@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en" class="no-js" id="html">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="language" content="english">
+    <meta http-equiv="content-type" content="text/html">
+    <meta name="author" content="AlertMend">
+    <meta name="designer" content="AlertMend">
+    <meta name="publisher" content="AlertMend">
+    <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#E2000F" style="background-color: #E2000F !important;">
+    <meta name="theme-color" content="#E2000F">
+    <!-- third-generation iPad with high-resolution Retina display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/favicon.ico">
+    <!-- iPhone with high-resolution Retina display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/favicon.ico">
+    <!-- first- and second-generation iPad: -->
+    <link rel="apple-touch-icon-precomposed" sizes="75x75" href="img/favicon.png">
+    <!-- non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <link rel="apple-touch-icon-precomposed" href="img/favicon.png">
+    <!-- basic favicon -->
+    <link rel="shortcut icon" href="img/favicon.png">
+    <!-- Bootstrap CSS START-->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-utilities.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS END-->
+    <!-- Custom CSS START-->
+    <link href="css/all.min.css" rel="stylesheet">
+    <link href="css/swiper-bundle.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/select2.min.css" rel="stylesheet">
+    <link href="css/jquery-ui.css" rel="stylesheet">
+    <link href="css/jquery.mCustomScrollbar.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!-- Custom CSS END-->
+    <title>AlertMend | How It Works</title>
+</head>
+
+<body class="homepage">
+    <main id="main">
+        <header id="header" class="header">
+            <div class="wrapper">
+                <div class="header_content d-flex flex-row justify-content-center align-items-center flex-wrap">
+                    <nav class="navbar navbar-expand-lg">
+                        <div class="collapse navbar-collapse nav" id="navbarNav">
+                            <ul class="navbar-nav d-flex flex-rowflex-wrap justify-content-start align-items-center">
+                                <li class="menu-item">
+                                    <a class="nav-link d-block" href="why-appletun.html"><span>Why AlertMend</span></a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="nav-link d-block" href="features.html"><span>Main Features</span></a>
+                                </li>
+                                <li class="menu-item active">
+                                    <a class="nav-link d-block" href="howitworks.html"><span>How It Works/Use cases</span></a>
+                                </li>
+                            </ul>
+                        </div>                        
+                        <!-- #navbarNav -->
+                    </nav>
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="img/logo.svg" alt="Logo">
+                        </a>
+                    </div>
+                    <div class="getfreebtn">
+                        <a href="contactus.html" class="btn_1">Contact us</a>
+                    </div>
+                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <img src="img/menu.svg" class="menu" alt="menu">
+                        <img src="img/close.svg" class="close" alt="close">
+                    </button>
+                </div>                
+            </div>
+        </header>        
+        <!-- /header -->
+        <section class="howitworks section_margin">
+            <div class="wrapper">
+                <div class="howitworks_inner">
+                    <div class="section_title">
+                        <h2>How It Works/Use cases</h2>
+                        <p>Effortlessly Manage Incidents and Enhance Productivity with AlertMend</p>
+                    </div>
+                    <div class="howitworks_scenario_main">
+                        <div class="howitworks_scenario">
+                            <div class="howitworks_scenario_head">
+                                <h2><strong></strong> Node Failure Alert Recived </h2>
+                                <ul>
+                                    <li>AlertMend listens to alerts indicating that a node has failed.</li>
+                                    <li>AlertMend processes the alert to understand the details of the node failure</li>
+                                    <li>AlertMend identifies which pods were running on the failed node</li>
+                                    <li>AlertMend triggers actions to reschedule the affected pods onto healthy nodes to restore service continuity.</li>
+                                </ul>
+                            </div>
+                            <div class="howitworks_scenario_head"" style="margin-top: 20px;">
+                                <h2><strong>Persistent Volume Claim (PVC) Disk Full Alert Received</strong></h2>
+                                <ul>
+                                    <li>AlertMend listens to alerts indicating that a Persistent Volume Claim (PVC) is full.</li>
+                                    <li>AlertMend processes the alert to identify the PVC and the associated pod or application affected by the full disk.</li>
+                                    <li>AlertMend checks for the largest files or data within the PVC to determine the cause of the disk full condition.</li>
+                                    <li>AlertMend triggers actions such as archiving or deleting unnecessary files, expanding the PVC, or notifying the relevant teams to take further action.</li>
+                                </ul>
+                            </div>
+                            <div class="howitworks_scenario_head"" style="margin-top: 20px;">
+                            <h2><strong>Pod Not Running State Alert Received</strong></h2>
+                            <ul>
+                                <li>AlertMend listens to alerts indicating that a pod is not in the running state.</li>
+                                <li>AlertMend checks the pod's logs and events to diagnose the issue (e.g., image pull errors, insufficient resources, failed readiness probes).</li>
+                                <li>AlertMend verifies the status of the node hosting the pod and checks for any issues that might prevent the pod from running (e.g., node pressure, network failures).</li>
+                                <li>AlertMend triggers actions to resolve common issues, such as restarting the pod, rescheduling it to a different node, or scaling up resources if required.</li>
+                                
+                            </ul>
+                        </div>
+                            
+                        </div>
+                        <div class="howitworks_scenario">
+                            <div class="howitworks_scenario_head">
+                                <div class="howitworks_scenario_head">
+                                    <h2><strong>High JVM Usage Alert Received</strong></h2>
+<ul>
+    <li>AlertMend listens to alerts indicating high JVM usage for an application.</li>
+    <li>AlertMend processes the alert to identify the application and the specific pod or instance experiencing high JVM usage.</li>
+    <li>AlertMend triggers an action to take a JVM heap dump to capture the memory state of the application.</li>
+    <li>AlertMend securely moves the heap dump file to designated block storage for further analysis by the engineering team.</li>
+
+</ul>
+                                </div>
+                                <div class="howitworks_scenario_head" style="margin-top: 20px;"" >
+                                    <h2><strong>Payment Failure Alert Received</strong></h2>
+<ul>
+    <li>AlertMend listens to alerts indicating multiple payment failures on the payment gateway.</li>
+    <li>AlertMend checks the payment gateway logs for error messages or unusual patterns that might indicate the root cause (e.g., network issues, authentication errors).</li>
+    <li>AlertMend verifies the status of the bank's gateway or API to check for outages or service interruptions on the bank's side.</li>
+    <li>AlertMend triggers actions to retry the failed transactions, if applicable, or automatically switch to an alternative payment route if supported.</li>
+    <li>AlertMend notifies the relevant teams and stakeholders with detailed information on the payment failures, the findings, and the actions taken for resolution.</li>
+</ul>
+                                </div>
+                                <div class="howitworks_scenario_head" style="margin-top: 20px;"" >
+                                <h2><strong>50x Error on Ingress Alert Received</strong></h2>
+<ul>
+    <li>AlertMend listens to alerts indicating a 50x error (e.g., 500, 502, 503) occurring on the ingress.</li>
+    <li>AlertMend processes the alert to identify the affected service, backend pods, or endpoints associated with the ingress.</li>
+    <li>AlertMend checks the ingress controller logs for error messages or anomalies that might indicate the root cause (e.g., misconfigurations, upstream failures, SSL issues).</li>
+    <li>AlertMend verifies the health of backend services and pods, checking for readiness and liveness probe failures, resource constraints, or application errors.</li>
+    <li>AlertMend triggers actions to restart affected pods, adjust ingress configurations, or reroute traffic to healthy pods or services if available.</li>
+    <li>AlertMend notifies the relevant teams with detailed information on the 50x errors, including the findings and actions taken to resolve the issue.</li>
+</ul>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </section>
+        <!-- /howitworks -->
+        <section class="aboutappletun section_margin">
+            <div class="wrapper">
+                <div class="aboutappletun_inner">
+                    <div class="section_title">
+                        <h2>Want to learn more about AlertMend?</h2>
+                        <p>AlertMend hosts events both online and in-person. See all that AlertMend has to offer by visiting our Events & Webinars hub.</p>
+                        <a href="why-appletun.html" class="btn_2">Learn more</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /aboutappletun -->
+        <footer class="footer">
+            <div class="wrapper">
+                <div class="footer_inner">
+                    <div class="footer_head">
+                        <div class="foot_logo">
+                            <a href="index.html"><img src="img/logo_mini.svg" alt="logo_mini"></a>
+                        </div>
+                        <ul>
+                            <li>
+                                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer_links">
+                        <ul>
+                            <li><a href="howitworks.html">About Us</a></li>
+                            <li><a href="contactus.html">Contact Us</a></li>
+                            <li><a href="#">Blogs</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="wrapper">
+                    <div class="copyright_inner">
+                        <p>© Copyright AlertMend 2024. All Rights Reserved.</p>
+                        <ul class="foot_tc">
+                            <li>
+                                <a href="#">Terms</a>
+                            </li>
+                            <li>
+                                <a href="#">Privacy</a>
+                            </li>
+                            <li>
+                                <a href="#">Cookies</a>
+                            </li>
+                        </ul>
+                    </div>                   
+                </div>
+            </div>
+        </footer>
+        <!-- /footer -->        
+    </main>
+    <!-- #main -->
+    <!-- All JQuery START-->
+    <script type="text/JavaScript " src="js/vendor/jquery-3.6.0.min.js"></script>
+    <script type="text/JavaScript " src="js/vendor/all.min.js "></script>
+    <!-- All JQuery END-->
+    <!-- Bootstrap JQuery START-->
+    <script type="text/JavaScript" src="js/vendor/bootstrap.min.js "></script>
+    <script type="text/JavaScript " src="js/vendor/bootstrap.bundle.min.js "></script>
+    <!-- Bootstrap JQuery END-->
+    <!-- Custom JQuery START-->
+    <script type="text/JavaScript " src="js/vendor/jquery.matchHeight-min.js "></script>
+    <script type="text/JavaScript " src="js/vendor/swiper-bundle.min.js"></script>
+    <script type="text/JavaScript " src="js/vendor/select2.min.js"></script>
+    <script type="text/JavaScript " src="js/vendor/jquery-ui.min.js"></script>
+    <script type="text/JavaScript " src="js/vendor/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/JavaScript " src="js/general.js "></script>
+</body>
+
+</html>

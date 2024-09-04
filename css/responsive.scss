@@ -1,0 +1,631 @@
+@import 'variables';
+@import 'mixin';
+// XXL ============================ START //
+@media only screen and (max-width: 2000px) {
+}
+@media only screen and (max-width: 1600px) {
+    .footer {
+        &_inner {
+            .footer_links {
+                gap: 2rem 6rem;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 1460px) {
+}
+@media only screen and (max-width: 1366px) {
+    .wrapper {
+        padding: 0 5rem;
+    }
+    .whyappletun {
+        &_inner {
+            .whyappletun_items {
+                .whyappletun_item {
+                    width: calc(50% - 1.5rem);
+                }
+            }
+        }
+    }
+}
+// XXL ============================ END //
+// XL ============================ START //
+@media only screen and (max-width: 1300px) {
+    #header {
+        &.sticky {
+            .header_content {
+                .logo {
+                    width: 15rem;
+                }
+            }
+        }
+        .header_content {
+            gap: 0 1rem;
+            .logo {
+                inset: 2.4rem 0 auto;
+                width: 3.9rem;
+                a {
+                    img {
+                        width: 15rem;
+                    }
+                }
+            }
+            .header_link {
+                gap: 2rem 0.3rem;
+                a {
+                    padding: 0.5rem 1rem;
+                    letter-spacing: 0;
+                }
+            }
+            .navbar {
+                .navbar-nav {
+                    gap: 2rem 0.3rem;
+                    .menu-item {
+                        .nav-link {
+                            padding: 0.5rem 1rem;
+                            letter-spacing: 0;
+                        }
+                    }
+                }
+            }
+        }        
+    }
+    .banner {
+        padding: 4rem 0;
+        &_inner {
+            .banner_head {
+                h1 {
+                    font-size: 5rem;
+                }
+                p {
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+    .footer {
+        &_inner {
+            .footer_links {
+                gap: 2rem 3rem;
+            }
+        }
+    }
+}
+@media only screen and (max-width: 1199px) {
+    #header {
+        &.sticky {
+            .header_content {
+                .logo {
+                    width: 12rem;
+                }
+            }
+        }
+        .header_content {
+            padding: 1rem 0;
+            .logo {
+                inset: 1.8rem 0 auto;
+                width: 3.1rem;
+                a {
+                    img {
+                        width: 12rem;
+                    }
+                }
+            }
+        }  
+    }
+    .journey_block {
+        &_inner {
+            .journey_block {
+                &_left {
+                    width: 100%;
+                    padding: 0;
+                    margin: 0 0 3rem;
+                    text-align: center;
+                    h2 {
+                        font-size: 4rem;
+                        margin: 0 auto 2rem;
+                    }
+                    .nav-pills {
+                        justify-content: center;
+                        .nav-link {
+                            margin: 0 0 1rem;
+                            text-align: center;
+                        }
+                    }
+                    .journey_block_btns {
+                        justify-content: center;
+                    }
+                }
+                &_right {
+                    width: 100%;
+                    padding: 3rem;
+                    border-radius: 5rem !important;
+                    display: none;
+                }
+            }
+        }
+    }
+    .journey_block {
+        .wrapper {
+            padding: 0 5rem;
+        }
+    }
+    .report_block {
+        &_inner {
+            .report_slider {
+                .swiper-slide {
+                    .report_box {
+                        &_text {
+                            strong {
+                                font-size: 1.6rem;
+                            }
+                            h2 {
+                                font-size: 3rem;
+                            }
+                            p {
+                                font-size: 1.6rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .footer {
+        &_inner {
+            .footer_links {
+                .foot_link_two {
+                    max-width: 50rem;
+                }
+                .foot_link {
+                    h2 {
+                        margin: 0 0 1rem;
+                    }
+                    ul {
+                        li {
+                            &:not(:last-child) {
+                                margin: 0 0 1rem;
+                            }
+                            a {
+                                font-size: 1.4rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+// XL ============================ END //
+// LG ============================ START //
+@media only screen and (max-width: 1024px) {
+    .wrapper {
+        padding: 0 3rem;
+    }
+    .journey_block {
+        .wrapper {
+            padding: 0 3rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .wrapper {
+        padding: 0 2rem;
+    }
+    .journey_block {
+        .wrapper {
+            padding: 0 2rem;
+        }
+    }
+    .navbar-toggler {
+        display: block;
+        width: 2rem;
+        height: 1.9rem;
+        position: relative;
+        padding: 0;
+        @include flexprob(center);
+        justify-content: center;
+        box-shadow: none;
+        outline: none;
+        &:focus {
+            box-shadow: none;
+        }
+        &.collapsed {
+            .close {
+                opacity: 0;
+            }
+        }
+        &:not(.collapsed) {
+            .menu {
+                opacity: 0;
+            }
+        }
+        img {
+            width: 2rem;
+            height: 1.9rem;
+            object-fit: contain;
+            position: absolute;
+            inset: 0;
+            margin: auto;      
+        }
+    }
+    .swiper-pagination, .swiper-pagination2 {
+        margin: 1.5rem auto 0 !important;
+        width: max-content;
+        .swiper-pagination-bullet {
+            margin: 0 0.3rem !important;
+        }
+    }
+    #header {
+        .header_content {
+            .logo {
+                position: static;
+                margin: 0 auto 0 0;
+                padding: 0;
+            }
+            .navbar {
+                display: none;
+                position: fixed;
+                top: 6rem;
+                background: $color-white;
+                width: 100%;
+                height: calc(100dvh - 6rem);
+                overflow-y: auto;
+                .nav {
+                    display: flex !important;
+                    flex-direction: column;
+                    justify-content: center;
+                    flex-wrap: nowrap;
+                    height: 100%;
+                    min-height: 44rem;
+                }
+            }
+            .header_link {
+                flex-direction: column;
+                justify-content: center;
+                margin: 2rem 0 0;
+            }
+        }
+    }
+    .language_select {
+        .language_icon {
+            width: 1.8rem;
+            inset: 0.4rem auto auto 0;
+            line-height: 0;
+            img {
+                width: 100%;
+            }
+        }
+        .select2-container {
+            .select2-selection {
+                &.select2-selection--single {
+                    padding: 0 2.2rem 0 2.2rem;
+                    span {
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+        }
+    }
+    .ebook_block {
+        margin: -10rem 0 0;
+    }
+    .section_margin {
+        margin: 5rem 0;
+    }
+    .section_padding {
+        margin: 5rem 0;
+    }
+    body {
+        font-size: 1.4rem;
+    }
+    .section_title {
+        h2 {
+            font-size: 3rem;
+            margin: 0 0 0.3rem;
+            line-height: 120%;
+            letter-spacing: -0.1rem;
+        }
+        p {
+            font-size: 1.4rem;
+        }
+    }
+    .ebook_block {
+        margin: 0;
+        &_inner {
+            padding: 4rem 3rem;
+            transform: scale(0.9);
+        }
+    }
+    .report_block {
+        &_inner {
+            .report_slider {
+                .swiper-slide {
+                    .report_box {
+                        &_img {
+                            width: 100%;
+                            figure {
+                                img {
+                                    border-radius: 2rem;
+                                }
+                            }
+                        }
+                        &_text {
+                            width: 100%;
+                            flex: 1 1 100%;
+                            padding: 3rem;
+                            border-radius: 2rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .aboutappletun {
+        &_inner {
+            padding: 3rem;
+            border-radius: 2rem;
+        }
+    }
+    .footer {
+        &_inner {
+            .footer_head {
+                max-width: 40rem;
+                .foot_logo {
+                    &:after {
+                        max-width: 16.5rem;
+                    }
+                }
+            }
+            .footer_links {
+                gap: 2rem;
+                .foot_link {
+                    width: calc(50% - 1rem);
+                    h2 {
+                        font-size: 1.8rem;
+                    }
+                }
+            }
+        }
+    }
+    .journey_block {
+        &_inner {
+            .journey_block {
+                &_left {
+                    h2 {
+                        font-size: 3rem;
+                        margin: 0 0 1rem;
+                    }
+                    .nav-pills {
+                        .nav-link {
+                            margin: 0;
+                            padding: 1rem 0;
+                            &:not(:last-child) {
+                                border-bottom: 0.1rem solid $color-grey;
+                            }
+                            figure {
+                                line-height: 0;
+                                margin: 0 0 0.5rem;
+                                img {
+                                    width: 100%;
+                                    backdrop-filter: drop-shadow(6.2rem -0.8rem 2.6rem black);
+                                    border-width: 0.5rem;
+                                    border-radius: 2rem;
+                                }
+                            }
+                            &.active {
+                                figure {
+                                    display: block;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .section_title {
+        margin: 0 0 2rem;
+    }
+    .whyappletun {
+        &_inner {
+            .whyappletun_items {
+                .whyappletun_item {
+                    h3 {
+                        font-size: 1.6rem;
+                    }
+                    p {
+                        font-size: 1.4rem;
+                    }
+                }
+            }
+        }
+    }
+    .howitworks {
+        &_inner {
+            .howitworks_scenario_main {
+                .howitworks_scenario {
+                    flex: 1 1 100%;
+                    padding: 3rem;
+                }
+            }
+        }
+    }
+    .contactus {
+        &_inner {
+            .contactus_block {
+                .contactus_box {
+                    width: 100%;
+                    flex: 1 1 100%;
+                }
+            }
+        }
+    }
+    .customertrust {
+        &_inner {
+            .section_title {
+                strong {
+                    font-size: 4rem;
+                }
+            }
+        }
+    }
+}
+
+// LG ============================ END //
+// MD ============================ START //
+@media only screen and (max-width: 767px) {
+    #header {
+        .header_content {
+            .language_select {
+                display: none;
+            }
+        }
+    }
+    .banner {
+        padding: 3rem 0;
+        &_inner {
+            .banner_head {
+                margin: 0 0 2rem;
+                h1 {
+                    font-size: 3rem;
+                    letter-spacing: -0.1rem;
+                    line-height: 120%;
+                }
+                p {
+                    font-size: 1.6rem;
+                }
+                .banner_btns {
+                    margin: 1.5rem auto 0;
+                }
+            }
+        }
+    }
+    .footer {
+        &_inner {
+            .footer_head {
+                max-width: 40rem;
+                flex-direction: column;
+                flex-wrap: nowrap;
+                gap: 1rem;
+                .foot_logo {
+                    &:after {
+                        display: none;
+                    }
+                    a {
+                        line-height: 0;
+                        img {
+                            max-width: 5rem;
+                        }
+                    }
+                }
+            }
+            .footer_links {
+                gap: 2rem;
+                .foot_link {
+                    width: 100%;
+                    h2 {
+                        font-size: 1.8rem;
+                    }
+                    &_two {
+                        ul {
+                            li {
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .copyright {
+            &_inner {
+                flex-direction: column;
+                flex-wrap: nowrap;
+                gap: 0.5rem;
+                p {
+                    text-align: center;
+                }
+            }
+        }
+    }
+    .whyappletun {
+        &_inner {
+            .whyappletun_items {
+                .whyappletun_item {
+                    width: 100%;
+                    text-align: center;
+                    figure {
+                        img {
+                            width: 5rem;
+                            height: 5rem;
+                        }
+                    }
+                    h3 {
+                        padding: 0.5rem 1rem;
+                    }
+                }
+            }
+        }
+    }
+    .mainfeatures {
+        &_inner {
+            .mainfeatures_items {
+                .mainfeatures_item {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .contactus {
+        &_inner {
+            .contactus_block {
+                .contactus_box {
+                    form {
+                        p {
+                            label {
+                                .wpcf7-form-control-wrap {
+                                    .wpcf7-form-control {
+                                        font-size: 1.4rem;
+                                        border-radius: 0.7rem;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .whyappletun {
+        &_inner {
+            .whyappletun_items {
+                .whyappletun_item {
+                    &_inner {
+                        flex-direction: column;
+                        gap: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// MD ============================ END //
+// SM OUR XS ============================ START //
+@media only screen and (max-width: 575px) {
+    .customertrust {
+        &_inner {
+            .customertrust_slider {
+                .swiper-slide {
+                    figure {
+                        img {
+                            max-width: 14rem;
+                            height: 5rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

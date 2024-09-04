@@ -1,0 +1,98 @@
+@mixin flexprob($align-items) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: $align-items;
+}
+
+@mixin btn_1 {
+    font-size: 1.4rem;
+    font-weight: 400;
+    padding: 1.5rem 2rem;
+    color: $color-white;
+    background: transparent;
+    text-align: center;
+    transition: $transition_3s;
+    line-height: normal;
+    @include flexprob(center);
+    justify-content: flex-start;
+    width: max-content;
+    gap: 0 0.5rem;
+    border-radius: 0.6rem;
+    position: relative;
+    z-index: 1;
+    border: 0.1rem solid transparent;
+    &:after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        inset: 0 0 auto;
+        background: linear-gradient(93.26deg, #0074BA 2.69%, #003454 225.23%);
+        transition: $transition_3s;
+        border-radius: 0.6rem;
+        z-index: -1;
+    }
+    img {
+        width: 1.8rem;
+        filter: invert(0%);
+    }
+    &:hover {        
+        color: $color-01;
+        border-color: transparentize( $color-01, 0.8);
+        img {
+            filter: invert(100%);
+        }
+        &:after {
+            opacity: 8%;
+        }
+    }
+    @media only screen and (max-width: 991px) {
+        font-size: 1.2rem;
+        min-height: auto;
+        padding: 1rem 1.5rem;
+    }
+}
+@mixin btn_2 {
+    font-size: 1.4rem;
+    font-weight: 400;
+    padding: 1.5rem 2rem;
+    color: $color-01;
+    background: transparent;
+    text-align: center;
+    transition: $transition_3s;
+    line-height: normal;
+    @include flexprob(center);
+    justify-content: flex-start;
+    width: max-content;
+    gap: 0 0.5rem;
+    border-radius: 0.6rem;
+    position: relative;
+    z-index: 1;
+    border: 0.1rem solid transparent;
+    &:after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        inset: 0 0 auto;
+        background: $color-02;
+        transition: $transition_3s;
+        border-radius: 0.6rem;
+        z-index: -1;
+    }
+    img {
+        width: 1.8rem;
+        filter: invert(0%);
+    }
+    &:hover {        
+        color: $color-01;
+        border-color: transparentize( $color-01, 0.8);
+    }
+    @media only screen and (max-width: 991px) {
+        font-size: 1.2rem;
+        min-height: auto;
+        padding: 1rem 1.5rem;
+    }
+}
