@@ -1331,3 +1331,21 @@
         padding: 15px;
     }
 }
+.contform{
+    .wpcf7-form-control {
+        width: 100%;
+        outline: none;
+        background: transparentize($color-02, 0.4);
+        border: none;
+        padding: 1rem 2rem;
+        font-size: 1.6rem;
+        color: $color-black;
+        border-radius: 1rem;                  
+    }
+    textarea {
+        height: 10rem;
+        resize: none;
+    }
+    
+
+}
