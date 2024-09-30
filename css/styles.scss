@@ -1298,3 +1298,54 @@
                         }
                     }
                 }
+                
+.logo-list {
+    .img-fix{
+        background: #E6F2F9;
+        border-radius: 6px;
+        max-width: 80px;
+    }
+}
+.integrations{
+    // background: linear-gradient(75.08deg, #D7DEF6 7.83%, #FAFCFF 89.92%);
+
+    background: linear-gradient(93.26deg, #0074BA 2.69%, #003454 225.23%);
+    padding: 80px 0px;
+    h2{
+        font-size: 2rem;
+        font-weight: 500;
+        line-height: 4rem;
+        color: #fff;
+    }
+    p{
+        text-align: justify;
+        color: #fff;
+    }
+}
+.tech-logo{
+    .img-fix{
+        background: #00446d;
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        padding: 15px;
+    }
+}
+.contform{
+    .wpcf7-form-control {
+        width: 100%;
+        outline: none;
+        background: transparentize($color-02, 0.4);
+        border: none;
+        padding: 1rem 2rem;
+        font-size: 1.6rem;
+        color: $color-black;
+        border-radius: 1rem;                  
+    }
+    textarea {
+        height: 10rem;
+        resize: none;
+    }
+    
+
+}
