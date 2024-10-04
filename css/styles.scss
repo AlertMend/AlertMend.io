@@ -1326,14 +1326,14 @@
     .img-fix{
         // background: #00446d;
         background: #fff;
-        border: 4px solid #00446d;
+        border: 4px solid rgba(0, 68, 109,0.7);
         border-radius: 50%;
         width: 95px;
         height: 95px;
-        padding: 10px;
-        img{
-            border-radius: 50%;
-        }
+        padding: 15px;
+        // img{
+        //     border-radius: 50%;
+        // }
     }
 }
 .contform{
