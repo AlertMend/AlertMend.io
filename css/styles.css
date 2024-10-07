@@ -1264,7 +1264,7 @@ main {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: top;
   justify-content: flex-start;
   gap: 3rem 5rem;
 }
@@ -1354,14 +1354,11 @@ main {
 
 .tech-logo .img-fix {
   background: #fff;
-  border: 4px solid #00446d;
-  border-radius: 50%;
+  border: 4px solid rgba(0, 68, 109, 0.7);
+  border-radius: 10px;
   width: 95px;
   height: 95px;
-  padding: 10px;
-}
-.tech-logo .img-fix img {
-  border-radius: 50%;
+  padding: 17px;
 }
 
 .contform .wpcf7-form-control {
