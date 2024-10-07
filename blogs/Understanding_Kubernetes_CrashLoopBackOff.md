@@ -32,6 +32,8 @@ If the status shows **CrashLoopBackOff**, Kubernetes is waiting to restart the p
 
 ## **Troubleshooting CrashLoopBackOff**
 
+![Troubleshooting CrashLoopBackOff](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/Troubleshooting_CrashLoopBackOff.png?raw=true)
+
 Here are common causes and solutions for the CrashLoopBackOff error:
 
 ### **1. Resource Overload or Insufficient Memory**
