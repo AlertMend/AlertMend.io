@@ -94,6 +94,8 @@ In complex Kubernetes environments, particularly those with multiple services, I
 
 ## **Troubleshooting Steps to Resolve the 502 Error**
 
+![Troubleshooting 502](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/Troubleshooting_502.png?raw=true)
+
 ### **1. Check Ingress Configuration**
    
    To verify Ingress configuration and ensure there are no misconfigurations:
