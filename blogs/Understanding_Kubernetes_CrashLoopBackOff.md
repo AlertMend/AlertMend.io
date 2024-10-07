@@ -97,7 +97,7 @@ If a container cannot find necessary runtime dependencies, the pod will crash.
 ---
 
 ## **Preventive Measures**
-![Preventive Measures](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/Preventive_Measures.png?raw=true)
+![Preventive Measures crashloopbackoff](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/Preventive_Measures.png?raw=true)
 
 To avoid future occurrences of **CrashLoopBackOff**, consider the following best practices:
 
