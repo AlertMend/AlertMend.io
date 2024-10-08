@@ -1222,7 +1222,7 @@
                 .contactus {
                     &_inner {
                         .contactus_block {
-                            @include flexprob(center);
+                            @include flexprob(top);
                                 justify-content: flex-start;
                                 gap: 3rem 5rem;
                             .contactus_box {      
@@ -1352,5 +1352,13 @@
         resize: none;
     }
     
+
+}
+.video-section{
+    background: linear-gradient(93.26deg, #0074BA 2.69%, #003454 225.23%);
+    border-radius: 2.7rem; 
+    text-align: center;
+    padding: 30px;
+    border: 1rem solid #E6F2F9;
 
 }
