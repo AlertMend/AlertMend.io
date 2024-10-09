@@ -1,5 +1,5 @@
 
-# **Troubleshooting Networking Errors in Kubernetes: A Comprehensive Guide**
+# **Troubleshooting Networking Errors in Kubernetes**
 
 ![Networking Troubleshoot](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/Networking_troubleshoot.png?raw=true)
 
