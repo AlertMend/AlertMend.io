@@ -83,7 +83,7 @@ Using tools like Prometheus, you can monitor the following key CoreDNS metrics:
 | **Queries per Second (QPS)**      | Tracks the volume of DNS queries handled by CoreDNS, useful for capacity planning.|
 
 ### 4. **Implement NodeLocal DNS Cache**
-Consider using **NodeLocal DNS Cache**, which runs a local DNS cache on each node. This improves DNS performance by resolving requests locally and reducing the load on CoreDNS【27†source】.
+Consider using **NodeLocal DNS Cache**, which runs a local DNS cache on each node. This improves DNS performance by resolving requests locally and reducing the load on CoreDNS.
 
 ### 5. **Ensure High Availability for CoreDNS**
 Deploy CoreDNS on dedicated nodes or ensure it runs as a highly available service. This will prevent DNS outages in the event of node failures.
