@@ -1,6 +1,4 @@
 
-# **Debugging Kubernetes OOMKilled (Exit Code 137): Causes and Solutions**
-
 ![OOMKilled Kubernetes](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/oomkilled.png?raw=true)
 
 The **OOMKilled** error in Kubernetes occurs when a container is terminated due to excessive memory usage, which exceeds the predefined memory limit. This is represented by exit code 137. When this happens, Kubernetes uses the **Out of Memory (OOM) Killer**, a feature of the Linux kernel, to protect the system from crashing by terminating the container that consumes too much memory. In this blog, we’ll explore common causes of the **OOMKilled** error and provide practical steps for troubleshooting and prevention.
