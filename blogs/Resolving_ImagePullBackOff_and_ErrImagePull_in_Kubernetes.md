@@ -1,4 +1,4 @@
-# **How to Troubleshoot and Fix ImagePullBackOff and ErrImagePull in Kubernetes**
+
 ![Kubernetes ImagePullBackOff](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/ImagePullBackOff_and_ErrImagePull.png?raw=true)
 
 In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors such as **ImagePullBackOff** and **ErrImagePull** may occur, preventing the pods from starting. These issues are typically related to problems with fetching the container image, and can disrupt application deployment.
