@@ -13,7 +13,7 @@ permalink: /blogs/
     <div class="card">
       <div class="card-banner">
         <p class="category-tag popular"><time datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date_to_long_string }}</time></p>
-        <img class="banner-img" src='{{ post.image }}' alt='{{ post.title }}'>
+        <a href="{{ post.url }}"><img class="banner-img" src='{{ post.image }}' alt='{{ post.title }}'></a>
       </div>
       <div class="card-body">
         <h2 class="blog-title py-1"><a href="{{ post.url }}">{{ post.title }}</a></h2>
