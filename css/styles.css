@@ -1382,4 +1382,23 @@ main {
   text-align: center;
   padding: 30px;
   border: 1rem solid #E6F2F9;
+}
+
+.calendly-button {
+  background-color: transparent;
+  background-image: linear-gradient(90deg, #f2f8ff 0%, #ffffff 100%);
+  display: flex;
+  border: 1px solid #CEDBEA;
+  border-radius: 0.75rem;
+  box-shadow: 0px 5px 12px 0px rgba(206, 219, 234, 0.2509803922);
+  padding: 0px 1.5rem;
+  gap: 20px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin-top: 7rem;
+}
+.calendly-button img {
+  padding-top: 1.5rem;
+  width: 150px;
 }/*# sourceMappingURL=styles.css.map */
