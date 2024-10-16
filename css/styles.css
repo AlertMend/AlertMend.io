@@ -1386,7 +1386,7 @@ main {
 
 .calendly-button {
   background-color: transparent;
-  background-image: linear-gradient(90deg, #f2f8ff 0%, #ffffff 100%);
+  background-image: linear-gradient(90deg, #e6f2f9 0%, #ffffff 100%);
   display: flex;
   border: 1px solid #CEDBEA;
   border-radius: 0.75rem;
@@ -1400,5 +1400,5 @@ main {
 }
 .calendly-button img {
   padding-top: 1.5rem;
-  width: 150px;
+  width: 175px;
 }/*# sourceMappingURL=styles.css.map */
