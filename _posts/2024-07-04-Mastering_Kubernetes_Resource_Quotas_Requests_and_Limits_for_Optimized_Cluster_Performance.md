@@ -1,6 +1,6 @@
 ---
 title: "Mastering Kubernetes Resource Quotas, Requests, and Limits for Optimized Cluster Performance"
-image: "https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/Resource_Quotas.png?raw=true"
+image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/Resource_Quotas.png?raw=true"
 layout: post
 ---
 # **Mastering Kubernetes Resource Quotas, Requests, and Limits for Optimized Cluster Performance**
