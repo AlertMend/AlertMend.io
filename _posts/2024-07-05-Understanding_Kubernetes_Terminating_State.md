@@ -1,6 +1,6 @@
 ---
 title: "How to Fix Kubernetes Pods Stuck in Terminating State"
-image: "https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/stuck_terminate.png?raw=true"
+image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/stuck_terminate.png?raw=true"
 layout: post
 ---
 # **How to Fix Kubernetes Pods Stuck in Terminating State**
