@@ -1,7 +1,12 @@
+---
+title: "Kubernetes ConfigMap and Secret Mount Failures"
+image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/configmap_secret_failure.png?raw=true"
+layout: post
+---
 
+---
 # 🚨 **Kubernetes ConfigMap and Secret Mount Failures: Troubleshooting and Best Practices**
-
-![Kubernetes ConfigMap and Secret](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/configmap_secret_failure.png?raw=true)
+---
 
 In Kubernetes, **ConfigMaps** and **Secrets** are crucial for managing configuration data and sensitive information such as passwords, tokens, and certificates. When these are not mounted correctly, it can result in application failures, broken configurations, or security risks. This guide covers the common causes of ConfigMap and Secret mount failures, how to troubleshoot them, and best practices to avoid such issues in your Kubernetes environment.
 

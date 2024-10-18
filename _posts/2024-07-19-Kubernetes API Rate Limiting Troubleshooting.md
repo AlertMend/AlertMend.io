@@ -1,7 +1,12 @@
+---
+title: "Kubernetes API Rate Limiting Troubleshooting"
+image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/api_rate_limiting.png?raw=true"
+layout: post
+---
 
+---
 # 🚨 **Kubernetes API Rate Limiting Troubleshooting: Solving Performance Bottlenecks**
-
-![Kubernetes API Rate Limiting](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/api_rate_limiting.png?raw=true)
+---
 
 In Kubernetes, the API server is a critical component that manages all the requests and interactions between different components of the cluster. However, when the API server is overwhelmed with too many requests, it enforces **rate limiting** to ensure cluster stability. If you’re encountering rate limiting issues, it can lead to delayed operations, throttling of requests, or even service failures. This blog post focuses on how to troubleshoot Kubernetes API rate limiting, optimize performance, and avoi...
 

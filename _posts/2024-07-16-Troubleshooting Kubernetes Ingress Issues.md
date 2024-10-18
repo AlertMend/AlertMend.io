@@ -1,6 +1,12 @@
+---
+title: "Troubleshooting Kubernetes Ingress Issues"
+image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/ingress_issues.png?raw=true"
+layout: post
+---
 
+---
 # 🚨 **Troubleshooting Kubernetes Ingress Issues: Common Problems and Fixes**
-![Kubernetes Ingress Issues](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/ingress_issues.png?raw=true)
+---
 
 **Kubernetes Ingress** is a key resource that manages external access to services within a Kubernetes cluster. It routes traffic based on predefined rules to the appropriate services. However, when Ingress configurations or behavior don’t work as expected, it can lead to connectivity problems and service outages. In this blog post, we’ll dive into common Kubernetes Ingress issues, how to troubleshoot them, and best practices to ensure smooth and reliable traffic routing.
 

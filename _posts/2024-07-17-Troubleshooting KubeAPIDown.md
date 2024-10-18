@@ -1,7 +1,12 @@
+---
+title: "Troubleshooting KubeAPIDown"
+image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/kubeapiserver_troubleshooting.png?raw=true"
+layout: post
+---
 
+---
 # 🚨 **Troubleshooting KubeAPIDown: How to Restore Kubernetes API Server Availability**
-
-![Kubernetes API Server Troubleshooting](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/kubeapiserver_troubleshooting.png?raw=true)
+---
 
 The Kubernetes API Server (KubeAPI) is the central management entity that exposes the Kubernetes API. When the KubeAPI is down, the entire cluster can become unusable, as it prevents communication between cluster components. This post will walk through the common causes of KubeAPIDown and provide steps to troubleshoot and resolve the issue effectively.
 
