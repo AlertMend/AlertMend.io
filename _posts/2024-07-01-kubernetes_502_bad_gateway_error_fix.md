@@ -1,6 +1,6 @@
 ---
 title: "How to Troubleshoot and Fix Kubernetes 502 Bad Gateway Error"
-image: "https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/502_error2.png?raw=true"
+image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/502_error2.png?raw=true"
 # Optional - date will be used from filename if not set here.
 layout: post
 ---
