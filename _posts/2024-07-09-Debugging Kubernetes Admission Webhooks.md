@@ -5,10 +5,9 @@ image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/admiss
 layout: post
 ---
 
-
+---
 # 🚨 **Debugging Kubernetes Admission Webhooks: A Complete Guide**
-
-![Kubernetes Admission Webhooks](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/admission_webhook_debugging.png?raw=true)
+---
 
 **Kubernetes Admission Webhooks** play a critical role in controlling and managing the lifecycle of resources in a Kubernetes cluster. They allow administrators to enforce custom policies, validate resource requests, or even mutate them before they are persisted in etcd. However, when these webhooks malfunction, it can lead to resource creation failures, degraded cluster performance, or even block the entire deployment pipeline. In this guide, we'll cover common issues with Admission Webhooks, how to debug them effectively, and best practices to prevent future failures.
 

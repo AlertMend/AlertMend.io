@@ -3,8 +3,10 @@ title: "How to Fix Kubernetes Pods Stuck in Pending State"
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/pendingimage.png?raw=true"
 layout: post
 ---
-# **How to Fix Kubernetes Pods Stuck in Pending State**
 
+---
+# **How to Fix Kubernetes Pods Stuck in Pending State**
+---
 
 When working with Kubernetes, a common issue developers encounter is a pod being stuck in the **Pending** state. This means the pod has been accepted by the Kubernetes system but hasn't started running yet. Troubleshooting the cause of this state is crucial to ensure smooth deployment of your applications.
 
