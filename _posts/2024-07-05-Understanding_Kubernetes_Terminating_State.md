@@ -5,8 +5,6 @@ layout: post
 ---
 # **How to Fix Kubernetes Pods Stuck in Terminating State**
 
-![StuckTerminatePod](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/stuck_terminate.png?raw=true)
-
 ---
 ### **Introduction**
 

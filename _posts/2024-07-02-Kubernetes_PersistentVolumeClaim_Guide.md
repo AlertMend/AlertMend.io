@@ -4,7 +4,6 @@ image: "https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/pvc.png
 layout: post
 ---
 # 🛠️ **Kubernetes PersistentVolumeClaim (PVC) Guide: Basic Tutorial and Troubleshooting Tips**
-![PVC](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/pvc.png?raw=true)
 
 In Kubernetes, a **PersistentVolumeClaim (PVC)** allows pods to request storage, which can be dynamically or manually provisioned. This guide will walk you through the fundamentals of PVCs, their lifecycle, common issues, and troubleshooting tips.
 

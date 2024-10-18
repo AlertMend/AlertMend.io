@@ -5,8 +5,6 @@ layout: post
 ---
 # **How to Troubleshoot and Fix Kubernetes Node Not Ready Error**
 
-![Node Not Ready](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/Node_Not_Ready.png?raw=true)
-
 In Kubernetes clusters, the **"Node Not Ready"** error is a frequent issue that can disrupt the smooth operation of your applications. This error occurs when a node becomes unresponsive or unavailable for scheduling new pods. Understanding the root causes and effective resolution strategies is crucial for maintaining a healthy Kubernetes environment.
 
 ---
@@ -120,7 +118,6 @@ This command will remove the NoSchedule taint and allow Kubernetes to use the no
 ---
 
 ## **Preventive Measures**
-![Prevent Node Not Ready](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/Prevent_Node_Not_Ready.png?raw=true)
 
 1. **Set Up Node Monitoring**: Use monitoring tools to continuously track the health and resource usage of your nodes.
 2. **Enable Cluster Autoscaling**: Configure autoscaling to ensure that your cluster can automatically adjust the number of nodes based on demand.

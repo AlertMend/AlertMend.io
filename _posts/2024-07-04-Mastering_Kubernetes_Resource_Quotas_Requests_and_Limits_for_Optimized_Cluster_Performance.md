@@ -4,7 +4,6 @@ image: "https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/Resourc
 layout: post
 ---
 # **Mastering Kubernetes Resource Quotas, Requests, and Limits for Optimized Cluster Performance**
-![Resource Quotas](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/Resource_Quotas.png?raw=true)
 
 In Kubernetes, resource management is key to ensuring that applications run efficiently while avoiding the overconsumption of cluster resources. This blog will guide you through **Kubernetes resource quotas, requests, and limits**, how they interact, and the best practices for their implementation.
 
