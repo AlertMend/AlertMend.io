@@ -1,6 +1,6 @@
 ---
 title: "Understanding and Troubleshooting Kubernetes CrashLoopBackOff"
-image: "https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/crashloopbackoffimage1.png?raw=true"
+image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/crashloopbackoffimage1.png?raw=true"
 layout: post
 ---
 
