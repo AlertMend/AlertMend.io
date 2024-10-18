@@ -1,6 +1,6 @@
 ---
 title: "How to Troubleshoot and Fix Kubernetes 502 Bad Gateway Error"
-image: "https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/Troubleshooting_502.png?raw=true"
+image: "https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/502_error2.png?raw=true"
 # Optional - date will be used from filename if not set here.
 layout: post
 ---
@@ -9,7 +9,7 @@ layout: post
 
 # **How to Troubleshoot and Fix Kubernetes 502 Bad Gateway Error**
 
-![502 Bad Gateway](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/502_error2.png?raw=true)
+#![502 Bad Gateway](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/502_error2.png?raw=true)
 
 A **502 Bad Gateway** error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers. This error usually indicates that the service acting as a gateway or proxy is receiving an invalid response from the upstream server. In Kubernetes, this often points to a misconfiguration or issue in routing traffic between services or containers, and understanding the root cause is essential for quick resolution.
 
@@ -102,7 +102,7 @@ In complex Kubernetes environments, particularly those with multiple services, I
 
 ## **Troubleshooting Steps to Resolve the 502 Error**
 
-![Troubleshooting 502](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/Troubleshooting_502.png?raw=true)
+#![Troubleshooting 502](https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/Troubleshooting_502.png?raw=true)
 
 ### **1. Check Ingress Configuration**
    
