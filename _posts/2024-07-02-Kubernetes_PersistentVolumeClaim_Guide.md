@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes PersistentVolumeClaim (PVC) Guide: Basic Tutorial and Troubleshooting Tips"
-image: "https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/pvc.png?raw=true"
+image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/pvc.png?raw=true"
 layout: post
 ---
 # 🛠️ **Kubernetes PersistentVolumeClaim (PVC) Guide: Basic Tutorial and Troubleshooting Tips**
