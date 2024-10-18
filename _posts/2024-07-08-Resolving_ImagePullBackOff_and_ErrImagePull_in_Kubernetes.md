@@ -1,6 +1,6 @@
 ---
 title: "How to Troubleshoot and Fix ImagePullBackOff and ErrImagePull in Kubernetes"
-image: "https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/ImagePullBackOff_and_ErrImagePull.png?raw=true"
+image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/ImagePullBackOff_and_ErrImagePull.png?raw=true"
 layout: post
 ---
 # **How to Troubleshoot and Fix ImagePullBackOff and ErrImagePull in Kubernetes**
