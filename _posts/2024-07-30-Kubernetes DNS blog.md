@@ -1,6 +1,6 @@
 ---
 title: "Mastering Kubernetes DNS"
-image: "https://github.com/AlertMend/AlertMend.io/blob/_posts/images/kubernetes_dns.png?raw=true"
+image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/kubernetes_dns.png?raw=true"        
 layout: post
 ---
 
