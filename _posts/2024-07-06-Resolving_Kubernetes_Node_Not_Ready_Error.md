@@ -1,6 +1,6 @@
 ---
 title: "How to Troubleshoot and Fix Kubernetes Node Not Ready Error"
-image: "https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/Node_Not_Ready.png?raw=true"
+image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/Node_Not_Ready.png?raw=true"
 layout: post
 ---
 # **How to Troubleshoot and Fix Kubernetes Node Not Ready Error**
