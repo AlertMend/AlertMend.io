@@ -1,5 +1,5 @@
 ---
-title: "Troubleshooting Elasticsearch Shard Initialization Failures on Kubernetes"
+title: "Troubleshooting Elasticsearch Shard Relocation Incidents on Kubernetes"
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/elastic_search_shard_relocation_incidents.png?raw=true"
 layout: post
 ---
