@@ -25,51 +25,51 @@ There are several reasons why shards may remain unassigned in Elasticsearch:
 
 ### 1. **Check Elasticsearch Pods**
 Ensure that all Elasticsearch pods are running as expected. If any pods are down, they may be causing the unassigned shards:
-\`\`\`bash
+```bash
 kubectl get pods -n ${ELASTICSEARCH_NAMESPACE} -l app=${ELASTICSEARCH_APP}
-\`\`\`
+```
 
 ### 2. **Check Elasticsearch Service**
 Verify that the Elasticsearch service is running and accessible:
-\`\`\`bash
+```bash
 kubectl get svc -n ${ELASTICSEARCH_NAMESPACE} ${ELASTICSEARCH_SERVICE}
-\`\`\`
+```
 
 ### 3. **Check Elasticsearch Deployment**
 Ensure that the Elasticsearch deployment is up and running. A misconfigured deployment could be responsible for unassigned shards:
-\`\`\`bash
+```bash
 kubectl get deployment -n ${ELASTICSEARCH_NAMESPACE} ${ELASTICSEARCH_DEPLOYMENT}
-\`\`\`
+```
 
 ### 4. **Monitor Elasticsearch Node Health**
 Use the following command to check if all Elasticsearch nodes are healthy:
-\`\`\`bash
+```bash
 kubectl exec -it ${ELASTICSEARCH_POD_NAME} -n ${ELASTICSEARCH_NAMESPACE} curl -XGET 'http://localhost:9200/_cat/nodes?v'
-\`\`\`
+```
 
 ### 5. **Check Shard Assignment**
 To see whether the shards are being assigned, use the following command:
-\`\`\`bash
+```bash
 kubectl exec -it ${ELASTICSEARCH_POD_NAME} -n ${ELASTICSEARCH_NAMESPACE} curl -XGET 'http://localhost:9200/_cat/shards?v'
-\`\`\`
+```
 
 ### 6. **Check Kubernetes Node Resources**
 Ensure that your Kubernetes nodes have enough resources to allocate to Elasticsearch:
-\`\`\`bash
+```bash
 kubectl get nodes --show-labels
-\`\`\`
+```
 
 ### 7. **Check for Pod Evictions or Disruptions**
 Pod evictions or disruptions may cause unassigned shards. Check for any such events in your cluster:
-\`\`\`bash
+```bash
 kubectl get events -n ${ELASTICSEARCH_NAMESPACE}
-\`\`\`
+```
 
 ### 8. **Review Elasticsearch Logs**
 Search the Elasticsearch logs for any errors related to unassigned shards:
-\`\`\`bash
+```bash
 kubectl logs -f ${ELASTICSEARCH_POD_NAME} -n ${ELASTICSEARCH_NAMESPACE} | grep "unassigned"
-\`\`\`
+```
 
 ---
 
@@ -77,7 +77,7 @@ kubectl logs -f ${ELASTICSEARCH_POD_NAME} -n ${ELASTICSEARCH_NAMESPACE} | grep "
 
 ### 1. **Ensure Adequate Resources for Elasticsearch Pods**
 Verify that your Elasticsearch pods have enough CPU, memory, and storage space:
-\`\`\`bash
+```bash
 # Check CPU usage
 CPU_USAGE=$(kubectl exec -n $NAMESPACE $POD_NAME -- sh -c "ps -p 1 -o %cpu | tail -1")
 if (( $(echo "$CPU_USAGE > 80.0" | bc -l) )); then
@@ -95,20 +95,20 @@ STORAGE_USAGE=$(kubectl exec -n $NAMESPACE $POD_NAME -- sh -c "df -h /usr/share/
 if (( $STORAGE_USAGE > 80 )); then
   echo "WARNING: Storage space usage of Elasticsearch pod is high: $STORAGE_USAGE%"
 fi
-\`\`\`
+```
 
 ### 2. **Scale the Elasticsearch Deployment**
 If the cluster is running out of resources, scale the Elasticsearch deployment to add more pods:
-\`\`\`bash
+```bash
 # Set the number of replicas to scale up
 kubectl scale deployment -n $NAMESPACE $DEPLOYMENT_NAME --replicas=$REPLICAS
-\`\`\`
+```
 
 ### 3. **Rebalance Shards**
 In some cases, manual intervention may be needed to rebalance unassigned shards across the cluster:
-\`\`\`bash
+```bash
 curl -X POST 'http://localhost:9200/_cluster/reroute?retry_failed=true'
-\`\`\`
+```
 
 ---
 
