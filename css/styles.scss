@@ -1321,6 +1321,9 @@
         text-align: justify;
         color: #fff;
     }
+    @media only screen and (max-width: 991px) {
+        padding: 40px 0px;
+    }
 }
 .tech-logo{
     .img-fix{
@@ -1376,6 +1379,10 @@
     justify-content: center;
     align-items: center;
     margin-top: 7rem;
+    // margin-bottom: 7rem;    
+        @media screen and (min-width: 800px)  {
+           
+      }    
     img{
         padding-top: 1.5rem;
         width:150px;
@@ -1448,4 +1455,17 @@
         list-style-position: inside;
     }
   }
-  
+  @media only screen and (max-width: 767px) {
+    .calendly-button{
+        flex-direction: column;
+        padding-bottom: 1.5rem;
+    }
+    .contactus_inner .contactus_block .contactus_box{
+        margin-top: 15px;
+    }
+    .integrations{
+        p{
+            text-align:left;
+        }
+    }
+  }

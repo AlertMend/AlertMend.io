@@ -1351,6 +1351,11 @@ main {
   text-align: justify;
   color: #fff;
 }
+@media only screen and (max-width: 991px) {
+  .integrations {
+    padding: 40px 0px;
+  }
+}
 
 .tech-logo .img-fix {
   background: #fff;
@@ -1465,4 +1470,17 @@ main {
 .post-content ol, .post-content ul {
   list-style: disc;
   list-style-position: inside;
+}
+
+@media only screen and (max-width: 767px) {
+  .calendly-button {
+    flex-direction: column;
+    padding-bottom: 1.5rem;
+  }
+  .contactus_inner .contactus_block .contactus_box {
+    margin-top: 15px;
+  }
+  .integrations p {
+    text-align: left;
+  }
 }/*# sourceMappingURL=styles.css.map */
