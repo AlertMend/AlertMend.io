@@ -76,6 +76,8 @@
         document.addEventListener( 'wpcf7mailsent', function( event ) { 
         location = 'https://www.example.com/thank-you/'; 
         }, false ); 
+
+        document.getElementById("contactId").reset();
         </script> 
 </head>
 
@@ -150,13 +152,13 @@
                                 <header class="mb-4"><strong>Fill in your details</strong> </header>
                                 <form
                     action="https://formspree.io/f/xanwlobr"
-                    method="POST" class="wpcf7-form init"
+                    method="POST" class="wpcf7-form init" id="contactId"
                     >
                     <p>
                     <label>
                         Your email:<br>
                         <span class="wpcf7-form-control-wrap">                        
-                        <input  name="email" class="wpcf7-form-control" pattern=".+@example\.com" required>
+                        <input  name="email" class="wpcf7-form-control" pattern="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$" required>
                     </span>
                     </label>
                     </p>
