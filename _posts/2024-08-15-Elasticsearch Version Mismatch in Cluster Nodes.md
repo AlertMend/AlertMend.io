@@ -1,5 +1,5 @@
 ---
-title: "Troubleshooting Elasticsearch Unassigned Shards Incident on Kubernetes"
+title: "Troubleshooting Elasticsearch Version Mismatch in Cluster Nodes"
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/elasticsearch_version_mismatch_in_cluster_nodes.png?raw=true"
 layout: post
 ---
