@@ -292,6 +292,19 @@ input[type=search]::-webkit-search-results-decoration {
   z-index: 1;
   border: 0.1rem solid transparent;
 }
+.d-b-center{
+  display: block !important;
+  text-align: center !important;
+}
+.fw-500{
+  font-weight: 500 !important;
+}
+.f-16{
+  font-size: 16px !important;
+}
+.f-12{
+  font-size: 12px !important;
+}
 .btn_1:after {
   content: "";
   width: 100%;
