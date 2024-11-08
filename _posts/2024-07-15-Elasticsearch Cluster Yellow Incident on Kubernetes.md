@@ -1,6 +1,6 @@
 ---
 title: "Elasticsearch Cluster Yellow Incident on Kubernetes"
-image: "https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/elasticsearch_yellow_incident.png?raw=true"
+image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/elasticsearch_yellow_incident.png?raw=true"
 layout: post
 ---
 
