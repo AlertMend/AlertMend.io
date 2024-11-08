@@ -10,7 +10,7 @@ gem 'wdm', '>= 0.1.0'
 
 # gem 'jekyll'
 # gem 'jekyll-archives'
-# gem 'jekyll-sitemap'
+gem 'jekyll-sitemap'
 # gem 'jekyll-paginate-v2'
 
 # gem "jekyll", ENV["JEKYLL_VERSION"] if ENV["JEKYLL_VERSION"]
