@@ -1,5 +1,6 @@
 ---
-title: "Optimizing High JVM Heap Usage in Elasticsearch"
+title: "Optimizing High JVM Heap Usage in Elasticsearch: Troubleshooting and Solutions"
+desc: "High JVM heap usage in Elasticsearch can degrade performance, slow down indexing, and even lead to crashes if the heap memory becomes excessively full. The Java Virtual Machine (JVM) allocates a specific amount of heap memory to Elasticsearch, which is critical for handling queries and managing data. This blog covers the key causes, debugging steps, and solutions for addressing high JVM heap usage in Elasticsearch."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/Optimizing_High_JVM_heap_usage_in_elasticsearch.png?raw=true"
 layout: post
 ---

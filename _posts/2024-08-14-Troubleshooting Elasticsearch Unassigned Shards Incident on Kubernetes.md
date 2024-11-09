@@ -1,5 +1,6 @@
 ---
 title: "Troubleshooting Elasticsearch Unassigned Shards Incident on Kubernetes"
+desc: "Elasticsearch unassigned shards occur when a node is unable to assign shards properly, leading to reduced cluster performance and potential data loss. Shards are the building blocks of Elasticsearch indexes, and unassigned shards indicate that Elasticsearch cannot find a suitable node to hold shard replicas. In Kubernetes environments, this issue can arise due to insufficient resources, misconfiguration, or pod failures. In this blog, we’ll cover the causes, troubleshooting steps, and solutions to help you resolve unassigned shard issues efficiently, ensuring optimal cluster performance and data reliability."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/elastic_search_unassigned_shards_incident.png?raw=true"
 layout: post
 ---

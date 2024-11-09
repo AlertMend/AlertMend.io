@@ -1,5 +1,6 @@
 ---
-title: "Mastering Kubernetes DNS"
+title: "Mastering Kubernetes DNS: A Guide to Seamless Communication in Your Cluster"
+desc: "Kubernetes DNS plays a vital role in managing network communications within a cluster. It simplifies service discovery and ensures that all components—pods, services, and external systems—can communicate efficiently without relying on static IP addresses. This blog will explore the basics of Kubernetes DNS, how it works, and troubleshooting common DNS-related issues."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/kubernetes_dns.png?raw=true"        
 layout: post
 ---

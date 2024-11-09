@@ -1,5 +1,6 @@
 ---
-title: "Troubleshooting Unhealthy Elasticsearch Nodes on Kubernetes"
+title: "Troubleshooting Unhealthy Elasticsearch Nodes on Kubernetes: Causes and Solutions"
+desc: "In an Elasticsearch cluster, the health of nodes is critical for the stability and performance of the entire system. A Healthy Nodes Incident occurs when one or more nodes in the Elasticsearch cluster become unhealthy or unresponsive. This can lead to poor search performance, incomplete data retrieval, and in some cases, data loss. Addressing node health issues quickly is .essential to maintaining optimal cluster operations."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/elasticsearch_healthy_nodes.png?raw=true"
 layout: post
 ---

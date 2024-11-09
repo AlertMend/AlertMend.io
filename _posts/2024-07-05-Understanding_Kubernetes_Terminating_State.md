@@ -1,5 +1,6 @@
 ---
 title: "How to Fix Kubernetes Pods Stuck in Terminating State"
+desc: "Kubernetes, the de facto standard for container orchestration, allows developers to manage and scale their applications seamlessly. However, even with its powerful capabilities, there are times when things don’t go as planned. One such issue is when Kubernetes pods get stuck in a Terminating state. This problem can disrupt workflows and increase downtime if not handled properly. In this post, we’ll explore the reasons why Kubernetes pods may get stuck in the Terminating state and walk through actionable steps to resolve this issue effectively."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/stuck_terminate.png?raw=true"
 layout: post
 ---

@@ -1,5 +1,6 @@
 ---
-title: "Troubleshooting Elasticsearch Backlog of Pending Tasks"
+title: "Troubleshooting Elasticsearch Backlog of Pending Tasks: Causes and Solutions"
+desc: "In Elasticsearch, a backlog of pending tasks can severely impact system performance by delaying or halting important operations like indexing and searching. This incident occurs when the system is overwhelmed with tasks, making it unable to process requests in a timely manner. Causes for these backlogs range from hardware constraints to software issues. This blog explores common causes, troubleshooting techniques, and solutions to prevent Elasticsearch from falling behind on task execution."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/elasticsearch_pending_tasks.png?raw=true"
 layout: post
 ---

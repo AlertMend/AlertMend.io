@@ -1,5 +1,6 @@
 ---
 title: "Kubernetes PersistentVolumeClaim (PVC) Guide: Basic Tutorial and Troubleshooting Tips"
+desc: "In Kubernetes, a PersistentVolumeClaim (PVC) allows pods to request storage, which can be dynamically or manually provisioned. This guide will walk you through the fundamentals of PVCs, their lifecycle, common issues, and troubleshooting tips."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/pvc.png?raw=true"
 layout: post
 ---

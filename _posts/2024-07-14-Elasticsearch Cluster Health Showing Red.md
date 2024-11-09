@@ -1,5 +1,6 @@
 ---
-title: "Elasticsearch Cluster Health Showing Red"
+title: "Elasticsearch Cluster Health Showing Red: Causes, Troubleshooting, and Solutions"
+desc: "When your Elasticsearch cluster health status turns red, it indicates critical issues that must be addressed immediately. A red health status means some primary shards are unassigned, which could cause data loss or make your cluster unstable. This guide will help you understand the causes of a red cluster health status, how to troubleshoot the issues, and what steps to take to restore your cluster’s functionality."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/elasticsearch_cluster_health_red.png?raw=true"
 layout: post
 ---

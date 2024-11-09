@@ -1,5 +1,6 @@
 ---
 title: "Troubleshooting Networking Errors in Kubernetes"
+desc: "Networking is one of the most critical components in any Kubernetes deployment, facilitating communication between containers, services, and external clients. Despite Kubernetes’ robustness, networking errors can still occur, leading to issues such as service downtime or degraded application performance. This blog covers common networking errors in Kubernetes and offers effective troubleshooting steps."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/Networking_troubleshoot.png?raw=true"
 layout: post
 ---

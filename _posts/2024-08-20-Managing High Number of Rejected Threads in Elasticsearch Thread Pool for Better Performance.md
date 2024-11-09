@@ -1,5 +1,6 @@
 ---
 title: "Managing High Number of Rejected Threads in Elasticsearch Thread Pool for Better Performance"
+desc: "In Elasticsearch, the thread pool manages concurrent threads needed for various operations like indexing and searching. However, a high number of rejected threads can indicate an overwhelmed thread pool that is unable to keep up with the current workload. Rejected threads lead to performance bottlenecks, slowdowns, and can impact overall system availability. This blog provides insights into identifying, diagnosing, and resolving high rejection rates in Elasticsearch’s thread pool."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/high_number_of_rejected_queued_threads_in_elasticsearch_thread_pool.png?raw=true"
 layout: post
 ---

@@ -1,5 +1,6 @@
 ---
-title: "Troubleshooting Elasticsearch Cluster Failures and Instability"
+title: "Troubleshooting Elasticsearch Cluster Failures and Instability: Causes and Solutions"
+desc: "Frequent cluster failures or instability in Elasticsearch can severely impact system performance, leading to downtime, reduced search efficiency, and even potential data loss. Elasticsearch, being a distributed system, relies on a stable cluster configuration. Issues can stem from hardware problems, configuration errors, resource exhaustion, or network connectivity issues. In this blog, we will walk through the common causes, troubleshooting steps, and strategies to resolve cluster instability and ensure your Elasticsearch environment remains stable and reliable."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/elastic_search_cluster_failures_and_instability.png?raw=true"
 layout: post
 ---

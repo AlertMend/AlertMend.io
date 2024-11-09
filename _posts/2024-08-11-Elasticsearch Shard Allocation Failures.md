@@ -1,5 +1,6 @@
 ---
-title: "Elasticsearch Shard Allocation Failures"
+title: "Troubleshooting Elasticsearch Shard Allocation Failures: A Comprehensive Guide"
+desc: "Elasticsearch relies on shard allocation to distribute data across the cluster. However, shard allocation failures can disrupt your cluster’s functionality, leading to performance degradation, potential data loss, and search inefficiencies. These failures occur when shards cannot be assigned to nodes due to misconfigurations, insufficient resources, or other cluster-related issues. This blog will explore common causes, troubleshooting steps, and effective solutions to resolve shard allocation failures."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/elastic_search_shard_allocation_failures.png?raw=true"
 layout: post
 ---

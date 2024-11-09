@@ -1,5 +1,6 @@
 ---
-title: "Optimizing Elasticsearch Heap Memory"
+title: "Optimizing Elasticsearch Heap Memory: Solving High Heap Usage Issues"
+desc: "High heap usage in Elasticsearch is a critical issue that can degrade performance, cause system crashes, or result in memory exhaustion. Heap memory is vital for Elasticsearch’s ability to handle queries and indexing efficiently. When heap usage exceeds 80%, it can trigger a heap memory issue, and immediate attention is required to prevent system failure. This blog explores the common causes of high heap memory usage, troubleshooting steps, and solutions for resolving these issues."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/elastic_search_heap_memory.png?raw=true"
 layout: post
 ---

@@ -1,5 +1,6 @@
 ---
-title: "Kubernetes Container Volume Usage Issues"
+title: "Kubernetes Container Volume Usage Issues: Detailed Troubleshooting and Best Practices"
+desc: "Managing storage in Kubernetes, especially for stateful applications like Elasticsearch, is crucial. Container Volume Usage Incidents occur when the storage volume allocated to a container is exceeded, leading to potential service disruptions or even data loss. This blog will provide an in-depth troubleshooting guide, common causes, and best practices to handle container volume usage issues effectively."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/volume_usage_issues.png?raw=true"
 layout: post
 ---

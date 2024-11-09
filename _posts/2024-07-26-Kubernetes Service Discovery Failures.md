@@ -1,5 +1,6 @@
 ---
-title: "Kubernetes Service Discovery Failures"
+title: "Kubernetes Service Discovery Failures: Troubleshooting and Best Practices"
+desc: "In Kubernetes, service discovery is crucial for enabling communication between different services within the cluster. When service discovery fails, it can lead to connectivity issues between pods and services, resulting in application downtime or degraded performance. In this blog post, we will cover common causes of Kubernetes service discovery failures, troubleshooting steps, and best practices to maintain smooth service communication in your cluster."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/service_discovery_failures.png?raw=true"
 layout: post
 ---

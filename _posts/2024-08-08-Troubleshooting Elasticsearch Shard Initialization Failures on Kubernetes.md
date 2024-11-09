@@ -1,5 +1,6 @@
 ---
-title: "Troubleshooting Elasticsearch Shard Initialization Failures on Kubernetes"
+title: "Troubleshooting Elasticsearch Shard Initialization Failures on Kubernetes: Causes and Fixes"
+desc: "Elasticsearch relies heavily on shard initialization to distribute data across the cluster efficiently. However, shard initialization failures in a Kubernetes environment can severely impact Elasticsearch performance, causing delays, downtime, or data loss. Immediate attention is required to resolve these failures and maintain cluster health. This blog will dive into the common causes, troubleshooting steps, and solutions for shard initialization failures."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/elastic_search_shard_initialization_failures.png?raw=true"
 layout: post
 ---

@@ -1,5 +1,6 @@
 ---
-title: "DNS Resolution Failures in Kubernetes"
+title: "DNS Resolution Failures in Kubernetes: Troubleshooting and Best Practices"
+desc: "In Kubernetes, DNS resolution is vital for enabling services and pods to communicate with each other within the cluster. DNS resolution failures can lead to service disruptions, application downtime, and connectivity issues between pods. This blog will cover the common causes of DNS resolution failures in Kubernetes, troubleshooting steps, and best practices to ensure reliable service discovery within your cluster."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/dns_resolution_failures.png?raw=true"
 layout: post
 ---

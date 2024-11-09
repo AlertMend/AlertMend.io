@@ -1,5 +1,6 @@
 ---
-title: "Troubleshooting Unhealthy Kubernetes DaemonSets"
+title: "Troubleshooting Unhealthy Kubernetes DaemonSets: A Comprehensive Guide"
+desc: "Kubernetes DaemonSets ensure that a copy of a pod runs on all (or selected) nodes in a cluster. However, managing DaemonSets can sometimes present challenges, particularly when they become unhealthy or fail to deploy correctly. This guide focuses on common issues with Kubernetes DaemonSets, how to troubleshoot them effectively, and best practices for maintaining their health."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/daemonset_troubleshooting.png?raw=true"
 layout: post
 ---

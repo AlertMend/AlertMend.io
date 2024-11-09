@@ -1,5 +1,6 @@
 ---
 title: "Debugging Kubernetes Jobs and CronJobs Failures"
+desc: "Kubernetes Jobs and CronJobs are vital tools for running tasks asynchronously in a Kubernetes cluster. They enable automation of workloads, making them essential for efficient operations. However, like any automation tool, things can go wrong, leading to job failures or unexpected behavior. This blog focuses on common issues with Jobs and CronJobs in Kubernetes, providing actionable debugging tips to ensure your workflows run smoothly."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/k8s_cronjobs.png?raw=true"
 layout: post
 ---

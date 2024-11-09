@@ -1,5 +1,6 @@
 ---
-title: "Elasticsearch Disk Out of Space Incident"
+title: "Elasticsearch Disk Out of Space Incident: Troubleshooting and Solutions"
+desc: "When Elasticsearch runs out of disk space, it can lead to serious issues, including system crashes, slow performance, and an inability to index new data. This type of incident is critical and requires immediate attention to avoid disruptions to your Elasticsearch cluster. In this blog, we’ll explore common causes of disk space issues in Elasticsearch, how to troubleshoot, and best practices to prevent this from happening in the future."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/elasticsearch_disk_out_of_space.png?raw=true"
 layout: post
 ---

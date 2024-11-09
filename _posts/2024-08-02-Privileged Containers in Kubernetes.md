@@ -1,5 +1,6 @@
 ---
-title: "Understanding Privileged Containers in Kubernetes"
+title: "Understanding Privileged Containers in Kubernetes: Best Practices and Security Risks"
+desc: "In Kubernetes, privileged containers play a critical role when applications need elevated access to the host system. However, running privileged containers can pose significant security risks. This blog will guide you through the concept of privileged containers, their use cases, and best practices to secure your Kubernetes environment."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/Privileged_Containers.png?raw=true"
 layout: post
 ---

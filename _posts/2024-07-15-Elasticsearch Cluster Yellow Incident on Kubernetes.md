@@ -1,5 +1,6 @@
 ---
-title: "Elasticsearch Cluster Yellow Incident on Kubernetes"
+title: "Elasticsearch Cluster Yellow Incident on Kubernetes: Troubleshooting and Solutions"
+desc: "An Elasticsearch Cluster Yellow incident indicates a partial degradation in the cluster’s health, usually triggered by unassigned replica shards. This doesn’t affect the cluster’s immediate functionality but poses a risk of reduced redundancy, leading to potential data loss if a node fails. In this blog, we’ll discuss the causes, debugging techniques, and steps to resolve a yellow cluster status in Kubernetes-managed Elasticsearch clusters."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/elasticsearch_yellow_incident.png?raw=true"
 layout: post
 ---

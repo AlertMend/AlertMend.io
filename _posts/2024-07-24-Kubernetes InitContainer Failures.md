@@ -1,5 +1,6 @@
 ---
-title: "Kubernetes InitContainer Failures"
+title: "Kubernetes InitContainer Failures: Troubleshooting and Best Practices"
+desc: "In Kubernetes, InitContainers are an essential feature that runs before the main containers in a pod. They perform initialization tasks like setting up configurations or checking dependencies before the main application starts. However, when InitContainers fail, they can prevent the main containers from starting, leading to pod failures and stalled applications. This guide will walk you through common causes of InitContainer failures and provide tips to troubleshoot and resolve these issues effective."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/initcontainer_failures.png?raw=true"
 layout: post
 ---

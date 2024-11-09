@@ -1,5 +1,6 @@
 ---
 title: "Debugging Kubernetes HPA Not Scaling: Troubleshooting and Best Practices"
+desc: "The Horizontal Pod Autoscaler (HPA) in Kubernetes is designed to automatically scale the number of pod replicas based on resource utilization, such as CPU or memory. However, there are situations where HPA does not scale as expected, leading to performance bottlenecks or resource overuse. This blog post will explore common reasons why HPA may not be scaling, how to troubleshoot these issues, and best practices to ensure smooth scaling in your Kubernetes cluster."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/hpa_not_scaling.png?raw=true"
 # Optional - date will be used from filename if not set here.
 layout: post

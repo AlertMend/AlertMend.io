@@ -1,5 +1,6 @@
 ---
-title: "Troubleshooting Elasticsearch Shard Relocation Incidents on Kubernetes"
+title: "Troubleshooting Elasticsearch Shard Relocation Incidents on Kubernetes: Causes and Solutions"
+desc: "In Elasticsearch, shard relocation refers to the movement of data shards from one node to another within a cluster. This process can temporarily impact data availability and increase query latency, particularly during node failures, hardware maintenance, or cluster rebalancing. Understanding and troubleshooting shard relocation incidents is critical to maintaining a healthy Elasticsearch cluster, especially in Kubernetes environments. In this blog, we’ll explore the causes, troubleshooting steps, and best practices to manage shard relocation effectively, ensuring optimal cluster performance and data availability even during transitions."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/elastic_search_shard_relocation_incidents.png?raw=true"
 layout: post
 ---

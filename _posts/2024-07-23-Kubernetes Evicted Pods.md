@@ -1,5 +1,6 @@
 ---
-title: "Kubernetes Evicted Pods"
+title: "Kubernetes Evicted Pods: Causes, Troubleshooting, and Best Practices"
+desc: "In Kubernetes, evicted pods occur when the node running the pods cannot meet their resource demands, leading to pod eviction as a result of resource pressure. Pod eviction is an automatic action taken by Kubernetes to free up resources on a node when it’s running low on essential resources like memory, disk, or CPU. Pod evictions can have serious real-world impacts, including degraded application performance or service outages. This blog will guide you through the causes of pod eviction, how to troubleshoot evicted pods, and best practices to prevent evictions, helping you maintain a stable and resilient Kubernetes environment."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/evicted_pods.png?raw=true"
 layout: post
 ---

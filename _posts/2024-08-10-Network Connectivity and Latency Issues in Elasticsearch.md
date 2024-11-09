@@ -1,5 +1,6 @@
 ---
-title: "Network Connectivity and Latency Issues in Elasticsearch"
+title: "Resolving Network Connectivity and Latency Issues in Elasticsearch: A Troubleshooting Guide"
+desc: "Network connectivity or latency problems in Elasticsearch can lead to significant performance degradation, timeouts, and even cluster unavailability. Elasticsearch is a distributed search engine that relies heavily on stable and efficient network communication between its nodes. When network issues occur, they can cause slow queries, increased latency, and disrupt search functionality. In this blog, we’ll explore the common causes of network issues in Elasticsearch, how to troubleshoot these problems, and provide solutions."
 image: "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/elastic_search_network_connectivity_and_latency_issues.png?raw=true"
 layout: post
 ---
