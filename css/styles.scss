@@ -1359,10 +1359,14 @@
 }
 .video-section{
     background: linear-gradient(93.26deg, #0074BA 2.69%, #003454 225.23%);
-    border-radius: 2.7rem; 
+    border-radius: 1.7rem; 
     text-align: center;
-    padding: 30px;
+    padding: 0.8rem 1rem;
     border: 1rem solid #E6F2F9;
+    iframe{
+     border-radius: 1.75rem; 
+
+    }
 
 }
 
