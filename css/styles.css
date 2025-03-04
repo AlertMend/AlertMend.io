@@ -432,7 +432,7 @@ main {
   transition: all 0.3s ease-in-out;
   width: 100%;
   inset: 0 0 auto;
-  border-bottom: 0.1rem solid #fffff1;
+  border-bottom: 0.1rem solid #9d5bc2;
   background: #fff;
   background: #fffff1;
   background: linear-gradient(-20deg, rgb(229, 212, 255) -10%, #fffff1 10%, #fffff1 100%);
@@ -537,7 +537,7 @@ main {
 
 .select2-dropdown {
   background: #fffff1;
-  border: 0.1rem solid #fffff1;
+  border: 0.1rem solid #9d5bc2;
   border-radius: 0.6rem !important;
   overflow: hidden;
 }
@@ -676,7 +676,7 @@ main {
   width: 100%;
   max-width: 100rem;
   border-radius: 3rem;
-  border: 1rem solid #fffff1;
+  border: 1rem solid #9d5bc2;
   background: #fff;
   padding: 2rem 0;
 }
@@ -955,7 +955,7 @@ main {
 }
 .report_block_inner .report_slider .swiper-slide .report_box_text p {
   font-size: 2rem;
-  font-weight: 300;
+  font-weight: 350;
 }
 .report_block_inner .report_slider .swiper-slide .report_box_text .btn_1 {
   margin: 3rem 0 0;
@@ -1129,7 +1129,7 @@ main {
   margin: 0 auto 0 0;
   color: #fff;
   font-size: 1.6rem;
-  font-weight: 300;
+  font-weight: 350;
 }
 .footer .copyright_inner .foot_tc {
   display: flex;
@@ -1159,7 +1159,7 @@ main {
 }
 .welcome_block_inner > p {
   font-size: 1.6rem;
-  font-weight: 300;
+  font-weight: 350;
   width: 100%;
   max-width: 100rem;
   margin: 0 auto;
@@ -1179,8 +1179,8 @@ main {
 }
 .whyappletun_inner .whyappletun_items .whyappletun_item {
   width: calc(33.33% - 1.5rem);
-  border: 0.1rem solid #fffff1;
-  background: #fff;
+  border: 0.1rem solid #9d5bc2;
+  background: #fbf4ff;
   border-radius: 2rem;
   padding: 3rem;
 }
@@ -1216,6 +1216,7 @@ main {
 }
 .whyappletun_inner .whyappletun_items .whyappletun_item p {
   font-size: 1.6rem;
+  font-weight: 350;
 }
 
 .mainfeatures_inner {
@@ -1240,7 +1241,7 @@ main {
 .mainfeatures_inner .mainfeatures_items .mainfeatures_item {
   width: calc(50% - 1rem);
   padding: 3rem;
-  background: #fffff1;
+  background: #fbf4ff;
   border-radius: 1rem;
   gap: 1rem;
   position: relative;
@@ -1269,6 +1270,7 @@ main {
 }
 .mainfeatures_inner .mainfeatures_items .mainfeatures_item .mainfeatures_text p {
   font-size: 1.4rem;
+  font-weight: 350;
 }
 
 .howitworks_inner .section_title {
@@ -1285,12 +1287,13 @@ main {
 }
 .howitworks_inner .howitworks_scenario_main .howitworks_scenario {
   flex: 1 1 0;
-  border: 0.1rem solid #fffff1;
+  border: 0.1rem solid #9d5bc2;
   border-radius: 3rem;
   padding: 5rem;
 }
 .howitworks_inner .howitworks_scenario_main .howitworks_scenario .howitworks_scenario_head p {
   font-size: 1.6rem;
+  font-weight: 350;
   margin: 0 0 1rem;
 }
 .howitworks_inner .howitworks_scenario_main .howitworks_scenario .howitworks_scenario_head p strong {
@@ -1310,7 +1313,7 @@ main {
 .howitworks_inner .howitworks_scenario_main .howitworks_scenario ul li:not(:last-child) {
   margin: 0 0 1rem;
   padding: 0 0 1rem;
-  border-bottom: 0.1rem solid #fffff1;
+  border-bottom: 0.1rem solid #9d5bc2;
 }
 
 .contactus_inner .contactus_block {
@@ -1332,6 +1335,7 @@ main {
   width: 100%;
 }
 .contactus_inner .contactus_block .contactus_box form p {
+  font-weight: 350;
   margin: 0 0 1rem;
 }
 .contactus_inner .contactus_block .contactus_box form p br {
@@ -1451,7 +1455,7 @@ main {
 .integrations p {
   text-align: center;
   color: #000;
-  font-weight: 300;
+  font-weight: 350;
   margin-bottom: 60px;
 }
 @media only screen and (max-width: 991px) {
@@ -1469,7 +1473,7 @@ main {
   padding: 10px;
 }
 
-.contform .wpcf7-form-control {
+/* .contform .wpcf7-form-control {
   width: 100%;
   outline: none;
   background: rgba(230, 242, 249, 0.6);
@@ -1478,7 +1482,7 @@ main {
   font-size: 1.6rem;
   color: #01000A;
   border-radius: 1rem;
-}
+} */
 .contform textarea {
   height: 10rem;
   resize: none;
@@ -1489,7 +1493,7 @@ main {
   border-radius: 1.7rem;
   /* text-align: center; */
   /* padding: 0.8rem 1rem; */
-  border: 1rem solid #fffff1;
+  border: 1rem solid #9d5bc2;
 }
 .video-section iframe {
   border-radius: 0.75rem;
@@ -1535,7 +1539,7 @@ main {
   // border-radius: 2.7rem;
   // text-align: center;
   // padding: 4px;
-  // border: 1rem solid #fffff1;
+  // border: 1rem solid #9d5bc2;
   // margin: 5px 0px;
   // } */
 }
@@ -1572,6 +1576,7 @@ main {
 }
 .post-content p {
   line-height: 1.75;
+  font-weight: 350;
 }
 .post-content ol, .post-content ul {
   list-style: disc;
