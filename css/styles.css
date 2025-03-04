@@ -1422,6 +1422,7 @@ main {
   height: 100%;
   border-radius: 10px;
   object-fit: contain;
+  padding: 5px;
 }
 .square:nth-child(1) { width: 230px; height: 230px; margin-top: auto; }
 .square:nth-child(2) { width: 180px; height: 180px; margin-top: auto; }
@@ -1433,10 +1434,10 @@ main {
 .square:nth-child(7) { width: 180px; height: 180px; margin-top: auto; }
 .square:nth-child(8) { width: 210px; height: 210px; margin-bottom: auto;}
 .square:nth-child(10) { width: 180px; height: 180px;  margin-bottom: auto;}
-.square:nth-child(12) { width: 100px; height: 100px; margin-bottom: auto; }
-.square:nth-child(14) { width: 200px; height: 200px; margin-top: auto; }
 .square:nth-child(11) { width: 150px; height: 150px; margin-bottom: auto;}
+.square:nth-child(12) { width: 180px; height: 180px; margin-bottom: auto; }
 .square:nth-child(13) { width: 230px; height: 230px; margin-top: auto; }
+.square:nth-child(14) { width: 200px; height: 200px; margin-top: auto; }
 .square:nth-child(15) { width: 150px; height: 150px; margin-bottom: auto; }
 .square:nth-child(16) { width: 130px; height: 130px; margin-bottom: auto; }
 
