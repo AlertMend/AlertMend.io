@@ -17,7 +17,7 @@
    id="metadata63"><rdf:RDF><cc:Work
        rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
          rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><sodipodi:namedview
-   pagecolor="#ffffff"
+   pagecolor="transparent"
    bordercolor="#666666"
    borderopacity="1"
    objecttolerance="10"
@@ -40,7 +40,7 @@
 <rect
    width="955.40002"
    height="322.39999"
-   fill="#ffffff"
+   fill="transparent"
    x="157.98001"
    y="95.040001"
    id="rect6" /><g
