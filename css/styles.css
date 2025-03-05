@@ -450,6 +450,13 @@ main {
   margin: 0 auto 0 0;
   padding: 0;
 }
+
+@media only screen and (min-width: 991px) {
+  #header .header_content .navbar{
+    max-width: 40vw;
+    flex-wrap: wrap !important;
+  }
+}
 #header .header_content .navbar .navbar-nav {
   gap: 2rem 1rem;
 }

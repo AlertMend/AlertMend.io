@@ -265,20 +265,20 @@
                 padding: 0;
             }
             .navbar {
-                display: none;
+                // display: none;
                 position: fixed;
                 top: 6rem;
                 background: $color-white;
                 width: 100%;
-                height: calc(100dvh - 6rem);
+                // height: calc(100dvh - 6rem);
                 overflow-y: auto;
                 .nav {
                     display: flex !important;
                     flex-direction: column;
                     justify-content: center;
                     flex-wrap: nowrap;
-                    height: 100%;
-                    min-height: 44rem;
+                    // height: 100%;
+                    // min-height: 44rem;
                 }
             }
             .header_link {
