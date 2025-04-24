@@ -90,7 +90,12 @@
     <main id="main">
         <header id="header" class="header">
             <div class="wrapper">
-                <div class="header_content d-flex flex-row justify-content-center align-items-center flex-wrap">
+                <div class="header_content d-flex flex-row align-items-center flex-wrap">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="img/logo.svg" alt="Kubernetes incident management dashboard by AlertMend">
+                        </a>
+                    </div>
                     <nav class="navbar navbar-expand-lg">
                         <div class="collapse navbar-collapse nav" id="navbarNav">
                             <ul class="navbar-nav d-flex flex-rowflex-wrap justify-content-start align-items-center">
@@ -103,15 +108,33 @@
                                 <li class="menu-item">
                                     <a class="nav-link d-block" href="howitworks.html"><span>How AlertMend Works</span></a>
                                 </li>
+                                <li class="menu-item m_popover">
+                                    <a class="nav-link d-block" role="button"><span>Use Cases</span></a>
+                                    <div class="popup-menu">
+                                        <div class="p_menu-items">
+                                            <div class="menu-item">
+                                                <a class="nav-link d-block" href="remediation-use-case.html"><span>Remediation Use Cases</span></a>
+                                            </div>
+                                            <div class="menu-item">
+                                                <a class="nav-link d-block" href="diagnostics-use-case.html"><span>Diagnostics Use Cases</span></a>
+                                            </div>
+                                            <div class="menu-item">
+                                                <a class="nav-link d-block" href="data-specific-use-case.html"><span>Data-Specific Use Cases (Cassandra & Kafka)</span></a>
+                                            </div>
+                                            <div class="menu-item">
+                                                <a class="nav-link d-block" href="additional-use-case.html"><span>Additional Use Cases</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="nav-link d-block" href="case-studies.html"><span>Case Studies</span></a>
+                                </li>
                             </ul>
                         </div>                        
                         <!-- #navbarNav -->
                     </nav>
-                    <div class="logo">
-                        <a href="index.html">
-                            <img src="img/logo.svg" alt="Kubernetes incident management dashboard by AlertMend">
-                        </a>
-                    </div>
+                    
                     <div class="getfreebtn d-flex gap-2">
                         <a href="/blogs" class="btn_2">Blogs</a>
                         <!-- <a href="contactus.html" class="btn_1">Contact us</a> -->
@@ -566,7 +589,7 @@
             <div class="copyright">
                 <div class="wrapper">
                     <div class="copyright_inner">
-                        <p>© Copyright AlertMend 2024. All Rights Reserved.</p>
+                        <p>© Copyright AlertMend 2025. All Rights Reserved.</p>
                         <ul class="foot_tc">
                             <li>
                                 <a href="https://docs.google.com/document/d/1JbVcwRBboF649PKJed5TNf71N_C6VV_GrqtxZ8WTdds/edit?usp=sharing">Terms</a>
