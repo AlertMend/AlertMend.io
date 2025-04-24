@@ -489,7 +489,7 @@ main {
   background: #dae0e2;
   color: #9d5bc2;
 }
-#header .header_content .navbar .navbar-nav .menu-item.active .nav-link {
+#header .header_content .navbar .navbar-nav .menu-item.active > .nav-link {
   /* background: #fffff1; */
   color: #9d5bc2;
 }
@@ -771,6 +771,42 @@ main {
       rgba(72, 61, 139, 0.5) /* Deep purple with opacity */
   );
   background-size: 100% 100%; /* Increase the background size for more movement */
+}
+
+.heading {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+.heading h2 {
+  font-weight: 700;
+  font-size: 4.2rem;
+}
+.heading p {
+  color: #6c757d;
+  font-size: 2rem;
+}
+.use-cases{
+  gap: 2rem 0;
+  justify-content: center;
+}
+.use-case {
+  margin-bottom: 40px;
+  border: 0.1rem solid #9d5bc2;
+  border-radius: 1rem;
+  padding: 2rem;
+  height: 100%;
+}
+.use-case h4 {
+  font-weight: 500;
+  font-size: 3.2rem;
+}
+.use-case span {
+  font-size: 4rem;
+  font-weight: 700;
+  display: inline-block;
+  margin-bottom: 4px;
+  color: #9d5bc2;
 }
 
 .ebook_block {
