@@ -5,7 +5,7 @@
 }
 @media only screen and (max-width: 1366px) {
   .wrapper {
-    padding: 0 5rem;
+    padding: 0 2rem;
   }
   .whyappletun_inner .whyappletun_items .whyappletun_item {
     width: calc(50% - 1.5rem);
@@ -19,8 +19,9 @@
     gap: 0 1rem;
   }
   #header .header_content .logo {
-    inset: 2.4rem 0 auto;
-    width: 3.9rem;
+    /* inset: 2.4rem 0 auto; */
+    /* width: 3.9rem; */
+    width: 15rem;
   }
   #header .header_content .logo a img {
     width: 15rem;
@@ -60,8 +61,9 @@
     padding: 1rem 0;
   }
   #header .header_content .logo {
-    inset: 1.8rem 0 auto;
-    width: 3.1rem;
+    /* inset: 1.8rem 0 auto;
+    width: 3.1rem; */
+    width: 12rem;
   }
   #header .header_content .logo a img {
     width: 12rem;
@@ -119,10 +121,10 @@
 }
 @media only screen and (max-width: 1024px) {
   .wrapper {
-    padding: 0 3rem;
+    padding: 0 2rem;
   }
   .journey_block .wrapper {
-    padding: 0 3rem;
+    padding: 0 2rem;
   }
 }
 @media only screen and (max-width: 991px) {
