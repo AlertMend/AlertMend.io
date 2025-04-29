@@ -74,7 +74,7 @@
         }
         
       </script>
-    <title>AlertMend | Remediation Use Cases</title>
+    <title>AlertMend | Use Cases</title>
 </head>
 
 <body class="homepage">
@@ -141,51 +141,172 @@
             </div>
         </header>        
         <!-- /header -->
-        <section class="mainfeatures my-5 pb-5">
-            <div class="wrapper">
-                <div class="mainfeatures_inner">
+        <section class="use_cases">
+            <div class="wrapper px-0">
+                <div class="use_cases_inner">
                     <div class="heading">
-                      <h2>Remediation Use Cases</h2>
-                      <p>Streamlining IT Operations Through Automation</p>
+                      <h2>Kubernetes Use Cases</h2>
+                      <p>Automation-Driven Resilience for Modern Clusters</p>
                     </div>
                   
                     <div class="row use-cases">
-                      <div class="col-md-4"> 
+                      <div class="col-md-6"> 
                         <div class="use-case">
                         <span>1</span>
-                        <h4>Dynamic Disk Resizing</h4>
-                        <p>Dynamically adjusting VM volumes when triggered by Datadog alert.</p>
+                        <h4>Auto-Recover CrashLooping Pods</h4>
+                        <p>Upon receiving
+                            CrashLoopBackOff alerts,
+                            automatically restart or
+                            redeploy affected pods.</p>
                         </div>
                       </div>
                   
-                      <div class="col-md-4"> 
+                      <div class="col-md-6"> 
                         <div class="use-case">
                         <span>2</span>
-                        <h4>JVM health diagnostics</h4>
-                        <p>Automatically capturing heap dumps, GC stats, and memory spikes for deeper analysis.</p>
+                        <h4>Dynamic PVC (Persistent Volume) Resizing</h4>
+                        <p>Resize persistent volumes
+                            automatically when storage
+                            usage alerts are triggered.</p>
                         </div>
                       </div>
                   
-                      <div class="col-md-4"> 
+                      <div class="col-md-6"> 
                         <div class="use-case">
                         <span>3</span>
-                        <h4>Log File Management</h4>
-                        <p>Set up automation to regularly clear accumulating log files, maintaining system efficiency and freeing up storage space without manual oversight.</p>
+                        <h4>Automated Response to SlowBooting Pods</h4>
+                        <p>On alerts about slow pod
+                            startups, initiate diagnostics
+                            or restart workflows.</p>
                         </div>
                       </div>
                   
-                      <div class="col-md-4"> 
+                      <div class="col-md-6"> 
                         <div class="use-case">
                         <span>4</span>
-                        <h4>Fixing Stuck Kubernetes Pods Automatically</h4>
+                        <h4>Cluster Diagnostics Capture on Failure Alerts</h4>
+                        <p>When failure alerts occur,
+                            automatically collect cluster
+                            state for faster root cause
+                            analysis.
+                            auto-rollback or retry
+                            Kubernetes deployments.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </section>
+        <section class="use_cases">
+            <div class="wrapper px-0">
+                <div class="use_cases_inner">
+                    <div class="heading">
+                      <h2>VM Use Cases</h2>
+                      <p>Unified Monitoring and Remediation for Virtual Machines</p>
+                    </div>
+                  
+                    <div class="row use-cases">
+                      <div class="col-md-6"> 
+                        <div class="use-case">
+                        <span>1</span>
+                        <h4>Predictive Disk and Log Space Management</h4>
+                        <p>Monitor disk usage and
+                            automate disk resizing or log
+                            cleanup before storage
+                            issues cause downtime.</p>
                         </div>
                       </div>
                   
-                      <div class="col-md-4"> 
+                      <div class="col-md-6"> 
                         <div class="use-case">
-                        <span>5</span>
-                        <h4>Ensuring critical services stay online / Pod Management Automation</h4>
-                        <p>Dynamically adjusting VM volumes when triggered by Datadog alert.</p>
+                        <span>2</span>
+                        <h4>CPU and Resource Utilization Monitoring</h4>
+                        <p>Detect high CPU, memory, or
+                            swap usage, and autothrottle or remediate
+                            overloaded VMs.</p>
+                        </div>
+                      </div>
+                  
+                      <div class="col-md-6"> 
+                        <div class="use-case">
+                        <span>3</span>
+                        <h4>Network Health Monitoring and Recovery</h4>
+                        <p>Continuously check VM
+                            connectivity and autotrigger failover or restart
+                            actions for unresponsive
+                            systems. </p>
+                        </div>
+                      </div>
+                  
+                      <div class="col-md-6"> 
+                        <div class="use-case">
+                        <span>4</span>
+                        <h4>Custom Monitoring with UserDefined Scripts</h4>
+                        <p>Enable teams to configure
+                            custom shell-based
+                            monitors, create alerts, and
+                            automate tailored
+                            remediation flows.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </section>
+        <section class="use_cases">
+            <div class="wrapper px-0">
+                <div class="use_cases_inner">
+                    <div class="heading">
+                      <h2>Data-Specific Use Cases (Cassandra & Kafka)</h2>
+                      <p>Ensuring Resilience and Performance Across Distributed Systems</p>
+                    </div>
+                  
+                    <div class="row use-cases">
+                      <div class="col-md-6"> 
+                        <div class="use-case">
+                        <span>1</span>
+                        <h4>Cassandra Health Monitoring and Node Management</h4>
+                        <p>Run canary queries to
+                            monitor health and detect
+                            stuck nodes in joining or
+                            moving states, triggering
+                            auto-remediation.</p>
+                        </div>
+                      </div>
+                  
+                      <div class="col-md-6"> 
+                        <div class="use-case">
+                        <span>2</span>
+                        <h4>Cassandra Disk Optimization</h4>
+                        <p>Monitor disk usage and
+                            automate cleanup and
+                            compaction processes to
+                            maintain optimal database
+                            performance. </p>
+                        </div>
+                      </div>
+                  
+                      <div class="col-md-6"> 
+                        <div class="use-case">
+                        <span>3</span>
+                        <h4>Kafka Cluster Leadership and Partition Balancingt</h4>
+                        <p>Detect leadership changes
+                            and trigger automated load
+                            rebalancing or repartitioning
+                            to maintain data flow
+                            stability. </p>
+                        </div>
+                      </div>
+                  
+                      <div class="col-md-6"> 
+                        <div class="use-case">
+                        <span>4</span>
+                        <h4>Kafka Retry and Lag Management</h4>
+                        <p>Monitor queue sizes and
+                            dynamically adjust
+                            producer/consumer retry
+                            settings to prevent message
+                            loss or processing delays. </p>
                         </div>
                       </div>
                     </div>
