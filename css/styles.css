@@ -1725,6 +1725,9 @@ main {
   width: 28%;
   box-sizing: border-box;
   transition: background 0.3s, transform 0.3s;
+  display: block;
+  text-transform: none;
+  text-decoration: none;
 }
 
 .use-card:hover {
@@ -1744,13 +1747,13 @@ main {
   color: #5a5a5a;
 }
 
-.use-card a {
+.use-card .link {
   text-decoration: none;
   color: #9d5bc2;
   font-weight: bold;
   font-size: 1.2rem;
 }
 
-.use-card a:hover {
+.use-card .link:hover {
   text-decoration: underline !important;
 }
