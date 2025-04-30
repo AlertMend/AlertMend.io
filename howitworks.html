@@ -97,7 +97,7 @@
                                     <a class="nav-link d-block" href="features.html"><span>Explore AlertMend Features</span></a>
                                 </li>
                                 <li class="menu-item active">
-                                    <a class="nav-link d-block" href="howitworks.html"><span>How AlertMend Works</span></a>
+                                    <a class="nav-link d-block" href="howitworks.html"><span>How It Works</span></a>
                                 </li>
                                 <li class="menu-item m_popover">
                                     <a class="nav-link d-block" href="use-case.html" role="button"><span>Use Cases</span></a>
@@ -140,80 +140,140 @@
             </div>
         </header>        
         <!-- /header -->
-        <section class="howitworks section_margin">
+        <section class="howitworks my-5 py-5">
             <div class="wrapper">
                 <div class="howitworks_inner">
                     <div class="section_title">
-                        <h2>How It Works/Use cases</h2>
-                        <p>Real-World Solutions for Seamless Incident Management in Kubernetes Environments—Automate, Optimize, and Resolve Faster</p>
+                        <h2>🛠️ How AlertMend Works</h2>
+                        <p>Fix incidents automatically. Keep your team in the loop.</p>
                     </div>
                     <div class="howitworks_scenario_main">
-                        <div class="howitworks_scenario">
-                            <div class="howitworks_scenario_head">
-                                <h2><strong></strong> Node Failure Alert Recived </h2>
-                                <ul>
-                                    <li>AlertMend listens to alerts indicating that a node has failed.</li>
-                                    <li>AlertMend processes the alert to understand the details of the node failure</li>
-                                    <li>AlertMend identifies which pods were running on the failed node</li>
-                                    <li>AlertMend triggers actions to reschedule the affected pods onto healthy nodes to restore service continuity.</li>
+                        <div class="vertical-steps">
+                            <div class="step">
+                              <div class="step-title">🔔 Step 1: Receive the Alert</div>
+                              <div class="step-description">
+                                <p>AlertMend connects to your monitoring tools and listens for alerts in real time.</p>
+                                <p>Integrates with:</p>
+                                <ul class="tech-list">
+                                    <li>
+                                        <img src="./img/howitworks/datadog.png" alt="Datadog Logo">
+                                        <span>Datadog</span>
+                                    </li>
+                                    <li>
+                                        <img src="./img/howitworks/prometheus.png" alt="Prometheus Logo">
+                                        <span>Prometheus</span>
+                                    </li>
+                                    <li>
+                                        <img src="./img/howitworks/cloudwatch.png" alt="AWS CloudWatch Logo">
+                                        <span>AWS CloudWatch</span>
+                                    </li>
+                                    <li>
+                                        <img src="./img/howitworks/grafana.png" alt="Grafana Logo">
+                                        <span>Grafana</span>
+                                    </li>
+                                    <li>
+                                        <span>+ New Relic, and more</span>
+                                    </li>
                                 </ul>
+                                <em>No code changes required — we plug right into your existing alert pipeline.</em>
+                              </div>
                             </div>
-                            <div class="howitworks_scenario_head"" style="margin-top: 20px;">
-                                <h2><strong>Persistent Volume Claim (PVC) Disk Full Alert Received</strong></h2>
-                                <ul>
-                                    <li>AlertMend listens to alerts indicating that a Persistent Volume Claim (PVC) is full.</li>
-                                    <li>AlertMend processes the alert to identify the PVC and the associated pod or application affected by the full disk.</li>
-                                    <li>AlertMend checks for the largest files or data within the PVC to determine the cause of the disk full condition.</li>
-                                    <li>AlertMend triggers actions such as archiving or deleting unnecessary files, expanding the PVC, or notifying the relevant teams to take further action.</li>
-                                </ul>
-                            </div>
-                            <div class="howitworks_scenario_head"" style="margin-top: 20px;">
-                            <h2><strong>Pod Not Running State Alert Received</strong></h2>
-                            <ul>
-                                <li>AlertMend listens to alerts indicating that a pod is not in the running state.</li>
-                                <li>AlertMend checks the pod's logs and events to diagnose the issue (e.g., image pull errors, insufficient resources, failed readiness probes).</li>
-                                <li>AlertMend verifies the status of the node hosting the pod and checks for any issues that might prevent the pod from running (e.g., node pressure, network failures).</li>
-                                <li>AlertMend triggers actions to resolve common issues, such as restarting the pod, rescheduling it to a different node, or scaling up resources if required.</li>
-                                
-                            </ul>
-                        </div>
                             
-                        </div>
-                        <div class="howitworks_scenario">
-                            <div class="howitworks_scenario_head">
-                                <div class="howitworks_scenario_head">
-                                    <h2><strong>High JVM Usage Alert Received</strong></h2>
-<ul>
-    <li>AlertMend listens to alerts indicating high JVM usage for an application.</li>
-    <li>AlertMend processes the alert to identify the application and the specific pod or instance experiencing high JVM usage.</li>
-    <li>AlertMend triggers an action to take a JVM heap dump to capture the memory state of the application.</li>
-    <li>AlertMend securely moves the heap dump file to designated block storage for further analysis by the engineering team.</li>
-
-</ul>
-                                </div>
-                                <div class="howitworks_scenario_head" style="margin-top: 20px;"" >
-                                    <h2><strong>Payment Failure Alert Received</strong></h2>
-<ul>
-    <li>AlertMend listens to alerts indicating multiple payment failures on the payment gateway.</li>
-    <li>AlertMend checks the payment gateway logs for error messages or unusual patterns that might indicate the root cause (e.g., network issues, authentication errors).</li>
-    <li>AlertMend verifies the status of the bank's gateway or API to check for outages or service interruptions on the bank's side.</li>
-    <li>AlertMend triggers actions to retry the failed transactions, if applicable, or automatically switch to an alternative payment route if supported.</li>
-    <li>AlertMend notifies the relevant teams and stakeholders with detailed information on the payment failures, the findings, and the actions taken for resolution.</li>
-</ul>
-                                </div>
-                                <div class="howitworks_scenario_head" style="margin-top: 20px;"" >
-                                <h2><strong>50x Error on Ingress Alert Received</strong></h2>
-<ul>
-    <li>AlertMend listens to alerts indicating a 50x error (e.g., 500, 502, 503) occurring on the ingress.</li>
-    <li>AlertMend processes the alert to identify the affected service, backend pods, or endpoints associated with the ingress.</li>
-    <li>AlertMend checks the ingress controller logs for error messages or anomalies that might indicate the root cause (e.g., misconfigurations, upstream failures, SSL issues).</li>
-    <li>AlertMend verifies the health of backend services and pods, checking for readiness and liveness probe failures, resource constraints, or application errors.</li>
-    <li>AlertMend triggers actions to restart affected pods, adjust ingress configurations, or reroute traffic to healthy pods or services if available.</li>
-    <li>AlertMend notifies the relevant teams with detailed information on the 50x errors, including the findings and actions taken to resolve the issue.</li>
-</ul>
+                            <div class="step">
+                              <div class="step-title">⚡ Step 2: Execute the Fix</div>
+                              <div class="step-description">
+                                <p>We instantly run the predefined remediation flow — fixing the problem automatically across your infrastructure.
+                                </p>
+                                <p>Works with:</p>
+                                <ul class="tech-list">
+                                    <li>
+                                        <span>🐳 Kubernetes</span>
+                                    </li>
+                                    <li>
+                                        <span>🖥️ Virtual Machines (VMs)</span>
+                                    </li>
+                                    <li>
+                                        <span>🚢 ECS</span>
+                                    </li>
+                                    <li>
+                                        <span>📬 SQS</span>
+                                    </li>
+                                    <li>
+                                        <span>🧵 AWS Lambda</span>
+                                    </li>
+                                    <li>
+                                        <span>💾 Disk Cleanup / PVC Resize</span>
+                                    </li>
+                                    <li>
+                                        <span>🐘 PostgreSQL / MongoDB</span>
+                                    </li>
+                                    <li>
+                                        <span>🔄 Shell Scripts</span>
+                                    </li>
+                                    <li>
+                                        <span>🔗 Custom APIs</span>
+                                    </li>
+                                </ul>
+                                <em>If there's a flow — we execute it. If not, we collect logs, metrics, and system state so you're not starting from zero.</em>
+                              </div>
                             </div>
-                        </div>
-                    </div>                    
+                            
+                            <div class="step">
+                              <div class="step-title">🤖 Step 3: Stay in Control</div>
+                              <div class="step-description">
+                                <p>RFs can execute:</p>
+                                <ul class="tech-list">
+                                    <li>
+                                        <span>✅ Automatically</span>
+                                    </li>
+                                    <li>
+                                        <span>🛑 Or with one-click approval via Slack, Teams, Email, or Dashboard</span>
+                                    </li>
+                                </ul>
+                                <p>Control tools:</p>
+                                <ul class="tech-list">
+                                    <li>
+                                        <img src="./img/howitworks/slack.png" alt="Datadog Logo">
+                                        <span>Slack</span>
+                                    </li>
+                                    <li>
+                                        <img src="./img/howitworks/msteams.png" alt="Datadog Logo">
+                                        <span>Microsoft Teams</span>
+                                    </li>
+                                    <li>
+                                        <span>📧 Email</span>
+                                    </li>
+                                    <li>
+                                        <span>📊 Web Dashboard</span>
+                                    </li>
+                                </ul>
+                                <em>You’re always in control. Define who approves what — and when.</em>
+                            </div>
+                            </div>
+                            
+                            <div class="step">
+                              <div class="step-title">📤 Step 4: Notify with a Full Report</div>
+                              <div class="step-description">
+                                <p>After every remediation, AlertMend sends a detailed PDF report with logs, steps taken, and system health snapshots.</p>
+                                <p>Report is delivered via:</p>
+                                <ul class="tech-list">
+                                    <li>
+                                        <img src="./img/howitworks/slack.png" alt="Datadog Logo">
+                                        <span>Slack</span>
+                                    </li>
+                                    <li>
+                                        <img src="./img/howitworks/msteams.png" alt="Datadog Logo">
+                                        <span>Microsoft Teams</span>
+                                    </li>
+                                    <li>
+                                        <span>📧 Email</span>
+                                    </li>
+                                </ul>
+                                <em>Your team stays informed — no need to dig through logs or dashboards.</em>
+                              </div>
+                            </div>
+                          </div>
+                    </div>           
                 </div>
             </div>
         </section>
@@ -222,9 +282,10 @@
             <div class="wrapper">
                 <div class="wave-body aboutappletun_inner">
                     <div class="section_title">
-                        <h2>Want to learn more about AlertMend?</h2>
-                        <p>Reactive management is no longer enough. Proactive, automated solutions are the key to staying ahead of disruptions. By addressing issues before they escalate, you empower your team to focus on innovation and growth rather than damage control.</p>
-                        <a href="why-alertmend.html" class="btn_2">Learn more</a>
+                        <h2>Simple. Powerful. Ready in Minutes.?</h2>
+                        <quote>AlertMend works out of the box with your existing stack.
+                            No long setups. No manual toil. Just faster incident resolution.</quote>
+                        <!-- <a href="why-alertmend.html" class="btn_2">Learn more</a> -->
                     </div>
                 </div>
             </div>

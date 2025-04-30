@@ -1757,3 +1757,142 @@ main {
 .use-card .link:hover {
   text-decoration: underline !important;
 }
+
+.vertical-steps {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 14px 0px;
+  position: relative;
+  border-left: 4px solid rgba(59, 130, 246, 0.4); /* blue glow line */
+}
+
+.step {
+  position: relative;
+  margin-bottom: 80px;
+  padding-left: 40px;
+}
+
+.step:hover {
+  transform: translateY(-5px);
+}
+
+.step::before {
+  content: '';
+  position: absolute;
+  left: -30px;
+  top: 0px;
+  width: 28px;
+  height: 28px;
+  background: radial-gradient(circle at 30% 30%, #60a5fa, #3b82f6);
+  border: 4px solid white;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.6);
+}
+
+.step-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #0f172a;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.step-description {
+  font-size: 1.8rem;
+  color: #334155;
+  line-height: 1.5;
+  max-width: 900px;
+  background: white;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.step:hover .step-description {
+  transform: translateY(-3px);
+  transition: transform smooth;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+.step-description p {
+  margin-bottom: 1em;
+}
+.step-description em {
+  font-style: italic !important;
+}
+
+@media (max-width: 768px) {
+  .step-title {
+    font-size: 2.2rem;
+  }
+
+  .step-description {
+    font-size: 1.5rem;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .vertical-steps {
+    padding-left: 20px;
+    border-left-width: 3px;
+  }
+
+  .step::before {
+    width: 20px;
+    height: 20px;
+    left: -14px;
+  }
+}
+
+.tech-list {
+  /* display: flex;
+  flex-wrap: wrap; */
+  /* display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 40px auto;
+  padding: 20px;
+  max-width: 400px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+}
+
+.tech-list li {
+  display: flex;
+  align-items: center;
+  gap:12px;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  border-radius: 6px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.tech-list li img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  transition: transform 0.3s;
+}
+
+.tech-list li:hover {
+  background-color: #f1f1f1;
+  transform: scale(1.05);
+}
+
+.tech-list li:hover img {
+  transform: rotate(10deg);
+}
+
+.tech-list li span {
+  text-decoration: none;
+  color: inherit;
+  font-size: 1.8rem;
+  color: #334155;
+  transition: color 0.3s;
+  font-weight: 700;
+}
