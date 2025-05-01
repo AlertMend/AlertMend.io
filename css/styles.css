@@ -1761,19 +1761,19 @@ main {
 .vertical-steps {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 14px 0px;
+  padding: 10px 14px 0px;
   position: relative;
   border-left: 4px solid rgba(59, 130, 246, 0.4); /* blue glow line */
 }
 
 .step {
   position: relative;
-  margin-bottom: 80px;
+  margin-bottom: 30px;
   padding-left: 40px;
 }
 
 .step:hover {
-  transform: translateY(-5px);
+  /* transform: translateY(-5px); */
 }
 
 .step::before {
@@ -1815,7 +1815,7 @@ main {
 }
 
 .step-description p {
-  margin-bottom: 1em;
+  margin-bottom: 0.3em;
 }
 .step-description em {
   font-style: italic !important;
@@ -1846,8 +1846,8 @@ main {
 }
 
 .tech-list {
-  /* display: flex;
-  flex-wrap: wrap; */
+  display: flex;
+  flex-wrap: wrap;
   /* display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1862,8 +1862,10 @@ main {
 .tech-list li {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   gap:12px;
-  margin: 10px 0;
+  margin: 4px 0;
   padding: 10px;
   font-size: 18px;
   font-weight: 500;
@@ -1873,15 +1875,15 @@ main {
 }
 
 .tech-list li img {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   object-fit: contain;
   transition: transform 0.3s;
 }
 
 .tech-list li:hover {
-  background-color: #f1f1f1;
-  transform: scale(1.05);
+  /* background-color: #f1f1f1;
+  transform: scale(1.05); */
 }
 
 .tech-list li:hover img {
@@ -1889,10 +1891,15 @@ main {
 }
 
 .tech-list li span {
+  /* width: 100%;s */
+  text-align: center;
   text-decoration: none;
   color: inherit;
   font-size: 1.8rem;
   color: #334155;
   transition: color 0.3s;
   font-weight: 700;
+}
+.text-left{
+  text-align: left !important;
 }
