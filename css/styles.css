@@ -849,46 +849,48 @@ main {
 .case_studies_inner {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   background: #fff;
   overflow: hidden;
   font-family: Arial, sans-serif;
   color: #111;
+  padding: 0 150px;
 }
 
 .case_studies_inner .case-content {
   flex: 1;
   padding: 30px;
-  background: #f9f9f9;
+  /* background: #f9f9f9; */
   text-align: center;
 }
 .case_studies_inner .case-content h2{
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: bold;
 }
 
 .case_studies_inner .results-panel {
-  min-width: 500px;
+  min-width: 400px;
   width: 30%;
   background: #0072c6;
   color: white;
-  padding: 30px 20px;
+  padding: 30px;
 }
 
 .case_studies_inner .quote {
-  font-size: 3rem;
+  font-size: 2rem;
   line-height: 1.1;
   position: relative;
 }
 
 .case_studies_inner .quote::before {
   content:"“";
-  font-size: 5rem;
+  font-size: 3rem;
   color: #0072c6;
   margin-right: 5px;
 }
 .case_studies_inner .quote::after {
   content:"”";
-  font-size: 5rem;
+  font-size: 3rem;
   color: #0072c6;
   margin-right: 5px;
 }
@@ -896,7 +898,7 @@ main {
 .case_studies_inner .author {
   margin-top: 15px;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.7rem;
 }
 .case_studies_inner .author a,.case_studies_inner .quote strong {
   color: #0072c6;
@@ -910,7 +912,7 @@ main {
   color: white;
   margin-top: 10px;
   margin-bottom: 40px;
-  height: 60px;
+  height: 50px;
   font-weight: bold;
 }
 
@@ -921,9 +923,9 @@ main {
 .case_studies_inner .use-cases ul {
   list-style: disc;
   padding-left: 20px;
-  font-size: 1.7rem;
+  font-size: 1.3rem;
   line-height: 1.5;
-  margin-top: 1.5rem;
+  margin-top: 1.3rem;
   color: #0072c6;
   font-weight: 500;
 }
@@ -938,14 +940,14 @@ main {
   background-color: black;
 }
 .case_studies_inner .results-panel h3 {
-  font-size: 4rem;
+  font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 2rem;
 }
 
 .case_studies_inner .results-list {
   list-style: none;
-  font-size: 2.8rem;
+  font-size: 2rem;
   font-weight: 400;
   padding: 0;
 }
@@ -959,13 +961,13 @@ main {
 }
 
 .case_studies_inner .results-list .value {
-  font-size: 4rem;
+  font-size: 2.8rem;
   font-weight: bold;
 }
 
 .case_studies_inner .footnote {
   margin-top: 20px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-style: italic;
 }
 
@@ -1366,7 +1368,7 @@ main {
 
 .footer {
   background: linear-gradient(120deg,#eef9fc 0%,#5b73c220 5%,#e8e8f5 50%,#5b73c210 70%,#5b73c230 90%,#e8e8f5 150%);
-  padding-top: 3rem;
+  padding-top: 1rem;
   padding-bottom: 0rem;
   display: flex;
   flex-wrap: wrap;
@@ -1381,18 +1383,21 @@ main {
   flex-wrap: wrap;
   justify-content: space-evenly;
   row-gap: 30px;
-  padding: 4rem;
+  padding: 2rem;
 }
 .footer-column:nth-child(1) {
-  width: 60% !important;
+  width: 45% !important;
   padding: 1rem;
+}
+.footer-column:nth-child(2) {
+  min-width: 180px;
   margin-right: auto;
 }
 .footer-column:nth-child(3) {
   min-width: 180px;
-  text-align: end;
 }
-.footer-column:nth-child(1) p{
+.footer-column:nth-child(1) p,
+.footer-column:nth-child(1) small{
   margin-top: 10px;
   margin-left: 15px;
 }
@@ -1464,9 +1469,8 @@ main {
 
 @media (max-width: 1280px) {
   .footer-column:nth-child(1) {
-    width: 45% !important;
+    width: 40% !important;
     padding: 1rem;
-    margin-right: auto;
   }
 }
 
@@ -1789,22 +1793,22 @@ main {
   object-fit: contain;
   padding: 5px;
 }
-.square:nth-child(1) { width: 150px; height: 150px; margin-top: auto; }
-.square:nth-child(2) { width: 120px; height: 120px; margin-top: auto; }
-.square:nth-child(3) { width: 120px; height: 120px; margin-top: auto; }
-.square:nth-child(4) { width: 140px; height: 140px; margin-top: auto; }
-.square:nth-child(5) { width: 90px; height: 90px; margin-top: auto; }
-.square:nth-child(6) { width: 120px; height: 120px; margin-top: auto; }
-.square:nth-child(9) { width: 90px; height: 90px;margin-bottom: auto; }
-.square:nth-child(7) { width: 120px; height: 120px; margin-top: auto; }
-.square:nth-child(8) { width: 140px; height: 140px; margin-bottom: auto;}
-.square:nth-child(10) { width: 120px; height: 120px;  margin-bottom: auto;}
-.square:nth-child(11) { width: 150px; height: 150px; margin-bottom: auto;}
-.square:nth-child(12) { width: 120px; height: 120px; margin-bottom: auto; }
-.square:nth-child(13) { width: 150px; height: 150px; margin-top: auto; }
-.square:nth-child(14) { width: 120px; height: 120px; margin-top: auto; }
-.square:nth-child(15) { width: 150px; height: 150px; margin-bottom: auto; }
-.square:nth-child(16) { width: 90px; height: 90px; margin-bottom: auto; }
+.square:nth-child(1) { width: 100px; height: 100px; margin-top: auto; }
+.square:nth-child(2) { width: 90px; height: 90px; margin-top: auto; }
+.square:nth-child(3) { width: 90px; height: 90px; margin-top: auto; }
+.square:nth-child(4) { width: 60px; height: 60px; margin-bottom: auto; }
+.square:nth-child(5) { width: 70px; height: 70px; margin-top: auto; }
+.square:nth-child(6) { width: 90px; height: 90px; margin-top: auto; }
+.square:nth-child(9) { width: 70px; height: 70px;margin-top: auto; }
+.square:nth-child(7) { width: 90px; height: 90px; margin-top: auto; }
+.square:nth-child(8) { width: 60px; height: 60px; margin-top: auto;}
+.square:nth-child(10) { width: 90px; height: 90px;  margin-top: auto;}
+.square:nth-child(11) { width: 120px; height: 120px; margin-bottom: auto;}
+.square:nth-child(12) { width: 90px; height: 90px; margin-bottom: auto; }
+.square:nth-child(13) { width: 120px; height: 120px; margin-top: auto; }
+.square:nth-child(14) { width: 90px; height: 90px; margin-top: auto; }
+.square:nth-child(15) { width: 120px; height: 120px; margin-bottom: auto; }
+.square:nth-child(16) { width: 70px; height: 70px; margin-bottom: auto; }
 
 .integrations {
   /* background: linear-gradient(93.26deg, #9d5bc2 2.69%, #831ac0 225.23%); */
