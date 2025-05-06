@@ -6,7 +6,7 @@ image: "https://github.com/AlertMend/AlertMend.io/blob/main/blogs/images/Trouble
 # Optional - date will be used from filename if not set here.
 layout: post-list
 permalink: /blogs/
-alias: [/blogs, /blogs/index.html ]
+alias: [/blogs, /blogs/index ]
 ---
 <div class="row">
 {% for post in site.posts %}
