@@ -854,6 +854,9 @@ main {
   width: 40%;
   border: 1px solid #d5d5eb;
 }
+.before_after_inner .table strong {
+  font-weight: 700;
+}
 
 /* Summary section */
 .before_after_inner .row {
