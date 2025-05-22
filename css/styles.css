@@ -870,13 +870,13 @@ main {
 }
 .before_after_inner .row.kpi strong {
     color: #2e2e4d;
-    font-weight: 600;   
+    font-weight: 700;   
 }
 
 /* Highlight (e.g. eliminated) */
 .before_after_inner .text-success {
   color: #2a7d5f !important;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* Feedback box */
