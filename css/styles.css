@@ -477,7 +477,7 @@ main {
 }
 #header .header_content .navbar .navbar-nav .menu-item .nav-link {
   color: #01000A;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   position: relative;
   font-size: 1.6rem;
   font-weight: 500;
