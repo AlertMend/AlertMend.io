@@ -124,8 +124,20 @@
                                   </div>
                               </div>
                           </li>
-                          <li class="menu-item">
-                              <a class="nav-link d-block" href="{{'/case-studies' | absolute_url}}"><span>Case Studies</span></a>
+                          <li class="menu-item m_popover">
+                              <a class="nav-link d-block" href="{{'{{'/case-studies' | absolute_url}}' | absolute_url}}"><span>Case Studies</span></a>
+                              <div class="popup-menu">
+                                <div class="p_menu-items">
+                                    <a href="{{'/case-studies' | absolute_url}}" class="use-card">
+                                        <div class="head">Auto Remediation</div>
+                                        <div class="link">Learn More</div>
+                                    </a>
+                                    <a href="{{'/kubernetes-case-studies' | absolute_url}}" class="use-card">
+                                        <div class="head">Kubernetes Cost Optimisation</div>
+                                        <div class="link">Learn More</div>
+                                    </a>
+                                </div>
+                            </div>
                           </li>
                         </ul>
                     </div>                        
