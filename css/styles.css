@@ -997,6 +997,13 @@ main {
   color: #0072c6;
   margin-right: 5px;
 }
+.case_studies_inner .testimonial2{
+  max-width: 800px;
+}
+.case_studies_inner .quote_slider{
+  width: 100%;
+  overflow: hidden;
+}
 .case_studies_inner .testimonial2 .quote::before,.case_studies_inner .testimonial2 .quote::after {
   font-size: 2rem !important;
 }

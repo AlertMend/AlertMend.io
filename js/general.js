@@ -38,6 +38,16 @@ $(document).ready(function() {
     var swiper = new Swiper(".report_slider", {
       grabCursor: true,
       centeredSlides: false,
+      slidesPerView: 2,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      }
+    });
+    var swiper = new Swiper(".quote_slider", {
+      grabCursor: false,
+      centeredSlides: true,
       slidesPerView: 1,
       loop: true,
       pagination: {
