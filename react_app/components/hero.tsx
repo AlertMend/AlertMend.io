@@ -50,10 +50,9 @@ export const Hero = () => {
         >
           Your All-in-One Kubernetes Companion
         </Heading>
-        {/* <Subheading className="text-center mt-2 md:mt-6 text-base md:text-xl text-muted dark:text-muted-dark max-w-3xl mx-auto relative z-10">
-          Automate Campaigns, Engage Audiences, and Boost Lead Generation with
-          Our All-in-One Marketing Solution
-        </Subheading> */}
+         <Subheading className="text-center mt-2 md:mt-6 text-base md:text-xl text-muted dark:text-muted-dark max-w-3xl mx-auto relative z-10">
+          AlertMend’s AI agent helps you manage Kubernetes at scale, cut cloud costs, reduce incident noise by 70%, fix issues in seconds, and free up your DevOps team to focus on what matters.
+        </Subheading> 
         <FeaturedImages
           textClassName="lg:text-left text-center"
           className="lg:justify-start justify-center items-center"

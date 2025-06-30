@@ -18,9 +18,9 @@ export const Tools = () => {
   const content = [
     {
       icon: <IconMailForward className="h-8 w-8 text-secondary" />,
-      title: "Manage at Ease",
+      title: "Crush Kubernetes Complexity.",
       description:
-        "With our best in class email automation, you can automate your entire emailing process.",
+        "AlertMend simplifies Kubernetes operations — from day-to-day management to intelligent automation.",
       content: (
         <ImageContainer>
           <BlurImage
@@ -36,9 +36,9 @@ export const Tools = () => {
     },
     {
       icon: <IconSocial className="h-8 w-8 text-secondary" />,
-      title: "Optimize your workload in 1 click",
+      title: "Smarter Workloads. Lower Cloud Bills.",
       description:
-        "With our optimize your workload in 1 click, you can reach your audience on all the platforms they use.",
+        "AlertMend delivers instant cloud savings and performance boosts with 1-click Kubernetes optimization.",
       content: (
         <ImageContainer>
           <BlurImage
@@ -54,9 +54,9 @@ export const Tools = () => {
     },
     {
       icon: <IconTerminal className="h-8 w-8 text-secondary" />,
-      title: "AutoRemediation",
+      title: "From Alert to Fix, Without Human Intervention",
       description:
-        "With our AutoRemediation, you can manage your leads and contacts in one place.",
+        "Fix incidents instantly with smart, pre-built and customizable workflows that act the moment your alerts fire.",
       content: (
         <ImageContainer>
           <BlurImage
@@ -131,9 +131,11 @@ export const Tools = () => {
         <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
           <IconTool className="h-6 w-6 text-cyan-500" />
         </FeatureIconContainer>
-        <Heading className="mt-4">Perfect set of tools</Heading>
+        <Heading className="mt-4">Purpose Built Tools for Every Kubernetes Challenge</Heading>
         <Subheading>
-          AlertMend comes with perfect tools for the perfect jobs out there.
+          AlertMend delivers targeted solutions for the most common and critical problems in your stack. Built by SREs, for SREs.
+
+
         </Subheading>
       </div>
       <StickyScroll content={content} />

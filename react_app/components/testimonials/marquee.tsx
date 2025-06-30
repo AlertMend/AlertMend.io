@@ -17,7 +17,7 @@ export const TestimonialsMarquee = () => {
         <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
           <TbLocationBolt className="h-6 w-6 text-cyan-500" />
         </FeatureIconContainer>
-        <Heading className="pt-4">Used by entreprenurs</Heading>
+        <Heading className="pt-4">Used by entreprenurs2</Heading>
         <Subheading>
           AlertMend is used by serial entrepreneurs and overachievers.
         </Subheading>

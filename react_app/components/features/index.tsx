@@ -24,24 +24,22 @@ export const Features = () => {
         <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
           <FaBolt className="h-6 w-6 text-cyan-500" />
         </FeatureIconContainer>
-        <Heading className="pt-4">Automate your social media</Heading>
+        <Heading className="pt-4">Automate Your Kubernetes Ops</Heading>
         <Subheading>
-          AlertMend houses a rich set of features to automate your marketing
-          efforts across all social medias
+          AlertMend comes with powerful workflows to automate alert response, remediation, and cost optimization, helping your team spend less time firefighting.
         </Subheading>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 py-10">
           <Card className="lg:col-span-2">
-            <CardTitle>Post to multiple platforms at once</CardTitle>
+            <CardTitle>Seamless Integrations</CardTitle>
             <CardDescription>
-              With our AI-powered platform, you can post to multiple platforms
-              at once, saving you time and effort.
+              Connect AlertMend with the tools your team already uses. From monitoring and alerting systems to collaboration platforms like Slack and Teams.
             </CardDescription>
             <CardSkeletonContainer>
               <SkeletonOne />
             </CardSkeletonContainer>
           </Card>
-          <Card>
+          {/*<Card>
             <CardSkeletonContainer className="max-w-[16rem] mx-auto">
               <SkeletonTwo />
             </CardSkeletonContainer>
@@ -50,17 +48,17 @@ export const Features = () => {
               Check analytics, track your posts, and get insights into your
               audience.
             </CardDescription>
-          </Card>
+          </Card>*/}
           <Card>
             <CardSkeletonContainer>
               <SkeletonThree />
             </CardSkeletonContainer>
             <CardTitle>Integrated AI</CardTitle>
             <CardDescription>
-              AlertMend uses AI to help you create engaging content.
+              From intelligent alert handling to auto-remediation suggestions, AlertMend uses AI to make your infrastructure smarter.
             </CardDescription>
           </Card>
-          <Card>
+          {/*<Card>
             <CardSkeletonContainer
               showGradient={false}
               className="max-w-[16rem] mx-auto"
@@ -72,8 +70,8 @@ export const Features = () => {
               AlertMend can integrate with Zapier, Slack and every other popular
               integration tools.
             </CardDescription>
-          </Card>
-          <Card>
+          </Card>*/}
+          {/*<Card>
             <CardSkeletonContainer>
               <SkeletonFive />
             </CardSkeletonContainer>
@@ -81,7 +79,7 @@ export const Features = () => {
             <CardDescription>
               Based on your audience, create funnels and drive more traffic.
             </CardDescription>
-          </Card>
+          </Card>*/}
         </div>
       </Container>
     </GradientContainer>
