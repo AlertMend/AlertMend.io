@@ -49,7 +49,7 @@ export default async function ArticlesIndex() {
           <p className="text-2xl font-bold text-white mb-10">More Posts</p>
 
           <div className="divide-y divide-neutral-800">
-            {blogs.slice(0, 6).map((blog, index) => (
+            {blogs.slice(0, 3).map((blog, index) => (
               <Link
                 href={`/blog/${blog.slug}`}
                 key={blog.slug + index}

@@ -9,7 +9,7 @@ export const Logo = () => {
       className="font-normal flex space-x-2 items-center text-sm mr-4  text-black px-2 py-1  relative z-20"
     >
       <Image
-        src={`/alertmend/favicon.png`}
+        src={`/img/favicon.png`}
         alt="hero"
         height={35}
         width={35}

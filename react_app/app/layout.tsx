@@ -6,15 +6,67 @@ import { ViewTransitions } from "next-view-transitions";
 import type { Viewport } from "next";
 import { NavBar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import Script from "next/script";
 
-export const metadata: Metadata = {
-  title: "AlertMend - Social Media Automation | Aceternity Templates",
+export const metadata = {
+  title: 'AlertMend | Automate Kubernetes Incident Management',
   description:
-    "AlertMend is an all in on marketing automation platform that handles emails, tasks tracking, social media management and everything in between.",
+    'AlertMend automates Kubernetes incident management with AI-driven workflows, reducing downtime and boosting operational efficiency across AKS, EKS, and GKE.',
+  keywords:
+    'Kubernetes incident management, Kubernetes automation, AI-driven incident management, AKS, EKS, GKE, DevOps automation, SRE automation, cloud-native, SaaS',
+  authors: [{ name: 'AlertMend' }],
+  creator: 'AlertMend',
+  publisher: 'AlertMend',
+  applicationName: 'AlertMend',
+  metadataBase: new URL('https://www.alertmend.io'),
   openGraph: {
-    images: ["https://proactiv-aceternity.vercel.app/banner.png"],
+    title: 'AlertMend | Automate Kubernetes Incident Management',
+    description:
+      'Minimize downtime and boost efficiency with AI-driven Kubernetes incident management, offering automated remediation and RCA features.',
+    url: 'https://www.alertmend.io',
+    siteName: 'AlertMend',
+    images: [
+      {
+        url: 'https://www.alertmend.io/img/alertmend_logo.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'AlertMend Logo',
+      },
+    ],
+    type: 'website',
   },
-};
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AlertMend | Automate Kubernetes Incident Management',
+    description:
+      'AI-driven Kubernetes incident management with automated remediation, RCA insights, and support for AKS, EKS, and GKE.',
+    images: ['https://www.alertmend.io/img/alertmend_logo.jpg'],
+  },
+  icons: {
+    icon: '/img/favicon.png',
+    shortcut: '/img/favicon.png',
+    apple: [
+      { url: '/img/favicon.ico', sizes: '144x144' },
+      { url: '/img/favicon.ico', sizes: '114x114' },
+      { url: '/img/favicon.png', sizes: '75x75' },
+      { url: '/img/favicon.png' },
+    ],
+  },
+  themeColor: '#E2000F',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+  },
+  other: {
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': '#E2000F',
+    'language': 'english',
+    'no-email-collection': 'http://www.unspam.com/noemailcollection/',
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/',
+  },
+}
 
 export const viewport: Viewport = {
   themeColor: [
@@ -37,12 +89,60 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en">
+        <head>
+          {/* Preconnect + Fonts */}
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="anonymous"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+            rel="stylesheet"
+          />
+
+          {/* JSON-LD Structured Data */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                '@context': 'https://schema.org',
+                '@type': 'Organization',
+                name: 'MyApp',
+                url: 'https://www.myapp.io',
+                logo: 'https://www.myapp.io/img/logo.svg',
+                description:
+                  'MyApp automates Kubernetes incident management with AI-driven workflows, reducing downtime and boosting operational efficiency.',
+                sameAs: ['https://www.linkedin.com/company/myapp'],
+              }),
+            }}
+          />
+        </head>
+      
         <body
           className={cn(
             inter.className,
             "bg-charcoal antialiased h-full w-full"
           )}
         >
+          {/* Google Analytics */}
+          <Script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-Z8QSJ5NK95"
+          />
+          <Script
+            id="gtag-init"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-Z8QSJ5NK95');
+              `,
+            }}
+          />
           <NavBar />
           {children}
           <Footer />
