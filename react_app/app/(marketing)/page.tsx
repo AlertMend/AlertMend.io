@@ -27,7 +27,7 @@ export default async function Home() {
       <Clients />
       <Tools />
       <Testimonials />
-      <Testimonials2 testimonials={caseStudies}/>
+      {/* <Testimonials2 testimonials={caseStudies}/> */}
       <Features />
       <ContactForm />
       <div className="py-20 sm:py-40">
