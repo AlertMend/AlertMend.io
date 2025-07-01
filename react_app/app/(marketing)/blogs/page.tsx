@@ -51,7 +51,7 @@ export default async function ArticlesIndex() {
           <div className="divide-y divide-neutral-800">
             {blogs.slice(0, 3).map((blog, index) => (
               <Link
-                href={`/blog/${blog.slug}`}
+                href={`/blogs/${blog.slug}`}
                 key={blog.slug + index}
                 className="flex md:flex-row flex-col items-start justify-between md:items-center group py-4"
               >
