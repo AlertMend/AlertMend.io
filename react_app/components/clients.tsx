@@ -7,42 +7,58 @@ import { BlurImage } from "./blur-image";
 export const Clients = () => {
   let [logos, setLogos] = useState([
     {
-      title: "netflix",
-      src: "/logos/netflix.png",
+      title: "Polymer",
+      src: "/img/polymer-logo.png",
     },
     {
-      title: "google",
-      src: "/logos/google.webp",
+      title: "Wareflex",
+      src: "/img/wareflex-logo.svg",
     },
     {
-      title: "meta",
-      src: "/logos/meta.png",
+      title: "Avios",
+      src: "/img/avios-logo.svg",
     },
     {
-      title: "onlyfans",
-      src: "/logos/onlyfans.png",
+      title: "Roombee",
+      src: "/img/roombee-logo.png",
     },
     {
-      title: "netflix second",
-      src: "/logos/netflix.png",
+      title: "Polymer 2",
+      src: "/img/polymer-logo.png",
     },
     {
-      title: "google second",
-      src: "/logos/google.webp",
+      title: "Wareflex 2",
+      src: "/img/wareflex-logo.svg",
     },
     {
-      title: "meta second",
-      src: "/logos/meta.png",
+      title: "Avios 2",
+      src: "/img/avios-logo.svg",
     },
     {
-      title: "onlyfans second",
-      src: "/logos/onlyfans.png",
+      title: "Roombee 2",
+      src: "/img/roombee-logo.png",
     },
+    // {
+    //   title: "netflix second",
+    //   src: "/logos/netflix.png",
+    // },
+    // {
+    //   title: "google second",
+    //   src: "/logos/google.webp",
+    // },
+    // {
+    //   title: "meta second",
+    //   src: "/logos/meta.png",
+    // },
+    // {
+    //   title: "onlyfans second",
+    //   src: "/logos/onlyfans.png",
+    // },
   ]);
   return (
     <div className="pt-20 pb-40 h-40">
       <p className="text-neutral-400 text-center mb-4">
-        Trusted by big industries
+        Trusted by leading teams
       </p>
       <div className="flex justify-center gap-4 max-w-7xl mx-auto relative">
         <div className="absolute inset-0 bg-charcoal grayscale z-40 pointer-events-none [mask-image:_radial-gradient(circle,_transparent_10%,_#000000_100%)]" />

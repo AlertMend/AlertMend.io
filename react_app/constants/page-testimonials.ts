@@ -2,6 +2,7 @@ interface Testimonial {
   src: string;
   quote: string;
   name: string;
+  logo?: string;
   designation?: string;
 }
 
@@ -11,6 +12,7 @@ export const testimonials: Testimonial[] = [
     quote:
       "AlertMend streamlined our incident management. Faster resolutions, less manual work, and a more focused team. Peace of mind is invaluable",
     src: "https://i.pravatar.cc/150?img=1",
+    logo: "/img/polymer-logo.png",
     designation: "CEO, Polymer",
   },
   {
@@ -18,6 +20,7 @@ export const testimonials: Testimonial[] = [
     quote:
       "AlertMend helped us uncover blind spots and slash our GKE spend — all without touching a single YAML file.",
     src: "https://i.pravatar.cc/150?img=2",
+    logo: "/img/wareflex-logo.svg",
     designation: "Wareflex",
   },
   {

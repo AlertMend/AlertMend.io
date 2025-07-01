@@ -8,7 +8,7 @@ import { NavBar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import Script from "next/script";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'AlertMend | Automate Kubernetes Incident Management',
   description:
     'AlertMend automates Kubernetes incident management with AI-driven workflows, reducing downtime and boosting operational efficiency across AKS, EKS, and GKE.',

@@ -11,12 +11,15 @@ import { Heading } from "@/components/heading";
 import { Hero } from "@/components/hero";
 import { PricingGrid } from "@/components/pricing-grid";
 import { Subheading } from "@/components/subheading";
-import { Testimonials } from "@/components/testimonials";
+import { Testimonials, Testimonials2 } from "@/components/testimonials";
 import { TestimonialsSlider } from "@/components/testimonials/slider";
+import { TestimonialsSlider2 } from "@/components/testimonials/slider2";
 import { Tools } from "@/components/tools";
+import { getAllCaseStudies } from "@/lib/case-studies";
 import { IconReceiptFilled } from "@tabler/icons-react";
 
-export default function Home() {
+export default async function Home() {
+  const caseStudies = await getAllCaseStudies()
   return (
     <div className="relative overflow-hidden">
       <AmbientColor />
@@ -24,6 +27,7 @@ export default function Home() {
       <Clients />
       <Tools />
       <Testimonials />
+      <Testimonials2 testimonials={caseStudies}/>
       <Features />
       <ContactForm />
       <div className="py-20 sm:py-40">

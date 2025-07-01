@@ -18,6 +18,10 @@ const navItems = [
     link: "/blogs",
   },
   {
+    title: "Case Studies",
+    link: "/case-studies",
+  },
+  {
     title: "Contact",
     link: "/contact",
   },
