@@ -8,7 +8,11 @@ interface CaseStudy {
     src: string;
   };
   date: string;
-  image?: string;
+  image: string;
+  links:{
+    name: string;
+    href: string;
+  }[];
 }
 
 export interface CaseStudyWithSlug extends CaseStudy {

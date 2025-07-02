@@ -1,12 +1,13 @@
-import { useRouter } from "next/navigation";
-
-import { IconArrowLeft } from "@tabler/icons-react";
-import { Container } from "./container";
-import Image from "next/image";
-import { Logo } from "./logo";
-import Link from "next/link";
+"use client";
 import { format } from "date-fns";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useState } from "react";
+import ReactMarkdown from "react-markdown";
+import { AnimatePresence, motion } from "motion/react";
+import { IconMenu } from "@tabler/icons-react";
 import { CaseStudyWithSlug } from "@/lib/case-studies";
+
 export function CaseStudyLayout({
   caseStudy,
   children,
@@ -15,65 +16,160 @@ export function CaseStudyLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Container className="mt-16 lg:mt-32">
-      <div className="flex justify-between items-center px-2 py-8">
-        <Link href="/case-studies" className="flex space-x-2 items-center">
-          <IconArrowLeft className="w-4 h-4 text-muted" />
-          <span className="text-sm text-muted">Back</span>
-        </Link>
-      </div>
-      <div className="w-full mx-auto">
-        {caseStudy.image ? (
+    <div className="mx-auto py-40 flex w-full max-w-7xl flex-col gap-4 px-4 md:flex-row md:px-8">
+      <Toc links={caseStudy.links} />
+      <div className="flex max-w-2xl flex-1 flex-col">
+        {/* <Image
+          src={caseStudy.image}
+          alt={caseStudy.title}
+          className="h-60 w-full rounded-3xl object-cover md:h-[30rem]"
+          height={720}
+          width={1024}
+        /> */}
+        <h2 className="mb-2 mt-6 text-2xl font-bold tracking-tight text-white">
+          {caseStudy.title}
+        </h2>
+
+        <div className="prose prose-invert mt-10">
+          {children}
+        </div>
+
+        <div className="mt-10 max-w-2xl">
+          <div className="h-px w-full bg-neutral-900" />
+          <div className="h-px w-full bg-neutral-800" />
+        </div>
+        <div className="mt-10 flex items-center">
           <Image
-            src={caseStudy.image}
-            height="800"
-            width="800"
-            className="h-40 md:h-96 w-full aspect-square object-cover rounded-3xl [mask-image:radial-gradient(circle,white,transparent)]"
-            alt={caseStudy.title}
+            src={caseStudy.author.src}
+            alt={caseStudy.author.name}
+            className="h-5 w-5 rounded-full"
+            height={20}
+            width={20}
           />
-        ) : (
-          <div className="h-40 md:h-96 w-full aspect-squace rounded-3xl shadow-derek bg-neutral-900 flex items-center justify-center">
-            <Logo />
-          </div>
-        )}
-      </div>
-      <div className="xl:relative">
-        <div className="mx-auto">
-          <article className="pb-8">
-            <header className="flex flex-col">
-              <h1 className="mt-8 text-4xl font-bold tracking-tight text-neutral-200 sm:text-5xl ">
-                {caseStudy.title}
-              </h1>
-            </header>
-            <div className="mt-8 prose prose-invert" style={{maxWidth:'fit-content !important'}} data-mdx-content>
-              {children}
-            </div>
-            <div className="flex space-x-2 items-center pt-12 border-t border-neutral-800 mt-12">
-              <div className="flex space-x-2 items-center ">
-                <Image
-                  src={caseStudy.author.src}
-                  alt={caseStudy.author.name}
-                  width={20}
-                  height={20}
-                  className="rounded-full h-5 w-5"
-                />
-                <p className="text-sm font-normal text-muted">
-                  {caseStudy.author.name}
-                </p>
-              </div>
-              <div className="h-5 rounded-lg w-0.5 bg-neutral-700" />
-              <time
-                dateTime={caseStudy.date}
-                className="flex items-center text-base "
-              >
-                <span className="text-muted text-sm">
-                  {format(new Date(caseStudy.date), "MMMM dd, yyyy")}
-                </span>
-              </time>
-            </div>
-          </article>
+          <p className="pl-2 text-sm text-neutral-400">
+            {caseStudy.author.name}
+          </p>
+          <div className="mx-2 h-1 w-1 rounded-full bg-neutral-700" />
+          <p className="pl-1 text-sm text-neutral-400">
+            {format(new Date(caseStudy.date), "LLLL d, yyyy")}
+          </p>
         </div>
       </div>
-    </Container>
+    </div>
   );
 }
+
+const Toc = ({links}:{links:any[]}) => {
+  const [hovered, setHovered] = useState<number | null>(null);
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <div className="sticky left-0 top-20 hidden max-w-xs flex-col self-start pr-10 md:flex">
+        {links.map((link, index) => (
+          <Link
+            className="group/toc-link relative rounded-lg px-2 py-1 text-sm text-neutral-200"
+            key={link.href}
+            href={link.href}
+            onMouseEnter={() => setHovered(index)}
+            onMouseLeave={() => setHovered(null)}
+          >
+            {hovered === index && (
+              <motion.span
+                layoutId="toc-indicator"
+                className="absolute left-0 top-0 h-full w-1 rounded-br-full rounded-tr-full bg-neutral-700"
+              />
+            )}
+            <span className="inline-block transition duration-200 group-hover/toc-link:translate-x-1">
+              {link.title}
+            </span>
+          </Link>
+        ))}
+      </div>
+      <div className="sticky right-2 top-20 flex w-full flex-col items-end justify-end self-start md:hidden">
+        <button
+          onClick={() => setOpen(!open)}
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-white bg-neutral-900"
+        >
+          <IconMenu className="h-6 w-6 text-white" />
+        </button>
+        <AnimatePresence>
+          x
+          {open && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="mt-2 flex flex-col items-end rounded-3xl border p-4 border-neutral-700 bg-neutral-900"
+            >
+              {links.map((link, index) => (
+                <Link
+                  className="group/toc-link relative rounded-lg px-2 py-1 text-right text-sm text-neutral-200"
+                  key={link.href}
+                  href={link.href}
+                  onMouseEnter={() => setHovered(index)}
+                  onMouseLeave={() => setHovered(null)}
+                >
+                  {hovered === index && (
+                    <motion.span
+                      layoutId="toc-indicator"
+                      className="absolute left-0 top-0 h-full w-1 rounded-br-full rounded-tr-full bg-neutral-700"
+                    />
+                  )}
+                  <span className="inline-block transition duration-200 group-hover/toc-link:translate-x-1">
+                    {link.title}
+                  </span>
+                </Link>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </>
+  );
+};
+
+const dummyContentMarkdown = `
+
+## Introduction
+
+Artificial Intelligence (AI) has been rapidly evolving, transforming various aspects of our lives. From voice assistants to autonomous vehicles, AI is becoming increasingly integrated into our daily routines.
+
+### Key Areas of AI Development
+
+1. **Machine Learning**
+   - Deep Learning
+   - Neural Networks
+   - Reinforcement Learning
+
+2. **Natural Language Processing**
+   - Language Translation
+   - Sentiment Analysis
+   - Chatbots and Virtual Assistants
+
+3. **Computer Vision**
+   - Image Recognition
+   - Facial Recognition
+   - Autonomous Vehicles
+
+## Ethical Considerations
+
+As AI continues to advance, it's crucial to address ethical concerns:
+
+- Privacy and data protection
+- Bias in AI algorithms
+- Job displacement due to automation
+
+## Conclusion
+
+The future of AI is both exciting and challenging. As we continue to push the boundaries of what's possible, it's essential to balance innovation with responsible development and implementation.
+
+> "The development of full artificial intelligence could spell the end of the human race." - Stephen Hawking
+
+*This quote reminds us of the importance of careful consideration in AI advancement.*
+
+![AI Concept Image](https://images.unsplash.com/photo-1719716136369-59ecf938a911?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+
+For more information, visit [AI Research Center](https://example.com/ai-research).
+`;
+

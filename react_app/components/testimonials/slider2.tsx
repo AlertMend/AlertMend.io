@@ -59,8 +59,8 @@ export const TestimonialsSlider2 = ({page_testimonials=[]}:{page_testimonials:an
 
   return (
     <section>
-      <div className="max-w-3xl mx-auto  relative z-40 h-80">
-        <div className="relative pb-12 md:pb-20">
+      <div className="max-w-7xl mx-auto relative mt-20 z-40">
+        <div className="relative">
           {/* Particles animation */}
           <div className="absolute left-1/2 -translate-x-1/2 -top-2 -z-10 w-80 h-20 -mt-6">
             <SparklesCore
@@ -105,35 +105,52 @@ export const TestimonialsSlider2 = ({page_testimonials=[]}:{page_testimonials:an
               </div>
             </div> */}
             {/* Text */}
-            <div className="mb-10 m-auto transition-all duration-150 delay-300 ease-in-out px-8 sm:px-6">
-              <div className="relative flex my-auto align-items-center overflow-hidden" ref={testimonialsRef}>
+            <div className="mb-0 m-auto transition-all duration-150 delay-300 ease-in-out px-8 sm:px-6">
+              <div className="relative flex my-auto align-items-center overflow" ref={testimonialsRef}>
                 {testimonials.map((item, index) => (
                   <Transition
                     key={index}
                     show={active === index}
                     enter="transition ease-in-out duration-500 delay-200 order-first"
-                    enterFrom="opacity-25 -translate-x-4"
+                    enterFrom="opacity-0 -translate-x-1"
                     enterTo="opacity-100 translate-x-0"
                     leave="transition ease-out duration-300 delay-300 absolute"
                     leaveFrom="opacity-100 translate-x-0"
-                    leaveTo="opacity-25 translate-x-4"
+                    leaveTo="opacity-0 translate-x-4"
                     beforeEnter={() => heightFix()}
                   >
                     <div className="p-8">
-                    <div style={{minWidth:'fit-content'}} className="w-full grid grid-cols-1 md:grid justify-start relative z-20 max-w-7xl mx-auto bg-gradient-to-r from-charcoal to-transparent dark:from-neutral-900 dark:to-neutral-950">
+                    <div style={{minWidth:'fit-content'}} 
+                    className=
+                    "w-full grid grid-cols-1 md:grid-cols-3 justify-start relative z-20 max-w-7xl mx-auto bg-gradient-to-br from-neutral-900 to-neutral-950">
                       <GridLineHorizontal className="top-0" offset="200px" />
                       <GridLineHorizontal className="bottom-0 top-auto" offset="200px" />
                       <GridLineVertical className="left-0" offset="80px" />
                       <GridLineVertical className="left-auto right-0" offset="80px" />
                       <div className="md:col-span-2 p-8 md:p-14">
-                        <h2 className="text-left text-xl md:text-3xl tracking-tight font-medium">
+                        <h2 className="text-left text-neutral-200 text-xl md:text-3xl tracking-tight font-medium">
                           {item.title}
                         </h2>
-                      <Button className="mt-5 mx-auto">
+                        <div className="flex items-start sm:items-center flex-col sm:flex-row sm:gap-4">
                         <Link href={`/case-studies/${item.slug}`}>
-                        View Full Case Study
+                        <button className="mt-8 flex space-x-2 items-center group text-base px-4 py-2 rounded-lg bg-gradient-to-b from-blue-500 to-blue-700 text-white shadow-[0px_2px_0px_0px_rgba(255,255,255,0.3)_inset]">
+                          <span>View Full Case Study</span>
+                        </button>
                         </Link>
-                      </Button>
+                        </div>
+                      </div>
+                      <div className="border-t md:border-t-0 md:border-l border-dashed border-[#7c7c7c] p-8 md:p-14">
+                        <p className="text-base text-neutral-200">
+                          &quot;{item.description}&quot;
+                        </p>
+                        <div className="flex flex-col text-sm items-start mt-4 gap-1">
+                          <p className="font-bold text-neutral-200">
+                            {item?.author?.name}
+                          </p>
+                          <p className="text-neutral-500 text-neutral-400">
+                            {item?.author?.designation}
+                          </p>
+                        </div>
                       </div>
                     </div>
                     </div>
@@ -142,7 +159,7 @@ export const TestimonialsSlider2 = ({page_testimonials=[]}:{page_testimonials:an
               </div>
             </div>
             {/* Buttons */}
-            <div className="flex flex-wrap justify-center m-1.5 px-8 sm:px-6">
+            <div className="flex flex-wrap justify-center m-0 px-8 sm:px-6">
               {testimonials.map((item, index) => (
                 <button
                   className={cn(
@@ -203,12 +220,11 @@ const GridLineHorizontal = ({
       }
       className={cn(
         "absolute w-[calc(100%+var(--offset))] h-[var(--height)] left-[calc(var(--offset)/2*-1)]",
-        "bg-[linear-gradient(to_right,var(--color),var(--color)_50%,transparent_0,transparent)]",
         "[background-size:var(--width)_var(--height)]",
         "[mask:linear-gradient(to_left,var(--background)_var(--fade-stop),transparent),_linear-gradient(to_right,var(--background)_var(--fade-stop),transparent),_linear-gradient(black,black)]",
         "[mask-composite:exclude]",
         "z-30",
-        "dark:bg-[linear-gradient(to_right,var(--color-dark),var(--color-dark)_50%,transparent_0,transparent)]",
+        "bg-[linear-gradient(to_right,var(--color-dark),var(--color-dark)_50%,transparent_0,transparent)]",
         className
       )}
     ></div>
@@ -238,12 +254,11 @@ const GridLineVertical = ({
       }
       className={cn(
         "absolute h-[calc(100%+var(--offset))] w-[var(--width)] top-[calc(var(--offset)/2*-1)]",
-        "bg-[linear-gradient(to_bottom,var(--color),var(--color)_50%,transparent_0,transparent)]",
         "[background-size:var(--width)_var(--height)]",
         "[mask:linear-gradient(to_top,var(--background)_var(--fade-stop),transparent),_linear-gradient(to_bottom,var(--background)_var(--fade-stop),transparent),_linear-gradient(black,black)]",
         "[mask-composite:exclude]",
         "z-30",
-        "dark:bg-[linear-gradient(to_bottom,var(--color-dark),var(--color-dark)_50%,transparent_0,transparent)]",
+        "bg-[linear-gradient(to_bottom,var(--color-dark),var(--color-dark)_50%,transparent_0,transparent)]",
         className
       )}
     ></div>
