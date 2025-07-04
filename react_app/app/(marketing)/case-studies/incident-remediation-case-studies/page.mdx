@@ -6,7 +6,7 @@ export const caseStudy = {
   title: "AlertMend in Action: Real Results.\nReal Fast.",
   description: "AlertMend streamlined our incident management. Faster resolutions, less manual work, and a more focused team. Peace of mind is invaluable",
   image:
-    "https://images.unsplash.com/photo-1696429175928-793a1cdef1d3?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "/img/case-study1.webp",
   links: [
     { title: "Introduction", href: "#introduction" },
     {
@@ -49,7 +49,7 @@ CEO
 
 ---
 
-[See complete case study](#)
+[See complete case study](https://docs.google.com/document/d/192rfaffZgEg2XNSAyL66wuWJ7_0NyXvfbpQKM-0a3tU/edit?usp=sharing)
 
 ---
 
@@ -72,4 +72,107 @@ Application Uptime
 
 ---
 
-*Disclaimer: All data in the right are optimized performance & realcost.com
+## 🚀 Customer Overview
+
+**Company:** Polymer Search  
+**Company Size:** 11–50  
+**Industry:** AI / SaaS / Data Analytics  
+**Region:** United States
+
+Polymer Search is an AI-powered platform that enables users to explore and analyze data without requiring SQL or dashboards. Their product is built on a microservice-based architecture deployed via Kubernetes (GKE), supporting real-time data ingestion, transformation, and visualization.
+
+---
+
+## 🔍 Challenge
+
+Polymer Search operates a real-time AI-powered data analytics platform on a modern, serverless, container-based stack, including ECS, SQS, Lambda, MongoDB, Redis, EC2, and Datadog for monitoring.
+
+Their most pressing reliability challenge stemmed from ECS-based AI worker tasks that:
+- Silently stopped processing SQS messages due to internal errors or deadlocks
+- Remained "healthy" per ECS health checks, as containers didn’t crash
+- Went undetected for hours during nights/weekends due to lack of 24/7 SRE coverage
+
+**Compounding issues:**
+- Datadog alerts fired but lacked actionable guidance
+- SQS queues backed up silently, delaying downstream workflows
+- Manual restarts became routine and burdensome
+
+This disconnect between "infrastructure looks fine" and "app is broken" consumed engineering time and undermined confidence in automation.
+
+---
+
+## 🛠️ Solution with AlertMend
+
+Polymer integrated **AlertMend** into their observability stack, leveraging Datadog metrics/logs to implement intelligent auto-remediation.
+
+### 🔔 Alert Trigger
+- Alert fired when:
+  - SQS message backlog exceeded threshold
+  - Message age remained high (processing stalled)
+
+### 🔍 Validation via Logs
+- AlertMend verified alerts before acting by:
+  - Querying Datadog logs for the ECS task
+  - Checking for missing activity logs ("processing started", "job completed") in a configurable window
+
+This filtered out false positives during high-traffic events.
+
+### 🤖 Automated Remediation
+- If inactivity confirmed via logs:
+  - AlertMend automatically restarted the ECS task
+  - Action was **auto-approved** in production for speed
+  - A detailed Slack summary was sent for review
+
+### ✅ Post-Restart Health Check
+- AlertMend:
+  - Re-monitored SQS/logs
+  - Verified message count was decreasing
+  - If still broken, escalated to `#critical` Slack channel
+
+---
+
+## 🔧 Key Features Used
+
+| Feature                     | Purpose / Impact                                                                 |
+|----------------------------|----------------------------------------------------------------------------------|
+| Custom Workflow Builder    | Combined SQS checks, log scans, ECS restarts, Slack reports                      |
+| Auto Remediation           | Auto-restarted stuck ECS tasks with built-in validation                          |
+| Slack Notifications        | Shared full incident summaries in Slack                                          |
+| Critical Escalation Channel| Triggered manual alerts when automation failed                                   |
+| Datadog Integration        | Seamless log + alert ingestion, no config changes needed                         |
+| Production-Ready Workflows | Enabled auto-approved flows with audit trails and rollback visibility            |
+
+---
+
+## 📈 Results
+
+- **90% reduction in MTTR** (from 45 minutes to under 5 minutes)
+- **100% of known SQS stalls auto-resolved** without human touch
+- **Alert fatigue cut drastically** — no more noise during nights
+- **Zero overnight escalations** for repeat ECS issues post-deployment
+- **Slack summaries ensured transparency and post-mortems**
+- **Critical issues surfaced more reliably**, thanks to escalation fallback
+
+By merging observability, logic, and automation, AlertMend empowered Polymer Search to achieve reliable, self-healing infrastructure — fixing problems before customers even noticed.
+
+![Slack alert with auto-restart confirmation](/img/slack-auto-restart-alert.png)
+
+![AlertMend remediation flow visualization](/img/alertmend-flow-ui.png)
+
+---
+
+## 🗣️ Customer Quote (Optional)
+
+> "We were drowning in alerts and incident noise. AlertMend helped us go from reactive firefighting to proactive resolution — it’s been a game-changer for our ops."  
+> — [Name], [Role, Polymer Search]
+
+---
+
+## 🧾 Summary
+
+By integrating AlertMend into their ECS infrastructure, **Polymer Search**:
+- Eliminated silent SQS processing failures
+- Reduced engineer toil
+- Enabled instant, log-aware remediation of recurring issues
+
+With ECS task restarts, smart validation, and Slack-based visibility, the team turned noisy problems into automated workflows. Critical issues are escalated only if automation fails, ensuring fast recovery **without human interruption**.

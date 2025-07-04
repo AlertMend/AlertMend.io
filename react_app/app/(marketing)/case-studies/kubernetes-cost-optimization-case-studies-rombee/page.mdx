@@ -1,0 +1,142 @@
+import { CaseStudyLayout } from "@/components/case-study-layout";
+
+export const caseStudy = {
+  author: { name: "Engineering Lead", src: "/avatar.jpeg", designation: "Wareflex" },
+  date: "2024-07-14",
+  title: "Roambee adopted AlertMend as a Kubernetes operations control layer, giving their team a unified system to track, diagnose, and act on issues across thousands of pods",
+  description: "Roambee uses AlertMend not just to fix things, but to understand and operate Kubernetes at scale. From intelligent issue detection to root cause analysis and integrated workflows in MS Teams.",
+  image:
+    "/img/case-study3.avif",
+  links: [
+    { title: "Introduction", href: "#introduction" },
+    {
+      title: "Key Areas of AI Development",
+      href: "#key-areas-of-ai-development",
+    },
+    { title: "Ethical Considerations", href: "#ethical-considerations" },
+    { title: "Conclusion", href: "#conclusion" },
+  ]
+};
+export const metadata = {
+  title: caseStudy.title,
+  description: caseStudy.description,
+  openGraph: {
+    images: [caseStudy.image],
+  },
+};
+
+export default (props) => <CaseStudyLayout caseStudy={caseStudy} {...props} />;
+
+# AlertMend in Action: Real Results.
+# Real Fast.
+
+> "AlertMend streamlined our incident management. Faster resolutions, less manual work, and a more focused team. Peace of mind is invaluable"
+
+**Sanjay Sharma**
+CEO
+
+![Rombee Logo](/img/roombee-logo.png)
+
+---
+
+### Use Cases:
+
+* Auto-detected unhealthy workloads (crash loops, failing probes, unmounted PVCs).
+* Grouped issues by namespace, cluster, and impact.
+* Provided a “single pane of glass” to monitor all service health.
+* AlertMend automatically identified causes for unhealthy pods.
+* Surfaced recent events, logs, and config diffs in one place.
+
+---
+
+[See complete case study](https://docs.google.com/document/d/1FTEjUvvOjmfO6_X_CBiqeVDFCnNtkuzcI9eN_H1hUW4/edit?usp=sharing)
+
+---
+---
+
+## 🌐 Customer Overview
+
+**Company:** Roambee  
+**Company Size:** 100–200  
+**Industry:** IoT-Driven Logistics & Supply Chain  
+**Region:** Global (HQ in Silicon Valley)  
+**Infrastructure:** Kubernetes (3,000+ Pods in Production)  
+**Use Case:** Kubernetes Operations Management & RCA
+
+Roambee delivers live visibility and intelligence across global logistics operations, powered by IoT sensors and real-time data. Their platform runs at massive scale — with over 3,000 pods across multiple Kubernetes clusters powering APIs, stream processors, event pipelines, and analytics services.
+
+---
+
+## ⚠️ Challenge
+
+Managing Kubernetes at scale introduced a new set of pains for Roambee’s DevOps team:
+- 3,000+ pods meant thousands of potential failure points — from failing containers to PVC bloat and service restarts
+- Prometheus and Kubernetes surfaced alerts, but lacked context, RCA, or resolution paths
+- Engineers manually investigated incidents by jumping between kubectl, logs, dashboards, and resource specs
+- Missed health signals (like readiness issues or silent OOM kills) led to performance degradation
+- No unified place to track, understand, and resolve K8s incidents
+
+Roambee needed more than alerting — they needed **operational clarity**.
+
+---
+
+## 🛠️ Solution with AlertMend
+
+Roambee adopted **AlertMend** as a Kubernetes operations control layer, giving their team a unified system to track, diagnose, and act on issues across thousands of pods.
+
+### 🧭 Centralized Issue Tracking
+
+- Auto-detected unhealthy workloads (crash loops, failing probes, unmounted PVCs)
+- Grouped issues by namespace, cluster, and impact
+- Provided a “single pane of glass” to monitor all service health
+
+### 🔎 Root Cause Analysis (RCA)
+
+- Automatically identified causes for unhealthy pods:
+  - Resource starvation (CPU, memory)
+  - Image pull failures
+  - Node pressure
+  - Misconfigurations
+- Surfaced recent events, logs, and config diffs in one place
+- Gave engineers a quick “why it broke” — not just “what broke”
+
+### 💬 Microsoft Teams Integration
+
+- All new issues and RCA summaries were posted to MS Teams
+- Engineers reviewed, commented, and coordinated actions in-chat
+- Reduced context-switching between dashboards and communication tools
+
+### 🧰 Operational Efficiency Tools
+
+- Engineers filtered workloads by state, node, namespace, and reason
+- Could restart, delete, or scale workloads directly from the UI
+- Saved hours of CLI and YAML debugging each week
+
+---
+
+## 🔧 Key Features Used
+
+| Feature                    | Purpose / Impact                                            |
+|---------------------------|--------------------------------------------------------------|
+| Centralized K8s Health View | Replaced scattered kubectl/debug tooling                   |
+| RCA Engine                | Explained the cause behind each issue in seconds             |
+| Issue Auto-Detection      | Surfaced failing pods, PVCs, probes across clusters          |
+| MS Teams Notification     | Kept the team aligned inside their communication tool        |
+| UI-Based Control Actions  | Reduced friction for triage and fixes                        |
+| Namespace / Node Filtering| Enabled focused troubleshooting at scale                     |
+
+---
+
+## 📈 Results
+
+- Improved visibility across 3,000+ pods in one dashboard
+- RCA reduced investigation time by **70%**
+- Engineers saved **15–20 hours/week** in CLI-based debugging
+- Reduced number of missed or latent failures thanks to early detection and analysis
+- Improved Dev + Ops collaboration with integrated Teams context and shared issue history
+
+---
+
+## 🧾 Summary
+
+Roambee uses **AlertMend** not just to fix things, but to understand and operate Kubernetes at scale. From intelligent issue detection to root cause analysis and integrated workflows in MS Teams, AlertMend helps their team go beyond monitoring — into true operational control.

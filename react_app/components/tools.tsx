@@ -25,7 +25,7 @@ export const Tools = () => {
         <ImageContainer>
           <BlurImage
             // src="/first.png"
-            src="/img/alertmind_GIF.gif"
+            src="/img/AlertMend Ai2.gif"
             alt="dashboard"
             height="1000"
             width="1000"

@@ -31,11 +31,10 @@ export default async function ArticlesIndex() {
             <IconClipboardText className="h-6 w-6 text-cyan-500" />
           </FeatureIconContainer>
           <Heading as="h1" className="mt-4">
-            Blog
+            Blogs
           </Heading>
           <Subheading className="text-center">
-            Discover insightful resources and expert advice from our seasoned
-            team to elevate your knowledge.
+          Real-world solutions, engineering deep-dives, and lessons from scaling modern systems.
           </Subheading>
         </div>
 

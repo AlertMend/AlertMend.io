@@ -75,7 +75,7 @@ export const Hero = () => {
           <Card rotate={rotate} translate={translate} scale={scale}>
             <Image
               // src={`/dashboard.png`}
-              src={`/img/alertmind_GIF.gif`}
+              src={`/img/AlertMend Ai2.gif`}
               alt="hero"
               height={720}
               width={1400}

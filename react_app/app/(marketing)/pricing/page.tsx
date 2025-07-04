@@ -28,11 +28,10 @@ export default function PricingPage() {
           <IconReceiptFilled className="h-6 w-6 text-cyan-500" />
         </FeatureIconContainer>
         <Heading as="h1" className="mt-4">
-          Simple pricing
+        Pricing Model
         </Heading>
         <Subheading>
-          Simple pricing for startups, small businesses, medium scale businesses
-          and enterprises.
+        45 Days Free Trial
         </Subheading>
         <PricingGrid />
       </div>

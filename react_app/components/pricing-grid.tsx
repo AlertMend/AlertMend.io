@@ -34,27 +34,15 @@ export const PricingGrid = () => {
       ctaText: "Get Started",
     },
     {
-      title: "Starter",
-      description: "For serious founders",
-      monthlyPrice: 20,
-      yearlyPrice: 100,
+      title: "Startups",
+      description: "$50/month + $10/month Per VM",
+      monthlyPrice: 10,
+      yearlyPrice: 50,
       features: [
-        "Everything in Hobby +",
-        "Access to AlertMend AI",
-        "Priority tools access",
-        <span key="access">
-          Support for{" "}
-          <CustomLink href="https://algochurn.com">Slack</CustomLink> and{" "}
-          <CustomLink href="https://twitter.com/mannupaaji">Twitter</CustomLink>
-        </span>,
-        "Priority support",
-        "99.67% Uptime SLA",
-        <span key="access">
-          Access to{" "}
-          <CustomLink href="https://ui.aceternity.com/templates">
-            Aceternity UI Templates
-          </CustomLink>
-        </span>,
+        "Unlimited Remediation Flows",
+        "Unlimited integrations",
+        "AI-Generated RCA",
+        "Support: within 24 hours",
       ],
       onClick: () => {
         console.log("clicked");
@@ -62,26 +50,16 @@ export const PricingGrid = () => {
       ctaText: "Get Started",
     },
     {
-      title: "Pro",
-      description: "For small to large businesses",
+      title: "Growth",
+      description: "$500/month + $10/month Per VM $1000/month per Kubernetes cluster",
       monthlyPrice: 30,
       yearlyPrice: 150,
       features: [
-        "Everything in Starter + ",
-        "Access to our dev team",
-        "Coffee with the CEO",
-        <span key="access">
-          Access to{" "}
-          <CustomLink href="https://ui.aceternity.com">
-            Aceternity UI
-          </CustomLink>
-        </span>,
-        "Request tools",
-        "Advanced analytics",
-        "Customizable dashboards",
-        "24/7 customer support",
-        "Unlimited data storage",
-        "Enhanced security features",
+        "For >10 VMs or Kubernetes <100 pods",
+        "Unlimited Remediation Flows",
+        "Unlimited integrations",
+        "AI-Generated RCA",
+        "Support: within 6 hours"
       ],
       featured: true,
       onClick: () => {
@@ -90,16 +68,16 @@ export const PricingGrid = () => {
       ctaText: "Get Started",
     },
     {
-      title: "Enterprise",
-      description: "For large scale businesses",
+      title: "Enterprise/Custom",
+      description: "Contact Us for Pricing",
       monthlyPrice: 0,
       yearlyPrice: 0,
       features: [
-        "Everything in Pro + ",
-        "HIPAA and SOC2 compliance",
-        "Bulk email support",
-        "Customizable dashboards",
-        "24/7 customer support",
+        "Unlimited VMs & Kubernetes",
+        "Unlimited Remediation Flows",
+        "Unlimited integrations",
+        "AI-Generated RCA",
+        "Support: within 30 min + Slack/Teams",
       ],
       onClick: () => {
         console.log("clicked");

@@ -40,7 +40,7 @@ export default async function ArticlesIndex() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full relative z-20">
-          {casestudies.slice(0, 3).map((caseStudy, index) => (
+          {casestudies.slice(0, 4).map((caseStudy, index) => (
             <CaseStudyCard caseStudy={caseStudy} key={caseStudy.title + index} />
           ))}
         </div>
@@ -49,7 +49,7 @@ export default async function ArticlesIndex() {
           <p className="text-2xl font-bold text-white mb-10">More Posts</p>
 
           <div className="divide-y divide-neutral-800">
-            {casestudies.slice(0, 3).map((caseStudy, index) => (
+            {casestudies.slice(0, 4).map((caseStudy, index) => (
               <Link
                 href={`/case-studies/${caseStudy.slug}`}
                 key={caseStudy.slug + index}

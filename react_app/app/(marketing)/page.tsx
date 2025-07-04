@@ -34,10 +34,9 @@ export default async function Home() {
         <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
           <IconReceiptFilled className="h-6 w-6 text-cyan-500" />
         </FeatureIconContainer>
-        <Heading className="pt-4">Simple pricing</Heading>
+        <Heading className="pt-4">Pricing Model</Heading>
         <Subheading>
-          Simple pricing for startups, small businesses, medium scale businesses
-          and enterprises.
+        45 Days Free Trial
         </Subheading>
         <PricingGrid />
         <FAQs />
