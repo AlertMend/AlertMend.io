@@ -38,7 +38,7 @@ CEO
 
 ---
 
-### Use Cases:
+### <span id="use-cases" />Use Cases::
 
 * Enabled fine-grained process supervision inside VMs.
 * Ensured incidents were real before restarting.
@@ -52,7 +52,7 @@ CEO
 [See complete case study](https://docs.google.com/document/d/1pg5nKmgesCoJ-uT-8cdxl0tPrJS28xpULC5MqcPZ5qc/edit?usp=sharing)
 
 ---
-## Customer Overview
+## <span id="customer-overview" /> Customer Overview
 
 **Company:** AIVOS  
 **Company Size:** 1–10  
@@ -64,7 +64,7 @@ AIVOS is a Vietnam-based startup building AI-powered voice assistants that help 
 
 ---
 
-## Challenge
+## <span id="challenge" /> Challenge
 
 The AIVOS team faced growing pains as their service matured:
 - Core AI services inside VMs would occasionally freeze, deadlock, or stop processing jobs — without crashing or failing health checks  
@@ -77,20 +77,20 @@ They needed a lightweight way to detect, act on, and escalate real issues inside
 
 ---
 
-## Solution with AlertMend
+## <span id="solution-with-alertmend" /> Solution with AlertMend
 
 AIVOS deployed **AlertMend agents directly on their virtual machines**, integrating with their existing logging and process monitoring setup.
 
 They built a **two-layered remediation strategy**:
 
-### 1️⃣ Service-Level Monitoring & Recovery
+### 1️⃣ <span id="service-level-monitoring&-recovery" /> Service-Level Monitoring & Recovery
 - AlertMend monitored system logs and custom health scripts to detect if AI services (e.g., audio processors, NLP workers) had stalled  
 - If the service was inactive beyond a threshold:  
   - AlertMend restarted the specific process or container  
   - Captured logs and status for audit  
   - Posted a summary to Slack for asynchronous review  
 
-### 2️⃣ VM-Level Remediation
+### 2️⃣<span id="vm-level-remediation" /> VM-Level Remediation
 - If the VM itself was unresponsive (e.g., no SSH, no heartbeat):  
   - AlertMend triggered a GCP VM auto-restart  
   - Ensured boot-time service restoration scripts were triggered  
@@ -100,7 +100,7 @@ This setup allowed **fully automated recovery** for most incidents, while keepin
 
 ---
 
-## Key Features Used
+## <span id="key-features-used" /> Key Features Used
 
 | Feature                        | Purpose / Impact                                              |
 |-------------------------------|----------------------------------------------------------------|
@@ -113,7 +113,7 @@ This setup allowed **fully automated recovery** for most incidents, while keepin
 
 ---
 
-## Results
+## <span id="results" /> Results
 
 - **90%+** of service failures were auto-remediated with no human involvement  
 - **100%** recovery of previously “stuck” VMs via automatic restart  
@@ -127,6 +127,6 @@ This setup allowed **fully automated recovery** for most incidents, while keepin
 
 ---
 
-## Summary
+## <span id="summary" /> Summary
 
 With no Kubernetes and a tiny team, **AIVOS** turned to AlertMend to add automated incident response to their GCP VM-based stack. From restarting frozen services to auto-recovering entire VMs, **AlertMend** helped them operate like a much larger team — keeping systems stable and engineers focused on innovation.

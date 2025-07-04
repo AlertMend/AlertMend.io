@@ -45,7 +45,7 @@ CEO
 
 ---
 
-### Use Cases:
+### <span id="use-cases" />Use Cases:
 
 * Automatically detect when a service is stuck on ECS.
 * Proactively using SQS metrics and Datadog logs to confirm the issue.
@@ -78,7 +78,7 @@ Application Uptime
 
 ---
 
-## Customer Overview
+## <span id="customer-overview" /> Customer Overview
 
 **Company:** Polymer Search  
 **Company Size:** 11–50  
@@ -89,7 +89,7 @@ Polymer Search is an AI-powered platform that enables users to explore and analy
 
 ---
 
-## Challenge
+## <span id="challenge" /> Challenge
 
 Polymer Search operates a real-time AI-powered data analytics platform on a modern, serverless, container-based stack, including ECS, SQS, Lambda, MongoDB, Redis, EC2, and Datadog for monitoring.
 
@@ -107,29 +107,29 @@ This disconnect between "infrastructure looks fine" and "app is broken" consumed
 
 ---
 
-## Solution with AlertMend
+## <span id="solution-with-alertmend" /> Solution with AlertMend
 
 Polymer integrated **AlertMend** into their observability stack, leveraging Datadog metrics/logs to implement intelligent auto-remediation.
 
-### Alert Trigger
+### <span id="alert-trigger" /> Alert Trigger
 - Alert fired when:
   - SQS message backlog exceeded threshold
   - Message age remained high (processing stalled)
 
-### Validation via Logs
+### <span id="validation-via-logs" /> Validation via Logs
 - AlertMend verified alerts before acting by:
   - Querying Datadog logs for the ECS task
   - Checking for missing activity logs ("processing started", "job completed") in a configurable window
 
 This filtered out false positives during high-traffic events.
 
-### Automated Remediation
+### <span id="automated-remediation" /> Automated Remediation
 - If inactivity confirmed via logs:
   - AlertMend automatically restarted the ECS task
   - Action was **auto-approved** in production for speed
   - A detailed Slack summary was sent for review
 
-### Post-Restart Health Check
+### <span id="post-restart-health-check" /> Post-Restart Health Check
 - AlertMend:
   - Re-monitored SQS/logs
   - Verified message count was decreasing
@@ -137,7 +137,7 @@ This filtered out false positives during high-traffic events.
 
 ---
 
-## Key Features Used
+## <span id="key-features-used" /> Key Features Used
 
 | Feature                     | Purpose / Impact                                                                 |
 |----------------------------|----------------------------------------------------------------------------------|
@@ -150,7 +150,7 @@ This filtered out false positives during high-traffic events.
 
 ---
 
-## Results
+## <span id="results" /> Results
 
 - **90% reduction in MTTR** (from 45 minutes to under 5 minutes)
 - **100% of known SQS stalls auto-resolved** without human touch
@@ -167,14 +167,14 @@ By merging observability, logic, and automation, AlertMend empowered Polymer Sea
 
 ---
 
-## Customer Quote (Optional)
+## <span id="customer-quote-optional" /> Customer Quote (Optional)
 
 > "We were drowning in alerts and incident noise. AlertMend helped us go from reactive firefighting to proactive resolution — it’s been a game-changer for our ops."  
 > — [Name], [Role, Polymer Search]
 
 ---
 
-## Summary
+## <span id="summary" /> Summary
 
 By integrating AlertMend into their ECS infrastructure, **Polymer Search**:
 - Eliminated silent SQS processing failures
