@@ -81,11 +81,19 @@ export const MobileNavbar = ({ navItems }: any) => {
             ))}
           </div>
           <div className="flex flex-row w-full items-start gap-2.5  px-8 py-4 ">
-            <Button>Book a demo</Button>
+            <Button 
+              as={Link}
+              href="https://calendly.com/hello-alertmend/30min"
+              target="_blank"
+              onClick={() => {
+                setOpen(false);
+              }}
+            >Book a demo</Button>
             <Button
               variant="simple"
               as={Link}
-              href="/register"
+              href="https://demo.alertmend.io/signup"
+              target="_blank"
               onClick={() => {
                 setOpen(false);
               }}

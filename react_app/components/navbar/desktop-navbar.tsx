@@ -69,10 +69,10 @@ export const DesktopNavbar = ({ navItems }: Props) => {
         </div>
       </div>
       <div className="flex space-x-2 items-center">
-        <Button variant="simple" as={Link} href="/register">
+        <Button variant="simple" as={Link} href="https://demo.alertmend.io/signup" target={'_blank'}>
           Register
         </Button>
-        <Button>Book a demo</Button>
+        <Button as={Link} href="https://calendly.com/hello-alertmend/30min" target={'_blank'}>Book a demo</Button>
       </div>
     </motion.div>
   );
