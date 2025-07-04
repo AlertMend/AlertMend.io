@@ -63,17 +63,9 @@ export default async function ArticlesIndex() {
                     {truncate(caseStudy.description, 80)}
                   </p>
 
-                  <p className="text-neutral-300 text-sm mt-2 max-w-xl group-hover:text-white transition duration-200">
-                    {format(new Date(caseStudy.date), "MMMM dd, yyyy")}
-                  </p>
+                  
                 </div>
-                <Image
-                  src={caseStudy.author.src}
-                  alt={caseStudy.author.name}
-                  width={40}
-                  height={40}
-                  className="rounded-full md:h-10 md:w-10 h-6 w-6 mt-4 md:mt-0 object-cover"
-                />
+               
               </Link>
             ))}
           </div>

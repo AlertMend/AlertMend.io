@@ -1,21 +1,19 @@
 import { CaseStudyLayout } from "@/components/case-study-layout";
 
 export const caseStudy = {
-  author: { name: "Engineering Lead", src: "/avatar.jpeg", designation: "Wareflex" },
-  date: "2024-07-14",
   title: "Wareflex Cut 50% of GKE Costs Using AlertMend’s Kubernetes Cost Optimization.",
   description: "AlertMend helped us uncover blind spots and slash our GKE spend — all without touching a single YAML file.",
   image:
     "/img/case-study4.avif",
   links: [
-    { title: "Introduction", href: "#introduction" },
-    {
-      title: "Key Areas of AI Development",
-      href: "#key-areas-of-ai-development",
-    },
-    { title: "Ethical Considerations", href: "#ethical-considerations" },
-    { title: "Conclusion", href: "#conclusion" },
-  ]
+  { title: "Use Cases", href: "#use-cases" },
+  { title: "Customer Overview", href: "#customer-overview" },
+  { title: "Challenge", href: "#challenge" },
+  { title: "Solution with AlertMend", href: "#solution-with-alertmend" },
+  { title: "Key Features Used", href: "#key-features-used" },
+  { title: "Results", href: "#results" },
+  { title: "Summary", href: "#summary" },
+]
 };
 export const metadata = {
   title: caseStudy.title,
@@ -54,7 +52,7 @@ Engineering Lead
 | **Before** | $719.42/mo             | $407.66/mo              |
 | **After**  | $422.42/mo             | $25.66/mo               |
 
-> ✅ AlertMend helped reduce compute costs by **41%** and storage costs by **over 90%**, enabling massive savings within just one week.
+> AlertMend helped reduce compute costs by **41%** and storage costs by **over 90%**, enabling massive savings within just one week.
 
 
 ---
@@ -63,7 +61,7 @@ Engineering Lead
 
 ---
 
-## 🌐 Customer Overview
+## Customer Overview
 
 **Company:** WareFlex  
 **Company Size:** 21–50  
@@ -75,7 +73,7 @@ Founded in 2022, WareFlex offers a full-service logistics platform—connecting 
 
 ---
 
-## ⚠️ Challenge
+## Challenge
 
 As WareFlex scaled, they faced key operational challenges:
 - Over-provisioned containers and VMs reserved far more resources than they used, inflating costs  
@@ -87,30 +85,30 @@ They needed a seamless way to identify and reclaim waste—without disrupting se
 
 ---
 
-## 🛠️ Solution with AlertMend
+## Solution with AlertMend
 
 WareFlex implemented **AlertMend’s Kubernetes Cost Optimization Engine** across its GKE clusters. It worked like this:
 
-### ⚙️ Automated Resource Tuning
+### Automated Resource Tuning
 - Prometheus-driven analysis recommended right-sizing of pods and VMs  
 - AlertMend applied changes safely without requiring manual YAML edits
 
-### 💾 Storage Cleanup
+### Storage Cleanup
 - Identified unused or oversized PVCs  
 - Safely decommissioned underutilized storage volumes
 
-### 🧠 Node Optimization
+### Node Optimization
 - Suggested more efficient machine types based on actual usage patterns
 
-### 🖱️ Self-Serve Remediation
+### Self-Serve Remediation
 - Engineers applied optimizations with a click — no YAML required
 
-### 📊 Continuous Cost Monitoring
+### Continuous Cost Monitoring
 - Ongoing alerts and dashboards ensured long-term resource efficiency
 
 ---
 
-## 🔧 Key Features Used
+## Key Features Used
 
 | Feature                        | Purpose / Impact                                        |
 |-------------------------------|----------------------------------------------------------|
@@ -123,7 +121,7 @@ WareFlex implemented **AlertMend’s Kubernetes Cost Optimization Engine** acros
 
 ---
 
-## 📈 Results
+## Results
 
 In just one week, WareFlex realized significant improvements:
 - **50% reduction in GKE costs**  
@@ -135,7 +133,7 @@ In just one week, WareFlex realized significant improvements:
 ![Metric alert](/img/matric-image.png)
 ---
 
-## 🧾 Summary
+## Summary
 
 By automating cost optimization with real usage data, PVC cleanup, and machine recommendations—all applied safely via a no-YAML workflow—**WareFlex** turned infrastructure cost reduction into a hands-off process.
 

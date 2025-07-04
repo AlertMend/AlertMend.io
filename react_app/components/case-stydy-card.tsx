@@ -34,14 +34,7 @@ export const CaseStudyCard = ({ caseStudy }: { caseStudy: CaseStudyWithSlug }) =
           {truncate(caseStudy.description, 100)}
         </p>
         <div className="flex space-x-2 items-center  mt-6">
-          <Image
-            src={caseStudy.author.src}
-            alt={caseStudy.author.name}
-            width={20}
-            height={20}
-            className="rounded-full h-5 w-5"
-          />
-          <p className="text-sm font-normal text-muted">{caseStudy.author.name}</p>
+          
         </div>
       </div>
     </Link>

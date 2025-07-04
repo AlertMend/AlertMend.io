@@ -1,16 +1,15 @@
 import { BlogLayout } from "@/components/blog-layout";
 
 export const blog = {
-  author: { name: "Manu Arora", src: "/avatar.jpeg" },
+  author: { name: "Himanshu Bansal", src: "/avatar.jpeg" },
   date: "2024-07-14",
   title: "Managing High Number of Queued Threads in Elasticsearch Thread Pool for Optimal Performance",
   description:
     "In Elasticsearch, an excessive number of queued threads in the thread pool can be an indication that the workload is overwhelming the system, causing delays in request processing and performance degradation. The thread pool is responsible for handling concurrent tasks such as indexing and searching. When threads exceed the pool’s capacity, tasks queue up, slowing down operations. This blog outlines how to identify, debug, and resolve high thread queuing issues in Elasticsearch.",
   image:
-    "https://images.unsplash.com/photo-1696429175928-793a1cdef1d3?q=80&w=3000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://github.com/AlertMend/AlertMend.io/blob/main/_posts/images/high_number_of_queued_threads_in_elasticsearch_thread_pool.png?raw=true",
 };
 export const metadata = {
-  title: blog.title,
   description: blog.description,
   openGraph: {
     images: [blog.image],

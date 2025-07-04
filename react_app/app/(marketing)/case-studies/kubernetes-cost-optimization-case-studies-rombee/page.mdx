@@ -8,14 +8,15 @@ export const caseStudy = {
   image:
     "/img/case-study3.avif",
   links: [
-    { title: "Introduction", href: "#introduction" },
-    {
-      title: "Key Areas of AI Development",
-      href: "#key-areas-of-ai-development",
-    },
-    { title: "Ethical Considerations", href: "#ethical-considerations" },
-    { title: "Conclusion", href: "#conclusion" },
-  ]
+  { title: "Use Cases", href: "#use-cases" },
+  { title: "Customer Overview", href: "#customer-overview" },
+  { title: "Challenge", href: "#challenge" },
+  { title: "Solution with AlertMend", href: "#solution-with-alertmend" },
+  { title: "Key Features Used", href: "#key-features-used" },
+  { title: "Results", href: "#results" },
+  { title: "Summary", href: "#summary" },
+]
+
 };
 export const metadata = {
   title: caseStudy.title,
@@ -52,9 +53,8 @@ CEO
 [See complete case study](https://docs.google.com/document/d/1FTEjUvvOjmfO6_X_CBiqeVDFCnNtkuzcI9eN_H1hUW4/edit?usp=sharing)
 
 ---
----
 
-## 🌐 Customer Overview
+## Customer Overview
 
 **Company:** Roambee  
 **Company Size:** 100–200  
@@ -67,7 +67,7 @@ Roambee delivers live visibility and intelligence across global logistics operat
 
 ---
 
-## ⚠️ Challenge
+## Challenge
 
 Managing Kubernetes at scale introduced a new set of pains for Roambee’s DevOps team:
 - 3,000+ pods meant thousands of potential failure points — from failing containers to PVC bloat and service restarts
@@ -80,17 +80,17 @@ Roambee needed more than alerting — they needed **operational clarity**.
 
 ---
 
-## 🛠️ Solution with AlertMend
+## Solution with AlertMend
 
 Roambee adopted **AlertMend** as a Kubernetes operations control layer, giving their team a unified system to track, diagnose, and act on issues across thousands of pods.
 
-### 🧭 Centralized Issue Tracking
+### Centralized Issue Tracking
 
 - Auto-detected unhealthy workloads (crash loops, failing probes, unmounted PVCs)
 - Grouped issues by namespace, cluster, and impact
 - Provided a “single pane of glass” to monitor all service health
 
-### 🔎 Root Cause Analysis (RCA)
+### Root Cause Analysis (RCA)
 
 - Automatically identified causes for unhealthy pods:
   - Resource starvation (CPU, memory)
@@ -100,13 +100,13 @@ Roambee adopted **AlertMend** as a Kubernetes operations control layer, giving t
 - Surfaced recent events, logs, and config diffs in one place
 - Gave engineers a quick “why it broke” — not just “what broke”
 
-### 💬 Microsoft Teams Integration
+### Microsoft Teams Integration
 
 - All new issues and RCA summaries were posted to MS Teams
 - Engineers reviewed, commented, and coordinated actions in-chat
 - Reduced context-switching between dashboards and communication tools
 
-### 🧰 Operational Efficiency Tools
+### Operational Efficiency Tools
 
 - Engineers filtered workloads by state, node, namespace, and reason
 - Could restart, delete, or scale workloads directly from the UI
@@ -114,7 +114,7 @@ Roambee adopted **AlertMend** as a Kubernetes operations control layer, giving t
 
 ---
 
-## 🔧 Key Features Used
+## Key Features Used
 
 | Feature                    | Purpose / Impact                                            |
 |---------------------------|--------------------------------------------------------------|
@@ -127,7 +127,7 @@ Roambee adopted **AlertMend** as a Kubernetes operations control layer, giving t
 
 ---
 
-## 📈 Results
+## Results
 
 - Improved visibility across 3,000+ pods in one dashboard
 - RCA reduced investigation time by **70%**
@@ -137,6 +137,6 @@ Roambee adopted **AlertMend** as a Kubernetes operations control layer, giving t
 
 ---
 
-## 🧾 Summary
+## Summary
 
 Roambee uses **AlertMend** not just to fix things, but to understand and operate Kubernetes at scale. From intelligent issue detection to root cause analysis and integrated workflows in MS Teams, AlertMend helps their team go beyond monitoring — into true operational control.

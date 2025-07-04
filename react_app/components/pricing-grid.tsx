@@ -35,9 +35,9 @@ export const PricingGrid = () => {
     },
     {
       title: "Startups",
-      description: "$50/month + $10/month Per VM",
-      monthlyPrice: 10,
-      yearlyPrice: 50,
+      description: "",
+      monthlyPrice: "50/month + Per VM $10",
+      yearlyPrice: "50/month + Per VM $10",
       features: [
         "Unlimited Remediation Flows",
         "Unlimited integrations",
@@ -51,9 +51,9 @@ export const PricingGrid = () => {
     },
     {
       title: "Growth",
-      description: "$500/month + $10/month Per VM $1000/month per Kubernetes cluster",
-      monthlyPrice: 30,
-      yearlyPrice: 150,
+      description: "",
+      monthlyPrice: "500/month + $10/month Per VM $1000",
+      yearlyPrice: "500/month + $10/month Per VM $1000",
       features: [
         "For >10 VMs or Kubernetes <100 pods",
         "Unlimited Remediation Flows",
@@ -69,9 +69,9 @@ export const PricingGrid = () => {
     },
     {
       title: "Enterprise/Custom",
-      description: "Contact Us for Pricing",
-      monthlyPrice: 0,
-      yearlyPrice: 0,
+      description: "",
+      monthlyPrice: "Contact Us for Pricing",
+      yearlyPrice: "Contact Us for Pricing",
       features: [
         "Unlimited VMs & Kubernetes",
         "Unlimited Remediation Flows",

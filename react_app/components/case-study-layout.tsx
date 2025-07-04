@@ -39,20 +39,9 @@ export function CaseStudyLayout({
           <div className="h-px w-full bg-neutral-800" />
         </div>
         <div className="mt-10 flex items-center">
-          <Image
-            src={caseStudy.author.src}
-            alt={caseStudy.author.name}
-            className="h-5 w-5 rounded-full"
-            height={20}
-            width={20}
-          />
-          <p className="pl-2 text-sm text-neutral-400">
-            {caseStudy.author.name}
-          </p>
+         
+         
           <div className="mx-2 h-1 w-1 rounded-full bg-neutral-700" />
-          <p className="pl-1 text-sm text-neutral-400">
-            {format(new Date(caseStudy.date), "LLLL d, yyyy")}
-          </p>
         </div>
       </div>
     </div>

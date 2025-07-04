@@ -17,7 +17,6 @@ import { BlurImage } from "./blur-image";
 export const Tools = () => {
   const content = [
     {
-      icon: <IconMailForward className="h-8 w-8 text-secondary" />,
       title: "Crush Kubernetes Complexity.",
       description:
         "AlertMend simplifies Kubernetes operations — from day-to-day management to intelligent automation.",
@@ -35,7 +34,6 @@ export const Tools = () => {
       ),
     },
     {
-      icon: <IconSocial className="h-8 w-8 text-secondary" />,
       title: "Smarter Workloads. Lower Cloud Bills.",
       description:
         "AlertMend delivers instant cloud savings and performance boosts with 1-click Kubernetes optimization.",
@@ -53,7 +51,6 @@ export const Tools = () => {
       ),
     },
     {
-      icon: <IconTerminal className="h-8 w-8 text-secondary" />,
       title: "From Alert to Fix, Without Human Intervention",
       description:
         "Fix incidents instantly with smart, pre-built and customizable workflows that act the moment your alerts fire.",

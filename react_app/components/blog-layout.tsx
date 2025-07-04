@@ -37,14 +37,14 @@ export function BlogLayout({
         )}
       </div>
       <div className="xl:relative">
-        <div className="mx-auto max-w-2xl">
+        <div className="mx-auto max-w-7xl px-5">
           <article className="pb-8">
             <header className="flex flex-col">
               <h1 className="mt-8 text-4xl font-bold tracking-tight text-neutral-200 sm:text-5xl ">
                 {blog.title}
               </h1>
             </header>
-            <div className="mt-8 prose prose-sm prose-invert" data-mdx-content>
+            <div className="mt-8 max-w-7xl mx-auto prose prose-sm prose-invert" data-mdx-content>
               {children}
             </div>
             <div className="flex space-x-2 items-center pt-12 border-t border-neutral-800 mt-12">

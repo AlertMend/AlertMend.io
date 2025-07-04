@@ -1,21 +1,20 @@
 import { CaseStudyLayout } from "@/components/case-study-layout";
 
 export const caseStudy = {
-  author: { name: "Engineering Lead", src: "/avatar.jpeg", designation: "Wareflex" },
-  date: "2024-07-14",
   title: "AIVOS deployed AlertMend agents directly on their virtual machines, integrating with their existing logging and process monitoring setup.",
   description: "With no Kubernetes and a tiny team, AIVOS turned to AlertMend to add automated incident response to their GCP VM-based stack. From restarting frozen services to auto-recovering entire VMs, AlertMend helped them operate like a much larger team — keeping systems stable and engineers focused on innovation.",
   image:
     "/img/case-study2.avif",
   links: [
-    { title: "Introduction", href: "#introduction" },
-    {
-      title: "Key Areas of AI Development",
-      href: "#key-areas-of-ai-development",
-    },
-    { title: "Ethical Considerations", href: "#ethical-considerations" },
-    { title: "Conclusion", href: "#conclusion" },
-  ]
+  { title: "Use Cases", href: "#use-cases" },
+  { title: "Customer Overview", href: "#customer-overview" },
+  { title: "Challenge", href: "#challenge" },
+  { title: "Solution with AlertMend", href: "#solution-with-alertmend" },
+  { title: "Key Features Used", href: "#key-features-used" },
+  { title: "Results", href: "#results" },
+  { title: "Summary", href: "#summary" },
+]
+
 };
 export const metadata = {
   title: caseStudy.title,
@@ -53,7 +52,7 @@ CEO
 [See complete case study](https://docs.google.com/document/d/1pg5nKmgesCoJ-uT-8cdxl0tPrJS28xpULC5MqcPZ5qc/edit?usp=sharing)
 
 ---
-## 🌐 Customer Overview
+## Customer Overview
 
 **Company:** AIVOS  
 **Company Size:** 1–10  
@@ -65,7 +64,7 @@ AIVOS is a Vietnam-based startup building AI-powered voice assistants that help 
 
 ---
 
-## ⚠️ Challenge
+## Challenge
 
 The AIVOS team faced growing pains as their service matured:
 - Core AI services inside VMs would occasionally freeze, deadlock, or stop processing jobs — without crashing or failing health checks  
@@ -78,7 +77,7 @@ They needed a lightweight way to detect, act on, and escalate real issues inside
 
 ---
 
-## 🛠️ Solution with AlertMend
+## Solution with AlertMend
 
 AIVOS deployed **AlertMend agents directly on their virtual machines**, integrating with their existing logging and process monitoring setup.
 
@@ -101,7 +100,7 @@ This setup allowed **fully automated recovery** for most incidents, while keepin
 
 ---
 
-## 🔧 Key Features Used
+## Key Features Used
 
 | Feature                        | Purpose / Impact                                              |
 |-------------------------------|----------------------------------------------------------------|
@@ -114,7 +113,7 @@ This setup allowed **fully automated recovery** for most incidents, while keepin
 
 ---
 
-## 📈 Results
+## Results
 
 - **90%+** of service failures were auto-remediated with no human involvement  
 - **100%** recovery of previously “stuck” VMs via automatic restart  
@@ -128,6 +127,6 @@ This setup allowed **fully automated recovery** for most incidents, while keepin
 
 ---
 
-## 🧾 Summary
+## Summary
 
 With no Kubernetes and a tiny team, **AIVOS** turned to AlertMend to add automated incident response to their GCP VM-based stack. From restarting frozen services to auto-recovering entire VMs, **AlertMend** helped them operate like a much larger team — keeping systems stable and engineers focused on innovation.

@@ -39,7 +39,7 @@ export default async function ArticlesIndex() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full relative z-20">
-          {blogs.slice(0, 3).map((blog, index) => (
+          {blogs.slice(0, 5).map((blog, index) => (
             <BlogCard blog={blog} key={blog.title + index} />
           ))}
         </div>
