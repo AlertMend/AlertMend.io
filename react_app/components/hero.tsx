@@ -78,7 +78,7 @@ export const Hero = () => {
               src={`/img/AlertMend Ai2.gif`}
               alt="hero"
               height={720}
-              width={1400}
+              width={1200}
               className="mx-auto rounded-md grayscale group-hover:grayscale-0 transition duration-200 object-cover md:object-left-top"
               draggable={false}
             />

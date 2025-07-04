@@ -31,9 +31,9 @@ export const Features = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 py-10">
           <Card className="lg:col-span-2">
-            <CardTitle>Seamless Integrations</CardTitle>
+            <CardTitle>Integrations</CardTitle>
             <CardDescription>
-              Connect AlertMend with the tools your team already uses. From monitoring and alerting systems to collaboration platforms like Slack and Teams.
+            AlertMend seamlessly integrates with leading alerting and monitoring tools such as Alertmanager, Prometheus, and Grafana, allowing you to effortlessly trigger Remediation Flows (RFs) within your Kubernetes stack. In addition, it supports communication platforms like Slack and Microsoft Teams, along with incident management tools like PagerDuty and ServiceNow, enabling real-time notifications and streamlined incident response across your entire ecosystem
             </CardDescription>
             <CardSkeletonContainer>
               <SkeletonOne />
