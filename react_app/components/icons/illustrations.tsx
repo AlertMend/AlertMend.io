@@ -122,7 +122,109 @@ export const SlackIcon = () => {
     </svg>
   );
 };
+export const AzureIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 32 32"
+    fill="none"
+    className="w-full h-full"
+  >
+    <path
+      fill="#0078D4"
+      d="M16 0L2.667 29.333H13.44L16 24.667l2.56 4.666h10.773L16 0zM16 7.573 24.64 25.6h-3.36L16 18.133 10.72 25.6h-3.36L16 7.573z"
+    />
+  </svg>
+);
+export const AWSIcon = () => (
+  <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <path fill="#FF9900" d="M199.9 0C89.5 0 0 89.5 0 199.9c0 110.5 89.5 199.9 199.9 199.9S399.8 310.4 399.8 199.9C399.8 89.5 310.4 0 199.9 0z" />
+    <text x="50%" y="55%" textAnchor="middle" fill="#fff" fontSize="90" fontWeight="bold" fontFamily="Arial">AWS</text>
+  </svg>
+);
 
+export const DatadogIcon = () => (
+  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <rect width="48" height="48" rx="8" fill="#632CA6" />
+    <text x="50%" y="55%" textAnchor="middle" fill="#fff" fontSize="14" fontFamily="Arial">Datadog</text>
+  </svg>
+);
+
+export const KubernetesIcon = () => (
+  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <circle cx="24" cy="24" r="24" fill="#326CE5" />
+    <text x="50%" y="55%" textAnchor="middle" fill="#fff" fontSize="10" fontFamily="Arial">K8s</text>
+  </svg>
+);
+
+export const JenkinsIcon = () => (
+  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <circle cx="24" cy="24" r="24" fill="#D33833" />
+    <text x="50%" y="55%" textAnchor="middle" fill="#fff" fontSize="10" fontFamily="Arial">Jenkins</text>
+  </svg>
+);
+
+export const PagerDutyIcon = () => (
+  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <rect width="48" height="48" rx="8" fill="#06BA63" />
+    <text x="50%" y="55%" textAnchor="middle" fill="#fff" fontSize="10" fontFamily="Arial">PD</text>
+  </svg>
+);
+
+export const WebhookIcon = () => (
+  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <rect width="48" height="48" rx="8" fill="#FF6F61" />
+    <text x="50%" y="55%" textAnchor="middle" fill="#fff" fontSize="10" fontFamily="Arial">Hook</text>
+  </svg>
+);
+
+export const NewRelicIcon = () => (
+  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <circle cx="24" cy="24" r="24" fill="#008C99" />
+    <text x="50%" y="55%" textAnchor="middle" fill="#fff" fontSize="8" fontFamily="Arial">New Relic</text>
+  </svg>
+);
+
+export const TeamsIcon = () => (
+  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <rect width="48" height="48" rx="8" fill="#5059C9" />
+    <text x="50%" y="55%" textAnchor="middle" fill="#fff" fontSize="10" fontFamily="Arial">Teams</text>
+  </svg>
+);
+
+export const PrometheusIcon = () => (
+  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <circle cx="24" cy="24" r="24" fill="#E6522C" />
+    <text x="50%" y="55%" textAnchor="middle" fill="#fff" fontSize="10" fontFamily="Arial">Prom</text>
+  </svg>
+);
+
+export const ServiceNowIcon = () => (
+  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <rect width="48" height="48" rx="8" fill="#06B025" />
+    <text x="50%" y="55%" textAnchor="middle" fill="#fff" fontSize="8" fontFamily="Arial">ServiceNow</text>
+  </svg>
+);
+
+export const GoogleCloudIcon = () => (
+  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <rect width="48" height="48" rx="8" fill="#4285F4" />
+    <text x="50%" y="55%" textAnchor="middle" fill="#fff" fontSize="8" fontFamily="Arial">GCP</text>
+  </svg>
+);
+
+export const GrafanaIcon = () => (
+  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <circle cx="24" cy="24" r="24" fill="#F46800" />
+    <text x="50%" y="55%" textAnchor="middle" fill="#fff" fontSize="10" fontFamily="Arial">Grafana</text>
+  </svg>
+);
+
+export const JiraIcon = () => (
+  <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+    <rect width="48" height="48" rx="8" fill="#0052CC" />
+    <text x="50%" y="55%" textAnchor="middle" fill="#fff" fontSize="10" fontFamily="Arial">Jira</text>
+  </svg>
+);
 export const InstagramIcon = () => {
   return (
     <svg viewBox="0 0 32 32" fill="none" className="w-full h-full">

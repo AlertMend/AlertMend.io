@@ -8,6 +8,20 @@ import {
   SlackIcon,
   TiktokIcon,
   TwitterIcon,
+  AzureIcon,
+  AWSIcon,
+  DatadogIcon,
+  KubernetesIcon,
+  JenkinsIcon,
+  PagerDutyIcon,
+  WebhookIcon,
+  NewRelicIcon,
+  TeamsIcon,
+  PrometheusIcon,
+  ServiceNowIcon,
+  GoogleCloudIcon,
+  GrafanaIcon,
+  JiraIcon,
 } from "@/components/icons/illustrations";
 import React from "react";
 import { IconContainer } from "../icon-container";
@@ -108,7 +122,7 @@ export const SkeletonOne = () => {
             </defs>
           </svg>
 
-          <IconContainer>
+          {/* <IconContainer>
             <InstagramIcon />
           </IconContainer>
           <IconContainer>
@@ -122,36 +136,54 @@ export const SkeletonOne = () => {
           </IconContainer>
           <IconContainer>
             <MetaIcon />
-          </IconContainer>
+              </IconContainer>*/}
           <IconContainer>
-            <LinkedInIcon />
+            <AzureIcon />
+          </IconContainer> 
+          <IconContainer>
+           <AWSIcon />
           </IconContainer>
+         <IconContainer>
+         <DatadogIcon />
+         </IconContainer>
+         <IconContainer>
+         <KubernetesIcon />
+         </IconContainer>
+          <IconContainer>
+         <JenkinsIcon />
+        </IconContainer>
           <IconContainer>
             <SlackIcon />
           </IconContainer>
+          <IconContainer>
+          <PagerDutyIcon />
+         </IconContainer>
+          <IconContainer>
+          <WebhookIcon />
+          </IconContainer>
+          <IconContainer>
+         <NewRelicIcon />
+         </IconContainer>
+         <IconContainer>
+         <TeamsIcon />
+         </IconContainer>
+         <IconContainer>
+         <PrometheusIcon />
+         </IconContainer>
         </div>
         <div className="flex gap-4 items-center justify-center flex-shrink-0 ml-8">
-          <IconContainer>
-            <MetaIcon />
-          </IconContainer>
-          <IconContainer>
-            <LinkedInIcon />
-          </IconContainer>
-          <IconContainer>
-            <SlackIcon />
-          </IconContainer>
-          <IconContainer>
-            <InstagramIcon />
-          </IconContainer>
-          <IconContainer>
-            <TiktokIcon />
-          </IconContainer>
-          <IconContainer>
-            <TwitterIcon />
-          </IconContainer>
-          <IconContainer>
-            <FacebookIcon />
-          </IconContainer>
+         <IconContainer>
+         <ServiceNowIcon />
+         </IconContainer>
+        <IconContainer>
+       <GoogleCloudIcon />
+       </IconContainer>
+      <IconContainer>
+      <GrafanaIcon />
+      </IconContainer>
+      <IconContainer>
+      <JiraIcon />
+      </IconContainer>
         </div>
       </div>
     </div>
