@@ -35,7 +35,7 @@ export const Footer = () => {
       href: "https://www.linkedin.com/company/alertmend",
     },
     {
-      name: "You Tube",
+      name: "YouTube",
       href: "https://www.youtube.com/@AlertMend",
     },
   ];
