@@ -60,7 +60,9 @@ export const Hero = () => {
         />
         <div className="flex items-center gap-4 justify-center my-10 relative z-10">
           <Button className="flex space-x-2 items-center group !text-lg">
-            <span>Book a demo</span>{" "}
+          <a href="https://calendly.com/hello-alertmend/30min" target="_blank"
+          rel="noopener noreferrer"
+          className="text-inherit no-underline">Book a demo</a>{" "}
             <HiArrowRight className="text-black group-hover:translate-x-1 stroke-[1px] h-3 w-3 mt-0.5 transition-transform duration-200" />
           </Button>
         </div>

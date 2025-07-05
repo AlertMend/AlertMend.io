@@ -32,16 +32,6 @@ export default (props) => <CaseStudyLayout caseStudy={caseStudy} {...props} />;
 
 ---
 
-### <span id="use-cases" />Use Cases:
-
-* Auto-detected unhealthy workloads (crash loops, failing probes, unmounted PVCs).
-* Grouped issues by namespace, cluster, and impact.
-* Provided a “single pane of glass” to monitor all service health.
-* AlertMend automatically identified causes for unhealthy pods.
-* Surfaced recent events, logs, and config diffs in one place.
-
----
-
 [See complete case study](https://docs.google.com/document/d/1FTEjUvvOjmfO6_X_CBiqeVDFCnNtkuzcI9eN_H1hUW4/edit?usp=sharing)
 
 ---
@@ -76,13 +66,13 @@ Roambee needed more than alerting — they needed **operational clarity**.
 
 Roambee adopted **AlertMend** as a Kubernetes operations control layer, giving their team a unified system to track, diagnose, and act on issues across thousands of pods.
 
-###<span id="centralized-issue-tracking" /> Centralized Issue Tracking
+### Centralized Issue Tracking
 
 - Auto-detected unhealthy workloads (crash loops, failing probes, unmounted PVCs)
 - Grouped issues by namespace, cluster, and impact
 - Provided a “single pane of glass” to monitor all service health
 
-###<span id="root-cause-analysis" />Root Cause Analysis (RCA)
+### Root Cause Analysis (RCA)
 
 - Automatically identified causes for unhealthy pods:
   - Resource starvation (CPU, memory)
@@ -92,13 +82,13 @@ Roambee adopted **AlertMend** as a Kubernetes operations control layer, giving t
 - Surfaced recent events, logs, and config diffs in one place
 - Gave engineers a quick “why it broke” — not just “what broke”
 
-###<span id="microsoft-teams-integration" />Microsoft Teams Integration
+### Microsoft Teams Integration
 
 - All new issues and RCA summaries were posted to MS Teams
 - Engineers reviewed, commented, and coordinated actions in-chat
 - Reduced context-switching between dashboards and communication tools
 
-###<span id="operational-efficiency-Tools" />Operational Efficiency Tools
+### Operational Efficiency Tools
 
 - Engineers filtered workloads by state, node, namespace, and reason
 - Could restart, delete, or scale workloads directly from the UI

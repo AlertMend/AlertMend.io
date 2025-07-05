@@ -38,7 +38,7 @@ export default function PricingPage() {
       <div className="pb-40">
         <TestimonialsMarquee />
       </div>
-      <CTA />
+      {/* <CTA /> */}
     </div>
   );
 }

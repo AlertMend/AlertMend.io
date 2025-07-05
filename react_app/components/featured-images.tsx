@@ -108,7 +108,7 @@ export const FeaturedImages = ({
                   </motion.div>
                 )}
               </AnimatePresence>
-              <div className="animation-container">
+             <div className="animation-container">
                 <motion.div
                   initial={{
                     opacity: 0,
@@ -125,39 +125,39 @@ export const FeaturedImages = ({
                   transition={{
                     duration: 0.2,
                   }}
-                  className="rounded-2xl overflow-hidden border-2  border-neutral-200  relative"
+                 // className="rounded-2xl overflow-hidden border-2  border-neutral-200  relative"
                 >
-                  <Image
+                  {/* <Image
                     onMouseMove={handleMouseMove}
                     height={100}
                     width={100}
                     src={testimonial.image}
                     alt={testimonial.name}
                     className="object-cover object-top  h-14 w-14 "
-                  />
+                  /> */}
                 </motion.div>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="flex justify-center ml-6">
+        {/* <div className="flex justify-center ml-6">
           {[...Array(5)].map((_, index) => (
             <BsStarFill
               key={index}
               className={showStars ? "h-4 w-4 text-yellow-400 mx-1" : "hidden"}
             />
           ))}
-        </div>
+        </div> */}
       </div>
-      <p
+      {/* <p
         className={twMerge(
           "text-neutral-400 text-sm text-center ml-8 relative z-40",
           textClassName
         )}
       >
         Trusted by 27,000+ creators
-      </p>
+      </p> */}
     </div>
   );
 };

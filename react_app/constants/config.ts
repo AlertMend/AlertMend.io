@@ -1,1 +1,1 @@
-export const config='https://api-demo.alertmend.io/'
+export const config='https://api-dev.alertmend.io/'

@@ -41,7 +41,7 @@ export default async function Home() {
         <PricingGrid />
         <FAQs />
       </div>
-      <CTA />
+      {/* <CTA /> */}
     </div>
   );
 }

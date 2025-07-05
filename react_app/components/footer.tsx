@@ -20,30 +20,38 @@ export const Footer = () => {
   const legal = [
     {
       name: "Privacy Policy",
-      href: "#",
+      href: "https://docs.google.com/document/d/1-0dRnRwBy7DGAh-7f4qDDjX6fPBVOifXCd2j3OEIjOI/edit?tab=t.0#heading=h.sndgwapwljbv",
+    },
+    // {
+    //   name: "Terms of Service",
+    //   href: "#",
+    // },
+    // {
+    //   name: "Refund Policy",
+    //   href: "#",
+    // },
+    {
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/company/alertmend",
     },
     {
-      name: "Terms of Service",
-      href: "#",
-    },
-    {
-      name: "Refund Policy",
-      href: "#",
+      name: "You Tube",
+      href: "https://www.youtube.com/@AlertMend",
     },
   ];
   const socials = [
-    {
-      name: "Twitter",
-      href: "https://twitter.com/mannupaaji",
-    },
-    {
-      name: "LinkedIn",
-      href: "https://linkedin.com/in/manuarora28",
-    },
-    {
-      name: "GitHub",
-      href: "https://github.com/manuarora700",
-    },
+    // {
+    //   name: "Twitter",
+    //   href: "https://twitter.com/mannupaaji",
+    // },
+    // {
+    //   name: "LinkedIn",
+    //   href: "https://www.linkedin.com/company/alertmend",
+    // },
+    // {
+    //   name: "You Tube",
+    //   href: "https://www.youtube.com/@AlertMend",
+    // },
   ];
   return (
     <div className="relative">
@@ -57,7 +65,17 @@ export const Footer = () => {
             <div>Copyright &copy; AlertMend 2025.</div>
             <div className="mt-2">All rights reserved</div>
           </div>
-          <div className="grid grid-cols-3 gap-10 items-start mt-10 md:mt-0">
+          <div className="flex justify-center mt-2">
+              <div className="text-center">
+              <p className="text-lg font-semibold mb-4 text-white">Backed by</p>
+            <img
+             src="img/Antler-Logo.png"
+             alt="Antler"
+             className="h-10 mx-auto"
+             />
+            </div>
+            </div>
+          <div className="grid grid-cols-2 gap-10 items-start mt-10 md:mt-0">
             <div className="flex justify-center space-y-4 flex-col mt-4">
               {links.map((link) => (
                 <Link
@@ -80,7 +98,7 @@ export const Footer = () => {
                 </Link>
               ))}
             </div>
-            <div className="flex justify-center space-y-4 flex-col mt-4">
+            {/* <div className="flex justify-center space-y-4 flex-col mt-4">
               {socials.map((link) => (
                 <Link
                   key={link.name}
@@ -90,7 +108,7 @@ export const Footer = () => {
                   {link.name}
                 </Link>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
