@@ -1,8 +1,9 @@
 import { CaseStudyLayout } from "@/components/case-study-layout";
 
 export const caseStudy = {
-  title: "AIVOS deployed AlertMend agents directly on their virtual machines, integrating with their existing logging and process monitoring setup.",
-  description: "With no Kubernetes and a tiny team, AIVOS turned to AlertMend to add automated incident response to their GCP VM-based stack. From restarting frozen services to auto-recovering entire VMs, AlertMend helped them operate like a much larger team — keeping systems stable and engineers focused on innovation.",
+  author: { name: "Phan (Marcus) Dinh Long Nhat", src: "/avatar.jpeg", designation: "Founder & CEO, AIVOS ex-Apple" },
+  title: "AIVOS Slashes Downtime on GCP VMs with AlertMend’s Auto-Remediation.",
+  description: "The automation we required was provided by AlertMend. 90% of our recurring service issues are now resolved by it, and it even automatically recovers stuck virtual machines (VMs) while communicating with our team through Slack. It's similar to having a backup SRE available at all times.",
   image:
     "/img/case-study2.avif",
   links: [
@@ -25,6 +26,14 @@ export const metadata = {
 };
 
 export default (props) => <CaseStudyLayout caseStudy={caseStudy} {...props} />;
+
+# AIVOS Slashes Downtime on GCP VMs with AlertMend’s Auto-Remediation
+
+> "The automation we required was provided by AlertMend. 90% of our recurring service issues are now resolved by it, and it even automatically recovers stuck virtual machines (VMs) while communicating with our team through Slack. It's similar to having a backup SRE available at all times."
+
+**Phan (Marcus) Dinh Long Nhat**  
+Founder & CEO, AIVOS  
+ex-Apple
 
 <img
   src="/img/avios-logo.svg"

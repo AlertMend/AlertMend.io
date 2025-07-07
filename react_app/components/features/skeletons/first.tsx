@@ -138,28 +138,28 @@ export const SkeletonOne = () => {
             <MetaIcon />
               </IconContainer>*/}
           <IconContainer>
-            <AzureIcon />
+          <img src="img/tech/Azure_logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
           </IconContainer> 
           <IconContainer>
-           <AWSIcon />
+          <img src="img/tech/AWS_logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
           </IconContainer>
          <IconContainer>
-         <DatadogIcon />
+         <img src="img/tech/DATADOG_Logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
          </IconContainer>
          <IconContainer>
-         <KubernetesIcon />
+         <img src="img/tech/Kubernetees_logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
          </IconContainer>
           <IconContainer>
-         <JenkinsIcon />
+          <img src="img/tech/Jenkins_Logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
         </IconContainer>
           <IconContainer>
-            <SlackIcon />
+          <img src="/img/tech/Slack_logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
           </IconContainer>
           <IconContainer>
-          <PagerDutyIcon />
+          <img src="img/tech/Pagerduty_Logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
          </IconContainer>
           <IconContainer>
-          <WebhookIcon />
+          <img src="img/tech/Webhook_Logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
           </IconContainer>
           <IconContainer>
          <NewRelicIcon />

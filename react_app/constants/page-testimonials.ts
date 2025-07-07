@@ -11,31 +11,31 @@ export const testimonials: Testimonial[] = [
     name: "Yasser Ansari",
     quote:
       "AlertMend streamlined our incident management. Faster resolutions, less manual work, and a more focused team. Peace of mind is invaluable",
-    src: "https://i.pravatar.cc/150?img=1",
+    src: "https://i.pravatar.cc/150?img=8",
     logo: "/img/polymer-logo.png",
     designation: "CEO, Polymer",
   },
   {
-    name: "Engineering Lead",
+    name: "Rajnish Sharma",
     quote:
-      "AlertMend helped us uncover blind spots and slash our GKE spend — all without touching a single YAML file.",
-    src: "https://i.pravatar.cc/150?img=2",
+      "AlertMend helped us take control of our Kubernetes costs without adding any manual effort. Within a week, we cut GKE expenses in half, cleaned up unused storage, and right-sized workloads — all without touching a single YAML file. It’s like having an AI-powered infra co-pilot that just works.",
+    src: "https://i.pravatar.cc/150?img=12",
     logo: "/img/wareflex-logo.svg",
-    designation: "Wareflex",
+    designation: "Founder and CEO of Wareflex",
   },
   {
-    name: "Alice Johnson1",
+    name: "Shailesh Mangar",
     quote:
       "This AI has transformed the way I work! It's like having a brilliant assistant who knows exactly what I need before I even ask.",
-    src: "https://i.pravatar.cc/150?img=3",
-    designation: "Senior Software Engineer",
+    src: "https://i.pravatar.cc/150?img=13",
+    designation: "CTO, Roambee",
   },
   {
-    name: "Alice Johnson2",
+    name: "Phan (Marcus) Dinh Long Nhat",
     quote:
-      "This AI has transformed the way I work! It's like having a brilliant assistant who knows exactly what I need before I even ask.",
-    src: "https://i.pravatar.cc/150?img=3",
-    designation: "Senior Software Engineer",
+      "The automation we required was provided by AlertMend. 90% of our recurring service issues are now resolved by it, and it even automatically recovers stuck virtual machines (VMs) while communicating with our team through Slack. It's similar to having a backup SRE available at all times.",
+    src: "https://i.pravatar.cc/150?img=52",
+    designation: "Founder & CEO, AIVOS",
   },
   {
     name: "Alice Johnson3",

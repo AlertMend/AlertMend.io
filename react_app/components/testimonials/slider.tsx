@@ -20,7 +20,7 @@ export const TestimonialsSlider = () => {
   const [autorotate, setAutorotate] = useState<boolean>(true);
   const testimonialsRef = useRef<HTMLDivElement>(null);
 
-  const testimonials = pageTestimonials.slice(0, 3);
+  const testimonials = pageTestimonials.slice(0, 4);
 
   useEffect(() => {
     if (!autorotate) return;

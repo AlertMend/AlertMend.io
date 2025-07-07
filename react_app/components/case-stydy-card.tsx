@@ -30,9 +30,9 @@ export const CaseStudyCard = ({ caseStudy }: { caseStudy: CaseStudyWithSlug }) =
         <p className="text-lg font-bold mb-4">
           <Balancer>{caseStudy.title}</Balancer>
         </p>
-        <p className="text-left text-sm mt-2 text-muted">
+        {/* <p className="text-left text-sm mt-2 text-muted">
           {truncate(caseStudy.description, 100)}
-        </p>
+        </p> */}
         <div className="flex space-x-2 items-center  mt-6">
           
         </div>
