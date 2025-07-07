@@ -26,7 +26,7 @@ export const Features = () => {
         </FeatureIconContainer>
         <Heading className="pt-4">Automate Your Kubernetes Ops</Heading>
         <Subheading>
-          AlertMend comes with powerful workflows to automate alert response, remediation, and cost optimization, helping your team spend less time firefighting.
+        AlertMend comes with a wide range of integrations and powerful pre-built workflows to automate alert response, remediation, and cost optimization, helping your team get value, fast.
         </Subheading>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-2 py-10">

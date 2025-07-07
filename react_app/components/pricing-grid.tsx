@@ -13,7 +13,7 @@ import { Clients } from "./clients";
 export const PricingGrid = () => {
   const tiers = [
     {
-      title: "Hobby",
+      title: "SRE/DevOps Playground",
       description: "For individuals trying out the product",
       monthlyPrice: 0,
       yearlyPrice: 0,
