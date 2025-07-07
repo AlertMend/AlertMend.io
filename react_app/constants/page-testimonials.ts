@@ -24,7 +24,7 @@ export const testimonials: Testimonial[] = [
     designation: "Founder and CEO of Wareflex",
   },
   {
-    name: "Shailesh Mangar",
+    name: "Shailesh Mangal",
     quote:
       "This AI has transformed the way I work! It's like having a brilliant assistant who knows exactly what I need before I even ask.",
     src: "/img/avatar3.jpg",
@@ -34,7 +34,7 @@ export const testimonials: Testimonial[] = [
     name: "Phan (Marcus) Dinh Long Nhat",
     quote:
       "The automation we required was provided by AlertMend. 90% of our recurring service issues are now resolved by it, and it even automatically recovers stuck virtual machines (VMs) while communicating with our team through Slack. It's similar to having a backup SRE available at all times.",
-    src: "/img/avatar4.jpeg",
+    src: "/img/avatar4.avif",
     designation: "Founder & CEO, AIVOS",
   },
   {
