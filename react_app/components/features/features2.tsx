@@ -10,11 +10,11 @@ export function Features2() {
     },
     {
       name: "AWS",
-      src: "img/tech/AWS_logo.png",
+      src: "img/aws.png",
     },
     {
       name: "DataDog",
-      src: "img/tech/DATADOG_Logo.png",
+      src: "img/tech/datadog.png",
     },
     {
       name: "Kubernetes",
@@ -22,20 +22,40 @@ export function Features2() {
     },
     {
       name: "Jenkins",
-      src: "img/tech/Jenkins_Logo.png",
+      src: "img/tech/jenkin.png",
     },
     {
       name: "Slack",
-      src: "img/tech/Slack_logo.png",
+      src: "img/tech/slack.png",
     },
     {
       name: "Pagerduty",
-      src: "img/tech/Pagerduty_Logo.png",
+      src: "img/tech/pagerduty.png",
     },
     {
       name: "Webhook",
-      src: "img/tech/Webhook_Logo.png",
+      src: "img/tech/webhooks.svg",
     },
+    {
+      name: "Prometheus",
+      src: "img/tech/prometheus.png",
+    },
+    {
+      name: "GoogleCloud",
+      src: "img/tech/googlecloud.png",
+    },
+    {
+      name: "Jira",
+      src: "img/tech/jira.png",
+    },
+    {
+      name: "Grafana",
+      src: "img/tech/grafana.png",
+    },
+    {
+      name: "Msteam",
+      src: "img/tech/MS_Team_Logo.png",
+    }
   ];
 
   return (
