@@ -81,7 +81,7 @@ export const Hero = () => {
               alt="hero"
               height={720}
               width={1200}
-              className="mx-auto rounded-md grayscale group-hover:grayscale-0 transition duration-200 object-cover md:object-left-top"
+              className="mx-auto rounded-md transition duration-200 object-cover md:object-left-top"
               draggable={false}
             />
           </Card>

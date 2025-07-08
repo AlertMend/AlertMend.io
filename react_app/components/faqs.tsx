@@ -6,64 +6,58 @@ import { Heading } from "./heading";
 const questions = [
   {
     id: 1,
-    title: "What is Proactic?",
+    title: "❓ What problems does AlertMend solve?",
     description:
-      "Proactic is a social media marketing automation tool designed to help businesses streamline their social media efforts.",
+      "AlertMend helps DevOps and SRE teams reduce manual toil, eliminate alert fatigue, and fix infrastructure issues faster — whether in Kubernetes or VM environments.",
   },
   {
     id: 2,
-    title: "How does Proactic work?",
+    title: "❓ How is AlertMend different from just using monitoring tools?",
     description:
-      "Proactic automates the process of scheduling, posting, and analyzing social media content across multiple platforms.",
+      "Monitoring tools only tell you what’s wrong. AlertMend takes the next step — it automatically fixes known issues or routes them for fast approval, so you don’t waste time on the same alerts over and over.",
   },
   {
     id: 3,
-    title: "Which social media platforms does Proactic support?",
+    title: "❓ Can AlertMend fix Kubernetes issues without manual intervention?",
     description:
-      "Proactic supports popular social media platforms such as Facebook, Twitter, Instagram, LinkedIn, and more.",
+      "Yes. AlertMend can detect and auto-remediate issues like pod restarts, CrashLoopBackOff, PVC pressure, unhealthy workloads, and more — either instantly or after Slack/email approval.",
   },
   {
     id: 4,
-    title: "Can I schedule posts in advance with Proactic?",
+    title: "❓ What kinds of problems can AlertMend handle on VMs?",
     description:
-      "Yes, Proactic allows you to schedule posts in advance, ensuring your content is published at the optimal times.",
+      "AlertMend supports actions like restarting failed services, cleaning up disk space, rebooting VMs, or running custom remediation scripts — helping you manage both containerized and legacy infrastructure.",
   },
   {
     id: 5,
-    title: "Does Proactic provide analytics?",
+    title: "❓ Can I trust AlertMend to act on its own?",
     description:
-      "Proactic offers detailed analytics to help you track the performance of your social media campaigns and make data-driven decisions.",
+      "Yes. You can fully control how and when actions run — automatically, with approval, or in dry-run mode. Every step is logged, reported, and auditable.",
   },
   {
     id: 6,
-    title: "Is Proactic suitable for small businesses?",
+    title: "❓ Can AlertMend help me understand why issues happen (RCA)?",
     description:
-      "Yes, Proactic is designed to be user-friendly and scalable, making it suitable for businesses of all sizes.",
+      "Yes. AlertMend includes Root Cause Analysis for failed workloads and incidents. It correlates logs, metrics, and deployment history to explain why something failed — not just what failed.",
   },
   {
     id: 7,
-    title: "Can I collaborate with my team on Proactic?",
+    title: "❓ How does AlertMend help with Kubernetes management?",
     description:
-      "Proactic includes collaboration features that allow team members to work together on social media campaigns.",
+      "AlertMend continuously scans your clusters for reliability risks — including unhealthy pods, misconfigured resources, overprovisioned workloads, and missing probes. It helps you fix them with one click or automate them entirely.",
   },
   {
     id: 8,
-    title: "Does Proactic offer customer support?",
+    title: "❓ How does AlertMend integrate with my existing stack?",
     description:
-      "Yes, Proactic provides customer support to assist you with any questions or issues you may encounter.",
+      "AlertMend connects with Prometheus, Datadog, Alertmanager, CloudWatch, New Relic, and more — and works with your existing alerting channels like Slack, Teams, and email.",
   },
   {
     id: 9,
-    title: "Is there a free trial available for Proactic?",
+    title: "❓ Does AlertMend help reduce on-call load?",
     description:
-      "Proactic offers a free trial so you can explore its features and see how it can benefit your social media marketing efforts.",
-  },
-  {
-    id: 10,
-    title: "How can I get started with Proactic?",
-    description:
-      "To get started with Proactic, simply sign up on our website and follow the onboarding process to set up your account.",
-  },
+      "Definitely. It handles routine, repeatable issues automatically — so your on-call engineers are only interrupted when truly needed.",
+  }
 ];
 
 export const FAQs = () => {
