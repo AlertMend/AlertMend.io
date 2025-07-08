@@ -7,6 +7,7 @@ import { CTA } from "@/components/cta";
 import { FAQs } from "@/components/faqs";
 import { Features } from "@/components/features";
 import { FeatureIconContainer } from "@/components/features/feature-icon-container";
+import { Features2 } from "@/components/features/features2";
 import { Heading } from "@/components/heading";
 import { Hero } from "@/components/hero";
 import { PricingGrid } from "@/components/pricing-grid";
@@ -28,7 +29,7 @@ export default async function Home() {
       <Tools />
       <Testimonials />
       <Testimonials2 testimonials={caseStudies}/>
-      <Features />
+      <Features2 />
       <ContactForm />
       <div className="py-20 sm:py-40">
         <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
