@@ -36,7 +36,7 @@ export default function PricingPage() {
         <PricingGrid />
       </div>
       <div className="pb-40">
-        <TestimonialsMarquee />
+        {/* <TestimonialsMarquee /> */}
       </div>
       {/* <CTA /> */}
     </div>
