@@ -15,15 +15,15 @@ const nextConfig = {
   pageExtensions: ["ts", "tsx", "mdx"],
 
   // 👇 Add this redirects function
-  async redirects() {
-    return [
-      {
-        source: "/:path*.html",
-        destination: "/:path*",
-        permanent: true,
-      },
-    ];
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: "/:path*.html",
+  //       destination: "/:path*",
+  //       permanent: true,
+  //     },
+  //   ];
+  // },
 };
 
 const withMDX = nextMDX({
