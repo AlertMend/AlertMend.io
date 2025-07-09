@@ -17,7 +17,7 @@ import { BlurImage } from "./blur-image";
 export const Tools = () => {
   const content = [
     {
-      title: "Your Kubernetes Copilot for Reliability and Efficiency",
+      title: "Your Kubernetes Copilot for Reliability and Efficiency.",
       description:
         "AlertMend automates troubleshooting, fixes issues faster, and keeps your clusters lean.",
       content: (
@@ -51,7 +51,7 @@ export const Tools = () => {
       ),
     },
     {
-      title: "Incidents Resolved Before You Even Look",
+      title: "Incidents Resolved Before You Even Look.",
       description:
         "Fix incidents instantly with smart, pre-built and customizable workflows that act the moment your alerts fire.",
       content: (
