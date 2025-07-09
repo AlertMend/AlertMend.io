@@ -11,7 +11,7 @@ import { IconReceiptFilled } from "@tabler/icons-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pricing | AlertMend | Aceternity Templates",
+  title: "Pricing | AlertMend ",
   description:
     "AlertMend is an all in on marketing automation platform that handles emails, tasks tracking, social media management and everything in between.",
   openGraph: {

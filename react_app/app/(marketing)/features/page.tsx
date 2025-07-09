@@ -8,7 +8,7 @@ import { Tools } from "@/components/tools";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Features | AlertMend | Aceternity Templates",
+  title: "Features | AlertMend ",
   description:
     "AlertMend is an all in on marketing automation platform that handles emails, tasks tracking, social media management and everything in between.",
   openGraph: {

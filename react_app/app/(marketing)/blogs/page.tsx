@@ -12,7 +12,7 @@ import { truncate } from "@/lib/utils";
 import { format } from "date-fns";
 
 export const metadata: Metadata = {
-  title: "Blog | AlertMend | Aceternity Templates",
+  title: "Blog | AlertMend ",
   description:
     "Everything AI is a platform that provides a wide range of AI tools and services to help you stay on top of your business. Generate images, text and everything else that you need to get your business off the ground.",
   openGraph: {
