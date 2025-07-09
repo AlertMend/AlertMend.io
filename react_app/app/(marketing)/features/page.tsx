@@ -1,6 +1,7 @@
 import { AmbientColor } from "@/components/ambient-color";
 import { CTA } from "@/components/cta";
 import { Features } from "@/components/features";
+import { Features2 } from "@/components/features/features2";
 import { FeaturesGrid } from "@/components/features/features-grid";
 import { Testimonials } from "@/components/testimonials";
 import { Tools } from "@/components/tools";
@@ -20,7 +21,7 @@ export default function PricingPage() {
     <div className="relative overflow-hidden">
       <AmbientColor />
       <Tools />
-      <Features />
+      <Features2 />
       <FeaturesGrid />
 
       <div className="pb-40">
