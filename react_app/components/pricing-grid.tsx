@@ -30,6 +30,7 @@ export const PricingGrid = () => {
       ],
       onClick: () => {
         console.log("clicked");
+        window.open("https://demo.alertmend.io/signup", "_blank");
       },
       ctaText: "Get Started",
     },
@@ -46,6 +47,7 @@ export const PricingGrid = () => {
       ],
       onClick: () => {
         console.log("clicked");
+        window.open("https://demo.alertmend.io/signup", "_blank");
       },
       ctaText: "Get Started",
     },
@@ -64,6 +66,7 @@ export const PricingGrid = () => {
       featured: true,
       onClick: () => {
         console.log("clicked");
+        window.open("https://demo.alertmend.io/signup", "_blank");
       },
       ctaText: "Get Started",
     },
@@ -81,6 +84,7 @@ export const PricingGrid = () => {
       ],
       onClick: () => {
         console.log("clicked");
+        window.open("https://demo.alertmend.io/signup", "_blank");
       },
       ctaText: "Book a demo",
     },
