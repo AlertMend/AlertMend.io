@@ -93,7 +93,7 @@ export const Tools = () => {
   const backgrounds = [
     "var(--charcoal)",
     "var(--neutral-900)",
-    "var(--gray-900)",
+    // "var(--gray-900)",
   ];
   const index = Math.round(scrollYProgress.get() * (backgrounds.length - 1));
 

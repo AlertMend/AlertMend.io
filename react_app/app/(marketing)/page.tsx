@@ -10,6 +10,9 @@ import { FeatureIconContainer } from "@/components/features/feature-icon-contain
 import { Features2 } from "@/components/features/features2";
 import { Heading } from "@/components/heading";
 import { Hero } from "@/components/hero";
+import { HeroCluster } from "@/components/hero-cluster";
+import { HeroCostOptimization } from "@/components/hero-cost-optimization";
+import { Language } from "@/components/language";
 import { PricingGrid } from "@/components/pricing-grid";
 import { Subheading } from "@/components/subheading";
 import { Testimonials, Testimonials2 } from "@/components/testimonials";
@@ -19,14 +22,27 @@ import { Tools } from "@/components/tools";
 import { getAllCaseStudies } from "@/lib/case-studies";
 import { IconReceiptFilled } from "@tabler/icons-react";
 
-export default async function Home() {
+export default async function Home({searchParams}:any) {
   const caseStudies = await getAllCaseStudies()
+
   return (
     <div className="relative overflow-hidden">
       <AmbientColor />
-      <Hero />
+      {
+        !searchParams?.service && 
+        <Hero />
+      }
+      {
+        searchParams?.service=='cost-optimization' && 
+        <HeroCostOptimization />
+      }
+      {
+        searchParams?.service=='cluster' && 
+        <HeroCluster />
+      }
       <Clients />
       <Tools />
+      <Language />
       <Testimonials />
       <Testimonials2 testimonials={caseStudies}/>
       <Features2 />
