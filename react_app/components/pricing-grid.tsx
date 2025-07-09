@@ -91,7 +91,7 @@ export const PricingGrid = () => {
       <div className="flex justify-center">
         <Switch checked={checked} setChecked={setChecked} />
       </div>
-      <Container className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-4 py-20">
+      <Container className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-4 py-14">
         {tiers.map((tier, index) => (
           <div
             key={tier.title + index}

@@ -86,7 +86,7 @@ export const ScrollContent = ({
         duration: 0.3,
       }}
       key={item.title + index}
-      className="my-40  relative grid grid-cols-3 gap-8"
+      className="my-28  relative grid grid-cols-3 gap-8"
     >
       <div className="w-full">
         <motion.div

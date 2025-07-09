@@ -34,7 +34,7 @@ export const Language = () => {
         duration: 0.5,
       }}
       ref={ref}
-      className="w-full relative h-full pt-0 md:pt-0 pb-40"
+      className="w-full relative h-full pt-0 md:pt-0 pb-32"
     >
       <div className="px-6">
         <FeatureIconContainer className="flex justify-center items-center overflow-hidden">

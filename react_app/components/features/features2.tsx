@@ -59,7 +59,7 @@ export function Features2() {
   ];
 
   return (
-    <div className="relative z-20 px-4 py-10 md:px-8 md:py-40">
+    <div className="relative z-20 px-4 py-8 md:px-8 md:py-32">
       <h2 className="bg-gradient-to-b bg-clip-text text-center font-sans text-2xl font-bold md:text-5xl  text-neutral-300 stext-transparent sfrom-white sto-neutral-600">
        Automate Your Kubernetes Ops
       </h2>
