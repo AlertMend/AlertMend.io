@@ -69,7 +69,7 @@ export const Footer = () => {
               <div className="text-center">
               <p className="text-lg font-semibold mb-4 text-white">Backed by</p>
             <img
-             src="img/Antler-Logo.png"
+             src="/img/Antler-Logo.png"
              alt="Antler"
              className="h-10 mx-auto"
              />
