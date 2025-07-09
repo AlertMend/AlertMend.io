@@ -7,6 +7,7 @@ import type { Viewport } from "next";
 import { NavBar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import Script from "next/script";
+import { ClientAnalytics } from "@/lib/ClientAnalytics";
 
 export const metadata: Metadata = {
   title: 'AlertMend | Automate Kubernetes Incident Management',
@@ -129,6 +130,7 @@ export default function RootLayout({
           {/* Google Analytics */}
           <Script
             async
+            strategy="afterInteractive"
             src="https://www.googletagmanager.com/gtag/js?id=G-Z8QSJ5NK95"
           />
           <Script
@@ -143,6 +145,7 @@ export default function RootLayout({
               `,
             }}
           />
+          <ClientAnalytics/>
           <NavBar />
           {children}
           <Footer />
