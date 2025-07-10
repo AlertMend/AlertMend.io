@@ -18,15 +18,16 @@ export const PricingGrid = () => {
       monthlyPrice: 0,
       yearlyPrice: 0,
       features: [
-        "Access to all tools for 14 days",
-        "No credit card required",
-        "Community Support",
-        <span key="access">
-          Access to{" "}
-          <CustomLink href="https://ui.aceternity.com">
-            Aceternity UI
-          </CustomLink>
-        </span>,
+        "Unlimited Remediation Flows",
+        "Unlimited integrations",
+        "AI-Generated RCA",
+        "Support: within 24 hours",
+        // <span key="access">
+        //   Access to{" "}
+        //   <CustomLink href="https://ui.aceternity.com">
+        //     Aceternity UI
+        //   </CustomLink>
+        // </span>,
       ],
       onClick: () => {
         console.log("clicked");

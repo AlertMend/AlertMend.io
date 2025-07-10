@@ -24,7 +24,7 @@ export const Tools = () => {
         <ImageContainer>
           <BlurImage
             // src="/first.png"
-            src="/img/AlertMend Ai2.gif"
+            src="/img/kubernetcopilot.png"
             alt="dashboard"
             height="1000"
             width="1000"
@@ -41,7 +41,7 @@ export const Tools = () => {
         <ImageContainer>
           <BlurImage
             // src="/second-backup.png"
-            src="/img/alertmind_GIF.gif"
+            src="/img/AlertMend Ai2.gif"
             alt="dashboard"
             height="1000"
             width="1000"
