@@ -41,13 +41,16 @@ export const Language = () => {
         <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
           <IconWorld className="h-6 w-6 text-cyan-500" />
         </FeatureIconContainer>
-        <Heading className="mt-4">Speak Your Language</Heading>
+        <Heading className="mt-4">Available in Your Language</Heading>
         <Subheading>
-          {`We’ve made it easier for everyone to feel at home.
-Our app supports multiple languages, so you can browse, explore, and get things done — all in the language you’re most comfortable with.
-
-Just pick your preferred language from the menu and you’re good to go!`}
-        </Subheading>
+  <p>
+    AlertMend supports multiple languages—including Vietnamese, Japanese, and more—
+    so you can use the app in the language you're most comfortable with.
+  </p>
+  <p className="mt-2">
+    Just choose your preferred language from the menu and you're ready to go.
+  </p>
+</Subheading>
       </div>
     </motion.div>
   );
