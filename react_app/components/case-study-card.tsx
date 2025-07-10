@@ -12,6 +12,7 @@ export const CaseStudyCard = ({ caseStudy }: { caseStudy: CaseStudyWithSlug }) =
     <Link
       className="shadow-derek rounded-3xl group border border-transparent hover:border-neutral-800 w-full hover:bg-neutral-900  overflow-hidden  hover:scale-[1.02] transition duration-200"
       href={`/case-studies/${caseStudy.slug}`}
+      data-section={"Case Study Card: "+caseStudy.title}
     >
       {caseStudy.image ? (
         <BlurImage

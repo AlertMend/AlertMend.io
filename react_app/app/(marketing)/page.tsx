@@ -26,7 +26,7 @@ export default async function Home({searchParams}:any) {
   const caseStudies = await getAllCaseStudies()
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden" data-section="Home Page">
       <AmbientColor />
       {
         !searchParams?.service && 
@@ -47,7 +47,7 @@ export default async function Home({searchParams}:any) {
       <Testimonials2 testimonials={caseStudies}/>
       <Features2 />
       <ContactForm />
-      <div className="py-20 sm:py-40">
+      <div className="py-20 sm:py-40" data-section="Pricing">
         <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
           <IconReceiptFilled className="h-6 w-6 text-cyan-500" />
         </FeatureIconContainer>

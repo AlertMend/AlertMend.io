@@ -42,10 +42,10 @@ export function NavBar() {
       }}
       className="max-w-7xl  fixed top-4  mx-auto inset-x-0 z-50 w-[95%] lg:w-full"
     >
-      <div className="hidden lg:block w-full">
+      <div className="hidden lg:block w-full" data-section="Navbar">
         <DesktopNavbar navItems={navItems} />
       </div>
-      <div className="flex h-full w-full items-center lg:hidden ">
+      <div className="flex h-full w-full items-center lg:hidden" data-section="Navbar">
         <MobileNavbar navItems={navItems} />
       </div>
     </motion.nav>

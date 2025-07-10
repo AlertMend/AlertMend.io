@@ -119,7 +119,9 @@ export const TestimonialsSlider2 = ({page_testimonials=[]}:{page_testimonials:an
                     leaveTo="opacity-0 translate-x-4"
                     beforeEnter={() => heightFix()}
                   >
-                    <div className="p-8">
+                    <div className="p-8" 
+                    data-section={"Testimonial:" + item.title}
+                    >
                     <div style={{minWidth:'fit-content'}} 
                     className=
                     "w-full grid grid-cols-1 md:grid-cols-3 justify-start relative z-20 max-w-7xl mx-auto bg-gradient-to-br from-neutral-900 to-neutral-950">
@@ -174,6 +176,7 @@ export const TestimonialsSlider2 = ({page_testimonials=[]}:{page_testimonials:an
                     setActive(index);
                     setAutorotate(false);
                   }}
+                  data-section={"Testimonial:" + item?.author?.name}
                 >
                   <span className="relative">
                     <span className="text-neutral-50 font-bold">

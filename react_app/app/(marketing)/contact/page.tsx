@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden"  data-section="Contact Page">
       <AmbientColor />
       <ContactForm />
     </div>

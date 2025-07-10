@@ -92,13 +92,14 @@ export const PricingGrid = () => {
   const [checked, setChecked] = useState(false);
   return (
     <div>
-      <div className="flex justify-center">
+      <div className="flex justify-center" data-section="Pricing">
         <Switch checked={checked} setChecked={setChecked} />
       </div>
       <Container className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-4 py-20">
         {tiers.map((tier, index) => (
           <div
             key={tier.title + index}
+            data-section={"Pricing Plan: " + tier.title }
             className={cn(
               "flex flex-col justify-between items-start px-6 py-4 rounded-lg relative overflow-hidden",
               tier.featured &&

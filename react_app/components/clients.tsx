@@ -56,7 +56,7 @@ export const Clients = () => {
     // },
   ]);
   return (
-    <div className="pt-20 pb-40 h-40">
+    <div className="pt-20 pb-40 h-40" data-section="Our Clients">
       <p className="text-neutral-400 text-center mb-4">
         Trusted by leading teams
       </p>

@@ -9,7 +9,7 @@ import Image from "next/image";
 import { truncate } from "@/lib/utils";
 import { format } from "date-fns";
 import { getAllCaseStudies } from "@/lib/case-studies";
-import { CaseStudyCard } from "@/components/case-stydy-card";
+import { CaseStudyCard } from "@/components/case-study-card";
 
 export const metadata: Metadata = {
   title: "CaseStudy | AlertMend ",
@@ -24,7 +24,7 @@ export default async function ArticlesIndex() {
   let casestudies = await getAllCaseStudies();
 
   return (
-    <div className="relative overflow-hidden py-20 md:py-0">
+    <div className="relative overflow-hidden py-20 md:py-0"  data-section="Case Studies Page">
       <Container className="flex flex-col items-center justify-between pb-20">
         <div className="relative z-20 py-10 md:pt-40">
           <FeatureIconContainer className="flex justify-center items-center overflow-hidden">

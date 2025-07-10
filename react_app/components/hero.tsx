@@ -42,6 +42,7 @@ export const Hero = () => {
     <div
       ref={containerRef}
       className="flex flex-col min-h-[70rem] md:min-h-[100rem] pt-20 md:pt-40 relative overflow-hidden"
+      data-section="Hero"
     >
       <Container className="flex  flex-col items-center justify-center">
         <Heading

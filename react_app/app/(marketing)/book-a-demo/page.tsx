@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 const BookDemo = dynamic(()=>import('./BookDemo'),{ssr:false})
 export default function BookingPage() {
   return (
-    <div className="relative overflow-hidden py-20">
+    <div className="relative overflow-hidden py-20"  data-section="Book Demo">
       <AmbientColor />
       <BookDemo/>
     </div>

@@ -14,7 +14,7 @@ export function BlogLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Container className="mt-16 lg:mt-32">
+    <Container className="mt-16 lg:mt-32"  data-section={"Blog Detail Page: "+ blog.title}>
       <div className="flex justify-between items-center px-2 py-8">
         <Link href="/blogs" className="flex space-x-2 items-center">
           <IconArrowLeft className="w-4 h-4 text-muted" />

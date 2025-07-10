@@ -24,7 +24,7 @@ export default async function ArticlesIndex() {
   let blogs = await getAllBlogs();
 
   return (
-    <div className="relative overflow-hidden py-20 md:py-0">
+    <div className="relative overflow-hidden py-20 md:py-0" data-section="Blogs">
       <Container className="flex flex-col items-center justify-between pb-20">
         <div className="relative z-20 py-10 md:pt-40">
           <FeatureIconContainer className="flex justify-center items-center overflow-hidden">

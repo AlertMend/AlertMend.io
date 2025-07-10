@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function PricingPage() {
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden"  data-section="Features Page">
       <AmbientColor />
       <Tools />
       <Features2 />

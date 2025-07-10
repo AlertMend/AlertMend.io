@@ -123,6 +123,7 @@ export const Tools = () => {
       }}
       ref={ref}
       className="w-full relative h-full pt-20 md:pt-40"
+      data-section="Tools"
     >
       <div className="px-6">
         <FeatureIconContainer className="flex justify-center items-center overflow-hidden">

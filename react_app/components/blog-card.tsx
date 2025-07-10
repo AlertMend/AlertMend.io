@@ -12,6 +12,7 @@ export const BlogCard = ({ blog }: { blog: BlogWithSlug }) => {
     <Link
       className="shadow-derek rounded-3xl group border border-transparent hover:border-neutral-800 w-full hover:bg-neutral-900  overflow-hidden  hover:scale-[1.02] transition duration-200"
       href={`/blogs/${blog.slug}`}
+      data-section={"Blog Card: "+ blog.title}
     >
       {blog.image ? (
         <BlurImage

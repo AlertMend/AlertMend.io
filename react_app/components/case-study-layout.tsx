@@ -16,7 +16,7 @@ export function CaseStudyLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="mx-auto py-40 flex w-full max-w-7xl flex-col gap-4 px-4 md:flex-row md:px-8">
+    <div className="mx-auto py-40 flex w-full max-w-7xl flex-col gap-4 px-4 md:flex-row md:px-8" data-section={"Case Study Detail Page: "+ caseStudy?.title}>
       <Toc links={caseStudy.links} />
       <div className="flex max-w-2xl flex-1 flex-col">
         {/* <Image

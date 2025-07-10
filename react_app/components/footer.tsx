@@ -54,7 +54,7 @@ export const Footer = () => {
     // },
   ];
   return (
-    <div className="relative">
+    <div className="relative"  data-section="Footer">
       <div className="border-t border-neutral-900 px-8 pt-20 pb-32 relative bg-primary">
         <div className="max-w-5xl mx-auto text-sm text-neutral-500 dark:text-neutral-400 flex sm:flex-row flex-col justify-between items-start ">
           <div>

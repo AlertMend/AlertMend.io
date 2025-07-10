@@ -14,7 +14,9 @@ import { TestimonialsSlider2 } from "./slider2";
 
 export const Testimonials = () => {
   return (
-    <div className="relative pt-20">
+    <div className="relative pt-20" 
+      data-section="Testimonials"
+    >
       <AmbientColor />
       <div className="pb-20">
         <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
@@ -40,7 +42,9 @@ export const Testimonials = () => {
 
 export const Testimonials2 = ({testimonials}:any) => {
   return (
-    <div className="relative">
+    <div className="relative"
+      data-section="Case Studies"
+    >
       <AmbientColor />
       <div className="pb-0">
         <FeatureIconContainer className="flex justify-center items-center overflow-hidden">

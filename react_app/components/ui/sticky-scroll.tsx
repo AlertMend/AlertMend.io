@@ -87,6 +87,7 @@ export const ScrollContent = ({
       }}
       key={item.title + index}
       className="my-40  relative grid grid-cols-3 gap-8"
+      data-section={"Tool "+item.title}
     >
       <div className="w-full">
         <motion.div
@@ -145,6 +146,7 @@ export const ScrollContentMobile = ({
       }}
       key={item.title + index}
       className="my-10  relative flex flex-col md:flex-row md:space-x-4"
+      data-section={"Tool "+item.title}
     >
       <div className="w-full">
         <motion.div className=" mb-6">
