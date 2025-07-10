@@ -44,7 +44,7 @@ export const Language = () => {
         <Heading className="mt-4">Available in Your Language</Heading>
         <Subheading>
   <p>
-    AlertMend supports multiple languages—including Vietnamese, Japanese, and more—
+    AlertMend supports multiple languages including Vietnamese, Japanese, and more
     so you can use the app in the language you're most comfortable with.
   </p>
   <p className="mt-2">
