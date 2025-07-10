@@ -108,13 +108,16 @@ export const PricingGrid = () => {
             {tier.featured && <Beam showBeam className="top-0 block" />}
             <div>
               <h3 className="text-base font-normal">{tier.title}</h3>
-              <p className="text-lg text-neutral-400 mt-4 font-medium">
+              {/* <p className="text-lg text-neutral-400 mt-4 font-medium">
                 {tier.title === "Enterprise"
                   ? "Custom"
                   : `$${checked ? tier.yearlyPrice : tier.monthlyPrice} / ${
                       checked ? "year" : "month"
                     }`}
-              </p>
+              </p> */}
+              <p className="text-lg text-neutral-400 mt-4 font-medium">
+              {tier.title === "SRE/DevOps Playground" ? "Free" : ""}
+               </p>
               <p className="text-sm text-neutral-4000 mt-4">
                 {tier.description}
               </p>
