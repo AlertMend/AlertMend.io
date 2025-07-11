@@ -1,0 +1,1 @@
+export const config='https://api-dev.alertmend.io/'

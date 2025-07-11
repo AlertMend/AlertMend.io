@@ -1,0 +1,138 @@
+import { CaseStudyLayout } from "@/components/case-study-layout";
+
+export const caseStudy = {
+  author: { name: "Rajnish Sharma", src: "/avatar.jpeg", designation: "Founder and CEO of Wareflex" },
+  title: "WareFlex Cut GKE Costs by 50% Using AlertMend’s AI-Powered Optimization.",
+  description: "AlertMend helped us take control of our Kubernetes costs without adding any manual effort. Within a week, we cut GKE expenses in half, cleaned up unused storage, and right-sized workloads — all without touching a single YAML file. It’s like having an AI-powered infra co-pilot that just works.",
+  image:
+    "/img/case-study4.avif",
+  links: [
+  { title: "Use Cases", href: "#use-cases" },
+  { title: "Customer Overview", href: "#customer-overview" },
+  { title: "Challenge", href: "#challenge" },
+  { title: "Solution with AlertMend", href: "#solution-with-alertmend" },
+  { title: "Key Features Used", href: "#key-features-used" },
+  { title: "Results", href: "#results" },
+  { title: "Summary", href: "#summary" },
+]
+};
+export const metadata = {
+  title: caseStudy.title,
+  description: caseStudy.description,
+  openGraph: {
+    images: [caseStudy.image],
+  },
+};
+
+export default (props) => <CaseStudyLayout caseStudy={caseStudy} {...props} />;
+
+# WareFlex Cut GKE Costs by 50% Using AlertMend’s AI-Powered Optimization
+
+> "AlertMend helped us take control of our Kubernetes costs without adding any manual effort. Within a week, we cut GKE expenses in half, cleaned up unused storage, and right-sized workloads — all without touching a single YAML file. It’s like having an AI-powered infra co-pilot that just works."
+
+**Rajnish Sharma**  
+Founder and CEO of Wareflex
+
+<img
+  src="/img/wareflex-logo.svg"
+  alt="Wareflex Logo"
+  width="400"
+  height="auto"
+  style={{ marginTop: "8px" }}
+/>
+
+---
+
+[See complete case study](https://docs.google.com/document/d/12ARCUZnEbxZXSf5BSToIXrfQnlzDCOX62Ij1O0J7rlg/edit?usp=sharing)
+
+---
+
+## <span id="customer-overview" /> Customer Overview
+
+**Company:** WareFlex  
+**Company Size:** 21–50  
+**Industry:** Logistics / Supply Chain Tech  
+**Region:** Vietnam (HQ), expanding into North America  
+**Kubernetes:** GKE
+
+Founded in 2022, WareFlex offers a full-service logistics platform—connecting businesses to thousands of trucks and hundreds of warehouses across Vietnam while scaling into global markets. Using GKE, the engineering team manages containerized microservices for their WMS, OMS, and TMS systems. However, rapid growth brought increased infrastructure costs and complexity.
+
+---
+
+## <span id="challenge" /> Challenge
+
+As WareFlex scaled, they faced key operational challenges:
+- Over-provisioned containers and VMs reserved far more resources than they used, inflating costs  
+- Accumulated unused PVCs eating into storage budgets  
+- No centralized automation to identify inefficiencies  
+- Rising GKE costs risked outpacing growth and profits  
+
+They needed a seamless way to identify and reclaim waste—without disrupting services or managing infrastructure manually.
+
+---
+
+## <span id="solution-with-alertmend" /> Solution with AlertMend
+
+WareFlex implemented **AlertMend’s Kubernetes Cost Optimization Engine** across its GKE clusters. It worked like this:
+
+### Automated Resource Tuning
+- Prometheus-driven analysis recommended right-sizing of pods and VMs  
+- AlertMend applied changes safely without requiring manual YAML edits
+
+### Storage Cleanup
+- Identified unused or oversized PVCs  
+- Safely decommissioned underutilized storage volumes
+
+### Node Optimization
+- Suggested more efficient machine types based on actual usage patterns
+
+### Self-Serve Remediation
+- Engineers applied optimizations with a click — no YAML required
+
+### Continuous Cost Monitoring
+- Ongoing alerts and dashboards ensured long-term resource efficiency
+
+---
+
+## <span id="key-features-used" /> Key Features Used
+
+| Feature                        | Purpose / Impact                                        |
+|-------------------------------|----------------------------------------------------------|
+| AI-based Resource Right-Sizing| Optimized CPU & memory allocation automatically         |
+| PVC Usage Auditing & Cleanup  | Reclaimed underused storage volumes safely              |
+| Node Type Recommendations     | Shifted workloads to cost-effective machine types        |
+| Prometheus + K8s Metrics      | Powered data-driven recommendations                     |
+| No-YAML Apply Workflow        | Simplified implementation, reduced risk                  |
+| Continuous Optimization Engine| Ensured ongoing efficiency as usage patterns shifted     |
+
+---
+
+## <span id="results" /> Results
+
+In just one week, WareFlex realized significant improvements:
+- **50% reduction in GKE costs**  
+- **Recovered unused storage**, freeing investment  
+- **Improved cluster efficiency** with no performance regression  
+- **DevOps hours saved**, eliminating manual tuning tasks  
+- **Maintained service stability** with safe, automated changes
+
+
+|            | **Total Compute Cost** | **Total Storage Cost** | **% Saved (Compute)** | **% Saved (Storage)** |
+|------------|------------------------|-------------------------|------------------------|------------------------|
+| **Before** | $719.42/mo             | $407.66/mo              | —                      | —                      |
+| **After**  | $422.42/mo             | $25.66/mo               | 41.27%                 | 93.71%                 |
+
+
+> AlertMend helped reduce compute costs by **41%** and storage costs by **over 90%**, enabling massive savings within just one week.
+
+
+---
+
+![Metric alert](/img/matric-image.png)
+---
+
+## <span id="summary" /> Summary
+
+By automating cost optimization with real usage data, PVC cleanup, and machine recommendations—all applied safely via a no-YAML workflow—**WareFlex** turned infrastructure cost reduction into a hands-off process.
+
+**AlertMend** empowered them to scale confidently, reduce waste, and focus on logistics innovation rather than ops overhead.
