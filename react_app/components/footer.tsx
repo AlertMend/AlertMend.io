@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { Logo } from "@/components/logo";
+import Image from "next/image";
 
 export const Footer = () => {
   const links = [
@@ -68,10 +69,12 @@ export const Footer = () => {
           <div className="flex justify-center mt-2">
               <div className="text-center">
               <p className="text-lg font-semibold mb-4 text-white">Backed by</p>
-            <img
+            <Image
              src="/img/Antler-Logo.png"
              alt="Antler"
              className="h-10 mx-auto"
+             width={120}
+             height={120}
              />
             </div>
             </div>

@@ -45,10 +45,10 @@ export const Language = () => {
         <Subheading>
   <p>
     AlertMend supports multiple languages including Vietnamese, Japanese, and more
-    so you can use the app in the language you're most comfortable with.
+    so you can use the app in the language you&apos;re most comfortable with.
   </p>
   <p className="mt-2">
-    Just choose your preferred language from the menu and you're ready to go.
+    Just choose your preferred language from the menu and you&apos;re ready to go.
   </p>
 </Subheading>
       </div>
