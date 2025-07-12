@@ -63,6 +63,7 @@ export const Tools = () => {
             height="1000"
             width="1000"
             className="w-full rounded-lg shadow-xl shadow-brand/[0.2]"
+            unoptimized
           />
         </ImageContainer>
       ),

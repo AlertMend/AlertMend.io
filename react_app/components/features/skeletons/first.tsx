@@ -25,6 +25,7 @@ import {
 } from "@/components/icons/illustrations";
 import React from "react";
 import { IconContainer } from "../icon-container";
+import Image from "next/image";
 
 export const SkeletonOne = () => {
   return (
@@ -138,28 +139,28 @@ export const SkeletonOne = () => {
             <MetaIcon />
               </IconContainer>*/}
           <IconContainer>
-          <img src="img/tech/Azure_logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
+          <Image src="Image/tech/Azure_logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
           </IconContainer> 
           <IconContainer>
-          <img src="img/tech/AWS_logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
+          <Image src="Image/tech/AWS_logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
           </IconContainer>
          <IconContainer>
-         <img src="img/tech/DATADOG_Logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
+         <Image src="Image/tech/DATADOG_Logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
          </IconContainer>
          <IconContainer>
-         <img src="img/tech/Kubernetees_logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
+         <Image src="Image/tech/Kubernetees_logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
          </IconContainer>
           <IconContainer>
-          <img src="img/tech/Jenkins_Logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
+          <Image src="Image/tech/Jenkins_Logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
         </IconContainer>
           <IconContainer>
-          <img src="/img/tech/Slack_logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
+          <Image src="/Image/tech/Slack_logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
           </IconContainer>
           <IconContainer>
-          <img src="img/tech/Pagerduty_Logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
+          <Image src="Image/tech/Pagerduty_Logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
          </IconContainer>
           <IconContainer>
-          <img src="img/tech/Webhook_Logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
+          <Image src="Image/tech/Webhook_Logo.png" alt="Slack" className="w-10 h-10 object-contain mx-auto" />
           </IconContainer>
           <IconContainer>
          <NewRelicIcon />

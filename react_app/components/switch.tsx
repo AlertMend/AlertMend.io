@@ -9,6 +9,7 @@ export const Switch = ({
   setChecked: (checked: boolean) => void;
 }) => {
   const id = useId();
+  return <></>
   // return (
   //   <form className="flex space-x-4  antialiased items-center">
   //     <p
