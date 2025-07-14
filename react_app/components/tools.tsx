@@ -24,7 +24,7 @@ export const Tools = () => {
         <ImageContainer>
           <BlurImage
             // src="/first.png"
-            src="/img/kubernetcopilot.png"
+            src="/img/Managing Kubernet 2.4.gif"
             alt="dashboard"
             height="1000"
             width="1000"
@@ -34,7 +34,7 @@ export const Tools = () => {
       ),
     },
     {
-      title: "Click Cost Optimization for Kubernetes.",
+      title: "1 Click Cost Optimization for Kubernetes.",
       description:
         "Save on cloud bills while keeping your workloads fast and efficient.",
       content: (
