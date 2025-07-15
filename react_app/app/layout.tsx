@@ -8,6 +8,7 @@ import { NavBar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import Script from "next/script";
 import { ClientAnalytics } from "@/lib/ClientAnalytics";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: 'AlertMend | Automate Kubernetes Incident Management',
@@ -53,11 +54,7 @@ export const metadata: Metadata = {
       { url: '/img/favicon.png' },
     ],
   },
-  themeColor: '#E2000F',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-  },
+  // REMOVED themeColor and viewport from metadata - they belong in viewport export
   other: {
     'apple-mobile-web-app-capable': 'yes',
     'apple-mobile-web-app-status-bar-style': '#E2000F',
@@ -69,10 +66,13 @@ export const metadata: Metadata = {
   },
 }
 
+// Consolidate all viewport settings here
 export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#06b6d4" },
-    { media: "(prefers-color-scheme: dark)", color: "#06b6d4" },
+    { media: "(prefers-color-scheme: light)", color: "#E2000F" },
+    { media: "(prefers-color-scheme: dark)", color: "#E2000F" },
   ],
 };
 
@@ -110,17 +110,17 @@ export default function RootLayout({
               __html: JSON.stringify({
                 '@context': 'https://schema.org',
                 '@type': 'Organization',
-                name: 'MyApp',
-                url: 'https://www.myapp.io',
-                logo: 'https://www.myapp.io/img/logo.svg',
+                name: 'AlertMend',
+                url: 'https://www.alertmend.io',
+                logo: 'https://www.alertmend.io/img/alertmend_logo.jpg',
                 description:
-                  'MyApp automates Kubernetes incident management with AI-driven workflows, reducing downtime and boosting operational efficiency.',
-                sameAs: ['https://www.linkedin.com/company/myapp'],
+                  'AlertMend automates Kubernetes incident management with AI-driven workflows, reducing downtime and boosting operational efficiency.',
+                sameAs: ['https://www.linkedin.com/company/alertmend'],
               }),
             }}
           />
         </head>
-      
+
         <body
           className={cn(
             inter.className,
@@ -145,7 +145,9 @@ export default function RootLayout({
               `,
             }}
           />
-          <ClientAnalytics/>
+          <Suspense>
+            <ClientAnalytics />
+          </Suspense>
           <NavBar />
           {children}
           <Footer />
