@@ -2,6 +2,13 @@ import rehypePrism from "@mapbox/rehype-prism";
 import nextMDX from "@next/mdx";
 import remarkGfm from "remark-gfm";
 
+const withMDX = nextMDX({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [remarkGfm],
+    rehypePlugins: [rehypePrism],
+  },
+});
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -23,13 +30,5 @@ const nextConfig = {
     ];
   },
 };
-
-const withMDX = nextMDX({
-  extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [rehypePrism],
-  },
-});
 
 export default withMDX(nextConfig);
