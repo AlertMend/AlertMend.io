@@ -24,7 +24,7 @@ export const Tools = () => {
         <ImageContainer>
           <BlurImage
             // src="/first.png"
-            src="/img/Managing Kubernet 2.4.gif"
+            src="/img/Managing Kubernet 2.5.gif"
             alt="dashboard"
             height="1000"
             width="1000"
