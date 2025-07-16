@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://alertmend.io/
+
+# Sitemaps
+Sitemap: https://alertmend.io/sitemap.xml
