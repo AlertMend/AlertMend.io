@@ -13,6 +13,15 @@ const nextConfig = {
     ],
   },
   pageExtensions: ["ts", "tsx", "mdx"],
+  async redirects() {
+    return [
+      {
+        source: "/howitworks",
+        destination: "/case-studies",
+        permanent: true, 
+      },
+    ];
+  },
 };
 
 const withMDX = nextMDX({
