@@ -19,9 +19,9 @@ export const Testimonials = () => {
     >
       <AmbientColor />
       <div className="pb-20">
-        <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
+        {/* <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
           <TbLocationBolt className="h-6 w-6 text-cyan-500" />
-        </FeatureIconContainer>
+        </FeatureIconContainer> */}
         <Heading className="pt-4">Loved by Engineers. Built for Impact.</Heading>
         <Subheading>
           AlertMend powers the people behind today’s most reliable systems.
@@ -47,9 +47,9 @@ export const Testimonials2 = ({testimonials}:any) => {
     >
       <AmbientColor />
       <div className="pb-0">
-        <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
+        {/* <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
           <TbLocationBolt className="h-6 w-6 text-cyan-500" />
-        </FeatureIconContainer>
+        </FeatureIconContainer> */}
         <Heading className="pt-4">Case Studies</Heading>
         <Subheading>
           AlertMend powers the people behind today’s most reliable systems.

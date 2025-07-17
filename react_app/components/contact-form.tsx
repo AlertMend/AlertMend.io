@@ -45,11 +45,11 @@ export const ContactForm = () => {
     data-section="Contact"
     >
       <div>
-        <div className="flex">
+        {/* <div className="flex">
           <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
             <IconMailFilled className="h-6 w-6 text-cyan-500" />
           </FeatureIconContainer>
-        </div>
+        </div> */}
         <Heading className="text-left">Get in Touch</Heading>
         <Subheading className="text-left text-neutral-400">
         Connect with Us, Simplify and Automate Your Kubernetes Incident Management with AlertMend

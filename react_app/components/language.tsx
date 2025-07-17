@@ -38,9 +38,9 @@ export const Language = () => {
       data-section="Language"
     >
       <div className="px-6">
-        <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
+        {/* <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
           <IconWorld className="h-6 w-6 text-cyan-500" />
-        </FeatureIconContainer>
+        </FeatureIconContainer> */}
         <Heading className="mt-4">Available in Your Language</Heading>
         <Subheading>
   <p>

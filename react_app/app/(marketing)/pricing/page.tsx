@@ -24,9 +24,9 @@ export default function PricingPage() {
     <div className="relative overflow-hidden">
       <AmbientColor />
       <div className="py-20 sm:py-40"  data-section="Pricing Page">
-        <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
+        {/* <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
           <IconReceiptFilled className="h-6 w-6 text-cyan-500" />
-        </FeatureIconContainer>
+        </FeatureIconContainer> */}
         <Heading as="h1" className="mt-4">
         Pricing Model
         </Heading>

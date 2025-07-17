@@ -48,9 +48,9 @@ export default async function Home({searchParams}:any) {
       <Features2 />
       <ContactForm />
       <div className="py-20 sm:py-40" data-section="Pricing">
-        <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
+        {/* <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
           <IconReceiptFilled className="h-6 w-6 text-cyan-500" />
-        </FeatureIconContainer>
+        </FeatureIconContainer> */}
         <Heading className="pt-4">Pricing Model</Heading>
         <Subheading>
         45 Days Free Trial
