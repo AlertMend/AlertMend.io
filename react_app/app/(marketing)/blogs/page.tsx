@@ -18,10 +18,11 @@ export const metadata: Metadata = {
   openGraph: {
     images: [{
       url: "/img/alertmend_logo.jpg",
-      width: 1200, 
-      height: 630, 
-      alt: "AlertMend Logo", 
-    },],
+      width: 1200,
+      height: 630,
+      alt: "AlertMend Logo",
+    },
+  ],
   },
 };
 
