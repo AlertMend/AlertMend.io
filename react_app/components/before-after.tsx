@@ -250,7 +250,7 @@ export default function BeforeAfter() {
         {/* Gradient Feedback Box */}
         <div className="mt-10 p-15 text-center text-2xl bg-gradient-to-b from-neutral-900 to-neutral-950 p-10 rounded-3xl">
           <p className="text-center text-3xl font-bold mb-6">Engineer Feedback</p>
-          "Before AlertMend, every alert was a manual fire drill. Now, most incidents are auto-resolved while I’m asleep."
+          &ldquo;Before AlertMend, every alert was a manual fire drill. Now, most incidents are auto-resolved while I’m asleep.&rdquo;
         </div>
       </section>
     </main>
