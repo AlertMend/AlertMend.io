@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     "",
   openGraph: {
     images: [ {
-      url: 'https://www.alertmend.io/img/alertmend_logo.jpg',
+      url: 'https://www.alertmend.io/img/AlertMend Ai 3.2.gif',
       width: 1200,
       height: 630,
       alt: 'AlertMend Logo',
