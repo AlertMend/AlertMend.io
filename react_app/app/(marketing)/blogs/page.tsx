@@ -39,7 +39,7 @@ export default async function ArticlesIndex() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full relative z-20">
-          {blogs.slice(0, 21).map((blog, index) => (
+          {blogs.slice(0, 51).map((blog, index) => (
             <BlogCard blog={blog} key={blog.title + index} />
           ))}
         </div>
@@ -48,7 +48,7 @@ export default async function ArticlesIndex() {
           <p className="text-2xl font-bold text-white mb-10">More Posts</p>
 
           <div className="divide-y divide-neutral-800">
-            {blogs.slice(0, 21).map((blog, index) => (
+            {blogs.slice(0, 51).map((blog, index) => (
               <Link
                 href={`/blogs/${blog.slug}`}
                 key={blog.slug + index}
