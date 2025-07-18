@@ -12,6 +12,7 @@ import { Heading } from "@/components/heading";
 import { Hero } from "@/components/hero";
 import { HeroCluster } from "@/components/hero-cluster";
 import { HeroCostOptimization } from "@/components/hero-cost-optimization";
+import { HeroMain } from "@/components/hero-main";
 import { Language } from "@/components/language";
 import { PricingGrid } from "@/components/pricing-grid";
 import { Subheading } from "@/components/subheading";
@@ -22,24 +23,13 @@ import { Tools } from "@/components/tools";
 import { getAllCaseStudies } from "@/lib/case-studies";
 import { IconReceiptFilled } from "@tabler/icons-react";
 
-export default async function Home({searchParams}:any) {
+export default async function Home({}:any) {
   const caseStudies = await getAllCaseStudies()
 
   return (
     <div className="relative overflow-hidden" data-section="Home Page">
       <AmbientColor />
-      {
-        !searchParams?.service && 
-        <Hero />
-      }
-      {
-        searchParams?.service=='cost-optimization' && 
-        <HeroCostOptimization />
-      }
-      {
-        searchParams?.service=='cluster' && 
-        <HeroCluster />
-      }
+      <HeroMain />
       <Clients />
       <Tools />
       <Language />
