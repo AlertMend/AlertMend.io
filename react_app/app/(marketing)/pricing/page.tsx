@@ -15,7 +15,13 @@ export const metadata: Metadata = {
   description:
     "AlertMend is an all in on marketing automation platform that handles emails, tasks tracking, social media management and everything in between.",
   openGraph: {
-    images: ["https://proactiv-aceternity.vercel.app/banner.png"],
+    images: [ {
+      url: 'https://www.alertmend.io/img/AlertMend Ai 3.2.gif',
+      width: 1200,
+      height: 630,
+      alt: 'AlertMend Logo',
+    },
+  ],
   },
 };
 
@@ -24,9 +30,9 @@ export default function PricingPage() {
     <div className="relative overflow-hidden">
       <AmbientColor />
       <div className="py-20 sm:py-40"  data-section="Pricing Page">
-        <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
+        {/* <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
           <IconReceiptFilled className="h-6 w-6 text-cyan-500" />
-        </FeatureIconContainer>
+        </FeatureIconContainer> */}
         <Heading as="h1" className="mt-4">
         Pricing Model
         </Heading>

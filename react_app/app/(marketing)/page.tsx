@@ -12,6 +12,7 @@ import { Heading } from "@/components/heading";
 import { Hero } from "@/components/hero";
 import { HeroCluster } from "@/components/hero-cluster";
 import { HeroCostOptimization } from "@/components/hero-cost-optimization";
+import { HeroMain } from "@/components/hero-main";
 import { Language } from "@/components/language";
 import { PricingGrid } from "@/components/pricing-grid";
 import { Subheading } from "@/components/subheading";
@@ -22,24 +23,13 @@ import { Tools } from "@/components/tools";
 import { getAllCaseStudies } from "@/lib/case-studies";
 import { IconReceiptFilled } from "@tabler/icons-react";
 
-export default async function Home({searchParams}:any) {
+export default async function Home({}:any) {
   const caseStudies = await getAllCaseStudies()
 
   return (
     <div className="relative overflow-hidden" data-section="Home Page">
       <AmbientColor />
-      {
-        !searchParams?.service && 
-        <Hero />
-      }
-      {
-        searchParams?.service=='cost-optimization' && 
-        <HeroCostOptimization />
-      }
-      {
-        searchParams?.service=='cluster' && 
-        <HeroCluster />
-      }
+      <HeroMain />
       <Clients />
       <Tools />
       <Language />
@@ -48,9 +38,9 @@ export default async function Home({searchParams}:any) {
       <Features2 />
       <ContactForm />
       <div className="py-20 sm:py-40" data-section="Pricing">
-        <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
+        {/* <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
           <IconReceiptFilled className="h-6 w-6 text-cyan-500" />
-        </FeatureIconContainer>
+        </FeatureIconContainer> */}
         <Heading className="pt-4">Pricing Model</Heading>
         <Subheading>
         45 Days Free Trial

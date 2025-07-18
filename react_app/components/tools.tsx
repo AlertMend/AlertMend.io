@@ -41,7 +41,7 @@ export const Tools = () => {
         <ImageContainer>
           <BlurImage
             // src="/second-backup.png"
-            src="/img/AlertMend Ai2.gif"
+            src="/img/AlertMend Ai 3.2.gif"
             alt="dashboard"
             height="1000"
             width="1000"
@@ -127,9 +127,9 @@ export const Tools = () => {
       data-section="Tools"
     >
       <div className="px-6">
-        <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
+        {/* <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
           <IconTool className="h-6 w-6 text-cyan-500" />
-        </FeatureIconContainer>
+        </FeatureIconContainer> */}
         <Heading className="mt-4">Purpose Built Tools for Every Kubernetes Challenge</Heading>
         <Subheading>
           AlertMend delivers targeted solutions for the most common and critical problems in your stack. Built by SREs, for SREs.

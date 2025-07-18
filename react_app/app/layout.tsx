@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     siteName: 'AlertMend',
     images: [
       {
-        url: 'https://www.alertmend.io/img/alertmend_logo.jpg',
+        url: 'https://www.alertmend.io/img/AlertMend Ai 3.2.gif',
         width: 1200,
         height: 630,
         alt: 'AlertMend Logo',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     title: 'AlertMend | Automate Kubernetes Incident Management',
     description:
       'AI-driven Kubernetes incident management with automated remediation, RCA insights, and support for AKS, EKS, and GKE.',
-    images: ['https://www.alertmend.io/img/alertmend_logo.jpg'],
+    images: ['https://www.alertmend.io/img/AlertMend Ai 3.2.gif'],
   },
   icons: {
     icon: '/img/favicon.png',
