@@ -49,10 +49,10 @@ export const HeroCluster = () => {
           as="h1"
           className="text-4xl md:text-4xl lg:text-8xl font-semibold max-w-6xl mx-auto text-center mt-6 relative z-10  py-6"
         >
-          Your All-in-One Kubernetes Companion
+          Your All-in-One Kubernetes Cluster Companion
         </Heading>
          <Subheading className="text-center mt-2 md:mt-6 text-base md:text-xl text-muted dark:text-muted-dark max-w-3xl mx-auto relative z-10">
-         AlertMend’s AI agent helps your team manage Kubernetes at scale by automating tasks and cutting infrastructure costs.  Free up your DevOps team to focus on what matters and save money at the same time.
+         AlertMend’s AI agent helps your team manage Kubernetes Cluster at scale by automating tasks and cutting infrastructure costs.  Free up your DevOps team to focus on what matters and save money at the same time.
         </Subheading> 
         <FeaturedImages
           textClassName="lg:text-left text-center"
