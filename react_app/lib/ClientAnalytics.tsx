@@ -57,6 +57,7 @@ export function ClientAnalytics() {
     // Fire on mount
     window.gtag?.('config', GA_TRACKING_ID, {
       page_path: pathname,
+      debug_mode:true
     },)
 
     startTimeRef.current = Date.now()
