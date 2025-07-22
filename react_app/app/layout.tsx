@@ -10,6 +10,7 @@ import Script from "next/script";
 import { ClientAnalytics } from "@/lib/ClientAnalytics";
 import { Suspense } from "react";
 import { Analytics } from '@vercel/analytics/next';
+import QueryPersistenceProvider from "@/lib/QueryPersistenceProvider";
 
 export const metadata: Metadata = {
   title: 'AlertMend | Automate Kubernetes Incident Management',
@@ -88,6 +89,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <ViewTransitions>
       <html lang="en">
@@ -148,6 +150,7 @@ export default function RootLayout({
           />
           <Suspense>
             <ClientAnalytics />
+            <QueryPersistenceProvider><></></QueryPersistenceProvider>
           </Suspense>
           <NavBar />
           {children}
