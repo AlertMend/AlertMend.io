@@ -58,7 +58,7 @@ export const Tools = () => {
         <ImageContainer>
           <BlurImage
             // src="/fourth-backup.png"
-            src="/img/alertmind_GIF.gif"
+            src="/img/Remidiation Flow v2.4.gif"
             alt="dashboard"
             height="1000"
             width="1000"
