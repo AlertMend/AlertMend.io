@@ -85,7 +85,7 @@ export const PricingGrid = () => {
       ],
       onClick: () => {
         console.log("clicked");
-        window.open("https://demo.alertmend.io/signup", "_blank");
+        window.open("https://calendly.com/hello-alertmend/30min/", "_blank");
       },
       ctaText: "Book a demo",
     },
