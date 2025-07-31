@@ -10,7 +10,7 @@ export function Features2() {
     },
     {
       name: "AWS",
-      src: "img/aws.png",
+      src: "img/tech/Aws.png",
     },
     {
       name: "DataDog",
