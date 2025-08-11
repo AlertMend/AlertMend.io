@@ -13,8 +13,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+   keywords:
+    'Kubernetes initcontainer failures, troubleshoot Kubernetes initcontainer, fix Kubernetes initcontainer issues, Kubernetes initcontainer best practices, Kubernetes initcontainer troubleshooting, Kubernetes initcontainer dependency errors, Kubernetes initcontainer volume mount issues, Kubernetes initcontainer resource limits, Kubernetes initcontainer image pull error, Kubernetes initcontainer logs, Kubernetes initcontainer retry logic, Kubernetes initcontainer readiness probe, Kubernetes initcontainer failure causes, Kubernetes initcontainer configuration, Kubernetes initcontainer monitoring',
   openGraph: {
     images: [blog.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Kubernetes-InitContainer-Failures.html',
   },
 };
 

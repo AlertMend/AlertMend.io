@@ -13,8 +13,19 @@ export const blog = {
 
 export const metadata = {
   description: blog.description,
+    keywords:
+    'Elasticsearch garbage collection, Elasticsearch GC issues, fix frequent garbage collection Elasticsearch, Elasticsearch JVM tuning, optimize Elasticsearch heap size, Elasticsearch performance tuning, Elasticsearch memory optimization, troubleshoot Elasticsearch GC, Elasticsearch cluster stability, reduce GC pauses Elasticsearch, Elasticsearch JVM heap usage, Elasticsearch indexing performance, optimize Elasticsearch queries',
   openGraph: {
     images: [blog.image],
+  },
+   twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Frequent-Garbage-Collection-Issues-in-Elasticsearch-for-Better-Performance.html',
   },
 };
 export default (props) => <BlogLayout blog={blog} {...props} />;

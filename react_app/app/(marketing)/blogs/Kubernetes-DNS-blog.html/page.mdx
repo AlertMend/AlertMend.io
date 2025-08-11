@@ -14,8 +14,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+   keywords:
+    'Kubernetes DNS, Kubernetes DNS troubleshooting, Kubernetes service discovery, fix Kubernetes DNS resolution failure, Kubernetes CoreDNS issues, Kubernetes DNS best practices, Kubernetes DNS caching, NodeLocal DNS cache Kubernetes, Kubernetes DNS performance monitoring, Kubernetes CoreDNS configuration, Kubernetes DNS resolution inside pods, Kubernetes CoreDNS metrics, fix CoreDNS latency, Kubernetes DNS optimiz',
   openGraph: {
     images: [blog.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Kubernetes-DNS-blog.html',
   },
 };
 

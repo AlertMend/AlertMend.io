@@ -13,8 +13,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+   keywords:
+    'Elasticsearch shard relocation, fix shard relocation Elasticsearch, Elasticsearch shard movement, Elasticsearch Kubernetes troubleshooting, Elasticsearch cluster rebalancing, Elasticsearch node failures, Elasticsearch rebalance shards, shard relocation Kubernetes, Elasticsearch scaling issues, Elasticsearch performance optimization, troubleshoot shard relocation Elasticsearch, Elasticsearch shard allocation, Elasticsearch auto-rebalancing',
   openGraph: {
     images: [blog.image],
+  },
+   twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Elasticsearch-Shard-Relocation-Incidents-on-Kubernetes.html',
   },
 };
 

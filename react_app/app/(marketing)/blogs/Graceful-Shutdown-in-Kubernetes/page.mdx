@@ -14,8 +14,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+    keywords:
+    'Kubernetes graceful shutdown, Kubernetes pod termination, SIGTERM in Kubernetes, Kubernetes preStop hook, terminationGracePeriodSeconds Kubernetes, Kubernetes rolling updates graceful shutdown, Kubernetes long running tasks, Kubernetes shutdown best practices, Kubernetes pod lifecycle, prevent traffic to terminating pods, Kubernetes SIGKILL handling, Kubernetes connection draining, Kubernetes readiness probe termination, safe pod shutdown Kubernetes, Kubernetes rainbow deployment strategy',
   openGraph: {
     images: [blog.image],
+  },
+   twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Graceful-Shutdown-in-Kubernetes',
   },
 };
 

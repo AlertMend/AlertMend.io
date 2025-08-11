@@ -14,8 +14,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+   keywords:
+    'Kubernetes ConfigMap troubleshooting, Kubernetes Secret troubleshooting, Kubernetes ConfigMap mount failure, Kubernetes Secret mount failure, fix Kubernetes ConfigMap not found, fix Kubernetes Secret not mounted, Kubernetes volume mount issues, Kubernetes RBAC ConfigMap access, Kubernetes RBAC Secret access, Kubernetes ConfigMap best practices, Kubernetes Secret best practices, Kubernetes containercreating issue, Kubernetes ConfigMap size limit, Kubernetes Secret size limit, Kubernetes init container for config validation',
   openGraph: {
     images: [blog.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Kubernetes-ConfigMap-and-Secret-Mount-Failures.html',
   },
 };
 

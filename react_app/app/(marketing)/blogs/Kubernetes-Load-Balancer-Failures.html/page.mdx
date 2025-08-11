@@ -14,8 +14,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+  keywords:
+    'Kubernetes load balancer failures, troubleshoot Kubernetes load balancer, fix Kubernetes load balancer issues, Kubernetes load balancer best practices, Kubernetes 502 bad gateway, Kubernetes load balancer troubleshooting, Kubernetes load balancer service misconfiguration, Kubernetes load balancer health check failure, Kubernetes network policy blocking, Kubernetes cloud provider load balancer limits, AWS Kubernetes load balancer issues, GCP Kubernetes load balancer problems, Azure Kubernetes load balancer troubleshooting, Kubernetes readiness probe for load balancer, Kubernetes load balancer monitoring, Kubernetes load balancer high availability',
   openGraph: {
     images: [blog.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Kubernetes-Load-Balancer-Failures.html',
   },
 };
 

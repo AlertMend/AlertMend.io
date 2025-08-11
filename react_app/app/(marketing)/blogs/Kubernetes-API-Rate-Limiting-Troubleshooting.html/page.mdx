@@ -14,8 +14,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+  keywords:
+    'Kubernetes API rate limiting, Kubernetes API throttling, troubleshoot Kubernetes API performance, Kubernetes API server tuning, Kubernetes API request limit, fix Kubernetes rate limiting, optimize Kubernetes API calls, Kubernetes max-requests-inflight, Kubernetes client QPS burst, Kubernetes API performance bottlenecks, Kubernetes API scaling, reduce Kubernetes API requests, Kubernetes probe optimization, Kubernetes API caching, Kubernetes API audit logging',
   openGraph: {
     images: [blog.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Kubernetes-API-Rate-Limiting-Troubleshooting.html',
   },
 };
 

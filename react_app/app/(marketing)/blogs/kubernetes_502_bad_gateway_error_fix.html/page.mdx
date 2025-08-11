@@ -14,8 +14,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+   keywords:
+    'Kubernetes 502 Bad Gateway, Kubernetes 502 error fix, troubleshoot Kubernetes 502 error, Kubernetes Ingress 502, Kubernetes LoadBalancer 502, Kubernetes DNS issues, fix 502 Bad Gateway Kubernetes, Kubernetes service misconfiguration, Kubernetes CoreDNS troubleshooting, Kubernetes pod health check, Kubernetes readiness probe error, Kubernetes liveness probe issues, Kubernetes CrashLoopBackOff 502, Kubernetes network troubleshooting, Kubernetes firewall configuration error',
   openGraph: {
     images: [blog.image],
+  },
+   twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/kubernetes_502_bad_gateway_error_fix.html',
   },
 };
 

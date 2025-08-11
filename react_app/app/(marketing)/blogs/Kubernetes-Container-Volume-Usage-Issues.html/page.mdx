@@ -10,8 +10,19 @@ export const blog = {
 
 export const metadata = {
   description: blog.description,
+   keywords:
+    'Kubernetes volume usage issues, Kubernetes container storage troubleshooting, Kubernetes PVC usage monitoring, fix Kubernetes out of disk space, Kubernetes Persistent Volume troubleshooting, Kubernetes PVC resize, Kubernetes log rotation best practices, Kubernetes disk pressure fix, Kubernetes PV vs PVC usage, Kubernetes storageclass allowVolumeExpansion, Kubernetes volume scaling, Kubernetes dynamic volume provisioning, Kubernetes Elasticsearch storage optimization, Kubernetes log file cleanup, Kubernetes container disk usage monitoring',
   openGraph: {
     images: [blog.image],
+  },
+   twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Kubernetes-Container-Volume-Usage-Issues.html',
   },
 };
 

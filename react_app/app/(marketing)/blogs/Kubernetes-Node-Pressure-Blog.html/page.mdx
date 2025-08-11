@@ -13,8 +13,19 @@ export const blog = {
 
 export const metadata = {
   description: blog.description,
+  keywords:
+    'Kubernetes node pressure, troubleshoot Kubernetes node pressure, fix Kubernetes node pressure issues, Kubernetes DiskPressure, Kubernetes MemoryPressure, Kubernetes PIDPressure, Kubernetes node pressure causes, Kubernetes node pressure solutions, Kubernetes node pressure troubleshooting, prevent Kubernetes node pressure, Kubernetes node eviction issues, Kubernetes resource constraints, Kubernetes node health monitoring, Kubernetes disk cleanup, Kubernetes memory optimization, Kubernetes PID limits, Kubernetes node scaling, Kubernetes Cluster Autoscaler node pressure, Kubernetes vertical pod autoscaler memory pressure',
   openGraph: {
     images: [blog.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Kubernetes-Node-Pressure-Blog.html',
   },
 };
 export default (props) => <BlogLayout blog={blog} {...props} />;

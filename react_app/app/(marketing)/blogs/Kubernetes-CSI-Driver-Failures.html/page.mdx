@@ -13,8 +13,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+   keywords:
+    'Kubernetes CSI driver failures, Kubernetes storage troubleshooting, Kubernetes Persistent Volume issues, fix CSI driver CrashLoopBackOff, Kubernetes PVC stuck in Pending, Kubernetes StorageClass misconfiguration, CSI driver pod failure fix, Kubernetes volume attachment failure, Kubernetes CSI driver best practices, update Kubernetes CSI driver, Kubernetes node storage connectivity, Kubernetes CSI driver monitoring, CSI driver logs analysis, fix Kubernetes volume provisioning errors, Kubernetes CSI driver health check',
   openGraph: {
     images: [blog.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Kubernetes-CSI-Driver-Failures.html',
   },
 };
 

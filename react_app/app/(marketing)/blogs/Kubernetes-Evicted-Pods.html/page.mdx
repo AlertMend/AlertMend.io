@@ -11,8 +11,19 @@ export const blog = {
 };
 export const metadata = {
   description: blog.description,
+   keywords:
+    'Kubernetes evicted pods, Kubernetes pod eviction troubleshooting, fix Kubernetes pod eviction, Kubernetes memory pressure eviction, Kubernetes disk pressure eviction, Kubernetes CPU resource eviction, Kubernetes pod eviction causes, prevent Kubernetes pod eviction, Kubernetes eviction best practices, Kubernetes node resource pressure, Kubernetes eviction thresholds, troubleshoot evicted pods Kubernetes, Kubernetes pod priority preemption eviction, Kubernetes pod eviction monitoring, Kubernetes autoscaling to prevent eviction',
   openGraph: {
     images: [blog.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Kubernetes-Evicted-Pods.html',
   },
 };
 
