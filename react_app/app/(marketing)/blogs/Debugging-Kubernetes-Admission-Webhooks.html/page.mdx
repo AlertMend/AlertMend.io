@@ -14,8 +14,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+  keywords:
+    'Kubernetes Admission Webhooks, MutatingAdmissionWebhook, ValidatingAdmissionWebhook, Kubernetes webhook troubleshooting, Kubernetes webhook timeout, Kubernetes webhook certificate issue, API server webhook error, Kubernetes webhook best practices, fail-open fail-close webhook, Kubernetes webhook configuration',
   openGraph: {
     images: [blog.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Debugging-Kubernetes-Admission-Webhooks.html',
   },
 };
 

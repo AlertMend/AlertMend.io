@@ -13,8 +13,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+  keywords:
+    'Kubernetes OOMKilled, Kubernetes exit code 137, OOMKilled troubleshooting, Kubernetes memory limits, Kubernetes memory leaks, OOMKilled causes, Kubernetes pod memory usage, node resource overcommitment, Kubernetes memory requests and limits, prevent OOMKilled, debug OOMKilled in Kubernetes, Kubernetes Vertical Pod Autoscaler, Kubernetes memory optimization',
   openGraph: {
     images: [blog.image],
+  },
+   twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+   alternates: {
+    canonical: 'https://www.alertmend.io/blogs/DNS-Resolution-Failures-in-Kubernetes.html',
   },
 };
 

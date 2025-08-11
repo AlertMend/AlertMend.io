@@ -11,8 +11,19 @@ export const blog = {
 };
 export const metadata = {
   description: blog.description,
+  keywords:
+    'Kubernetes HPA troubleshooting, Kubernetes Horizontal Pod Autoscaler, HPA not scaling, Kubernetes autoscaling, HPA debugging, Kubernetes performance optimization, Metrics Server troubleshooting, Kubernetes scaling best practices, AKS HPA, EKS HPA, GKE HPA',
   openGraph: {
     images: [blog.image],
+  },
+    twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+   alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Debugging-Kubernetes-HPA-Not-Scaling.html',
   },
 };
 

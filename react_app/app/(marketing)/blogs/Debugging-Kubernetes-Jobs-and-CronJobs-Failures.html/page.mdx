@@ -14,8 +14,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+  keywords:
+    'Kubernetes Jobs troubleshooting, Kubernetes CronJobs troubleshooting, Kubernetes job failed, Kubernetes CronJob not running, job pod CrashLoopBackOff, Kubernetes job stuck pending, CronJob missed schedule, Kubernetes concurrencyPolicy, activeDeadlineSeconds, startingDeadlineSeconds, Kubernetes job best practices, Kubernetes job debugging, Kubernetes job monitoring',
   openGraph: {
     images: [blog.image],
+  },
+   twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+   alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Debugging-Kubernetes-Jobs-and-CronJobs-Failures.html',
   },
 };
 
