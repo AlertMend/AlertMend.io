@@ -14,9 +14,7 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
-  openGraph: {
-    images: [blog.image],
-    keywords: [
+  keywords: [
     "Kubernetes load balancing",
     "long-lived connections Kubernetes",
     "Kubernetes WebSockets",
@@ -28,6 +26,8 @@ export const metadata = {
     "Istio service mesh",
     "Kubernetes service traffic routing"
   ],
+  openGraph: {
+    images: [blog.image],
   },
 };
 
