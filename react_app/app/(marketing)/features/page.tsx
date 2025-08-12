@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     },
   ],
   },
+  alternates: {
+    canonical: 'https://www.alertmend.io/features',
+  },
 };
 
 export default function PricingPage() {
