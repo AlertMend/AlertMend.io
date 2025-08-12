@@ -14,8 +14,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+  keywords:
+    'Kubernetes pending pod fix, fix Kubernetes pod stuck in pending, Kubernetes pod pending troubleshooting, resolve Kubernetes pending state, Kubernetes insufficient resources pod, Kubernetes node selector issue, Kubernetes affinity rules troubleshooting, Kubernetes taints and tolerations fix, Kubernetes PVC pending issue, Kubernetes persistent volume claim not bound, Kubernetes networking issue pending pod, diagnose Kubernetes pending pod, kubectl describe pending pod, Kubernetes pod scheduling issue, Kubernetes CNI plugin troubleshooting, Kubernetes autoscaling pods, Kubernetes cluster resource shortage fix, prevent Kubernetes pending pods, Kubernetes Prometheus Grafana monitoring, Kubernetes pod resource optimization',
   openGraph: {
     images: [blog.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Understanding_Kubernetes_Pending-pod.html',
   },
 };
 

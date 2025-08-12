@@ -14,8 +14,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+  keywords:
+    'Kubernetes pod stuck terminating, fix Kubernetes terminating pods, force delete Kubernetes pod, Kubernetes finalizers stuck, remove finalizer Kubernetes pod, Kubernetes pod won’t delete, troubleshooting Kubernetes terminating pods, Kubernetes volume detach issue, Persistent Volume unmount problem Kubernetes, Kubernetes storage stuck pod, kubectl delete pod force, Kubernetes SIGTERM handling, Kubernetes termination grace period, Kubernetes pod finalizer removal, Kubernetes node restart for stuck pod, Kubernetes liveness readiness probes, Kubernetes pod cleanup stuck, Kubernetes terminating state fix, Kubernetes pod termination troubleshooting, Kubernetes best practices pod termination',
   openGraph: {
     images: [blog.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Understanding_Kubernetes_Terminating_State.html',
   },
 };
 

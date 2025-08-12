@@ -13,8 +13,19 @@ export const blog = {
 
 export const metadata = {
   description: blog.description,
+  keywords:
+    'Elasticsearch cluster failure troubleshooting, fix Elasticsearch instability, Elasticsearch node failure recovery, troubleshoot Elasticsearch red yellow cluster, Elasticsearch shard allocation issues fix, optimize Elasticsearch cluster performance, Elasticsearch JVM heap size tuning, Elasticsearch resource allocation best practices, Elasticsearch network connectivity issues, fix unassigned shards in Elasticsearch, Elasticsearch cluster health monitoring, Elasticsearch high memory usage solution, Elasticsearch scaling guide, Elasticsearch replica and shard configuration, prevent Elasticsearch cluster split brain, Elasticsearch performance optimization tips, fix Elasticsearch node crash, Elasticsearch cluster recovery best practices, monitor Elasticsearch node stats, Elasticsearch cluster maintenance guide',
   openGraph: {
     images: [blog.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Troubleshooting-Elasticsearch-Cluster-Failures-and-Instability.html',
   },
 };
 export default (props) => <BlogLayout blog={blog} {...props} />;

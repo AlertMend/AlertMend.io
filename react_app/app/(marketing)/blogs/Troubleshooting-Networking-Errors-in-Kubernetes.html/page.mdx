@@ -14,8 +14,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+  keywords:
+    'Kubernetes networking troubleshooting, Kubernetes networking errors, Kubernetes DNS issues, Kubernetes service discovery problems, Kubernetes network latency fix, Kubernetes network congestion, Kubernetes firewall rules, Kubernetes network policy troubleshooting, Kubernetes pod networking issues, Kubernetes CNI plugin errors, Calico troubleshooting Kubernetes, Flannel troubleshooting Kubernetes, Kubernetes DNS resolution failure, Kubernetes service connectivity issues, Kubernetes networking best practices, Kubernetes pod IP conflicts, Kubernetes network monitoring tools, Kubernetes firewall misconfiguration fix, Kubernetes network performance optimization, Kubernetes network policy misconfiguration',
   openGraph: {
     images: [blog.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Troubleshooting-Networking-Errors-in-Kubernetes.html',
   },
 };
 

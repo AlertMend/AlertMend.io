@@ -25,6 +25,16 @@ export const metadata = {
   openGraph: {
     images: [blog.image],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Roll-Back-Deployments-in-Kubernetes',
+  },
+
 };
 
 export default (props) => <BlogLayout blog={blog} {...props} />;

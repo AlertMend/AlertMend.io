@@ -13,8 +13,19 @@ export const blog = {
 
 export const metadata = {
   description: blog.description,
+  keywords:
+    'Kubernetes StatefulSet volume recovery, StatefulSet PVC recovery issues, fix Kubernetes volume mount failure, troubleshoot StatefulSet PVC pending, Kubernetes Persistent Volume recovery guide, StatefulSet pod volume attach fail, Kubernetes volume detachment issues, fix StatefulSet data corruption, Kubernetes StorageClass misconfiguration fix, StatefulSet volume not mounting, Kubernetes PV PVC troubleshooting, Kubernetes stateful application volume recovery, Kubernetes node resource constraints volumes, best practices for StatefulSet storage, StatefulSet persistent storage issues, Kubernetes PV stuck in pending state, Kubernetes volume backup and restore Velero, StatefulSet pod recovery from node failure, Kubernetes stateful workload troubleshooting, Kubernetes persistent volume best practices',
   openGraph: {
     images: [blog.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Troubleshooting-Elasticsearch-Backlog-of-Pending-Tasks.html',
   },
 };
 export default (props) => <BlogLayout blog={blog} {...props} />;

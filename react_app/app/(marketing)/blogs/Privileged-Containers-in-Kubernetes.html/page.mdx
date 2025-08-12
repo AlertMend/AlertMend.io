@@ -14,8 +14,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+  keywords:
+    'EKubernetes privileged containers, Kubernetes container security best practices, privileged vs non-privileged containers, risks of privileged containers in Kubernetes, secure Kubernetes privileged containers, Kubernetes securityContext configuration, drop container capabilities Kubernetes, Kubernetes Pod Security Admission, PSA Kubernetes privileged container policy, Kubernetes security for system tools, Kubernetes monitoring privileged containers, audit privileged containers Kubernetes, Kubernetes NET_ADMIN capability, Kubernetes container security hardening, Kubernetes privileged container alternatives, mitigate privileged container risks, Kubernetes host access security, Kubernetes container capabilities management, Kubernetes privileged container case study, Kubernetes container isolation best practices',
   openGraph: {
     images: [blog.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Privileged-Containers-in-Kubernetes.html',
   },
 };
 

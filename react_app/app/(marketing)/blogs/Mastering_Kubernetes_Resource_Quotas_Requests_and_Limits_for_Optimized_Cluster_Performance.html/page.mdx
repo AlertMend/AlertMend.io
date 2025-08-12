@@ -13,8 +13,19 @@ export const blog = {
 
 export const metadata = {
   description: blog.description,
+   keywords:
+    'Kubernetes resource quotas, Kubernetes requests and limits, Kubernetes performance optimization, set resource quotas in Kubernetes, Kubernetes CPU memory limits, Kubernetes requests vs limits, Kubernetes namespace resource limits, optimize Kubernetes resource allocation, Kubernetes cluster performance tuning, Kubernetes autoscaling best practices, Kubernetes vertical pod autoscaler, Kubernetes horizontal pod autoscaler, Kubernetes resource quota examples, Kubernetes cost optimization, Kubernetes pod resource management, Kubernetes workload optimization, Kubernetes resource monitoring tools, Kubernetes Prometheus Grafana monitoring, Kubernetes overprovisioning fix, Kubernetes resource allocation strategy',
   openGraph: {
     images: [blog.image],
+  },
+   twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Mastering_Kubernetes_Resource_Quotas_Requests_and_Limits_for_Optimized_Cluster_Performance.html',
   },
 };
 export default (props) => <BlogLayout blog={blog} {...props} />;

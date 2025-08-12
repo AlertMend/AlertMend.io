@@ -13,10 +13,22 @@ export const blog = {
 
 export const metadata = {
   description: blog.description,
+  keywords:
+    'Kubernetes ImagePullBackOff fix, Kubernetes ErrImagePull troubleshooting, Kubernetes image pull errors, fix ImagePullBackOff in Kubernetes, Kubernetes pod image not pulling, Kubernetes private registry authentication, Kubernetes image name and tag error, Docker Hub rate limit Kubernetes, Kubernetes imagePullSecrets example, Kubernetes network issue image pull, Kubernetes describe pod ImagePullBackOff, Kubernetes error pulling image, troubleshoot Kubernetes image pull issues, fix Kubernetes ErrImagePull, Kubernetes docker-registry secret, Kubernetes image registry access error, Kubernetes image pull backoff retry, Kubernetes pull image from private registry, ImagePullBackOff common causes, Kubernetes deployment image pull fix',
   openGraph: {
     images: [blog.image],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Resolving_ImagePullBackOff_and_ErrImagePull_in_Kubernetes.html',
+  },
 };
+
 export default (props) => <BlogLayout blog={blog} {...props} />;
 
 

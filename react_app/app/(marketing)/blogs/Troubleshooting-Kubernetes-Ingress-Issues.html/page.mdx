@@ -14,8 +14,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+  keywords:
+    'Kubernetes Ingress troubleshooting, fix Kubernetes Ingress issues, Kubernetes Ingress not working, Kubernetes Ingress Controller down, Kubernetes Ingress DNS issues, Kubernetes Ingress SSL/TLS configuration, NGINX Ingress troubleshooting, Kubernetes Ingress service not reachable, Kubernetes Ingress misconfiguration fix, Kubernetes Ingress path routing issues, Kubernetes Ingress Controller logs, debug Kubernetes Ingress, Kubernetes Ingress class setup, Kubernetes Ingress health checks, Kubernetes Ingress best practices, Kubernetes Ingress SSL termination, Kubernetes Ingress DNS propagation fix, Kubernetes Ingress endpoints not found, Kubernetes Ingress common problems, Kubernetes Ingress Controller monitoring',
   openGraph: {
     images: [blog.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Troubleshooting-Kubernetes-Ingress-Issues.html',
   },
 };
 

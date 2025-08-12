@@ -14,8 +14,19 @@ export const blog = {
 export const metadata = {
   title: blog.title,
   description: blog.description,
+  keywords:
+    'KubeAPIDown troubleshooting, fix Kubernetes API server down, Kubernetes API server not responding, restore Kubernetes API availability, Kubernetes control plane troubleshooting, fix kubectl unable to connect to server, Kubernetes API server CrashLoopBackOff, troubleshoot etcd issues Kubernetes, Kubernetes API server high availability setup, Kubernetes API server logs analysis, Kubernetes API server resource exhaustion fix, Kubernetes API server HA best practices, restore etcd Kubernetes, Kubernetes API server network issues, fix Kubernetes node NotReady API server, Kubernetes API server backup and restore, Kubernetes etcd snapshot backup, Kubernetes control plane recovery, troubleshoot Kubernetes API server failure, fix Kubernetes API server timeout',
   openGraph: {
     images: [blog.image],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Troubleshooting-KubeAPIDown.html',
   },
 };
 

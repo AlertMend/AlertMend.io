@@ -13,10 +13,21 @@ export const blog = {
 
 export const metadata = {
   description: blog.description,
+  keywords:
+    'Kubernetes Node Not Ready fix, troubleshoot Node Not Ready Kubernetes, Kubernetes node health check, Kubernetes node network issue, Kubernetes node resource exhaustion, Kubernetes kubelet restart, Kubernetes Not Ready state causes, fix Kubernetes node status Not Ready, Kubernetes disk pressure solution, Kubernetes node monitoring best practices, Kubernetes cluster node troubleshooting, Kubernetes node network connectivity issue, Kubernetes CNI plugin troubleshooting, Kubernetes restart kubelet command, Kubernetes Docker runtime error, Kubernetes node OS issues, Kubernetes cloud provider integration issue, Kubernetes autoscaling node fix, Kubernetes system logs node not ready, Kubernetes node taint removal',
   openGraph: {
     images: [blog.image],
   },
-};
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/Resolving_Kubernetes_Node_Not_Ready_Error.html',
+  },
+};  
 export default (props) => <BlogLayout blog={blog} {...props} />;
 
 
