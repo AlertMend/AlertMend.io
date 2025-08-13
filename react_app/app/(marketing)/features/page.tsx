@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   title: "Features | AlertMend ",
   description:
     "AlertMend is an all in on marketing automation platform that handles emails, tasks tracking, social media management and everything in between.",
+    keywords:
+    'AlertMend features, automation, email automation, task tracking, social media management, business productivity, workflow automation, team collaboration, AI-powered automation, campaign management,AlertMend notifications,AlertM monitoring features,AlertMend benefits,AlertMend overview',
   openGraph: {
     images: [ {
       url: 'https://www.alertmend.io/img/AlertMend Ai 3.2.gif',
