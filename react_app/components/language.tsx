@@ -8,6 +8,8 @@ import {
   IconWorld,
 } from "@tabler/icons-react";
 import { useScroll } from "framer-motion";
+import { Container } from "./container";
+import Image from "next/image";
 
 export const Language = () => {
  
@@ -34,7 +36,7 @@ export const Language = () => {
         duration: 0.5,
       }}
       ref={ref}
-      className="w-full relative h-full pt-0 md:pt-0 pb-40"
+      className="w-full relative h-full pt-0 md:pt-0 pb-20"
       data-section="Language"
     >
       <div className="px-6">
@@ -47,9 +49,17 @@ export const Language = () => {
     AlertMend supports multiple languages including Vietnamese, Japanese, and more
     so you can use the app in the language you&apos;re most comfortable with.
   </p>
-  <p className="mt-2">
+   <div className="flex mt-10 items-center justify-center gap-4">
+    <Container className="rounded-lg bg-neutral-900 border border-neutral-800 shadow-sm mx-0 p-2">
+      <Image src={'/img/flag/icon-flag-vn.svg'} width={'30'} height={'30'} alt={'flag-vn'} />
+    </Container>
+    <Container className="rounded-lg bg-neutral-900 border border-neutral-800 shadow-sm mx-0 p-2">
+      <Image src={'/img/flag/icon-flag-ja.svg'} width={'30'} height={'30'} alt={'flag-ja'} />
+    </Container>
+  </div>
+  {/* <p className="mt-2">
     Just choose your preferred language from the menu and you&apos;re ready to go.
-  </p>
+  </p> */}
 </Subheading>
       </div>
     </motion.div>
