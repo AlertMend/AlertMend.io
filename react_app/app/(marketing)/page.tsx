@@ -13,6 +13,7 @@ import { Hero } from "@/components/hero";
 import { HeroCluster } from "@/components/hero-cluster";
 import { HeroCostOptimization } from "@/components/hero-cost-optimization";
 import { HeroMain } from "@/components/hero-main";
+import { Integrations } from "@/components/intrgrations";
 import { Language } from "@/components/language";
 import { PricingGrid } from "@/components/pricing-grid";
 import { Subheading } from "@/components/subheading";
@@ -32,6 +33,7 @@ export default async function Home({}:any) {
       <HeroMain />
       <Clients />
       <Tools />
+      <Integrations />
       <Language />
       <Testimonials />
       <Testimonials2 testimonials={caseStudies}/>
