@@ -3,9 +3,9 @@ import Image from "next/image";
 export function Integrations() {
   const features = [
     {
-      title: "Built for developers",
+      title: "AWS EKS Integration",
       description:
-        "Built for engineers, developers, dreamers, thinkers and doers.",
+        "Deploy, monitor, and auto-remediate workloads directly on Amazon EKS.",
       icon: <Image
         width={40}
         height={40}
@@ -14,35 +14,35 @@ export function Integrations() {
       />,
     },
     {
-      title: "Ease of use",
+      title: "Azure AKS Ready",
       description:
-        "It's as easy as using an Apple, and as expensive as buying one.",
+        "Seamless automation and diagnostics on Azure Kubernetes Service.",
       icon: <Image
         width={40}
         height={40}
         alt="Integration"
-        src="/img/intrgrations/aws.png"
+        src="/img/intrgrations/azure.png"
       />,
     },
     {
-      title: "Pricing like no other",
+      title: "Google Cloud GKE Support",
       description:
-        "Our prices are best in the market. No cap, no lock, no credit card required.",
+        "Built-in intelligence for GKE clusters without extra setup.",
       icon: <Image
         width={40}
         height={40}
         alt="Integration"
-        src="/img/intrgrations/aws.png"
+        src="/img/intrgrations/GoogleCloudGKESupport.png"
       />,
     },
     {
-      title: "100% Uptime guarantee",
-      description: "We just cannot be taken down by anyone.",
+      title: "Multi-Cloud Native",
+      description: "Works across any Kubernetes flavor — on-prem, hybrid, or managed.",
       icon: <Image
         width={40}
         height={40}
         alt="Integration"
-        src="/img/intrgrations/aws.png"
+        src="/img/intrgrations/multicloudnative.png"
       />,
     },
   ];
