@@ -6,6 +6,7 @@ import { FeaturesGrid } from "@/components/features/features-grid";
 import { Testimonials } from "@/components/testimonials";
 import { Tools } from "@/components/tools";
 import { Metadata } from "next";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Features | AlertMend ",
@@ -27,8 +28,34 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PricingPage() {
+export default function FeauresPage() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.alertmend.io/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Features",
+        item: "https://www.alertmend.io/features",
+      },
+    ],
+  };
+
   return (
+    <>
+    <Script
+      id="ld-breadcrumbs"
+      type="application/ld+json"
+      strategy="afterInteractive"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+    />
     <div className="relative overflow-hidden"  data-section="Features Page">
       <AmbientColor />
       <Tools />
@@ -40,5 +67,6 @@ export default function PricingPage() {
       </div>
       {/* <CTA /> */}
     </div>
+    </>
   );
 }

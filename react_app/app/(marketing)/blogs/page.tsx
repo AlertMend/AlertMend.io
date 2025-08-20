@@ -10,6 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { truncate } from "@/lib/utils";
 import { format } from "date-fns";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Blog | AlertMend ",
@@ -27,9 +28,34 @@ export const metadata: Metadata = {
 };
 
 export default async function ArticlesIndex() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.alertmend.io/",
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blogs",
+        "item": "https://www.alertmend.io/pricing",
+      },
+    ],
+  };
   let blogs = await getAllBlogs();
 
   return (
+    <>
+    <Script
+      id="ld-breadcrumbs"
+      type="application/ld+json"
+      strategy="afterInteractive"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+    />
     <div className="relative overflow-hidden py-20 md:py-0" data-section="Blogs">
       <Container className="flex flex-col items-center justify-between pb-20">
         <div className="relative z-20 py-10 md:pt-40">
@@ -85,5 +111,6 @@ export default async function ArticlesIndex() {
         </div>
       </Container>
     </div>
+    </>
   );
 }
