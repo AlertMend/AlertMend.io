@@ -1,11 +1,12 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { Heading } from "./heading";
 export function Integrations() {
   const features = [
     {
-      title: "AWS EKS Integration",
+      title: "AWS EKS",
       description:
-        "Deploy, monitor, and auto-remediate workloads directly on Amazon EKS.",
+        "Run and fix your workloads directly on Amazon EKS.",
       icon: <Image
         width={40}
         height={40}
@@ -14,9 +15,9 @@ export function Integrations() {
       />,
     },
     {
-      title: "Azure AKS Ready",
+      title: "Azure AKS",
       description:
-        "Seamless automation and diagnostics on Azure Kubernetes Service.",
+        "Easily automate and troubleshoot apps on Azure AKS.",
       icon: <Image
         width={40}
         height={40}
@@ -25,9 +26,9 @@ export function Integrations() {
       />,
     },
     {
-      title: "Google Cloud GKE Support",
+      title: "Google Cloud GKE",
       description:
-        "Built-in intelligence for GKE clusters without extra setup.",
+        "Monitor and repair GKE clusters with no extra setup.",
       icon: <Image
         width={40}
         height={40}
@@ -36,8 +37,8 @@ export function Integrations() {
       />,
     },
     {
-      title: "Multi-Cloud Native",
-      description: "Works across any Kubernetes flavor — on-prem, hybrid, or managed.",
+      title: "Multi-Cloud",
+      description: "Use on any Kubernetes — cloud, hybrid, or on-prem.",
       icon: <Image
         width={40}
         height={40}
@@ -47,10 +48,14 @@ export function Integrations() {
     },
   ];
   return (
+    <div className="px-6">
+       <Heading className="mt-4">Run Kubernetes Anywhere, Without the Chaos</Heading>
+    
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  relative z-10 py-10 max-w-7xl mx-auto pb-40">
       {features.map((feature, index) => (
         <Integration key={feature.title} {...feature} index={index} />
       ))}
+    </div>
     </div>
   );
 }
