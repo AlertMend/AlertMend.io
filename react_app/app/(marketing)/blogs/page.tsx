@@ -42,9 +42,36 @@ export default async function ArticlesIndex() {
         "@type": "ListItem",
         "position": 2,
         "name": "Blogs",
-        "item": "https://www.alertmend.io/pricing",
+        "item": "https://www.alertmend.io/blogs",
       },
     ],
+  };
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.alertmend.io/blogs#webpage",
+    url: "https://www.alertmend.io/blogs",
+    name: "Blogs | AlertMend",
+    description:
+      "Insights on automation, reliability engineering, and productivity. Read product updates, tutorials, and best practices from the AlertMend team.",
+    isPartOf: { "@type": "WebSite", url: "https://www.alertmend.io", name: "AlertMend" },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement:[
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://www.alertmend.io"
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Blogs",
+          item: "https://www.alertmend.io/blogs"
+        }
+      ]
+    }
   };
   let blogs = await getAllBlogs();
 
@@ -55,6 +82,12 @@ export default async function ArticlesIndex() {
       type="application/ld+json"
       strategy="afterInteractive"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+    />
+     <Script
+      id="ld-webpage"
+      type="application/ld+json"
+      strategy="afterInteractive"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
     />
     <div className="relative overflow-hidden py-20 md:py-0" data-section="Blogs">
       <Container className="flex flex-col items-center justify-between pb-20">

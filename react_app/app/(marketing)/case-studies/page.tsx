@@ -10,11 +10,14 @@ import { truncate } from "@/lib/utils";
 import { format } from "date-fns";
 import { getAllCaseStudies } from "@/lib/case-studies";
 import { CaseStudyCard } from "@/components/case-study-card";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "CaseStudy | AlertMend ",
   description:
     "",
+    keywords:
+    'AlertMend case studies, AlertMend customer success stories, AlertMend client experiences, automation case studies, workflow automation examples, business productivity case studies, AI automation success, email automation case study, task tracking case study, social media management case study, team collaboration success stories, business workflow optimization, automation ROI examples, AlertMend industry use cases, AlertMend customer benefits, real-world automation results, AlertMend implementation examples, campaign management case study, AlertMend monitoring case study, AlertMend impact overview',
   openGraph: {
     images: [ {
       url: 'https://www.alertmend.io/img/AlertMend Ai 3.2.gif',
@@ -27,9 +30,68 @@ export const metadata: Metadata = {
 };
 
 export default async function ArticlesIndex() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.alertmend.io/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Case-Studies",
+        item: "https://www.alertmend.io/case-studies",
+      },
+    ],
+  };
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.alertmend.io/case-studies#webpage",
+    url: "https://www.alertmend.io/case-studies",
+    name: "Case-Studies | AlertMend",
+    description:
+      "Explore AlertMend customer success stories, client experiences, and automation case studies showcasing real-world results.",
+    isPartOf: { "@type": "WebSite", url: "https://www.alertmend.io", name: "AlertMend" },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://www.alertmend.io"
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Case-Studies",
+          item: "https://www.alertmend.io/case-studies"
+        }
+      ]
+    }
+  };
+  
   let casestudies = await getAllCaseStudies();
 
   return (
+    <>
+    <Script
+      id="ld-breadcrumbs"
+      type="application/ld+json"
+      strategy="afterInteractive"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+    />
+    <Script
+      id="ld-webpage"
+      type="application/ld+json"
+      strategy="afterInteractive"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+    />
     <div className="relative overflow-hidden py-20 md:py-0"  data-section="Case Studies Page">
       <Container className="flex flex-col items-center justify-between pb-20">
         <div className="relative z-20 py-10 md:pt-40">
@@ -78,5 +140,6 @@ export default async function ArticlesIndex() {
         </div>
       </Container>
     </div>
+    </>
   );
 }

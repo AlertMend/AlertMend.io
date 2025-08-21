@@ -37,7 +37,7 @@ export default function FeauresPage() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://www.alertmend.io/",
+        item: "https://www.alertmend.io",
       },
       {
         "@type": "ListItem",
@@ -47,6 +47,33 @@ export default function FeauresPage() {
       },
     ],
   };
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://www.alertmend.io/features#webpage",
+    url: "https://www.alertmend.io/features",
+    name: "Features | AlertMend",
+    description:
+      "Explore AlertMend features including email automation, task tracking, social media management, workflow automation, collaboration, and monitoring.",
+    isPartOf: { "@type": "WebSite", url: "https://www.alertmend.io", name: "AlertMend" },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement:[
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://www.alertmend.io"
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Features",
+          item: "https://www.alertmend.io/features"
+        }
+      ]
+    }
+  };
 
   return (
     <>
@@ -55,6 +82,12 @@ export default function FeauresPage() {
       type="application/ld+json"
       strategy="afterInteractive"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+    />
+      <Script
+      id="ld-webpage"
+      type="application/ld+json"
+      strategy="afterInteractive"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
     />
     <div className="relative overflow-hidden"  data-section="Features Page">
       <AmbientColor />
