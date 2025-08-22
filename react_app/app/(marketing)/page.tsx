@@ -39,7 +39,7 @@ export default async function Home({}:any) {
       <Testimonials2 testimonials={caseStudies}/>
       <Features2 />
       <ContactForm />
-      <div className="py-20 sm:py-40" data-section="Pricing">
+      <div className="py-20" data-section="Pricing">
         {/* <FeatureIconContainer className="flex justify-center items-center overflow-hidden">
           <IconReceiptFilled className="h-6 w-6 text-cyan-500" />
         </FeatureIconContainer> */}
