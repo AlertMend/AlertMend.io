@@ -23,7 +23,7 @@ export const StickyScroll = ({
     "linear-gradient(to bottom right, var(--orange-500), var(--yellow-500))",
   ];
   return (
-    <div className="pt-4 md:pt-20 pb-0">
+    <div className="pt-4 pb-0">
       <motion.div className="hidden lg:flex h-full  flex-col max-w-7xl mx-auto justify-between relative   p-10 ">
         {content.map((item, index) => (
           <ScrollContent key={item.title + index} item={item} index={index} />
@@ -86,7 +86,7 @@ export const ScrollContent = ({
         duration: 0.3,
       }}
       key={item.title + index}
-      className="mt-40 relative grid grid-cols-3 gap-4"
+      className="mt-20 relative grid grid-cols-3 gap-4"
       data-section={"Tool "+item.title}
     >
       <div className="w-full">

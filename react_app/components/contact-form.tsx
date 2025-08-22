@@ -41,7 +41,7 @@ export const ContactForm = () => {
   };
 
   return (
-    <Container className="pt-40 pb-20 grid grid-cols-1 md:grid-cols-2 gap-10 px-6"
+    <Container className="pt-20 grid grid-cols-1 md:grid-cols-2 gap-10 px-6"
     data-section="Contact"
     >
       <div>

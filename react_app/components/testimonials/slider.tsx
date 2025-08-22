@@ -56,7 +56,7 @@ export const TestimonialsSlider = () => {
   return (
     <section>
       <div className="max-w-3xl mx-auto  relative z-40 h-80">
-        <div className="relative pb-12 md:pb-20">
+        <div className="relative pb-12">
           {/* Particles animation */}
           <div className="absolute left-1/2 -translate-x-1/2 -top-2 -z-10 w-80 h-20 -mt-6">
             <SparklesCore

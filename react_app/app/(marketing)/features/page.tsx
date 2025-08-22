@@ -91,7 +91,9 @@ export default function FeauresPage() {
     />
     <div className="relative overflow-hidden"  data-section="Features Page">
       <AmbientColor />
+      <div className="pt-20">
       <Tools />
+      </div>
       <Features2 />
       <FeaturesGrid />
 

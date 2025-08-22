@@ -51,7 +51,7 @@ export function Integrations() {
     <div className="px-6">
        <Heading className="mt-4">Run Kubernetes Anywhere, Without the Chaos</Heading>
     
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  relative z-10 py-10 max-w-7xl mx-auto pb-40">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  relative z-10 py-10 max-w-7xl mx-auto pb-20">
       {features.map((feature, index) => (
         <Integration key={feature.title} {...feature} index={index} />
       ))}

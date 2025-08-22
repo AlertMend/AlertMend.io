@@ -54,11 +54,11 @@ export const Hero = () => {
          <Subheading className="text-center mt-2 md:mt-6 text-base md:text-xl text-muted dark:text-muted-dark max-w-3xl mx-auto relative z-10">
          AlertMend’s AI agent helps your team manage Kubernetes at scale by automating tasks and cutting infrastructure costs.  Free up your DevOps team to focus on what matters and save money at the same time.
         </Subheading> 
-        <FeaturedImages
+        {/* <FeaturedImages
           textClassName="lg:text-left text-center"
           className="lg:justify-start justify-center items-center"
           showStars
-        />
+        /> */}
         <div className="flex items-center gap-4 justify-center my-10 relative z-10">
           <Button className="flex space-x-2 items-center group !text-lg">
           <a href="https://calendly.com/hello-alertmend/30min" target="_blank"
@@ -116,9 +116,9 @@ export const Card = ({
     >
       <Beam showBeam className="-top-1 block" />
       <div className="absolute h-40 w-full bottom-0 md:-bottom-10 inset-x-0 scale-[1.2] z-20 pointer-events-none bg-charcoal [mask-image:linear-gradient(to_top,white_30%,transparent)]" />
-      <div className="absolute inset-0 z-20  bg-transparent group-hover:bg-black/0 transition-all duration-200 flex items-center justify-center">
+      {/* <div className="absolute inset-0 z-20  bg-transparent group-hover:bg-black/0 transition-all duration-200 flex items-center justify-center"> */}
         {/* <VideoModal /> */}
-      </div>
+      {/* </div> */}
       <div className=" h-full w-full  overflow-hidden rounded-2xl bg-transparent md:rounded-2xl md:p-4 ">
         {children}
       </div>

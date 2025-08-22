@@ -64,9 +64,9 @@ export const FAQs = () => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className="max-w-3xl mx-auto py-20 px-8" data-section="FAQs">
+    <div className="max-w-3xl mx-auto pt-20 px-8" data-section="FAQs">
       <Heading className="pt-4">Frequently asked questions</Heading>
-      <div className="grid  gap-10 pt-20">
+      <div className="grid gap-5 pt-10">
         {questions.map((item, i) => (
           <Accordion
             key={i}

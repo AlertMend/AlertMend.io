@@ -56,7 +56,7 @@ export const Testimonials2 = ({testimonials}:any) => {
         </Subheading>
       </div>
 
-      <div className="pb-30 relative">
+      <div className="pb-10 relative">
         {/* <div className="absolute inset-0 h-full w-full bg-charcoal opacity-30 [mask-image:radial-gradient(circle_at_center,transparent_10%,white_90%)]">
           <TestimonialsGrid />
         </div> */}

@@ -36,7 +36,7 @@ export const Language = () => {
         duration: 0.5,
       }}
       ref={ref}
-      className="w-full relative h-full pt-0 md:pt-0 pb-20"
+      className="w-full relative h-full"
       data-section="Language"
     >
       <div className="px-6">

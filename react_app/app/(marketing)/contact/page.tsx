@@ -85,7 +85,9 @@ export default function ContactPage() {
     />
     <div className="relative overflow-hidden"  data-section="Contact Page">
       <AmbientColor />
+      <div className="py-20">
       <ContactForm />
+      </div>
     </div>
     </>
   );

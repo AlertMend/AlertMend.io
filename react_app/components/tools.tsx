@@ -116,14 +116,14 @@ export const Tools = () => {
   });
   return (
     <motion.div
-      animate={{
-        background: gradient,
-      }}
+      // animate={{
+      //   background: gradient,
+      // }}
       transition={{
         duration: 0.5,
       }}
       ref={ref}
-      className="w-full relative h-full pt-20 md:pt-40"
+      className="w-full relative h-full pt-20"
       data-section="Tools"
     >
       <div className="px-6">

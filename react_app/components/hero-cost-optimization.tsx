@@ -54,11 +54,11 @@ export const HeroCostOptimization = () => {
          <Subheading className="text-center mt-2 md:mt-6 text-base md:text-xl text-muted dark:text-muted-dark max-w-3xl mx-auto relative z-10">
          AlertMend’s AI agent helps your team manage Kubernetes at scale by automating tasks and cutting infrastructure costs.  Free up your DevOps team to focus on what matters and save money at the same time.
         </Subheading> 
-        <FeaturedImages
+        {/* <FeaturedImages
           textClassName="lg:text-left text-center"
           className="lg:justify-start justify-center items-center"
           showStars
-        />
+        /> */}
         <div className="flex items-center gap-4 justify-center my-10 relative z-10">
           <Button className="flex space-x-2 items-center group !text-lg">
           <a href="https://calendly.com/hello-alertmend/30min" target="_blank"

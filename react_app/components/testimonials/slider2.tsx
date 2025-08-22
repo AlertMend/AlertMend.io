@@ -59,7 +59,7 @@ export const TestimonialsSlider2 = ({page_testimonials=[]}:{page_testimonials:an
 
   return (
     <section>
-      <div className="max-w-7xl mx-auto relative mt-20 z-40">
+      <div className="max-w-7xl mx-auto relative mt-10 z-40">
         <div className="relative">
           {/* Particles animation */}
           <div className="absolute left-1/2 -translate-x-1/2 -top-2 -z-10 w-80 h-20 -mt-6">
