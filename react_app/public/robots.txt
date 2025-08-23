@@ -1,9 +1,13 @@
 User-agent: *
 Disallow: /_next/
+Disallow: /static/
+Disallow: /api/
+Disallow: /preview
+Disallow: /*?*
 Allow: /
 
 # Host
-Host: https://alertmend.io/
+Host: https://www.alertmend.io/
 
 # Sitemaps
-Sitemap: https://alertmend.io/sitemap.xml
+Sitemap: https://www.alertmend.io/sitemap.xml
