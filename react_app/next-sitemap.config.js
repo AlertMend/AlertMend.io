@@ -1,5 +1,5 @@
 module.exports = {
-    siteUrl: "https://alertmend.io/",
+    siteUrl: "https://www.alertmend.io",
     generateRobotsTxt: true,
     sitemapSize: 5000,
   };
