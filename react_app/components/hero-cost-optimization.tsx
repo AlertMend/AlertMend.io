@@ -63,17 +63,17 @@ export const HeroCostOptimization = () => {
           <a href="https://demo.alertmend.io/playground" target="_blank"
           rel="noopener noreferrer"
           className="text-inherit no-underline">
-          <Button variant="muted" className="flex space-x-2 items-center group !text-lg">
+            <Button className="flex space-x-2 items-center group !text-lg">
               Explore Playground
             </Button>
           </a>
           <a href="https://calendly.com/hello-alertmend/30min" target="_blank"
           rel="noopener noreferrer"
           className="text-inherit no-underline">
-          <Button className="flex space-x-2 items-center gap-2 group !text-lg">
+          <Button variant="muted" className="flex space-x-2 items-center gap-2 group !text-lg">
             Book a demo
             {" "}
-            <HiArrowRight className="text-black group-hover:translate-x-1 stroke-[1px] h-3 w-3 mt-0.5 transition-transform duration-200" />
+            <HiArrowRight className="text-light group-hover:translate-x-1 stroke-[1px] h-3 w-3 mt-0.5 transition-transform duration-200" />
           </Button>
           </a>
         </div>
