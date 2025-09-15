@@ -1,0 +1,111 @@
+import { BlogLayout } from "@/components/blog-layout";
+import Thumbnail from "./thumbnail.jpeg";
+
+export const blog = {
+  author: { name: "Arvind Rajpurohit", src: "/img/avatar1.png" },
+  date: "2025-09-14",
+  title: "OOMKilled in Kubernetes",
+  description:
+    "In Kubernetes, applications run inside pods with limits on CPU and memory. If CPU goes high, Kubernetes throttles it. But if memory spikes, Kubernetes kills the pod immediately.",
+  image:
+    "/img/blogs/OOMKilled in Kubernetesblog.png",
+};
+
+export const metadata = {
+  title: blog.title,
+  description: blog.description,
+  keywords:
+    'OOMKilled Kubernetes,Kubernetes OOMKilled solution,Fix OOMKilled automatically,Kubernetes memory limit exceeded,Kubernetes self-healing pods,AlertMend Kubernetes automation',
+  openGraph: {
+    images: [blog.image],
+    title: blog.title,
+    description: blog.description,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: 'https://www.alertmend.io/blogs/OOMKilled-in-Kubernetes',
+  },
+};
+
+export default (props) => <BlogLayout blog={blog} {...props} />;
+
+
+---
+
+# OOMKilled in Kubernetes: How AlertMend Solves It Automatically
+
+In Kubernetes, applications run inside pods with limits on CPU and memory.  
+If CPU goes high, Kubernetes throttles it. But if memory spikes, Kubernetes kills the pod immediately.
+
+This event is called OOMKilled (Out Of Memory Killed). The pod restarts, but in that short downtime:
+
+- Some user requests fail  
+- Customers may see errors  
+
+---
+<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+  <img
+    src="/img/blogs/OOMKilled in Kubernetes.png"
+    alt="Kubernetes security best practices and real breach example"
+    style={{
+      height: '400px',
+      flexShrink: 0,
+      borderRadius: '6px',
+      minWidth: '800px' 
+    }}
+  />
+</div>
+
+## The Old Way: Manual Fix (Slow & Painful)
+
+Before automation, engineers had to:
+
+1. Check pod restarts and confirm the reason was OOMKilled  
+2. Review logs right before the crash  
+3. Compare memory usage vs. pod limits  
+4. Update memory limits, redeploy, and monitor  
+
+Each incident took 45–60 minutes, turning into hours wasted on repeat issues.
+
+---
+
+## The AlertMend Way: Fully Automatic
+
+### Detect
+Prometheus detects high memory usage (≥90% for 5 minutes) and Alertmanager sends the OOMKilled alert to AlertMend.
+
+### Decide
+AlertMend checks: Is it one pod or the whole app?
+
+### Fix
+If many pods are memory-starved → AlertMend increases limits or safely scales out.
+
+If only one pod → AlertMend drains traffic, collects logs & metrics, restarts the pod.
+
+### Record
+AlertMend creates a Jira ticket with evidence and actions taken.
+
+---
+
+## The Result
+
+- Time saved: Fix in 2 minutes (vs. 1 hour)  
+- Better reliability: Users don’t notice errors  
+- No firefighting: Engineers avoid repeat manual work  
+- Full visibility: Every fix is documented automatically  
+
+---
+
+## Final Thoughts
+
+Before AlertMend, OOMKilled in Kubernetes meant downtime, lost time, and frustrated teams.  
+Now, it’s just another self-healing event.
+
+Alertmanager delivers the OOMKilled alert, and AlertMend handles everything else: detection, diagnosis, remediation, and documentation.
+
+
