@@ -101,9 +101,13 @@ export const HeroOnCall = () => {
         </div>
 
         <div className="flex justify-center my-4 relative z-10">
+          <a href="https://demo.alertmend.io/signup?service=on-call" target="_blank"
+          rel="noopener noreferrer"
+          className="text-inherit no-underline">
           <Button className="flex space-x-2 items-center group !text-lg">
             Start monitoring in 30 seconds
           </Button>
+          </a>
         </div>
 
       </Container>
