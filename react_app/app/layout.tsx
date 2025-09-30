@@ -13,9 +13,9 @@ import { Analytics } from '@vercel/analytics/next';
 import QueryPersistenceProvider from "@/lib/QueryPersistenceProvider";
 
 export const metadata: Metadata = {
-  title: 'AlertMend | Automate Kubernetes Incident Management',
+  title: 'AlertMend | Your All-in-One Cloud Companion.',
   description:
-    'Your All-in-One Cloud Companion. AlertMend’s AI agent helps your team manage Kubernetes at scale by automating tasks and cutting infrastructure costs. Free up your DevOps team to focus on what matters and save money at the same time',
+    'AlertMend’s AI agent helps your team manage Kubernetes at scale by automating tasks and cutting infrastructure costs. Free up your DevOps team to focus on what matters and save money at the same time',
   keywords:
     'Kubernetes incident management, Kubernetes automation, AI-driven incident management, AKS, EKS, GKE, DevOps automation, SRE automation, cloud-native, SaaS',
   authors: [{ name: 'AlertMend' }],
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
   applicationName: 'AlertMend',
   metadataBase: new URL('https://www.alertmend.io'),
   openGraph: {
-    title: 'AlertMend | Automate Kubernetes Incident Management',
+    title: 'AlertMend | Your All-in-One Cloud Companion.',
     description:
-      'Your All-in-One Cloud Companion. AlertMend’s AI agent helps your team manage Kubernetes at scale by automating tasks and cutting infrastructure costs. Free up your DevOps team to focus on what matters and save money at the same time.',
+      'AlertMend’s AI agent helps your team manage Kubernetes at scale by automating tasks and cutting infrastructure costs. Free up your DevOps team to focus on what matters and save money at the same time.',
     url: 'https://www.alertmend.io',
     siteName: 'AlertMend',
     images: [
@@ -41,9 +41,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AlertMend | Automate Kubernetes Incident Management',
+    title: 'AlertMend | Your All-in-One Cloud Companion.',
     description:
-    'Your All-in-One Cloud Companion. AlertMend’s AI agent helps your team manage Kubernetes at scale by automating tasks and cutting infrastructure costs. Free up your DevOps team to focus on what matters and save money at the same time.',
+    'AlertMend’s AI agent helps your team manage Kubernetes at scale by automating tasks and cutting infrastructure costs. Free up your DevOps team to focus on what matters and save money at the same time.',
     images: ['https://www.alertmend.io/img/AlertMend Ai 3.2.gif'],
   },
   icons: {
