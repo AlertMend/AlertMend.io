@@ -15,7 +15,7 @@ import QueryPersistenceProvider from "@/lib/QueryPersistenceProvider";
 export const metadata: Metadata = {
   title: 'AlertMend | Automate Kubernetes Incident Management',
   description:
-    'AlertMend automates Kubernetes incident management with AI-driven workflows, reducing downtime and boosting operational efficiency across AKS, EKS, and GKE.',
+    'Your All-in-One Cloud Companion. AlertMend’s AI agent helps your team manage Kubernetes at scale by automating tasks and cutting infrastructure costs. Free up your DevOps team to focus on what matters and save money at the same time',
   keywords:
     'Kubernetes incident management, Kubernetes automation, AI-driven incident management, AKS, EKS, GKE, DevOps automation, SRE automation, cloud-native, SaaS',
   authors: [{ name: 'AlertMend' }],
