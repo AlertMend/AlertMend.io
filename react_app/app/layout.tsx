@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AlertMend | Automate Kubernetes Incident Management',
     description:
-      'Minimize downtime and boost efficiency with AI-driven Kubernetes incident management, offering automated remediation and RCA features.',
+      'Your All-in-One Cloud Companion. AlertMend’s AI agent helps your team manage Kubernetes at scale by automating tasks and cutting infrastructure costs. Free up your DevOps team to focus on what matters and save money at the same time.',
     url: 'https://www.alertmend.io',
     siteName: 'AlertMend',
     images: [
