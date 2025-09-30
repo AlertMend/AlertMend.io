@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'AlertMend | Automate Kubernetes Incident Management',
     description:
-      'AI-driven Kubernetes incident management with automated remediation, RCA insights, and support for AKS, EKS, and GKE.',
+    'Your All-in-One Cloud Companion. AlertMend’s AI agent helps your team manage Kubernetes at scale by automating tasks and cutting infrastructure costs. Free up your DevOps team to focus on what matters and save money at the same time.',
     images: ['https://www.alertmend.io/img/AlertMend Ai 3.2.gif'],
   },
   icons: {
