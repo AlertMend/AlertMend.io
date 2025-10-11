@@ -42,7 +42,7 @@ export const HeroOnCall = () => {
   return (
     <div
       ref={containerRef}
-      className="flex flex-col py-20 md:py-40 relative overflow-hidden"
+      className="flex flex-col py-20 py-40 relative overflow-hidden"
       data-section="Hero Cluster"
     >
       <Container className="flex  flex-col items-center justify-center">

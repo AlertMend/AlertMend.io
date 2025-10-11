@@ -41,7 +41,7 @@ export const HeroCostOptimization = () => {
   return (
     <div
       ref={containerRef}
-      className="flex flex-col min-h-[70rem] md:min-h-[100rem] pt-20 md:pt-40 relative overflow-hidden"
+      className="flex flex-col py-20 md:py-40 relative overflow-hidden"
       data-section="Hero Cost Optimization"
     >
       <Container className="flex  flex-col items-center justify-center">
@@ -78,7 +78,7 @@ export const HeroCostOptimization = () => {
           </a>
         </div>
       </Container>
-      <div className="flex  items-center justify-center relative p-2 md:p-20 cursor-pointer md:-mt-20">
+      {/* <div className="flex  items-center justify-center relative p-2 md:p-20 cursor-pointer md:-mt-20">
         <div
           className="w-full relative"
           style={{
@@ -97,7 +97,7 @@ export const HeroCostOptimization = () => {
             />
           </Card>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
