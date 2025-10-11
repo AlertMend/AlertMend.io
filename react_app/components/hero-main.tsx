@@ -10,10 +10,10 @@ function HeroContent() {
   const sParams = useSearchParams();
   const service = sParams.get("service") || "";
 
-  if (service === "on-call") return <HeroOnCall />;
-  if (service === "cost-optimization") return <HeroCostOptimization />;
-  if (service === "cluster") return <HeroCluster />;
-  return <Hero />; // Default when no service param
+  if (service === "on-call") return <Suspense fallback={<div>Loading...</div>}><HeroOnCall /> </Suspense>;
+  if (service === "cost-optimization") return <Suspense fallback={<div>Loading...</div>}><HeroCostOptimization /> </Suspense>;
+  if (service === "cluster") return <Suspense fallback={<div>Loading...</div>}><HeroCluster /> </Suspense>;
+  return <Suspense fallback={<div>Loading...</div>}><Hero /> </Suspense>; // Default when no service param
 }
 
 export const HeroMain = () => {

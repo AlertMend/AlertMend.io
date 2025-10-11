@@ -1,5 +1,6 @@
 import Home from "@/components/home";
 import { getAllCaseStudies } from "@/lib/case-studies";
+import { Suspense } from "react";
 
 
 export default async function Page({}:any) {
@@ -7,7 +8,9 @@ export default async function Page({}:any) {
 
   return (
     <div className="relative overflow-hidden" data-section="Home Page">
-      <Home caseStudies={caseStudies}/>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Home caseStudies={caseStudies}/>
+      </Suspense>
     </div>
   );
 }

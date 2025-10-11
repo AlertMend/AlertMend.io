@@ -17,13 +17,15 @@ import { useSearchParams } from "next/navigation";
 import { KeyFeatures } from "./key-features";
 import { ClientsOnCall } from "./clients-oncall";
 import { PricingGridOnCall } from "./pricing-grid-oncall";
+import { Suspense } from "react";
 
-export default async function Home({caseStudies}:any) {
+export default function Home({caseStudies}:any) {
   const sParams = useSearchParams();
   const service = sParams.get("service") || "";
 
   if(service=='on-call'){
     return (
+        <Suspense fallback={<div>Loading...</div>}>
         <div className="relative overflow-hidden" data-section="Home Page">
             <HeroMain />
             <KeyFeatures />
@@ -39,6 +41,7 @@ export default async function Home({caseStudies}:any) {
                 <FAQs />
             </div>
         </div>
+        </Suspense>
     )
   }
   return (
@@ -50,7 +53,9 @@ export default async function Home({caseStudies}:any) {
       <Integrations />
       <Language />
       <Testimonials />
+      <Suspense fallback={<div>Loading...</div>}>
       <Testimonials2 testimonials={caseStudies}/>
+      </Suspense>
       <Features2 />
       <ContactForm />
       <div className="py-20" data-section="Pricing">
