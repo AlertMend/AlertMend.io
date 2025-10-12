@@ -110,11 +110,10 @@ export const Tools = () => {
           transition={{ duration: 0.5, delay: 0.25 }}
           className="mt-14 flex flex-col items-center gap-3"
         >
-          <p className="text-zinc-300 text-center">
-            Want this section on your site today? I can export Tailwind HTML or wire it into your React/Next.js page.
-          </p>
+          
           <a
-            href="#book-demo"
+            href="https://calendly.com/hello-alertmend/30min" 
+            target="_blank"
             className="inline-flex items-center justify-center rounded-2xl px-5 py-3 text-sm font-medium bg-white text-black hover:opacity-90 transition"
           >
             Book a 10-minute demo
