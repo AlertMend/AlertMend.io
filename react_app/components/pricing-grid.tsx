@@ -9,6 +9,7 @@ import Balancer from "react-wrap-balancer";
 import Beam from "./beam";
 import { Switch } from "./switch";
 import { Clients } from "./clients";
+import { Link } from "next-view-transitions";
 
 export const PricingGrid = () => {
   const tiers = [
@@ -29,6 +30,7 @@ export const PricingGrid = () => {
         //   </CustomLink>
         // </span>,
       ],
+      url: "https://demo.alertmend.io/signup",
       onClick: () => {
         console.log("clicked");
         window.open("https://demo.alertmend.io/signup", "_blank");
@@ -46,6 +48,7 @@ export const PricingGrid = () => {
         "AI-Generated RCA",
         "Support: within 24 hours",
       ],
+      url: "https://demo.alertmend.io/signup",
       onClick: () => {
         console.log("clicked");
         window.open("https://demo.alertmend.io/signup", "_blank");
@@ -65,6 +68,7 @@ export const PricingGrid = () => {
         "Support: within 6 hours"
       ],
       featured: true,
+      url: "https://demo.alertmend.io/signup",
       onClick: () => {
         console.log("clicked");
         window.open("https://demo.alertmend.io/signup", "_blank");
@@ -83,6 +87,7 @@ export const PricingGrid = () => {
         "AI-Generated RCA",
         "Support: within 30 min + Slack/Teams",
       ],
+      url:"https://calendly.com/hello-alertmend/30min/",
       onClick: () => {
         console.log("clicked");
         window.open("https://calendly.com/hello-alertmend/30min/", "_blank");
@@ -131,7 +136,9 @@ export const PricingGrid = () => {
             </div>
             <Button
               variant={tier.featured ? "primary" : "muted"}
-              onClick={tier.onClick}
+              as={Link}
+              href={tier.url}
+              target={'_blank'}
               className="mt-4"
             >
               {tier.ctaText}

@@ -4,6 +4,7 @@ import { Container } from "./container";
 import { Button } from "./button";
 import { cn } from "@/lib/utils";
 import Balancer from "react-wrap-balancer";
+import { Link } from "next-view-transitions";
 
 export const PricingGridOnCall = () => {
   const tiers = [
@@ -19,9 +20,7 @@ export const PricingGridOnCall = () => {
         "20 monitors included",
         "No call / WhatsApp",
       ],
-      onClick: () => {
-        window.open("https://demo.alertmend.io/signup", "_blank");
-      },
+      url: "https://demo.alertmend.io/signup",
       ctaText: "Start Free",
     },
     {
@@ -38,9 +37,7 @@ export const PricingGridOnCall = () => {
         "Priority support",
       ],
       featured: true,
-      onClick: () => {
-        window.open("https://demo.alertmend.io/signup", "_blank");
-      },
+      url: "https://demo.alertmend.io/signup",
       ctaText: "Upgrade Now",
     },
   ];
@@ -68,7 +65,10 @@ export const PricingGridOnCall = () => {
           </div>
           <Button
             variant={tier.featured ? "primary" : "muted"}
-            onClick={tier.onClick}
+            // onClick={tier.onClick}
+            as = {Link}
+            href={tier.url}
+            target={'_blank'}
             className="mt-6 w-full"
           >
             {tier.ctaText}
