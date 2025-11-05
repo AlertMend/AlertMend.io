@@ -4,12 +4,6 @@ import { useEffect, useRef } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 
 const GA_TRACKING_ID = 'G-Z8QSJ5NK95'
-const script = `
-    <script nowprocket nitro-exclude type="text/javascript" id="sa-dynamic-optimization"
-      data-uuid="457086dd-8bfb-46dd-a38d-2f4a6efd0e7e"
-      src="data:text/javascript;base64,sfsfsfsfsfsfs==">
-    </script>
-  `;
 
 export function ClientAnalytics() {
   const pathname = usePathname()
