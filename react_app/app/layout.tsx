@@ -137,13 +137,30 @@ export default function RootLayout({
             src="https://www.googletagmanager.com/gtag/js?id=G-Z8QSJ5NK95"
           />
 
-          <script 
+          {/* <script 
             nowprocket 
             nitro-exclude 
             type="text/javascript" 
             id="sa-dynamic-optimization" 
             data-uuid="457086dd-8bfb-46dd-a38d-2f4a6efd0e7e"
             src="data:text/javascript;base64,dmFyIHNjcmlwdCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoInNjcmlwdCIpO3NjcmlwdC5zZXRBdHRyaWJ1dGUoIm5vd3Byb2NrZXQiLCAiIik7c2NyaXB0LnNldEF0dHJpYnV0ZSgibml0cm8tZXhjbHVkZSIsICIiKTtzY3JpcHQuc3JjID0gImh0dHBzOi8vZGFzaGJvYXJkLnNlYXJjaGF0bGFzLmNvbS9zY3JpcHRzL2R5bmFtaWNfb3B0aW1pemF0aW9uLmpzIjtzY3JpcHQuZGF0YXNldC51dWlkID0gIjQ1NzA4NmRkLThiZmItNDZkZC1hMzhkLTJmNGE2ZWZkMGU3ZSI7c2NyaXB0LmlkID0gInNhLWR5bmFtaWMtb3B0aW1pemF0aW9uLWxvYWRlciI7ZG9jdW1lbnQuaGVhZC5hcHBlbmRDaGlsZChzY3JpcHQpOw=="
+          /> */}
+
+          <Script
+            id="sa-dynamic-optimization"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                var script = document.createElement('script');
+                script.setAttribute('nowprocket', '');
+                script.setAttribute('nitro-exclude', '');
+                script.type = 'text/javascript';
+                script.id = 'sa-dynamic-optimization';
+                script.dataset.uuid = '457086dd-8bfb-46dd-a38d-2f4a6efd0e7e';
+                script.src = 'data:text/javascript;base64,dmFyIHNjcmlwdCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoInNjcmlwdCIpO3NjcmlwdC5zZXRBdHRyaWJ1dGUoIm5vd3Byb2NrZXQiLCAiIik7c2NyaXB0LnNldEF0dHJpYnV0ZSgibml0cm8tZXhjbHVkZSIsICIiKTtzY3JpcHQuc3JjID0gImh0dHBzOi8vZGFzaGJvYXJkLnNlYXJjaGF0bGFzLmNvbS9zY3JpcHRzL2R5bmFtaWNfb3B0aW1pemF0aW9uLmpzIjtzY3JpcHQuZGF0YXNldC51dWlkID0gIjQ1NzA4NmRkLThiZmItNDZkZC1hMzhkLTJmNGE2ZWZkMGU3ZSI7c2NyaXB0LmlkID0gInNhLWR5bmFtaWMtb3B0aW1pemF0aW9uLWxvYWRlciI7ZG9jdW1lbnQuaGVhZC5hcHBlbmRDaGlsZChzY3JpcHQpOw==';
+                document.head.appendChild(script);
+              `,
+            }}
           />
 
           <Script
