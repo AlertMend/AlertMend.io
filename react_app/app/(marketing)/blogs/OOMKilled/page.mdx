@@ -1,0 +1,234 @@
+import { BlogLayout } from "@/components/blog-layout";
+import Thumbnail from "./thumbnail.jpeg";
+
+export const blog = {
+  author: { name: "Arvind Rajpurohit", src: "/img/avatar1.png" },
+  date: "2025-11-10",
+  title: "OOMKilled (Exit Code 137): Understanding the Kubernetes Memory Kill",
+  description:
+    "",
+  image: "/img/blogs/5CommonKubernetesChallenges.png",
+};
+
+export const metadata = {
+  title: blog.title,
+  description: blog.description,
+  keywords:
+    "Kubernetes incident management, Kubernetes automation, AI-driven incident management, AKS, EKS, GKE, DevOps automation, SRE automation, cloud-native, SaaS",
+  openGraph: {
+    images: [blog.image],
+    title: blog.title,
+    description: blog.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: blog.title,
+    description: blog.description,
+    images: [blog.image],
+  },
+  alternates: {
+    canonical: "https://www.alertmend.io/blogs/5-Common-Kubernetes-Challenges",
+  },
+};
+
+export default (props) => <BlogLayout blog={blog} {...props} />;
+
+---
+
+# OOMKilled (Exit Code 137): Understanding the Kubernetes Memory Kill
+
+## What Exactly Happened?
+
+The simple explanation is this: **your container tried to use more memory (RAM) than it was allowed, so the system shut it down immediately**.
+
+In Kubernetes, every container in a Pod has strict memory boundaries defined by two parameters:
+
+1. **Memory Request** — the minimum guaranteed memory.
+2. **Memory Limit** — the maximum memory the container can use.
+
+When your application crosses the **Memory Limit**, the Linux Kernel’s built-in **Out-Of-Memory (OOM) Killer)** steps in.  
+It terminates the offending container to protect other workloads.  
+The result? A Pod in state `OOMKilled` with **Exit Code 137**.
+
+
+## Why Did This Happen? — The Technical Deep Dive
+
+The OOMKilled mechanism is **a Linux kernel feature**, not Kubernetes itself.  
+Kubernetes simply **interfaces** with it.
+
+### 🧠 The Role of the Linux OOM Killer
+
+The kernel constantly monitors node memory.  
+When memory runs out, it assigns each process an `oom_score`.  
+Higher scores = higher likelihood of being killed.
+
+Kubernetes influences this through **Quality of Service (QoS)** classes by setting `oom_score_adj` values.
+
+| QoS Class | `oom_score_adj` | Eviction Priority | Description |
+|------------|-----------------|-------------------|--------------|
+| **BestEffort** | 1000 | 🔴 **First to be killed** | No requests or limits defined. |
+| **Burstable** | 2 – 999 | 🟠 **Second to be killed** | Has Requests, but higher Limits. |
+| **Guaranteed** | −997 | 🟢 **Last to be killed** | Requests = Limits; strongest protection. |
+
+**Key takeaway:**  
+If the node runs out of memory, BestEffort Pods die first; Guaranteed Pods survive the longest.  
+If a Pod restarts repeatedly, it means Kubernetes keeps trying to recreate it after every OOM event.
+
+---
+
+## Checking the OOM Score in Practice
+
+###### Step 1: Access the Pod
+Run the following to get an interactive shell inside your pod:
+
+```bash
+kubectl exec -it <pod-name> -- /bin/bash
+
+Replace <pod-name> with your actual pod name.
+If /bin/bash isn’t available, use /bin/sh instead.
+
+
+Step 2: Find the Process ID (PID)
+
+List all running processes and note down the PID of your main application:
+
+ps aux
+# or
+top
+
+
+Step 3: View the OOM Score
+
+Once you have the PID, view its OOM score:
+
+cat /proc/<PID>/oom_score
+
+Replace <PID> with the process ID from the previous step.
+
+This number shows the likelihood of being killed when the system runs out of memory.
+The higher the value, the greater the risk.
+
+
+Step 4: View the OOM Score Adjustment
+
+To check the adjustment applied by Kubernetes:
+
+cat /proc/<PID>/oom_score_adj
+
+This value is set based on the pod’s QoS class.
+Lower values mean the process is less likely to be terminated.
+
+| Metric          | What It Shows             |                  Meaning                 |
+| --------------- | ------------------------- | :--------------------------------------: |
+| `oom_score`     | Kernel’s calculated score |     Higher = more likely to be killed    |
+| `oom_score_adj` | Kubernetes-set adjustment | Determines protection level based on QoS |
+
+
+If you compare these scores across multiple pods on the same node, you can see why Kubernetes and Linux terminated certain pods first.
+It's not random; it’s based on these exact values.
+
+How to Spot and Diagnose OOMKilled
+Step 1: Gather Pod Details
+
+You can quickly check for this status using:
+
+kubectl get pods
+
+Example output:
+NAME          READY   STATUS      RESTARTS   AGE
+my-app-pod    0/1     OOMKilled   3          15m
+another-pod   1/1     Running     0          2h
+
+For a deeper look, inspect the Pod's events and the container's last state:
+
+kubectl describe pod my-app-pod
+
+
+Scroll to the Containers section:
+
+Last State:      Terminated
+  Reason:        OOMKilled
+  Exit Code:     137
+  Started:       (timestamp)
+  Finished:      (timestamp)
+# ... (Check the Events section for clues)
+
+
+✅ The Reason: OOMKilled and Exit Code: 137 confirm the kernel killed the process due to memory exhaustion.
+
+Step 2: Identify the Root Cause
+
+If Container Limit Was Reached:
+
+Check if your app actually needs more memory.
+
+If it does (for example, due to a sudden traffic increase), increase the memory limit.
+
+If not, profile the app — you might be leaking memory.
+
+If Node Was Overcommitted:
+
+Kubernetes might have scheduled too many pods on one node.
+
+Example:
+
+Node has 16GB memory
+
+8 pods each request 2GB, but can use up to 2.5GB
+
+If several exceed 2GB, the node runs out of memory and Linux kills one or more pods.
+
+Step 3: Adjust and Observe
+
+Update deployment manifests with corrected memory values.
+
+Roll out gradually.
+
+Monitor using kubectl top pods and dashboards for stability.
+
+Common Causes and Recommended Solutions
+
+OOMKilled usually stems from container misconfiguration or node resource pressure.
+
+| Issue Category     | Common Cause                 |                                Resolution Strategy                                |
+| ------------------ | ---------------------------- | :-------------------------------------------------------------------------------: |
+| Container Specific | Insufficient Memory Limit    | **Adjust Limits Up:** Increase `memory.limit` if the app legitimately needs more. |
+| Container Specific | Application Memory Leak      |       **Debug the Code:** Fix leaks; increasing limits only delays failure.       |
+| Node Resource      | Node Overcommitment/Pressure |      **Right-Size Requests:** Keep total requests below node memory capacity.     |
+| Node Resource      | Low QoS Priority             | **Elevate QoS:** Set `requests == limits` for critical services (Guaranteed QoS). |
+
+
+From Firefighting to Prevention: Proactive Memory Management in Kubernetes
+
+A good engineer doesn’t just fix problems — they prevent them.
+Here are practical steps to build proactive memory management:
+
+Monitor with Intent:
+Use Prometheus + Grafana to track memory usage historically (average, P95, max).
+
+Right-Size Your Pods:
+
+Request ≈ average usage + buffer
+
+Limit ≈ P95 usage
+This minimizes waste while preventing OOMKills.
+
+Use Vertical Pod Autoscaler (VPA) Carefully:
+It can auto-adjust Requests and Limits — test thoroughly before production.
+
+Adopt Multi-Tier Testing:
+Simulate high-load conditions in staging to identify OOM thresholds early.
+
+Use Memory-Efficient Libraries:
+Optimize code — stream data and use smaller caches.
+
+Debug Memory Leaks Early:
+
+Java: Heap dumps or Eclipse MAT
+
+Python/Node.js: memory-profiler, clinic.js
+
+Mastering OOMKilled is a foundational skill in Kubernetes administration.
+When you understand how the Linux kernel’s OOM Killer interacts with Kubernetes QoS — and monitor effectively — you build truly stable, resilient clusters.
+
+
