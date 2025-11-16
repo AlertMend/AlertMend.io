@@ -404,5 +404,5 @@ const metaDescription = generateUniqueMetaDescription(
 
 - **Website:** https://alertmend.io
 - **Playground:** https://demo.alertmend.io/playground
-- **Book a Demo:** https://calendly.com/hello-alertmend
+- **Book a Demo:** https://calendly.com/hello-alertmend/30min
 - **Signup:** https://demo.alertmend.io/signup

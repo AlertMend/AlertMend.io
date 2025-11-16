@@ -138,7 +138,7 @@ export default function PricingPage() {
                   <button
                     onClick={() => {
                       if (plan.buttonText === 'Book a demo') {
-                        window.open('https://calendly.com/hello-alertmend', '_blank')
+                        window.open('https://calendly.com/hello-alertmend/30min', '_blank')
                       } else {
                         navigate('/#cta')
                       }

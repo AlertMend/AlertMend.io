@@ -330,7 +330,7 @@ export default function CaseStudyDetailPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
-                onClick={() => window.open('https://calendly.com/hello-alertmend', '_blank')}
+                onClick={() => window.open('https://calendly.com/hello-alertmend/30min', '_blank')}
                 className="bg-white text-purple-800 px-8 py-4 rounded-xl font-semibold hover:bg-purple-50 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
               >
                 <span>Book a Demo</span>

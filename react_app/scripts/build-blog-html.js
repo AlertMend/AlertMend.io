@@ -974,7 +974,7 @@ markdownFiles.forEach(file => {
             Playground
           </a>
           <a href="https://demo.alertmend.io/signup" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-secondary">Register</a>
-          <a href="https://calendly.com/hello-alertmend" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-primary">Book a Demo</a>
+          <a href="https://calendly.com/hello-alertmend/30min" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-primary">Book a Demo</a>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -1036,7 +1036,7 @@ markdownFiles.forEach(file => {
             <!-- Promotional Section -->
             <div class="promotional-section">
               <p>Ready to eliminate manual firefighting and achieve autonomous infrastructure operations?</p>
-              <p>See how AlertMend AI can help you reduce costs by 50%, achieve zero downtime, and automate incident remediation across Kubernetes, VMs, and ECS. <a href="https://calendly.com/hello-alertmend" target="_blank" rel="noopener noreferrer">Book a demo.</a></p>
+              <p>See how AlertMend AI can help you reduce costs by 50%, achieve zero downtime, and automate incident remediation across Kubernetes, VMs, and ECS. <a href="https://calendly.com/hello-alertmend/30min" target="_blank" rel="noopener noreferrer">Book a demo.</a></p>
             </div>
 
             <!-- Horizontal Separator -->

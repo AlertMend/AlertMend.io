@@ -130,7 +130,7 @@ export default function CaseStudiesPage() {
                 Join teams using AlertMend AI to eliminate manual firefighting, cut costs, and achieve zero downtime
               </p>
               <button 
-                onClick={() => window.open('https://calendly.com/hello-alertmend', '_blank')}
+                onClick={() => window.open('https://calendly.com/hello-alertmend/30min', '_blank')}
                 className="bg-white text-purple-800 px-8 py-4 rounded-xl font-semibold hover:bg-purple-50 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-2 mx-auto"
               >
                 <span>Book a Demo</span>

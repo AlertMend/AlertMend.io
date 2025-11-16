@@ -253,7 +253,7 @@ export default function BlogPostDetailPage() {
                       <p className="text-gray-800 text-lg leading-7 mb-6">
                         See how AlertMend AI can help you reduce costs by 50%, achieve zero downtime, and automate incident remediation across Kubernetes, VMs, and ECS.{' '}
                         <button
-                          onClick={() => window.open('https://calendly.com/hello-alertmend', '_blank')}
+                          onClick={() => window.open('https://calendly.com/hello-alertmend/30min', '_blank')}
                           className="text-purple-700 hover:text-purple-900 font-semibold underline inline-flex items-center gap-1"
                         >
                           Book a demo.

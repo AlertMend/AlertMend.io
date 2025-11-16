@@ -39,7 +39,7 @@ export default function CTA({ solutionId = 'default' }: CTAProps) {
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
           <button 
-            onClick={() => window.open('https://calendly.com/hello-alertmend', '_blank')}
+            onClick={() => window.open('https://calendly.com/hello-alertmend/30min', '_blank')}
             className="group bg-gradient-to-r from-purple-800 to-purple-900 text-white px-10 py-4 rounded-xl font-semibold text-lg hover:from-purple-900 hover:to-purple-950 transition-all shadow-2xl hover:shadow-xl hover:scale-105 flex items-center justify-center space-x-2"
           >
             <span>Book a Demo</span>

@@ -230,7 +230,7 @@ export default function Navbar() {
               </button>
               <button 
                 type="button"
-                onClick={() => window.open('https://calendly.com/hello-alertmend', '_blank')}
+                onClick={() => window.open('https://calendly.com/hello-alertmend/30min', '_blank')}
                 className="bg-gradient-to-r from-purple-800 to-purple-900 text-white px-5 py-2 rounded-lg hover:from-purple-900 hover:to-purple-950 transition-all shadow-sm hover:shadow-md font-semibold text-sm"
               >
                 Book a Demo
@@ -334,7 +334,7 @@ export default function Navbar() {
                 type="button"
                 onClick={() => {
                   setIsOpen(false)
-                  window.open('https://calendly.com/hello-alertmend', '_blank')
+                  window.open('https://calendly.com/hello-alertmend/30min', '_blank')
                 }}
                 className="w-full bg-gradient-to-r from-purple-800 to-purple-900 text-white px-4 py-2.5 rounded-lg hover:from-purple-900 hover:to-purple-950 transition-all shadow-sm font-semibold text-sm"
               >
