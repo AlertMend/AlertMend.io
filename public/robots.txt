@@ -9,5 +9,5 @@ Disallow: /_next/
 Disallow: /private/
 
 # Sitemap location
-Sitemap: https://alertmend.io/sitemap.xml
+Sitemap: https://www.alertmend.io/sitemap.xml
 

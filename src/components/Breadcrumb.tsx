@@ -15,7 +15,7 @@ interface BreadcrumbProps {
 export default function Breadcrumb({ items, showSolutions = false }: BreadcrumbProps) {
   const navigate = useNavigate()
   const location = useLocation()
-  const siteUrl = 'https://alertmend.io'
+  const siteUrl = 'https://www.alertmend.io'
 
   // All solutions for breadcrumb
   const allSolutions = [

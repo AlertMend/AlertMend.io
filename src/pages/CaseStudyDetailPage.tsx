@@ -86,7 +86,7 @@ export default function CaseStudyDetailPage() {
           "@type": "CaseStudy",
           "name": `${study.company} - ${study.title}`,
           "description": study.testimonial.quote,
-          "url": `https://alertmend.io${caseStudyUrl}`,
+          "url": `https://www.alertmend.io${caseStudyUrl}`,
           "author": {
             "@type": "Organization",
             "name": "AlertMend AI"
@@ -102,7 +102,7 @@ export default function CaseStudyDetailPage() {
           "datePublished": new Date().toISOString(),
           "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": `https://alertmend.io${caseStudyUrl}`
+            "@id": `https://www.alertmend.io${caseStudyUrl}`
           }
         }}
         breadcrumbData={{

@@ -28,7 +28,7 @@ export default function SEO({
   breadcrumbData,
 }: SEOProps) {
   const location = useLocation()
-  const siteUrl = 'https://alertmend.io'
+  const siteUrl = 'https://www.alertmend.io'
   const fullTitle = title.includes('AlertMend') ? title : `${title} | AlertMend AI`
   
   // Generate canonical URL with proper normalization

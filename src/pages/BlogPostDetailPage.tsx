@@ -124,7 +124,7 @@ export default function BlogPostDetailPage() {
           },
           "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": `https://alertmend.io${blogPostUrl}`
+            "@id": `https://www.alertmend.io${blogPostUrl}`
           },
           "articleSection": post.category
         }}

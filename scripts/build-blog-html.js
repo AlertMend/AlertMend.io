@@ -260,18 +260,18 @@ markdownFiles.forEach(file => {
   <meta name="description" content="${metaDescription.replace(/"/g, '&quot;')}">
   <meta name="author" content="${metadata.author || 'AlertMend Team'}">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://alertmend.io/blog/${slug}">
+  <link rel="canonical" href="https://www.alertmend.io/blog/${slug}">
   
   <!-- Open Graph -->
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://alertmend.io/blog/${slug}">
+  <meta property="og:url" content="https://www.alertmend.io/blog/${slug}">
   <meta property="og:title" content="${shortenedTitle}">
   <meta property="og:description" content="${metaDescription.replace(/"/g, '&quot;')}">
   <meta property="og:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://alertmend.io/blog/${slug}">
+  <meta name="twitter:url" content="https://www.alertmend.io/blog/${slug}">
   <meta name="twitter:title" content="${shortenedTitle}">
   <meta name="twitter:description" content="${metaDescription.replace(/"/g, '&quot;')}">
   <meta name="twitter:image" content="https://alertmend.io/og-image.jpg">
@@ -300,7 +300,7 @@ markdownFiles.forEach(file => {
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://alertmend.io/blog/${slug}"
+      "@id": "https://www.alertmend.io/blog/${slug}"
     },
     "articleSection": "${metadata.category || 'Blog'}"
   }
@@ -832,9 +832,10 @@ markdownFiles.forEach(file => {
       background: #f9fafb;
     }
     .navbar-logo-icon {
-      width: 32px;
+      width: auto;
       height: 32px;
-      color: #9333ea;
+      max-height: 32px;
+      object-fit: contain;
     }
     .navbar-logo-text {
       font-size: 1.25rem;
@@ -948,10 +949,11 @@ markdownFiles.forEach(file => {
       <div class="navbar-content">
         <!-- Logo -->
         <a href="/" class="navbar-logo">
-          <svg class="navbar-logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'; this.parentElement.querySelector('.navbar-logo-text').style.display='inline';" />
+          <svg class="navbar-logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
           </svg>
-          <span class="navbar-logo-text">AlertMend AI</span>
+          <span class="navbar-logo-text" style="display: none;">AlertMend AI</span>
         </a>
 
         <!-- Desktop Navigation -->

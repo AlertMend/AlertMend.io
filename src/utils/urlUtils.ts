@@ -3,7 +3,7 @@
  * Ensures all canonical URLs use correct domain and proper normalization
  */
 
-const BASE_URL = 'https://alertmend.io'
+const BASE_URL = 'https://www.alertmend.io'
 
 /**
  * Normalizes a pathname by:
@@ -39,10 +39,11 @@ export function getCanonicalUrl(pathname?: string): string {
  * Returns true if successful, false otherwise
  */
 export function setCanonicalUrl(url: string): boolean {
-  // Ensure URL uses correct domain
-  if (!url.includes('alertmend.io')) {
+  // Ensure URL uses correct domain with www subdomain
+  if (!url.includes('www.alertmend.io')) {
     console.warn(`⚠️ Canonical URL domain mismatch: ${url}`)
-    url = url.replace(/alertmendai\.com|www\.alertmendai\.com/g, 'alertmend.io')
+    // Normalize to www.alertmend.io
+    url = url.replace(/https?:\/\/(www\.)?alertmend(ai)?\.(io|com)/g, 'https://www.alertmend.io')
   }
   
   // Remove existing canonical links
@@ -74,8 +75,8 @@ export function verifyCanonicalUrl(): void {
   
   const currentUrl = canonical.href
   
-  // Check for correct domain
-  if (!currentUrl.includes('alertmend.io')) {
+  // Check for correct domain with www subdomain
+  if (!currentUrl.includes('www.alertmend.io')) {
     console.warn(`⚠️ Canonical URL domain mismatch: ${currentUrl}`)
     setCanonicalUrl(expectedUrl)
     return
