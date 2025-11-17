@@ -240,26 +240,7 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              {/* Advisor 2 - James */}
-              <div className="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border-2 border-purple-200/50 hover:border-purple-400 hover:shadow-xl transition-all duration-300 text-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-50/0 via-purple-100/0 to-purple-200/0 group-hover:from-purple-50/50 group-hover:via-purple-100/30 group-hover:to-purple-200/20 transition-all duration-500 rounded-2xl"></div>
-                
-                <div className="relative z-10">
-                  {/* Avatar Placeholder */}
-                  <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold shadow-xl group-hover:scale-110 transition-transform duration-300">
-                    JE
-                  </div>
-                  
-                  <h3 className="text-xl font-bold text-purple-950 mb-3 group-hover:text-purple-800 transition-colors">James</h3>
-                  <p className="text-purple-600 font-semibold mb-4">Advisor</p>
-                  
-                  <p className="text-gray-700 leading-relaxed text-sm mt-2">
-                    Industry expert providing guidance on product strategy and market positioning.
-                  </p>
-                </div>
-              </div>
-
-              {/* Advisor 3 - Erik */}
+              {/* Advisor 2 - Erik */}
               <div className="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border-2 border-purple-200/50 hover:border-purple-400 hover:shadow-xl transition-all duration-300 text-center relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-50/0 via-purple-100/0 to-purple-200/0 group-hover:from-purple-50/50 group-hover:via-purple-100/30 group-hover:to-purple-200/20 transition-all duration-500 rounded-2xl"></div>
                 
@@ -270,7 +251,7 @@ export default function AboutPage() {
                   </div>
                   
                   <h3 className="text-xl font-bold text-purple-950 mb-3 group-hover:text-purple-800 transition-colors">Erik</h3>
-                  <p className="text-purple-600 font-semibold mb-4">Advisor</p>
+                  <p className="text-purple-600 font-semibold mb-4">Mentor</p>
                   
                   <p className="text-gray-700 leading-relaxed text-sm mt-2">
                     Technology advisor with deep expertise in cloud infrastructure and DevOps practices.
