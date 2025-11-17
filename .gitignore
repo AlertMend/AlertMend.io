@@ -9,6 +9,10 @@ _site/
 vendor/
 Gemfile.lock
 
+
+# NPM Modules
+node_modules
+
 # Gems
 *.gem
 

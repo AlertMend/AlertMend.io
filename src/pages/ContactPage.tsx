@@ -3,26 +3,60 @@ import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import Breadcrumb from '../components/Breadcrumb'
 import { Mail, MapPin, Phone, Send } from 'lucide-react'
-import { useState } from 'react'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
+import { useState } from 'react'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    full_name: '',
     company: '',
+    email: '',
     message: '',
   })
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle form submission
-    console.log('Form submitted:', formData)
-  }
+  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
   
   // Generate unique meta description for contact page
   const baseDescription = "Contact AlertMend AI for AIOps. Automate infrastructure and achieve zero downtime with our platform. Get in touch today!"
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'contact', 'contact')
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setFormStatus('submitting')
+    setErrorMessage('')
+
+    try {
+      const response = await fetch('https://api-demo.alertmend.io/contact', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          full_name: formData.full_name,
+          company: formData.company,
+          email: formData.email,
+          message: formData.message,
+        }),
+      })
+
+      if (response.ok) {
+        setFormStatus('success')
+        setFormData({ full_name: '', company: '', email: '', message: '' })
+        // Reset success message after 5 seconds
+        setTimeout(() => {
+          setFormStatus('idle')
+        }, 5000)
+      } else {
+        const data = await response.json().catch(() => ({}))
+        setFormStatus('error')
+        setErrorMessage(data.error || data.message || 'There was an error submitting the form. Please try again.')
+      }
+    } catch (error) {
+      setFormStatus('error')
+      setErrorMessage('Network error. Please check your connection and try again.')
+    }
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -95,64 +129,99 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <header className="mb-4">
+                  <strong>Fill in your details</strong>
+                </header>
+                <form 
+                  onSubmit={handleSubmit}
+                  className="wpcf7-form init space-y-6"
+                  id="contactId"
+                >
                   <div>
-                    <label htmlFor="name" className="block text-sm font-bold text-purple-950 mb-2">
-                      Name
+                    <label htmlFor="full_name" className="block text-sm font-bold text-purple-950 mb-2">
+                      Full Name:
                     </label>
-                    <input
-                      type="text"
-                      id="name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-400 focus:outline-none"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-bold text-purple-950 mb-2">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-400 focus:outline-none"
-                      required
-                    />
+                    <span className="wpcf7-form-control-wrap">
+                      <input
+                        type="text"
+                        id="full_name"
+                        name="full_name"
+                        value={formData.full_name}
+                        onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-400 focus:outline-none wpcf7-form-control"
+                        required
+                      />
+                    </span>
                   </div>
                   <div>
                     <label htmlFor="company" className="block text-sm font-bold text-purple-950 mb-2">
-                      Company
+                      Company:
                     </label>
-                    <input
-                      type="text"
-                      id="company"
-                      value={formData.company}
-                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-400 focus:outline-none"
-                    />
+                    <span className="wpcf7-form-control-wrap">
+                      <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        value={formData.company}
+                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-400 focus:outline-none wpcf7-form-control"
+                        required
+                      />
+                    </span>
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-bold text-purple-950 mb-2">
+                      Your email:
+                    </label>
+                    <span className="wpcf7-form-control-wrap">
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-400 focus:outline-none wpcf7-form-control"
+                        required
+                      />
+                    </span>
                   </div>
                   <div>
                     <label htmlFor="message" className="block text-sm font-bold text-purple-950 mb-2">
-                      Message
+                      Your message:
                     </label>
-                    <textarea
-                      id="message"
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      rows={6}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-400 focus:outline-none"
-                      required
-                    />
+                    <span className="wpcf7-form-control-wrap">
+                      <textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                        rows={6}
+                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-400 focus:outline-none wpcf7-form-control wpcf7-textarea"
+                        required
+                      />
+                    </span>
                   </div>
+                  
+                  {formStatus === 'success' && (
+                    <div className="p-4 bg-green-50 border-2 border-green-200 rounded-xl text-green-800 font-medium">
+                      Thank you! Your message has been sent successfully. We'll get back to you soon.
+                    </div>
+                  )}
+                  
+                  {formStatus === 'error' && (
+                    <div className="p-4 bg-red-50 border-2 border-red-200 rounded-xl text-red-800 font-medium">
+                      {errorMessage || 'There was an error sending your message. Please try again.'}
+                    </div>
+                  )}
+                  
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-purple-800 to-purple-900 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-purple-900 hover:to-purple-950 transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-2"
+                    disabled={formStatus === 'submitting'}
+                    className="wpcf7-form-control wpcf7-submit has-spinner w-full bg-gradient-to-r from-purple-800 to-purple-900 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-purple-900 hover:to-purple-950 transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Send Message
-                    <Send className="h-5 w-5" />
+                    {formStatus === 'submitting' ? 'Sending...' : 'Send'}
+                    {formStatus !== 'submitting' && <Send className="h-5 w-5" />}
                   </button>
                 </form>
               </div>

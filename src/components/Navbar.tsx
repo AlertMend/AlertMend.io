@@ -95,9 +95,21 @@ export default function Navbar() {
         window.scrollTo({ top: 0, behavior: 'instant' })
       }, 0)
     } else {
-      // Handle anchor links for homepage sections
-      if (location.pathname !== '/') {
-        navigate(`/#${item.id}`)
+      // Check if we're on a solution page
+      const validSolutions = ['auto-remediation', 'kubernetes-management', 'on-call-management', 'kubernetes-cost-optimization']
+      const isOnSolutionPage = validSolutions.some(solutionId => 
+        location.pathname === `/${solutionId}` || location.pathname.startsWith(`/${solutionId}/`)
+      )
+      
+      // If on a solution page, scroll to section on current page
+      if (isOnSolutionPage) {
+        const element = document.getElementById(item.id)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      } else if (location.pathname === '/') {
+        // On homepage (Platform Overview), navigate to auto-remediation's How It Works
+        navigate(`/auto-remediation#${item.id}`)
         // Wait for navigation then scroll
         setTimeout(() => {
           const element = document.getElementById(item.id)
@@ -106,10 +118,15 @@ export default function Navbar() {
           }
         }, 100)
       } else {
-        const element = document.getElementById(item.id)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        }
+        // Not on homepage or solution page, navigate to auto-remediation with anchor
+        navigate(`/auto-remediation#${item.id}`)
+        // Wait for navigation then scroll
+        setTimeout(() => {
+          const element = document.getElementById(item.id)
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }
+        }, 100)
       }
     }
   }
