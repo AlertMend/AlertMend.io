@@ -22,7 +22,7 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="AIOps & Kubernetes: AlertMend AI's Insights & Best Practices"
+        title="AlertMend AI: AIOps & Kubernetes Best Practices in 2025"
         description={uniqueDescription}
         canonical="/blog"
         keywords="AIOps blog, Kubernetes best practices, infrastructure automation, DevOps insights, SRE articles, cloud-native operations"

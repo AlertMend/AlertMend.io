@@ -22,7 +22,7 @@ export default function PrivacyPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="AlertMend AI Privacy Policy: Data Protection in 2025"
+        title="AlertMend AI Privacy Policy 2025: Data Protection Explained"
         description={uniqueDescription}
         keywords="AlertMend privacy policy, data protection, privacy, GDPR, data security"
         canonical="/privacy"

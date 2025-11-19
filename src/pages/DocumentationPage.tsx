@@ -105,7 +105,7 @@ export default function DocumentationPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="AlertMend AI: Documentation for Kubernetes, VMs, and ECS"
+        title="AlertMend AI: Kubernetes, VMs, ECS Documentation (2025)"
         description={uniqueDescription}
         keywords="AlertMend documentation, AIOps documentation, Kubernetes monitoring guide, infrastructure automation docs, AlertMend setup"
         canonical="/documentation"

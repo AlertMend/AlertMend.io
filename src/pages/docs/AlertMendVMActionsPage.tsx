@@ -10,7 +10,7 @@ export default function AlertMendVMActionsPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Pre-Defined Actions Using AlertMend VM | AlertMend AI Documentation"
+        title="AlertMend AI: Automate VM Remediation Actions in 2025"
         description={uniqueDescription}
         keywords="AlertMend VM, VM actions, virtual machine remediation, VM automation, pre-defined actions"
         canonical="/documentation/alertmend-vm-actions"

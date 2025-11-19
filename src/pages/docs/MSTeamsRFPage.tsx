@@ -10,7 +10,7 @@ export default function MSTeamsRFPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Configure MS Teams In RF | AlertMend AI Documentation"
+        title="Configure MS Teams in AlertMend AI RF: A Step-by-Step Guide"
         description={uniqueDescription}
         keywords="Microsoft Teams RF, remediation framework, MS Teams automation, AlertMend Teams RF"
         canonical="/documentation/ms-teams-rf"

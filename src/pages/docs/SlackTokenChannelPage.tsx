@@ -10,7 +10,7 @@ export default function SlackTokenChannelPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Get Slack Token and Channel ID | AlertMend AI Documentation"
+        title="AlertMend AI: Get Slack Token and Channel ID for Integration"
         description={uniqueDescription}
         keywords="Slack token, Slack channel ID, Slack authentication, AlertMend Slack setup"
         canonical="/documentation/slack-token-channel"

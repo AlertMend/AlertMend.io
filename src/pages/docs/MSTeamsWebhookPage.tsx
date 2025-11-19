@@ -10,7 +10,7 @@ export default function MSTeamsWebhookPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Create MS Teams Incoming Webhook | AlertMend AI Documentation"
+        title="AlertMend AI: MS Teams Webhook Setup Guide (2025)"
         description={uniqueDescription}
         keywords="MS Teams webhook, Teams incoming webhook, webhook URL, AlertMend Teams webhook"
         canonical="/documentation/ms-teams-webhook"

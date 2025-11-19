@@ -61,7 +61,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Contact Us - Get in Touch with AlertMend AI"
+        title="Contact AlertMend: Connect for Incident Management"
         description={uniqueDescription}
         keywords="Contact AlertMend, AlertMend support, book demo, AIOps consultation, infrastructure automation contact"
         canonical="/contact"

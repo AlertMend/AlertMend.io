@@ -10,7 +10,7 @@ export default function SlackRCAChannelPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Setup Slack Channel for RCA | AlertMend AI Documentation"
+        title="Set Up AlertMend AI's Slack Channel for RCA Reports in 2025"
         description={uniqueDescription}
         keywords="Slack RCA, root cause analysis, Slack notifications, AlertMend RCA setup"
         canonical="/documentation/slack-rca-channel"

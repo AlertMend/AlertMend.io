@@ -10,7 +10,7 @@ export default function MSTeamsApprovalPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Configure MS Teams for Approval | AlertMend AI Documentation"
+        title="AlertMend AI: Configure MS Teams Approvals Easily"
         description={uniqueDescription}
         keywords="Microsoft Teams integration, MS Teams approval, AlertMend Teams setup, Teams notification"
         canonical="/documentation/ms-teams-approval"

@@ -10,7 +10,7 @@ export default function SlackAppApprovalPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Configure Slack App for Approval | AlertMend AI Documentation"
+        title="AlertMend AI: Configure Slack App for Approval Workflows"
         description={uniqueDescription}
         keywords="Slack integration, Slack app approval, AlertMend Slack setup, notification configuration"
         canonical="/documentation/slack-app-approval"

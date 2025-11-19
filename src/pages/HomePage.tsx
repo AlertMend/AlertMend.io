@@ -24,7 +24,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="AlertMend AI: Automate Infrastructure Management"
+        title="AlertMend: Automate Kubernetes & Optimize Cloud Costs"
         description={uniqueDescription}
         keywords="AIOps, Kubernetes, incident management, auto-remediation, SRE, DevOps, cloud-native, cost optimization, VM monitoring, ECS management, infrastructure automation, AI operations, Kubernetes monitoring, container orchestration"
         canonical="/"

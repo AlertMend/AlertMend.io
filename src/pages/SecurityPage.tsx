@@ -36,7 +36,7 @@ export default function SecurityPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Security & Compliance | AlertMend AI"
+        title="AlertMend AI: Cloud Security & Compliance Solutions"
         description={uniqueDescription}
         keywords="AlertMend security, enterprise security, SOC 2, ISO 27001, GDPR compliance, data encryption, infrastructure security, AIOps security"
         canonical="/security"

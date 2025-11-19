@@ -73,7 +73,7 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="AlertMend AI Pricing: Flexible Plans for Your Team in 2025"
+        title="AlertMend AI Pricing: Infrastructure Automation Plans in 2025"
         description={uniqueDescription}
         keywords="AlertMend pricing, AIOps pricing, infrastructure automation pricing, Kubernetes monitoring pricing, cost-effective AIOps"
         canonical="/pricing"

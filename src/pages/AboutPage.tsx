@@ -36,7 +36,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Meet the AlertMend AI Team: Your AIOps Solution Experts"
+        title="AlertMend AI: AIOps for Infrastructure in 2025"
         description={uniqueDescription}
         keywords="About AlertMend, AlertMend team, AIOps founders, infrastructure automation team, SRE team, DevOps experts"
         canonical="/about"

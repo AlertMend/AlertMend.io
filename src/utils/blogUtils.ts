@@ -13,7 +13,7 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     slug: 'oomkilled-in-kubernetes',
-    title: 'How to Fix OOMKilled Errors in Kubernetes',
+    title: 'Kubernetes OOMKilled Errors: How to Fix Them',
     excerpt: 'In Kubernetes, applications run inside pods with limits on CPU and memory. If CPU goes high, Kubernetes throttles it. But if memory goes high, Kubernetes kills the pod.',
     date: '2025-07-01',
     category: 'Kubernetes',
@@ -22,7 +22,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'graceful-shutdown-kubernetes',
-    title: 'Graceful Shutdown in Kubernetes: Ensuring Safe Pod Termination',
+    title: 'Kubernetes Shutdown: AlertMend AI\'s Guide for Reliability',
     excerpt: 'Learn how to gracefully shut down Kubernetes Pods to prevent broken connections, dropped tasks, and data loss.',
     date: '2025-06-28',
     category: 'Kubernetes',
@@ -31,7 +31,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'load-balancing-long-lived-connections-kubernetes',
-    title: 'Load Balancing and Scaling Long-Lived Connections in Kubernetes',
+    title: 'Kubernetes Load Balancing: AlertMend AI\'s Expert Guide',
     excerpt: 'Understand how Kubernetes handles WebSockets, gRPC, and database connections—and learn how to properly load balance them.',
     date: '2025-06-25',
     category: 'Kubernetes',
@@ -40,7 +40,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'rollback-deployments-kubernetes',
-    title: 'How to Roll Back Deployments in Kubernetes',
+    title: 'Kubernetes Rollbacks: Best Practices with AlertMend AI',
     excerpt: 'Understand how Kubernetes handles rollbacks, why it\'s risky in production, and best practices for safe rollbacks.',
     date: '2025-06-20',
     category: 'Kubernetes',
@@ -49,7 +49,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: '5-common-kubernetes-challenges',
-    title: '5 Common Kubernetes Challenges: Scaling, Networking, GitOps & More',
+    title: 'AlertMend AI: Kubernetes Challenges & Automated Solutions',
     excerpt: 'Kubernetes Admission Webhooks play a critical role in controlling and managing the lifecycle of resources in your cluster.',
     date: '2025-06-15',
     category: 'Kubernetes',
@@ -67,7 +67,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'debugging-kubernetes-admission-webhooks',
-    title: 'Debugging Kubernetes Admission Webhooks: A Complete Guide',
+    title: 'Debug Kubernetes Webhooks: AlertMend AI\'s Expert Guide',
     excerpt: 'Kubernetes Admission Webhooks play a critical role in controlling and managing the lifecycle of resources in your cluster.',
     date: '2025-06-14',
     category: 'Kubernetes',
@@ -76,7 +76,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'kubernetes-dns-guide',
-    title: 'Kubernetes DNS: A Guide to Cluster Communication',
+    title: 'Kubernetes DNS: AlertMend\'s Guide (2025)',
     excerpt: 'Kubernetes DNS plays a vital role in managing network communications within a cluster. It simplifies service discovery and enables pods to communicate using service names.',
     date: '2025-06-07',
     category: 'Kubernetes',
@@ -85,7 +85,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'kubernetes-node-not-ready-error',
-    title: 'How to Troubleshoot and Fix Kubernetes Node Not Ready Error',
+    title: 'AlertMend\'s Kubernetes \'Node Not Ready\' Fix Guide (2025)',
     excerpt: 'In Kubernetes clusters, the "Node Not Ready" error is a frequent issue that can disrupt the smooth operation of your workloads.',
     date: '2025-05-30',
     category: 'Kubernetes',
@@ -94,7 +94,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'imagepullbackoff-errimagepull-kubernetes',
-    title: 'How to Troubleshoot and Fix ImagePullBackOff and ErrImagePull in Kubernetes',
+    title: 'Fix Kubernetes ImagePullBackOff Errors: AlertMend AI Guide',
     excerpt: 'In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors occur during this process.',
     date: '2025-05-21',
     category: 'Kubernetes',
@@ -103,7 +103,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'kubernetes-crashloopbackoff',
-    title: 'Understanding and Troubleshooting Kubernetes CrashLoopBackOff',
+    title: 'Fixing Kubernetes CrashLoopBackOff: AlertMend AI\'s Guide',
     excerpt: 'The CrashLoopBackOff error in Kubernetes indicates that a pod is repeatedly crashing and Kubernetes is backing off from restarting it.',
     date: '2025-02-28',
     category: 'Kubernetes',
@@ -112,7 +112,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'kubernetes-evicted-pods',
-    title: 'Kubernetes Evicted Pods: Causes, Troubleshooting, and Best Practices',
+    title: 'Kubernetes Evicted Pods: Solutions by AlertMend AI',
     excerpt: 'In Kubernetes, evicted pods occur when the node running the pods cannot meet the resource requirements, forcing Kubernetes to terminate them.',
     date: '2025-02-24',
     category: 'Kubernetes',
@@ -121,7 +121,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'kubernetes-502-bad-gateway',
-    title: 'How to Troubleshoot and Fix Kubernetes 502 Bad Gateway Error',
+    title: 'Fixing Kubernetes 502 Errors: AlertMend AI\'s Guide',
     excerpt: 'A 502 Bad Gateway error is a common issue that users face when working with Kubernetes services and ingress controllers.',
     date: '2025-02-01',
     category: 'Kubernetes',
@@ -130,7 +130,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: '5-ways-aiops-transforming-infrastructure',
-    title: '5 Ways AIOps is Transforming Infrastructure Management',
+    title: 'AIOps: 5 Ways to Transform Infrastructure in 2025',
     excerpt: 'Discover how AI-powered operations are revolutionizing the way teams manage Kubernetes, VMs, and ECS.',
     date: '2024-03-15',
     category: 'AIOps',
@@ -139,7 +139,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'kubernetes-auto-remediation-best-practices',
-    title: 'Kubernetes Auto-Remediation: Best Practices',
+    title: 'Kubernetes Auto-Remediation: Best Practices by AlertMend AI',
     excerpt: 'Learn how to set up effective auto-remediation workflows for your Kubernetes clusters.',
     date: '2024-03-10',
     category: 'Kubernetes',
@@ -157,7 +157,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'kubernetes-statefulset-volume-recovery-issues',
-    title: 'Kubernetes StatefulSet Volume Recovery Issues: Troubleshooting and Best Practices',
+    title: 'Kubernetes StatefulSet Volume Recovery: Tips & Solutions',
     excerpt: 'Explore common challenges with StatefulSet volume recovery in Kubernetes and learn best practices for troubleshooting and preventing data loss.',
     date: '2025-06-10',
     category: 'Kubernetes',
@@ -166,7 +166,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'mastering-load-balancing-persistent-connections-kubernetes',
-    title: 'Mastering Load Balancing for Persistent Connections in Kubernetes',
+    title: 'Optimize Kubernetes Connections: Load Balancing in 2025',
     excerpt: 'A deep dive into Kubernetes\' handling of long-lived connections and architectural strategies for building reliable, scalable solutions.',
     date: '2025-06-22',
     category: 'Kubernetes',
@@ -202,7 +202,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'troubleshooting-kubeapidown',
-    title: 'Troubleshooting KubeAPI Down: Causes and Recovery Steps',
+    title: 'Fix KubeAPIDown: Restore Kubernetes API Server Availability',
     excerpt: 'Understand what happens when the Kubernetes API server goes down and learn how to diagnose and recover from API server failures.',
     date: '2025-03-25',
     category: 'Kubernetes',

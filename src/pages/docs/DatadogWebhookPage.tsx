@@ -10,7 +10,7 @@ export default function DatadogWebhookPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Setup Datadog Custom Webhook | AlertMend AI Documentation"
+        title="AlertMend AI: Datadog Webhook Setup for Incident Automation"
         description={uniqueDescription}
         keywords="Datadog webhook, Datadog integration, custom webhook, AlertMend Datadog setup"
         canonical="/documentation/datadog-webhook"
