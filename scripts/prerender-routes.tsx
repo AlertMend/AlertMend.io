@@ -1,0 +1,135 @@
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import React from 'react'
+import ReactDOMServer from 'react-dom/server'
+import { StaticRouter } from 'react-router-dom/server'
+import { HelmetProvider } from 'react-helmet-async'
+import App from '../src/App'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const distDir = path.join(__dirname, '../dist')
+const manifestPath = path.join(distDir, '.vite/manifest.json')
+
+if (!fs.existsSync(manifestPath)) {
+  console.error('✗ Manifest file not found. Make sure to run `vite build` before prerendering.')
+  process.exit(1)
+}
+
+const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'))
+const entry = manifest['src/main.tsx']
+
+if (!entry) {
+  console.error('✗ Unable to find `src/main.tsx` in manifest. Cannot prerender pages.')
+  process.exit(1)
+}
+
+const makeModulePreloadLinks = (entryName: string, seen = new Set<string>()): string => {
+  const chunk = manifest[entryName]
+  if (!chunk || seen.has(entryName)) {
+    return ''
+  }
+  seen.add(entryName)
+  let links = ''
+  if (chunk.imports) {
+    chunk.imports.forEach((importName: string) => {
+      const imported = manifest[importName]
+      if (imported) {
+        links += `<link rel="modulepreload" href="/${imported.file}" crossorigin />\n`
+        if (imported.css) {
+          imported.css.forEach((cssFile: string) => {
+            links += `<link rel="stylesheet" href="/${cssFile}" />\n`
+          })
+        }
+        links += makeModulePreloadLinks(importName, seen)
+      }
+    })
+  }
+  return links
+}
+
+const scriptTag = `<script type="module" crossorigin src="/${entry.file}"></script>`
+const cssLinks = (entry.css || []).map((cssFile: string) => `<link rel="stylesheet" href="/${cssFile}">`).join('\n')
+const preloadLinks = makeModulePreloadLinks('src/main.tsx')
+
+const routesToPrerender = [
+  '/',
+  '/auto-remediation',
+  '/kubernetes-management',
+  '/on-call-management',
+  '/kubernetes-cost-optimization',
+  '/pricing',
+  '/case-studies',
+  '/about',
+  '/partners',
+  '/documentation',
+  '/contact',
+  '/careers',
+  '/security',
+  '/compliance',
+  '/terms',
+  '/privacy',
+  '/help',
+  '/community',
+  '/tutorials',
+  '/webinars'
+]
+
+const outputPathForRoute = (route: string) => {
+  if (route === '/') {
+    return path.join(distDir, 'index.html')
+  }
+  const routePath = route.replace(/^\//, '')
+  return path.join(distDir, routePath, 'index.html')
+}
+
+const ensureDirForFile = (filePath: string) => {
+  const dir = path.dirname(filePath)
+  fs.mkdirSync(dir, { recursive: true })
+}
+
+console.log('\nPrerendering static HTML for marketing pages...')
+
+routesToPrerender.forEach((route) => {
+  const helmetContext: { helmet?: any } = {}
+  const markup = ReactDOMServer.renderToString(
+    <HelmetProvider context={helmetContext}>
+      <StaticRouter location={route}>
+        <App />
+      </StaticRouter>
+    </HelmetProvider>
+  )
+
+  const { helmet } = helmetContext
+  const htmlAttrs = helmet?.htmlAttributes?.toString() || 'lang="en"'
+  const bodyAttrs = helmet?.bodyAttributes?.toString() || ''
+
+  const head = `
+  <meta charset="utf-8" />
+  ${helmet?.title?.toString() || '<title>AlertMend AI</title>'}
+  ${helmet?.meta?.toString() || ''}
+  ${helmet?.link?.toString() || ''}
+  ${preloadLinks}
+  ${cssLinks}
+  `
+
+  const document = `<!DOCTYPE html>
+<html ${htmlAttrs}>
+<head>
+${head}
+</head>
+<body ${bodyAttrs}>
+  <div id="root">${markup}</div>
+  ${scriptTag}
+</body>
+</html>`
+
+  const outputFile = outputPathForRoute(route)
+  ensureDirForFile(outputFile)
+  fs.writeFileSync(outputFile, document.trim(), 'utf-8')
+  console.log(`✓ Prerendered ${route} -> ${path.relative(distDir, outputFile)}`)
+})
+
+console.log('✓ Prerendering complete.\n')
+
