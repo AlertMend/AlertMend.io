@@ -9,8 +9,5 @@ Disallow: /_next/
 Disallow: /private/
 
 # Sitemap location
-Sitemap: https://alertmend.io/sitemap.xml
-
-# Crawl-delay (optional, helps prevent server overload)
-Crawl-delay: 1
+Sitemap: https://www.alertmend.io/sitemap.xml
 

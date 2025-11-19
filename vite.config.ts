@@ -24,5 +24,8 @@ const generateBlogHtmlPlugin = () => {
 export default defineConfig({
   plugins: [react(), generateBlogHtmlPlugin()],
   publicDir: 'public',
+  build: {
+    manifest: true,
+  },
 })
 

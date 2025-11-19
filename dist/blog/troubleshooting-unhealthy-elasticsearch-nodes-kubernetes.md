@@ -1,9 +1,9 @@
 ---
-title: "Troubleshooting Unhealthy Elasticsearch Nodes on Kubernetes: Causes and Solutions"
-excerpt: "Networking is one of the most critical components in any Kubernetes deployment, facilitating communication between pods, services, and external resources."
-date: "2025-06-27"
+title: "Unhealthy Elasticsearch Nodes on Kubernetes"
+excerpt: "Explore the causes of unhealthy Elasticsearch nodes and learn how to address them within a Kubernetes environment to maintain cluster stability."
+date: "2025-05-18"
 category: "Elasticsearch"
-author: "Arvind Rajpurohit"
+author: "Himanshu Bansal"
 ---
 
 # Troubleshooting Unhealthy Elasticsearch Nodes on Kubernetes: Causes and Solutions

@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom/server'
-import { HelmetProvider } from 'react-helmet-async'
+import { HelmetProvider } from '../src/lib/helmet'
 import App from '../src/App'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -18,10 +18,11 @@ if (!fs.existsSync(manifestPath)) {
 }
 
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'))
-const entry = manifest['src/main.tsx']
+// Find the entry point (usually index.html or the entry with isEntry: true)
+const entry = manifest['index.html'] || Object.values(manifest).find((m: any) => m.isEntry)
 
 if (!entry) {
-  console.error('✗ Unable to find `src/main.tsx` in manifest. Cannot prerender pages.')
+  console.error('✗ Unable to find entry point in manifest. Cannot prerender pages.')
   process.exit(1)
 }
 
