@@ -2,7 +2,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import Breadcrumb from '../components/Breadcrumb'
-import { Mail, MapPin, Phone, Send } from 'lucide-react'
+import { Mail, MapPin, Send } from 'lucide-react'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
 import { useState } from 'react'
 
@@ -99,17 +99,6 @@ export default function ContactPage() {
                       <h3 className="font-bold text-purple-950 mb-1">Email</h3>
                       <a href="mailto:hello@alertmend.io" className="text-purple-600 hover:text-purple-700 font-medium">
                         hello@alertmend.io
-                      </a>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-purple-50 text-purple-600">
-                      <Phone className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-purple-950 mb-1">Phone</h3>
-                      <a href="tel:+6512345678" className="text-purple-600 hover:text-purple-700 font-medium">
-                        +65 1234 5678
                       </a>
                     </div>
                   </div>
