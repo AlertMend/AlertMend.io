@@ -1127,3 +1127,171 @@ markdownFiles.forEach(file => {
 
 console.log(`\n✓ Successfully converted ${markdownFiles.length} blog posts to HTML`)
 
+// Generate blog listing page (index.html for /blog route)
+console.log('\nGenerating blog listing page...')
+
+// Collect all blog posts with metadata
+const allBlogPosts = []
+markdownFiles.forEach(file => {
+  const markdownPath = path.join(blogDir, file)
+  const slug = file.replace('.md', '')
+  
+  try {
+    const markdown = fs.readFileSync(markdownPath, 'utf-8')
+    const frontmatterMatch = markdown.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/)
+    if (!frontmatterMatch) return
+    
+    const frontmatter = frontmatterMatch[1]
+    const metadata = {}
+    frontmatter.split('\n').forEach((line) => {
+      const match = line.match(/^(\w+):\s*["']?([^"']+)["']?$/)
+      if (match) {
+        metadata[match[1]] = match[2]
+      }
+    })
+    
+    // Parse tags if present
+    const tagsMatch = frontmatter.match(/^tags:\s*\[(.*?)\]/m)
+    let tags = []
+    if (tagsMatch) {
+      tags = tagsMatch[1].split(',').map(t => t.trim().replace(/['"]/g, ''))
+    }
+    
+    allBlogPosts.push({
+      slug,
+      title: metadata.title || slug,
+      excerpt: metadata.excerpt || '',
+      date: metadata.date || '',
+      category: metadata.category || 'Blog',
+      tags: tags
+    })
+  } catch (error) {
+    console.warn(`Warning: Could not read metadata from ${file}`)
+  }
+})
+
+// Sort posts by date (newest first)
+allBlogPosts.sort((a, b) => {
+  const dateA = new Date(a.date).getTime()
+  const dateB = new Date(b.date).getTime()
+  return dateB - dateA
+})
+
+// Generate blog cards HTML
+const blogCardsHTML = allBlogPosts.map(post => {
+  const filteredTags = post.tags ? post.tags.filter(tag => tag.toLowerCase() !== post.category.toLowerCase()) : []
+  const tagsHTML = filteredTags.length > 0 
+    ? `<div class="flex items-center gap-1.5 flex-wrap">
+        ${filteredTags.map(tag => `<span class="inline-flex items-center px-2.5 py-1 bg-gray-100 text-gray-700 rounded-md text-xs font-medium border border-gray-200">${tag}</span>`).join('')}
+      </div>`
+    : ''
+  
+  return `
+    <article class="group bg-white rounded-xl p-8 border border-gray-200 hover:border-purple-300 hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col h-full" onclick="window.location.href='/blog/${post.slug}'">
+      <div class="flex items-center gap-2 flex-wrap mb-4">
+        <div class="inline-block px-3 py-1.5 bg-purple-50 text-purple-700 rounded-md text-xs font-semibold">
+          ${post.category}
+        </div>
+        ${tagsHTML}
+      </div>
+      <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 leading-tight group-hover:text-purple-700 transition-colors">${post.title}</h2>
+      <p class="text-gray-600 mb-6 leading-relaxed line-clamp-3 flex-grow text-base">${post.excerpt}</p>
+      <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+        <div class="flex items-center gap-2 text-gray-500 text-sm">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          <span>${formatDate(post.date)}</span>
+        </div>
+        <div class="text-purple-600 group-hover:text-purple-800 font-semibold text-sm flex items-center gap-2 transition-colors">
+          Read More
+          <svg class="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </div>
+      </div>
+    </article>`
+}).join('')
+
+// Generate full HTML for blog listing page
+const blogListingHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIOps & Kubernetes: AlertMend AI's Insights & Best Practices</title>
+  <meta name="description" content="AlertMend AI blog: Get expert insights on AIOps and Kubernetes. Learn best practices for autonomous infrastructure management.">
+  <meta name="keywords" content="AIOps blog, Kubernetes best practices, infrastructure automation, DevOps insights, SRE articles, cloud-native operations">
+  <link rel="canonical" href="https://www.alertmend.io/blog">
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
+  
+  <!-- Tailwind CSS - using CDN for static HTML -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://fonts.googleapis.com https://calendly.com https://www.googletagmanager.com https://dashboard.searchatlas.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://calendly.com https://demo.alertmend.io https://api-demo.alertmend.io https://www.google-analytics.com https://www.googletagmanager.com https://formspree.io https://dashboard.searchatlas.com; frame-src https://calendly.com; object-src 'none'; base-uri 'self'; form-action 'self' https://formspree.io; frame-ancestors 'none'; upgrade-insecure-requests;">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            purple: {
+              50: '#faf5ff',
+              100: '#f3e8ff',
+              200: '#e9d5ff',
+              300: '#d8b4fe',
+              400: '#c084fc',
+              500: '#a855f7',
+              600: '#9333ea',
+              700: '#7e22ce',
+              800: '#6b21a8',
+              900: '#581c87',
+              950: '#3b0764',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-white">
+  <section class="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-purple-50/30 via-white to-blue-50/30">
+    <div class="max-w-7xl mx-auto">
+      <div class="mb-8">
+        <nav class="text-sm text-purple-600">
+          <a href="/" class="hover:text-purple-800">Home</a>
+          <span class="mx-2">/</span>
+          <span class="text-gray-600">Blog</span>
+        </nav>
+      </div>
+      <div class="text-center mb-12 md:mb-16">
+        <div class="inline-block px-5 py-2 bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 rounded-full text-sm font-bold mb-8 shadow-md border border-purple-200/50">
+          Blog
+        </div>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-purple-950 mb-6 leading-tight">
+          Latest Insights & Updates
+        </h1>
+        <p class="text-xl md:text-2xl text-purple-700 max-w-3xl mx-auto leading-relaxed mb-12">
+          Stay updated with the latest trends, best practices, and insights in AIOps and infrastructure management.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        ${blogCardsHTML}
+      </div>
+    </div>
+  </section>
+</body>
+</html>`
+
+// Write blog listing page
+const blogListingPath = path.join(outputDir, 'index.html')
+fs.writeFileSync(blogListingPath, blogListingHTML, 'utf-8')
+console.log(`✓ Generated blog listing page: blog/index.html`)
+
