@@ -19,7 +19,8 @@ if (!fs.existsSync(manifestPath)) {
 
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'))
 // Find the entry point (usually index.html or the entry with isEntry: true)
-const entry = manifest['index.html'] || Object.values(manifest).find((m: any) => m.isEntry)
+const entryKey = 'index.html'
+const entry = manifest[entryKey] || Object.values(manifest).find((m: any) => m.isEntry)
 
 if (!entry) {
   console.error('✗ Unable to find entry point in manifest. Cannot prerender pages.')
@@ -50,9 +51,34 @@ const makeModulePreloadLinks = (entryName: string, seen = new Set<string>()): st
   return links
 }
 
+// Get all CSS files from the entry and its imports
+const getAllCssFiles = (entryName: string, seen = new Set<string>()): string[] => {
+  const chunk = manifest[entryName]
+  if (!chunk || seen.has(entryName)) {
+    return []
+  }
+  seen.add(entryName)
+  let cssFiles: string[] = []
+  
+  // Add CSS from this chunk
+  if (chunk.css) {
+    cssFiles.push(...chunk.css)
+  }
+  
+  // Add CSS from imported chunks
+  if (chunk.imports) {
+    chunk.imports.forEach((importName: string) => {
+      cssFiles.push(...getAllCssFiles(importName, seen))
+    })
+  }
+  
+  return cssFiles
+}
+
 const scriptTag = `<script type="module" crossorigin src="/${entry.file}"></script>`
-const cssLinks = (entry.css || []).map((cssFile: string) => `<link rel="stylesheet" href="/${cssFile}">`).join('\n')
-const preloadLinks = makeModulePreloadLinks('src/main.tsx')
+const allCssFiles = getAllCssFiles(entryKey)
+const cssLinks = allCssFiles.map((cssFile: string) => `<link rel="stylesheet" href="/${cssFile}">`).join('\n')
+const preloadLinks = makeModulePreloadLinks(entryKey)
 
 const routesToPrerender = [
   '/',
@@ -108,11 +134,12 @@ routesToPrerender.forEach((route) => {
 
   const head = `
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  ${cssLinks}
   ${helmet?.title?.toString() || '<title>AlertMend AI</title>'}
   ${helmet?.meta?.toString() || ''}
   ${helmet?.link?.toString() || ''}
   ${preloadLinks}
-  ${cssLinks}
   `
 
   const document = `<!DOCTYPE html>
