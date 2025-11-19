@@ -19,6 +19,82 @@
       "destination": "/blog/:slug.html"
     },
     {
+      "source": "/auto-remediation",
+      "destination": "/auto-remediation/index.html"
+    },
+    {
+      "source": "/kubernetes-management",
+      "destination": "/kubernetes-management/index.html"
+    },
+    {
+      "source": "/on-call-management",
+      "destination": "/on-call-management/index.html"
+    },
+    {
+      "source": "/kubernetes-cost-optimization",
+      "destination": "/kubernetes-cost-optimization/index.html"
+    },
+    {
+      "source": "/pricing",
+      "destination": "/pricing/index.html"
+    },
+    {
+      "source": "/case-studies",
+      "destination": "/case-studies/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about/index.html"
+    },
+    {
+      "source": "/partners",
+      "destination": "/partners/index.html"
+    },
+    {
+      "source": "/documentation",
+      "destination": "/documentation/index.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact/index.html"
+    },
+    {
+      "source": "/careers",
+      "destination": "/careers/index.html"
+    },
+    {
+      "source": "/security",
+      "destination": "/security/index.html"
+    },
+    {
+      "source": "/compliance",
+      "destination": "/compliance/index.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms/index.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy/index.html"
+    },
+    {
+      "source": "/help",
+      "destination": "/help/index.html"
+    },
+    {
+      "source": "/community",
+      "destination": "/community/index.html"
+    },
+    {
+      "source": "/tutorials",
+      "destination": "/tutorials/index.html"
+    },
+    {
+      "source": "/webinars",
+      "destination": "/webinars/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
