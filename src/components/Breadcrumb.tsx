@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom'
 import { ChevronRight, Home, Zap, Activity, Bell, DollarSign } from 'lucide-react'
-import { Helmet } from 'react-helmet-async'
+import { Helmet } from '../lib/helmet'
 
 interface BreadcrumbItem {
   label: string

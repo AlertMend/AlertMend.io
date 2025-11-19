@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, useLocation } from 'react-router-dom'
-import { HelmetProvider } from 'react-helmet-async'
+import { HelmetProvider } from './lib/helmet'
 import App from './App.tsx'
 import './index.css'
 import { setupCanonicalObserver, verifyCanonicalUrl } from './utils/urlUtils'

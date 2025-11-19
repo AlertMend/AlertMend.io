@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async'
+import { Helmet } from '../lib/helmet'
 import { useLocation } from 'react-router-dom'
 import { normalizePathname } from '../utils/urlUtils'
 
