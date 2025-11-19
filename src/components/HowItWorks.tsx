@@ -10,7 +10,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
   const monitoringTools = [
     { name: 'Datadog', logo: '/logos/datadog-logo.svg', icon: null, color: 'text-purple-600', bg: 'bg-purple-50' }, // ✓ Logo exists
     { name: 'Grafana', logo: '/logos/Grafana_Logo.png', icon: null, color: 'text-orange-600', bg: 'bg-orange-50' }, // ✓ Logo exists
-    { name: 'Alertmanager', logo: '/logos/alertmanager-logo.png', icon: Bell, color: 'text-orange-600', bg: 'bg-orange-50' }, // ⚠ Uses icon fallback
+    { name: 'Alertmanager', logo: null, icon: Bell, color: 'text-orange-600', bg: 'bg-orange-50' }, // Uses icon fallback (logo file doesn't exist)
     { name: 'Prometheus', logo: '/logos/prometheus.png', icon: null, color: 'text-red-600', bg: 'bg-red-50' }, // ✓ Logo exists
     { name: 'Webhooks', logo: '/logos/webhook-logo.png', icon: Webhook, color: 'text-green-600', bg: 'bg-green-50' }, // ✓ Logo exists
   ]
@@ -37,7 +37,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
           'Trigger remediation workflows based on alert type',
         ],
         tools: [
-          { name: 'Alertmanager', logo: '/logos/alertmanager-logo.png', icon: Bell, color: 'text-orange-600', bg: 'bg-orange-50' },
+          { name: 'Alertmanager', logo: null, icon: Bell, color: 'text-orange-600', bg: 'bg-orange-50' },
           { name: 'Datadog', logo: '/logos/datadog-logo.svg', icon: null, color: 'text-purple-600', bg: 'bg-purple-50' },
           { name: 'PagerDuty', logo: '/logos/pagerduty-logo.png', icon: Bell, color: 'text-red-600', bg: 'bg-red-50' },
           { name: 'CloudWatch', logo: '/logos/cloudwatch.png', icon: null, color: 'text-orange-600', bg: 'bg-orange-50' },

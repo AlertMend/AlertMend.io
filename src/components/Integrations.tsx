@@ -15,7 +15,7 @@ const integrations = [
   { name: 'AWS', logo: '/logos/aws-logo.png', icon: null, color: 'text-orange-600', bg: 'bg-white' }, // ✓ Logo exists
   { name: 'AWS CloudWatch', logo: '/logos/cloudwatch.png', icon: null, color: 'text-orange-600', bg: 'bg-white' }, // ✓ Logo exists
   { name: 'Datadog', logo: '/logos/datadog-logo.svg', icon: null, color: 'text-purple-600', bg: 'bg-white' }, // ✓ Logo exists
-  { name: 'Alertmanager', logo: '/logos/alertmanager-logo.png', icon: Bell, color: 'text-orange-600', bg: 'bg-white' }, // ⚠ Placeholder: Uses icon fallback
+  { name: 'Alertmanager', logo: null, icon: Bell, color: 'text-orange-600', bg: 'bg-white' }, // Uses icon fallback (logo file doesn't exist)
   { name: 'AWS ECS', logo: '/logos/ecs-logo.png', icon: null, color: 'text-purple-600', bg: 'bg-white' }, // ✓ Logo exists
   { name: 'Jenkins', logo: '/logos/jenkins-logo.png', icon: Settings, color: 'text-red-600', bg: 'bg-white' }, // ✓ Logo exists
   { name: 'Kubernetes', logo: '/logos/kubernetes-logo.png', icon: null, color: 'text-blue-600', bg: 'bg-white' }, // ✓ Logo exists
@@ -39,7 +39,7 @@ function IntegrationBadge({ integration }: { integration: any }) {
           alt={`${integration.name} logo`}
           className="h-12 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity mb-2"
           onError={() => {
-            console.error(`Failed to load logo for ${integration.name}:`, integration.logo);
+            // Silently handle image load errors - fallback to icon will be used
             setImageError(true);
           }}
           onLoad={() => {

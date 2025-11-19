@@ -259,7 +259,7 @@ markdownFiles.forEach(file => {
   <title>${shortenedTitle}</title>
   <meta name="description" content="${metaDescription.replace(/"/g, '&quot;')}">
   <meta name="author" content="${metadata.author || 'AlertMend Team'}">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.alertmend.io/blog/${slug}">
   
   <!-- Open Graph -->
@@ -1222,6 +1222,7 @@ const blogListingHTML = `<!DOCTYPE html>
   <title>AIOps & Kubernetes: AlertMend AI's Insights & Best Practices</title>
   <meta name="description" content="AlertMend AI blog: Get expert insights on AIOps and Kubernetes. Learn best practices for autonomous infrastructure management.">
   <meta name="keywords" content="AIOps blog, Kubernetes best practices, infrastructure automation, DevOps insights, SRE articles, cloud-native operations">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.alertmend.io/blog">
   <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
   
