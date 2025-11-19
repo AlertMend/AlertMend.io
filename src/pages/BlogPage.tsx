@@ -58,14 +58,16 @@ export default function BlogPage() {
                     </div>
                     {post.tags && post.tags.length > 0 && (
                       <div className="flex items-center gap-1.5 flex-wrap">
-                        {post.tags.map((tag, index) => (
-                          <span
-                            key={index}
-                            className="inline-flex items-center px-2.5 py-1 bg-gray-100 text-gray-700 rounded-md text-xs font-medium border border-gray-200"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+                        {post.tags
+                          .filter(tag => tag.toLowerCase() !== post.category.toLowerCase())
+                          .map((tag, index) => (
+                            <span
+                              key={index}
+                              className="inline-flex items-center px-2.5 py-1 bg-gray-100 text-gray-700 rounded-md text-xs font-medium border border-gray-200"
+                            >
+                              {tag}
+                            </span>
+                          ))}
                       </div>
                     )}
                   </div>
