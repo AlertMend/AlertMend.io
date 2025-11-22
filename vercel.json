@@ -2,43 +2,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": null,
-  "redirects": [
-    {
-      "source": "/blog/:slug.html",
-      "destination": "/blog/:slug",
-      "permanent": true
-    },
-    {
-      "source": "/blogs/Kubernetes-Evicted-Pods.html",
-      "destination": "/blog/kubernetes-evicted-pods",
-      "permanent": true
-    },
-    {
-      "source": "/blogs/kubernetes_502_bad_gateway_error_fix.html",
-      "destination": "/blog/kubernetes-502-bad-gateway",
-      "permanent": true
-    },
-    {
-      "source": "/blogs/Debugging-Kubernetes-Admission-Webhooks.html",
-      "destination": "/blog/debugging-kubernetes-admission-webhooks",
-      "permanent": true
-    },
-    {
-      "source": "/blogs/Privileged-Containers-in-Kubernetes.html",
-      "destination": "/blog/understanding-privileged-containers-kubernetes",
-      "permanent": true
-    },
-    {
-      "source": "/blogs/:slug.html",
-      "destination": "/blogs/:slug",
-      "permanent": true
-    },
-    {
-      "source": "/blogs",
-      "destination": "/blog",
-      "permanent": true
-    }
-  ],
+  "redirects": [],
   "rewrites": [
     {
       "source": "/blog",
@@ -49,7 +13,15 @@
       "destination": "/blog/:slug.html"
     },
     {
+      "source": "/blog/:slug.html",
+      "destination": "/blog/:slug.html"
+    },
+    {
       "source": "/blogs/:slug",
+      "destination": "/blogs/:slug.html"
+    },
+    {
+      "source": "/blogs/:slug.html",
       "destination": "/blogs/:slug.html"
     },
     {

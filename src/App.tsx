@@ -54,6 +54,7 @@ function App() {
       <Route path="/about" element={<AboutPage />} />
       <Route path="/blog" element={<BlogPage />} />
       <Route path="/blog/:slug" element={<BlogPostDetailPage />} />
+      <Route path="/blog/:slug.html" element={<BlogPostDetailPage />} />
       <Route path="/blogs/*" element={<LegacyBlogPage />} />
       <Route path="/careers" element={<CareersPage />} />
       <Route path="/contact" element={<ContactPage />} />

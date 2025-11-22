@@ -19,7 +19,9 @@ export default function BlogPostDetailPage() {
 
   useEffect(() => {
     if (slug) {
-      getBlogPost(slug).then((data) => {
+      // Remove .html extension if present for fetching the blog post
+      const cleanSlug = slug.replace(/\.html$/, '')
+      getBlogPost(cleanSlug).then((data) => {
         setPost(data)
         setLoading(false)
       })
@@ -81,6 +83,7 @@ export default function BlogPostDetailPage() {
   const relatedPosts = [...sameCategoryPosts, ...otherPosts].slice(0, 10)
 
   const readTime = post.content ? calculateReadTime(post.content) : '5 min read'
+  // Canonical URL always points to the preferred format without .html
   const blogPostUrl = `/blog/${post.slug}`
   
   // Truncate title to 30-60 characters for SEO
