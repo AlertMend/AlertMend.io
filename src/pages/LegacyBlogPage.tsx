@@ -32,6 +32,9 @@ export default function LegacyBlogPage() {
       getBlogPost(newSlug).then((data) => {
         setPost(data)
         setLoading(false)
+      }).catch((error) => {
+        console.error('Error loading blog post:', error)
+        setLoading(false)
       })
     } else {
       // If we can't map it, redirect to blog listing

@@ -40,15 +40,26 @@ export function mapOldBlogUrlToSlug(oldUrl: string): string | null {
  * - /blogs/Kubernetes-Evicted-Pods.html
  * - /blogs/kubernetes_502_bad_gateway_error_fix.html
  * - blogs/Debugging-Kubernetes-Admission-Webhooks.html
+ * - Privileged-Containers-in-Kubernetes.html (from React Router params)
  */
 export function extractSlugFromOldUrl(path: string): string | null {
-  // Extract the filename from the path
-  const match = path.match(/\/(?:blogs\/)?([^/]+)\.html?$/)
-  if (!match) {
+  if (!path) {
     return null
   }
   
-  const filename = match[1]
+  // Remove leading slash if present
+  let cleanPath = path.replace(/^\/+/, '')
+  
+  // Remove /blogs/ prefix if present
+  cleanPath = cleanPath.replace(/^blogs\//, '')
+  
+  // Extract the filename (remove .html extension)
+  const filename = cleanPath.replace(/\.html?$/, '')
+  
+  if (!filename) {
+    return null
+  }
+  
   return mapOldBlogUrlToSlug(filename)
 }
 

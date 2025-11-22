@@ -18,11 +18,11 @@
     },
     {
       "source": "/blogs/:slug",
-      "destination": "/blogs/:slug.html"
+      "destination": "/index.html"
     },
     {
       "source": "/blogs/:slug.html",
-      "destination": "/blogs/:slug.html"
+      "destination": "/index.html"
     },
     {
       "source": "/auto-remediation",
