@@ -1,8 +1,14 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
+import Breadcrumb from '../components/Breadcrumb'
 import { MessageSquare, Github, Slack } from 'lucide-react'
+import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
 
 export default function CommunityPage() {
+  // Generate unique meta description for community page
+  const baseDescription = "Join the AlertMend AI community! Connect with other users, share experiences, contribute to open-source integrations, and learn from the community on GitHub, Slack, and discussions."
+  const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'community', 'community')
   const platforms = [
     {
       icon: Github,
@@ -26,10 +32,22 @@ export default function CommunityPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="AlertMend AI Community: Join Our Growing Ecosystem"
+        description={uniqueDescription}
+        keywords="AlertMend community, AIOps community, DevOps community, open source, GitHub, Slack community, infrastructure automation community"
+        canonical="/community"
+        breadcrumbData={{
+          items: [{ label: 'Community' }]
+        }}
+      />
       <Navbar />
       <main className="pt-24">
         <section className="py-20 md:py-32 container-padding bg-gradient-to-b from-white via-primary-50/30 to-white">
           <div className="max-w-7xl mx-auto">
+            <div className="mb-8">
+              <Breadcrumb items={[{ label: 'Community' }]} />
+            </div>
             <div className="text-center mb-20">
               <div className="inline-block px-5 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 rounded-full text-sm font-bold mb-6 shadow-lg">
                 Community

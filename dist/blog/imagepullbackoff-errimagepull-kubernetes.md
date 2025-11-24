@@ -6,10 +6,6 @@ category: "Kubernetes"
 author: "Himanshu Bansal"
 ---
 
-# How to Troubleshoot and Fix ImagePullBackOff and ErrImagePull in Kubernetes
-
-In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors occur during this process.
-
 ## Understanding the Errors
 
 - **ImagePullBackOff**: Kubernetes is backing off from pulling the image after repeated failures
@@ -61,13 +57,11 @@ In Kubernetes, container images are pulled from repositories when you deploy a p
 
 **Solutions:**
 ```bash
-# Create image pull secret
 kubectl create secret docker-registry my-registry-secret \
   --docker-server=<registry-url> \
   --docker-username=<username> \
   --docker-password=<password>
 
-# Add to pod spec
 spec:
   imagePullSecrets:
   - name: my-registry-secret

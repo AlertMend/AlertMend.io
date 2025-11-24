@@ -6,10 +6,6 @@ category: "Kubernetes"
 author: "Arvind Rajpurohit"
 ---
 
-# How to Fix OOMKilled Errors in Kubernetes
-
-In Kubernetes, applications run inside pods with limits on CPU and memory. If CPU goes high, Kubernetes throttles it. But if memory goes high, Kubernetes kills the pod.
-
 ## Understanding OOMKilled
 
 When a pod exceeds its memory limit, Kubernetes terminates it with the status `OOMKilled` (Out Of Memory Killed). This is a critical issue that can cause service disruptions and data loss.
@@ -24,10 +20,8 @@ When a pod exceeds its memory limit, Kubernetes terminates it with the status `O
 ## How to Diagnose
 
 ```bash
-# Check pod status
 kubectl get pods
 
-# Describe the pod to see OOMKilled status
 kubectl describe pod <pod-name>
 
 # Check container logs

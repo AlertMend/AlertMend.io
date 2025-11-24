@@ -6,8 +6,6 @@ category: "Kubernetes"
 author: "AlertMend Team"
 ---
 
-# Kubernetes Auto-Remediation: Best Practices
-
 Auto-remediation is one of the most powerful features for Kubernetes operations. When implemented correctly, it can eliminate 70% of manual incident response work. Here's how to do it right.
 
 ## Understanding Auto-Remediation
@@ -31,7 +29,6 @@ Begin with remediations that have minimal impact if they fail or are applied inc
 
 ### Example Workflow:
 ```yaml
-# Example: Auto-restart crash-looping pods
 apiVersion: v1
 kind: Pod
 metadata:

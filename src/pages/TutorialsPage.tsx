@@ -1,8 +1,14 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
+import Breadcrumb from '../components/Breadcrumb'
 import { PlayCircle, Clock, ArrowRight } from 'lucide-react'
+import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
 
 export default function TutorialsPage() {
+  // Generate unique meta description for tutorials page
+  const baseDescription = "Learn AlertMend AI with step-by-step tutorials. Master Kubernetes monitoring, VM auto-scaling, ECS optimization, and advanced auto-remediation workflows."
+  const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'tutorials', 'tutorials')
   const tutorials = [
     {
       title: 'Getting Started with Kubernetes Monitoring',
@@ -44,10 +50,22 @@ export default function TutorialsPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="AlertMend AI Tutorials: Step-by-Step Learning Guides"
+        description={uniqueDescription}
+        keywords="AlertMend tutorials, Kubernetes tutorials, AIOps tutorials, infrastructure automation tutorials, video tutorials, learning guides"
+        canonical="/tutorials"
+        breadcrumbData={{
+          items: [{ label: 'Tutorials' }]
+        }}
+      />
       <Navbar />
       <main className="pt-24">
         <section className="py-20 md:py-32 container-padding bg-gradient-to-b from-white via-primary-50/30 to-white">
           <div className="max-w-7xl mx-auto">
+            <div className="mb-8">
+              <Breadcrumb items={[{ label: 'Tutorials' }]} />
+            </div>
             <div className="text-center mb-20">
               <div className="inline-block px-5 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 rounded-full text-sm font-bold mb-6 shadow-lg">
                 Tutorials

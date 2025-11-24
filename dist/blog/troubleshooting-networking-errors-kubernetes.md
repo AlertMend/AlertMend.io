@@ -6,10 +6,6 @@ category: "Kubernetes"
 author: "Arvind Rajpurohit"
 ---
 
-# 🚨 Troubleshooting Networking Errors in Kubernetes
-
-Networking is one of the most critical components in any Kubernetes deployment, facilitating communication between pods, services, and external resources.
-
 ## Common Networking Issues
 
 ### 1. Pod-to-Pod Communication Fails
@@ -21,10 +17,8 @@ Networking is one of the most critical components in any Kubernetes deployment, 
 
 **Diagnosis:**
 ```bash
-# Check pod network
 kubectl exec -it <pod-name> -- ping <other-pod-ip>
 
-# Check service endpoints
 kubectl get endpoints <service-name>
 
 # Verify CNI plugin

@@ -1,8 +1,14 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
+import Breadcrumb from '../components/Breadcrumb'
 import { HelpCircle, Search, Book, MessageCircle } from 'lucide-react'
+import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
 
 export default function HelpCenterPage() {
+  // Generate unique meta description for help center page
+  const baseDescription = "Get help with AlertMend AI. Find answers to common questions, troubleshooting guides, installation instructions, and connect with our support team."
+  const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'help', 'help')
   const categories = [
     {
       icon: Book,
@@ -23,10 +29,22 @@ export default function HelpCenterPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEO
+        title="AlertMend AI Help Center: Get Support & Documentation"
+        description={uniqueDescription}
+        keywords="AlertMend help, AlertMend support, troubleshooting, documentation, FAQ, customer support, AIOps help"
+        canonical="/help"
+        breadcrumbData={{
+          items: [{ label: 'Help Center' }]
+        }}
+      />
       <Navbar />
       <main className="pt-24">
         <section className="py-20 md:py-32 container-padding bg-gradient-to-b from-white via-primary-50/30 to-white">
           <div className="max-w-7xl mx-auto">
+            <div className="mb-8">
+              <Breadcrumb items={[{ label: 'Help Center' }]} />
+            </div>
             <div className="text-center mb-20">
               <div className="inline-block px-5 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 rounded-full text-sm font-bold mb-6 shadow-lg">
                 Help Center

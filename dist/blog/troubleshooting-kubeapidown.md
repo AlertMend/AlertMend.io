@@ -6,8 +6,6 @@ category: "Kubernetes"
 author: "Arvind Rajpurohit"
 ---
 
-# Troubleshooting KubeAPIDown: How to Restore Kubernetes API Server Availability
-
 The Kubernetes API server is the central control plane component. When it's down, the entire cluster becomes unmanageable.
 
 ## Understanding API Server Failure
@@ -62,10 +60,8 @@ The API server is responsible for:
 ## Diagnosis
 
 ```bash
-# Check API server status
 kubectl get componentstatuses
 
-# Check API server pods
 kubectl get pods -n kube-system | grep kube-apiserver
 
 # View API server logs

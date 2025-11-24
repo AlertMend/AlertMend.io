@@ -6,8 +6,6 @@ category: "Elasticsearch"
 author: "Himanshu Bansal"
 ---
 
-# Elasticsearch Cluster Yellow Incident on Kubernetes: Troubleshooting and Solutions
-
 A yellow cluster status in Elasticsearch indicates that all primary shards are allocated, but replica shards are not. This is common in single-node clusters or when nodes are unavailable.
 
 ## Understanding Cluster Status
@@ -54,10 +52,8 @@ A yellow cluster status in Elasticsearch indicates that all primary shards are a
 ## Troubleshooting
 
 ```bash
-# Check cluster health
 kubectl exec -it <elasticsearch-pod> -- curl -X GET "localhost:9200/_cluster/health?pretty"
 
-# Check unassigned shards
 kubectl exec -it <elasticsearch-pod> -- curl -X GET "localhost:9200/_cat/shards?h=index,shard,prirep,state,unassigned.reason"
 
 # Force shard allocation (use with caution)

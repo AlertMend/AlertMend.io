@@ -6,10 +6,6 @@ category: "Kubernetes"
 author: "Arvind Rajpurohit"
 ---
 
-# How to Troubleshoot and Fix Kubernetes 502 Bad Gateway Error
-
-A 502 Bad Gateway error is a common issue that users face when working with Kubernetes services and ingress controllers.
-
 ## Understanding 502 Bad Gateway
 
 A 502 error occurs when a gateway or proxy server receives an invalid response from an upstream server. In Kubernetes, this typically happens between:
@@ -28,10 +24,8 @@ A 502 error occurs when a gateway or proxy server receives an invalid response f
 
 **Diagnosis:**
 ```bash
-# Check service endpoints
 kubectl get endpoints <service-name>
 
-# Check pod status
 kubectl get pods -l app=<app-label>
 
 # Check readiness probes

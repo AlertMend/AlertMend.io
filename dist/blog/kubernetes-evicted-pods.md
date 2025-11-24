@@ -6,10 +6,6 @@ category: "Kubernetes"
 author: "Himanshu Bansal"
 ---
 
-# 🚨 Kubernetes Evicted Pods: Causes, Troubleshooting, and Best Practices
-
-In Kubernetes, evicted pods occur when the node running the pods cannot meet the resource requirements, forcing Kubernetes to terminate them.
-
 ## Why Pods Get Evicted
 
 Kubernetes evicts pods when nodes experience resource pressure:
@@ -61,10 +57,8 @@ Kubernetes evicts pods when nodes experience resource pressure:
 ### Check Evicted Pods
 
 ```bash
-# List evicted pods
 kubectl get pods --all-namespaces | grep Evicted
 
-# Get details
 kubectl describe pod <pod-name>
 ```
 
