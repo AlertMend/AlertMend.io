@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -14,6 +14,7 @@ import { generateUniqueMetaDescription } from '../utils/descriptionUtils'
 export default function BlogPostDetailPage() {
   const { slug } = useParams<{ slug: string }>()
   const navigate = useNavigate()
+  const location = useLocation()
   const [post, setPost] = useState<BlogPost | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -83,8 +84,11 @@ export default function BlogPostDetailPage() {
   const relatedPosts = [...sameCategoryPosts, ...otherPosts].slice(0, 10)
 
   const readTime = post.content ? calculateReadTime(post.content) : '5 min read'
-  // Canonical URL always points to the preferred format without .html
-  const blogPostUrl = `/blog/${post.slug}`
+  // Canonical URL should match the current URL format
+  // If accessed via /blog/slug.html, canonical should be /blog/slug.html
+  // If accessed via /blog/slug, canonical should be /blog/slug
+  const isHtmlVersion = location.pathname.endsWith('.html') || slug?.endsWith('.html')
+  const blogPostUrl = isHtmlVersion ? `/blog/${post.slug}.html` : `/blog/${post.slug}`
   
   // Truncate title to 30-60 characters for SEO
   const seoTitle = truncateBlogTitle(post.title)

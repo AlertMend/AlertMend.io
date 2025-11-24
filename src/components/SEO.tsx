@@ -19,7 +19,7 @@ interface SEOProps {
 export default function SEO({
   title = 'AlertMend AI: Automate Infrastructure Management',
   description = 'AlertMend AI: Automate incident management for Kubernetes, VMs, and ECS. Cut costs, reduce downtime with our AIOps platform. Optimize now!',
-  keywords = 'AIOps, Kubernetes, incident management, auto-remediation, SRE, DevOps, cloud-native, cost optimization, VM monitoring, ECS management, infrastructure automation, AI operations, Kubernetes monitoring, container orchestration',
+  keywords = 'AIOps, Kubernetes, incident management, auto-remediation, SRE, DevOps, cloud-native, cost optimization, VM monitoring, ECS management, infrastructure automation, AI operations, Kubernetes monitoring, container orchestration, observability',
   canonical,
   ogImage = 'https://alertmend.io/og-image.jpg',
   ogType = 'website',

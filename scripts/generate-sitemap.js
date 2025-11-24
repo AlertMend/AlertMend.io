@@ -16,7 +16,9 @@ const blogPosts = [
   { slug: 'debugging-kubernetes-admission-webhooks', date: '2025-06-14' },
   { slug: 'kubernetes-dns-guide', date: '2025-06-07' },
   { slug: 'kubernetes-node-not-ready-error', date: '2025-05-30' },
+  { slug: 'mastering-kubernetes-statefulsets', date: '2025-05-30' },
   { slug: 'imagepullbackoff-errimagepull-kubernetes', date: '2025-05-21' },
+  { slug: 'mastering-kubernetes-resource-quotas-requests-limits', date: '2025-05-21' },
   { slug: 'kubernetes-crashloopbackoff', date: '2025-02-28' },
   { slug: 'kubernetes-evicted-pods', date: '2025-02-24' },
   { slug: 'kubernetes-502-bad-gateway', date: '2025-02-01' },
@@ -91,8 +93,15 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-${blogPosts.map(post => `  <url>
+${blogPosts.map(post => `  <!-- Blog Post: ${post.slug} -->
+  <url>
     <loc>${siteUrl}/blog/${post.slug}</loc>
+    <lastmod>${post.date}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>${siteUrl}/blog/${post.slug}.html</loc>
     <lastmod>${post.date}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
