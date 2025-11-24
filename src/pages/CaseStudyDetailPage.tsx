@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Quote, CheckCircle2, ArrowRight, Building2 } from 'lucide-react'
-import { caseStudiesData } from '../data/caseStudies'
+import { caseStudiesData, findCaseStudyBySlug, generateCaseStudySlug } from '../data/caseStudies'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'
@@ -39,10 +39,8 @@ export default function CaseStudyDetailPage() {
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [slug])
 
-  // Find case study by slug (company name in lowercase)
-  const study = caseStudiesData.find(
-    (s) => s.company.toLowerCase().replace(/\s+/g, '-') === slug
-  )
+  // Find case study by slug (format: {category-slug}-case-studies-{company-slug})
+  const study = findCaseStudyBySlug(slug || '')
 
   if (!study) {
     return (
@@ -67,11 +65,11 @@ export default function CaseStudyDetailPage() {
     )
   }
 
-  const caseStudyUrl = `/case-studies/${study.company.toLowerCase().replace(/\s+/g, '-')}`
+  const caseStudyUrl = `/case-studies/${generateCaseStudySlug(study.category, study.company)}`
   
   // Generate unique meta description for case study detail page
   const baseDescription = `Learn how ${study.company} achieved ${study.results[0]?.metric || 'significant'} ${study.results[0]?.label || 'results'} using AlertMend AI. ${study.testimonial.quote.substring(0, 120)}...`
-  const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'case-study', study.company.toLowerCase().replace(/\s+/g, '-'))
+  const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'case-study', generateCaseStudySlug(study.category, study.company))
 
   return (
     <div className="min-h-screen">

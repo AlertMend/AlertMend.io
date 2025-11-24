@@ -1,5 +1,40 @@
 import { TrendingDown, Zap, CheckCircle2, Clock, DollarSign, Activity, Shield } from 'lucide-react'
 
+// Helper function to convert category to URL slug
+const categoryToSlug = (category: string): string => {
+  const categoryMap: { [key: string]: string } = {
+    'Automated Incident Remediation': 'auto-remediation',
+    'Cost Optimization': 'kubernetes-cost-optimization',
+    'Kubernetes Management': 'kubernetes-management',
+    'On-Call Management': 'on-call-management',
+  }
+  return categoryMap[category] || category.toLowerCase().replace(/\s+/g, '-')
+}
+
+// Special slug overrides for specific case studies
+const specialSlugOverrides: { [key: string]: string } = {
+  'Decklar': 'kubernetes-cost-optimization-case-studies-rombee',
+}
+
+// Helper function to generate case study slug
+export const generateCaseStudySlug = (category: string, company: string): string => {
+  // Check if there's a special override for this company
+  if (specialSlugOverrides[company]) {
+    return specialSlugOverrides[company]
+  }
+  const categorySlug = categoryToSlug(category)
+  const companySlug = company.toLowerCase().replace(/\s+/g, '-')
+  return `${categorySlug}-case-studies-${companySlug}`
+}
+
+// Helper function to find case study by slug
+export const findCaseStudyBySlug = (slug: string) => {
+  return caseStudiesData.find((study) => {
+    const expectedSlug = generateCaseStudySlug(study.category, study.company)
+    return expectedSlug === slug
+  })
+}
+
 export const caseStudiesData = [
   {
     company: 'Polymer Search',

@@ -5,6 +5,41 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
+// Case studies data (matching src/data/caseStudies.ts)
+const caseStudiesData = [
+  { company: 'Polymer Search', category: 'Automated Incident Remediation' },
+  { company: 'WareFlex', category: 'Cost Optimization' },
+  { company: 'Decklar', category: 'Kubernetes Management' },
+  { company: 'AIVOS', category: 'Automated Incident Remediation' },
+]
+
+// Special slug overrides for specific case studies
+const specialSlugOverrides = {
+  'Decklar': 'kubernetes-cost-optimization-case-studies-rombee',
+}
+
+// Helper function to convert category to URL slug
+const categoryToSlug = (category) => {
+  const categoryMap = {
+    'Automated Incident Remediation': 'auto-remediation',
+    'Cost Optimization': 'kubernetes-cost-optimization',
+    'Kubernetes Management': 'kubernetes-management',
+    'On-Call Management': 'on-call-management',
+  }
+  return categoryMap[category] || category.toLowerCase().replace(/\s+/g, '-')
+}
+
+// Helper function to generate case study slug
+const generateCaseStudySlug = (category, company) => {
+  // Check if there's a special override for this company
+  if (specialSlugOverrides[company]) {
+    return specialSlugOverrides[company]
+  }
+  const categorySlug = categoryToSlug(category)
+  const companySlug = company.toLowerCase().replace(/\s+/g, '-')
+  return `${categorySlug}-case-studies-${companySlug}`
+}
+
 // Blog posts data (matching src/utils/blogUtils.ts)
 const blogPosts = [
   { slug: 'oomkilled-in-kubernetes', date: '2025-07-01' },
@@ -85,6 +120,15 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+${caseStudiesData.map(study => {
+  const slug = generateCaseStudySlug(study.category, study.company)
+  return `  <url>
+    <loc>${siteUrl}/case-studies/${slug}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>`
+}).join('\n')}
   
   <!-- Blog -->
   <url>

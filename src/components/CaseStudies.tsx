@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ArrowRight, CheckCircle2, Building2 } from 'lucide-react'
-import { caseStudiesData } from '../data/caseStudies'
+import { caseStudiesData, generateCaseStudySlug } from '../data/caseStudies'
 
 function CompanyLogo({ company, logo }: { company: string; logo?: string }) {
   const [imageError, setImageError] = useState(false)
@@ -54,7 +54,7 @@ export default function CaseStudies() {
               <div
                 key={index}
                 className="group bg-white border-2 border-purple-200 rounded-3xl p-6 lg:p-8 hover:border-purple-400 hover:shadow-2xl transition-all duration-500 cursor-pointer relative overflow-hidden transform hover:-translate-y-2"
-                onClick={() => navigate(`/case-studies/${study.company.toLowerCase().replace(/\s+/g, '-')}`)}
+                onClick={() => navigate(`/case-studies/${generateCaseStudySlug(study.category, study.company)}`)}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-50/0 via-purple-100/0 to-purple-200/0 group-hover:from-purple-50/50 group-hover:via-purple-100/30 group-hover:to-purple-200/20 transition-all duration-500"></div>
                 
