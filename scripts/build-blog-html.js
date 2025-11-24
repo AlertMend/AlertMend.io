@@ -1131,9 +1131,8 @@ markdownFiles.forEach(file => {
 </html>`
     
     // Create a temporary full HTML to extract the body
-    // Use a placeholder canonical URL for now (will be overridden per version)
-    const tempCanonical = `https://www.alertmend.io/blog/${slug}`
-    const tempFullHTML = createHTMLHead(tempCanonical) + `
+    // Generate HTML body (canonical URL will be set per version)
+    const tempFullHTML = createHTMLHead(`https://www.alertmend.io/blog/${slug}`) + `
   
   <style>
     * {
@@ -1950,24 +1949,19 @@ markdownFiles.forEach(file => {
     const bodyStart = tempFullHTML.indexOf('<body>')
     const htmlBody = tempFullHTML.substring(bodyStart)
     
-    // Write both versions: with .html extension and without (directory structure)
-    // Version 1: With .html extension (e.g., /blogs/post-name.html)
-    // Canonical URL for .html version points to /blogs/
-    const canonicalUrlHtml = `https://www.alertmend.io/blogs/${slug}.html`
-    const fullHTMLHtml = createHTMLHead(canonicalUrlHtml) + htmlBody
+    // Write both versions: HTML version and non-HTML version
+    // Version 1: HTML version - /blogs/slug.html
+    const fullHTMLHtml = createHTMLHead(`https://www.alertmend.io/blogs/${slug}.html`) + htmlBody
     fs.writeFileSync(htmlPath, fullHTMLHtml, 'utf-8')
-    console.log(`✓ Converted ${file} → blogs/${slug}.html (canonical: ${canonicalUrlHtml})`)
+    console.log(`✓ Converted ${file} → blogs/${slug}.html`)
     
-    // Version 2: Without .html extension (e.g., /blog/post-name/)
-    // Canonical URL for non-html version points to /blog/
-    const canonicalUrlClean = `https://www.alertmend.io/blog/${slug}`
-    const fullHTMLClean = createHTMLHead(canonicalUrlClean) + htmlBody
-    // Create directory structure for clean URL
+    // Version 2: Non-HTML version - /blog/slug/
+    const fullHTMLClean = createHTMLHead(`https://www.alertmend.io/blog/${slug}`) + htmlBody
     if (!fs.existsSync(path.dirname(dirPath))) {
       fs.mkdirSync(path.dirname(dirPath), { recursive: true })
     }
     fs.writeFileSync(dirPath, fullHTMLClean, 'utf-8')
-    console.log(`✓ Converted ${file} → blog/${slug}/index.html (canonical: ${canonicalUrlClean})`)
+    console.log(`✓ Converted ${file} → blog/${slug}/index.html`)
   } catch (error) {
     console.error(`✗ Error converting ${file}:`, error.message)
   }
