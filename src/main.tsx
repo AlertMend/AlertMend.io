@@ -6,15 +6,13 @@ import App from './App.tsx'
 import './index.css'
 import { setupCanonicalObserver, verifyCanonicalUrl } from './utils/urlUtils'
 
-// Component to track route changes and update canonical URL
+// Component to track route changes
 function PageTracker() {
   const location = useLocation()
 
   useEffect(() => {
-    // Verify canonical URL on route change
-    setTimeout(() => {
-      verifyCanonicalUrl()
-    }, 100)
+    // React Helmet (via SEO component) handles canonical URLs
+    // We don't need to verify/override them
   }, [location.pathname])
 
   return null

@@ -58,37 +58,7 @@
     <meta name="twitter:image" content="https://alertmend.io/twitter-image.jpg" />
     <meta name="twitter:image:alt" content="AlertMend AI - AIOps Platform Dashboard" />
     
-    <!-- Canonical URL - Pre-React script sets initial canonical, React Helmet will update -->
-    <script>
-      // Pre-React canonical URL setup
-      (function() {
-        const baseUrl = 'https://www.alertmend.io';
-        const pathname = window.location.pathname;
-        
-        // Normalize pathname (remove trailing slash except root, remove query/hash)
-        let normalized = pathname.split('?')[0].split('#')[0];
-        if (normalized !== '/' && normalized.endsWith('/')) {
-          normalized = normalized.slice(0, -1);
-        }
-        
-        const canonicalUrl = baseUrl + normalized;
-        
-        // Remove any existing canonical links
-        const existing = document.querySelectorAll('link[rel="canonical"]');
-        existing.forEach(link => link.remove());
-        
-        // Create and add canonical link
-        const link = document.createElement('link');
-        link.rel = 'canonical';
-        link.href = canonicalUrl;
-        document.head.appendChild(link);
-        
-        // Verify canonical URL is correct
-        if (!canonicalUrl.includes('www.alertmend.io')) {
-          console.warn('⚠️ Canonical URL domain mismatch:', canonicalUrl);
-        }
-      })();
-    </script>
+    <!-- Canonical URL will be set by React Helmet via SEO component -->
     
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />

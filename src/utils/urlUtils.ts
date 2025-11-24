@@ -84,69 +84,36 @@ export function setCanonicalUrl(url: string): boolean {
 
 /**
  * Verifies the canonical URL is correct
- * Logs warnings if issues are found
- * Note: For blog posts, the canonical URL is set by the SEO component with normalized slugs,
- * so we should not override it.
+ * Note: React Helmet sets canonical URLs via the SEO component.
+ * We should NOT override canonical URLs set by React Helmet (they have data-rh="true" attribute).
  */
 export function verifyCanonicalUrl(): void {
-  // Skip verification for blog posts - they handle their own canonical URLs
-  const isBlogPost = window.location.pathname.startsWith('/blog')
-  if (isBlogPost) {
-    return
-  }
-  
   const canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null
-  const expectedUrl = getCanonicalUrl()
   
+  // If React Helmet has set a canonical URL (has data-rh attribute), don't override it
+  if (canonical && canonical.hasAttribute('data-rh')) {
+    // React Helmet is managing this canonical URL, don't interfere
+    return
+  }
+  
+  // Only set canonical URL if React Helmet hasn't set one yet
+  // This is a fallback for pages that don't use the SEO component
   if (!canonical) {
-    setCanonicalUrl(expectedUrl)
-    return
-  }
-  
-  const currentUrl = canonical.href
-  
-  // Check for correct domain with www subdomain
-  if (!currentUrl.includes('www.alertmend.io')) {
-    console.warn(`⚠️ Canonical URL domain mismatch: ${currentUrl}`)
-    setCanonicalUrl(expectedUrl)
-    return
-  }
-  
-  // Check if URL matches expected (for non-blog pages)
-  if (currentUrl !== expectedUrl) {
-    console.warn(`⚠️ Canonical URL mismatch. Expected: ${expectedUrl}, Found: ${currentUrl}`)
+    const expectedUrl = getCanonicalUrl()
     setCanonicalUrl(expectedUrl)
   }
 }
 
 /**
  * Sets up MutationObserver to watch for changes to canonical URL
- * and verify it's correct
+ * Note: We don't actively verify/override canonical URLs set by React Helmet
+ * This is just a fallback for pages that don't use the SEO component
  */
 export function setupCanonicalObserver(): void {
-  // Initial verification
-  verifyCanonicalUrl()
-  
-  // Watch for changes to head
-  const observer = new MutationObserver(() => {
+  // Only set initial canonical if React Helmet hasn't set one
+  // Wait a bit for React to render
+  setTimeout(() => {
     verifyCanonicalUrl()
-  })
-  
-  observer.observe(document.head, {
-    childList: true,
-    subtree: true,
-    attributes: true,
-    attributeFilter: ['href', 'rel']
-  })
-  
-  // Periodic safety check (every 5 seconds)
-  setInterval(() => {
-    verifyCanonicalUrl()
-  }, 5000)
-  
-  // Verify on route changes (for React Router)
-  window.addEventListener('popstate', () => {
-    setTimeout(verifyCanonicalUrl, 100)
-  })
+  }, 1000)
 }
 
