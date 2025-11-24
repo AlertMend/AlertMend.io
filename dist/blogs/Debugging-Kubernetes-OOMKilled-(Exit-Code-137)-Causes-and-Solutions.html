@@ -3,24 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How to Troubleshoot and Fix ImagePullBackO... | AlertMend AI</title>
-  <meta name="description" content="In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors such as ImagePullBackOff and ErrImagePull may...">
+  <title>🚨 Debugging Kubernetes OOMKilled (Exit... | AlertMend AI</title>
+  <meta name="description" content="The OOMKilled error in Kubernetes occurs when a container is terminated due to excessive memory usage, which exceeds the predefined memory limit. This is...">
   <meta name="author" content="Himanshu Bansal">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  <link rel="canonical" href="https://www.alertmend.io/blogs/Resolving_ImagePullBackOff_and_ErrImagePull_in_Kubernetes.html">
+  <link rel="canonical" href="https://www.alertmend.io/blogs/Debugging-Kubernetes-OOMKilled-(Exit-Code-137)-Causes-and-Solutions.html">
   
   <!-- Open Graph -->
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://www.alertmend.io/blogs/Resolving_ImagePullBackOff_and_ErrImagePull_in_Kubernetes.html">
-  <meta property="og:title" content="How to Troubleshoot and Fix ImagePullBackO... | AlertMend AI">
-  <meta property="og:description" content="In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors such as ImagePullBackOff and ErrImagePull may...">
+  <meta property="og:url" content="https://www.alertmend.io/blogs/Debugging-Kubernetes-OOMKilled-(Exit-Code-137)-Causes-and-Solutions.html">
+  <meta property="og:title" content="🚨 Debugging Kubernetes OOMKilled (Exit... | AlertMend AI">
+  <meta property="og:description" content="The OOMKilled error in Kubernetes occurs when a container is terminated due to excessive memory usage, which exceeds the predefined memory limit. This is...">
   <meta property="og:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://www.alertmend.io/blogs/Resolving_ImagePullBackOff_and_ErrImagePull_in_Kubernetes.html">
-  <meta name="twitter:title" content="How to Troubleshoot and Fix ImagePullBackO... | AlertMend AI">
-  <meta name="twitter:description" content="In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors such as ImagePullBackOff and ErrImagePull may...">
+  <meta name="twitter:url" content="https://www.alertmend.io/blogs/Debugging-Kubernetes-OOMKilled-(Exit-Code-137)-Causes-and-Solutions.html">
+  <meta name="twitter:title" content="🚨 Debugging Kubernetes OOMKilled (Exit... | AlertMend AI">
+  <meta name="twitter:description" content="The OOMKilled error in Kubernetes occurs when a container is terminated due to excessive memory usage, which exceeds the predefined memory limit. This is...">
   <meta name="twitter:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Structured Data -->
@@ -28,11 +28,11 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "How to Troubleshoot and Fix ImagePullBackO... | AlertMend AI",
-    "description": "In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors such as ImagePullBackOff and ErrImagePull may...",
+    "headline": "🚨 Debugging Kubernetes OOMKilled (Exit... | AlertMend AI",
+    "description": "The OOMKilled error in Kubernetes occurs when a container is terminated due to excessive memory usage, which exceeds the predefined memory limit. This is...",
     "image": "https://alertmend.io/og-image.jpg",
-    "datePublished": "2025-05-21",
-    "dateModified": "2025-05-21",
+    "datePublished": "2025-01-13",
+    "dateModified": "2025-01-13",
     "author": {
       "@type": "Person",
       "name": "Himanshu Bansal"
@@ -47,7 +47,7 @@
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://www.alertmend.io/blogs/Resolving_ImagePullBackOff_and_ErrImagePull_in_Kubernetes.html"
+      "@id": "https://www.alertmend.io/blogs/Debugging-Kubernetes-OOMKilled-(Exit-Code-137)-Causes-and-Solutions.html"
     },
     "articleSection": "Kubernetes"
   }
@@ -763,7 +763,7 @@
         <div class="article-content">
           <article>
             <header>
-              <h1>How to Troubleshoot and Fix ImagePullBackOff and ErrImagePull in Kubernetes</h1>
+              <h1>🚨 Debugging Kubernetes OOMKilled (Exit Code 137): Causes and Solutions</h1>
               
               <!-- Author Info -->
               <div class="author-info">
@@ -772,7 +772,7 @@
                 </div>
                 <div class="author-details">
                   <div class="author-name">Himanshu Bansal</div>
-                  <div class="author-meta">5 min read • May 21, 2025</div>
+                  <div class="author-meta">5 min read • January 13, 2025</div>
                 </div>
               </div>
 
@@ -782,111 +782,100 @@
 
             <!-- Content -->
             <div class="content">
-              <h2>How to Troubleshoot and Fix ImagePullBackOff and ErrImagePull in...</h2>
+              <h2>🚨 Debugging Kubernetes OOMKilled (Exit Code 137): Causes and...</h2>
 <hr>
-<p>In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors such as <strong>ImagePullBackOff</strong> and <strong>ErrImagePull</strong> may occur, preventing the pods from starting. These issues are typically related to problems with fetching the container image, and can disrupt application deployment.</p>
-<p>In this guide, we’ll explore the causes of these errors and how to troubleshoot and fix them.</p>
+<p>The <strong>OOMKilled</strong> error in Kubernetes occurs when a container is terminated due to excessive memory usage, which exceeds the predefined memory limit. This is represented by exit code 137. When this happens, Kubernetes uses the <strong>Out of Memory (OOM) Killer</strong>, a feature of the Linux kernel, to protect the system from crashing by terminating the container that consumes too much memory. In this blog, we’ll explore common causes of the <strong>OOMKilled</strong> error and provide practical steps for troubleshooting and prevention.</p>
 <hr>
-<h2>What Are ImagePullBackOff and ErrImagePull Errors?</h2>
+<h2>🛠️ What Is OOMKilled in Kubernetes?</h2>
+<p>The <strong>OOMKilled</strong> status is triggered when the container exceeds its allocated memory limit, leading to termination. This memory management feature is crucial for maintaining system stability, as it prevents one container from consuming all available memory on the node. Each container within a pod can define two important memory-related parameters:</p>
 <ul>
-<li><p><strong>ErrImagePull</strong>: This error occurs when Kubernetes fails to pull the container image from a container registry (like Docker Hub).</p>
-</li>
-<li><p><strong>ImagePullBackOff</strong>: This is a follow-up error where Kubernetes retries pulling the image, but due to repeated failures, it backs off, thus the term &quot;BackOff&quot;.</p>
-</li>
+<li><strong>Memory Requests</strong>: The minimum memory guaranteed for the container.</li>
+<li><strong>Memory Limits</strong>: The maximum memory a container can use before being killed.</li>
 </ul>
-<p>These errors stop the pod from starting since the required container image is unavailable.</p>
+<p>When memory usage surpasses the set limits, the Linux kernel sends a <strong>SIGKILL</strong> signal, killing the container to free up resources.</p>
 <hr>
-<h2>How Does Kubernetes Pull Container Images?</h2>
-<p>When you deploy a pod in Kubernetes, it pulls the specified container image from a container registry. The image can either be stored in a public registry like Docker Hub or a private registry. Kubernetes communicates with the registry to fetch the image and deploy it in the cluster. If any issues occur during the image retrieval process—such as incorrect image names, authentication errors, or network problems—errors like <strong>ErrImagePull</strong> or <strong>ImagePullBackOff</strong> are triggered.</p>
-<hr>
-<h2>Common Causes of ImagePullBackOff and ErrImagePull</h2>
-<h3><strong>1. Incorrect Image Name or Tag</strong></h3>
-<p>One of the most common reasons for these errors is an incorrect image name or tag in the pod&#39;s configuration. Kubernetes cannot pull an image if the image name is misspelled or if the tag specified does not exist in the container registry.</p>
-<p><strong>Solution:</strong></p>
+<h2>🔍 Common Causes of OOMKilled Errors</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Cause</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Solution</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Misconfigured Memory Limits</td>
+<td>Application needs more memory than allocated.</td>
+<td>Adjust memory limits based on actual usage.</td>
+</tr>
+<tr>
+<td>Memory Leaks</td>
+<td>Application continuously consumes memory due to a leak.</td>
+<td>Use profiling tools to detect and fix memory leaks.</td>
+</tr>
+<tr>
+<td>Node Resource Overcommitment</td>
+<td>Node resources are overbooked by multiple containers.</td>
+<td>Set realistic requests and limits, use VPA for autoscaling.</td>
+</tr>
+</tbody></table>
+<h3>1. <strong>Misconfigured Memory Limits</strong></h3>
+<p>One of the most frequent reasons for OOMKilled errors is that the <strong>memory limit</strong> is set too low for the application’s needs. If your application requires more memory than the specified limit, Kubernetes will kill the container to protect the node.</p>
+<p><strong>Solution</strong>:</p>
 <ul>
-<li>Verify the image name and tag in the pod specification.</li>
-<li>Use the command below to inspect the image name and tag:<pre><code class="language-bash">kubectl describe pod &lt;pod-name&gt;
-</code></pre>
-</li>
-</ul>
-<p>Check that the image and tag match what exists in the container registry.</p>
-<hr>
-<h3><strong>2. Image Doesn’t Exist in Registry</strong></h3>
-<p>If the image does not exist in the specified container registry, Kubernetes will not be able to pull it.</p>
-<p><strong>Solution:</strong></p>
-<ul>
-<li>Ensure that the image exists in the registry. If the image is private, ensure you have the proper authentication credentials to access it.</li>
-<li>Use the following command to list available images:<pre><code class="language-bash">docker images
-</code></pre>
-</li>
-</ul>
-<hr>
-<h3><strong>3. Private Container Registry Without Authentication</strong></h3>
-<p>If the image is in a private container registry, Kubernetes needs credentials to access it. If these credentials are not supplied, you’ll encounter the ImagePullBackOff error.</p>
-<p><strong>Solution:</strong></p>
-<ul>
-<li><p>Create a Kubernetes secret that stores your registry credentials:</p>
-<pre><code class="language-bash">kubectl create secret docker-registry &lt;secret-name&gt; --docker-username=&lt;username&gt; --docker-password=&lt;password&gt; --docker-email=&lt;email&gt; --docker-server=&lt;registry-server&gt;
-</code></pre>
-</li>
-<li><p>Reference this secret in your pod&#39;s YAML configuration under the <code>imagePullSecrets</code> section:</p>
-<pre><code class="language-yaml">imagePullSecrets:
-- name: &lt;secret-name&gt;
+<li>Review and adjust memory limits based on the application’s actual usage by setting appropriate values in your pod spec:<pre><code class="language-yaml">resources:
+  requests:
+    memory: &quot;512Mi&quot;
+  limits:
+    memory: &quot;1Gi&quot;
 </code></pre>
 </li>
 </ul>
-<hr>
-<h3><strong>4. Network Connectivity Issues</strong></h3>
-<p>Sometimes, your node may not be able to reach the container registry due to network issues, preventing it from pulling the image.</p>
-<p><strong>Solution:</strong></p>
+<h3>2. <strong>Memory Leaks in Applications</strong></h3>
+<p>Applications with memory leaks can gradually consume more memory over time, eventually leading to OOMKilled events. Memory leaks often occur when an application fails to release memory it no longer needs.</p>
+<p><strong>Solution</strong>:</p>
 <ul>
-<li><p>Check the network configuration and ensure the node can communicate with the container registry.</p>
-</li>
-<li><p>Use tools like <code>curl</code> or <code>ping</code> to verify connectivity between the node and the registry.</p>
-<p>Example:</p>
-<pre><code class="language-bash">ping &lt;registry-url&gt;
-curl https://&lt;registry-url&gt;
-</code></pre>
-</li>
+<li>Use tools like <strong>Heapster</strong>, <strong>Prometheus</strong>, or built-in language profilers (e.g., JVM profilers for Java applications) to detect memory leaks and fix them in the application’s code.</li>
+</ul>
+<h3>3. <strong>Node Resource Overcommitment</strong></h3>
+<p>Nodes can become overcommitted when the sum of the memory requests across multiple pods exceeds the node’s available memory. If several containers request memory at the same time, the node may run out of memory, causing Kubernetes to kill some pods.</p>
+<p><strong>Solution</strong>:</p>
+<ul>
+<li>Set realistic <strong>memory requests</strong> and <strong>limits</strong> for each container to avoid overcommitment. Use Kubernetes <strong>Vertical Pod Autoscaler (VPA)</strong> to automatically adjust memory requests and limits based on real-time usage.</li>
 </ul>
 <hr>
-<h3><strong>5. Rate Limits on Public Registries</strong></h3>
-<p>Docker Hub and other public container registries often impose rate limits. If your Kubernetes cluster exceeds these limits, the ImagePullBackOff error may occur.</p>
-<p><strong>Solution:</strong></p>
-<ul>
-<li>Monitor the number of pull requests your cluster is making.</li>
-<li>Consider using an authenticated account or a mirror registry to avoid rate limits.</li>
-<li>Docker Hub rate limits unauthenticated users to 100 pulls per 6 hours and authenticated users to 200 pulls per 6 hours.</li>
-</ul>
-<hr>
-<h2>How to Diagnose ImagePullBackOff</h2>
-<p>To troubleshoot and identify the root cause of an ImagePullBackOff error, follow these steps:</p>
-<h3><strong>1. Describe the Pod</strong></h3>
-<p>Use the <code>kubectl describe pod</code> command to inspect detailed information about the pod, including events and error messages.</p>
-<pre><code class="language-bash">kubectl describe pod &lt;pod-name&gt;
+<h2>🚨 Steps to Troubleshoot OOMKilled Errors</h2>
+<h3>1. <strong>Inspect Pod Events</strong></h3>
+<p>Use <code>kubectl describe pod &lt;pod-name&gt;</code> to check pod events and verify whether the pod was terminated due to an <strong>OOMKilled</strong> event. Look for the <strong>Exit Code 137</strong> in the output:</p>
+<pre><code class="language-bash">State:          Terminated
+Reason:         OOMKilled
+Exit Code:      137
 </code></pre>
-<p>Look for error messages under the “Events” section.</p>
-<h3><strong>2. Check Pod Logs</strong></h3>
-<p>The pod logs might provide clues as to why the image is not pulling correctly.</p>
-<pre><code class="language-bash">kubectl logs &lt;pod-name&gt;
+<h3>2. <strong>Monitor Memory Usage</strong></h3>
+<p>Use tools like <strong>Prometheus</strong> and <strong>Grafana</strong> to monitor memory usage trends across your cluster. Set up alerts for memory spikes to detect potential memory leaks or inefficient resource usage before they result in OOMKilled events.</p>
+<h3>3. <strong>Analyze Resource Configuration</strong></h3>
+<p>Review the pod’s <strong>resource requests</strong> and <strong>limits</strong> to ensure they are sufficient for the container’s workload. Adjust limits if necessary to prevent future OOMKilled events:</p>
+<pre><code class="language-yaml">resources:
+  requests:
+    memory: &quot;256Mi&quot;
+  limits:
+    memory: &quot;512Mi&quot;
 </code></pre>
-<h3><strong>3. Check Node Logs</strong></h3>
-<p>You can also check the logs of the node where the pod is scheduled. This will help identify if there are any node-level issues like network connectivity.</p>
-<pre><code class="language-bash">kubectl logs &lt;node-name&gt;
+<h3>4. <strong>Debug with Ephemeral Containers</strong></h3>
+<p>If you need more detailed debugging, you can use Kubernetes’ <strong>ephemeral containers</strong> to inspect the running state of a pod before it gets killed. This can help investigate the memory consumption just before termination.</p>
+<pre><code class="language-bash">kubectl debug -it &lt;pod-name&gt; --image=busybox --target=&lt;container-name&gt;
 </code></pre>
 <hr>
-<h2>Preventive Measures</h2>
-<ol>
-<li><strong>Use Correct Image Names and Tags</strong>: Double-check image names and tags in your YAML configuration to avoid typing errors.</li>
-<li><strong>Monitor Image Registry Access</strong>: Ensure proper authentication and access when using private registries.</li>
-<li><strong>Set Up Alerting for Rate Limits</strong>: Set up monitoring and alerts to detect if your cluster is hitting registry rate limits.</li>
-<li><strong>Deploy Images from a Private Cache</strong>: Mirror container images locally to prevent network or rate limit issues with public registries.</li>
-</ol>
+<h2>🛡️ Preventing OOMKilled Errors</h2>
+<h3>1. <strong>Right-Sizing Resources</strong></h3>
+<p>Use historical memory usage data to set appropriate memory requests and limits for each container. This ensures that pods have enough memory while preventing overprovisioning.</p>
+<h3>2. <strong>Enable Vertical Pod Autoscaler (VPA)</strong></h3>
+<p><strong>VPA</strong> dynamically adjusts pod resources based on actual usage patterns, preventing OOMKilled events by automatically increasing memory limits during high usage periods.</p>
+<h3>3. <strong>Use Memory-Efficient Libraries</strong></h3>
+<p>Optimize your application to use libraries and algorithms that consume less memory. Regularly update your application to fix known memory inefficiencies.</p>
 <hr>
-<h2>Conclusion</h2>
-<p><strong>ImagePullBackOff</strong> and <strong>ErrImagePull</strong> are common errors in Kubernetes related to image pulling issues. Understanding the root causes—whether they are related to image names, private registry authentication, network problems, or rate limits—can help you quickly diagnose and resolve the problem. By following the troubleshooting steps outlined in this guide, you can ensure that your Kubernetes deployments run smoothly.</p>
-<p>Regular monitoring and proper image management practices will help avoid these issues and ensure the reliability of your containerized applications.</p>
-<hr>
+<h2>🚀 Conclusion</h2>
+<p><strong>OOMKilled</strong> errors in Kubernetes are often caused by misconfigured memory limits, memory leaks, or overcommitted nodes. By monitoring resource usage, setting appropriate memory requests and limits, and using tools like Vertical Pod Autoscaler, you can prevent these errors and keep your Kubernetes cluster running smoothly. Debugging tools like ephemeral containers and memory profiling tools can also help resolve persistent OOMKilled events.</p>
 
             </div>
 
@@ -1069,7 +1058,7 @@ curl https://&lt;registry-url&gt;
         <div class="article-content">
           <article>
             <header>
-              <h1>How to Troubleshoot and Fix ImagePullBackOff and ErrImagePull in Kubernetes</h1>
+              <h1>🚨 Debugging Kubernetes OOMKilled (Exit Code 137): Causes and Solutions</h1>
               
               <!-- Author Info -->
               <div class="author-info">
@@ -1078,7 +1067,7 @@ curl https://&lt;registry-url&gt;
                 </div>
                 <div class="author-details">
                   <div class="author-name">Himanshu Bansal</div>
-                  <div class="author-meta">5 min read • May 21, 2025</div>
+                  <div class="author-meta">5 min read • January 13, 2025</div>
                 </div>
               </div>
 
@@ -1088,111 +1077,100 @@ curl https://&lt;registry-url&gt;
 
             <!-- Content -->
             <div class="content">
-              <h2>How to Troubleshoot and Fix ImagePullBackOff and ErrImagePull in...</h2>
+              <h2>🚨 Debugging Kubernetes OOMKilled (Exit Code 137): Causes and...</h2>
 <hr>
-<p>In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors such as <strong>ImagePullBackOff</strong> and <strong>ErrImagePull</strong> may occur, preventing the pods from starting. These issues are typically related to problems with fetching the container image, and can disrupt application deployment.</p>
-<p>In this guide, we’ll explore the causes of these errors and how to troubleshoot and fix them.</p>
+<p>The <strong>OOMKilled</strong> error in Kubernetes occurs when a container is terminated due to excessive memory usage, which exceeds the predefined memory limit. This is represented by exit code 137. When this happens, Kubernetes uses the <strong>Out of Memory (OOM) Killer</strong>, a feature of the Linux kernel, to protect the system from crashing by terminating the container that consumes too much memory. In this blog, we’ll explore common causes of the <strong>OOMKilled</strong> error and provide practical steps for troubleshooting and prevention.</p>
 <hr>
-<h2>What Are ImagePullBackOff and ErrImagePull Errors?</h2>
+<h2>🛠️ What Is OOMKilled in Kubernetes?</h2>
+<p>The <strong>OOMKilled</strong> status is triggered when the container exceeds its allocated memory limit, leading to termination. This memory management feature is crucial for maintaining system stability, as it prevents one container from consuming all available memory on the node. Each container within a pod can define two important memory-related parameters:</p>
 <ul>
-<li><p><strong>ErrImagePull</strong>: This error occurs when Kubernetes fails to pull the container image from a container registry (like Docker Hub).</p>
-</li>
-<li><p><strong>ImagePullBackOff</strong>: This is a follow-up error where Kubernetes retries pulling the image, but due to repeated failures, it backs off, thus the term &quot;BackOff&quot;.</p>
-</li>
+<li><strong>Memory Requests</strong>: The minimum memory guaranteed for the container.</li>
+<li><strong>Memory Limits</strong>: The maximum memory a container can use before being killed.</li>
 </ul>
-<p>These errors stop the pod from starting since the required container image is unavailable.</p>
+<p>When memory usage surpasses the set limits, the Linux kernel sends a <strong>SIGKILL</strong> signal, killing the container to free up resources.</p>
 <hr>
-<h2>How Does Kubernetes Pull Container Images?</h2>
-<p>When you deploy a pod in Kubernetes, it pulls the specified container image from a container registry. The image can either be stored in a public registry like Docker Hub or a private registry. Kubernetes communicates with the registry to fetch the image and deploy it in the cluster. If any issues occur during the image retrieval process—such as incorrect image names, authentication errors, or network problems—errors like <strong>ErrImagePull</strong> or <strong>ImagePullBackOff</strong> are triggered.</p>
-<hr>
-<h2>Common Causes of ImagePullBackOff and ErrImagePull</h2>
-<h3><strong>1. Incorrect Image Name or Tag</strong></h3>
-<p>One of the most common reasons for these errors is an incorrect image name or tag in the pod&#39;s configuration. Kubernetes cannot pull an image if the image name is misspelled or if the tag specified does not exist in the container registry.</p>
-<p><strong>Solution:</strong></p>
+<h2>🔍 Common Causes of OOMKilled Errors</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Cause</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Solution</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Misconfigured Memory Limits</td>
+<td>Application needs more memory than allocated.</td>
+<td>Adjust memory limits based on actual usage.</td>
+</tr>
+<tr>
+<td>Memory Leaks</td>
+<td>Application continuously consumes memory due to a leak.</td>
+<td>Use profiling tools to detect and fix memory leaks.</td>
+</tr>
+<tr>
+<td>Node Resource Overcommitment</td>
+<td>Node resources are overbooked by multiple containers.</td>
+<td>Set realistic requests and limits, use VPA for autoscaling.</td>
+</tr>
+</tbody></table>
+<h3>1. <strong>Misconfigured Memory Limits</strong></h3>
+<p>One of the most frequent reasons for OOMKilled errors is that the <strong>memory limit</strong> is set too low for the application’s needs. If your application requires more memory than the specified limit, Kubernetes will kill the container to protect the node.</p>
+<p><strong>Solution</strong>:</p>
 <ul>
-<li>Verify the image name and tag in the pod specification.</li>
-<li>Use the command below to inspect the image name and tag:<pre><code class="language-bash">kubectl describe pod &lt;pod-name&gt;
-</code></pre>
-</li>
-</ul>
-<p>Check that the image and tag match what exists in the container registry.</p>
-<hr>
-<h3><strong>2. Image Doesn’t Exist in Registry</strong></h3>
-<p>If the image does not exist in the specified container registry, Kubernetes will not be able to pull it.</p>
-<p><strong>Solution:</strong></p>
-<ul>
-<li>Ensure that the image exists in the registry. If the image is private, ensure you have the proper authentication credentials to access it.</li>
-<li>Use the following command to list available images:<pre><code class="language-bash">docker images
-</code></pre>
-</li>
-</ul>
-<hr>
-<h3><strong>3. Private Container Registry Without Authentication</strong></h3>
-<p>If the image is in a private container registry, Kubernetes needs credentials to access it. If these credentials are not supplied, you’ll encounter the ImagePullBackOff error.</p>
-<p><strong>Solution:</strong></p>
-<ul>
-<li><p>Create a Kubernetes secret that stores your registry credentials:</p>
-<pre><code class="language-bash">kubectl create secret docker-registry &lt;secret-name&gt; --docker-username=&lt;username&gt; --docker-password=&lt;password&gt; --docker-email=&lt;email&gt; --docker-server=&lt;registry-server&gt;
-</code></pre>
-</li>
-<li><p>Reference this secret in your pod&#39;s YAML configuration under the <code>imagePullSecrets</code> section:</p>
-<pre><code class="language-yaml">imagePullSecrets:
-- name: &lt;secret-name&gt;
+<li>Review and adjust memory limits based on the application’s actual usage by setting appropriate values in your pod spec:<pre><code class="language-yaml">resources:
+  requests:
+    memory: &quot;512Mi&quot;
+  limits:
+    memory: &quot;1Gi&quot;
 </code></pre>
 </li>
 </ul>
-<hr>
-<h3><strong>4. Network Connectivity Issues</strong></h3>
-<p>Sometimes, your node may not be able to reach the container registry due to network issues, preventing it from pulling the image.</p>
-<p><strong>Solution:</strong></p>
+<h3>2. <strong>Memory Leaks in Applications</strong></h3>
+<p>Applications with memory leaks can gradually consume more memory over time, eventually leading to OOMKilled events. Memory leaks often occur when an application fails to release memory it no longer needs.</p>
+<p><strong>Solution</strong>:</p>
 <ul>
-<li><p>Check the network configuration and ensure the node can communicate with the container registry.</p>
-</li>
-<li><p>Use tools like <code>curl</code> or <code>ping</code> to verify connectivity between the node and the registry.</p>
-<p>Example:</p>
-<pre><code class="language-bash">ping &lt;registry-url&gt;
-curl https://&lt;registry-url&gt;
-</code></pre>
-</li>
+<li>Use tools like <strong>Heapster</strong>, <strong>Prometheus</strong>, or built-in language profilers (e.g., JVM profilers for Java applications) to detect memory leaks and fix them in the application’s code.</li>
+</ul>
+<h3>3. <strong>Node Resource Overcommitment</strong></h3>
+<p>Nodes can become overcommitted when the sum of the memory requests across multiple pods exceeds the node’s available memory. If several containers request memory at the same time, the node may run out of memory, causing Kubernetes to kill some pods.</p>
+<p><strong>Solution</strong>:</p>
+<ul>
+<li>Set realistic <strong>memory requests</strong> and <strong>limits</strong> for each container to avoid overcommitment. Use Kubernetes <strong>Vertical Pod Autoscaler (VPA)</strong> to automatically adjust memory requests and limits based on real-time usage.</li>
 </ul>
 <hr>
-<h3><strong>5. Rate Limits on Public Registries</strong></h3>
-<p>Docker Hub and other public container registries often impose rate limits. If your Kubernetes cluster exceeds these limits, the ImagePullBackOff error may occur.</p>
-<p><strong>Solution:</strong></p>
-<ul>
-<li>Monitor the number of pull requests your cluster is making.</li>
-<li>Consider using an authenticated account or a mirror registry to avoid rate limits.</li>
-<li>Docker Hub rate limits unauthenticated users to 100 pulls per 6 hours and authenticated users to 200 pulls per 6 hours.</li>
-</ul>
-<hr>
-<h2>How to Diagnose ImagePullBackOff</h2>
-<p>To troubleshoot and identify the root cause of an ImagePullBackOff error, follow these steps:</p>
-<h3><strong>1. Describe the Pod</strong></h3>
-<p>Use the <code>kubectl describe pod</code> command to inspect detailed information about the pod, including events and error messages.</p>
-<pre><code class="language-bash">kubectl describe pod &lt;pod-name&gt;
+<h2>🚨 Steps to Troubleshoot OOMKilled Errors</h2>
+<h3>1. <strong>Inspect Pod Events</strong></h3>
+<p>Use <code>kubectl describe pod &lt;pod-name&gt;</code> to check pod events and verify whether the pod was terminated due to an <strong>OOMKilled</strong> event. Look for the <strong>Exit Code 137</strong> in the output:</p>
+<pre><code class="language-bash">State:          Terminated
+Reason:         OOMKilled
+Exit Code:      137
 </code></pre>
-<p>Look for error messages under the “Events” section.</p>
-<h3><strong>2. Check Pod Logs</strong></h3>
-<p>The pod logs might provide clues as to why the image is not pulling correctly.</p>
-<pre><code class="language-bash">kubectl logs &lt;pod-name&gt;
+<h3>2. <strong>Monitor Memory Usage</strong></h3>
+<p>Use tools like <strong>Prometheus</strong> and <strong>Grafana</strong> to monitor memory usage trends across your cluster. Set up alerts for memory spikes to detect potential memory leaks or inefficient resource usage before they result in OOMKilled events.</p>
+<h3>3. <strong>Analyze Resource Configuration</strong></h3>
+<p>Review the pod’s <strong>resource requests</strong> and <strong>limits</strong> to ensure they are sufficient for the container’s workload. Adjust limits if necessary to prevent future OOMKilled events:</p>
+<pre><code class="language-yaml">resources:
+  requests:
+    memory: &quot;256Mi&quot;
+  limits:
+    memory: &quot;512Mi&quot;
 </code></pre>
-<h3><strong>3. Check Node Logs</strong></h3>
-<p>You can also check the logs of the node where the pod is scheduled. This will help identify if there are any node-level issues like network connectivity.</p>
-<pre><code class="language-bash">kubectl logs &lt;node-name&gt;
+<h3>4. <strong>Debug with Ephemeral Containers</strong></h3>
+<p>If you need more detailed debugging, you can use Kubernetes’ <strong>ephemeral containers</strong> to inspect the running state of a pod before it gets killed. This can help investigate the memory consumption just before termination.</p>
+<pre><code class="language-bash">kubectl debug -it &lt;pod-name&gt; --image=busybox --target=&lt;container-name&gt;
 </code></pre>
 <hr>
-<h2>Preventive Measures</h2>
-<ol>
-<li><strong>Use Correct Image Names and Tags</strong>: Double-check image names and tags in your YAML configuration to avoid typing errors.</li>
-<li><strong>Monitor Image Registry Access</strong>: Ensure proper authentication and access when using private registries.</li>
-<li><strong>Set Up Alerting for Rate Limits</strong>: Set up monitoring and alerts to detect if your cluster is hitting registry rate limits.</li>
-<li><strong>Deploy Images from a Private Cache</strong>: Mirror container images locally to prevent network or rate limit issues with public registries.</li>
-</ol>
+<h2>🛡️ Preventing OOMKilled Errors</h2>
+<h3>1. <strong>Right-Sizing Resources</strong></h3>
+<p>Use historical memory usage data to set appropriate memory requests and limits for each container. This ensures that pods have enough memory while preventing overprovisioning.</p>
+<h3>2. <strong>Enable Vertical Pod Autoscaler (VPA)</strong></h3>
+<p><strong>VPA</strong> dynamically adjusts pod resources based on actual usage patterns, preventing OOMKilled events by automatically increasing memory limits during high usage periods.</p>
+<h3>3. <strong>Use Memory-Efficient Libraries</strong></h3>
+<p>Optimize your application to use libraries and algorithms that consume less memory. Regularly update your application to fix known memory inefficiencies.</p>
 <hr>
-<h2>Conclusion</h2>
-<p><strong>ImagePullBackOff</strong> and <strong>ErrImagePull</strong> are common errors in Kubernetes related to image pulling issues. Understanding the root causes—whether they are related to image names, private registry authentication, network problems, or rate limits—can help you quickly diagnose and resolve the problem. By following the troubleshooting steps outlined in this guide, you can ensure that your Kubernetes deployments run smoothly.</p>
-<p>Regular monitoring and proper image management practices will help avoid these issues and ensure the reliability of your containerized applications.</p>
-<hr>
+<h2>🚀 Conclusion</h2>
+<p><strong>OOMKilled</strong> errors in Kubernetes are often caused by misconfigured memory limits, memory leaks, or overcommitted nodes. By monitoring resource usage, setting appropriate memory requests and limits, and using tools like Vertical Pod Autoscaler, you can prevent these errors and keep your Kubernetes cluster running smoothly. Debugging tools like ephemeral containers and memory profiling tools can also help resolve persistent OOMKilled events.</p>
 
             </div>
 
@@ -2013,7 +1991,7 @@ curl https://&lt;registry-url&gt;
         <div class="article-content">
           <article>
             <header>
-              <h1>How to Troubleshoot and Fix ImagePullBackOff and ErrImagePull in Kubernetes</h1>
+              <h1>🚨 Debugging Kubernetes OOMKilled (Exit Code 137): Causes and Solutions</h1>
               
               <!-- Author Info -->
               <div class="author-info">
@@ -2022,7 +2000,7 @@ curl https://&lt;registry-url&gt;
                 </div>
                 <div class="author-details">
                   <div class="author-name">Himanshu Bansal</div>
-                  <div class="author-meta">5 min read • May 21, 2025</div>
+                  <div class="author-meta">5 min read • January 13, 2025</div>
                 </div>
               </div>
 
@@ -2032,111 +2010,100 @@ curl https://&lt;registry-url&gt;
 
             <!-- Content -->
             <div class="content">
-              <h2>How to Troubleshoot and Fix ImagePullBackOff and ErrImagePull in...</h2>
+              <h2>🚨 Debugging Kubernetes OOMKilled (Exit Code 137): Causes and...</h2>
 <hr>
-<p>In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors such as <strong>ImagePullBackOff</strong> and <strong>ErrImagePull</strong> may occur, preventing the pods from starting. These issues are typically related to problems with fetching the container image, and can disrupt application deployment.</p>
-<p>In this guide, we’ll explore the causes of these errors and how to troubleshoot and fix them.</p>
+<p>The <strong>OOMKilled</strong> error in Kubernetes occurs when a container is terminated due to excessive memory usage, which exceeds the predefined memory limit. This is represented by exit code 137. When this happens, Kubernetes uses the <strong>Out of Memory (OOM) Killer</strong>, a feature of the Linux kernel, to protect the system from crashing by terminating the container that consumes too much memory. In this blog, we’ll explore common causes of the <strong>OOMKilled</strong> error and provide practical steps for troubleshooting and prevention.</p>
 <hr>
-<h2>What Are ImagePullBackOff and ErrImagePull Errors?</h2>
+<h2>🛠️ What Is OOMKilled in Kubernetes?</h2>
+<p>The <strong>OOMKilled</strong> status is triggered when the container exceeds its allocated memory limit, leading to termination. This memory management feature is crucial for maintaining system stability, as it prevents one container from consuming all available memory on the node. Each container within a pod can define two important memory-related parameters:</p>
 <ul>
-<li><p><strong>ErrImagePull</strong>: This error occurs when Kubernetes fails to pull the container image from a container registry (like Docker Hub).</p>
-</li>
-<li><p><strong>ImagePullBackOff</strong>: This is a follow-up error where Kubernetes retries pulling the image, but due to repeated failures, it backs off, thus the term &quot;BackOff&quot;.</p>
-</li>
+<li><strong>Memory Requests</strong>: The minimum memory guaranteed for the container.</li>
+<li><strong>Memory Limits</strong>: The maximum memory a container can use before being killed.</li>
 </ul>
-<p>These errors stop the pod from starting since the required container image is unavailable.</p>
+<p>When memory usage surpasses the set limits, the Linux kernel sends a <strong>SIGKILL</strong> signal, killing the container to free up resources.</p>
 <hr>
-<h2>How Does Kubernetes Pull Container Images?</h2>
-<p>When you deploy a pod in Kubernetes, it pulls the specified container image from a container registry. The image can either be stored in a public registry like Docker Hub or a private registry. Kubernetes communicates with the registry to fetch the image and deploy it in the cluster. If any issues occur during the image retrieval process—such as incorrect image names, authentication errors, or network problems—errors like <strong>ErrImagePull</strong> or <strong>ImagePullBackOff</strong> are triggered.</p>
-<hr>
-<h2>Common Causes of ImagePullBackOff and ErrImagePull</h2>
-<h3><strong>1. Incorrect Image Name or Tag</strong></h3>
-<p>One of the most common reasons for these errors is an incorrect image name or tag in the pod&#39;s configuration. Kubernetes cannot pull an image if the image name is misspelled or if the tag specified does not exist in the container registry.</p>
-<p><strong>Solution:</strong></p>
+<h2>🔍 Common Causes of OOMKilled Errors</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Cause</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Solution</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Misconfigured Memory Limits</td>
+<td>Application needs more memory than allocated.</td>
+<td>Adjust memory limits based on actual usage.</td>
+</tr>
+<tr>
+<td>Memory Leaks</td>
+<td>Application continuously consumes memory due to a leak.</td>
+<td>Use profiling tools to detect and fix memory leaks.</td>
+</tr>
+<tr>
+<td>Node Resource Overcommitment</td>
+<td>Node resources are overbooked by multiple containers.</td>
+<td>Set realistic requests and limits, use VPA for autoscaling.</td>
+</tr>
+</tbody></table>
+<h3>1. <strong>Misconfigured Memory Limits</strong></h3>
+<p>One of the most frequent reasons for OOMKilled errors is that the <strong>memory limit</strong> is set too low for the application’s needs. If your application requires more memory than the specified limit, Kubernetes will kill the container to protect the node.</p>
+<p><strong>Solution</strong>:</p>
 <ul>
-<li>Verify the image name and tag in the pod specification.</li>
-<li>Use the command below to inspect the image name and tag:<pre><code class="language-bash">kubectl describe pod &lt;pod-name&gt;
-</code></pre>
-</li>
-</ul>
-<p>Check that the image and tag match what exists in the container registry.</p>
-<hr>
-<h3><strong>2. Image Doesn’t Exist in Registry</strong></h3>
-<p>If the image does not exist in the specified container registry, Kubernetes will not be able to pull it.</p>
-<p><strong>Solution:</strong></p>
-<ul>
-<li>Ensure that the image exists in the registry. If the image is private, ensure you have the proper authentication credentials to access it.</li>
-<li>Use the following command to list available images:<pre><code class="language-bash">docker images
-</code></pre>
-</li>
-</ul>
-<hr>
-<h3><strong>3. Private Container Registry Without Authentication</strong></h3>
-<p>If the image is in a private container registry, Kubernetes needs credentials to access it. If these credentials are not supplied, you’ll encounter the ImagePullBackOff error.</p>
-<p><strong>Solution:</strong></p>
-<ul>
-<li><p>Create a Kubernetes secret that stores your registry credentials:</p>
-<pre><code class="language-bash">kubectl create secret docker-registry &lt;secret-name&gt; --docker-username=&lt;username&gt; --docker-password=&lt;password&gt; --docker-email=&lt;email&gt; --docker-server=&lt;registry-server&gt;
-</code></pre>
-</li>
-<li><p>Reference this secret in your pod&#39;s YAML configuration under the <code>imagePullSecrets</code> section:</p>
-<pre><code class="language-yaml">imagePullSecrets:
-- name: &lt;secret-name&gt;
+<li>Review and adjust memory limits based on the application’s actual usage by setting appropriate values in your pod spec:<pre><code class="language-yaml">resources:
+  requests:
+    memory: &quot;512Mi&quot;
+  limits:
+    memory: &quot;1Gi&quot;
 </code></pre>
 </li>
 </ul>
-<hr>
-<h3><strong>4. Network Connectivity Issues</strong></h3>
-<p>Sometimes, your node may not be able to reach the container registry due to network issues, preventing it from pulling the image.</p>
-<p><strong>Solution:</strong></p>
+<h3>2. <strong>Memory Leaks in Applications</strong></h3>
+<p>Applications with memory leaks can gradually consume more memory over time, eventually leading to OOMKilled events. Memory leaks often occur when an application fails to release memory it no longer needs.</p>
+<p><strong>Solution</strong>:</p>
 <ul>
-<li><p>Check the network configuration and ensure the node can communicate with the container registry.</p>
-</li>
-<li><p>Use tools like <code>curl</code> or <code>ping</code> to verify connectivity between the node and the registry.</p>
-<p>Example:</p>
-<pre><code class="language-bash">ping &lt;registry-url&gt;
-curl https://&lt;registry-url&gt;
-</code></pre>
-</li>
+<li>Use tools like <strong>Heapster</strong>, <strong>Prometheus</strong>, or built-in language profilers (e.g., JVM profilers for Java applications) to detect memory leaks and fix them in the application’s code.</li>
+</ul>
+<h3>3. <strong>Node Resource Overcommitment</strong></h3>
+<p>Nodes can become overcommitted when the sum of the memory requests across multiple pods exceeds the node’s available memory. If several containers request memory at the same time, the node may run out of memory, causing Kubernetes to kill some pods.</p>
+<p><strong>Solution</strong>:</p>
+<ul>
+<li>Set realistic <strong>memory requests</strong> and <strong>limits</strong> for each container to avoid overcommitment. Use Kubernetes <strong>Vertical Pod Autoscaler (VPA)</strong> to automatically adjust memory requests and limits based on real-time usage.</li>
 </ul>
 <hr>
-<h3><strong>5. Rate Limits on Public Registries</strong></h3>
-<p>Docker Hub and other public container registries often impose rate limits. If your Kubernetes cluster exceeds these limits, the ImagePullBackOff error may occur.</p>
-<p><strong>Solution:</strong></p>
-<ul>
-<li>Monitor the number of pull requests your cluster is making.</li>
-<li>Consider using an authenticated account or a mirror registry to avoid rate limits.</li>
-<li>Docker Hub rate limits unauthenticated users to 100 pulls per 6 hours and authenticated users to 200 pulls per 6 hours.</li>
-</ul>
-<hr>
-<h2>How to Diagnose ImagePullBackOff</h2>
-<p>To troubleshoot and identify the root cause of an ImagePullBackOff error, follow these steps:</p>
-<h3><strong>1. Describe the Pod</strong></h3>
-<p>Use the <code>kubectl describe pod</code> command to inspect detailed information about the pod, including events and error messages.</p>
-<pre><code class="language-bash">kubectl describe pod &lt;pod-name&gt;
+<h2>🚨 Steps to Troubleshoot OOMKilled Errors</h2>
+<h3>1. <strong>Inspect Pod Events</strong></h3>
+<p>Use <code>kubectl describe pod &lt;pod-name&gt;</code> to check pod events and verify whether the pod was terminated due to an <strong>OOMKilled</strong> event. Look for the <strong>Exit Code 137</strong> in the output:</p>
+<pre><code class="language-bash">State:          Terminated
+Reason:         OOMKilled
+Exit Code:      137
 </code></pre>
-<p>Look for error messages under the “Events” section.</p>
-<h3><strong>2. Check Pod Logs</strong></h3>
-<p>The pod logs might provide clues as to why the image is not pulling correctly.</p>
-<pre><code class="language-bash">kubectl logs &lt;pod-name&gt;
+<h3>2. <strong>Monitor Memory Usage</strong></h3>
+<p>Use tools like <strong>Prometheus</strong> and <strong>Grafana</strong> to monitor memory usage trends across your cluster. Set up alerts for memory spikes to detect potential memory leaks or inefficient resource usage before they result in OOMKilled events.</p>
+<h3>3. <strong>Analyze Resource Configuration</strong></h3>
+<p>Review the pod’s <strong>resource requests</strong> and <strong>limits</strong> to ensure they are sufficient for the container’s workload. Adjust limits if necessary to prevent future OOMKilled events:</p>
+<pre><code class="language-yaml">resources:
+  requests:
+    memory: &quot;256Mi&quot;
+  limits:
+    memory: &quot;512Mi&quot;
 </code></pre>
-<h3><strong>3. Check Node Logs</strong></h3>
-<p>You can also check the logs of the node where the pod is scheduled. This will help identify if there are any node-level issues like network connectivity.</p>
-<pre><code class="language-bash">kubectl logs &lt;node-name&gt;
+<h3>4. <strong>Debug with Ephemeral Containers</strong></h3>
+<p>If you need more detailed debugging, you can use Kubernetes’ <strong>ephemeral containers</strong> to inspect the running state of a pod before it gets killed. This can help investigate the memory consumption just before termination.</p>
+<pre><code class="language-bash">kubectl debug -it &lt;pod-name&gt; --image=busybox --target=&lt;container-name&gt;
 </code></pre>
 <hr>
-<h2>Preventive Measures</h2>
-<ol>
-<li><strong>Use Correct Image Names and Tags</strong>: Double-check image names and tags in your YAML configuration to avoid typing errors.</li>
-<li><strong>Monitor Image Registry Access</strong>: Ensure proper authentication and access when using private registries.</li>
-<li><strong>Set Up Alerting for Rate Limits</strong>: Set up monitoring and alerts to detect if your cluster is hitting registry rate limits.</li>
-<li><strong>Deploy Images from a Private Cache</strong>: Mirror container images locally to prevent network or rate limit issues with public registries.</li>
-</ol>
+<h2>🛡️ Preventing OOMKilled Errors</h2>
+<h3>1. <strong>Right-Sizing Resources</strong></h3>
+<p>Use historical memory usage data to set appropriate memory requests and limits for each container. This ensures that pods have enough memory while preventing overprovisioning.</p>
+<h3>2. <strong>Enable Vertical Pod Autoscaler (VPA)</strong></h3>
+<p><strong>VPA</strong> dynamically adjusts pod resources based on actual usage patterns, preventing OOMKilled events by automatically increasing memory limits during high usage periods.</p>
+<h3>3. <strong>Use Memory-Efficient Libraries</strong></h3>
+<p>Optimize your application to use libraries and algorithms that consume less memory. Regularly update your application to fix known memory inefficiencies.</p>
 <hr>
-<h2>Conclusion</h2>
-<p><strong>ImagePullBackOff</strong> and <strong>ErrImagePull</strong> are common errors in Kubernetes related to image pulling issues. Understanding the root causes—whether they are related to image names, private registry authentication, network problems, or rate limits—can help you quickly diagnose and resolve the problem. By following the troubleshooting steps outlined in this guide, you can ensure that your Kubernetes deployments run smoothly.</p>
-<p>Regular monitoring and proper image management practices will help avoid these issues and ensure the reliability of your containerized applications.</p>
-<hr>
+<h2>🚀 Conclusion</h2>
+<p><strong>OOMKilled</strong> errors in Kubernetes are often caused by misconfigured memory limits, memory leaks, or overcommitted nodes. By monitoring resource usage, setting appropriate memory requests and limits, and using tools like Vertical Pod Autoscaler, you can prevent these errors and keep your Kubernetes cluster running smoothly. Debugging tools like ephemeral containers and memory profiling tools can also help resolve persistent OOMKilled events.</p>
 
             </div>
 

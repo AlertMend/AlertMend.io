@@ -81,13 +81,74 @@ const convertSlugToHtmlFilename = (slug) => {
   return slug
     .split('-')
     .map((word, index) => {
-      // Always capitalize first word, lowercase stop words in middle, capitalize others
       if (index === 0 || !stopWords.has(word.toLowerCase())) {
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
       }
       return word.toLowerCase()
     })
     .join('-')
+}
+
+// Canonical filename overrides supplied by SEO team
+const canonicalFilenameOverrides = {
+  'dns-resolution-failures-in-kubernetes': 'DNS-Resolution-Failures-in-Kubernetes.html',
+  'debugging-kubernetes-admission-webhooks': 'Debugging-Kubernetes-Admission-Webhooks.html',
+  'debugging-kubernetes-hpa-not-scaling': 'Debugging-Kubernetes-HPA-Not-Scaling.html',
+  'debugging-kubernetes-jobs-and-cronjobs-failures': 'Debugging-Kubernetes-Jobs-and-CronJobs-Failures.html',
+  'debugging-kubernetes-oomkilled-exit-code-137-causes-and-solutions': 'Debugging-Kubernetes-OOMKilled-(Exit-Code-137)-Causes-and-Solutions.html',
+  'elasticsearch-caching-issues': 'Elasticsearch-Caching-Issues.html',
+  'elasticsearch-cluster-health-showing-red': 'Elasticsearch-Cluster-Health-Showing-Red.html',
+  'elasticsearch-cluster-yellow-incident-on-kubernetes': 'Elasticsearch-Cluster-Yellow-Incident-on-Kubernetes.html',
+  'elasticsearch-disk-out-of-space-incident': 'Elasticsearch-Disk-Out-of-Space-Incident.html',
+  'elasticsearch-shard-allocation-failures': 'Elasticsearch-Shard-Allocation-Failures.html',
+  'elasticsearch-shard-relocation-incidents-on-kubernetes': 'Elasticsearch-Shard-Relocation-Incidents-on-Kubernetes.html',
+  'elasticsearch-version-mismatch-in-cluster-nodes': 'Elasticsearch-Version-Mismatch-in-Cluster-Nodes.html',
+  'elasticsearch-virtual-memory-limit-issues-for-optimal-performance': 'Elasticsearch-Virtual-Memory-Limit-Issues-for-Optimal-Performance.html',
+  'elasticsearch-for-slow-index-flushing-issues': 'Elasticsearch-for-Slow-Index-Flushing-Issues.html',
+  'frequent-garbage-collection-issues-in-elasticsearch-for-better-performance': 'Frequent-Garbage-Collection-Issues-in-Elasticsearch-for-Better-Performance.html',
+  'graceful-shutdown-in-kubernetes': 'Graceful-Shutdown-in-Kubernetes.html',
+  'kubernetes-api-rate-limiting-troubleshooting': 'Kubernetes-API-Rate-Limiting-Troubleshooting.html',
+  'kubernetes-csi-driver-failures': 'Kubernetes-CSI-Driver-Failures.html',
+  'kubernetes-configmap-and-secret-mount-failures': 'Kubernetes-ConfigMap-and-Secret-Mount-Failures.html',
+  'kubernetes-container-volume-usage-issues': 'Kubernetes-Container-Volume-Usage-Issues.html',
+  'kubernetes-dns-blog': 'Kubernetes-DNS-blog.html',
+  'kubernetes-evicted-pods': 'Kubernetes-Evicted-Pods.html',
+  'kubernetes-initcontainer-failures': 'Kubernetes-InitContainer-Failures.html',
+  'kubernetes-load-balancer-failures': 'Kubernetes-Load-Balancer-Failures.html',
+  'kubernetes-node-pressure-blog': 'Kubernetes-Node-Pressure-Blog.html',
+  'kubernetes-service-discovery-failures': 'Kubernetes-Service-Discovery-Failures.html',
+  'kubernetes-statefulset-volume-recovery-issues-troublshooting': 'Kubernetes-StatefulSet-Volume-Recovery-Issues-troublshooting.html',
+  'kubernetes-statefulset-volume-recovery-issues': 'Kubernetes-StatefulSet-Volume-Recovery-Issues.html',
+  'kubernetes-persistentvolumeclaim-guide': 'Kubernetes_PersistentVolumeClaim_Guide.html',
+  'load-balancing-and-scaling-long-lived-connections-in-kubernetes': 'Load-Balancing-and-Scaling-Long-Lived-Connections-in-Kubernetes.html',
+  'managing-high-number-of-queued-threads-in-elasticsearch-thread-pool-for-optimal-performance': 'Managing-High-Number-of-Queued-Threads-in-Elasticsearch-Thread-Pool-for-Optimal-Performance.html',
+  'managing-high-number-of-rejected-threads-in-elasticsearch-thread-pool-for-better-performance': 'Managing-High-Number-of-Rejected-Threads-in-Elasticsearch-Thread-Pool-for-Better-Performance.html',
+  'mastering-kubernetes-statefulsets-basics-and-debugging-tips': 'Mastering-Kubernetes-StatefulSets-Basics-and-Debugging-Tips.html',
+  'mastering-load-balancing-for-persistent-connections-in-kubernetes': 'Mastering-Load-Balancing-for-Persistent-Connections-in-Kubernetes.html',
+  'mastering-kubernetes-resource-quotas-requests-and-limits-for-optimized-cluster-performance': 'Mastering_Kubernetes_Resource_Quotas_Requests_and_Limits_for_Optimized_Cluster_Performance.html',
+  'network-connectivity-and-latency-issues-in-elasticsearch': 'Network-Connectivity-and-Latency-Issues-in-Elasticsearch.html',
+  'oomkilled-in-kubernetes': 'OOMKilled-in-Kubernetes.html',
+  'optimizing-elasticsearch-heap-memory': 'Optimizing-Elasticsearch-Heap-Memory.html',
+  'optimizing-elasticsearch-for-high-volume-indexing': 'Optimizing-Elasticsearch-for-High-Volume-Indexing.html',
+  'optimizing-high-jvm-heap-usage-in-elasticsearch': 'Optimizing-High-JVM-Heap-Usage-in-Elasticsearch.html',
+  'privileged-containers-in-kubernetes': 'Privileged-Containers-in-Kubernetes.html',
+  'resolving-imagepullbackoff-and-errimagepull-in-kubernetes': 'Resolving_ImagePullBackOff_and_ErrImagePull_in_Kubernetes.html',
+  'resolving-kubernetes-node-not-ready-error': 'Resolving_Kubernetes_Node_Not_Ready_Error.html',
+  'roll-back-deployments-in-kubernetes': 'Roll-Back-Deployments-in-Kubernetes.html',
+  'troubleshooting-elasticsearch-backlog-of-pending-tasks': 'Troubleshooting-Elasticsearch-Backlog-of-Pending-Tasks.html',
+  'troubleshooting-elasticsearch-cluster-failures-and-instability': 'Troubleshooting-Elasticsearch-Cluster-Failures-and-Instability.html',
+  'troubleshooting-elasticsearch-shard-initialization-failures-on-kubernetes': 'Troubleshooting-Elasticsearch-Shard-Initialization-Failures-on-Kubernetes.html',
+  'troubleshooting-elasticsearch-unassigned-shards-incident-on-kubernetes': 'Troubleshooting-Elasticsearch-Unassigned-Shards-Incident-on-Kubernetes.html',
+  'troubleshooting-kubeapidown': 'Troubleshooting-KubeAPIDown.html',
+  'troubleshooting-kubernetes-ingress-issues': 'Troubleshooting-Kubernetes-Ingress-Issues.html',
+  'troubleshooting-networking-errors-in-kubernetes': 'Troubleshooting-Networking-Errors-in-Kubernetes.html',
+  'troubleshooting-unhealthy-elasticsearch-nodes-on-kubernetes': 'Troubleshooting-Unhealthy-Elasticsearch-Nodes-on-Kubernetes.html',
+  'troubleshooting-unhealthy-kubernetes-daemonsets-a-comprehensive-guide': 'Troubleshooting-Unhealthy-Kubernetes-DaemonSets-A-Comprehensive-Guide.html',
+  'understanding-kubernetes-crashloopbackoff': 'Understanding_Kubernetes_CrashLoopBackOff.html',
+  'understanding-kubernetes-pending-pod': 'Understanding_Kubernetes_Pending-pod.html',
+  'understanding-kubernetes-terminating-state': 'Understanding_Kubernetes_Terminating_State.html',
+  'kubernetes-502-bad-gateway-error-fix': 'kubernetes_502_bad_gateway_error_fix.html',
+  'slack-integration': 'slack-integration.html'
 }
 
 // Read all markdown files
@@ -98,10 +159,10 @@ console.log(`Found ${markdownFiles.length} markdown files to convert...`)
 markdownFiles.forEach(file => {
   const markdownPath = path.join(blogDir, file)
   const slug = file.replace('.md', '')
-  // Convert slug to HTML filename format: lowercase-hyphens -> Title_Case_With_Underscores
-  const htmlFilename = convertSlugToHtmlFilename(slug)
+  const defaultFilename = `${convertSlugToHtmlFilename(slug)}.html`
+  const htmlFilename = canonicalFilenameOverrides[slug] || defaultFilename
   // HTML version goes to /blogs/ directory
-  const htmlPath = path.join(blogsHtmlDir, `${htmlFilename}.html`)
+  const htmlPath = path.join(blogsHtmlDir, htmlFilename)
   // Directory version (non-HTML) goes to /blog/ directory (keep lowercase/hyphens for React routing)
   const dirPath = path.join(outputDir, slug, 'index.html')
   
@@ -1968,10 +2029,10 @@ markdownFiles.forEach(file => {
     const htmlBody = tempFullHTML.substring(bodyStart)
     
     // Write both versions: HTML version and non-HTML version
-    // Version 1: HTML version - /blogs/htmlFilename.html (uses mapped filename if exists)
-    const fullHTMLHtml = createHTMLHead(`https://www.alertmend.io/blogs/${htmlFilename}.html`) + htmlBody
+    // Version 1: HTML version - /blogs/htmlFilename (uses mapped filename if exists)
+    const fullHTMLHtml = createHTMLHead(`https://www.alertmend.io/blogs/${htmlFilename}`) + htmlBody
     fs.writeFileSync(htmlPath, fullHTMLHtml, 'utf-8')
-    console.log(`✓ Converted ${file} → blogs/${htmlFilename}.html`)
+    console.log(`✓ Converted ${file} → blogs/${htmlFilename}`)
     
     // Version 2: Non-HTML version - /blog/slug/
     const fullHTMLClean = createHTMLHead(`https://www.alertmend.io/blog/${slug}`) + htmlBody
