@@ -4,6 +4,7 @@ excerpt: "Elasticsearch requires adequate virtual memory to run smoothly. If the
 date: "2025-06-08"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
+keywords: "Elasticsearch cluster, yellow cluster status, Kubernetes monitoring, incident remediation, troubleshooting Elasticsearch, cluster health management, automated incident response, Elasticsearch issues"
 ---
 
 A yellow cluster status in Elasticsearch indicates that all primary shards are allocated, but replica shards are not. This is common in single-node clusters or when nodes are unavailable.

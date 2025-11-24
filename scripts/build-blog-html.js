@@ -183,6 +183,13 @@ markdownFiles.forEach(file => {
     // Parse frontmatter fields
     const metadata = {}
     frontmatter.split('\n').forEach((line) => {
+      // Handle keywords which may contain commas and quotes
+      const keywordsMatch = line.match(/^keywords:\s*["'](.+)["']$/)
+      if (keywordsMatch) {
+        metadata.keywords = keywordsMatch[1]
+        return
+      }
+      
       const match = line.match(/^(\w+):\s*["']?([^"']+)["']?$/)
       if (match) {
         metadata[match[1]] = match[2]
@@ -347,6 +354,7 @@ markdownFiles.forEach(file => {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${shortenedTitle}</title>
   <meta name="description" content="${metaDescription.replace(/"/g, '&quot;')}">
+  <meta name="keywords" content="${(metadata.keywords || `${metadata.category || 'Blog'}, AlertMend AI, AIOps, Kubernetes, DevOps`).replace(/"/g, '&quot;')}">
   <meta name="author" content="${metadata.author || 'AlertMend Team'}">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="${canonicalUrl}">

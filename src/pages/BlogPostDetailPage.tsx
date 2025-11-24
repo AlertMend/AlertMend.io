@@ -142,7 +142,7 @@ export default function BlogPostDetailPage() {
       <SEO
         title={seoTitle}
         description={metaDescription}
-        keywords={`${post.category}, AlertMend AI, AIOps, Kubernetes, DevOps`}
+        keywords={post.keywords || `${post.category}, AlertMend AI, AIOps, Kubernetes, DevOps`}
         canonical={blogPostUrl}
         ogType="article"
         structuredData={{

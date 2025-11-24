@@ -4,6 +4,7 @@ excerpt: "In Kubernetes, container images are pulled from repositories when you 
 date: "2025-05-21"
 category: "Kubernetes"
 author: "Himanshu Bansal"
+keywords: "Kubernetes, ImagePullBackOff, ErrImagePull, container image pull errors, Kubernetes troubleshooting, automated incident remediation, deployment delays, AlertMend AI"
 ---
 
 ## Understanding the Errors

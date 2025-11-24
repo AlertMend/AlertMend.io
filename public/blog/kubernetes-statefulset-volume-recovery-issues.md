@@ -4,6 +4,7 @@ excerpt: "Elasticsearch requires adequate virtual memory to run smoothly. If the
 date: "2025-06-10"
 category: "Kubernetes"
 author: "Himanshu Bansal"
+keywords: "Kubernetes, StatefulSet, volume recovery, PVC binding failures, volume mount failures, data recovery, stateful applications, troubleshooting Kubernetes, AlertMend AI, automated recovery"
 ---
 
 StatefulSets in Kubernetes manage stateful applications with persistent storage. However, volume recovery issues can cause data loss and service disruptions.

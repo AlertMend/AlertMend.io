@@ -4,6 +4,7 @@ excerpt: "In Kubernetes, evicted pods occur when the node running the pods canno
 date: "2025-02-24"
 category: "Kubernetes"
 author: "Himanshu Bansal"
+keywords: "Kubernetes pod evictions, Kubernetes resource management, pod eviction causes, troubleshooting Kubernetes pods, prevent pod evictions, Kubernetes automation solutions, disk pressure in Kubernetes, memory pressure Kubernetes"
 ---
 
 ## Why Pods Get Evicted

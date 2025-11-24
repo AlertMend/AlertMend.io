@@ -9,6 +9,7 @@ export interface BlogPost {
   author?: string
   content?: string
   tags?: string[]
+  keywords?: string
 }
 
 // List of available blog posts - automatically generated from markdown files
@@ -42,6 +43,13 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
     
     // Parse frontmatter fields
     frontmatter.split('\n').forEach((line) => {
+      // Handle keywords which may contain commas and quotes
+      const keywordsMatch = line.match(/^keywords:\s*["'](.+)["']$/)
+      if (keywordsMatch) {
+        post.keywords = keywordsMatch[1]
+        return
+      }
+      
       const match = line.match(/^(\w+):\s*["']?([^"']+)["']?$/)
       if (match) {
         const key = match[1]
