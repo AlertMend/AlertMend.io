@@ -9,6 +9,7 @@ const BASE_URL = 'https://www.alertmend.io'
  * Normalizes a pathname by:
  * - Removing trailing slashes (except root)
  * - Removing query parameters and hash fragments
+ * - Normalizing blog post slugs (underscores to hyphens, lowercase)
  */
 export function normalizePathname(pathname: string): string {
   // Remove query parameters and hash fragments
@@ -17,6 +18,28 @@ export function normalizePathname(pathname: string): string {
   // Remove trailing slash except for root
   if (normalized !== '/' && normalized.endsWith('/')) {
     normalized = normalized.slice(0, -1)
+  }
+  
+  // Normalize blog post URLs: convert underscores to hyphens and lowercase
+  // Handle /blogs/slug.html and /blog/slug patterns
+  if (normalized.startsWith('/blogs/') || normalized.startsWith('/blog/')) {
+    const parts = normalized.split('/')
+    if (parts.length >= 3) {
+      let slug = parts[2]
+      // Check if slug has .html extension
+      const hasHtmlExtension = slug.endsWith('.html')
+      if (hasHtmlExtension) {
+        slug = slug.replace('.html', '')
+      }
+      // Normalize slug: lowercase and convert underscores to hyphens
+      const normalizedSlug = slug.toLowerCase().replace(/_/g, '-')
+      // Reconstruct path with normalized slug
+      if (normalized.startsWith('/blogs/')) {
+        normalized = `/blogs/${normalizedSlug}${hasHtmlExtension ? '.html' : ''}`
+      } else {
+        normalized = `/blog/${normalizedSlug}`
+      }
+    }
   }
   
   return normalized
@@ -62,14 +85,22 @@ export function setCanonicalUrl(url: string): boolean {
 /**
  * Verifies the canonical URL is correct
  * Logs warnings if issues are found
+ * Note: For blog posts, the canonical URL is set by the SEO component with normalized slugs,
+ * so we should not override it if it's already set correctly.
  */
 export function verifyCanonicalUrl(): void {
   const canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null
   const expectedUrl = getCanonicalUrl()
   
   if (!canonical) {
-    console.warn('⚠️ No canonical URL found in document head')
-    setCanonicalUrl(expectedUrl)
+    // Only set if no canonical exists (don't override if React component hasn't set it yet)
+    // Wait a bit for React to set it
+    setTimeout(() => {
+      const stillMissing = !document.querySelector('link[rel="canonical"]')
+      if (stillMissing) {
+        setCanonicalUrl(expectedUrl)
+      }
+    }, 500)
     return
   }
   
@@ -82,7 +113,15 @@ export function verifyCanonicalUrl(): void {
     return
   }
   
-  // Check if URL matches expected
+  // For blog posts, the canonical URL is set by the SEO component with normalized slugs
+  // Don't override it if it's already set correctly (even if it doesn't match the current pathname)
+  const isBlogPost = window.location.pathname.startsWith('/blog')
+  if (isBlogPost) {
+    // Just verify domain is correct, don't override the canonical URL set by React
+    return
+  }
+  
+  // Check if URL matches expected (for non-blog pages)
   if (currentUrl !== expectedUrl) {
     console.warn(`⚠️ Canonical URL mismatch. Expected: ${expectedUrl}, Found: ${currentUrl}`)
     setCanonicalUrl(expectedUrl)
