@@ -4,7 +4,7 @@ import { BrowserRouter, useLocation } from 'react-router-dom'
 import { HelmetProvider } from './lib/helmet'
 import App from './App.tsx'
 import './index.css'
-import { setupCanonicalObserver, verifyCanonicalUrl } from './utils/urlUtils'
+import { setupCanonicalObserver } from './utils/urlUtils'
 
 // Component to track route changes
 function PageTracker() {
