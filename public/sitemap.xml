@@ -85,7 +85,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Graceful_Shutdown_In_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Graceful-Shutdown-in-Kubernetes.html</loc>
     <lastmod>2025-08-1</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -98,7 +98,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Load_Balancing_And_Scaling_Long_Lived_Connections_In_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Load-Balancing-and-Scaling-Long-Lived-Connections-in-Kubernetes.html</loc>
     <lastmod>2025-07-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -111,7 +111,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Mastering_Load_Balancing_For_Persistent_Connections_In_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Mastering-Load-Balancing-for-Persistent-Connections-in-Kubernetes.html</loc>
     <lastmod>2025-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -124,7 +124,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Roll_Back_Deployments_In_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Roll-Back-Deployments-in-Kubernetes.html</loc>
     <lastmod>2025-07-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -137,7 +137,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Oomkilled_In_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Oomkilled-in-Kubernetes.html</loc>
     <lastmod>2025-07-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -150,7 +150,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Graceful_Shutdown_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Graceful-Shutdown-Kubernetes.html</loc>
     <lastmod>2025-06-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -163,7 +163,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Troubleshooting_Networking_Errors_In_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Troubleshooting-Networking-Errors-in-Kubernetes.html</loc>
     <lastmod>2025-06-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -176,7 +176,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Troubleshooting_Networking_Errors_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Troubleshooting-Networking-Errors-Kubernetes.html</loc>
     <lastmod>2025-06-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -189,7 +189,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Troubleshooting_Unhealthy_Elasticsearch_Nodes_On_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Troubleshooting-Unhealthy-Elasticsearch-Nodes-on-Kubernetes.html</loc>
     <lastmod>2025-06-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -202,7 +202,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Load_Balancing_Long_Lived_Connections_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Load-Balancing-Long-Lived-Connections-Kubernetes.html</loc>
     <lastmod>2025-06-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -215,7 +215,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Mastering_Load_Balancing_Persistent_Connections_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Mastering-Load-Balancing-Persistent-Connections-Kubernetes.html</loc>
     <lastmod>2025-06-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -228,7 +228,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Rollback_Deployments_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Rollback-Deployments-Kubernetes.html</loc>
     <lastmod>2025-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -241,7 +241,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/5_Common_Kubernetes_Challenges.html</loc>
+    <loc>https://www.alertmend.io/blogs/5-Common-Kubernetes-Challenges.html</loc>
     <lastmod>2025-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -254,7 +254,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Debugging_Kubernetes_Admission_Webhooks.html</loc>
+    <loc>https://www.alertmend.io/blogs/Debugging-Kubernetes-Admission-Webhooks.html</loc>
     <lastmod>2025-06-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -267,7 +267,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_Statefulset_Volume_Recovery_Issues.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Statefulset-Volume-Recovery-Issues.html</loc>
     <lastmod>2025-06-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -280,7 +280,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Elasticsearch_Cluster_Yellow_Incident_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Elasticsearch-Cluster-Yellow-Incident-Kubernetes.html</loc>
     <lastmod>2025-06-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -293,7 +293,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Elasticsearch_Cluster_Yellow_Incident_On_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Elasticsearch-Cluster-Yellow-Incident-on-Kubernetes.html</loc>
     <lastmod>2025-06-8</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -306,7 +306,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_Dns_Guide.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Dns-Guide.html</loc>
     <lastmod>2025-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -319,7 +319,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_Dns_Blog.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Dns-Blog.html</loc>
     <lastmod>2025-06-7</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -332,7 +332,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Troubleshooting_Elasticsearch_Unassigned_Shards_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Troubleshooting-Elasticsearch-Unassigned-Shards-Kubernetes.html</loc>
     <lastmod>2025-06-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -345,7 +345,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Troubleshooting_Elasticsearch_Unassigned_Shards_Incident_On_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Troubleshooting-Elasticsearch-Unassigned-Shards-Incident-on-Kubernetes.html</loc>
     <lastmod>2025-06-5</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -358,7 +358,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_Node_Not_Ready_Error.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Node-Not-Ready-Error.html</loc>
     <lastmod>2025-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -371,7 +371,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Mastering_Kubernetes_Statefulsets_Basics_And_Debugging_Tips.html</loc>
+    <loc>https://www.alertmend.io/blogs/Mastering-Kubernetes-Statefulsets-Basics-and-Debugging-Tips.html</loc>
     <lastmod>2025-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -384,7 +384,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Mastering_Kubernetes_Statefulsets.html</loc>
+    <loc>https://www.alertmend.io/blogs/Mastering-Kubernetes-Statefulsets.html</loc>
     <lastmod>2025-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -397,7 +397,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Resolving_Kubernetes_Node_Not_Ready_Error.html</loc>
+    <loc>https://www.alertmend.io/blogs/Resolving-Kubernetes-Node-Not-Ready-Error.html</loc>
     <lastmod>2025-05-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -410,7 +410,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Imagepullbackoff_Errimagepull_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Imagepullbackoff-Errimagepull-Kubernetes.html</loc>
     <lastmod>2025-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -423,7 +423,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Mastering_Kubernetes_Resource_Quotas_Requests_And_Limits_For_Optimized_Cluster_Performance.html</loc>
+    <loc>https://www.alertmend.io/blogs/Mastering-Kubernetes-Resource-Quotas-Requests-and-Limits-for-Optimized-Cluster-Performance.html</loc>
     <lastmod>2025-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -436,7 +436,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Mastering_Kubernetes_Resource_Quotas_Requests_Limits.html</loc>
+    <loc>https://www.alertmend.io/blogs/Mastering-Kubernetes-Resource-Quotas-Requests-Limits.html</loc>
     <lastmod>2025-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -449,7 +449,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Resolving_Imagepullbackoff_And_Errimagepull_In_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Resolving-Imagepullbackoff-and-Errimagepull-in-Kubernetes.html</loc>
     <lastmod>2025-05-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -462,7 +462,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Privileged_Containers_In_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Privileged-Containers-in-Kubernetes.html</loc>
     <lastmod>2025-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -475,7 +475,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Troubleshooting_Kubeapidown.html</loc>
+    <loc>https://www.alertmend.io/blogs/Troubleshooting-Kubeapidown.html</loc>
     <lastmod>2025-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -488,7 +488,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Troubleshooting_Unhealthy_Elasticsearch_Nodes_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Troubleshooting-Unhealthy-Elasticsearch-Nodes-Kubernetes.html</loc>
     <lastmod>2025-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -501,7 +501,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Understanding_Privileged_Containers_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Understanding-Privileged-Containers-Kubernetes.html</loc>
     <lastmod>2025-05-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -514,7 +514,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Elasticsearch_Version_Mismatch_In_Cluster_Nodes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Elasticsearch-Version-Mismatch-in-Cluster-Nodes.html</loc>
     <lastmod>2025-04-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -527,7 +527,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_Node_Pressure_Blog.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Node-Pressure-Blog.html</loc>
     <lastmod>2025-04-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -540,7 +540,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Elasticsearch_Shard_Relocation_Incidents_On_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Elasticsearch-Shard-Relocation-Incidents-on-Kubernetes.html</loc>
     <lastmod>2025-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -553,7 +553,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Dns_Resolution_Failures_In_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Dns-Resolution-Failures-in-Kubernetes.html</loc>
     <lastmod>2025-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -566,7 +566,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_Initcontainer_Failures.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Initcontainer-Failures.html</loc>
     <lastmod>2025-04-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -579,7 +579,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_Csi_Driver_Failures.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Csi-Driver-Failures.html</loc>
     <lastmod>2025-04-2</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -592,7 +592,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Managing_High_Number_Of_Queued_Threads_In_Elasticsearch_Thread_Pool_For_Optimal_Performance.html</loc>
+    <loc>https://www.alertmend.io/blogs/Managing-High-Number-of-Queued-Threads-in-Elasticsearch-Thread-Pool-for-Optimal-Performance.html</loc>
     <lastmod>2025-04-1</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -605,7 +605,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Optimizing_High_Jvm_Heap_Usage_In_Elasticsearch.html</loc>
+    <loc>https://www.alertmend.io/blogs/Optimizing-High-Jvm-Heap-Usage-in-Elasticsearch.html</loc>
     <lastmod>2025-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -618,7 +618,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Elasticsearch_Disk_Out_Of_Space_Incident.html</loc>
+    <loc>https://www.alertmend.io/blogs/Elasticsearch-Disk-Out-of-Space-Incident.html</loc>
     <lastmod>2025-03-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -631,7 +631,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_Container_Volume_Usage_Issues.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Container-Volume-Usage-Issues.html</loc>
     <lastmod>2025-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -644,7 +644,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Frequent_Garbage_Collection_Issues_In_Elasticsearch_For_Better_Performance.html</loc>
+    <loc>https://www.alertmend.io/blogs/Frequent-Garbage-Collection-Issues-in-Elasticsearch-for-Better-Performance.html</loc>
     <lastmod>2025-03-9</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -657,7 +657,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_Statefulset_Volume_Recovery_Issues_Troublshooting.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Statefulset-Volume-Recovery-Issues-Troublshooting.html</loc>
     <lastmod>2025-03-9</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -670,7 +670,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Network_Connectivity_And_Latency_Issues_In_Elasticsearch.html</loc>
+    <loc>https://www.alertmend.io/blogs/Network-Connectivity-and-Latency-Issues-in-Elasticsearch.html</loc>
     <lastmod>2025-03-9</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -683,7 +683,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Troubleshooting_Elasticsearch_Backlog_Of_Pending_Tasks.html</loc>
+    <loc>https://www.alertmend.io/blogs/Troubleshooting-Elasticsearch-Backlog-of-Pending-Tasks.html</loc>
     <lastmod>2025-03-9</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -696,7 +696,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Troubleshooting_Elasticsearch_Cluster_Failures_And_Instability.html</loc>
+    <loc>https://www.alertmend.io/blogs/Troubleshooting-Elasticsearch-Cluster-Failures-and-Instability.html</loc>
     <lastmod>2025-03-9</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -709,7 +709,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_Crashloopbackoff.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Crashloopbackoff.html</loc>
     <lastmod>2025-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -722,7 +722,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Troubleshooting_Unhealthy_Kubernetes_Daemonsets_A_Comprehensive_Guide.html</loc>
+    <loc>https://www.alertmend.io/blogs/Troubleshooting-Unhealthy-Kubernetes-Daemonsets-a-Comprehensive-Guide.html</loc>
     <lastmod>2025-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -735,7 +735,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Understanding_Kubernetes_Crashloopbackoff.html</loc>
+    <loc>https://www.alertmend.io/blogs/Understanding-Kubernetes-Crashloopbackoff.html</loc>
     <lastmod>2025-02-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -748,7 +748,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_Evicted_Pods.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Evicted-Pods.html</loc>
     <lastmod>2025-02-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -761,7 +761,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Debugging_Kubernetes_Jobs_And_Cronjobs_Failures.html</loc>
+    <loc>https://www.alertmend.io/blogs/Debugging-Kubernetes-Jobs-and-Cronjobs-Failures.html</loc>
     <lastmod>2025-02-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -774,7 +774,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Troubleshooting_Elasticsearch_Shard_Initialization_Failures_On_Kubernetes.html</loc>
+    <loc>https://www.alertmend.io/blogs/Troubleshooting-Elasticsearch-Shard-Initialization-Failures-on-Kubernetes.html</loc>
     <lastmod>2025-02-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -787,7 +787,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_Api_Rate_Limiting_Troubleshooting.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Api-Rate-Limiting-Troubleshooting.html</loc>
     <lastmod>2025-02-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -800,7 +800,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Elasticsearch_Caching_Issues.html</loc>
+    <loc>https://www.alertmend.io/blogs/Elasticsearch-Caching-Issues.html</loc>
     <lastmod>2025-02-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -813,7 +813,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_Persistentvolumeclaim_Guide.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Persistentvolumeclaim-Guide.html</loc>
     <lastmod>2025-02-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -826,7 +826,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Debugging_Kubernetes_Hpa_Not_Scaling.html</loc>
+    <loc>https://www.alertmend.io/blogs/Debugging-Kubernetes-Hpa-Not-Scaling.html</loc>
     <lastmod>2025-02-8</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -839,7 +839,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Elasticsearch_Shard_Allocation_Failures.html</loc>
+    <loc>https://www.alertmend.io/blogs/Elasticsearch-Shard-Allocation-Failures.html</loc>
     <lastmod>2025-02-5</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -852,7 +852,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Elasticsearch_Virtual_Memory_Limit_Issues_For_Optimal_Performance.html</loc>
+    <loc>https://www.alertmend.io/blogs/Elasticsearch-Virtual-Memory-Limit-Issues-for-Optimal-Performance.html</loc>
     <lastmod>2025-02-5</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -865,7 +865,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Elasticsearch_Cluster_Health_Showing_Red.html</loc>
+    <loc>https://www.alertmend.io/blogs/Elasticsearch-Cluster-Health-Showing-Red.html</loc>
     <lastmod>2025-02-4</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -878,7 +878,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_502_Bad_Gateway.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-502-Bad-Gateway.html</loc>
     <lastmod>2025-02-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -891,7 +891,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_502_Bad_Gateway_Error_Fix.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-502-Bad-Gateway-Error-Fix.html</loc>
     <lastmod>2025-02-1</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -904,7 +904,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_Load_Balancer_Failures.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Load-Balancer-Failures.html</loc>
     <lastmod>2025-02-1</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -917,7 +917,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_Service_Discovery_Failures.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Service-Discovery-Failures.html</loc>
     <lastmod>2025-02-1</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -930,7 +930,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Optimizing_Elasticsearch_Heap_Memory.html</loc>
+    <loc>https://www.alertmend.io/blogs/Optimizing-Elasticsearch-Heap-Memory.html</loc>
     <lastmod>2025-02-1</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -943,7 +943,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_Configmap_And_Secret_Mount_Failures.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Configmap-and-Secret-Mount-Failures.html</loc>
     <lastmod>2025-01-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -956,7 +956,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Optimizing_Elasticsearch_For_High_Volume_Indexing.html</loc>
+    <loc>https://www.alertmend.io/blogs/Optimizing-Elasticsearch-for-High-Volume-Indexing.html</loc>
     <lastmod>2025-01-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -969,7 +969,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Understanding_Kubernetes_Pending_Pod.html</loc>
+    <loc>https://www.alertmend.io/blogs/Understanding-Kubernetes-Pending-Pod.html</loc>
     <lastmod>2025-01-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -982,7 +982,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Debugging_Kubernetes_Oomkilled_Exit_Code_137_Causes_And_Solutions.html</loc>
+    <loc>https://www.alertmend.io/blogs/Debugging-Kubernetes-Oomkilled-Exit-Code-137-Causes-and-Solutions.html</loc>
     <lastmod>2025-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -995,7 +995,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Elasticsearch_For_Slow_Index_Flushing_Issues.html</loc>
+    <loc>https://www.alertmend.io/blogs/Elasticsearch-for-Slow-Index-Flushing-Issues.html</loc>
     <lastmod>2025-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1008,7 +1008,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Troubleshooting_Kubernetes_Ingress_Issues.html</loc>
+    <loc>https://www.alertmend.io/blogs/Troubleshooting-Kubernetes-Ingress-Issues.html</loc>
     <lastmod>2025-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1021,7 +1021,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Understanding_Kubernetes_Terminating_State.html</loc>
+    <loc>https://www.alertmend.io/blogs/Understanding-Kubernetes-Terminating-State.html</loc>
     <lastmod>2025-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1034,7 +1034,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Managing_High_Number_Of_Rejected_Threads_In_Elasticsearch_Thread_Pool_For_Better_Performance.html</loc>
+    <loc>https://www.alertmend.io/blogs/Managing-High-Number-of-Rejected-Threads-in-Elasticsearch-Thread-Pool-for-Better-Performance.html</loc>
     <lastmod>2025-01-2</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1047,7 +1047,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Slack_Integration.html</loc>
+    <loc>https://www.alertmend.io/blogs/Slack-Integration.html</loc>
     <lastmod>2024-07-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1060,7 +1060,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Teams_Webhook_Integration.html</loc>
+    <loc>https://www.alertmend.io/blogs/Teams-Webhook-Integration.html</loc>
     <lastmod>2024-07-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1073,7 +1073,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/5_Ways_Aiops_Transforming_Infrastructure.html</loc>
+    <loc>https://www.alertmend.io/blogs/5-Ways-Aiops-Transforming-Infrastructure.html</loc>
     <lastmod>2024-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1086,7 +1086,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes_Auto_Remediation_Best_Practices.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Auto-Remediation-Best-Practices.html</loc>
     <lastmod>2024-03-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1099,7 +1099,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Cost_Optimization_Multi_Cloud.html</loc>
+    <loc>https://www.alertmend.io/blogs/Cost-Optimization-Multi-Cloud.html</loc>
     <lastmod>2024-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

@@ -74,12 +74,20 @@ const formatDate = (dateString) => {
   })
 }
 
-// Function to convert slug (lowercase-hyphens) to HTML filename format (Title_Case_With_Underscores)
+// Function to convert slug (lowercase-hyphens) to HTML filename format (Title-Case-With-Hyphens)
+// Small words (in, of, the, a, an, etc.) remain lowercase except at the start
 const convertSlugToHtmlFilename = (slug) => {
+  const stopWords = new Set(['in', 'of', 'the', 'a', 'an', 'and', 'or', 'but', 'for', 'to', 'at', 'on', 'by', 'with', 'from'])
   return slug
     .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join('_')
+    .map((word, index) => {
+      // Always capitalize first word, lowercase stop words in middle, capitalize others
+      if (index === 0 || !stopWords.has(word.toLowerCase())) {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      }
+      return word.toLowerCase()
+    })
+    .join('-')
 }
 
 // Read all markdown files
