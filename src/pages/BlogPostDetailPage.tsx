@@ -101,9 +101,11 @@ export default function BlogPostDetailPage() {
   // Canonical URL should match the current URL format
   // If accessed via /blogs/slug.html, canonical should be /blogs/slug.html
   // If accessed via /blog/slug, canonical should be /blog/slug
+  // Always use normalized slug (lowercase, hyphens) for canonical URL
   const isHtmlVersion = location.pathname.startsWith('/blogs/') && location.pathname.endsWith('.html')
-  // Use normalized slug from post (which is already normalized) for canonical URL
-  const blogPostUrl = isHtmlVersion ? `/blogs/${post.slug}.html` : `/blog/${post.slug}`
+  const blogPostUrl = isHtmlVersion 
+    ? `/blogs/${post.slug}.html`  // HTML version: /blogs/normalized-slug.html
+    : `/blog/${post.slug}`         // Non-HTML version: /blog/normalized-slug
   
   // Truncate title to 30-60 characters for SEO
   const seoTitle = truncateBlogTitle(post.title)

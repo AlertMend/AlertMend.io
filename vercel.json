@@ -17,6 +17,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/blogs/:slug.html",
+      "destination": "/index.html"
+    },
+    {
       "source": "/auto-remediation",
       "destination": "/auto-remediation/index.html"
     },
