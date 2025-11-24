@@ -1,5 +1,5 @@
 ---
-title: "Elasticsearch Cluster Yellow Incident on Kubernetes: Troubleshooting and Solutions"
+title: "AlertMend: Fix Elasticsearch Yellow Clusters in Kubernetes"
 excerpt: "Elasticsearch requires adequate virtual memory to run smoothly. If the system's virtual memory limit is too low, it can cause performance issues and failures."
 date: "2025-06-08"
 category: "Elasticsearch"

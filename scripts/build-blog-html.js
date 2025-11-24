@@ -1846,7 +1846,7 @@ markdownFiles.forEach(file => {
                 </div>
                 <div class="author-details">
                   <div class="author-name">${metadata.author || 'AlertMend Team'}</div>
-                  <div class="author-meta">${readTime} • ${formatDate(metadata.date || '')}</div>
+                  <div class="author-meta">${calculateReadTime(content)} • ${formatDate(metadata.date || '')}</div>
                 </div>
               </div>
 

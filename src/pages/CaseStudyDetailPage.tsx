@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Quote, CheckCircle2, ArrowRight, Building2 } from 'lucide-react'
-import { caseStudiesData, findCaseStudyBySlug, generateCaseStudySlug } from '../data/caseStudies'
+import { findCaseStudyBySlug, generateCaseStudySlug } from '../data/caseStudies'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import SEO from '../components/SEO'

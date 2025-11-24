@@ -1,5 +1,5 @@
 ---
-title: "Troubleshooting KubeAPIDown: How to Restore Kubernetes API Server Availability"
+title: "Fix KubeAPIDown: Restore Kubernetes API Server Availability"
 excerpt: "In Kubernetes, privileged containers play a critical role when applications need elevated access to host resources."
 date: "2025-05-18"
 category: "Kubernetes"
