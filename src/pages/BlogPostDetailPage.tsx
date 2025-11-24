@@ -40,7 +40,7 @@ export default function BlogPostDetailPage() {
       })
     }
   }, [slug])
-
+  
   if (loading) {
     return (
       <div className="min-h-screen bg-white">
@@ -97,10 +97,10 @@ export default function BlogPostDetailPage() {
 
   const readTime = post.content ? calculateReadTime(post.content) : '5 min read'
   // Canonical URL should match the current URL format
-  // If accessed via /blog/slug.html, canonical should be /blog/slug.html
+  // If accessed via /blogs/slug.html, canonical should be /blogs/slug.html
   // If accessed via /blog/slug, canonical should be /blog/slug
-  const isHtmlVersion = location.pathname.endsWith('.html') || slug?.endsWith('.html')
-  const blogPostUrl = isHtmlVersion ? `/blog/${post.slug}.html` : `/blog/${post.slug}`
+  const isHtmlVersion = location.pathname.startsWith('/blogs/') && location.pathname.endsWith('.html')
+  const blogPostUrl = isHtmlVersion ? `/blogs/${post.slug}.html` : `/blog/${post.slug}`
   
   // Truncate title to 30-60 characters for SEO
   const seoTitle = truncateBlogTitle(post.title)

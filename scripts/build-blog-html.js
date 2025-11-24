@@ -45,11 +45,15 @@ marked.setOptions({
 
 // Read blog markdown files
 const blogDir = path.join(__dirname, '../public/blog')
-const outputDir = path.join(__dirname, '../dist/blog')
+const outputDir = path.join(__dirname, '../dist/blog') // For directory versions (non-HTML)
+const blogsHtmlDir = path.join(__dirname, '../dist/blogs') // For HTML files
 
-// Ensure output directory exists
+// Ensure output directories exist
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true })
+}
+if (!fs.existsSync(blogsHtmlDir)) {
+  fs.mkdirSync(blogsHtmlDir, { recursive: true })
 }
 
 // Helper function to calculate read time
@@ -78,8 +82,9 @@ console.log(`Found ${markdownFiles.length} markdown files to convert...`)
 markdownFiles.forEach(file => {
   const markdownPath = path.join(blogDir, file)
   const slug = file.replace('.md', '')
-  const htmlPath = path.join(outputDir, `${slug}.html`)
-  // Also create a directory version without .html extension
+  // HTML version goes to /blogs/ directory
+  const htmlPath = path.join(blogsHtmlDir, `${slug}.html`)
+  // Directory version (non-HTML) goes to /blog/ directory
   const dirPath = path.join(outputDir, slug, 'index.html')
   
   try {
@@ -1126,7 +1131,7 @@ markdownFiles.forEach(file => {
 </html>`
     
     // Create a temporary full HTML to extract the body
-    // Use a placeholder canonical URL for now
+    // Use a placeholder canonical URL for now (will be overridden per version)
     const tempCanonical = `https://www.alertmend.io/blog/${slug}`
     const tempFullHTML = createHTMLHead(tempCanonical) + `
   
@@ -1946,15 +1951,15 @@ markdownFiles.forEach(file => {
     const htmlBody = tempFullHTML.substring(bodyStart)
     
     // Write both versions: with .html extension and without (directory structure)
-    // Version 1: With .html extension (e.g., /blog/post-name.html)
-    // Canonical URL for .html version points to itself
-    const canonicalUrlHtml = `https://www.alertmend.io/blog/${slug}.html`
+    // Version 1: With .html extension (e.g., /blogs/post-name.html)
+    // Canonical URL for .html version points to /blogs/
+    const canonicalUrlHtml = `https://www.alertmend.io/blogs/${slug}.html`
     const fullHTMLHtml = createHTMLHead(canonicalUrlHtml) + htmlBody
     fs.writeFileSync(htmlPath, fullHTMLHtml, 'utf-8')
-    console.log(`✓ Converted ${file} → ${slug}.html (canonical: ${canonicalUrlHtml})`)
+    console.log(`✓ Converted ${file} → blogs/${slug}.html (canonical: ${canonicalUrlHtml})`)
     
     // Version 2: Without .html extension (e.g., /blog/post-name/)
-    // Canonical URL for non-html version points to itself
+    // Canonical URL for non-html version points to /blog/
     const canonicalUrlClean = `https://www.alertmend.io/blog/${slug}`
     const fullHTMLClean = createHTMLHead(canonicalUrlClean) + htmlBody
     // Create directory structure for clean URL
@@ -1962,7 +1967,7 @@ markdownFiles.forEach(file => {
       fs.mkdirSync(path.dirname(dirPath), { recursive: true })
     }
     fs.writeFileSync(dirPath, fullHTMLClean, 'utf-8')
-    console.log(`✓ Converted ${file} → ${slug}/index.html (canonical: ${canonicalUrlClean})`)
+    console.log(`✓ Converted ${file} → blog/${slug}/index.html (canonical: ${canonicalUrlClean})`)
   } catch (error) {
     console.error(`✗ Error converting ${file}:`, error.message)
   }

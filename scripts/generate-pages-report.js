@@ -75,20 +75,22 @@ function extractMetadata(htmlContent, filePath) {
 
 // Scan blog pages
 console.log('📊 Scanning blog pages...')
-const blogHtmlFiles = fs.readdirSync(blogDir)
-  .filter(file => file.endsWith('.html') && file !== 'index.html')
+const blogsHtmlDir = path.join(__dirname, '../dist/blogs')
+const blogHtmlFiles = fs.existsSync(blogsHtmlDir)
+  ? fs.readdirSync(blogsHtmlDir).filter(file => file.endsWith('.html'))
+  : []
 
 blogHtmlFiles.forEach(file => {
-  const filePath = path.join(blogDir, file)
+  const filePath = path.join(blogsHtmlDir, file)
   const slug = file.replace('.html', '')
   const htmlContent = fs.readFileSync(filePath, 'utf-8')
   const metadata = extractMetadata(htmlContent, filePath)
   
   const pageInfo = {
     type: 'blog-html',
-    path: `/blog/${file}`,
+    path: `/blogs/${file}`,
     slug: slug,
-    file: file,
+    file: `blogs/${file}`,
     ...metadata,
     issues: []
   }
@@ -100,7 +102,10 @@ blogHtmlFiles.forEach(file => {
   if (!metadata.hasOgUrl) pageInfo.issues.push('Missing Open Graph URL')
   if (!metadata.hasTwitterUrl) pageInfo.issues.push('Missing Twitter URL')
   
-  // Check canonical URL format
+  // Check canonical URL format (should be /blogs/{slug}.html)
+  if (metadata.hasCanonical && !metadata.canonical.includes('/blogs/')) {
+    pageInfo.issues.push(`Canonical URL should be in /blogs/ directory (found: ${metadata.canonical})`)
+  }
   if (metadata.hasCanonical && !metadata.canonical.endsWith('.html')) {
     pageInfo.issues.push(`Canonical URL should end with .html (found: ${metadata.canonical})`)
   }

@@ -5,32 +5,35 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const blogDir = path.join(__dirname, '../dist/blog')
+const blogDir = path.join(__dirname, '../dist/blog') // Directory versions (non-HTML)
+const blogsHtmlDir = path.join(__dirname, '../dist/blogs') // HTML files
 const issues = []
 
-// Check all .html files
-const htmlFiles = fs.readdirSync(blogDir).filter(file => file.endsWith('.html') && file !== 'index.html')
+// Check all .html files in /blogs/ directory
+const htmlFiles = fs.existsSync(blogsHtmlDir) 
+  ? fs.readdirSync(blogsHtmlDir).filter(file => file.endsWith('.html'))
+  : []
 
 console.log(`Checking ${htmlFiles.length} .html files...\n`)
 
 htmlFiles.forEach(file => {
-  const filePath = path.join(blogDir, file)
+  const filePath = path.join(blogsHtmlDir, file)
   const slug = file.replace('.html', '')
   const content = fs.readFileSync(filePath, 'utf-8')
   
-  const canonicalMatch = content.match(/<link rel="canonical" href="([^"]+)">/)
+  const canonicalMatch = content.match(/<link[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["']/i)
   if (!canonicalMatch) {
     issues.push({
-      file: file,
+      file: `blogs/${file}`,
       issue: 'Missing canonical URL',
-      expected: `https://www.alertmend.io/blog/${slug}.html`
+      expected: `https://www.alertmend.io/blogs/${slug}.html`
     })
   } else {
     const canonical = canonicalMatch[1]
-    const expected = `https://www.alertmend.io/blog/${slug}.html`
+    const expected = `https://www.alertmend.io/blogs/${slug}.html`
     if (canonical !== expected) {
       issues.push({
-        file: file,
+        file: `blogs/${file}`,
         issue: 'Incorrect canonical URL',
         found: canonical,
         expected: expected
@@ -110,12 +113,12 @@ console.log('='.repeat(80))
 let consistencyIssues = 0
 htmlFiles.forEach(file => {
   const slug = file.replace('.html', '')
-  const htmlPath = path.join(blogDir, file)
+  const htmlPath = path.join(blogsHtmlDir, file)
   const dirPath = path.join(blogDir, slug, 'index.html')
   
   if (!fs.existsSync(dirPath)) {
     consistencyIssues++
-    console.log(`⚠️  ${slug}: Has .html file but missing directory/index.html`)
+    console.log(`⚠️  ${slug}: Has .html file in /blogs/ but missing directory/index.html in /blog/`)
   }
 })
 
