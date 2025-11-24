@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AlertMend: Fix Elasticsearch Yellow... | AlertMend AI</title>
-  <meta name="description" content="Elasticsearch Cluster Yellow Incident on Kubernetes: Troubleshooting and Solutions A yellow cluster status in Elasticsearch indicates that all primary...">
+  <meta name="description" content="A yellow cluster status in Elasticsearch indicates that all primary shards are allocated, but replica shards are not. This is common in single-node clusters...">
   <meta name="author" content="Himanshu Bansal">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.alertmend.io/blog/elasticsearch-cluster-yellow-incident-kubernetes.html">
@@ -13,14 +13,14 @@
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.alertmend.io/blog/elasticsearch-cluster-yellow-incident-kubernetes.html">
   <meta property="og:title" content="AlertMend: Fix Elasticsearch Yellow... | AlertMend AI">
-  <meta property="og:description" content="Elasticsearch Cluster Yellow Incident on Kubernetes: Troubleshooting and Solutions A yellow cluster status in Elasticsearch indicates that all primary...">
+  <meta property="og:description" content="A yellow cluster status in Elasticsearch indicates that all primary shards are allocated, but replica shards are not. This is common in single-node clusters...">
   <meta property="og:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://www.alertmend.io/blog/elasticsearch-cluster-yellow-incident-kubernetes.html">
   <meta name="twitter:title" content="AlertMend: Fix Elasticsearch Yellow... | AlertMend AI">
-  <meta name="twitter:description" content="Elasticsearch Cluster Yellow Incident on Kubernetes: Troubleshooting and Solutions A yellow cluster status in Elasticsearch indicates that all primary...">
+  <meta name="twitter:description" content="A yellow cluster status in Elasticsearch indicates that all primary shards are allocated, but replica shards are not. This is common in single-node clusters...">
   <meta name="twitter:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Structured Data -->
@@ -29,7 +29,7 @@
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": "AlertMend: Fix Elasticsearch Yellow... | AlertMend AI",
-    "description": "Elasticsearch Cluster Yellow Incident on Kubernetes: Troubleshooting and Solutions A yellow cluster status in Elasticsearch indicates that all primary...",
+    "description": "A yellow cluster status in Elasticsearch indicates that all primary shards are allocated, but replica shards are not. This is common in single-node clusters...",
     "image": "https://alertmend.io/og-image.jpg",
     "datePublished": "2025-06-08",
     "dateModified": "2025-06-08",
@@ -782,8 +782,7 @@
 
             <!-- Content -->
             <div class="content">
-              <h2>Elasticsearch Cluster Yellow Incident on Kubernetes...</h2>
-<p>A yellow cluster status in Elasticsearch indicates that all primary shards are allocated, but replica shards are not. This is common in single-node clusters or when nodes are unavailable.</p>
+              <p>A yellow cluster status in Elasticsearch indicates that all primary shards are allocated, but replica shards are not. This is common in single-node clusters or when nodes are unavailable.</p>
 <h2>Understanding Cluster Status</h2>
 <ul>
 <li><strong>Green</strong>: All shards (primary and replica) are allocated</li>
@@ -828,10 +827,8 @@
 <li>Verify pod status</li>
 </ul>
 <h2>Troubleshooting</h2>
-<pre><code class="language-bash"># Check cluster health
-kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/health?pretty&quot;
+<pre><code class="language-bash">kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/health?pretty&quot;
 
-# Check unassigned shards
 kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/shards?h=index,shard,prirep,state,unassigned.reason&quot;
 
 # Force shard allocation (use with caution)
@@ -1054,8 +1051,7 @@ kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X POST &quot;localhost:9200/
 
             <!-- Content -->
             <div class="content">
-              <h2>Elasticsearch Cluster Yellow Incident on Kubernetes...</h2>
-<p>A yellow cluster status in Elasticsearch indicates that all primary shards are allocated, but replica shards are not. This is common in single-node clusters or when nodes are unavailable.</p>
+              <p>A yellow cluster status in Elasticsearch indicates that all primary shards are allocated, but replica shards are not. This is common in single-node clusters or when nodes are unavailable.</p>
 <h2>Understanding Cluster Status</h2>
 <ul>
 <li><strong>Green</strong>: All shards (primary and replica) are allocated</li>
@@ -1100,10 +1096,8 @@ kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X POST &quot;localhost:9200/
 <li>Verify pod status</li>
 </ul>
 <h2>Troubleshooting</h2>
-<pre><code class="language-bash"># Check cluster health
-kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/health?pretty&quot;
+<pre><code class="language-bash">kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/health?pretty&quot;
 
-# Check unassigned shards
 kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/shards?h=index,shard,prirep,state,unassigned.reason&quot;
 
 # Force shard allocation (use with caution)
@@ -1964,8 +1958,7 @@ kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X POST &quot;localhost:9200/
 
             <!-- Content -->
             <div class="content">
-              <h2>Elasticsearch Cluster Yellow Incident on Kubernetes...</h2>
-<p>A yellow cluster status in Elasticsearch indicates that all primary shards are allocated, but replica shards are not. This is common in single-node clusters or when nodes are unavailable.</p>
+              <p>A yellow cluster status in Elasticsearch indicates that all primary shards are allocated, but replica shards are not. This is common in single-node clusters or when nodes are unavailable.</p>
 <h2>Understanding Cluster Status</h2>
 <ul>
 <li><strong>Green</strong>: All shards (primary and replica) are allocated</li>
@@ -2010,10 +2003,8 @@ kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X POST &quot;localhost:9200/
 <li>Verify pod status</li>
 </ul>
 <h2>Troubleshooting</h2>
-<pre><code class="language-bash"># Check cluster health
-kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/health?pretty&quot;
+<pre><code class="language-bash">kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/health?pretty&quot;
 
-# Check unassigned shards
 kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/shards?h=index,shard,prirep,state,unassigned.reason&quot;
 
 # Force shard allocation (use with caution)

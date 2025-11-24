@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>How to Roll Back Deployments in Kubernetes | AlertMend AI</title>
-  <meta name="description" content="How to Roll Back Deployments in Kubernetes Understand how Kubernetes handles rollbacks, why it's risky in production, and best practices for safe rollbacks.">
+  <meta name="description" content="Understanding Kubernetes Rollbacks Kubernetes maintains a rollout history for Deployments, allowing you to roll back to previous versions. However...">
   <meta name="author" content="Arvind Rajpurohit">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.alertmend.io/blog/rollback-deployments-kubernetes">
@@ -13,14 +13,14 @@
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.alertmend.io/blog/rollback-deployments-kubernetes">
   <meta property="og:title" content="How to Roll Back Deployments in Kubernetes | AlertMend AI">
-  <meta property="og:description" content="How to Roll Back Deployments in Kubernetes Understand how Kubernetes handles rollbacks, why it's risky in production, and best practices for safe rollbacks.">
+  <meta property="og:description" content="Understanding Kubernetes Rollbacks Kubernetes maintains a rollout history for Deployments, allowing you to roll back to previous versions. However...">
   <meta property="og:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://www.alertmend.io/blog/rollback-deployments-kubernetes">
   <meta name="twitter:title" content="How to Roll Back Deployments in Kubernetes | AlertMend AI">
-  <meta name="twitter:description" content="How to Roll Back Deployments in Kubernetes Understand how Kubernetes handles rollbacks, why it's risky in production, and best practices for safe rollbacks.">
+  <meta name="twitter:description" content="Understanding Kubernetes Rollbacks Kubernetes maintains a rollout history for Deployments, allowing you to roll back to previous versions. However...">
   <meta name="twitter:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Structured Data -->
@@ -29,7 +29,7 @@
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": "How to Roll Back Deployments in Kubernetes | AlertMend AI",
-    "description": "How to Roll Back Deployments in Kubernetes Understand how Kubernetes handles rollbacks, why it's risky in production, and best practices for safe rollbacks.",
+    "description": "Understanding Kubernetes Rollbacks Kubernetes maintains a rollout history for Deployments, allowing you to roll back to previous versions. However...",
     "image": "https://alertmend.io/og-image.jpg",
     "datePublished": "2025-06-20",
     "dateModified": "2025-06-20",
@@ -782,16 +782,12 @@
 
             <!-- Content -->
             <div class="content">
-              <h2>How to Roll Back Deployments in Kubernetes</h2>
-<p>Understand how Kubernetes handles rollbacks, why it&#39;s risky in production, and best practices for safe rollbacks.</p>
-<h2>Understanding Kubernetes Rollbacks</h2>
+              <h2>Understanding Kubernetes Rollbacks</h2>
 <p>Kubernetes maintains a rollout history for Deployments, allowing you to roll back to previous versions. However, rollbacks can be risky if not done carefully.</p>
 <h2>Rolling Back a Deployment</h2>
 <h3>Using kubectl</h3>
-<pre><code class="language-bash"># View rollout history
-kubectl rollout history deployment/my-app
+<pre><code class="language-bash">kubectl rollout history deployment/my-app
 
-# Rollback to previous version
 kubectl rollout undo deployment/my-app
 
 # Rollback to specific revision
@@ -1033,16 +1029,12 @@ kubectl rollout history deployment/my-app --revision=2
 
             <!-- Content -->
             <div class="content">
-              <h2>How to Roll Back Deployments in Kubernetes</h2>
-<p>Understand how Kubernetes handles rollbacks, why it&#39;s risky in production, and best practices for safe rollbacks.</p>
-<h2>Understanding Kubernetes Rollbacks</h2>
+              <h2>Understanding Kubernetes Rollbacks</h2>
 <p>Kubernetes maintains a rollout history for Deployments, allowing you to roll back to previous versions. However, rollbacks can be risky if not done carefully.</p>
 <h2>Rolling Back a Deployment</h2>
 <h3>Using kubectl</h3>
-<pre><code class="language-bash"># View rollout history
-kubectl rollout history deployment/my-app
+<pre><code class="language-bash">kubectl rollout history deployment/my-app
 
-# Rollback to previous version
 kubectl rollout undo deployment/my-app
 
 # Rollback to specific revision
@@ -1922,16 +1914,12 @@ kubectl rollout history deployment/my-app --revision=2
 
             <!-- Content -->
             <div class="content">
-              <h2>How to Roll Back Deployments in Kubernetes</h2>
-<p>Understand how Kubernetes handles rollbacks, why it&#39;s risky in production, and best practices for safe rollbacks.</p>
-<h2>Understanding Kubernetes Rollbacks</h2>
+              <h2>Understanding Kubernetes Rollbacks</h2>
 <p>Kubernetes maintains a rollout history for Deployments, allowing you to roll back to previous versions. However, rollbacks can be risky if not done carefully.</p>
 <h2>Rolling Back a Deployment</h2>
 <h3>Using kubectl</h3>
-<pre><code class="language-bash"># View rollout history
-kubectl rollout history deployment/my-app
+<pre><code class="language-bash">kubectl rollout history deployment/my-app
 
-# Rollback to previous version
 kubectl rollout undo deployment/my-app
 
 # Rollback to specific revision

@@ -20,10 +20,20 @@ export default function BlogPostDetailPage() {
 
   useEffect(() => {
     if (slug) {
+      // Reset loading state when slug changes
+      setLoading(true)
+      setPost(null)
+      
+      // Scroll to top when navigating to a new post
+      window.scrollTo({ top: 0, behavior: 'instant' })
+      
       // Remove .html extension if present for fetching the blog post
       const cleanSlug = slug.replace(/\.html$/, '')
       getBlogPost(cleanSlug).then((data) => {
         setPost(data)
+        setLoading(false)
+      }).catch(() => {
+        setPost(null)
         setLoading(false)
       })
     }
@@ -364,30 +374,22 @@ export default function BlogPostDetailPage() {
                       <ul className="space-y-3">
                         {relatedPosts.map((relatedPost) => (
                           <li key={relatedPost.slug}>
-                            <a
-                              href={`/blog/${relatedPost.slug}`}
-                              onClick={(e) => {
-                                e.preventDefault()
-                                navigate(`/blog/${relatedPost.slug}`)
-                              }}
-                              className="text-left text-blue-600 hover:text-blue-800 underline text-sm leading-relaxed cursor-pointer"
+                            <button
+                              onClick={() => navigate(`/blog/${relatedPost.slug}`)}
+                              className="text-left text-blue-600 hover:text-blue-800 underline text-sm leading-relaxed cursor-pointer bg-transparent border-none p-0"
                             >
                               {relatedPost.title}
-                            </a>
+                            </button>
                           </li>
                         ))}
                       </ul>
-                      <a 
-                        href="/blog"
-                        onClick={(e) => {
-                          e.preventDefault()
-                          navigate('/blog')
-                        }}
-                        className="mt-4 text-purple-600 hover:text-purple-800 text-sm font-medium flex items-center gap-1 cursor-pointer"
+                      <button
+                        onClick={() => navigate('/blog')}
+                        className="mt-4 text-purple-600 hover:text-purple-800 text-sm font-medium flex items-center gap-1 cursor-pointer bg-transparent border-none p-0"
                       >
                         View All Posts
                         <ArrowRight className="h-4 w-4" />
-                      </a>
+                      </button>
                     </div>
                   )}
 

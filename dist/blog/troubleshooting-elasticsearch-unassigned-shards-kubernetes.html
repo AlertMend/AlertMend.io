@@ -782,9 +782,7 @@
 
             <!-- Content -->
             <div class="content">
-              <h2>Troubleshooting Elasticsearch Unassigned Shards Incident on Kubernetes</h2>
-<p>Elasticsearch unassigned shards occur when a node is unable to assign shards properly, leading to reduced search performance and potential data loss.</p>
-<h2>Understanding Unassigned Shards</h2>
+              <h2>Understanding Unassigned Shards</h2>
 <p>Unassigned shards are shards that should be allocated to nodes but aren&#39;t. This can happen for several reasons:</p>
 <ul>
 <li><strong>Node failures</strong>: Nodes go down and shards cannot be allocated</li>
@@ -833,10 +831,8 @@
 <li>Adjust allocation settings</li>
 </ul>
 <h2>Diagnosis</h2>
-<pre><code class="language-bash"># Check unassigned shards
-kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/shards?h=index,shard,prirep,state,unassigned.reason&quot;
+<pre><code class="language-bash">kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/shards?h=index,shard,prirep,state,unassigned.reason&quot;
 
-# Get allocation explanation
 kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/allocation/explain?pretty&quot;
 
 # Check cluster settings
@@ -1083,9 +1079,7 @@ kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_
 
             <!-- Content -->
             <div class="content">
-              <h2>Troubleshooting Elasticsearch Unassigned Shards Incident on Kubernetes</h2>
-<p>Elasticsearch unassigned shards occur when a node is unable to assign shards properly, leading to reduced search performance and potential data loss.</p>
-<h2>Understanding Unassigned Shards</h2>
+              <h2>Understanding Unassigned Shards</h2>
 <p>Unassigned shards are shards that should be allocated to nodes but aren&#39;t. This can happen for several reasons:</p>
 <ul>
 <li><strong>Node failures</strong>: Nodes go down and shards cannot be allocated</li>
@@ -1134,10 +1128,8 @@ kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_
 <li>Adjust allocation settings</li>
 </ul>
 <h2>Diagnosis</h2>
-<pre><code class="language-bash"># Check unassigned shards
-kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/shards?h=index,shard,prirep,state,unassigned.reason&quot;
+<pre><code class="language-bash">kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/shards?h=index,shard,prirep,state,unassigned.reason&quot;
 
-# Get allocation explanation
 kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/allocation/explain?pretty&quot;
 
 # Check cluster settings
@@ -2022,9 +2014,7 @@ kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_
 
             <!-- Content -->
             <div class="content">
-              <h2>Troubleshooting Elasticsearch Unassigned Shards Incident on Kubernetes</h2>
-<p>Elasticsearch unassigned shards occur when a node is unable to assign shards properly, leading to reduced search performance and potential data loss.</p>
-<h2>Understanding Unassigned Shards</h2>
+              <h2>Understanding Unassigned Shards</h2>
 <p>Unassigned shards are shards that should be allocated to nodes but aren&#39;t. This can happen for several reasons:</p>
 <ul>
 <li><strong>Node failures</strong>: Nodes go down and shards cannot be allocated</li>
@@ -2073,10 +2063,8 @@ kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_
 <li>Adjust allocation settings</li>
 </ul>
 <h2>Diagnosis</h2>
-<pre><code class="language-bash"># Check unassigned shards
-kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/shards?h=index,shard,prirep,state,unassigned.reason&quot;
+<pre><code class="language-bash">kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/shards?h=index,shard,prirep,state,unassigned.reason&quot;
 
-# Get allocation explanation
 kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/allocation/explain?pretty&quot;
 
 # Check cluster settings

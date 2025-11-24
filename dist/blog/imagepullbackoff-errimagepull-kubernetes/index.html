@@ -782,9 +782,7 @@
 
             <!-- Content -->
             <div class="content">
-              <h2>How to Troubleshoot and Fix ImagePullBackOff and ErrImagePull in...</h2>
-<p>In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors occur during this process.</p>
-<h2>Understanding the Errors</h2>
+              <h2>Understanding the Errors</h2>
 <ul>
 <li><strong>ImagePullBackOff</strong>: Kubernetes is backing off from pulling the image after repeated failures</li>
 <li><strong>ErrImagePull</strong>: Initial error occurred while pulling the image</li>
@@ -836,13 +834,11 @@
 <li>Authentication failures</li>
 </ul>
 <p><strong>Solutions:</strong></p>
-<pre><code class="language-bash"># Create image pull secret
-kubectl create secret docker-registry my-registry-secret \
+<pre><code class="language-bash">kubectl create secret docker-registry my-registry-secret \
   --docker-server=&lt;registry-url&gt; \
   --docker-username=&lt;username&gt; \
   --docker-password=&lt;password&gt;
 
-# Add to pod spec
 spec:
   imagePullSecrets:
   - name: my-registry-secret
@@ -1083,9 +1079,7 @@ kubectl describe secret &lt;secret-name&gt;
 
             <!-- Content -->
             <div class="content">
-              <h2>How to Troubleshoot and Fix ImagePullBackOff and ErrImagePull in...</h2>
-<p>In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors occur during this process.</p>
-<h2>Understanding the Errors</h2>
+              <h2>Understanding the Errors</h2>
 <ul>
 <li><strong>ImagePullBackOff</strong>: Kubernetes is backing off from pulling the image after repeated failures</li>
 <li><strong>ErrImagePull</strong>: Initial error occurred while pulling the image</li>
@@ -1137,13 +1131,11 @@ kubectl describe secret &lt;secret-name&gt;
 <li>Authentication failures</li>
 </ul>
 <p><strong>Solutions:</strong></p>
-<pre><code class="language-bash"># Create image pull secret
-kubectl create secret docker-registry my-registry-secret \
+<pre><code class="language-bash">kubectl create secret docker-registry my-registry-secret \
   --docker-server=&lt;registry-url&gt; \
   --docker-username=&lt;username&gt; \
   --docker-password=&lt;password&gt;
 
-# Add to pod spec
 spec:
   imagePullSecrets:
   - name: my-registry-secret
@@ -2022,9 +2014,7 @@ kubectl describe secret &lt;secret-name&gt;
 
             <!-- Content -->
             <div class="content">
-              <h2>How to Troubleshoot and Fix ImagePullBackOff and ErrImagePull in...</h2>
-<p>In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors occur during this process.</p>
-<h2>Understanding the Errors</h2>
+              <h2>Understanding the Errors</h2>
 <ul>
 <li><strong>ImagePullBackOff</strong>: Kubernetes is backing off from pulling the image after repeated failures</li>
 <li><strong>ErrImagePull</strong>: Initial error occurred while pulling the image</li>
@@ -2076,13 +2066,11 @@ kubectl describe secret &lt;secret-name&gt;
 <li>Authentication failures</li>
 </ul>
 <p><strong>Solutions:</strong></p>
-<pre><code class="language-bash"># Create image pull secret
-kubectl create secret docker-registry my-registry-secret \
+<pre><code class="language-bash">kubectl create secret docker-registry my-registry-secret \
   --docker-server=&lt;registry-url&gt; \
   --docker-username=&lt;username&gt; \
   --docker-password=&lt;password&gt;
 
-# Add to pod spec
 spec:
   imagePullSecrets:
   - name: my-registry-secret

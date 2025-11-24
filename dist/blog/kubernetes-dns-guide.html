@@ -782,9 +782,7 @@
 
             <!-- Content -->
             <div class="content">
-              <h2>🚨 Mastering Kubernetes DNS: A Guide to Seamless Communication in...</h2>
-<p>Kubernetes DNS plays a vital role in managing network communications within a cluster. It simplifies service discovery and enables pods to communicate using service names.</p>
-<h2>How Kubernetes DNS Works</h2>
+              <h2>How Kubernetes DNS Works</h2>
 <p>Kubernetes uses CoreDNS (or kube-dns) to provide DNS services. Every service gets a DNS name in the format:</p>
 <pre><code>&lt;service-name&gt;.&lt;namespace&gt;.svc.cluster.local
 </code></pre>
@@ -804,10 +802,8 @@
 <li>Connection refused errors</li>
 </ul>
 <p><strong>Diagnosis:</strong></p>
-<pre><code class="language-bash"># Test DNS from pod
-kubectl run -it --rm debug --image=busybox --restart=Never -- nslookup &lt;service-name&gt;
+<pre><code class="language-bash">kubectl run -it --rm debug --image=busybox --restart=Never -- nslookup &lt;service-name&gt;
 
-# Check CoreDNS pods
 kubectl get pods -n kube-system | grep coredns
 
 # Check CoreDNS logs
@@ -1084,9 +1080,7 @@ spec:
 
             <!-- Content -->
             <div class="content">
-              <h2>🚨 Mastering Kubernetes DNS: A Guide to Seamless Communication in...</h2>
-<p>Kubernetes DNS plays a vital role in managing network communications within a cluster. It simplifies service discovery and enables pods to communicate using service names.</p>
-<h2>How Kubernetes DNS Works</h2>
+              <h2>How Kubernetes DNS Works</h2>
 <p>Kubernetes uses CoreDNS (or kube-dns) to provide DNS services. Every service gets a DNS name in the format:</p>
 <pre><code>&lt;service-name&gt;.&lt;namespace&gt;.svc.cluster.local
 </code></pre>
@@ -1106,10 +1100,8 @@ spec:
 <li>Connection refused errors</li>
 </ul>
 <p><strong>Diagnosis:</strong></p>
-<pre><code class="language-bash"># Test DNS from pod
-kubectl run -it --rm debug --image=busybox --restart=Never -- nslookup &lt;service-name&gt;
+<pre><code class="language-bash">kubectl run -it --rm debug --image=busybox --restart=Never -- nslookup &lt;service-name&gt;
 
-# Check CoreDNS pods
 kubectl get pods -n kube-system | grep coredns
 
 # Check CoreDNS logs
@@ -2024,9 +2016,7 @@ spec:
 
             <!-- Content -->
             <div class="content">
-              <h2>🚨 Mastering Kubernetes DNS: A Guide to Seamless Communication in...</h2>
-<p>Kubernetes DNS plays a vital role in managing network communications within a cluster. It simplifies service discovery and enables pods to communicate using service names.</p>
-<h2>How Kubernetes DNS Works</h2>
+              <h2>How Kubernetes DNS Works</h2>
 <p>Kubernetes uses CoreDNS (or kube-dns) to provide DNS services. Every service gets a DNS name in the format:</p>
 <pre><code>&lt;service-name&gt;.&lt;namespace&gt;.svc.cluster.local
 </code></pre>
@@ -2046,10 +2036,8 @@ spec:
 <li>Connection refused errors</li>
 </ul>
 <p><strong>Diagnosis:</strong></p>
-<pre><code class="language-bash"># Test DNS from pod
-kubectl run -it --rm debug --image=busybox --restart=Never -- nslookup &lt;service-name&gt;
+<pre><code class="language-bash">kubectl run -it --rm debug --image=busybox --restart=Never -- nslookup &lt;service-name&gt;
 
-# Check CoreDNS pods
 kubectl get pods -n kube-system | grep coredns
 
 # Check CoreDNS logs

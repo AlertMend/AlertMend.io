@@ -4,10 +4,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "generate:blog-list": "node scripts/generate-blog-list.js",
     "build:blog": "node scripts/build-blog-html.js",
     "build:sitemap": "node scripts/generate-sitemap.js",
     "prerender": "tsx --tsconfig tsconfig.prerender.json scripts/prerender-routes.tsx",
-    "build": "npm run build:sitemap && npm run build:blog && tsc && vite build && npm run prerender",
+    "build": "npm run generate:blog-list && npm run build:sitemap && npm run build:blog && tsc && vite build && npm run prerender",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },

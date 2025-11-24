@@ -782,8 +782,7 @@
 
             <!-- Content -->
             <div class="content">
-              <h2>Troubleshooting Unhealthy Elasticsearch Nodes on Kubernetes...</h2>
-<p>Elasticsearch nodes can become unhealthy in Kubernetes due to various reasons. Here&#39;s how to diagnose and fix common issues.</p>
+              <p>Elasticsearch nodes can become unhealthy in Kubernetes due to various reasons. Here&#39;s how to diagnose and fix common issues.</p>
 <h2>Common Causes</h2>
 <h3>1. Resource Constraints</h3>
 <p><strong>Symptoms:</strong></p>
@@ -828,10 +827,8 @@
 <li>Review DNS configuration</li>
 </ul>
 <h2>Diagnosis Steps</h2>
-<pre><code class="language-bash"># Check Elasticsearch cluster health
-kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/health?pretty&quot;
+<pre><code class="language-bash">kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/health?pretty&quot;
 
-# Check node status
 kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/nodes?v&quot;
 
 # View Elasticsearch logs
@@ -1054,8 +1051,7 @@ kubectl logs &lt;elasticsearch-pod&gt;
 
             <!-- Content -->
             <div class="content">
-              <h2>Troubleshooting Unhealthy Elasticsearch Nodes on Kubernetes...</h2>
-<p>Elasticsearch nodes can become unhealthy in Kubernetes due to various reasons. Here&#39;s how to diagnose and fix common issues.</p>
+              <p>Elasticsearch nodes can become unhealthy in Kubernetes due to various reasons. Here&#39;s how to diagnose and fix common issues.</p>
 <h2>Common Causes</h2>
 <h3>1. Resource Constraints</h3>
 <p><strong>Symptoms:</strong></p>
@@ -1100,10 +1096,8 @@ kubectl logs &lt;elasticsearch-pod&gt;
 <li>Review DNS configuration</li>
 </ul>
 <h2>Diagnosis Steps</h2>
-<pre><code class="language-bash"># Check Elasticsearch cluster health
-kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/health?pretty&quot;
+<pre><code class="language-bash">kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/health?pretty&quot;
 
-# Check node status
 kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/nodes?v&quot;
 
 # View Elasticsearch logs
@@ -1964,8 +1958,7 @@ kubectl logs &lt;elasticsearch-pod&gt;
 
             <!-- Content -->
             <div class="content">
-              <h2>Troubleshooting Unhealthy Elasticsearch Nodes on Kubernetes...</h2>
-<p>Elasticsearch nodes can become unhealthy in Kubernetes due to various reasons. Here&#39;s how to diagnose and fix common issues.</p>
+              <p>Elasticsearch nodes can become unhealthy in Kubernetes due to various reasons. Here&#39;s how to diagnose and fix common issues.</p>
 <h2>Common Causes</h2>
 <h3>1. Resource Constraints</h3>
 <p><strong>Symptoms:</strong></p>
@@ -2010,10 +2003,8 @@ kubectl logs &lt;elasticsearch-pod&gt;
 <li>Review DNS configuration</li>
 </ul>
 <h2>Diagnosis Steps</h2>
-<pre><code class="language-bash"># Check Elasticsearch cluster health
-kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/health?pretty&quot;
+<pre><code class="language-bash">kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/health?pretty&quot;
 
-# Check node status
 kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/nodes?v&quot;
 
 # View Elasticsearch logs
