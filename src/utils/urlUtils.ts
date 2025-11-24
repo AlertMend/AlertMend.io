@@ -86,21 +86,20 @@ export function setCanonicalUrl(url: string): boolean {
  * Verifies the canonical URL is correct
  * Logs warnings if issues are found
  * Note: For blog posts, the canonical URL is set by the SEO component with normalized slugs,
- * so we should not override it if it's already set correctly.
+ * so we should not override it.
  */
 export function verifyCanonicalUrl(): void {
+  // Skip verification for blog posts - they handle their own canonical URLs
+  const isBlogPost = window.location.pathname.startsWith('/blog')
+  if (isBlogPost) {
+    return
+  }
+  
   const canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null
   const expectedUrl = getCanonicalUrl()
   
   if (!canonical) {
-    // Only set if no canonical exists (don't override if React component hasn't set it yet)
-    // Wait a bit for React to set it
-    setTimeout(() => {
-      const stillMissing = !document.querySelector('link[rel="canonical"]')
-      if (stillMissing) {
-        setCanonicalUrl(expectedUrl)
-      }
-    }, 500)
+    setCanonicalUrl(expectedUrl)
     return
   }
   
@@ -110,14 +109,6 @@ export function verifyCanonicalUrl(): void {
   if (!currentUrl.includes('www.alertmend.io')) {
     console.warn(`⚠️ Canonical URL domain mismatch: ${currentUrl}`)
     setCanonicalUrl(expectedUrl)
-    return
-  }
-  
-  // For blog posts, the canonical URL is set by the SEO component with normalized slugs
-  // Don't override it if it's already set correctly (even if it doesn't match the current pathname)
-  const isBlogPost = window.location.pathname.startsWith('/blog')
-  if (isBlogPost) {
-    // Just verify domain is correct, don't override the canonical URL set by React
     return
   }
   

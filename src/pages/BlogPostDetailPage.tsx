@@ -19,6 +19,18 @@ export default function BlogPostDetailPage() {
   const [loading, setLoading] = useState(true)
   const [navigating, setNavigating] = useState(false)
 
+  // Determine if this is HTML version and normalize slug for canonical URL
+  const isHtmlVersion = location.pathname.startsWith('/blogs/') && location.pathname.endsWith('.html')
+  let loadingCanonicalUrl = ''
+  if (slug) {
+    // Normalize slug for canonical URL
+    let cleanSlug = slug.replace(/\.html$/, '')
+    cleanSlug = cleanSlug.toLowerCase().replace(/_/g, '-')
+    loadingCanonicalUrl = isHtmlVersion 
+      ? `/blogs/${cleanSlug}.html`
+      : `/blog/${cleanSlug}`
+  }
+
   useEffect(() => {
     if (slug) {
       // Reset loading state when slug changes
@@ -42,10 +54,18 @@ export default function BlogPostDetailPage() {
       })
     }
   }, [slug])
-  
+
   if (loading) {
     return (
       <div className="min-h-screen bg-white">
+        {loadingCanonicalUrl && (
+          <SEO
+            title="Loading..."
+            description="Loading blog post..."
+            canonical={loadingCanonicalUrl}
+            noindex={true}
+          />
+        )}
         <Navbar />
         <div className="pt-32 pb-20 flex items-center justify-center">
           <div className="text-center">
@@ -102,7 +122,6 @@ export default function BlogPostDetailPage() {
   // If accessed via /blogs/slug.html, canonical should be /blogs/slug.html
   // If accessed via /blog/slug, canonical should be /blog/slug
   // Always use normalized slug (lowercase, hyphens) for canonical URL
-  const isHtmlVersion = location.pathname.startsWith('/blogs/') && location.pathname.endsWith('.html')
   const blogPostUrl = isHtmlVersion 
     ? `/blogs/${post.slug}.html`  // HTML version: /blogs/normalized-slug.html
     : `/blog/${post.slug}`         // Non-HTML version: /blog/normalized-slug

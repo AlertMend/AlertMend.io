@@ -31,19 +31,18 @@ export default function SEO({
   const siteUrl = 'https://www.alertmend.io'
   const fullTitle = title.includes('AlertMend') ? title : `${title} | AlertMend AI`
   
-  // Generate canonical URL with proper normalization
-  // If canonical is provided, use it (e.g., '/blog' for blog page)
+  // Generate canonical URL - use provided canonical directly, or fallback to pathname
+  // If canonical is provided, use it directly (already normalized by the component)
   // Otherwise, use the current pathname
-  let canonicalPath: string
+  let canonicalUrl: string
   if (canonical) {
-    canonicalPath = canonical.startsWith('/') ? canonical : `/${canonical}`
+    // Use canonical prop directly - it's already normalized by the component that provides it
+    canonicalUrl = canonical.startsWith('http') ? canonical : `${siteUrl}${canonical.startsWith('/') ? canonical : `/${canonical}`}`
   } else {
-    canonicalPath = location.pathname
+    // Fallback: normalize the pathname
+    const normalizedPath = normalizePathname(location.pathname)
+    canonicalUrl = `${siteUrl}${normalizedPath}`
   }
-  
-  // Normalize the pathname (remove trailing slash except root, remove query/hash)
-  const normalizedPath = normalizePathname(canonicalPath)
-  const canonicalUrl = `${siteUrl}${normalizedPath}`
 
   // Build breadcrumb structured data if provided
   const breadcrumbStructuredData = breadcrumbData ? {
