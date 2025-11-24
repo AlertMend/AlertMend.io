@@ -2,7 +2,13 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": null,
-  "redirects": [],
+  "redirects": [
+    {
+      "source": "/blogs/Resolving_Kubernetes_Node_Not_Ready_Error.html",
+      "destination": "/blogs/resolving-kubernetes-node-not-ready-error.html",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/blog",
@@ -14,10 +20,6 @@
     },
     {
       "source": "/blog/:slug.html",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/blogs/:slug.html",
       "destination": "/index.html"
     },
     {
