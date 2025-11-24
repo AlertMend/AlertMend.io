@@ -29,8 +29,10 @@ export default function BlogPostDetailPage() {
       // Scroll to top when navigating to a new post
       window.scrollTo({ top: 0, behavior: 'instant' })
       
-      // Remove .html extension if present for fetching the blog post
-      const cleanSlug = slug.replace(/\.html$/, '')
+      // Normalize slug: remove .html extension, convert underscores to hyphens, lowercase
+      let cleanSlug = slug.replace(/\.html$/, '')
+      cleanSlug = cleanSlug.toLowerCase().replace(/_/g, '-')
+      
       getBlogPost(cleanSlug).then((data) => {
         setPost(data)
         setLoading(false)
@@ -100,6 +102,7 @@ export default function BlogPostDetailPage() {
   // If accessed via /blogs/slug.html, canonical should be /blogs/slug.html
   // If accessed via /blog/slug, canonical should be /blog/slug
   const isHtmlVersion = location.pathname.startsWith('/blogs/') && location.pathname.endsWith('.html')
+  // Use normalized slug from post (which is already normalized) for canonical URL
   const blogPostUrl = isHtmlVersion ? `/blogs/${post.slug}.html` : `/blog/${post.slug}`
   
   // Truncate title to 30-60 characters for SEO
