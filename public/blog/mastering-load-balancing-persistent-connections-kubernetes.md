@@ -6,10 +6,6 @@ category: "Kubernetes"
 author: "Arvind Rajpurohit"
 ---
 
-# Mastering Load Balancing for Persistent Connections in Kubernetes
-
-Learn why Kubernetes struggles with long-lived connections and how to architect reliable, scalable load balancing for WebSockets, gRPC, and database connections.
-
 ## The Challenge with Long-Lived Connections
 
 Kubernetes Services use round-robin load balancing by default, which works well for stateless HTTP requests but creates problems with persistent connections:

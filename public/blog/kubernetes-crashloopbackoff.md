@@ -6,10 +6,6 @@ category: "Kubernetes"
 author: "Arvind Rajpurohit"
 ---
 
-# Understanding and Troubleshooting Kubernetes CrashLoopBackOff
-
-The CrashLoopBackOff error in Kubernetes indicates that a pod is repeatedly crashing and Kubernetes is backing off from restarting it.
-
 ## What is CrashLoopBackOff?
 
 When a pod crashes, Kubernetes automatically restarts it. If the pod continues to crash, Kubernetes enters a "CrashLoopBackOff" state, gradually increasing the delay between restart attempts.

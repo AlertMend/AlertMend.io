@@ -6,8 +6,6 @@ category: "Elasticsearch"
 author: "Himanshu Bansal"
 ---
 
-# Troubleshooting Unhealthy Elasticsearch Nodes on Kubernetes: Causes and Solutions
-
 Elasticsearch nodes can become unhealthy in Kubernetes due to various reasons. Here's how to diagnose and fix common issues.
 
 ## Common Causes
@@ -54,10 +52,8 @@ Elasticsearch nodes can become unhealthy in Kubernetes due to various reasons. H
 ## Diagnosis Steps
 
 ```bash
-# Check Elasticsearch cluster health
 kubectl exec -it <elasticsearch-pod> -- curl -X GET "localhost:9200/_cluster/health?pretty"
 
-# Check node status
 kubectl exec -it <elasticsearch-pod> -- curl -X GET "localhost:9200/_cat/nodes?v"
 
 # View Elasticsearch logs

@@ -6,8 +6,6 @@ category: "Kubernetes"
 author: "Himanshu Bansal"
 ---
 
-# Mastering Kubernetes StatefulSets: Basics, Use Cases, and Debugging Tips
-
 StatefulSets are designed for stateful applications that require stable network identities and persistent storage.
 
 ## What Are StatefulSets?
@@ -111,10 +109,8 @@ spec:
 ## Debugging Tips
 
 ```bash
-# Check StatefulSet status
 kubectl get statefulset
 
-# Describe StatefulSet
 kubectl describe statefulset <name>
 
 # Check pods

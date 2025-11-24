@@ -6,10 +6,6 @@ category: "Kubernetes"
 author: "Arvind Rajpurohit"
 ---
 
-# How to Roll Back Deployments in Kubernetes
-
-Understand how Kubernetes handles rollbacks, why it's risky in production, and best practices for safe rollbacks.
-
 ## Understanding Kubernetes Rollbacks
 
 Kubernetes maintains a rollout history for Deployments, allowing you to roll back to previous versions. However, rollbacks can be risky if not done carefully.
@@ -19,10 +15,8 @@ Kubernetes maintains a rollout history for Deployments, allowing you to roll bac
 ### Using kubectl
 
 ```bash
-# View rollout history
 kubectl rollout history deployment/my-app
 
-# Rollback to previous version
 kubectl rollout undo deployment/my-app
 
 # Rollback to specific revision

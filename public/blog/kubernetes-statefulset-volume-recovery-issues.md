@@ -6,8 +6,6 @@ category: "Kubernetes"
 author: "Himanshu Bansal"
 ---
 
-# Kubernetes StatefulSet Volume Recovery Issues: Troubleshooting and Best Practices
-
 StatefulSets in Kubernetes manage stateful applications with persistent storage. However, volume recovery issues can cause data loss and service disruptions.
 
 ## Common Volume Recovery Issues
@@ -21,10 +19,8 @@ StatefulSets in Kubernetes manage stateful applications with persistent storage.
 
 **Diagnosis:**
 ```bash
-# Check PVC status
 kubectl get pvc
 
-# Describe PVC for details
 kubectl describe pvc <pvc-name>
 
 # Check storage class

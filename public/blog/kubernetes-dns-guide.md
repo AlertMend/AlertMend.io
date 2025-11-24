@@ -6,10 +6,6 @@ category: "Kubernetes"
 author: "Arvind Rajpurohit"
 ---
 
-# 🚨 Mastering Kubernetes DNS: A Guide to Seamless Communication in Your Cluster
-
-Kubernetes DNS plays a vital role in managing network communications within a cluster. It simplifies service discovery and enables pods to communicate using service names.
-
 ## How Kubernetes DNS Works
 
 Kubernetes uses CoreDNS (or kube-dns) to provide DNS services. Every service gets a DNS name in the format:
@@ -36,10 +32,8 @@ Kubernetes uses CoreDNS (or kube-dns) to provide DNS services. Every service get
 
 **Diagnosis:**
 ```bash
-# Test DNS from pod
 kubectl run -it --rm debug --image=busybox --restart=Never -- nslookup <service-name>
 
-# Check CoreDNS pods
 kubectl get pods -n kube-system | grep coredns
 
 # Check CoreDNS logs

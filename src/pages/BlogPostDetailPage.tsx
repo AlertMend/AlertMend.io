@@ -366,7 +366,11 @@ export default function BlogPostDetailPage() {
                           <li key={relatedPost.slug}>
                             <a
                               href={`/blog/${relatedPost.slug}`}
-                              className="text-left text-blue-600 hover:text-blue-800 underline text-sm leading-relaxed"
+                              onClick={(e) => {
+                                e.preventDefault()
+                                navigate(`/blog/${relatedPost.slug}`)
+                              }}
+                              className="text-left text-blue-600 hover:text-blue-800 underline text-sm leading-relaxed cursor-pointer"
                             >
                               {relatedPost.title}
                             </a>
@@ -375,7 +379,11 @@ export default function BlogPostDetailPage() {
                       </ul>
                       <a 
                         href="/blog"
-                        className="mt-4 text-purple-600 hover:text-purple-800 text-sm font-medium flex items-center gap-1"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          navigate('/blog')
+                        }}
+                        className="mt-4 text-purple-600 hover:text-purple-800 text-sm font-medium flex items-center gap-1 cursor-pointer"
                       >
                         View All Posts
                         <ArrowRight className="h-4 w-4" />

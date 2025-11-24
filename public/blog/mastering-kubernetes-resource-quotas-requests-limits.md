@@ -6,8 +6,6 @@ category: "Kubernetes"
 author: "Himanshu Bansal"
 ---
 
-# Mastering Kubernetes Resource Quotas, Requests, and Limits for Optimized Cluster Performance
-
 Proper resource management is crucial for Kubernetes cluster performance and cost optimization.
 
 ## Understanding Resources

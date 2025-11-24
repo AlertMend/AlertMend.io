@@ -6,10 +6,6 @@ category: "Elasticsearch"
 author: "Arvind Rajpurohit"
 ---
 
-# Troubleshooting Elasticsearch Unassigned Shards Incident on Kubernetes
-
-Elasticsearch unassigned shards occur when a node is unable to assign shards properly, leading to reduced search performance and potential data loss.
-
 ## Understanding Unassigned Shards
 
 Unassigned shards are shards that should be allocated to nodes but aren't. This can happen for several reasons:
@@ -60,10 +56,8 @@ Unassigned shards are shards that should be allocated to nodes but aren't. This 
 ## Diagnosis
 
 ```bash
-# Check unassigned shards
 kubectl exec -it <elasticsearch-pod> -- curl -X GET "localhost:9200/_cat/shards?h=index,shard,prirep,state,unassigned.reason"
 
-# Get allocation explanation
 kubectl exec -it <elasticsearch-pod> -- curl -X GET "localhost:9200/_cluster/allocation/explain?pretty"
 
 # Check cluster settings

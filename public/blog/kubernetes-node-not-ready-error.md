@@ -6,8 +6,6 @@ category: "Kubernetes"
 author: "Himanshu Bansal"
 ---
 
-# How to Troubleshoot and Fix Kubernetes Node Not Ready Error
-
 In Kubernetes clusters, the "Node Not Ready" error is a frequent issue that can disrupt the smooth operation of your workloads.
 
 ## Understanding Node Not Ready
@@ -25,10 +23,8 @@ A node is marked as "Not Ready" when the kubelet cannot communicate with the API
 
 **Diagnosis:**
 ```bash
-# Check node status
 kubectl get nodes
 
-# Describe node for details
 kubectl describe node <node-name>
 
 # Check kubelet status

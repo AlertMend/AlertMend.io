@@ -6,10 +6,6 @@ category: "Kubernetes"
 author: "Arvind Rajpurohit"
 ---
 
-# Load Balancing and Scaling Long-Lived Connections in Kubernetes
-
-Understand how Kubernetes handles WebSockets, gRPC, and database connections—and learn how to properly load balance them.
-
 ## The Challenge
 
 Kubernetes Services use round-robin load balancing by default, which works well for stateless HTTP requests but can cause issues with long-lived connections like:
