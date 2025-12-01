@@ -63,7 +63,6 @@ export default function BlogPostDetailPage() {
             title="Loading..."
             description="Loading blog post..."
             canonical={loadingCanonicalUrl}
-            noindex={true}
           />
         )}
         <Navbar />

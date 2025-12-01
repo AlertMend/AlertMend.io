@@ -48,7 +48,6 @@ export default function CaseStudyDetailPage() {
         <SEO
           title="Case Study Not Found | AlertMend AI"
           description="The requested case study could not be found."
-          noindex={true}
         />
         <Navbar />
         <div className="pt-24 pb-20 text-center relative overflow-hidden gradient-bg-white">
