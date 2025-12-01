@@ -3,7 +3,7 @@
     "slug": "graceful-shutdown-in-kubernetes",
     "title": "Graceful Shutdown in Kubernetes: Ensuring Safe Pod Termination",
     "excerpt": "Learn how to gracefully shut down Kubernetes Pods to prevent broken connections, dropped tasks, and race conditions during termination.",
-    "date": "2025-08-1",
+    "date": "2025-08-01",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",
     "tags": []
@@ -147,7 +147,7 @@
     "slug": "elasticsearch-cluster-yellow-incident-on-kubernetes",
     "title": "Elasticsearch Cluster Yellow Incident on Kubernetes: Troubleshooting and Solutions",
     "excerpt": "Elasticsearch requires adequate virtual memory to run smoothly. If the system’s virtual memory limit falls below the recommended level, Elasticsearch may encounter errors, impacting performance or causing downtime. A common error message, such as “max virtual memory areas vm.max_map_count [65530] is too low - This value is crucial as it determines the maximum number of memory-mapped areas that can be used. If set too low, users may experience issues like Elasticsearch failing to allocate enough memory for indexing operations,” signals that the system’s virtual memory needs adjustment. In this blog, we’ll explore the causes, troubleshooting steps, and solutions for resolving Elasticsearch virtual memory limit issues.",
-    "date": "2025-06-8",
+    "date": "2025-06-08",
     "category": "Elasticsearch",
     "author": "Himanshu Bansal",
     "tags": []
@@ -165,7 +165,7 @@
     "slug": "kubernetes-dns-blog",
     "title": "🚨 Mastering Kubernetes DNS: A Guide to Seamless Communication in Your Cluster",
     "excerpt": "Kubernetes DNS plays a vital role in managing network communications within a cluster. It simplifies service discovery and ensures that all components—pods, services, and external systems—can communicate efficiently without relying on static IP addresses. This blog will explore the basics of Kubernetes DNS, how it works, and troubleshooting common DNS-related issues.",
-    "date": "2025-06-7",
+    "date": "2025-06-07",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",
     "tags": []
@@ -183,7 +183,7 @@
     "slug": "troubleshooting-elasticsearch-unassigned-shards-incident-on-kubernetes",
     "title": "Troubleshooting Elasticsearch Unassigned Shards Incident on Kubernetes",
     "excerpt": "Elasticsearch unassigned shards occur when a node is unable to assign shards properly, leading to reduced cluster performance and potential data loss. Shards are the building blocks of Elasticsearch indexes, and unassigned shards indicate that Elasticsearch cannot find a suitable node to hold shard replicas. In Kubernetes environments, this issue can arise due to insufficient resources, misconfiguration, or pod failures. In this blog, we’ll cover the causes, troubleshooting steps, and solutions to help you resolve unassigned shard issues efficiently, ensuring optimal cluster performance and data reliability.",
-    "date": "2025-06-5",
+    "date": "2025-06-05",
     "category": "Elasticsearch",
     "author": "Arvind Rajpurohit",
     "tags": []
@@ -345,7 +345,7 @@
     "slug": "kubernetes-csi-driver-failures",
     "title": "Kubernetes CSI Driver Failures: Troubleshooting and Best Practices",
     "excerpt": "When nodes in an Elasticsearch cluster run different versions, it can lead to data inconsistency, reduced performance, and even potential downtime. Elasticsearch relies on synchronized versioning across nodes to perform efficient data indexing, querying, and retrieval. This blog discusses the causes of version mismatches, essential troubleshooting steps, and how to ensure all nodes run a consistent version for optimal cluster performance.",
-    "date": "2025-04-2",
+    "date": "2025-04-02",
     "category": "Kubernetes",
     "author": "Himanshu Bansal",
     "tags": []
@@ -354,7 +354,7 @@
     "slug": "managing-high-number-of-queued-threads-in-elasticsearch-thread-pool-for-optimal-performance",
     "title": "Managing High Number of Queued Threads in Elasticsearch Thread Pool for Optimal Performance",
     "excerpt": "In Elasticsearch, an excessive number of queued threads in the thread pool can be an indication that the workload is overwhelming the system, causing delays in request processing and performance degradation. The thread pool is responsible for handling concurrent tasks such as indexing and searching. When threads exceed the pool’s capacity, tasks queue up, slowing down operations. This blog outlines how to identify, debug, and resolve high thread queuing issues in Elasticsearch.",
-    "date": "2025-04-1",
+    "date": "2025-04-01",
     "category": "Elasticsearch",
     "author": "Himanshu Bansal",
     "tags": []
@@ -390,7 +390,7 @@
     "slug": "frequent-garbage-collection-issues-in-elasticsearch-for-better-performance",
     "title": "Resolving Frequent Garbage Collection Issues in Elasticsearch for Better Performance",
     "excerpt": "Explore the latest AI tools and applications that are revolutionizing various industries. From image generation to natural language processing, AI is changing the way we think and interact with the world.",
-    "date": "2025-03-9",
+    "date": "2025-03-09",
     "category": "Elasticsearch",
     "author": "Himanshu Bansal",
     "tags": []
@@ -399,7 +399,7 @@
     "slug": "kubernetes-statefulset-volume-recovery-issues-troublshooting",
     "title": "Kubernetes StatefulSet Volume Recovery Issues: Troubleshooting and Best Practices",
     "excerpt": "Explore the latest AI tools and applications that are revolutionizing various industries. From image generation to natural language processing, AI is changing the way we think and interact with the world.",
-    "date": "2025-03-9",
+    "date": "2025-03-09",
     "category": "Kubernetes",
     "author": "Himanshu Bansal",
     "tags": []
@@ -408,7 +408,7 @@
     "slug": "network-connectivity-and-latency-issues-in-elasticsearch",
     "title": "Resolving Network Connectivity and Latency Issues in Elasticsearch: A Troubleshooting Guide",
     "excerpt": "Explore the latest AI tools and applications that are revolutionizing various industries. From image generation to natural language processing, AI is changing the way we think and interact with the world.",
-    "date": "2025-03-9",
+    "date": "2025-03-09",
     "category": "Elasticsearch",
     "author": "Himanshu Bansal",
     "tags": []
@@ -417,7 +417,7 @@
     "slug": "troubleshooting-elasticsearch-backlog-of-pending-tasks",
     "title": "Kubernetes StatefulSet Volume Recovery Issues: Troubleshooting and Best Practices",
     "excerpt": "Explore the latest AI tools and applications that are revolutionizing various industries. From image generation to natural language processing, AI is changing the way we think and interact with the world.",
-    "date": "2025-03-9",
+    "date": "2025-03-09",
     "category": "Kubernetes",
     "author": "Himanshu Bansal",
     "tags": []
@@ -426,7 +426,7 @@
     "slug": "troubleshooting-elasticsearch-cluster-failures-and-instability",
     "title": "Troubleshooting Elasticsearch Cluster Failures and Instability: Causes and Solutions",
     "excerpt": "Explore the latest AI tools and applications that are revolutionizing various industries. From image generation to natural language processing, AI is changing the way we think and interact with the world.",
-    "date": "2025-03-9",
+    "date": "2025-03-09",
     "category": "Elasticsearch",
     "author": "Himanshu Bansal",
     "tags": []
@@ -516,7 +516,7 @@
     "slug": "debugging-kubernetes-hpa-not-scaling",
     "title": "Debugging Kubernetes HPA Not Scaling: Troubleshooting and Best Practices",
     "excerpt": "Elasticsearch requires adequate virtual memory to run smoothly. If the system’s virtual memory limit falls below the recommended level, Elasticsearch may encounter errors, impacting performance or causing downtime. A common error message, such as “max virtual memory areas vm.max_map_count [65530] is too low - This value is crucial as it determines the maximum number of memory-mapped areas that can be used. If set too low, users may experience issues like Elasticsearch failing to allocate enough memory for indexing operations,” signals that the system’s virtual memory needs adjustment. In this blog, we’ll explore the causes, troubleshooting steps, and solutions for resolving Elasticsearch virtual memory limit issues.",
-    "date": "2025-02-8",
+    "date": "2025-02-08",
     "category": "Kubernetes",
     "author": "Himanshu Bansal",
     "tags": []
@@ -525,7 +525,7 @@
     "slug": "elasticsearch-shard-allocation-failures",
     "title": "Troubleshooting Elasticsearch Shard Allocation Failures: A Comprehensive Guide",
     "excerpt": "A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers. This error usually indicates that the service acting as a gateway or proxy is receiving an invalid response from the upstream server. In Kubernetes, this often points to a misconfiguration or issue in routing traffic between services or containers, and understanding the root cause is essential for quick resolution.In this blog post, we’ll explore the reasons behind the 502 Bad Gateway error in Kubernetes and guide you through some detailed troubleshooting steps to resolve it.",
-    "date": "2025-02-5",
+    "date": "2025-02-05",
     "category": "Elasticsearch",
     "author": "Arvind Rajpurohit",
     "tags": []
@@ -534,7 +534,7 @@
     "slug": "elasticsearch-virtual-memory-limit-issues-for-optimal-performance",
     "title": "Resolving Elasticsearch Virtual Memory Limit Issues for Optimal Performance",
     "excerpt": "Elasticsearch requires adequate virtual memory to run smoothly. If the system’s virtual memory limit falls below the recommended level, Elasticsearch may encounter errors, impacting performance or causing downtime. A common error message, such as “max virtual memory areas vm.max_map_count [65530] is too low - This value is crucial as it determines the maximum number of memory-mapped areas that can be used. If set too low, users may experience issues like Elasticsearch failing to allocate enough memory for indexing operations,” signals that the system’s virtual memory needs adjustment. In this blog, we’ll explore the causes, troubleshooting steps, and solutions for resolving Elasticsearch virtual memory limit issues.",
-    "date": "2025-02-5",
+    "date": "2025-02-05",
     "category": "Elasticsearch",
     "author": "Himanshu Bansal",
     "tags": []
@@ -543,7 +543,7 @@
     "slug": "elasticsearch-cluster-health-showing-red",
     "title": "Elasticsearch Cluster Health Showing Red: Causes, Troubleshooting, and Solutions",
     "excerpt": "A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers. This error usually indicates that the service acting as a gateway or proxy is receiving an invalid response from the upstream server. In Kubernetes, this often points to a misconfiguration or issue in routing traffic between services or containers, and understanding the root cause is essential for quick resolution.In this blog post, we’ll explore the reasons behind the 502 Bad Gateway error in Kubernetes and guide you through some detailed troubleshooting steps to resolve it.",
-    "date": "2025-02-4",
+    "date": "2025-02-04",
     "category": "Elasticsearch",
     "author": "Arvind Rajpurohit",
     "tags": []
@@ -561,7 +561,7 @@
     "slug": "kubernetes-502-bad-gateway-error-fix",
     "title": "How to Troubleshoot and Fix Kubernetes 502 Bad Gateway Error",
     "excerpt": "A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers. This error usually indicates that the service acting as a gateway or proxy is receiving an invalid response from the upstream server. In Kubernetes, this often points to a misconfiguration or issue in routing traffic between services or containers, and understanding the root cause is essential for quick resolution.In this blog post, we’ll explore the reasons behind the 502 Bad Gateway error in Kubernetes and guide you through some detailed troubleshooting steps to resolve it.",
-    "date": "2025-02-1",
+    "date": "2025-02-01",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",
     "tags": []
@@ -570,7 +570,7 @@
     "slug": "kubernetes-load-balancer-failures",
     "title": "Kubernetes Load Balancer Failures: Troubleshooting and Best Practices",
     "excerpt": "A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers. This error usually indicates that the service acting as a gateway or proxy is receiving an invalid response from the upstream server. In Kubernetes, this often points to a misconfiguration or issue in routing traffic between services or containers, and understanding the root cause is essential for quick resolution.In this blog post, we’ll explore the reasons behind the 502 Bad Gateway error in Kubernetes and guide you through some detailed troubleshooting steps to resolve it.",
-    "date": "2025-02-1",
+    "date": "2025-02-01",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",
     "tags": []
@@ -579,7 +579,7 @@
     "slug": "kubernetes-service-discovery-failures",
     "title": "Kubernetes Service Discovery Failures: Troubleshooting and Best Practices",
     "excerpt": "A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers. This error usually indicates that the service acting as a gateway or proxy is receiving an invalid response from the upstream server. In Kubernetes, this often points to a misconfiguration or issue in routing traffic between services or containers, and understanding the root cause is essential for quick resolution.In this blog post, we’ll explore the reasons behind the 502 Bad Gateway error in Kubernetes and guide you through some detailed troubleshooting steps to resolve it.",
-    "date": "2025-02-1",
+    "date": "2025-02-01",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",
     "tags": []
@@ -588,7 +588,7 @@
     "slug": "optimizing-elasticsearch-heap-memory",
     "title": "Optimizing Elasticsearch Heap Memory: Solving High Heap Usage Issues",
     "excerpt": "A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers. This error usually indicates that the service acting as a gateway or proxy is receiving an invalid response from the upstream server. In Kubernetes, this often points to a misconfiguration or issue in routing traffic between services or containers, and understanding the root cause is essential for quick resolution.In this blog post, we’ll explore the reasons behind the 502 Bad Gateway error in Kubernetes and guide you through some detailed troubleshooting steps to resolve it.",
-    "date": "2025-02-1",
+    "date": "2025-02-01",
     "category": "Elasticsearch",
     "author": "Arvind Rajpurohit",
     "tags": []
@@ -660,7 +660,7 @@
     "slug": "managing-high-number-of-rejected-threads-in-elasticsearch-thread-pool-for-better-performance",
     "title": "Managing High Number of Rejected Threads in Elasticsearch Thread Pool for Better Performance",
     "excerpt": "In Elasticsearch, the thread pool manages concurrent threads needed for various operations like indexing and searching. However, a high number of rejected threads can indicate an overwhelmed thread pool that is unable to keep up with the current workload. Rejected threads lead to performance bottlenecks, slowdowns, and can impact overall system availability. This blog provides insights into identifying, diagnosing, and resolving high rejection rates in Elasticsearch’s thread pool.",
-    "date": "2025-01-2",
+    "date": "2025-01-02",
     "category": "Elasticsearch",
     "author": "Himanshu Bansal",
     "tags": []

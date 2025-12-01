@@ -124,6 +124,19 @@ const blogPosts = JSON.parse(fs.readFileSync(blogListPath, 'utf-8'))
 const siteUrl = 'https://www.alertmend.io'
 const currentDate = new Date().toISOString().split('T')[0]
 
+// Helper function to normalize date format (ensures YYYY-MM-DD with two-digit day)
+const normalizeDate = (dateString) => {
+  if (!dateString) return currentDate
+  // Match YYYY-MM-D or YYYY-MM-DD format
+  const match = dateString.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/)
+  if (match) {
+    const [, year, month, day] = match
+    // Pad month and day to two digits
+    return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
+  }
+  return dateString
+}
+
 // Generate sitemap XML
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -192,16 +205,17 @@ ${caseStudiesData.map(study => {
 ${blogPosts.map(post => {
   const defaultFilename = `${convertSlugToHtmlFilename(post.slug)}.html`
   const htmlFilename = canonicalFilenameOverrides[post.slug] || defaultFilename
+  const normalizedDate = normalizeDate(post.date)
   return `  <!-- Blog Post: ${post.slug} -->
   <url>
     <loc>${siteUrl}/blog/${post.slug}</loc>
-    <lastmod>${post.date}</lastmod>
+    <lastmod>${normalizedDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>${siteUrl}/blogs/${htmlFilename}</loc>
-    <lastmod>${post.date}</lastmod>
+    <lastmod>${normalizedDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>`
