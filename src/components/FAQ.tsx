@@ -7,39 +7,83 @@ export default function FAQ() {
   const faqs = [
     {
       question: 'What problems does AlertMend solve?',
-      answer: 'AlertMend AI solves critical infrastructure management challenges including incident remediation, cost optimization, on-call management, and Kubernetes operations. It automatically detects, analyzes, and fixes issues across Kubernetes, VMs, and ECS, reducing manual work by up to 90% and cutting infrastructure costs by up to 50%. The platform eliminates the need for constant firefighting and enables teams to achieve zero downtime operations.',
+      answer: 'AlertMend eliminates Kubernetes firefighting by automating incident detection, root-cause analysis, and remediation. It fixes issues like CrashLoopBackOff, OOMKilled, 5xx errors, failing rollouts, node pressure, disk full, cost inefficiencies, and more—without manual intervention.',
     },
     {
-      question: 'How is AlertMend different from just using monitoring tools?',
-      answer: 'While traditional monitoring tools only alert you to problems, AlertMend AI goes beyond detection to automatically analyze root causes and execute fixes. It uses AI-powered workflows to remediate incidents in seconds, learns from past incidents to improve over time, and proactively prevents issues before they impact your systems. Unlike monitoring tools that require manual intervention, AlertMend acts autonomously to maintain system reliability.',
+      question: 'How does AlertMend automatically fix CrashLoopBackOff errors in Kubernetes?',
+      answer: 'AlertMend analyzes logs, checks readiness/liveness probes, validates config and secrets, detects OOMKilled events, and applies automated remediations such as restarts, patching configs, adjusting limits, or recreating dependent services. This resolves CrashLoopBackOff incidents in seconds.',
     },
     {
-      question: 'Can AlertMend fix Kubernetes issues without manual intervention?',
-      answer: 'Yes, AlertMend AI can automatically fix many Kubernetes issues without manual intervention. It can restart failed pods, resize PVCs, adjust resource limits, scale services, and execute custom remediation scripts. The platform handles up to 70% of recurring incidents automatically with intelligent runbooks. For complex issues requiring human judgment, AlertMend provides detailed analysis and recommendations, but always allows you to review and approve actions before execution.',
+      question: 'Can AlertMend detect and fix Kubernetes 5xx errors?',
+      answer: 'Yes. AlertMend monitors API latency, service health, and ingress failures to detect 500/502/503/504 spikes. It then auto-restores service health by restarting pods, scaling replicas, draining problematic nodes, or adjusting readiness probes.',
     },
     {
-      question: 'What kinds of problems can AlertMend handle on VMs?',
-      answer: 'AlertMend AI can handle a wide range of VM-related problems including high CPU/memory usage, disk space issues, service failures, network connectivity problems, and auto-scaling needs. It can automatically restart services, scale VM instances, clean up disk space, and optimize resource allocation. The platform integrates with major cloud providers (AWS, GCP, Azure) and can manage VMs across hybrid and multi-cloud environments.',
+      question: 'Can AlertMend troubleshoot and fix failed Kubernetes rollouts?',
+      answer: 'Absolutely. AlertMend detects failed deployments caused by unhealthy pods, image pull errors, failing probes, or misconfigurations. It can rollback automatically or restore to the last known good state.',
     },
     {
-      question: 'Can I trust AlertMend to act on its own?',
-      answer: 'Yes, AlertMend AI is designed with safety and reliability in mind. You have full control over what actions it can take through configurable runbooks and approval workflows. The platform provides detailed audit logs of all actions, allows you to set safety limits and rollback capabilities, and learns from your preferences over time. Many customers start with read-only monitoring and gradually enable automated remediation as they build confidence. AlertMend has a 98.5% success rate in automated remediation.',
+      question: 'How is AlertMend different from monitoring tools like Prometheus, Datadog, and Grafana?',
+      answer: 'Monitoring tools show alerts. AlertMend fixes the root cause. It takes signals from Datadog/Prometheus/CloudWatch and performs automated remediation—reducing MTTR and minimizing on-call fatigue.',
     },
     {
-      question: 'Can AlertMend help me understand why issues happen (RCA)?',
-      answer: 'Absolutely. AlertMend AI includes advanced Root Cause Analysis (RCA) capabilities that automatically analyze incidents to identify underlying causes. It correlates events across your infrastructure, examines historical patterns, and provides detailed explanations of why issues occurred. The platform learns from each incident to improve its analysis over time, helping you understand not just what happened, but why it happened and how to prevent similar issues in the future.',
+      question: 'Does AlertMend support GitOps and CI/CD error troubleshooting?',
+      answer: 'Yes. AlertMend detects deployment failures related to Git issues such as: "fatal: refusing to merge unrelated histories", "error: failed to push some refs", Exit code 1 build failures. It notifies the team and can auto-retry or rollback via ArgoCD or Flux.',
     },
     {
-      question: 'How does AlertMend help with Kubernetes management?',
-      answer: 'AlertMend AI provides comprehensive Kubernetes management through AI-powered cluster monitoring, automated troubleshooting, proactive health checks, and intelligent resource optimization. It manages multi-cluster environments from a single dashboard, handles pod failures automatically, optimizes resource allocation, and maintains up to 99.97% uptime. The platform supports AWS EKS, GCP GKE, Azure AKS, and on-premise Kubernetes deployments, making it easy to manage your entire K8s infrastructure.',
+      question: 'Can AlertMend fix OOMKilled and resource exhaustion issues?',
+      answer: 'Yes. AlertMend identifies memory leaks, CPU spikes, and resource starvation. It automatically adjusts pod limits, restarts containers, or scales replicas to restore service stability.',
     },
     {
-      question: 'How does AlertMend integrate with my existing stack?',
-      answer: 'AlertMend AI integrates seamlessly with your existing infrastructure stack. It connects with popular monitoring tools like Datadog, Prometheus, Grafana, and Alertmanager, notification platforms including Slack, Microsoft Teams, and PagerDuty, and cloud providers AWS, GCP, and Azure. The platform also supports webhooks for custom integrations and works with Kubernetes, VMs, and ECS. Setup typically takes just minutes, and AlertMend can start monitoring your infrastructure immediately without disrupting your current workflows.',
+      question: 'Does AlertMend reduce cloud and Kubernetes costs?',
+      answer: 'AlertMend reduces cloud spend by 40–70% with AI-driven rightsizing, autoscaling optimization, unused resource cleanup, spot instance controls, stale PVC removal, and cluster-efficiency tuning.',
     },
     {
-      question: 'Does AlertMend help reduce on-call load?',
-      answer: 'Yes, AlertMend AI significantly reduces on-call load by automatically handling up to 70% of incidents without requiring human intervention. It intelligently routes alerts, eliminates false positives through smart filtering, and provides context-rich notifications only when human attention is needed. The platform improves on-call efficiency by up to 3x, reduces missed alerts to zero, and ensures team members are only notified for issues that truly require their expertise. This means fewer late-night pages and more time for strategic work.',
+      question: 'How does AlertMend compare to Komodor?',
+      answer: 'Komodor provides Kubernetes troubleshooting visibility. AlertMend goes beyond visibility by offering true auto-remediation. Where Komodor shows what happened, AlertMend actually fixes it automatically.',
+    },
+    {
+      question: 'How does AlertMend compare to Shoreline?',
+      answer: 'Shoreline offers scripted runbooks. AlertMend provides AI-driven automations with Slack approvals, predefined workflows, cluster insights, and easier onboarding for smaller teams. AlertMend is built for fast setup and automatic fixes, not manual scripting.',
+    },
+    {
+      question: 'Does AlertMend replace PagerDuty, OpsGenie, or Grafana OnCall?',
+      answer: 'AlertMend includes an intelligent on-call system with Slack/Teams/WhatsApp/phone alerts, but unlike PagerDuty—it also remediates the incident automatically. Fewer alerts. Faster fixes.',
+    },
+    {
+      question: 'Can AlertMend detect and fix "openocd exited with code 1" or other exit code errors?',
+      answer: 'Yes. AlertMend analyzes build logs and identifies root causes of exit code failures, suggesting or executing the fix automatically through pipelines or GitOps flows.',
+    },
+    {
+      question: 'What makes AlertMend different from Rancher?',
+      answer: 'Rancher manages clusters. AlertMend manages cluster reliability. Rancher handles provisioning; AlertMend handles troubleshooting + auto-remediation inside the cluster. They are complementary tools.',
+    },
+    {
+      question: 'Can AlertMend help SRE/DevOps teams reduce on-call noise?',
+      answer: 'Yes. By automating noisy and repeatable tasks—restart loops, disk full issues, node drains, rollout failures—AlertMend reduces alert fatigue by up to 80%.',
+    },
+    {
+      question: 'How does AlertMend integrate with AWS, GCP, Azure, and on-prem?',
+      answer: 'AlertMend deploys as a lightweight agent via Helm and connects securely using TLS/mTLS. It supports: EKS / GKE / AKS, EC2, VMs, ECS/Fargate, Bare-metal clusters, Private VPC-only clusters.',
+    },
+    {
+      question: 'Is AlertMend secure?',
+      answer: 'Yes. AlertMend follows SOC2-ready design principles with encrypted communication, RBAC, no customer data access, audit logs, optional mTLS, and compliance integrations via SPIFFE/SPIRE or cert-manager.',
+    },
+    {
+      question: 'Who is AlertMend best suited for?',
+      answer: 'Kubernetes-based startups, SaaS companies, DevOps/SRE teams, Companies scaling clusters, Teams without 24/7 SRE coverage, Engineering teams seeking automated reliability + cost reduction.',
+    },
+    {
+      question: 'How quickly can I get started with AlertMend?',
+      answer: 'You can deploy AlertMend in under 20 minutes using Helm. Most users see real automated remediations within the first hour.',
+    },
+    {
+      question: 'Can I build my own automation workflows?',
+      answer: 'Yes. AlertMend includes a workflow builder allowing: Node.js scripts, Kubernetes API calls, Cloud provider actions, Conditional logic, Slack approval steps, Full custom remediation flows.',
+    },
+    {
+      question: 'Does AlertMend support disk full / PVC full / node pressure remediation?',
+      answer: 'Yes. AlertMend detects disk pressure, PVC full events, inode exhaustion, and node memory pressure. It can auto-expand PVCs, clean up image caches, and evict or rebalance workloads.',
     },
   ]
 
