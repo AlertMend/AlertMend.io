@@ -4,6 +4,7 @@ excerpt: "Understand how Kubernetes handles rollbacks, why it's risky in product
 date: "2025-06-20"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
+keywords: "Kubernetes rollback, deployment management, incident remediation, automated rollback, production risks, Kubernetes best practices, AlertMend AI, operational safety"
 ---
 
 ## Understanding Kubernetes Rollbacks

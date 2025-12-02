@@ -4,6 +4,7 @@ excerpt: "A 502 Bad Gateway error is a common issue that users face when working
 date: "2025-02-01"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
+keywords: "kubernetes 502 bad gateway, troubleshoot kubernetes errors, fix 502 bad gateway, automated kubernetes management, kubernetes error resolution, service reliability kubernetes, kubernetes troubleshooting guide, alertmend ai solutions"
 ---
 
 ## Understanding 502 Bad Gateway

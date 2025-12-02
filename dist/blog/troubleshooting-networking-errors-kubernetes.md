@@ -4,6 +4,7 @@ excerpt: "Networking is one of the most critical components in any Kubernetes de
 date: "2025-06-27"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
+keywords: "Kubernetes networking, troubleshooting Kubernetes, pod communication issues, service discovery problems, ingress troubleshooting, automated incident remediation, Kubernetes management solutions, AlertMend AI"
 ---
 
 ## Common Networking Issues

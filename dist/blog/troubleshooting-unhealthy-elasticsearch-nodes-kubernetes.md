@@ -4,6 +4,7 @@ excerpt: "Explore the causes of unhealthy Elasticsearch nodes and learn how to a
 date: "2025-05-18"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
+keywords: "Elasticsearch, Kubernetes, incident remediation, troubleshooting Elasticsearch, unhealthy nodes, cluster stability, automated incident management, diagnosing Elasticsearch issues"
 ---
 
 Elasticsearch nodes can become unhealthy in Kubernetes due to various reasons. Here's how to diagnose and fix common issues.

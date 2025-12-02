@@ -4,6 +4,7 @@ excerpt: "Elasticsearch unassigned shards occur when a node is unable to assign 
 date: "2025-06-05"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"
+keywords: "Elasticsearch, unassigned shards, Kubernetes, troubleshooting Elasticsearch, cluster health, shard allocation, automated incident remediation, operational efficiency"
 ---
 
 ## Understanding Unassigned Shards

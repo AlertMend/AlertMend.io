@@ -4,6 +4,7 @@ excerpt: "Understand how Kubernetes handles WebSockets, gRPC, and database conne
 date: "2025-06-25"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
+keywords: "Kubernetes load balancing, long-lived connections, WebSocket load balancing, gRPC connection management, database connection optimization, session affinity, service meshes, ingress controllers, Kubernetes monitoring, AlertMend AI"
 ---
 
 ## The Challenge
