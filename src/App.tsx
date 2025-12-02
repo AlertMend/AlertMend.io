@@ -1,4 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import HomePage from './pages/HomePage'
 import CaseStudiesPage from './pages/CaseStudiesPage'
 import CaseStudyDetailPage from './pages/CaseStudyDetailPage'
@@ -32,7 +34,8 @@ import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
   return (
-    <Routes>
+    <>
+      <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/case-studies" element={<CaseStudiesPage />} />
       <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
@@ -68,7 +71,10 @@ function App() {
       <Route path="/tutorials" element={<TutorialsPage />} />
       <Route path="/webinars" element={<WebinarsPage />} />
       <Route path="*" element={<NotFoundPage />} />
-    </Routes>
+      </Routes>
+      <Analytics />
+      <SpeedInsights />
+    </>
   )
 }
 

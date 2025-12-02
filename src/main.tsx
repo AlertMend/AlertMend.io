@@ -11,10 +11,11 @@ declare global {
   interface Window {
     gtag?: (
       command: 'config' | 'event' | 'js' | 'set',
-      targetId: string | Date,
+      targetId: string | Date | 'page_view',
       config?: {
         page_path?: string
         page_title?: string
+        page_location?: string
         [key: string]: any
       }
     ) => void
@@ -27,13 +28,36 @@ function PageTracker() {
   const location = useLocation()
 
   useEffect(() => {
-    // Track pageview in Google Analytics when route changes
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('config', 'G-Z8QSJ5NK95', {
-        page_path: location.pathname + location.search,
-        page_title: document.title,
-      })
+    // Wait for gtag to be available (async script loading)
+    const trackPageView = (retries = 10) => {
+      if (typeof window !== 'undefined') {
+        // Check if gtag is available
+        if (window.gtag) {
+          // Use event method for better SPA tracking
+          window.gtag('event', 'page_view', {
+            page_path: location.pathname + location.search,
+            page_title: document.title,
+            page_location: window.location.href,
+          })
+        } else if (window.dataLayer) {
+          // Fallback: push directly to dataLayer if gtag isn't available yet
+          window.dataLayer.push({
+            event: 'page_view',
+            page_path: location.pathname + location.search,
+            page_title: document.title,
+            page_location: window.location.href,
+          })
+        } else if (retries > 0) {
+          // Retry after a short delay if neither is available
+          setTimeout(() => trackPageView(retries - 1), 100)
+        }
+      }
     }
+
+    // Small delay to ensure page title is updated and scripts are loaded
+    const timeoutId = setTimeout(() => trackPageView(), 100)
+
+    return () => clearTimeout(timeoutId)
   }, [location.pathname, location.search])
 
   return null
