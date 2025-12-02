@@ -29,23 +29,28 @@ function PageTracker() {
 
   useEffect(() => {
     // Wait for gtag to be available (async script loading)
-    const trackPageView = (retries = 10) => {
+    const trackPageView = (retries = 20) => {
       if (typeof window !== 'undefined') {
+        const pagePath = location.pathname + location.search
+        const pageTitle = document.title
+        const pageLocation = window.location.href
+
         // Check if gtag is available
         if (window.gtag) {
-          // Use event method for better SPA tracking
-          window.gtag('event', 'page_view', {
-            page_path: location.pathname + location.search,
-            page_title: document.title,
-            page_location: window.location.href,
+          // For GA4 SPA tracking, use config with page_path update
+          // This is the recommended method for single-page applications
+          window.gtag('config', 'G-Z8QSJ5NK95', {
+            page_path: pagePath,
+            page_title: pageTitle,
+            page_location: pageLocation,
           })
         } else if (window.dataLayer) {
           // Fallback: push directly to dataLayer if gtag isn't available yet
           window.dataLayer.push({
             event: 'page_view',
-            page_path: location.pathname + location.search,
-            page_title: document.title,
-            page_location: window.location.href,
+            page_path: pagePath,
+            page_title: pageTitle,
+            page_location: pageLocation,
           })
         } else if (retries > 0) {
           // Retry after a short delay if neither is available
@@ -54,8 +59,8 @@ function PageTracker() {
       }
     }
 
-    // Small delay to ensure page title is updated and scripts are loaded
-    const timeoutId = setTimeout(() => trackPageView(), 100)
+    // Wait a bit longer to ensure gtag script is fully loaded
+    const timeoutId = setTimeout(() => trackPageView(), 300)
 
     return () => clearTimeout(timeoutId)
   }, [location.pathname, location.search])
