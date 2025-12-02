@@ -134,6 +134,9 @@ routesToPrerender.forEach((route) => {
 
   const head = `
   <meta charset="utf-8" />
+  <!-- Favicon - uses SVG logo -->
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg" />
+  <link rel="apple-touch-icon" href="/logos/alertmend-logo.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z8QSJ5NK95"></script>

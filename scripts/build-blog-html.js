@@ -358,6 +358,9 @@ markdownFiles.forEach(file => {
   <meta name="author" content="${metadata.author || 'AlertMend Team'}">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="${canonicalUrl}">
+  <!-- Favicon - uses SVG logo -->
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg" />
+  <link rel="apple-touch-icon" href="/logos/alertmend-logo.svg" />
   
   <!-- Open Graph -->
   <meta property="og:type" content="article">
