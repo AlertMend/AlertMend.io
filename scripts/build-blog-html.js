@@ -360,6 +360,7 @@ markdownFiles.forEach(file => {
   <link rel="canonical" href="${canonicalUrl}">
   <!-- Favicon - uses SVG logo -->
   <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/logos/alertmend-logo.svg" />
   
   <!-- Open Graph -->
@@ -1339,7 +1340,10 @@ const blogListingHTML = `<!DOCTYPE html>
   <meta name="keywords" content="AIOps blog, Kubernetes best practices, infrastructure automation, DevOps insights, SRE articles, cloud-native operations">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.alertmend.io/blog">
-  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
+  <!-- Favicon - uses SVG logo -->
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/logos/alertmend-logo.svg" />
   
   <!-- Tailwind CSS - using CDN for static HTML -->
   <script src="https://cdn.tailwindcss.com"></script>
