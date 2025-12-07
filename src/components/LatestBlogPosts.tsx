@@ -26,7 +26,10 @@ export default function LatestBlogPosts() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-          {latestPosts.map((post) => (
+          {latestPosts.map((post) => {
+            // Ensure title is not empty or slug
+            const displayTitle = post.title && post.title !== post.slug ? post.title : post.title || post.slug
+            return (
             <article
               key={post.slug}
               onClick={() => navigate(`/blog/${post.slug}`)}
@@ -38,7 +41,7 @@ export default function LatestBlogPosts() {
                 </div>
               </div>
               <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-purple-700 transition-colors">
-                {post.title}
+                {displayTitle}
               </h3>
               <p className="text-gray-600 mb-4 leading-relaxed line-clamp-2 flex-grow text-sm">
                 {post.excerpt}
@@ -54,7 +57,8 @@ export default function LatestBlogPosts() {
                 </div>
               </div>
             </article>
-          ))}
+            )
+          })}
         </div>
 
         <div className="text-center">

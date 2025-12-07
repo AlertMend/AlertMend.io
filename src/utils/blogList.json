@@ -27,15 +27,6 @@
     "tags": []
   },
   {
-    "slug": "fatal-not-a-git-repository",
-    "title": "fatal-not-a-git-repository",
-    "excerpt": "",
-    "date": "2025-08-05",
-    "category": "DevOps",
-    "author": "AlertMend Team",
-    "tags": []
-  },
-  {
     "slug": "openocd-exited-with-code-1",
     "title": "OpenOCD Exited with Code 1: Troubleshooting",
     "excerpt": "Learn how to resolve OpenOCD initialization failures, including configuration issues, hardware connection problems, and driver compatibility.",
@@ -126,6 +117,15 @@
     "tags": []
   },
   {
+    "slug": "fatal-not-a-git-repository",
+    "title": "Fix 'Fatal: Not a Git Repository' Error",
+    "excerpt": "Troubleshoot the 'fatal: not a git repository' error with practical solutions for uninitialized directories, corrupted .git folders, and incorrect paths.",
+    "date": "2025-08-05",
+    "category": "DevOps",
+    "author": "AlertMend Team",
+    "tags": []
+  },
+  {
     "slug": "fatal-refusing-to-merge-unrelated-histories",
     "title": "Fix Git Merge Unrelated Histories Error",
     "excerpt": "Resolve Git merge errors when attempting to merge branches with unrelated commit histories using the --allow-unrelated-histories flag and best practices.",
@@ -209,7 +209,7 @@
   {
     "slug": "rollback-deployments-kubernetes",
     "title": "How to Roll Back Deployments in Kubernetes",
-    "excerpt": "",
+    "excerpt": "Understand how Kubernetes handles rollbacks, why it's risky in production, and best practices for safe rollbacks.",
     "date": "2025-06-20",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",
@@ -236,7 +236,7 @@
   {
     "slug": "kubernetes-statefulset-volume-recovery-issues",
     "title": "Kubernetes StatefulSet Volume Recovery Issues: Troubleshooting and Best Practices",
-    "excerpt": "",
+    "excerpt": "StatefulSets in Kubernetes manage stateful applications with persistent storage. However, volume recovery issues can cause data loss and service disruptions.",
     "date": "2025-06-10",
     "category": "Kubernetes",
     "author": "Himanshu Bansal",
@@ -245,7 +245,7 @@
   {
     "slug": "elasticsearch-cluster-yellow-incident-kubernetes",
     "title": "AlertMend: Fix Elasticsearch Yellow Clusters in Kubernetes",
-    "excerpt": "",
+    "excerpt": "Elasticsearch requires adequate virtual memory to run smoothly. If the system's virtual memory limit is too low, it can cause performance issues and failures.",
     "date": "2025-06-08",
     "category": "Elasticsearch",
     "author": "Himanshu Bansal",
@@ -299,7 +299,7 @@
   {
     "slug": "kubernetes-node-not-ready-error",
     "title": "How to Troubleshoot and Fix Kubernetes Node Not Ready Error",
-    "excerpt": "",
+    "excerpt": "In Kubernetes clusters, the 'Node Not Ready' error is a frequent issue that can disrupt the smooth operation of your workloads.",
     "date": "2025-05-30",
     "category": "Kubernetes",
     "author": "Himanshu Bansal",
@@ -317,7 +317,7 @@
   {
     "slug": "mastering-kubernetes-statefulsets",
     "title": "Mastering Kubernetes StatefulSets: Basics, Use Cases, and Debugging Tips",
-    "excerpt": "",
+    "excerpt": "StatefulSets are designed for stateful applications that require stable network identities and persistent storage.",
     "date": "2025-05-30",
     "category": "Kubernetes",
     "author": "Himanshu Bansal",

@@ -46,7 +46,10 @@ export default function BlogPage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {sortedPosts.map((post) => (
+              {sortedPosts.map((post) => {
+                // Ensure title is not empty or slug
+                const displayTitle = post.title && post.title !== post.slug ? post.title : post.title || post.slug
+                return (
                 <article
                   key={post.slug}
                   onClick={() => navigate(`/blog/${post.slug}`)}
@@ -71,7 +74,7 @@ export default function BlogPage() {
                       </div>
                     )}
                   </div>
-                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 leading-tight group-hover:text-purple-700 transition-colors">{post.title}</h2>
+                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 leading-tight group-hover:text-purple-700 transition-colors">{displayTitle}</h2>
                   <p className="text-gray-600 mb-6 leading-relaxed line-clamp-3 flex-grow text-base">{post.excerpt}</p>
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                     <div className="flex items-center gap-2 text-gray-500 text-sm">
@@ -84,7 +87,8 @@ export default function BlogPage() {
                     </div>
                   </div>
                 </article>
-              ))}
+                )
+              })}
             </div>
           </div>
         </section>

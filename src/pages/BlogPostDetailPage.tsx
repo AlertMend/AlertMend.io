@@ -445,10 +445,10 @@ export default function BlogPostDetailPage() {
                          <p className="text-purple-700 font-semibold mb-4">Co-Founder & CEO</p>
                          <div className="text-gray-800 leading-7 space-y-4 mb-4">
                            <p>
-                             Arvind is a Kubestronaut and Kubernetes expert with 15+ years of experience in infrastructure automation. Previously DevOps Team Lead at Roambee and Customer Success Engineer at Shoreline.io (acquired by NVIDIA), he's helped hundreds of teams achieve 99.97% uptime, reduce costs by 50%, and eliminate 90% of manual operations work.
+                             Arvind Rajpurohit — 15+ years in Kubernetes and infrastructure automation. Former DevOps Lead at Roambee and Customer Success Engineer at Shoreline.io (acquired by NVIDIA). Helped teams reach 99.97% uptime, reduce costs by 50%, and cut manual work by 90%.
                            </p>
                            <p>
-                             As CEO of AlertMend AI, Arvind is building the future of autonomous infrastructure management—where AI doesn't just monitor systems, but understands, predicts, and automatically resolves issues while continuously learning and improving.
+                             As CEO of AlertMend AI, building autonomous infrastructure where AI predicts, fixes, and learns.
                            </p>
                          </div>
                          {/* LinkedIn Icon */}
