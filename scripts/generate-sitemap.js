@@ -206,7 +206,37 @@ ${blogPosts.map(post => {
   const defaultFilename = `${convertSlugToHtmlFilename(post.slug)}.html`
   const htmlFilename = canonicalFilenameOverrides[post.slug] || defaultFilename
   const normalizedDate = normalizeDate(post.date)
-  return `  <!-- Blog Post: ${post.slug} -->
+  
+  // New blogs that should only have /blog/{slug} entries (no /blogs/ entries)
+  const newBlogsOnly = [
+    'alertmend-kubernetes',
+    'exit-status-127',
+    'oomkilled',
+    'fatal-not-a-git-repository',
+    'openocd-exited-with-code-1',
+    'kubectl-rollout',
+    '5xx-errors',
+    '5xx-error',
+    '5xx-server-error',
+    'crashloopbackoff-kubernetes',
+    'fatal-refusing-to-merge-unrelated-histories',
+    'error-failed-to-push-some-refs-to'
+  ]
+  
+  const isNewBlog = newBlogsOnly.includes(post.slug)
+  
+  if (isNewBlog) {
+    // New blogs: only /blog/{slug} entry
+    return `  <!-- Blog Post: ${post.slug} -->
+  <url>
+    <loc>${siteUrl}/blog/${post.slug}</loc>
+    <lastmod>${normalizedDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>`
+  } else {
+    // Existing blogs: both /blog/{slug} and /blogs/{slug}.html entries
+    return `  <!-- Blog Post: ${post.slug} -->
   <url>
     <loc>${siteUrl}/blog/${post.slug}</loc>
     <lastmod>${normalizedDate}</lastmod>
@@ -219,6 +249,7 @@ ${blogPosts.map(post => {
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>`
+  }
 }).join('\n')}
   
   <!-- Main Pages -->
@@ -364,6 +395,22 @@ ${blogPosts.map(post => {
 const sitemapPath = path.join(__dirname, '../public/sitemap.xml')
 fs.writeFileSync(sitemapPath, sitemap, 'utf-8')
 
+const newBlogsCount = blogPosts.filter(post => [
+  'alertmend-kubernetes',
+  'exit-status-127',
+  'oomkilled',
+  'fatal-not-a-git-repository',
+  'openocd-exited-with-code-1',
+  'kubectl-rollout',
+  '5xx-errors',
+  '5xx-error',
+  '5xx-server-error',
+  'crashloopbackoff-kubernetes',
+  'fatal-refusing-to-merge-unrelated-histories',
+  'error-failed-to-push-some-refs-to'
+].includes(post.slug)).length
+
 console.log(`✅ Generated sitemap.xml with ${blogPosts.length} blog posts`)
-console.log(`   Blog URLs include both /blog/{slug} and /blogs/{slug}.html entries`)
+console.log(`   ${newBlogsCount} new blogs use /blog/{slug} only`)
+console.log(`   ${blogPosts.length - newBlogsCount} existing blogs include both /blog/{slug} and /blogs/{slug}.html`)
 
