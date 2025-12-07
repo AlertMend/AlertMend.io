@@ -27,6 +27,15 @@
     "tags": []
   },
   {
+    "slug": "fatal-not-a-git-repository",
+    "title": "Fix 'Fatal: Not a Git Repository' Error",
+    "excerpt": "Troubleshoot the 'fatal: not a git repository' error with practical solutions for uninitialized directories, corrupted .git folders, and incorrect paths.",
+    "date": "2025-08-05",
+    "category": "DevOps",
+    "author": "AlertMend Team",
+    "tags": []
+  },
+  {
     "slug": "openocd-exited-with-code-1",
     "title": "OpenOCD Exited with Code 1: Troubleshooting",
     "excerpt": "Learn how to resolve OpenOCD initialization failures, including configuration issues, hardware connection problems, and driver compatibility.",
@@ -113,15 +122,6 @@
     "excerpt": "Learn how to diagnose and resolve CrashLoopBackOff errors in Kubernetes, including common causes, troubleshooting techniques, and prevention strategies.",
     "date": "2025-07-22",
     "category": "Kubernetes",
-    "author": "AlertMend Team",
-    "tags": []
-  },
-  {
-    "slug": "fatal-not-a-git-repository",
-    "title": "Fix 'Fatal: Not a Git Repository' Error",
-    "excerpt": "Troubleshoot the 'fatal: not a git repository' error with practical solutions for uninitialized directories, corrupted .git folders, and incorrect paths.",
-    "date": "2025-08-05",
-    "category": "DevOps",
     "author": "AlertMend Team",
     "tags": []
   },
@@ -236,7 +236,7 @@
   {
     "slug": "kubernetes-statefulset-volume-recovery-issues",
     "title": "Kubernetes StatefulSet Volume Recovery Issues: Troubleshooting and Best Practices",
-    "excerpt": "StatefulSets in Kubernetes manage stateful applications with persistent storage. However, volume recovery issues can cause data loss and service disruptions.",
+    "excerpt": "Elasticsearch requires adequate virtual memory to run smoothly. If the system's virtual memory limit is too low, it can cause performance issues and failures.",
     "date": "2025-06-10",
     "category": "Kubernetes",
     "author": "Himanshu Bansal",
@@ -317,7 +317,7 @@
   {
     "slug": "mastering-kubernetes-statefulsets",
     "title": "Mastering Kubernetes StatefulSets: Basics, Use Cases, and Debugging Tips",
-    "excerpt": "StatefulSets are designed for stateful applications that require stable network identities and persistent storage.",
+    "excerpt": "In Kubernetes clusters, the 'Node Not Ready' error is a frequent issue that can disrupt the smooth operation of your workloads.",
     "date": "2025-05-30",
     "category": "Kubernetes",
     "author": "Himanshu Bansal",

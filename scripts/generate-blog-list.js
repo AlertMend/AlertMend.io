@@ -28,12 +28,15 @@ markdownFiles.forEach(file => {
     // Parse frontmatter fields (handle quoted and unquoted values)
     // Handle double-quoted strings (may contain single quotes)
     frontmatter.split('\n').forEach((line) => {
+      const trimmed = line.trim()
+      if (!trimmed) return
+      
       // Match double-quoted strings (allows single quotes inside)
-      const doubleQuotedMatch = line.match(/^(\w+):\s*"([^"]*)"$/)
+      const doubleQuotedMatch = trimmed.match(/^(\w+):\s*"([^"]*)"$/)
       // Match single-quoted strings (allows double quotes inside)
-      const singleQuotedMatch = line.match(/^(\w+):\s*'([^']*)'$/)
+      const singleQuotedMatch = trimmed.match(/^(\w+):\s*'([^']*)'$/)
       // Match unquoted values
-      const unquotedMatch = line.match(/^(\w+):\s*(.+)$/)
+      const unquotedMatch = trimmed.match(/^(\w+):\s*(.+)$/)
       
       if (doubleQuotedMatch) {
         metadata[doubleQuotedMatch[1]] = doubleQuotedMatch[2]
