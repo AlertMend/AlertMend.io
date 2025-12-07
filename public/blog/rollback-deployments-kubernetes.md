@@ -1,6 +1,6 @@
 ---
 title: "How to Roll Back Deployments in Kubernetes"
-excerpt: "Understand how Kubernetes handles rollbacks, why it's risky in production, and best practices for safe rollbacks."
+excerpt: "Understand how Kubernetes handles rollbacks, why it is risky in production, and best practices for safe rollbacks."
 date: "2025-06-20"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"

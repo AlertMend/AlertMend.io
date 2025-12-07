@@ -1,6 +1,6 @@
 ---
 title: "Mastering Kubernetes StatefulSets: Basics, Use Cases, and Debugging Tips"
-excerpt: "In Kubernetes clusters, the 'Node Not Ready' error is a frequent issue that can disrupt the smooth operation of your workloads."
+excerpt: "StatefulSets are designed for stateful applications that require stable network identities and persistent storage."
 date: "2025-05-30"
 category: "Kubernetes"
 author: "Himanshu Bansal"
