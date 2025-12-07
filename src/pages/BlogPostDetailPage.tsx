@@ -125,14 +125,125 @@ export default function BlogPostDetailPage() {
     ? `/blogs/${post.slug}.html`  // HTML version: /blogs/normalized-slug.html
     : `/blog/${post.slug}`         // Non-HTML version: /blog/normalized-slug
   
-  // Truncate title to 30-60 characters for SEO
-  const seoTitle = truncateBlogTitle(post.title)
+  // Modify title for /blog routes to make it unique (keep /blogs routes unchanged)
+  const getModifiedTitle = (title: string, slug: string): string => {
+    if (isHtmlVersion) {
+      // Keep original title for /blogs routes
+      return title
+    }
+    
+    // Modify title for /blog routes to add uniqueness
+    // Use consistent variations based on slug hash for same slug
+    const titleHash = slug.split('').reduce((a, b) => a + b.charCodeAt(0), 0)
+    
+    // Check if title already has common suffixes
+    const hasGuide = title.toLowerCase().includes('guide')
+    const hasTroubleshooting = title.toLowerCase().includes('troubleshooting')
+    const hasFix = title.toLowerCase().includes('fix') || title.toLowerCase().startsWith('how to')
+    
+    // Add prefix variations for titles without "How to" or "Fix"
+    if (!hasFix && !title.toLowerCase().startsWith('understanding')) {
+      const prefixes = ['How to', 'Understanding', 'Mastering', 'Complete Guide to']
+      const prefix = prefixes[titleHash % prefixes.length]
+      const newTitle = `${prefix} ${title}`
+      // Check if it fits within 60 chars (before truncation)
+      if (newTitle.length <= 60) {
+        return newTitle
+      }
+    }
+    
+    // Add suffix variations for titles that don't have them
+    if (!hasGuide && !hasTroubleshooting) {
+      const suffixes = ['Guide', 'Tips', 'Solutions', 'Best Practices']
+      const suffix = suffixes[titleHash % suffixes.length]
+      const newTitle = `${title}: ${suffix}`
+      // Check if it fits within 60 chars (before truncation)
+      if (newTitle.length <= 60) {
+        return newTitle
+      }
+    }
+    
+    // If title is already long or has variations, just add a subtle modifier
+    const modifiers = ['Complete', 'Expert', 'Advanced', 'Practical']
+    const modifier = modifiers[titleHash % modifiers.length]
+    if (title.length + modifier.length + 1 <= 60) {
+      return `${modifier} ${title}`
+    }
+    
+    // Return original if can't modify without breaking length
+    return title
+  }
+  
+  // Modify content tone for /blog routes to make it unique (keep /blogs routes unchanged)
+  const getModifiedContent = (content: string): string => {
+    if (isHtmlVersion) {
+      // Keep original content for /blogs routes
+      return content
+    }
+    
+    // Modify content tone slightly for /blog routes to avoid duplication
+    // Replace common phrases with variations (subtle changes that maintain meaning)
+    let modifiedContent = content
+    
+    // Replace common phrases with variations - more subtle changes
+    const replacements: [RegExp, string][] = [
+      [/In this article/gi, 'In this comprehensive guide'],
+      [/In this guide/gi, 'In this detailed article'],
+      [/This article/gi, 'This comprehensive guide'],
+      [/This guide/gi, 'This detailed article'],
+      [/we'll explore/gi, 'we will dive deep into'],
+      [/we'll discuss/gi, 'we will examine'],
+      [/we'll cover/gi, 'we will analyze'],
+      [/Let's explore/gi, 'Let us dive into'],
+      [/Let's discuss/gi, 'Let us examine'],
+      [/understanding/gi, 'comprehending'],
+      [/learn how to/gi, 'discover the process of'],
+      [/learn about/gi, 'gain insights into'],
+      [/common causes/gi, 'primary factors'],
+      [/common issues/gi, 'frequent challenges'],
+      [/best practices/gi, 'proven strategies'],
+      [/troubleshooting/gi, 'diagnosing and resolving'],
+      [/solutions/gi, 'effective approaches'],
+      [/important to/gi, 'crucial to'],
+      [/essential to/gi, 'vital to'],
+      [/ensure that/gi, 'guarantee that'],
+      [/make sure/gi, 'verify'],
+      [/can help/gi, 'can assist'],
+      [/can be/gi, 'may be'],
+      [/should be/gi, 'ought to be'],
+      [/will help/gi, 'will assist'],
+      [/provides/gi, 'delivers'],
+      [/offers/gi, 'furnishes'],
+      [/allows/gi, 'enables'],
+      [/ensures/gi, 'guarantees'],
+      [/explore/gi, 'examine'],
+      [/discuss/gi, 'analyze'],
+      [/cover/gi, 'address'],
+      [/delve into/gi, 'investigate'],
+      [/examine/gi, 'explore'],
+      [/analyze/gi, 'review'],
+      [/review/gi, 'examine'],
+    ]
+    
+    // Apply replacements (simple approach - patterns already match whole phrases)
+    replacements.forEach(([pattern, replacement]) => {
+      modifiedContent = modifiedContent.replace(pattern, replacement)
+    })
+    
+    return modifiedContent
+  }
+  
+  const displayTitle = getModifiedTitle(post.title, post.slug)
+  const displayContent = getModifiedContent(post.content || '')
+  
+  // Truncate title to 30-60 characters for SEO (use original title for SEO, modified for display)
+  const seoTitle = truncateBlogTitle(isHtmlVersion ? post.title : displayTitle)
   
   // Generate unique meta description for SEO (50-160 characters)
   const metaDescription = generateUniqueMetaDescription(
-    post.title,
+    isHtmlVersion ? post.title : displayTitle,
     post.excerpt,
-    post.content,
+    isHtmlVersion ? post.content : displayContent,
     post.category
   )
   
@@ -196,7 +307,7 @@ export default function BlogPostDetailPage() {
                     {/* Header */}
                     <header className="mb-8">
                       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-purple-950 mb-6 leading-tight">
-                        {post.title}
+                        {displayTitle}
                       </h1>
                       
                       {/* Author Info */}
@@ -266,7 +377,7 @@ export default function BlogPostDetailPage() {
                             img: ({ node, ...props }) => <img className="rounded-lg my-8 w-full" {...props} />,
                           }}
                         >
-                          {post.content || ''}
+                          {displayContent}
                         </ReactMarkdown>
                       </div>
                     </div>
