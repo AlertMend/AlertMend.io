@@ -47,8 +47,9 @@ export default function BlogPage() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {sortedPosts.map((post) => {
-                // Ensure title is not empty or slug
-                const displayTitle = post.title && post.title !== post.slug ? post.title : post.title || post.slug
+                // Ensure title is not empty or slug - use title if it exists and is different from slug
+                const displayTitle = (post.title && post.title.trim() && post.title !== post.slug) ? post.title : post.slug
+                const displayExcerpt = post.excerpt && post.excerpt.trim() ? post.excerpt : ''
                 return (
                 <article
                   key={post.slug}
@@ -75,7 +76,9 @@ export default function BlogPage() {
                     )}
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 leading-tight group-hover:text-purple-700 transition-colors">{displayTitle}</h2>
-                  <p className="text-gray-600 mb-6 leading-relaxed line-clamp-3 flex-grow text-base">{post.excerpt}</p>
+                  {displayExcerpt && (
+                    <p className="text-gray-600 mb-6 leading-relaxed line-clamp-3 flex-grow text-base">{displayExcerpt}</p>
+                  )}
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                     <div className="flex items-center gap-2 text-gray-500 text-sm">
                       <Calendar className="h-4 w-4" />
