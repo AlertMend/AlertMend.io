@@ -43,17 +43,42 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
     
     // Parse frontmatter fields
     frontmatter.split('\n').forEach((line) => {
+      const trimmed = line.trim()
+      if (!trimmed) return
+      
       // Handle keywords which may contain commas and quotes
-      const keywordsMatch = line.match(/^keywords:\s*["'](.+)["']$/)
+      const keywordsMatch = trimmed.match(/^keywords:\s*["'](.+)["']$/)
       if (keywordsMatch) {
         post.keywords = keywordsMatch[1]
         return
       }
       
-      const match = line.match(/^(\w+):\s*["']?([^"']+)["']?$/)
-      if (match) {
-        const key = match[1]
-        const value = match[2]
+      // Match double-quoted strings (allows single quotes inside)
+      const doubleQuotedMatch = trimmed.match(/^(\w+):\s*"([^"]*)"$/)
+      // Match single-quoted strings (allows double quotes inside)
+      const singleQuotedMatch = trimmed.match(/^(\w+):\s*'([^']*)'$/)
+      // Match unquoted values
+      const unquotedMatch = trimmed.match(/^(\w+):\s*(.+)$/)
+      
+      if (doubleQuotedMatch) {
+        const key = doubleQuotedMatch[1]
+        const value = doubleQuotedMatch[2]
+        if (key === 'title') post.title = value
+        if (key === 'excerpt') post.excerpt = value
+        if (key === 'date') post.date = value
+        if (key === 'category') post.category = value
+        if (key === 'author') post.author = value
+      } else if (singleQuotedMatch) {
+        const key = singleQuotedMatch[1]
+        const value = singleQuotedMatch[2]
+        if (key === 'title') post.title = value
+        if (key === 'excerpt') post.excerpt = value
+        if (key === 'date') post.date = value
+        if (key === 'category') post.category = value
+        if (key === 'author') post.author = value
+      } else if (unquotedMatch) {
+        const key = unquotedMatch[1]
+        const value = unquotedMatch[2].trim()
         if (key === 'title') post.title = value
         if (key === 'excerpt') post.excerpt = value
         if (key === 'date') post.date = value
