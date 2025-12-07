@@ -1107,84 +1107,84 @@
   <!-- Blog Post: alertmend-kubernetes -->
   <url>
     <loc>https://www.alertmend.io/blog/alertmend-kubernetes</loc>
-    <lastmod>2024-08-15</lastmod>
+    <lastmod>2025-08-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Blog Post: exit-status-127 -->
   <url>
     <loc>https://www.alertmend.io/blog/exit-status-127</loc>
-    <lastmod>2024-08-10</lastmod>
+    <lastmod>2025-08-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Blog Post: oomkilled -->
   <url>
     <loc>https://www.alertmend.io/blog/oomkilled</loc>
-    <lastmod>2024-08-08</lastmod>
+    <lastmod>2025-08-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Blog Post: fatal-not-a-git-repository -->
   <url>
     <loc>https://www.alertmend.io/blog/fatal-not-a-git-repository</loc>
-    <lastmod>2024-08-05</lastmod>
+    <lastmod>2025-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Blog Post: openocd-exited-with-code-1 -->
   <url>
     <loc>https://www.alertmend.io/blog/openocd-exited-with-code-1</loc>
-    <lastmod>2024-08-03</lastmod>
+    <lastmod>2025-08-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Blog Post: kubectl-rollout -->
   <url>
     <loc>https://www.alertmend.io/blog/kubectl-rollout</loc>
-    <lastmod>2024-08-01</lastmod>
+    <lastmod>2025-08-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Blog Post: 5xx-errors -->
   <url>
     <loc>https://www.alertmend.io/blog/5xx-errors</loc>
-    <lastmod>2024-07-28</lastmod>
+    <lastmod>2025-07-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Blog Post: 5xx-error -->
   <url>
     <loc>https://www.alertmend.io/blog/5xx-error</loc>
-    <lastmod>2024-07-26</lastmod>
+    <lastmod>2025-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Blog Post: 5xx-server-error -->
   <url>
     <loc>https://www.alertmend.io/blog/5xx-server-error</loc>
-    <lastmod>2024-07-24</lastmod>
+    <lastmod>2025-07-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Blog Post: crashloopbackoff-kubernetes -->
   <url>
     <loc>https://www.alertmend.io/blog/crashloopbackoff-kubernetes</loc>
-    <lastmod>2024-07-22</lastmod>
+    <lastmod>2025-07-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Blog Post: fatal-refusing-to-merge-unrelated-histories -->
   <url>
     <loc>https://www.alertmend.io/blog/fatal-refusing-to-merge-unrelated-histories</loc>
-    <lastmod>2024-07-20</lastmod>
+    <lastmod>2025-07-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <!-- Blog Post: error-failed-to-push-some-refs-to -->
   <url>
     <loc>https://www.alertmend.io/blog/error-failed-to-push-some-refs-to</loc>
-    <lastmod>2024-07-18</lastmod>
+    <lastmod>2025-07-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
