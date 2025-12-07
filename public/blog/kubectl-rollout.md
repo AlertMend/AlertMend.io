@@ -1,3 +1,12 @@
+---
+title: "Kubectl Rollout: Kubernetes Deployments"
+excerpt: "Master kubectl rollout commands for managing deployments, monitoring status, performing rollbacks, and implementing rolling updates in Kubernetes."
+date: "2025-08-01"
+category: "Kubernetes"
+author: "AlertMend Team"
+keywords: "kubectl rollout, Kubernetes deployments, deployment management, rolling updates, Kubernetes commands"
+---
+
 # kubectl rollout
 
 ## Mastering Kubernetes Deployments with Kubectl Rollout

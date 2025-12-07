@@ -1,3 +1,12 @@
+---
+title: "5xx Server Errors: Troubleshooting Guide"
+excerpt: "Comprehensive guide to 5xx server errors, including common causes, troubleshooting steps, and best practices for maintaining server reliability."
+date: "2025-07-28"
+category: "DevOps"
+author: "AlertMend Team"
+keywords: "5xx errors, server errors, HTTP errors, troubleshooting, server reliability, DevOps"
+---
+
 # 5xx errors
 
 ## Decoding 5xx Errors: A Guide for IT Professionals

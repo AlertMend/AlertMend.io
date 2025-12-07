@@ -1,3 +1,12 @@
+---
+title: "Fix Git Merge Unrelated Histories Error"
+excerpt: "Resolve Git merge errors when attempting to merge branches with unrelated commit histories using the --allow-unrelated-histories flag and best practices."
+date: "2025-07-20"
+category: "DevOps"
+author: "AlertMend Team"
+keywords: "git merge error, unrelated histories, git troubleshooting, version control, merge conflicts"
+---
+
 # fatal: refusing to merge unrelated histories
 
 ## Navigating the "Fatal: Refusing to Merge Unrelated Histories" Git Error

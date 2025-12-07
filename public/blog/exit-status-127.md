@@ -1,3 +1,12 @@
+---
+title: "Exit Status 127: Command Not Found"
+excerpt: "Learn how to troubleshoot exit status 127 errors, which occur when the system cannot find a specified command, and discover best practices."
+date: "2025-08-10"
+category: "DevOps"
+author: "AlertMend Team"
+keywords: "exit status 127, command not found, DevOps troubleshooting, system errors, Linux commands, troubleshooting guide"
+---
+
 # exit status 127
 
 ## Understanding Exit Status 127

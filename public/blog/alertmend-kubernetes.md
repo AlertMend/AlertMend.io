@@ -1,3 +1,12 @@
+---
+title: "Kubernetes Management with AlertMend.io"
+excerpt: "Discover how AlertMend.io simplifies Kubernetes management with advanced monitoring, alerting, and automated remediation solutions."
+date: "2025-08-15"
+category: "Kubernetes"
+author: "AlertMend Team"
+keywords: "Kubernetes management, AlertMend.io, Kubernetes monitoring, automated remediation, infrastructure management, Kubernetes optimization"
+---
+
 # Kubernetes Management with AlertMend.io
 
 ## Navigating the Complexity of Kubernetes with Alertmend.io

@@ -1,3 +1,12 @@
+---
+title: "OOMKilled Errors: Causes and Solutions"
+excerpt: "Explore the OOMKilled error, its causes in Linux and Kubernetes environments, and learn effective strategies for prevention and resolution."
+date: "2025-08-08"
+category: "Kubernetes"
+author: "AlertMend Team"
+keywords: "OOMKilled, out of memory, Kubernetes errors, memory management, Linux troubleshooting, container memory issues"
+---
+
 # oomkilled
 
 ## Decoding OOMKilled: Causes and Solutions

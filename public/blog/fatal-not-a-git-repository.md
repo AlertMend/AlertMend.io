@@ -1,3 +1,12 @@
+---
+title: "Fix 'Fatal: Not a Git Repository' Error"
+excerpt: "Troubleshoot the 'fatal: not a git repository' error with practical solutions for uninitialized directories, corrupted .git folders, and incorrect paths."
+date: "2025-08-05"
+category: "DevOps"
+author: "AlertMend Team"
+keywords: "git repository error, fatal not a git repository, git troubleshooting, version control, DevOps errors"
+---
+
 # fatal not a git repository
 
 ## Introduction: Navigating the "Fatal: Not a Git Repository" Error
