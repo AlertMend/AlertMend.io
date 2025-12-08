@@ -233,15 +233,16 @@ export default function BlogPostDetailPage() {
     return modifiedContent
   }
   
-  const displayTitle = getModifiedTitle(post.title, post.slug)
+  // Use original title for display (no modifications)
+  const displayTitle = post.title
   const displayContent = getModifiedContent(post.content || '')
   
-  // Truncate title to 30-60 characters for SEO (use original title for SEO, modified for display)
-  const seoTitle = truncateBlogTitle(isHtmlVersion ? post.title : displayTitle)
+  // Truncate title to 30-60 characters for SEO (use original title)
+  const seoTitle = truncateBlogTitle(post.title)
   
   // Generate unique meta description for SEO (50-160 characters)
   const metaDescription = generateUniqueMetaDescription(
-    isHtmlVersion ? post.title : displayTitle,
+    post.title,
     post.excerpt,
     isHtmlVersion ? post.content : displayContent,
     post.category
