@@ -125,55 +125,6 @@ export default function BlogPostDetailPage() {
     ? `/blogs/${post.slug}.html`  // HTML version: /blogs/normalized-slug.html
     : `/blog/${post.slug}`         // Non-HTML version: /blog/normalized-slug
   
-  // Modify title for /blog routes to make it unique (keep /blogs routes unchanged)
-  const getModifiedTitle = (title: string, slug: string): string => {
-    if (isHtmlVersion) {
-      // Keep original title for /blogs routes
-      return title
-    }
-    
-    // Modify title for /blog routes to add uniqueness
-    // Use consistent variations based on slug hash for same slug
-    const titleHash = slug.split('').reduce((a, b) => a + b.charCodeAt(0), 0)
-    
-    // Check if title already has common suffixes
-    const hasGuide = title.toLowerCase().includes('guide')
-    const hasTroubleshooting = title.toLowerCase().includes('troubleshooting')
-    const hasFix = title.toLowerCase().includes('fix') || title.toLowerCase().startsWith('how to')
-    
-    // Add prefix variations for titles without "How to" or "Fix"
-    if (!hasFix && !title.toLowerCase().startsWith('understanding')) {
-      const prefixes = ['How to', 'Understanding', 'Mastering', 'Complete Guide to']
-      const prefix = prefixes[titleHash % prefixes.length]
-      const newTitle = `${prefix} ${title}`
-      // Check if it fits within 60 chars (before truncation)
-      if (newTitle.length <= 60) {
-        return newTitle
-      }
-    }
-    
-    // Add suffix variations for titles that don't have them
-    if (!hasGuide && !hasTroubleshooting) {
-      const suffixes = ['Guide', 'Tips', 'Solutions', 'Best Practices']
-      const suffix = suffixes[titleHash % suffixes.length]
-      const newTitle = `${title}: ${suffix}`
-      // Check if it fits within 60 chars (before truncation)
-      if (newTitle.length <= 60) {
-        return newTitle
-      }
-    }
-    
-    // If title is already long or has variations, just add a subtle modifier
-    const modifiers = ['Complete', 'Expert', 'Advanced', 'Practical']
-    const modifier = modifiers[titleHash % modifiers.length]
-    if (title.length + modifier.length + 1 <= 60) {
-      return `${modifier} ${title}`
-    }
-    
-    // Return original if can't modify without breaking length
-    return title
-  }
-  
   // Modify content tone for /blog routes to make it unique (keep /blogs routes unchanged)
   const getModifiedContent = (content: string): string => {
     if (isHtmlVersion) {
