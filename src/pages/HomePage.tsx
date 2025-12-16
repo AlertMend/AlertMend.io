@@ -18,13 +18,13 @@ export default function HomePage() {
   const solutionId = 'default'
   
   // Generate unique meta description for homepage
-  const baseDescription = "AlertMend AI: Automate incident management for Kubernetes, VMs, and ECS. Cut costs, reduce downtime with our AIOps platform. Optimize now!"
+  const baseDescription = "AlertMend AI empowers DevOps teams with an autonomous AI agent that troubleshoots Kubernetes alerts 10x faster, reduces MTTR, and optimizes cloud costs. Agentic AI for production diagnosis and infrastructure automation."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'home', 'homepage')
 
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="AlertMend: Automate Kubernetes & Optimize Cloud Costs"
+        title="AlertMend: Autonomous AI SRE Platform"
         description={uniqueDescription}
         keywords="AIOps, Kubernetes, incident management, auto-remediation, SRE, DevOps, cloud-native, cost optimization, VM monitoring, ECS management, infrastructure automation, AI operations, Kubernetes monitoring, container orchestration, observability"
         canonical="/"
