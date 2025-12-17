@@ -10,7 +10,7 @@
   },
   {
     "slug": "error-kv-get-failed-503-service-temporarily-unavailable",
-    "title": "Error KV Get Failed 503: Service Temporarily Unavailable - Troubleshooting Guide",
+    "title": "503 Service Unavailable: How to Fix and Prevent in Kubernetes",
     "excerpt": "Learn how to diagnose and resolve 503 Service Temporarily Unavailable errors in Kubernetes and cloud environments, including load balancer and pod configuration issues.",
     "date": "2025-12-15",
     "category": "Kubernetes",
