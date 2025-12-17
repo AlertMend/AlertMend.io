@@ -224,6 +224,10 @@ markdownFiles.forEach(file => {
     // Replace all <h1> tags with <h2> in the markdown content (main title is already H1)
     htmlContent = htmlContent.replace(/<h1>/g, '<h2>').replace(/<\/h1>/g, '</h2>')
     
+    // Wrap tables in a div for better styling and responsiveness
+    htmlContent = htmlContent.replace(/<table>/g, '<div class="table-wrapper"><table>')
+    htmlContent = htmlContent.replace(/<\/table>/g, '</table></div>')
+    
     // Truncate H2 headings to 50-70 characters for SEO
     htmlContent = htmlContent.replace(/<h2[^>]*>(.*?)<\/h2>/gi, (match, headingText) => {
       // Remove HTML tags from heading text
@@ -642,24 +646,76 @@ markdownFiles.forEach(file => {
       margin: 2rem 0;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin: 2rem 0;
+      -webkit-overflow-scrolling: touch;
+    }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 2rem 0;
+      margin: 0;
       font-size: 1rem;
+      background: #ffffff;
+      border: 2px solid #d1d5db;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
     }
-    th, td {
-      padding: 0.75rem;
-      text-align: left;
-      border-bottom: 1px solid #e5e7eb;
+    thead {
+      background: #faf5ff;
     }
     th {
-      background: #f9fafb;
+      padding: 1rem;
+      text-align: left;
       font-weight: 600;
-      color: #374151;
+      color: #581c87;
+      border-right: 1px solid #e9d5ff;
+      border-bottom: 2px solid #c084fc;
+      background: #faf5ff;
+      font-size: 0.9375rem;
     }
-    tr:hover {
+    th:first-child {
+      border-left: none;
+    }
+    th:last-child {
+      border-right: none;
+    }
+    td {
+      padding: 1rem;
+      text-align: left;
+      border-right: 1px solid #e5e7eb;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+    td:first-child {
+      border-left: none;
+    }
+    td:last-child {
+      border-right: none;
+    }
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+    tbody tr:nth-child(even) {
       background: #f9fafb;
+    }
+    tbody tr:hover {
+      background: #f3e8ff;
+    }
+    @media (max-width: 768px) {
+      .table-wrapper {
+        margin: 1.5rem 0;
+      }
+      table {
+        font-size: 0.875rem;
+      }
+      th, td {
+        padding: 0.75rem;
+      }
     }
     hr {
       border: none;

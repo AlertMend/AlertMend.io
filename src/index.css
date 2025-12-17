@@ -186,5 +186,92 @@
   .animate-delay-2s {
     animation-delay: 2s;
   }
+  
+  /* Table styles for markdown content */
+  .table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    margin: 2rem 0;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    font-size: 1rem;
+    background: #ffffff;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  thead {
+    background: #faf5ff;
+  }
+  
+  th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #581c87;
+    border-right: 1px solid #e9d5ff;
+    border-bottom: 2px solid #c084fc;
+    background: #faf5ff;
+    font-size: 0.9375rem;
+  }
+  
+  th:first-child {
+    border-left: none;
+  }
+  
+  th:last-child {
+    border-right: none;
+  }
+  
+  td {
+    padding: 1rem;
+    text-align: left;
+    border-right: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: top;
+    color: #1f2937;
+    line-height: 1.6;
+  }
+  
+  td:first-child {
+    border-left: none;
+  }
+  
+  td:last-child {
+    border-right: none;
+  }
+  
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+  
+  tbody tr:nth-child(even) {
+    background: #f9fafb;
+  }
+  
+  tbody tr:hover {
+    background: #f3e8ff;
+  }
+  
+  @media (max-width: 768px) {
+    .table-wrapper {
+      margin: 1.5rem 0;
+    }
+    
+    table {
+      font-size: 0.875rem;
+    }
+    
+    th, td {
+      padding: 0.75rem;
+    }
+  }
 }
 

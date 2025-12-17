@@ -327,6 +327,11 @@ export default function BlogPostDetailPage() {
                             em: ({ node, ...props }) => <em className="italic text-gray-800" {...props} />,
                             hr: ({ node, ...props }) => <hr className="my-8 border-gray-200" {...props} />,
                             img: ({ node, ...props }) => <img className="rounded-lg my-8 w-full" {...props} />,
+                            table: ({ node, ...props }) => (
+                              <div className="table-wrapper">
+                                <table {...props} />
+                              </div>
+                            ),
                           }}
                         >
                           {displayContent}
