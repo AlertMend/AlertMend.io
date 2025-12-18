@@ -10,6 +10,7 @@ import { Linkedin, ArrowRight } from 'lucide-react'
 import { getBlogPost, formatDate, BlogPost, blogPosts } from '../utils/blogUtils'
 import { truncateBlogTitle, truncateH2Heading } from '../utils/titleUtils'
 import { generateUniqueMetaDescription } from '../utils/descriptionUtils'
+import { mapOldBlogUrlToSlug } from '../utils/blogSlugMapper'
 
 export default function BlogPostDetailPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -41,9 +42,17 @@ export default function BlogPostDetailPage() {
       // Scroll to top when navigating to a new post
       window.scrollTo({ top: 0, behavior: 'instant' })
       
-      // Normalize slug: remove .html extension, convert underscores to hyphens, lowercase
+      // Normalize slug: remove .html extension, then map old URLs (including Chinese characters) to new slugs
       let cleanSlug = slug.replace(/\.html$/, '')
-      cleanSlug = cleanSlug.toLowerCase().replace(/_/g, '-')
+      
+      // Try to map old URL format to new slug (handles Chinese characters and legacy formats)
+      const mappedSlug = mapOldBlogUrlToSlug(cleanSlug)
+      if (mappedSlug) {
+        cleanSlug = mappedSlug
+      } else {
+        // Fallback: convert underscores to hyphens, lowercase
+        cleanSlug = cleanSlug.toLowerCase().replace(/_/g, '-')
+      }
       
       getBlogPost(cleanSlug).then((data) => {
         setPost(data)
