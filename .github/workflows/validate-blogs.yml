@@ -1,0 +1,46 @@
+name: Validate Blogs
+
+on:
+  pull_request:
+    paths:
+      - 'public/blog/**'
+      - 'scripts/validate-blogs.js'
+      - 'scripts/build-blog-html.js'
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'public/blog/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Generate blog list
+        run: npm run generate:blog-list
+      
+      - name: Generate sitemap
+        run: npm run build:sitemap
+      
+      - name: Build blog HTML
+        run: npm run build:blog
+      
+      - name: Validate blogs
+        run: npm run validate:blogs
+
+
+
+
