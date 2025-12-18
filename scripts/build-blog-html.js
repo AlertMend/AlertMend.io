@@ -190,9 +190,26 @@ markdownFiles.forEach(file => {
         return
       }
       
-      const match = line.match(/^(\w+):\s*["']?([^"']+)["']?$/)
+      // Handle double-quoted values (like excerpt, title, etc.)
+      const doubleQuotedMatch = line.match(/^(\w+):\s*"([^"]*)"$/)
+      if (doubleQuotedMatch) {
+        // Unescape quotes in the value
+        let value = doubleQuotedMatch[2].replace(/\\"/g, '"').replace(/\\\\/g, '\\')
+        metadata[doubleQuotedMatch[1]] = value
+        return
+      }
+      
+      // Handle single-quoted values
+      const singleQuotedMatch = line.match(/^(\w+):\s*'([^']*)'$/)
+      if (singleQuotedMatch) {
+        metadata[singleQuotedMatch[1]] = singleQuotedMatch[2]
+        return
+      }
+      
+      // Handle unquoted values
+      const match = line.match(/^(\w+):\s*(.+)$/)
       if (match) {
-        metadata[match[1]] = match[2]
+        metadata[match[1]] = match[2].trim()
       }
     })
     
@@ -285,7 +302,15 @@ markdownFiles.forEach(file => {
     
     // Helper function to generate unique meta description
     const generateUniqueMetaDescription = (title, excerpt, content, category, maxLength = 160, minLength = 50) => {
+      // Use conservative limit (150 chars) to leave room for HTML entity encoding (quotes become &quot;)
+      const safeMaxLength = 150
+      
       let description = excerpt || ''
+      
+      // Clean up excerpt - remove any escaped quotes and extra characters
+      if (description) {
+        description = description.replace(/\\"/g, '"').replace(/\\\\"/g, '"').trim()
+      }
       
       // If no excerpt or excerpt is too short, generate from content
       if (!description || description.length < minLength) {
@@ -295,48 +320,136 @@ markdownFiles.forEach(file => {
             .replace(/\n+/g, ' ')
             .trim()
           
+          // Take first sentence or first 200 chars, then find sentence boundary
           let text = cleanContent.substring(0, 200)
-          const lastPeriod = text.lastIndexOf('.')
-          if (lastPeriod > 100) {
-            text = text.substring(0, lastPeriod + 1)
+          const firstSentenceMatch = text.match(/^[^.!?]+[.!?]/)
+          if (firstSentenceMatch && firstSentenceMatch[0].length >= minLength && firstSentenceMatch[0].length <= safeMaxLength) {
+            description = firstSentenceMatch[0].trim()
+          } else {
+            // Try to find a sentence boundary within safeMaxLength
+            const lastPeriod = text.lastIndexOf('.')
+            const lastExclamation = text.lastIndexOf('!')
+            const lastQuestion = text.lastIndexOf('?')
+            const lastSentence = Math.max(lastPeriod, lastExclamation, lastQuestion)
+            
+            if (lastSentence >= minLength && lastSentence <= safeMaxLength) {
+              description = text.substring(0, lastSentence + 1).trim()
+            } else {
+              // Just take safeMaxLength chars at word boundary
+              text = cleanContent.substring(0, safeMaxLength)
+              const lastSpace = text.lastIndexOf(' ')
+              if (lastSpace >= minLength) {
+                description = text.substring(0, lastSpace).trim() + '...'
+              } else {
+                // If word boundary is too short, take more text to ensure minLength
+                text = cleanContent.substring(0, Math.min(safeMaxLength, minLength + 50))
+                const lastSpace2 = text.lastIndexOf(' ')
+                if (lastSpace2 >= minLength) {
+                  description = text.substring(0, lastSpace2).trim() + '...'
+                } else {
+                  // Take at least minLength chars
+                  description = cleanContent.substring(0, Math.min(safeMaxLength, minLength + 20)).trim() + '...'
+                }
+              }
+            }
           }
-          description = text.trim()
         }
       }
       
       // If still no description, create one from title and category
       if (!description || description.length < minLength) {
+        const cleanTitle = title.replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
         const categoryText = category ? ` on ${category}` : ''
-        description = `Learn how to ${title.toLowerCase()}${categoryText}. Expert tips and best practices from AlertMend AI.`
+        description = `Learn how to ${cleanTitle.toLowerCase()}${categoryText}. Expert tips and best practices.`
+        // Ensure it fits
+        if (description.length > maxLength) {
+          description = description.substring(0, maxLength - 3).trim() + '...'
+        }
       }
       
-      // Ensure uniqueness by including key terms from title
-      const titleWords = title.toLowerCase().split(/\s+/).filter(word => word.length > 4)
+      // Ensure uniqueness by including key terms from title (but only if there's room)
+      const cleanTitle = title.replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+      const titleWords = cleanTitle.toLowerCase().split(/\s+/).filter(word => word.length > 4)
       const descriptionLower = description.toLowerCase()
       const missingKeywords = titleWords.filter(word => !descriptionLower.includes(word))
       
-      if (missingKeywords.length > 0 && description.length < maxLength - 30) {
+      if (missingKeywords.length > 0 && description.length < maxLength - 40) {
         const keywordsToAdd = missingKeywords.slice(0, 2).join(', ')
-        description = `${description} Discover solutions for ${keywordsToAdd}.`
+        const newDescription = `${description} Discover solutions for ${keywordsToAdd}.`
+        // Only add if it fits
+        if (newDescription.length <= maxLength) {
+          description = newDescription
+        }
       }
       
-      // Truncate to max length at word boundary
-      if (description.length > maxLength) {
-        let truncated = description.substring(0, maxLength - 3)
+      // STRICT truncation to max length (safeMaxLength already defined above)
+      if (description.length > safeMaxLength) {
+        let truncated = description.substring(0, safeMaxLength - 3)
         const lastSpace = truncated.lastIndexOf(' ')
-        if (lastSpace > maxLength * 0.7) {
+        const lastPeriod = truncated.lastIndexOf('.')
+        const lastExclamation = truncated.lastIndexOf('!')
+        const lastQuestion = truncated.lastIndexOf('?')
+        const lastSentenceEnd = Math.max(lastPeriod, lastExclamation, lastQuestion)
+        
+        // Prefer sentence boundary
+        if (lastSentenceEnd >= safeMaxLength * 0.6) {
+          truncated = truncated.substring(0, lastSentenceEnd + 1)
+        } else if (lastSpace >= safeMaxLength * 0.7) {
           truncated = truncated.substring(0, lastSpace)
         }
         truncated = truncated.replace(/[.,;:!?\-—–\s]+$/, '').trim()
-        description = truncated + '...'
+        description = truncated + (truncated.endsWith('.') || truncated.endsWith('!') || truncated.endsWith('?') ? '' : '...')
       }
       
       // Ensure minimum length
       if (description.length < minLength) {
+        const padding = `Expert guide on ${category || 'Kubernetes'}.`
+        const newDescription = description + ' ' + padding
+        if (newDescription.length <= safeMaxLength) {
+          description = newDescription
+        } else {
+          description = padding
+        }
+      }
+      
+      // Final safety: if HTML-encoded would exceed maxLength, truncate more
+      // Each quote " becomes &quot; (adds 5 chars)
+      const quoteCount = (description.match(/"/g) || []).length
+      const htmlEncodedLength = description.length + (quoteCount * 5)
+      if (htmlEncodedLength > maxLength && description.length > minLength) {
+        const excess = htmlEncodedLength - maxLength
+        const charsToRemove = Math.ceil(excess / 6) + 3 // Each quote in worst case adds 5, plus safety margin
+        let targetLength = Math.max(minLength, description.length - charsToRemove - 3)
+        let truncated = description.substring(0, targetLength)
+        const lastSpace = truncated.lastIndexOf(' ')
+        if (lastSpace >= minLength) {
+          truncated = truncated.substring(0, lastSpace)
+        } else {
+          // If we can't truncate at word boundary without going below minLength, use minLength
+          truncated = description.substring(0, minLength)
+        }
+        description = truncated.trim() + (truncated.endsWith('.') ? '' : '...')
+      }
+      
+      // Final check: ensure minimum length (but don't exceed max)
+      if (description.length < minLength) {
         const padding = `Expert guide on ${category || 'Kubernetes'} troubleshooting.`
-        description = description + ' ' + padding
+        const newDescription = description + ' ' + padding
+        if (newDescription.length <= safeMaxLength) {
+          description = newDescription
+        } else {
+          description = padding
+        }
+      }
+      
+      // Final validation - must be within limits
+      if (description.length > maxLength) {
+        description = description.substring(0, maxLength - 3).trim() + '...'
+      }
+      if (description.length < minLength && description.length < maxLength - 20) {
+        description = description + ' Learn more with AlertMend AI.'
         if (description.length > maxLength) {
-          description = description.substring(0, maxLength - 3) + '...'
+          description = description.substring(0, maxLength - 3).trim() + '...'
         }
       }
       
