@@ -1,11 +1,12 @@
 ---
 title: "code exited status 1/failure解决"
-excerpt: "Encountering the \"code exited status 1/failure\" error can be a challenging hurdle in system monitoring and management"
+excerpt: "Encountering the code exited status 1/failure error can be challenging in system monitoring."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "code, exited, status, failure, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
+
 
 # code exited status 1/failure解决
 

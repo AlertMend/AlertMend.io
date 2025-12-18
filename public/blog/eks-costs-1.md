@@ -1,11 +1,12 @@
 ---
-title: "eks costs"
+title: "eks costs Guide"
 excerpt: "In today's dynamic cloud ecosystem, managing EKS costs is crucial for organizations utilizing Amazon's Kubernetes services"
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "costs, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
+
 
 # eks costs
 

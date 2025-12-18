@@ -1,11 +1,12 @@
 ---
-title: "aks vs eks"
+title: "aks vs eks Guide"
 excerpt: "In the evolving world of cloud computing, Kubernetes has become an essential tool for managing containerized applications"
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
+
 
 # aks vs eks
 

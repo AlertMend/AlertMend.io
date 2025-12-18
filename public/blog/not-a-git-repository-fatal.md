@@ -1,11 +1,12 @@
 ---
 title: "not a git repository fatal"
-excerpt: "When working with Git, encountering the dreaded \"not a git repository fatal\" error can be both confusing and frustrating"
+excerpt: "When working with Git, encountering the dreaded \"not a git repository fatal\" error can be both confusing and frustrating."
 date: "2025-12-18"
 category: "Troubleshooting"
 author: "AlertMend Team"
 keywords: "repository, fatal, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"
 ---
+
 
 # not a git repository fatal
 

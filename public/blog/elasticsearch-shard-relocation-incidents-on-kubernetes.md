@@ -1,10 +1,12 @@
 ---
-title: "Troubleshooting Elasticsearch Shard Relocation Incidents on Kubernetes: Causes and Solutions"
-excerpt: "When nodes in an Elasticsearch cluster run different versions, it can lead to data inconsistency, reduced performance, and even potential downtime. Elasticsearch relies on synchronized versioning across nodes to perform efficient data indexing, querying, and retrieval. This blog discusses the causes of version mismatches, essential troubleshooting steps, and how to ensure all nodes run a consistent version for optimal cluster performance."
+title: "Troubleshooting Elasticsearch Shard"
+excerpt: "When nodes in an Elasticsearch cluster run different versions, it can lead to data inconsistency, reduced performance, and even potential downtime."
 date: "2025-04-24"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
+
 ---
+
 
 # 🚨 **Troubleshooting Elasticsearch Shard Relocation Incidents on Kubernetes: Causes and Solutions**
 ---

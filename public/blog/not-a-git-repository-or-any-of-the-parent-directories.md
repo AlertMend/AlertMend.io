@@ -1,11 +1,13 @@
 ---
-title: "not a git repository or any of the parent directories"
-excerpt: "The dreaded \"not a git repository or any of the parent directories\" message can be a stumbling block for developers and system administrators alike"
+title: "not a git repository or any of the parent"
+excerpt: "The dreaded \"not a git repository or any of the parent directories\" message can be a stumbling block for developers and system administrators alike."
 date: "2025-12-18"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "repository, parent, directories, DevOps, AlertMend AI, AIOps"
 ---
+
+
 
 # not a git repository or any of the parent directories
 

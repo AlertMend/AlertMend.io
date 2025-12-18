@@ -1,10 +1,12 @@
 ---
-title: "Mastering Kubernetes StatefulSets: Basics, Use Cases, and Debugging Tips"
+title: "Mastering Kubernetes StatefulSets: Basics"
 excerpt: "StatefulSets are designed for stateful applications that require stable network identities and persistent storage."
 date: "2025-05-30"
 category: "Kubernetes"
 author: "Himanshu Bansal"
+
 ---
+
 
 StatefulSets are designed for stateful applications that require stable network identities and persistent storage.
 

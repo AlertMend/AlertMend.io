@@ -1,11 +1,12 @@
 ---
-title: "how to get status of kubernates node using golang"
+title: "how to get status of kubernates node using"
 excerpt: "In the dynamic world of cloud-native technologies, Kubernetes stands out as a crucial tool for orchestrating application deployment and management"
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "status, kubernates, node, using, golang, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
+
 
 # how to get status of kubernates node using golang
 

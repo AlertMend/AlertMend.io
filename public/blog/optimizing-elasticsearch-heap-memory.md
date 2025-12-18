@@ -1,10 +1,12 @@
 ---
-title: "Optimizing Elasticsearch Heap Memory: Solving High Heap Usage Issues"
-excerpt: "A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers. This error usually indicates that the service acting as a gateway or proxy is receiving an invalid response from the upstream server. In Kubernetes, this often points to a misconfiguration or issue in routing traffic between services or containers, and understanding the root cause is essential for quick resolution.In this blog post, we’ll explore the reasons behind the 502 Bad Gateway error in Kubernetes and guide you through some detailed troubleshooting steps to resolve it."
+title: "Optimizing Elasticsearch Heap Memory"
+excerpt: "A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers."
 date: "2025-02-1"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"
+
 ---
+
 
 # 🚨 **Optimizing Elasticsearch Heap Memory: Solving High Heap Usage Issues**
 ---

@@ -1,10 +1,12 @@
 ---
-title: "Elasticsearch Cluster Yellow Incident on Kubernetes: Troubleshooting and Solutions"
-excerpt: "Elasticsearch requires adequate virtual memory to run smoothly. If the system’s virtual memory limit falls below the recommended level, Elasticsearch may encounter errors, impacting performance or causing downtime. A common error message, such as “max virtual memory areas vm.max_map_count [65530] is too low - This value is crucial as it determines the maximum number of memory-mapped areas that can be used. If set too low, users may experience issues like Elasticsearch failing to allocate enough memory for indexing operations,” signals that the system’s virtual memory needs adjustment. In this blog, we’ll explore the causes, troubleshooting steps, and solutions for resolving Elasticsearch virtual memory limit issues."
+title: "Elasticsearch Cluster Yellow Incident on"
+excerpt: "Elasticsearch requires adequate virtual memory to run smoothly. If the system’s virtual memory limit falls below the recommended level, Elasticsearch may..."
 date: "2025-06-8"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
+
 ---
+
 
 # 🚨 **Elasticsearch Cluster Yellow Incident on Kubernetes: Troubleshooting and Solutions**
 ---

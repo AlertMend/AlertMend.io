@@ -1,10 +1,12 @@
 ---
-title: "Elasticsearch Disk Out of Space Incident: Troubleshooting and Solutions"
+title: "Elasticsearch Disk Out of Space Incident"
 excerpt: "Learn how to troubleshoot and optimize high JVM heap usage in Elasticsearch with practical steps and commands."
 date: "2025-03-28"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
+
 ---
+
 
 # 🚨 **Elasticsearch Disk Out of Space Incident: Troubleshooting and Solutions**
 ---

@@ -1,11 +1,12 @@
 ---
 title: "refusing to merge unrelated histories git"
-excerpt: "Encountering the \"refusing to merge unrelated histories\" Git error can be a stumbling block in your development workflow"
+excerpt: "Encountering the \"refusing to merge unrelated histories\" Git error can be a stumbling block in your development workflow."
 date: "2025-12-18"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "refusing, merge, unrelated, histories, DevOps, AlertMend AI, AIOps"
 ---
+
 
 # refusing to merge unrelated histories git
 

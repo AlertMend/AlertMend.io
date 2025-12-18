@@ -1,10 +1,12 @@
 ---
-title: "Troubleshooting Elasticsearch Version Mismatch in Cluster Nodes: A Comprehensive Guide"
-excerpt: "When nodes in an Elasticsearch cluster run different versions, it can lead to data inconsistency, reduced performance, and even potential downtime. Elasticsearch relies on synchronized versioning across nodes to perform efficient data indexing, querying, and retrieval. This blog discusses the causes of version mismatches, essential troubleshooting steps, and how to ensure all nodes run a consistent version for optimal cluster performance."
+title: "Troubleshooting Elasticsearch Version"
+excerpt: "When nodes in an Elasticsearch cluster run different versions, it can lead to data inconsistency, reduced performance, and even potential downtime."
 date: "2025-04-27"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
+
 ---
+
 
 When nodes in an **Elasticsearch cluster** run different versions, it can lead to data inconsistency, reduced performance, and even potential downtime. Elasticsearch relies on synchronized versioning across nodes to perform efficient data indexing, querying, and retrieval. This blog discusses the causes of version mismatches, essential troubleshooting steps, and how to ensure all nodes run a consistent version for optimal cluster performance.
 

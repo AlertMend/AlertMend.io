@@ -1,11 +1,12 @@
 ---
-title: "Exit Code 5: Complete Guide to Access Denied Errors and Solutions"
+title: "Exit Code 5: Complete Guide to Access"
 excerpt: "Complete guide to exit code 5 (access denied) errors in Windows, Linux, and Kubernetes. Learn diagnostic techniques and proven solutions for permission issues."
 date: "2025-12-18"
 category: "Troubleshooting"
 author: "AlertMend Team"
 keywords: "exit code 5, access denied error, permission denied, Windows exit codes, Linux exit codes, Kubernetes troubleshooting, system errors, DevOps, error resolution, AlertMend AI, AIOps"
 ---
+
 
 # Exit Code 5: Complete Guide to Access Denied Errors and Solutions
 

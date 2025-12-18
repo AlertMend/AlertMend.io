@@ -1,10 +1,12 @@
 ---
-title: "Microsoft Teams Integration Guide for Alertmend"
-excerpt: "Enhance your incident response workflow by integrating Microsoft Teams with Alertmend. This guide walks you through the step by step process of setting up an incoming webhook in Microsoft Teams and connecting it to Alertmend. Once configured, you"
+title: "Microsoft Teams Integration Guide for"
+excerpt: "Enhance your incident response workflow by integrating Microsoft Teams with Alertmend. This guide walks you through the step by step process of setting up..."
 date: "2024-07-24"
 category: "Blog"
 author: "Arvind Rajpurohit"
+
 ---
+
 
 Enhance your incident response workflow by integrating Microsoft Teams with Alertmend. This guide walks you through the step by step process of setting up an incoming webhook in Microsoft Teams and connecting it to Alertmend. Once configured, you'll receive real time alerts and notifications directly within your chosen Teams channel ensuring your team stays informed and can take immediate action. Whether you're monitoring Kubernetes pods, system resources, or cloud infrastructure, this integration ensures timely and collaborative incident resolution.
 

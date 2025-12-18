@@ -1,11 +1,13 @@
 ---
-title: "not a git repo"
-excerpt: "Encountering the \"not a git repo\" error can be frustrating, particularly for developers who rely on Git for version control in their daily workflow"
+title: "not a git repo Guide"
+excerpt: "Encountering the \"not a git repo\" error can be frustrating, particularly for developers who rely on Git for version control in their daily workflow."
 date: "2025-12-18"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "repo, DevOps, AlertMend AI, AIOps"
 ---
+
+
 
 # not a git repo
 

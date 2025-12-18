@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>how to restart a pod | AlertMend AI</title>
+  <meta name="description" content="REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS This content is gathered from the top-ranking pages for comprehensive reference">
+  <meta name="keywords" content="restart, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps">
+  <meta name="author" content="AlertMend Team">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://www.alertmend.io/blog/how-to-restart-a-pod">
+  <!-- Favicon - uses SVG logo -->
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/logos/alertmend-logo.svg" />
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.alertmend.io/blog/how-to-restart-a-pod">
+  <meta property="og:title" content="how to restart a pod | AlertMend AI">
+  <meta property="og:description" content="REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS This content is gathered from the top-ranking pages for comprehensive reference">
+  <meta property="og:image" content="https://alertmend.io/og-image.jpg">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.alertmend.io/blog/how-to-restart-a-pod">
+  <meta name="twitter:title" content="how to restart a pod | AlertMend AI">
+  <meta name="twitter:description" content="REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS This content is gathered from the top-ranking pages for comprehensive reference">
+  <meta name="twitter:image" content="https://alertmend.io/og-image.jpg">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "how to restart a pod | AlertMend AI",
+    "description": "REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS This content is gathered from the top-ranking pages for comprehensive reference",
+    "image": "https://alertmend.io/og-image.jpg",
+    "datePublished": "2025-12-18",
+    "dateModified": "2025-12-18",
+    "author": {
+      "@type": "Person",
+      "name": "AlertMend Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "AlertMend AI",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://alertmend.io/logos/alertmend-logo.svg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.alertmend.io/blog/how-to-restart-a-pod"
+    },
+    "articleSection": "Kubernetes"
+  }
+  </script>
+  
+  <!-- SearchAtlas Dynamic Optimization -->
+  <script nowprocket nitro-exclude type="text/javascript" id="sa-dynamic-optimization" data-uuid="457086dd-8bfb-46dd-a38d-2f4a6efd0e7e" src="data:text/javascript;base64,dmFyIHNjcmlwdCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoInNjcmlwdCIpO3NjcmlwdC5zZXRBdHRyaWJ1dGUoIm5vd3Byb2NrZXQiLCAiIik7c2NyaXB0LnNldEF0dHJpYnV0ZSgibml0cm8tZXhjbHVkZSIsICIiKTtzY3JpcHQuc3JjID0gImh0dHBzOi8vZGFzaGJvYXJkLnNlYXJjaGF0bGFzLmNvbS9zY3JpcHRzL2R5bmFtaWNfb3B0aW1pemF0aW9uLmpzIjtzY3JpcHQuZGF0YXNldC51dWlkID0gIjQ1NzA4NmRkLThiZmItNDZkZC1hMzhkLTJmNGE2ZWZkMGU3ZSI7c2NyaXB0LmlkID0gInNhLWR5bmFtaWMtb3B0aW1pemF0aW9uLWxvYWRlciI7ZG9jdW1lbnQuaGVhZC5hcHBlbmRDaGlsZChzY3JpcHQpOw=="></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.7;
+      color: #1f2937;
+      background: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .main-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 96px 16px 32px;
+      margin-top: 64px;
+    }
+    @media (min-width: 640px) {
+      .main-container {
+        padding: 96px 24px 32px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .main-container {
+        padding: 96px 32px 48px;
+      }
+    }
+    .content-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-top: 32px;
+    }
+    @media (min-width: 1024px) {
+      .content-wrapper {
+        grid-template-columns: 8fr 4fr;
+        gap: 32px;
+      }
+    }
+    .main-content {
+      display: flex;
+      gap: 24px;
+    }
+    .social-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 8px;
+    }
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .social-icon:hover {
+      background: #f3e8ff;
+    }
+    .article-content {
+      flex: 1;
+    }
+    article {
+      background: #ffffff;
+    }
+    header {
+      margin-bottom: 32px;
+    }
+    h1 {
+      color: #581c87;
+      font-size: 2.25rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 3rem;
+      }
+    }
+    @media (min-width: 1024px) {
+      h1 {
+        font-size: 3.75rem;
+      }
+    }
+    h2 {
+      color: #581c87;
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    @media (min-width: 768px) {
+      h2 {
+        font-size: 2.25rem;
+      }
+    }
+    h3 {
+      color: #581c87;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    @media (min-width: 768px) {
+      h3 {
+        font-size: 1.875rem;
+      }
+    }
+    h4, h5, h6 {
+      color: #581c87;
+      font-weight: 600;
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+    p {
+      margin-bottom: 24px;
+      font-size: 1.125rem;
+      line-height: 1.75;
+      color: #1f2937;
+    }
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e9d5ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9333ea;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .author-details {
+      display: flex;
+      flex-direction: column;
+    }
+    .author-name {
+      font-weight: 600;
+      color: #111827;
+      font-size: 1rem;
+    }
+    .author-meta {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+    .category-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #dbeafe;
+      color: #1e40af;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-top: 16px;
+    }
+    code {
+      background: #f3f4f6;
+      color: #9333ea;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+      font-size: 0.9em;
+      border: 1px solid #e5e7eb;
+    }
+    pre {
+      background: #1f2937;
+      color: #f9fafb;
+      padding: 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border: 1px solid #374151;
+    }
+    pre code {
+      background: none;
+      color: #f9fafb;
+      padding: 0;
+      border: none;
+      font-size: 0.875rem;
+    }
+    a {
+      color: #9333ea;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #7c3aed;
+      text-decoration: underline;
+    }
+    ul, ol {
+      margin-bottom: 24px;
+      padding-left: 24px;
+      font-size: 1.125rem;
+      line-height: 1.75;
+    }
+    li {
+      margin-bottom: 12px;
+      color: #1f2937;
+    }
+    blockquote {
+      border-left: 4px solid #a855f7;
+      padding-left: 24px;
+      margin: 32px 0;
+      color: #374151;
+      font-style: italic;
+      font-size: 1.125rem;
+      line-height: 1.75;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin: 2rem 0;
+      -webkit-overflow-scrolling: touch;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0;
+      font-size: 1rem;
+      background: #ffffff;
+      border: 2px solid #d1d5db;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    }
+    thead {
+      background: #faf5ff;
+    }
+    th {
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      color: #581c87;
+      border-right: 1px solid #e9d5ff;
+      border-bottom: 2px solid #c084fc;
+      background: #faf5ff;
+      font-size: 0.9375rem;
+    }
+    th:first-child {
+      border-left: none;
+    }
+    th:last-child {
+      border-right: none;
+    }
+    td {
+      padding: 1rem;
+      text-align: left;
+      border-right: 1px solid #e5e7eb;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+    td:first-child {
+      border-left: none;
+    }
+    td:last-child {
+      border-right: none;
+    }
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+    tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+    tbody tr:hover {
+      background: #f3e8ff;
+    }
+    @media (max-width: 768px) {
+      .table-wrapper {
+        margin: 1.5rem 0;
+      }
+      table {
+        font-size: 0.875rem;
+      }
+      th, td {
+        padding: 0.75rem;
+      }
+    }
+    hr {
+      border: none;
+      border-top: 2px solid #e5e7eb;
+      margin: 3rem 0;
+    }
+    .content {
+      font-size: 1.125rem;
+      line-height: 1.75;
+      color: #1f2937;
+    }
+    .promotional-section {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid #e5e7eb;
+    }
+    .promotional-section p {
+      color: #1f2937;
+      font-size: 1.125rem;
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+    .profile-section {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #e5e7eb;
+      margin-top: 32px;
+    }
+    @media (min-width: 640px) {
+      .profile-section {
+        flex-direction: row;
+      }
+    }
+    .profile-image {
+      flex-shrink: 0;
+      width: 128px;
+      height: 128px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid #e5e7eb;
+    }
+    .profile-content {
+      flex: 1;
+    }
+    .profile-placeholder-arvind {
+      display: none;
+      width: 128px;
+      height: 128px;
+      border-radius: 8px;
+      background: #f3e8ff;
+      border: 1px solid #e5e7eb;
+      align-items: center;
+      justify-content: center;
+      color: #9333ea;
+      font-weight: 700;
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    .profile-placeholder-arvind.show {
+      display: flex;
+    }
+    .profile-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #581c87;
+      margin-bottom: 8px;
+    }
+    .profile-bio {
+      color: #1f2937;
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .profile-bio p {
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+    .linkedin-link {
+      display: inline-flex;
+      align-items: center;
+      color: #9333ea;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .linkedin-link:hover {
+      color: #7c3aed;
+    }
+    footer {
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px solid #e5e7eb;
+      color: #6b7280;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+    footer a {
+      color: #9333ea;
+      font-weight: 600;
+    }
+    .sidebar {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .sidebar {
+        display: block;
+      }
+    }
+    .sidebar-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: sticky;
+      top: 96px;
+    }
+    .sidebar-card {
+      background: #faf5ff;
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid #e9d5ff;
+    }
+    .sidebar-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #581c87;
+      margin-bottom: 16px;
+      margin-top: 0;
+    }
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .signup-form input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 1rem;
+    }
+    .signup-form input:focus {
+      outline: none;
+      border-color: #9333ea;
+      box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+    }
+    .signup-form button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(to right, #6b21a8, #581c87);
+      color: white;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .signup-form button:hover {
+      background: linear-gradient(to right, #581c87, #4c1d95);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .related-content-title {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #111827;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      margin-top: 0;
+    }
+    .related-posts-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .related-posts-list li {
+      margin: 0;
+    }
+    .related-post-link {
+      color: #2563eb;
+      text-decoration: underline;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      display: block;
+      transition: color 0.2s;
+    }
+    .related-post-link:hover {
+      color: #1e40af;
+    }
+    .view-more-link {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 16px;
+      color: #9333ea;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .view-more-link:hover {
+      color: #7c3aed;
+    }
+    @media (max-width: 768px) {
+      .main-container {
+        padding: 80px 16px 32px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.75rem;
+      }
+      h3 {
+        font-size: 1.25rem;
+      }
+      p, ul, ol {
+        font-size: 1rem;
+      }
+      .social-sidebar {
+        display: none;
+      }
+      .main-content {
+        flex-direction: column;
+      }
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      z-index: 50;
+    }
+    .navbar-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    @media (min-width: 640px) {
+      .navbar-container {
+        padding: 0 24px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .navbar-container {
+        padding: 0 32px;
+      }
+    }
+    .navbar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: inherit;
+      padding: 6px 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .navbar-logo:hover {
+      background: #f9fafb;
+    }
+    .navbar-logo-icon {
+      width: auto;
+      height: 32px;
+      max-height: 32px;
+      object-fit: contain;
+    }
+    .navbar-logo-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #6b21a8, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .navbar-links {
+      display: none;
+      align-items: center;
+      gap: 4px;
+    }
+    @media (min-width: 1024px) {
+      .navbar-links {
+        display: flex;
+      }
+    }
+    .navbar-link {
+      padding: 8px 16px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #7c3aed;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .navbar-link:hover {
+      color: #581c87;
+      background: #f9fafb;
+    }
+    .navbar-link.active {
+      color: #7c3aed;
+      background: #faf5ff;
+    }
+    .navbar-actions {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      margin-left: 16px;
+      padding-left: 16px;
+      border-left: 1px solid #e5e7eb;
+    }
+    @media (min-width: 1024px) {
+      .navbar-actions {
+        display: flex;
+      }
+    }
+    .navbar-button {
+      padding: 8px 16px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .navbar-button-primary {
+      background: linear-gradient(to right, #6b21a8, #581c87);
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+    .navbar-button-primary:hover {
+      background: linear-gradient(to right, #581c87, #4c1d95);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .navbar-button-secondary {
+      color: #7c3aed;
+      background: transparent;
+    }
+    .navbar-button-secondary:hover {
+      color: #581c87;
+      background: #f9fafb;
+    }
+    .navbar-button-playground {
+      background: #7c3aed;
+      color: white;
+      font-weight: 600;
+    }
+    .navbar-button-playground:hover {
+      background: #6b21a8;
+    }
+    .mobile-menu-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: #374151;
+    }
+    @media (min-width: 1024px) {
+      .mobile-menu-button {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-content">
+        <!-- Logo -->
+        <a href="/" class="navbar-logo">
+          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'; this.parentElement.querySelector('.navbar-logo-text').style.display='inline';" />
+          <svg class="navbar-logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <span class="navbar-logo-text" style="display: none;">AlertMend AI</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="navbar-links">
+          <a href="/#how-it-works" class="navbar-link">How It Works</a>
+          <a href="/#solutions" class="navbar-link">Solutions</a>
+          <a href="/#benefits" class="navbar-link">Benefits</a>
+          <a href="/case-studies" class="navbar-link">Case Studies</a>
+          <a href="/blog" class="navbar-link active">Blog</a>
+          <a href="/pricing" class="navbar-link">Pricing</a>
+        </div>
+
+        <!-- Desktop Actions -->
+        <div class="navbar-actions">
+          <a href="https://demo.alertmend.io/playground" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-playground">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Playground
+          </a>
+          <a href="https://demo.alertmend.io/signup" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-secondary">Register</a>
+          <a href="https://calendly.com/hello-alertmend/30min" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-primary">Book a Demo</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-button" aria-label="Toggle menu">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <div class="content-wrapper">
+      <!-- Main Content Area (70%) -->
+      <div class="main-content">
+        <!-- Social Share Icons (Left Sidebar) -->
+        <div class="social-sidebar">
+          <a href="#" class="social-icon" aria-label="Share on Facebook">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Share on Twitter">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Share on LinkedIn">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Copy link">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8.465 11.293c1.133-1.133 3.109-1.133 4.242 0l.707.707 1.414-1.414-.707-.707c-1.498-1.498-3.94-1.498-5.439 0l-.707.707 1.414 1.414.707-.707zm-2.829 2.829l.707.707c1.498 1.498 3.94 1.498 5.439 0l.707-.707-1.414-1.414-.707.707c-1.133 1.133-3.109 1.133-4.242 0l-.707-.707-1.414 1.414zm11.314-8.485l-6.364 6.364c-.39.39-1.023.39-1.414 0s-.39-1.023 0-1.414l6.364-6.364c.39-.39 1.023-.39 1.414 0s.39 1.023 0 1.414z"/></svg>
+          </a>
+        </div>
+
+        <!-- Article Content -->
+        <div class="article-content">
+          <article>
+            <header>
+              <h1>how to restart a pod</h1>
+              
+              <!-- Author Info -->
+              <div class="author-info">
+                <div class="author-avatar">
+                  A
+                </div>
+                <div class="author-details">
+                  <div class="author-name">AlertMend Team</div>
+                  <div class="author-meta">73 min read • December 18, 2025</div>
+                </div>
+              </div>
+
+              <!-- Category Tag -->
+              <div class="category-tag">Kubernetes</div>
+            </header>
+
+            <!-- Content -->
+            <div class="content">
+              <h2>how to restart a pod</h2>
+<p>REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS</p>
+<p>This content is gathered from the top-ranking pages for comprehensive reference.
+Sources:</p>
+<ol>
+<li><a href="https://spacelift.io/blog/restart-kubernetes-pods-with-kubectl">https://spacelift.io/blog/restart-kubernetes-pods-with-kubectl</a></li>
+<li><a href="https://kodekloud.com/blog/kubernetes-pod-restart/">https://kodekloud.com/blog/kubernetes-pod-restart/</a></li>
+<li><a href="https://www.vcluster.com/blog/how-to-restart-pods-in-kubectl-a-tutorial-with-examples">https://www.vcluster.com/blog/how-to-restart-pods-in-kubectl-a-tutorial-with-examples</a></li>
+<li><a href="https://www.cherryservers.com/blog/kubernetes-restart-pod">https://www.cherryservers.com/blog/kubernetes-restart-pod</a></li>
+<li><a href="https://www.suse.com/c/observability-restarting-kubernetes-pods-a-detailed-guide/">https://www.suse.com/c/observability-restarting-kubernetes-pods-a-detailed-guide/</a></li>
+<li><a href="https://www.strongdm.com/blog/restart-kubernetes-pods-with-kubectl">https://www.strongdm.com/blog/restart-kubernetes-pods-with-kubectl</a></li>
+<li><a href="https://middleware.io/blog/kubectl-restart-pod/">https://middleware.io/blog/kubectl-restart-pod/</a></li>
+<li><a href="https://www.warp.dev/terminus/kubectl-restart-pod">https://www.warp.dev/terminus/kubectl-restart-pod</a></li>
+</ol>
+<p>The following sections contain content from each source, organized for reference.
+utilize this information to comprehend the topic comprehensively, identify key points,
+related keywords, and best practices. Then create original, SEO-optimized content
+that synthesizes insights from all sources while using completely original wording.</p>
+<p>Kubernetes How to Restart Kubernetes Pods With Kubectl Jack Roper Updated 05 Dec 2025 · 12 min read A pod is the smallest unit in Kubernetes (K8S). It should run until it is replaced by a new deployment. This means there is no way to restart a pod; it should be replaced instead. There is no kubectl restart [podname] command for utilize with K8S (with Docker you can utilize docker restart [container_id] ), but there are several ways to achieve a pod ‘restart’ with kubectl. What we will cover in this article: Why might you desire to restart a Kubernetes pod? Available pod statuses How to restart a Kubernetes pod Why might you desire to restart a Kubernetes pod? Here are some situations in which you may require to restart a pod: Applying configuration changes → Updates to the pod’s configuration (configmaps, secrets, environment variables) may require the pod to be restarted for the changes to take effect manually. Debugging applications → Sometimes, if your application is not running correctly or you are experiencing issues with it, restarting the underlying pods to reset their state and create troubleshooting easier represents good practice. Pod stuck in a terminating state → In this case, a delete and a recreation would usually do the trick. However, there are some cases where a node is taken out of service, and the pods cannot be evicted from it, so a restart will assist address the issue. Addressing Out Of Memory (OOM) errors → If a pod is terminated with an Out Of Memory Error (OOM), you will require to restart the pod after making changes to the resource specifications. This may be solved automatically if the pod’s restart policy allows it. Forcing a new image pull → If you are using the latest tag (which is not a best practice), you require to manually restart the pod to force a new image pull to ensure a pod is using the latest version of an image. Of course, if you are making changes to the image parameter in the configuration because you’ve released a new image and desire to take advantage of that, a restart will still be required. Resource contention → If a pod is consuming excessive resources, causing performance issues, or affecting other workflows, restarting the pod may release those resources and mitigate the problem. This usually occurs when you are not using memory and CPU restrictions. Note: Manually deleting and restarting pods in Kubernetes can introduce risks. If not managed carefully, this action may disrupt running applications, especially if the pod is handling live traffic or has not been configured with appropriate replication or readiness probes. Without proper checks, manual restarts can lead to temporary downtime, data loss, or state inconsistencies. It may also bypass automated orchestration logic, preventing Kubernetes from managing the pod lifecycle as intended. For safer operations, it’s recommended to utilize rolling updates or Kubernetes-native tools that respect deployment strategies and maintain service availability. Available pod statuses A Kubernetes pod has five possible statuses: pending, running, succeeded, failed, and unknown. Pending : This state shows that at least one container within the pod has not yet been created. Running : All containers were created, and the pod was bound to a Node. At this point, the containers are running or are being started or restarted. Succeeded : All containers in the pod were successfully terminated and will not be restarted. Failed: All containers were terminated, and at least one container has failed. The failed container exists in a non-zero state. Unknown: The status of the pod cannot be obtained. If you notice a pod in an undesirable state, with the status showing error , you might attempt a ‘restart’ as part of your troubleshooting to obtain things back to normal operations. You may also observe the status CrashLoopBackOff , which is the default when an error is encountered, and K8S tries to restart the pod automatically. How to restart a Kubernetes pod Kubernetes does not provide a direct kubectl restart pod command. However, you can achieve similar functionality using several methods with kubectl. Below are some common ways to restart a Kubernetes pod: Rolling restart the deployment ( kubectl rollout restart ) Scale deployment replicas ( kubectl scale ) Delete an individual pod ( kubectl delete ) Force replace a pod ( kubectl replace ) Update environment variables ( kubectl set env ) Once new pods are re-created, they will have a different name from the old ones. utilize the kubectl obtain pods command to obtain a list of all your pods. Method 1: Rolling restart the deployment Quick command reference: kubectl rollout restart This method is recommended for triggering a restart when you haven’t made changes to the deployment manifest but desire the pods to refresh (e. , to pick up new secrets, reinitialize a process, etc. A rollout restart will kill one pod at a time, and then new pods shall be scaled up. This method works on Kubernetes and kubectl 1. 15 and newer , which includes all currently supported Kubernetes releases. kubectl rollout restart deployment &lt; deployment_name &gt; -n &lt; namespace &gt; This command tells Kubernetes to restart the Deployment, which causes all the associated pods to be replaced one by one. Troubleshooting: error: unknown command “restart” If you obtain this error when running kubectl rollout restart , your kubectl binary is too old – restart was added in 1. Upgrade kubectl (and ideally your cluster) to a supported version, then attempt again. To check versions: kubectl version # or: kubectl version --output=yaml What represents rolling restart in Kubernetes? A rolling restart in Kubernetes represents process where pods in a deployment are gradually terminated and replaced with new ones, ensuring that the application remains available throughout the update. This is done incrementally, typically one pod at a time, so that there is no downtime during the rollout. Rolling restarts are commonly used for applying configuration changes or updating container images without disrupting end users. Method 2: Scale deployment replicas Quick command reference: kubectl scale Scaling a Deployment down to 0 replicas and then back up forces Kubernetes to terminate all existing pods and create fresh ones. This is essentially a “restart” because the new pods are instantiated from the Deployment’s pod template. However, this method will introduce an outage and is not recommended. If downtime is not an issue, it may be used as a quicker alternative to the kubectl rollout restart method (your pod may have to run through a lengthy continuous integration/deployment process before it is redeployed). If there is no YAML file associated with the deployment, you can set the number of replicas to 0. kubectl scale deployment &lt; deployment name &gt; -n &lt; namespace &gt; --replicas = 0 This terminates the pods. Once scaling is complete, the replicas may be scaled back up as needed (to at least 1): kubectl scale deployment &lt; deployment name &gt; -n &lt; namespace &gt; --replicas = 3 Pod status may be checked during the scaling using: kubectl obtain pods -n &lt; namespace &gt; 💡 You might also like: How to Maintain Operations Around Kubernetes Cluster 15 Kubernetes Best Practices to Follow The Role of Kubernetes in DevOps – utilize Cases &amp; Other Tools Method 3: Delete an individual pod Quick command reference: kubectl delete pod and kubectl delete replicaset If the pod is managed by a Deployment, ReplicaSet, or StatefulSet, you can safely delete the pod with kubectl delete pod since Kubernetes will automatically recreate it. Each pod may be deleted individually if required: kubectl delete pod &lt; pod_name &gt; -n &lt; namespace &gt; Doing this will cause the pod to be recreated because K8S is declarative; it will create a new pod based on the specified configuration. However, when many pods are running, this is not truly a practical approach. Where many pods have the same label, you could utilize that label to select multiple pods at once: kubectl delete pod -l “app:myapp” -n &lt; namespace &gt; ReplicaSet may be deleted instead if there are many pods: kubectl delete replicaset &lt; name &gt; -n &lt; namespace &gt; Method 4: Force replace a Pod Quick command reference: kubectl obtain pod | kubectl replace The pod you desire to replace may be retrieved using the kubectl obtain pod to obtain the YAML statement of the currently running pod and passed it to the kubectl replace command with the --force flag specified in order to achieve a restart. This is useful if no YAML file is available and the pod was started. kubectl obtain pod &lt; pod_name &gt; -n &lt; namespace &gt; -o yaml | kubectl replace --force -f - This method only works for manually created pods or those not controlled by higher-level objects like Deployments, StatefulSets, etc. If you attempt this on a pod that’s part of a Deployment, Kubernetes might immediately recreate a second pod (since the Deployment notices one went missing), leading to duplicates or conflicts. Method 5: Update environment variables Quick command reference: kubectl set env A simple and effective way to restart pods in Kubernetes is by using the kubectl set env command to update an environment variable in a Deployment. Kubernetes triggers a rolling restart whenever the pod template changes, and changing or adding an environment variable is enough to create that happen. The example below sets the environment variable DEPLOY_DATE to the date specified, causing the pod to restart. kubectl set env deployment &lt; deployment name &gt; -n &lt; namespace &gt; DEPLOY_DATE = &quot; $( date ) &quot; This method is safe, causes no downtime (thanks to the rolling update), and is perfect for triggering restarts after updating ConfigMaps and Secrets or refreshing the application state without changing the app code or deployment image. It’s also a popular approach in automation scripts and CI/CD pipelines. Best practices for restarting pods in Kubernetes Best practices for restarting pods in Kubernetes involve using declarative and automated approaches to ensure reliability and minimal disruption: utilize readiness and liveness probes : These health checks assist Kubernetes detect when a pod is unhealthy and should be restarted, ensuring that only healthy containers receive traffic. Avoid manual deletion : Instead of manually deleting pods, update deployments or utilize rolling restarts ( kubectl rollout restart deployment/<name> ) to let Kubernetes handle restarts gracefully. Implement rolling updates : utilize rolling updates for deployments to ensure zero downtime by gradually replacing old pods with new ones. Configure resource requests and limits : Proper resource allocation helps prevent pods from being killed unexpectedly by the scheduler or node-level OOM (Out Of Memory) conditions. utilize CrashLoopBackOff as a signal : If a pod enters this state, investigate logs and errors before forcing restarts. Configuration or code may be causing the issue. Avoid frequent or unnecessary restarts: Unplanned or frequent restarts can lead to performance issues, cascading failures, or configuration drift. Always aim to identify and fix root causes rather than relying on restarts as a workaround. Log and monitor restarts: Track pod restarts through logs and metrics to comprehend restart reasons (e. , crashes, probes failing, OOM errors). Restarting shouldn’t be the first solution to runtime problems; observability helps prevent recurring issues. Tune your rolling-update strategy: For Deployments, fields like maxUnavailable and maxSurge control how many pods may be down and how aggressively you roll out changes. utilize them to strike the right balance between safety and speed. Managing Kubernetes with Spacelift If you require assistance managing your Kubernetes projects, look at Spacelift. It brings a GitOps workflow, so your Kubernetes deployments stay in sync with your Kubernetes stacks, and pull requests demonstrate you a preview of the changes they’re going to apply. Spacelift has a native Kubernetes integration that applies changes via kubectl. For each Kubernetes stack, you can choose which kubectl version to utilize, so you can align with your cluster version and utilize features such as kubectl rollout restart , provided your cluster supports them. You can also utilize Spacelift to mix and match Terraform, OpenTofu, Pulumi, AWS CloudFormation, and Kubernetes stacks and have them talk to one another. To take this one step further, you could add custom policies to reinforce the security and reliability of your configurations and deployments. Spacelift provides different types of policies and workflows that are easily customizable to fit every utilize case. For instance, you could add plan policies to restrict or warn about security or compliance violations or approval policies to add an approval step during deployments. You can attempt Spacelift for free by creating a trial account or booking a demo with one of our engineers. Supply chain management platform Logixboard has found Spacelift easy to install, configure, and maintain. Some of Logixboard’s stacks manage Kubernetes resources, such as CRDs, deployments, and ConfigMaps, via some Terraform providers. The company shall be creating a lot more stacks as they increasingly utilize Kubernetes, and Spacelift will assist them do that with confidence and ease. Spacelift customer case study Read the full story Key points Having a range of commands to utilize when you encounter issues with pods in K8S will enable you to restart them appropriately, depending on how you have deployed the pods, the necessity for application uptime, and the urgency of the restart. In general, the best approach is to utilize the kubectl rollout restart method described above, as it will avoid application downtime. A restart will not resolve the problem that caused the pods to have issues in the first place, so further investigation into the root cause shall be required. Manage Kubernetes easier and faster Spacelift allows you to automate, audit, secure, and continuously deliver your infrastructure. It helps overcome common state management issues and adds several must-have features for infrastructure management. Learn more Frequently asked questions How to restart a Kubernetes service? You cannot directly restart a Kubernetes Service using kubectl , because a Service represents stable network abstraction without runtime state. If your goal is to restart the underlying application (like a Deployment or Pod), you require to target the controller or resource managing the Pods. How to restart a Kubernetes deployment? Kubernetes does not offer a native restart command like some other systems. Instead, restarting is simulated by changing the deployment’s pod template metadata, prompting the system to replace the existing pods. The rollout restart command updates the spec. annotations with a timestamp, which changes the hash and initiates a new rollout. Is it safe to just delete pods? Deleting pods managed by a controller (Deployment/ReplicaSet/StatefulSet/DaemonSet) is usually safe – the controller will recreate them. But you may cause a brief capacity dip, and for large fleets it’s harder to control blast radius than using a rolling restart. For manually-created pods without a controller, deleting them will remove them permanently</p>
+<p>Join 1M+ Learners Learn &amp; Practice DevOps, Cloud, AI, and Much More — All Through Hands-On, Interactive Labs! Create Your Free Account How to Restart a Pod in Kubernetes Restarting a Pod represents common operation in Kubernetes. There are several reasons why you might desire to restart a Pod. For example, you might desire to update the container image to a newer version or modify the environment variables to adjust how your application works. In this blog post, we’ll explore three different methods to restart a Pod in Kubernetes. It’s crucial to note that in Kubernetes, &quot;restarting a pod&quot; doesn&#39;t happen in the traditional sense, like restarting a service or a server. When we say a Pod is &quot;restarted,&quot; it usually means a Pod is deleted, and a new one is created to replace it. The new Pod runs the same container(s) as the one that was deleted. Prerequisites To follow along with the examples in this post, you’ll require a code editor. In addition, you’ll require access to a running Kubernetes cluster. If you don’t have access to one, you can utilize a tool such as minikube to set up a Kubernetes cluster. Also, you’ll require to have kubectl installed on your local machine to interact with the Kubernetes cluster. attempt the Kubernetes Pods Lab for free Kubernetes Pods Lab Understanding Kubernetes Pod Restart Policy In Kubernetes, a Deployment manages the lifecycle of one or more Pods. When we define a Deployment using a YAML file, the spec field of the Pod template contains the configuration for the containers running inside the Pod. The restartPolicy field is one of the configuration options available in the spec field. It allows you to control how the Pods hosting the containers are restarted in case of failure. Here&#39;s an example of a Deployment configuration file with a restartPolicy field added to the Pod spec: apiVersion: apps/v1 kind: Deployment metadata: name: demo-deployment spec: replicas: 1 selector: matchLabels: app: alpine-demo template: metadata: labels: app: alpine-demo spec: restartPolicy: Always containers: - name: alpine-container image: alpine:3. 15 command: [&quot;/bin/sh&quot;,&quot;-c&quot;] args: [&quot;echo Hello World! &amp;&amp; sleep infinity&quot;] You can set the restartPolicy field to one of the following three values: Always : Always restart the Pod when it terminates. OnFailure : Restart the Pod only when it terminates with failure. Never : Never restart the Pod after it terminates. Note that if you don’t explicitly specify the restartPolicy field in a Deployment configuration file, Kubernetes sets the restartPolicy to Always by default. Creating a Pod To restart a Pod, we must create one first. Follow these steps to create a Pod: Open your code editor and create a new folder. Within this folder, create a new file with a. Copy and paste the following content into the new. apiVersion: apps/v1 kind: Deployment metadata: name: demo-deployment spec: replicas: 1 selector: matchLabels: app: alpine-demo template: metadata: labels: app: alpine-demo spec: restartPolicy: Always containers: - name: alpine-container image: alpine:3. 15 command: [&quot;/bin/sh&quot;,&quot;-c&quot;] args: [&quot;echo Hello World! &amp;&amp; sleep infinity&quot;] In this file, we have defined a Deployment named demo-deployment that manages a single Pod. The Pod has one container running the alpine:3. When the container starts, it prints Hello World! to the standard output (stdout) stream and then sleeps indefinitely. Now run the following command to create the Deployment: kubectl apply -f <FILE-NAME>. yaml Replace <FILE-NAME> with the name of your file. Running the command above will produce an output similar to the following: As you can observe, the Deployment named demo-deployment was created. Next, check the Pod status by running the following command: kubectl obtain pods This command will display a list of all the Pods running in your Kubernetes cluster, as shown below: Look for the Pod with a name starting with demo-deployment and ensure that it&#39;s in the Running state. Note that Kubernetes creates unique Pod names by adding unique characters to the Deployment name. Hence, your Pod name shall be different from mine. Next, let’s view the message Hello World! printed by the container by running the following command: kubectl logs <POD-NAME> Replace <POD-NAME> with the name of your Pod. After running the command above, you should observe the output displaying Hello World! as shown below: 3 Methods to Restart Kubernetes Pod In this section, we’ll explore three methods you can utilize to restart a Kubernetes Pod. Method 1: Deleting the Pod One of the easiest methods to restart a running Pod is to simply delete it. Run the following command to observe the Pod restart in action: kubectl delete pod <POD-NAME> After running the command above, you will receive a confirmation that the Pod was deleted, as shown in the output below: The job of a Deployment is to ensure that the specified number of Pod replicas (in our case, 1) is running at all times. Therefore, after deleting the Pod, Kubernetes will automatically create a new Pod to replace the deleted one. To check if Kubernetes has created a new Pod, run the following command: kubectl obtain pods This command will list all the Pods in your system: As you can observe, Kubernetes has created a new Pod. It’s worth noting that although it’s a new Pod, it still runs the same container as the deleted Pod. How can we confirm this? One way would be to check the container logs. If it’s indeed the same container running, we should observe the output Hello World!. To fetch the container logs, run the following command: kubectl logs <POD-NAME> The output displays Hello World! , which confirms that the new Pod runs the same container as the deleted Pod. Method 2: Modifying the fields in spec. containers In a Deployment configuration file, the spec. containers field describes the container(s) that should exist in a Pod overseen by the Deployment. This field holds various specifications about the container, such as its image, any necessary environment variables, and any required volumes, among others. Any modification to the value of these fields effectively changes the Pods&#39; definition, triggering a Pod restart. To observe the Pod restart in action, let’s change the alpine image version from 3. Run the following command: kubectl set image deployment/demo-deployment alpine-container=alpine:3. 16 After running the command, you’ll receive the following output: As you can observe, the container image was updated. Next, immediately run the following command: kubectl obtain pods You should observe an output, as shown above, where the previous Pod is in a Terminating state while the new Pod is already up and running. If you run the kubectl obtain pods command again after a minute or so, you will only observe the new Pod in the running state, as shown below: The reason I wanted you to run the kubectl obtain pods immediately after updating the container image, I wanted you to observe the Pod rollout process in action. During this process, Kubernetes creates Pods with the updated image and gradually phases out the old Pods. Next, as we did earlier, let’s ensure that the new Pod is indeed running the same container as the terminated Pod. Run the following command to fetch the container logs: kubectl logs <POD-NAME> As you can observe, Hello World! is displayed in the terminal, confirming that the new Pod is indeed running the same container as the deleted Pod. Note that we only changed the alpine image version to trigger a Pod restart in this example. Depending on your configuration file, you could modify other fields such as the env entries, volumeMounts , and resources fields to trigger Pod restart. Method 3: Using the &quot;kubectl rollout restart&quot; command You can restart a Pod using the kubectl rollout restart command without making any modifications to the Deployment configuration. To observe the Pod restart in action, run the following command: kubectl rollout restart deployment/demo-deployment After running the command, you’ll receive an output similar to the following: As you can observe, the Deployment was restarted. Next, let’s list the Pods in our system by running the following command: kubectl obtain pods As you can observe in the output above, the Pod rollout process is in progress. If you run the kubectl obtain pods command again, you’ll observe only the new Pod in a Running state, as shown below: To verify that the new Pod is running the same container as the deleted Pod, retrieve the container logs by running the following command: kubectl logs <POD-NAME> The terminal will display, Hello World! , confirming that the new Pod is indeed running the same container as the terminated Pod. How Do I Restart Kubernetes Pod Without Downtime? The Deployment resource in Kubernetes has a default rolling update strategy, which allows for restarting Pods without causing downtime. Here&#39;s how it works: Kubernetes gradually replaces the old Pods with the new version, minimizing the impact on users and ensuring the system remains available throughout the update process. To restart a Pod without downtime, you can choose between two methods: using a Deployment (Method 2) or using the kubectl rollout restart command (Method 3). Note that manually deleting a Pod (Method 1) to restart it won&#39;t work effectively because there might be a brief period of downtime. When you manually delete a Pod in a Deployment, the old Pod is immediately removed, but the new Pod takes some time to begin up. Note : You can confirm that Kubernetes uses a rolling update strategy by fetching the Deployment details using the following command: kubectl describe deployment/demo-deployment After running the command above, you’ll observe the following output: Notice the highlighted section in the output above. The RollingUpdateStrategy field has a default value of 25% max unavailable, 25% max surge. 25% max unavailable means that during a rolling update, 25% of the total number of Pods may be unavailable. And 25% max surge means that the total number of Pods can temporarily exceed the desired count by up to 25% to ensure that the application is available as old Pods are brought down. Master container orchestration with our Kubernetes Learning path : Kubernetes Learning Path | Kodekloud Embark on the Kubernetes learning path. Hone your Kubernetes skills with our study roadmap. begin your Kubernetes journey today. Kodekloud Conclusion Knowing how to restart a Pod is an crucial skill when managing containerized applications on a Kubernetes cluster. In this blog post, you learned about three different methods you can utilize to restart a Kubernetes Pod. You also learned about how Kubernetes uses the rolling update strategy to restart Pods without causing any interruptions, keeping the application up and running for your users even during the update process. More on Kubernetes: How to Fix ImagePullBackOff &amp; ErrImagePull in Kubernetes How to Manage Your K8s with K9s Kubernetes CLI How to utilize Kubectl Scale on Deployment How to utilize Kubectl Config Set-Context How to obtain Pod Logs in Kubernetes (With Examples) How to Copy File From Pod to Local (With Examples) How to Execute Shell Commands Into a Container (With Examples) Optimizing Kubernetes Clusters for Cost &amp; Performance: Part 1 - Resource Requests Deploying, Maintaining, and Scaling Kubernetes Clusters Join 1M+ Learners Learn &amp; Practice DevOps, Cloud, AI, and Much More — All Through Hands-On, Interactive Labs! Create Your Free Account Hemanta Sundaray 29 min read Certified Kubernetes Security Specialist (CKS) Exam Verification Guide Pramodh Kumar M Pramodh Kumar M LinkedIn Dec 17, 2025 • K8s • CKS • CKS Kubernetes 22 min read How to Build a CI/CD Pipeline on AWS in 2026 (Step-by-Step Guide) Nimesha Jinarajadasa Nimesha Jinarajadasa Nimesha Jianrajadasa represents DevOps &amp; Cloud Consultant, K8s expert, and instructional content strategist-crafting hands-on learning experiences in DevOps, Kubernetes, and platform engineering. LinkedIn Dec 15, 2025 • AWS • CI/CD Pipeline • CI/CD 15 min read Multi-Cloud DevAIOps: Engineering High-Performing Cloud &amp; AI-native Dev Teams in the GenAI Era Dheeraj Nayal Dheeraj Nayal Dec 12, 2025 • DevAIOps • DevOps • Multi-Cloud 11 min read 1 Million Hands-On Learners: How KodeKloud Labs Built a Global Movement - One Command at a Time Nimesha Jinarajadasa Nimesha Jinarajadasa Nimesha Jianrajadasa represents DevOps &amp; Cloud Consultant, K8s expert, and instructional content strategist-crafting hands-on learning experiences in DevOps, Kubernetes, and platform engineering. LinkedIn Dec 8, 2025 • DevOps hands-on labs • hands-on-labs-free • AI 25 min read Istio Certified Associate (ICA) Study Guide Pramodh Kumar M Pramodh Kumar M LinkedIn Dec 3, 2025 • Istio • service mesh • Istio Certified Associate 7 min read From AI Literacy to AI Readiness: The 2026 Playbook for Universities Shashank Karpal Shashank Karpal Shashank leads Education &amp; Government Programs at KodeKloud and writes about AI-native education and workforce transformation, covering hands-on labs, agentic workflows, and outcome analytics for academia, enterprises, and governments. LinkedIn Dec 2, 2025 • AI • AI Literacy 8 min read desire a Competitive Edge in 2026? Follow This AI-Powered Roadmap for DevOps &amp; Cloud Engineers Nimesha Jinarajadasa Nimesha Jinarajadasa Nimesha Jianrajadasa represents DevOps &amp; Cloud Consultant, K8s expert, and instructional content strategist-crafting hands-on learning experiences in DevOps, Kubernetes, and platform engineering. LinkedIn Dec 1, 2025 • AI • AI Agents • Cloud 19 min read Top AWS Certifications in 2026: Which Are Worth Your Investment? Nimesha Jinarajadasa Nimesha Jinarajadasa Nimesha Jianrajadasa represents DevOps &amp; Cloud Consultant, K8s expert, and instructional content strategist-crafting hands-on learning experiences in DevOps, Kubernetes, and platform engineering. LinkedIn Nov 27, 2025 • AWS • AWS Certification • Cloud 34 min read CKAD Exam Verification Guide Pramodh Kumar M Pramodh Kumar M LinkedIn Nimesha Jinarajadasa Nimesha Jianrajadasa represents DevOps &amp; Cloud Consultant, K8s expert, and instructional content strategist-crafting hands-on learning experiences in DevOps, Kubernetes, and platform engineering. LinkedIn +1 Nimesha Jinarajadasa Nov 25, 2025 • CKAD • CKAD Tip • Kubernetes 3 min read The Hackathon Habit: Turning Everyday Problems Into Creative Sprints Phuong Vu Phuong Vu Nov 24, 2025 Subscribe to Newsletter Join me on this exciting journey as we explore the boundless world of web design together. Subscribe Sending Sent Please check your inbox and click the confirmation link</p>
+<p>Related blog posts View all posts December 1, 2025 • 9 Minute Read Architecting a Private Cloud for AI Workloads Public clouds are convenient for AI experimentation, but production workloads often hit walls. For enterprises running continuous training and inference, a private cloud can deliver better ROI, data sovereignty, and performance. This comprehensive guide walks through architecting a private cloud for AI workloads from the ground up. November 26, 2025 • 6 Minute Read Demystifying Karpenter on GCP: The Complete Setup Guide Karpenter has become the gold standard for Kubernetes autoscaling on AWS, but what about GCP? This guide shows you how to set it up and introduces a better way. November 21, 2025 • 5 Minute Read GPU Multitenancy in Kubernetes: Strategies, Challenges, and Best Practices GPUs don&#39;t support native sharing between isolated processes. Learn four approaches for running multitenant GPU workloads at scale without performance hits. Sign up for our newsletter Be the first to understand about new features, announcements and industry insights. eu1 26230392 15314855-8a4c-4751-ad29-605050b96984 loft-sh true Subscribe Join our newsletter to stay up to date on new releases. eu1 26230392 15314855-8a4c-4751-ad29-605050b96984 loft-sh true By subscribing you agree to our Privacy Policy and provide email consent Product GitHub Getting Started Documentation Slack Changelog Company About Blog Careers Events © 2025 vCluster, All rights reserved. Privacy Policy Terms of Service Cookie Policy</p>
+<p>Home Blog Kubernetes How to Restart a Pod in Kubernetes? Methods and Best Practices How to Restart a Pod in Kubernetes? Methods and Best Practices Boemo Wame Mmopelwa #Kubernetes Published on Nov 22, 2024 Updated on Nov 7, 2025 Pods are essential for deploying and scaling applications in Kubernetes. When a Pod starts having issues such as high resource consumption or misconfigurations, updating and restarting the Pod may be the solution. Restarting a Pod fixes many issues and enables you to add new Pod configuration changes. In this article, you will learn when it is crucial to restart a Pod and how to restart the Pod in order to fix issues and optimize the cluster. # Prerequisites You require a running Kubernetes cluster and have at least basic knowledge on how to create a Pod you will utilize in this tutorial. Build and scale your self-managed Kubernetes clusters effortlessly with powerful Dedicated Servers — ideal for containerized workloads. obtain started now # Why should you restart a Kubernetes Pod? Restarting a Pod represents remedy for many issues that Pods face. However, not every error or problem a Pod experiences may be solved with a restart. Below are the valid reasons for restarting a Pod. Fixing resource issues: Pods can experience resource-related issues such as CPU throttling and memory leaks. If a Pod uses all the resources it was allocated to within a short time, the containers and applications hosted by the Pod shall be starved of resources. Uncontrolled resource issues degrade application performance or can even crash the application. Restarting the Pod minimizes the resource issue by resetting CPU usage and clears temporary memory issues. Updating Pod configuration: When you create Pod configuration changes such as updating the Pod’s environment variables or updating the Secret and ConfigMaps, it is crucial to restart the Pod so that the changes may be applied. Debugging and troubleshooting Pods: Restarting a misbehaving Pod can assist clear temporary issues or glitches. Also, restarting a Pod can trigger the generation of diagnostic logs or metrics that are useful for troubleshooting. Monitoring the Pod during and after the restart can provide insights into the root cause of issues. The status of the Pod determines whether the Pod needs a Restart or not. A Pod that is consistently failing and in a pending status needs a troubleshooting procedure. A Pod goes through 5 stages in its lifecycle. Below are the 5 stages of the Pod lifecycle: Pending: A Pod gets in the pending phase when it is being scheduled and bound to a node and necessary resources. The Pod was created but isn&#39;t yet running on a node. It is called the pending phase because the Kubernetes scheduler is still looking for a node that will run the Pod. Running: After a Pod was assigned to a node it moves to the running phase where it will begin to execute its tasks such as starting networks. This is the stage where the Pod starts pulling the container’s image from the registry and setting up storage volumes and networks. Also, Kubernetes prepares the environment for the containers. This is the functional stage of the Pod. Kubernetes will monitor the resource usage and the health of the Pod using readiness and liveness probes. Success or Failure: The success and failure of the Pod is determined by the status of the containers. If containers fail because of persistent errors the Pod will fail too. If the containers execute their tasks successfully the Pod shall be successful. Termination: If a node running the Pod fails, the Pod will automatically obtain terminated. Deployment scalability and API server issues can also lead to a Pod being terminated. The Pod’s resources shall be released after it gets terminated. A Pod can also obtain into a phase called “Unknown” if the Kubernetes control plane cannot determine the status of the Pod. # Different methods for restarting a Kubernetes Pod In this section, you will learn various ways that may be used to restart a Pod. Every method has its own pros and cons. Below are different techniques you can implement to restart Pods. # Restarting a Pod by Scaling the number of Pods When traffic increases or decreases it is crucial to scale the deployments to create sure that resources are used efficiently and no downtime occurs. Whenever you scale the number of Pods, Kubernetes will automatically restart the Pods whether you are scaling up or down. utilize the following command to increase or decrease the number of Pod replicas. kubectl scale deployment <deployment name> -n <namespace> --replicas=3 You will obtain the following output that shows the number of new replicas created. # Restarting a Pod by updating configuration specifications When you change the Pod’s configuration, Kubernetes shall be forced to restart the Pod in order to apply and enable the new changes added to the Pod’s configuration file. Updating the Pod configuration with new variables and values that are incorrect will cause more errors. This method of restarting the Pod by updating its specifications is complex. So, it is crucial to ensure that the configuration updates are made accurate. utilize the following command to restart a Pod by replacing its configuration with new configuration details using a YAML file. kubectl obtain pod <pod_name> -n <namespace> -o yaml | kubectl replace --force -f - # Restarting a Pod by Deleting it One of the most straightforward ways to restart a Pod is by deleting it. Kubernetes controllers like Deployments and ReplicaSets ensure that the desired number of Pods are running. When you delete a Pod that&#39;s managed by a controller, Kubernetes automatically creates a new one to replace it using the specified configuration. utilize the following command to delete a Pod. kubectl delete pod <pod_name> -n <namespace> # Using the rollout restart command The kubectl rollout restart command allows you to restart Pods for a specific deployment gradually without experiencing downtime. utilize the following command to restart a deployment rollout. kubectl rollout restart deployment <deployment_name> -n <namespace> Also read: How to deploy Kubernetes on Bare Metal # Best practices for restarting Kubernetes Pods Abruptly restarting Pods can have serious consequences on the containers. That is why it is crucial to follow best practices when restarting Pods. This section will teach you different ways you should follow in order to safely restart Pods. utilize liveness and readiness probes: The liveness probe is used to check if an application in a Pod is failing or crashing. The status of the application is used to determine the health of the Pod. The liveness probe is crucial because it may be instructed to restart the application if it crashes after a certain specified period of time. On the other hand, the readiness probe is used to check if an application is ready to begin receiving incoming traffic. Before you begin sending traffic to the newly deployed application it is crucial to utilize the readiness probe to understand when an application is ready to begin receiving incoming traffic. Doing this will assist save resources and prevent traffic from being sent to unhealthy and unready applications. Monitor Pod restarts: After restarting the Pod plans might not go well as expected. So, it is crucial to monitor the restarted Pods to ensure that you are alert when they fail. You can monitor them by analyzing logs or setting up metrics collection tools such as Prometheus to collect metrics and notify you when the Pod exceeds set thresholds. Avoid frequent restarts: Frequent Pod restarts can lead to instability and performance degradation. It&#39;s crucial to minimize unnecessary restarts to maintain a healthy Kubernetes environment. Test in non-production environment: Before restarting Pods that are in the production environment it is crucial to test the new changes in the development environment. Testing a Pod helps you to identify issues early and validate changes before deploying the new version to the live environment. # Conclusion In this guide, you have learned various reasons why it is necessary to restart a Kubernetes Pod and how to restart the Pod in different ways. In addition, you have learned best practices to follow when restarting Pods. Consistently experiencing the require to restart Pods might be a sign of a bigger underlying problem. Restarting a Pod solves surface problems. Persistent resource and network issues require full troubleshooting and solutions. Deeper resource issues may be solved by expanding memory and CPU. Fortunately, Cherry Servers offers elastic cloud storage solutions that include security such as RBAC. Fix your Kubernetes resource issues by using a premium storage bandwidth at a lower cost. Cloud VPS Hosting Starting at just $ 3. 24 / month, obtain virtual servers with top-tier performance. Check Available Servers Share this article Related Articles #Kubernetes Published on Oct 10, 2025 Updated on Nov 7, 2025 OpenShift vs Kubernetes on Bare Metal: Which One to Choose Compare Kubernetes vs OpenShift on bare metal. Learn how each platform performs, their setup, features, costs, and which suits your infrastructure best. Read More #Kubernetes Published on Sep 26, 2025 Updated on Nov 7, 2025 How to Create a Kubernetes Cluster with Minikube and Kubeadm Learn how to create a Kubernetes cluster using Minikube for local development and Kubeadm for production-ready setups with step-by-step guidance. Read More #Kubernetes Published on Sep 24, 2025 Updated on Nov 7, 2025 How to Install Calico on Kubernetes: Step-by-Step Tutorial Install Calico on Kubernetes with Helm or YAML for secure, scalable networking. Learn setup steps, benefits, and performance boosts for your cluster</p>
+<p>&lt; Back to Blog Restarting Kubernetes Pods: A Detailed Guide May 28, 2025 | By: Mark Bakker Share Share This blog will assist you learn all about restarting Kubernetes pods and give you some tips on troubleshooting issues you may encounter. Kubernetes pods are one of the most commonly used Kubernetes resources. Since all of your applications running on your cluster live in a pod, the sooner you learn all about pods, the better. One of the things you’ll probably require to do from time to time is to restart your Kubernetes pods, either to reload their configuration or to recover from a crashed application situation. We’ll guide you through exactly how to do that in this post, but before we dive into restarting pods, let’s do a quick recap. What are Kubernetes Pods and Why You Would desire to Restart Them? When you desire to deploy your application on Kubernetes, you have a few options for doing that depending on your needs. Kubernetes pods are the simplest and smallest things you can deploy on Kubernetes. You can’t deploy a container on its own in Kubernetes. Instead, you require to encapsulate it in a pod. Therefore, when you desire to effectively restart your application, you basically require to restart the pod that it’s running in. But restarting a pod is not actually as simple and straightforward as one would think. It’s not difficult either, but there are some things you require to understand about restarting a pod in order to avoid some unexpected issues. For example, depending on the restart method you choose, you may or may not experience downtime of your application. You also absolutely require to understand that it’s possible that your pod won’t begin correctly after a restart. This can happen, for example, if a Kubernetes secret that the pod was using was deleted in the meantime. In rare cases, it can also happen that your pod shall be stuck in the “waiting for resources” state for quite a while if your cluster operates at full capacity. Let’s Restart Some Pods Enough theory—let’s dive into practice. If we desire to restart some pods, we require to deploy some first. Let’s create a simple deployment with the following YAML definition: So, in order to create a pod, save the above code snippet into a YAML file and apply it with kubectl apply-f [filename. yaml]: Now, our deployment was created, and the deployment resource should create one pod for us. Before we can restart our pod, we require to verify a few things. First of all, we require to check if our pod is in fact running. We can do that with the following command: OK, it looks like our pod does indeed exist. The second thing we require to check is the state of the pod. If your pod is in a terminal state (succeeded or completed), then restarting won’t truly work. You’ll just delete the pod, but a new one won’t be created. Technically, you can restart a pod that’s in a pending state and you could do that, for example, when you decided to create a last-minute configuration change. But normally you would restart a pod that’s in either a running or failed state. You can check the state of a pod with the same command that we used above. There, in the same output, we can observe that our pod is in a “running” state. We are all set then, so it’s time to restart our innocent pod. One could expect that it’s as easy as executing a command such as kubectl restart pod followed by a pod name. It may come as a surprise to you, but there’s no kubectl restart pod command. In fact, there isn’t any command to restart the pod. Wait, what? Well, in the Kubernetes world, you actually can’t restart a pod in a typical sense. What you can do, however, is delete the pod. And once you do that, Kubernetes will realize that the number of pods running doesn’t match its desired state and, therefore, will quickly create a new one. The outcome basically shall be as if you’d restarted the pod. So, long story short, the easiest way to “restart” a pod in Kubernetes is to execute kubectl delete pod [pod_name]: Kubernetes says that our pod was deleted. Let’s list the pods again then: It looks like Kubernetes lied to us. It seems like the pod hasn’t been deleted. But if you look closely, you’ll observe that the pod ID (the random numbers and letters after the pod name) are different. Also, if you check the age of the pod, you’ll observe it’s only four seconds old. All of that tells us that the pod we observe now is actually not the same pod that we originally deployed. Kubernetes did its job. As soon as we deleted one pod, Kubernetes created a new one to bring the cluster state back to its desired state. In other words, we effectively restarted our pod. Great! Now you understand how to restart a pod. But there’s something else you should understand. First of all, that’s not the only method of restarting a pod. And second, this method will introduce a downtime to your application since Kubernetes will only create a new pod after the old one was deleted. Let’s take a look at other methods to restart a pod. A bit more of a sophisticated method of restarting a pod is to perform a rollout restart of a deployment. Our pod is managed by a Kubernetes deployment resource, and with Kubernetes deployments, it’s possible to do the opposite of what we just did. Instead of deleting a pod and then creating a new one, rollout restart will first create a new pod and, once that new pod is ready, only then will it terminate the old one. Let’s observe that in action. To perform rollout restart, you require to execute kubectl rollout restart deployment [deployment_name]: And if you’re quick enough in executing kubectl obtain pods, you may be able to observe the whole process: As you can observe, with this method we always have at least one pod running. Therefore, there’s no downtime like there was with the previous method. You can also observe that with this method, it may happen that for a short period of time both old and new pods shall be running at the same time. Depending on how your application works, this may be an issue, so it’s something to be aware of. How to cease and begin a Pod Both methods shown above have two things in common—the pod restart is truly quick, and you don’t have control over it. But there are times when you may desire to restart a pod “slower” with a few seconds or even minutes to do something in between. In such cases, you can utilize the kubectl scale command to cease the pod first, then do whatever you require to do before bringing the pod up again. Normally, the kubectl scale command is used to increase or decrease the number of pods to deal with the load—for example, from 2 to 5. But you can also scale the number of pods to 0 and then scale it back to at least 1. This will effectively restart your pods. Let’s observe an example: If you’ve worked with Kubernetes for a bit already, you may be wondering why you can’t just delete the deployment and recreate it later instead. Sure, you could do that as well with a similar result, but there’s a key difference. You should utilize the scaling method when you don’t desire to lose the history of the deployment. You’ll still be able to observe when it was originally created and when it was scaled. Sometimes this information may be useful. If you delete the deployment and recreate it later, from Kubernetes’ perspective, these shall be just two completely separate deployments that won’t have anything in common. This method may be useful, for example, when you are debugging an issue and desire to be 100% sure that new pods are starting from a “clean state. ” What If Something Goes Wrong? Now you understand a few ways to restart a pod in Kubernetes. But restarting a pod may sometimes cause a pod to fail—for example, if you desire to restart a pod in order to change its configuration or add a new configmap or volume. Any of these changes could introduce some bugs that prevent the pod from starting again properly. Let’s observe how we can troubleshoot issues in such cases. Imagine that your pod uses some Kubernetes secrets. You wanted to update the secret, so you ran your CI/CD process for that, and then you restarted the pod using the kubectl delete pod method to test the change quickly. Oh, no! Instead of a shiny new pod, you observe some errors. What now? The first and easiest thing to do in such cases is to execute the kubectl describe pod command followed by a pod name. There, in the Events section of the output, you should observe some indication of what’s going on: Pretty straightforward, isn’t it? It seems like there was a problem with the secret update, and it was deleted instead. So, to fix our failed pod restart in this case, we require to restore the secret that the pod wants to load. This is just one example, but as a general rule, kubectl describe pod can usually tell you what the problem with your pod is. However, sometimes it won’t. Imagine that you restored the secret on the cluster and restarted your pod again but it still fails. This time, however, kubectl describe pod doesn’t say anything about the missing secret. This could indicate that now we have an issue not with the pod configuration but with the application running in the pod. If that happens to you, the next debugging step is to check the logs of your application. You can do that by executing kubectl logs [pod_name]: Aha! It seems like the secret is not missing anymore, but it’s simply the wrong one now. Updating the secret to the correct one and restarting the pod one more time will fix your problem. Summary As you can observe, something as simple as restarting a pod is worth a whole blog post. Not only can you actually directly restart a pod in Kubernetes, but you have a few ways of achieving a pod restart. If you desire some more tips on troubleshooting Kubernetes, check out this guide “ Top 4 Kubernetes Troubleshooting Issues Identified and Fixed in Minutes. ” And if you desire to avoid failures in your cluster caused by issues with configurations, typos or any other reasons, sign up for a 30-day free trial of SUSE Cloud Observability on the AWS Marketplace. Share (Visited 82 times, 1 visits today) Related Articles Apr 09th, 2025 Driving Kubernetes Modernization Together: SUSE and CloudCasa heidi. com Jul 22nd, 2025 SIGKILL vs SIGTERM: A Developer’s Guide to Process Termination Genevieve Cross Jan 06th, 2025 5 Reasons Why Enterprise Leaders Must Prioritize Owning Their AI Platforms in 2025 Jen Canfor Mar 18th, 2025 Zero Trust Infrastructure with SUSE Linux &amp; Confidential Computing Sebastian Martinez 2,179 views Mark Bakker Co-founder of StackState and now serves as a Product Owner at SUSE, leveraging his extensive experience as an IT architect. Mark plays a key role in shaping the SUSE Observability solution and is dedicated to creating solutions that drive efficiency and innovation</p>
+<p>Blog / DevOps How to Restart Kubernetes Pods with Kubectl: 5 Methods observe StrongDM in action → Written by StrongDM Team Universal Privileged Access Authorization (UPAA) StrongDM Last updated on: May 15, 2024 Reading time: 5 minutes Contents Secure Access Made Simple Built for Security. Free Trial — No Credit Card Needed Full Access to All Features Trusted by the Fortune 100, early startups, and everyone in between Free Trial Kubernetes pod restarts are crucial for efficiently managing containerized applications in a dynamic microservices architecture. Understanding how to effectively restart pods using kubectl will assist you streamline operations and minimize downtime. This article describes five methods to restart Kubernetes pods empowering you to maintain application health and performance confidently. Key Stages in the Lifecycle of a Kubernetes Pod Understanding the Kubernetes pod lifecycle is crucial for efficient management and troubleshooting within a containerized environment. Pods progress through various states from creation to termination, each of which plays a critical role in deploying and maintaining your application. Exploring these states will assist you comprehend the require to restart your pod at different points. Creation: Pods are created manually or through controllers like Deployments and StatefulSets. During this state, the container initializes with the defined configuration and resources, ready to perform the desired task. Pending: At this state, the pod was created, but one or more of its containers are not yet running. This could be due to resource limitations or waiting for dependencies to become available. Running: A pod is running when all containers within it are operational. Applications inside containers actively process requests and perform their intended functions. Success/Failure/Completed: Pods enter these states based on the outcome of their tasks. A pod is in a successful state when all containers within it have successfully terminated their tasks. Conversely, if a container within a pod fails, the pod enters a failed state. Additionally, when all containers in a pod complete their tasks, the pod enters a completed state. Termination: A pod is terminated either spontaneously or due to external factors like node failure or scaling operations. During termination, resources associated with the pod are released, and the container stops gracefully. These states may necessitate restarting the pod to address various scenarios such as updating configurations, troubleshooting performance issues, and recovering from errors. Reasons for Restarting a Kubernetes Pod Restarting a Kubernetes pod is common when managing containerized applications for a variety of reasons: Configuration changes: Restarting a pod changes the environment variables. New settings like volume mounts are effectively applied. Application updates: Ensure that the latest changes, such as new images for deployment or updates to code, are included upon pod restart. Troubleshooting: It helps resolve issues like crashes or resource conflicts to restore normal operation. Resource management: By restarting pods, resource limits may be adjusted and usage optimized to ensure efficient resource utilization within the Kubernetes cluster. Network/Service Discovery Adjustments: Network configuration changes may be adopted upon pod restart, ensuring proper communication between application components. State Cleanup: It clears accumulated state to improve application performance and stability. Performance optimization: It updates resources, reduces memory leaks, and improves overall performance. Health Indicators Monitoring pod status and interpreting health indicators is an essential way to maintain the stability and reliability of Kubernetes deployment. By understanding how to assess pod health and interpret health metrics, operators can proactively identify issues and decide when to restart pods to ensure optimal performance and availability. Health indicators: Kubernetes provides several health indicators to assess the health of pods. These are: Readiness Probe: This determines if the container is ready to handle traffic. If the readiness check fails, the container is removed from service until it succeeds. Liveness Probe: This verifies that the container is responsive and operational. If the liveness check fails, Kubernetes restarts the container. Resource usage metrics: Monitoring resource usage metrics such as CPU and memory usage will indicate performance issues or resource contention. Logs and events: Reviewing pod logs and Kubernetes events provides insight into application behavior, errors, and potential issues. Prerequisites for Restarting Kubernetes Pods Before getting into how to restart a Kubernetes pod using Kubectl, certain prerequisites must be met to ensure a smooth and efficient process. These prerequisites are primarily about having the necessary access and tools to interact with the Kubernetes cluster. Access to Kubernetes Cluster: create sure you have the credentials (such as a kubeconfig file or API token) and permissions to authenticate to the Kubernetes cluster where kubectl is deployed. Without appropriate permissions, you cannot run commands or create changes to the cluster. Setting up kubectl: kubectl is the command used to interact with Kubernetes. It facilitates various operations including managing pods, deployments, services, etc. Before restarting the pod, ensure that kubectl is properly installed and configured on your local computer or the system where you are running the command. Installation: Install kubectl on your operating system by following the official Kubernetes documentation or distribution-specific instructions. Configuration: Configure kubectl to connect to the target Kubernetes cluster by setting the appropriate kubeconfig file or environment variables. This ensures that Kubectl communicates with the correct cluster and authenticates itself using the provided credentials. Once you have access to the Kubernetes cluster and Kubectl is properly configured, you can proceed with restarting pods. Methods to Restart Kubernetes Pods Using Kubectl Restarting a Kubernetes pod using Kubectl provides flexibility and control in managing container applications in a Kubernetes cluster. There are five ways to restart pods with Kubectl, each addressing different scenarios and needs. Method 1: kubectl Delete Pod Command This method involves deleting the pod directly. It&#39;s crucial to ensure that the pod is terminated before executing this command, as Kubernetes will create a new pod instance to replace it. <code>kubectl delete pod &lt;pod_name&gt;</code> Method 2: kubectl Rollout Restart Command If the pod is managed by a deployment, a rollout restart policy is used to properly restart pods, ensuring zero downtime. <code>kubectl rollout restart deployment/&lt;deployment_name&gt;</code> Method 3: kubectl Scale Replicas command Scaling a deployment&#39;s replica down to zero and backing it up initiates a restart of all pods controlled by that deployment. <code>kubectl scale deployment &lt;deployment_name&gt; --replicas=0 kubectl scale deployment &lt;deployment_name&gt; --replicas=&lt;desired_replica_count&gt;</code> Method 4: Updating Environment Variables (kubectl Set Env) Updating environment variables associated with a pod can trigger a restart to apply the new configurations. <code>kubectl set env pod &lt;pod_name&gt; &lt;key&gt;=&lt;value&gt;</code> Method 5: Using a restart policy Specifying a restart policy in the pod manifest allows automatic restarts based on defined conditions, such as OnFailure or Always. Define the restart policy in the pod spec: <code>yaml spec: restart policy: Always</code> These methods offer versatility in restarting Kubernetes pods to accommodate various utilize cases, from manual intervention to automated restarts based on defined policies. Troubleshooting common pod restart issues Although restarting a Kubernetes pod using Kubectl is generally straightforward, there are certain common issues that you require to troubleshoot to ensure a smooth restart process. Here are steps to identify and resolve common pod restart issues. Removing stuck pods: Issue: Pods stuck in a terminal state may prevent the creation of new pods. Solution: utilize the <code>--force</code> flag with <code>kubectl delete pod</code> to force delete stuck pods and ensure there are no underlying node issues. Liveness check failure: Issue: Liveness check failure causes pods to continually restart. Solution: Check the liveness probe configuration, check logs/events, and resolve the root cause, like application code or environment issues. Resource contention: Issue: Restarting pods at the same time causes resource contention. Solution: Implement a pod suspension budget to limit concurrent restarts and accommodate off-peak schedules. Configuration errors: Issue: Configuration errors lead to application errors. Solution: Double-check that your changes are accurate, utilize version control, and roll back if necessary. Network connectivity issues: Issue: Network connectivity is temporarily lost during pod restart. Solution: Monitor network traffic, verify proper configuration, and adjust firewall rules as necessary. Integrating StrongDM for Easier Kubernetes Management StrongDM streamlines operational workflows and enhances the security of Kubernetes cluster management. Here&#39;s how it simplifies Kubernetes management, including pod restarts: 1. Centralized access control: StrongDM provides a centralized platform for managing access to Kubernetes clusters and managing individual credentials. Administrators can define access policies based on roles and permissions to allow authorized users to perform actions such as restarting a pod. Auditing and Compliance: StrongDM provides auditing capabilities to track user activity, including pod restarts, for compliance and security. A Kubectlgs provides visibility into user actions and supports compliance with legal requirements and internal policies. Automation and Orchestration: StrongDM integrates with automation tools to enable streamlined Kubernetes management, such as restarting pods. Administrators can utilize StrongDM&#39;s API and CLI to automate tasks such as restarting pods based on triggers or schedules, reducing manual effort. Improved security: StrongDM enforces the least privilege access, restricting users to necessary resources and actions. Session recording allows you to monitor pod restarts in real-time, allowing you to detect suspicious activity and reduce security risks. Regarding the upcoming Kubernetes changes, our product and engineering teams shall be rolling out updates in the next few weeks or months, accompanied by new documentation. To sum things up, mastering pod restarts is critical to managing Kubernetes and ensuring application stability, reliability, and performance in container environments. We delved into the importance of pod restarts and the many methods available through Kubectl to efficiently manage Kubernetes, covering scenarios such as configuration changes, troubleshooting, and performance tuning. Understanding these methods allows operators to effectively manage the pod lifecycle and ensure smooth application operations while troubleshooting common restart issues and maintaining deployment stability. Integrating solutions like StrongDM streamlines Kubernetes management by centralizing access control, auditing, automation, and improved security, ultimately streamlining management operations and enhancing application stability and reliability. Overall, mastering pod restarts assist Kubernetes administrators navigate dynamic environments, effectively manage applications, reduce risk, and drive success in cloud-native initiatives. desire to simplify Kubernetes management? attempt StrongDM for free. Next Steps StrongDM unifies access management across databases, servers, clusters, and more—for IT, security, and DevOps teams. Learn how StrongDM works Book a personalized demo begin your free StrongDM trial Share this: Share How to Restart Kubernetes Pods with Kubectl: 5 Methods on LinkedIn Share How to Restart Kubernetes Pods with Kubectl: 5 Methods on Reddit Share How to Restart Kubernetes Pods with Kubectl: 5 Methods on Facebook Share How to Restart Kubernetes Pods with Kubectl: 5 Methods on Hacker News Categories: DevOps Kubernetes About the Author StrongDM Team , Universal Privileged Access Authorization (UPAA) , the StrongDM team is building and delivering a Zero Trust Privileged Access Management (PAM), which delivers unparalleled precision in dynamic privileged action control for any type of infrastructure. The frustration-free access stops unsanctioned actions while ensuring continuous compliance. 💙 this post? Then obtain all that StrongDM goodness, right in your inbox. You May Also Like Kubernetes Security: Guide to Securing Your Clusters Kubernetes security is the practice of protecting containerized workloads and cluster components from unauthorized access, misconfigurations, and vulnerabilities. It involves securing the infrastructure, clusters, containers, and application code through layered controls like RBAC, network policies, image scanning, and runtime protection. StrongDM Kubernetes: Zero Trust Access for Kubernetes Clusters StrongDM’s Next-Gen Kubernetes provides secure, seamless access to Kubernetes clusters at scale. By eliminating standing privileges and enforcing Zero Trust security principles, StrongDM helps security teams maintain tight access controls without slowing down DevOps workflows. What Are Microservices in Kubernetes? Architecture, Example &amp; More Microservices create applications more scalable and resilient, and Kubernetes is the backbone that keeps them running smoothly. By orchestrating containers, handling service discovery, and automating scaling, Kubernetes simplifies microservices management—but it also introduces complexity. This guide covers key principles, deployment strategies, and security best practices to assist you navigate microservices in Kubernetes. Plus, observe a modern way of simplifying access and security, so your teams can build faster—without compromising control. What Is Kubernetes Observability? Best Practices, Tools &amp; More Kubernetes observability is the practice of monitoring and analyzing a Kubernetes environment through metrics, logs, and traces to gain visibility into system performance and health. It enables teams to detect and resolve issues proactively, optimize resource utilization, and maintain cluster reliability through real-time insights and automated monitoring tools. What Is Kubernetes Ingress? Guide to K8s Traffic Management This article breaks down Kubernetes Ingress, explaining how it manages external access to services, routing configurations, and best practices. You’ll learn how Ingress differs from Load Balancers, how controllers enforce routing rules, and how to choose the right setup for your needs</p>
+<p>Back to Blog Knowledge 9 mins read How to Restart Pods in Kubernetes Using kubectl By Keval Bhogayata Updated 29 Sep 2025 What&#39;s in this article Share Now: Learn how to restart Kubernetes pods using kubectl, why it matters, and the safest methods plus monitor pods easily with Middleware for smarter decisions. kubectl is the essential command-line tool for managing Kubernetes clusters. It allows you to manage pods, deployments, and other resources from the terminal, helping you troubleshoot Kubernetes issues , check pod health, and scale applications easily. Most kubectl commands follow a simple structure. For example, kubectl obtain pods lists running pods, and kubectl delete pod <pod-name> removes a pod. Many users wonder how to restart a Kubernetes pod using kubectl. Contrary to popular belief, there is no direct kubectl restart pod command. Instead, Kubernetes expects you to work with higher-level objects, such as Deployments. This guide covers the safest and most effective methods for restarting pods, including rollout restarts, deleting pods, scaling replicas, and updating environment variables, helping you maintain a healthy and stable cluster without guesswork. Table of Contents When Should You Restart a Kubernetes Pod? Knowing when to restart a Kubernetes pod is key to maintaining application stability and performance. Here are the most common scenarios that require a pod restart: 1. Configuration Changes When you update your application’s settings (such as environment variables or resource limits), the pod continues to utilize the old configurations. Restarting ensures the new settings take effect. Recover from Application Failure If your app crashes but the container stays in a “Running” state, or the pod shows as running but isn’t functioning, a restart forces a clean begin to recover the service. 🐳For more in-depth analysis of pod failures, check out our guide on Exit Code 137 in Kubernetes: Causes, Diagnosis, and Fixes. Debugging Application Issues Restarting the pod helps resolve temporary issues or confirms persistent problems while troubleshooting why the application isn’t behaving as expected. Effective debugging often starts with understanding application logs. Learn how to tail kubectl logs in real-time. Pod Stuck or Not Responding A pod may cease responding to traffic while Kubernetes still reports it as healthy. Restarting resolves frozen states or resource leaks and restores responsiveness. What are the Different Pod States in Kubernetes? Understanding the different Kubernetes pod states enables you to monitor your application’s health and take the necessary actions when needed. Here are the key pod states you should understand: 1. Pending Kubernetes has approved the pod, but it is awaiting scheduling and launch. This occurs while Kubernetes is downloading container images or while it is still looking for a suitable node to run your pod. A prolonged pending pod typically indicates a configuration issue or insufficient resources. Running Your pod has at least one active container. The containers are working, but this doesn’t mean everything is functional. Your application may still have troubles despite the pod running. Succeeded You typically observe this state with jobs or one-time tasks that are designed to run once and finish. It means all containers in the pod have completed their tasks successfully and won’t restart. Failed The failed state means one or more containers in the pod have stopped running, maybe due to an error, or the system terminated the containers. It indicates something went wrong with your application, or the container couldn’t restart correctly. Failed pods often require a restart. Instead of reacting to a failing pod, ⚠️ learn how to obtain ahead of the problem. Our guide on how to catch deployment issues can assist you prevent many of these problems before they ever happen. Unknown This indicates that the node where your pod should be running has lost contact with Kubernetes. Node failures, network problems, or other infrastructure issues may be the cause of this. It’s actually hard to tell what’s going on with your pod when you observe this state. 🔍 Don’t Just React, Proactively Monitor Pods Instead of restarting pods to fix issues, utilize real-time monitoring to spot the root cause. Our dashboard provides comprehensive metrics and alerts to prevent issues before they happen. obtain a Demo begin Free Trial How to Restart Pods in Kubernetes using kubectl When you search for how to restart a Kubernetes pod using kubectl , the first thing that comes to mind is the command: kubectl restart pod However, that command does not exist. Instead, there are several reliable methods to restart Kubernetes pods using kubectl. Below are the most effective and commonly used approaches: 1. Restart Pods Using Kubectl Rollout Restart This is the safest and most recommended method for restarting pods managed by a deployment. It performs a controlled restart without downtime by creating new pods and removing old ones. For a deeper dive into managing application lifecycles and automated updates, check out our article on Kubernetes Operators. 🤖 Commands to utilize: kubectl rollout restart deployment/my-app This command replaces existing pods with new ones. It will remove the old pods after starting and waiting for the new ones. This approach keeps your app up during the restart. To restart pods in a deployment within a specific namespace: kubectl rollout restart deployment/my-app -n your-namespace To check the status of your restart kubectl rollout status deployment/my-app Consider this strategy if you desire minimal downtime, the safest alternative, or have deployment-managed pods. Delete Individual Pods to Force Restart With this method, you must delete pods to force Kubernetes to recreate them. It’s simpler than rollout restart , but you must watch which pods you remove. If the pod is managed by a deployment, replica set, or equivalent controller, Kubernetes immediately creates a new one when you delete the existing one. However, this may temporarily disrupt service. Here’s how to go about it: # List all pods to observe what you&#39;re working with kubectl obtain pods # To delete a specific pod kubectl delete pod <pod-name> # To delete multiple pods at once kubectl delete pod <pod-1> <pod-2> # To delete and wait to remove fully kubectl delete pod <pod-name> --wait=true # To force delete a stuck pod (utilize with caution) kubectl delete pod <pod-name> --grace-period=0 --force Delete only controller-managed pods. A standalone pod that isn’t managed by anything will never be restored if it is deleted. Scale Deployment Replicas to Restart Pods This strategy works by scaling your deployment down to zero replicas for a short time, which stops all the pods. Then it scales back up to the number you started with. Kubernetes lets you turn your program off and back again in a controlled way. Check how many replicas you currently have kubectl obtain deployment my-app 2. Scale down to zero kubectl scale deployment my-app --replicas=0 3. Lastly, scale back up to your original number (creates new pods) kubectl scale deployment my-app --replicas=3 When you scale down to zero, Kubernetes deletes all the pods in that deployment. When you scale back up, it creates new pods from scratch. This approach is more aggressive than rollout restart, but sometimes necessary when you require a complete fresh begin. Update Environment Variables to Trigger a Restart This is yet another clever method for pod restarts. You will require to modify their configuration slightly. Kubernetes interprets changing environment variables in a deployment as a configuration change and restarts the pods automatically to implement the updated configuration. The key here is that you don’t even have to alter your environment variables significantly. To initiate the restart, update a timestamp or add a dummy variable. For instance: You can update an existing environment variable kubectl set env deployment/my-app RESTART_TRIGGER=$(date +%s) or You can also edit the deployment directly: kubectl edit deployment my-app Then add or modify any environment variable in the editor. The benefit of using this approach is that it follows the same safe strategy as the rollout restart , and there’s no downtime during the restart process. Replacing Pods Manually Using the same configuration or an updated version, this method requires deleting particular pods and then manually creating new ones to replace them. You have total control over the creation and deletion processes with this method. obtain the pod configuration and save it kubectl obtain pod -o yaml &gt; pod-backup. Delete the existing pod kubectl delete pod 3. Create a new pod using the saved configuration kubectl apply -f pod-backup. yaml This method causes downtime because the old pod is removed before the new one starts. This method is only used with standalone pods; don’t do this with pods managed by deployments. Monitoring Pods with Middleware Monitoring Kubernetes pods keeps apps healthy. Without monitoring, you may overlook memory leaks , high CPU consumption, or network difficulties that could kill pods. The best way to understand when and how to perform a kubectl restart pod is with continuous monitoring. Our guide to Kubernetes Monitoring Tools can assist you choose the right solution for your needs. Middleware provides a simple and user-friendly platform that allows you to monitor pod metrics. Once you install and set up Middleware in your cluster, you’ll be able to track pods like: CPU and memory usage Pod restart counts and reasons Network traffic and errors Container health status Resource limits and requests Middleware helps you create decisions by displaying the issue rather than relying on your intuition about when to restart pods. You shall be able to observe whether a pod is throwing errors, not responding to requests, or using excessive amounts of memory. How to Set Up Middleware for Kubernetes Pod Monitoring The installation involves setting up Middleware Agent inside your Kubernetes cluster to collect data and display it on a centralized dashboard for you to observe and analyze. This setup process is simplified in the official documentation , so you can check it out. Proper monitoring represents cornerstone of Kubernetes Observability , which encompasses more than just metrics; it also includes logs and traces. Getting started with Middleware is straightforward, and in this guide, I’m going to simplify it into two simple steps: Step 1. Install the Middleware Agent This may be done in three different ways. You can install the Middleware Agent using either helm, bash, or. Install Via Helm: helm repo add middleware-labs <a href="https://helm">https://helm</a>. io helm install mw-agent middleware-labs/mw-kube-agent-v3 --set mw. apiKey=<MW_API_KEY> --set mw. target=https://<MW_UID>. io:443 --set clusterMetadata. name=<your-cluster-name> -n mw-agent-ns --create-namespace 2. Install via Bash MW_API_KEY=&quot;&quot; MW_TARGET=https://. io:443 bash -c &quot;$(curl -L <a href="https://install">https://install</a>. io/scripts/mw-kube-agent-install-v3. bat (Windows) set MW_API_KEY=&quot;<MW_API_KEY>&quot; set MW_TARGET=https://<MW_UID>. io:443 Mw-kube-agent-install-windows. bat Replace <your-cluster-name> and <MW_API_KEY> with the right information. You can obtain these from your dashboard. For the cluster name, you’ll have to set it up here: For the API KEY, you can obtain it from “ your profile &gt; API Key ” Next, verify the installation by running the command: kubectl obtain daemonset/mw-kube-agent -n mw-agent-ns kubectl obtain deployment/mw-kube-agent -n mw-agent-ns 2. Access the dashboard Once installed, Middleware automatically collects data from your Kubernetes cluster and presents it in an easy-to-utilize dashboard. From there, you can: Monitor CPU and memory usage per pod Track pod restart counts and reasons View network traffic and error rates Analyze container health and resource limits Tracking pod restarts is crucial for understanding application health. For a more detailed look at the kubectl logs tail command and what to look for, observe our guide on Kubernetes Logging. Additionally, set up custom alerts to obtain instant notifications when a pod becomes unhealthy or consumes excessive resources, helping you act before issues impact your applications. Conclusion To wrap it up, restarting Kubernetes pods can assist you in so many ways, as discussed in this article, one of which is maintaining healthy applications. It doesn’t matter the method you choose to utilize; the key thing is to comprehend when and why you desire to restart. Monitoring pods also helps you in making the right restart decision. Instead of guessing what’s wrong, which you might be wrong about, proper observability shows you exactly when pods require attention. begin monitoring your pods with Middleware and catch issues before they become problems. 📦Deploy in Minutes, Gain Insights Instantly Middleware agent installs in minutes, giving you instant visibility into your pod health, resource usage, and application logs. Install Agent Now obtain Started with Free Monitoring FAQs How can I restart a single pod? utilize kubectl delete pod <pod-name> to remove the pod. If it represents component of a deployment, Kubernetes will automatically generate a new one. Which Method of Testing Pods in a Deployment is the Safest? Restart the deployment of my-app using kubectl rollout. This eliminates downtime by restarting pods one at a time. What happens if I delete a Pod? If it is managed by a deployment, Kubernetes creates a new pod, but if it’s standalone, it’ll be gone forever. When should I avoid restarting Pods manually? Don’t restart during high traffic, in production without monitoring, or when you haven’t fixed the root cause of the problem first. Related Posts Knowledge How to Monitor Mobile App Performance with Synthetic Testing Archish Thakkar 17 Dec 2025 Knowledge What is AWS Step Functions? How It Works &amp; utilize Cases Neel Shah 10 Dec 2025 Knowledge Proactive Alerts for Slow APIs Kaushal Madani 2 Dec 2025 Optimize More, Worry Less With Middleware obtain Started View Pricing</p>
+<p>Restart Kubernetes Pods with kubectl Sudha Bulusu Published: 1/31/2024 Kubernetes About Terminus A Kubernetes pod serves as an isolated environment for running a single process, representing the smallest operational unit within the Kubernetes ecosystem. Unlike other resources, such as Deployments, which are replaced during updates, pods have a more persistent nature. Consequently, Kubernetes does not provide a dedicated kubectl restart pod command. Instead, various methods, both automatic and manual, may be employed to restart pods effectively. The short answer To restart a Kubernetes pod, you can utilize the kubectl delete pod command as follows: $ kubectl delete pod <pod_name> Run in Warp Where: pod_name is the name of the pod to delete Kubernetes will delete the pod and automatically recreate a new one with the same configuration. Easily retrieve this command using Warp’s AI Command Suggestions If you’re using Warp as your terminal, you can easily retrieve this command using the Warp AI Command Suggestions feature : Entering kubectl delete pod in the AI Command Suggestions will prompt a kubectl command that can then quickly be inserted into your shell by doing CMD+ENTER. ‍ Deleting multiple pods To delete all the pods that have failed across all namespaces, you can utilize the following command: $ kubectl delete pods --field-selector status. phase=Failed -A Run in Warp Where: The --field-selector flag with status. phase=Failed specifies failed pods. The -A flag (short for --all-namespaces) specifies all the namespaces in the cluster. Deleting pods in a namespace To delete all the failed pods in a particular namespace, you can utilize the following command instead: $ kubectl delete pods --field-selector status. phase=Failed --namespace=<namespace> Run in Warp Where: namespace is the name of the namespace from which to delete the failed pods. Deleting pods by label If you’ve used labels to organize your pods, you can delete pods with a specific label using the -l flag as follows: $ kubectl delete pods -l <label>=<value> Run in Warp For example: $ kubectl delete pods -l environment=test Run in Warp The above command will delete all the pods with the environment label set to test. Defining a restart policy Pod specifications include a restartPolicy field used to define the restart policy associated with a pod. The available values are Always, OnFailure, and Never. The Always restart policy Always is the default restart policy. It ensures that Kubernetes will automatically restart a container within the pod whenever it terminates, whether it exits successfully or fails. As in the example below, a web server represents common utilize case for a restart policy of Always. apiVersion: v1 kind: Pod metadata: name: nginx-webserver-pod spec: restartPolicy: Always containers: - name: my-container image: nginx:latest Run in Warp The OnFailure restart policy The OnFailure restart policy is used for pods whose containers execute tasks on a schedule or only once. This ensures that the containers in the pod are replaced automatically in the event of a failure and prevents them from restarting unnecessarily, thus consuming resources. The example below of a container that copies a file from one directory to another represents utilize case for setting the restart policy to OnFailure. apiVersion: v1 kind: Pod metadata: name: busybox-file-task spec: restartPolicy: OnFailure containers: - name: busybox-container image: busybox:latest command: [&quot;cp&quot;, &quot;/path/to/source/file&quot;, &quot;/path/to/destination/file&quot;] Run in Warp Restarting pods using rolling updates Aside from choosing the appropriate restart policy, there are many scenarios where it becomes necessary to restart a pod manually. The most recommended method for a manual restart is the rolling restart. A rollout represents process used to ensure that updates are rolled out with minimal disruption of the availability of the application by terminating pods gracefully and recreating them one at a time. This method is available in Kubernetes v1. Performing the rolling restart of a Deployment A Deployment controller may be defined to declare the desired application state, including details such as the container image, number of replicas, and update strategy. A common utilize case is managing the deployment and scaling of a web application. If a change is made to the Deployment manifest, all the pods in the Deployment may be restarted with the command below: $ kubectl rollout restart deployment/<deployment_name> Run in Warp Performing a rolling restart using namespaces Namespaces are logical, isolated environments within a Kubernetes cluster that allow you to group and manage Kubernetes resources separately. To restart all the Deployments located in a specified namespace, you can utilize the following kubectl rollout restart deployment command with the -n flag as follows: $ kubectl rollout restart deployment/<deployment_name>-n<namespace> Run in Warp Performing a rolling restart using labels Labels are key-value pairs attached to Kubernetes objects used for organizing resources based on specific criteria. To restart all the pods based on a specific label, you can utilize the kubectl rollout restart pod command with the -l flag as follows: $ kubectl rollout restart pod -l <label>=<value> Run in Warp For example: $ kubectl rollout restart pod -l environment=development Run in Warp The above command will restart all the pods identified by the environment=development label. Scaling down deployment replicas Scaling pods down is another method to restart pods in a controlled manner with graceful termination. To restart a pod by scaling deployment replicas to 0, you can utilize the following kubectl scale deployment command: $ kubectl scale --replicas=0 deployment <deployment_name> Run in Warp Which will gracefully terminate all the pods in the specified deployment. You can then recreate them by setting the number of replicas to 1 or more as follows: $ kubectl scale --replicas=1 deployment <deployment_name> Run in Warp Scaling down Deployments in a namespace To restart the pods in a particular namespace, you can utilize the kubectl scale deployment with the -n flag as follows: $ kubectl scale --replicas=0 deployment <deployment_name> -n <namespace> $ kubectl scale --replicas=1 deployment <deployment_name> -n <namespace> Run in Warp Scaling down Deployment using labels To restart pods with a specific label, you can utilize the kubectl scale command with the --selector flag as follows: $ kubectl scale --replicas=0 --selector=<label>=<value> deployment $ kubectl scale --replicas=1 --selector=<label>=<value> deployment Run in Warp Where: label is the name of the label selector. value is the value associated with this label. For example: $ kubectl scale --replicas=0 --selector=app=my-app deployment $ kubectl scale --replicas=1 --selector=app=my-app deployment Run in Warp Updating environment variables Updating the environment variables of a pod, or container in a pod, will gracefully terminate the pod, change the specified environment variables, and recreate the pod. Updating the environment variables of a pod To update the environment variables of a pod, you can utilize the kubectl set env command as follows: $ kubectl set env pod <pod_name> -n<namespace> <env_name> =<env_value> Run in Warp Where: pod_name is the name of the pod you desire to update. namespace is the name of the namespace the pod runs in. env_name is the name of the environment variable you desire to add or update. env_value is the value of the env_name variable. For example: $ kubectl set env pod my-pod -n my-namespace USER_NAME=admin USER_PWD=admin Run in Warp Updating the environment variables of a container To update the environment variables of a specific container in a pod, you can utilize the kubectl set env command as follows: $ kubectl set env pod <pod_name> -n <namespace> -c <container_name> <env_name>=<env_value> Run in Warp Where: pod_name is the name of the pod you desire to update. namespace is the name of the namespace the pod runs in. container_name is the name of the container in the pod. env_name is the name of the environment variable you desire to add or update. env_value is the value of the env_name variable. For example: $ kubectl set env pod my-pod -n my-namespace -c database DB_NAME=admin DB_PWD=admin Run in Warp Written by Sudha Bulusu Filed Under Kubernetes Related Articles Copy Files From Pod in Kubernetes Learn how to copy files and directories from within a Kubernetes Pod into the local filesystem using the kubectl command. Kubernetes Scale Deployments in Kubernetes Learn how to manually and automatically scale a Deployment based on CPU usage in Kubernetes using the kubectl-scale and kubectl-autoscale commands. Kubernetes obtain Kubernetes Logs With kubectl Learn how to obtain the logs of pods, containers, deployments, and services in Kubernetes using the kubectl command. Troubleshoot a cluster stuck in CrashloopBackoff, ImagePullBackoff, or Pending error states. Kubernetes Forward Ports In Kubernetes Learn how to forward the ports of Kubernetes resources such as Pods and Services using the kubectl port-forward command. Kubernetes Tail Logs In Kubernetes Learn how to tail and monitor Kubernetes logs efficiently to debug, trace, and troubleshoot errors more easily using the kubectl command. Kubernetes obtain Context In Kubernetes Learn how to obtain information about one or more contexts in Kubernetes using the kubectl command. Kubernetes Delete Kubernetes Namespaces With kubectl Learn how to delete one or more namespaces and their related resources in a Kubernetes cluster using the kubectl command. Kubernetes obtain Kubernetes Secrets With kubectl Learn how to list, describe, customize, sort and filter secrets in a Kubernetes cluster by name, type, namespace, label and more using the kubectl command. Kubernetes List Kubernetes Namespaces With kubectl Learn how to list, describe, customize, sort and filter namespaces in a Kubernetes cluster by name, label, and more using the kubectl command. Kubernetes How To List Events With kubectl Learn how to list and filter events in Kubernetes cluster by namespace, pod name and more using the kubectl command. Kubernetes Kubernetes vs Docker: The Backbone of Modern Backend Technologies Lean the fundamentals of the Kubernetes and Docker technologies and how they interplay with each other. Kubernetes Docker Set Context With kubectl Learn how to create, modify, switch, and delete a context in Kubernetes using the kubectl config command</p>
+<p>This information is tailored for the alertmend.io platform, providing comprehensive insights and solutions.</p>
+
+            </div>
+
+            <!-- Promotional Section -->
+            <div class="promotional-section">
+              <p>Ready to eliminate manual firefighting and achieve autonomous infrastructure operations?</p>
+              <p>See how AlertMend AI can help you reduce costs by 50%, achieve zero downtime, and automate incident remediation across Kubernetes, VMs, and ECS. <a href="https://calendly.com/hello-alertmend/30min" target="_blank" rel="noopener noreferrer">Book a demo.</a></p>
+            </div>
+
+            <!-- Horizontal Separator -->
+            <hr />
+
+            <!-- Arvind Rajpurohit Profile Section -->
+            <div class="profile-section">
+              <img src="/logos/arvind.jpeg" alt="Arvind Rajpurohit" class="profile-image" onerror="this.style.display='none'; const placeholder = this.nextElementSibling; if (placeholder) placeholder.classList.add('show');" />
+              <div class="profile-placeholder-arvind">AR</div>
+              <div class="profile-content">
+                <h3 class="profile-name">Arvind Rajpurohit</h3>
+                <p class="profile-title" style="color: #9333ea; font-weight: 600; margin-bottom: 1rem; font-size: 1rem;">Co-Founder & CEO</p>
+                <div class="profile-bio">
+                  <p>Arvind is a Kubestronaut and Kubernetes expert with 15+ years of experience in infrastructure automation. Previously DevOps Team Lead at Roambee and Customer Success Engineer at Shoreline.io (acquired by NVIDIA), he's helped hundreds of teams achieve 99.97% uptime, reduce costs by 50%, and eliminate 90% of manual operations work.</p>
+                  <p>As CEO of AlertMend AI, Arvind is building the future of autonomous infrastructure management—where AI doesn't just monitor systems, but understands, predicts, and automatically resolves issues while continuously learning and improving.</p>
+                </div>
+                <a href="https://www.linkedin.com/in/arvind-rajpurohit-4a332523/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+                  <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Right Sidebar (30%) -->
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <!-- Email Signup -->
+          <div class="sidebar-card">
+            <h3>Receive blog and product updates</h3>
+            <form class="signup-form">
+              <input type="email" placeholder="Email*" required />
+              <button type="submit">SIGN UP</button>
+            </form>
+          </div>
+
+          <!-- Related Content -->
+          
+          <div class="sidebar-card">
+            <h3 class="related-content-title">RELATED CONTENT</h3>
+            <ul class="related-posts-list">
+              
+                <li>
+                  <a href="/blog/oomkilled-in-kubernetes" class="related-post-link">How to Fix OOMKilled Errors in Kubernetes</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/graceful-shutdown-kubernetes" class="related-post-link">Graceful Shutdown in Kubernetes: Ensuring Safe Pod Termination</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/load-balancing-long-lived-connections-kubernetes" class="related-post-link">Load Balancing and Scaling Long-Lived Connections in Kubernetes</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/5-ways-aiops-transforming-infrastructure" class="related-post-link">5 Ways AIOps is Transforming Infrastructure Management</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/cost-optimization-multi-cloud" class="related-post-link">Cost Optimization Strategies for Multi-Cloud Infrastructure</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/troubleshooting-unhealthy-elasticsearch-nodes-kubernetes" class="related-post-link">Troubleshooting Unhealthy Elasticsearch Nodes on Kubernetes: Causes and Solutions</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/troubleshooting-elasticsearch-unassigned-shards-kubernetes" class="related-post-link">Troubleshooting Elasticsearch Unassigned Shards Incident on Kubernetes: Causes and Solutions</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/elasticsearch-cluster-yellow-incident-kubernetes" class="related-post-link">Elasticsearch Cluster Yellow Incident on Kubernetes</a>
+                </li>
+              
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View All Posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+          
+
+          <!-- Additional Internal Links -->
+          <div class="sidebar-card">
+            <h3 class="related-content-title">EXPLORE ALERTMEND</h3>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/kubernetes-cost-optimization" class="related-post-link">Cost Optimization</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

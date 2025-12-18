@@ -1,11 +1,12 @@
 ---
-title: "Kubectl Get Svc: Complete Guide to Kubernetes Service Management"
-excerpt: "Master kubectl get svc command for listing and managing Kubernetes services. Learn service discovery, troubleshooting techniques, and integration with monitoring tools."
+title: "Kubectl Get Svc: Complete Guide to"
+excerpt: "Master kubectl get svc command for listing and managing Kubernetes services. Learn service discovery, troubleshooting techniques, and integration with..."
 date: "2025-12-15"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubectl get svc, Kubernetes services, service discovery, service management, kubectl commands, Kubernetes networking, service troubleshooting"
 ---
+
 
 # kubectl get svc
 

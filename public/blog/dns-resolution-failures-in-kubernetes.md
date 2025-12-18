@@ -1,10 +1,12 @@
 ---
-title: "DNS Resolution Failures in Kubernetes: Troubleshooting and Best Practices"
-excerpt: "When nodes in an Elasticsearch cluster run different versions, it can lead to data inconsistency, reduced performance, and even potential downtime. Elasticsearch relies on synchronized versioning across nodes to perform efficient data indexing, querying, and retrieval. This blog discusses the causes of version mismatches, essential troubleshooting steps, and how to ensure all nodes run a consistent version for optimal cluster performance."
+title: "DNS Resolution Failures in Kubernetes"
+excerpt: "When nodes in an Elasticsearch cluster run different versions, it can lead to data inconsistency, reduced performance, and even potential downtime."
 date: "2025-04-17"
 category: "Kubernetes"
 author: "Himanshu Bansal"
+
 ---
+
 
 # 🚨 **DNS Resolution Failures in Kubernetes: Troubleshooting and Best Practices**
 ---

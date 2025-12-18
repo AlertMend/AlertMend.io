@@ -1,10 +1,12 @@
 ---
-title: "🚨 Troubleshooting Networking Errors in Kubernetes"
-excerpt: "Networking is one of the most critical components in any Kubernetes deployment, facilitating communication between containers, services, and external clients. Despite Kubernetes’ robustness, networking errors can still occur, leading to issues such as service downtime or degraded application performance. This blog covers common networking errors in Kubernetes and offers effective troubleshooting steps."
+title: "🚨 Troubleshooting Networking Errors in"
+excerpt: "Networking is one of the most critical components in any Kubernetes deployment, facilitating communication between containers, services, and external..."
 date: "2025-06-27"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
+
 ---
+
 
 # 🚨 **Troubleshooting Networking Errors in Kubernetes**
 ---

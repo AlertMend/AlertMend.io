@@ -1,11 +1,12 @@
 ---
-title: "Kubernetes Tolerations and Taints: Complete Guide to Pod Scheduling"
-excerpt: "Master Kubernetes tolerations and taints for controlling pod placement. Learn how to use NoSchedule, PreferNoSchedule, and NoExecute effects for efficient cluster management."
+title: "Kubernetes Tolerations and Taints"
+excerpt: "Master Kubernetes tolerations and taints for controlling pod placement. Learn how to use NoSchedule, PreferNoSchedule, and NoExecute effects for efficient..."
 date: "2025-12-15"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "Kubernetes tolerations, taints, pod scheduling, node affinity, NoSchedule, PreferNoSchedule, NoExecute, cluster management, resource allocation"
 ---
+
 
 # what is a kubernetes tolerations and tains
 

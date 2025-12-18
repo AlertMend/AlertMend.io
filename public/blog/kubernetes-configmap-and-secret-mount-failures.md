@@ -1,10 +1,12 @@
 ---
-title: "Kubernetes ConfigMap and Secret Mount Failures: Troubleshooting and Best Practices"
-excerpt: "Elasticsearch relies on efficient index flushing to write data to disk, but when index flushing slows down, it can lead to degraded performance, delayed queries, and system bottlenecks. Slow index flushing can occur due to several factors, including hardware limitations, network latency, memory exhaustion, or configuration issues. In this blog, we will dive into the common causes of slow index flushing, steps to troubleshoot the problem, and solutions to improve Elasticsearch performance."
+title: "Kubernetes ConfigMap and Secret Mount"
+excerpt: "Elasticsearch relies on efficient index flushing to write data to disk, but when index flushing slows down, it can lead to degraded performance, delayed..."
 date: "2025-01-23"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
+
 ---
+
 
 # 🚨 **Kubernetes ConfigMap and Secret Mount Failures: Troubleshooting and Best Practices**
 ---

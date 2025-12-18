@@ -1,11 +1,12 @@
 ---
-title: "Exit Code 127: Command Not Found - Troubleshooting Guide"
-excerpt: "Learn how to diagnose and fix exit code 127 errors caused by missing commands, incorrect PATH settings, and permission issues in Linux and containerized environments."
+title: "Exit Code 127: Command Not Found"
+excerpt: "Learn how to diagnose and fix exit code 127 errors caused by missing commands, incorrect PATH settings, and permission issues in Linux and containerized..."
 date: "2025-12-15"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "exit code 127, command not found, PATH environment variable, Linux troubleshooting, Docker errors, permission issues, executable permissions"
 ---
+
 
 # exit code 127
 

@@ -1,11 +1,12 @@
 ---
-title: "Exited Code 1: Troubleshooting Application Termination Errors"
-excerpt: "Discover how to diagnose and fix exited code 1 errors caused by application failures, invalid references, and environment configuration issues in containerized environments."
+title: "Exited Code 1: Troubleshooting Application"
+excerpt: "Discover how to diagnose and fix exited code 1 errors caused by application failures, invalid references, and environment configuration issues in..."
 date: "2025-12-15"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "exited code 1, application errors, process termination, container debugging, environment variables, Kubernetes troubleshooting, system monitoring"
 ---
+
 
 # exited - code 1
 

@@ -1,10 +1,12 @@
 ---
-title: "Optimizing High JVM Heap Usage in Elasticsearch: Troubleshooting and Solutions"
+title: "Optimizing High JVM Heap Usage in"
 excerpt: "Learn how to troubleshoot and optimize high JVM heap usage in Elasticsearch with practical steps and commands."
 date: "2025-03-30"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
+
 ---
+
 
 # 🛠️ **Optimizing High JVM Heap Usage in Elasticsearch: Troubleshooting and Solutions**
 ---

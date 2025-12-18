@@ -1,11 +1,12 @@
 ---
 title: "not a git repository git"
-excerpt: "Encountering the \"not a git repository git\" error can be a frustrating roadblock for developers working with version control"
+excerpt: "Encountering the \"not a git repository git\" error can be a frustrating roadblock for developers working with version control."
 date: "2025-12-18"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "repository, DevOps, AlertMend AI, AIOps"
 ---
+
 
 # not a git repository git
 

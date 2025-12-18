@@ -1,11 +1,12 @@
 ---
-title: "SIGSEGV Error: Segmentation Violation Causes and Solutions"
+title: "SIGSEGV Error: Segmentation Violation"
 excerpt: "Learn how to diagnose and fix SIGSEGV segmentation violation errors caused by null pointer dereferencing, out-of-bounds access, and memory management issues."
 date: "2025-12-15"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "SIGSEGV, segmentation violation, segmentation fault, null pointer, memory access errors, debugging, AddressSanitizer, core dumps"
 ---
+
 
 # sigsegv error
 

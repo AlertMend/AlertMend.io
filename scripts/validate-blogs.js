@@ -309,8 +309,22 @@ function validateAllBlogs() {
         matchingFile = files.find(f => {
           const fileName = f.toLowerCase().replace('.html', '').replace(/[^a-z0-9-]/g, '')
           const normalizedSlugClean = normalizedSlug.replace(/[^a-z0-9-]/g, '')
-          return fileName.includes(normalizedSlugClean) || normalizedSlugClean.includes(fileName)
+          // Check if slug is contained in filename or filename is contained in slug
+          return fileName.includes(normalizedSlugClean) || normalizedSlugClean.includes(fileName) || 
+                 fileName.replace(/_/g, '-').includes(normalizedSlugClean) ||
+                 normalizedSlugClean.includes(fileName.replace(/_/g, '-'))
         })
+      }
+      
+      // Also check canonical filename overrides from build-blog-html.js
+      const canonicalOverrides = {
+        'understanding-kubernetes-pending-pod': 'Understanding_Kubernetes_Pending-pod.html',
+        'understanding-kubernetes-terminating-state': 'Understanding_Kubernetes_Terminating_State.html',
+        'kubernetes-persistentvolumeclaim-guide': 'Kubernetes_PersistentVolumeClaim_Guide.html',
+        'mastering-kubernetes-resource-quotas-requests-and-limits-for-optimized-cluster-performance': 'Mastering_Kubernetes_Resource_Quotas_Requests_and_Limits_for_Optimized_Cluster_Performance.html'
+      }
+      if (!matchingFile && canonicalOverrides[slug]) {
+        matchingFile = files.find(f => f === canonicalOverrides[slug])
       }
       
       if (matchingFile) {

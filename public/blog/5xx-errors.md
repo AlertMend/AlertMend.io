@@ -1,11 +1,12 @@
 ---
-title: "Mastering 5xx Server Errors: Complete Troubleshooting Guide"
-excerpt: "HTTP 5xx server errors indicate that a request was received and understood by your server, but the server itself failed to fulfill it, significantly affecting availability and user experience. This guide explains what the 5xx class means, how common codes (500, 502, 503, 504) arise in prevalent web stacks, and provides practical steps to troubleshoot and fix them."
+title: "Mastering 5xx Server Errors: Complete"
+excerpt: "HTTP 5xx server errors indicate that a request was received and understood by your server, but the server itself failed to fulfill it, significantly..."
 date: "2025-07-28"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "5xx errors, server errors, HTTP errors, 500 error, 502 bad gateway, 503 service unavailable, 504 gateway timeout, troubleshooting, server reliability, DevOps, Nginx, Apache, Kubernetes, WordPress"
 ---
+
 
 # Mastering 5xx Server Errors
 

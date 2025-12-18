@@ -1,11 +1,12 @@
 ---
-title: "SIGKILL Signal: Understanding Forceful Process Termination in Linux"
-excerpt: "Learn about SIGKILL signal (signal 9) for terminating unresponsive processes in Linux and Kubernetes. Discover best practices, when to use it, and monitoring strategies."
+title: "SIGKILL Signal: Understanding Forceful"
+excerpt: "Learn about SIGKILL signal (signal 9) for terminating unresponsive processes in Linux and Kubernetes. Discover best practices, when to use it, and..."
 date: "2025-12-15"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "SIGKILL, signal 9, process termination, Linux signals, unresponsive processes, OOM killer, process management, system administration"
 ---
+
 
 # sigkill
 

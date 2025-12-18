@@ -1,11 +1,12 @@
 ---
-title: "Kubernetes Observability: Complete Guide to Monitoring and Metrics"
-excerpt: "Master Kubernetes observability with metrics, logs, traces, and visualization tools. Learn best practices for monitoring dynamic environments and implementing AIOps solutions."
+title: "Kubernetes Observability: Complete Guide"
+excerpt: "Master Kubernetes observability with metrics, logs, traces, and visualization tools. Learn best practices for monitoring dynamic environments and..."
 date: "2025-12-15"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "Kubernetes observability, monitoring, metrics, logs, traces, Prometheus, Grafana, AIOps, distributed tracing, system monitoring"
 ---
+
 
 # kubernetes observability
 

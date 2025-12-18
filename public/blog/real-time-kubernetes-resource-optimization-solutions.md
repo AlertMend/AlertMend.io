@@ -1,11 +1,12 @@
 ---
-title: "real-time kubernetes resource optimization solutions"
+title: "real-time kubernetes resource optimization"
 excerpt: "In today's fast-evolving tech landscape, Kubernetes stands as the cornerstone for scalable application deployment"
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "real, time, kubernetes, resource, optimization, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
+
 
 # real-time kubernetes resource optimization solutions
 

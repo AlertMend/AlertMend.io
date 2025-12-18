@@ -1,10 +1,12 @@
 ---
-title: "Troubleshooting Elasticsearch Cluster Failures and Instability: Causes and Solutions"
-excerpt: "Explore the latest AI tools and applications that are revolutionizing various industries. From image generation to natural language processing, AI is changing the way we think and interact with the world."
+title: "Troubleshooting Elasticsearch Cluster"
+excerpt: "Explore the latest AI tools and applications that are revolutionizing various industries. From image generation to natural language processing, AI is..."
 date: "2025-03-9"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
+
 ---
+
 
 # 🚨 **Troubleshooting Elasticsearch Cluster Failures and Instability: Causes and Solutions**
 ---

@@ -1,11 +1,12 @@
 ---
-title: "AlertMend: Fix Elasticsearch Yellow Clusters in Kubernetes"
+title: "AlertMend: Fix Elasticsearch Yellow"
 excerpt: "Elasticsearch requires adequate virtual memory to run smoothly. If the system's virtual memory limit is too low, it can cause performance issues and failures."
 date: "2025-06-08"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
 keywords: "Elasticsearch cluster, yellow cluster status, Kubernetes monitoring, incident remediation, troubleshooting Elasticsearch, cluster health management, automated incident response, Elasticsearch issues"
 ---
+
 
 A yellow cluster status in Elasticsearch indicates that all primary shards are allocated, but replica shards are not. This is common in single-node clusters or when nodes are unavailable.
 

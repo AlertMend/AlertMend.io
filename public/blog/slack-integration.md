@@ -1,10 +1,12 @@
 ---
 title: "Slack Integration Guide for Alertmend"
-excerpt: "Integrate Slack with Alertmend to receive real-time incident alerts directly within your preferred Slack channels. This guide provides a step-by-step walkthrough for creating a Slack app, generating necessary tokens, adding the app to your workspace and channels, and retrieving the channel ID. Once integrated, Alertmend can push automated alerts and updates to Slack, helping your team stay informed and respond to incidents faster and more efficiently. Whether you"
+excerpt: "Integrate Slack with Alertmend to receive real-time incident alerts directly within your preferred Slack channels."
 date: "2024-07-24"
 category: "Blog"
 author: "Arvind Rajpurohit"
+
 ---
+
 
 Integrate Slack with Alertmend to receive real-time incident alerts directly within your preferred Slack channels. This guide provides a step-by-step walkthrough for creating a Slack app, generating necessary tokens, adding the app to your workspace and channels, and retrieving the channel ID. Once integrated, Alertmend can push automated alerts and updates to Slack, helping your team stay informed and respond to incidents faster and more efficiently. Whether you're monitoring infrastructure, Kubernetes, or system events, this integration ensures streamlined collaboration and faster incident resolution.
 

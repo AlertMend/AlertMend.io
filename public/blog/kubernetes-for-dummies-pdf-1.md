@@ -1,11 +1,15 @@
 ---
 title: "kubernetes for dummies pdf"
-excerpt: "If you're new to the world of cloud computing, \"Kubernetes for dummies pdf\" is a term you might have come across while exploring system monitoring and contai..."
+excerpt: "If you're new to the world of cloud computing, \"Kubernetes for dummies pdf\" is a term you might have come across while exploring system monitoring and..."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubernetes, dummies, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
+
+
+
+
 
 # kubernetes for dummies pdf
 

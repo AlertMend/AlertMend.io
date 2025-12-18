@@ -1,11 +1,12 @@
 ---
-title: "not a git repo"
+title: "not a git repo Guide"
 excerpt: "When it comes to version control systems, encountering errors can disrupt your workflow significantly"
 date: "2025-12-18"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "repo, DevOps, AlertMend AI, AIOps"
 ---
+
 
 # not a git repo
 

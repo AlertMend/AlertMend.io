@@ -1,11 +1,12 @@
 ---
-title: "dashboard pod"
+title: "dashboard pod Guide"
 excerpt: "In the dynamic world of DevOps, the dashboard pod plays a pivotal role in streamlining system monitoring and alerting processes"
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "dashboard, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
+
 
 # dashboard pod
 

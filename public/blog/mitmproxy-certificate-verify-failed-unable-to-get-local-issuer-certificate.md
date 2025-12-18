@@ -1,11 +1,13 @@
 ---
-title: "mitmproxy certificate verify failed unable to get local issuer certificate"
-excerpt: "When working with mitmproxy for system monitoring and alerting through the alertmend. io platform, you may encounter the error \"mitmproxy certificate verify ..."
+title: "mitmproxy certificate verify failed unable"
+excerpt: "When working with mitmproxy for system monitoring and alerting through the alertmend."
 date: "2025-12-18"
 category: "Security"
 author: "AlertMend Team"
 keywords: "mitmproxy, certificate, verify, failed, unable, Security, AlertMend AI, AIOps"
 ---
+
+
 
 # mitmproxy certificate verify failed unable to get local issuer certificate
 

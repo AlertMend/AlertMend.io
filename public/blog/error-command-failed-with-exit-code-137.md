@@ -1,11 +1,13 @@
 ---
 title: "error command failed with exit code 137."
-excerpt: "Encountering the message \"error command failed with exit code 137\" can be a perplexing and frustrating experience, especially when working in containerized e..."
+excerpt: "Encountering error command failed with exit code 137 can be perplexing when working in containerized environments. Learn how to diagnose and resolve this issue."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "error, command, failed, with, exit, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
+
+
 
 # error command failed with exit code 137.
 

@@ -1,11 +1,12 @@
 ---
-title: "Mastering Load Balancing for Persistent Connections in Kubernetes"
+title: "Mastering Load Balancing for Persistent"
 excerpt: "Learn why Kubernetes struggles with long-lived connections and how to architect reliable, scalable load balancing for gRPC, WebSockets, and database sessions."
 date: "2025-07-28"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
 keywords: "Kubernetes load balancing, persistent connections, gRPC load balancing, WebSocket load balancing, Kubernetes services, kube-proxy, headless services, service mesh, Istio, Envoy, long-lived connections, database connection pooling, Kubernetes networking"
 ---
+
 
 # Mastering Load Balancing for Persistent Connections in Kubernetes
 

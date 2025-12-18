@@ -1,11 +1,12 @@
 ---
 title: "fatal not git repository"
-excerpt: "The \"fatal: not a git repository\" error is a common hurdle many developers encounter when working with Git, often disrupting workflow unexpectedly"
+excerpt: "The \"fatal: not a git repository\" error is a common hurdle many developers encounter when working with Git, often disrupting workflow unexpectedly."
 date: "2025-12-18"
 category: "Troubleshooting"
 author: "AlertMend Team"
 keywords: "fatal, repository, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"
 ---
+
 
 # fatal not git repository
 

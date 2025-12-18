@@ -1,10 +1,12 @@
 ---
-title: "Mastering Kubernetes Resource Quotas, Requests, and Limits for Optimized Cluster Performance"
+title: "Mastering Kubernetes Resource Quotas"
 excerpt: "In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors occur during this process."
 date: "2025-05-21"
 category: "Kubernetes"
 author: "Himanshu Bansal"
+
 ---
+
 
 Proper resource management is crucial for Kubernetes cluster performance and cost optimization.
 

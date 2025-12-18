@@ -1,10 +1,12 @@
 ---
-title: "Graceful Shutdown in Kubernetes: Ensuring Safe Pod Termination"
+title: "Graceful Shutdown in Kubernetes: Ensuring"
 excerpt: "Learn how to gracefully shut down Kubernetes Pods to prevent broken connections, dropped tasks, and race conditions during termination."
 date: "2025-08-1"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
+
 ---
+
 
 ## Why Graceful Shutdown Matters
 

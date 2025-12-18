@@ -1,11 +1,12 @@
 ---
-title: "best kubernetes resource optimization platforms"
+title: "best kubernetes resource optimization"
 excerpt: "Kubernetes has revolutionized the way organizations orchestrate their containerized applications, offering unmatched scalability and flexibility"
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "best, kubernetes, resource, optimization, platforms, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
+
 
 # best kubernetes resource optimization platforms
 

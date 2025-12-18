@@ -1,11 +1,12 @@
 ---
-title: "Fix KubeAPIDown: Restore Kubernetes API Server Availability"
+title: "Fix KubeAPIDown: Restore Kubernetes API"
 excerpt: "In Kubernetes, privileged containers play a critical role when applications need elevated access to host resources."
 date: "2025-05-18"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
 keywords: "Kubernetes troubleshooting, KubeAPIDown, Kubernetes API server, high availability Kubernetes, Kubernetes reliability solutions, Kubernetes monitoring tools, AlertMend AI, API server recovery steps"
 ---
+
 
 The Kubernetes API server is the central control plane component. When it's down, the entire cluster becomes unmanageable.
 

@@ -1,11 +1,12 @@
 ---
 title: "How to Fix OOMKilled Errors in Kubernetes"
-excerpt: "In Kubernetes, applications run inside pods with limits on CPU and memory. If CPU goes high, Kubernetes throttles it. But if memory goes high, Kubernetes kills the pod."
+excerpt: "In Kubernetes, applications run inside pods with limits on CPU and memory. If CPU goes high, Kubernetes throttles it."
 date: "2025-07-01"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
 keywords: "Kubernetes, OOMKilled errors, memory management, Kubernetes optimization, automated remediation, infrastructure management, Kubernetes troubleshooting, container memory issues"
 ---
+
 
 ## Understanding OOMKilled
 

@@ -1,11 +1,12 @@
 ---
-title: "Troubleshooting Elasticsearch Unassigned Shards Incident on Kubernetes"
+title: "Troubleshooting Elasticsearch Unassigned"
 excerpt: "Elasticsearch unassigned shards occur when a node is unable to assign shards properly, leading to reduced search performance and potential data loss."
 date: "2025-06-05"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"
 keywords: "Elasticsearch, unassigned shards, Kubernetes, troubleshooting Elasticsearch, cluster health, shard allocation, automated incident remediation, operational efficiency"
 ---
+
 
 ## Understanding Unassigned Shards
 

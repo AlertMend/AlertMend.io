@@ -1,11 +1,12 @@
 ---
 title: "kubelet stopped posting node status"
-excerpt: "In the world of Kubernetes, the phrase \"kubelet stopped posting node status\" can signal an array of operational challenges within a cluster"
+excerpt: "In the world of Kubernetes, the phrase \"kubelet stopped posting node status\" can signal an array of operational challenges within a cluster."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubelet, stopped, posting, node, status, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
+
 
 # kubelet stopped posting node status
 

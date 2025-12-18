@@ -1,11 +1,12 @@
 ---
-title: "make error 127"
+title: "make error 127: How to Fix"
 excerpt: "Encountering the infamous make error 127 can be frustrating, especially when you're in the midst of compiling code"
 date: "2025-12-18"
 category: "Troubleshooting"
 author: "AlertMend Team"
 keywords: "make, error, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"
 ---
+
 
 # make error 127
 

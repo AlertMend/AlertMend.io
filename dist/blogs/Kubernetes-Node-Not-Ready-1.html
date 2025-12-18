@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kubernetes node not ready | AlertMend AI</title>
+  <meta name="description" content="REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS This content is gathered from the top-ranking pages for comprehensive reference">
+  <meta name="keywords" content="kubernetes, node, ready, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps">
+  <meta name="author" content="AlertMend Team">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://www.alertmend.io/blogs/Kubernetes-Node-Not-Ready-1.html">
+  <!-- Favicon - uses SVG logo -->
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/logos/alertmend-logo.svg" />
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.alertmend.io/blogs/Kubernetes-Node-Not-Ready-1.html">
+  <meta property="og:title" content="kubernetes node not ready | AlertMend AI">
+  <meta property="og:description" content="REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS This content is gathered from the top-ranking pages for comprehensive reference">
+  <meta property="og:image" content="https://alertmend.io/og-image.jpg">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.alertmend.io/blogs/Kubernetes-Node-Not-Ready-1.html">
+  <meta name="twitter:title" content="kubernetes node not ready | AlertMend AI">
+  <meta name="twitter:description" content="REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS This content is gathered from the top-ranking pages for comprehensive reference">
+  <meta name="twitter:image" content="https://alertmend.io/og-image.jpg">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "kubernetes node not ready | AlertMend AI",
+    "description": "REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS This content is gathered from the top-ranking pages for comprehensive reference",
+    "image": "https://alertmend.io/og-image.jpg",
+    "datePublished": "2025-12-18",
+    "dateModified": "2025-12-18",
+    "author": {
+      "@type": "Person",
+      "name": "AlertMend Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "AlertMend AI",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://alertmend.io/logos/alertmend-logo.svg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.alertmend.io/blogs/Kubernetes-Node-Not-Ready-1.html"
+    },
+    "articleSection": "Kubernetes"
+  }
+  </script>
+  
+  <!-- SearchAtlas Dynamic Optimization -->
+  <script nowprocket nitro-exclude type="text/javascript" id="sa-dynamic-optimization" data-uuid="457086dd-8bfb-46dd-a38d-2f4a6efd0e7e" src="data:text/javascript;base64,dmFyIHNjcmlwdCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoInNjcmlwdCIpO3NjcmlwdC5zZXRBdHRyaWJ1dGUoIm5vd3Byb2NrZXQiLCAiIik7c2NyaXB0LnNldEF0dHJpYnV0ZSgibml0cm8tZXhjbHVkZSIsICIiKTtzY3JpcHQuc3JjID0gImh0dHBzOi8vZGFzaGJvYXJkLnNlYXJjaGF0bGFzLmNvbS9zY3JpcHRzL2R5bmFtaWNfb3B0aW1pemF0aW9uLmpzIjtzY3JpcHQuZGF0YXNldC51dWlkID0gIjQ1NzA4NmRkLThiZmItNDZkZC1hMzhkLTJmNGE2ZWZkMGU3ZSI7c2NyaXB0LmlkID0gInNhLWR5bmFtaWMtb3B0aW1pemF0aW9uLWxvYWRlciI7ZG9jdW1lbnQuaGVhZC5hcHBlbmRDaGlsZChzY3JpcHQpOw=="></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.7;
+      color: #1f2937;
+      background: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .main-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 96px 16px 32px;
+      margin-top: 64px;
+    }
+    @media (min-width: 640px) {
+      .main-container {
+        padding: 96px 24px 32px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .main-container {
+        padding: 96px 32px 48px;
+      }
+    }
+    .content-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-top: 32px;
+    }
+    @media (min-width: 1024px) {
+      .content-wrapper {
+        grid-template-columns: 8fr 4fr;
+        gap: 32px;
+      }
+    }
+    .main-content {
+      display: flex;
+      gap: 24px;
+    }
+    .social-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 8px;
+    }
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .social-icon:hover {
+      background: #f3e8ff;
+    }
+    .article-content {
+      flex: 1;
+    }
+    article {
+      background: #ffffff;
+    }
+    header {
+      margin-bottom: 32px;
+    }
+    h1 {
+      color: #581c87;
+      font-size: 2.25rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 3rem;
+      }
+    }
+    @media (min-width: 1024px) {
+      h1 {
+        font-size: 3.75rem;
+      }
+    }
+    h2 {
+      color: #581c87;
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    @media (min-width: 768px) {
+      h2 {
+        font-size: 2.25rem;
+      }
+    }
+    h3 {
+      color: #581c87;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    @media (min-width: 768px) {
+      h3 {
+        font-size: 1.875rem;
+      }
+    }
+    h4, h5, h6 {
+      color: #581c87;
+      font-weight: 600;
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+    p {
+      margin-bottom: 24px;
+      font-size: 1.125rem;
+      line-height: 1.75;
+      color: #1f2937;
+    }
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e9d5ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9333ea;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .author-details {
+      display: flex;
+      flex-direction: column;
+    }
+    .author-name {
+      font-weight: 600;
+      color: #111827;
+      font-size: 1rem;
+    }
+    .author-meta {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+    .category-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #dbeafe;
+      color: #1e40af;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-top: 16px;
+    }
+    code {
+      background: #f3f4f6;
+      color: #9333ea;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+      font-size: 0.9em;
+      border: 1px solid #e5e7eb;
+    }
+    pre {
+      background: #1f2937;
+      color: #f9fafb;
+      padding: 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border: 1px solid #374151;
+    }
+    pre code {
+      background: none;
+      color: #f9fafb;
+      padding: 0;
+      border: none;
+      font-size: 0.875rem;
+    }
+    a {
+      color: #9333ea;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #7c3aed;
+      text-decoration: underline;
+    }
+    ul, ol {
+      margin-bottom: 24px;
+      padding-left: 24px;
+      font-size: 1.125rem;
+      line-height: 1.75;
+    }
+    li {
+      margin-bottom: 12px;
+      color: #1f2937;
+    }
+    blockquote {
+      border-left: 4px solid #a855f7;
+      padding-left: 24px;
+      margin: 32px 0;
+      color: #374151;
+      font-style: italic;
+      font-size: 1.125rem;
+      line-height: 1.75;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin: 2rem 0;
+      -webkit-overflow-scrolling: touch;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0;
+      font-size: 1rem;
+      background: #ffffff;
+      border: 2px solid #d1d5db;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    }
+    thead {
+      background: #faf5ff;
+    }
+    th {
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      color: #581c87;
+      border-right: 1px solid #e9d5ff;
+      border-bottom: 2px solid #c084fc;
+      background: #faf5ff;
+      font-size: 0.9375rem;
+    }
+    th:first-child {
+      border-left: none;
+    }
+    th:last-child {
+      border-right: none;
+    }
+    td {
+      padding: 1rem;
+      text-align: left;
+      border-right: 1px solid #e5e7eb;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+    td:first-child {
+      border-left: none;
+    }
+    td:last-child {
+      border-right: none;
+    }
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+    tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+    tbody tr:hover {
+      background: #f3e8ff;
+    }
+    @media (max-width: 768px) {
+      .table-wrapper {
+        margin: 1.5rem 0;
+      }
+      table {
+        font-size: 0.875rem;
+      }
+      th, td {
+        padding: 0.75rem;
+      }
+    }
+    hr {
+      border: none;
+      border-top: 2px solid #e5e7eb;
+      margin: 3rem 0;
+    }
+    .content {
+      font-size: 1.125rem;
+      line-height: 1.75;
+      color: #1f2937;
+    }
+    .promotional-section {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid #e5e7eb;
+    }
+    .promotional-section p {
+      color: #1f2937;
+      font-size: 1.125rem;
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+    .profile-section {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #e5e7eb;
+      margin-top: 32px;
+    }
+    @media (min-width: 640px) {
+      .profile-section {
+        flex-direction: row;
+      }
+    }
+    .profile-image {
+      flex-shrink: 0;
+      width: 128px;
+      height: 128px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid #e5e7eb;
+    }
+    .profile-content {
+      flex: 1;
+    }
+    .profile-placeholder-arvind {
+      display: none;
+      width: 128px;
+      height: 128px;
+      border-radius: 8px;
+      background: #f3e8ff;
+      border: 1px solid #e5e7eb;
+      align-items: center;
+      justify-content: center;
+      color: #9333ea;
+      font-weight: 700;
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    .profile-placeholder-arvind.show {
+      display: flex;
+    }
+    .profile-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #581c87;
+      margin-bottom: 8px;
+    }
+    .profile-bio {
+      color: #1f2937;
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .profile-bio p {
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+    .linkedin-link {
+      display: inline-flex;
+      align-items: center;
+      color: #9333ea;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .linkedin-link:hover {
+      color: #7c3aed;
+    }
+    footer {
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px solid #e5e7eb;
+      color: #6b7280;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+    footer a {
+      color: #9333ea;
+      font-weight: 600;
+    }
+    .sidebar {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .sidebar {
+        display: block;
+      }
+    }
+    .sidebar-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: sticky;
+      top: 96px;
+    }
+    .sidebar-card {
+      background: #faf5ff;
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid #e9d5ff;
+    }
+    .sidebar-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #581c87;
+      margin-bottom: 16px;
+      margin-top: 0;
+    }
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .signup-form input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 1rem;
+    }
+    .signup-form input:focus {
+      outline: none;
+      border-color: #9333ea;
+      box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+    }
+    .signup-form button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(to right, #6b21a8, #581c87);
+      color: white;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .signup-form button:hover {
+      background: linear-gradient(to right, #581c87, #4c1d95);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .related-content-title {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #111827;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      margin-top: 0;
+    }
+    .related-posts-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .related-posts-list li {
+      margin: 0;
+    }
+    .related-post-link {
+      color: #2563eb;
+      text-decoration: underline;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      display: block;
+      transition: color 0.2s;
+    }
+    .related-post-link:hover {
+      color: #1e40af;
+    }
+    .view-more-link {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 16px;
+      color: #9333ea;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .view-more-link:hover {
+      color: #7c3aed;
+    }
+    @media (max-width: 768px) {
+      .main-container {
+        padding: 80px 16px 32px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.75rem;
+      }
+      h3 {
+        font-size: 1.25rem;
+      }
+      p, ul, ol {
+        font-size: 1rem;
+      }
+      .social-sidebar {
+        display: none;
+      }
+      .main-content {
+        flex-direction: column;
+      }
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      z-index: 50;
+    }
+    .navbar-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    @media (min-width: 640px) {
+      .navbar-container {
+        padding: 0 24px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .navbar-container {
+        padding: 0 32px;
+      }
+    }
+    .navbar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: inherit;
+      padding: 6px 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .navbar-logo:hover {
+      background: #f9fafb;
+    }
+    .navbar-logo-icon {
+      width: auto;
+      height: 32px;
+      max-height: 32px;
+      object-fit: contain;
+    }
+    .navbar-logo-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #6b21a8, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .navbar-links {
+      display: none;
+      align-items: center;
+      gap: 4px;
+    }
+    @media (min-width: 1024px) {
+      .navbar-links {
+        display: flex;
+      }
+    }
+    .navbar-link {
+      padding: 8px 16px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #7c3aed;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .navbar-link:hover {
+      color: #581c87;
+      background: #f9fafb;
+    }
+    .navbar-link.active {
+      color: #7c3aed;
+      background: #faf5ff;
+    }
+    .navbar-actions {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      margin-left: 16px;
+      padding-left: 16px;
+      border-left: 1px solid #e5e7eb;
+    }
+    @media (min-width: 1024px) {
+      .navbar-actions {
+        display: flex;
+      }
+    }
+    .navbar-button {
+      padding: 8px 16px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .navbar-button-primary {
+      background: linear-gradient(to right, #6b21a8, #581c87);
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+    .navbar-button-primary:hover {
+      background: linear-gradient(to right, #581c87, #4c1d95);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .navbar-button-secondary {
+      color: #7c3aed;
+      background: transparent;
+    }
+    .navbar-button-secondary:hover {
+      color: #581c87;
+      background: #f9fafb;
+    }
+    .navbar-button-playground {
+      background: #7c3aed;
+      color: white;
+      font-weight: 600;
+    }
+    .navbar-button-playground:hover {
+      background: #6b21a8;
+    }
+    .mobile-menu-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: #374151;
+    }
+    @media (min-width: 1024px) {
+      .mobile-menu-button {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-content">
+        <!-- Logo -->
+        <a href="/" class="navbar-logo">
+          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'; this.parentElement.querySelector('.navbar-logo-text').style.display='inline';" />
+          <svg class="navbar-logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <span class="navbar-logo-text" style="display: none;">AlertMend AI</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="navbar-links">
+          <a href="/#how-it-works" class="navbar-link">How It Works</a>
+          <a href="/#solutions" class="navbar-link">Solutions</a>
+          <a href="/#benefits" class="navbar-link">Benefits</a>
+          <a href="/case-studies" class="navbar-link">Case Studies</a>
+          <a href="/blog" class="navbar-link active">Blog</a>
+          <a href="/pricing" class="navbar-link">Pricing</a>
+        </div>
+
+        <!-- Desktop Actions -->
+        <div class="navbar-actions">
+          <a href="https://demo.alertmend.io/playground" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-playground">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Playground
+          </a>
+          <a href="https://demo.alertmend.io/signup" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-secondary">Register</a>
+          <a href="https://calendly.com/hello-alertmend/30min" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-primary">Book a Demo</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-button" aria-label="Toggle menu">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <div class="content-wrapper">
+      <!-- Main Content Area (70%) -->
+      <div class="main-content">
+        <!-- Social Share Icons (Left Sidebar) -->
+        <div class="social-sidebar">
+          <a href="#" class="social-icon" aria-label="Share on Facebook">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Share on Twitter">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Share on LinkedIn">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Copy link">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8.465 11.293c1.133-1.133 3.109-1.133 4.242 0l.707.707 1.414-1.414-.707-.707c-1.498-1.498-3.94-1.498-5.439 0l-.707.707 1.414 1.414.707-.707zm-2.829 2.829l.707.707c1.498 1.498 3.94 1.498 5.439 0l.707-.707-1.414-1.414-.707.707c-1.133 1.133-3.109 1.133-4.242 0l-.707-.707-1.414 1.414zm11.314-8.485l-6.364 6.364c-.39.39-1.023.39-1.414 0s-.39-1.023 0-1.414l6.364-6.364c.39-.39 1.023-.39 1.414 0s.39 1.023 0 1.414z"/></svg>
+          </a>
+        </div>
+
+        <!-- Article Content -->
+        <div class="article-content">
+          <article>
+            <header>
+              <h1>kubernetes node not ready</h1>
+              
+              <!-- Author Info -->
+              <div class="author-info">
+                <div class="author-avatar">
+                  A
+                </div>
+                <div class="author-details">
+                  <div class="author-name">AlertMend Team</div>
+                  <div class="author-meta">57 min read • December 18, 2025</div>
+                </div>
+              </div>
+
+              <!-- Category Tag -->
+              <div class="category-tag">Kubernetes</div>
+            </header>
+
+            <!-- Content -->
+            <div class="content">
+              <h2>kubernetes node not ready</h2>
+<p>REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS</p>
+<p>This content is gathered from the top-ranking pages for comprehensive reference.
+Sources:</p>
+<ol>
+<li><a href="https://www.groundcover.com/kubernetes-troubleshooting/kubernetes-node-not-ready">https://www.groundcover.com/kubernetes-troubleshooting/kubernetes-node-not-ready</a></li>
+<li><a href="https://www.perfectscale.io/blog/kubernetes-node-notready">https://www.perfectscale.io/blog/kubernetes-node-notready</a></li>
+<li><a href="https://alertmend.io.com/learn/how-to-fix-kubernetes-node-not-ready-error/">https://alertmend.io.com/learn/how-to-fix-kubernetes-node-not-ready-error/</a></li>
+<li><a href="https://joecreager.com/troubleshooting-kubernetes-worker-node-notready/">https://joecreager.com/troubleshooting-kubernetes-worker-node-notready/</a></li>
+<li><a href="https://repost.aws/knowledge-center/eks-node-status-ready">https://repost.aws/knowledge-center/eks-node-status-ready</a></li>
+<li><a href="https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/availability-performance/node-not-ready-after-being-healthy">https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/availability-performance/node-not-ready-after-being-healthy</a></li>
+<li><a href="https://github.com/kubernetes-sigs/kind/issues/3603">https://github.com/kubernetes-sigs/kind/issues/3603</a></li>
+<li><a href="https://kubernetes.io/docs/concepts/architecture/nodes/">https://kubernetes.io/docs/concepts/architecture/nodes/</a></li>
+</ol>
+<p>The following sections contain content from each source, organized for reference.
+utilize this information to comprehend the topic comprehensively, identify key points,
+related keywords, and best practices. Then create original, SEO-optimized content
+that synthesizes insights from all sources while using completely original wording.</p>
+<p>Shahar Azulay , CEO This is some text inside of a div block. minutes read, This is some text inside of a div block. Nodes are one of the fundamental building blocks of a Kubernetes cluster – which is why having nodes stuck in the &quot;not ready&quot; state represents big problem. When nodes aren&#39;t ready, they can&#39;t host workloads. They are, in other words, dead weight until you figure out what caused them to end up being not ready and fix the issue. Keep reading for guidance as we elaborate on everything Kubernetes admins require to understand about “node not ready” issues – including what they mean, what causes them, how to troubleshoot nodes that are not ready, and how to fix the problem. What is the Kubernetes node not ready error? Kubernetes &quot;node not ready&quot; is an error indicating that Kubernetes nodes can&#39;t host workload (to put that in slightly more technical terms, it means the nodes can&#39;t schedule pods). It&#39;s a node status assigned by the Kubernetes node controller, which is responsible for monitoring the state of nodes. &quot;Node not ready&quot; could indicate that the Kubernetes API server and other control plane components can&#39;t communicate reliably with the node at all because of problems like the node being stuck in a crash-restart loop or a flaky network connection. The error could also indicate that the node is reachable but is unable to support pods due to issues with the kubelet or kube-proxy processes running on the node. You can determine whether a “node not ready” issue exists for any of your nodes by running: kubectl obtain nodes The output will include a list of nodes and their status (among other information). Any nodes whose status matches NotReady are in the “not ready” state. Understanding Kubernetes node states | State | Meaning | Main causes | |---|---|---| | Ready | Node is operating normally. | | NotReady | Node can&#39;t schedule pods. | Resource exhaustion, problems with kubelet or kube-proxy, networking issues. | | SchedulingDisabled | Node is &quot;cordoned&quot; and can&#39;t schedule pods. | Admins deliberately configured node not to be able to host pods. | | Unknown | The node is entirely unreachable and Kubernetes. | Node has permanently crashed; network connection to node has permanently failed. | Before diving deeper into what causes &quot;node not ready&quot; errors, let&#39;s step back a bit and elaborate on how Kubernetes tracks node status in general. In Kubernetes, a node represents server that forms part of a Kubernetes cluster. Most nodes function as worker nodes, which means their job is to host applications (which are deployed in Kubernetes using pods). Some nodes are control-plane nodes, meaning they host the software that manages the rest of the Kubernetes cluster. Once you join a node to a cluster, it can exist in one of the following four node states: Ready : The node is functioning normally and can host applications. NotReady : The node has a problem and can&#39;t host applications. SchedulingDisabled : The node is functioning normally but can&#39;t host applications because admins have used Kubernetes &quot; cordon &quot; feature to disable scheduling on that node. Unknown : The node is completely unreachable, typically due either to a failed network connection or because the node has permanently shut down. What causes “node not ready” errors? There are many potential causes of the “node not ready” error. The following are the most common. Insufficient system resources Nodes that lack sufficient CPU or memory to host workloads may experience “node not ready” errors. Typically, this issue occurs when you join a server to your cluster that simply doesn&#39;t have enough spare resources to host any workloads because all of its CPU and memory is being consumed by other, non-Kubernetes related applications or processes that are running on the node. Memory leaks or other bugs that cause the node to waste CPU or memory resources could also be the underlying problem. kubelet issues Kubelet is an agent that runs on each node and manages the node&#39;s connection with the cluster. If kubelet experiences a problem, it could lead to Kubernetes node not ready problems because Kubernetes can no longer reliably communicate with the node via kubelet. In general, kubelet issues are rare because kubelet is stable software. But you may experience situations where the node&#39;s operating system kills the kubelet process to free up CPU or memory. Or, you may be running a buggy version of kubelet, especially if you&#39;re using an experimental Kubernetes release. kube-proxy issues Each node in a Kubernetes cluster also runs kube-proxy, a networking agent whose main job is to enforce a networking configuration on each node that matches the network Services configured through Kubernetes. Problems with node-proxy could cause node not ready errors by preventing the node from being able to communicate normally with the control plane. As with kubelet, kube-proxy is typically stable and issues with it are rare. But the operating system could kill kube-proxy for some reason, or buggy code could trigger unusual kube-proxy behavior. Networking issues Even if kube-proxy is functioning normally, problems with other networking software or infrastructure could lead to “node not ready” problems. The network that connects a node to the cluster might simply be flaky, causing intermittent disconnects. Or, problems like IP address conflicts (which happen when the node is assigned the same IP address as other endpoints on the network) could create it difficult for the control plane to reach the node reliably. How to troubleshoot “node not ready” issues utilize the following steps to troubleshoot problems with nodes stuck in the NotReady state. Confirm node status First, double-check that your node is indeed in the NotReady node status. As noted above, you can do this by running: kubectl obtain nodes If you&#39;ve just noticed this issue for the first time, it may be worth waiting a few minutes and checking again. Occasionally, the “node not ready” issue will resolve itself (especially in cases where the problem is due to a fluke, like a short-lived networking problem that doesn&#39;t frequently occur). Connect to node As a next step, connect to the node to create sure it&#39;s definitely up and functioning. This allows you to rule out issues like the node crashing or being completely unreachable via the network. The best way to connect to the node will depend on how you set up your nodes. But in most cases, you can utilize an SSH command like the following: ssh user@node-name 3. Describe node Assuming the node is indeed up and running, the next step in the troubleshooting process is to utilize kubectl to obtain more information about the node. You can do this by running: kubectl describe node-name (Replace node-name with the actual name of the node. ) Review the output, looking in particular at the following sections: Conditions : This tells you whether the node is experiencing any adverse conditions, such as MemoryPressure (meaning it&#39;s running low on memory) or DiskPressure (meaning it&#39;s low on disk space due to Kubernetes disk pressure problems). If one of these conditions is true, it&#39;s likely the cause of the issue, and you can resolve it by mitigating the problem – such as by allocating killing processes to free up memory, in the case of MemoryPressure. (This section will also tell you that the node is in the NotReady state, but you already understand that. ) ‍ Events : This will typically tell you when the node first became NotReady. It may also include information about other relevant events, like failure to begin containers. View node and kubelet logs If no node conditions or events assist to elaborate on what caused the Kubernetes node not ready error, the next step is to examine the node and kubelet logs. The exact location of logs varies between operating systems, but on most Linux distributions, you can discover most logs in /var/log. The most crucial log file is typically syslog. So, SSH into the node and open up syslog by running: less /var/log/syslog As you review the log, look for events related to kubelet or kube-proxy. If these processes have shut down or been killed, you&#39;ll typically discover information about those events in this log. Depending on how you installed Kubernetes, you can also typically view kubelet logs using: journalctl -u kubelet As with syslog, reviewing the kubelet logs can assist identify events related to kubelet crashing or otherwise behaving erratically. Review other node details If you&#39;re still at a loss as to why the Kubernetes node is NotReady, there represent few other things you can check while logged into the node: The top command on most Linux distributions will display information about running processes and how many resources they are using. If kubelet or kube-proxy are misbehaving because of issues like memory leaks, this data may clue you in. The df command displays data about disk space usage. If the node is running highly low on disk space, this will tell you. It will also tell you exactly which partition is running out of space, in the event that there are multiple partitions. The netstat command displays information about network connections, which may be useful for identifying unusual network behavior. Generally, most of the relevant data you can obtain from these commands would also be recorded in syslog. But in certain cases – such as if the system has run out of space to the point that it can no longer record events in syslog because there is no space to expand the file – it may not be, so it&#39;s worth performing these additional checks. Verify network connectivity In some cases, the node&#39;s networking configuration may appear valid based on information provided by the Kubernetes node itself, but this doesn&#39;t necessarily mean the Kubernetes control plane can reach the node. To check for issues in the connection between the node and the control plane, first determine the node&#39;s IP address, which you can discover by running the following kubectl obtain nodes command: kubectl obtain nodes -o wide Then, SSH into a control plane node and run the following command: traceroute node-ip-address Replace node-ip-address with the IP address that kubectl reports for the node. The output will display data about the flow of network packets between the control plane and the node. If packets are being held up at some point on the network – such as when they exit a subnet – this information will assist you identify the problem. Check kube-system components Kube-system represents namespace that hosts objects created by the control plane, including kube-proxy. Verifying the status of resources running in this namespace may be helpful for troubleshooting in cases where an issue on the control plane side, like a failed kube-proxy pod, has caused nodes to become NotReady (that said, if the issue lies with the control plane, it&#39;s likely that most or all of your nodes will become NotReady, so this is rarely the culprit). Restart kubelet and kube-proxy Restarting the kubelet service and kube-proxy on the node may assist to resolve Kubernetes node “not ready” issues. In addition, watching log events and resource utilization by kubelet and kube-proxy as they restart could provide insight into why they are not functioning normally. For example, you may notice that one of these processes steadily increases its memory usage over time, which is an indication of a memory leak. On most Linux distributions, you can restart the kubelet service and kube-proxy with: sudo systemctl restart kubelet sudo systemctl restart kube-proxy 9. Restart the node As a final troubleshooting step, you can attempt restarting the entire Kubernetes node. While this won&#39;t necessarily tell you why the issue occurred, it may resolve it in cases where the problem stemmed from a temporary failure or misconfiguration. That said, if this does fix the issue, you&#39;ll desire to keep watching the node closely to ensure that it operates normally. It&#39;s possible that problems like memory leaks will cause the node to run low on resources again over time, causing the NotReady error to recur eventually. Best practices to prevent node NotReady errors Successfully troubleshooting node NotReady errors is good. What&#39;s even better is preventing them from occurring in the first place. The following best practices can assist in this regard by minimizing the risk of node NotReady problems. Regular monitoring and alerting The single most crucial step you can take to prevent node not ready issues is to utilize Kubernetes monitoring tools to observe your nodes continuously and generate alerts when something looks awry. For example, alerting tools can tell you that your node is running short on CPU, memory, or disk space well before the issue becomes critical and causes the node to cease functioning normally. Likewise, network monitoring tools can alert you to network disconnects, high network latency, or packet loss issues, which provides early warning about problems that may cause the node to become unavailable due to networking problems. Resource capacity planning Carefully planning resource capacity for nodes is another best practice for preventing NotReady errors. Capacity planning means ensuring that the servers you join to your cluster as worker nodes have enough CPU, memory, and disk space to support the workloads you intend to run on them. In addition, you should avoid forcing pods to run on nodes that lack enough resources to handle them. For example, before creating a DaemonSet to schedule pods on a specific node, check the node&#39;s resource utilization status to ensure it&#39;s a good fit. Node autoscaling Node autoscaling allows you to increase the total nodes in your cluster and/or modify the resource allocations to individual nodes. Autoscaling can assist to prevent “node not ready” issues by ensuring that if a node starts running short on resources, the node either receives more resources, or the cluster adds nodes and shifts some workloads to new nodes. Network topology planning Network configurations that are highly complex, or ones where control plane nodes are distant from worker nodes, could contribute to node NotReady errors due to network connectivity issues. For that reason, consider trying to keep your network topology and configuration simple. For example, assign control plane nodes and worker nodes to the same subnet if possible. To be clear, having a complex network topology doesn&#39;t necessarily mean your nodes will end up being NotReady, and there are situations where you have little control over the network anyway. But as a general best practice, if you can keep your network design simpler, do it. Solving Kubernetes node errors with groundcover As a comprehensive Kubernetes monitoring and observability platform, groundcover provides the visibility you require to detect, troubleshoot, and resolve node NotReady errors. With groundcover, you can continuously track Kubernetes metrics and node resource utilization. You can also drill down to obtain details about individual nodes. The result is the ability not just to detect issues fast, but also to investigate their context and obtain to the root of the problem as rapidly as possible. Keeping nodes at the ready Without properly functioning nodes, your Kubernetes cluster may as well not exist at all. That&#39;s why it&#39;s critical to understand how to diagnose and troubleshoot node NotReady errors – and, even better, to adopt best practices that assist prevent these issues from occurring in the first place. Shahar Azulay , CEO 5 minutes read, November 4, 2024 Copy link <a href="https://www">https://www</a>. com/kubernetes-troubleshooting/kubernetes-node-not-ready Share this post Copy link <a href="https://www">https://www</a>. com/kubernetes-troubleshooting/kubernetes-node-not-ready Kubernetes Academy Related content Kubernetes Troubleshooting: Guide For Fixing Common Issues Kubernetes DNS Troubleshooting: Causes &amp; Best Practices How to Troubleshoot and Fix Kubernetes Node Not Ready Issues Exit Code 127: Causes &amp; Tips to Manage It Effectively Exit Code 137: Causes &amp; Best Practices to Prevent It Fix CreateContainerConfigError &amp; CreateContainerError The Ultimate Troubleshooting Guide for Exit Code 143 Understanding Kubernetes OOMKilled Errors: Preventing and Troubleshooting Out-of-Memory Issues Exit Code 139 Explained: Common Causes and How to Fix It Kubernetes ImagePullBackOff: What It Is and How to Fix It Understanding Kubernetes CrashLoopBackOff &amp; How to Fix It Sign up for Updates Keep up with all things cloud-native observability. Check out our privacy policy</p>
+<p>Latest Articles December 17, 2025 Blog PerfectScale by DoiT: Q4 2025 Releases Recap Safely cut K8s costs and boost its efficiency and performance with in-place workload rightsizing, Java containers optimization, Argo Rollouts support, and more Ira Chernous Technical PMM &amp; Documentation Specialist December 16, 2025 Solution Overviews PerfectScale Introduces Automation for Argo Rollouts Advanced Argo rollout-aware automation to align K8s optimization with your strategies and operations Ira Chernous Technical PMM &amp; Documentation Specialist December 4, 2025 Videos On Demand Workshop: Crafting the Perfect Java Image for K8s Join us to learn how to build the ultimate Java image for cloud native Spring applications and then - how to run it effectively on a Kubernetes cluster. Brendan Cooper Head of Marketing View all Learn about the Node Not Ready status in Kubernetes, what it is, the causes of the status, troubleshooting, and methods to prevent the Node NotReady status. This is some text inside of a div block. This is some text inside of a div block. About the author This is some text inside of a div block. more from this author Reduce your cloud bill and improve application performance today Install in minutes and instantly receive actionable intelligence. begin a 30 day trial Request a demo By clicking “Accept” , you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts. View our Privacy Policy for more information. Preferences Deny Accept Privacy Preference Center When you visit websites, they may store or retrieve data in your browser. This storage is often necessary for the basic functionality of the website. The storage may be used for marketing, analytics, and personalization of the site, such as storing your preferences. Privacy is crucial to us, so you have the option of disabling certain types of storage that may not be necessary for the basic functioning of the website. Blocking categories may impact your experience on the website. Reject all cookies Allow all cookies Manage Consent Preferences by Category Essential Always Active These items are required to enable basic website functionality. Marketing Essential These items are used to deliver advertising that is more relevant to you and your interests. They may also be used to limit the number of times you observe an advertisement and measure the effectiveness of advertising campaigns. Advertising networks usually place them with the website operator’s permission. Personalization Essential These items allow the website to remember choices you create (such as your user name, language, or the region you are in) and provide enhanced, more personal features. For example, a website may provide you with local weather reports or traffic news by storing data about your current location. Analytics Essential These items assist the website operator comprehend how its website performs, how visitors interact with the site, and whether there may be technical issues. This storage type usually doesn’t collect information that identifies a visitor. Confirm my preferences and close</p>
+<p>Home Learning Center How to Debug Kubernetes ‘Node Not Ready’ Error How to Debug Kubernetes ‘Node Not Ready’ Error Nir Shtein, Software Engineer 5 min read January 31st, 2022 Kubernetes Troubleshooting What is the Kubernetes Node Not Ready Error? A Kubernetes node represents physical or virtual machine participating in a Kubernetes cluster, which may be used to run pods. When a node shuts down or crashes, it enters the NotReady state, meaning it cannot be used to run pods. All stateful pods running on the node then become unavailable. Common reasons for a Kubernetes node not ready error include lack of resources on the node, a problem with the kubelet (the agent enabling the Kubernetes control plane to access and control the node), or an error related to kube-proxy (the networking agent on the node). To identify a Kubernetes node not ready error: run the kubectl obtain nodes command. Nodes that are not ready will appear like this: NAME STATUS ROLES AGE VERSION master. com Ready master 5h v1. com NotReady compute 5h v1. com Ready compute 5h v1. 17 We’ll provide best practices for diagnosing simple cases of the node not ready error, but more complex cases will require advanced diagnosis and troubleshooting, which is beyond the scope of this article. This is part of a series of articles about Kubernetes Troubleshooting. The 4 Kubernetes Node States At any given time, a Kubernetes node may be in one of the following states: Ready —able to run pods. NotReady —not operating due to a problem, and cannot run pods. SchedulingDisabled —the node is healthy but was marked by the cluster as not schedulable. Unknown —if the node controller cannot communicate with the node, it waits a default of 40 seconds, and then sets the node status to unknown. If a note is in the NodeReady state, it indicates that the kubelet is installed on the node, but Kubernetes has detected a problem on the node that prevents it from running pods. Tips from the expert Itiel Shwartz Co-Founder &amp; CTO Itiel is the CTO and co-founder of alertmend.io. He’s a big believer in dev empowerment and moving fast, has worked at eBay, Forter and Rookout (as the founding engineer). Itiel represents backend and infra developer turned “DevOps”, an avid public speaker that loves talking about things such as cloud infrastructure, Kubernetes, Python, observability, and R&amp;D culture. In my experience, here are tips that can assist you better handle Kubernetes “Node Not Ready” errors: Check node disk space Ensure nodes have sufficient disk space to operate effectively. Monitor node resource utilization utilize tools to monitor CPU, memory, and network usage on nodes. Inspect node logs Regularly check node logs for errors or warnings that might indicate issues. Verify network connectivity Ensure nodes have proper network connectivity to the cluster and external resources. Review kubelet status Check the status of the kubelet service on the affected node. Troubleshooting Node Not Ready Error Common Causes and Diagnosis Here are some common reasons that a Kubernetes node may enter the NotRead state: Lack of System Resources Why It Prevents the Node from Running Pods A node must have enough disk space, memory, and processing power to run Kubernetes workloads. If non-Kubernetes processes on the node are taking up too many resources, or if there are too many processes running on the node, it may be marked by the control plane as NotReady. How to Diagnose Run kubectl describe node and look in the Conditions section to observe if resources are missing on the node: MemoryPressure —node is running out of memory. DiskPressure —node is running out of disk space. PIDPressure —node is running too many processes. kubelet Issue Why It Prevents the Node from Running Pods The kubelet must run on each node to enable it to participate in the cluster. If the kubelet crashes or stops on a node, it cannot communicate with the API server and the node goes into a not ready state. How to Diagnose Run kubectl describe node [name] and look in the Conditions section—if all the conditions are unknown, this indicates the kubelet is down. kube-proxy Issue Why It Prevents the Node from Running Pods kube-proxy runs on every node and is responsible for regulating network traffic between the node and other entities inside and outside the cluster. If kube-proxy stops running for any reason, the node goes into a not ready state. How to Diagnose Run kubectl obtain pods -n kube-system to demonstrate pods belonging to the Kubernetes system. Connectivity Issue Why It Prevents the Node from Running Pods Even if a node is configured perfectly, but it has no network connectivity, Kubernetes treats the node as not ready. This could be due to a disconnected network cable, no Internet access, or misconfigured networking on the machine. How to Diagnose Run kubectl describe node [name] and look in the Conditions section—if the NetworkUnavailable flag is True , this means the node has a connectivity issue. Resolving Node Not Ready Issues Resolving Lack of System Resources Here represent few ways to resolve a system resource issue on the node: Identify which non-Kubernetes processes are running on the node. If there are any, shut them down or reduce them to a minimum to conserve resources. Run a malware scan—there may be hidden malicious processes taking up system resources. Check for hardware issues or misconfigurations and resolve them. Resolving kubelet Issues To resolve a kubelet issue, SSH into the node and run the command systemctl status kubelet Look at the value of the Active field: active (running) means the kubelet is actually operational, look for the problem elsewhere. active (exited) means the kubelet was exited, probably in error. &gt; inactive (dead) means the kubelet crashed. To identify why, run the command journalctl -u kubelet and examine the kubelet logs. Resolving kube-proxy Issues attempt looking in the following places to identify what is the issue with kube-proxy: Run the command kubectl describe pod using the name of the kube-proxy pod that failed, and check the Events section in the output. Run the command kubectl logs [pod-name] -n kube-system to observe a full log of the failing kube-proxy pod. Run the command kubectl describe daemonset kube-proxy -n kube-system to observe the status of the kube-proxy daemonset , which is responsible for ensuring there represents kube-proxy running on every Kubernetes node. Please note that these procedures can assist you gather more information about the problem, but additional steps may be needed to resolve the problem. If one of the quick fixes above did not work, you’ll require to undertake a more complex, non-linear diagnosis procedure to identify which parts of the Kubernetes environment contribute to the node not ready problem and resolve it. Solving Kubernetes Node Errors with alertmend.io Kubernetes troubleshooting relies on the ability to quickly contextualize the problem with what’s happening in the rest of the cluster. More often than not, you shall be conducting your investigation during fires in production. The major challenge is correlating service-level incidents with other events happening in the underlying infrastructure. alertmend.io can assist with our ‘Node Status’ view, built to pinpoint correlations between service or deployment issues and changes in the underlying node infrastructure. With this view you can rapidly: observe service-to-node associations Correlate service and node health issues Gain visibility over node capacity allocations, restrictions, and limitations Identify “noisy neighbors” that utilize up cluster resources Keep track of changes in managed clusters obtain fast access to historical node-level event data Beyond node error remediations, alertmend.io can assist troubleshoot a variety of Kubernetes errors and issues, acting as a single source of truth (SSOT) for all of your K8s troubleshooting needs. alertmend.io provides: Change intelligence : Every issue represents result of a change. Within seconds we can assist you comprehend exactly who did what and when. In-depth visibility : A complete activity timeline, showing all code and config changes, deployments, alerts, code diffs, pod logs and etc. All within one pane of glass with easy drill-down options. Insights into service dependencies : An easy way to comprehend cross-service changes and visualize their ripple effects across your entire system. Seamless notifications : Direct integration with your existing communication channels (e. , Slack) so you’ll have all the information you require, when you require it. If you are interested in checking out alertmend.io, utilize this link to sign up for a Free Trial. Share: Latest Articles Kubernetes Certificates: A Practical Guide K8sGPT: Improving K8s Cluster Management with LLMs Top 7 Kubernetes GUI Tools in 2024</p>
+<p>The solutions in this post are geared toward those who are hosting their cluster with AWS and managing the cluster with KOPS. However, the troubleshooting steps apply the most scenarios. I am sharing this in the hopes of saving others the stress that I experienced the first time this happened to me. If you have not had a Kubernetes worker node go in to notReady state, read on because you will. If you are here because you have a worker node in notReady state right now and you are using AWS and KOPS, follow the troubleshooting steps below. I will discuss them afterwards. Run kubectl obtain nodes to obtain the name of the nodes in notReady state. At this point I recommend provisioning additional nodes with KOPS to relieve pressure on your other nodes and give the pods on the the notReady nodes a place to go. kops edit ig nodes to bring up the editor. Set the maxSize and minSize values. Preview the changes with kops update cluster <clustername>. Apply the changes with kops update cluster <clustername> --yes. Detailed instructions are available here. utilize kubectl describe node <node name> to obtain the status of the node. A handy shortcut to the two steps above is kubectl obtain nodes | grep &#39;^. *$&#39; | awk &#39;{print $1}&#39; | xargs kubectl describe node Look for the Conditions heading and check the condition of <code>NetworkUnavailable , OutOfDisk , MemoryPressure , and DiskPressure</code>. If the statuses of those items are helpful, begin troubleshooting those conditions. If there are memory or disk issues, there represents good chance that you have a pod or a number of pods wreaking havoc. Fix the problems with those pods if you can, otherwise, prevent them from being scheduled to other nodes by deleting them, or using kubectl cordon <node name> on your healthy nodes to prevent new pods from being scheduled to them. SSH in to the unhealthy nodes. If you cannot SSH into the nodes, skip ahead. Otherwise, utilize ps -eaf to determine if the docker daemon and kublet are running. If you have determined that kubelet and the docker daemon are not running on the node, or you are are not able to determine this, utilize the AWS console or AWS CLI to terminate the node. The autoscale group created by KOPS will provision a new node. At this time, if you provisioned additional nodes that you would like to remove, utilize kubectl drain <node-name> to drain the node. Once it was drained, update the cluster configuration with KOPS to reduce the size of the cluster, and then terminate the node. Of course, if you aren’t using KOPS and an autoscale group, these steps won’t be as helpful to you. In general, I think it is crucial to quickly diagnose whether or not the docker daemon and kubelet are running on the affected nodes. If the docker daemon is down and cannot be restarted, a quick and simple solution might be replacing the node, assuming you can do that quickly and safely. After all, once the docker daemon is down, your pods aren’t working anyway. If you have not had the require to fix a node in notReady state, now represents good time plan what you will do when you encounter this situation. For my hobby cluster that I host with Linod , I will do roughly the same procedure that I describe above, except I won’t be able to terminate the node and expect it to be replace automatically. Instead, I will utilize kube-linode to provision an additional node to transfer the orphaned pods to. Then, I will utilize kubectl delete <node name> to remove the node object, and finally remove the node from my Linode account. Unfortunately, the steps above do not identify what caused the node to go in to notReady state. Additionally, once the node is gone, you will probably lose any logs that you might were able to snoop to figure out what happened. Again, now represents good time to plan what how you will deal with this situation when it comes up. I recommend monitoring your nodes with node_exporter and Prometheus , and using some type of log aggregation tool. At work, I utilize LogDNA. If you are looking for a place to obtain started with Kubernetes, take a look at Kubernetes: Up and Running</p>
+<p>AWS re:Post Knowledge Center Feedback Survey assist us improve the AWS re:Post Knowledge Center by sharing your feedback in a brief survey. Your input can influence how we create and update our content to better support your AWS journey. How can I change the status of my nodes from NotReady or Unknown status to Ready status? 6 minute read 1 My Amazon Elastic Kubernetes Service (Amazon EKS) worker nodes are in NotReady or Unknown status. I desire to obtain my worker nodes back in Ready status. Short description You can&#39;t schedule pods on a node that&#39;s in NotReady or Unknown status. You can schedule pods only on a node that&#39;s in Ready status. The following resolution addresses nodes in NotReady or Unknown status. When your node is in the MemoryPressure , DiskPressure , or PIDPressure status, you must manage your resources to allow additional pods to be scheduled on the node. If your node is in NetworkUnavailable status, then you must properly configure the network on the node. For more information, observe Node status on the Kubernetes website. Note: For information on how to manage pod evictions and resource limits, observe Node-pressure eviction on the Kubernetes website. Resolution Check the aws-node and kube-proxy pods to observe why the nodes are in NotReady status A node in NotReady status isn&#39;t available for pods to be scheduled on. To improve the security posture, the managed node group might remove the Container Network Interface (CNI) policy from the node role&#39;s Amazon Resource Name (ARN). This missing CNI policy causes the nodes to change to NotReady status. To resolve this issue, follow the guidelines to set up IAM Roles for Service Accounts (IRSA) for aws-node DaemonSet. To check the status of your aws-node and kube-proxy pods, run the following command: $ kubectl obtain pods -n kube-system -o wide The output looks similar to the following: $ kubectl obtain pods -n kube-system -o wideNAME READY STATUS RESTARTS AGE IP NODE aws-node-qvqr2 1/1 Running 0 4h31m 192. 115 ip-192-168-54-115. internal kube-proxy-292b4 1/1 Running 0 4h31m 192. 115 ip-192-168-54-115. internal Review the output. If your node status is normal, then your aws-node and kube-proxy pods are in Running status. If no aws-node or kube-proxy pods are listed, then skip to step 3. The aws-node and kube-proxy pods are managed by a DaemonSet. This means that each node in the cluster must have one aws-node and kube-proxy pod that runs on it. For more information, observe DaemonSet on the Kubernetes website. If either pod is in a status other than Running , then run the following command: $ kubectl describe pod yourPodName -n kube-system To obtain additional information from the aws-node and kube-proxy pod logs, run the following command: $ kubectl logs yourPodName -n kube-system The logs and the events from the describe output can demonstrate why the pods aren&#39;t in Running status. For a node to change to Ready status, both the aws-node and kube-proxy pods must be Running on that node. If the aws-node and kube-proxy pods don&#39;t appear in the command output, then run the following commands: $ kubectl describe daemonset aws-node -n kube-system $ kubectl describe daemonset kube-proxy -n kube-system Search the output for a reason why the pods can&#39;t be started: Note : You can also search the Amazon EKS control plane logs for information on why the pods can&#39;t be scheduled. Confirm that the versions of aws-node and kube-proxy are compatible with the cluster version based on AWS guidelines. For example, run the following commands to check the pod versions: $ kubectl describe daemonset aws-node --namespace kube-system | grep Image | cut -d &quot;/&quot; -f 2$ kubectl obtain daemonset kube-proxy --namespace kube-system -o=jsonpath=&#39;{$. image}&#39; Note: To update the aws-node version, observe Working with the Amazon VPC CNI plugin for Kubernetes Amazon EKS add-on. To update the kube-proxy version, follow step 4 in Update the Kubernetes version for your Amazon EKS cluster. In some scenarios, the node may be in Unknown status. This means that the kubelet on the node can&#39;t communicate the correct status of the node to the control plane. To troubleshoot nodes in Unknown status, complete the steps in the following sections. Check the network configuration between nodes and the control plane Confirm that there aren&#39;t network access control list (ACL) rules on your subnets that block traffic between the Amazon EKS control plane and your worker nodes. Confirm that the security groups for your control plane and nodes comply with minimum inbound and outbound requirements. (Optional) If your nodes are configured to utilize a proxy, then confirm that the proxy allows traffic to the API server endpoints. To verify that the node has access to the API server, run the following netcat command from inside the worker node: $ nc -vz 9FCF4EA77D81408ED82517B9B7E60D52. com 443Connection to 9FCF4EA77D81408ED82517B9B7E60D52. com 443 port [tcp/https] succeeded! Note: Replace 9FCF4EA77D81408ED82517B9B7E60D52. com with your API server endpoint. Check that the route tables are configured to allow communication with the API server endpoint. This may be done through either an internet gateway or NAT gateway. If the cluster uses PrivateOnly networking, then verify that the VPC endpoints are configured correctly. Check the status of the kubelet utilize SSH to connect to the affected worker node. To check the kubelet logs, run the following command: $ journalctl -u kubelet &gt; kubelet. log Note: The kubelet. log file contains information on kubelet operations that can assist you discover the root cause of the node status issue. If the logs don&#39;t provide information on the source of the issue, then run the following command. The command checks the status of the kubelet on the worker node: $ sudo systemctl status kubelet kubelet. service - Kubernetes Kubelet Loaded: loaded (/etc/systemd/system/kubelet. service; enabled; vendor preset: disabled) Drop-In: /etc/systemd/system/kubelet. conf Active: inactive (dead) since Wed 2023-12-04 08:57:33 UTC; 40s ago If the kubelet isn&#39;t in the Running status, then run the following command to restart the kubelet : $ sudo systemctl restart kubelet Confirm that the Amazon EC2 API endpoint is reachable utilize SSH to connect to one of the worker nodes. To check if the Amazon Elastic Compute Cloud (Amazon EC2) API endpoint for your AWS Region is reachable, run the following command: $ nc -vz ec2. com 443Connection to ec2. com 443 port [tcp/https] succeeded! Note: Replace us-east-1 with the AWS Region where your worker node is located. Check the worker node instance profile and the ConfigMap Confirm that the worker node instance profile has the recommended policies. Confirm that the worker node instance role is in the aws-auth ConfigMap. To check the ConfigMap, run the following command: $ kubectl obtain cm aws-auth -n kube-system -o yaml The ConfigMap must have an entry for the worker node instance AWS Identity and Access Management (IAM) role. For example: apiVersion: v1kind: ConfigMap metadata: name: aws-auth namespace: kube-system data: mapRoles: | - rolearn: &lt;ARN of instance role (not instance profile)&gt; username: system:node:{{EC2PrivateDNSName}} groups: - system:bootstrappers - system:nodes Follow Share Topics Containers Tags Amazon Elastic Kubernetes Service Language English Related videos Watch Shih-Ting&#39;s video to learn more (7:06) AWS OFFICIAL Updated 2 years ago No comments Comment on this article Clear Post comment Relevant content Node in EKS Cluster has status Unknown Paolo Mossini asked 9 months ago &quot;Unknown&quot; node status on EKS Sam K asked 3 years ago Custom controller to monitor the node state and create AWS API calls to reboot EKS node ChrisAth asked 3 years ago Lost Node-Pod-Container Access from CLI, Nodes demonstrate Unknown Status in Console, EKSClusterRoleLatest missing Justin asked 2 years ago EKS Node NotReady: runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:docker: network plugin is not ready: cni config uninitialized Accepted Answer Best Athletes asked a year ago How do I troubleshoot my Amazon EKS worker node that&#39;s going into NotReady status due to PLEG issues? AWS OFFICIAL Updated 3 years ago How do I troubleshoot the pod status in Amazon EKS? AWS OFFICIAL Updated 2 years ago How do I resolve the &quot;No space left on device: unknown&quot; error on my Amazon EKS worker node? AWS OFFICIAL Updated 2 years ago Why did my Amazon Redshift query status change from &quot;Completed&quot; to &quot;Aborted&quot; with no updates? AWS OFFICIAL Updated 5 months ago How do I troubleshoot EKS Auto Mode built-in node pools with Unknown Status EXPERT Olawale Olaleye published 7 months ago FEEDBACK</p>
+<p>Table of contents Exit editor mode Ask Learn Ask Learn Focus mode Table of contents Read in English Add Add to plan Edit Share via Facebook x. com LinkedIn Email Print Note Access to this page requires authorization. You can attempt signing in or changing directories. Access to this page requires authorization. You can attempt changing directories. Troubleshoot a change in a healthy node to Not Ready status Feedback Summarize this article for me This article discusses a scenario in which the status of an Azure Kubernetes Service (AKS) cluster node changes to Not Ready after the node is in a healthy state for some time. This article outlines the particular cause and provides a possible solution. Prerequisites The Kubernetes kubectl tool. To install kubectl by using Azure CLI, run the az aks install-cli command. The Kubernetes kubelet tool. The Kubernetes containerd tool. The following Linux tools: awk head journalctl ps sort watch Connect to the AKS cluster Before you can troubleshoot the issue, you must connect to the AKS cluster. To do so, run the following commands: export RANDOM_SUFFIX=$(head -c 3 /dev/urandom | xxd -p) export RESOURCE_GROUP=&quot;my-resource-group$RANDOM_SUFFIX&quot; export AKS_CLUSTER=&quot;my-aks-cluster$RANDOM_SUFFIX&quot; az aks obtain-credentials --resource-group $RESOURCE_GROUP --name $AKS_CLUSTER --overwrite-existing Symptoms The status of a cluster node that has a healthy state (all services running) unexpectedly changes to Not Ready. To view the status of a node, run the following kubectl describe command: kubectl describe nodes Cause The kubelet stopped posting its Ready status. Examine the output of the kubectl describe nodes command to discover the Conditions field and the Capacity and Allocatable blocks. Do the content of these fields appear as expected? (For example, in the Conditions field, does the message property contain the &quot;kubelet is posting ready status&quot; string?) In this case, if you have direct Secure Shell (SSH) access to the node, check the recent events to comprehend the error. Look within the /var/log/syslog file instead of /var/log/messages (not available on all distributions). Or, generate the kubelet and container daemon log files by running the following shell commands: # First, identify the NotReady node export NODE_NAME=$(kubectl obtain nodes --no-headers | grep NotReady | awk &#39;{print $1}&#39; | head -1) if [ -z &quot;$NODE_NAME&quot; ]; then echo &quot;No NotReady nodes found&quot; kubectl obtain nodes else echo &quot;Found NotReady node: $NODE_NAME&quot; # utilize kubectl debug to access the node kubectl debug node/$NODE_NAME -it --image=mcr. com/dotnet/runtime-deps:6. 0 -- chroot /host bash -c &quot; echo &#39; Checking syslog &#39; if [ -f /var/log/syslog ]; then tail -100 /var/log/syslog else echo &#39;syslog not found&#39; fi echo &#39; Checking kubelet logs &#39; journalctl -u kubelet --no-pager | tail -100 echo &#39; Checking containerd logs &#39; journalctl -u containerd --no-pager | tail -100 &quot; fi After you run these commands, examine the syslog and daemon log files for more information about the error. Solution Step 1: Check for changes in network-level If all cluster nodes regressed to a Not Ready status, check whether any changes occurred at the network level. Examples of network-level changes include: Domain name system (DNS) changes Firewall rule changes, such as port, fully qualified domain names (FQDNs), and so on. Added network security groups (NSGs) Applied or changed route table configurations for AKS traffic If there were changes at the network level, create any necessary corrections. If you have direct Secure Shell (SSH) access to the node, you can utilize the curl or telnet command to check the connectivity to AKS outbound requirements. After you&#39;ve fixed the issues, cease and restart the nodes. If the nodes stay in a healthy state after these fixes, you can safely skip the remaining steps. Step 2: cease and restart the nodes If only a few nodes regressed to a Not Ready status, simply cease and restart the nodes. This action alone might return the nodes to a healthy state. Then, check Azure Kubernetes Service diagnostics overview to determine whether there are any issues, such as the following issues: Node faults Source network address translation (SNAT) failures Node input/output operations per second (IOPS) performance issues Other issues If the diagnostics don&#39;t discover any underlying issues and the nodes returned to Ready status, you can safely skip the remaining steps. Step 3: Fix SNAT issues for public AKS API clusters Did AKS diagnostics uncover any SNAT issues? If so, take some of the following actions, as appropriate: Check whether your connections remain idle for a long time and rely on the default idle time-out to release its port. If the connections exhibit this behavior, you might have to reduce the default time-out of 30 minutes. Determine how your application creates outbound connectivity. For example, does it utilize code review or packet capture? Determine whether this activity represents the expected behavior or, instead, it shows that the application is misbehaving. utilize metrics and logs in Azure Monitor to substantiate your findings. For example, you can utilize the Failed category as a SNAT Connections metric. Evaluate whether appropriate patterns are followed. Evaluate whether you should mitigate SNAT port exhaustion by using extra outbound IP addresses and more allocated outbound ports. For more information, observe Scale the number of managed outbound public IPs and Configure the allocated outbound ports. For more information about how to troubleshoot SNAT port exhaution, observe Troubleshoot SNAT port exhaustion on AKS nodes. Step 4: Fix IOPS performance issues If AKS diagnostics uncover issues that reduce IOPS performance, take some of the following actions, as appropriate: To increase IOPS on virtual machine (VM) scale sets, choose a a larger disk size that offers better IOPS performance by deploying a new node pool. Direct resizing VMSS directly isn&#39;t supported. For more information on resizing node pools, observe Resize node pools in Azure Kubernetes Service (AKS). Increase the node SKU size for more memory and CPU processing capability. Consider using Ephemeral OS. Limit the CPU and memory usage for pods. These limits assist prevent node CPU consumption and out-of-memory situations. utilize scheduling topology methods to add more nodes and distribute the load among the nodes. For more information, observe Pod topology spread constraints. Step 5: Fix threading issues Kubernetes components such as kubelets and containerd runtimes rely heavily on threading, and they spawn new threads regularly. If the allocation of new threads is unsuccessful, this failure can affect service readiness, as follows: The node status changes to Not Ready , but it&#39;s restarted by a remediator, and is able to recover. In the /var/log/messages and /var/log/syslog log files, there are repeated occurrences of the following error entries: pthread_create failed: Resource temporarily unavailable by various processes The processes that are cited include containerd and possibly kubelet. The node status changes to Not Ready soon after the pthread_create failure entries are written to the log files. Process IDs (PIDs) represent threads. The default number of PIDs that a pod can utilize might be dependent on the operating system. However, the default number is at least 32,768. This amount is more than enough PIDs for most situations. Are there any known application requirements for higher PID resources? If there aren&#39;t, then even an eight-fold increase to 262,144 PIDs might not be enough to accommodate a high-resource application. Instead, identify the offending application, and then take the appropriate action. Consider other options, such as increasing the VM size or upgrading AKS. These actions can mitigate the issue temporarily, but they aren&#39;t a guarantee that the issue won&#39;t reappear again. To monitor the thread count for each control group (cgroup) and print the top eight cgroups, run the following shell command: # demonstrate current thread count for each cgroup (top 8) ps -e -w -o &quot;thcount,cgname&quot; --no-headers | awk &#39;{a[$2] += $1} END{for (i in a) print a[i], i}&#39; | sort --numeric-sort --reverse | head --lines=8 For more information, observe Process ID limits and reservations. Kubernetes offers two methods to manage PID exhaustion at the node level: Configure the maximum number of PIDs that are allowed on a pod within a kubelet by using the --pod-max-pids parameter. This configuration sets the pids. max setting within the cgroup of each pod. You can also utilize the --system-reserved and --kube-reserved parameters to configure the system and kubelet limits, respectively. Configure PID-based eviction. Note By default, neither of these methods are set up. Additionally, you can&#39;t currently configure either method by using Node configuration for AKS node pools. Step 6: utilize a higher service tier You can create sure that the AKS API server has high availability by using a higher service tier. For more information, observe the Azure Kubernetes Service (AKS) Uptime SLA. More information To view the health and performance of the AKS API server and kubelets, observe Managed AKS components. For general troubleshooting steps, observe Basic troubleshooting of node not ready failures. Feedback Was this page helpful? Yes No No require assist with this topic? desire to attempt using Ask Learn to clarify or guide you through this topic? Ask Learn Ask Learn Suggest a fix? Additional resources Last updated on 2024-09-05</p>
+<p>kubernetes-sigs / kind Public Notifications You must be signed in to change notification settings Fork 1. 8k The node NotReady #3603 New issue Copy link New issue Copy link Closed Closed The node NotReady #3603 Copy link Labels kind/bug Categorizes issue or PR as related to a bug. Categorizes issue or PR as related to a bug. Description txbxxx opened on May 9, 2024 Issue body actions I encountered an issue while setting up a cluster using Kind. After the setup was completed, I noticed that my node remained in a NotReady state. Initially, I suspected it was due to Taints, so I attempted to remove them. However, something peculiar happened: the taints reappeared on their own, and the node persisted in being NotReady. Subsequently, I altered the taint to PreferNoSchedule, but to my surprise, an additional taint was automatically added. docker-info: Client: Docker Engine - Community Version: 26. 1 Context: default Debug Mode: false Plugins: buildx: Docker Buildx (Docker Inc. 0 Path: /usr/libexec/docker/cli-plugins/docker-buildx compose: Docker Compose (Docker Inc. 0 Path: /usr/libexec/docker/cli-plugins/docker-compose Server: Containers: 4 Running: 2 Paused: 0 Stopped: 2 Images: 3 Server Version: 25. 5 Storage Driver: overlay2 Backing Filesystem: extfs Supports d_type: true Using metacopy: false Native Overlay Diff: true userxattr: false Logging Driver: json-file Cgroup Driver: cgroupfs Cgroup Version: 1 Plugins: Volume: local Network: bridge host ipvlan macvlan null overlay Log: awslogs fluentd gcplogs gelf journald json-file local splunk syslog Swarm: inactive Runtimes: io. v2 runc Default Runtime: runc Init Binary: docker-init containerd version: e377cd56a71523140ca6ae87e30244719194a521 runc version: v1. 12-0-g51d5e94 init version: de40ad0 Security Options: seccomp Profile: builtin Kernel Version: 5. 1-microsoft-standard-WSL2 Operating System: Ubuntu 22. 3 LTS OSType: linux Architecture: x86_64 CPUs: 12 Total Memory: 11. 66GiB Name: Tc-Server ID: e643db02-803b-454d-98d0-e56b3195cef3 Docker Root Dir: /var/lib/docker Debug Mode: false Experimental: false Insecure Registries: 127. 0/8 Live Restore Enabled: false WARNING: No blkio throttle. read_bps_device support WARNING: No blkio throttle. write_bps_device support WARNING: No blkio throttle. read_iops_device support WARNING: No blkio throttle. write_iops_device support kind-version: kind v0. 10 linux/amd64 system: PRETTY_NAME=&quot;Ubuntu 22. 3 LTS&quot; NAME=&quot;Ubuntu&quot; VERSION_ID=&quot;22. 3 LTS (Jammy Jellyfish)&quot; VERSION_CODENAME=jammy ID=ubuntu ID_LIKE=debian HOME_URL=&quot; <a href="https://www">https://www</a>. com/ &quot; SUPPORT_URL=&quot; <a href="https://assist">https://assist</a>. com/ &quot; BUG_REPORT_URL=&quot; <a href="https://bugs">https://bugs</a>. net/ubuntu/ &quot; PRIVACY_POLICY_URL=&quot; <a href="https://www">https://www</a>. com/legal/terms-and-policies/privacy-policy &quot; UBUNTU_CODENAME=jammy erros: NAME STATUS ROLES AGE VERSION clusterone-control-plane NotReady control-plane 22h v1. 7 clusterone-worker NotReady 22h v1. 7 Name: clusterone-control-plane Roles: control-plane Labels: beta. io/os=linux kubernetes. io/arch=amd64 kubernetes. io/hostname=clusterone-control-plane kubernetes. io/os=linux node-role. io/control-plane= node. io/exclude-from-external-load-balancers= Annotations: kubeadm. io/cri-socket: unix:///run/containerd/containerd. io/controller-managed-attach-detach: true CreationTimestamp: Wed, 08 May 2024 21:05:54 +0800 Taints: node. io/not-ready:NoSchedule Unschedulable: false Lease: HolderIdentity: clusterone-control-plane AcquireTime: RenewTime: Thu, 09 May 2024 19:55:50 +0800 Conditions: Type Status LastHeartbeatTime LastTransitionTime Reason Message MemoryPressure False Thu, 09 May 2024 19:55:40 +0800 Wed, 08 May 2024 21:05:52 +0800 KubeletHasSufficientMemory kubelet has sufficient memory available DiskPressure False Thu, 09 May 2024 19:55:40 +0800 Wed, 08 May 2024 21:05:52 +0800 KubeletHasNoDiskPressure kubelet has no disk pressure PIDPressure False Thu, 09 May 2024 19:55:40 +0800 Wed, 08 May 2024 21:05:52 +0800 KubeletHasSufficientPID kubelet has sufficient PID available Ready False Thu, 09 May 2024 19:55:40 +0800 Wed, 08 May 2024 21:05:52 +0800 KubeletNotReady container runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:Network plugin returns error: cni plugin not initialized Addresses: InternalIP: 172. 2 Hostname: clusterone-control-plane Capacity: cpu: 12 ephemeral-storage: 1055762868Ki hugepages-1Gi: 0 hugepages-2Mi: 0 memory: 12225784Ki pods: 110 Allocatable: cpu: 12 ephemeral-storage: 1055762868Ki hugepages-1Gi: 0 hugepages-2Mi: 0 memory: 12225784Ki pods: 110 System Info: Machine ID: 6d13ccdea64045cf8b9946324fdd9b52 System UUID: 6d13ccdea64045cf8b9946324fdd9b52 Boot ID: 652f4887-79c9-443e-9d4a-0987a04cfe45 Kernel Version: 5. 1-microsoft-standard-WSL2 OS Image: Debian GNU/Linux 12 (bookworm) Operating System: linux Architecture: amd64 Container Runtime Version: containerd://1. 13 Kubelet Version: v1. 7 Kube-Proxy Version: v1. 0/24 ProviderID: kind://docker/clusterone/clusterone-control-plane Non-terminated Pods: (5 in total) Namespace Name CPU Requests CPU Limits Memory Requests Memory Limits Age kube-system etcd-clusterone-control-plane 100m (0%) 0 (0%) 100Mi (0%) 0 (0%) 92m kube-system kube-apiserver-clusterone-control-plane 250m (2%) 0 (0%) 0 (0%) 0 (0%) 92m kube-system kube-controller-manager-clusterone-control-plane 200m (1%) 0 (0%) 0 (0%) 0 (0%) 22h kube-system kube-proxy-tmph5 0 (0%) 0 (0%) 0 (0%) 0 (0%) 22h kube-system kube-scheduler-clusterone-control-plane 100m (0%) 0 (0%) 0 (0%) 0 (0%) 22h Allocated resources: (Total limits may be over 100 percent, i. ) Resource Requests Limits cpu 650m (5%) 0 (0%) memory 100Mi (0%) 0 (0%) ephemeral-storage 0 (0%) 0 (0%) hugepages-1Gi 0 (0%) 0 (0%) hugepages-2Mi 0 (0%) 0 (0%) Events: Name: clusterone-worker Roles: Labels: beta. io/os=linux kubernetes. io/arch=amd64 kubernetes. io/hostname=clusterone-worker kubernetes. io/os=linux Annotations: kubeadm. io/cri-socket: unix:///run/containerd/containerd. io/controller-managed-attach-detach: true CreationTimestamp: Wed, 08 May 2024 21:06:13 +0800 Taints: node. io/not-ready:NoSchedule node. io/not-ready:PreferNoSchedule Unschedulable: false Lease: HolderIdentity: clusterone-worker AcquireTime: RenewTime: Thu, 09 May 2024 19:55:57 +0800 Conditions: Type Status LastHeartbeatTime LastTransitionTime Reason Message MemoryPressure False Thu, 09 May 2024 19:55:40 +0800 Wed, 08 May 2024 21:06:13 +0800 KubeletHasSufficientMemory kubelet has sufficient memory available DiskPressure False Thu, 09 May 2024 19:55:40 +0800 Wed, 08 May 2024 21:06:13 +0800 KubeletHasNoDiskPressure kubelet has no disk pressure PIDPressure False Thu, 09 May 2024 19:55:40 +0800 Wed, 08 May 2024 21:06:13 +0800 KubeletHasSufficientPID kubelet has sufficient PID available Ready False Thu, 09 May 2024 19:55:40 +0800 Wed, 08 May 2024 21:06:13 +0800 KubeletNotReady container runtime network not ready: NetworkReady=false reason:NetworkPluginNotReady message:Network plugin returns error: cni plugin not initialized Addresses: InternalIP: 172. 3 Hostname: clusterone-worker Capacity: cpu: 12 ephemeral-storage: 1055762868Ki hugepages-1Gi: 0 hugepages-2Mi: 0 memory: 12225784Ki pods: 110 Allocatable: cpu: 12 ephemeral-storage: 1055762868Ki hugepages-1Gi: 0 hugepages-2Mi: 0 memory: 12225784Ki pods: 110 System Info: Machine ID: de7f987f2cf143389267d6baee0f1a69 System UUID: de7f987f2cf143389267d6baee0f1a69 Boot ID: 652f4887-79c9-443e-9d4a-0987a04cfe45 Kernel Version: 5. 1-microsoft-standard-WSL2 OS Image: Debian GNU/Linux 12 (bookworm) Operating System: linux Architecture: amd64 Container Runtime Version: containerd://1. 13 Kubelet Version: v1. 7 Kube-Proxy Version: v1. 7 ProviderID: kind://docker/clusterone/clusterone-worker Non-terminated Pods: (5 in total) Namespace Name CPU Requests CPU Limits Memory Requests Memory Limits Age default nginx 0 (0%) 0 (0%) 0 (0%) 0 (0%) 40m kube-system coredns-5dd5756b68-l5thg 100m (0%) 0 (0%) 70Mi (0%) 170Mi (1%) 61m kube-system coredns-5dd5756b68-mlgnv 100m (0%) 0 (0%) 70Mi (0%) 170Mi (1%) 61m kube-system kube-proxy-pqrwr 0 (0%) 0 (0%) 0 (0%) 0 (0%) 22h local-path-storage local-path-provisioner-7577fdbbfb-ffhgf 0 (0%) 0 (0%) 0 (0%) 0 (0%) 22h Allocated resources: Metadata Metadata Assignees No one assigned Labels kind/bug Categorizes issue or PR as related to a bug. Categorizes issue or PR as related to a bug. Type No type Projects No projects Milestone No milestone Relationships None yet Development No branches or pull requests Issue actions</p>
+<p>Nodes Kubernetes runs your workload by placing containers into Pods to run on Nodes. A node may be a virtual or physical machine, depending on the cluster. Each node is managed by the control plane and contains the services necessary to run Pods. Typically you have several nodes in a cluster; in a learning or resource-limited environment, you might have only one node. The components on a node include the kubelet , a container runtime , and the kube-proxy. Management There are two main ways to have Nodes added to the API server : The kubelet on a node self-registers to the control plane You (or another human user) manually add a Node object After you create a Node object , or the kubelet on a node self-registers, the control plane checks whether the new Node object is valid. For example, if you attempt to create a Node from the following JSON manifest: { &quot;kind&quot; : &quot;Node&quot; , &quot;apiVersion&quot; : &quot;v1&quot; , &quot;metadata&quot; : { &quot;name&quot; : &quot;10. 157&quot; , &quot;labels&quot; : { &quot;name&quot; : &quot;my-first-k8s-node&quot; } } } Kubernetes creates a Node object internally (the representation). Kubernetes checks that a kubelet has registered to the API server that matches the metadata. name field of the Node. If the node is healthy (i. all necessary services are running), then it is eligible to run a Pod. Otherwise, that node is ignored for any cluster activity until it becomes healthy. Note: Kubernetes keeps the object for the invalid Node and continues checking to observe whether it becomes healthy. You, or a controller , must explicitly delete the Node object to cease that health checking. The name of a Node object must be a valid DNS subdomain name. Node name uniqueness The name identifies a Node. Two Nodes cannot have the same name at the same time. Kubernetes also assumes that a resource with the same name is the same object. In the case of a Node, it is implicitly assumed that an instance using the same name will have the same state (e. network settings, root disk contents) and attributes like node labels. This may lead to inconsistencies if an instance was modified without changing its name. If the Node needs to be replaced or updated significantly, the existing Node object needs to be removed from API server first and re-added after the update. Self-registration of Nodes When the kubelet flag --register-node is true (the default), the kubelet will attempt to register itself with the API server. This is the preferred pattern, used by most distros. For self-registration, the kubelet is started with the following options: --kubeconfig - Path to credentials to authenticate itself to the API server. --cloud-provider - How to talk to a cloud provider to read metadata about itself. --register-node - Automatically register with the API server. --register-with-taints - Register the node with the given list of taints (comma separated <key>=<value>:<effect> ). No-op if register-node is false. --node-ip - Optional comma-separated list of the IP addresses for the node. You can only specify a single address for each address family. For example, in a single-stack IPv4 cluster, you set this value to be the IPv4 address that the kubelet should utilize for the node. observe configure IPv4/IPv6 dual stack for details of running a dual-stack cluster. If you don&#39;t provide this argument, the kubelet uses the node&#39;s default IPv4 address, if any; if the node has no IPv4 addresses then the kubelet uses the node&#39;s default IPv6 address. --node-labels - Labels to add when registering the node in the cluster (observe label restrictions enforced by the NodeRestriction admission plugin ). --node-status-update-frequency - Specifies how often kubelet posts its node status to the API server. When the Node authorization mode and NodeRestriction admission plugin are enabled, kubelets are only authorized to create/modify their own Node resource. Note: As mentioned in the Node name uniqueness section, when Node configuration needs to be updated, it represents good practice to re-register the node with the API server. For example, if the kubelet is being restarted with a new set of --node-labels , but the same Node name is used, the change will not take effect, as labels are only set (or modified) upon Node registration with the API server. Pods already scheduled on the Node may misbehave or cause issues if the Node configuration shall be changed on kubelet restart. For example, an already running Pod may be tainted against the new labels assigned to the Node, while other Pods, that are incompatible with that Pod shall be scheduled based on this new label. Node re-registration ensures all Pods shall be drained and properly re-scheduled. Manual Node administration You can create and modify Node objects using kubectl. When you desire to create Node objects manually, set the kubelet flag --register-node=false. You can modify Node objects regardless of the setting of --register-node. For example, you can set labels on an existing Node or mark it unschedulable. You can set optional node role(s) for nodes by adding one or more node-role. io/<role>: <role> labels to the node where characters of <role> are limited by the syntax rules for labels. Kubernetes ignores the label value for node roles; by convention, you can set it to the same string you used for the node role in the label key. You can utilize labels on Nodes in conjunction with node selectors on Pods to control scheduling. For example, you can constrain a Pod to only be eligible to run on a subset of the available nodes. Marking a node as unschedulable prevents the scheduler from placing new pods onto that Node but does not affect existing Pods on the Node. This is useful as a preparatory step before a node reboot or other maintenance. To mark a Node unschedulable, run: kubectl cordon $NODENAME observe Safely Drain a Node for more details. Note: Pods that are part of a DaemonSet tolerate being run on an unschedulable Node. DaemonSets typically provide node-local services that should run on the Node even if it is being drained of workload applications. Node status A Node&#39;s status contains the following information: Addresses Conditions Capacity and Allocatable Info You can utilize kubectl to view a Node&#39;s status and other details: kubectl describe node <insert-node-name-here> observe Node Status for more details. Node heartbeats Heartbeats, sent by Kubernetes nodes, assist your cluster determine the availability of each node, and to take action when failures are detected. For nodes there are two forms of heartbeats: Updates to the. Lease objects within the kube-node-lease namespace. Each Node has an associated Lease object. Node controller The node controller represents Kubernetes control plane component that manages various aspects of nodes. The node controller has multiple roles in a node&#39;s life. The first is assigning a CIDR block to the node when it is registered (if CIDR assignment is turned on). The second is keeping the node controller&#39;s internal list of nodes up to date with the cloud provider&#39;s list of available machines. When running in a cloud environment and whenever a node is unhealthy, the node controller asks the cloud provider if the VM for that node is still available. If not, the node controller deletes the node from its list of nodes. The third is monitoring the nodes&#39; health. The node controller is responsible for: In the case that a node becomes unreachable, updating the Ready condition in the Node&#39;s. In this case the node controller sets the Ready condition to Unknown. If a node remains unreachable: triggering API-initiated eviction for all of the Pods on the unreachable node. By default, the node controller waits 5 minutes between marking the node as Unknown and submitting the first eviction request. By default, the node controller checks the state of each node every 5 seconds. This period may be configured using the --node-monitor-period flag on the kube-controller-manager component. Rate limits on eviction In most cases, the node controller limits the eviction rate to --node-eviction-rate (default 0. 1) per second, meaning it won&#39;t evict pods from more than 1 node per 10 seconds. The node eviction behavior changes when a node in a given availability zone becomes unhealthy. The node controller checks what percentage of nodes in the zone are unhealthy (the Ready condition is Unknown or False ) at the same time: If the fraction of unhealthy nodes is at least --unhealthy-zone-threshold (default 0. 55), then the eviction rate is reduced. If the cluster is small (i. has less than or equal to --large-cluster-size-threshold nodes - default 50), then evictions are stopped. Otherwise, the eviction rate is reduced to --secondary-node-eviction-rate (default 0. The reason these policies are implemented per availability zone is because one availability zone might become partitioned from the control plane while the others remain connected. If your cluster does not span multiple cloud provider availability zones, then the eviction mechanism does not take per-zone unavailability into account. A key reason for spreading your nodes across availability zones is so that the workload may be shifted to healthy zones when one entire zone goes down. Therefore, if all nodes in a zone are unhealthy, then the node controller evicts at the normal rate of --node-eviction-rate. The corner case is when all zones are completely unhealthy (none of the nodes in the cluster are healthy). In such a case, the node controller assumes that there is some problem with connectivity between the control plane and the nodes, and doesn&#39;t perform any evictions. (If there was an outage and some nodes reappear, the node controller does evict pods from the remaining nodes that are unhealthy or unreachable). The node controller is also responsible for evicting pods running on nodes with NoExecute taints, unless those pods tolerate that taint. The node controller also adds taints corresponding to node problems like node unreachable or not ready. This means that the scheduler won&#39;t place Pods onto unhealthy nodes. Resource capacity tracking Node objects track information about the Node&#39;s resource capacity: for example, the amount of memory available and the number of CPUs. Nodes that self register report their capacity during registration. If you manually add a Node, then you require to set the node&#39;s capacity information when you add it. The Kubernetes scheduler ensures that there are enough resources for all the Pods on a Node. The scheduler checks that the sum of the requests of containers on the node is no greater than the node&#39;s capacity. That sum of requests includes all containers managed by the kubelet, but excludes any containers started directly by the container runtime, and also excludes any processes running outside of the kubelet&#39;s control. Note: If you desire to explicitly reserve resources for non-Pod processes, observe reserve resources for system daemons. Node topology FEATURE STATE: Kubernetes v1. 27 [stable] (enabled by default) If you have enabled the TopologyManager feature gate , then the kubelet can utilize topology hints when making resource assignment decisions. observe Control Topology Management Policies on a Node for more information. What&#39;s next Learn more about the following: Components that create up a node. API definition for Node. Node section of the architecture design document. Graceful/non-graceful node shutdown. Node autoscaling to manage the number and size of nodes in your cluster. Taints and Tolerations. Node Resource Managers. Resource Management for Windows nodes. Feedback Was this page helpful? Yes No Thanks for the feedback. If you have a specific, answerable question about how to utilize Kubernetes, ask it on Stack Overflow. Open an issue in the GitHub Repository if you desire to report a problem or suggest an improvement. Last modified November 28, 2025 at 12:26 PM PST: Fix grammar and clarity issues in Node architecture documentation (1bb5853418)</p>
+
+            </div>
+
+            <!-- Promotional Section -->
+            <div class="promotional-section">
+              <p>Ready to eliminate manual firefighting and achieve autonomous infrastructure operations?</p>
+              <p>See how AlertMend AI can help you reduce costs by 50%, achieve zero downtime, and automate incident remediation across Kubernetes, VMs, and ECS. <a href="https://calendly.com/hello-alertmend/30min" target="_blank" rel="noopener noreferrer">Book a demo.</a></p>
+            </div>
+
+            <!-- Horizontal Separator -->
+            <hr />
+
+            <!-- Arvind Rajpurohit Profile Section -->
+            <div class="profile-section">
+              <img src="/logos/arvind.jpeg" alt="Arvind Rajpurohit" class="profile-image" onerror="this.style.display='none'; const placeholder = this.nextElementSibling; if (placeholder) placeholder.classList.add('show');" />
+              <div class="profile-placeholder-arvind">AR</div>
+              <div class="profile-content">
+                <h3 class="profile-name">Arvind Rajpurohit</h3>
+                <p class="profile-title" style="color: #9333ea; font-weight: 600; margin-bottom: 1rem; font-size: 1rem;">Co-Founder & CEO</p>
+                <div class="profile-bio">
+                  <p>Arvind is a Kubestronaut and Kubernetes expert with 15+ years of experience in infrastructure automation. Previously DevOps Team Lead at Roambee and Customer Success Engineer at Shoreline.io (acquired by NVIDIA), he's helped hundreds of teams achieve 99.97% uptime, reduce costs by 50%, and eliminate 90% of manual operations work.</p>
+                  <p>As CEO of AlertMend AI, Arvind is building the future of autonomous infrastructure management—where AI doesn't just monitor systems, but understands, predicts, and automatically resolves issues while continuously learning and improving.</p>
+                </div>
+                <a href="https://www.linkedin.com/in/arvind-rajpurohit-4a332523/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+                  <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Right Sidebar (30%) -->
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <!-- Email Signup -->
+          <div class="sidebar-card">
+            <h3>Receive blog and product updates</h3>
+            <form class="signup-form">
+              <input type="email" placeholder="Email*" required />
+              <button type="submit">SIGN UP</button>
+            </form>
+          </div>
+
+          <!-- Related Content -->
+          
+          <div class="sidebar-card">
+            <h3 class="related-content-title">RELATED CONTENT</h3>
+            <ul class="related-posts-list">
+              
+                <li>
+                  <a href="/blog/oomkilled-in-kubernetes" class="related-post-link">How to Fix OOMKilled Errors in Kubernetes</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/graceful-shutdown-kubernetes" class="related-post-link">Graceful Shutdown in Kubernetes: Ensuring Safe Pod Termination</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/load-balancing-long-lived-connections-kubernetes" class="related-post-link">Load Balancing and Scaling Long-Lived Connections in Kubernetes</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/5-ways-aiops-transforming-infrastructure" class="related-post-link">5 Ways AIOps is Transforming Infrastructure Management</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/cost-optimization-multi-cloud" class="related-post-link">Cost Optimization Strategies for Multi-Cloud Infrastructure</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/troubleshooting-unhealthy-elasticsearch-nodes-kubernetes" class="related-post-link">Troubleshooting Unhealthy Elasticsearch Nodes on Kubernetes: Causes and Solutions</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/troubleshooting-elasticsearch-unassigned-shards-kubernetes" class="related-post-link">Troubleshooting Elasticsearch Unassigned Shards Incident on Kubernetes: Causes and Solutions</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/elasticsearch-cluster-yellow-incident-kubernetes" class="related-post-link">Elasticsearch Cluster Yellow Incident on Kubernetes</a>
+                </li>
+              
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View All Posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+          
+
+          <!-- Additional Internal Links -->
+          <div class="sidebar-card">
+            <h3 class="related-content-title">EXPLORE ALERTMEND</h3>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/kubernetes-cost-optimization" class="related-post-link">Cost Optimization</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

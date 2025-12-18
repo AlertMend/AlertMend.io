@@ -1,11 +1,12 @@
 ---
-title: "best platform for monitoring kubernetes expenses"
+title: "best platform for monitoring kubernetes"
 excerpt: "In today's cloud-driven landscape, monitoring Kubernetes expenses has become a pivotal aspect for businesses looking to optimize their operational costs"
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "best, platform, monitoring, kubernetes, expenses, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
+
 
 # best platform for monitoring kubernetes expenses
 

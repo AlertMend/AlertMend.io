@@ -1,11 +1,12 @@
 ---
-title: "How to Troubleshoot and Fix Kubernetes Node Not Ready Error"
+title: "How to Troubleshoot and Fix Kubernetes"
 excerpt: "In Kubernetes clusters, the Node Not Ready error is a frequent issue that can disrupt the smooth operation of your workloads."
 date: "2025-05-30"
 category: "Kubernetes"
 author: "Himanshu Bansal"
 keywords: "Kubernetes troubleshooting, Node Not Ready error, Kubernetes management, incident remediation, Kubernetes automation, cluster health monitoring, Kubernetes errors, AlertMend solutions"
 ---
+
 
 In Kubernetes clusters, the "Node Not Ready" error is a frequent issue that can disrupt the smooth operation of your workloads.
 

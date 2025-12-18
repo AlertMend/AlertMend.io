@@ -1,11 +1,13 @@
 ---
 title: "python unable to get local issuer certificate"
-excerpt: "Encountering the \"Python unable to get local issuer certificate\" error can be a stumbling block for developers utilizing Python’s requests module or other li..."
+excerpt: "Encountering the Python unable to get local issuer certificate error can be a stumbling block for developers. Learn troubleshooting steps and solutions."
 date: "2025-12-18"
 category: "Security"
 author: "AlertMend Team"
 keywords: "python, unable, local, issuer, certificate, Security, AlertMend AI, AIOps"
 ---
+
+
 
 # python unable to get local issuer certificate
 

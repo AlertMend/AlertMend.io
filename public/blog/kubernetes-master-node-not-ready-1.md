@@ -1,11 +1,13 @@
 ---
 title: "kubernetes master node not ready"
-excerpt: "Kubernetes is an essential tool for managing containerized applications, but encountering the \"Kubernetes master node not ready\" issue can disrupt operations"
+excerpt: "Kubernetes is essential for managing containerized applications, but encountering the master node not ready issue can disrupt operations. Learn fixes here."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubernetes, master, node, ready, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
+
+
 
 # kubernetes master node not ready
 

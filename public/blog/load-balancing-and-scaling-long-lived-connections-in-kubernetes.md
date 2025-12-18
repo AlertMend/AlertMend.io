@@ -1,10 +1,12 @@
 ---
-title: "Load Balancing and Scaling Long-Lived Connections in Kubernetes"
+title: "Load Balancing and Scaling Long-Lived"
 excerpt: "Understand how Kubernetes handles WebSockets, gRPC, and database connections—and learn how to properly scale and load balance persistent traffic."
 date: "2025-07-30"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
+
 ---
+
 
 # Load Balancing and Scaling Long-Lived Connections in Kubernetes
 

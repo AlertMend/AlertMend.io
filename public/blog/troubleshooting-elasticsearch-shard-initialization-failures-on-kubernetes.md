@@ -1,10 +1,12 @@
 ---
-title: "Troubleshooting Elasticsearch Shard Initialization Failures on Kubernetes: Causes and Fixes"
-excerpt: "In Kubernetes, privileged containers play a critical role when applications need elevated access to the host system. However, running privileged containers can pose significant security risks. This blog will guide you through the concept of privileged containers, their use cases, and best practices to secure your Kubernetes environment."
+title: "Troubleshooting Elasticsearch Shard"
+excerpt: "In Kubernetes, privileged containers play a critical role when applications need elevated access to the host system."
 date: "2025-02-18"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"
+
 ---
+
 
 Elasticsearch relies heavily on shard initialization to distribute data across the cluster efficiently. However, shard initialization failures in a **Kubernetes** environment can severely impact Elasticsearch performance, causing delays, downtime, or data loss. Immediate attention is required to resolve these failures and maintain cluster health. This blog will dive into the common causes, troubleshooting steps, and solutions for shard initialization failures.
 

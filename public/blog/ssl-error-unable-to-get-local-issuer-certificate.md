@@ -1,11 +1,12 @@
 ---
-title: "ssl error: unable to get local issuer certificate"
+title: "ssl error: unable to get local issuer"
 excerpt: "Encountering the SSL error: unable to get local issuer certificate can disrupt your operations and affect data security"
 date: "2025-12-18"
 category: "Troubleshooting"
 author: "AlertMend Team"
 keywords: "error, unable, local, issuer, certificate, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"
 ---
+
 
 # ssl error: unable to get local issuer certificate
 

@@ -1,10 +1,12 @@
 ---
-title: "Resolving Network Connectivity and Latency Issues in Elasticsearch: A Troubleshooting Guide"
-excerpt: "Explore the latest AI tools and applications that are revolutionizing various industries. From image generation to natural language processing, AI is changing the way we think and interact with the world."
+title: "Resolving Network Connectivity and Latency"
+excerpt: "Explore the latest AI tools and applications that are revolutionizing various industries. From image generation to natural language processing, AI is..."
 date: "2025-03-9"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
+
 ---
+
 
 # 🚨 **Resolving Network Connectivity and Latency Issues in Elasticsearch: A Troubleshooting Guide**
 ---
