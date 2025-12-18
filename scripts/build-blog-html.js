@@ -353,7 +353,7 @@ markdownFiles.forEach(file => {
             description = firstSentenceMatch[0].trim()
           } else {
             // Try to find a sentence boundary within safeMaxLength
-            const lastPeriod = text.lastIndexOf('.')
+          const lastPeriod = text.lastIndexOf('.')
             const lastExclamation = text.lastIndexOf('!')
             const lastQuestion = text.lastIndexOf('?')
             const lastSentence = Math.max(lastPeriod, lastExclamation, lastQuestion)
@@ -710,19 +710,42 @@ markdownFiles.forEach(file => {
     }
     
     // Helper function to ensure description is always valid (50-160 chars)
-    const ensureValidDescription = (desc, title, category) => {
-      const cleanDesc = (desc || '').trim()
-      if (cleanDesc.length >= 50 && cleanDesc.length <= 160) {
-        return cleanDesc
+    const ensureValidDescription = (desc, title, category, slug) => {
+      let cleanDesc = (desc || '').trim()
+      // If description is too short, replace it completely
+      if (cleanDesc.length < 50) {
+        const cleanTitle = (title || slug).replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+        const categoryText = category || 'Kubernetes'
+        cleanDesc = `Expert guide on ${cleanTitle.toLowerCase()} for ${categoryText}. Learn best practices and solutions.`
       }
-      const cleanTitle = (title || slug).replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
-      const categoryText = category || 'Kubernetes'
-      const fallback = `Expert guide on ${cleanTitle.toLowerCase()} for ${categoryText}. Learn best practices and solutions.`
-      return fallback.length > 150 ? fallback.substring(0, 147).trim() + '...' : fallback
+      // If still too short (shouldn't happen), use minimal fallback
+      if (cleanDesc.length < 50) {
+        const cleanTitle = (title || slug).replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+        cleanDesc = `Expert guide on ${cleanTitle.toLowerCase()} for ${category || 'Kubernetes'}. Learn best practices.`
+      }
+      // Truncate if too long
+      if (cleanDesc.length > 150) {
+        cleanDesc = cleanDesc.substring(0, 147).trim() + '...'
+      }
+      return cleanDesc
     }
     
-    // Ensure metaDescription is valid before using it
-    metaDescription = ensureValidDescription(metaDescription, metadata.title, metadata.category)
+    // Ensure metaDescription is valid before using it - this MUST fix any invalid descriptions
+    metaDescription = ensureValidDescription(metaDescription, metadata.title, metadata.category, slug)
+    
+    // FINAL CHECK: Create a const variable with guaranteed valid description
+    // This MUST ensure the description is always >= 50 chars
+    let tempDesc = (metaDescription || '').trim()
+    if (!tempDesc || tempDesc.length < 50) {
+      const cleanTitle = ((metadata.title || slug).replace(/\s*\|\s*AlertMend AI\s*$/i, '')).trim()
+      tempDesc = `Expert guide on ${cleanTitle.toLowerCase()} for ${metadata.category || 'Kubernetes'}. Learn best practices and solutions.`
+    }
+    // Absolute guarantee - if still too short, use minimal fallback
+    if (tempDesc.length < 50) {
+      const cleanTitle = ((metadata.title || slug).replace(/\s*\|\s*AlertMend AI\s*$/i, '')).trim()
+      tempDesc = `Expert guide on ${cleanTitle.toLowerCase()} for ${metadata.category || 'Kubernetes'}. Learn best practices.`
+    }
+    const finalMetaDescription = tempDesc
     
     // Function to create HTML head with specific canonical URL
     const createHTMLHead = (canonicalUrl) => `<!DOCTYPE html>
@@ -731,7 +754,7 @@ markdownFiles.forEach(file => {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${shortenedTitle}</title>
-  <meta name="description" content="${metaDescription.replace(/"/g, '&quot;')}">
+  <meta name="description" content="${((finalMetaDescription && finalMetaDescription.trim().length >= 50) ? finalMetaDescription : `Expert guide on ${((metadata.title || slug).replace(/\s*\|\s*AlertMend AI\s*$/i, '')).trim().toLowerCase()} for ${metadata.category || 'Kubernetes'}. Learn best practices and solutions.`).replace(/"/g, '&quot;')}">
   <meta name="keywords" content="${(metadata.keywords || `${metadata.category || 'Blog'}, AlertMend AI, AIOps, Kubernetes, DevOps`).replace(/"/g, '&quot;')}">
   <meta name="author" content="${metadata.author || 'AlertMend Team'}">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -745,14 +768,14 @@ markdownFiles.forEach(file => {
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonicalUrl}">
   <meta property="og:title" content="${shortenedTitle}">
-  <meta property="og:description" content="${metaDescription.replace(/"/g, '&quot;')}">
+  <meta property="og:description" content="${finalMetaDescription.replace(/"/g, '&quot;')}">
   <meta property="og:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="${canonicalUrl}">
   <meta name="twitter:title" content="${shortenedTitle}">
-  <meta name="twitter:description" content="${metaDescription.replace(/"/g, '&quot;')}">
+  <meta name="twitter:description" content="${finalMetaDescription.replace(/"/g, '&quot;')}">
   <meta name="twitter:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Structured Data -->
@@ -761,7 +784,7 @@ markdownFiles.forEach(file => {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": "${shortenedTitle}",
-    "description": "${metaDescription.replace(/"/g, '\\"')}",
+    "description": "${finalMetaDescription.replace(/"/g, '\\"')}",
     "image": "https://alertmend.io/og-image.jpg",
     "datePublished": "${metadata.date || ''}",
     "dateModified": "${metadata.date || ''}",

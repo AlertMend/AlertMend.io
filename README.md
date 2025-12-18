@@ -83,6 +83,16 @@ This project follows strict SEO guidelines to ensure optimal search engine visib
 // - Other pages: Page-specific unique suffixes
 ```
 
+**Post-Processing Validation:**
+- ✅ A post-processing script (`scripts/fix-html-descriptions.js`) runs after HTML generation
+- ✅ Automatically fixes any HTML files with descriptions < 50 characters
+- ✅ Extracts title from HTML and generates a valid description (50-160 chars)
+- ✅ Updates all meta tags: `description`, `og:description`, `twitter:description`, and JSON-LD
+- ✅ Integrated into the build process (`npm run build:blog`)
+- ✅ Ensures 100% compliance with SEO description length requirements
+
+**Location:** `scripts/fix-html-descriptions.js`
+
 ### 2.1. Meta Keywords Rules
 **Requirement:** All pages should have meta keywords tag (optional but recommended)
 
@@ -296,8 +306,10 @@ Alertmend-AI/
 │   │   └── blogUtils.ts       # Blog utilities
 │   └── ...
 ├── scripts/
-│   ├── build-blog-html.js     # Static HTML generation
-│   └── generate-sitemap.js    # Sitemap generation
+│   ├── build-blog-html.js         # Static HTML generation
+│   ├── fix-html-descriptions.js   # Post-processing: Fixes invalid meta descriptions
+│   ├── validate-blogs.js          # Validates blog HTML files for SEO compliance
+│   └── generate-sitemap.js        # Sitemap generation
 └── vercel.json            # Vercel configuration
 ```
 
@@ -305,10 +317,16 @@ Alertmend-AI/
 
 1. **Generate Sitemap:** `npm run build:sitemap`
 2. **Generate Blog HTML:** `npm run build:blog`
-3. **TypeScript Compilation:** `tsc`
-4. **Vite Build:** `vite build`
+   - Generates static HTML files from markdown blog posts
+   - Automatically runs post-processing script to fix invalid descriptions
+   - Ensures all meta descriptions are 50-160 characters
+3. **Validate Blogs:** `npm run validate:blogs` (runs automatically in build)
+   - Validates all blog HTML files for SEO compliance
+   - Checks title lengths, description lengths, H1/H2 structure, etc.
+4. **TypeScript Compilation:** `tsc`
+5. **Vite Build:** `vite build`
 
-All blog posts are converted to static HTML files during build for better SEO.
+All blog posts are converted to static HTML files during build for better SEO. The build process includes automatic validation and fixing of SEO issues.
 
 ## 🌐 Deployment
 
@@ -368,6 +386,36 @@ Your content here...
 
 3. Run `npm run build:blog` to generate static HTML
 4. The title and description will be automatically optimized for SEO
+5. The post-processing script will automatically fix any invalid descriptions if needed
+
+### Blog Validation and Quality Assurance
+
+The project includes automatic validation and fixing of blog HTML files:
+
+**Validation Script:** `scripts/validate-blogs.js`
+- Validates all generated HTML files for SEO compliance
+- Checks:
+  - Title lengths (30-60 characters)
+  - Meta description lengths (50-160 characters)
+  - H1/H2 structure (exactly one H1, H2s are 50-70 chars)
+  - Code block formatting
+  - Frontmatter structure
+
+**Post-Processing Script:** `scripts/fix-html-descriptions.js`
+- Automatically fixes invalid meta descriptions (< 50 characters)
+- Generates valid descriptions from page titles
+- Updates all meta tags (description, og:description, twitter:description, JSON-LD)
+- Runs automatically as part of `npm run build:blog`
+- Ensures 100% compliance with SEO requirements
+
+**Running Validation:**
+```bash
+# Validate all blog HTML files
+npm run validate:blogs
+
+# The validation runs automatically during build
+npm run build
+```
 
 ### SEO Utilities
 
@@ -395,9 +443,11 @@ const metaDescription = generateUniqueMetaDescription(
 
 - All blog titles are automatically truncated to 30-60 characters
 - All H2 headings are automatically truncated to 50-70 characters
-- All meta descriptions are automatically generated to be unique
+- All meta descriptions are automatically generated to be unique and 50-160 characters
+- Invalid meta descriptions are automatically fixed during build via post-processing script
 - Canonical URLs are automatically set for all pages
 - Static HTML files are generated during build for better SEO
+- Blog HTML files are validated for SEO compliance during build
 - Logo uses SVG format for better performance and scalability
 
 ## 🔗 Links

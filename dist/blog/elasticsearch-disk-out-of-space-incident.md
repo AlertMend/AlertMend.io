@@ -1,0 +1,126 @@
+---
+title: "Elasticsearch Disk Out of Space Incident"
+excerpt: "Learn how to troubleshoot and optimize high JVM heap usage in Elasticsearch with practical steps and commands."
+date: "2025-03-28"
+category: "Elasticsearch"
+author: "Himanshu Bansal"
+
+---
+
+
+# 🚨 **Elasticsearch Disk Out of Space Incident: Troubleshooting and Solutions**
+---
+
+When **Elasticsearch** runs out of disk space, it can lead to serious issues, including system crashes, slow performance, and an inability to index new data. This type of incident is critical and requires immediate attention to avoid disruptions to your Elasticsearch cluster. In this blog, we’ll explore common causes of disk space issues in Elasticsearch, how to troubleshoot, and best practices to prevent this from happening in the future.
+
+---
+
+## 🔍 **Common Causes of Disk Space Issues in Elasticsearch**
+
+Running out of disk space in Elasticsearch can be caused by several factors:
+- **Excessive Data Growth**: High volumes of data being indexed without proper retention policies.
+- **No Data Cleanup**: Data not being purged after its retention period, causing storage to fill up.
+- **Backup Issues**: Backups not being performed regularly, resulting in accumulated data.
+- **Improper Shard Allocation**: Over-allocation of shards can lead to inefficient use of disk space.
+
+---
+
+## 🛠️ **Troubleshooting Elasticsearch Disk Space Issues**
+
+### 1. **Check Disk Usage on Elasticsearch Instance**
+Start by verifying the current disk usage on the Elasticsearch instance:
+```bash
+ssh ${ELASTICSEARCH_INSTANCE} df -h
+```
+This command will show how much disk space is used and available.
+
+### 2. **Identify Large Directories Consuming Space**
+To pinpoint where most of the disk space is being used, list the largest directories:
+```bash
+ssh ${ELASTICSEARCH_INSTANCE} sudo du -h / | sort -rh | head -n 10
+```
+
+### 3. **Review Elasticsearch Logs for Disk Errors**
+Logs can provide critical information about disk-related errors affecting Elasticsearch:
+```bash
+ssh ${ELASTICSEARCH_INSTANCE} sudo tail -f /var/log/elasticsearch/elasticsearch.log | grep "disk"
+```
+
+### 4. **Check Elasticsearch Cluster Health**
+Verify the overall health of the Elasticsearch cluster to see if there are any underlying issues:
+```bash
+curl -X GET "${ELASTICSEARCH_ENDPOINT}/_cluster/health?pretty"
+```
+
+### 5. **Check Cluster and Shard Status**
+It's important to ensure that all shards are properly allocated and functioning:
+```bash
+curl -X GET "${ELASTICSEARCH_ENDPOINT}/_cat/shards?v"
+```
+
+### 6. **Examine Index Retention Policy**
+Ensure that the index retention policy is configured correctly to avoid storing excessive data:
+```bash
+aws es describe-elasticsearch-domain --domain-name ${ELASTICSEARCH_DOMAIN_NAME}
+```
+
+### 7. **Check Elasticsearch Backup Schedule**
+Regular backups are essential to free up disk space by archiving data:
+```bash
+aws s3 ls s3://${S3_BUCKET_NAME} --recursive | sort | tail -n 1
+```
+
+---
+
+## 🛡️ **Solutions for Fixing Elasticsearch Disk Space Issues**
+
+### 1. **Add More Disk Space to Elasticsearch**
+One way to prevent future incidents is by adding more disk space to the Elasticsearch instance:
+```bash
+aws ec2 create-volume --size ${VOLUME_SIZE} --availability-zone $(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
+```
+This increases the total storage capacity of your instance.
+
+### 2. **Clear Old or Unused Data**
+Implement a data retention policy to delete old indices that are no longer needed:
+```bash
+aws es delete-by-query --index ${INDEX_NAME} --query '{"range": {"@timestamp": {"lt": "now-${NUMBER_OF_DAYS_TO_KEEP_DATA}d"}}}'
+```
+This ensures that outdated data does not consume valuable disk space.
+
+### 3. **Monitor Disk Space Usage**
+Use monitoring tools like **Prometheus** or **Grafana** to track disk space usage and set alerts when disk usage exceeds a threshold:
+```yaml
+disk:
+  alert: "if disk space usage exceeds 85%"
+```
+
+### 4. **Automate Backups and Data Archiving**
+Automate the backup process to regularly archive old data to Amazon S3 or another storage service:
+```bash
+aws s3 sync /path/to/data s3://${S3_BUCKET_NAME}/backups
+```
+This process helps prevent disk space from filling up due to large volumes of data.
+
+### 5. **Scale Elasticsearch Resources**
+Consider adding more nodes to your cluster to balance the data load and increase the total available disk space:
+```bash
+kubectl scale deployment ${ELASTICSEARCH_DOMAIN_NAME} --replicas ${NEW_REPLICA_COUNT}
+```
+
+---
+
+## 🔄 **Common Issues and Fixes for Disk Space Incidents in Elasticsearch**
+
+| **Issue**                              | **Cause**                                      | **Solution**                                      |
+|----------------------------------------|------------------------------------------------|---------------------------------------------------|
+| Elasticsearch out of disk space        | Excessive data growth, improper retention       | Add disk space, clear old data, implement retention policies |
+| Indexing stopped                       | No available disk space                        | Delete old indices, optimize shard allocation     |
+| Shards not allocated                   | Insufficient space or resources                | Add nodes, scale the cluster, increase storage    |
+| Backups not performed regularly        | Backup schedule not configured                 | Automate backups to archive data in S3            |
+
+---
+
+## 🚀 **Conclusion**
+
+Disk space issues in **Elasticsearch** can lead to severe performance problems, system crashes, and an inability to index new data. By following the troubleshooting steps provided here, you can identify and resolve disk space issues effectively. Implementing best practices like data retention policies, monitoring disk usage, and automating backups will help prevent these incidents from occurring in the future.

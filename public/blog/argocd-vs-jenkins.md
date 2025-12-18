@@ -64,6 +64,7 @@ pipeline {
         }
     }
 }
+```
 
 ### Utilizing ArgoCD for Kubernetes Deployments
 
@@ -88,6 +89,7 @@ spec:
     automated:
       prune: true
       selfHeal: true
+```
 
 ## Choosing Between ArgoCD and Jenkins
 

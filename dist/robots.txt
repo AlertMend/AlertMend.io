@@ -1,0 +1,13 @@
+# robots.txt for AlertMend AI
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+# Sitemap location
+Sitemap: https://www.alertmend.io/sitemap.xml
+
