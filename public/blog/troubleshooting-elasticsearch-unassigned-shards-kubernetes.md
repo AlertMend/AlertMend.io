@@ -1,13 +1,13 @@
 ---
-title: "Troubleshooting Elasticsearch Unassigned Shards in Kubernetes: Complete Guide"
-excerpt: "Complete troubleshooting guide for Elasticsearch unassigned shards in Kubernetes. Learn how to diagnose and fix shard allocation failures caused by disk space, node failures, configuration issues, and memory constraints."
+title: "Elasticsearch Unassigned Shards Guide"
+excerpt: "Troubleshooting guide for Elasticsearch unassigned shards in Kubernetes. Diagnose and fix shard allocation failures caused by disk space."
 date: "2025-06-05"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"
 keywords: "Elasticsearch, unassigned shards, Kubernetes, troubleshooting Elasticsearch, cluster health, shard allocation, automated incident remediation, operational efficiency"
 ---
 
-# Troubleshooting Elasticsearch Unassigned Shards in Kubernetes: Complete Guide
+# Elasticsearch Unassigned Shards Guide
 
 Elasticsearch unassigned shards occur when shards cannot be allocated to nodes in the cluster. This leads to reduced search performance, potential data loss, and cluster instability. Understanding how to diagnose and resolve unassigned shards is crucial for maintaining a healthy Elasticsearch cluster in Kubernetes.
 

@@ -216,8 +216,8 @@
     "tags": []
   },
   {
-    "slug": "code-exited-status-1failure解决",
-    "title": "code exited status 1/failure解决",
+    "slug": "code-exited-status-1-failure",
+    "title": "code exited status 1/failure",
     "excerpt": "Encountering the code exited status 1/failure error can be challenging in system monitoring.",
     "date": "2025-12-18",
     "category": "Kubernetes",
@@ -246,15 +246,6 @@
     "slug": "container-clusters-list",
     "title": "container clusters list",
     "excerpt": "REFERENCE CONTENT FROM TOP 9 GOOGLE SEARCH RESULTS This content is gathered from the top-ranking pages for comprehensive reference",
-    "date": "2025-12-18",
-    "category": "Kubernetes",
-    "author": "AlertMend Team",
-    "tags": []
-  },
-  {
-    "slug": "cpu-throttling-是-什么",
-    "title": "cpu throttling 是 什么",
-    "excerpt": "In the realm of system monitoring and performance management, understanding cpu throttling 是 什么 is crucial for optimizing your infrastructure",
     "date": "2025-12-18",
     "category": "Kubernetes",
     "author": "AlertMend Team",
@@ -531,15 +522,6 @@
     "tags": []
   },
   {
-    "slug": "k8s-node-notready-排查",
-    "title": "k8s node notready 排查",
-    "excerpt": "In the dynamic world of Kubernetes, encountering a k8s node notready 排查 status is a common challenge that can disrupt operations",
-    "date": "2025-12-18",
-    "category": "Kubernetes",
-    "author": "AlertMend Team",
-    "tags": []
-  },
-  {
     "slug": "karpenter-cost-optimization",
     "title": "karpenter cost optimization",
     "excerpt": "In the evolving landscape of cloud computing, managing resources efficiently has become a critical necessity for businesses",
@@ -678,6 +660,15 @@
     "slug": "kubernetes-master-node-not-ready",
     "title": "kubernetes master node not ready",
     "excerpt": "Experiencing a Kubernetes master node not ready issue can significantly impact the functionality of your cluster, as master nodes play a crucial role in mana...",
+    "date": "2025-12-18",
+    "category": "Kubernetes",
+    "author": "AlertMend Team",
+    "tags": []
+  },
+  {
+    "slug": "kubernetes-node-not-ready-troubleshooting",
+    "title": "k8s node notready troubleshooting",
+    "excerpt": "In the dynamic world of Kubernetes, encountering a k8s node notready status is a common challenge that can disrupt operations",
     "date": "2025-12-18",
     "category": "Kubernetes",
     "author": "AlertMend Team",
@@ -1197,6 +1188,24 @@
     "tags": []
   },
   {
+    "slug": "what-is-cpu-throttling",
+    "title": "cpu throttling 是 什么",
+    "excerpt": "In the realm of system monitoring and performance management, understanding cpu throttling 是 什么 is crucial for optimizing your infrastructure",
+    "date": "2025-12-18",
+    "category": "Kubernetes",
+    "author": "AlertMend Team",
+    "tags": []
+  },
+  {
+    "slug": "what-is-the-best-way-to-prevent-container-drift-1",
+    "title": "what is the best way to prevent container",
+    "excerpt": "When it comes to maintaining the integrity of cloud-native applications, understanding what is the best way to prevent container drift becomes critical",
+    "date": "2025-12-18",
+    "category": "Kubernetes",
+    "author": "AlertMend Team",
+    "tags": []
+  },
+  {
     "slug": "what-is-the-best-way-to-prevent-container-drift",
     "title": "what is the best way to prevent container",
     "excerpt": "In the ever-evolving landscape of cloud-native applications, understanding what is the best way to prevent container drift is crucial for maintaining securit...",
@@ -1495,8 +1504,8 @@
   },
   {
     "slug": "graceful-shutdown-kubernetes",
-    "title": "Graceful Pod Shutdown in Kubernetes: Best Practices and Implementation",
-    "excerpt": "Learn how to gracefully shut down Kubernetes Pods to prevent broken connections, dropped tasks, and data loss.",
+    "title": "Graceful Pod Shutdown in Kubernetes Guide",
+    "excerpt": "Learn how to gracefully shut down Kubernetes Pods to prevent broken connections and data loss. Complete guide with code examples for Node.js, Python, and Go.",
     "date": "2025-06-28",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",
@@ -1513,8 +1522,8 @@
   },
   {
     "slug": "troubleshooting-networking-errors-kubernetes",
-    "title": "Troubleshooting Kubernetes Networking Issues: Common Problems and Solutions",
-    "excerpt": "Networking is one of the most critical components in any Kubernetes deployment, facilitating communication between pods, services, and external resources.",
+    "title": "Kubernetes Networking Issues Guide",
+    "excerpt": "Guide to troubleshooting Kubernetes networking problems including pod-to-pod communication, service discovery, and ingress issues.",
     "date": "2025-06-27",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",
@@ -1531,8 +1540,8 @@
   },
   {
     "slug": "load-balancing-long-lived-connections-kubernetes",
-    "title": "Load Balancing Long-Lived Connections in Kubernetes: WebSockets and gRPC",
-    "excerpt": "Understand how Kubernetes handles WebSockets, gRPC, and database connections—and learn how to properly load balance them.",
+    "title": "Load Balancing Long-Lived Connections Guide",
+    "excerpt": "Guide to load balancing WebSockets, gRPC, and other long-lived connections in Kubernetes. Learn about session affinity and best practices.",
     "date": "2025-06-25",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",
@@ -1540,8 +1549,8 @@
   },
   {
     "slug": "mastering-load-balancing-persistent-connections-kubernetes",
-    "title": "Mastering Persistent Connection Load Balancing in Kubernetes",
-    "excerpt": "Learn why Kubernetes struggles with long-lived connections and how to architect reliable, scalable load balancing for WebSockets, gRPC, and database...",
+    "title": "Persistent Connection Load Balancing Guide",
+    "excerpt": "Learn why Kubernetes struggles with long-lived connections and how to architect reliable load balancing for WebSockets, gRPC, and database connections.",
     "date": "2025-06-22",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",
@@ -1549,8 +1558,8 @@
   },
   {
     "slug": "rollback-deployments-kubernetes",
-    "title": "How to Rollback Kubernetes Deployments: Step-by-Step Guide",
-    "excerpt": "Understand how Kubernetes handles rollbacks, why it is risky in production, and best practices for safe rollbacks.",
+    "title": "Rollback Kubernetes Deployments Guide",
+    "excerpt": "Learn how to safely rollback Kubernetes deployments using kubectl, understand rollout history, and implement automated rollback strategies.",
     "date": "2025-06-20",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",
@@ -1612,8 +1621,8 @@
   },
   {
     "slug": "kubernetes-dns-blog",
-    "title": "Kubernetes DNS Configuration: A Practical Guide",
-    "excerpt": "Kubernetes DNS plays a vital role in managing network communications within a cluster. It simplifies service discovery and ensures that all components—pods,...",
+    "title": "Kubernetes DNS Configuration Guide",
+    "excerpt": "Complete guide to Kubernetes DNS configuration, CoreDNS setup, troubleshooting DNS issues, and optimizing DNS performance for service discovery.",
     "date": "2025-06-7",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",
@@ -1621,8 +1630,8 @@
   },
   {
     "slug": "troubleshooting-elasticsearch-unassigned-shards-kubernetes",
-    "title": "Troubleshooting Elasticsearch Unassigned Shards in Kubernetes: Complete Guide",
-    "excerpt": "Elasticsearch unassigned shards occur when a node is unable to assign shards properly, leading to reduced search performance and potential data loss.",
+    "title": "Elasticsearch Unassigned Shards Guide",
+    "excerpt": "Troubleshooting guide for Elasticsearch unassigned shards in Kubernetes. Diagnose and fix shard allocation failures caused by disk space.",
     "date": "2025-06-05",
     "category": "Elasticsearch",
     "author": "Arvind Rajpurohit",
@@ -1657,8 +1666,8 @@
   },
   {
     "slug": "mastering-kubernetes-statefulsets",
-    "title": "Mastering Kubernetes StatefulSets: Complete Guide",
-    "excerpt": "StatefulSets are designed for stateful applications that require stable network identities and persistent storage.",
+    "title": "Kubernetes StatefulSets: Complete Guide",
+    "excerpt": "Complete guide to Kubernetes StatefulSets for stateful applications. Learn about stable network identities, persistent storage, and scaling best practices.",
     "date": "2025-05-30",
     "category": "Kubernetes",
     "author": "Himanshu Bansal",
@@ -1666,8 +1675,8 @@
   },
   {
     "slug": "resolving-kubernetes-node-not-ready-error",
-    "title": "Resolving Kubernetes Node Not Ready Error: Diagnostic Guide",
-    "excerpt": "In Kubernetes clusters, the “Node Not Ready” error is a frequent issue that can disrupt the smooth operation of your applications.",
+    "title": "Kubernetes Node Not Ready: Diagnostic Guide",
+    "excerpt": "Troubleshooting guide for Kubernetes Node Not Ready errors. Diagnose and fix node issues including resource exhaustion and network problems.",
     "date": "2025-05-30",
     "category": "Kubernetes",
     "author": "Himanshu Bansal",
@@ -1693,8 +1702,8 @@
   },
   {
     "slug": "mastering-kubernetes-resource-quotas-requests-limits",
-    "title": "Kubernetes Resource Quotas, Requests, and Limits: Essential Guide",
-    "excerpt": "In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors occur during this process.",
+    "title": "Kubernetes Resource Quotas Guide",
+    "excerpt": "Complete guide to Kubernetes resource management including requests, limits, and resource quotas. Learn how to optimize allocation and reduce costs.",
     "date": "2025-05-21",
     "category": "Kubernetes",
     "author": "Himanshu Bansal",
@@ -1702,8 +1711,8 @@
   },
   {
     "slug": "resolving-imagepullbackoff-and-errimagepull-in-kubernetes",
-    "title": "Resolving ImagePullBackOff and ErrImagePull Errors in Kubernetes",
-    "excerpt": "In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors such as ImagePullBackOff and ErrImagePull may...",
+    "title": "ImagePullBackOff Errors: Fix Guide",
+    "excerpt": "Troubleshooting guide for Kubernetes ImagePullBackOff and ErrImagePull errors. Diagnose and fix image pull failures caused by authentication and network issues.",
     "date": "2025-05-21",
     "category": "Kubernetes",
     "author": "Himanshu Bansal",
@@ -1738,8 +1747,8 @@
   },
   {
     "slug": "understanding-privileged-containers-kubernetes",
-    "title": "Understanding Privileged Containers in Kubernetes: Security and Use Cases",
-    "excerpt": "In Kubernetes, privileged containers play a critical role when applications need elevated access to host resources.",
+    "title": "Privileged Containers in Kubernetes Guide",
+    "excerpt": "Guide to privileged containers in Kubernetes. Learn when to use them, security risks, alternatives like Linux capabilities, and securing workloads.",
     "date": "2025-05-18",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",
@@ -1846,8 +1855,8 @@
   },
   {
     "slug": "kubernetes-statefulset-volume-recovery-issues-troublshooting",
-    "title": "Troubleshooting Kubernetes StatefulSet Volume Recovery Issues",
-    "excerpt": "Explore the latest AI tools and applications that are revolutionizing various industries. From image generation to natural language processing, AI is...",
+    "title": "StatefulSet Volume Recovery Issues Guide",
+    "excerpt": "Troubleshooting guide for Kubernetes StatefulSet volume recovery issues. Diagnose and fix problems with volume mounting, detachment, and data recovery.",
     "date": "2025-03-9",
     "category": "Kubernetes",
     "author": "Himanshu Bansal",
@@ -1864,10 +1873,10 @@
   },
   {
     "slug": "troubleshooting-elasticsearch-backlog-of-pending-tasks",
-    "title": "Troubleshooting Elasticsearch Backlog of Pending Tasks",
-    "excerpt": "Explore the latest AI tools and applications that are revolutionizing various industries. From image generation to natural language processing, AI is...",
+    "title": "Elasticsearch Backlog of Pending Tasks Guide",
+    "excerpt": "Guide to troubleshooting Elasticsearch backlog of pending tasks in Kubernetes. Diagnose and resolve task queue issues that impact cluster performance.",
     "date": "2025-03-9",
-    "category": "Kubernetes",
+    "category": "Elasticsearch",
     "author": "Himanshu Bansal",
     "tags": []
   },
@@ -1900,8 +1909,8 @@
   },
   {
     "slug": "understanding-kubernetes-crashloopbackoff",
-    "title": "Understanding Kubernetes CrashLoopBackOff: Root Causes and Solutions",
-    "excerpt": "The CrashLoopBackOff error in Kubernetes indicates that a pod is repeatedly crashing and restarting. It typically occurs due to configuration issues,...",
+    "title": "Kubernetes CrashLoopBackOff Guide",
+    "excerpt": "Guide to troubleshooting Kubernetes CrashLoopBackOff errors. Diagnose and fix pod crashes caused by resource issues and configuration errors.",
     "date": "2025-02-28",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",
@@ -1927,8 +1936,8 @@
   },
   {
     "slug": "troubleshooting-elasticsearch-shard-initialization-failures-on-kubernetes",
-    "title": "Troubleshooting Elasticsearch Shard Initialization Failures on Kubernetes",
-    "excerpt": "In Kubernetes, privileged containers play a critical role when applications need elevated access to the host system.",
+    "title": "Elasticsearch Shard Initialization Guide",
+    "excerpt": "Troubleshooting guide for Elasticsearch shard initialization failures in Kubernetes. Diagnose and fix issues caused by resource constraints.",
     "date": "2025-02-18",
     "category": "Elasticsearch",
     "author": "Arvind Rajpurohit",
@@ -1972,8 +1981,8 @@
   },
   {
     "slug": "elasticsearch-shard-allocation-failures",
-    "title": "Elasticsearch Shard Allocation Failures: Causes and Solutions",
-    "excerpt": "A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers.",
+    "title": "Elasticsearch Shard Allocation Guide",
+    "excerpt": "Troubleshooting guide for Elasticsearch shard allocation failures in Kubernetes. Diagnose and fix issues caused by disk space and node failures.",
     "date": "2025-02-5",
     "category": "Elasticsearch",
     "author": "Arvind Rajpurohit",
@@ -2008,8 +2017,8 @@
   },
   {
     "slug": "kubernetes-502-bad-gateway-error-fix",
-    "title": "Kubernetes 502 Bad Gateway Error: Complete Fix Guide",
-    "excerpt": "A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers.",
+    "title": "Kubernetes 502 Bad Gateway: Fix Guide",
+    "excerpt": "Troubleshooting guide for Kubernetes 502 Bad Gateway errors. Diagnose and fix issues with Ingress, services, load balancers, and backend pods.",
     "date": "2025-02-1",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",
@@ -2098,8 +2107,8 @@
   },
   {
     "slug": "understanding-kubernetes-terminating-state",
-    "title": "Understanding Kubernetes Pod Terminating State: Troubleshooting Guide",
-    "excerpt": "Elasticsearch relies on efficient index flushing to write data to disk, but when index flushing slows down, it can lead to degraded performance, delayed...",
+    "title": "Kubernetes Pod Terminating: Troubleshooting",
+    "excerpt": "Guide to troubleshooting Kubernetes pods stuck in Terminating state. Diagnose and fix issues with finalizers, volumes, and processes.",
     "date": "2025-01-13",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",

@@ -1,13 +1,13 @@
 ---
-title: "Kubernetes Resource Quotas, Requests, and Limits: Essential Guide"
-excerpt: "Complete guide to Kubernetes resource management including requests, limits, and resource quotas. Learn how to optimize resource allocation, prevent resource exhaustion, and reduce costs."
+title: "Kubernetes Resource Quotas Guide"
+excerpt: "Complete guide to Kubernetes resource management including requests, limits, and resource quotas. Learn how to optimize allocation and reduce costs."
 date: "2025-05-21"
 category: "Kubernetes"
 author: "Himanshu Bansal"
 keywords: "Kubernetes resources, resource requests, resource limits, resource quotas, CPU throttling, memory limits, resource optimization, cost optimization, AlertMend AI"
 ---
 
-# Kubernetes Resource Quotas, Requests, and Limits: Essential Guide
+# Kubernetes Resource Quotas Guide
 
 Proper resource management is crucial for Kubernetes cluster performance, stability, and cost optimization. Understanding how to set resource requests, limits, and quotas helps ensure applications get the resources they need while preventing resource exhaustion and controlling costs.
 

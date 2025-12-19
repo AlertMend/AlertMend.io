@@ -1,13 +1,13 @@
 ---
-title: "Elasticsearch Shard Allocation Failures: Causes and Solutions"
-excerpt: "Complete troubleshooting guide for Elasticsearch shard allocation failures in Kubernetes. Learn how to diagnose and fix allocation issues caused by disk space, configuration, node failures, and resource constraints."
+title: "Elasticsearch Shard Allocation Guide"
+excerpt: "Troubleshooting guide for Elasticsearch shard allocation failures in Kubernetes. Diagnose and fix issues caused by disk space and node failures."
 date: "2025-02-5"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"
 keywords: "Elasticsearch, shard allocation, allocation failures, cluster health, shard distribution, Elasticsearch troubleshooting, Kubernetes, AlertMend AI"
 ---
 
-# Elasticsearch Shard Allocation Failures: Causes and Solutions
+# Elasticsearch Shard Allocation Guide
 
 Elasticsearch relies on shard allocation to distribute data across the cluster efficiently. However, shard allocation failures can disrupt your cluster's functionality, leading to performance degradation, potential data loss, and search inefficiencies. Understanding how to diagnose and resolve these failures is crucial for maintaining a healthy Elasticsearch cluster.
 

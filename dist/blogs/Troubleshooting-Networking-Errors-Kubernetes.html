@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🚨 Troubleshooting Networking Errors in | AlertMend AI</title>
-  <meta name="description" content="Networking is one of the most critical components in any Kubernetes deployment, facilitating communication between pods, services, and external...">
+  <title>Kubernetes Networking Issues Guide | AlertMend AI</title>
+  <meta name="description" content="Guide to troubleshooting Kubernetes networking problems including pod-to-pod communication, service discovery, and ingress issues.">
   <meta name="keywords" content="Kubernetes networking, troubleshooting Kubernetes, pod communication issues, service discovery problems, ingress troubleshooting, automated incident remediation, Kubernetes management solutions, AlertMend AI">
   <meta name="author" content="Arvind Rajpurohit">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -17,15 +17,15 @@
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.alertmend.io/blogs/Troubleshooting-Networking-Errors-Kubernetes.html">
-  <meta property="og:title" content="🚨 Troubleshooting Networking Errors in | AlertMend AI">
-  <meta property="og:description" content="Networking is one of the most critical components in any Kubernetes deployment, facilitating communication between pods, services, and external...">
+  <meta property="og:title" content="Kubernetes Networking Issues Guide | AlertMend AI">
+  <meta property="og:description" content="Guide to troubleshooting Kubernetes networking problems including pod-to-pod communication, service discovery, and ingress issues.">
   <meta property="og:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://www.alertmend.io/blogs/Troubleshooting-Networking-Errors-Kubernetes.html">
-  <meta name="twitter:title" content="🚨 Troubleshooting Networking Errors in | AlertMend AI">
-  <meta name="twitter:description" content="Networking is one of the most critical components in any Kubernetes deployment, facilitating communication between pods, services, and external...">
+  <meta name="twitter:title" content="Kubernetes Networking Issues Guide | AlertMend AI">
+  <meta name="twitter:description" content="Guide to troubleshooting Kubernetes networking problems including pod-to-pod communication, service discovery, and ingress issues.">
   <meta name="twitter:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Structured Data -->
@@ -33,8 +33,8 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "🚨 Troubleshooting Networking Errors in | AlertMend AI",
-    "description": "Networking is one of the most critical components in any Kubernetes deployment, facilitating communication between pods, services, and external...",
+    "headline": "Kubernetes Networking Issues Guide | AlertMend AI",
+    "description": "Guide to troubleshooting Kubernetes networking problems including pod-to-pod communication, service discovery, and ingress issues.",
     "image": "https://alertmend.io/og-image.jpg",
     "datePublished": "2025-06-27",
     "dateModified": "2025-06-27",
@@ -820,7 +820,7 @@
         <div class="article-content">
           <article>
             <header>
-              <h1>🚨 Troubleshooting Networking Errors in</h1>
+              <h1>Kubernetes Networking Issues Guide</h1>
               
               <!-- Author Info -->
               <div class="author-info">
@@ -829,7 +829,7 @@
                 </div>
                 <div class="author-details">
                   <div class="author-name">Arvind Rajpurohit</div>
-                  <div class="author-meta">2 min read • June 27, 2025</div>
+                  <div class="author-meta">10 min read • June 27, 2025</div>
                 </div>
               </div>
 
@@ -839,96 +839,484 @@
 
             <!-- Content -->
             <div class="content">
-              <h2>Common Networking Issues</h2>
+              <h2>Kubernetes Networking Issues Guide</h2>
+<p>Networking is one of the most critical components in any Kubernetes deployment, facilitating communication between pods, services, and external resources. When networking issues occur, they can completely disrupt application functionality. This comprehensive guide covers common networking problems and their solutions.</p>
+<h2>Understanding Kubernetes Networking Fundamentals</h2>
+<p>Before troubleshooting, it&#39;s essential to understand how Kubernetes networking works:</p>
+<h3>Core Networking Concepts</h3>
+<ul>
+<li><strong>Pod Network</strong>: Each pod gets its own IP address from the cluster CIDR</li>
+<li><strong>Service Network</strong>: Services provide stable endpoints for pod groups</li>
+<li><strong>CNI Plugins</strong>: Container Network Interface plugins manage pod networking</li>
+<li><strong>kube-proxy</strong>: Implements service networking and load balancing</li>
+<li><strong>DNS</strong>: CoreDNS provides service discovery via DNS names</li>
+</ul>
+<h3>Network Components to Monitor</h3>
+<ul>
+<li>CNI plugin pods (e.g., Calico, Flannel, Weave Net)</li>
+<li>kube-proxy daemonset</li>
+<li>CoreDNS pods</li>
+<li>Ingress controller pods</li>
+<li>Network policy controllers</li>
+</ul>
+<h2>Common Networking Issues and Solutions</h2>
 <h3>1. Pod-to-Pod Communication Fails</h3>
 <p><strong>Symptoms:</strong></p>
 <ul>
-<li>Pods cannot reach each other</li>
-<li>Connection timeouts</li>
-<li>Network unreachable errors</li>
+<li>Pods cannot reach each other using IP addresses</li>
+<li>Connection timeouts between pods</li>
+<li>&quot;Network unreachable&quot; or &quot;No route to host&quot; errors</li>
+<li>Intermittent connectivity issues</li>
 </ul>
-<p><strong>Diagnosis:</strong></p>
-<pre><code class="language-bash">kubectl exec -it &lt;pod-name&gt; -- ping &lt;other-pod-ip&gt;
+<p><strong>Diagnosis Steps:</strong></p>
+<pre><code class="language-bash"># Test connectivity between pods
+kubectl exec -it &lt;pod-1-name&gt; -- ping &lt;pod-2-ip&gt;
 
-kubectl get endpoints &lt;service-name&gt;
+# Check pod IPs
+kubectl get pods -o wide
 
-# Verify CNI plugin
-kubectl get pods -n kube-system | grep network
+# Verify CNI plugin is running
+kubectl get pods -n kube-system | grep -E &#39;calico|flannel|weave|cilium&#39;
+
+# Check CNI plugin logs
+kubectl logs -n kube-system -l k8s-app=calico-node --tail=50
+
+# Verify node network configuration
+ip addr show
+ip route show
+
+# Check if pods can reach nodes
+kubectl exec -it &lt;pod-name&gt; -- ping &lt;node-ip&gt;
+
+# Test DNS resolution
+kubectl exec -it &lt;pod-name&gt; -- nslookup kubernetes.default
 </code></pre>
-<p><strong>Solutions:</strong></p>
-<ul>
-<li>Verify CNI plugin is installed and running</li>
-<li>Check network policies</li>
-<li>Ensure pod CIDR is correctly configured</li>
-<li>Verify kube-proxy is running</li>
-</ul>
+<p><strong>Root Causes and Solutions:</strong></p>
+<p><strong>Issue: CNI Plugin Not Installed or Not Running</strong></p>
+<pre><code class="language-bash"># Check CNI plugin status
+kubectl get daemonset -n kube-system
+
+# If missing, install CNI plugin (example for Calico)
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+
+# Verify installation
+kubectl get pods -n kube-system -w
+</code></pre>
+<p><strong>Issue: Pod CIDR Misconfiguration</strong></p>
+<p>Check cluster CIDR configuration:</p>
+<pre><code class="language-bash"># Check kube-controller-manager CIDR settings
+kubectl get pod kube-controller-manager-&lt;node&gt; -n kube-system -o yaml | grep cluster-cidr
+
+# Verify CNI plugin CIDR matches cluster CIDR
+kubectl get configmap -n kube-system | grep -i cidr
+</code></pre>
+<p><strong>Issue: Network Policies Blocking Traffic</strong></p>
+<pre><code class="language-bash"># List network policies
+kubectl get networkpolicies --all-namespaces
+
+# Check if policies are blocking traffic
+kubectl describe networkpolicy &lt;policy-name&gt; -n &lt;namespace&gt;
+
+# Temporarily test by deleting policies (in non-production)
+kubectl delete networkpolicy &lt;policy-name&gt; -n &lt;namespace&gt;
+</code></pre>
+<p><strong>Solution: Fix Network Policy Rules</strong></p>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-pod-to-pod
+  namespace: default
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector: {}
+    - namespaceSelector: {}
+  egress:
+  - to:
+    - podSelector: {}
+    - namespaceSelector: {}
+  - to:
+    - namespaceSelector: {}
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+    - protocol: UDP
+      port: 53
+</code></pre>
 <h3>2. Service Discovery Issues</h3>
 <p><strong>Symptoms:</strong></p>
 <ul>
-<li>DNS resolution fails</li>
-<li>Services cannot be found by name</li>
-<li>Connection refused errors</li>
+<li>Services cannot be resolved by DNS name</li>
+<li>&quot;Connection refused&quot; errors when accessing services</li>
+<li>Services resolve but don&#39;t route to pods</li>
+<li>Intermittent service connectivity</li>
 </ul>
 <p><strong>Diagnosis:</strong></p>
-<pre><code class="language-bash"># Test DNS resolution
+<pre><code class="language-bash"># Test DNS resolution from pod
 kubectl run -it --rm debug --image=busybox --restart=Never -- nslookup &lt;service-name&gt;
 
-# Check CoreDNS
-kubectl get pods -n kube-system | grep coredns
+# Check service endpoints
+kubectl get endpoints &lt;service-name&gt;
 
-# View DNS logs
-kubectl logs -n kube-system &lt;coredns-pod&gt;
+# Verify service selector matches pod labels
+kubectl get service &lt;service-name&gt; -o yaml
+kubectl get pods -l &lt;label-selector&gt;
+
+# Check CoreDNS pods
+kubectl get pods -n kube-system -l k8s-app=kube-dns
+
+# View CoreDNS logs
+kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100
+
+# Test CoreDNS connectivity
+kubectl exec -it &lt;pod-name&gt; -- dig @&lt;coredns-ip&gt; &lt;service-name&gt;.default.svc.cluster.local
 </code></pre>
-<p><strong>Solutions:</strong></p>
-<ul>
-<li>Verify CoreDNS is running</li>
-<li>Check service selectors match pod labels</li>
-<li>Ensure DNS service is properly configured</li>
-<li>Verify network policies allow DNS traffic</li>
-</ul>
+<p><strong>Common Issues:</strong></p>
+<p><strong>Issue: Service Has No Endpoints</strong></p>
+<pre><code class="language-bash"># Check if pods match service selector
+kubectl get pods --show-labels
+kubectl get service &lt;service-name&gt; -o jsonpath=&#39;{.spec.selector}&#39;
+
+# If labels don&#39;t match, update either pods or service
+kubectl label pods &lt;pod-name&gt; &lt;key&gt;=&lt;value&gt;
+# OR
+kubectl edit service &lt;service-name&gt;
+</code></pre>
+<p><strong>Issue: CoreDNS Not Running</strong></p>
+<pre><code class="language-bash"># Check CoreDNS status
+kubectl get pods -n kube-system -l k8s-app=kube-dns
+
+# Restart CoreDNS if needed
+kubectl delete pod -n kube-system -l k8s-app=kube-dns
+
+# Verify CoreDNS recovers
+kubectl get pods -n kube-system -l k8s-app=kube-dns -w
+</code></pre>
+<p><strong>Issue: DNS Queries Timing Out</strong></p>
+<pre><code class="language-bash"># Check CoreDNS resource limits
+kubectl describe pod -n kube-system -l k8s-app=kube-dns | grep -A 5 Resources
+
+# Increase CoreDNS resources if needed
+kubectl edit deployment coredns -n kube-system
+# Add/update:
+# resources:
+#   requests:
+#     memory: &quot;256Mi&quot;
+#     cpu: &quot;250m&quot;
+#   limits:
+#     memory: &quot;512Mi&quot;
+#     cpu: &quot;500m&quot;
+</code></pre>
 <h3>3. Ingress Not Working</h3>
 <p><strong>Symptoms:</strong></p>
 <ul>
 <li>External traffic cannot reach services</li>
 <li>502 Bad Gateway errors</li>
+<li>404 Not Found errors</li>
 <li>Ingress controller not responding</li>
+<li>TLS/SSL certificate errors</li>
 </ul>
 <p><strong>Diagnosis:</strong></p>
-<pre><code class="language-bash"># Check ingress status
+<pre><code class="language-bash"># Check ingress resource
 kubectl get ingress
+kubectl describe ingress &lt;ingress-name&gt;
 
-# Check ingress controller
-kubectl get pods -n ingress-nginx
+# Verify ingress controller is running
+kubectl get pods -n ingress-nginx  # or your ingress namespace
 
-# View ingress controller logs
-kubectl logs -n ingress-nginx &lt;ingress-controller-pod&gt;
+# Check ingress controller logs
+kubectl logs -n ingress-nginx -l app.kubernetes.io/component=controller --tail=100
+
+# Test backend service directly
+kubectl port-forward service/&lt;backend-service&gt; 8080:80
+curl http://localhost:8080
+
+# Check ingress controller service
+kubectl get service -n ingress-nginx
+
+# Verify ingress controller can reach backend
+kubectl exec -n ingress-nginx &lt;ingress-controller-pod&gt; -- wget -O- http://&lt;backend-service&gt;:&lt;port&gt;
 </code></pre>
-<p><strong>Solutions:</strong></p>
+<p><strong>Common Issues:</strong></p>
+<p><strong>Issue: Ingress Controller Not Installed</strong></p>
+<p>Install NGINX Ingress Controller:</p>
+<pre><code class="language-bash">kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.1/deploy/static/provider/cloud/deploy.yaml
+
+# Verify installation
+kubectl get pods -n ingress-nginx -w
+</code></pre>
+<p><strong>Issue: Ingress Rules Misconfigured</strong></p>
+<pre><code class="language-yaml"># Correct ingress configuration
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-app-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: myapp.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: my-app-service
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - myapp.example.com
+    secretName: myapp-tls-secret
+</code></pre>
+<p><strong>Issue: Backend Service Not Accessible</strong></p>
+<pre><code class="language-bash"># Verify service exists and has endpoints
+kubectl get service &lt;backend-service&gt;
+kubectl get endpoints &lt;backend-service&gt;
+
+# Check if service is in same namespace as ingress
+kubectl get ingress &lt;ingress-name&gt; -o jsonpath=&#39;{.spec.rules[*].http.paths[*].backend.service.name}&#39;
+kubectl get service -n &lt;namespace&gt;
+</code></pre>
+<p><strong>Issue: TLS Certificate Problems</strong></p>
+<pre><code class="language-bash"># Check TLS secret exists
+kubectl get secret &lt;tls-secret-name&gt;
+
+# Verify certificate
+kubectl get secret &lt;tls-secret-name&gt; -o jsonpath=&#39;{.data.tls\.crt}&#39; | base64 -d | openssl x509 -text -noout
+
+# Create TLS secret if missing
+kubectl create secret tls &lt;tls-secret-name&gt; --cert=path/to/cert.crt --key=path/to/key.key
+</code></pre>
+<h3>4. kube-proxy Issues</h3>
+<p><strong>Symptoms:</strong></p>
 <ul>
-<li>Verify ingress controller is installed</li>
-<li>Check ingress rules and paths</li>
-<li>Ensure backend services are accessible</li>
-<li>Verify TLS certificates</li>
+<li>Services not load balancing correctly</li>
+<li>Service IPs not working</li>
+<li>Connection timeouts to services</li>
+<li>iptables rules incorrect</li>
 </ul>
-<h2>Best Practices</h2>
-<ol>
-<li><strong>Monitor Network Metrics</strong>: Track network latency, packet loss, and throughput</li>
-<li><strong>Use Network Policies</strong>: Implement proper network segmentation</li>
-<li><strong>Test Connectivity</strong>: Regularly test pod-to-pod and service communication</li>
-<li><strong>Document Network Topology</strong>: Keep network architecture documentation updated</li>
-</ol>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check kube-proxy pods
+kubectl get pods -n kube-system -l k8s-app=kube-proxy
+
+# View kube-proxy logs
+kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=100
+
+# Check iptables rules (on node)
+sudo iptables -t nat -L | grep &lt;service-name&gt;
+
+# Verify kube-proxy mode
+kubectl get configmap kube-proxy -n kube-system -o yaml | grep mode
+</code></pre>
+<p><strong>Common Issues:</strong></p>
+<p><strong>Issue: kube-proxy Not Running</strong></p>
+<pre><code class="language-bash"># Restart kube-proxy daemonset
+kubectl delete pod -n kube-system -l k8s-app=kube-proxy
+
+# Verify recovery
+kubectl get pods -n kube-system -l k8s-app=kube-proxy
+</code></pre>
+<p><strong>Issue: Wrong kube-proxy Mode</strong></p>
+<pre><code class="language-bash"># Check current mode
+kubectl get configmap kube-proxy -n kube-system -o yaml
+
+# For better performance, use IPVS mode
+kubectl edit configmap kube-proxy -n kube-system
+# Update mode: &quot;ipvs&quot;
+# Then restart kube-proxy pods
+</code></pre>
+<h3>5. Network Policy Problems</h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Unexpected traffic blocked</li>
+<li>Allowed traffic still blocked</li>
+<li>Policies not taking effect</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># List all network policies
+kubectl get networkpolicies --all-namespaces
+
+# Describe specific policy
+kubectl describe networkpolicy &lt;policy-name&gt; -n &lt;namespace&gt;
+
+# Check if network policy controller is running (for CNI plugins)
+kubectl get pods -n kube-system | grep -i policy
+</code></pre>
+<p><strong>Common Issues:</strong></p>
+<p><strong>Issue: Default Deny Policy Too Restrictive</strong></p>
+<pre><code class="language-yaml"># Allow DNS traffic explicitly
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns
+  namespace: default
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          name: kube-system
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+</code></pre>
+<p><strong>Issue: Policy Selectors Don&#39;t Match</strong></p>
+<pre><code class="language-bash"># Verify pod labels match policy selectors
+kubectl get pods --show-labels
+kubectl get networkpolicy &lt;policy-name&gt; -o yaml | grep -A 10 selector
+</code></pre>
+<h2>Advanced Troubleshooting Techniques</h2>
+<h3>Network Diagnostics Pod</h3>
+<p>Create a diagnostic pod for network testing:</p>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: network-diag
+spec:
+  containers:
+  - name: tools
+    image: nicolaka/netshoot
+    command: [&quot;/bin/bash&quot;]
+    args: [&quot;-c&quot;, &quot;sleep 3600&quot;]
+</code></pre>
+<p>Use it for testing:</p>
+<pre><code class="language-bash">kubectl exec -it network-diag -- bash
+
+# Inside the pod:
+# Test DNS
+nslookup &lt;service-name&gt;
+dig &lt;service-name&gt;.default.svc.cluster.local
+
+# Test connectivity
+curl http://&lt;service-name&gt;:&lt;port&gt;
+telnet &lt;pod-ip&gt; &lt;port&gt;
+
+# Check routing
+ip route
+traceroute &lt;destination&gt;
+</code></pre>
+<h3>Network Monitoring</h3>
+<p>Monitor network metrics:</p>
+<pre><code class="language-bash"># Install network monitoring tools
+kubectl apply -f https://raw.githubusercontent.com/cilium/cilium/v1.14/install/kubernetes/quick-install.yaml
+
+# View network flows
+cilium status
+cilium connectivity test
+</code></pre>
+<h3>Packet Capture</h3>
+<p>Capture network traffic for analysis:</p>
+<pre><code class="language-bash"># On node, capture traffic
+sudo tcpdump -i any -w capture.pcap
+
+# Filter for specific service
+sudo tcpdump -i any host &lt;service-ip&gt; -w service-traffic.pcap
+
+# Analyze with Wireshark or tcpdump
+tcpdump -r capture.pcap -A
+</code></pre>
+<h2>Best Practices for Kubernetes Networking</h2>
+<h3>1. Use Network Policies</h3>
+<p>Implement network policies for security:</p>
+<pre><code class="language-yaml">apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: production
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  - Egress
+</code></pre>
+<h3>2. Monitor Network Metrics</h3>
+<p>Track key network metrics:</p>
+<ul>
+<li>Network latency between pods</li>
+<li>Packet loss rates</li>
+<li>DNS query latency</li>
+<li>Service endpoint availability</li>
+<li>Ingress request rates and errors</li>
+</ul>
+<h3>3. Use Service Mesh for Advanced Networking</h3>
+<p>Consider service mesh solutions for:</p>
+<ul>
+<li>mTLS between services</li>
+<li>Advanced traffic management</li>
+<li>Observability</li>
+<li>Circuit breaking</li>
+</ul>
+<h3>4. Regular Network Testing</h3>
+<p>Implement automated network connectivity tests:</p>
+<pre><code class="language-yaml">apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: network-connectivity-test
+spec:
+  schedule: &quot;*/5 * * * *&quot;
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: test
+            image: busybox
+            command:
+            - /bin/sh
+            - -c
+            - |
+              for service in service1 service2 service3; do
+                if ! nslookup $service; then
+                  echo &quot;DNS resolution failed for $service&quot;
+                  exit 1
+                fi
+              done
+          restartPolicy: OnFailure
+</code></pre>
+<h3>5. Document Network Architecture</h3>
+<p>Maintain documentation for:</p>
+<ul>
+<li>CNI plugin used</li>
+<li>Network CIDR ranges</li>
+<li>Service IP ranges</li>
+<li>Ingress controller configuration</li>
+<li>Network policy rules</li>
+</ul>
 <h2>Automated Troubleshooting with AlertMend</h2>
 <p>AlertMend AI can automatically:</p>
 <ul>
-<li>Detect networking issues before they impact users</li>
-<li>Diagnose root causes of network failures</li>
-<li>Remediate common networking problems</li>
-<li>Provide network health dashboards</li>
+<li><strong>Detect Network Issues Early</strong>: Monitor network metrics and detect anomalies before they impact users</li>
+<li><strong>Diagnose Root Causes</strong>: Analyze network failures and identify whether issues are CNI-related, DNS-related, or service configuration problems</li>
+<li><strong>Remediate Common Problems</strong>: Automatically fix common networking issues like restarting failed CNI pods or correcting misconfigured services</li>
+<li><strong>Network Health Dashboards</strong>: Provide comprehensive views of network health across the cluster</li>
+<li><strong>Alert on Network Degradation</strong>: Set intelligent alerts for network latency, packet loss, and connectivity issues</li>
 </ul>
+<h3>Integration Examples</h3>
+<pre><code class="language-yaml"># AlertMend monitors these network components automatically:
+- CNI plugin pod health
+- kube-proxy daemonset status
+- CoreDNS availability and latency
+- Service endpoint health
+- Ingress controller metrics
+- Network policy effectiveness
+</code></pre>
 <h2>Conclusion</h2>
-<p>Networking issues can be complex, but with proper monitoring and automated troubleshooting, you can maintain reliable connectivity in your Kubernetes cluster.</p>
+<p>Kubernetes networking issues can be complex, but systematic troubleshooting helps identify and resolve problems quickly. By understanding the networking stack, using proper diagnostic tools, and following best practices, you can maintain reliable network connectivity in your Kubernetes clusters. Automated monitoring and remediation with AlertMend AI can further reduce the impact of networking issues and improve overall cluster reliability.</p>
 <hr>
-<p><em>Need help with Kubernetes networking? <a href="/solutions/ai-monitoring">Learn about AlertMend&#39;s monitoring capabilities</a>.</em></p>
+<p><em>Need help with Kubernetes networking? <a href="/solutions/kubernetes-management">Learn about AlertMend&#39;s Kubernetes management solutions</a>.</em></p>
 
             </div>
 

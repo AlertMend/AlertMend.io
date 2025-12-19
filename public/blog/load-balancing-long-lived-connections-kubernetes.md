@@ -1,13 +1,13 @@
 ---
-title: "Load Balancing Long-Lived Connections in Kubernetes: WebSockets and gRPC"
-excerpt: "Complete guide to load balancing WebSockets, gRPC, and other long-lived connections in Kubernetes. Learn about session affinity, service mesh solutions, and best practices for persistent connections."
+title: "Load Balancing Long-Lived Connections Guide"
+excerpt: "Guide to load balancing WebSockets, gRPC, and other long-lived connections in Kubernetes. Learn about session affinity and best practices."
 date: "2025-06-25"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
 keywords: "Kubernetes load balancing, long-lived connections, WebSocket load balancing, gRPC connection management, database connection optimization, session affinity, service meshes, ingress controllers, Kubernetes monitoring, AlertMend AI"
 ---
 
-# Load Balancing Long-Lived Connections in Kubernetes: WebSockets and gRPC
+# Load Balancing Long-Lived Connections Guide
 
 Kubernetes Services use round-robin load balancing by default, which works well for stateless HTTP requests but can cause issues with long-lived connections like WebSockets, gRPC streams, and database connections. Understanding how to properly configure load balancing for these connection types is crucial for maintaining application performance and reliability.
 

@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How to Troubleshoot and Fix Kubernetes | AlertMend AI</title>
-  <meta name="description" content="In Kubernetes clusters, the “Node Not Ready” error is a frequent issue that can disrupt the smooth operation of your applications.">
-  <meta name="keywords" content="Kubernetes, AlertMend AI, AIOps, Kubernetes, DevOps">
+  <title>Kubernetes Node Not Ready: Diagnostic Guide | AlertMend AI</title>
+  <meta name="description" content="Troubleshooting guide for Kubernetes Node Not Ready errors. Diagnose and fix node issues including resource exhaustion and network problems.">
+  <meta name="keywords" content="Kubernetes node not ready, node troubleshooting, kubelet issues, node health, Kubernetes diagnostics, node recovery, cluster management, AlertMend AI">
   <meta name="author" content="Himanshu Bansal">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.alertmend.io/blogs/Resolving_Kubernetes_Node_Not_Ready_Error.html">
@@ -17,15 +17,15 @@
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.alertmend.io/blogs/Resolving_Kubernetes_Node_Not_Ready_Error.html">
-  <meta property="og:title" content="How to Troubleshoot and Fix Kubernetes | AlertMend AI">
-  <meta property="og:description" content="In Kubernetes clusters, the “Node Not Ready” error is a frequent issue that can disrupt the smooth operation of your applications.">
+  <meta property="og:title" content="Kubernetes Node Not Ready: Diagnostic Guide | AlertMend AI">
+  <meta property="og:description" content="Troubleshooting guide for Kubernetes Node Not Ready errors. Diagnose and fix node issues including resource exhaustion and network problems.">
   <meta property="og:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://www.alertmend.io/blogs/Resolving_Kubernetes_Node_Not_Ready_Error.html">
-  <meta name="twitter:title" content="How to Troubleshoot and Fix Kubernetes | AlertMend AI">
-  <meta name="twitter:description" content="In Kubernetes clusters, the “Node Not Ready” error is a frequent issue that can disrupt the smooth operation of your applications.">
+  <meta name="twitter:title" content="Kubernetes Node Not Ready: Diagnostic Guide | AlertMend AI">
+  <meta name="twitter:description" content="Troubleshooting guide for Kubernetes Node Not Ready errors. Diagnose and fix node issues including resource exhaustion and network problems.">
   <meta name="twitter:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Structured Data -->
@@ -33,8 +33,8 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "How to Troubleshoot and Fix Kubernetes | AlertMend AI",
-    "description": "In Kubernetes clusters, the “Node Not Ready” error is a frequent issue that can disrupt the smooth operation of your applications.",
+    "headline": "Kubernetes Node Not Ready: Diagnostic Guide | AlertMend AI",
+    "description": "Troubleshooting guide for Kubernetes Node Not Ready errors. Diagnose and fix node issues including resource exhaustion and network problems.",
     "image": "https://alertmend.io/og-image.jpg",
     "datePublished": "2025-05-30",
     "dateModified": "2025-05-30",
@@ -820,7 +820,7 @@
         <div class="article-content">
           <article>
             <header>
-              <h1>How to Troubleshoot and Fix Kubernetes</h1>
+              <h1>Kubernetes Node Not Ready: Diagnostic Guide</h1>
               
               <!-- Author Info -->
               <div class="author-info">
@@ -829,7 +829,7 @@
                 </div>
                 <div class="author-details">
                   <div class="author-name">Himanshu Bansal</div>
-                  <div class="author-meta">6 min read • May 30, 2025</div>
+                  <div class="author-meta">11 min read • May 30, 2025</div>
                 </div>
               </div>
 
@@ -839,106 +839,528 @@
 
             <!-- Content -->
             <div class="content">
-              <h2>How to Troubleshoot and Fix Kubernetes Node Not Ready Error</h2>
-<hr>
-<p>In Kubernetes clusters, the <strong>&quot;Node Not Ready&quot;</strong> error is a frequent issue that can disrupt the smooth operation of your applications. This error occurs when a node becomes unresponsive or unavailable for scheduling new pods. Understanding the root causes and effective resolution strategies is crucial for maintaining a healthy Kubernetes environment.</p>
-<hr>
-<h2>Kubernetes Node States</h2>
-<p>Kubernetes nodes can exist in four basic states:</p>
+              <h2>Kubernetes Node Not Ready: Diagnostic Guide</h2>
+<p>In Kubernetes clusters, the &quot;Node Not Ready&quot; error is a frequent issue that can disrupt the smooth operation of your applications. This error occurs when a node becomes unresponsive or unavailable for scheduling new pods. Understanding the root causes and effective resolution strategies is crucial for maintaining a healthy Kubernetes environment.</p>
+<h2>Understanding Kubernetes Node States</h2>
+<p>Kubernetes nodes can exist in several states that indicate their health and availability:</p>
+<h3>Node States</h3>
 <ol>
-<li><strong>Ready</strong>: The node is functioning correctly and available to schedule pods.</li>
-<li><strong>Not Ready</strong>: The node is not functioning properly and cannot schedule new pods.</li>
-<li><strong>SchedulingDisabled</strong>: The node is available but marked as unschedulable, meaning it won’t accept new pods.</li>
-<li><strong>Unknown</strong>: The node’s status cannot be determined, usually due to loss of communication between the control plane and the node.</li>
+<li><strong>Ready</strong>: The node is functioning correctly and available to schedule pods</li>
+<li><strong>Not Ready</strong>: The node is not functioning properly and cannot schedule new pods</li>
+<li><strong>SchedulingDisabled</strong>: The node is available but marked as unschedulable (won&#39;t accept new pods)</li>
+<li><strong>Unknown</strong>: The node&#39;s status cannot be determined, usually due to loss of communication</li>
 </ol>
-<hr>
-<h2>Understanding the &quot;Node Not Ready&quot; State</h2>
-<p>When a node enters the &quot;Not Ready&quot; state, it indicates that the <strong>kubelet</strong> on that node is not functioning correctly, preventing the node from being used to schedule new pods. The <strong>kubelet</strong> is a critical component of Kubernetes that manages pod operations on each node. Kubernetes continuously monitors node health through a <strong>Node Controller</strong>, which checks for heartbeats and resource availability. If the node fails these checks, it transitions to the Not Ready state.</p>
-<p>To identify if a node is in the Not Ready state, use the following command:</p>
-<pre><code class="language-bash">kubectl get nodes
+<h3>Node Conditions</h3>
+<p>Kubernetes tracks several conditions for each node:</p>
+<ul>
+<li><strong>Ready</strong>: Node is healthy and ready to accept pods</li>
+<li><strong>MemoryPressure</strong>: Available memory is low</li>
+<li><strong>DiskPressure</strong>: Available disk space is low</li>
+<li><strong>PIDPressure</strong>: Available process IDs are low</li>
+<li><strong>NetworkUnavailable</strong>: Network is not properly configured</li>
+</ul>
+<h2>Diagnostic Workflow</h2>
+<h3>Step 1: Identify the Problem</h3>
+<pre><code class="language-bash"># Check node status
+kubectl get nodes
+
+# Get detailed node information
+kubectl describe node &lt;node-name&gt;
+
+# Check node conditions
+kubectl get node &lt;node-name&gt; -o yaml | grep -A 10 conditions
 </code></pre>
-<p>Nodes in the &quot;Not Ready&quot; state will be displayed with this status in the output.</p>
-<hr>
-<h2>Common Causes of &quot;Node Not Ready&quot; Error</h2>
-<h3><strong>1. Resource Exhaustion (CPU/Memory)</strong></h3>
-<p>Nodes can become unresponsive when they run out of critical resources like CPU or memory. Overloaded nodes may fail to communicate with the control plane, triggering the Not Ready status.</p>
-<p><strong>Solution:</strong></p>
-<ul>
-<li><strong>Monitor Resource Usage</strong>: Use monitoring tools such as <strong>Prometheus</strong> or <strong>Grafana</strong> to track CPU and memory usage over time.</li>
-<li><strong>Scale Your Cluster</strong>: If resource usage is consistently high, consider scaling the cluster by adding more nodes.</li>
-<li><strong>Evict Unnecessary Pods</strong>: Remove non-critical workloads or optimize applications to use fewer resources.</li>
-</ul>
-<hr>
-<h3><strong>2. Network Connectivity Issues</strong></h3>
-<p>Nodes in a Kubernetes cluster rely on the network to communicate with the control plane and other components. Network disruptions can lead to nodes being marked as Not Ready.</p>
-<p><strong>Solution:</strong></p>
-<ul>
-<li><strong>Check Node Network Connectivity</strong>: Use <code>ping</code> or <code>traceroute</code> to check if the node can reach the Kubernetes API server and other nodes.</li>
-<li><strong>Verify Network Configurations</strong>: Ensure that firewalls, VPNs, or any networking rules aren&#39;t preventing node communication.</li>
-<li><strong>Check the CNI Plugin</strong>: If you&#39;re using a third-party Container Network Interface (CNI) plugin, verify its health and configurations.</li>
-</ul>
-<hr>
-<h3><strong>3. Disk Pressure</strong></h3>
-<p>Kubernetes nodes can experience disk pressure when available disk space runs low. When this happens, the node may fail to run new pods and eventually enter the Not Ready state.</p>
-<p><strong>Solution:</strong></p>
-<ul>
-<li><strong>Free Up Disk Space</strong>: Identify and remove unused logs, containers, or volumes that are consuming excess space.</li>
-<li><strong>Check Disk I/O</strong>: If the issue is due to disk read/write performance, consider upgrading to faster storage.</li>
-</ul>
-<hr>
-<h3><strong>4. kubelet or Docker Issues</strong></h3>
-<p>The <strong>kubelet</strong> service on the node is responsible for node operations. If the kubelet fails, the node will not function correctly, leading to the Not Ready status. Similarly, Docker or other container runtimes may also cause problems if they crash or malfunction.</p>
-<p><strong>Solution:</strong></p>
-<ul>
-<li><p><strong>Check the kubelet Status</strong>: Use the following command to check if the kubelet is running:</p>
-<pre><code class="language-bash">systemctl status kubelet
+<h3>Step 2: Analyze Node Conditions</h3>
+<pre><code class="language-bash"># View all node conditions in readable format
+kubectl get node &lt;node-name&gt; -o jsonpath=&#39;{range .status.conditions[*]}{.type}{&quot;\t&quot;}{.status}{&quot;\t&quot;}{.reason}{&quot;\t&quot;}{.message}{&quot;\n&quot;}{end}&#39;
 </code></pre>
-</li>
-<li><p><strong>Restart kubelet or Docker</strong>: Restart the kubelet or Docker service:</p>
-<pre><code class="language-bash">systemctl restart kubelet
-systemctl restart docker
-</code></pre>
-</li>
-<li><p><strong>Inspect Logs</strong>: Review logs of kubelet and Docker for any errors or issues:</p>
-<pre><code class="language-bash">journalctl -u kubelet
-journalctl -u docker
-</code></pre>
-</li>
-</ul>
-<hr>
-<h3><strong>5. Problems with Cloud Provider Integration</strong></h3>
-<p>If you&#39;re running a Kubernetes cluster in the cloud, issues with cloud provider integrations (like autoscaling, load balancing, etc.) can lead to the node being marked as Not Ready.</p>
-<p><strong>Solution:</strong></p>
+<p>Example output analysis:</p>
 <ul>
-<li><strong>Verify Cloud Provider Logs</strong>: Check the cloud provider’s console for any node-level errors or network outages.</li>
-<li><strong>Inspect IAM Roles and Permissions</strong>: Ensure that Kubernetes has the correct permissions to interact with cloud resources, such as network interfaces or persistent storage.</li>
+<li><code>Ready=False</code> - Node is not ready</li>
+<li><code>MemoryPressure=True</code> - Node is out of memory</li>
+<li><code>DiskPressure=True</code> - Node is out of disk space</li>
+<li><code>NetworkUnavailable=True</code> - Network configuration issue</li>
 </ul>
-<hr>
-<h3><strong>6. Kernel and OS-Level Issues</strong></h3>
-<p>Sometimes the node OS or kernel may encounter issues that prevent the node from functioning correctly.</p>
-<p><strong>Solution:</strong></p>
+<h2>Common Causes and Solutions</h2>
+<h3>1. Resource Exhaustion (CPU/Memory)</h3>
+<p><strong>Symptoms:</strong></p>
 <ul>
-<li><strong>Check System Logs</strong>: Review the system logs to identify OS-level errors that may be impacting node availability.</li>
-<li><strong>Apply OS Patches and Updates</strong>: Ensure that the node is running an up-to-date version of the operating system with all necessary patches applied.</li>
+<li>Node shows <code>MemoryPressure=True</code> or high CPU usage</li>
+<li>Pods are evicted frequently</li>
+<li>Node becomes unresponsive</li>
+<li>OOMKilled errors in pod logs</li>
 </ul>
-<hr>
-<h2>Forcing Node to Be Ready (Use with Caution)</h2>
-<p>If none of the above solutions work and the node is critical, you can force the node to be ready by removing its <strong>taints</strong> and allowing pods to be scheduled on it again. However, this should be done cautiously as it may allow workloads to run on an unhealthy node.</p>
-<pre><code class="language-bash">kubectl taint nodes &lt;node-name&gt; key=value:NoSchedule-
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check node resource usage
+kubectl top node &lt;node-name&gt;
+
+# View node resource capacity and allocation
+kubectl describe node &lt;node-name&gt; | grep -A 10 &quot;Allocated resources&quot;
+
+# Check for OOMKilled pods
+kubectl get pods --all-namespaces --field-selector=status.phase=Failed | grep OOMKilled
+
+# Check system memory (on the node)
+ssh &lt;node&gt; free -h
+ssh &lt;node&gt; df -h
+
+# Check for memory pressure events
+kubectl get events --field-selector involvedObject.name=&lt;node-name&gt; --sort-by=&#39;.lastTimestamp&#39;
 </code></pre>
-<p>This command will remove the NoSchedule taint and allow Kubernetes to use the node for scheduling new pods.</p>
-<hr>
-<h2>Preventive Measures</h2>
+<p><strong>Solutions:</strong></p>
+<p><strong>Immediate Actions:</strong></p>
+<pre><code class="language-bash"># Evict pods from the node
+kubectl drain &lt;node-name&gt; --ignore-daemonsets --delete-emptydir-data
+
+# After freeing resources, uncordon the node
+kubectl uncordon &lt;node-name&gt;
+</code></pre>
+<p><strong>Long-term Solutions:</strong></p>
 <ol>
-<li><strong>Set Up Node Monitoring</strong>: Use monitoring tools to continuously track the health and resource usage of your nodes.</li>
-<li><strong>Enable Cluster Autoscaling</strong>: Configure autoscaling to ensure that your cluster can automatically adjust the number of nodes based on demand.</li>
-<li><strong>Regular System Maintenance</strong>: Apply OS and Kubernetes patches regularly to keep nodes secure and operational.</li>
-<li><strong>Resource Requests and Limits</strong>: Enforce resource requests and limits in your pod specifications to prevent resource exhaustion on nodes.</li>
+<li><p><strong>Add Resource Limits to Pods:</strong></p>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: app
+    resources:
+      requests:
+        memory: &quot;128Mi&quot;
+        cpu: &quot;100m&quot;
+      limits:
+        memory: &quot;256Mi&quot;
+        cpu: &quot;200m&quot;
+</code></pre>
+</li>
+<li><p><strong>Scale the Cluster:</strong></p>
+<pre><code class="language-bash"># Add more nodes to distribute load
+# For cloud providers, use autoscaling groups
+</code></pre>
+</li>
+<li><p><strong>Optimize Application Resource Usage:</strong></p>
+<ul>
+<li>Profile applications to identify memory leaks</li>
+<li>Optimize container images</li>
+<li>Implement resource quotas</li>
+</ul>
+</li>
 </ol>
-<hr>
+<h3>2. Network Connectivity Issues</h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Node shows <code>NetworkUnavailable=True</code></li>
+<li>Cannot ping node from control plane</li>
+<li>Node cannot reach API server</li>
+<li>Pods cannot communicate with each other</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check if node can reach API server
+kubectl get node &lt;node-name&gt; -o yaml | grep -A 5 addresses
+
+# Test connectivity from control plane to node
+ping &lt;node-ip&gt;
+
+# Check node network interfaces (on the node)
+ssh &lt;node&gt; ip addr show
+
+# Check routing table (on the node)
+ssh &lt;node&gt; ip route show
+
+# Verify CNI plugin is running
+kubectl get pods -n kube-system | grep -E &#39;calico|flannel|weave|cilium&#39;
+
+# Check CNI plugin logs
+kubectl logs -n kube-system -l k8s-app=calico-node --tail=50
+
+# Test DNS resolution
+kubectl debug node/&lt;node-name&gt; -it --image=busybox -- nslookup kubernetes.default
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<p><strong>Issue: CNI Plugin Not Running</strong></p>
+<pre><code class="language-bash"># Check CNI plugin daemonset
+kubectl get daemonset -n kube-system
+
+# Restart CNI plugin pods
+kubectl delete pod -n kube-system -l k8s-app=calico-node
+
+# Verify recovery
+kubectl get pods -n kube-system -l k8s-app=calico-node
+</code></pre>
+<p><strong>Issue: Firewall Blocking Traffic</strong></p>
+<pre><code class="language-bash"># On the node, check firewall rules
+ssh &lt;node&gt; sudo iptables -L -n
+
+# Check if ports are blocked
+ssh &lt;node&gt; sudo netstat -tuln | grep -E &#39;10250|10255|30000-32767&#39;
+
+# Configure firewall to allow Kubernetes ports
+# TCP 10250 (kubelet API)
+# TCP 10255 (read-only kubelet)
+# TCP 30000-32767 (NodePort services)
+# TCP 10251 (kube-scheduler)
+# TCP 10252 (kube-controller-manager)
+</code></pre>
+<p><strong>Issue: Network Configuration</strong></p>
+<pre><code class="language-bash"># Check network interface configuration
+ssh &lt;node&gt; cat /etc/netplan/50-cloud-init.yaml  # Ubuntu
+ssh &lt;node&gt; cat /etc/sysconfig/network-scripts/ifcfg-eth0  # RHEL/CentOS
+
+# Restart network service (if needed)
+ssh &lt;node&gt; sudo systemctl restart network
+</code></pre>
+<h3>3. Disk Pressure</h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Node shows <code>DiskPressure=True</code></li>
+<li>Pods cannot be created</li>
+<li>Container images cannot be pulled</li>
+<li>Log writes fail</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check disk usage on node
+kubectl describe node &lt;node-name&gt; | grep -i disk
+
+# Check disk usage (on the node)
+ssh &lt;node&gt; df -h
+
+# Check specific directories
+ssh &lt;node&gt; du -sh /var/lib/docker/*
+ssh &lt;node&gt; du -sh /var/lib/kubelet/*
+ssh &lt;node&gt; du -sh /var/log/*
+
+# Check inode usage
+ssh &lt;node&gt; df -i
+
+# List large files
+ssh &lt;node&gt; find /var/lib/docker -type f -size +100M -exec ls -lh {} \;
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<p><strong>Clean Up Docker/Container Runtime:</strong></p>
+<pre><code class="language-bash"># On the node, clean up unused images and containers
+ssh &lt;node&gt; docker system prune -a --volumes -f
+
+# For containerd
+ssh &lt;node&gt; crictl images
+ssh &lt;node&gt; crictl rmi &lt;image-id&gt;
+</code></pre>
+<p><strong>Clean Up kubelet:</strong></p>
+<pre><code class="language-bash"># Clean up unused pod logs
+ssh &lt;node&gt; sudo journalctl --vacuum-time=7d
+
+# Clean up unused volumes
+kubectl get pv
+kubectl delete pv &lt;unused-pv&gt;
+
+# Configure kubelet garbage collection
+# Edit kubelet configuration:
+# --image-gc-high-threshold=85
+# --image-gc-low-threshold=80
+# --eviction-hard=memory.available&lt;100Mi,nodefs.available&lt;10%
+</code></pre>
+<p><strong>Configure Disk Pressure Eviction:</strong></p>
+<pre><code class="language-yaml">apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+evictionHard:
+  memory.available: &quot;200Mi&quot;
+  nodefs.available: &quot;10%&quot;
+  nodefs.inodesFree: &quot;5%&quot;
+evictionSoft:
+  memory.available: &quot;300Mi&quot;
+  nodefs.available: &quot;15%&quot;
+evictionSoftGracePeriod:
+  memory.available: &quot;30s&quot;
+  nodefs.available: &quot;1m&quot;
+</code></pre>
+<h3>4. kubelet Service Issues</h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>kubelet process not running</li>
+<li>Node cannot communicate with API server</li>
+<li>Pods cannot be scheduled or started</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check kubelet status (on the node)
+ssh &lt;node&gt; sudo systemctl status kubelet
+
+# Check kubelet logs
+ssh &lt;node&gt; sudo journalctl -u kubelet -n 100 --no-pager
+
+# Check kubelet configuration
+ssh &lt;node&gt; cat /var/lib/kubelet/config.yaml
+
+# Verify kubelet can access kubeconfig
+ssh &lt;node&gt; sudo cat /var/lib/kubelet/kubeconfig
+
+# Check kubelet certificates
+ssh &lt;node&gt; sudo ls -la /var/lib/kubelet/pki/
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<p><strong>Issue: kubelet Not Running</strong></p>
+<pre><code class="language-bash"># Start kubelet service
+ssh &lt;node&gt; sudo systemctl start kubelet
+
+# Enable kubelet to start on boot
+ssh &lt;node&gt; sudo systemctl enable kubelet
+
+# Check status
+ssh &lt;node&gt; sudo systemctl status kubelet
+</code></pre>
+<p><strong>Issue: kubelet Certificate Problems</strong></p>
+<pre><code class="language-bash"># Check certificate expiration
+ssh &lt;node&gt; sudo openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -dates
+
+# If expired, delete and let kubelet regenerate
+ssh &lt;node&gt; sudo rm /var/lib/kubelet/pki/kubelet-client-*.pem
+ssh &lt;node&gt; sudo systemctl restart kubelet
+</code></pre>
+<p><strong>Issue: kubelet Configuration Errors</strong></p>
+<pre><code class="language-bash"># Validate kubelet configuration
+ssh &lt;node&gt; sudo kubelet --config=/var/lib/kubelet/config.yaml --validate
+
+# Check for configuration syntax errors
+ssh &lt;node&gt; sudo cat /var/lib/kubelet/config.yaml | yamllint
+</code></pre>
+<h3>5. Container Runtime Issues</h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Pods stuck in ContainerCreating state</li>
+<li>Image pull errors</li>
+<li>Container runtime errors in logs</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check container runtime status (Docker)
+ssh &lt;node&gt; sudo systemctl status docker
+
+# Check container runtime status (containerd)
+ssh &lt;node&gt; sudo systemctl status containerd
+
+# Check runtime logs
+ssh &lt;node&gt; sudo journalctl -u docker -n 100
+ssh &lt;node&gt; sudo journalctl -u containerd -n 100
+
+# Test container runtime
+ssh &lt;node&gt; docker ps
+ssh &lt;node&gt; crictl ps
+
+# Check for image pull errors
+kubectl describe pod &lt;pod-name&gt; | grep -A 10 Events
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<p><strong>Issue: Docker/Containerd Not Running</strong></p>
+<pre><code class="language-bash"># Restart container runtime
+ssh &lt;node&gt; sudo systemctl restart docker
+# OR
+ssh &lt;node&gt; sudo systemctl restart containerd
+
+# Verify it&#39;s running
+ssh &lt;node&gt; sudo systemctl status docker
+</code></pre>
+<p><strong>Issue: Image Pull Failures</strong></p>
+<pre><code class="language-bash"># Check image pull secrets
+kubectl get secrets --all-namespaces | grep docker-registry
+
+# Test manual image pull (on node)
+ssh &lt;node&gt; docker pull &lt;image-name&gt;
+ssh &lt;node&gt; crictl pull &lt;image-name&gt;
+
+# Check registry connectivity
+ssh &lt;node&gt; curl -I https://registry.example.com/v2/
+</code></pre>
+<h3>6. API Server Connectivity Issues</h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Node cannot reach API server</li>
+<li>Node status shows Unknown</li>
+<li>kubelet logs show connection errors</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Test API server connectivity from node
+ssh &lt;node&gt; curl -k https://&lt;api-server-ip&gt;:6443/healthz
+
+# Check kubelet API server configuration
+ssh &lt;node&gt; cat /var/lib/kubelet/kubeconfig
+
+# Test with kubectl from node
+ssh &lt;node&gt; kubectl get nodes
+
+# Check network connectivity
+ssh &lt;node&gt; ping &lt;api-server-ip&gt;
+ssh &lt;node&gt; telnet &lt;api-server-ip&gt; 6443
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<p><strong>Issue: API Server Certificate Problems</strong></p>
+<pre><code class="language-bash"># Update kubeconfig on node
+# Copy kubeconfig from control plane or regenerate
+ssh &lt;node&gt; sudo mkdir -p /var/lib/kubelet
+ssh &lt;node&gt; sudo cp &lt;new-kubeconfig&gt; /var/lib/kubelet/kubeconfig
+ssh &lt;node&gt; sudo systemctl restart kubelet
+</code></pre>
+<p><strong>Issue: Network Routing Problems</strong></p>
+<pre><code class="language-bash"># Check routing to API server
+ssh &lt;node&gt; ip route get &lt;api-server-ip&gt;
+
+# Verify DNS resolution
+ssh &lt;node&gt; nslookup &lt;api-server-hostname&gt;
+
+# Check for network policies blocking traffic
+kubectl get networkpolicies --all-namespaces
+</code></pre>
+<h2>Advanced Troubleshooting</h2>
+<h3>Using Node Debug Container</h3>
+<p>Kubernetes provides a debug container feature for troubleshooting:</p>
+<pre><code class="language-bash"># Create debug pod on the node
+kubectl debug node/&lt;node-name&gt; -it --image=busybox
+
+# Inside the debug container, you can:
+# - Check network connectivity
+# - Test DNS resolution
+# - Inspect filesystem
+# - Check processes
+</code></pre>
+<h3>Collecting Diagnostic Information</h3>
+<pre><code class="language-bash"># Collect comprehensive node information
+kubectl get node &lt;node-name&gt; -o yaml &gt; node-status.yaml
+
+# Collect events
+kubectl get events --field-selector involvedObject.name=&lt;node-name&gt; &gt; node-events.yaml
+
+# Collect kubelet logs
+ssh &lt;node&gt; sudo journalctl -u kubelet --since &quot;1 hour ago&quot; &gt; kubelet-logs.txt
+
+# Collect system information
+ssh &lt;node&gt; dmesg &gt; dmesg.log
+ssh &lt;node&gt; /proc/meminfo &gt; meminfo.txt
+ssh &lt;node&gt; /proc/cpuinfo &gt; cpuinfo.txt
+</code></pre>
+<h3>Node Recovery Procedures</h3>
+<p><strong>Cordon and Drain:</strong></p>
+<pre><code class="language-bash"># Mark node as unschedulable
+kubectl cordon &lt;node-name&gt;
+
+# Evict all pods gracefully
+kubectl drain &lt;node-name&gt; --ignore-daemonsets --delete-emptydir-data --force --grace-period=300
+
+# After fixing issues, uncordon the node
+kubectl uncordon &lt;node-name&gt;
+</code></pre>
+<p><strong>Node Reset (Last Resort):</strong></p>
+<pre><code class="language-bash"># On the node, reset kubelet
+ssh &lt;node&gt; sudo kubeadm reset
+
+# Clean up
+ssh &lt;node&gt; sudo rm -rf /etc/cni/net.d
+ssh &lt;node&gt; sudo rm -rf /var/lib/etcd
+ssh &lt;node&gt; sudo rm -rf /var/lib/kubelet
+
+# Rejoin cluster (get join command from control plane)
+kubectl get nodes  # Verify rejoin
+</code></pre>
+<h2>Prevention and Best Practices</h2>
+<h3>1. Implement Resource Monitoring</h3>
+<pre><code class="language-yaml"># Deploy node exporter for monitoring
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: node-exporter
+spec:
+  selector:
+    matchLabels:
+      app: node-exporter
+  template:
+    metadata:
+      labels:
+        app: node-exporter
+    spec:
+      containers:
+      - name: node-exporter
+        image: prom/node-exporter:latest
+        ports:
+        - containerPort: 9100
+        volumeMounts:
+        - name: proc
+          mountPath: /host/proc
+        - name: sys
+          mountPath: /host/sys
+      volumes:
+      - name: proc
+        hostPath:
+          path: /proc
+      - name: sys
+        hostPath:
+          path: /sys
+</code></pre>
+<h3>2. Configure Resource Quotas</h3>
+<pre><code class="language-yaml">apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: compute-quota
+  namespace: production
+spec:
+  hard:
+    requests.cpu: &quot;10&quot;
+    requests.memory: 20Gi
+    limits.cpu: &quot;20&quot;
+    limits.memory: 40Gi
+</code></pre>
+<h3>3. Set Up Health Checks</h3>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: node-health-check
+spec:
+  hostNetwork: true
+  containers:
+  - name: health-check
+    image: busybox
+    command: [&quot;/bin/sh&quot;, &quot;-c&quot;]
+    args:
+    - |
+      while true; do
+        if ! ping -c 1 &lt;api-server-ip&gt;; then
+          echo &quot;API server unreachable&quot;
+          exit 1
+        fi
+        sleep 60
+      done
+</code></pre>
+<h3>4. Implement Node Autoscaling</h3>
+<p>Configure cluster autoscaling to automatically add nodes when resources are low:</p>
+<pre><code class="language-yaml"># For cloud providers, configure node groups with autoscaling
+# Example for AWS EKS:
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: my-cluster
+nodeGroups:
+  - name: ng-1
+    desiredCapacity: 2
+    minSize: 1
+    maxSize: 10
+    volumeSize: 100
+    instanceType: m5.large
+</code></pre>
+<h2>Automated Detection and Remediation</h2>
+<p>AlertMend AI can automatically:</p>
+<ul>
+<li><strong>Monitor Node Health</strong>: Continuously monitor node conditions and resource usage</li>
+<li><strong>Detect Issues Early</strong>: Identify nodes approaching Not Ready state before they fail</li>
+<li><strong>Diagnose Root Causes</strong>: Analyze node failures and identify specific problems (memory, disk, network, kubelet)</li>
+<li><strong>Automated Remediation</strong>: Automatically drain nodes, clean up resources, or restart services</li>
+<li><strong>Alert on Patterns</strong>: Identify patterns like recurring node failures or resource exhaustion trends</li>
+</ul>
+<h3>Integration Example</h3>
+<pre><code class="language-yaml"># AlertMend monitors these node metrics:
+- Node condition status (Ready, MemoryPressure, DiskPressure)
+- kubelet health and response time
+- Resource usage (CPU, memory, disk)
+- Network connectivity to API server
+- Container runtime health
+- Pod eviction events
+</code></pre>
 <h2>Conclusion</h2>
-<p>The <strong>Node Not Ready</strong> error in Kubernetes can be caused by various factors, including resource exhaustion, network issues, disk pressure, or kubelet failures. By following a systematic approach to diagnose and resolve these issues, you can restore your node to the Ready state and ensure the smooth operation of your Kubernetes cluster.</p>
+<p>Kubernetes Node Not Ready errors can have various causes, from resource exhaustion to network issues to kubelet failures. By following a systematic diagnostic approach, checking node conditions, and applying appropriate solutions, you can quickly restore nodes to a Ready state. Implementing monitoring, resource quotas, and automated remediation with AlertMend AI helps prevent and quickly resolve node issues, maintaining cluster reliability and availability.</p>
 <hr>
+<p><em>Need help with Kubernetes node management? <a href="/solutions/kubernetes-management">Learn about AlertMend&#39;s Kubernetes management solutions</a>.</em></p>
 
             </div>
 

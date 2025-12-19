@@ -1,13 +1,13 @@
 ---
-title: "Kubernetes 502 Bad Gateway Error: Complete Fix Guide"
-excerpt: "Complete troubleshooting guide for Kubernetes 502 Bad Gateway errors. Learn how to diagnose and fix issues with Ingress, services, load balancers, backend pods, and network configuration."
+title: "Kubernetes 502 Bad Gateway: Fix Guide"
+excerpt: "Troubleshooting guide for Kubernetes 502 Bad Gateway errors. Diagnose and fix issues with Ingress, services, load balancers, and backend pods."
 date: "2025-02-1"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
 keywords: "502 Bad Gateway, Kubernetes troubleshooting, Ingress errors, service discovery, load balancer issues, backend health, Kubernetes networking, AlertMend AI"
 ---
 
-# Kubernetes 502 Bad Gateway Error: Complete Fix Guide
+# Kubernetes 502 Bad Gateway: Fix Guide
 
 A 502 Bad Gateway error is a common issue in Kubernetes environments, especially when dealing with services, Ingress controllers, and load balancers. This error indicates that the gateway or proxy server received an invalid response from the upstream server. Understanding the root causes and systematic troubleshooting approaches is essential for quick resolution.
 

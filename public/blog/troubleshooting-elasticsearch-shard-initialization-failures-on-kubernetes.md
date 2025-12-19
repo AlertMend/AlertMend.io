@@ -1,13 +1,13 @@
 ---
-title: "Troubleshooting Elasticsearch Shard Initialization Failures on Kubernetes"
-excerpt: "Complete troubleshooting guide for Elasticsearch shard initialization failures in Kubernetes. Learn how to diagnose and fix initialization issues caused by resource constraints, node failures, and configuration problems."
+title: "Elasticsearch Shard Initialization Guide"
+excerpt: "Troubleshooting guide for Elasticsearch shard initialization failures in Kubernetes. Diagnose and fix issues caused by resource constraints."
 date: "2025-02-18"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"
 keywords: "Elasticsearch, shard initialization, initialization failures, cluster health, Elasticsearch troubleshooting, Kubernetes, AlertMend AI"
 ---
 
-# Troubleshooting Elasticsearch Shard Initialization Failures on Kubernetes
+# Elasticsearch Shard Initialization Guide
 
 Elasticsearch relies heavily on shard initialization to distribute data across the cluster efficiently. However, shard initialization failures in a Kubernetes environment can severely impact Elasticsearch performance, causing delays, downtime, or potential data loss. Understanding how to diagnose and resolve these failures is crucial for maintaining cluster health.
 

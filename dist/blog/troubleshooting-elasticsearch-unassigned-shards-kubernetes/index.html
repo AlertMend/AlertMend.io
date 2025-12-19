@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Troubleshooting Elasticsearch Unassigned | AlertMend AI</title>
-  <meta name="description" content="Elasticsearch unassigned shards occur when a node is unable to assign shards properly, leading to reduced search performance and potential data loss.">
+  <title>Elasticsearch Unassigned Shards Guide | AlertMend AI</title>
+  <meta name="description" content="Troubleshooting guide for Elasticsearch unassigned shards in Kubernetes. Diagnose and fix shard allocation failures caused by disk space.">
   <meta name="keywords" content="Elasticsearch, unassigned shards, Kubernetes, troubleshooting Elasticsearch, cluster health, shard allocation, automated incident remediation, operational efficiency">
   <meta name="author" content="Arvind Rajpurohit">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -17,15 +17,15 @@
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.alertmend.io/blog/troubleshooting-elasticsearch-unassigned-shards-kubernetes">
-  <meta property="og:title" content="Troubleshooting Elasticsearch Unassigned | AlertMend AI">
-  <meta property="og:description" content="Elasticsearch unassigned shards occur when a node is unable to assign shards properly, leading to reduced search performance and potential data loss.">
+  <meta property="og:title" content="Elasticsearch Unassigned Shards Guide | AlertMend AI">
+  <meta property="og:description" content="Troubleshooting guide for Elasticsearch unassigned shards in Kubernetes. Diagnose and fix shard allocation failures caused by disk space.">
   <meta property="og:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://www.alertmend.io/blog/troubleshooting-elasticsearch-unassigned-shards-kubernetes">
-  <meta name="twitter:title" content="Troubleshooting Elasticsearch Unassigned | AlertMend AI">
-  <meta name="twitter:description" content="Elasticsearch unassigned shards occur when a node is unable to assign shards properly, leading to reduced search performance and potential data loss.">
+  <meta name="twitter:title" content="Elasticsearch Unassigned Shards Guide | AlertMend AI">
+  <meta name="twitter:description" content="Troubleshooting guide for Elasticsearch unassigned shards in Kubernetes. Diagnose and fix shard allocation failures caused by disk space.">
   <meta name="twitter:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Structured Data -->
@@ -33,8 +33,8 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "Troubleshooting Elasticsearch Unassigned | AlertMend AI",
-    "description": "Elasticsearch unassigned shards occur when a node is unable to assign shards properly, leading to reduced search performance and potential data loss.",
+    "headline": "Elasticsearch Unassigned Shards Guide | AlertMend AI",
+    "description": "Troubleshooting guide for Elasticsearch unassigned shards in Kubernetes. Diagnose and fix shard allocation failures caused by disk space.",
     "image": "https://alertmend.io/og-image.jpg",
     "datePublished": "2025-06-05",
     "dateModified": "2025-06-05",
@@ -820,7 +820,7 @@
         <div class="article-content">
           <article>
             <header>
-              <h1>Troubleshooting Elasticsearch Unassigned</h1>
+              <h1>Elasticsearch Unassigned Shards Guide</h1>
               
               <!-- Author Info -->
               <div class="author-info">
@@ -829,7 +829,7 @@
                 </div>
                 <div class="author-details">
                   <div class="author-name">Arvind Rajpurohit</div>
-                  <div class="author-meta">2 min read • June 5, 2025</div>
+                  <div class="author-meta">10 min read • June 5, 2025</div>
                 </div>
               </div>
 
@@ -839,98 +839,510 @@
 
             <!-- Content -->
             <div class="content">
-              <h2>Understanding Unassigned Shards</h2>
-<p>Unassigned shards are shards that should be allocated to nodes but aren&#39;t. This can happen for several reasons:</p>
+              <h2>Elasticsearch Unassigned Shards Guide</h2>
+<p>Elasticsearch unassigned shards occur when shards cannot be allocated to nodes in the cluster. This leads to reduced search performance, potential data loss, and cluster instability. Understanding how to diagnose and resolve unassigned shards is crucial for maintaining a healthy Elasticsearch cluster in Kubernetes.</p>
+<h2>Understanding Unassigned Shards</h2>
+<p>Unassigned shards are shards that should be allocated to nodes but aren&#39;t. Elasticsearch tries to allocate shards based on:</p>
 <ul>
-<li><strong>Node failures</strong>: Nodes go down and shards cannot be allocated</li>
-<li><strong>Disk space</strong>: Insufficient disk space on nodes</li>
-<li><strong>Memory pressure</strong>: Nodes cannot allocate shards due to memory constraints</li>
-<li><strong>Configuration issues</strong>: Shard allocation settings prevent assignment</li>
+<li>Disk space availability</li>
+<li>Memory constraints</li>
+<li>Node health</li>
+<li>Allocation settings</li>
+<li>Cluster routing configuration</li>
 </ul>
-<h2>Common Causes</h2>
+<h3>Types of Shards</h3>
+<ul>
+<li><strong>Primary Shards</strong>: Original data shards (one per index)</li>
+<li><strong>Replica Shards</strong>: Copies of primary shards for redundancy</li>
+</ul>
+<h3>Shard States</h3>
+<ul>
+<li><strong>STARTED</strong>: Shard is active and serving requests</li>
+<li><strong>INITIALIZING</strong>: Shard is being allocated to a node</li>
+<li><strong>RELOCATING</strong>: Shard is being moved between nodes</li>
+<li><strong>UNASSIGNED</strong>: Shard cannot be allocated (problem state)</li>
+</ul>
+<h2>Diagnostic Workflow</h2>
+<h3>Step 1: Check Cluster Health</h3>
+<pre><code class="language-bash"># Check overall cluster health
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/health?pretty&quot;
+
+# Health status meanings:
+# GREEN: All shards allocated
+# YELLOW: Primary shards allocated, some replicas unassigned
+# RED: Some primary shards unassigned (CRITICAL)
+</code></pre>
+<p><strong>Health Status Analysis:</strong></p>
+<pre><code class="language-json">{
+  &quot;cluster_name&quot; : &quot;elasticsearch&quot;,
+  &quot;status&quot; : &quot;yellow&quot;,
+  &quot;timed_out&quot; : false,
+  &quot;number_of_nodes&quot; : 3,
+  &quot;number_of_data_nodes&quot; : 3,
+  &quot;active_primary_shards&quot; : 10,
+  &quot;active_shards&quot; : 18,
+  &quot;relocating_shards&quot; : 0,
+  &quot;initializing_shards&quot; : 0,
+  &quot;unassigned_shards&quot; : 2,  // Problem indicator
+  &quot;delayed_unassigned_shards&quot; : 0,
+  &quot;number_of_pending_tasks&quot; : 0,
+  &quot;number_of_in_flight_fetch&quot; : 0
+}
+</code></pre>
+<h3>Step 2: Identify Unassigned Shards</h3>
+<pre><code class="language-bash"># List all unassigned shards with reasons
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/shards?h=index,shard,prirep,state,unassigned.reason,unassigned.details&amp;v&quot; | grep UNASSIGNED
+
+# Detailed shard allocation explanation
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/allocation/explain?pretty&quot;
+</code></pre>
+<p><strong>Common Unassigned Reasons:</strong></p>
+<ul>
+<li><code>ALLOCATION_FAILED</code>: Allocation attempt failed</li>
+<li><code>CLUSTER_RECOVERED</code>: Cluster recovered but shard not allocated</li>
+<li><code>DANGLING_INDEX_IMPORTED</code>: Index imported but shard not allocated</li>
+<li><code>EXISTING_INDEX_RESTORED</code>: Index restored but shard not allocated</li>
+<li><code>FORCED_EMPTY_PRIMARY</code>: Forced empty primary not allocated</li>
+<li><code>INDEX_CLOSED</code>: Index is closed</li>
+<li><code>INDEX_CREATED</code>: Index created but shard not allocated</li>
+<li><code>NEW_INDEX_CREATED</code>: New index created</li>
+<li><code>NODE_LEFT</code>: Node left cluster</li>
+<li><code>REINITIALIZED</code>: Shard reinitialized</li>
+<li><code>REPLICA_ADDED</code>: Replica added but not allocated</li>
+</ul>
+<h3>Step 3: Check Node Status</h3>
+<pre><code class="language-bash"># List all nodes
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/nodes?v&quot;
+
+# Check node disk usage
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/allocation?v&quot;
+
+# Check node stats
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_nodes/stats?pretty&quot;
+</code></pre>
+<h3>Step 4: Check Allocation Explanation</h3>
+<pre><code class="language-bash"># Get detailed explanation for unassigned shard
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/allocation/explain?pretty&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;index&quot;: &quot;my-index&quot;,
+  &quot;shard&quot;: 0,
+  &quot;primary&quot;: true
+}&#39;
+</code></pre>
+<p><strong>Example Output:</strong></p>
+<pre><code class="language-json">{
+  &quot;index&quot; : &quot;my-index&quot;,
+  &quot;shard&quot; : 0,
+  &quot;primary&quot; : true,
+  &quot;current_state&quot; : &quot;unassigned&quot;,
+  &quot;unassigned_info&quot; : {
+    &quot;reason&quot; : &quot;ALLOCATION_FAILED&quot;,
+    &quot;at&quot; : &quot;2025-01-15T10:00:00.000Z&quot;,
+    &quot;details&quot; : &quot;failed shard on node [node-1]: failed to create shard, failure IOException[failed to obtain in-memory shard lock]; nested: ShardLockObtainFailedException[[my-index][0]: obtaining shard lock timed out after 5000ms]&quot;,
+    &quot;last_allocation_status&quot; : &quot;no&quot;
+  },
+  &quot;can_allocate&quot; : &quot;no&quot;,
+  &quot;allocate_explanation&quot; : &quot;cannot allocate because allocation is not permitted to any of the nodes that hold an in-sync shard copy&quot;,
+  &quot;node_allocation_decisions&quot; : [
+    {
+      &quot;node_id&quot; : &quot;node-1&quot;,
+      &quot;node_name&quot; : &quot;elasticsearch-0&quot;,
+      &quot;transport_address&quot; : &quot;10.0.0.1:9300&quot;,
+      &quot;node_decision&quot; : &quot;no&quot;,
+      &quot;weight_ranking&quot; : 1,
+      &quot;deciders&quot; : [
+        {
+          &quot;decider&quot; : &quot;disk_threshold&quot;,
+          &quot;decision&quot; : &quot;NO&quot;,
+          &quot;explanation&quot; : &quot;disk watermark [85%] exceeded on [node-1][/var/lib/elasticsearch] free: 10.2%&quot;
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+<h2>Common Causes and Solutions</h2>
 <h3>1. Disk Space Issues</h3>
 <p><strong>Symptoms:</strong></p>
 <ul>
-<li>&quot;disk watermark exceeded&quot; errors</li>
+<li>Error: &quot;disk watermark exceeded&quot;</li>
 <li>Nodes in read-only mode</li>
+<li>Shards cannot be allocated to nodes with low disk</li>
 </ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check disk usage per node
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/allocation?v&quot;
+
+# Check disk watermarks
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/settings?include_defaults=true&amp;filter_path=**.disk*&amp;pretty&quot;
+</code></pre>
 <p><strong>Solutions:</strong></p>
-<ul>
-<li>Free up disk space</li>
-<li>Increase node disk size</li>
-<li>Clean up old indices</li>
-<li>Adjust disk watermark settings</li>
-</ul>
+<p><strong>Free Up Disk Space:</strong></p>
+<pre><code class="language-bash"># Delete old indices
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X DELETE &quot;localhost:9200/old-index-*&quot;
+
+# Delete old snapshots
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X DELETE &quot;localhost:9200/_snapshot/my-repo/snapshot-name&quot;
+
+# Force merge to reduce index size
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X POST &quot;localhost:9200/my-index/_forcemerge?max_num_segments=1&quot;
+
+# Clear cache
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X POST &quot;localhost:9200/_cache/clear&quot;
+</code></pre>
+<p><strong>Adjust Disk Watermarks (Temporary):</strong></p>
+<pre><code class="language-bash"># Lower disk watermark thresholds (use carefully)
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_cluster/settings&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;persistent&quot;: {
+    &quot;cluster.routing.allocation.disk.watermark.low&quot;: &quot;90%&quot;,
+    &quot;cluster.routing.allocation.disk.watermark.high&quot;: &quot;95%&quot;,
+    &quot;cluster.routing.allocation.disk.watermark.flood_stage&quot;: &quot;97%&quot;
+  }
+}&#39;
+</code></pre>
+<p><strong>Increase Node Disk Size:</strong></p>
+<pre><code class="language-yaml"># Update StatefulSet to increase volume size
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: elasticsearch
+spec:
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      resources:
+        requests:
+          storage: 200Gi  # Increased from 100Gi
+</code></pre>
 <h3>2. Node Failures</h3>
 <p><strong>Symptoms:</strong></p>
 <ul>
-<li>Nodes unavailable</li>
-<li>Shards stuck in unassigned state</li>
+<li>Nodes marked as unavailable</li>
+<li>Primary shards unassigned after node failure</li>
+<li>Cluster health RED</li>
 </ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check node status
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/nodes?v&quot;
+
+# Check pod status in Kubernetes
+kubectl get pods -l app=elasticsearch
+
+# Check node events
+kubectl describe pod &lt;elasticsearch-pod&gt;
+</code></pre>
 <p><strong>Solutions:</strong></p>
-<ul>
-<li>Restart failed nodes</li>
-<li>Check pod status</li>
-<li>Verify node connectivity</li>
-<li>Recover from snapshots if needed</li>
-</ul>
+<p><strong>Restart Failed Node:</strong></p>
+<pre><code class="language-bash"># Restart Elasticsearch pod
+kubectl delete pod &lt;elasticsearch-pod&gt;
+
+# Or restart entire StatefulSet
+kubectl rollout restart statefulset elasticsearch
+</code></pre>
+<p><strong>Wait for Automatic Recovery:</strong></p>
+<p>If nodes come back online, Elasticsearch will automatically recover shards. Monitor recovery:</p>
+<pre><code class="language-bash"># Watch cluster recovery
+watch -n 5 &#39;kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -s &quot;localhost:9200/_cluster/health?pretty&quot;&#39;
+</code></pre>
+<p><strong>Force Allocation (Use with Caution):</strong></p>
+<p>Only use if you&#39;re certain the node won&#39;t recover and you have replicas:</p>
+<pre><code class="language-bash"># Reroute unassigned shards
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X POST &quot;localhost:9200/_cluster/reroute?retry_failed=true&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;commands&quot;: [
+    {
+      &quot;allocate_empty_primary&quot;: {
+        &quot;index&quot;: &quot;my-index&quot;,
+        &quot;shard&quot;: 0,
+        &quot;node&quot;: &quot;target-node-name&quot;,
+        &quot;accept_data_loss&quot;: true
+      }
+    }
+  ]
+}&#39;
+</code></pre>
 <h3>3. Allocation Settings</h3>
 <p><strong>Symptoms:</strong></p>
 <ul>
 <li>Shards cannot be allocated</li>
 <li>Allocation explanation shows restrictions</li>
+<li>Node attributes prevent allocation</li>
 </ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check allocation settings
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/settings?include_defaults=true&amp;filter_path=**.allocation*&amp;pretty&quot;
+
+# Check node attributes
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/nodeattrs?v&quot;
+</code></pre>
 <p><strong>Solutions:</strong></p>
-<ul>
-<li>Check allocation filters</li>
-<li>Verify node attributes</li>
-<li>Review shard allocation awareness</li>
-<li>Adjust allocation settings</li>
-</ul>
-<h2>Diagnosis</h2>
-<pre><code class="language-bash">kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/shards?h=index,shard,prirep,state,unassigned.reason&quot;
-
-kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/allocation/explain?pretty&quot;
-
-# Check cluster settings
-kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/settings?pretty&quot;
-</code></pre>
-<h2>Solutions</h2>
-<h3>Force Allocation (Use with Caution)</h3>
-<pre><code class="language-bash"># Reroute unassigned shards
-kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X POST &quot;localhost:9200/_cluster/reroute?retry_failed=true&quot;
-</code></pre>
-<h3>Adjust Disk Watermark</h3>
-<pre><code class="language-bash"># Update disk watermark settings
+<p><strong>Disable Allocation Filters (Temporary):</strong></p>
+<pre><code class="language-bash"># Disable allocation filters
 kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_cluster/settings&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
 {
-  &quot;persistent&quot;: {
-    &quot;cluster.routing.allocation.disk.watermark.low&quot;: &quot;85%&quot;,
-    &quot;cluster.routing.allocation.disk.watermark.high&quot;: &quot;90%&quot;
+  &quot;transient&quot;: {
+    &quot;cluster.routing.allocation.enable&quot;: &quot;all&quot;
   }
 }&#39;
 </code></pre>
-<h2>Best Practices</h2>
-<ol>
-<li><strong>Monitor Shard Status</strong>: Track unassigned shards continuously</li>
-<li><strong>Disk Management</strong>: Maintain adequate disk space</li>
-<li><strong>Node Health</strong>: Ensure all nodes are healthy</li>
-<li><strong>Backup Strategy</strong>: Regular snapshots for recovery</li>
-<li><strong>Shard Sizing</strong>: Keep shard sizes reasonable (20-50GB)</li>
-</ol>
-<h2>Automated Remediation</h2>
+<p><strong>Adjust Allocation Awareness:</strong></p>
+<pre><code class="language-bash"># Configure allocation awareness
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_cluster/settings&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;persistent&quot;: {
+    &quot;cluster.routing.allocation.awareness.attributes&quot;: &quot;zone,rack&quot;
+  }
+}&#39;
+</code></pre>
+<p><strong>Enable Shard Allocation:</strong></p>
+<pre><code class="language-bash"># Enable allocation if disabled
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_cluster/settings&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;persistent&quot;: {
+    &quot;cluster.routing.allocation.enable&quot;: &quot;all&quot;
+  }
+}&#39;
+</code></pre>
+<h3>4. Memory Pressure</h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Nodes cannot allocate shards due to memory</li>
+<li>High JVM heap usage</li>
+<li>GC pressure</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check JVM heap usage
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/nodes?v&amp;h=name,heap.percent,heap.current,heap.max&quot;
+
+# Check node stats
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_nodes/stats/jvm?pretty&quot;
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<p><strong>Increase Heap Size:</strong></p>
+<pre><code class="language-yaml"># Update Elasticsearch configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: elasticsearch-config
+data:
+  elasticsearch.yml: |
+    -Xms4g
+    -Xmx4g
+</code></pre>
+<p><strong>Reduce Shard Count:</strong></p>
+<pre><code class="language-bash"># Reduce number of replicas
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/my-index/_settings&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;index.number_of_replicas&quot;: 1
+}&#39;
+</code></pre>
+<h3>5. Too Many Shards</h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>High shard count per node</li>
+<li>Allocation failures</li>
+<li>Cluster instability</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Count shards per node
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/allocation?v&quot;
+
+# List all indices with shard counts
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/indices?v&amp;h=index,pri,rep,docs.count,store.size&quot;
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<p><strong>Reduce Replica Count:</strong></p>
+<pre><code class="language-bash"># Reduce replicas for all indices
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_all/_settings&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;index.number_of_replicas&quot;: 1
+}&#39;
+</code></pre>
+<p><strong>Delete Unused Indices:</strong></p>
+<pre><code class="language-bash"># List old indices
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/indices?v&amp;s=creation.date&quot;
+
+# Delete old indices
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X DELETE &quot;localhost:9200/old-index-*&quot;
+</code></pre>
+<p><strong>Shrink Indices:</strong></p>
+<pre><code class="language-bash"># Shrink index to reduce shard count
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/my-index/_settings&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;settings&quot;: {
+    &quot;index.number_of_shards&quot;: 1,
+    &quot;index.routing.allocation.require._name&quot;: &quot;shrink-node&quot;
+  }
+}&#39;
+
+# Then shrink
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X POST &quot;localhost:9200/my-index/_shrink/my-index-shrunk&quot;
+</code></pre>
+<h2>Advanced Troubleshooting</h2>
+<h3>Force Allocation of Unassigned Shards</h3>
+<p><strong>⚠️ Use with extreme caution - can cause data loss</strong></p>
+<pre><code class="language-bash"># Force allocate primary shard (accepts data loss)
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X POST &quot;localhost:9200/_cluster/reroute&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;commands&quot;: [
+    {
+      &quot;allocate_empty_primary&quot;: {
+        &quot;index&quot;: &quot;my-index&quot;,
+        &quot;shard&quot;: 0,
+        &quot;node&quot;: &quot;target-node-name&quot;,
+        &quot;accept_data_loss&quot;: true
+      }
+    }
+  ]
+}&#39;
+
+# Move shard to specific node
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X POST &quot;localhost:9200/_cluster/reroute&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;commands&quot;: [
+    {
+      &quot;move&quot;: {
+        &quot;index&quot;: &quot;my-index&quot;,
+        &quot;shard&quot;: 0,
+        &quot;from_node&quot;: &quot;source-node&quot;,
+        &quot;to_node&quot;: &quot;target-node&quot;
+      }
+    }
+  ]
+}&#39;
+</code></pre>
+<h3>Retry Failed Allocations</h3>
+<pre><code class="language-bash"># Retry failed shard allocations
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X POST &quot;localhost:9200/_cluster/reroute?retry_failed=true&quot;
+</code></pre>
+<h3>Cancel Ongoing Allocation</h3>
+<pre><code class="language-bash"># Cancel shard allocation
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X POST &quot;localhost:9200/_cluster/reroute&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;commands&quot;: [
+    {
+      &quot;cancel&quot;: {
+        &quot;index&quot;: &quot;my-index&quot;,
+        &quot;shard&quot;: 0,
+        &quot;node&quot;: &quot;node-name&quot;
+      }
+    }
+  ]
+}&#39;
+</code></pre>
+<h2>Prevention Best Practices</h2>
+<h3>1. Monitor Cluster Health</h3>
+<pre><code class="language-bash"># Continuous health monitoring
+watch -n 30 &#39;kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -s &quot;localhost:9200/_cluster/health?pretty&quot;&#39;
+
+# Set up alerts for:
+# - Cluster status RED
+# - Unassigned shards &gt; 0
+# - Node failures
+</code></pre>
+<h3>2. Maintain Adequate Disk Space</h3>
+<pre><code class="language-yaml"># Configure disk watermarks appropriately
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: elasticsearch-config
+data:
+  elasticsearch.yml: |
+    cluster.routing.allocation.disk.watermark.low: 85%
+    cluster.routing.allocation.disk.watermark.high: 90%
+    cluster.routing.allocation.disk.watermark.flood_stage: 95%
+</code></pre>
+<h3>3. Set Appropriate Shard Sizes</h3>
+<ul>
+<li>Keep shard sizes between 20-50GB</li>
+<li>Monitor shard count per node (aim for &lt; 20 shards per GB heap)</li>
+<li>Use index lifecycle management (ILM) to manage shard count</li>
+</ul>
+<h3>4. Regular Snapshots</h3>
+<pre><code class="language-bash"># Create repository
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_snapshot/my-backup&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;type&quot;: &quot;s3&quot;,
+  &quot;settings&quot;: {
+    &quot;bucket&quot;: &quot;my-elasticsearch-backups&quot;
+  }
+}&#39;
+
+# Create snapshot
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_snapshot/my-backup/snapshot-1?wait_for_completion=true&quot;
+</code></pre>
+<h3>5. Index Lifecycle Management (ILM)</h3>
+<pre><code class="language-bash"># Create ILM policy
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_ilm/policy/my-policy&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;policy&quot;: {
+    &quot;phases&quot;: {
+      &quot;hot&quot;: {
+        &quot;actions&quot;: {
+          &quot;rollover&quot;: {
+            &quot;max_size&quot;: &quot;50GB&quot;,
+            &quot;max_age&quot;: &quot;30d&quot;
+          }
+        }
+      },
+      &quot;delete&quot;: {
+        &quot;min_age&quot;: &quot;90d&quot;,
+        &quot;actions&quot;: {
+          &quot;delete&quot;: {}
+        }
+      }
+    }
+  }
+}&#39;
+</code></pre>
+<h2>Monitoring and Alerting</h2>
+<h3>Key Metrics to Monitor</h3>
+<ul>
+<li>Unassigned shard count</li>
+<li>Cluster health status</li>
+<li>Disk usage per node</li>
+<li>JVM heap usage</li>
+<li>Shard allocation rate</li>
+<li>Node count and health</li>
+</ul>
+<h3>Prometheus Queries</h3>
+<pre><code class="language-promql"># Unassigned shards
+elasticsearch_cluster_health_unassigned_shards
+
+# Cluster status (0=green, 1=yellow, 2=red)
+elasticsearch_cluster_health_status
+
+# Disk usage percentage
+elasticsearch_filesystem_data_used_percent
+
+# JVM heap usage
+elasticsearch_jvm_memory_used_bytes{area=&quot;heap&quot;} / elasticsearch_jvm_memory_max_bytes{area=&quot;heap&quot;}
+</code></pre>
+<h2>Automated Detection and Remediation</h2>
 <p>AlertMend AI can automatically:</p>
 <ul>
-<li>Detect unassigned shards</li>
-<li>Diagnose root causes</li>
-<li>Free up disk space</li>
-<li>Reroute shards safely</li>
-<li>Scale cluster if needed</li>
+<li><strong>Detect Unassigned Shards</strong>: Monitor cluster health and identify unassigned shards</li>
+<li><strong>Diagnose Root Causes</strong>: Analyze allocation explanations to identify specific issues</li>
+<li><strong>Automated Remediation</strong>: Free up disk space, adjust watermarks, or reroute shards when safe</li>
+<li><strong>Prevent Issues</strong>: Monitor disk usage and alert before watermarks are exceeded</li>
+<li><strong>Optimize Allocation</strong>: Suggest shard allocation improvements</li>
 </ul>
+<h3>Integration Example</h3>
+<pre><code class="language-yaml"># AlertMend monitors:
+- Cluster health status
+- Unassigned shard count
+- Disk usage per node
+- Allocation failures
+- Node health
+- Shard distribution
+</code></pre>
 <h2>Conclusion</h2>
-<p>Unassigned shards can impact cluster performance. With proper monitoring and automated remediation, you can maintain cluster health.</p>
+<p>Unassigned shards in Elasticsearch can significantly impact cluster performance and availability. By understanding the common causes (disk space, node failures, allocation settings, memory pressure), following a systematic diagnostic approach, and implementing preventive measures, you can maintain a healthy Elasticsearch cluster. Regular monitoring, proper disk management, appropriate shard sizing, and automated remediation help prevent and quickly resolve unassigned shard issues.</p>
+<p>Implementing automated monitoring and remediation with AlertMend AI helps ensure your Elasticsearch cluster remains healthy and performant.</p>
 <hr>
-<p><em>Need help with Elasticsearch? <a href="/solutions/auto-remediation">Learn about AlertMend&#39;s auto-remediation</a>.</em></p>
+<p><em>Need help with Elasticsearch troubleshooting? <a href="/solutions/auto-remediation">Learn about AlertMend&#39;s auto-remediation</a>.</em></p>
 
             </div>
 

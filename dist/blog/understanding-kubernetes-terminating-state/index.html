@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How to Fix Kubernetes Pods Stuck in | AlertMend AI</title>
-  <meta name="description" content="Elasticsearch relies on efficient index flushing to write data to disk, but when index flushing slows down, it can lead to degraded performance,...">
-  <meta name="keywords" content="Kubernetes, AlertMend AI, AIOps, Kubernetes, DevOps">
+  <title>Kubernetes Pod Terminating: Troubleshooting | AlertMend AI</title>
+  <meta name="description" content="Guide to troubleshooting Kubernetes pods stuck in Terminating state. Diagnose and fix issues with finalizers, volumes, and processes.">
+  <meta name="keywords" content="Kubernetes terminating, pod stuck, finalizers, pod deletion, graceful shutdown, volume unmount, SIGTERM, AlertMend AI">
   <meta name="author" content="Arvind Rajpurohit">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.alertmend.io/blog/understanding-kubernetes-terminating-state">
@@ -17,15 +17,15 @@
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.alertmend.io/blog/understanding-kubernetes-terminating-state">
-  <meta property="og:title" content="How to Fix Kubernetes Pods Stuck in | AlertMend AI">
-  <meta property="og:description" content="Elasticsearch relies on efficient index flushing to write data to disk, but when index flushing slows down, it can lead to degraded performance,...">
+  <meta property="og:title" content="Kubernetes Pod Terminating: Troubleshooting | AlertMend AI">
+  <meta property="og:description" content="Guide to troubleshooting Kubernetes pods stuck in Terminating state. Diagnose and fix issues with finalizers, volumes, and processes.">
   <meta property="og:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://www.alertmend.io/blog/understanding-kubernetes-terminating-state">
-  <meta name="twitter:title" content="How to Fix Kubernetes Pods Stuck in | AlertMend AI">
-  <meta name="twitter:description" content="Elasticsearch relies on efficient index flushing to write data to disk, but when index flushing slows down, it can lead to degraded performance,...">
+  <meta name="twitter:title" content="Kubernetes Pod Terminating: Troubleshooting | AlertMend AI">
+  <meta name="twitter:description" content="Guide to troubleshooting Kubernetes pods stuck in Terminating state. Diagnose and fix issues with finalizers, volumes, and processes.">
   <meta name="twitter:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Structured Data -->
@@ -33,8 +33,8 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "How to Fix Kubernetes Pods Stuck in | AlertMend AI",
-    "description": "Elasticsearch relies on efficient index flushing to write data to disk, but when index flushing slows down, it can lead to degraded performance,...",
+    "headline": "Kubernetes Pod Terminating: Troubleshooting | AlertMend AI",
+    "description": "Guide to troubleshooting Kubernetes pods stuck in Terminating state. Diagnose and fix issues with finalizers, volumes, and processes.",
     "image": "https://alertmend.io/og-image.jpg",
     "datePublished": "2025-01-13",
     "dateModified": "2025-01-13",
@@ -820,7 +820,7 @@
         <div class="article-content">
           <article>
             <header>
-              <h1>How to Fix Kubernetes Pods Stuck in</h1>
+              <h1>Kubernetes Pod Terminating: Troubleshooting</h1>
               
               <!-- Author Info -->
               <div class="author-info">
@@ -829,7 +829,7 @@
                 </div>
                 <div class="author-details">
                   <div class="author-name">Arvind Rajpurohit</div>
-                  <div class="author-meta">5 min read • January 13, 2025</div>
+                  <div class="author-meta">10 min read • January 13, 2025</div>
                 </div>
               </div>
 
@@ -839,85 +839,443 @@
 
             <!-- Content -->
             <div class="content">
-              <h2>How to Fix Kubernetes Pods Stuck in Terminating State</h2>
-<hr>
-<h3><strong>Introduction</strong></h3>
-<p>Kubernetes, the de facto standard for container orchestration, allows developers to manage and scale their applications seamlessly. However, even with its powerful capabilities, there are times when things don&#39;t go as planned. One such issue is when Kubernetes pods get stuck in a <strong>Terminating</strong> state. This problem can disrupt workflows and increase downtime if not handled properly.</p>
-<p>In this post, we&#39;ll explore the reasons why Kubernetes pods may get stuck in the Terminating state and walk through actionable steps to resolve this issue effectively.</p>
-<hr>
-<h3><strong>What Does &quot;Terminating&quot; Mean?</strong></h3>
-<p>When you delete a pod in Kubernetes, it doesn&#39;t disappear immediately. Instead, it enters a <strong>Terminating</strong> state where Kubernetes tries to gracefully shut it down by:</p>
+              <h2>Kubernetes Pod Terminating: Troubleshooting</h2>
+<p>Kubernetes pods enter a &quot;Terminating&quot; state when deletion is initiated, allowing for graceful shutdown. However, pods can get stuck in this state, preventing cleanup and potentially blocking new deployments. Understanding the termination process and how to troubleshoot stuck pods is essential for maintaining cluster health.</p>
+<h2>What Does &quot;Terminating&quot; Mean?</h2>
+<p>When you delete a pod in Kubernetes, it doesn&#39;t disappear immediately. Instead, it enters a <strong>Terminating</strong> state where Kubernetes performs a graceful shutdown sequence:</p>
 <ol>
-<li>Sending a <code>SIGTERM</code> signal to the container.</li>
-<li>Waiting for processes inside the container to stop.</li>
-<li>Cleaning up resources like network connections and volumes.</li>
-<li>Removing the pod from the cluster.</li>
+<li><strong>Mark pod for deletion</strong>: Pod&#39;s deletion timestamp is set</li>
+<li><strong>Send SIGTERM</strong>: Termination signal sent to containers</li>
+<li><strong>Wait for processes</strong>: Allow processes to clean up</li>
+<li><strong>Execute preStop hooks</strong>: Run any configured preStop handlers</li>
+<li><strong>Wait for grace period</strong>: Default 30 seconds (configurable)</li>
+<li><strong>Clean up resources</strong>: Unmount volumes, release IPs, clean up network</li>
+<li><strong>Remove pod</strong>: Pod is finally removed from etcd</li>
 </ol>
-<p>However, if any of these steps fail, the pod may get stuck in the Terminating state.</p>
-<hr>
-<h3><strong>Common Reasons for Pods Getting Stuck</strong></h3>
-<ol>
-<li><p><strong>Finalizers Not Being Cleared</strong>
-Finalizers are hooks that Kubernetes uses to ensure that certain actions (like resource cleanup) are performed before a pod is fully terminated. If a finalizer is not correctly handled, the pod will remain stuck. <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/finalizers/">Learn more about finalizers in Kubernetes</a>.</p>
-</li>
-<li><p><strong>Long-Running Processes in the Pod</strong>
-If a process inside the pod ignores the termination signal (SIGTERM) or takes too long to finish, Kubernetes may wait indefinitely unless you have a configured grace period.</p>
-</li>
-<li><p><strong>Mounts or Volumes Failing to Unmount</strong>
-Sometimes, volumes or persistent storage associated with the pod fail to detach, preventing Kubernetes from deleting the pod. You may need to investigate the storage backend (AWS EBS, Azure Disk, etc.) to resolve these issues.</p>
-<p><strong>Tip</strong>: Use <code>kubectl get pv</code> to verify the state of the Persistent Volume (PV) and check the status of your storage resources.</p>
-</li>
-<li><p><strong>Network Disconnections</strong>
-If there is a network issue, Kubernetes may not be able to communicate with the API server to signal a proper termination.</p>
-</li>
-</ol>
-<hr>
-<h3><strong>How to Fix Pods Stuck in Terminating State</strong></h3>
-<h4><strong>1. Force Delete the Pod</strong></h4>
-<p>If you&#39;re sure that the pod no longer needs to run, you can forcefully delete it using:</p>
-<pre><code class="language-bash">kubectl delete pod &lt;pod_name&gt; --grace-period=0 --force
+<h3>Normal Termination Flow</h3>
+<pre><code class="language-bash"># Check pod status during deletion
+kubectl get pods -w
+
+# Output shows progression:
+# NAME         READY   STATUS       RESTARTS   AGE
+# my-pod       1/1     Running      0          5m
+# my-pod       1/1     Terminating  0          5m
+# my-pod       0/1     Terminating  0          5m
+# (pod removed)
 </code></pre>
-<p>This will bypass Kubernetes&#39; usual graceful shutdown process and immediately remove the pod.</p>
-<h4><strong>2. Check and Remove Finalizers</strong></h4>
-<p>If finalizers are preventing the pod from being terminated, you can edit the pod&#39;s metadata to remove the finalizers manually:</p>
-<pre><code class="language-bash">kubectl patch pod &lt;pod_name&gt; -p &#39;{&quot;metadata&quot;:{&quot;finalizers&quot;:null}}&#39;
+<h2>Why Pods Get Stuck in Terminating State</h2>
+<h3>1. Finalizers Not Being Cleared</h3>
+<p>Finalizers are hooks that ensure cleanup actions complete before pod deletion. If a finalizer handler fails or hangs, the pod remains stuck.</p>
+<p><strong>Check for Finalizers:</strong></p>
+<pre><code class="language-bash"># View pod finalizers
+kubectl get pod &lt;pod-name&gt; -o jsonpath=&#39;{.metadata.finalizers}&#39;
+
+# Describe pod to see finalizers
+kubectl get pod &lt;pod-name&gt; -o yaml | grep -A 5 finalizers
 </code></pre>
-<p>This will force Kubernetes to stop waiting for any pending finalizer actions.</p>
-<h4><strong>3. Check for Volume Detachment Issues</strong></h4>
-<p>If volumes are preventing the pod from terminating, you can try manually detaching or resolving the issue by investigating the storage backend (like AWS EBS or Azure Disk).</p>
-<p><strong>Example</strong>: If using AWS EBS, check the status of the volume in the AWS Management Console to see if it is still attached to the node. Use <code>kubectl get pv</code> to verify the state of the Persistent Volume.</p>
-<h4><strong>4. Investigate with Descriptions and Logs</strong></h4>
-<p>Running <code>kubectl describe pod &lt;pod_name&gt;</code> can provide you with more details about what is keeping the pod from terminating. Checking logs of the container might also help identify long-running processes.</p>
-<pre><code class="language-bash">kubectl logs &lt;pod_name&gt;
+<p><strong>Common Finalizers:</strong></p>
+<ul>
+<li><code>kubernetes.io/pv-protection</code>: Prevents PV deletion while PVC exists</li>
+<li><code>kubernetes.io/pvc-protection</code>: Prevents PVC deletion while pod exists</li>
+<li>Custom finalizers added by operators or controllers</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check finalizers
+kubectl get pod &lt;pod-name&gt; -o json | jq &#39;.metadata.finalizers&#39;
+
+# Check events for finalizer-related errors
+kubectl describe pod &lt;pod-name&gt; | grep -i finalizer
 </code></pre>
-<h4><strong>5. Restart the Node</strong></h4>
-<p>In extreme cases, where all else fails, you may need to restart the node that the pod is running on. This will force Kubernetes to re-evaluate the state of the pod and potentially clear it up.</p>
-<hr>
-<h3><strong>Preventive Measures</strong></h3>
-<ol>
-<li><strong>Set Proper Grace Periods</strong>
-By configuring appropriate termination grace periods in your deployment specs, you can prevent long-running processes from blocking termination.</li>
-</ol>
-<pre><code class="language-yaml">spec:
-  terminationGracePeriodSeconds: 30
+<p><strong>Solution: Remove Finalizers</strong></p>
+<pre><code class="language-bash"># Method 1: Patch to remove all finalizers
+kubectl patch pod &lt;pod-name&gt; -p &#39;{&quot;metadata&quot;:{&quot;finalizers&quot;:[]}}&#39;
+
+# Method 2: Edit pod and remove finalizers section
+kubectl edit pod &lt;pod-name&gt;
+# Remove the finalizers: section under metadata
+
+# Method 3: Use kubectl replace
+kubectl get pod &lt;pod-name&gt; -o json | \
+  jq &#39;del(.metadata.finalizers)&#39; | \
+  kubectl replace -f -
 </code></pre>
-<ol start="2">
-<li><p><strong>Use Health Checks and Liveness Probes</strong>
-Ensure that your pod&#39;s containers are using proper liveness and readiness probes to detect and recover from unhealthy states. <strong>Liveness probes</strong> check if a pod is still running properly, while <strong>readiness probes</strong> check if the pod is ready to serve traffic.</p>
-</li>
-<li><p><strong>Monitor Storage and Volumes</strong>
-Keep an eye on the state of your Persistent Volumes (PVs) and storage systems to avoid issues related to unmounting. Check storage backends (like AWS EBS or Azure Disk) regularly for volume detachment issues.</p>
-</li>
-<li><p><strong>Handle Finalizers Properly</strong>
-Make sure that any resources or services that use finalizers are well-documented and their clean-up logic is functioning correctly.</p>
-</li>
-</ol>
+<p><strong>⚠️ Warning</strong>: Only remove finalizers if you understand why they exist and that it&#39;s safe to do so. Some finalizers protect critical resources.</p>
+<h3>2. Long-Running Processes Ignoring SIGTERM</h3>
+<p>If processes ignore SIGTERM or take too long to terminate, pods can stick in Terminating.</p>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check if processes are still running
+kubectl exec &lt;pod-name&gt; -- ps aux
+
+# Check pod events
+kubectl describe pod &lt;pod-name&gt; | grep -A 10 Events
+
+# Check container exit codes
+kubectl get pod &lt;pod-name&gt; -o jsonpath=&#39;{.status.containerStatuses[*].lastState.terminated.exitCode}&#39;
+</code></pre>
+<p><strong>Common Causes:</strong></p>
+<ul>
+<li>Process doesn&#39;t handle SIGTERM</li>
+<li>Process is stuck in uninterruptible sleep</li>
+<li>Process is waiting on I/O that never completes</li>
+<li>Process has child processes that don&#39;t terminate</li>
+</ul>
+<p><strong>Solution: Handle SIGTERM Properly</strong></p>
+<p><strong>Example: Node.js Application</strong></p>
+<pre><code class="language-javascript">// Handle SIGTERM for graceful shutdown
+process.on(&#39;SIGTERM&#39;, () =&gt; {
+  console.log(&#39;SIGTERM received, shutting down gracefully&#39;);
+  
+  // Close server connections
+  server.close(() =&gt; {
+    console.log(&#39;Server closed&#39;);
+    // Close database connections
+    db.close(() =&gt; {
+      console.log(&#39;Database closed&#39;);
+      process.exit(0);
+    });
+  });
+  
+  // Force exit after timeout
+  setTimeout(() =&gt; {
+    console.error(&#39;Forced shutdown after timeout&#39;);
+    process.exit(1);
+  }, 30000);
+});
+</code></pre>
+<p><strong>Example: Python Application</strong></p>
+<pre><code class="language-python">import signal
+import sys
+
+def signal_handler(sig, frame):
+    print(&#39;SIGTERM received, shutting down gracefully&#39;)
+    # Cleanup code here
+    server.shutdown()
+    sys.exit(0)
+
+signal.signal(signal.SIGTERM, signal_handler)
+</code></pre>
+<p><strong>Configure Termination Grace Period:</strong></p>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  terminationGracePeriodSeconds: 60  # Increase from default 30s
+  containers:
+  - name: app
+    image: my-app:latest
+</code></pre>
+<h3>3. Volumes Failing to Unmount</h3>
+<p>Persistent volumes or hostPath volumes that fail to unmount can prevent pod deletion.</p>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check volume mount status
+kubectl describe pod &lt;pod-name&gt; | grep -A 10 &quot;Volumes\|Mounts&quot;
+
+# Check PersistentVolume status
+kubectl get pv
+
+# Check PersistentVolumeClaim status
+kubectl get pvc
+
+# Check volume attachment (cloud providers)
+# AWS: Check EBS volume attachments
+# GCP: Check persistent disk attachments
+# Azure: Check managed disk attachments
+</code></pre>
+<p><strong>Common Causes:</strong></p>
+<ul>
+<li>Node is unreachable</li>
+<li>Storage backend issues</li>
+<li>Volume is in use by another process</li>
+<li>Network issues preventing unmount</li>
+<li>Storage driver bugs</li>
+</ul>
+<p><strong>Solutions:</strong></p>
+<p><strong>Check Node Status:</strong></p>
+<pre><code class="language-bash"># Verify node is reachable
+kubectl get nodes
+kubectl describe node &lt;node-name&gt;
+
+# Check if node is NotReady
+kubectl get nodes | grep NotReady
+</code></pre>
+<p><strong>Force Unmount (Dangerous):</strong></p>
+<pre><code class="language-bash"># SSH to node and force unmount
+ssh &lt;node&gt;
+sudo umount -f /var/lib/kubelet/pods/&lt;pod-uid&gt;/volumes/...
+
+# Or use lsof to find processes using the mount
+sudo lsof | grep /var/lib/kubelet/pods/&lt;pod-uid&gt;
+
+# Kill processes using the mount
+sudo kill -9 &lt;pid&gt;
+</code></pre>
+<p><strong>Delete Volume Manually (Last Resort):</strong></p>
+<pre><code class="language-bash"># Only if you&#39;re sure it&#39;s safe
+kubectl delete pvc &lt;pvc-name&gt; --force --grace-period=0
+
+# Or patch PVC to remove finalizers
+kubectl patch pvc &lt;pvc-name&gt; -p &#39;{&quot;metadata&quot;:{&quot;finalizers&quot;:[]}}&#39;
+</code></pre>
+<h3>4. PreStop Hooks Hanging</h3>
+<p>preStop hooks that hang or take too long can prevent termination.</p>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check if preStop hook is configured
+kubectl get pod &lt;pod-name&gt; -o yaml | grep -A 10 preStop
+
+# Check container logs for preStop execution
+kubectl logs &lt;pod-name&gt; --previous
+</code></pre>
+<p><strong>Solution: Fix preStop Hook</strong></p>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  containers:
+  - name: app
+    image: my-app:latest
+    lifecycle:
+      preStop:
+        exec:
+          command:
+          - /bin/sh
+          - -c
+          - |
+            # Add timeout to prevent hanging
+            timeout 10 /path/to/cleanup-script.sh || true
+            # Or use simple command
+            sleep 5
+</code></pre>
+<p><strong>Best Practices for preStop Hooks:</strong></p>
+<ul>
+<li>Always set timeouts</li>
+<li>Make hooks idempotent</li>
+<li>Handle errors gracefully</li>
+<li>Keep execution time short (&lt; grace period)</li>
+</ul>
+<h3>5. Network Issues</h3>
+<p>Network problems preventing communication with API server can cause pods to stick.</p>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check if node can reach API server
+kubectl get nodes
+kubectl describe node &lt;node-name&gt;
+
+# Check network connectivity from node
+kubectl debug node/&lt;node-name&gt; -it --image=busybox -- ping &lt;api-server-ip&gt;
+
+# Check kubelet logs
+kubectl logs -n kube-system &lt;kubelet-pod&gt; | tail -50
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<ul>
+<li>Fix network connectivity</li>
+<li>Restart kubelet</li>
+<li>Check firewall rules</li>
+<li>Verify API server is accessible</li>
+</ul>
+<h3>6. Node Issues</h3>
+<p>If a node is unreachable or has issues, pods on that node can stick in Terminating.</p>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check node status
+kubectl get nodes
+
+# Check node conditions
+kubectl describe node &lt;node-name&gt; | grep -A 10 Conditions
+
+# Check if node is cordoned
+kubectl get nodes | grep -i schedulable
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<p><strong>Cordon and Drain Node:</strong></p>
+<pre><code class="language-bash"># Mark node as unschedulable
+kubectl cordon &lt;node-name&gt;
+
+# Evict pods from node
+kubectl drain &lt;node-name&gt; --ignore-daemonsets --delete-emptydir-data --force
+</code></pre>
+<p><strong>Force Delete Pods on Unreachable Node:</strong></p>
+<pre><code class="language-bash"># Delete pod with force
+kubectl delete pod &lt;pod-name&gt; --grace-period=0 --force
+
+# Remove finalizers first if needed
+kubectl patch pod &lt;pod-name&gt; -p &#39;{&quot;metadata&quot;:{&quot;finalizers&quot;:[]}}&#39; --type=merge
+kubectl delete pod &lt;pod-name&gt; --grace-period=0 --force
+</code></pre>
+<h2>Diagnostic Workflow</h2>
+<h3>Step 1: Identify the Problem</h3>
+<pre><code class="language-bash"># List pods stuck in Terminating
+kubectl get pods --all-namespaces | grep Terminating
+
+# Get detailed pod information
+kubectl describe pod &lt;pod-name&gt;
+
+# Check events
+kubectl get events --field-selector involvedObject.name=&lt;pod-name&gt; --sort-by=&#39;.lastTimestamp&#39;
+</code></pre>
+<h3>Step 2: Check Finalizers</h3>
+<pre><code class="language-bash"># Check for finalizers
+kubectl get pod &lt;pod-name&gt; -o jsonpath=&#39;{.metadata.finalizers}&#39;
+
+# If finalizers exist, investigate why they&#39;re not clearing
+</code></pre>
+<h3>Step 3: Check Volumes</h3>
+<pre><code class="language-bash"># Check volume mounts
+kubectl get pod &lt;pod-name&gt; -o jsonpath=&#39;{.spec.volumes[*]}&#39;
+
+# Check PVC status
+kubectl get pvc
+
+# Check PV status
+kubectl get pv
+</code></pre>
+<h3>Step 4: Check Processes</h3>
+<pre><code class="language-bash"># Try to exec into pod (may fail if terminating)
+kubectl exec &lt;pod-name&gt; -- ps aux
+
+# Check container status
+kubectl get pod &lt;pod-name&gt; -o jsonpath=&#39;{.status.containerStatuses[*]}&#39;
+</code></pre>
+<h3>Step 5: Check Node Status</h3>
+<pre><code class="language-bash"># Find which node the pod is on
+kubectl get pod &lt;pod-name&gt; -o wide
+
+# Check node status
+kubectl describe node &lt;node-name&gt;
+</code></pre>
+<h2>Solutions by Scenario</h2>
+<h3>Scenario 1: Finalizers Preventing Deletion</h3>
+<pre><code class="language-bash"># Remove finalizers
+kubectl patch pod &lt;pod-name&gt; -p &#39;{&quot;metadata&quot;:{&quot;finalizers&quot;:[]}}&#39;
+
+# Verify pod is deleted
+kubectl get pod &lt;pod-name&gt;
+</code></pre>
+<h3>Scenario 2: Stuck Process</h3>
+<pre><code class="language-bash"># Force delete with grace period 0
+kubectl delete pod &lt;pod-name&gt; --grace-period=0 --force
+
+# If that doesn&#39;t work, remove finalizers first
+kubectl patch pod &lt;pod-name&gt; -p &#39;{&quot;metadata&quot;:{&quot;finalizers&quot;:[]}}&#39;
+kubectl delete pod &lt;pod-name&gt; --grace-period=0 --force
+</code></pre>
+<h3>Scenario 3: Volume Unmount Issue</h3>
+<pre><code class="language-bash"># Check if PVC has finalizers
+kubectl get pvc &lt;pvc-name&gt; -o jsonpath=&#39;{.metadata.finalizers}&#39;
+
+# Remove PVC finalizers if safe
+kubectl patch pvc &lt;pvc-name&gt; -p &#39;{&quot;metadata&quot;:{&quot;finalizers&quot;:[]}}&#39;
+
+# Then delete pod
+kubectl delete pod &lt;pod-name&gt; --grace-period=0 --force
+</code></pre>
+<h3>Scenario 4: Unreachable Node</h3>
+<pre><code class="language-bash"># Force delete pod
+kubectl delete pod &lt;pod-name&gt; --grace-period=0 --force
+
+# If node is permanently down, you may need to:
+# 1. Remove node from cluster
+# 2. Clean up node resources
+# 3. Remove pods from etcd directly (advanced)
+</code></pre>
+<h2>Force Delete Pod</h2>
+<p><strong>⚠️ Use with caution</strong>: Force deletion bypasses graceful shutdown.</p>
+<pre><code class="language-bash"># Force delete pod
+kubectl delete pod &lt;pod-name&gt; --grace-period=0 --force
+
+# If pod has finalizers, remove them first
+kubectl patch pod &lt;pod-name&gt; -p &#39;{&quot;metadata&quot;:{&quot;finalizers&quot;:[]}}&#39; --type=merge
+kubectl delete pod &lt;pod-name&gt; --grace-period=0 --force
+</code></pre>
+<p><strong>What force delete does:</strong></p>
+<ul>
+<li>Sets grace period to 0</li>
+<li>Bypasses graceful shutdown</li>
+<li>Immediately removes pod from API server</li>
+<li>May leave resources on node that need manual cleanup</li>
+</ul>
+<h2>Prevention Best Practices</h2>
+<h3>1. Set Appropriate Grace Periods</h3>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  terminationGracePeriodSeconds: 30  # Adjust based on cleanup needs
+  containers:
+  - name: app
+    image: my-app:latest
+</code></pre>
+<h3>2. Implement Graceful Shutdown</h3>
+<p><strong>Handle SIGTERM in applications:</strong></p>
+<pre><code class="language-javascript">// Node.js example
+process.on(&#39;SIGTERM&#39;, () =&gt; {
+  console.log(&#39;SIGTERM received, shutting down&#39;);
+  server.close(() =&gt; {
+    process.exit(0);
+  });
+  
+  // Force exit after timeout
+  setTimeout(() =&gt; process.exit(1), 29000);
+});
+</code></pre>
+<h3>3. Use PreStop Hooks Correctly</h3>
+<pre><code class="language-yaml">lifecycle:
+  preStop:
+    exec:
+      command:
+      - /bin/sh
+      - -c
+      - |
+        # Quick cleanup with timeout
+        timeout 5 cleanup.sh || true
+        sleep 2
+</code></pre>
+<h3>4. Avoid Finalizers Unless Necessary</h3>
+<pre><code class="language-yaml"># Only use finalizers if you have specific cleanup logic
+# Most pods don&#39;t need finalizers
+metadata:
+  # finalizers: []  # Avoid unless necessary
+</code></pre>
+<h3>5. Monitor Pod Termination</h3>
+<pre><code class="language-bash"># Script to monitor terminating pods
+watch -n 1 &#39;kubectl get pods --all-namespaces | grep Terminating&#39;
+
+# Alert on pods stuck in Terminating &gt; 5 minutes
+kubectl get pods --all-namespaces -o json | \
+  jq &#39;.items[] | select(.status.phase == &quot;Terminating&quot;) | 
+  select((.metadata.deletionTimestamp | fromdateiso8601) &lt; (now - 300))&#39;
+</code></pre>
+<h3>6. Test Termination</h3>
+<p>Regularly test pod termination:</p>
+<pre><code class="language-bash"># Test graceful shutdown
+kubectl delete pod &lt;test-pod&gt;
+
+# Verify it terminates within grace period
+kubectl get pod &lt;test-pod&gt; -w
+</code></pre>
+<h2>Automated Detection and Remediation</h2>
+<p>AlertMend AI can automatically:</p>
+<ul>
+<li><strong>Detect Stuck Pods</strong>: Identify pods stuck in Terminating state</li>
+<li><strong>Diagnose Root Causes</strong>: Analyze finalizers, volumes, and processes to identify issues</li>
+<li><strong>Automated Remediation</strong>: Remove finalizers or force delete stuck pods when safe</li>
+<li><strong>Alert on Issues</strong>: Notify when pods are stuck in Terminating state</li>
+<li><strong>Prevent Issues</strong>: Monitor termination patterns and suggest fixes</li>
+</ul>
+<h3>Integration Example</h3>
+<pre><code class="language-yaml"># AlertMend monitors:
+- Pod termination status
+- Finalizers blocking deletion
+- Volume unmount issues
+- Process termination problems
+- Grace period violations
+</code></pre>
+<h2>Conclusion</h2>
+<p>Pods stuck in Terminating state are common issues in Kubernetes clusters. Understanding the termination process, finalizers, volume unmounting, and process handling helps diagnose and resolve these issues quickly. By implementing graceful shutdown handlers, appropriate grace periods, and proper monitoring, you can prevent most termination issues. When pods do get stuck, following a systematic diagnostic approach helps identify and resolve the root cause efficiently.</p>
+<p>Implementing automated monitoring and remediation with AlertMend AI helps detect and resolve stuck pods before they significantly impact cluster operations.</p>
 <hr>
-<h3><strong>Conclusion</strong></h3>
-<p>Having Kubernetes pods stuck in the Terminating state can be frustrating, but with the right approach, it’s a solvable problem. By understanding the underlying causes and using the strategies outlined above, you can efficiently address this issue and maintain a healthy Kubernetes cluster.</p>
-<p>Always remember to monitor your resources proactively and apply preventive measures to avoid such situations in the future.</p>
-<p>Need more Kubernetes troubleshooting tips? Check out our related articles or subscribe to our newsletter for the latest updates.</p>
-<hr>
+<p><em>Need help troubleshooting Kubernetes issues? <a href="/solutions/auto-remediation">Learn about AlertMend&#39;s automated incident remediation</a>.</em></p>
 
             </div>
 

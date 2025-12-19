@@ -1,13 +1,13 @@
 ---
-title: "Troubleshooting Kubernetes Networking Issues: Common Problems and Solutions"
-excerpt: "Complete guide to troubleshooting Kubernetes networking problems including pod-to-pod communication, service discovery, ingress issues, CNI problems, and network policy debugging."
+title: "Kubernetes Networking Issues Guide"
+excerpt: "Guide to troubleshooting Kubernetes networking problems including pod-to-pod communication, service discovery, and ingress issues."
 date: "2025-06-27"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
 keywords: "Kubernetes networking, troubleshooting Kubernetes, pod communication issues, service discovery problems, ingress troubleshooting, automated incident remediation, Kubernetes management solutions, AlertMend AI"
 ---
 
-# Troubleshooting Kubernetes Networking Issues: Common Problems and Solutions
+# Kubernetes Networking Issues Guide
 
 Networking is one of the most critical components in any Kubernetes deployment, facilitating communication between pods, services, and external resources. When networking issues occur, they can completely disrupt application functionality. This comprehensive guide covers common networking problems and their solutions.
 

@@ -7,7 +7,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.alertmend.io/</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,25 +15,25 @@
   <!-- Solutions -->
   <url>
     <loc>https://www.alertmend.io/auto-remediation</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/kubernetes-management</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/on-call-management</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/kubernetes-cost-optimization</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -41,31 +41,31 @@
   <!-- Case Studies -->
   <url>
     <loc>https://www.alertmend.io/case-studies</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/case-studies/auto-remediation-case-studies-polymer-search</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/case-studies/kubernetes-cost-optimization-case-studies-wareflex</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/case-studies/kubernetes-cost-optimization-case-studies-rombee</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/case-studies/auto-remediation-case-studies-aivos</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -73,7 +73,7 @@
   <!-- Blog -->
   <url>
     <loc>https://www.alertmend.io/blog</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -112,19 +112,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Apache-Airflow-Consultants.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: argocd-drift-detection-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/argocd-drift-detection-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Argocd-Drift-Detection-1.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -181,32 +168,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: automated-kubernetes-cost-optimization-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/automated-kubernetes-cost-optimization-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Automated-Kubernetes-Cost-Optimization-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: automated-kubernetes-cost-optimization-2 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/automated-kubernetes-cost-optimization-2</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Automated-Kubernetes-Cost-Optimization-2.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: automated-kubernetes-cost-optimization -->
   <url>
     <loc>https://www.alertmend.io/blog/automated-kubernetes-cost-optimization</loc>
@@ -216,19 +177,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Automated-Kubernetes-Cost-Optimization.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: automated-kubernetes-resource-tuning-tools-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/automated-kubernetes-resource-tuning-tools-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Automated-Kubernetes-Resource-Tuning-Tools-1.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -259,32 +207,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: best-cost-management-platform-for-kubernetes-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/best-cost-management-platform-for-kubernetes-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Best-Cost-Management-Platform-for-Kubernetes-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: best-cost-management-platform-for-kubernetes-2 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/best-cost-management-platform-for-kubernetes-2</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Best-Cost-Management-Platform-for-Kubernetes-2.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: best-cost-management-platform-for-kubernetes -->
   <url>
     <loc>https://www.alertmend.io/blog/best-cost-management-platform-for-kubernetes</loc>
@@ -311,19 +233,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: best-kubernetes-resource-optimization-platforms-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/best-kubernetes-resource-optimization-platforms-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Best-Kubernetes-Resource-Optimization-Platforms-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: best-kubernetes-resource-optimization-platforms -->
   <url>
     <loc>https://www.alertmend.io/blog/best-kubernetes-resource-optimization-platforms</loc>
@@ -333,19 +242,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Best-Kubernetes-Resource-Optimization-Platforms.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: best-kubernetes-resource-optimization-tools-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/best-kubernetes-resource-optimization-tools-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Best-Kubernetes-Resource-Optimization-Tools-1.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -363,19 +259,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: best-platform-for-monitoring-kubernetes-expenses-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/best-platform-for-monitoring-kubernetes-expenses-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Best-Platform-for-Monitoring-Kubernetes-Expenses-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: best-platform-for-monitoring-kubernetes-expenses -->
   <url>
     <loc>https://www.alertmend.io/blog/best-platform-for-monitoring-kubernetes-expenses</loc>
@@ -385,19 +268,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Best-Platform-for-Monitoring-Kubernetes-Expenses.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: best-pod-rightsizing-tools-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/best-pod-rightsizing-tools-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Best-Pod-Rightsizing-Tools-1.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -428,19 +298,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: best-rated-kubernetes-cost-management-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/best-rated-kubernetes-cost-management-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Best-Rated-Kubernetes-Cost-Management-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: best-rated-kubernetes-cost-management -->
   <url>
     <loc>https://www.alertmend.io/blog/best-rated-kubernetes-cost-management</loc>
@@ -450,19 +307,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Best-Rated-Kubernetes-Cost-Management.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: best-software-for-managing-kubernetes-costs-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/best-software-for-managing-kubernetes-costs-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Best-Software-for-Managing-Kubernetes-Costs-1.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -532,19 +376,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: claude-vs-llama-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/claude-vs-llama-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Claude-Vs-Llama-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: claude-vs-llama -->
   <url>
     <loc>https://www.alertmend.io/blog/claude-vs-llama</loc>
@@ -558,15 +389,15 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: code-exited-status-1failure解决 -->
+  <!-- Blog Post: code-exited-status-1-failure -->
   <url>
-    <loc>https://www.alertmend.io/blog/code-exited-status-1failure解决</loc>
+    <loc>https://www.alertmend.io/blog/code-exited-status-1-failure</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Code-Exited-Status-1failure解决.html</loc>
+    <loc>https://www.alertmend.io/blogs/Code-Exited-Status-1-Failure.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -606,32 +437,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Container-Clusters-List.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: cpu-throttling-是-什么 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/cpu-throttling-是-什么</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Cpu-Throttling-是-什么.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: dashboard-pod-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/dashboard-pod-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Dashboard-Pod-1.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -701,19 +506,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: eks-1.26-to-1.27-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/eks-1.26-to-1.27-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Eks-1.26-to-1.27-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: eks-1.26-to-1.27 -->
   <url>
     <loc>https://www.alertmend.io/blog/eks-1.26-to-1.27</loc>
@@ -736,19 +528,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Eks-Cloud-Controller-Manager.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: eks-costs-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/eks-costs-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Eks-Costs-1.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -814,45 +593,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Evaluate-the-Cloud-Infrastructure-Company-Scaleops-on-Pod-Rightsizing.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: exit-code-1-kubernetes-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/exit-code-1-kubernetes-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Exit-Code-1-Kubernetes-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: exit-code-1-kubernetes-2 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/exit-code-1-kubernetes-2</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Exit-Code-1-Kubernetes-2.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: exit-code-1-kubernetes-3 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/exit-code-1-kubernetes-3</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Exit-Code-1-Kubernetes-3.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1013,32 +753,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: how-to-get-status-of-kubernates-node-using-golang-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/how-to-get-status-of-kubernates-node-using-golang-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/How-to-Get-Status-of-Kubernates-Node-Using-Golang-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: how-to-get-status-of-kubernates-node-using-golang-2 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/how-to-get-status-of-kubernates-node-using-golang-2</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/How-to-Get-Status-of-Kubernates-Node-Using-Golang-2.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: how-to-get-status-of-kubernates-node-using-golang -->
   <url>
     <loc>https://www.alertmend.io/blog/how-to-get-status-of-kubernates-node-using-golang</loc>
@@ -1091,32 +805,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: is-it-top-kubernetes-cost-management-solutions-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/is-it-top-kubernetes-cost-management-solutions-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Is-It-Top-Kubernetes-Cost-Management-Solutions-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: is-it-top-kubernetes-cost-management-solutions-2 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/is-it-top-kubernetes-cost-management-solutions-2</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Is-It-Top-Kubernetes-Cost-Management-Solutions-2.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: is-it-top-kubernetes-cost-management-solutions -->
   <url>
     <loc>https://www.alertmend.io/blog/is-it-top-kubernetes-cost-management-solutions</loc>
@@ -1130,19 +818,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: it-configuration-governance-tools-real-time-drift-detection-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/it-configuration-governance-tools-real-time-drift-detection-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/It-Configuration-Governance-Tools-Real-Time-Drift-Detection-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: it-configuration-governance-tools-real-time-drift-detection -->
   <url>
     <loc>https://www.alertmend.io/blog/it-configuration-governance-tools-real-time-drift-detection</loc>
@@ -1152,19 +827,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/It-Configuration-Governance-Tools-Real-Time-Drift-Detection.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: k8s-node-notready-排查 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/k8s-node-notready-排查</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/K8s-Node-Notready-排查.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1221,19 +883,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: kubectl-restart-all-pods-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/kubectl-restart-all-pods-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Kubectl-Restart-All-Pods-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: kubectl-restart-all-pods -->
   <url>
     <loc>https://www.alertmend.io/blog/kubectl-restart-all-pods</loc>
@@ -1243,32 +892,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Kubectl-Restart-All-Pods.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: kubelet-stopped-posting-node-status-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/kubelet-stopped-posting-node-status-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Kubelet-Stopped-Posting-Node-Status-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: kubelet-stopped-posting-node-status-2 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/kubelet-stopped-posting-node-status-2</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Kubelet-Stopped-Posting-Node-Status-2.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1299,19 +922,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: kubernetes-cloud-migration-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/kubernetes-cloud-migration-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes-Cloud-Migration-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: kubernetes-cloud-migration -->
   <url>
     <loc>https://www.alertmend.io/blog/kubernetes-cloud-migration</loc>
@@ -1334,19 +944,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Kubernetes-Createcontainerconfigerror.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: kubernetes-exit-code-137-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/kubernetes-exit-code-137-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes-Exit-Code-137-1.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1377,19 +974,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: kubernetes-for-dummies-pdf-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/kubernetes-for-dummies-pdf-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes-for-Dummies-Pdf-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: kubernetes-for-dummies-pdf -->
   <url>
     <loc>https://www.alertmend.io/blog/kubernetes-for-dummies-pdf</loc>
@@ -1412,32 +996,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Kubernetes-in-Production-Best-Practices-Pdf.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: kubernetes-init-crashloopbackoff-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/kubernetes-init-crashloopbackoff-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes-Init-Crashloopbackoff-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: kubernetes-init-crashloopbackoff-2 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/kubernetes-init-crashloopbackoff-2</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes-Init-Crashloopbackoff-2.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1468,19 +1026,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: kubernetes-master-node-not-ready-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/kubernetes-master-node-not-ready-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes-Master-Node-Not-Ready-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: kubernetes-master-node-not-ready -->
   <url>
     <loc>https://www.alertmend.io/blog/kubernetes-master-node-not-ready</loc>
@@ -1494,15 +1039,15 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: kubernetes-node-not-ready-1 -->
+  <!-- Blog Post: kubernetes-node-not-ready-troubleshooting -->
   <url>
-    <loc>https://www.alertmend.io/blog/kubernetes-node-not-ready-1</loc>
+    <loc>https://www.alertmend.io/blog/kubernetes-node-not-ready-troubleshooting</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes-Node-Not-Ready-1.html</loc>
+    <loc>https://www.alertmend.io/blogs/Kubernetes-Node-Not-Ready-Troubleshooting.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1533,19 +1078,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: kubernetes-resource-optimization-platforms-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/kubernetes-resource-optimization-platforms-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes-Resource-Optimization-Platforms-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: kubernetes-resource-optimization-platforms -->
   <url>
     <loc>https://www.alertmend.io/blog/kubernetes-resource-optimization-platforms</loc>
@@ -1559,19 +1091,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: kubernetes-resource-optimization-software-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/kubernetes-resource-optimization-software-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes-Resource-Optimization-Software-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: kubernetes-resource-optimization-software -->
   <url>
     <loc>https://www.alertmend.io/blog/kubernetes-resource-optimization-software</loc>
@@ -1581,19 +1100,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Kubernetes-Resource-Optimization-Software.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: kubernetes-resource-optimization-solutions-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/kubernetes-resource-optimization-solutions-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes-Resource-Optimization-Solutions-1.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1637,19 +1143,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: kubernetes-visibility-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/kubernetes-visibility-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes-Visibility-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: kubernetes-visibility -->
   <url>
     <loc>https://www.alertmend.io/blog/kubernetes-visibility</loc>
@@ -1672,32 +1165,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Kubernetes-Vs-Eks.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: kubernetes-vs-rancher-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/kubernetes-vs-rancher-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes-Vs-Rancher-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: kubernetes-vs-rancher-2 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/kubernetes-vs-rancher-2</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Kubernetes-Vs-Rancher-2.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1845,32 +1312,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: not-a-git-repo-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/not-a-git-repo-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Not-a-Git-Repo-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: not-a-git-repo-2 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/not-a-git-repo-2</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Not-a-Git-Repo-2.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: not-a-git-repo -->
   <url>
     <loc>https://www.alertmend.io/blog/not-a-git-repo</loc>
@@ -1897,32 +1338,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: not-a-git-repository-git-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/not-a-git-repository-git-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Not-a-Git-Repository-Git-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: not-a-git-repository-git-2 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/not-a-git-repository-git-2</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Not-a-Git-Repository-Git-2.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: not-a-git-repository-git -->
   <url>
     <loc>https://www.alertmend.io/blog/not-a-git-repository-git</loc>
@@ -1932,32 +1347,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Not-a-Git-Repository-Git.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: not-a-git-repository-or-any-of-the-parent-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/not-a-git-repository-or-any-of-the-parent-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Not-a-Git-Repository-or-Any-of-the-Parent-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: not-a-git-repository-or-any-of-the-parent-directories -->
-  <url>
-    <loc>https://www.alertmend.io/blog/not-a-git-repository-or-any-of-the-parent-directories</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Not-a-Git-Repository-or-Any-of-the-Parent-Directories.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -2079,19 +1468,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: pod-rightsizing-tools-for-enterprise-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/pod-rightsizing-tools-for-enterprise-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Pod-Rightsizing-Tools-for-Enterprise-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: pod-rightsizing-tools-for-enterprise -->
   <url>
     <loc>https://www.alertmend.io/blog/pod-rightsizing-tools-for-enterprise</loc>
@@ -2157,19 +1533,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: rancher-alternatives-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/rancher-alternatives-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Rancher-Alternatives-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: rancher-alternatives -->
   <url>
     <loc>https://www.alertmend.io/blog/rancher-alternatives</loc>
@@ -2205,19 +1568,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Readiness-Probe-Failed-Http-Probe-Failed-with-Statuscode-503.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: real-time-configuration-drift-detection-capabilities-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/real-time-configuration-drift-detection-capabilities-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Real-Time-Configuration-Drift-Detection-Capabilities-1.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -2365,19 +1715,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: top-kubernetes-cost-management-solutions-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/top-kubernetes-cost-management-solutions-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Top-Kubernetes-Cost-Management-Solutions-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: top-kubernetes-cost-management-solutions -->
   <url>
     <loc>https://www.alertmend.io/blog/top-kubernetes-cost-management-solutions</loc>
@@ -2430,32 +1767,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: what's-the-most-effective-way-to-manage-kubernetes-costs-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/what's-the-most-effective-way-to-manage-kubernetes-costs-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/What's-the-Most-Effective-Way-to-Manage-Kubernetes-Costs-1.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: what's-the-most-effective-way-to-manage-kubernetes-costs-2 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/what's-the-most-effective-way-to-manage-kubernetes-costs-2</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/What's-the-Most-Effective-Way-to-Manage-Kubernetes-Costs-2.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: what's-the-most-effective-way-to-manage-kubernetes-costs -->
   <url>
     <loc>https://www.alertmend.io/blog/what's-the-most-effective-way-to-manage-kubernetes-costs</loc>
@@ -2478,6 +1789,19 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/What-Do-Probes-Do.html</loc>
+    <lastmod>2025-12-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: what-is-cpu-throttling -->
+  <url>
+    <loc>https://www.alertmend.io/blog/what-is-cpu-throttling</loc>
+    <lastmod>2025-12-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.alertmend.io/blogs/What-Is-Cpu-Throttling.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -3818,109 +3142,109 @@
   <!-- Main Pages -->
   <url>
     <loc>https://www.alertmend.io/pricing</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/about</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/contact</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/partners</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation/slack-app-approval</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation/slack-token-channel</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation/slack-rca-channel</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation/ms-teams-approval</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation/ms-teams-rf</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation/ms-teams-webhook</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation/datadog-webhook</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation/alertmend-vm-actions</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/careers</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/help</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/community</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/tutorials</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/webinars</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -3928,25 +3252,25 @@
   <!-- Legal Pages -->
   <url>
     <loc>https://www.alertmend.io/privacy</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/terms</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/security</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/compliance</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

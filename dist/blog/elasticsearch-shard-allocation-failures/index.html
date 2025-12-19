@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Troubleshooting Elasticsearch Shard | AlertMend AI</title>
-  <meta name="description" content="A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers.">
-  <meta name="keywords" content="Elasticsearch, AlertMend AI, AIOps, Kubernetes, DevOps">
+  <title>Elasticsearch Shard Allocation Guide | AlertMend AI</title>
+  <meta name="description" content="Troubleshooting guide for Elasticsearch shard allocation failures in Kubernetes. Diagnose and fix issues caused by disk space and node failures.">
+  <meta name="keywords" content="Elasticsearch, shard allocation, allocation failures, cluster health, shard distribution, Elasticsearch troubleshooting, Kubernetes, AlertMend AI">
   <meta name="author" content="Arvind Rajpurohit">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.alertmend.io/blog/elasticsearch-shard-allocation-failures">
@@ -17,15 +17,15 @@
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.alertmend.io/blog/elasticsearch-shard-allocation-failures">
-  <meta property="og:title" content="Troubleshooting Elasticsearch Shard | AlertMend AI">
-  <meta property="og:description" content="A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers.">
+  <meta property="og:title" content="Elasticsearch Shard Allocation Guide | AlertMend AI">
+  <meta property="og:description" content="Troubleshooting guide for Elasticsearch shard allocation failures in Kubernetes. Diagnose and fix issues caused by disk space and node failures.">
   <meta property="og:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://www.alertmend.io/blog/elasticsearch-shard-allocation-failures">
-  <meta name="twitter:title" content="Troubleshooting Elasticsearch Shard | AlertMend AI">
-  <meta name="twitter:description" content="A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers.">
+  <meta name="twitter:title" content="Elasticsearch Shard Allocation Guide | AlertMend AI">
+  <meta name="twitter:description" content="Troubleshooting guide for Elasticsearch shard allocation failures in Kubernetes. Diagnose and fix issues caused by disk space and node failures.">
   <meta name="twitter:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Structured Data -->
@@ -33,8 +33,8 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "Troubleshooting Elasticsearch Shard | AlertMend AI",
-    "description": "A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers.",
+    "headline": "Elasticsearch Shard Allocation Guide | AlertMend AI",
+    "description": "Troubleshooting guide for Elasticsearch shard allocation failures in Kubernetes. Diagnose and fix issues caused by disk space and node failures.",
     "image": "https://alertmend.io/og-image.jpg",
     "datePublished": "2025-02-5",
     "dateModified": "2025-02-5",
@@ -820,7 +820,7 @@
         <div class="article-content">
           <article>
             <header>
-              <h1>Troubleshooting Elasticsearch Shard</h1>
+              <h1>Elasticsearch Shard Allocation Guide</h1>
               
               <!-- Author Info -->
               <div class="author-info">
@@ -829,7 +829,7 @@
                 </div>
                 <div class="author-details">
                   <div class="author-name">Arvind Rajpurohit</div>
-                  <div class="author-meta">5 min read • February 5, 2025</div>
+                  <div class="author-meta">7 min read • February 5, 2025</div>
                 </div>
               </div>
 
@@ -839,121 +839,298 @@
 
             <!-- Content -->
             <div class="content">
-              <h2>🚨 Troubleshooting Elasticsearch Shard Allocation Failures: A...</h2>
-<hr>
-<p>Elasticsearch relies on shard allocation to distribute data across the cluster. However, <strong>shard allocation failures</strong> can disrupt your cluster&#39;s functionality, leading to performance degradation, potential data loss, and search inefficiencies. These failures occur when shards cannot be assigned to nodes due to misconfigurations, insufficient resources, or other cluster-related issues. This blog will explore common causes, troubleshooting steps, and effective solutions to resolve shard allocation failures.</p>
-<hr>
-<h2>🔍 What is Shard Allocation in Elasticsearch?</h2>
-<p>In Elasticsearch, data is divided into smaller parts known as shards. These shards are then distributed across the nodes in the cluster. This distribution allows Elasticsearch to balance the load, replicate data for fault tolerance, and handle large-scale data operations efficiently. When shard allocation fails, Elasticsearch may struggle to manage data, resulting in slow performance, unassigned shards, and even data loss if not resolved promptly.</p>
-<h2>🔍 Common Causes of Elasticsearch Shard Allocation Failures</h2>
-<p>There are several reasons why shard allocation may fail in Elasticsearch:</p>
+              <h2>Elasticsearch Shard Allocation Guide</h2>
+<p>Elasticsearch relies on shard allocation to distribute data across the cluster efficiently. However, shard allocation failures can disrupt your cluster&#39;s functionality, leading to performance degradation, potential data loss, and search inefficiencies. Understanding how to diagnose and resolve these failures is crucial for maintaining a healthy Elasticsearch cluster.</p>
+<h2>What is Shard Allocation in Elasticsearch?</h2>
+<p>In Elasticsearch, data is divided into smaller parts known as shards. These shards are then distributed across nodes in the cluster. This distribution allows Elasticsearch to:</p>
 <ul>
-<li><strong>Insufficient Disk Space</strong>: If a node doesn&#39;t have enough disk space, shards cannot be allocated.</li>
-<li><strong>Misconfigured Cluster Settings</strong>: Incorrect shard allocation or resource settings can prevent proper shard distribution.</li>
-<li><strong>Node Failures</strong>: Nodes marked as &quot;unavailable&quot; or &quot;down&quot; can hinder shard allocation.</li>
-<li><strong>High Shard Count</strong>: A high number of shards can overwhelm nodes, leading to allocation issues.</li>
-<li><strong>Network Partitions</strong>: Poor connectivity between nodes can lead to shard allocation failures due to unreachable nodes.</li>
+<li>Balance load across nodes</li>
+<li>Replicate data for fault tolerance</li>
+<li>Handle large-scale data operations efficiently</li>
+<li>Improve search and indexing performance</li>
 </ul>
-<hr>
-<h2>🛠️ Troubleshooting Shard Allocation Failures</h2>
-<h3>1. <strong>Check Elasticsearch Cluster Health</strong></h3>
-<p>Start by checking the overall health of the cluster to see if any issues are affecting shard allocation:</p>
-<pre><code class="language-bash">curl -X GET ${ELASTICSEARCH_ENDPOINT}/_cluster/health
-</code></pre>
-<p>A yellow status indicates that replica shards are not allocated, while a red status means primary shards are unassigned, which requires immediate attention.</p>
-<h3>2. <strong>Review Node Status</strong></h3>
-<p>Ensure that all nodes in the cluster are online and functioning properly:</p>
-<pre><code class="language-bash">curl -X GET ${ELASTICSEARCH_ENDPOINT}/_cat/nodes
-</code></pre>
-<h3>3. <strong>Examine Shard Allocation</strong></h3>
-<p>Check how shards are being distributed across nodes to identify any allocation issues:</p>
-<pre><code class="language-bash">curl -X GET ${ELASTICSEARCH_ENDPOINT}/_cat/allocation
-</code></pre>
-<h3>4. <strong>Inspect Shard Status</strong></h3>
-<p>Monitor the status of individual shards to detect any unassigned or failed shards:</p>
-<pre><code class="language-bash">curl -X GET ${ELASTICSEARCH_ENDPOINT}/_cat/shards
-</code></pre>
-<h3>5. <strong>Review Elasticsearch Logs</strong></h3>
-<p>Logs are a great way to identify errors or warnings related to shard allocation. Look for any relevant log entries that might point to the root cause:</p>
-<pre><code class="language-bash">sudo grep -iE &#39;error|warn&#39; ${ELASTICSEARCH_LOG_PATH}
-</code></pre>
-<h3>6. <strong>Check Disk Usage</strong></h3>
-<p>Shard allocation can fail if nodes run out of disk space. Verify the disk usage on your Elasticsearch nodes:</p>
-<pre><code class="language-bash">df -h | grep ${ELASTICSEARCH_DATA_PATH}
-</code></pre>
-<p>If disk space is low, consider deleting old indices, snapshots, or unneeded data.</p>
-<h3>7. <strong>Examine Elasticsearch Configuration</strong></h3>
-<p>Review your Elasticsearch configuration file for any misconfigurations or incorrect settings that may affect shard allocation:</p>
-<pre><code class="language-bash">cat ${ELASTICSEARCH_CONFIG_PATH}/elasticsearch.yml
-</code></pre>
-<hr>
-<h2>🛡️ Fixing Elasticsearch Shard Allocation Failures</h2>
-<h3>1. <strong>Adjust Shard Allocation Settings</strong></h3>
-<p>Tune the cluster’s shard allocation settings to ensure proper distribution of shards across nodes:</p>
-<pre><code class="language-bash"># Review current shard allocation settings
-curl -XGET &quot;localhost:9200/_cluster/settings?pretty&quot;
+<p>When shard allocation fails, Elasticsearch cannot properly distribute shards, resulting in:</p>
+<ul>
+<li>Slow performance</li>
+<li>Unassigned shards</li>
+<li>Potential data loss</li>
+<li>Cluster instability</li>
+</ul>
+<h2>Common Causes of Shard Allocation Failures</h2>
+<h3>1. Insufficient Disk Space</h3>
+<p>When nodes run out of disk space, Elasticsearch cannot allocate new shards or relocate existing ones.</p>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Error: &quot;disk watermark exceeded&quot;</li>
+<li>Nodes marked as read-only</li>
+<li>Shards stuck in INITIALIZING state</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check disk usage per node
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/allocation?v&quot;
 
-# Update the number of shards per index
-curl -XPUT &quot;localhost:9200/$INDEX_NAME/_settings&quot; -H &#39;Content-Type: application/json&#39; -d &#39;{
-  &quot;index&quot; : {
-    &quot;number_of_shards&quot; : 5
+# Check disk watermarks
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/settings?include_defaults=true&amp;filter_path=**.disk*&amp;pretty&quot;
+
+# Check node stats
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_nodes/stats/fs?pretty&quot;
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<pre><code class="language-bash"># Free up disk space by deleting old indices
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X DELETE &quot;localhost:9200/old-index-*&quot;
+
+# Adjust disk watermarks temporarily
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_cluster/settings&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;persistent&quot;: {
+    &quot;cluster.routing.allocation.disk.watermark.low&quot;: &quot;90%&quot;,
+    &quot;cluster.routing.allocation.disk.watermark.high&quot;: &quot;95%&quot;
   }
 }&#39;
 </code></pre>
-<h3>2. <strong>Reduce Shard Count to Avoid Oversharding</strong></h3>
-<p>If the number of shards is too high for your cluster size, consider merging smaller indices or reducing the shard count:</p>
-<pre><code class="language-bash">curl -XPOST &quot;localhost:9200/${INDEX_NAME}/_forcemerge?max_num_segments=1&quot;
+<h3>2. Misconfigured Cluster Settings</h3>
+<p>Incorrect allocation settings can prevent shard allocation.</p>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Shards cannot be allocated despite available resources</li>
+<li>Allocation explanation shows restrictions</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check allocation settings
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/settings?include_defaults=true&amp;filter_path=**.allocation*&amp;pretty&quot;
+
+# Get allocation explanation
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/allocation/explain?pretty&quot;
 </code></pre>
-<h3>3. <strong>Increase Disk Watermark Thresholds</strong></h3>
-<p>In situations where disk space is the issue, you can adjust the disk watermark settings to allow for more space:</p>
-<pre><code class="language-bash"># Increase the disk watermark thresholds to allocate more space for shards
-curl -XPUT &quot;localhost:9200/_cluster/settings&quot; -H &#39;Content-Type: application/json&#39; -d &#39;{
-  &quot;persistent&quot; : {
-    &quot;cluster.routing.allocation.disk.watermark.low&quot; : &quot;85%&quot;,
-    &quot;cluster.routing.allocation.disk.watermark.high&quot; : &quot;90%&quot;
+<p><strong>Solutions:</strong></p>
+<pre><code class="language-bash"># Enable allocation if disabled
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_cluster/settings&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;persistent&quot;: {
+    &quot;cluster.routing.allocation.enable&quot;: &quot;all&quot;
+  }
+}&#39;
+
+# Remove allocation filters if causing issues
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_cluster/settings&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;transient&quot;: {
+    &quot;cluster.routing.allocation.exclude._name&quot;: &quot;&quot;
   }
 }&#39;
 </code></pre>
-<h3>4. <strong>Rebalance the Cluster</strong></h3>
-<p>If shards are unevenly distributed, manually trigger shard reallocation to rebalance the cluster:</p>
-<pre><code class="language-bash">curl -X POST &quot;localhost:9200/_cluster/reroute&quot;
+<h3>3. Node Failures</h3>
+<p>When nodes fail or become unavailable, shards cannot be allocated.</p>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Nodes marked as unavailable</li>
+<li>Primary shards unassigned</li>
+<li>Cluster health RED</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check node status
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/nodes?v&quot;
+
+# Check cluster health
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/health?pretty&quot;
+
+# Check pod status in Kubernetes
+kubectl get pods -l app=elasticsearch
 </code></pre>
-<h3>5. <strong>Increase Node Resources</strong></h3>
-<p>Ensure that nodes have sufficient memory, CPU, and disk space to handle the shard allocation process. If needed, add more nodes to the cluster to handle the shard load more effectively.</p>
+<p><strong>Solutions:</strong></p>
+<pre><code class="language-bash"># Restart failed node
+kubectl delete pod &lt;elasticsearch-pod&gt;
+
+# Wait for automatic recovery
+# Monitor with:
+watch -n 5 &#39;kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -s &quot;localhost:9200/_cluster/health?pretty&quot;&#39;
+</code></pre>
+<h3>4. High Shard Count</h3>
+<p>Too many shards can overwhelm nodes and cause allocation failures.</p>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>High shard count per node</li>
+<li>Slow allocation</li>
+<li>Cluster instability</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Count shards per node
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/allocation?v&quot;
+
+# List indices with shard counts
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/indices?v&amp;h=index,pri,rep&quot;
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<pre><code class="language-bash"># Reduce replica count
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_all/_settings&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;index.number_of_replicas&quot;: 1
+}&#39;
+
+# Delete unused indices
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X DELETE &quot;localhost:9200/unused-index-*&quot;
+</code></pre>
+<h3>5. Network Partitions</h3>
+<p>Poor connectivity between nodes can cause allocation failures.</p>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Nodes unreachable</li>
+<li>Allocation timeouts</li>
+<li>Split-brain scenarios</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check node connectivity
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/nodes?v&quot;
+
+# Check cluster state
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/state?pretty&quot;
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<ul>
+<li>Fix network connectivity</li>
+<li>Restart affected nodes</li>
+<li>Check Kubernetes network policies</li>
+</ul>
+<h2>Diagnostic Workflow</h2>
+<h3>Step 1: Check Cluster Health</h3>
+<pre><code class="language-bash">kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/health?pretty&quot;
+</code></pre>
+<p><strong>Health Status:</strong></p>
+<ul>
+<li><strong>GREEN</strong>: All shards allocated</li>
+<li><strong>YELLOW</strong>: Some replica shards unassigned</li>
+<li><strong>RED</strong>: Some primary shards unassigned (CRITICAL)</li>
+</ul>
+<h3>Step 2: Identify Unassigned Shards</h3>
+<pre><code class="language-bash"># List unassigned shards
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/shards?h=index,shard,prirep,state,unassigned.reason&amp;v&quot; | grep UNASSIGNED
+
+# Get allocation explanation
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/allocation/explain?pretty&quot;
+</code></pre>
+<h3>Step 3: Check Node Status</h3>
+<pre><code class="language-bash"># List all nodes
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/nodes?v&quot;
+
+# Check node allocation
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cat/allocation?v&quot;
+</code></pre>
+<h3>Step 4: Review Allocation Settings</h3>
+<pre><code class="language-bash"># Check current allocation settings
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X GET &quot;localhost:9200/_cluster/settings?include_defaults=true&amp;filter_path=**.allocation*&amp;pretty&quot;
+</code></pre>
+<h2>Solutions</h2>
+<h3>Adjust Shard Allocation Settings</h3>
+<pre><code class="language-bash"># Enable all allocation types
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_cluster/settings&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;persistent&quot;: {
+    &quot;cluster.routing.allocation.enable&quot;: &quot;all&quot;
+  }
+}&#39;
+
+# Adjust concurrent recoveries
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_cluster/settings&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;persistent&quot;: {
+    &quot;cluster.routing.allocation.node_concurrent_recoveries&quot;: 4
+  }
+}&#39;
+</code></pre>
+<h3>Free Up Disk Space</h3>
+<pre><code class="language-bash"># Delete old indices
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X DELETE &quot;localhost:9200/old-index-*&quot;
+
+# Force merge to reduce size
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X POST &quot;localhost:9200/my-index/_forcemerge?max_num_segments=1&quot;
+</code></pre>
+<h3>Reduce Shard Count</h3>
+<pre><code class="language-bash"># Reduce replicas
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_all/_settings&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;index.number_of_replicas&quot;: 1
+}&#39;
+</code></pre>
+<h3>Rebalance Cluster</h3>
+<pre><code class="language-bash"># Trigger cluster rebalancing
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X POST &quot;localhost:9200/_cluster/reroute?retry_failed=true&quot;
+</code></pre>
+<h3>Increase Node Resources</h3>
+<pre><code class="language-yaml"># Update StatefulSet resources
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: elasticsearch
+spec:
+  template:
+    spec:
+      containers:
+      - name: elasticsearch
+        resources:
+          requests:
+            memory: &quot;8Gi&quot;
+            cpu: &quot;4&quot;
+          limits:
+            memory: &quot;8Gi&quot;
+            cpu: &quot;4&quot;
+</code></pre>
+<h2>Best Practices</h2>
+<h3>1. Monitor Cluster Health</h3>
+<pre><code class="language-bash"># Continuous monitoring
+watch -n 30 &#39;kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -s &quot;localhost:9200/_cluster/health?pretty&quot;&#39;
+</code></pre>
+<h3>2. Maintain Adequate Disk Space</h3>
+<ul>
+<li>Keep disk usage below 85%</li>
+<li>Monitor disk usage per node</li>
+<li>Set up alerts for disk usage</li>
+</ul>
+<h3>3. Set Appropriate Shard Sizes</h3>
+<ul>
+<li>Keep shard sizes between 20-50GB</li>
+<li>Monitor shard count per node</li>
+<li>Use index lifecycle management</li>
+</ul>
+<h3>4. Regular Snapshots</h3>
+<pre><code class="language-bash"># Create snapshot repository
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_snapshot/my-backup&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;type&quot;: &quot;s3&quot;,
+  &quot;settings&quot;: {
+    &quot;bucket&quot;: &quot;elasticsearch-backups&quot;
+  }
+}&#39;
+</code></pre>
+<h3>5. Use Index Lifecycle Management</h3>
+<pre><code class="language-bash"># Create ILM policy
+kubectl exec -it &lt;elasticsearch-pod&gt; -- curl -X PUT &quot;localhost:9200/_ilm/policy/my-policy&quot; -H &#39;Content-Type: application/json&#39; -d&#39;
+{
+  &quot;policy&quot;: {
+    &quot;phases&quot;: {
+      &quot;hot&quot;: {
+        &quot;actions&quot;: {
+          &quot;rollover&quot;: {
+            &quot;max_size&quot;: &quot;50GB&quot;,
+            &quot;max_age&quot;: &quot;30d&quot;
+          }
+        }
+      }
+    }
+  }
+}&#39;
+</code></pre>
+<h2>Automated Detection and Remediation</h2>
+<p>AlertMend AI can automatically:</p>
+<ul>
+<li><strong>Detect Allocation Failures</strong>: Monitor cluster health and identify allocation failures</li>
+<li><strong>Diagnose Root Causes</strong>: Analyze allocation explanations to identify specific issues</li>
+<li><strong>Automated Remediation</strong>: Free up disk space, adjust settings, or reroute shards</li>
+<li><strong>Prevent Issues</strong>: Monitor resources and alert before failures occur</li>
+</ul>
+<h2>Conclusion</h2>
+<p>Elasticsearch shard allocation failures can significantly impact cluster performance and data accessibility. By understanding common causes, following systematic diagnostic approaches, and implementing preventive measures, you can maintain a healthy Elasticsearch cluster. Regular monitoring, proper resource management, and automated remediation help prevent and quickly resolve allocation failures.</p>
 <hr>
-<h2>🔄 Common Issues and Fixes for Shard Allocation Failures</h2>
-<div class="table-wrapper"><table>
-<thead>
-<tr>
-<th><strong>Issue</strong></th>
-<th><strong>Cause</strong></th>
-<th><strong>Solution</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Shards not allocated</td>
-<td>Insufficient disk space</td>
-<td>Increase disk watermark thresholds, add disk space</td>
-</tr>
-<tr>
-<td>Unassigned shards</td>
-<td>Misconfigured settings, node failures</td>
-<td>Fix settings, restart affected nodes</td>
-</tr>
-<tr>
-<td>Cluster in yellow or red state</td>
-<td>Node unavailability, shard allocation failures</td>
-<td>Restart nodes, manually reroute shards</td>
-</tr>
-<tr>
-<td>High shard count affecting performance</td>
-<td>Too many shards for available nodes</td>
-<td>Reduce shard count, scale cluster</td>
-</tr>
-</tbody></table></div>
-<hr>
-<h2>🚀 Conclusion</h2>
-<p>Elasticsearch shard allocation failures can have a significant impact on cluster performance and data accessibility. By following the troubleshooting steps outlined here—checking logs, monitoring shard status, tuning cluster settings, and preventing oversharding—you can resolve these issues and ensure that your shards are properly allocated. Taking proactive steps to configure shard allocation and manage resources will help maintain the stability and efficiency of your Elasticsearch cluster.</p>
+<p><em>Need help with Elasticsearch troubleshooting? <a href="/solutions/auto-remediation">Learn about AlertMend&#39;s auto-remediation</a>.</em></p>
 
             </div>
 

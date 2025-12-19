@@ -1,13 +1,13 @@
 ---
-title: "How to Rollback Kubernetes Deployments: Step-by-Step Guide"
-excerpt: "Learn how to safely rollback Kubernetes deployments using kubectl, understand rollout history, and implement automated rollback strategies for production environments."
+title: "Rollback Kubernetes Deployments Guide"
+excerpt: "Learn how to safely rollback Kubernetes deployments using kubectl, understand rollout history, and implement automated rollback strategies."
 date: "2025-06-20"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
 keywords: "Kubernetes rollback, deployment management, incident remediation, automated rollback, production risks, Kubernetes best practices, AlertMend AI, operational safety"
 ---
 
-# How to Rollback Kubernetes Deployments: Step-by-Step Guide
+# Rollback Kubernetes Deployments Guide
 
 Deployment rollbacks are a critical safety mechanism in Kubernetes that allows you to revert to a previous working version when issues occur. Understanding how to perform rollbacks safely and effectively is essential for maintaining production reliability.
 

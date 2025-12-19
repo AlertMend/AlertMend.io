@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mastering Kubernetes Resource Quotas | AlertMend AI</title>
-  <meta name="description" content="In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors occur during this process.">
-  <meta name="keywords" content="Kubernetes, AlertMend AI, AIOps, Kubernetes, DevOps">
+  <title>Kubernetes Resource Quotas Guide | AlertMend AI</title>
+  <meta name="description" content="Complete guide to Kubernetes resource management including requests, limits, and resource quotas. Learn how to optimize allocation and reduce costs.">
+  <meta name="keywords" content="Kubernetes resources, resource requests, resource limits, resource quotas, CPU throttling, memory limits, resource optimization, cost optimization, AlertMend AI">
   <meta name="author" content="Himanshu Bansal">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.alertmend.io/blog/mastering-kubernetes-resource-quotas-requests-limits">
@@ -17,15 +17,15 @@
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.alertmend.io/blog/mastering-kubernetes-resource-quotas-requests-limits">
-  <meta property="og:title" content="Mastering Kubernetes Resource Quotas | AlertMend AI">
-  <meta property="og:description" content="In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors occur during this process.">
+  <meta property="og:title" content="Kubernetes Resource Quotas Guide | AlertMend AI">
+  <meta property="og:description" content="Complete guide to Kubernetes resource management including requests, limits, and resource quotas. Learn how to optimize allocation and reduce costs.">
   <meta property="og:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://www.alertmend.io/blog/mastering-kubernetes-resource-quotas-requests-limits">
-  <meta name="twitter:title" content="Mastering Kubernetes Resource Quotas | AlertMend AI">
-  <meta name="twitter:description" content="In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors occur during this process.">
+  <meta name="twitter:title" content="Kubernetes Resource Quotas Guide | AlertMend AI">
+  <meta name="twitter:description" content="Complete guide to Kubernetes resource management including requests, limits, and resource quotas. Learn how to optimize allocation and reduce costs.">
   <meta name="twitter:image" content="https://alertmend.io/og-image.jpg">
   
   <!-- Structured Data -->
@@ -33,8 +33,8 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "Mastering Kubernetes Resource Quotas | AlertMend AI",
-    "description": "In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors occur during this process.",
+    "headline": "Kubernetes Resource Quotas Guide | AlertMend AI",
+    "description": "Complete guide to Kubernetes resource management including requests, limits, and resource quotas. Learn how to optimize allocation and reduce costs.",
     "image": "https://alertmend.io/og-image.jpg",
     "datePublished": "2025-05-21",
     "dateModified": "2025-05-21",
@@ -820,7 +820,7 @@
         <div class="article-content">
           <article>
             <header>
-              <h1>Mastering Kubernetes Resource Quotas</h1>
+              <h1>Kubernetes Resource Quotas Guide</h1>
               
               <!-- Author Info -->
               <div class="author-info">
@@ -829,7 +829,7 @@
                 </div>
                 <div class="author-details">
                   <div class="author-name">Himanshu Bansal</div>
-                  <div class="author-meta">2 min read • May 21, 2025</div>
+                  <div class="author-meta">12 min read • May 21, 2025</div>
                 </div>
               </div>
 
@@ -839,22 +839,209 @@
 
             <!-- Content -->
             <div class="content">
-              <p>Proper resource management is crucial for Kubernetes cluster performance and cost optimization.</p>
-<h2>Understanding Resources</h2>
-<h3>Requests</h3>
+              <h2>Kubernetes Resource Quotas Guide</h2>
+<p>Proper resource management is crucial for Kubernetes cluster performance, stability, and cost optimization. Understanding how to set resource requests, limits, and quotas helps ensure applications get the resources they need while preventing resource exhaustion and controlling costs.</p>
+<h2>Understanding Kubernetes Resources</h2>
+<p>Kubernetes manages two types of compute resources:</p>
 <ul>
-<li><strong>CPU</strong>: Guaranteed CPU allocation</li>
-<li><strong>Memory</strong>: Guaranteed memory allocation</li>
-<li>Used for scheduling decisions</li>
+<li><strong>CPU</strong>: Measured in cores (1000m = 1 core)</li>
+<li><strong>Memory</strong>: Measured in bytes (Mi, Gi, etc.)</li>
 </ul>
-<h3>Limits</h3>
+<p>For each resource, you can specify:</p>
 <ul>
-<li><strong>CPU</strong>: Maximum CPU usage (throttled if exceeded)</li>
-<li><strong>Memory</strong>: Maximum memory usage (pod killed if exceeded)</li>
-<li>Used for resource enforcement</li>
+<li><strong>Requests</strong>: Guaranteed minimum resources</li>
+<li><strong>Limits</strong>: Maximum allowed resources</li>
 </ul>
+<h2>Resource Requests</h2>
+<h3>What Are Requests?</h3>
+<p>Resource requests specify the minimum amount of CPU or memory that a container needs. Kubernetes uses requests for:</p>
+<ul>
+<li><strong>Scheduling decisions</strong>: Pods are only scheduled on nodes with sufficient resources</li>
+<li><strong>Resource allocation</strong>: Guaranteed minimum resources for the container</li>
+<li><strong>Quality of Service (QoS) classification</strong>: Determines pod priority during resource contention</li>
+</ul>
+<h3>CPU Requests</h3>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app
+spec:
+  containers:
+  - name: app
+    image: nginx:latest
+    resources:
+      requests:
+        cpu: &quot;500m&quot;  # 0.5 cores (500 millicores)
+        # cpu: &quot;1&quot;     # 1 full core
+        # cpu: &quot;2.5&quot;   # 2.5 cores
+</code></pre>
+<p><strong>CPU Units:</strong></p>
+<ul>
+<li><code>1</code> = 1 CPU core</li>
+<li><code>1000m</code> = 1 CPU core (1000 millicores)</li>
+<li><code>500m</code> = 0.5 CPU cores</li>
+<li><code>0.5</code> = 0.5 CPU cores (equivalent to 500m)</li>
+</ul>
+<h3>Memory Requests</h3>
+<pre><code class="language-yaml">resources:
+  requests:
+    memory: &quot;512Mi&quot;   # 512 Mebibytes
+    # memory: &quot;1Gi&quot;   # 1 Gibibyte (1024 Mi)
+    # memory: &quot;2G&quot;    # 2 Gigabytes (decimal)
+    # memory: &quot;1000M&quot; # 1000 Megabytes
+</code></pre>
+<p><strong>Memory Units:</strong></p>
+<ul>
+<li><code>Mi</code> = Mebibyte (1024^2 bytes)</li>
+<li><code>Gi</code> = Gibibyte (1024^3 bytes)</li>
+<li><code>M</code> = Megabyte (1000^2 bytes)</li>
+<li><code>G</code> = Gigabyte (1000^3 bytes)</li>
+</ul>
+<p><strong>Best Practice</strong>: Use binary units (Mi, Gi) for consistency with Kubernetes defaults.</p>
+<h3>How Requests Work</h3>
+<ol>
+<li><strong>Scheduling</strong>: Kubernetes scheduler ensures node has enough resources before scheduling</li>
+<li><strong>Allocation</strong>: Container is guaranteed at least the requested amount</li>
+<li><strong>Burstable Usage</strong>: Container can use more if available, up to limits</li>
+</ol>
+<h2>Resource Limits</h2>
+<h3>What Are Limits?</h3>
+<p>Resource limits specify the maximum amount of CPU or memory a container can use. Exceeding limits causes:</p>
+<ul>
+<li><strong>CPU</strong>: Throttling (CPU usage is capped)</li>
+<li><strong>Memory</strong>: Pod termination (OOMKilled)</li>
+</ul>
+<h3>CPU Limits</h3>
+<pre><code class="language-yaml">resources:
+  limits:
+    cpu: &quot;1000m&quot;  # Maximum 1 core
+</code></pre>
+<p><strong>CPU Throttling:</strong></p>
+<ul>
+<li>When a container exceeds CPU limit, it&#39;s throttled</li>
+<li>Throttling means the container gets less CPU time</li>
+<li>Application performance degrades but container continues running</li>
+</ul>
+<p><strong>Monitoring CPU Throttling:</strong></p>
+<pre><code class="language-bash"># Check for throttling in pod metrics
+kubectl top pod &lt;pod-name&gt;
+
+# View detailed CPU metrics
+kubectl get --raw /api/v1/namespaces/default/pods/&lt;pod-name&gt;/proxy/metrics | grep cpu
+</code></pre>
+<h3>Memory Limits</h3>
+<pre><code class="language-yaml">resources:
+  limits:
+    memory: &quot;1Gi&quot;  # Maximum 1 Gibibyte
+</code></pre>
+<p><strong>Memory Limits Behavior:</strong></p>
+<ul>
+<li>Container can use up to the limit</li>
+<li>Exceeding limit causes OOMKilled (Out Of Memory killed)</li>
+<li>Pod is terminated and restarted based on restart policy</li>
+</ul>
+<p><strong>Check for OOMKills:</strong></p>
+<pre><code class="language-bash"># Check pod events for OOMKilled
+kubectl describe pod &lt;pod-name&gt; | grep -i oom
+
+# Check pod status
+kubectl get pod &lt;pod-name&gt; -o jsonpath=&#39;{.status.containerStatuses[0].lastState.terminated.reason}&#39;
+
+# List all OOMKilled pods
+kubectl get pods --all-namespaces --field-selector=status.phase=Failed -o json | \
+  jq &#39;.items[] | select(.status.containerStatuses[].lastState.terminated.reason==&quot;OOMKilled&quot;)&#39;
+</code></pre>
+<h3>Complete Resource Specification</h3>
+<pre><code class="language-yaml">apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app
+spec:
+  containers:
+  - name: app
+    image: nginx:latest
+    resources:
+      requests:
+        cpu: &quot;250m&quot;      # Minimum guaranteed CPU
+        memory: &quot;256Mi&quot;  # Minimum guaranteed memory
+      limits:
+        cpu: &quot;500m&quot;      # Maximum CPU (will throttle if exceeded)
+        memory: &quot;512Mi&quot;  # Maximum memory (will be killed if exceeded)
+</code></pre>
+<h2>Quality of Service (QoS) Classes</h2>
+<p>Kubernetes assigns pods to QoS classes based on resource specifications:</p>
+<h3>1. Guaranteed</h3>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>All containers have CPU and memory requests and limits</li>
+<li>Requests equal limits for all containers</li>
+</ul>
+<pre><code class="language-yaml">resources:
+  requests:
+    cpu: &quot;500m&quot;
+    memory: &quot;512Mi&quot;
+  limits:
+    cpu: &quot;500m&quot;      # Same as request
+    memory: &quot;512Mi&quot;  # Same as request
+</code></pre>
+<p><strong>Characteristics:</strong></p>
+<ul>
+<li>Highest priority</li>
+<li>Cannot be evicted unless node is out of resources</li>
+<li>Guaranteed resources are always available</li>
+</ul>
+<h3>2. Burstable</h3>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>At least one container has CPU or memory request</li>
+<li>Requests don&#39;t equal limits (or limits not set)</li>
+</ul>
+<pre><code class="language-yaml">resources:
+  requests:
+    cpu: &quot;250m&quot;
+    memory: &quot;256Mi&quot;
+  limits:
+    cpu: &quot;1000m&quot;     # Higher than request
+    memory: &quot;1Gi&quot;    # Higher than request
+</code></pre>
+<p><strong>Characteristics:</strong></p>
+<ul>
+<li>Medium priority</li>
+<li>Can be evicted if node runs out of resources</li>
+<li>Can use resources beyond requests when available</li>
+</ul>
+<h3>3. BestEffort</h3>
+<p><strong>Requirements:</strong></p>
+<ul>
+<li>No containers have CPU or memory requests or limits</li>
+</ul>
+<pre><code class="language-yaml"># No resources specified
+containers:
+- name: app
+  image: nginx:latest
+</code></pre>
+<p><strong>Characteristics:</strong></p>
+<ul>
+<li>Lowest priority</li>
+<li>First to be evicted during resource contention</li>
+<li>Can use any available resources</li>
+</ul>
+<p><strong>Eviction Order:</strong></p>
+<ol>
+<li>BestEffort pods (evicted first)</li>
+<li>Burstable pods (evicted if needed)</li>
+<li>Guaranteed pods (evicted last)</li>
+</ol>
 <h2>Resource Quotas</h2>
-<p>Resource quotas limit resource consumption per namespace:</p>
+<h3>What Are Resource Quotas?</h3>
+<p>Resource quotas limit resource consumption per namespace. They help:</p>
+<ul>
+<li>Prevent resource exhaustion</li>
+<li>Control costs</li>
+<li>Enforce resource allocation policies</li>
+<li>Ensure fair resource distribution</li>
+</ul>
+<h3>Creating Resource Quotas</h3>
 <pre><code class="language-yaml">apiVersion: v1
 kind: ResourceQuota
 metadata:
@@ -862,55 +1049,407 @@ metadata:
   namespace: production
 spec:
   hard:
+    # CPU and Memory
+    requests.cpu: &quot;10&quot;           # Total CPU requests
+    requests.memory: 20Gi        # Total memory requests
+    limits.cpu: &quot;20&quot;             # Total CPU limits
+    limits.memory: 40Gi          # Total memory limits
+    
+    # Object counts
+    pods: &quot;10&quot;                   # Maximum pods
+    persistentvolumeclaims: &quot;10&quot; # Maximum PVCs
+    services: &quot;5&quot;                # Maximum services
+    
+    # Storage
+    requests.storage: 100Gi      # Total storage requests
+    
+    # Extended resources (if configured)
+    # nvidia.com/gpu: &quot;4&quot;
+</code></pre>
+<h3>Quota Scopes</h3>
+<p>Quotas can be scoped to specific pod states:</p>
+<pre><code class="language-yaml">apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota-scoped
+spec:
+  hard:
+    pods: &quot;10&quot;
+    requests.cpu: &quot;10&quot;
+  scopes:
+  - BestEffort      # Only count BestEffort pods
+  # - NotBestEffort # Count all except BestEffort
+  # - Terminating   # Count pods in Terminating state
+  # - NotTerminating # Count pods not terminating
+  # - PriorityClass # Count pods with specific priority class
+</code></pre>
+<h3>Checking Quota Usage</h3>
+<pre><code class="language-bash"># List quotas in namespace
+kubectl get resourcequota -n production
+
+# Describe quota to see usage
+kubectl describe resourcequota compute-quota -n production
+
+# Output shows:
+# Name:            compute-quota
+# Namespace:       production
+# Resource         Used  Hard
+# --------         ----  ----
+# limits.cpu       5     20
+# limits.memory    10Gi  40Gi
+# requests.cpu     3     10
+# requests.memory  5Gi   20Gi
+</code></pre>
+<h3>Common Quota Errors</h3>
+<p><strong>Error: &quot;exceeded quota&quot;</strong></p>
+<pre><code class="language-bash"># Check which resource is exhausted
+kubectl describe resourcequota &lt;quota-name&gt; -n &lt;namespace&gt;
+
+# Solution: Increase quota or reduce resource usage
+kubectl edit resourcequota &lt;quota-name&gt; -n &lt;namespace&gt;
+</code></pre>
+<h2>Limit Ranges</h2>
+<p>Limit ranges set default, min, and max resource constraints for pods in a namespace.</p>
+<h3>Creating Limit Ranges</h3>
+<pre><code class="language-yaml">apiVersion: v1
+kind: LimitRange
+metadata:
+  name: mem-limit-range
+  namespace: production
+spec:
+  limits:
+  - default:           # Default limits if not specified
+      memory: &quot;512Mi&quot;
+      cpu: &quot;500m&quot;
+    defaultRequest:    # Default requests if not specified
+      memory: &quot;256Mi&quot;
+      cpu: &quot;250m&quot;
+    max:               # Maximum allowed
+      memory: &quot;2Gi&quot;
+      cpu: &quot;2000m&quot;
+    min:               # Minimum required
+      memory: &quot;128Mi&quot;
+      cpu: &quot;100m&quot;
+    type: Container
+</code></pre>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li>Enforces resource specifications</li>
+<li>Provides defaults for pods without resources</li>
+<li>Prevents resource abuse</li>
+<li>Ensures minimum resource allocation</li>
+</ul>
+<h2>Best Practices</h2>
+<h3>1. Always Set Requests</h3>
+<pre><code class="language-yaml"># Good: Set requests for proper scheduling
+resources:
+  requests:
+    cpu: &quot;250m&quot;
+    memory: &quot;256Mi&quot;
+
+# Bad: No requests makes scheduling unpredictable
+# resources: {}
+</code></pre>
+<p><strong>Why:</strong></p>
+<ul>
+<li>Enables proper scheduling decisions</li>
+<li>Prevents resource contention</li>
+<li>Helps with capacity planning</li>
+</ul>
+<h3>2. Set Realistic Limits</h3>
+<pre><code class="language-yaml"># Good: Limits are 2-3x requests
+resources:
+  requests:
+    cpu: &quot;250m&quot;
+    memory: &quot;256Mi&quot;
+  limits:
+    cpu: &quot;500m&quot;      # 2x request
+    memory: &quot;512Mi&quot;  # 2x request
+
+# Bad: Limits too close to requests (no burst capacity)
+resources:
+  requests:
+    cpu: &quot;500m&quot;
+    memory: &quot;512Mi&quot;
+  limits:
+    cpu: &quot;510m&quot;      # Too close to request
+    memory: &quot;520Mi&quot;  # Too close to request
+</code></pre>
+<h3>3. Monitor and Right-Size</h3>
+<p><strong>Collect Baseline Metrics:</strong></p>
+<pre><code class="language-bash"># Monitor resource usage over time
+kubectl top pods --all-namespaces
+
+# Use metrics-server API for historical data
+kubectl get --raw /apis/metrics.k8s.io/v1beta1/namespaces/default/pods
+</code></pre>
+<p><strong>Analyze Usage Patterns:</strong></p>
+<pre><code class="language-promql"># Average CPU usage
+avg(rate(container_cpu_usage_seconds_total[5m])) by (pod)
+
+# Average memory usage
+avg(container_memory_working_set_bytes) by (pod)
+
+# CPU throttling
+rate(container_cpu_cfs_throttled_seconds_total[5m])
+</code></pre>
+<p><strong>Right-Size Based on Data:</strong></p>
+<pre><code class="language-yaml"># Adjust resources based on actual usage
+# If average CPU usage is 200m, set request to 250m
+# If P95 CPU usage is 400m, set limit to 500m
+resources:
+  requests:
+    cpu: &quot;250m&quot;      # Slightly above average
+    memory: &quot;256Mi&quot;
+  limits:
+    cpu: &quot;500m&quot;      # Based on P95/P99 usage
+    memory: &quot;512Mi&quot;
+</code></pre>
+<h3>4. Use Vertical Pod Autoscaler (VPA)</h3>
+<p>VPA automatically adjusts pod resource requests and limits based on usage:</p>
+<pre><code class="language-yaml">apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: my-app-vpa
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-app
+  updatePolicy:
+    updateMode: &quot;Auto&quot;  # or &quot;Initial&quot;, &quot;Off&quot;, &quot;Recreate&quot;
+  resourcePolicy:
+    containerPolicies:
+    - containerName: app
+      minAllowed:
+        cpu: 100m
+        memory: 128Mi
+      maxAllowed:
+        cpu: 2
+        memory: 4Gi
+</code></pre>
+<h3>5. Set Namespace Quotas</h3>
+<pre><code class="language-yaml"># Enforce quotas per namespace
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: team-quota
+  namespace: team-a
+spec:
+  hard:
     requests.cpu: &quot;10&quot;
     requests.memory: 20Gi
     limits.cpu: &quot;20&quot;
     limits.memory: 40Gi
-    persistentvolumeclaims: &quot;10&quot;
+    pods: &quot;50&quot;
 </code></pre>
-<h2>Best Practices</h2>
-<h3>1. Set Appropriate Requests</h3>
-<pre><code class="language-yaml">resources:
+<h3>6. Use Limit Ranges for Defaults</h3>
+<pre><code class="language-yaml"># Set sensible defaults for namespace
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: default-limits
+spec:
+  limits:
+  - default:
+      cpu: &quot;500m&quot;
+      memory: &quot;512Mi&quot;
+    defaultRequest:
+      cpu: &quot;250m&quot;
+      memory: &quot;256Mi&quot;
+    type: Container
+</code></pre>
+<h2>Common Issues and Solutions</h2>
+<h3>Issue 1: Pods Pending - Insufficient Resources</h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Pods stuck in Pending state</li>
+<li>Error: &quot;0/X nodes are available: X Insufficient cpu, X Insufficient memory&quot;</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check node resources
+kubectl describe node &lt;node-name&gt;
+
+# Check pod scheduling events
+kubectl describe pod &lt;pod-name&gt; | grep -A 10 &quot;Events&quot;
+
+# Check cluster capacity
+kubectl top nodes
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<ol>
+<li><p><strong>Reduce Resource Requests:</strong></p>
+<pre><code class="language-yaml"># Lower requests to fit available resources
+resources:
   requests:
-    cpu: &quot;500m&quot;
-    memory: &quot;512Mi&quot;
+    cpu: &quot;100m&quot;      # Reduced from 500m
+    memory: &quot;128Mi&quot;  # Reduced from 512Mi
 </code></pre>
-<h3>2. Set Realistic Limits</h3>
+</li>
+<li><p><strong>Add More Nodes:</strong></p>
+<pre><code class="language-bash"># Scale cluster (cloud provider specific)
+# AWS EKS: Update node group desired capacity
+# GKE: Resize node pool
+</code></pre>
+</li>
+<li><p><strong>Free Up Resources:</strong></p>
+<pre><code class="language-bash"># Delete unused pods
+kubectl delete pod &lt;unused-pod&gt;
+
+# Scale down other deployments
+kubectl scale deployment &lt;deployment&gt; --replicas=2
+</code></pre>
+</li>
+</ol>
+<h3>Issue 2: CPU Throttling</h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Application performance degradation</li>
+<li>High CPU usage but application feels slow</li>
+<li>Metrics show throttling</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check for CPU throttling
+kubectl top pod &lt;pod-name&gt;
+
+# View detailed CPU metrics
+kubectl get --raw /api/v1/namespaces/default/pods/&lt;pod-name&gt;/proxy/metrics | grep cpu
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<ol>
+<li><p><strong>Increase CPU Limit:</strong></p>
 <pre><code class="language-yaml">resources:
   limits:
-    cpu: &quot;1000m&quot;
-    memory: &quot;1Gi&quot;
+    cpu: &quot;2000m&quot;  # Increased from 1000m
 </code></pre>
-<h3>3. Use Resource Quotas</h3>
-<p>Implement quotas to prevent resource exhaustion and control costs.</p>
-<h3>4. Monitor Resource Usage</h3>
-<p>Track actual usage vs. requests to optimize allocation.</p>
-<h2>Common Issues</h2>
-<h3>Over-Provisioning</h3>
+</li>
+<li><p><strong>Optimize Application:</strong></p>
 <ul>
-<li><strong>Problem</strong>: Requests set too high</li>
-<li><strong>Solution</strong>: Right-size based on actual usage</li>
+<li>Profile application to identify CPU hotspots</li>
+<li>Optimize algorithms</li>
+<li>Reduce unnecessary processing</li>
 </ul>
-<h3>Under-Provisioning</h3>
-<ul>
-<li><strong>Problem</strong>: Requests set too low</li>
-<li><strong>Solution</strong>: Increase requests based on usage patterns</li>
-</ul>
-<h3>Limit Violations</h3>
-<ul>
-<li><strong>Problem</strong>: Pods hitting limits frequently</li>
-<li><strong>Solution</strong>: Adjust limits or optimize application</li>
-</ul>
-<h2>Optimization Tips</h2>
-<ol>
-<li><strong>Start Conservative</strong>: Set requests based on baseline usage</li>
-<li><strong>Monitor Continuously</strong>: Track resource usage over time</li>
-<li><strong>Use Vertical Pod Autoscaler</strong>: Automatically right-size pods</li>
-<li><strong>Review Regularly</strong>: Adjust resources based on trends</li>
-<li><strong>Test Changes</strong>: Validate resource changes in staging</li>
+</li>
 </ol>
+<h3>Issue 3: OOMKilled Pods</h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Pods restarting frequently</li>
+<li>Exit code 137</li>
+<li>Error: &quot;OOMKilled&quot; in pod events</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check for OOMKilled
+kubectl describe pod &lt;pod-name&gt; | grep -i oom
+
+# Check memory usage before kill
+kubectl get pod &lt;pod-name&gt; -o jsonpath=&#39;{.status.containerStatuses[0].lastState.terminated}&#39;
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<ol>
+<li><p><strong>Increase Memory Limit:</strong></p>
+<pre><code class="language-yaml">resources:
+  limits:
+    memory: &quot;2Gi&quot;  # Increased from 1Gi
+</code></pre>
+</li>
+<li><p><strong>Fix Memory Leaks:</strong></p>
+<ul>
+<li>Profile application memory usage</li>
+<li>Identify and fix leaks</li>
+<li>Optimize data structures</li>
+</ul>
+</li>
+<li><p><strong>Add Memory Requests:</strong></p>
+<pre><code class="language-yaml">resources:
+  requests:
+    memory: &quot;1Gi&quot;  # Ensures sufficient memory allocation
+  limits:
+    memory: &quot;2Gi&quot;
+</code></pre>
+</li>
+</ol>
+<h3>Issue 4: Resource Quota Exceeded</h3>
+<p><strong>Symptoms:</strong></p>
+<ul>
+<li>Cannot create new pods</li>
+<li>Error: &quot;exceeded quota&quot;</li>
+</ul>
+<p><strong>Diagnosis:</strong></p>
+<pre><code class="language-bash"># Check quota usage
+kubectl describe resourcequota &lt;quota-name&gt; -n &lt;namespace&gt;
+</code></pre>
+<p><strong>Solutions:</strong></p>
+<ol>
+<li><p><strong>Increase Quota:</strong></p>
+<pre><code class="language-bash">kubectl edit resourcequota &lt;quota-name&gt; -n &lt;namespace&gt;
+</code></pre>
+</li>
+<li><p><strong>Free Up Resources:</strong></p>
+<pre><code class="language-bash"># Delete unused pods
+kubectl delete pod &lt;unused-pod&gt; -n &lt;namespace&gt;
+
+# Scale down deployments
+kubectl scale deployment &lt;deployment&gt; --replicas=1 -n &lt;namespace&gt;
+</code></pre>
+</li>
+<li><p><strong>Move Pods to Different Namespace:</strong></p>
+<pre><code class="language-bash"># Create pods in namespace with available quota
+kubectl create namespace &lt;new-namespace&gt;
+</code></pre>
+</li>
+</ol>
+<h2>Monitoring Resource Usage</h2>
+<h3>Key Metrics to Track</h3>
+<ul>
+<li><strong>CPU Usage vs Requests/Limits</strong>: Identify over/under-provisioning</li>
+<li><strong>Memory Usage vs Requests/Limits</strong>: Detect memory pressure</li>
+<li><strong>CPU Throttling Rate</strong>: Indicates limit too low</li>
+<li><strong>OOMKill Rate</strong>: Indicates memory limit too low</li>
+<li><strong>Resource Request Efficiency</strong>: Requests vs actual usage</li>
+<li><strong>Quota Utilization</strong>: Track quota usage per namespace</li>
+</ul>
+<h3>Prometheus Queries</h3>
+<pre><code class="language-promql"># CPU usage percentage of limit
+(rate(container_cpu_usage_seconds_total[5m]) / container_spec_cpu_quota * 100)
+
+# Memory usage percentage of limit
+(container_memory_working_set_bytes / container_spec_memory_limit_bytes * 100)
+
+# CPU throttling rate
+rate(container_cpu_cfs_throttled_seconds_total[5m])
+
+# OOM kills
+rate(container_oom_events_total[5m])
+</code></pre>
+<h2>Cost Optimization</h2>
+<h3>Strategies</h3>
+<ol>
+<li><strong>Right-Size Resources</strong>: Set requests based on actual usage (P50-P75)</li>
+<li><strong>Use Spot Instances</strong>: For non-critical workloads</li>
+<li><strong>Implement Autoscaling</strong>: Scale down during low usage</li>
+<li><strong>Monitor Waste</strong>: Identify over-provisioned pods</li>
+<li><strong>Use Resource Quotas</strong>: Prevent resource sprawl</li>
+</ol>
+<h3>Calculate Savings</h3>
+<pre><code class="language-bash"># Compare requests vs usage
+# If request is 1 CPU but usage is 0.25 CPU:
+# Waste = 0.75 CPU per pod
+# With 100 pods: 75 CPUs wasted
+# Cost savings = 75 CPUs * hourly_rate
+</code></pre>
+<h2>Automated Optimization with AlertMend</h2>
+<p>AlertMend AI can automatically:</p>
+<ul>
+<li><strong>Right-Size Resources</strong>: Analyze usage patterns and recommend optimal requests/limits</li>
+<li><strong>Detect Over-Provisioning</strong>: Identify pods with excessive resource requests</li>
+<li><strong>Prevent OOMKills</strong>: Alert on memory pressure before OOMKills occur</li>
+<li><strong>Optimize Quotas</strong>: Suggest quota adjustments based on usage</li>
+<li><strong>Cost Analysis</strong>: Identify cost optimization opportunities</li>
+</ul>
 <h2>Conclusion</h2>
-<p>Proper resource management improves cluster performance and reduces costs. AlertMend AI can help automatically right-size resources and optimize allocation.</p>
+<p>Proper resource management in Kubernetes requires understanding requests, limits, and quotas. Setting appropriate resource specifications ensures applications get the resources they need while preventing resource exhaustion and controlling costs. By monitoring usage, right-sizing resources, and using quotas effectively, you can optimize cluster performance and reduce infrastructure costs.</p>
+<p>Implementing automated monitoring and optimization with AlertMend AI helps continuously improve resource allocation and reduce waste.</p>
 <hr>
 <p><em>Want to optimize resource usage? <a href="/solutions/cost-optimization">Learn about AlertMend&#39;s cost optimization</a>.</em></p>
 

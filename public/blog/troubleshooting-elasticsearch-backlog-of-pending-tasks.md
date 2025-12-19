@@ -1,13 +1,13 @@
 ---
-title: "Troubleshooting Elasticsearch Backlog of Pending Tasks"
-excerpt: "Complete guide to troubleshooting Elasticsearch backlog of pending tasks in Kubernetes. Learn how to diagnose and resolve task queue issues that impact cluster performance and responsiveness."
+title: "Elasticsearch Backlog of Pending Tasks Guide"
+excerpt: "Guide to troubleshooting Elasticsearch backlog of pending tasks in Kubernetes. Diagnose and resolve task queue issues that impact cluster performance."
 date: "2025-03-9"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
 keywords: "Elasticsearch, pending tasks, task queue, cluster tasks, Elasticsearch performance, cluster responsiveness, Kubernetes, AlertMend AI"
 ---
 
-# Troubleshooting Elasticsearch Backlog of Pending Tasks
+# Elasticsearch Backlog of Pending Tasks Guide
 
 Elasticsearch uses a task queue to manage cluster-level operations. When the backlog of pending tasks grows too large, it can significantly impact cluster performance, responsiveness, and data consistency. Understanding how to diagnose and resolve pending task backlogs is crucial for maintaining a healthy Elasticsearch cluster.
 

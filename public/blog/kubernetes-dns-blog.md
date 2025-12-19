@@ -1,6 +1,6 @@
 ---
-title: "Kubernetes DNS Configuration: A Practical Guide"
-excerpt: "Complete guide to Kubernetes DNS configuration, CoreDNS setup, troubleshooting DNS issues, and optimizing DNS performance for service discovery in Kubernetes clusters."
+title: "Kubernetes DNS Configuration Guide"
+excerpt: "Complete guide to Kubernetes DNS configuration, CoreDNS setup, troubleshooting DNS issues, and optimizing DNS performance for service discovery."
 date: "2025-06-7"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
@@ -8,7 +8,7 @@ author: "Arvind Rajpurohit"
 ---
 
 
-# 🚨 **Mastering Kubernetes DNS: A Guide to Seamless Communication in Your Cluster**
+# Kubernetes DNS Configuration Guide
 ---
 
 Kubernetes DNS plays a vital role in managing network communications within a cluster. It simplifies service discovery and ensures that all components—pods, services, and external systems—can communicate efficiently without relying on static IP addresses. This blog will explore the basics of Kubernetes DNS, how it works, and troubleshooting common DNS-related issues.
