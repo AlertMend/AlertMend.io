@@ -67,6 +67,7 @@ export default function BlogPostDetailPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-white">
+        <Navbar />
         {loadingCanonicalUrl && (
           <SEO
             title="Loading..."
@@ -74,7 +75,6 @@ export default function BlogPostDetailPage() {
             canonical={loadingCanonicalUrl}
           />
         )}
-        <Navbar />
         <div className="pt-32 pb-20 flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
@@ -210,6 +210,7 @@ export default function BlogPostDetailPage() {
   
   return (
     <div className="min-h-screen bg-white">
+      <Navbar />
       <SEO
         title={seoTitle}
         description={metaDescription}
@@ -249,7 +250,6 @@ export default function BlogPostDetailPage() {
           ]
         }}
       />
-      <Navbar />
       <main className="pt-24">
         <article className="pt-8 pb-8 md:pb-12 container-padding">
           <div className="max-w-7xl mx-auto">
