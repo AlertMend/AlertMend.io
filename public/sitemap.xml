@@ -7,7 +7,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.alertmend.io/</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,25 +15,25 @@
   <!-- Solutions -->
   <url>
     <loc>https://www.alertmend.io/auto-remediation</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/kubernetes-management</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/on-call-management</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/kubernetes-cost-optimization</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -41,31 +41,31 @@
   <!-- Case Studies -->
   <url>
     <loc>https://www.alertmend.io/case-studies</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/case-studies/auto-remediation-case-studies-polymer-search</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/case-studies/kubernetes-cost-optimization-case-studies-wareflex</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/case-studies/kubernetes-cost-optimization-case-studies-rombee</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/case-studies/auto-remediation-case-studies-aivos</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -73,7 +73,7 @@
   <!-- Blog -->
   <url>
     <loc>https://www.alertmend.io/blog</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -684,19 +684,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Edge-Computing-Systems-with-Kubernetes-Pdf.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: edge-computing-systems-with-kubernetes-read-online -->
-  <url>
-    <loc>https://www.alertmend.io/blog/edge-computing-systems-with-kubernetes-read-online</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Edge-Computing-Systems-with-Kubernetes-Read-Online.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -3818,109 +3805,109 @@
   <!-- Main Pages -->
   <url>
     <loc>https://www.alertmend.io/pricing</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/about</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/contact</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/partners</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation/slack-app-approval</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation/slack-token-channel</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation/slack-rca-channel</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation/ms-teams-approval</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation/ms-teams-rf</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation/ms-teams-webhook</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation/datadog-webhook</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/documentation/alertmend-vm-actions</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/careers</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/help</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/community</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/tutorials</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/webinars</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -3928,25 +3915,25 @@
   <!-- Legal Pages -->
   <url>
     <loc>https://www.alertmend.io/privacy</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/terms</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/security</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.alertmend.io/compliance</loc>
-    <lastmod>2025-12-18</lastmod>
+    <lastmod>2025-12-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

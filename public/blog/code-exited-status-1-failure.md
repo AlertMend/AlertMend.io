@@ -8,7 +8,7 @@ keywords: "code, exited, status, failure, Kubernetes, AlertMend AI, AIOps, conta
 ---
 
 
-# code exited status 1/failure解决
+# code exited status 1/failure
 
 ## Resolving the Code Exited Status 1/Failure Issue in System Monitoring
 
