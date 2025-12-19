@@ -207,8 +207,14 @@ ${blogPosts.map(post => {
   const htmlFilename = canonicalFilenameOverrides[post.slug] || defaultFilename
   const normalizedDate = normalizeDate(post.date)
   
-  // New blogs that should only have /blog/{slug} entries (no /blogs/ entries)
-  const newBlogsOnly = [
+  // Automatically detect new blogs: blogs dated after Dec 18, 2025 are "new blogs"
+  // New blogs only have /blog/{slug} entries (no /blogs/ entries)
+  const newBlogCutoffDate = new Date('2025-12-18')
+  const postDate = new Date(post.date || normalizedDate)
+  const isNewBlog = postDate > newBlogCutoffDate
+  
+  // Also check hardcoded list for any legacy new blogs that might have earlier dates
+  const legacyNewBlogsOnly = [
     'alertmend-kubernetes',
     'exit-status-127',
     'oomkilled',
@@ -223,9 +229,10 @@ ${blogPosts.map(post => {
     'error-failed-to-push-some-refs-to'
   ]
   
-  const isNewBlog = newBlogsOnly.includes(post.slug)
+  const isLegacyNewBlog = legacyNewBlogsOnly.includes(post.slug)
+  const isNewBlogFinal = isNewBlog || isLegacyNewBlog
   
-  if (isNewBlog) {
+  if (isNewBlogFinal) {
     // New blogs: only /blog/{slug} entry
     return `  <!-- Blog Post: ${post.slug} -->
   <url>
@@ -395,7 +402,9 @@ ${blogPosts.map(post => {
 const sitemapPath = path.join(__dirname, '../public/sitemap.xml')
 fs.writeFileSync(sitemapPath, sitemap, 'utf-8')
 
-const newBlogsCount = blogPosts.filter(post => [
+// Count new blogs (automatically detected by date > Dec 18, 2025, plus legacy list)
+const newBlogCutoffDate = new Date('2025-12-18')
+const legacyNewBlogsOnly = [
   'alertmend-kubernetes',
   'exit-status-127',
   'oomkilled',
@@ -408,7 +417,13 @@ const newBlogsCount = blogPosts.filter(post => [
   'crashloopbackoff-kubernetes',
   'fatal-refusing-to-merge-unrelated-histories',
   'error-failed-to-push-some-refs-to'
-].includes(post.slug)).length
+]
+const newBlogsCount = blogPosts.filter(post => {
+  const postDate = new Date(post.date || normalizeDate(post.date))
+  const isNewBlogByDate = postDate > newBlogCutoffDate
+  const isLegacyNewBlog = legacyNewBlogsOnly.includes(post.slug)
+  return isNewBlogByDate || isLegacyNewBlog
+}).length
 
 console.log(`✅ Generated sitemap.xml with ${blogPosts.length} blog posts`)
 console.log(`   ${newBlogsCount} new blogs use /blog/{slug} only`)
