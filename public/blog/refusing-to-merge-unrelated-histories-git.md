@@ -1,6 +1,6 @@
 ---
 title: "refusing to merge unrelated histories git"
-excerpt: "Encountering the \"refusing to merge unrelated histories\" Git error can be a stumbling block in your development workflow."
+excerpt: "Complete guide to fixing the refusing to merge unrelated histories Git error. Learn how to resolve merge conflicts and combine unrelated repository histories."
 date: "2025-12-18"
 category: "DevOps"
 author: "AlertMend Team"

@@ -1,13 +1,13 @@
 ---
-title: "automate pod rightsizing solutions"
-excerpt: "In today's rapidly evolving DevOps landscape, the demand for optimizing Kubernetes workloads has never been more critical"
+title: "Automate Pod Rightsizing Solutions Guide"
+excerpt: "Complete guide to automating pod rightsizing in Kubernetes. Learn how to optimize resource allocation, reduce costs, and improve performance with automation."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "automate, rightsizing, solutions, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-# automate pod rightsizing solutions
+# Automate Pod Rightsizing Solutions Guide
 
 ## Introduction to Automating Pod Rightsizing Solutions
 

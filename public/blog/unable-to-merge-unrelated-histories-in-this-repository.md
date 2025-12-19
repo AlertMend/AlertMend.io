@@ -1,6 +1,6 @@
 ---
 title: "unable to merge unrelated histories in"
-excerpt: "Encountering the error message \"unable to merge unrelated histories in this repository\" can be a frustrating roadblock for developers, especially when..."
+excerpt: "Troubleshooting guide for unable to merge unrelated histories error. Learn how to fix Git merge issues and combine unrelated repository histories."
 date: "2025-12-18"
 category: "DevOps"
 author: "AlertMend Team"

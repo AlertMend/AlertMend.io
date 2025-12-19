@@ -1,7 +1,7 @@
 [
   {
     "slug": "503-no-healthy-upstream",
-    "title": "503 No Healthy Upstream Error: Complete",
+    "title": "503 No Healthy Upstream Error Guide",
     "excerpt": "Complete troubleshooting guide for 503 no healthy upstream errors in Kubernetes and Nginx. Learn diagnostic techniques, common causes, and proven solutions.",
     "date": "2025-12-18",
     "category": "Kubernetes",
@@ -10,8 +10,8 @@
   },
   {
     "slug": "aks-vs-eks",
-    "title": "aks vs eks Guide",
-    "excerpt": "In the evolving world of cloud computing, Kubernetes has become an essential tool for managing containerized applications",
+    "title": "AKS vs EKS: Managed Kubernetes Guide",
+    "excerpt": "Compare Azure Kubernetes Service (AKS) and Amazon Elastic Kubernetes Service (EKS) to choose the right managed Kubernetes platform for your needs.",
     "date": "2025-12-18",
     "category": "Kubernetes",
     "author": "AlertMend Team",
@@ -19,8 +19,8 @@
   },
   {
     "slug": "apache-airflow-consultants",
-    "title": "apache airflow consultants",
-    "excerpt": "In today's data-driven landscape, orchestrating workflows effectively is crucial. Apache Airflow consultants can be key players in optimizing your data proce...",
+    "title": "Apache Airflow Consultants Guide",
+    "excerpt": "Complete guide to Apache Airflow consultants. Learn how to hire experts, optimize workflows, and leverage consultants for data orchestration and automation.",
     "date": "2025-12-18",
     "category": "Kubernetes",
     "author": "AlertMend Team",
@@ -55,8 +55,8 @@
   },
   {
     "slug": "automate-pod-rightsizing-solutions",
-    "title": "automate pod rightsizing solutions",
-    "excerpt": "In today's rapidly evolving DevOps landscape, the demand for optimizing Kubernetes workloads has never been more critical",
+    "title": "Automate Pod Rightsizing Solutions Guide",
+    "excerpt": "Complete guide to automating pod rightsizing in Kubernetes. Learn how to optimize resource allocation, reduce costs, and improve performance with automation.",
     "date": "2025-12-18",
     "category": "Kubernetes",
     "author": "AlertMend Team",

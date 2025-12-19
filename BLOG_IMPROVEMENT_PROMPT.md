@@ -30,10 +30,15 @@ keywords: "keyword1, keyword2, keyword3, main topic, Kubernetes, AlertMend AI"
 
 **CRITICAL: Character Limits (MUST ENFORCE)**
 - **Title**: Maximum 43 characters in frontmatter (because " | AlertMend AI" suffix = 17 chars is added during build, making total 60 chars max)
-- **Excerpt**: Maximum 160 characters (including spaces)
+- **Excerpt**: **REQUIRED** - Must be between 50-160 characters (including spaces)
+  - **Build will FAIL** if excerpt is missing, empty, or outside this range
+  - Must be descriptive and explain what the blog covers
+  - Used for meta descriptions and blog listing page previews
+  - Validation: The build process (`npm run validate:blogs`) will fail if excerpt requirements are not met
 - **Validation**: Always verify character counts before committing
 - **DO NOT** append " | AlertMend AI" to titles - it's added automatically during build
 - **Example**: Title "Kubernetes Node Not Ready: Diagnostic Guide" (43 chars) → becomes "Kubernetes Node Not Ready: Diagnostic Guide | AlertMend AI" (60 chars total) ✓
+- **Example**: Excerpt "Complete troubleshooting guide for Kubernetes Node Not Ready errors. Diagnose and fix node issues like resource exhaustion and network problems." (155 chars) ✓
 
 ### 2. Main Heading
 ```markdown

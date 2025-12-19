@@ -1,6 +1,6 @@
 ---
 title: "kubelet stopped posting node status"
-excerpt: "In the world of Kubernetes, the phrase \"kubelet stopped posting node status\" can signal an array of operational challenges within a cluster."
+excerpt: "Troubleshooting guide for kubelet stopped posting node status errors in Kubernetes. Learn how to diagnose and fix node status issues and cluster problems."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"

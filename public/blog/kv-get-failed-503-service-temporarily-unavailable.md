@@ -1,6 +1,6 @@
 ---
 title: "kv get failed: 503 service temporarily"
-excerpt: "Encountering an error such as \"kv get failed: 503 service temporarily unavailable\" can be a frustrating roadblock in your system's operations."
+excerpt: "Troubleshooting guide for kv get failed 503 service temporarily unavailable errors. Learn how to diagnose and fix service availability issues in Kubernetes."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"

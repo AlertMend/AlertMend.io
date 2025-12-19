@@ -84,6 +84,19 @@ function validateMarkdownFile(filePath, filename) {
     if (!frontmatter[field]) {
       errors.push(`❌ ${filename}: Missing required frontmatter field: ${field}`)
       isValid = false
+    } else if (field === 'excerpt') {
+      // Strict validation for excerpt: must exist, not empty, and meet length requirements
+      const excerptValue = frontmatter[field].trim()
+      if (!excerptValue || excerptValue.length === 0) {
+        errors.push(`❌ ${filename}: Excerpt is empty (excerpt is required and must not be empty)`)
+        isValid = false
+      } else if (excerptValue.length < SEO_RULES.descriptionMinLength) {
+        errors.push(`❌ ${filename}: Excerpt too short (${excerptValue.length} chars, min ${SEO_RULES.descriptionMinLength}): "${excerptValue}"`)
+        isValid = false
+      } else if (excerptValue.length > SEO_RULES.descriptionMaxLength) {
+        errors.push(`❌ ${filename}: Excerpt too long (${excerptValue.length} chars, max ${SEO_RULES.descriptionMaxLength}): "${excerptValue}"`)
+        isValid = false
+      }
     }
   }
   
@@ -101,18 +114,6 @@ function validateMarkdownFile(filePath, filename) {
     }
     if (titleWithSuffix.length > SEO_RULES.titleMaxLength) {
       errors.push(`❌ ${filename}: Title too long (${titleWithSuffix.length} chars, max ${SEO_RULES.titleMaxLength}): "${titleWithSuffix}"`)
-      isValid = false
-    }
-  }
-  
-  // Validate excerpt/description length
-  if (frontmatter.excerpt) {
-    if (frontmatter.excerpt.length < SEO_RULES.descriptionMinLength) {
-      errors.push(`❌ ${filename}: Excerpt too short (${frontmatter.excerpt.length} chars, min ${SEO_RULES.descriptionMinLength}): "${frontmatter.excerpt}"`)
-      isValid = false
-    }
-    if (frontmatter.excerpt.length > SEO_RULES.descriptionMaxLength) {
-      errors.push(`❌ ${filename}: Excerpt too long (${frontmatter.excerpt.length} chars, max ${SEO_RULES.descriptionMaxLength}): "${frontmatter.excerpt}"`)
       isValid = false
     }
   }
