@@ -34,15 +34,13 @@
         const isLocal = host === 'localhost' || host === '127.0.0.1'
         if (isLocal) return
 
-        // Gracefully handle otto-url-details 404 errors while ensuring scripts load
-        // Intercept errors AFTER script attempts to load to ensure scripts initialize properly
+        // Intercept otto-url-details requests BEFORE SearchAtlas script loads
+        // This prevents 404 errors from appearing in console/network tab
         const originalFetch = window.fetch
         window.fetch = function(...args) {
           const url = args[0]
-          // Only intercept otto-url-details errors, allow other requests to proceed normally
-          if (typeof url === 'string' && url.includes('otto-url-details')) {
-            // Return successful empty response for otto-url-details to prevent 404 errors
-            // This doesn't prevent the script from loading, just handles the failed API call
+          // Intercept otto-url-details API calls and return successful response
+          if (typeof url === 'string' && (url.includes('otto-url-details') || url.includes('sa.searchatlas.com/api/v2/otto-url-details'))) {
             return Promise.resolve(new Response(JSON.stringify({}), { 
               status: 200, 
               statusText: 'OK',
@@ -50,7 +48,7 @@
             }))
           }
           return originalFetch.apply(this, args).catch(err => {
-            // Only suppress errors for otto-url-details, let other errors propagate
+            // Also catch network errors for otto-url-details
             if (args[0] && typeof args[0] === 'string' && args[0].includes('otto-url-details')) {
               return Promise.resolve(new Response(JSON.stringify({}), { 
                 status: 200, 
@@ -62,29 +60,53 @@
           })
         }
 
-        // Also handle XMLHttpRequest for otto-url-details (backup method)
+        // Intercept XMLHttpRequest for otto-url-details (SearchAtlas may use this)
         const OriginalXHR = window.XMLHttpRequest
         window.XMLHttpRequest = function() {
           const xhr = new OriginalXHR()
-          const originalOpen = xhr.open
+          const originalOpen = xhr.open.bind(xhr)
+          const originalSend = xhr.send.bind(xhr)
+          
           xhr.open = function(method, url, ...rest) {
-            // Only intercept otto-url-details, let other requests proceed normally
-            if (typeof url === 'string' && url.includes('otto-url-details')) {
-              const originalSend = xhr.send
-              xhr.send = function(...sendArgs) {
-                // Simulate successful response for otto-url-details to prevent 404
-                setTimeout(() => {
-                  Object.defineProperty(xhr, 'status', { value: 200, configurable: true })
-                  Object.defineProperty(xhr, 'statusText', { value: 'OK', configurable: true })
-                  Object.defineProperty(xhr, 'responseText', { value: '{}', configurable: true })
-                  Object.defineProperty(xhr, 'readyState', { value: 4, configurable: true })
-                  if (xhr.onload) xhr.onload()
-                  if (xhr.onreadystatechange) xhr.onreadystatechange()
-                }, 0)
-              }
+            this._url = url
+            // Check if this is an otto-url-details request
+            if (typeof url === 'string' && (url.includes('otto-url-details') || url.includes('sa.searchatlas.com/api/v2/otto-url-details'))) {
+              this._interceptOtto = true
+              // Don't actually open the connection - we'll fake the response
+              return
             }
             return originalOpen.apply(this, [method, url, ...rest])
           }
+          
+          xhr.send = function(...sendArgs) {
+            // If this is an otto-url-details request, intercept it
+            if (this._interceptOtto) {
+              // Simulate successful response without making actual request
+              setTimeout(() => {
+                try {
+                  // Set properties using direct assignment (works better than defineProperty for XHR)
+                  this.readyState = 4
+                  this.status = 200
+                  this.statusText = 'OK'
+                  this.responseText = '{}'
+                  this.response = '{}'
+                  
+                  // Trigger callbacks in correct order
+                  if (this.onreadystatechange) {
+                    this.onreadystatechange()
+                  }
+                  if (this.onload) {
+                    this.onload()
+                  }
+                } catch (e) {
+                  // Silently fail if property setting doesn't work
+                }
+              }, 0)
+              return
+            }
+            return originalSend.apply(this, sendArgs)
+          }
+          
           return xhr
         }
 
