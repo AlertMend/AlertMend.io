@@ -38,9 +38,10 @@
         // This prevents 404 errors from appearing in console/network tab
         const originalFetch = window.fetch
         window.fetch = function(...args) {
-          const url = args[0]
+          const url = typeof args[0] === 'string' ? args[0] : (args[0]?.url || '')
           // Intercept otto-url-details API calls and return successful response
-          if (typeof url === 'string' && (url.includes('otto-url-details') || url.includes('sa.searchatlas.com/api/v2/otto-url-details'))) {
+          // Match: sa.searchatlas.com/api/v2/otto-url-details or any URL containing otto-url-details
+          if (url && (url.includes('otto-url-details') || url.includes('sa.searchatlas.com/api/v2/otto-url-details'))) {
             return Promise.resolve(new Response(JSON.stringify({}), { 
               status: 200, 
               statusText: 'OK',
@@ -49,7 +50,8 @@
           }
           return originalFetch.apply(this, args).catch(err => {
             // Also catch network errors for otto-url-details
-            if (args[0] && typeof args[0] === 'string' && args[0].includes('otto-url-details')) {
+            const errorUrl = typeof args[0] === 'string' ? args[0] : (args[0]?.url || '')
+            if (errorUrl && errorUrl.includes('otto-url-details')) {
               return Promise.resolve(new Response(JSON.stringify({}), { 
                 status: 200, 
                 statusText: 'OK',
