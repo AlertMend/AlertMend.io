@@ -1,5 +1,5 @@
 ---
-title: "kubelet stopped posting node status"
+title: "Kubelet Stopped Posting Node Status"
 excerpt: "Troubleshooting guide for kubelet stopped posting node status errors in Kubernetes. Learn how to diagnose and fix node status issues and cluster problems."
 date: "2025-12-18"
 category: "Kubernetes"

@@ -1,5 +1,5 @@
 ---
-title: "best kubernetes resource optimization"
+title: "Best Kubernetes Resource Optimization"
 excerpt: "Kubernetes has revolutionized the way organizations orchestrate their containerized applications, offering unmatched scalability and flexibility"
 date: "2025-12-18"
 category: "Kubernetes"

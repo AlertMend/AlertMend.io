@@ -1,5 +1,5 @@
 ---
-title: "helmfile tutorial"
+title: "Helmfile Tutorial"
 excerpt: "Embarking on the journey of Kubernetes management can be intricate, but mastering tools like Helmfile simplifies deploying multiple Helm charts efficiently"
 date: "2025-12-18"
 category: "Kubernetes"

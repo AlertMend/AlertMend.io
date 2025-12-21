@@ -1,5 +1,5 @@
 ---
-title: "git config global http sslbackend schannel"
+title: "Git Config Global Http Sslbackend Schannel"
 excerpt: "Integrating Git seamlessly with Windows' security systems is crucial for efficient and secure development"
 date: "2025-12-18"
 category: "DevOps"

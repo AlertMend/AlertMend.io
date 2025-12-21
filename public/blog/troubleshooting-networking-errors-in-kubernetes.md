@@ -1,5 +1,5 @@
 ---
-title: "🚨 Troubleshooting Networking Errors in"
+title: "🚨 Troubleshooting Networking Errors In"
 excerpt: "Networking is one of the most critical components in any Kubernetes deployment, facilitating communication between containers, services, and external..."
 date: "2025-06-27"
 category: "Kubernetes"

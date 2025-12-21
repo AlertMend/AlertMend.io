@@ -1,5 +1,5 @@
 ---
-title: "container clusters list"
+title: "Container Clusters List"
 excerpt: "REFERENCE CONTENT FROM TOP 9 GOOGLE SEARCH RESULTS This content is gathered from the top-ranking pages for comprehensive reference"
 date: "2025-12-18"
 category: "Kubernetes"

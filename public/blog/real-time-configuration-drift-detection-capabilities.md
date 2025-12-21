@@ -1,5 +1,5 @@
 ---
-title: "real-time configuration drift detection"
+title: "Real-time Configuration Drift Detection"
 excerpt: "In today's fast-paced digital landscape, maintaining a consistent and secure IT environment is critical"
 date: "2025-12-18"
 category: "Kubernetes"

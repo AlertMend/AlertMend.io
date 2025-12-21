@@ -1,5 +1,5 @@
 ---
-title: "Microsoft Teams Integration Guide for"
+title: "Microsoft Teams Integration Guide For"
 excerpt: "Enhance your incident response workflow by integrating Microsoft Teams with Alertmend. This guide walks you through the step by step process of setting up..."
 date: "2024-07-24"
 category: "Blog"

@@ -1,5 +1,5 @@
 ---
-title: "kubernetes vs eks"
+title: "Kubernetes vs Eks"
 excerpt: "In the ever-evolving landscape of cloud computing, the debate between Kubernetes vs EKS continues to captivate DevOps professionals and IT managers alike"
 date: "2025-12-18"
 category: "Kubernetes"

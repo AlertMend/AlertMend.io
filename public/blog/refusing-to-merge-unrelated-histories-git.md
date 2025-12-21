@@ -1,5 +1,5 @@
 ---
-title: "refusing to merge unrelated histories git"
+title: "Refusing to Merge Unrelated Histories Git"
 excerpt: "Complete guide to fixing the refusing to merge unrelated histories Git error. Learn how to resolve merge conflicts and combine unrelated repository histories."
 date: "2025-12-18"
 category: "DevOps"

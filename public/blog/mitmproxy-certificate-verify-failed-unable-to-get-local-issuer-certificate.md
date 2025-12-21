@@ -1,5 +1,5 @@
 ---
-title: "mitmproxy certificate verify failed unable"
+title: "Mitmproxy Certificate Verify Failed Unable"
 excerpt: "When working with mitmproxy for system monitoring and alerting through the alertmend."
 date: "2025-12-18"
 category: "Security"

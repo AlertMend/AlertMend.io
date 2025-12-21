@@ -1,5 +1,5 @@
 ---
-title: "tools for automatically rightsizing"
+title: "Tools for Automatically Rightsizing"
 excerpt: "In today’s fast-paced tech landscape, tools for automatically rightsizing Kubernetes pods in production environments have become essential for maintaining ef..."
 date: "2025-12-18"
 category: "Kubernetes"

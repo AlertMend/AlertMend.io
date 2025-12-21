@@ -1,5 +1,5 @@
 ---
-title: "code exited status 1/failure"
+title: "Code Exited Status 1/failure"
 excerpt: "Encountering the code exited status 1/failure error can be challenging in system monitoring."
 date: "2025-12-18"
 category: "Kubernetes"

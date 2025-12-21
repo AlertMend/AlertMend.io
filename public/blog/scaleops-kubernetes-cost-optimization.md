@@ -1,5 +1,5 @@
 ---
-title: "scaleops kubernetes cost optimization"
+title: "Scaleops Kubernetes Cost Optimization"
 excerpt: "In the dynamic world of cloud computing, scaleops Kubernetes cost optimization has become a pivotal focus for businesses aiming to balance efficiency with ex..."
 date: "2025-12-18"
 category: "Kubernetes"

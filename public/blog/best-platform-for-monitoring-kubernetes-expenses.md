@@ -1,5 +1,5 @@
 ---
-title: "best platform for monitoring kubernetes"
+title: "Best Platform for Monitoring Kubernetes"
 excerpt: "Navigating the complex landscape of Kubernetes can be challenging, especially when it comes to managing and monitoring expenses"
 date: "2025-12-18"
 category: "Kubernetes"

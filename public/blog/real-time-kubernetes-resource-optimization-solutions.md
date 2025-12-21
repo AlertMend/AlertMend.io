@@ -1,5 +1,5 @@
 ---
-title: "real-time kubernetes resource optimization"
+title: "Real-time Kubernetes Resource Optimization"
 excerpt: "In today's fast-evolving tech landscape, Kubernetes stands as the cornerstone for scalable application deployment"
 date: "2025-12-18"
 category: "Kubernetes"

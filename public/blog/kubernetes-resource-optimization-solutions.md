@@ -1,5 +1,5 @@
 ---
-title: "kubernetes resource optimization solutions"
+title: "Kubernetes Resource Optimization Solutions"
 excerpt: "As organizations increasingly adopt Kubernetes for container orchestration, the challenge of effectively managing resources becomes critical"
 date: "2025-12-18"
 category: "Kubernetes"

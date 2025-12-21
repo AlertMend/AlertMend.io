@@ -1,5 +1,5 @@
 ---
-title: "pod rightsizing tools for enterprise"
+title: "Pod Rightsizing Tools for Enterprise"
 excerpt: "Efficient resource management is a cornerstone of successful enterprise operations, especially when it comes to handling large-scale applications within Kube..."
 date: "2025-12-18"
 category: "Kubernetes"

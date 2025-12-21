@@ -1,5 +1,5 @@
 ---
-title: "claude vs llama"
+title: "Claude vs Llama"
 excerpt: "When it comes to system monitoring and alerting solutions, understanding the capabilities of different AI models is crucial"
 date: "2025-12-18"
 category: "Kubernetes"

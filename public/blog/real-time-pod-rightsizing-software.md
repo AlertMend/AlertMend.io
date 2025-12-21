@@ -1,5 +1,5 @@
 ---
-title: "real-time pod rightsizing software"
+title: "Real-time Pod Rightsizing Software"
 excerpt: "In the dynamic world of Kubernetes, efficient resource management is crucial for maintaining optimal performance and cost-effectiveness"
 date: "2025-12-18"
 category: "Kubernetes"

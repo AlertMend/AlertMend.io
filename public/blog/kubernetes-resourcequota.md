@@ -1,5 +1,5 @@
 ---
-title: "kubernetes resourcequota"
+title: "Kubernetes Resourcequota"
 excerpt: "In the dynamic world of Kubernetes, managing resource allocation efficiently is crucial to maintaining a stable environment"
 date: "2025-12-18"
 category: "Kubernetes"

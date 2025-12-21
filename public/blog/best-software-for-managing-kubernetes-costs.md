@@ -1,5 +1,5 @@
 ---
-title: "best software for managing kubernetes costs"
+title: "Best Software for Managing Kubernetes Costs"
 excerpt: "Kubernetes, while powerful for orchestrating containerized applications, can quickly lead to skyrocketing costs if not managed effectively"
 date: "2025-12-18"
 category: "Kubernetes"

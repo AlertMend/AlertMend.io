@@ -1,5 +1,5 @@
 ---
-title: "it configuration governance tools"
+title: "It Configuration Governance Tools"
 excerpt: "In today's rapidly evolving digital landscape, maintaining robust IT infrastructure is paramount. To ensure seamless operations, it is crucial to utilize IT ..."
 date: "2025-12-18"
 category: "Kubernetes"

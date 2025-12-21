@@ -1,5 +1,5 @@
 ---
-title: "kubernetes explorer"
+title: "Kubernetes Explorer"
 excerpt: "In today's fast-paced tech landscape, efficiently managing containerized applications is paramount for businesses"
 date: "2025-12-18"
 category: "Kubernetes"

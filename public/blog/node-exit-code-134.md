@@ -1,5 +1,5 @@
 ---
-title: "node exit code 134"
+title: "Node Exit Code 134"
 excerpt: "js, encountering exit code 134 can be a perplexing situation for developers. This exit code often signifies a fatal error where the program has terminated un..."
 date: "2025-12-18"
 category: "Troubleshooting"

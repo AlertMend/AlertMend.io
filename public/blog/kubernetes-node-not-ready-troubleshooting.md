@@ -1,5 +1,5 @@
 ---
-title: "k8s node notready troubleshooting"
+title: "K8s Node Notready Troubleshooting"
 excerpt: "In the dynamic world of Kubernetes, encountering a k8s node notready status is a common challenge that can disrupt operations"
 date: "2025-12-18"
 category: "Kubernetes"

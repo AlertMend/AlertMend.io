@@ -1,5 +1,5 @@
 ---
-title: "how to get status of kubernates node using"
+title: "How to Get Status of Kubernates Node Using"
 excerpt: "In the realm of Kubernetes cluster management, understanding the status of your nodes is crucial for maintaining system health and efficiency"
 date: "2025-12-18"
 category: "Kubernetes"

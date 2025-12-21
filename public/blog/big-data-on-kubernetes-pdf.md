@@ -1,5 +1,5 @@
 ---
-title: "big data on kubernetes pdf"
+title: "Big Data on Kubernetes Pdf"
 excerpt: "In today's rapidly evolving digital landscape, the integration of big data on Kubernetes PDF solutions is becoming increasingly pivotal for organizations aim..."
 date: "2025-12-18"
 category: "Kubernetes"

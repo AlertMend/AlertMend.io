@@ -1,5 +1,5 @@
 ---
-title: "Understanding Exit Code 1: Causes and"
+title: "Understanding Exit Code 1: Causes And"
 excerpt: "Explore exit code 1 errors in Unix and Linux systems. Learn about application errors, invalid references, environment issues, and effective troubleshooting..."
 date: "2025-12-15"
 category: "DevOps"

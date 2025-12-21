@@ -1,5 +1,5 @@
 ---
-title: "external-dns helm chart"
+title: "External-dns Helm Chart"
 excerpt: "In today’s dynamic cloud environments, managing DNS records efficiently is crucial for maintaining seamless service delivery"
 date: "2025-12-18"
 category: "Kubernetes"

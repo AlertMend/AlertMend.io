@@ -1,5 +1,5 @@
 ---
-title: "kubernetes exit code 137"
+title: "Kubernetes Exit Code 137"
 excerpt: "Encountering issues with Kubernetes exit code 137 can be a perplexing experience for DevOps professionals"
 date: "2025-12-18"
 category: "Kubernetes"

@@ -1,5 +1,5 @@
 ---
-title: "🚨 Understanding Privileged Containers in"
+title: "🚨 Understanding Privileged Containers In"
 excerpt: "In Kubernetes, privileged containers play a critical role when applications need elevated access to the host system."
 date: "2025-05-18"
 category: "Kubernetes"

@@ -1,5 +1,5 @@
 ---
-title: "kubernetes master node not ready"
+title: "Kubernetes Master Node Not Ready"
 excerpt: "Experiencing a Kubernetes master node not ready issue can significantly impact the functionality of your cluster, as master nodes play a crucial role in mana..."
 date: "2025-12-18"
 category: "Kubernetes"

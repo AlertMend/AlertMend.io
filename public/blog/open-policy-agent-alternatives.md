@@ -1,5 +1,5 @@
 ---
-title: "open policy agent alternatives"
+title: "Open Policy Agent Alternatives"
 excerpt: "In the ever-evolving world of DevOps, system monitoring and alerting play a crucial role. As organizations seek flexible and efficient solutions, the quest f..."
 date: "2025-12-18"
 category: "Kubernetes"

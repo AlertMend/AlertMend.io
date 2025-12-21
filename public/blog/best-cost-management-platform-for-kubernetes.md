@@ -1,5 +1,5 @@
 ---
-title: "best cost management platform for kubernetes"
+title: "Best Cost Management Platform for Kubernetes"
 excerpt: "Managing costs in Kubernetes can be challenging, especially as workloads scale and environments become more complex"
 date: "2025-12-18"
 category: "Kubernetes"
