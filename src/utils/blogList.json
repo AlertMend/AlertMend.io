@@ -1513,7 +1513,7 @@
   },
   {
     "slug": "troubleshooting-networking-errors-in-kubernetes",
-    "title": "Troubleshooting Networking Errors in Kubernetes",
+    "title": "Kubernetes Networking Errors Guide",
     "excerpt": "Networking is one of the most critical components in any Kubernetes deployment, facilitating communication between containers, services, and external...",
     "date": "2025-06-27",
     "category": "Kubernetes",
@@ -1720,7 +1720,7 @@
   },
   {
     "slug": "privileged-containers-in-kubernetes",
-    "title": "Understanding Privileged Containers in Kubernetes",
+    "title": "Privileged Containers in Kubernetes Guide",
     "excerpt": "In Kubernetes, privileged containers play a critical role when applications need elevated access to the host system.",
     "date": "2025-05-18",
     "category": "Kubernetes",
