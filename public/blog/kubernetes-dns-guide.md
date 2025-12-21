@@ -1,5 +1,5 @@
 ---
-title: "🚨 Mastering Kubernetes DNS: a Guide To"
+title: "Mastering Kubernetes DNS Guide"
 excerpt: "Kubernetes DNS plays a vital role in managing network communications within a cluster. It simplifies service discovery and enables pods to communicate using..."
 date: "2025-06-07"
 category: "Kubernetes"

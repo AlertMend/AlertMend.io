@@ -1,5 +1,5 @@
 ---
-title: "Pacman Ssl Certificate Problem Unable To"
+title: "Pacman SSL Certificate Problem Fix"
 excerpt: "Encountering the pacman SSL certificate problem unable to get local issuer certificate error can disrupt system updates. Learn how to fix it."
 date: "2025-12-18"
 category: "Security"

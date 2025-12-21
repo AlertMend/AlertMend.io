@@ -1,5 +1,5 @@
 ---
-title: "Unable to Merge Unrelated Histories In"
+title: "Unable to Merge Unrelated Histories"
 excerpt: "Troubleshooting guide for unable to merge unrelated histories error. Learn how to fix Git merge issues and combine unrelated repository histories."
 date: "2025-12-18"
 category: "DevOps"

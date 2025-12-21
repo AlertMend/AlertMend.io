@@ -1,5 +1,5 @@
 ---
-title: "Kubectl Config File: Complete Guide To"
+title: "Kubectl Config File: Complete Guide"
 excerpt: "Master kubectl config file management for efficient Kubernetes cluster access. Learn about cluster, user, and context configurations with best practices and..."
 date: "2025-12-15"
 category: "Kubernetes"

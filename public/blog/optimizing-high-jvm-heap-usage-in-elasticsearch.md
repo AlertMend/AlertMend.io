@@ -1,5 +1,5 @@
 ---
-title: "Optimizing High JVM Heap Usage In"
+title: "Optimizing High JVM Heap Usage"
 excerpt: "Learn how to troubleshoot and optimize high JVM heap usage in Elasticsearch with practical steps and commands."
 date: "2025-03-30"
 category: "Elasticsearch"

@@ -1,5 +1,5 @@
 ---
-title: "Kubectl Get Svc: Complete Guide To"
+title: "Kubectl Get Svc: Complete Guide"
 excerpt: "Master kubectl get svc command for listing and managing Kubernetes services. Learn service discovery, troubleshooting techniques, and integration with..."
 date: "2025-12-15"
 category: "Kubernetes"
