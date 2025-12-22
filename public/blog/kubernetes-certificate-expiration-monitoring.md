@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes Certificate Expiration"
-excerpt: "Kubernetes Certificate Expiration Monitoring Generated on 2025-12-23 01:48:00  Navigating Kubernetes Certificate Expiration Monitoring In the intricate world..."
+excerpt: "Kubernetes Certificate Expiration Monitoring Navigating Kubernetes Certificate Expiration Monitoring In the intricate world..."
 date: "2025-12-22"
 category: "Kubernetes"
 author: "AlertMend Team"

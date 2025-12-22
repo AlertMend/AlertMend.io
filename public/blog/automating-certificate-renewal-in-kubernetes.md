@@ -1,6 +1,6 @@
 ---
 title: "Automating Certificate Renewal In"
-excerpt: "Automating Certificate Renewal In Kubernetes Generated on 2025-12-23 01:48:51  Automating Certificate Renewal in Kubernetes: A Critical Component of Modern..."
+excerpt: "Automating Certificate Renewal In Kubernetes Automating Certificate Renewal in Kubernetes: A Critical Component of Modern..."
 date: "2025-12-22"
 category: "Kubernetes"
 author: "AlertMend Team"

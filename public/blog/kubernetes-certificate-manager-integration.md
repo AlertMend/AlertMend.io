@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes Certificate Manager Integration"
-excerpt: "Kubernetes Certificate Manager Integration Generated on 2025-12-23 01:46:43  Mastering Kubernetes Certificate Manager Integration for Seamless DevOps Workflows."
+excerpt: "Kubernetes Certificate Manager Integration Mastering Kubernetes Certificate Manager Integration for Seamless DevOps Workflows."
 date: "2025-12-22"
 category: "Kubernetes"
 author: "AlertMend Team"

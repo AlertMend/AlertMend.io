@@ -1,6 +1,6 @@
 ---
 title: "Devops With Kubernetes V1.35.0"
-excerpt: "Devops With Kubernetes V1.35.0 Generated on 2025-12-23 01:29:54  Navigating DevOps with Kubernetes v1.35."
+excerpt: "Devops With Kubernetes V1.35.0 Navigating DevOps with Kubernetes v1.35."
 date: "2025-12-22"
 category: "Kubernetes"
 author: "AlertMend Team"

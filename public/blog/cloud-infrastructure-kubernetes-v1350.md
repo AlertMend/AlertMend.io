@@ -1,6 +1,6 @@
 ---
 title: "Cloud Infrastructure Kubernetes V1.35.0"
-excerpt: "Cloud Infrastructure Kubernetes V1.35.0 Generated on 2025-12-23 01:30:19  Navigating the Latest in Cloud Infrastructure: Kubernetes v1.35."
+excerpt: "Cloud Infrastructure Kubernetes V1.35.0 Navigating the Latest in Cloud Infrastructure: Kubernetes v1.35."
 date: "2025-12-22"
 category: "Kubernetes"
 author: "AlertMend Team"

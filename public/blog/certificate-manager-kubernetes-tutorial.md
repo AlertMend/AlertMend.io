@@ -1,6 +1,6 @@
 ---
 title: "Certificate Manager Kubernetes Tutorial"
-excerpt: "Certificate Manager Kubernetes Tutorial Generated on 2025-12-23 01:49:39  Mastering Certificate Management in Kubernetes for DevOps Excellence In today's..."
+excerpt: "Certificate Manager Kubernetes Tutorial Mastering Certificate Management in Kubernetes for DevOps Excellence In today's..."
 date: "2025-12-22"
 category: "Kubernetes"
 author: "AlertMend Team"

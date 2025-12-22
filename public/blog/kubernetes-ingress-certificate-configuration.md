@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes Ingress Certificate"
-excerpt: "Kubernetes Ingress Certificate Configuration Generated on 2025-12-23 01:50:30  Navigating Kubernetes Ingress Certificate Configuration Configuring Kubernetes..."
+excerpt: "Kubernetes Ingress Certificate Configuration Navigating Kubernetes Ingress Certificate Configuration Configuring Kubernetes..."
 date: "2025-12-22"
 category: "Kubernetes"
 author: "AlertMend Team"

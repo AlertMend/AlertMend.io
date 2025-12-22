@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes V1.35.0 Alerting Setup"
-excerpt: "Kubernetes V1.35.0 Alerting Setup Generated on 2025-12-23 01:31:35  Mastering Kubernetes v1.35."
+excerpt: "Kubernetes V1.35.0 Alerting Setup Mastering Kubernetes v1.35."
 date: "2025-12-22"
 category: "Kubernetes"
 author: "AlertMend Team"

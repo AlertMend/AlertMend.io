@@ -1,6 +1,6 @@
 ---
 title: "Real-Time System Monitoring With Aiops"
-excerpt: "Real-Time System Monitoring With Aiops Generated on 2025-12-23 01:21:03  Embracing Real-Time System Monitoring with AIOps: A Game-Changer for Modern IT..."
+excerpt: "Real-Time System Monitoring With Aiops Embracing Real-Time System Monitoring with AIOps: A Game-Changer for Modern IT..."
 date: "2025-12-22"
 category: "AIOps"
 author: "AlertMend Team"

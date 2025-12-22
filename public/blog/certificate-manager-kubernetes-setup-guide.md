@@ -1,6 +1,6 @@
 ---
 title: "Certificate Manager Kubernetes Setup Guide"
-excerpt: "Certificate Manager Kubernetes Setup Guide Generated on 2025-12-23 01:48:27  Navigating the Certificate Manager Kubernetes Setup Guide In the world of modern..."
+excerpt: "Certificate Manager Kubernetes Setup Guide Navigating the Certificate Manager Kubernetes Setup Guide In the world of modern..."
 date: "2025-12-22"
 category: "Kubernetes"
 author: "AlertMend Team"

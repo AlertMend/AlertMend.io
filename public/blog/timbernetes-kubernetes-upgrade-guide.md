@@ -1,6 +1,6 @@
 ---
 title: "Timbernetes Kubernetes Upgrade Guide"
-excerpt: "Timbernetes Kubernetes Upgrade Guide Generated on 2025-12-23 01:28:07  Mastering Kubernetes Upgrades with Timbernetes: A Comprehensive Guide In today's rapidly."
+excerpt: "Timbernetes Kubernetes Upgrade Guide Mastering Kubernetes Upgrades with Timbernetes: A Comprehensive Guide In today's rapidly."
 date: "2025-12-22"
 category: "Kubernetes"
 author: "AlertMend Team"

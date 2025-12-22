@@ -1,6 +1,6 @@
 ---
 title: "Best Practices For Certificate Manager"
-excerpt: "Best Practices For Certificate Manager Kubernetes Generated on 2025-12-23 01:47:11  Navigating Kubernetes Certificate Management: Essential Best Practices In..."
+excerpt: "Best Practices For Certificate Manager Kubernetes Navigating Kubernetes Certificate Management: Essential Best Practices In..."
 date: "2025-12-22"
 category: "Kubernetes"
 author: "AlertMend Team"

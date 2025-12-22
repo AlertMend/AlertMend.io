@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes V1.35.0 Deployment Strategies"
-excerpt: "Kubernetes V1.35.0 Deployment Strategies Generated on 2025-12-23 01:30:42  Navigating Kubernetes v1.35."
+excerpt: "Kubernetes V1.35.0 Deployment Strategies Navigating Kubernetes v1.35."
 date: "2025-12-22"
 category: "Kubernetes"
 author: "AlertMend Team"

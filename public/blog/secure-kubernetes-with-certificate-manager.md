@@ -1,6 +1,6 @@
 ---
 title: "Secure Kubernetes With Certificate Manager"
-excerpt: "Secure Kubernetes With Certificate Manager Generated on 2025-12-23 01:47:35  Enhancing Kubernetes Security with Certificate Manager: A Comprehensive Guide In..."
+excerpt: "Secure Kubernetes With Certificate Manager Enhancing Kubernetes Security with Certificate Manager: A Comprehensive Guide In..."
 date: "2025-12-22"
 category: "Kubernetes"
 author: "AlertMend Team"
