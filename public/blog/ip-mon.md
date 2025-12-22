@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps"
 ---
 
-
-
 # ip mon
 
 ## Embracing IP Mon for Robust System Monitoring

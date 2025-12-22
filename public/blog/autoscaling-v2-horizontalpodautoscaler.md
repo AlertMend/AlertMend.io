@@ -1,12 +1,11 @@
 ---
-title: "Kubernetes HPA V2: Complete HorizontalPodAu"
+title: "Kubernetes HPA V2: Complete HorizontalPodAutoscaler Guide"
 excerpt: "Complete guide to Kubernetes HorizontalPodAutoscaler (HPA) v2 with configuration examples, custom metrics, scaling strategies, and production best practices."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "horizontalpodautoscaler, HPA v2, kubernetes autoscaling, pod autoscaling, custom metrics autoscaling, kubernetes scaling, resource-based scaling, AlertMend AI, AIOps, DevOps, cloud native"
 ---
-
 
 # Kubernetes HPA V2: Complete HorizontalPodAutoscaler Guide
 

@@ -25,8 +25,6 @@ Without a graceful shutdown strategy, users may face:
 
 ## What Happens When a Pod is Created?
 
-
-
 The creation process involves:
 1. Submitting to the Kubernetes API
 2. Scheduling via the Scheduler
@@ -44,8 +42,6 @@ Once the Pod is ready, it becomes an endpoint used by services like:
 ---
 
 ## What Happens When a Pod is Deleted?
-
-
 
 Steps:
 - Pod marked `Terminating` in etcd
@@ -80,8 +76,6 @@ Gives more time for cleanup before the Pod is forcefully killed.
 
 ## Graceful Shutdown During Rolling Updates
 
-
-
 When deploying new versions:
 
 - New Pods become ready in seconds
@@ -102,8 +96,6 @@ Examples:
 Don't kill them early — let them finish.
 
 ### Use Rainbow Deployments:
-
-
 
 - Create new Deployment
 - Let old one continue

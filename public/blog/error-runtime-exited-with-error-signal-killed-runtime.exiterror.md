@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "error, runtime, exited, with, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"
 ---
 
-
-
 # error: runtime exited with error: signal: killed runtime.exiterror
 
 ## Navigating the "error: runtime exited with error: signal: killed runtime.exiterror" Challenge

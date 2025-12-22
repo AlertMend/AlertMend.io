@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "error, unable, local, issuer, certificate, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"
 ---
 
-
 # ssl error: unable to get local issuer certificate
 
 ## Navigating SSL Error: Unable to Get Local Issuer Certificate
@@ -44,7 +43,6 @@ Ensure your CA bundle is up to date. For Linux systems, utilize package managers
 
 sudo apt-get update
 sudo apt-get install --reinstall ca-certificates
-
 
 sudo yum update
 sudo yum reinstall ca-certificates

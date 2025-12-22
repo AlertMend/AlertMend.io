@@ -1,6 +1,6 @@
 ---
 title: "How To Whitelist Ip"
-excerpt: "how to whitelist ip ================================================================================ REFERENCE CONTENT FROM TOP 9 GOOGLE SEARCH RESULTS..."
+excerpt: "In the realm of Kubernetes, ensuring robust security measures is paramount. IP whitelisting stands out as a powerful tool in this security toolkit, allowing ..."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"

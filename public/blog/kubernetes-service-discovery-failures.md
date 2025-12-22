@@ -7,7 +7,6 @@ author: "Arvind Rajpurohit"
 keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kubernetes monitoring, Kubernetes troubleshooting, Kubernetes automation"
 ---
 
-
 # 🚨 **Kubernetes Service Discovery Failures: Troubleshooting and Best Practices**
 ---
 

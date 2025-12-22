@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps"
 ---
 
-
-
 # hw log
 
 ## Unlocking the Power of HW Log in System Monitoring

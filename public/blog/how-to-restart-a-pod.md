@@ -1,6 +1,6 @@
 ---
 title: "How to Restart a Pod"
-excerpt: "REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS This content is gathered from the top-ranking pages for comprehensive reference"
+excerpt: "In the dynamic landscape of containers and microservices, Kubernetes has emerged as a leading orchestration platform, efficiently managing containerized appl..."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"

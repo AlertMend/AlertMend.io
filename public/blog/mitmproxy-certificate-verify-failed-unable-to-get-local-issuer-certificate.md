@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "mitmproxy, certificate, verify, failed, unable, Security, AlertMend AI, AIOps"
 ---
 
-
-
 # mitmproxy certificate verify failed unable to get local issuer certificate
 
 ## Solving Certificate Verification Issues with mitmproxy: "Unable to Get Local Issuer Certificate"

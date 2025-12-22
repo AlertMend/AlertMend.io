@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "unable, local, issuer, certificate, Security, AlertMend AI, AIOps"
 ---
 
-
 # unable to get local issuer certificate npm
 
 ## Overcoming the "Unable to Get Local Issuer Certificate" Error in npm

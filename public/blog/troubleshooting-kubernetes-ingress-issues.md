@@ -1,12 +1,11 @@
 ---
 title: "Troubleshooting Kubernetes Ingress Issues"
-excerpt: "Elasticsearch relies on efficient index flushing to write data to disk, but when index flushing slows down, it can lead to degraded performance, delayed..."
+excerpt: "The **Ingress Controller** is the core component responsible for processing Ingress rules and routing traffic to services within the cluster. It runs as a po..."
 date: "2025-01-13"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
 keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kubernetes monitoring, Kubernetes troubleshooting, Kubernetes automation, Troubleshooting"
 ---
-
 
 # 🚨 **Troubleshooting Kubernetes Ingress Issues: Common Problems and Fixes**
 ---

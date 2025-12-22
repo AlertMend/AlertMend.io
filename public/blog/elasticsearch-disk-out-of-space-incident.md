@@ -7,7 +7,6 @@ author: "Himanshu Bansal"
 keywords: "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization"
 ---
 
-
 # 🚨 **Elasticsearch Disk Out of Space Incident: Troubleshooting and Solutions**
 ---
 

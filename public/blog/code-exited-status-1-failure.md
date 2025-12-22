@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "code, exited, status, failure, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # code exited status 1/failure
 
 ## Resolving the Code Exited Status 1/Failure Issue in System Monitoring

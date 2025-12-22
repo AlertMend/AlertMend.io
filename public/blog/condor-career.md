@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "condor, career, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # condor career
 
 ## Exploring Career Opportunities with Alertmend.io

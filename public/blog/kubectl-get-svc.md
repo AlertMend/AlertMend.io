@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "kubectl get svc, Kubernetes services, service discovery, service management, kubectl commands, Kubernetes networking, service troubleshooting"
 ---
 
-
 # kubectl get svc
 
 ## Understanding kubectl get svc
@@ -135,5 +134,4 @@ kubectl get endpoints <service-name>
 ## Summary and Key Takeaways
 
 The `kubectl get svc` command is foundational for Kubernetes service management. Its ability to provide detailed insights and integrate seamlessly with platforms like alertmend.io makes it indispensable for DevOps professionals. By leveraging these commands and practices, you can ensure effective monitoring, rapid troubleshooting, and optimal performance of your Kubernetes services.
-
 

@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "kubelet, stopped, posting, node, status, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # kubelet stopped posting node status
 
 ## Analyzing the "Kubelet Stopped Posting Node Status" Issue

@@ -50,7 +50,6 @@ Leveraging the **Pearson current monitor** on the alertmend.io platform allows f
 
 ```markdown
 
-
 pearson_monitor:
   model: 2877
   frequency_range: "Single Hz to MHz"

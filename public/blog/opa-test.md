@@ -7,10 +7,6 @@ author: "AlertMend Team"
 keywords: "test, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
-
-
-
 # opa test
 
 ## Unveiling OPA Test: A Key to Effective Policy Verification

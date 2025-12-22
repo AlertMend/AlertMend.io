@@ -9,7 +9,6 @@ keywords: "latency, measurement, url monitoring, AlertMend AI, AIOps, DevOps"
 
 # Url Latency Measurement
 
-
 ```markdown
 ## Understanding URL Latency Measurement in System Monitoring
 

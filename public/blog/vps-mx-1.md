@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps"
 ---
 
-
-
 # vps mx
 
 ## Understanding the Essentials of VPS MX for DevOps

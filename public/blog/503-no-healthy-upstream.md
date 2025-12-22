@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "503 no healthy upstream, upstream error, nginx 503 error, kubernetes service unavailable, load balancer troubleshooting, reverse proxy errors, service health checks, AlertMend AI, AIOps, DevOps"
 ---
 
-
 # 503 No Healthy Upstream Error Guide
 
 ## Introduction: Understanding the 503 No Healthy Upstream Error

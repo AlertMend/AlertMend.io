@@ -9,7 +9,6 @@ keywords: "kubernetes, performance, AlertMend AI, AIOps, DevOps"
 
 # Kubernetes Performance Ai
 
-
 ## Enhancing Kubernetes Performance with AI: A New Era in DevOps
 
 In the dynamic world of IT infrastructure, ensuring optimal Kubernetes performance is crucial for businesses striving to maintain a competitive edge. The integration of AI into Kubernetes environments offers a transformative approach, enabling more efficient performance management. This advancement is especially significant for alertmend.io users, focusing on the seamless operation of system monitoring and alerting solutions. In this comprehensive guide, we'll delve into how AI enhances Kubernetes performance and the practical benefits it brings to modern DevOps practices.
@@ -29,7 +28,6 @@ Implementing AI for Kubernetes performance optimization involves creating AI age
 ```python
 from crewai import Agent, Task
 from crewai_tools import SerperDevTool, WebsiteSearchTool
-
 
 agent = Agent(
     task=Task(

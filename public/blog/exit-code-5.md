@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "exit code 5, access denied error, permission denied, Windows exit codes, Linux exit codes, Kubernetes troubleshooting, system errors, DevOps, error resolution, AlertMend AI, AIOps"
 ---
 
-
 # Exit Code 5: Complete Guide to Access Denied Errors and Solutions
 
 ## Introduction: Understanding Exit Code 5

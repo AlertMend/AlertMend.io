@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, porting, tools"
 ---
 
-
-
 # porting tools
 
 ## The Essential Guide to Porting Tools in DevOps

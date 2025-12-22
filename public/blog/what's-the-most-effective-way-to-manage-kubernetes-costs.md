@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "what, most, effective, manage, kubernetes, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # what's the most effective way to manage kubernetes costs
 
 ## Introduction: Navigating Kubernetes Cost Management

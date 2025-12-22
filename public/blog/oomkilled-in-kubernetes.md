@@ -7,7 +7,6 @@ author: "Arvind Rajpurohit"
 keywords: "Kubernetes, OOMKilled errors, memory management, Kubernetes optimization, automated remediation, infrastructure management, Kubernetes troubleshooting, container memory issues"
 ---
 
-
 ## Understanding OOMKilled
 
 When a pod exceeds its memory limit, Kubernetes terminates it with the status `OOMKilled` (Out Of Memory Killed). This is a critical issue that can cause service disruptions and data loss.

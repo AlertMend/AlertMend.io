@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "testing, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # opa testing
 
 ## Introduction to OPA Testing in DevOps

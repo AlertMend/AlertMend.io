@@ -7,9 +7,6 @@ author: "AlertMend Team"
 keywords: "repository, parent, DevOps, AlertMend AI, AIOps"
 ---
 
-
-
-
 # not a git repository or any of the parent
 
 ## Understanding the Git Repository Structure

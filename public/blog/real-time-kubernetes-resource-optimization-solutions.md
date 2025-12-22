@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "real, time, kubernetes, resource, optimization, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # real-time kubernetes resource optimization solutions
 
 ## Introduction to Real-Time Kubernetes Resource Optimization Solutions

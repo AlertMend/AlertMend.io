@@ -9,7 +9,6 @@ keywords: "response, time, monitoring, techniques, api monitoring, AlertMend AI,
 
 # Api Response Time Monitoring Techniques
 
-
 ```markdown
 ## Mastering API Response Time Monitoring Techniques in DevOps
 

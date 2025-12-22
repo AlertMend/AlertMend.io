@@ -1,6 +1,6 @@
 ---
 title: "Uptime Self Hosted"
-excerpt: "uptime self hosted ================================================================================ REFERENCE CONTENT FROM TOP 10 GOOGLE SEARCH RESULTS..."
+excerpt: "In today's digital-first world, maintaining the uptime of your applications and websites is paramount. Downtime not only affects user satisfaction but can al..."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"

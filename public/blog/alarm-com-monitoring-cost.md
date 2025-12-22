@@ -49,8 +49,6 @@ For those seeking to maximize their security budget, **alertmend.io** provides s
 
 ```markdown
 
-
-
 import requests
 
 def integrate_system(api_key, device_id):
@@ -61,7 +59,6 @@ def integrate_system(api_key, device_id):
     }
     response = requests.post(url, json=payload)
     return response.json()
-
 
 result = integrate_system("your_api_key", "device_id")
 print(result)

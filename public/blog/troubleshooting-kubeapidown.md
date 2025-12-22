@@ -7,7 +7,6 @@ author: "Arvind Rajpurohit"
 keywords: "Kubernetes troubleshooting, KubeAPIDown, Kubernetes API server, high availability Kubernetes, Kubernetes reliability solutions, Kubernetes monitoring tools, AlertMend AI, API server recovery steps"
 ---
 
-
 The Kubernetes API server is the central control plane component. When it's down, the entire cluster becomes unmanageable.
 
 ## Understanding API Server Failure

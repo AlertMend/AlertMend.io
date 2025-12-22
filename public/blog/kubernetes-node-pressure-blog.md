@@ -7,7 +7,6 @@ author: "Himanshu Bansal"
 keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kubernetes monitoring, Kubernetes troubleshooting, Kubernetes automation"
 ---
 
-
 # 🚨 **Mastering Kubernetes Node Pressure: Types, Causes, and Solutions**
 ---
 

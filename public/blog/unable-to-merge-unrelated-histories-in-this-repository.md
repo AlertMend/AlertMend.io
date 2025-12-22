@@ -7,10 +7,6 @@ author: "AlertMend Team"
 keywords: "unable, merge, unrelated, histories, this, DevOps, AlertMend AI, AIOps"
 ---
 
-
-
-
-
 # unable to merge unrelated histories in this repository.
 
 ## Navigating the Challenge of Unrelated Histories in Git Repositories

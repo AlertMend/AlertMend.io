@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, livemonitor"
 ---
 
-
-
 # livemonitor
 
 ## Mastering Livemonitoring for Enhanced DevOps Efficiency

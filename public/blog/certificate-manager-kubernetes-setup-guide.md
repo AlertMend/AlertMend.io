@@ -9,8 +9,6 @@ keywords: "AlertMend AI, Kubernetes, DevOps, Certificate, Manager, Setup, Guide"
 
 # Certificate Manager Kubernetes Setup Guide
 
-
-
 ## Navigating the Certificate Manager Kubernetes Setup Guide
 
 In the world of modern DevOps, establishing a secure environment for applications is crucial. This **certificate manager Kubernetes setup guide** is designed to help you seamlessly integrate certificate management into your Kubernetes cluster, ensuring your services remain encrypted and trustworthy. By understanding this process, you can automate the lifecycle of SSL/TLS certificates, thus enhancing the security and reliability of your systems.

@@ -7,7 +7,6 @@ author: "Arvind Rajpurohit"
 keywords: "Kubernetes, Admission Webhooks, debugging Kubernetes, Kubernetes resource management, webhook management, infrastructure monitoring, AlertMend AI, Kubernetes best practices"
 ---
 
-
 ## What Are Admission Webhooks?
 
 Admission webhooks are HTTP callbacks that intercept requests to the Kubernetes API server. They can:

@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, monitor"
 ---
 
-
-
 # co to monitor
 
 ## Elevating System Monitoring with Alertmend.io: A Complete Guide

@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "what, best, prevent, container, drift, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # what is the best way to prevent container drift
 
 ## Introduction: Unpacking Container Drift Prevention

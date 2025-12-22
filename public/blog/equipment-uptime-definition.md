@@ -1,6 +1,6 @@
 ---
 title: "Equipment Uptime Definition"
-excerpt: "equipment uptime definition  This content is gathered from the top-ranking pages for comprehensive reference."
+excerpt: "In the dynamic realm of modern technology, maintaining high equipment uptime is pivotal for ensuring uninterrupted service delivery and bolstering user satis..."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"

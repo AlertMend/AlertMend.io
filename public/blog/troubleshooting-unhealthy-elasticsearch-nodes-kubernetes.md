@@ -1,6 +1,6 @@
 ---
 title: "Unhealthy Elasticsearch Nodes on Kubernetes"
-excerpt: "Explore the causes of unhealthy Elasticsearch nodes and learn how to address them within a Kubernetes environment to maintain cluster stability."
+excerpt: "Elasticsearch nodes can become unhealthy in Kubernetes due to various reasons. Here's how to diagnose and fix common issues."
 date: "2025-05-18"
 category: "Elasticsearch"
 author: "Himanshu Bansal"

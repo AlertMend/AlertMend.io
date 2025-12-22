@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "error, command, failed, with, exit, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
-
 # error command failed with exit code 137.
 
 ## Understanding the Error Command Failed with Exit Code 137

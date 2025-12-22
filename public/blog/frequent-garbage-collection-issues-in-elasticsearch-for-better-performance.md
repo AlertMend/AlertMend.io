@@ -7,7 +7,6 @@ author: "Himanshu Bansal"
 keywords: "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization"
 ---
 
-
 In **Elasticsearch**, frequent garbage collection (GC) can lead to increased response times, latency issues, and overall cluster instability, especially during heavy query or indexing operations. Garbage collection is an essential JVM process that clears memory by removing unused objects. However, if it occurs too frequently in Elasticsearch, it can cause latency issues, increased response times, and impact overall cluster health. This blog covers the causes, debugging steps, and solutions to address frequent garbage collection incidents in Elasticsearch.
 
 ---

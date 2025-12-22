@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "configuration, governance, tools, real, time, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # it configuration governance tools real-time drift detection
 
 ## Harnessing the Power of IT Configuration Governance Tools with Real-Time Drift Detection

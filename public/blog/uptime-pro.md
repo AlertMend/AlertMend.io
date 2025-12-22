@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, uptime"
 ---
 
-
-
 # uptime pro
 
 ## Elevating System Monitoring with Uptime Pro: A Deep Dive into Alertmend.io's Capabilities

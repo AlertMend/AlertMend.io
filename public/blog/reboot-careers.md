@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, reboot, careers"
 ---
 
-
-
 # reboot careers
 
 ## Navigating the Reboot Careers Landscape in DevOps

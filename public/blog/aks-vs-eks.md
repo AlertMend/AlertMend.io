@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # AKS vs EKS: Managed Kubernetes Guide
 
 ## Introduction to Managed Kubernetes Services: Comparing AKS vs EKS

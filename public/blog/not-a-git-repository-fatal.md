@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "repository, fatal, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"
 ---
 
-
 # not a git repository fatal
 
 ## Navigating the "Not a Git Repository Fatal" Error

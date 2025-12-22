@@ -7,7 +7,6 @@ author: "Arvind Rajpurohit"
 keywords: "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization"
 ---
 
-
 # 🚨 **Elasticsearch Caching Issues: Troubleshooting and Solutions**
 ---
 

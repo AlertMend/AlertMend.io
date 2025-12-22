@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "make, error, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"
 ---
 
-
 # make error 127
 
 ## Introduction: Demystifying Error 127 in Makefile Execution
