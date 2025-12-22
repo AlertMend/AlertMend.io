@@ -1,6 +1,6 @@
 ---
-title: "OpenOCD Exited With Code 1: Troubleshooting Guide"
-excerpt: "OpenOCD 'Exited With Code 1' indicates a failed debug session initialization. Learn how to troubleshoot hardware, driver, and configuration issues with AlertMend AI."
+title: "OpenOCD Exited Code 1: Troubleshooting Guide"
+excerpt: "OpenOCD 'Exited With Code 1' indicates a failed debug session initialization. Troubleshoot hardware, driver, and configuration issues with AlertMend AI."
 date: "2025-08-03"
 category: "DevOps"
 author: "AlertMend Team"
