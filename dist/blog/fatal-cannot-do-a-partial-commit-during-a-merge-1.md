@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "fatal, cannot, partial, commit, during, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"
 ---
 
-
-
 # fatal cannot do a partial commit during a merge
 
 ## Navigating Git Merge Challenges: Understanding "Fatal Cannot Do a Partial Commit During a Merge"

@@ -4,15 +4,13 @@ excerpt: "Elasticsearch relies on efficient index flushing to write data to disk
 date: "2025-01-13"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"
-
+keywords: "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization"
 ---
-
 
 # 🚨 **Troubleshooting Elasticsearch Unassigned Shards Incident on Kubernetes**
 ---
 
 **Elasticsearch unassigned shards** occur when a node is unable to assign shards properly, leading to reduced cluster performance and potential data loss. Shards are the building blocks of Elasticsearch indexes, and unassigned shards indicate that Elasticsearch cannot find a suitable node to hold shard replicas. In **Kubernetes** environments, this issue can arise due to insufficient resources, misconfiguration, or pod failures. In this blog, we’ll cover the causes, troubleshooting steps, and solutions to help you resolve unassigned shard issues efficiently, ensuring optimal cluster performance and data reliability.
-
 
 ## 🔍 **Common Causes of Unassigned Shards in Elasticsearch**
 

@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, heartbeat"
 ---
 
-
-
 # svg heartbeat
 
 ## Unveiling SVG Heartbeat: The Pulse of Modern System Monitoring

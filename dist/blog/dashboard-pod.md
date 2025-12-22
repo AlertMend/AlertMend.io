@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "dashboard, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # dashboard pod
 
 ## Exploring the Dashboard Pod in Kubernetes Environments

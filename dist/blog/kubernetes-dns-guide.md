@@ -7,7 +7,6 @@ author: "Arvind Rajpurohit"
 keywords: "Kubernetes DNS, Kubernetes management, incident remediation, service communication, DNS best practices, Kubernetes networking, DNS troubleshooting, AlertMend AI"
 ---
 
-
 ## How Kubernetes DNS Works
 
 Kubernetes uses CoreDNS (or kube-dns) to provide DNS services. Every service gets a DNS name in the format:

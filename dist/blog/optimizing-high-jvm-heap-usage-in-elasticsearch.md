@@ -1,12 +1,11 @@
 ---
 title: "Optimizing High JVM Heap Usage"
-excerpt: "Learn how to troubleshoot and optimize high JVM heap usage in Elasticsearch with practical steps and commands."
+excerpt: "High **JVM heap usage** in Elasticsearch can degrade performance, slow down indexing, and even lead to crashes if the heap memory becomes excessively full. T..."
 date: "2025-03-30"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
-
+keywords: "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization"
 ---
-
 
 # 🛠️ **Optimizing High JVM Heap Usage in Elasticsearch: Troubleshooting and Solutions**
 ---

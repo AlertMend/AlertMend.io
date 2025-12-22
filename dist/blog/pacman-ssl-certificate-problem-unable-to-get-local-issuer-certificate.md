@@ -7,9 +7,6 @@ author: "AlertMend Team"
 keywords: "pacman, certificate, problem, unable, local, Security, AlertMend AI, AIOps"
 ---
 
-
-
-
 # pacman ssl certificate problem unable to get local issuer certificate
 
 ## Tackling the 'Pacman SSL Certificate Problem: Unable to Get Local Issuer Certificate' Issue

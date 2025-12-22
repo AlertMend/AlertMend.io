@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "codoor, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
-
 # codoor
 
 ## Discovering Codoor in System Monitoring

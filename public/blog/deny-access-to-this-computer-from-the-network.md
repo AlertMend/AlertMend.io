@@ -1,6 +1,6 @@
 ---
-title: "Deny Access To This Computer From The"
-excerpt: "In the dynamic landscape of IT infrastructure, ensuring robust security measures is paramount. One critical security policy setting is "Deny access to this c..."
+title: "Deny Access To Computer From Network"
+excerpt: "Learn how to configure the 'Deny access to this computer from the network' security policy in Windows environments to prevent unauthorized network access."
 date: "2025-12-18"
 category: "Troubleshooting"
 author: "AlertMend Team"

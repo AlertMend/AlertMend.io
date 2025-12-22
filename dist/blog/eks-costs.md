@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "costs, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # eks costs
 
 ## Navigating the Costs of Amazon EKS

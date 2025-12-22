@@ -4,9 +4,8 @@ excerpt: "A 502 Bad Gateway error is a common issue that users face when working
 date: "2025-02-1"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"
-
+keywords: "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization"
 ---
-
 
 # 🚨 **Optimizing Elasticsearch Heap Memory: Solving High Heap Usage Issues**
 ---

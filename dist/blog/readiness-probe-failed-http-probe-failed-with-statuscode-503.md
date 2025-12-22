@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "readiness, probe, failed, http, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # readiness probe failed: http probe failed with statuscode: 503
 
 ## Navigating Readiness Probe Failures: Understanding HTTP 503 Errors

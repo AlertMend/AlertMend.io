@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "best, kubernetes, resource, optimization, platforms, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # best kubernetes resource optimization platforms
 
 ## Exploring the Best Kubernetes Resource Optimization Platforms

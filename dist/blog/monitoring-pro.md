@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, monitoring"
 ---
 
-
-
 # monitoring pro
 
 ## Navigating the World of Monitoring Pro: Essential Insights for DevOps

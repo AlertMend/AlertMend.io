@@ -4,9 +4,8 @@ excerpt: "Explore the latest AI tools and applications that are revolutionizing 
 date: "2025-03-9"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
-
+keywords: "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization"
 ---
-
 
 # 🚨 **Resolving Network Connectivity and Latency Issues in Elasticsearch: A Troubleshooting Guide**
 ---

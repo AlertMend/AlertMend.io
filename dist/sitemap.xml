@@ -77,6 +77,216 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Blog Post: ai-driven-it-operations-management -->
+  <url>
+    <loc>https://www.alertmend.io/blog/ai-driven-it-operations-management</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: aiops-for-predictive-analytics-in-devops -->
+  <url>
+    <loc>https://www.alertmend.io/blog/aiops-for-predictive-analytics-in-devops</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: aiops-implementation-strategies -->
+  <url>
+    <loc>https://www.alertmend.io/blog/aiops-implementation-strategies</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: aiops-integration-with-existing-it-workflows -->
+  <url>
+    <loc>https://www.alertmend.io/blog/aiops-integration-with-existing-it-workflows</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: aiops-solutions-for-alerting-systems -->
+  <url>
+    <loc>https://www.alertmend.io/blog/aiops-solutions-for-alerting-systems</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: automating-certificate-renewal-in-kubernetes -->
+  <url>
+    <loc>https://www.alertmend.io/blog/automating-certificate-renewal-in-kubernetes</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: best-practices-for-certificate-manager-kubernetes -->
+  <url>
+    <loc>https://www.alertmend.io/blog/best-practices-for-certificate-manager-kubernetes</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: certificate-manager-kubernetes-setup-guide -->
+  <url>
+    <loc>https://www.alertmend.io/blog/certificate-manager-kubernetes-setup-guide</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: certificate-manager-kubernetes-tutorial -->
+  <url>
+    <loc>https://www.alertmend.io/blog/certificate-manager-kubernetes-tutorial</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: cloud-infrastructure-kubernetes-v1350 -->
+  <url>
+    <loc>https://www.alertmend.io/blog/cloud-infrastructure-kubernetes-v1350</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: cloud-infrastructure-monitoring-with-aiops -->
+  <url>
+    <loc>https://www.alertmend.io/blog/cloud-infrastructure-monitoring-with-aiops</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: devops-automation-using-aiops-tools -->
+  <url>
+    <loc>https://www.alertmend.io/blog/devops-automation-using-aiops-tools</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: devops-with-kubernetes-v1350 -->
+  <url>
+    <loc>https://www.alertmend.io/blog/devops-with-kubernetes-v1350</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: kubernetes-certificate-expiration-monitoring -->
+  <url>
+    <loc>https://www.alertmend.io/blog/kubernetes-certificate-expiration-monitoring</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: kubernetes-certificate-manager-integration -->
+  <url>
+    <loc>https://www.alertmend.io/blog/kubernetes-certificate-manager-integration</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: kubernetes-ingress-certificate-configuration -->
+  <url>
+    <loc>https://www.alertmend.io/blog/kubernetes-ingress-certificate-configuration</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: kubernetes-ssl-certificate-management -->
+  <url>
+    <loc>https://www.alertmend.io/blog/kubernetes-ssl-certificate-management</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: kubernetes-stable-version-benefits -->
+  <url>
+    <loc>https://www.alertmend.io/blog/kubernetes-stable-version-benefits</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: kubernetes-v1350-alerting-setup -->
+  <url>
+    <loc>https://www.alertmend.io/blog/kubernetes-v1350-alerting-setup</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: kubernetes-v1350-deployment-strategies -->
+  <url>
+    <loc>https://www.alertmend.io/blog/kubernetes-v1350-deployment-strategies</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: kubernetes-v1350-features-overview -->
+  <url>
+    <loc>https://www.alertmend.io/blog/kubernetes-v1350-features-overview</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: kubernetes-v1350-monitoring-tools -->
+  <url>
+    <loc>https://www.alertmend.io/blog/kubernetes-v1350-monitoring-tools</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: machine-learning-in-cloud-infrastructure-monitoring -->
+  <url>
+    <loc>https://www.alertmend.io/blog/machine-learning-in-cloud-infrastructure-monitoring</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: real-time-system-monitoring-with-aiops -->
+  <url>
+    <loc>https://www.alertmend.io/blog/real-time-system-monitoring-with-aiops</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: secure-kubernetes-with-certificate-manager -->
+  <url>
+    <loc>https://www.alertmend.io/blog/secure-kubernetes-with-certificate-manager</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: timbernetes-kubernetes-scaling-solutions -->
+  <url>
+    <loc>https://www.alertmend.io/blog/timbernetes-kubernetes-scaling-solutions</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: timbernetes-kubernetes-upgrade-guide -->
+  <url>
+    <loc>https://www.alertmend.io/blog/timbernetes-kubernetes-upgrade-guide</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: timbernetes-system-monitoring-integration -->
+  <url>
+    <loc>https://www.alertmend.io/blog/timbernetes-system-monitoring-integration</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: troubleshooting-kubernetes-certificate-manager-issues -->
+  <url>
+    <loc>https://www.alertmend.io/blog/troubleshooting-kubernetes-certificate-manager-issues</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: using-aiops-to-enhance-network-performance -->
+  <url>
+    <loc>https://www.alertmend.io/blog/using-aiops-to-enhance-network-performance</loc>
+    <lastmod>2025-12-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- Blog Post: 24x7-network-monitoring -->
   <url>
     <loc>https://www.alertmend.io/blog/24x7-network-monitoring</loc>
@@ -1594,19 +1804,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Fatal-Not-Git-Repository.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: fortinet-fortigate-80-1 -->
-  <url>
-    <loc>https://www.alertmend.io/blog/fortinet-fortigate-80-1</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Fortinet-Fortigate-80-1.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -3531,19 +3728,6 @@
   </url>
   <url>
     <loc>https://www.alertmend.io/blogs/Resourcequota-Requests.nvidia.comgpu.html</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: ro-dashboard -->
-  <url>
-    <loc>https://www.alertmend.io/blog/ro-dashboard</loc>
-    <lastmod>2025-12-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.alertmend.io/blogs/Ro-Dashboard.html</loc>
     <lastmod>2025-12-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "repository, DevOps, AlertMend AI, AIOps"
 ---
 
-
 # not a git repository git
 
 ## Demystifying the "Not a Git Repository" Error in Git

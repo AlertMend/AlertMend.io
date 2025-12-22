@@ -6,7 +6,7 @@ category: "Kubernetes"
 author: "Arvind Rajpurohit"
 keywords: "Kubernetes, CrashLoopBackOff, Kubernetes troubleshooting, automated incident remediation, Kubernetes management, service reliability, AlertMend AI, best practices for Kubernetes"
 ---
-
+# Understanding and Troubleshooting
 
 ## What is CrashLoopBackOff?
 
@@ -114,4 +114,3 @@ CrashLoopBackOff errors require systematic troubleshooting. With automated detec
 ---
 
 *Need help with pod crashes? [Learn about AlertMend's auto-remediation](/solutions/auto-remediation).*
-

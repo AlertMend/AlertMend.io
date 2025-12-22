@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, uptime"
 ---
 
-
-
 # uptime pro
 
 ## Elevating Your System's Reliability with Uptime Pro

@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "real, time, configuration, drift, detection, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # real-time configuration drift detection capabilities
 
 ## Exploring Real-Time Configuration Drift Detection Capabilities

@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "evaluate, cloud, infrastructure, company, scaleops, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # evaluate the cloud infrastructure company scaleops on pod rightsizing
 
 ## Evaluating Cloud Infrastructure for Optimal Pod Rightsizing with ScaleOps

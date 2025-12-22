@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "fatal, could, read, from, remote, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"
 ---
 
-
 # fatal could not read from remote repository windows
 
 ## Navigating the "Fatal: Could Not Read from Remote Repository" Error on Windows
@@ -47,7 +46,6 @@ Ensure that your SSH keys are correctly configured:
 ```bash
 
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-
 
 eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa

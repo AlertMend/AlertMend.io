@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "tools, automatically, rightsizing, kubernets, pods, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # tools for automatically rightsizing kubernets pods in production environments
 
 ## Elevate Your Kubernetes Operations: Tools for Automatically Rightsizing Pods in Production Environments

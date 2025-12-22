@@ -55,11 +55,8 @@ Embarking on effective AI behavior monitoring with low performance impact involv
 
 ```plaintext
 
-
-
 export AI_THRESHOLD_LOW=50
 export AI_THRESHOLD_HIGH=80
-
 
 ./deploy-agent.sh --config=config.yml --env=prod
 ```

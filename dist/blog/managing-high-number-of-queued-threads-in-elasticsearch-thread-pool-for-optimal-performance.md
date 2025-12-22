@@ -1,12 +1,11 @@
 ---
 title: "Managing High Number of Queued Threads"
-excerpt: "In Elasticsearch, an excessive number of queued threads in the thread pool can be an indication that the workload is overwhelming the system, causing delays..."
+excerpt: "Monitor queued threads in the Elasticsearch search thread pool: curl -s -XGET 'http://${ELASTICSEARCH_HOST}:9200/_cat/thread_pool?v' | grep -E '^search' | aw..."
 date: "2025-04-1"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
-
+keywords: "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization"
 ---
-
 
 ## 🛠️ **Steps to Diagnose and Debug Queued Threads in Elasticsearch**
 

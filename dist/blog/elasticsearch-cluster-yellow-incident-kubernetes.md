@@ -7,7 +7,6 @@ author: "Himanshu Bansal"
 keywords: "Elasticsearch cluster, yellow cluster status, Kubernetes monitoring, incident remediation, troubleshooting Elasticsearch, cluster health management, automated incident response, Elasticsearch issues"
 ---
 
-
 A yellow cluster status in Elasticsearch indicates that all primary shards are allocated, but replica shards are not. This is common in single-node clusters or when nodes are unavailable.
 
 ## Understanding Cluster Status

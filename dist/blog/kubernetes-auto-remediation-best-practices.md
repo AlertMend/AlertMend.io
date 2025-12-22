@@ -6,6 +6,7 @@ category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "Kubernetes auto-remediation, automated incident response, Kubernetes automation, infrastructure automation, incident management, AlertMend AI, DevOps automation"
 ---
+# Kubernetes Auto-Remediation: Best Practices
 
 Auto-remediation is one of the most powerful features for Kubernetes operations. When implemented correctly, it can eliminate 70% of manual incident response work. Here's how to do it right.
 
@@ -125,4 +126,3 @@ Auto-remediation is a game-changer for Kubernetes operations, but it requires ca
 ---
 
 *Need help setting up auto-remediation? [Contact our team](/contact) for a consultation.*
-

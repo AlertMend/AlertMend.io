@@ -7,7 +7,6 @@ author: "Arvind Rajpurohit"
 keywords: "Kubernetes load balancing, persistent connections, gRPC load balancing, WebSocket load balancing, Kubernetes services, kube-proxy, headless services, service mesh, Istio, Envoy, long-lived connections, database connection pooling, Kubernetes networking"
 ---
 
-
 # Mastering Load Balancing for Persistent Connections in Kubernetes
 
 Kubernetes revolutionized application deployment with powerful primitives like Deployments and Services. While it handles stateless workloads well, things get tricky when working with long-lived connections such as gRPC, WebSockets, and database sessions.
@@ -34,8 +33,6 @@ Kubernetes Services don’t maintain a listener or process on the virtual IP. In
 
 > But the rules are only evaluated at connection **start**. Reused connections skip them entirely.
 
-
-
 ---
 
 ## Why Load Balancing Breaks for Persistent Connections
@@ -47,8 +44,6 @@ Kubernetes Services don’t maintain a listener or process on the virtual IP. In
 3. All future requests go only to Pod A
 
 Even if Pods B and C are healthy, they won’t receive traffic unless the frontend opens new connections.
-
-
 
 ---
 
@@ -73,8 +68,6 @@ Use a smart sidecar/proxy to abstract the balancing:
 - **HAProxy, Traefik** → WebSockets, TCP
 
 These proxies keep the client connection alive while distributing traffic among backends.
-
-
 
 ---
 

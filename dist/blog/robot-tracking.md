@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, robot, tracking"
 ---
 
-
-
 # robot tracking
 
 ## Navigating the Landscape of Robot Tracking in System Monitoring

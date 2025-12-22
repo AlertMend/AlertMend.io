@@ -876,8 +876,6 @@
 </li>
 </ol>
 <pre><code class="language-markdown">
-
-
 import requests
 
 def integrate_system(api_key, device_id):
@@ -888,7 +886,6 @@ def integrate_system(api_key, device_id):
     }
     response = requests.post(url, json=payload)
     return response.json()
-
 
 result = integrate_system(&quot;your_api_key&quot;, &quot;device_id&quot;)
 print(result)

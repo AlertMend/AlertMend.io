@@ -1,12 +1,11 @@
 ---
 title: "Kubernetes ConfigMap and Secret Mount"
-excerpt: "Elasticsearch relies on efficient index flushing to write data to disk, but when index flushing slows down, it can lead to degraded performance, delayed..."
+excerpt: "In Kubernetes, **ConfigMaps** and **Secrets** are crucial for managing configuration data and sensitive information such as passwords, tokens, and certificat..."
 date: "2025-01-23"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
-
+keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kubernetes monitoring, Kubernetes troubleshooting, Kubernetes automation"
 ---
-
 
 # 🚨 **Kubernetes ConfigMap and Secret Mount Failures: Troubleshooting and Best Practices**
 ---

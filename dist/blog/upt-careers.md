@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, careers"
 ---
 
-
-
 # upt careers
 
 ```markdown

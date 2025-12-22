@@ -61,15 +61,12 @@ Maximize the efficiency of downtime by bundling related tasks together. For inst
 ```python
 import alertmendio
 
-
 schedule = alertmendio.DowntimeScheduler()
-
 
 schedule.set_host('web-server-1')
 schedule.set_duration(hours=2)
 schedule.set_type('maintenance')
 schedule.set_start_time('2023-10-15 23:00')
-
 
 schedule.confirm()
 schedule.execute()

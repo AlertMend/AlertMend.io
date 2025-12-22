@@ -4,9 +4,8 @@ excerpt: "The OOMKilled error in Kubernetes occurs when a container is terminate
 date: "2025-01-13"
 category: "Kubernetes"
 author: "Himanshu Bansal"
-
+keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kubernetes monitoring, Kubernetes troubleshooting, Kubernetes automation, Debugging"
 ---
-
 
 # 🚨 **Debugging Kubernetes OOMKilled (Exit Code 137): Causes and Solutions**
 ---

@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, root, robots"
 ---
 
-
-
 # root robots
 
 ```markdown

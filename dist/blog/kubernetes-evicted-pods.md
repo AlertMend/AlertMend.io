@@ -6,7 +6,7 @@ category: "Kubernetes"
 author: "Himanshu Bansal"
 keywords: "Kubernetes pod evictions, Kubernetes resource management, pod eviction causes, troubleshooting Kubernetes pods, prevent pod evictions, Kubernetes automation solutions, disk pressure in Kubernetes, memory pressure Kubernetes"
 ---
-
+# 🚨 Kubernetes Evicted Pods: Causes
 
 ## Why Pods Get Evicted
 
@@ -101,4 +101,3 @@ Pod evictions can disrupt services, but with proper resource management and moni
 ---
 
 *Want to prevent pod evictions? [Learn about AlertMend's resource optimization](/solutions/cost-optimization).*
-

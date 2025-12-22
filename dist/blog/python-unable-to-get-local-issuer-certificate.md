@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "python, unable, local, issuer, certificate, Security, AlertMend AI, AIOps"
 ---
 
-
-
 # python unable to get local issuer certificate
 
 ## Navigating the "Python Unable to Get Local Issuer Certificate" Error

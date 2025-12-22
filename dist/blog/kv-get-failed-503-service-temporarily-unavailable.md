@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "failed, service, temporarily, unavailable, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
-
 # kv get failed: 503 service temporarily unavailable
 
 ## Navigating HTTP 503 Errors: Understanding "kv get failed: 503 service temporarily unavailable"

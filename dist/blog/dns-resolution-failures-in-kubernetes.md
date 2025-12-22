@@ -1,12 +1,11 @@
 ---
 title: "DNS Resolution Failures in Kubernetes"
-excerpt: "When nodes in an Elasticsearch cluster run different versions, it can lead to data inconsistency, reduced performance, and even potential downtime."
+excerpt: "In Kubernetes, DNS resolution is vital for enabling services and pods to communicate with each other within the cluster. **DNS resolution failures** can lead..."
 date: "2025-04-17"
 category: "Kubernetes"
 author: "Himanshu Bansal"
-
+keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kubernetes monitoring, Kubernetes troubleshooting, Kubernetes automation"
 ---
-
 
 # 🚨 **DNS Resolution Failures in Kubernetes: Troubleshooting and Best Practices**
 ---

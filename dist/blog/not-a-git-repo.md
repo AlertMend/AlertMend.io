@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "repo, DevOps, AlertMend AI, AIOps"
 ---
 
-
-
 # not a git repo
 
 ## Introduction to "Not a Git Repo" Errors

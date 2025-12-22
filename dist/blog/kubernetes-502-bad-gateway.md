@@ -7,7 +7,6 @@ author: "Arvind Rajpurohit"
 keywords: "kubernetes 502 bad gateway, troubleshoot kubernetes errors, fix 502 bad gateway, automated kubernetes management, kubernetes error resolution, service reliability kubernetes, kubernetes troubleshooting guide, alertmend ai solutions"
 ---
 
-
 ## Understanding 502 Bad Gateway
 
 A 502 error occurs when a gateway or proxy server receives an invalid response from an upstream server. In Kubernetes, this typically happens between:

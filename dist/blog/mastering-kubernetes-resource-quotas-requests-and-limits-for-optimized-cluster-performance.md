@@ -4,9 +4,8 @@ excerpt: "In Kubernetes, container images are pulled from repositories when you 
 date: "2025-05-21"
 category: "Kubernetes"
 author: "Himanshu Bansal"
-
+keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kubernetes monitoring, Kubernetes troubleshooting, Kubernetes automation"
 ---
-
 
 # **Mastering Kubernetes Resource Quotas, Requests, and Limits for Optimized Cluster Performance**
 ---

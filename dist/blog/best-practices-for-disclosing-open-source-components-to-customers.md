@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "best, practices, disclosing, open, source, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # best practices for disclosing open source components to customers
 
 ## Embracing Open Source: Best Practices for Disclosing Components to Customers

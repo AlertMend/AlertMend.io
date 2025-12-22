@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "exit, code, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"
 ---
 
-
 # exit code 126
 
 ## Unraveling Exit Code 126: Causes and Solutions

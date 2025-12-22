@@ -870,15 +870,12 @@
 <h3>Code Example for Scheduling with alertmend.io</h3>
 <pre><code class="language-python">import alertmendio
 
-
 schedule = alertmendio.DowntimeScheduler()
-
 
 schedule.set_host(&#39;web-server-1&#39;)
 schedule.set_duration(hours=2)
 schedule.set_type(&#39;maintenance&#39;)
 schedule.set_start_time(&#39;2023-10-15 23:00&#39;)
-
 
 schedule.confirm()
 schedule.execute()

@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, livenx"
 ---
 
-
-
 # the livenx
 
 ## Unveiling The LiveNX: A Game Changer in Network Monitoring

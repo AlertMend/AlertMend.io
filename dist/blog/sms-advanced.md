@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, advanced"
 ---
 
-
-
 # sms advanced
 
 ## Unlocking SMS Advanced for Enhanced System Monitoring

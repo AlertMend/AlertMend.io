@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "refusing, merge, unrelated, histories, DevOps, AlertMend AI, AIOps"
 ---
 
-
 # refusing to merge unrelated histories git
 
 ## Navigating the "Refusing to Merge Unrelated Histories" Git Challenge

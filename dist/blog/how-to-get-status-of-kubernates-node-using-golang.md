@@ -7,7 +7,6 @@ author: "AlertMend Team"
 keywords: "status, kubernates, node, using, golang, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
 # how to get status of kubernates node using golang
 
 ## Mastering Kubernetes Node Status Retrieval Using Golang

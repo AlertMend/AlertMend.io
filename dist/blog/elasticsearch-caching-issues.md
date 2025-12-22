@@ -4,9 +4,8 @@ excerpt: "Elasticsearch caching issues can significantly degrade search performa
 date: "2025-02-14"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"
-
+keywords: "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization"
 ---
-
 
 # 🚨 **Elasticsearch Caching Issues: Troubleshooting and Solutions**
 ---

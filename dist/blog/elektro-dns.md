@@ -7,8 +7,6 @@ author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, elektro"
 ---
 
-
-
 # elektro dns
 
 ## Navigating Elektro DNS: A Comprehensive Guide for DevOps and System Monitoring

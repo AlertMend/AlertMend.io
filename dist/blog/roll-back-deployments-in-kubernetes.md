@@ -4,6 +4,7 @@ excerpt: "Understand how Kubernetes handles rollbacks, why it"
 date: "2025-07-27"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
+keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kubernetes monitoring, Kubernetes troubleshooting, Kubernetes automation"
 ---
 
 # How to Roll Back Deployments in Kubernetes
@@ -28,8 +29,6 @@ If you update your container image from `v1.0.0` to `v1.1.0`, Kubernetes increme
 
 > Rolling updates are ideal for zero-downtime deployments — as long as the new version is API-compatible.
 
-
-
 ---
 
 ## When Things Go Wrong: The Need for Rollback
@@ -53,8 +52,6 @@ Each time you update a Deployment, Kubernetes:
 - Retains old ReplicaSets with `replicas: 0`  
 
 This design avoids version mixing and enables rollback by scaling the old ReplicaSet back up.
-
-
 
 ## Useful Commands
 
@@ -106,7 +103,6 @@ The recommended approach in modern environments is:
 | `rollout undo`   | Emergency manual rollback        | ❌ High        |
 | Git revert       | GitOps-compatible restoration    | ✅ Low         |
 | YAML reapply     | Temporary manual/CI fix          | ⚠️ Medium      |
-
 
 ---
 

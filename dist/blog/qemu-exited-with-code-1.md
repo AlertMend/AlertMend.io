@@ -7,9 +7,6 @@ author: "AlertMend Team"
 keywords: "qemu, exited, with, code, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
-
-
-
 # qemu exited with code 1
 
 ## Navigating the "QEMU Exited with Code 1" Error

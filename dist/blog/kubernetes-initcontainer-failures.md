@@ -1,12 +1,11 @@
 ---
 title: "Kubernetes InitContainer Failures"
-excerpt: "When nodes in an Elasticsearch cluster run different versions, it can lead to data inconsistency, reduced performance, and even potential downtime."
+excerpt: "In Kubernetes, **InitContainers** are an essential feature that runs before the main containers in a pod. They perform initialization tasks like setting up c..."
 date: "2025-04-10"
 category: "Kubernetes"
 author: "Himanshu Bansal"
-
+keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kubernetes monitoring, Kubernetes troubleshooting, Kubernetes automation"
 ---
-
 
 # 🚨 **Kubernetes InitContainer Failures: Troubleshooting and Best Practices**
 ---

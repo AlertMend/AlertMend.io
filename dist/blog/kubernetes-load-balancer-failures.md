@@ -4,9 +4,8 @@ excerpt: "A 502 Bad Gateway error is a common issue that users face when working
 date: "2025-02-1"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
-
+keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kubernetes monitoring, Kubernetes troubleshooting, Kubernetes automation"
 ---
-
 
 # 🚨 **Kubernetes Load Balancer Failures: Troubleshooting and Best Practices**
 ---
