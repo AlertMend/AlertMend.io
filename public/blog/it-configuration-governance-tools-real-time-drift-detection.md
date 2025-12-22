@@ -1,6 +1,6 @@
 ---
 title: "It Configuration Governance Tools"
-excerpt: "In today's rapidly evolving digital landscape, maintaining robust IT infrastructure is paramount. To ensure seamless operations, it is crucial to utilize IT ..."
+excerpt: "it configuration governance tools real-time drift detection Harnessing the Power of IT Configuration Governance Tools with Real-Time Drift Detection In..."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"

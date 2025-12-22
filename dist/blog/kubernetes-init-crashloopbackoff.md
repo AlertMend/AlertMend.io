@@ -1,5 +1,5 @@
 ---
-title: "kubernetes init crashloopbackoff"
+title: "Kubernetes Init Crashloopbackoff"
 excerpt: "Experiencing a Kubernetes init CrashLoopBackOff can be a daunting challenge for DevOps teams managing system stability"
 date: "2025-12-18"
 category: "Kubernetes"

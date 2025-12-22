@@ -4,6 +4,7 @@ excerpt: "Understand how Kubernetes handles rollbacks, why it"
 date: "2025-07-27"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
+keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kubernetes monitoring, Kubernetes troubleshooting, Kubernetes automation"
 ---
 
 # How to Roll Back Deployments in Kubernetes

@@ -4,7 +4,7 @@ excerpt: "Elasticsearch unassigned shards occur when a node is unable to assign 
 date: "2025-06-5"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"
-
+keywords: "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization, Troubleshooting"
 ---
 
 

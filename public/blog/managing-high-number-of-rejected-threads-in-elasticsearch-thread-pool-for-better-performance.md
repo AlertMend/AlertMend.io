@@ -4,7 +4,7 @@ excerpt: "In Elasticsearch, the thread pool manages concurrent threads needed fo
 date: "2025-01-2"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
-
+keywords: "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization"
 ---
 
 

@@ -4,7 +4,7 @@ excerpt: "Complete guide to Kubernetes DNS configuration, CoreDNS setup, trouble
 date: "2025-06-7"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
-
+keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kubernetes monitoring, Kubernetes troubleshooting, Kubernetes automation"
 ---
 
 

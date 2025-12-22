@@ -1,5 +1,5 @@
 ---
-title: "edge computing systems with kubernetes pdf"
+title: "Edge Computing Systems With Kubernetes Pdf"
 excerpt: "As digital transformation accelerates across industries, the role of edge computing systems with Kubernetes pdf becomes increasingly significant"
 date: "2025-12-18"
 category: "Kubernetes"

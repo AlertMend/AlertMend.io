@@ -4,7 +4,7 @@ excerpt: "In Kubernetes clusters, the “Node Not Ready” error is a frequent i
 date: "2025-05-30"
 category: "Kubernetes"
 author: "Himanshu Bansal"
-
+keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kubernetes monitoring, Kubernetes troubleshooting, Kubernetes automation"
 ---
 
 

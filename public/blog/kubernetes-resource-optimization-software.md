@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes Resource Optimization Software"
-excerpt: "In today's fast-paced digital landscape, leveraging Kubernetes resource optimization software is essential for maintaining efficient and cost-effective cloud..."
+excerpt: "kubernetes resource optimization software Introduction to Kubernetes Resource Optimization Software In today's fast-paced digital landscape, leveraging..."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"

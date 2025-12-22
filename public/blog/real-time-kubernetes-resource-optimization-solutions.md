@@ -1,6 +1,6 @@
 ---
 title: "Real-time Kubernetes Resource Optimization"
-excerpt: "In today's fast-evolving tech landscape, Kubernetes stands as the cornerstone for scalable application deployment"
+excerpt: "real-time kubernetes resource optimization solutions Introduction to Real-Time Kubernetes Resource Optimization Solutions In today's fast-evolving tech..."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"

@@ -4,7 +4,7 @@ excerpt: "Learn how to troubleshoot and optimize high JVM heap usage in Elastics
 date: "2025-03-28"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
-
+keywords: "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization"
 ---
 
 

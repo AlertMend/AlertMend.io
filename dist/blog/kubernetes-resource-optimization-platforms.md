@@ -1,5 +1,5 @@
 ---
-title: "kubernetes resource optimization platforms"
+title: "Kubernetes Resource Optimization Platforms"
 excerpt: "In the rapidly evolving world of cloud computing, Kubernetes resource optimization platforms play a crucial role in managing containerized applications effic..."
 date: "2025-12-18"
 category: "Kubernetes"

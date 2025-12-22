@@ -1,5 +1,5 @@
 ---
-title: "exit code 1 kubernetes"
+title: "Exit Code 1 Kubernetes"
 excerpt: "Encountering exit code 1 in Kubernetes can be a perplexing challenge for developers and DevOps engineers"
 date: "2025-12-18"
 category: "Kubernetes"

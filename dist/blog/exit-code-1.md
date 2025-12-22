@@ -1,5 +1,5 @@
 ---
-title: "Exit Code 1: Causes, Solutions, and"
+title: "Exit Code 1: Causes and Solutions"
 excerpt: "Understand exit code 1 errors in Linux and Kubernetes environments. Learn common causes, troubleshooting techniques, and best practices for resolving..."
 date: "2025-12-15"
 category: "DevOps"

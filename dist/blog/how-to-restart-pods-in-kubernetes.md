@@ -1,5 +1,5 @@
 ---
-title: "how to restart pods in kubernetes"
+title: "How to Restart Pods in Kubernetes"
 excerpt: "The art of managing Kubernetes pods effectively is essential for maintaining a robust and responsive infrastructure"
 date: "2025-12-18"
 category: "Kubernetes"

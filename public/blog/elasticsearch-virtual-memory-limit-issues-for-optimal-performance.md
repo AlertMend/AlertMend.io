@@ -4,7 +4,7 @@ excerpt: "Elasticsearch requires adequate virtual memory to run smoothly. If the
 date: "2025-02-5"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
-
+keywords: "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization"
 ---
 
 

@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes Management with AlertMend.io"
+title: "Kubernetes Management With AlertMend.io"
 excerpt: "Discover how AlertMend.io simplifies Kubernetes management with advanced monitoring, alerting, and automated remediation solutions."
 date: "2025-08-15"
 category: "Kubernetes"

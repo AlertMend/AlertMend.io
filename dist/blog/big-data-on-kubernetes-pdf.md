@@ -1,6 +1,6 @@
 ---
-title: "big data on kubernetes pdf"
-excerpt: "In today's rapidly evolving digital landscape, the integration of big data on Kubernetes PDF solutions is becoming increasingly pivotal for organizations aim..."
+title: "Big Data on Kubernetes Pdf"
+excerpt: "big data on kubernetes pdf Exploring Big Data on Kubernetes: A Comprehensive Guide In today's rapidly evolving digital landscape, the integration of big..."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"

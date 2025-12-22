@@ -4,7 +4,7 @@ excerpt: "When nodes in an Elasticsearch cluster run different versions, it can 
 date: "2025-04-27"
 category: "Elasticsearch"
 author: "Himanshu Bansal"
-
+keywords: "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization, Troubleshooting"
 ---
 
 

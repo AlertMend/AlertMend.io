@@ -1,5 +1,5 @@
 ---
-title: "origin does not appear to be a git repository"
+title: "Origin Does Not Appear to be a Git Repository"
 excerpt: "When working with Git, encountering errors is a part of the learning curve. One common issue is the \"origin does not appear to be a git repository\" error"
 date: "2025-12-18"
 category: "DevOps"

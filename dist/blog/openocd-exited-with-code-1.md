@@ -1,5 +1,5 @@
 ---
-title: "OpenOCD Exited with Code 1: Troubleshooting"
+title: "OpenOCD Exited With Code 1: Troubleshooting"
 excerpt: "Learn how to resolve OpenOCD initialization failures, including configuration issues, hardware connection problems, and driver compatibility."
 date: "2025-08-03"
 category: "DevOps"

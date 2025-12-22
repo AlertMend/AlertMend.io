@@ -1,6 +1,6 @@
 ---
-title: "not a git repository git"
-excerpt: "Encountering the \"not a git repository git\" error can be a frustrating roadblock for developers working with version control."
+title: "Not a Git Repository Git"
+excerpt: "Guide to fixing the not a git repository git error. Learn how to diagnose and resolve Git repository issues with practical solutions and best practices."
 date: "2025-12-18"
 category: "DevOps"
 author: "AlertMend Team"

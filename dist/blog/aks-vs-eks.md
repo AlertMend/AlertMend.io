@@ -1,6 +1,6 @@
 ---
-title: "aks vs eks Guide"
-excerpt: "In the evolving world of cloud computing, Kubernetes has become an essential tool for managing containerized applications"
+title: "AKS vs EKS: Managed Kubernetes Guide"
+excerpt: "Compare Azure Kubernetes Service (AKS) and Amazon Elastic Kubernetes Service (EKS) to choose the right managed Kubernetes platform for your needs."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"
@@ -8,7 +8,7 @@ keywords: "Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
 ---
 
 
-# aks vs eks
+# AKS vs EKS: Managed Kubernetes Guide
 
 ## Introduction to Managed Kubernetes Services: Comparing AKS vs EKS
 

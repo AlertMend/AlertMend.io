@@ -4,7 +4,7 @@ excerpt: "Elasticsearch relies on efficient index flushing to write data to disk
 date: "2025-01-13"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"
-
+keywords: "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization"
 ---
 
 

@@ -1,5 +1,5 @@
 ---
-title: "fatal cannot do a partial commit during a"
+title: "Fatal Cannot do a Partial Commit During A"
 excerpt: "When working with Git, encountering the fatal cannot do a partial commit during a merge error can disrupt your workflow. Learn how to resolve it."
 date: "2025-12-18"
 category: "Troubleshooting"

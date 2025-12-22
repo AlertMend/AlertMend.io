@@ -4,7 +4,7 @@ excerpt: "Understand how Kubernetes handles WebSockets, gRPC, and database conne
 date: "2025-07-30"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
-
+keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kubernetes monitoring, Kubernetes troubleshooting, Kubernetes automation, Scaling"
 ---
 
 

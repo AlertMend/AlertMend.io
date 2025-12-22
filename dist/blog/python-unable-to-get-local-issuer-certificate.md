@@ -1,5 +1,5 @@
 ---
-title: "python unable to get local issuer certificate"
+title: "Python Unable to Get Local Issuer Certificate"
 excerpt: "Encountering the Python unable to get local issuer certificate error can be a stumbling block for developers. Learn troubleshooting steps and solutions."
 date: "2025-12-18"
 category: "Security"

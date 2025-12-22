@@ -1,5 +1,5 @@
 ---
-title: "turtle wow error 132"
+title: "Turtle Wow Error 132"
 excerpt: "Encountering Turtle WOW Error 132 can be a frustrating experience for both newcomers and seasoned players alike"
 date: "2025-12-18"
 category: "Troubleshooting"

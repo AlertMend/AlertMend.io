@@ -4,7 +4,7 @@ excerpt: "When nodes in an Elasticsearch cluster run different versions, it can 
 date: "2025-04-2"
 category: "Kubernetes"
 author: "Himanshu Bansal"
-
+keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kubernetes monitoring, Kubernetes troubleshooting, Kubernetes automation"
 ---
 
 

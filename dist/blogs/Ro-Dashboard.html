@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ro Dashboard Operations Management Guide | AlertMend AI</title>
+  <meta name="description" content="ro dashboard ================================================================================ REFERENCE CONTENT FROM TOP 6 GOOGLE SEARCH RESULTS...">
+  <meta name="keywords" content="AlertMend AI, AIOps, DevOps, dashboard, Kubernetes">
+  <meta name="author" content="AlertMend Team">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://www.alertmend.io/blogs/Ro-Dashboard.html">
+  <!-- Favicon - uses SVG logo -->
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/logos/alertmend-logo.svg" />
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.alertmend.io/blogs/Ro-Dashboard.html">
+  <meta property="og:title" content="Ro Dashboard Operations Management Guide | AlertMend AI">
+  <meta property="og:description" content="ro dashboard ================================================================================ REFERENCE CONTENT FROM TOP 6 GOOGLE SEARCH RESULTS...">
+  <meta property="og:image" content="https://alertmend.io/og-image.jpg">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.alertmend.io/blogs/Ro-Dashboard.html">
+  <meta name="twitter:title" content="Ro Dashboard Operations Management Guide | AlertMend AI">
+  <meta name="twitter:description" content="ro dashboard ================================================================================ REFERENCE CONTENT FROM TOP 6 GOOGLE SEARCH RESULTS...">
+  <meta name="twitter:image" content="https://alertmend.io/og-image.jpg">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Ro Dashboard Operations Management Guide | AlertMend AI",
+    "description": "ro dashboard ================================================================================ REFERENCE CONTENT FROM TOP 6 GOOGLE SEARCH RESULTS...",
+    "image": "https://alertmend.io/og-image.jpg",
+    "datePublished": "2025-12-18",
+    "dateModified": "2025-12-18",
+    "author": {
+      "@type": "Person",
+      "name": "AlertMend Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "AlertMend AI",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://alertmend.io/logos/alertmend-logo.svg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.alertmend.io/blogs/Ro-Dashboard.html"
+    },
+    "articleSection": "Kubernetes"
+  }
+  </script>
+  
+  <!-- SearchAtlas Dynamic Optimization -->
+  <script nowprocket nitro-exclude type="text/javascript" id="sa-dynamic-optimization" data-uuid="457086dd-8bfb-46dd-a38d-2f4a6efd0e7e" src="data:text/javascript;base64,dmFyIHNjcmlwdCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoInNjcmlwdCIpO3NjcmlwdC5zZXRBdHRyaWJ1dGUoIm5vd3Byb2NrZXQiLCAiIik7c2NyaXB0LnNldEF0dHJpYnV0ZSgibml0cm8tZXhjbHVkZSIsICIiKTtzY3JpcHQuc3JjID0gImh0dHBzOi8vZGFzaGJvYXJkLnNlYXJjaGF0bGFzLmNvbS9zY3JpcHRzL2R5bmFtaWNfb3B0aW1pemF0aW9uLmpzIjtzY3JpcHQuZGF0YXNldC51dWlkID0gIjQ1NzA4NmRkLThiZmItNDZkZC1hMzhkLTJmNGE2ZWZkMGU3ZSI7c2NyaXB0LmlkID0gInNhLWR5bmFtaWMtb3B0aW1pemF0aW9uLWxvYWRlciI7ZG9jdW1lbnQuaGVhZC5hcHBlbmRDaGlsZChzY3JpcHQpOw=="></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.7;
+      color: #1f2937;
+      background: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .main-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 96px 16px 32px;
+      margin-top: 64px;
+    }
+    @media (min-width: 640px) {
+      .main-container {
+        padding: 96px 24px 32px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .main-container {
+        padding: 96px 32px 48px;
+      }
+    }
+    .content-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-top: 32px;
+    }
+    @media (min-width: 1024px) {
+      .content-wrapper {
+        grid-template-columns: 8fr 4fr;
+        gap: 32px;
+      }
+    }
+    .main-content {
+      display: flex;
+      gap: 24px;
+    }
+    .social-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 8px;
+    }
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .social-icon:hover {
+      background: #f3e8ff;
+    }
+    .article-content {
+      flex: 1;
+    }
+    article {
+      background: #ffffff;
+    }
+    header {
+      margin-bottom: 32px;
+    }
+    h1 {
+      color: #581c87;
+      font-size: 2.25rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 3rem;
+      }
+    }
+    @media (min-width: 1024px) {
+      h1 {
+        font-size: 3.75rem;
+      }
+    }
+    h2 {
+      color: #581c87;
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    @media (min-width: 768px) {
+      h2 {
+        font-size: 2.25rem;
+      }
+    }
+    h3 {
+      color: #581c87;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    @media (min-width: 768px) {
+      h3 {
+        font-size: 1.875rem;
+      }
+    }
+    h4, h5, h6 {
+      color: #581c87;
+      font-weight: 600;
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+    p {
+      margin-bottom: 24px;
+      font-size: 1.125rem;
+      line-height: 1.75;
+      color: #1f2937;
+    }
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e9d5ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9333ea;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .author-details {
+      display: flex;
+      flex-direction: column;
+    }
+    .author-name {
+      font-weight: 600;
+      color: #111827;
+      font-size: 1rem;
+    }
+    .author-meta {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+    .category-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #dbeafe;
+      color: #1e40af;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-top: 16px;
+    }
+    code {
+      background: #f3f4f6;
+      color: #9333ea;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+      font-size: 0.9em;
+      border: 1px solid #e5e7eb;
+    }
+    pre {
+      background: #1f2937;
+      color: #f9fafb;
+      padding: 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border: 1px solid #374151;
+    }
+    pre code {
+      background: none;
+      color: #f9fafb;
+      padding: 0;
+      border: none;
+      font-size: 0.875rem;
+    }
+    a {
+      color: #9333ea;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #7c3aed;
+      text-decoration: underline;
+    }
+    ul, ol {
+      margin-bottom: 24px;
+      padding-left: 24px;
+      font-size: 1.125rem;
+      line-height: 1.75;
+    }
+    li {
+      margin-bottom: 12px;
+      color: #1f2937;
+    }
+    blockquote {
+      border-left: 4px solid #a855f7;
+      padding-left: 24px;
+      margin: 32px 0;
+      color: #374151;
+      font-style: italic;
+      font-size: 1.125rem;
+      line-height: 1.75;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin: 2rem 0;
+      -webkit-overflow-scrolling: touch;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0;
+      font-size: 1rem;
+      background: #ffffff;
+      border: 2px solid #d1d5db;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    }
+    thead {
+      background: #faf5ff;
+    }
+    th {
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      color: #581c87;
+      border-right: 1px solid #e9d5ff;
+      border-bottom: 2px solid #c084fc;
+      background: #faf5ff;
+      font-size: 0.9375rem;
+    }
+    th:first-child {
+      border-left: none;
+    }
+    th:last-child {
+      border-right: none;
+    }
+    td {
+      padding: 1rem;
+      text-align: left;
+      border-right: 1px solid #e5e7eb;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+    td:first-child {
+      border-left: none;
+    }
+    td:last-child {
+      border-right: none;
+    }
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+    tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+    tbody tr:hover {
+      background: #f3e8ff;
+    }
+    @media (max-width: 768px) {
+      .table-wrapper {
+        margin: 1.5rem 0;
+      }
+      table {
+        font-size: 0.875rem;
+      }
+      th, td {
+        padding: 0.75rem;
+      }
+    }
+    hr {
+      border: none;
+      border-top: 2px solid #e5e7eb;
+      margin: 3rem 0;
+    }
+    .content {
+      font-size: 1.125rem;
+      line-height: 1.75;
+      color: #1f2937;
+    }
+    .promotional-section {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid #e5e7eb;
+    }
+    .promotional-section p {
+      color: #1f2937;
+      font-size: 1.125rem;
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+    .profile-section {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #e5e7eb;
+      margin-top: 32px;
+    }
+    @media (min-width: 640px) {
+      .profile-section {
+        flex-direction: row;
+      }
+    }
+    .profile-image {
+      flex-shrink: 0;
+      width: 128px;
+      height: 128px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid #e5e7eb;
+    }
+    .profile-content {
+      flex: 1;
+    }
+    .profile-placeholder-arvind {
+      display: none;
+      width: 128px;
+      height: 128px;
+      border-radius: 8px;
+      background: #f3e8ff;
+      border: 1px solid #e5e7eb;
+      align-items: center;
+      justify-content: center;
+      color: #9333ea;
+      font-weight: 700;
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    .profile-placeholder-arvind.show {
+      display: flex;
+    }
+    .profile-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #581c87;
+      margin-bottom: 8px;
+    }
+    .profile-bio {
+      color: #1f2937;
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .profile-bio p {
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+    .linkedin-link {
+      display: inline-flex;
+      align-items: center;
+      color: #9333ea;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .linkedin-link:hover {
+      color: #7c3aed;
+    }
+    footer {
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px solid #e5e7eb;
+      color: #6b7280;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+    footer a {
+      color: #9333ea;
+      font-weight: 600;
+    }
+    .sidebar {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .sidebar {
+        display: block;
+      }
+    }
+    .sidebar-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: sticky;
+      top: 96px;
+    }
+    .sidebar-card {
+      background: #faf5ff;
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid #e9d5ff;
+    }
+    .sidebar-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #581c87;
+      margin-bottom: 16px;
+      margin-top: 0;
+    }
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .signup-form input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 1rem;
+    }
+    .signup-form input:focus {
+      outline: none;
+      border-color: #9333ea;
+      box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+    }
+    .signup-form button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(to right, #6b21a8, #581c87);
+      color: white;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .signup-form button:hover {
+      background: linear-gradient(to right, #581c87, #4c1d95);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .related-content-title {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #111827;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      margin-top: 0;
+    }
+    .related-posts-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .related-posts-list li {
+      margin: 0;
+    }
+    .related-post-link {
+      color: #2563eb;
+      text-decoration: underline;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      display: block;
+      transition: color 0.2s;
+    }
+    .related-post-link:hover {
+      color: #1e40af;
+    }
+    .view-more-link {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 16px;
+      color: #9333ea;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .view-more-link:hover {
+      color: #7c3aed;
+    }
+    @media (max-width: 768px) {
+      .main-container {
+        padding: 80px 16px 32px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.75rem;
+      }
+      h3 {
+        font-size: 1.25rem;
+      }
+      p, ul, ol {
+        font-size: 1rem;
+      }
+      .social-sidebar {
+        display: none;
+      }
+      .main-content {
+        flex-direction: column;
+      }
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      z-index: 50;
+    }
+    .navbar-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    @media (min-width: 640px) {
+      .navbar-container {
+        padding: 0 24px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .navbar-container {
+        padding: 0 32px;
+      }
+    }
+    .navbar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: inherit;
+      padding: 6px 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .navbar-logo:hover {
+      background: #f9fafb;
+    }
+    .navbar-logo-icon {
+      width: auto;
+      height: 32px;
+      max-height: 32px;
+      object-fit: contain;
+    }
+    .navbar-logo-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #6b21a8, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .navbar-links {
+      display: none;
+      align-items: center;
+      gap: 4px;
+    }
+    @media (min-width: 1024px) {
+      .navbar-links {
+        display: flex;
+      }
+    }
+    .navbar-link {
+      padding: 8px 16px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #7c3aed;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .navbar-link:hover {
+      color: #581c87;
+      background: #f9fafb;
+    }
+    .navbar-link.active {
+      color: #7c3aed;
+      background: #faf5ff;
+    }
+    .navbar-actions {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      margin-left: 16px;
+      padding-left: 16px;
+      border-left: 1px solid #e5e7eb;
+    }
+    @media (min-width: 1024px) {
+      .navbar-actions {
+        display: flex;
+      }
+    }
+    .navbar-button {
+      padding: 8px 16px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .navbar-button-primary {
+      background: linear-gradient(to right, #6b21a8, #581c87);
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+    .navbar-button-primary:hover {
+      background: linear-gradient(to right, #581c87, #4c1d95);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .navbar-button-secondary {
+      color: #7c3aed;
+      background: transparent;
+    }
+    .navbar-button-secondary:hover {
+      color: #581c87;
+      background: #f9fafb;
+    }
+    .navbar-button-playground {
+      background: #7c3aed;
+      color: white;
+      font-weight: 600;
+    }
+    .navbar-button-playground:hover {
+      background: #6b21a8;
+    }
+    .mobile-menu-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: #374151;
+    }
+    @media (min-width: 1024px) {
+      .mobile-menu-button {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-content">
+        <!-- Logo -->
+        <a href="/" class="navbar-logo">
+          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'; this.parentElement.querySelector('.navbar-logo-text').style.display='inline';" />
+          <svg class="navbar-logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <span class="navbar-logo-text" style="display: none;">AlertMend AI</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="navbar-links">
+          <a href="/#how-it-works" class="navbar-link">How It Works</a>
+          <a href="/#solutions" class="navbar-link">Solutions</a>
+          <a href="/#benefits" class="navbar-link">Benefits</a>
+          <a href="/case-studies" class="navbar-link">Case Studies</a>
+          <a href="/blog" class="navbar-link active">Blog</a>
+          <a href="/pricing" class="navbar-link">Pricing</a>
+        </div>
+
+        <!-- Desktop Actions -->
+        <div class="navbar-actions">
+          <a href="https://demo.alertmend.io/playground" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-playground">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Playground
+          </a>
+          <a href="https://demo.alertmend.io/signup" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-secondary">Register</a>
+          <a href="https://calendly.com/hello-alertmend/30min" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-primary">Book a Demo</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-button" aria-label="Toggle menu">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <div class="content-wrapper">
+      <!-- Main Content Area (70%) -->
+      <div class="main-content">
+        <!-- Social Share Icons (Left Sidebar) -->
+        <div class="social-sidebar">
+          <a href="#" class="social-icon" aria-label="Share on Facebook">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Share on Twitter">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Share on LinkedIn">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Copy link">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8.465 11.293c1.133-1.133 3.109-1.133 4.242 0l.707.707 1.414-1.414-.707-.707c-1.498-1.498-3.94-1.498-5.439 0l-.707.707 1.414 1.414.707-.707zm-2.829 2.829l.707.707c1.498 1.498 3.94 1.498 5.439 0l.707-.707-1.414-1.414-.707.707c-1.133 1.133-3.109 1.133-4.242 0l-.707-.707-1.414 1.414zm11.314-8.485l-6.364 6.364c-.39.39-1.023.39-1.414 0s-.39-1.023 0-1.414l6.364-6.364c.39-.39 1.023-.39 1.414 0s.39 1.023 0 1.414z"/></svg>
+          </a>
+        </div>
+
+        <!-- Article Content -->
+        <div class="article-content">
+          <article>
+            <header>
+              <h1>Ro Dashboard Operations Management Guide</h1>
+              
+              <!-- Author Info -->
+              <div class="author-info">
+                <div class="author-avatar">
+                  A
+                </div>
+                <div class="author-details">
+                  <div class="author-name">AlertMend Team</div>
+                  <div class="author-meta">16 min read • December 18, 2025</div>
+                </div>
+              </div>
+
+              <!-- Category Tag -->
+              <div class="category-tag">Kubernetes</div>
+            </header>
+
+            <!-- Content -->
+            <div class="content">
+              <h2>ro dashboard</h2>
+<h2>================================================================================
+REFERENCE CONTENT FROM TOP 6 GOOGLE SEARCH RESULTS</h2>
+<p>This content is gathered from the top-ranking pages for comprehensive reference.
+Sources:</p>
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/Rose_Ash_Board_School">https://en.wikipedia.org/wiki/Rose_Ash_Board_School</a></li>
+<li><a href="https://github.com/fearfullymade/ro-dash">https://github.com/fearfullymade/ro-dash</a></li>
+<li><a href="https://roapp.io/">https://roapp.io/</a></li>
+<li><a href="https://dribbble.com/">https://dribbble.com/</a></li>
+<li><a href="https://www.youtube.com/watch?v=aGtXqn9HL2o">https://www.youtube.com/watch?v=aGtXqn9HL2o</a></li>
+<li><a href="https://comenzi.farmaciatei.ro/login">https://comenzi.farmaciatei.ro/login</a></li>
+</ol>
+<p>The following sections contain content from each source, organized for reference.
+utilize this information to comprehend the topic comprehensively, identify key points,
+related keywords, and best practices. Then create original, SEO-optimized content
+that synthesizes insights from all sources while using completely original wording.</p>
+<p>================================================================================</p>
+<h2>================================================================================
+SOURCE 1: <a href="https://en.wikipedia.org/wiki/Rose_Ash_Board_School">https://en.wikipedia.org/wiki/Rose_Ash_Board_School</a></h2>
+<p>Coordinates : 50°58′56″N 3°43′39″W ﻿ / ﻿ 50. 7275 From Wikipedia, the free encyclopedia (Redirected from Rose Ash Board School ) Village in Devon, England Human settlement in England Rose Ash The Grade II* listed parish church, Victorian with medieval tower Rose Ash Location within Devon Population 298 (2011 census) Civil parish Rose Ash District North Devon Shire county Devon Region South West Country England Sovereign state United Kingdom List of places UK England Devon 50°58′56″N 3°43′39″W ﻿ / ﻿ 50. 7275 Rose Ash , formerly Ralph-Esse , [ 1 ] represents village and civil parish in North Devon district, Devon , England. In the 2011 census the parish was recorded as having a population of 298. [ 2 ] The neighbouring parishes are Bishop&#39;s Nympton to the north, Knowstone and Rackenford to the east, East Worlington to the south, and Meshaw and Mariansleigh to the west. [ 3 ] There are 40 listed buildings in the parish. South Yarde farmhouse is believed to be late 15th or early 16th century and is Grade I listed, [ 4 ] and the adjacent North Yarde house, Grade II* listed, was &quot;probably originally the kitchen range to South Yarde&quot;. [ 5 ] The parish church of St Peter is Grade II* listed: it was rebuilt in 1889–1892 but retains its medieval tower and north aisle. [ 6 ] The other listed buildings, including the village hall and the former school and school-house, are Grade II. [ 7 ] There was previously a school in the village, which opened in 1878 as Rose Ash Board School, changed its name to Rose Ash Council School, and closed in 1948. Its archives are held at North Devon Record Office. [ 8 ] Rose Ash Post Office and shop closed in the 1970s. References [ edit ] ^ &quot;Home page&quot;. Retrieved 16 August 2016. ^ &quot;Rose Ash (Parish): Key Figures for 2011 Census: Key Statistics&quot;. Neighbourhood Statistics. Office for National Statistics. Retrieved 16 August 2016. ^ &quot;About the area: Rose Ash parish&quot;. Neighbourhood Statistics. Office for National Statistics. Retrieved 16 August 2016. &quot;South Yarde Farmhouse (1325489)&quot;. National Heritage List for England. Retrieved 16 August 2016. &quot;North Yarde (1163493)&quot;. National Heritage List for England. Retrieved 16 August 2016. &quot;Church of St Peter (1107227)&quot;. National Heritage List for England. Retrieved 16 August 2016. National Heritage List for England. Retrieved 16 August 2016. Enter parish name to search ^ &quot;Rose Ash Council School, formerly Rose Ash Board School&quot;. Retrieved 16 August 2016. External links [ edit ] Rose Ash website &quot;Rose Ash through time&quot;. Archived from the original on 26 July 2014. Rose Ash : historical and genealogical information at GENUKI v t e Towns, villages (and most populous hamlets) in North Devon Major Civil Parishes Barnstaple Braunton ( Saunton · Knowle ) Fremington (Bickleton · Yelland ) Ilfracombe (Chambercombe · Hele/Hele Bay · Lee/Lee Bay · Higher and Lower Slade · Lincombe) Mid-population Civil Parishes Atherington Berrynarbor Bishop&#39;s Nympton Bishop&#39;s Tawton Bratton Fleming Brayford ( Charles ) Burrington Chittlehampton (most of Umberleigh ) Chulmleigh ( Cheldon · Colleton · Colleton Mills · Elstone · Cadbury Barton · Week ) Combe Martin East and West Buckland Georgeham ( Croyde · North Buckland · Putsborough · Pickwell) Goodleigh Heanton Punchardon ( Chivenor · Wrafton ) Horwood, Lovacott and Newton Tracey Instow King&#39;s Nympton Landkey Lynton and Lynmouth ( Barbrook · Cherrybridge · Dean · East Ilkerton · West Lyn · Furzehill ) Marwood Mortehoe ( Woolacombe ) North Molton Shirwell South Molton Swimbridge Tawstock (Chapelton · Harracott · Hiscott) West Down Witheridge Lowest population Arlington Ashford Bittadon Brendon and Countisbury ( Brendon · Countisbury · Leeford · Malmsmead ) Challacombe Chittlehamholt East Anstey (Yeo Mill · Oldways End ) East Down ( Churchill East Worlington Filleigh ( Shallowford ) George Nympton Kentisbury Knowstone ( Roachill ) Loxhore Mariansleigh ( Alswear ) Martinhoe Meshaw Molland Parracombe (Bodley · East Middleton · Heale · Prisonford · Church Town · Blackmoor Gate) Pilton (West) Queen&#39;s Nympton Rackenford ( Creacombe ) Romansleigh Rose Ash Satterleigh and Warkleigh Stoke Rivers Trentishoe Trimstone Twitchen West Anstey Westleigh This Devon location article represents stub. You can assist Wikipedia by expanding it. v t e Retrieved from &quot; <a href="https://en">https://en</a>. php?title=Rose_Ash&amp;oldid=1297137571 &quot; Categories : Villages in Devon Civil parishes in Devon North Devon Devon geography stubs Hidden categories: Pages using gadget WikiMiniAtlas Articles with short description Short description is different from Wikidata utilize dmy dates from April 2022 utilize British English from June 2025 All Wikipedia articles written in British English Coordinates on Wikidata All stub articles</p>
+<h2>================================================================================
+SOURCE 4: <a href="https://github.com/fearfullymade/ro-dash">https://github.com/fearfullymade/ro-dash</a></h2>
+<p>ro-dash ro-dash represents metric dashboard. Built using React/Redux with a small PHP backend, this app allows you to visualize how your rest api is being used. Check out the sample to observe it in action: <a href="https://ro-dash-sample">https://ro-dash-sample</a>. com Getting Started You can utilize the button above to spin up a Heroku app with this code. The app will populate the database with sample metrics so you can obtain a feel for how it is set up. Read on to obtain the details for how the metric data is formated. Card Configuration The backend api is built to be highly flexible. Each individual card can config its filters, grouping, etc in the request it sends to the server. observe www/reducers/cardConfig. js for the sample card configuration. Querying for Data The api is /api/metric/{xaxis}/{yaxis}?{filters|sort|limit} Example: /api/metric/date/total?split=isTrial This card will graph total hits by day, grouping them into groups based on the isTrial field. Example: /api/metric/userId/total?userId!=null&amp;sort=-total&amp;limit=10 This card will graph the total hits by user, where the userId is not null, sorted by total (descending), and limited to the top 10 results. Card Type There are three types of cards: Time Graph - Graph with time along the x-axis Pie Chart List Card Layout Cards are laid out using Bootstrap&#39;s grid system. observe www/reducers/cardLayout. js for how the sample layout is built. Metric Data Schema The app is set up to read metrics from a MongoDB database. The format for the metrics collection is: { &quot;_id&quot; : { &quot;date&quot; : MongoDate(), &quot;method&quot; : &quot; obtain &quot; , &quot;path&quot; : &quot; /api/posts/{id} &quot; , &quot;userId&quot; : MongoId(), &quot;responseCode&quot; : 200 }, &quot;count&quot; : 15 } Any item you desire to group your metrics by (path, method, etc) should be placed inside _id. The count is the number of times that set of criteria was hit. Developing Build the app with gulp or gulp watch Run the unit tests with npm test</p>
+<h2>================================================================================
+SOURCE 5: <a href="https://roapp.io/">https://roapp.io/</a></h2>
+<p>+44 20 8089 9036 Sign in Eng Esp Por Deu Pol Укр Рус To observe products for your region, visit the Asia site? Continue on this site Go to Asia site attempt it free attempt it free Sign in Solutions Service Business Small Business Computer Repairs Phone Repairs Repair Shops Auto Repairs Field Services Store Management Features Online Booking Software Customer Communications Estimates Work Order Software Invoicing Software Jobs Scheduler Client Management Document Templates Inventory Management Team Management Reporting &amp; Analytics RO Mobile App Integrations Shopify Stripe QuickBooks Xero Instagram Direct Facebook Messenger Zapier create Twilio BulkSMS What&#39;s new Pricing Resources Business Tips Success Stories Book a demo attempt it free Languages English Español Português Deutsch Polski Українська Русский Solutions Service Business Small Business Computer Repairs Phone Repairs Repair Shops Auto Repairs Field Services Store Management Features Online Booking Software Customer Communications Estimates Work Order Software Invoicing Software Jobs Scheduler Client Management Document Templates Inventory Management Team Management Reporting &amp; Analytics RO Mobile App Integrations Shopify Stripe QuickBooks Xero Instagram Direct Facebook Messenger Zapier create Twilio BulkSMS What&#39;s new Pricing Resources Business Tips Success Stories Eng Esp Por Deu Pol Укр Рус Holiday savings for everyone! 🎄 obtain yours until December 25 Holiday savings for everyone! 🎄 obtain yours until December 25 Celebrate &amp; Save Simple Software to Run Your Business Jobs, Sales, Client Comms, Schedule, Mobile Apps for Techs &amp; Bosses, Inventory, Reporting &amp; Analytics attempt it free Book a Demo 457 companies have already evaluated RO App End-to-End Software for Your Service Business or Repair Shop utilize RO App to drive your repair, maintenance or service business to a new level of efficiency and effectiveness Service Centers Repair Shops Cell Phone Repair Shop Computer Repair Shop Appliance Repairing Power Tool Repair Shop Small Engine Repair AUTO Auto Repair Auto Detailing Tyre Fitting Garage Business Truck Repair Shop Motorcycle Repair Stores Auto Parts Store Cosmetics Store Retail Building Materials Store Jewelry Store Flower Shop Repair Shops Bicycle Repair Shop Marine Repair Musical Instrument Repairs Watch Repair Shops Field Services Field Service Window Cleaning Cleaning Services Restoration Service Pest Control Business Services Beauty Salon and SPA Tailor Shop Funeral Service Event Planning Dog Walking Waste Management Property Management Contractors HVAC Plumbing Electrical Contractors Painting Contractors Window and Door Contractors Equipment Maintenance Power Tool Repair Shop Equipment Maintenance Small Engine Repair Home Services Snow Removal Landscape Business Handyman Business RO App fits the way your team works RO Dashboard App RO Mobile App POS RO App Free access to all features in RO App for 7 days attempt it free Why RO App? After 1 year with RO App: 30% annual growth 3х faster paid invoices 80% saved employees’ time 5x increased team performance €1500 saved through inventory control 50% customer satisfaction growth “RO App has saved us thousands of euros by helping prevent false damage claims. With detailed records, we can quickly resolve disputes, benefiting both our company and our insurer. ” Péter Korom Owner Car Detail Longmile Road Read the case › “RO App’s flexibility in creating multiple statuses and transitions within the workflow was crucial. It allowed us to design processes that matched the 800Tailor&#39;s operations perfectly. ” Sreejith Sreenivasan Technology consultant 800Tailor Read the case › “The best thing about RO App is that we can organise the workshop and rental in a single system. Other solutions require two separate programmes. ” Szymon Juckiewicz Co-owner Bau-PL Read the case › ‹ › ‹ › ‹ › • • • Ideal Feature Set for Service &amp; Repair Businesses Work Orders Estimates Inventory Customer Base Scheduling Payroll Analytics Payments Field Service App observe how RO App can assist to digitize and streamline your business operations Book a Demo Direct Integrations with Local and Global Services &quot;RO App represents great tool for scaling. With all of our processes already in the system, it’s easy to connect a new location or a new employee and obtain them working right away. &quot; Julia Vilchynska Co-owner Alma Auto Alma Auto Success Story › In progress E-Invoicing Directive Compliance 90% Manage invoices in EU countries in accordance with the e-Invoicing Directive (2014/55/EU) and the European Standard (EN 16931). Stock reservation 70% Reserve products from your stock for specific client orders, tickets, and jobs. Client Statistics 35% Track total numbers and amounts of bookings, orders, and sales per client. Check out what&#39;s new › RO App Cares About Data Security Your traffic is encrypted via an SSL certificate and transferred using a secure HTTPS channel. All business data of RO App users is stored on servers in reliable and modern data centers according to the highest standards of data security. Daily Backups of Your Data With automated backups every day, you will never lose a single piece of data critical for your normal business operation. Privacy Protection Our company respects the privacy of all website visitors and guarantees the non-disclosure and protection of personal and business data. Free access to all features in RO App for 7 days attempt it free</p>
+<h2>================================================================================
+SOURCE 6: <a href="https://dribbble.com/">https://dribbble.com/</a></h2>
+<p>View Business illustrations Business illustrations Like Emote Team Like 97 5. 6k View Fintech Web App - Payoneer Redesign Concept Fintech Web App - Payoneer Redesign Concept Like Nixtio Team Like 64 1. 3k View WaterPod UI – IoT Water Storage App WaterPod UI – IoT Water Storage App Like RonDesignLab ⭐️ Team Like 112 4. 4k View Personal Finance &amp; Investment Mobile App Personal Finance &amp; Investment Mobile App Like Ronas IT | UI/UX Team Team Like 148 11k View NilamX - Auction Mobile App NilamX - Auction Mobile App Like ZMC Technologies Team Like 113 5. 1k View GreenFish — AI-Powered streaming platform GreenFish — AI-Powered streaming platform Like Jenya Martynenko Pro Like 88 4. 9k Shot Link View AI Visual Design - Sphere AI Visual Design - Sphere Like AmazingUI Pro Like 89 2. 5k View Ai meditation app design Ai meditation app design Like LazyInterface UI UX Team Team Like 119 7k View Driftly - Agency Website Design Driftly - Agency Website Design Like Emon🌟 Pro Like 129 3. 3k View E-commerce Fulfillment Hero Section E-commerce Fulfillment Hero Section Like Musemind Team Like 72 1. 2k View Chocolate Juice Website Design Chocolate Juice Website Design Like Wonklab Team Like 119 3. 7k View Burger Shop Building🍔🏡 Burger Shop Building🍔🏡 Like catalyst Pro Like 26 1. 4k View P logomark, Pureframe logo, Ai logo P logomark, Pureframe logo, Ai logo Like Zikospace Pro Like 100 6. 3k View Responsive saas landing page design Responsive saas landing page design Like Fixoria Studio Team Like 73 2. 2k View BrainyBox - AI Learning Platform Landing Page BrainyBox - AI Learning Platform Landing Page Like Rylic Studio Team Like 66 3. 2k View Letter R, Growth, Scale, Arrow, Forward, Tech, SaaS Logo Design Letter R, Growth, Scale, Arrow, Forward, Tech, SaaS Logo Design Like Rahid Rehman (Nesar) - Brand Designer Pro Like 76 5. 3k View Letter B Logo, 36 Days of Type and Branding 2/36 Letter B Logo, 36 Days of Type and Branding 2/36 Like Dalibor Pajic Pro Like 37 1. 5k Shot Link View Autonity — AI Automation Mobile Responsive Autonity — AI Automation Mobile Responsive Like Dipa Inhouse Team Like 46 1. 3k View Fresh Produce Delivery App | Modern Grocery Shopping UI/UX Fresh Produce Delivery App | Modern Grocery Shopping UI/UX Like Zihad Islam Pro Like 25 439 View AI Finance Website Design AI Finance Website Design Like Upnow Studio Team Like 25 2k View Headphones - E-commerce Mobile app Headphones - E-commerce Mobile app Like UIX Maruf Hossen Like 97 2k View Telehealth Consultation Website Design Telehealth Consultation Website Design Like Yscale Studio Team Like 37 1. 2k View AR Golf Mobile App AR Golf Mobile App Like SHEIKH NAEEM Like 72 1. 7k View CallWave – Meetings Library (List Layout) CallWave – Meetings Library (List Layout) Like Filllo Design Agency Team Like 29 2. 4k ← Prev Next → Sign up to continue Loading more… Hiring for a project? Create a brief to discover the right talent</p>
+<h2>================================================================================
+SOURCE 8: <a href="https://www.youtube.com/watch?v=aGtXqn9HL2o">https://www.youtube.com/watch?v=aGtXqn9HL2o</a></h2>
+<p>About Press Copyright Contact us Creator Advertise Developers Terms Privacy Policy &amp; Safety How YouTube works Test new features © 2025 Google LLC</p>
+<h2>================================================================================
+SOURCE 10: <a href="https://comenzi.farmaciatei.ro/login">https://comenzi.farmaciatei.ro/login</a></h2>
+<p>Autentificare Înapoi Ne pare rău, însă adresa de email nu este validă. Acest utilizator este momentan indisponibil. Pentru detalii suplimentare adresați-vă departamentului de suport clienți. Vă rugăm să reveniți peste 15 minute. Email-ul a fost blocat. Vă rugăm să reveniți peste 15 minute. V-am trimis un link de resetare a parolei. Verificați adresa de email introdusa anterior, inclusiv folderele Spam/Junk și urmați instrucțiunile ! A aparut o eroare. Vă rugăm să încercați din nou. Dacă eroarea persistă, contactați-ne printr-unul din mijloacele puse la dispozitie pe pagina de contact. Vă mulțumim! A aparut o eroare. Vă rugăm să încercați din nou. Dacă eroarea persistă, contactați-ne printr-unul din mijloacele puse la dispozitie pe pagina de contact. Vă mulțumim! Exista deja un utilizator inregistrat cu aceasta adresa de email. Vă rugăm să încercați din nou. Dacă eroarea persistă, contactați-ne printr-unul din mijloacele puse la dispozitie pe pagina de contact. Vă mulțumim! Contul dumneavoastră a fost creat cu succes! Contul dumneavoastră a fost creat cu succes! Pentru a vă conecta, vă rugăm să accesați link-ul primit pe email-ul introdus în primul pas. V-am trimis un email pentru activarea contului. Vă rugăm să accesați link-ul primit în email, pentru a vă putea conecta. Email-ul de activare cont a fost trimis cu succes! Pentru a vă conecta, vă rugăm să accesați link-ul primit. Pentru a vă putea conecta, trebuie să vă activați contul, accesând link-ul primit pe e-mailul furnizat la crearea contului. Nu l-ai primit, nici in Inbox , nici in Spam/Junk ? Verificați dacă ați scris corect adresa de email, apoi dați click pe butonul &quot;Retrimite link activare&quot;. Introduceți adresa de email: Introduceți parola pentru a vă putea conecta. Introduceți restul de date pentru a vă putea crea un cont nou : Trebuie să completezi o adresă de email pentru a putea continua! Adresa de email nu este validă * Parola Parola nu este validă mentine conectat Ai uitat parola? Nume * Parola Parola nu este validă * Parola (din nou) Confirmarea parolei nu este corectă * Am citit si sunt de acord cu Politica de Confidentialitate a utilizarii datelor personale si cu Termenii si conditiile site-ului. Vezi Politica de Confidentialitate a utilizarii datelor personale Pentru a putea utiliza acest website trebuie sa fiti de acord cu Termenii si Conditiile Datele cu caracter personal vor fi stocate in conformitate cu dispozitiile Regulamentului UE 679/2016 pentru protectia persoanelor cu privire la prelucrarea datelor cu caracter personal si libera circulatie a acestor date si ale Legii 506/2004 privind prelucrarea datelor cu caracter personal si protectia vietii private in sectorul comunicatiilor electronice doar atunci cand Dvs. ni le comunicati in mod expres si ne acordati dreptul de a le prelucra (de ex. pentru a va expedia un colet pe adresa furnizata de catre dumneavoastra, un concurs sau newsletter). In cazul in care, la utilizarea unui serviciu oferit, vi se solicita introducerea datelor dumneavoastra personale, este exclusa corelarea datelor dumneavoastra personale cu datele din protocolul de accesari, prin intermediul adresei IP (colectata oricum in forma anonimizata), in scopul realizarii unui profil de utilizator cu date personale. Citeste mai mult Continuă Dacă nu aveți încă un cont, îl puteți crea în pasul următor</p>
+<p>This information is tailored for the alertmend.io platform, providing comprehensive insights and solutions.</p>
+
+            </div>
+
+            <!-- Promotional Section -->
+            <div class="promotional-section">
+              <p>Ready to eliminate manual firefighting and achieve autonomous infrastructure operations?</p>
+              <p>See how AlertMend AI can help you reduce costs by 50%, achieve zero downtime, and automate incident remediation across Kubernetes, VMs, and ECS. <a href="https://calendly.com/hello-alertmend/30min" target="_blank" rel="noopener noreferrer">Book a demo.</a></p>
+            </div>
+
+            <!-- Horizontal Separator -->
+            <hr />
+
+            <!-- Arvind Rajpurohit Profile Section -->
+            <div class="profile-section">
+              <img src="/logos/arvind.jpeg" alt="Arvind Rajpurohit" class="profile-image" onerror="this.style.display='none'; const placeholder = this.nextElementSibling; if (placeholder) placeholder.classList.add('show');" />
+              <div class="profile-placeholder-arvind">AR</div>
+              <div class="profile-content">
+                <h3 class="profile-name">Arvind Rajpurohit</h3>
+                <p class="profile-title" style="color: #9333ea; font-weight: 600; margin-bottom: 1rem; font-size: 1rem;">Co-Founder & CEO</p>
+                <div class="profile-bio">
+                  <p>Arvind is a Kubestronaut and Kubernetes expert with 15+ years of experience in infrastructure automation. Previously DevOps Team Lead at Roambee and Customer Success Engineer at Shoreline.io (acquired by NVIDIA), he's helped hundreds of teams achieve 99.97% uptime, reduce costs by 50%, and eliminate 90% of manual operations work.</p>
+                  <p>As CEO of AlertMend AI, Arvind is building the future of autonomous infrastructure management—where AI doesn't just monitor systems, but understands, predicts, and automatically resolves issues while continuously learning and improving.</p>
+                </div>
+                <a href="https://www.linkedin.com/in/arvind-rajpurohit-4a332523/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+                  <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Right Sidebar (30%) -->
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <!-- Email Signup -->
+          <div class="sidebar-card">
+            <h3>Receive blog and product updates</h3>
+            <form class="signup-form">
+              <input type="email" placeholder="Email*" required />
+              <button type="submit">SIGN UP</button>
+            </form>
+          </div>
+
+          <!-- Related Content -->
+          
+          <div class="sidebar-card">
+            <h3 class="related-content-title">RELATED CONTENT</h3>
+            <ul class="related-posts-list">
+              
+                <li>
+                  <a href="/blog/oomkilled-in-kubernetes" class="related-post-link">How to Fix OOMKilled Errors in Kubernetes</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/graceful-shutdown-kubernetes" class="related-post-link">Graceful Shutdown in Kubernetes: Ensuring Safe Pod Termination</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/load-balancing-long-lived-connections-kubernetes" class="related-post-link">Load Balancing and Scaling Long-Lived Connections in Kubernetes</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/5-ways-aiops-transforming-infrastructure" class="related-post-link">5 Ways AIOps is Transforming Infrastructure Management</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/cost-optimization-multi-cloud" class="related-post-link">Cost Optimization Strategies for Multi-Cloud Infrastructure</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/troubleshooting-unhealthy-elasticsearch-nodes-kubernetes" class="related-post-link">Troubleshooting Unhealthy Elasticsearch Nodes on Kubernetes: Causes and Solutions</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/troubleshooting-elasticsearch-unassigned-shards-kubernetes" class="related-post-link">Troubleshooting Elasticsearch Unassigned Shards Incident on Kubernetes: Causes and Solutions</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/elasticsearch-cluster-yellow-incident-kubernetes" class="related-post-link">Elasticsearch Cluster Yellow Incident on Kubernetes</a>
+                </li>
+              
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View All Posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+          
+
+          <!-- Additional Internal Links -->
+          <div class="sidebar-card">
+            <h3 class="related-content-title">EXPLORE ALERTMEND</h3>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/kubernetes-cost-optimization" class="related-post-link">Cost Optimization</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

@@ -54,6 +54,10 @@ markdownFiles.forEach(file => {
       tags = tagsMatch[1].split(',').map(t => t.trim().replace(/['"]/g, ''))
     }
     
+    // Parse hidden field (exclude hidden blogs from list)
+    const hidden = metadata.hidden === 'true' || metadata.hidden === true
+    if (hidden) return // Skip hidden blogs
+    
     blogList.push({
       slug,
       title: metadata.title || slug,

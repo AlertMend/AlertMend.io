@@ -1,5 +1,5 @@
 ---
-title: "is it top kubernetes cost management"
+title: "Is it Top Kubernetes Cost Management"
 excerpt: "In the realm of cloud computing, managing costs effectively is paramount, especially when deploying Kubernetes at scale"
 date: "2025-12-18"
 category: "Kubernetes"

@@ -1,6 +1,6 @@
 ---
 title: "Git Config Global Http Sslbackend Schannel"
-excerpt: "Integrating Git seamlessly with Windows' security systems is crucial for efficient and secure development"
+excerpt: "git config global http sslbackend schannel Setting Up Git with SChannel for Secure Connections Integrating Git seamlessly with Windows' security systems is..."
 date: "2025-12-18"
 category: "DevOps"
 author: "AlertMend Team"

@@ -1,5 +1,5 @@
 ---
-title: "llama vs claude"
+title: "Llama vs Claude"
 excerpt: "In the rapidly evolving landscape of AI models, understanding the comparative capabilities of major players like Llama and Claude is crucial for developers a..."
 date: "2025-12-18"
 category: "Kubernetes"

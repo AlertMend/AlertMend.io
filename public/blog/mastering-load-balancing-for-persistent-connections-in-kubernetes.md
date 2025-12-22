@@ -1,5 +1,5 @@
 ---
-title: "Mastering Load Balancing for Persistent"
+title: "Load Balancing Persistent Connections Guide"
 excerpt: "Learn why Kubernetes struggles with long-lived connections and how to architect reliable, scalable load balancing for gRPC, WebSockets, and database sessions."
 date: "2025-07-28"
 category: "Kubernetes"

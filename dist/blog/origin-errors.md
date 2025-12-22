@@ -1,5 +1,5 @@
 ---
-title: "origin errors: How to Fix"
+title: "Origin Errors: How to Fix"
 excerpt: "In the complex world of system monitoring and DevOps solutions, origin errors represent a significant challenge"
 date: "2025-12-18"
 category: "Troubleshooting"

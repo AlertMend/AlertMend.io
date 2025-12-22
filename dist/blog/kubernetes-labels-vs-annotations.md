@@ -1,5 +1,5 @@
 ---
-title: "kubernetes labels vs annotations"
+title: "Kubernetes Labels vs Annotations"
 excerpt: "In the ever-evolving world of Kubernetes, managing metadata effectively is crucial for efficient system monitoring and operational management"
 date: "2025-12-18"
 category: "Kubernetes"

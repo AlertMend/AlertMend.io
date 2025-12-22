@@ -1,5 +1,5 @@
 ---
-title: "Cost Optimization Strategies for"
+title: "Cost Optimization Strategies for Multi-Cloud"
 excerpt: "Reduce infrastructure costs by up to 50% with these proven optimization techniques."
 date: "2024-03-05"
 category: "Cost Optimization"

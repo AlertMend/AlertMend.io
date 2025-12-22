@@ -1,5 +1,5 @@
 ---
-title: "dnspolicy clusterfirstwithhostnet"
+title: "Dnspolicy Clusterfirstwithhostnet"
 excerpt: "In the dynamic world of Kubernetes, understanding DNS policies is pivotal for seamless cluster operations"
 date: "2025-12-18"
 category: "Kubernetes"

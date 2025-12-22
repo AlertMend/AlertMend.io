@@ -1,6 +1,6 @@
 ---
-title: "real-time configuration drift detection"
-excerpt: "In today's fast-paced digital landscape, maintaining a consistent and secure IT environment is critical"
+title: "Real-time Configuration Drift Detection"
+excerpt: "real-time configuration drift detection capabilities Exploring Real-Time Configuration Drift Detection Capabilities In today's fast-paced digital..."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"

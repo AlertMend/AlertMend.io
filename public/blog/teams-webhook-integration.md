@@ -4,7 +4,7 @@ excerpt: "Enhance your incident response workflow by integrating Microsoft Teams
 date: "2024-07-24"
 category: "Blog"
 author: "Arvind Rajpurohit"
-
+keywords: "AlertMend AI, AIOps, Kubernetes, DevOps, monitoring, infrastructure management, automated remediation"
 ---
 
 

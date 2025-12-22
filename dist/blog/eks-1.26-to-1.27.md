@@ -1,5 +1,5 @@
 ---
-title: "eks 1.26 to 1.27"
+title: "Eks 1.26 to 1.27"
 excerpt: "The journey of upgrading from EKS 1. 27 is pivotal for businesses leveraging cloud-native solutions"
 date: "2025-12-18"
 category: "Kubernetes"

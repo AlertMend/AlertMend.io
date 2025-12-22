@@ -4,7 +4,7 @@ excerpt: "Integrate Slack with Alertmend to receive real-time incident alerts di
 date: "2024-07-24"
 category: "Blog"
 author: "Arvind Rajpurohit"
-
+keywords: "AlertMend AI, AIOps, Kubernetes, DevOps, monitoring, infrastructure management, automated remediation"
 ---
 
 

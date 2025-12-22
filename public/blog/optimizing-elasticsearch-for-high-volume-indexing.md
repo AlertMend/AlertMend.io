@@ -4,7 +4,7 @@ excerpt: "When working with Kubernetes, a common issue developers encounter is a
 date: "2025-01-18"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"
-
+keywords: "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization"
 ---
 
 

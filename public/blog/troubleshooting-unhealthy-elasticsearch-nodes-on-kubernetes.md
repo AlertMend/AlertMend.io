@@ -4,7 +4,7 @@ excerpt: "Networking is one of the most critical components in any Kubernetes de
 date: "2025-06-27"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"
-
+keywords: "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization, Troubleshooting"
 ---
 
 

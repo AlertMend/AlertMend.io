@@ -1,6 +1,6 @@
 ---
-title: "best practices for disclosing open source"
-excerpt: "In today's dynamic software development landscape, leveraging open source components has become a norm, allowing organizations to innovate swiftly and cost-e..."
+title: "Best Practices for Disclosing Open Source"
+excerpt: "best practices for disclosing open source components to customers Embracing Open Source: Best Practices for Disclosing Components to Customers In today's..."
 date: "2025-12-18"
 category: "Kubernetes"
 author: "AlertMend Team"

@@ -1,5 +1,5 @@
 ---
-title: "Elasticsearch Cluster Yellow Incident on"
+title: "Elasticsearch Cluster Yellow Incident On"
 excerpt: "Elasticsearch requires adequate virtual memory to run smoothly. If the system’s virtual memory limit falls below the recommended level, Elasticsearch may..."
 date: "2025-06-8"
 category: "Elasticsearch"
