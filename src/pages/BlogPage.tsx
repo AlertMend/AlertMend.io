@@ -12,11 +12,15 @@ export default function BlogPage() {
   const navigate = useNavigate()
   
   // Sort posts by date (newest first) and ensure excerpts are properly handled
+  // Ensure blogPosts is available and is an array
   const sortedPosts = useMemo(() => {
+    if (!blogPosts || !Array.isArray(blogPosts) || blogPosts.length === 0) {
+      return []
+    }
     return [...blogPosts]
       .map(post => ({
         ...post,
-        excerpt: post.excerpt && typeof post.excerpt === 'string' ? post.excerpt.trim() : ''
+        excerpt: (post.excerpt && typeof post.excerpt === 'string' && post.excerpt.trim()) ? post.excerpt.trim() : ''
       }))
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   }, [])
@@ -24,6 +28,27 @@ export default function BlogPage() {
   // Generate unique meta description for blog list page
   const baseDescription = "AlertMend AI blog: Get expert insights on AIOps and Kubernetes. Learn best practices for autonomous infrastructure management."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'blog-list', 'blog')
+
+  // Ensure we always have posts to render
+  if (!sortedPosts || sortedPosts.length === 0) {
+    return (
+      <div className="min-h-screen bg-white">
+        <SEO
+          title="AlertMend AI: AIOps & Kubernetes Best Practices in 2025"
+          description={uniqueDescription}
+          canonical="/blog"
+          keywords="AIOps blog, Kubernetes best practices, infrastructure automation, DevOps insights, SRE articles, cloud-native operations"
+        />
+        <Navbar />
+        <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto text-center">
+            <p className="text-gray-600">Loading blog posts...</p>
+          </div>
+        </section>
+        <Footer />
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -56,7 +81,7 @@ export default function BlogPage() {
                 // Ensure title is not empty or slug - use title if it exists and is different from slug
                 const displayTitle = (post.title && post.title.trim() && post.title !== post.slug) ? post.title : post.slug
                 // Ensure excerpt is always checked and displayed if available - post.excerpt is already trimmed in useMemo
-                const displayExcerpt = post.excerpt || null
+                const displayExcerpt = (post.excerpt && typeof post.excerpt === 'string' && post.excerpt.trim().length > 0) ? post.excerpt.trim() : null
                 return (
                 <article
                   key={post.slug}
@@ -83,9 +108,11 @@ export default function BlogPage() {
                     )}
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 leading-tight group-hover:text-purple-700 transition-colors">{displayTitle}</h2>
-                  {displayExcerpt ? (
+                  {displayExcerpt && displayExcerpt.length > 0 ? (
                     <p className="text-gray-600 mb-6 leading-relaxed line-clamp-3 flex-grow text-base">{displayExcerpt}</p>
-                  ) : null}
+                  ) : (
+                    <p className="text-gray-600 mb-6 leading-relaxed line-clamp-3 flex-grow text-base italic">Read more about {displayTitle}...</p>
+                  )}
                   <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                     <div className="flex items-center gap-2 text-gray-500 text-sm">
                       <Calendar className="h-4 w-4" />
