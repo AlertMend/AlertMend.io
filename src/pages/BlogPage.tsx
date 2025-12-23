@@ -18,10 +18,21 @@ export default function BlogPage() {
       return []
     }
     return [...blogPosts]
-      .map(post => ({
-        ...post,
-        excerpt: (post.excerpt && typeof post.excerpt === 'string' && post.excerpt.trim()) ? post.excerpt.trim() : ''
-      }))
+      .map(post => {
+        // Ensure excerpt is always a string and properly trimmed
+        let excerpt = ''
+        if (post.excerpt) {
+          if (typeof post.excerpt === 'string') {
+            excerpt = post.excerpt.trim()
+          } else if (typeof post.excerpt === 'object' && post.excerpt !== null) {
+            excerpt = String(post.excerpt).trim()
+          }
+        }
+        return {
+          ...post,
+          excerpt: excerpt
+        }
+      })
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   }, [])
   
@@ -80,8 +91,8 @@ export default function BlogPage() {
               {sortedPosts.map((post) => {
                 // Ensure title is not empty or slug - use title if it exists and is different from slug
                 const displayTitle = (post.title && post.title.trim() && post.title !== post.slug) ? post.title : post.slug
-                // Ensure excerpt is always checked and displayed if available - post.excerpt is already trimmed in useMemo
-                const displayExcerpt = (post.excerpt && typeof post.excerpt === 'string' && post.excerpt.trim().length > 0) ? post.excerpt.trim() : null
+                // Ensure excerpt is always checked and displayed if available - post.excerpt is already normalized in useMemo
+                const displayExcerpt = post.excerpt && post.excerpt.length > 0 ? post.excerpt : null
                 return (
                 <article
                   key={post.slug}
@@ -108,7 +119,7 @@ export default function BlogPage() {
                     )}
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 leading-tight group-hover:text-purple-700 transition-colors">{displayTitle}</h2>
-                  {displayExcerpt && displayExcerpt.length > 0 ? (
+                  {displayExcerpt ? (
                     <p className="text-gray-600 mb-6 leading-relaxed line-clamp-3 flex-grow text-base">{displayExcerpt}</p>
                   ) : (
                     <p className="text-gray-600 mb-6 leading-relaxed line-clamp-3 flex-grow text-base italic">Read more about {displayTitle}...</p>
