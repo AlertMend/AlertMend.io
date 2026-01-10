@@ -1,5 +1,5 @@
 ---
-title: "URL Availability Monitoring"
+title: "Url Availability Monitoring Guide"
 excerpt: "Url Availability Monitoring Understanding the Importance of URL Availability Monitoring In our interconnected digital world, ensuring the consistent..."
 date: "2025-12-18"
 category: "URL Monitoring"

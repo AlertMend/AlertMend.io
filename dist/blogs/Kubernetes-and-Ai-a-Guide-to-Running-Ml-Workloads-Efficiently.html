@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kubernetes And Ai Guide Running | AlertMend AI</title>
+  <meta name="description" content="================================================================================ REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS">
+  <meta name="keywords" content="AlertMend AI, AIOps, DevOps, Kubernetes, Ai, Guide, Running, Ml">
+  <meta name="author" content="AlertMend Team">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://www.alertmend.io/blogs/Kubernetes-and-Ai-a-Guide-to-Running-Ml-Workloads-Efficiently.html">
+  <!-- Favicon - uses SVG logo -->
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/logos/alertmend-logo.svg" />
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.alertmend.io/blogs/Kubernetes-and-Ai-a-Guide-to-Running-Ml-Workloads-Efficiently.html">
+  <meta property="og:title" content="Kubernetes And Ai Guide Running | AlertMend AI">
+  <meta property="og:description" content="================================================================================ REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS">
+  <meta property="og:image" content="https://alertmend.io/og-image.jpg">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.alertmend.io/blogs/Kubernetes-and-Ai-a-Guide-to-Running-Ml-Workloads-Efficiently.html">
+  <meta name="twitter:title" content="Kubernetes And Ai Guide Running | AlertMend AI">
+  <meta name="twitter:description" content="================================================================================ REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS">
+  <meta name="twitter:image" content="https://alertmend.io/og-image.jpg">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Kubernetes And Ai Guide Running | AlertMend AI",
+    "description": "================================================================================ REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS",
+    "image": "https://alertmend.io/og-image.jpg",
+    "datePublished": "2025-12-18",
+    "dateModified": "2025-12-18",
+    "author": {
+      "@type": "Person",
+      "name": "AlertMend Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "AlertMend AI",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://alertmend.io/logos/alertmend-logo.svg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.alertmend.io/blogs/Kubernetes-and-Ai-a-Guide-to-Running-Ml-Workloads-Efficiently.html"
+    },
+    "articleSection": "Kubernetes"
+  }
+  </script>
+  
+  <!-- SearchAtlas Dynamic Optimization -->
+  <script nowprocket nitro-exclude type="text/javascript" id="sa-dynamic-optimization" data-uuid="457086dd-8bfb-46dd-a38d-2f4a6efd0e7e" src="data:text/javascript;base64,dmFyIHNjcmlwdCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoInNjcmlwdCIpO3NjcmlwdC5zZXRBdHRyaWJ1dGUoIm5vd3Byb2NrZXQiLCAiIik7c2NyaXB0LnNldEF0dHJpYnV0ZSgibml0cm8tZXhjbHVkZSIsICIiKTtzY3JpcHQuc3JjID0gImh0dHBzOi8vZGFzaGJvYXJkLnNlYXJjaGF0bGFzLmNvbS9zY3JpcHRzL2R5bmFtaWNfb3B0aW1pemF0aW9uLmpzIjtzY3JpcHQuZGF0YXNldC51dWlkID0gIjQ1NzA4NmRkLThiZmItNDZkZC1hMzhkLTJmNGE2ZWZkMGU3ZSI7c2NyaXB0LmlkID0gInNhLWR5bmFtaWMtb3B0aW1pemF0aW9uLWxvYWRlciI7ZG9jdW1lbnQuaGVhZC5hcHBlbmRDaGlsZChzY3JpcHQpOw=="></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.7;
+      color: #1f2937;
+      background: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .main-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 96px 16px 32px;
+      margin-top: 64px;
+    }
+    @media (min-width: 640px) {
+      .main-container {
+        padding: 96px 24px 32px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .main-container {
+        padding: 96px 32px 48px;
+      }
+    }
+    .content-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-top: 32px;
+    }
+    @media (min-width: 1024px) {
+      .content-wrapper {
+        grid-template-columns: 8fr 4fr;
+        gap: 32px;
+      }
+    }
+    .main-content {
+      display: flex;
+      gap: 24px;
+    }
+    .social-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 8px;
+    }
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .social-icon:hover {
+      background: #f3e8ff;
+    }
+    .article-content {
+      flex: 1;
+    }
+    article {
+      background: #ffffff;
+    }
+    header {
+      margin-bottom: 32px;
+    }
+    h1 {
+      color: #581c87;
+      font-size: 2.25rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 3rem;
+      }
+    }
+    @media (min-width: 1024px) {
+      h1 {
+        font-size: 3.75rem;
+      }
+    }
+    h2 {
+      color: #581c87;
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    @media (min-width: 768px) {
+      h2 {
+        font-size: 2.25rem;
+      }
+    }
+    h3 {
+      color: #581c87;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    @media (min-width: 768px) {
+      h3 {
+        font-size: 1.875rem;
+      }
+    }
+    h4, h5, h6 {
+      color: #581c87;
+      font-weight: 600;
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+    p {
+      margin-bottom: 24px;
+      font-size: 1.125rem;
+      line-height: 1.75;
+      color: #1f2937;
+    }
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #e9d5ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9333ea;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .author-details {
+      display: flex;
+      flex-direction: column;
+    }
+    .author-name {
+      font-weight: 600;
+      color: #111827;
+      font-size: 1rem;
+    }
+    .author-meta {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+    .category-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #dbeafe;
+      color: #1e40af;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-top: 16px;
+    }
+    code {
+      background: #f3f4f6;
+      color: #9333ea;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+      font-size: 0.9em;
+      border: 1px solid #e5e7eb;
+    }
+    pre {
+      background: #1f2937;
+      color: #f9fafb;
+      padding: 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border: 1px solid #374151;
+    }
+    pre code {
+      background: none;
+      color: #f9fafb;
+      padding: 0;
+      border: none;
+      font-size: 0.875rem;
+    }
+    a {
+      color: #9333ea;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #7c3aed;
+      text-decoration: underline;
+    }
+    ul, ol {
+      margin-bottom: 24px;
+      padding-left: 24px;
+      font-size: 1.125rem;
+      line-height: 1.75;
+    }
+    li {
+      margin-bottom: 12px;
+      color: #1f2937;
+    }
+    blockquote {
+      border-left: 4px solid #a855f7;
+      padding-left: 24px;
+      margin: 32px 0;
+      color: #374151;
+      font-style: italic;
+      font-size: 1.125rem;
+      line-height: 1.75;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin: 2rem 0;
+      -webkit-overflow-scrolling: touch;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0;
+      font-size: 1rem;
+      background: #ffffff;
+      border: 2px solid #d1d5db;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    }
+    thead {
+      background: #faf5ff;
+    }
+    th {
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      color: #581c87;
+      border-right: 1px solid #e9d5ff;
+      border-bottom: 2px solid #c084fc;
+      background: #faf5ff;
+      font-size: 0.9375rem;
+    }
+    th:first-child {
+      border-left: none;
+    }
+    th:last-child {
+      border-right: none;
+    }
+    td {
+      padding: 1rem;
+      text-align: left;
+      border-right: 1px solid #e5e7eb;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+    td:first-child {
+      border-left: none;
+    }
+    td:last-child {
+      border-right: none;
+    }
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+    tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+    tbody tr:hover {
+      background: #f3e8ff;
+    }
+    @media (max-width: 768px) {
+      .table-wrapper {
+        margin: 1.5rem 0;
+      }
+      table {
+        font-size: 0.875rem;
+      }
+      th, td {
+        padding: 0.75rem;
+      }
+    }
+    hr {
+      border: none;
+      border-top: 2px solid #e5e7eb;
+      margin: 3rem 0;
+    }
+    .content {
+      font-size: 1.125rem;
+      line-height: 1.75;
+      color: #1f2937;
+    }
+    .promotional-section {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid #e5e7eb;
+    }
+    .promotional-section p {
+      color: #1f2937;
+      font-size: 1.125rem;
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+    .profile-section {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #e5e7eb;
+      margin-top: 32px;
+    }
+    @media (min-width: 640px) {
+      .profile-section {
+        flex-direction: row;
+      }
+    }
+    .profile-image {
+      flex-shrink: 0;
+      width: 128px;
+      height: 128px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid #e5e7eb;
+    }
+    .profile-content {
+      flex: 1;
+    }
+    .profile-placeholder-arvind {
+      display: none;
+      width: 128px;
+      height: 128px;
+      border-radius: 8px;
+      background: #f3e8ff;
+      border: 1px solid #e5e7eb;
+      align-items: center;
+      justify-content: center;
+      color: #9333ea;
+      font-weight: 700;
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    .profile-placeholder-arvind.show {
+      display: flex;
+    }
+    .profile-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #581c87;
+      margin-bottom: 8px;
+    }
+    .profile-bio {
+      color: #1f2937;
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .profile-bio p {
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+    .linkedin-link {
+      display: inline-flex;
+      align-items: center;
+      color: #9333ea;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .linkedin-link:hover {
+      color: #7c3aed;
+    }
+    footer {
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px solid #e5e7eb;
+      color: #6b7280;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+    footer a {
+      color: #9333ea;
+      font-weight: 600;
+    }
+    .sidebar {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .sidebar {
+        display: block;
+      }
+    }
+    .sidebar-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: sticky;
+      top: 96px;
+    }
+    .sidebar-card {
+      background: #faf5ff;
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid #e9d5ff;
+    }
+    .sidebar-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #581c87;
+      margin-bottom: 16px;
+      margin-top: 0;
+    }
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .signup-form input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 1rem;
+    }
+    .signup-form input:focus {
+      outline: none;
+      border-color: #9333ea;
+      box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+    }
+    .signup-form button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(to right, #6b21a8, #581c87);
+      color: white;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .signup-form button:hover {
+      background: linear-gradient(to right, #581c87, #4c1d95);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .related-content-title {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #111827;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      margin-top: 0;
+    }
+    .related-posts-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .related-posts-list li {
+      margin: 0;
+    }
+    .related-post-link {
+      color: #2563eb;
+      text-decoration: underline;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      display: block;
+      transition: color 0.2s;
+    }
+    .related-post-link:hover {
+      color: #1e40af;
+    }
+    .view-more-link {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 16px;
+      color: #9333ea;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .view-more-link:hover {
+      color: #7c3aed;
+    }
+    @media (max-width: 768px) {
+      .main-container {
+        padding: 80px 16px 32px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.75rem;
+      }
+      h3 {
+        font-size: 1.25rem;
+      }
+      p, ul, ol {
+        font-size: 1rem;
+      }
+      .social-sidebar {
+        display: none;
+      }
+      .main-content {
+        flex-direction: column;
+      }
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      z-index: 50;
+    }
+    .navbar-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    @media (min-width: 640px) {
+      .navbar-container {
+        padding: 0 24px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .navbar-container {
+        padding: 0 32px;
+      }
+    }
+    .navbar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: inherit;
+      padding: 6px 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .navbar-logo:hover {
+      background: #f9fafb;
+    }
+    .navbar-logo-icon {
+      width: auto;
+      height: 32px;
+      max-height: 32px;
+      object-fit: contain;
+    }
+    .navbar-logo-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #6b21a8, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .navbar-links {
+      display: none;
+      align-items: center;
+      gap: 4px;
+    }
+    @media (min-width: 1024px) {
+      .navbar-links {
+        display: flex;
+      }
+    }
+    .navbar-link {
+      padding: 8px 16px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #7c3aed;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .navbar-link:hover {
+      color: #581c87;
+      background: #f9fafb;
+    }
+    .navbar-link.active {
+      color: #7c3aed;
+      background: #faf5ff;
+    }
+    .navbar-actions {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      margin-left: 16px;
+      padding-left: 16px;
+      border-left: 1px solid #e5e7eb;
+    }
+    @media (min-width: 1024px) {
+      .navbar-actions {
+        display: flex;
+      }
+    }
+    .navbar-button {
+      padding: 8px 16px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .navbar-button-primary {
+      background: linear-gradient(to right, #6b21a8, #581c87);
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    }
+    .navbar-button-primary:hover {
+      background: linear-gradient(to right, #581c87, #4c1d95);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .navbar-button-secondary {
+      color: #7c3aed;
+      background: transparent;
+    }
+    .navbar-button-secondary:hover {
+      color: #581c87;
+      background: #f9fafb;
+    }
+    .navbar-button-playground {
+      background: #7c3aed;
+      color: white;
+      font-weight: 600;
+    }
+    .navbar-button-playground:hover {
+      background: #6b21a8;
+    }
+    .mobile-menu-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: #374151;
+    }
+    @media (min-width: 1024px) {
+      .mobile-menu-button {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-content">
+        <!-- Logo -->
+        <a href="/" class="navbar-logo">
+          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'; this.parentElement.querySelector('.navbar-logo-text').style.display='inline';" />
+          <svg class="navbar-logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <span class="navbar-logo-text" style="display: none;">AlertMend AI</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="navbar-links">
+          <a href="/#how-it-works" class="navbar-link">How It Works</a>
+          <a href="/#solutions" class="navbar-link">Solutions</a>
+          <a href="/#benefits" class="navbar-link">Benefits</a>
+          <a href="/case-studies" class="navbar-link">Case Studies</a>
+          <a href="/blog" class="navbar-link active">Blog</a>
+          <a href="/pricing" class="navbar-link">Pricing</a>
+        </div>
+
+        <!-- Desktop Actions -->
+        <div class="navbar-actions">
+          <a href="https://demo.alertmend.io/playground" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-playground">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Playground
+          </a>
+          <a href="https://demo.alertmend.io/signup" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-secondary">Register</a>
+          <a href="https://calendly.com/hello-alertmend/30min" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-primary">Book a Demo</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-button" aria-label="Toggle menu">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <div class="content-wrapper">
+      <!-- Main Content Area (70%) -->
+      <div class="main-content">
+        <!-- Social Share Icons (Left Sidebar) -->
+        <div class="social-sidebar">
+          <a href="#" class="social-icon" aria-label="Share on Facebook">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Share on Twitter">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Share on LinkedIn">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Copy link">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8.465 11.293c1.133-1.133 3.109-1.133 4.242 0l.707.707 1.414-1.414-.707-.707c-1.498-1.498-3.94-1.498-5.439 0l-.707.707 1.414 1.414.707-.707zm-2.829 2.829l.707.707c1.498 1.498 3.94 1.498 5.439 0l.707-.707-1.414-1.414-.707.707c-1.133 1.133-3.109 1.133-4.242 0l-.707-.707-1.414 1.414zm11.314-8.485l-6.364 6.364c-.39.39-1.023.39-1.414 0s-.39-1.023 0-1.414l6.364-6.364c.39-.39 1.023-.39 1.414 0s.39 1.023 0 1.414z"/></svg>
+          </a>
+        </div>
+
+        <!-- Article Content -->
+        <div class="article-content">
+          <article>
+            <header>
+              <h1>Kubernetes And Ai Guide Running</h1>
+              
+              <!-- Author Info -->
+              <div class="author-info">
+                <div class="author-avatar">
+                  A
+                </div>
+                <div class="author-details">
+                  <div class="author-name">AlertMend Team</div>
+                  <div class="author-meta">54 min read • December 18, 2025</div>
+                </div>
+              </div>
+
+              <!-- Category Tag -->
+              <div class="category-tag">Kubernetes</div>
+            </header>
+
+            <!-- Content -->
+            <div class="content">
+              <h2>Kubernetes And Ai: A Guide To Running Ml Workloads Efficiently</h2>
+<p><em>Generated on 2025-12-25 16:12:41</em></p>
+<hr>
+<p>================================================================================
+REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS
+This content is gathered from the top-ranking pages for comprehensive reference. <a href="https://collabnix.com/kubernetes-and-ai-the-ultimate-guide-to-orchestrating-machine-learning-workloads-in-2025/">https://collabnix.com/kubernetes-and-ai-the-ultimate-guide-to-orchestrating-machine-learning-workloads-in-2025/</a></p>
+<ol start="2">
+<li><p><a href="https://portworx.com/knowledge-hub/kubernetes-ai/">https://portworx.com/knowledge-hub/kubernetes-ai/</a></p>
+</li>
+<li><p><a href="https://pages.run.ai/hubfs/PDFs/Scaling-Up-AI-ML-with-Kubernetes.pdf">https://pages.run.ai/hubfs/PDFs/Scaling-Up-AI-ML-with-Kubernetes.pdf</a></p>
+</li>
+<li></li>
+</ol>
+<p><a href="https://www.techtarget.com/searchEnterpriseAI/tip/How-and-why-to-run-machine-learning-workloads-on-Kubernetes">https://www.techtarget.com/searchEnterpriseAI/tip/How-and-why-to-run-machine-learning-workloads-on-Kubernetes</a></p>
+<ol start="5">
+<li><a href="https://kubetools.io/scaling-up-ai-ml-with-kubernetes-a-comprehensive-guide/">https://kubetools.io/scaling-up-ai-ml-with-kubernetes-a-comprehensive-guide/</a></li>
+<li><a href="https://www.wiz.io/academy/ai-ml-kubernetes-best-practices">https://www.wiz.io/academy/ai-ml-kubernetes-best-practices</a></li>
+<li><a href="https://www.f5.com/company/blog/nginx/a-quick-guide-to-scaling-ai-ml-workloads-on-kubernetes">https://www.f5.com/company/blog/nginx/a-quick-guide-to-scaling-ai-ml-workloads-on-kubernetes</a></li>
+<li><a href="https://www.redhat.com/en/topics/cloud-computing/how-kubernetes-can-assist-ai">https://www.redhat.com/en/topics/cloud-computing/how-kubernetes-can-assist-ai</a></li>
+</ol>
+<p>The following sections contain content from each source, organized for reference.
+utilize this information to comprehend the topic comprehensively, identify key points,
+related keywords, and best practices. Then create original, SEO-optimized content
+that synthesizes insights from all sources while using completely original wording. SOURCE 1: <a href="https://collabnix.com/kubernetes-and-ai-the-ultimate-guide-to-orchestrating-machine-learning-workloads-in-2025/">https://collabnix.com/kubernetes-and-ai-the-ultimate-guide-to-orchestrating-machine-learning-workloads-in-2025/</a>
+Table of Contents Toggle The intersection of Kubernetes and AI represents one of the most transformative developments in modern technology infrastructure.
+As artificial intelligence and machine learning workloads become increasingly complex and resource-intensive, organizations worldwide are turning to Kubernetes to orchestrate, scale, and manage their AI applications efficiently. In this comprehensive guide, we’ll explore how Kubernetes has become the backbone of AI infrastructure, enabling organizations to deploy machine learning models at scale while maintaining reliability, cost-effectiveness, and operational efficiency.
+Kubernetes , often abbreviated as K8s, is an open-source container orchestration platform that automates the deployment, scaling, and management of containerized applications. Originally developed by Google, Kubernetes has evolved into the de facto standard for container orchestration across enterprises. The AI Infrastructure Challenge Traditional AI and machine learning deployments face several critical challenges: Resource Management Complexity : AI workloads require dynamic resource allocation, often needing GPUs, CPUs, and memory in varying combinations depending on the training or inference phase.
+Scalability Demands : Machine learning models require to scale horizontally during training and vertically during inference, requiring sophisticated orchestration capabilities. Environment Consistency : AI applications must run consistently across development, testing, and production environments, which traditional deployment methods struggle to guarantee. Cost Optimization : GPU resources are expensive, and organizations require efficient ways to maximize utilization while minimizing costs.
+How Kubernetes Transforms AI and Machine Learning Operations 1. Dynamic Resource Allocation for AI Workloads Kubernetes excels at managing the diverse resource requirements of AI applications. Through its resource quotas and limits , Kubernetes can: Automatically allocate GPU resources to machine learning training jobs Scale CPU and memory based on inference demand Implement resource sharing across multiple AI teams and projects Provide quality of service guarantees for critical AI workloads 2.
+Automated Scaling for Machine Learning Models One of Kubernetes’ greatest strengths in the AI domain is its ability to automatically scale applications based on demand.
+The Horizontal Pod Autoscaler (HPA) and Vertical Pod Autoscaler (VPA) enable: Automatic scaling of inference servers based on request volume Dynamic resource adjustment for training jobs Cost optimization through intelligent resource allocation Load balancing across multiple model instances 3.
+MLOps Integration and Continuous Deployment Kubernetes seamlessly integrates with MLOps pipelines, enabling: Automated model deployment and versioning A/B testing of different model versions Rollback capabilities for model updates Integration with CI/CD pipelines for machine learning workflows Essential Kubernetes Tools and Platforms for AI Kubeflow: The Complete ML Platform Kubeflow stands as the most comprehensive platform for running machine learning workloads on Kubernetes.
+Key components include: Kubeflow Pipelines : For building and deploying portable ML workflows Katib : For automated hyperparameter tuning and neural architecture search KFServing : For model serving and inference Training Operators : For distributed training of TensorFlow, PyTorch, and other frameworks KubeAI and AI-Specific Operators Several specialized operators extend Kubernetes capabilities for AI: TensorFlow Operator : Manages TensorFlow training jobs PyTorch Operator : Handles PyTorch distributed training MPI Operator : Supports MPI-based distributed training Volcano : Provides advanced batch scheduling for AI workloads GPU Management and Scheduling Effective GPU management is crucial for AI workloads on Kubernetes: NVIDIA GPU Operator : Simplifies GPU management and monitoring GPU sharing and time-slicing : Maximizes GPU utilization Multi-Instance GPU (MIG) : Provides GPU virtualization for better resource utilization Best Practices for Running AI on Kubernetes 1.
+Container Optimization for AI Workloads Creating efficient containers for AI applications requires specific considerations: Base Image Selection : utilize optimized base images with pre-installed AI frameworks like TensorFlow, PyTorch, or CUDA. Dependency Management : Implement proper dependency management to avoid conflicts between different AI libraries. Security Scanning : Regularly scan AI containers for vulnerabilities, especially crucial given the sensitive nature of AI data.
+Resource Management Strategies Effective resource management ensures optimal performance and cost efficiency: Resource Requests and Limits : Set appropriate CPU, memory, and GPU requests and limits for AI workloads. Node Affinity and Taints : utilize node affinity to schedule AI workloads on appropriate hardware (GPU nodes, high-memory nodes). Priority Classes : Implement priority classes to ensure critical AI workloads obtain resources when needed.
+Data Management and Storage AI workloads require sophisticated data management strategies: Persistent Volumes : utilize appropriate storage classes for different types of AI data (training data, model artifacts, logs). Data Pipeline Integration : Integrate with data pipeline tools to ensure smooth data flow to AI workloads. Backup and Recovery : Implement robust backup strategies for valuable AI models and training data. Common utilize Cases: Kubernetes and AI in Action 1.
+Large-Scale Machine Learning Training Organizations utilize Kubernetes to orchestrate distributed training across multiple nodes: Distributed TensorFlow training across multiple GPUs and nodes PyTorch distributed data parallel training for large models Hyperparameter optimization running hundreds of parallel experiments Model ensemble training with different algorithms and parameters 2. AI Model Serving and Inference Kubernetes provides robust model serving capabilities: Real-time inference with automatic scaling based on request volume Batch inference for processing large datasets Multi-model serving with efficient resource sharing A/B testing of different model versions in production 3.
+AI Development Environments Kubernetes enables consistent development environments: Jupyter notebook servers with GPU access for data scientists Development sandboxes with isolated environments for different teams Collaborative environments with shared storage and resources CI/CD integration for automated testing and deployment of AI models Overcoming Challenges in Kubernetes AI Deployments 1. GPU Resource Management Managing GPU resources effectively requires careful planning: Challenge : GPUs are expensive and often underutilized in traditional deployments.
+Solution : Implement GPU sharing, utilize fractional GPUs where appropriate, and employ intelligent scheduling to maximize utilization. Data Pipeline Integration Integrating data pipelines with Kubernetes may be complex: Challenge : AI workloads require access to large datasets that may be stored in various locations. Solution : utilize tools like Apache Airflow on Kubernetes, implement proper data locality strategies, and leverage high-performance storage solutions.
+Model Versioning and Deployment Managing multiple model versions and deployments: Challenge : Tracking different model versions and ensuring smooth deployments. Solution : Implement MLOps practices with tools like MLflow, utilize GitOps for model deployment, and maintain proper model registries. Security Considerations for AI on Kubernetes 1. Data Protection and Privacy AI workloads often process sensitive data requiring robust security measures: Encryption at rest and in transit for all AI data Network policies to isolate AI workloads RBAC (Role-Based Access Control) for controlling access to AI resources Pod security policies to ensure secure container execution 2.
+Model Security Protecting AI models from theft or tampering: Model encryption for valuable intellectual property Access logging for model serving endpoints Vulnerability scanning for AI container images Supply chain security for AI dependencies and frameworks Performance Optimization Strategies 1. Hardware Optimization Maximizing hardware utilization for AI workloads: GPU Utilization : Implement GPU monitoring and optimize batch sizes for maximum throughput.
+Memory Management : utilize memory-mapped files for large datasets and implement efficient caching strategies. Network Optimization : Optimize network configuration for distributed training and data movement. Application-Level Optimization Optimizing AI applications for Kubernetes environments: Batching Strategies : Implement dynamic batching for inference workloads to improve throughput. Caching Mechanisms : utilize Redis or other caching solutions to cache frequently accessed data or model outputs.
+Connection Pooling : Implement connection pooling for database and external service connections. Monitoring and Observability for AI Workloads 1. Infrastructure Monitoring Comprehensive monitoring of Kubernetes infrastructure supporting AI: Prometheus and Grafana for metrics collection and visualization GPU monitoring with NVIDIA DCGM and custom metrics Resource utilization tracking for cost optimization Node health monitoring for early problem detection 2.
+Application Monitoring Monitoring AI-specific metrics and performance: Model performance metrics (accuracy, latency, throughput) Data drift detection for model degradation Training job monitoring for distributed training workloads Inference latency tracking for serving applications Cost Optimization for AI on Kubernetes 1. Resource Right-Sizing Optimizing resource allocation to minimize costs: Spot Instances : utilize spot instances for training workloads that can tolerate interruptions.
+Mixed Instance Types : Combine different instance types based on workload requirements. Automatic Scaling : Implement horizontal and vertical pod autoscaling to optimize resource usage. GPU Cost Management Strategies for managing expensive GPU resources: GPU Sharing : Implement GPU sharing for development and light inference workloads. Preemptible Training : utilize preemptible instances for long-running training jobs. Scheduling Optimization : Implement intelligent scheduling to maximize GPU utilization.
+Future Trends: The Evolution of Kubernetes and AI 1. Edge AI and Kubernetes The expansion of AI to edge environments presents new opportunities: Lightweight Kubernetes distributions for edge deployments Federated learning coordination through Kubernetes Edge-to-cloud AI pipelines with seamless integration Real-time inference at the edge with Kubernetes orchestration 2. Serverless AI on Kubernetes The convergence of serverless computing and AI: Knative for AI workloads enabling serverless model serving Event-driven AI pipelines triggered by data availability Auto-scaling to zero for cost-effective AI deployments Function-as-a-Service (FaaS) for AI microservices 3.
+AI-Powered Kubernetes Operations AI enhancing Kubernetes operations themselves: Predictive scaling based on historical patterns Intelligent resource allocation using machine learning Automated anomaly detection for Kubernetes clusters Self-healing systems powered by AI algorithms Practical Code Examples for Kubernetes AI Deployments 1.
+Dockerfile for AI Model Serving Here’s a production-ready Dockerfile for serving a TensorFlow model: # utilize official TensorFlow serving image with GPU support FROM tensorflow/serving:2. 0-gpu # Set environment variables ENV MODEL_NAME=my_ai_model ENV MODEL_BASE_PATH=/models # Create model directory RUN mkdir -p ${MODEL_BASE_PATH} # Copy your trained model COPY. /saved_model ${MODEL_BASE_PATH}/${MODEL_NAME}/1/ # Expose the serving port EXPOSE 8500 8501 # Configure TensorFlow Serving CMD [&quot;tensorflow_model_server&quot;, \ &quot;--port=8500&quot;, \ &quot;--rest_api_port=8501&quot;, \ &quot;--model_name=${MODEL_NAME}&quot;, \ &quot;--model_base_path=${MODEL_BASE_PATH}/${MODEL_NAME}&quot;] 2.
+Kubernetes Deployment for AI Model Serving Deploy your AI model with GPU support and autoscaling: apiVersion: apps/v1 kind: Deployment metadata: name: ai-model-serving labels: app: ai-model-serving spec: replicas: 2 selector: matchLabels: app: ai-model-serving template: metadata: labels: app: ai-model-serving spec: containers: - name: tensorflow-serving image: your-registry/ai-model:latest ports: - containerPort: 8500 name: grpc - containerPort: 8501 name: rest resources: requests: memory: &quot;2Gi&quot; cpu: &quot;1000m&quot; nvidia.
+com/gpu: 1 limits: memory: &quot;4Gi&quot; cpu: &quot;2000m&quot; nvidia. com/gpu: 1 env: - name: MODEL_NAME value: &quot;my_ai_model&quot; livenessProbe: httpGet: path: /v1/models/my_ai_model port: 8501 initialDelaySeconds: 30 periodSeconds: 10 readinessProbe: httpGet: path: /v1/models/my_ai_model port: 8501 initialDelaySeconds: 15 periodSeconds: 5 nodeSelector: accelerator: nvidia-tesla-v100 tolerations: - key: nvidia. com/gpu operator: Exists effect: NoSchedule --- apiVersion: v1 kind: Service metadata: name: ai-model-service spec: selector: app: ai-model-serving ports: - name: grpc port: 8500 targetPort: 8500 - name: rest port: 8501 targetPort: 8501 type: ClusterIP 3.
+Horizontal Pod Autoscaler for AI Workloads Automatically scale your AI model based on CPU and custom metrics: apiVersion: autoscaling/v2 kind: HorizontalPodAutoscaler metadata: name: ai-model-hpa spec: scaleTargetRef: apiVersion: apps/v1 kind: Deployment name: ai-model-serving minReplicas: 2 maxReplicas: 10 metrics: - type: Resource resource: name: cpu target: type: Utilization averageUtilization: 70 - type: Resource resource: name: memory target: type: Utilization averageUtilization: 80 - type: Pods pods: metric: name: requests_per_second target: type: AverageValue averageValue: &quot;100&quot; behavior: scaleDown: stabilizationWindowSeconds: 300 policies: - type: Percent value: 10 periodSeconds: 60 scaleUp: stabilizationWindowSeconds: 0 policies: - type: Percent value: 100 periodSeconds: 15 - type: Pods value: 2 periodSeconds: 60 4.
+TensorFlow Training Job with Kubeflow Deploy a distributed TensorFlow training job using Kubeflow’s TFJob operator: apiVersion: kubeflow. org/v1 kind: TFJob metadata: name: distributed-training spec: tfReplicaSpecs: Chief: replicas: 1 restartPolicy: OnFailure template: spec: containers: - name: tensorflow image: tensorflow/tensorflow:2. 0-gpu command: - python - /opt/training/train. py - --model_dir=/tmp/model - --batch_size=32 - --learning_rate=0. 001 resources: requests: memory: &quot;4Gi&quot; cpu: &quot;2&quot; nvidia.
+com/gpu: 1 limits: memory: &quot;8Gi&quot; cpu: &quot;4&quot; nvidia. com/gpu: 1 volumeMounts: - name: training-data mountPath: /data - name: model-storage mountPath: /tmp/model volumes: - name: training-data persistentVolumeClaim: claimName: training-data-pvc - name: model-storage persistentVolumeClaim: claimName: model-storage-pvc Worker: replicas: 3 restartPolicy: OnFailure template: spec: containers: - name: tensorflow image: tensorflow/tensorflow:2. 0-gpu command: - python - /opt/training/train.
+py - --model_dir=/tmp/model - --batch_size=32 - --learning_rate=0. 001 resources: requests: memory: &quot;4Gi&quot; cpu: &quot;2&quot; nvidia. com/gpu: 1 limits: memory: &quot;8Gi&quot; cpu: &quot;4&quot; nvidia. com/gpu: 1 volumeMounts: - name: training-data mountPath: /data - name: model-storage mountPath: /tmp/model volumes: - name: training-data persistentVolumeClaim: claimName: training-data-pvc - name: model-storage persistentVolumeClaim: claimName: model-storage-pvc 5. PyTorch Distributed Training with PyTorchJob Run distributed PyTorch training across multiple nodes: apiVersion: kubeflow.
+org/v1 kind: PyTorchJob metadata: name: pytorch-distributed-training spec: pytorchReplicaSpecs: Master: replicas: 1 restartPolicy: OnFailure template: spec: containers: - name: pytorch image: pytorch/pytorch:2. 7-cudnn8-runtime command: - python - /workspace/train. py - --backend=nccl - --epochs=100 - --batch-size=64 resources: requests: nvidia. com/gpu: 1 memory: &quot;8Gi&quot; cpu: &quot;4&quot; limits: nvidia. com/gpu: 1 memory: &quot;16Gi&quot; cpu: &quot;8&quot; env: - name: LOGLEVEL value: INFO volumeMounts: - name: dataset mountPath: /data - name: workspace mountPath: /workspace volumes: - name: dataset persistentVolumeClaim: claimName: dataset-pvc - name: workspace configMap: name: training-scripts Worker: replicas: 2 restartPolicy: OnFailure template: spec: containers: - name: pytorch image: pytorch/pytorch:2.
+7-cudnn8-runtime command: - python - /workspace/train. py - --backend=nccl - --epochs=100 - --batch-size=64 resources: requests: nvidia. com/gpu: 1 memory: &quot;8Gi&quot; cpu: &quot;4&quot; limits: nvidia. com/gpu: 1 memory: &quot;16Gi&quot; cpu: &quot;8&quot; volumeMounts: - name: dataset mountPath: /data - name: workspace mountPath: /workspace volumes: - name: dataset persistentVolumeClaim: claimName: dataset-pvc - name: workspace configMap: name: training-scripts 6. Jupyter Notebook Environment for Data Scientists Create a GPU-enabled Jupyter environment for your data science team: apiVersion: apps/v1 kind: Deployment metadata: name: jupyter-gpu spec: replicas: 1 selector: matchLabels: app: jupyter-gpu template: metadata: labels: app: jupyter-gpu spec: securityContext: runAsUser: 1000 runAsGroup: 100 fsGroup: 100 containers: - name: jupyter image: jupyter/tensorflow-notebook:python-3.
+10 ports: - containerPort: 8888 resources: requests: nvidia. com/gpu: 1 memory: &quot;4Gi&quot; cpu: &quot;2&quot; limits: nvidia. com/gpu: 1 memory: &quot;8Gi&quot; cpu: &quot;4&quot; env: - name: JUPYTER_ENABLE_LAB value: &quot;yes&quot; - name: GRANT_SUDO value: &quot;yes&quot; volumeMounts: - name: jupyter-data mountPath: /home/jovyan/work - name: shared-datasets mountPath: /home/jovyan/datasets readOnly: true volumes: - name: jupyter-data persistentVolumeClaim: claimName: jupyter-data-pvc - name: shared-datasets persistentVolumeClaim: claimName: shared-datasets-pvc nodeSelector: accelerator: nvidia-tesla-v100 --- apiVersion: v1 kind: Service metadata: name: jupyter-service spec: selector: app: jupyter-gpu ports: - port: 8888 targetPort: 8888 type: LoadBalancer 7.
+ConfigMap for Model Configuration Manage model configurations and hyperparameters: apiVersion: v1 kind: ConfigMap metadata: name: ai-model-config data: model_config. json: | { &quot;model_name&quot;: &quot;image_classifier&quot;, &quot;model_version&quot;: &quot;1. 0&quot;, &quot;batch_size&quot;: 32, &quot;max_sequence_length&quot;: 512, &quot;confidence_threshold&quot;: 0. 8, &quot;preprocessing&quot;: { &quot;normalize&quot;: true, &quot;resize_to&quot;: [224, 224], &quot;mean&quot;: [0. 225] }, &quot;postprocessing&quot;: { &quot;top_k&quot;: 5, &quot;output_format&quot;: &quot;json&quot; } } training_config.
+yaml: | training: epochs: 100 learning_rate: 0. 001 optimizer: &quot;adam&quot; loss_function: &quot;categorical_crossentropy&quot; metrics: [&quot;accuracy&quot;, &quot;top_5_accuracy&quot;] early_stopping: patience: 10 monitor: &quot;val_loss&quot; model_checkpoint: save_best_only: true monitor: &quot;val_accuracy&quot; mode: &quot;max&quot; 8. Persistent Volume Claims for AI Data Set up storage for datasets and model artifacts: apiVersion: v1 kind: PersistentVolumeClaim metadata: name: training-data-pvc spec: accessModes: - ReadWriteMany resources: requests: storage: 100Gi storageClassName: fast-ssd --- apiVersion: v1 kind: PersistentVolumeClaim metadata: name: model-storage-pvc spec: accessModes: - ReadWriteMany resources: requests: storage: 50Gi storageClassName: fast-ssd --- apiVersion: v1 kind: PersistentVolumeClaim metadata: name: shared-datasets-pvc spec: accessModes: - ReadOnlyMany resources: requests: storage: 500Gi storageClassName: standard 9.
+Python Flask API for Model Serving Simple REST API wrapper for your ML model: from flask import Flask, request, jsonify import tensorflow as tf import numpy as np import logging import os from prometheus_client import Counter, Histogram, generate_latest import time app = Flask(<strong>name</strong>) # Prometheus metrics REQUEST_COUNT = Counter(&#39;model_requests_total&#39;, &#39;Total model requests&#39;) REQUEST_LATENCY = Histogram(&#39;model_request_duration_seconds&#39;, &#39;Model request latency&#39;) PREDICTION_COUNT = Counter(&#39;model_predictions_total&#39;, &#39;Total predictions made&#39;, [&#39;model_version&#39;]) # Load model MODEL_PATH = os.
+getenv(&#39;MODEL_PATH&#39;, &#39;/models/my_model&#39;) model = tf. load_model(MODEL_PATH) MODEL_VERSION = os. getenv(&#39;MODEL_VERSION&#39;, &#39;1. basicConfig(level=logging. INFO) logger = logging. getLogger(<strong>name</strong>) @app. route(&#39;/health&#39;, methods=[&#39;obtain&#39;]) def health_check(): &quot;&quot;&quot;Health check endpoint for Kubernetes probes&quot;&quot;&quot; return jsonify({&#39;status&#39;: &#39;healthy&#39;, &#39;model_version&#39;: MODEL_VERSION}), 200 @app. route(&#39;/ready&#39;, methods=[&#39;obtain&#39;]) def readiness_check(): &quot;&quot;&quot;Readiness check endpoint&quot;&quot;&quot; attempt: # Test model prediction with dummy data dummy_input = np.
+random((1, 224, 224, 3)) _ = model. predict(dummy_input) return jsonify({&#39;status&#39;: &#39;ready&#39;, &#39;model_version&#39;: MODEL_VERSION}), 200 except Exception as e: logger. error(f&quot;Model not ready: {str(e)}&quot;) return jsonify({&#39;status&#39;: &#39;not ready&#39;, &#39;error&#39;: str(e)}), 503 @app. route(&#39;/predict&#39;, methods=[&#39;POST&#39;]) def predict(): &quot;&quot;&quot;Main prediction endpoint&quot;&quot;&quot; start_time = time. inc() attempt: # obtain input data data = request. get_json() if &#39;instances&#39; not in data: return jsonify({&#39;error&#39;: &#39;Missing instances in request&#39;}), 400 # Preprocess input instances = np.
+array(data[&#39;instances&#39;]) if len(instances. shape) != 4: # Expecting (batch, height, width, channels) return jsonify({&#39;error&#39;: &#39;Invalid input shape&#39;}), 400 # create prediction predictions = model. predict(instances) PREDICTION_COUNT. labels(model_version=MODEL_VERSION). inc(len(instances)) # Format response response = { &#39;predictions&#39;: predictions. tolist(), &#39;model_version&#39;: MODEL_VERSION, &#39;request_id&#39;: request. obtain(&#39;X-Request-ID&#39;, &#39;unknown&#39;) } duration = time.
+time() - start_time REQUEST_LATENCY. observe(duration) logger. info(f&quot;Prediction completed in {duration:. 3f}s for {len(instances)} instances&quot;) return jsonify(response), 200 except Exception as e: logger. error(f&quot;Prediction error: {str(e)}&quot;) return jsonify({&#39;error&#39;: str(e)}), 500 @app. route(&#39;/metrics&#39;, methods=[&#39;obtain&#39;]) def metrics(): &quot;&quot;&quot;Prometheus metrics endpoint&quot;&quot;&quot; return generate_latest() @app. route(&#39;/batch_predict&#39;, methods=[&#39;POST&#39;]) def batch_predict(): &quot;&quot;&quot;Batch prediction endpoint for large datasets&quot;&quot;&quot; start_time = time.
+inc() attempt: data = request. get_json() instances = np. array(data[&#39;instances&#39;]) batch_size = data. obtain(&#39;batch_size&#39;, 32) # Process in batches all_predictions = [] for i in range(0, len(instances), batch_size): batch = instances[i:i+batch_size] batch_predictions = model. predict(batch) all_predictions. extend(batch_predictions. tolist()) PREDICTION_COUNT. labels(model_version=MODEL_VERSION). inc(len(instances)) response = { &#39;predictions&#39;: all_predictions, &#39;model_version&#39;: MODEL_VERSION, &#39;processed_count&#39;: len(instances) } duration = time.
+time() - start_time REQUEST_LATENCY. observe(duration) return jsonify(response), 200 except Exception as e: logger. error(f&quot;Batch prediction error: {str(e)}&quot;) return jsonify({&#39;error&#39;: str(e)}), 500 if <strong>name</strong> == &#39;<strong>main</strong>&#39;: app. 0&#39;, port=5000, debug=False) 10. Monitoring and Alerting Configuration Prometheus monitoring setup for AI workloads: apiVersion: v1 kind: ServiceMonitor metadata: name: ai-model-metrics spec: selector: matchLabels: app: ai-model-serving endpoints: - port: metrics interval: 30s path: /metrics --- apiVersion: monitoring.
+com/v1 kind: PrometheusRule metadata: name: ai-model-alerts spec: groups: - name: ai-model-alerts rules: - alert: HighModelLatency expr: histogram_quantile(0. 95, rate(model_request_duration_seconds_bucket[5m])) &gt; 1. 0 for: 2m labels: severity: warning annotations: summary: &quot;High model inference latency&quot; description: &quot;95th percentile latency is {{ $value }}s&quot; - alert: ModelErrorRate expr: rate(flask_http_request_exceptions_total[5m]) &gt; 0. 1 for: 1m labels: severity: critical annotations: summary: &quot;High model error rate&quot; description: &quot;Error rate is {{ $value }} errors/second&quot; - alert: GPUMemoryHigh expr: nvidia_ml_py_device_memory_used_bytes / nvidia_ml_py_device_memory_total_bytes &gt; 0.
+9 for: 5m labels: severity: warning annotations: summary: &quot;High GPU memory usage&quot; description: &quot;GPU memory usage is {{ $value | humanizePercentage }}&quot; Getting Started: Your First AI Project on Kubernetes 1. Prerequisites and Setup Before deploying AI workloads on Kubernetes, ensure you have: Kubernetes Cluster : Set up a Kubernetes cluster with GPU support (EKS, GKE, or on-premises) Container Registry : Configure a container registry for storing AI container images GPU Operator : Install NVIDIA GPU Operator for GPU management Storage : Set up appropriate storage solutions for data and model artifacts Monitoring : Install Prometheus and Grafana for monitoring 2.
+Quick Deployment Guide Follow these steps to deploy your first AI model: # 1. Build and push your model container docker build -t your-registry/ai-model:v1. docker push your-registry/ai-model:v1. Create namespace for AI workloads kubectl create namespace ai-workloads # 3. Apply storage configurations kubectl apply -f storage-config. yaml -n ai-workloads # 4. Deploy the model kubectl apply -f ai-model-deployment. yaml -n ai-workloads # 5. Set up autoscaling kubectl apply -f ai-model-hpa.
+yaml -n ai-workloads # 6. Configure monitoring kubectl apply -f monitoring-config. yaml -n ai-workloads # 7. Test the deployment kubectl port-forward service/ai-model-service 8501:8501 -n ai-workloads curl -X POST <a href="http://localhost:8501/v1/models/my_model:predict">http://localhost:8501/v1/models/my_model:predict</a> \ -H &quot;Content-Type: application/json&quot; \ -d &#39;{&quot;instances&quot;: [[[1. Advanced MLOps Pipeline For production environments, implement a complete MLOps pipeline: # Kubeflow Pipeline for end-to-end ML workflow apiVersion: argoproj.
+io/v1alpha1 kind: Workflow metadata: name: ml-pipeline spec: entrypoint: ml-pipeline templates: - name: ml-pipeline dag: tasks: - name: data-preparation template: data-prep - name: model-training template: train-model dependencies: [data-preparation] - name: model-validation template: validate-model dependencies: [model-training] - name: model-deployment template: deploy-model dependencies: [model-validation] - name: monitoring-setup template: setup-monitoring dependencies: [model-deployment] # Template definitions.</p>
+<ul>
+<li>name: data-prep container: image: your-registry/data-prep:latest command: [python, /app/prepare_data. py] - name: train-model resource: action: create manifest: | apiVersion: kubeflow. org/v1 kind: TFJob metadata: name: training-job spec: # TFJob specification. - name: validate-model container: image: your-registry/model-validator:latest command: [python, /app/validate. py] - name: deploy-model resource: action: create manifest: | apiVersion: apps/v1 kind: Deployment metadata: name: model-serving spec: # Deployment specification.</li>
+</ul>
+<p>Conclusion The combination of Kubernetes and AI represents a powerful paradigm for modern machine learning operations. By leveraging Kubernetes’ orchestration capabilities, organizations can build scalable, reliable, and cost-effective AI infrastructure that adapts to the demanding requirements of machine learning workloads. As AI continues to evolve and become more central to business operations, Kubernetes provides the foundation for sustainable, production-ready AI deployments.
+Whether you’re just starting your AI journey or scaling existing machine learning operations, Kubernetes offers the tools and capabilities needed to succeed in the AI-driven future. The investment in learning and implementing Kubernetes for AI workloads pays dividends in operational efficiency, cost savings, and the ability to innovate rapidly in the competitive landscape of artificial intelligence and machine learning. Ready to transform your AI operations with Kubernetes?
+begin with a pilot project, leverage the tools and best practices outlined in this guide, and gradually scale your Kubernetes AI infrastructure as your needs grow. The future of AI is orchestrated, and Kubernetes is leading the way
+SOURCE 3: <a href="https://portworx.com/knowledge-hub/kubernetes-ai/">https://portworx.com/knowledge-hub/kubernetes-ai/</a>
+Knowledge Hub Accelerate AI Workloads on Kubernetes Running AI and ML Workloads on Kubernetes: A Practical Guide Portworx Team
+SOURCE 5: <a href="https://pages.run.ai/hubfs/PDFs/Scaling-Up-AI-ML-with-Kubernetes.pdf">https://pages.run.ai/hubfs/PDFs/Scaling-Up-AI-ML-with-Kubernetes.pdf</a>
+%PDF-1.7
+%����
+84 0 obj
+&lt;&lt;/Linearized 1/L 579814/O 88/E 412439/N 7/T 578014/H [ 4196 771]&gt;&gt;
+endobj
+xref
+84 195
+0000000016 00000 n
+0000004967 00000 n
+0000005143 00000 n
+0000005185 00000 n
+0000005219 00000 n
+0000006902 00000 n
+0000006983 00000 n
+0000007121 00000 n
+0000007259 00000 n
+0000007397 00000 n
+0000007535 00000 n
+0000007673 00000 n
+0000007811 00000 n
+0000007949 00000 n
+0000008087 00000 n
+0000008224 00000 n
+0000008360 00000 n
+0000008851 00000 n
+0000009320 00000 n
+0000009738 00000 n
+0000009775 00000 n
+0000009889 00000 n
+0000010001 00000 n
+0000010028 00000 n
+0000010673 00000 n
+0000010937 00000 n
+0000011485 00000 n
+0000011746 00000 n
+0000012054 00000 n
+0000012151 00000 n
+0000012550 00000 n
+0000013055 00000 n
+0000015353 00000 n
+0000018560 00000 n
+0000020444 00000 n
+0000021460 00000 n
+0000022475 00000 n
+0000023534 00000 n
+0000023978 00000 n
+0000024372 00000 n
+0000024874 00000 n
+0000026044 00000 n
+0000029480 00000 n
+0000032130 00000 n
+0000032200 00000 n
+0000032301 00000 n
+0000043583 00000 n
+0000043858 00000 n
+0000044345 00000 n
+0000048314 00000 n
+0000058754 00000 n
+0000067016 00000 n
+0000070786 00000 n
+0000070809 00000 n
+0000070887 00000 n
+0000071001 00000 n
+0000071075 00000 n
+0000071185 00000 n
+0000071306 00000 n
+0000071427 00000 n
+0000071573 00000 n
+0000071944 00000 n
+0000072285 00000 n
+0000072351 00000 n
+0000072479 00000 n
+0000072595 00000 n
+0000072718 00000 n
+0000072741 00000 n
+0000072819 00000 n
+0000072893 00000 n
+0000073249 00000 n
+0000073604 00000 n
+0000073670 00000 n
+0000073786 00000 n
+0000073809 00000 n
+0000073887 00000 n
+0000073961 00000 n
+0000074318 00000 n
+0000074668 00000 n
+0000074734 00000 n
+0000074850 00000 n
+0000074873 00000 n
+0000074951 00000 n
+0000075025 00000 n
+0000075381 00000 n
+0000075733 00000 n
+0000075799 00000 n
+0000075915 00000 n
+0000075938 00000 n
+0000076016 00000 n
+0000076090 00000 n
+0000076445 00000 n
+0000076794 00000 n
+0000076860 00000 n
+0000076976 00000 n
+0000076999 00000 n
+0000077077 00000 n
+0000077151 00000 n
+0000077504 00000 n
+0000077853 00000 n
+0000077919 00000 n
+0000078035 00000 n
+0000078058 00000 n
+0000078136 00000 n
+0000078210 00000 n
+0000078562 00000 n
+0000078914 00000 n
+0000078980 00000 n
+0000079096 00000 n
+0000117843 00000 n
+0000117882 00000 n
+0000169881 00000 n
+0000169920 00000 n
+0000170029 00000 n
+0000170126 00000 n
+0000170272 00000 n
+0000170388 00000 n
+0000170485 00000 n
+0000170631 00000 n
+0000171058 00000 n
+0000171472 00000 n
+0000172013 00000 n
+0000172088 00000 n
+0000172277 00000 n
+0000172352 00000 n
+0000172664 00000 n
+0000172739 00000 n
+0000172852 00000 n
+0000172969 00000 n
+0000173044 00000 n
+0000173157 00000 n
+0000192887 00000 n
+0000193727 00000 n
+0000193802 00000 n
+0000211670 00000 n
+0000212516 00000 n
+0000212873 00000 n
+0000212948 00000 n
+0000213023 00000 n
+0000232678 00000 n
+0000233526 00000 n
+0000233601 00000 n
+0000251407 00000 n
+0000252254 00000 n
+0000252608 00000 n
+0000252683 00000 n
+0000252758 00000 n
+0000272191 00000 n
+0000273044 00000 n
+0000273119 00000 n
+0000290705 00000 n
+0000291544 00000 n
+0000291901 00000 n
+0000291976 00000 n
+0000292051 00000 n
+0000311787 00000 n
+0000312635 00000 n
+0000312710 00000 n
+0000330565 00000 n
+0000331404 00000 n
+0000331756 00000 n
+0000331831 00000 n
+0000331906 00000 n
+0000351198 00000 n
+0000352005 00000 n
+0000352080 00000 n
+0000369561 00000 n
+0000370373 00000 n
+0000370730 00000 n
+0000370805 00000 n
+0000370880 00000 n
+0000390334 00000 n
+0000391177 00000 n
+0000391252 00000 n
+0000408833 00000 n
+0000409663 00000 n
+0000410020 00000 n
+0000410095 00000 n
+0000410221 00000 n
+0000410296 00000 n
+0000410401 00000 n
+0000410498 00000 n
+0000410644 00000 n
+0000411010 00000 n
+0000411414 00000 n
+0000411508 00000 n
+0000411606 00000 n
+0000411729 00000 n
+0000411874 00000 n
+0000411977 00000 n
+0000412087 00000 n
+0000412188 00000 n
+0000412290 00000 n
+0000412380 00000 n
+0000004196 00000 n
+trailer
+&lt;&lt;/Size 279/Root 85 0 R/Info 83 0 R/ID[<E2115A8AC53A874ABB5A325E6A5E3FE7>&lt;9CAB40EAFA39674E8A6998395ACDF332&gt;]/Prev 578003&gt;&gt;
+startxref
+0
+%%EOF
+278 0 obj
+&lt;&lt;/E 1014/Filter/FlateDecode/I 1030/Length 668/O 998/S 469/T 946&gt;&gt;stream
+hބSILSQ=���iKK[JAl;�HkP��&quot;��.�Apa@��<code>ҍ��Ę8%Wa��&amp;�DR&#39;fĝ��Bְ��_ �/��w�9������Ї!��pU q�B!6�$�ܐ�)UOS��m�&gt;��za�鋭%�Zk��{�q������q�|x�f|th����</code><em>њK��6{��t��/&#39;�B+Y�lv�ESVTj�T�}^O��r��0!�,��r��j�����TF���-+,l7;�Q�r:$E�&lt;&gt;��x���&amp;f\��cKy{�is<del>V&amp;�&amp;r���Y���)y��ړ^
+��7F�9�ޜ�O��`sK:/dokp{s�J-����
+�������С��5�^�Π���5]�GpJ�i�+4�C��H=�]���T� ߄�J5=�n����4o�E I�i���EE@��שf� Zp�[/�0&lt;�@+N�\��J�JR}JP4�iOj�E�ʻ��D&gt;�A4��Y�]Q �&#39;�·qL��6��^ Քd�?v2&gt;/젘�c�B��}�2�&#39;H��Ge�N�1_%��|��c����I����[���<em>D��$��vX�v�z�ʫt��
+�*�.��E4���&#39;=��ٹ�B�</em>�U�O�D����F�EE��t�%���,�&lt;ܛ ƳXy��</del>������ ���K
+endstream
+endobj
+85 0 obj
+&lt;&lt;/Lang(he)/Metadata 82 0 R/Names 87 0 R/OpenAction 86 0 R/Outlines 72 0 R/PageLayout/OneColumn/Pages 81 0 R/Type/Catalog/ViewerPreferences&lt;&lt;/Direction/L2R&gt;&gt;&gt;&gt;
+endobj
+86 0 obj
+&lt;&lt;/D[88 0 R/Fit]/S/GoTo&gt;&gt;
+endobj
+87 0 obj
+&lt;&lt;/Dests 80 0 R&gt;&gt;
+endobj
+88 0 obj
+&lt;&lt;/Annots 89 0 R/ArtBox[0.0 0.0 595.276 841.89]/BleedBox[0.0 0.0 595.276 841.89]/Contents[115 0 R 116 0 R 117 0 R 118 0 R 119 0 R 120 0 R 124 0 R 125 0 R]/CropBox[0.0 0.0 595.276 841.89]/Group 277 0 R/MediaBox[0.0 0.0 595.276 841.89]/Parent 81 0 R/PieceInfo&lt;&lt;/InDesign&lt;&lt;/DocumentID<FEFF0078006D0070002E006400690064003A00340066003100350066003900380033002D0061003200390065002D0032003200340034002D0038003100300062002D003700650066006400620036006200660034006600330064>/LastModified<FEFF0044003A00320030003200310030003700310034003000380030003800320035005A>/NumberOfPageItemsInPage 2/NumberofPages 1/OriginalDocumentID<FEFF0078006D0070002E006400690064003A00390035003700310063003900640032002D0065003600300031002D0030006400340038002D0061003000320039002D006200320063003000650035003200330064006400360065>/PageItemUIDToLocationDataMap&lt;&lt;/0[3373.0 0.0 3.0 -60.6614 388.63 14.1732 422.362 1.0 0.0 0.0 1.0 -36.5669 405.638]/1[3397.0 1.0 3.0 -432.992 388.772 -74.4095 415.701 1.0 0.0 0.0 1.0 -294.024 410.563]&gt;&gt;/PageTransformationMatrixList&lt;&lt;/0[1.0 0.0 0.0 1.0 0.0 0.0]&gt;&gt;/PageUIDList&lt;&lt;/0 209&gt;&gt;/PageWidthList&lt;&lt;/0 595.276&gt;&gt;&gt;&gt;&gt;&gt;/Resources&lt;&lt;/ColorSpace&lt;&lt;/CS0 103 0 R&gt;&gt;/ExtGState&lt;&lt;/GS0 104 0 R/GS1 105 0 R/GS10 147 0 R/GS2 148 0 R/GS3 149 0 R/GS4 156 0 R/GS5 163 0 R/GS6 170 0 R/GS7 177 0 R/GS8 184 0 R/GS9 191 0 R&gt;&gt;/Font&lt;&lt;/C2_0 99 0 R/T1_0 100 0 R/T1_1 121 0 R/TT0 101 0 R/TT1 102 0 R&gt;&gt;/ProcSet[/PDF/Text]/Properties&lt;&lt;/MC0 193 0 R/MC1 195 0 R&gt;&gt;/Shading&lt;&lt;/Sh0 198 0 R/Sh1 201 0 R&gt;&gt;/XObject&lt;&lt;/Fm0 204 0 R/Fm1 206 0 R/Fm2 208 0 R/Fm3 219 0 R/Fm4 227 0 R/Fm5 235 0 R/Fm6 243 0 R/Fm7 251 0 R/Fm8 259 0 R/Fm9 267 0 R&gt;&gt;&gt;&gt;/Rotate 0/Tabs/W/Thumb 73 0 R/TrimBox[0.0 0.0 595.276 841.89]/Type/Page&gt;&gt;
+endobj
+89 0 obj
+[90 0 R 91 0 R 92 0 R 93 0 R 94 0 R 95 0 R 96 0 R 97 0 R 98 0 R]
+endobj
+90 0 obj
+&lt;&lt;/A 268 0 R/BS&lt;&lt;/S/S/Type/Border/W 0&gt;&gt;/Border[0 0 0]/H/N/Rect[70.6929 298.274 160.576 285.666]/Subtype/Link/Type/Annot&gt;&gt;
+endobj
+91 0 obj
+&lt;&lt;/A 269 0 R/BS&lt;&lt;/S/S/Type/Border/W 0&gt;&gt;/Border[0 0 0]/H/N/Rect[70.6929 286.274 173.101 273.666]/Subtype/Link/Type/Annot&gt;&gt;
+endobj
+92 0 obj
+&lt;&lt;/A 270 0 R/BS&lt;&lt;/S/S/Type/Border/W 0&gt;&gt;/Border[0 0 0]/H/N/Rect[70.6929 274.274 292.844 261.666]/Subtype/Link/Type/Annot&gt;&gt;
+endobj
+93 0 obj
+&lt;&lt;/A 271 0 R/BS&lt;&lt;/S/S/Type/Border/W 0&gt;&gt;/Border[0 0 0]/H/N/Rect[70.6929 262.274 371.033 249.666]/Subtype/Link/Type/Annot&gt;&gt;
+endobj
+94 0 obj
+&lt;&lt;/A 272 0 R/BS&lt;&lt;/S/S/Type/Border/W 0&gt;&gt;/Border[0 0 0]/H/N/Rect[70.6929 178.274 198.433 165.666]/Subtype/Link/Type/Annot&gt;&gt;
+endobj
+95 0 obj
+&lt;&lt;/A 273 0 R/BS&lt;&lt;/S/S/Type/Border/W 0&gt;&gt;/Border[0 0 0]/H/N/Rect[70.6929 166.274 202.524 153.666]/Subtype/Link/Type/Annot&gt;&gt;
+endobj
+96 0 obj
+&lt;&lt;/A 274 0 R/BS&lt;&lt;/S/S/Type/Border/W 0&gt;&gt;/Border[0 0 0]/H/N/Rect[70.6929 154.274 145.269 141.666]/Subtype/Link/Type/Annot&gt;&gt;
+endobj
+97 0 obj
+&lt;&lt;/A 275 0 R/BS&lt;&lt;/S/S/Type/Border/W 0&gt;&gt;/Border[0 0 0]/H/N/Rect[70.6929 142.274 159.459 129.666]/Subtype/Link/Type/Annot&gt;&gt;
+endobj
+98 0 obj
+&lt;&lt;/A 276 0 R/BS&lt;&lt;/S/S/Type/Border/W 0&gt;&gt;/Border[0 0 0]/H/N/Rect[70.6929 130.274 143.27 117.666]/Subtype/Link/Type/Annot&gt;&gt;
+endobj
+99 0 obj
+&lt;&lt;/BaseFont/SGQGLY+Roboto-Light/DescendantFonts 106 0 R/Encoding/Identity-H/Subtype/Type0/ToUnicode 107 0 R/Type/Font&gt;&gt;
+endobj
+100 0 obj
+&lt;&lt;/BaseFont/IWUYBS+CloneRounded-Bd/Encoding 112 0 R/FirstChar 30/FontDescriptor 113 0 R/LastChar 146/Subtype/Type1/ToUnicode 114 0 R/Type/Font/Widths[438 1032 222 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 434 0 597 612 582 620 541 511 611 621 438 0 579 498 725 648 653 571 0 598 552 518 634 0 768 0 542 0 0 0 0 0 0 0 522 560 503 560 517 452 559 562 424 0 530 399 0 564 552 0 0 532 484 439 564 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 251]&gt;&gt;
+endobj
+101 0 obj
+&lt;&lt;/BaseFont/OKRIHG+Roboto-Medium/Encoding/WinAnsiEncoding/FirstChar 32/FontDescriptor 108 0 R/LastChar 121/Subtype/TrueType/ToUnicode 109 0 R/Type/Font/Widths[249 0 0 0 0 0 0 0 349 353 0 0 220 328 279 0 0 568 568 568 568 568 568 568 568 0 265 0 0 0 0 0 0 666 631 0 0 0 549 681 710 0 555 630 541 875 710 0 639 0 624 604 607 652 647 0 0 0 0 0 0 0 0 0 0 541 563 523 564 537 354 567 555 255 0 522 255 870 556 569 563 568 352 516 333 556 495 743 503 487]&gt;&gt;
+endobj
+102 0 obj
+&lt;&lt;/BaseFont/VELBBS+Roboto-Light/Encoding/WinAnsiEncoding/FirstChar 32/FontDescriptor 110 0 R/LastChar 149/Subtype/TrueType/ToUnicode 111 0 R/Type/Font/Widths[243 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 323]&gt;&gt;
+endobj
+103 0 obj
+[/ICCBased 126 0 R]
+endobj
+104 0 obj
+&lt;&lt;/AIS false/BM/Normal/CA 1.0/OP false/OPM 1/SA true/SMask/None/Type/ExtGState/ca 1.0/op false&gt;&gt;
+endobj
+105 0 obj
+&lt;&lt;/AIS false/BM/Normal/CA 1.0/OP true/OPM 1/SA true/SMask/None/Type/ExtGState/ca 1.0/op true&gt;&gt;
+endobj
+106 0 obj
+[131 0 R]
+endobj
+107 0 obj
+&lt;&lt;/Filter/FlateDecode/Length 574&gt;&gt;stream
+H�\�͊�@F�y�Zv/�$U�V)��/��ƙФtc1.|��9�F�cR}��}��n���Τ��k���9Uu������㹪�ܚ�*�������$ix��u�O�d63���k�mQ^��=I��el��l�<del>���&amp;�ߛ�O�ĺ3���MO��rh�.Ѥñ�]�?���G����G�8&#39;Lq-�9�=��̲�37�m��&#39;�.�{�;��߇vx]�׳�f󁦐B+h���@y��ZC�@�B�s���!Y(@�@�ӑ3_@ZB�����F�
+����r KN!�%��ӒS�i�)��rZr
+9-9����BNKN!�%��ӒS�i�)�t܃p�{��q�=8�A������S�</del>���O�s�)<del>?��a�9a�g�0�3A��� L�L&amp;x&amp;
+z�y� 
+z��q:
+z�4�4�iPi�ӠҠ�A�AO�J�������S�</del>�<em>�O��)<del>?�/��������|�t����,$�@H�)4�V��ȗc��_��r�������</del>��湌��i&gt;7]qo�<del>�
+�u�nϽV��s�6�����?�<em> �jG�
+endstream
+endobj
+108 0 obj
+&lt;&lt;/Ascent 1056/CapHeight 711/Descent -271/Flags 32/FontBBox[-732 -271 1170 1056]/FontFamily(Roboto Medium)/FontFile2 133 0 R/FontName/OKRIHG+Roboto-Medium/FontStretch/Normal/FontWeight 500/ItalicAngle 0/StemV 120/Type/FontDescriptor/XHeight 528&gt;&gt;
+endobj
+109 0 obj
+&lt;&lt;/Filter/FlateDecode/Length 477&gt;&gt;stream
+H�\��n�0E�|����&quot;���Z EJ�V�b�j2����C����V�4H ���;�춻��\��f&amp;w��6��p�Mp�p��lY��k�ϫ��9�c�����e
+�]��r��t�2ś�[��!�g�{lC�������߻|ǿ���-�j��pLA?��&gt;���vm��M��4���</em>�1�b�^�L3��2�M�u
+Y�H��U��Xe�o���=��͟:fU���tJ�H</del>?�����%o�/���r�tJ\�pI.�B�&#39;{��ld�O�&gt;嚼N,�K0�p.�\�A�0G�#��sd�y&amp;?��(p:
+��G�w��&lt;���������������ѳ�G7eEe�&quot;G���Q�(r�9�e��9tT8<em>��o��vJG���Q�tT8</em>��JN��2�|��
+���
+���
+���
+���
+���
+���
+���
+���� ��sub��]��Fs�1m�y+��;����n�ѥQ�e� y��
+endstream
+endobj
+110 0 obj
+&lt;&lt;/Ascent 1056/CapHeight 711/Descent -271/Flags 32/FontBBox[-734 -271 1138 1056]/FontFamily(Roboto Light)/FontFile2 134 0 R/FontName/VELBBS+Roboto-Light/FontStretch/Normal/FontWeight 300/ItalicAngle 0/StemV 56/Type/FontDescriptor/XHeight 528&gt;&gt;
+endobj
+111 0 obj
+&lt;&lt;/Filter/FlateDecode/Length 237&gt;&gt;stream
+H�\��j�0��~
+�C�k�a`�e��ڱl��JfXl�8����t0�-���-yj�m�;%�a�!DO8��B�c���W�U��d��w�\pj㐄1 ?�9Za��S�{!��Ba�u�� �%��0P�4�q�Ao6</em>� +vh=�CY��)&gt;׌�k}��q�㜭C�qDaG散����Q��- �7�R��y<del>�VZW��&amp;�G�a�-D�n�Z�̄���唁��_ �q�
+endstream
+endobj
+112 0 obj
+&lt;&lt;/BaseEncoding/WinAnsiEncoding/Differences[30/hyphen.case/T_h]/Type/Encoding&gt;&gt;
+endobj
+113 0 obj
+&lt;&lt;/Ascent 1144/CapHeight 670/CharSet(/hyphen.case/T_h/space/question/A/B/C/D/E/F/G/H/I/K/L/M/N/O/P/R/S/T/U/W/Y/a/b/c/d/e/f/g/h/i/k/l/n/o/r/s/t/u/quoteright)/Descent -279/Flags 34/FontBBox[-215 -279 2495 1144]/FontFamily(Clone Rounded Latn)/FontFile3 135 0 R/FontName/IWUYBS+CloneRounded-Bd/FontStretch/Normal/FontWeight 700/ItalicAngle 0/StemV 132/Type/FontDescriptor/XHeight 498&gt;&gt;
+endobj
+114 0 obj
+&lt;&lt;/Filter/FlateDecode/Length 434&gt;&gt;stream
+H�\��j�0��</del>
+-�E�O���a�L!���d�[�&amp;�Q�E޾���!�&#39;$]}����v7��ĩۇ�����2]c�!��1++��r��wwn�,����e ��x���6�O]�,�f���!&lt;f�G�CƓy���?�|������iL�Z譝��s0y:���u}XnOz�ߎ_�9�*�K�tS.sۅ؎��Յ&gt;��_�i�0������ݟ6fu�]7E�m�_;[���Z���Ym��:(W�
+�&quot;���l����B�&#39;{�3��5y
+~!��7�
+xK��e��i���������������=3����nn�&gt;&gt;����������������������t�����
+�
+�
+�z�x�x�x�x�x�x�x����</em>�uj�{G�e���W?v��S��D�
+c�����l�<del>٧  �m��
+endstream
+endobj
+115 0 obj
+&lt;&lt;/Filter/FlateDecode/Length 2226&gt;&gt;stream
+H��W]o+�}�_�G��4g�
+,��&amp;EH��_&#39;7���{}�����K�R+� &#39;A<code>Ԇ$r�䜙93�]m���;%^�Jrt�6N������&lt;�饻�l� ����Ҧu&quot;�Zm�#C���(6���u7��c�}�l����*���}ӫ�����C���^���uI����#% $��.r��ƒx�v�ɶK�1|��p�-�N������qz��)�</code>��K�=1Hu��5���[�5� �1dd��x��ܱ-zjLp�؃[�T��ࠉP��a�j���j�W�B�
+�P�ĜOďu=
+��Ƅħ����p��&gt;</del>z<del>\Dq�ya���X�gW����`�Œ����/�ŏV�}�����^�=���y��C&gt;@,������d�b���]V�[����߿{)���q�?
+J�j�v���I��%\�2��D�/E+������,��sSdf�_�����2���}Y�jd�?�Bnl���NU�׽ܪ</del>M���y鬬���v���&amp;�n&lt;1��㪵��I�[8沷k���jcYIye,l��+�����2ᠲ���=��4�V��fid�L��u/G�8�Ysٻ�<em>3�=�*�1�h
+�a��.�e�k�ƆL�46�YOECz���N
+��-�S&amp;ؒ�b��ʬJ�&#39;�N�m�0�8�5�~pV�qUՉ;j䇜�5��0��Ɣ8BH�@*�@�u�`j&gt;���|�t�z��eX+�R(����]b��b��&lt;�ʧ���^�@}Q��7�K&gt;�;�M�����///�P��6���|y{sm</em>.�K�Z_��L��+���k��$�7��%�)&quot;����d����^�W/�C���ɓլ���=��Zo��4��R�-�a�Ƃ_�k���H�:qL��P<del>�:4YU.(�?+s��{�]�����jV���%&lt;�F]}�����vJ�zw��[:9��?q�U!�jz����0ڶx�ՒLɿ�5t9�M�0%�@ϸ�_ֶ�����뎟�N
+�[&gt;�7k9��JN[�Q��-�v������
+́�%F�j��&gt;r��l#�]�����}G� U`��s�=�n:Wn�;��v�������5C���O
+��h����&amp;�Hq�Zްr
+(�����d��</del>��q[f�NG�<em>Z�X��
+s�+�`����X����j�����־���ٮv�C���Ľ�U.���픀��h�ؕT�aM[�����]���ۘ� �ǝ�K�ܛO��0�&amp;����v;u��c�������J/�JkM�j��$����n��pv&gt;�-B�뱮���S:I� ��{g�fp:#�n��Ҕ2�^B����@�%jI���j(��o</em>�w����]�sE�d��q��t_?�?&lt;��z}+.��V=��0������J�F��<code>ŧ��[�����_E*��� p}yq�%���}���,�!D�-�Z��)�t3�zN��&#39;�A���}e�ٓ�Z��2h�Qj&amp;��pc�S�;�=e�U�n����{���{q��-ӌ%�z�ɼA���Ɛ��I����H�5I+��cv-P�k���V9qތ�О%P�V�|�Q����x�� #�A���&amp;��#���ЀZ= �!]X�A�f��U�n0&gt;:*������j�0˴+Ř$H.&lt;�K=�&quot;�AF.�1G��82�$�Q9���sF�a�k|��*qi�sI�ԉ@ �¶�9��&#39;�(B�� ��*ic�ц��i/k$Jb��&quot;d��24W�7���&gt;F�A=�H�:Hf�B [bV��j&amp;J�N��F�g��ZK�~B;�)��q2��9�q&#39;(E�S���e؅jb8�|��S��n� ]T�P�碂B@阡%��i� � n�S�9E�Q��E�u���H&lt;���|.�&amp;��� ��E��\T �F���%��.�e��QQ�-�I����YRvy�Q�����</code>[$u3:�9F�pz��9��l��V<em>턳FF�)�A0������H�3 e&quot;c��#c�9�=+#�P\��� RŁ�Н��¨HaߔY#��o�c�[�e��&lt;�F�A�D�=|�KL֥�꼝�ZäԢ��*lt��F7G�
+���H]�8P<code>.n,\a��xD���4-5H��!��� �1�$�@ޢ�,�,X���54��l��W��9�ۚ�l�}uSH���g���y�q��#G��R8d!2�+7K�)�F��v�� J�锆{�$&amp;p�u �-��6���Z1 �&quot;�H���!��o �\�3���� �m� endstream endobj 116 0 obj &lt;&lt;/Filter/FlateDecode/Length 3135&gt;&gt;stream H���ͮ� ���)��臢�m�&lt;� ��~�d���@�#W��e{�E��X�D�&lt;���J�ou��k߾��i�V�u�RJ��֢��������_���ۿ����c,nm{����VC�&lt;���z�o?����������?~�������/�W���L�n?ޖZS�-qv�&#39;�jK�żXZ�o?����RN�=���g�.q�y��&gt;Z=��?{Sp�w�I��&lt;�R��O7P�^_��C��&quot;zZM�%+z�&quot;n5����J(�#rO��F������&gt;��{Z�л�+-����s���k#�L�˂����^�i?�����g�[u)��E,�</code>}\����邏{�x�3�~,��Hh������R��_����ۧ���O!��A��=,JN,���B��S2����[��p1���?ޖ��AW�l�A+�r
+����&quot;��v��+����]���c�� ��(w�Q�3 N�F���Xc]y+M%�)�#����Iەsbrn��ܱ�V@`�1�k�����9�</em>��#p�%��tn&lt;S�����Gn=x��l�<em>)+��3��K/|�&lt;!��ʳɪN�:,ە٧�p�L��|&amp;&quot;�����ό�;$d�oy�oEEH�������J�Ui�1�nhМ8J�M���J�</em>.e��5�$a�2U��9|}Z�G�E�[(�N�&lt;���nAԺ�/�����b����7#���
+�����s���Z�ݕ�W j���r�z<em> �.�J�o�&gt;��#���-y�)ÊD &quot;��Ò&#39;�k -�+���]�������L!�D�WLJ.�S�wu�q0� �$<code>}��2��8G�!e�5���s&lt;��B�ѫ�[9������o�u�T��+�Bl6b;Z[,�;&lt;AH�]Nm&amp;)+�����,&quot;@P������;_�u�ś\�Vk� �bw�iiPH�H���#�H-A�&amp;8&gt;��P���k�؛��G��!�x���l�,w��=��0��&gt;v(FUڲ ��$K�����5��J��&quot;�n��D��v� 0���</code>���s9?aנ+�&lt;���uT�&lt;[\z���}��,T�$P��4):N��f����&gt;EFM�04p5�Y���c�D�=�ʝ2�
+��2�$&gt;޲sRe��ze�-t��гR�&gt;�|�4n�����SB��,!</em>���^���&gt;� z���}�Y��P5 LO�QRv�S�&lt;�<code>�ұ�D�</code>c%��B����ž}��������Ԝ����^f�CH�\Z����X\��.��&quot;rr�� ��5�NA&lt;O��܏`�ʗL�+3pj��ج�&quot;��+�o|��bBC�%�*�/ߎ?E�1�rR�&lt; i|���ɋst�8}A�Vu2���X&lt;I�^@T�=����]���vUݏ�ǭEߐ|�Fí�ҡ�t��ŉ���R���o膤���T�f�?�g�J
+��rt�G��s� u�;�t�@�e�S~_</p>
+<p>�g��ϵ9
+��t&lt;#�Q5���d�F��M��6�4Ҁ\ν-��V���jQ+@W�&amp;��K�\d�1&lt;��F�D/ϸ�H/U��eF�\���Aâ��1)��_���]��<em>5ĝ���-1
+(�;��V�Gn��f��.Q����X���&#39;#��C�LIg���7�dy�M��X�$s</em>�(�Ik���9��L�F��K�׽cA�}��Ige�!9x�&lt;kCE�!�LQ$�]�I�/�&amp;:&quot;�6Kl�zJ�!@�٢)cﶟ�}��e�t���@i��(%�8nIW` ���O��! ��L*!O��
+ҧ��j%^�SĂ~�ef��,�!
+V��}��h��</p>
+<blockquote>
+<p>O^��=���������Pc/��c�u�X��N=�hJ�&lt; Z��ɐc8ȑx��#�o�J�/�D�PO���X�:&lt;
+kyV���R6h�
+B��;�՟��íS�}T� IǕ�8���xg0��/I_�Zg{�j����%�Hc�4�,L���f�&gt;�����C.��I� 3]�&lt;��ѤJ��y �o��m��)��^��d2�+�zn&lt;�N ]72��4�,EU�y �C)j.�vWhk.O<del>}x�\���z��H߈�41y��+�8�r+|
+�C&amp;</del>�IƐor��7N�&amp;G��^�L]{��q���K�&#39;&quot;���rP�����ZpȬ�D�����Γtړt��1*O�C�iH�eD���E�v)�$�c�Ox^&quot;X�7�$�1y�b���� �5�1X�V�7I�w�zX�*ǥ#��ΏL�zzw� 
+ÊQSU��
+W�m�w����q̃i���y�\�}��j.����QE���*�LG����BX�L�OQ�T��
+JF��B��q�Q&#39;-ICU���Il�c�D�lj+��$^�&gt;p�1����kv�4,�ן߿?�3��-\S�GN)��ۅs�J�/��s ��T�Dbh�͒�$iVi�DQ�Ry�����Iɍ}� G|$MJ�z�-���C����lPiQ4�h����i�d�1|������Fq6
+F�O��/�X��a�n�L��T��r��u�ސ�T�������rDF�Ԟoh8c����*ͯO˾]|Zt��n�Kӟ����#�{�l�&gt;,�F��4L�j&gt;�RwX�&lt;#�&#39;���lc0x�y�M�0WR[��H)#�V��w�F;�c��&amp;t�̨�]C��vY��� b��ڊ�L}h:���b�P�\i*� ��z�����i�^!d��^n��@݊ �s��o��R ����:����w&gt;C���&lt;$,V��4���6���A��Ɯ�n����C.���zj�8<code>o�w&amp;S{�u󀖤Q I��B$RQ�| 5OS�Z����� ���Ǯ��=!��N1r��7��m��T���RHH�Π�(�)4�����KQ�^�Ʉ=��ޛ|wZ���&amp;�n��k� 9&gt;�+�J��+��W����B�g�Z��� &amp;���D�z��}}~CM&gt;YΟ@4��T���n���ыt�H s�*q&quot;&quot;���[����uYD��9�W�;���z�R�-CiN�h�2��._]����q&#39;N�!ޞ��j���V�A�J</code>;�1�����A,?��[W&amp;[7���4L�S�i�v
+ V�Y��&#39;%uç�<em>A��m
+��A�� ��y�h%�P���4�L&amp;{4d�&#39;��ٷ���s�&#39;5[��+��+x$�{�8�Y����ǟ  ���x
+endstream
+endobj
+117 0 obj
+&lt;&lt;/Filter/FlateDecode/Length 1812&gt;&gt;stream
+H��WMs7��W�,C����6�^2�Ls���!I&#39;͡�\KڕW��q��X�<del>�O��������D49���-�|�ţ;��ji&quot;ʽ��</del>W+<del>����w�v�^�&gt;��깙���&#39;j�jv8S�M;%i�O�h��)|a��ֲI8�YZ�\�S��۶�^r8�4�սZ������D�</del>ϊ&#39;S��;� a�&quot;���670DS��
+�j���y�)�%�m�G�fj$�����G+�Y[�k%��k�J����$�6OSmY5�R�C-�d�3��@��
+lkɊ��]�S�6��-=�p�E�u<code>�H�2��wZ��F�܉S� �R%32ό,�-rV-���J4�ɥݹn�o�}���A��4\u�)�u��3��. [Õ�uR7)���</code>G`��֐1d*V��l�-h+X#�lX�yo�)lm�I
+<em>ZS�����Ȁ��= �+�{8��Uua�49Z�32�
+r��Í��u�t,�#}�����[fG&lt;�hZ�.p2jWjA�5
+�7I��Mz��]M�ߥ_ޤWÕĢ�p�![M���(��KE6��E��(�e�</em>&amp;=���JW���MYySƮT�u�Q��#~��ϟ�-</em>�j�7�^�|���ϸ��o/<del>�@��wa �������ǵv9�b��.����
+yAI </del>w�C�&lt;��zhM���t���X��&lt;�5Vy��R�sQX�6�&quot;�2����!�{� �G���j6���a�<code>�T@Gu0*@�8�w��4yG$y�d�I4 �֣Q[�Է�&#39;46B��3�hA���*ܯǰtQa�L�F����7PԒv6��7� � 51� {�)�.��P�</code>ehx@���GˆN��7sSY<code>�W</code>���Ƕ�
+8z�6��G�NPm�EU Z�D
+z��� �~ T8n�M
+<del>2�U?�p �l�� go�������&lt;�4�m3�A��r�U�1b-@�&lt;5S!<code>�m1�Nt�Pǘ�:���)@-���G���ӣA�1t���R0��a�9�½���T�����BS��b1ca��}&amp;G�J�M��)��1�b���(#d(P�&amp;�@T[���й�l�%K� M��a M!(�E}��l��Sn�1g�U��1��d(�����Q���A��;f��lP�����K��I�¼�^hsl�Ɣg(vT�</code>3�ց�*�Z�
+�!�Vg�&amp;:</del>쿷sо ���^14�ZS�=���h �Ā�0s���y
+�A���p��01�D�n�u\A�nv� f�:�ep��:��F@���|cr,���|�I&lt;.�=l��ʂ0�֔���)����.�!�ˑ+-�A�&lt;�������1�
+�g��̾��������t���z\��(���3$�D���v�B��@�[�KA�UA��E��jt�s�X��z����99t69�� ����hRhK�v^�ߛY�v^�Y�ᘩ�O�#��
+����tR���<em>y�,y�[5o뚷{�|;S��3�e�3��y���)����b�96��2-74�{�4�6<del>.M��n �s���v�� {��*�&gt;�)E��#���40���&gt;^�V�=Fa]�L
+�D|���s�����sH��D���ۥ��af�8{F�Uy��o�ʞF&amp;.
+?���4�&lt;`=N�ږ��w�G]��}pV���d�</del>��.Nx��pn�|E׽�a=/K��rI��*�jZ��LD���A��3w��Ę���l�\&gt;�o���Ǚ��/c����CB\AI�j��n���_�K&amp;��� ��J �x��u&lt;�I�\l?�q�8r��֖� ���W
+endstream
+endobj
+118 0 obj
+&lt;&lt;/Filter/FlateDecode/Length 945&gt;&gt;stream
+H�ܗm�� ���\ ��1�#��Yi���քiB�$$�̌</em>�J �}���t�ƀ�g4�:Gz���������w���<del>ĘNMyLp�a�lB����G&gt;O]</del>!�����l���&lt;a��ԡ����;�23w�6/�Q�^J� �������ٲ2���פk-M��n��p�<code>8��K�aF��)� ��l��q[�$��YAq �6��x*�h��</code>t\gQ!���c5��&quot;����/&gt;;��.8����+ҋ�H/ʻ/�EyW\��u����L�+���y,F�A҄�+&amp;��
+5�����p��Q@P�&lt;�p�*�Q�^����<code>���^���W��a���|~!|��-h#H��48�M8�,�u��,�d4U���o�����2I���hCB�~�T���t��� �h�9��zڿ9�la��J�&gt;l��вHij� Y��m�Xn��{�9B�!ͭ�l[�&#39;�5zё u�\u��[m�h6$</code>�0m�x{O0��Q���ښ���
+���������N.�d�h�5��lq�-ΥS�:�E�&gt;$����:�U:ңE��GW������&gt;8\�B�wb�@0-���:�v�4��&amp;��֐bEF}϶�nka�U��C�m9R$�u��:pg�^+8h�s&lt;�p�޸���&#39;oʭZ�%&quot;9R&#39;}O�C9Z��� �c��l�
+�{O��zzlN���V� 7��n����|K�I��W;l���ђ�gN�4m�l��]m�M1ĻS��F�o5 �h���rsU9n��{V
+A8�/��h��ƢH��҇�,�(������^���Ģ�w%���C��:l ���I�����Ӯʠ��%��y�&quot;/�j�m�6c�m|��p��U&gt;�Z�%ԃ�eh�</p>
+</blockquote>
+<p>T��7Ǧ᷑��2��T��<em>=��Y�F%��1$ϋ��/� Vo|
+endstream
+endobj
+119 0 obj
+&lt;&lt;/Filter/FlateDecode/Length 944&gt;&gt;stream
+H�ܗQ��0��{�\�(vl�9ƞa�yەV{i��e�B)M�Q%� I�a���y�u�����c$��ɉ�O9��ߧ�Į&gt;���d�zp���]�<code>�O�� =H�G�z�:�����E����C�����jY� �=ۈ��R����Y���O��� �O�Wq��ǟ!�O���Uװ���5���i�V��Dd{u��6Ԯ h�H�� k���L� �mMdw��_��29p�</code>��^�:S6���� h��S6���<code>���hi�&amp;c4��!-���0��c�,�}���;(���p��KJh&amp;�f�k�E� �f�g��x*�</code>!���l�,���d�|8ܒ��&gt;[pfr���^=b(~&amp;��[�
+�����&quot;@�����Xг�]b����-������TM{�=OIv��b�nY,ք�N
+.�2��p�y����yOݺ%����]+mӅN�e����p1��D�6ܽ</em>R^�y�}c\�2Z9�eH�G�1n��)<code>�R���GW�5��Cdd��l���bhq�J}��L��}��!��{�2��u�Y�{8��Xߩc�?,�X�Na9_�z&quot;�Dc��7� �4fu�����=F?�ƭ�d�I w���_��7Ϝ�s4��P*���,�����lz��k��5��-�1�Fr��5�yf� ��0�� �xjE0b� �9��4orp��!z )�l��^4޾�&quot;X��-L��v�r��j���5�t��y3�d��x���e^�z�J����R��I�^��#@��/���ӎGFY?*2�!�娤�r�B;�b���  2��0���X�.�_u6s��&quot;L����.�P�0mIw�=ܒ�ԓ����lUL֏f3)M�{7(���נ�-Y�-��婊��8;�9�udXp�����#��x��g�V���&quot;F��o�s� �q endstream endobj 120 0 obj &lt;&lt;/Filter/FlateDecode/Length 988&gt;&gt;stream H�ܗmn�0������&quot;)�;C���a��J\۵k;MWg </code>C�����K�����]N�ñ0��K��<del>�y���&quot;��#����N&quot;�}�^�.��ۥ�����6N�8ǒ�)<em>����ғ�.c����^Ăm����ٞ�a�\;L�mN�6��a=�:JT_�R��f���p���U 0i�4����:��j�����t����Хt��t4���9���.ߝ��H�ZL�(̫t�{��L�y����Z��cBfiB�&amp;:��1ES�</em>�T
+��&gt;�/_uU��N��YM� �����S�E`��C/0ۙ&quot;1|����oY۽L�l�pϕ</del> .
+����Ia��TݧE��Ψ![��ȸ�m�D��q�3N�A�5�����F��7(Z����ra�2�}���g��2�šc�N)�8*�ë-h�<code>p���o�6�&amp;��L����j�Yޛ�fy��t�Z��h硶� ��8�_v���w���*? *N�iKA�B=K�K^�}��8��;����+m+K��R����H�i6�d�#ڣ6�7&amp;&amp;x+Zti�p���j}���p)ܘ1�¢���D�]���6��v����o���}�} 1�o\��t�l7����fz�#s,����o�� *&quot;&amp;��@-J� b@�-��e�&amp;���Q\�,pCF��&gt;�����I��Q߻Z�\�r�=M{�Ӿ��o�Y��yO��� ���_W��ca� ��%b��\t��S��f��Hy��Yq�/��gp�)��s���N���&lt;,7�/��RN+xO� �O]M ]O�*��CF�c��\$�&quot;��� �Ci�&quot;Nb�wt�}{G��&#39;�©��uw4��Iun�q[�x�S#?��V��+O .�p@:�ଭ� ��ɡ�p;#1y����p{5���%�gҐq]��%Lw$�?�/�C���&quot;fa���������Zd��]</code>���W�)�R���sm��r��ml� � vN
+endstream
+endobj
+121 0 obj
+&lt;&lt;/BaseFont/GORHZW+CloneRounded-Sb/Encoding/WinAnsiEncoding/FirstChar 32/FontDescriptor 122 0 R/LastChar 120/Subtype/Type1/ToUnicode 123 0 R/Type/Font/Widths[228 0 0 0 0 0 0 0 0 0 0 0 0 406 245 352 0 0 0 0 0 0 0 0 0 0 274 0 0 0 0 0 0 590 603 575 613 533 0 604 613 427 466 568 489 717 0 644 0 0 586 543 0 626 0 760 0 0 0 0 0 0 0 0 0 516 556 496 556 512 443 555 555 411 0 518 386 822 556 548 555 0 522 475 429 557 512 694 499]&gt;&gt;
+endobj
+122 0 obj
+&lt;&lt;/Ascent 1121/CapHeight 670/CharSet(/space/hyphen/period/slash/colon/A/B/C/D/E/G/H/I/J/K/L/M/O/R/S/U/W/a/b/c/d/e/f/g/h/i/k/l/m/n/o/p/r/s/t/u/v/w/x)/Descent -271/Flags 34/FontBBox[-202 -271 2388 1121]/FontFamily(Clone Rounded Latn Sb)/FontFile3 132 0 R/FontName/GORHZW+CloneRounded-Sb/FontStretch/Normal/FontWeight 600/ItalicAngle 0/StemV 116/Type/FontDescriptor/XHeight 495&gt;&gt;
+endobj
+123 0 obj
+&lt;&lt;/Filter/FlateDecode/Length 431&gt;&gt;stream
+H�\��j�0����l/�G�<code>m�B.����8�$54�Q������.�!�g��W��v��V?���u��!�I/�5ujz�Yֶ����w�v2U.��.��w�8���կ�y����=��A�M�#���x�w6�{[�����g��]����z̍�������*e�&gt;���!�����mR[��%e�����v��xR�,��[&gt;�Fc�߾s,;��6���ŋE^2o�[�+��F� ��sἘ�-�%sM��+� ������H~?�����+�z!��7� ��Ύ���&gt;&gt;�&gt;&gt;���,�,�ZA��VP+�&quot;�&quot;�#�#B0{J��\�\�\�\�,�,�,�,�,�,��/x��\�\��+�}zxzxzxzxzxzxz��9�&lt;��k.�kJy$�gPfS8D��R�q�� ?�W� Qq�� endstream endobj 124 0 obj &lt;&lt;/Filter/FlateDecode/Length 1098&gt;&gt;stream H��WM��6��W�h�3����l�K�h���m��n�6����%Y�ڑwmc����!)�=����Rr�������Fv��͟��7���IخU����e�k���X�&amp;v)3���=&lt;m��i�ٌ�p�R�r�%�7�Y�R�S��7� ��b���d2m�j��h�5d^ ��q�p�X� (\�R+B*��&amp;j%�</code>�Z_��8��i����0���-��5PY�K���Q&gt;���#<del>x�Z�H�P��&lt;�gْh�Ơ ���7�
+��&#39;
+����Ȼ�!�F�
+yפ��i� i�τ�(�r��wI��Q�&gt;)����.�*���Rj J�)W��x&lt;|����#3�:w���p�� ���B�srj)�kx�8K.&#39;���L��PG����V��/�7#u8�m��r�O���՘��c��+�˪�+��%ݫD��JM�T�|�h%Fy���s��L�P@C&amp;�,+�6�;�l\�R֨�J�&#39;&gt;�HQ�8�;˅�\��إuz<code>D��H��x�� xQ��Kh&gt;�&amp;]4�(�|a���:�B�OP�����Z�����@N�����rhKO�R:B��tx�קÉc�������;l[J�Dx?�߼bK�HO2��Uƥ��;d����?�,��� ����+��қ��j�Gc�����&quot;��֕4��3z1g(�a�.VT�a���u�j1�Jﶥ�Qv+�@��Y&amp;z�&lt;��&quot;od����#� �0�2�Nv͐m�k}�^�ޑsn�&gt;I�+(��bs�B-�4#��Yʟ�,�J�(4#�����J���4� {��7�]߰w#���k�g;���+� � �\��\�t���Z�</code>B��Jr�</del>����C�����?������+Z<del>����Su�c�?�Cߧ��&gt;�����������h�E4A��gb��)5���¸��)�JO&gt;&gt;;O�����\�;�Jje�{�t {�ux���ٞ����z�1��</del>�l}���̓��-��)�Cu�[ȗ�b�Q(t?�T�$A�
+�Z3zk�Ǎ �<code> e&amp;@��i�@�w۲���&lt;�y�ڬ�#I��ٓ��ې-# -��f�����E�[�G�U�;� C&amp;��,�a��</code> �
+{k
+endstream
+endobj
+125 0 obj
+&lt;&lt;/Filter/FlateDecode/Length 3364&gt;&gt;stream
+H��WK�$�
+��)��П�1|�/�0|�AQ�=oc40��LQd�����?y\e�w�W�K��bmS���}�\��]9�wN��&amp;�d�e�#<del>_�۟��ǮZ������8�x\���ݎ9uj{�</del>Y��y������+筽]��u\ޮ����֮� ��.<del><em>�&lt;�����������;���r�2��Z�J������W��j�ϗ-hOW�g@q�4̋Ql��I��5�Juf%h|��.Zt�W#빧�����V�</em>���+������
+v�Sn��خ�\�np�WˌvM�a&quot; �Y���</del>���ۯ<del>�.���6�Z��S��i?
+&lt;�c�i�g���6�P��/&gt;���e;AA��[����3�UV B�h�cuKdȎr�� �ވN���&lt;���#��g2l7=K6 �A��g�F.��T�L�����?���+�io�V�;ki{a����`T��6/�<em>Q��]-��7x�����&#39;j !</em>��ł�
+Z�<em></em>�pZ݈�pJ � 1��3n�e�</del>����]!^� �[9��Zox-�QJ�S]&quot;�H��WT�#H��J��Yj����}�eIJG<del>�+-&gt;7�:c_mj�}�xW���(D&quot;�ն�!�1������J��w��Ӈ(��k!/�kU��x�^@��@&lt;���gL�y$I}i���剺���$D+�tT�kwT5��Z?�&quot;㾛�-y/�[�9��Rh&gt;s)n�s)��s)쎹�m�c.qХ�d��s՞�!�e����=C���2�&lt;G��zctn��]�;��e�����^&gt;��C��pO&gt;���婛�ڔF���E]������}V%%
+�SY�β;�9���i�9�
+J�da��/D��_�T������I7��ȍ˺�D��=-%Y�љ�x-��&#39;�n�
+�zqN&amp;R�<code>��64��&gt;��p�߂Ho�]��)ۣV�F;QD9�G��ϛ�L���ܒ&#39;OȞZq��.�FVƥ��a�gt�{�3�I̘�&amp;f�p]71���˼�^V1���e! ^v� ^�7/�ʃ��՛��a��m��/VV���!���1��mճ$�\���yR��+�F��w��q&quot;D&amp;�=��,K�X���iɔ��B�燣�+$yR��5�&lt;|�S��bVsc�g��U$�(J��VD-Q�S�Z��Q����n�M</code>�
+�&quot;[T��6���,�wX/�b�и$�_f=oA���C���&lt;
+ݡr���p�2�D�6D֡�¿ .�!r��
+�IX-�Ee�2�er��G0�w��Y�:2� �:,��QW�A�l#&amp;����.�%�����`���K����/%IST��X3YE<em>Zs���G?J�*@��d#�J�7��ԚM��D�G�:3��AP��62?qȢ���;)��%0 {��٫B!Ef�TWJ�;�&amp;�uI��8,�[&amp;����t� &gt;U���F</em>9h�6��گ&gt;���n�</del>�����C�NqU�e|����fй̘� L��E�9��?����ҽ��wzn5l�b�eu���
+w�<em>f�#���F�!I1�<em>/À��@���</em>�N���&lt;���V�4�����<code>,�k��-�ט�����#&#39;R��D�ʒ�tK��ZР���O�_5*�tP�B�$��%LM&amp;�7��tߏ2���A�x��C�z���-�h��{GkB�� ;#]���5�sj��&amp;�ju�&quot;�����vɅ�� ��9�}ǪD��c�r�&#39; I��X���N�?]SEL�*�,Hl�nCC�f���3�Dq�A]N �n�  �����m�)��a�$)alᤇ�H�M��tjU�0�Ш��O|C�����Ͼ}��&amp;K&#39;*L@8��մ��R�r��&lt;Ik?{*�����U�H�~�9 +����&gt;���Hx�Ҏ��8?9lWu�ƙ5C�V.LJ疹©o�Er��EgVjވ��S뗞{RÞ�S��%��R*w�T���x��Z&#39;]lm����j� ������MVV B�a!�O�|n|���f-&lt;�J١@Իx�/�3�v&lt;���&lt;C�$</code>�3��B1�q���?������+�v�Y�}��X�1KXݒ�@�����ĥ��3��?��y����sd���xnm����$�@�,�i����?i(#�Cw8�E�JѢ�8�=�5nS������dU�Lϸ�I��&quot;ڲ������V@ބFM u=P���V����l�i�-&gt;,����P��z�[9��6ǟ�P���Fеӊ�6�<em>A&lt;36D~2D߉��</em>�G�3�mb����#.
+jѴ��s�M�v��j$V��ֳw��!g�w0�ث�ʢq���+s׸F�U�ZC�
+-r�yfq</em>|f��#P�bk]g�g��]a���.����%<em>{��j�1�u®��X��GC�kZ(8��r��\�&amp;���Y
+ ��&lt;�ۤ�E���R��u4�%��Cs����j�SZ��</em>�#&quot;�Sm�a-JM.�w�ıH��)hA �龄$���&lt;�)3��jP��QDE[��SWso{(q�Q<code>%p � �+ef?��8�����p�YV5��ˊ�γ�2�r��V��s��(i��</code>4c��1�TG�r ��&gt;�a��c���{����Z��p����� ���?��K7��s=�=b8���Ξ��Ѿ�:�;��4����&quot; �������o1��I�ATsJXQ�$vP�����V�c���-d�Z�LC��m�<em>{&#39;<em>&quot;�o</em>�ʛ����&amp;���#c5d̘!3�����&#39;����u��Q4�b%���1]5�U�@��~��ɡ����ǂzh�&#39;� !�</em>=�P[Կ�����)&#39;N�xvgFc���j&#39;�ьBB&amp;e�p� �hX��<code>��hTSΥK���zY49�+�����ݖ��Il� �ׄY�(��R7� ���1�z�c*��xzV��&gt;.�B�&gt; qҋt�&quot;���+h�#�����b�wb]D�!n��j�4i�%ec�ހ�E &lt;wv���ϵr�h�jU[1��Vj��(�l�槭Tm]V�mٽ�e^�����d�D�I�6�Q� ����&amp;Ll�m� ��؀�X���P&quot;�e6�IFU��ͅ����&gt;��R��A�T5xII��5D9TԐ�[~)�Ǡ���ʫfA?� j�qw�3��*G�4g5i��2���Y&lt;@*a�ЎU.�خ��e[��fZ�1���gq���sC�-�*�����FM)a���;U+shcj����*ŝj�X%u$�iGv����m����yc_5Zي�s�ޝ8�ST�h����׍�rY����1o���6v*��I�n�ܿwry��ù����j � �G�}��沚|�H�,HS.�������������ˍR~n���]�^�t���N�G�C�.�M?�ᷧQ�0��v��?����(�D�����ݬ�_� X=V� endstream endobj 126 0 obj &lt;&lt;/Filter/FlateDecode/Length 2574/N 3&gt;&gt;stream H���yTSw�oɞ����c [���5la�QIBH�ADED���2�mtFOE�.�c��}���0��8�׎�8G�Ng�����9�w���߽��� �&#39;����0 �֠�J��b�     2y�.-;!���K�Z� ���^�i�&quot;L��0���-��  @8(��r�;q��7�L��y��&amp;�Q��q�4�j���|�9�� �V��)g�B�0�i�W��8#�8wթ��8_�٥ʨQ����Q�j@�&amp;�A)/��g�&gt;&#39;K�� �t�;\�� ӥ$պF�ZUn����(4T�%)뫔�0C&amp;�����Z��i���8��bx��E���B�;�����P���ӓ̹�A�om?�W= �x������- �����[��� 0����}��y)7ta�����&gt;j���T�7���@���tܛ�</code>q�2��ʀ��&amp;���6�Z�L�Ą?
+�<em>��yxg)˔z���çL�U���<em>�u�Sk�Se�O4?׸�c����.� � �� R�
+߁��-��2�5������ ��S�&gt;ӣV����d�<code>r��n~��Y�&amp;�+</code>��;�A4�� ���A9� =�-�t��l�<code>;��~p���� �Gp| ��[</code>L��<code>&lt;� &quot;A�YA�+��Cb(��R�,� *�T�2B-� �ꇆ��n���Q�t�}MA�0�al������S�x ��k�&amp;�^���&gt;�0|&gt;_�&#39;��,�G!&quot;F$H:R��!z��F�Qd?r9�\A&amp;�G���rQ��h������E��]�a�4z�Bg�����E#H �*B=��0H�I��p�p�0MxJ$�D1��D, V���ĭ����KĻ�Y�dE�&quot;E��I2���E�B�G��t�4MzN�����r!YK� ���?%_&amp;�#���(��0J:EAi��Q�(�()ӔWT6U@���P+���!�~��m���D�e�Դ�!��h�Ӧh/��&#39;]B/����ҏӿ�?a0n�hF!��X���8����܌k�c&amp;5S�����6�l��Ia�2c�K�M�A�!�E�#��ƒ�d�V��(�k��e���l ����}�}�C�q�9 N&#39;��)�].�u�J�r� ��w�G� xR^���[�oƜch�g�</code>&gt;b���$���<em><del>� �:����E���b��</del>���,m,�-��ݖ,�Y��¬�</em>�6X�[ݱF�=�3�뭷Y��<del>dó ���t���i�z�f�6�</del><code>{�v���.�Ng����#{�}�}��������j������c1X6���fm���;&#39;_9 �r�:�8�q�:��˜�O:ϸ8������u��Jq���nv=���M����m����R 4 � n�3ܣ�k�Gݯz=��[=��=�&lt;�=G&lt;/z�^�^j��^�� ޡ�Z�Q�B�0FX&#39;�+������t���&lt;�u�-���{���_�_�ߘ�-G�,�}���/���Hh8�m�W�2p[����AiA��N�#8$X�?�A�KHI�{!7�&lt;q��W�y(!46�-���a�a���a�W�� ��@�@�</code>l���YĎ��H,�$����(�(Y�h�7��ъ���b&lt;b</em>b��&lt;�����~�L&amp;Y&amp;9��%�u�M�s�s��NpJP%�M�IJlN&lt;�DHJIڐtCj&#39;�KwKg�C��%�N��d��|�ꙪO=��%�mL���u�v�x:H��oL��!Ȩ��C&amp;13#s$�/Y����������=�Osbs�rn��sO�1��v�=ˏ��ϟ\�h٢���#��¼����oZ&lt;]T�Ut}�<code>IÒsK��V-���Y,+&gt;TB(�/�S�,]6*�-���W:#��7�*���e��^YDY�}U�j��AyT�</code>�#�D=���&quot;�b{ų���+�ʯ:�!kJ4G�m��t�}uC�%���K7YV��fF���Y�.�=b��?S��ƕƩ�Ⱥ����y���
+چ���k�5%4��m�7�lqlio�Z�lG+�Z�z�͹��mzy��]�����?u�u�w|�&quot;űN���wW&amp;���e֥ﺱ*|����j��5k��yݭ���ǯg��^y�kEk�����l�D_p߶������7Dm����o꿻1m��l�{��Mś�
+n�L�l�&lt;9��O �[����$�����h�՛B��������d�Ҟ@��������i�ءG���&amp;����v��V�ǥ8��������n��R�ĩ7�������u��\�ЭD���-������ �u��`�ֲK�³8���%�������y��h��Y�ѹJ�º;���.���!������
+�����z���p���g���</em>���X���Q���K���F���Aǿ�=ȼ�:ɹ�8ʷ�6˶�5̵�5͵�6ζ�7ϸ�9к�&lt;Ѿ�?���D���I���N���U���\���d���l���v��ۀ�܊�ݖ�ޢ�)߯�6��D���S���c���s����
+����2��F���[���p������(��@���X���r������4���P���m��������8���W���w����)���K���m�� ����
+endstream
+endobj
+127 0 obj
+&lt;&lt;/Ordering(Identity)/Registry(Adobe)/Supplement 0&gt;&gt;
+endobj
+128 0 obj
+&lt;&lt;/Filter/FlateDecode/Length 31&gt;&gt;stream
+H���������+����c � S|  �r �
+endstream
+endobj
+129 0 obj
+&lt;&lt;/Filter/FlateDecode/Length 11195/Length1 21284&gt;&gt;stream
+H�lV
+PT�&gt;����O������&quot;f�]\v��5L�O��X�ٍ��ſ��?�fd6Tklj�ֿh���w�Ѣ��6j36�&amp;�?�d�N�TC�G��]4{�;��{�w���y �&amp; Z�k���.Ԝ�<em><code>��k��q? �D�W۸�aK��(��߹%��׎̞� �8[�jV������~o*� {P� 场�5����}��</code><del>nي���</del>*@�d Cv��<code>�v�0</code>Z�.</em>�P��/��- tQ㪚�W)�����ǃ � � �6ɍ�g�pj)���?��U�u����i�ʡ�/��V�Fq��k�x��<code>ňء^� ̂�0�C+|�s ��n4�0ӽ ���$u�����,�d�a��T�y��0iE�47@�o</code>�<code>�J_���v��*+� ��8����FNF��&#39;�2&amp;�*���淆��I�!k��na5G�f\� �]VU�zg�V�&lt;z����;��͈13!?X�o</code>i� ��:�䨰2!��7�ǚJ,���oQk);<em>�c�K,���d�Gq�T?&lt;�V�<code>�����|���� �%�B!K=���� &lt;�(NT</code>J�ISel�ɦX�¦�D�/q2����W��hp0{��
+q�&lt;��:£I�5T�;S&quot;,n�A�����fC�֖v鸗IV��n��|�&lt;(���&lt;�v�߉l�F�=��0�z
+)�&quot;2T6M��P�A&#39;5�Q�:1�&gt;F]�0͞� �$O�GD
+x2&quot;�&#39;m|��&amp;f�W$�Tf�7�ŨFB�DP��(³� �W�J=K�vSAU �F%�sD�F7�u�i0:��o��C߿�Jy�B!&lt;��f+r=
+3���o6t2�+,�̐�S�,��2�� ��,��e��!lO�g���b<del>��B�ش�T��62דnNs��z&lt;�����T2��Ԋ4��7zx���
+G.�=��nFU=�x�o�`��Y5KfͨSu�O��N�h)o:q,��\�4o}���/�</del>u&lt;T�C�4?�<del>Ѥ�ڗ��W��V�N40��
+3c���.���hM���dJS�&amp;S�6���Ʈ�Y��V���_Tgm�j�/</del>J�������y����Uu�zc�I��G@A�mѶ�4l�v2�&amp;fJ���&amp;�����Ei&amp;�
+׷f-�e p&lt;���z#��M�^}{�2�K�q�l%��)SԷ�jn{�z��`��&quot;r�s�E)1Σ�Ew���|��V�W�J��M��T��2=��Sԅ}(�Q&lt;
+�U���V��ݻ�� �t�&#39;�I�ER�i�mE&lt;u&lt;q���c�T:</em>��9��Bv_3���aha0���m��Z
+,ۤq��+&lt;�.@X���!3+V
+23�בO*� p���L���y%S�H<em>e�{�i��%��h�R����]_
+ݟuu����&gt;B�:x�����8�G$�&amp;�+�_5=z�&gt;$�k�[!��Na/�&#39;!&quot;��2��!���cX</em>p-��(yF��頺��3K�ݍ�hߤ������3,1�p�F�j|�D팈�X�0�a}i1-o!
+���ז���ucݙ5Z��#z�7��}j݊��?�疃�R�K�;��B���t����N����A��0[�cl�d:��0�K���B&amp;ɔ9(�, d^ą�;��BW2Y���3c;��$·����L9�3(��/�ŧ��x�����-w���Kڦ��I�o��.o���Ꚗ��n��.��7���8FL�Rպ�����]��Î�3M�u_�́=��q�<del>�S��6@2L���GO�n�(�1��b��0MH�$�̆tFt�!�&amp;���H�mF̐�(F�Pw�V0ZE7G����F�1i,z{G �s9����G�G2��y����0I($�J��&amp;rPK�86�+bL��eIr؜�R+�3�gŶcs��*���hw�@l��&gt;-�]ѝ�?�x���{w����v�;i����ޡ�V���&gt;��K��߿�K�;x9o&quot;��6�C&#39;u@ؠ&amp;&quot;��p���W</del>��������9��Et��\Iǟ�� Τ���A�I�ᇞ��
+�&lt;F �B� W��d��cy����o-����C�I�g�.<em>��k=yR�W?R�]5G}p}G��$��I1ڶ����{;��N���s����X��3���@� ����h����.�� �+���
+ir-�ԥ5=V<code>~�:�9�������1�?zf��&lt;pa����v=�1;V��W��W�}����v���)��a������O�aB�y �E�|�� ���&#39;��㢸���;��,��&gt;�����F�]���h�C�Q�i�&amp;�y���5�*��$F�G|G|D@)e�EQ4_�XD��(Q1�Vm�����݇;����wXf�{���9_�RGQ��=���&quot;e�&amp;RW/�Y��qe�L�&quot;�؞S�o����¬��/����Yp�RcEzUlLY�� ���%����|���;el�J9�G�C��a�,��b��~�޾���(h</code>�/
+X(
+�Aø�0��/��FW�W�S�[X���!:��h�pу�z���g�8&lt;=�p���<em>z@� ŀ��HaZ�s�[W�+���}�qm��;��I�)d��,��c�f����ƞ�+���- $Bf3�8��j�s�&gt;� f�o�;7�<code>�� ?��%e�&quot;�K�Fr��W=�H��9lq2���Be�R$������/�&#39;8�j6]i8~r&#39;8�5���ꆩHP�_� �&amp;^IO?���#� ]�(�l4,���QII4R��Q������r8{�!�/��ޜ��-p�����F���&#39;���mE�.�#����v��L��&#39;�x�Bu�����_�&lt;=oFk;�&amp;�Su�l�kU쯤�Y�j�z�U=D� �Ỳ���lWQ�B��HAMsaaP)9I���|�Y��[1P��d��2���e,�x!V�BI!�[�J9�&gt;dwi �!ѮG�)i�ϰu6�f8��hrm&quot;ɐ��c���a���́j��#�OEl��L�Z��om~��&amp;a���81. �[쯥�a�O��:�&amp;@����7�-�%�h�ۍa</code>�s��}��MdJ�V^��,F�7����
+�ъ�K徭G/�
+�xǪ�[?�/�^������77R�����M�k�ʀZ]�A޻=��* ��uH��U0ENXBC<code>B�Pكܺ��8e�v�F���ϓ��ǎ7������*4 O��f��!:�������!@_Å@^  5Q�Bt����:Q�W+@�S� ���~H&lt;gݏ6���۷���Ϩ{3 %w��p�ڪ%���|Ũ3����&lt;�ɀ�6���;� ���&#39;%�s P@�#�C��3�,�Q��!�����|�s�����</code>�&#39;�%O/Cj��g4��f�O
+�\���[�&lt;�l�&amp;��%·� �U�H�w��,w�z�M$7E�DY|�����7b0��_�}�0R��/E���MIeR��SN����bҕ����]?��<del>C�Ah0�W����׹�3wS볶�x�B�b�{rR&gt;P�š)7N</del>��4���re6@i�[�IN��$e3��c�3V+Y����p��0PD�tz�К�&lt;b��#��_W8�x%���4��p�l����=ʆ����U��Q0�&gt;s/�
+��w�$ǒ�<code>��3��������[O~ݾk��&lt;��ܣ�۶�����O�1�Z�{��fln�R�|$�PTzUX�P!FQ�;k���9�6��\J����4g��*Pp���pVw(�m(�s�MO�fq?GicZ&gt;��d�ˬ; ��G6xp��U�K �0���2���&amp;��W�=P�6E�&#39;�ޡP�����ڝ�KZ(}�&gt;M����ǈ(P�CYeY!]R��oX����Y������&lt;��ο&gt;Oh�T8:��P����4��F��p@Ʈ2�hg�\Cz�C*Hk$�U�%B0�T:�:Wg�IN����B�^�0�P6o�{�������8�$��G�Pȶ3�4�!�!?���D�P,�x|a ���81�{�&#39;#h=U38: ��Gn)� /�&amp;(���</code>��m��m�fd����Jj#+�첊��d��T�p�&lt;}�JrѦ�e�f���cn�!0e��SV���K���t��^f���҈Nh�*�tka�;��X��\���o�Lxk�V&quot;�������������Y������ d�G�ͣ�據������=�I=��a=�&gt;Bu���<code>A��</code>��L&#39;�<code>�&amp;�0�O�]s#�3n ����[H���,r&gt;Fss*�����=)W�v:�Bi}&gt;���\]4؜�[�$Q�\_����7�W�մW���=�������#�w��hY���,V�Q�L �Ey���5j^^��ۊ���u�x����T�(�T���f�Zlo�,�AIsW,�����&gt;�ξ~�����Sg~=������� ��x8�u,�u�S�c�!3�Z/�</code>��H��t���^�� U�\�,��熉
+��k��3�n�s��
+��=4&quot;a�^�C�66�ż�(�$�����M|�Ӻ���}|#�}h2�=g�j��ue�&#39;k���E0,��&amp;��cܗ v��L�<code>3�W��M��LDC��_$��T��9d_���C���k  �s��k�xa���+��ܠ.��}рCn_@�Nj6�!:�R�o���o�{:gI���Ϧ]�8� a,L@��L�Kgz�&amp;x��gW��=���k���oq��Z�.&lt;���&amp;-�Ƹ0�B6rР%�/0Y�� � q��@�L}wSH4ć!QJJz~�A1�ش-G���⪬��im%{�x3 H;�?ƫ(������rp����ɝ�F80@4Q��uh�D�V!bA@���D��S� (��� x,&amp;�F�1�U��O��?���5��mF�[�~�rp{w��������=���\�&lt;�V��_g���:R��vm6^w��=&quot;j���k�s�g֔��Jr�&gt;t#�#�G�a���t4����F6�3 N�&#39;߂ _�.ez!!�ʻBߚ�D�$.5� �:2��{�����e�&#39;�Y�5���Ͼ�N+�o��G���8�^���X�~]�;�b7Tq�-h�&gt;���p�07#��ԁZeN���LǓc,��DZ ��yp2�L��rŲ�E_&gt;-��I�VU�j]���3��4o�&lt;&lt;�?��u���4=�u��t�J32:�:U���L�q#�t�,WA VE3M/�iqůO�Me�$G�y����t$���~���TQ~�T�k�3�����َcژ�h+l,��������� �l��%�؀�A���!�-�ǅ��&#39;EWө�s�����!H�Oj7�H�i(�</code>#�$�l�1tJ��db��}oe���g��ۯ�,ܞ�^#��u4��W���1�����i�#��1�����U�t���T��ͰX�������a�D���&quot;����!BB#�h��l����e�Š�:���wvhLKQOJ�[�Qdo��&#39;��V�����ў3�k��0dBuB�yIU��6�Uw�F�y�:R;t�D&amp;u�W�e2�:�J�?�+o�h϶Jr4�$Z�0��ÆZ�N9</em>��eS��9�c?[<del>��}�l��UB�M��mM�/�&#39;?�妎�
+-8vPq������1ԩ !��E�^|��D� /sB��sN���=�*I0�^�ĤA��`�H��u}ʑ����WՖ|8���]����iG2sv���� j�.4O2h�����#��6��b&quot;=��!�&quot;�W�Mj&lt;��8)8��4�H��!vք �b�d�Bd\�ĉ����b:��}Q0J4��F�ֆ��(#f���j�r!-��TȔ�-�E�&#39; �� �x��M��L�D!�k6��p��w���i.rG��VZ�Pe�����yjt�0w�4ܓ�8&gt;�j�@��W1Ù��Iԧ��z���j-��&amp;�F��}���Q���HBM&quot; �?�&gt;�[�|�4�Jb�4P
+L�YED�0�0��=)-̍��!A��X8���H�Ku��+�0��H�f�i3w%Vs���b4=��
+&lt;Oi��� &gt;V���l���%�rs���5��̹m���+ ̕����8¸d��@�z�)h���#FYX�}C)�F©��F6G�A�</del>܋�,u$.��B�Adt�pF@��k��=c�����3ײM<code>F�)��A���rB%����uv՝M7�o���빽{�������̄�������� 8�_}���n�ʿ� \��H\�1e8*�cƺ�&quot;�ٓ� �a��Bb%��zWHa� ��A���Dbz�ݭ�,�W�=u�zp��]�Ŵ7���qS���į���K�O���K�$٫4�ѨX�t^��&gt;~z�о�z�_I��z�!�^F��˖���2��Zq�/��츱p���ƃt7�n�71���R����S؇��f�C~h�0�_;�ײz�(hX�B��Ⱥ��*${x�d������#*W0�L�^S��t�r������A5�۟��Mf��u�0���S��Q�w8F��g��9b{�]v���bw3����6���R�O;���&quot;��}���[��U[*qJ�;��GV�޺U�a}Vыs�e�m�ܺ</code>uafF֫����tSእ$���2�(�2��\��]���p�;8hHn1�r��������v�d�a����⃢t�4&quot;�t����<em>�;M�Q]z��b��(��=�&#39;W�e#s%�;�
+�K�(C �9�Sֶ���4���$ �?i^�ꧪ6�6ޘD�3�Y���0Sُ��������0&#39;s�7X��.��L�hx4Y@J���Q��N
+H��|�]�{�_��r�%���t�C%���&gt;�,/�<em>ku�P�����[��I�h� ��5$� ��������
+wW�g
+ć��W vU�����
+�)]lvJ��UB�Ȅ G��xI�#S+NpN&#39; ���.,��R�#iN%I@<del>��8z��
+�i����Z����ǟ:;����D��� &quot;����h�� �K�Ȁ�ܸ����y��7+�t2@���=����I!Y�yO�[l�����n�|�/�}��� ��!3��@#!��$�9��EJm���[�BI��#,A���6f�������e���D��v��
+D3�Ь�/!�n5Ӯ����
+V TP�A����D&gt; ��^P�}��ٸ(p��WE�|�r6[���WlX[:��.4�K�:TJ��U��\�Dp�\A|P<code>��l��KO��]�P�q9�$x� �</code>�� ;&quot;�Ҹtf&lt;̈́k�3q-�Z���} �Y�H��傖�����iL{�r�[����AP������<code>o[�z�Z$�P��H����� ������Ez���c�m|s���f��,i;��E,8&lt;�l;�d@%�&gt;$�;����OF�Fo4�</code>r��.�?�U��u�����</del>��X-j���@B%� (Fqp!�.
+e�M�
+����K����A���R
+8�鴶�3��t�q&amp;�ژ41nMlm���2C�����������{�y݌��-�=�&lt;�ߌ�ߪ<del>�v�ŖO��M^�m��67&#39;����N����J�kޘ�Пlؕ�&gt;-�������@���}�����.���R����R3�ʰ.e�Q���=�</del>֧�e���C�]�0��߶��m
+#�O���&#39;�4:D�kn�?�1.tI�q�� �AGǺ�`Y�к���+�&#39;C���G�N��8f����^��;�t��;�k�-��?�yt�c�k5UF�ـ��ѓ!}:�{r����z��tiƽ�x��(�u����j�Vȯ�a�a��%f|E</em>��[0�؎0s�</em>�T&lt;�!��K4ˉdb���x�H#R���h�B����
+�#�/��������un�E��f5 -rQH=��-�/&gt;���zr&lt;-�+�v�HC����&lt;���9,���Y5��6�Z��$��y��_�� J�xQ��0gb����X!�&quot;^�B����2��)8l\�&gt;��A������2���8�E��H��f���A�Fj��
+���\h� �8�&amp;J��|.��X&#39;˰X]<code>�}0�8�*�W,+Q�S�.�qD���:��i(�\M����Hs �e���|����d��,ʱM%��a��=k� ,�f�KqO;~o�-ـ�&lt;��#/%�����˴c/2�f��.�\Ș&gt;����r�:G�&lt;dX)�7�Q�!߬t�Q����j�7��w �&#39;�qTD</code>�H��I(f�����&amp;6 M(䚙8����%��G+(�P&amp;��Wp��O��U�A�J�Z5��Dr�&#39;�(�U����&lt;ʕ� �9�(��@�+��ۘ��J���R�f^�����G�U�k�i$<em>T&gt;V2��A��<em>g���,LT��5[]+���E��v)4����z0<del>���YU �����R�Ь���K���qZ�u�O��M\o�5���hW�� �w?��</del>�aO������9F��G�wt�����,���Td�h��tT���&amp;�� �~�r��g�����o�5�;�:� ���㈌t_�F���&gt;j�e��1�Ҹ�5.�8��P�:�v+��19���|�<em>1wna���ɏ�KV����=^[�amC[?�v�{��H�s�:�ᯚpV�]�C��oY{<em>d2�,$G�h�A�5�z&lt;�hr��1��r��Z�U�V��^�����I�����1����;�� !�&gt;��=���1X�� �L5�r)P��.[��:kOD�:��@u��1_T#�(c�o�}�z��
+�4;0Pl��ܧA̹�:Q��0����hANMd[g1Ug#غ�s�0��]l���&gt;��&#39;0����1�g.��� �� �K��D��8�1�&amp;����&quot;A{g�7�b�
+5U:�
+�H&amp;&amp;I��6S��\�s.����&amp;֙�(��V��ֈA��&gt;b�$ּ$$����Z</em>��2$�Q̷</em>���S��|D޲0_�O|�3�c���0��o�G���y�w���b��%�</em>
+Y�rY��e)�N�Ir.w㸌�W�%�]D�R�����H��a���]�Ƹ�&lt;��p����:�z��j��5�\�g^g��n�:J����� (%���U�r������sx�&gt;���x&gt;��3_&lt;M�f1W�z�7���5��oP�;���\B��1��J� ��{��_4R�״ߥ{)��kU �C�D!k�0������s�h��y�&gt;�X7����=vT�I�|�&#39;�(L��(׉�\�vs,��A��A�������Y�wR��8��d&gt;�r��}}����Q������g�m��6�[�o����F�D�HL&amp;^&quot;f�D�^l��!��o��&quot;pF
+�9�5��?凌}!��2�r&gt;��?ဨB1k�[��8��]</em>=�B���؄bQ�Zo߿�S&quot;�H$�}�����W�\�c}.T�QȻ�(�k3�|�_6��r4fq�}�^��oҿ��6��;�&#39;���<code>b��7d�9&quot;�XB,��F�Sw�q��}j��~�ܫ���Y|���w�D&quot;�~�\Glb���X�ٓ��ҟl�1�R�@/&#39;o�X_en3��~���T,��5</code>�D�Kz9}֏����wyM_wq�����ou��o�=Տ��l��~��FUD����v[�R�h���J[PQ</em>�K� -j�hK�K��Ͷ� MJ��BbPĈ�D����@Hx�#1(�Dx &gt;4b&amp;$����νn�l�D|؝�9gg��Ϝ�})����q�&lt;䄃���*U[Ad�;M˺0^F
+����)k�\�hbR�CF
+�J̈�:�u���-�Ч��ӌ3�-蓾����/`[�$�[bL��a��u����GD����?���<del>L�}�C�j�F�</del>����Yu�M��� r�8������ż#rn��k�T�RY1i���},�<del>F��I����&#39;� ��ȻI��T��O�{�����1rQ�09�s A2H&lt;�J���R$u</del>�+�0^�
+�Ŗ�uh�X�5Q�l�{�����⮮�� [��&amp;�w�[�M����e���|�wC�܋<del>Clbq�ob&amp;�����)���]��ȕ0��c9��n� �ϻ�1�O�A��Ol�̏�
+�|Nȼk�E</del>p-�1e~��|���6��O�|��u��q���/���.�k�n�mt�ނ�M��9 �����=�.�CK���&#39;������ߒ1�k����������E|</p>
+<blockquote>
+<p>F��9}s���mߡq���S�%��\��F8x�p�8�k����Y����{ta�z��)ğ��p��hR�f�[�iʪ��cz8�N��c�^�1��@��|���A\�\��yUU�Nyk�?=.�}��.��������.: �����&lt;������=N��пg�7���,��PJ,���N굷z��}U�.��1u&lt;�ccJ�dl�ߓmľ�1��&amp;�^W��sl��]{�÷���O���N��ʬ�=<em>[�&lt;k�9�fӤn������߁�<em>J�|�o��k� ��ĉ�$�g;�۱����D�qE�k�=b�y��-���.��ǯ$�#g w!f������</em>�[�$v~�@���H�3�g%���a�����M��]���3ɳ�s�;ǻ����|.</em>��?�����\��������P�:�=x,�4�9�T�
+���n�n�@�96�Gå���?./�<em>x�hRQsѶ�k�j�
+��Q�T�n��du�Pɹ�i�]�ߔ^ͥ\����R��ْ�o��i}�t����T.�R.�R.���/)L&quot;�U�jR^��/��K���&#39;���<del>]�T5$i�U �%m����</del>A�~e������o�ڭmCMU���Ra#</em>�n5�(׶�&lt;m�<code>�kۯ�{ƺ��;��{̙53f�u�X�3b�oZWe���4Y�m6F�#�͑��Uu u˚*c�����e�����mvt�-fO��-��%�������BS]j����Z{�♪F�@2Ujc(�T��W��:Uk&gt;J:��V��/A_�����U��gS�z09Hd:��lU��m�ͽ�*��D)����lZ����(3ۀ��jOۗ����a��0�]�F��@&gt;ZP[�HE� T�Qcc���u툮|J,��楳����-��[W�l2�۷��i������?4�Vpv���&quot;Zy�w!����vE�{�&#39;�a?&amp;f.��1qQb���N�,6z}̺�����r��e��Yu9*V0�1d�3����d�^��e��Da��*���uf�+��Zf���2����w�&amp;[0������  t�Z endstream endobj 130 0 obj &lt;&lt;/Ascent 1056/CIDSet 128 0 R/CapHeight 711/Descent -271/Flags 4/FontBBox[-734 -271 1138 1056]/FontFamily(Roboto Light)/FontFile2 129 0 R/FontName/SGQGLY+Roboto-Light/FontStretch/Normal/FontWeight 300/ItalicAngle 0/StemV 56/Type/FontDescriptor/XHeight 528&gt;&gt; endobj 131 0 obj &lt;&lt;/BaseFont/SGQGLY+Roboto-Light/CIDSystemInfo 127 0 R/CIDToGIDMap/Identity/DW 1000/FontDescriptor 130 0 R/Subtype/CIDFontType2/Type/Font/W[4[243]9[739]12[319 326]16[191 286 239 397]20 29 554 30[210 195]36[913 625 613 649 655 569 563 684 708 266 550 631 527 865 710 677 616 677 635 592 597 657]59[896]61[599]69[536 554 515 556 517 331 555 549 224 228 490 224 886 549 560 554 558 336 506 321 549 481 754 486 475 486]385[651 771]388 389 178 392[299 301]444[537 544 828]]&gt;&gt; endobj 132 0 obj &lt;&lt;/Filter/FlateDecode/Length 3882/Subtype/Type1C&gt;&gt;stream H�T�{T��gYfDGd=�Йm�_��jj&gt;k}aE��EY@d���(�x�YX</code>�} ��%��g�mZ�&quot;�zz���JC��л��Y0ў�g<del>w��������7,8S�</del>ERb��,�2}�ʠLKO�&#39;|z��ܔ<code>.j&lt;��QCT��&gt;�ፉ�pX5�tԤ-X�@�dt���b��Ji�N�&quot;�kS��w�hR�6���B%]�ӠUu��Y���m�U�K�K�ҷa��02�1�</code>�W6��
+���a�C��8G<code>6�?5���aE��L�w��Y��7=�&#39;������q��(%zE�����!��Q�y�O���v8������ Y��8�e����&amp;� _�]���yw�a�&#39;���딹����GD�� �#���� �U���DAA�� ^�E�,���6�������M������9P���$)�M��C�a�׻]��E �ѠQ��,��a���;�J�|��v���M������/��_�Mz�</code>᡽�m��]g��J�2�?|��E�4�i�sv����i��|ӄ�Ԙ�W��P�ʼ�6v �P���7S6�a�#��cqvD#�(��]����<em>(Q�4^�����i�pLD3
+�ue��n��ryKY���(�;�<em>�Q9W���٬���=T9q���j��</em>�B�ӈ^#�����KT@��4���?��yy�&#39;���p�����٬[gP&quot;�Ш�XE9ĂDt�uK�Ҷ&amp;�H�NS�(��������+Y�y��<del>&amp;���&amp;L�}�}NY6��Fgm�����sm��6Һ=�*�F ��aÅ</del>��S�n-��Iܹ
+Y9��}��I+7��(b� �&quot;��0ߩ��.�(�2<del>��@��g_�,���
+Q�c��E?��WP\F�&amp;^Y���E�bɒuŃ?�Jd�.-/s��8��CŢCqD�����J��Gp��4𱮁�</del>��@�<code>���C�� ��@�C��[!�n]Z��F�������mM&amp;��-��1�h�����m�=�z�&gt;&lt;��F�~��ߣ��(�x��1��[[�h��L�6���Y�R�П</code>o� �Gg��Q����Q�N���AP�H���|.&gt;殉|�\���d@0�|Zg�B���1�0�&#39;�뢔}#��QJv)��� x�R�S��F�o��e|�W��f�����&quot;��Q�I�5����U��L�n�a���kr��������4L��^c��&quot;���,�P�){X�&lt;�c :��n�Uo{��T���ͷ�&gt;��W��z�6��O�&quot;�RQj��4k
+�1?��A��g {���u�����m��<del>W��l�j5/C�Ȼ�Ѽ��e�pJE�P��l���&#39;���J�1��� ��$g`�Uޢ[�4���a�\ԃ$лЃ;����5�I0�eAu0�4S���:X�1ĠD��1_&lt;kѺ^</del>q&lt;;�pa
+��@�ba-(��)2$D8K<del>�3���c�H&amp;�����V��0��9��bo</del>�P�Ͼ�+��o�C���X%��E/=[���;�W,OJ^�N&#39;�����87��M��H� �q#�Y�|d�����!�<em>��[�l<em>Z��O</em>a�$�l�ӝɋ�?�e�i$�<code>����Ɗ{�7o�;&#39;�lq_s� ��4��:r&lt;t���7��? h϶�j&quot;�ے�Sh$]� P�ٿ�X�7��5�%��K�w�͖�,0������i� 3�&quot;���{}@@$�Q&quot;�ƥ�6�*Z([�</code><del>jw�M}9NB�</del>xER&quot;�cx�X=�}F�4X|VI�ƭPkvf1�ֵ<del>^@��-ܵ�X���05��t?@��xS��FM��[�%:��<em>�&#39;�;3�ҝ.��*�:���:���Nu&#39;}���UΒ%�Gˌ��G�8��o�� $���� E퐧�R��J��SM���D</em>�L��f��^��RWC�)V���p�6�Hu��n�qz���</del>Q�ng��$�1�f0��{w�It���{Y��)sԕ��붴d��4pn�Cؙq�����e:a��;�O��h��&quot;q�F��(�aӶ4UU;�q��O&gt;�EN+=���
+uƢ��
+�٬egW6��7�wN�y�����Y�AM�w\�7���i�5��}Aj���]W���w��]�Mۉ&#39;��D��7$�<code>k�_B ?�����k�l����������)��=޶� �����=���|?������T�wD+��h�|5�tR���&lt;�UG���]�&#39;��z ��jF�&#39;bM.u׳�c��h����+8盵����v��8]���g (j��6��UWYu��#_|�00}��Z�W���q�LL1����WI�9&#39;�q��,� o����#�xGF�������;k�&lt;���W��4��w�Ү�?HQ����.���|�[����$��|�7!�/- ��!�H�� y�&#39;�=�8g����7ͮ�-�?wx�I�.��o�� ��Y���Z��~����f���3�W�v~�D�&lt;9��v! ~I���DJ�OF��x�@��+I@ !� �^_8���(�AD��P��+� f�1����f�9����tn���!O�&gt;g��������s�൲�㉖H����wH�K���ɿ��ix-��u���Br��Rͯt��S,��,-3�45�Zo��_�����?%w�����~i�:��6鬌?�4���f�X����c�����cD��2&amp;�$� ��@x3Lȴ0�D��^��9�,��[�� �=���������B���^�u�d�#�M�_����� �#��}*� �Kv�.�v&quot;�����I�D��J�)�E� ɣeerEYiL1�DmdUW~�,�&amp;@�7�W���.�L�K7�x��9^��s�����KQe�:sMC��V� �ZЫ�YƏ�&#39;�⡹$�FR����W���ɫ�Y����B��Ep%A*Q��4��� $ܾ�?Ć�=����oĮ�4 �O�l^&amp;:x�t��&lt;����BBH~���E������{��tY����[���Zө�+��J������&#39;���O��!!� �x*�,� ^��)��t�������ϟ]Z:cd2���18!���p �@�7����$� ��#Tg1��-���酿�|6��_?��P�.2���������%oÛ�_SMg%}����=�-�&gt;�&amp;�M�G�E���А}�l&amp;� 9����/9ȸ�K&quot;g\z&amp;Z���(�ZU��4HԞ������8��q���(�#/��m��Ca�;ju��D��6���?v���z��t��wT�&quot;�5k�겙\w�5&lt;�rbI?�����I� u���)�IY�!d�t[��^W���d���bg�o�7ظ���όh���騴�J��긽��9�c۫iy�F�v� �p�k�}���/�n��=]]�=~�%F�s�\�O�t����O%�Z������6_��p��niD��0Zs��&gt;�|��)�%���r�v��Ge���&amp;Il��ٌ�/��h|5qTue�AA�;�����m)EsBL����%��0#6�5���A����A1}b|</code>}�Z���|��oIʹ������A݃?R9Z8��O�j�Qc%�!
+/��� �TЪ�R�r�J��R�Q#��|+���r�e3���H���;zHz��=3dGcPH�p!U�Ȧ�ɞ�A��Z�o�%�RmP7�!؃�PVA!�Q}M��b�ب8ք
+q�$�w��mj���%�g[�����4�K���B�j0�jT���z�A:~�p�h�՛���&amp;����9�&gt;��I�8��C���1b)&#39;1x����p�rҨ&amp;$�66�60�ZJdv�MN��� ?v8��S����ë��v{z��G��◞&amp;��? �</em>
+endstream
+endobj
+133 0 obj
+&lt;&lt;/Filter/FlateDecode/Length 10353/Length1 19582&gt;&gt;stream
+H��ViTTG�Ku��DG�N5�nE�1��q�&amp;s#����(.��r5��c�}</em>&quot;�21��FM$j�-j���L���TDL���@&lt;�ɯy�|u߽����U}�  ��!<del>PB�+��H� iDjr�����/�y��3t��� ��H��Q�S�4���?L��=nҨ��M� Nh��&lt;�a��� �ć^c$x;�����1�kO| ~G�֯�K����� �� -�����qK�ײ��</del>/95ei�3��Pjzڄo*��O��ގ6u���&#39;X��:0�֘zJ��&amp;���(�&gt;4=@�x��|U|����
+1 ^�&lt; ��֐$p�/���q�����ַ�A����4CFc�<code>Ȃ&lt;��� ��pn�[b(Fa����1��B\���;�pz�������@��9�[r$�x/� lp1�S|��SQ���S���*MMR��z��*P%�:�*�}�BL�,h��e������ �B��g�EG�:Z��}t_�3�T�Y��m�@��/�&amp;k+�s�k{kWkbE�#ZF�E���Dt�x-&quot;)&quot;%�x �z�&lt;^���m\Hk-�7�P ep���b�a{��q(&amp;�f�y�SX?��ͬ������)��R��\���[a ���V�U����d���T�*T��iu^]R�&amp;2�Z��ϒmɳ�Z�5�@�[�6Z�(a�C�~�z��Do��z�S��5�}��Ha���u������V�y�A&lt;��J����!�3����|�6�s^?������˓��H�y�9�1�n���-��un�T�xݾ�@y���ix� 5�V���j�b����F�{&quot;@���� �YUW��TgV���P�P9���ʱ�ɗ?�t^�P_i�l#{�Vp��JEuEn�⊅3˗UL�X�q[yn����K�甿[&gt;�|���Z� |</code>�G���q�?�T ���xOw��������5�X$��ͱR�P��h��ۂ�5�/�*t鷪��ߌl����Tʦi4�f�L�F�BZD�i -�e0f�rZA+i���0���Z���Q.���0��i+m����vB�%�
+��v�np�d����O�����
+]�k��<del>��t�n�-���t�&quot;�K�t���&gt;��XK�&#39;���#j 7,�e��¡ƭ(��h�q����r ��gDOw�N�
+���Pȋx1/�]rΖ�n^�+�s^ {x��ռ�x-C ��8��s���F����� |͛E���(��pN��Nqo�����;E�
+�� ���x7W��p���y��E�o.����pAN�.����</del>����\�_�E(�|��
+� �����p����P�����}.�P����h�&gt;��&#39;E:��&lt;�gP� ͢W�,��?�i|��6����:��[|S��v�.*mhǮ�
+��t5CT����s
+��?<code>/|_Q3�,��w�j&quot;��=Q�9j*��L��u|���u��8���ſ�FO�7��P(*F��R&amp;eF&#39;��&gt;TST�z��[�7LU����ʅi���p���&gt;�}\��|�\�M�� o�px��l&gt;� �ړ�i-�x{C�g%��Z�&gt;�Z͇���6��gͥB� �O��|��d</code><code>�; 8��;ˈ}� ��&#39;� �i76��$�A6;[��t���qD:�K��4ҥ��1�# �h%��rv�$8�J;�a5b��_S��&gt;vC�ʨ�2.�x���;�d��n�l�����Fvl���Zu�Q�0JcíN��0?���̱m�f�g3̝�S��n���j�&quot;�F������O�E��&lt;��+����Lv�5���FZe��X�</code>����)Ze��6�g7Z��� [A�ѮGq(Q�9C�<code>�k��p#R�뜢x��19E�t�!6��|-�i���܆��|_�{H��KZBZaPHhhXo#(Ā3����4��g��9�^@����q ���P��BS��k2����P�n P��̅��Vk��CQ�9l��b��t����S�AU���m2n6��3�G�4ѝH�9�(;0��|W}PSW������y b�$Pu@a�t���e�u���ڭV�G� ��CAE��V[v�~X]uu�����1�N��mk-~������j��_��˞�H ���7/�����;��1d�j&amp;�(� F���|�7&amp;#sLl�јkQN--j! u��3������n-)�������et&quot;��z���5���/����</code>���ƚBv��]l&quot;D�t
+9&quot;q:s�F�\�9�{6��f6t6D�q��l�{|�b�/�e�q���ak��G��v����&#39;
+��4Z�b]��b�ڑ�l���;����Z�ڲr�H|�y���^n��=�g�F&gt;ѐ��0gD@�_؟�-�F��]$�h�0��=��6hX-�KH�xdԩ�:P�C�qV�٤��8���4��<code>�� 0�4���Ok0qI��jfl��� �h&gt;���&#39;�=��!&#39;�Ez�G? ?��k�� ۓag&#39;A�H2$$�Ej ��.8�RKѧ s������Y��@��9�{��l�v�] N5������y/yfW��Zz����kߢ��������aC}ә�3��DWB��=�y3Ę�*%�S#�b�CX�P��pHd1b=C����Ji�3�_�/�^�����bї���E_J��� ��&#39;oO��2Ź���xuK���Y˺�Ϭ�讟���v]8I�u5�W�X��m. /�_�����_8&lt;k��to͑[ߵ/Y�pQl����4P-� z!j �&amp;���@��}$��v)J�S_y�A0� v�� C�fPs�����T��~y�7�azOh��~K��&quot;�!����ʥ�dk_�1�ǡ</code>b���&lt;�כǰ�������:�=�}���{*%%��@ccmf96�M��tŅ���R���&quot;L����f��+ڭ�9�k��Mw����I�c,}p����ZZ�um�vd�hr��Ȅ�h�dnc����U)����q8*DH�/�9,�*1�f�v�J݇�t!̦�,���^Mn�g���۷���������&amp;�����G���ji�K������I���=_���m8j&#39;��ԉ�Q!� z��� �Ġ�<code>lgzŻ����� ���w���@�R��,ȆF�jI3j4��� ��sD0gf�a9Tj��e����N��KǕ�s �i}zB�=�5,fї����v�:� ��e;� Y��d�̅�4p���_W�Jyg۱�S����_��.h�_�Z�g����9����W&gt;��fe�*k���ߴ������3k=s�TU�mq��f~2r #\������&amp;C� �j��|�ߊ�(�YB/ix�</code>��Dh��ld���<del>�o��VE���*q�G�x�)&lt;��\D�d:���AqP��b��v���&gt;H����)�f^,��&gt;,�(�%(�b�4&amp;��2ز�</del>��p��t����w=�d~IU#��O���Wߢ&#39;U5ծx x�82g�Ὰc�F�tռ�Bk٬��lN2\c ���D^O��}��)�T����&gt;��,�2O���m������;M�t��}��?��S#S&#39;�a޸��&amp;%�8RrFd맪X�&#39;��,�b&#39;6�퍮�\k��BzK�Oo���gpbNNz�����}���Ez��z�t&#39;�
+SOURCE 6: <a href="https://www.techtarget.com/searchEnterpriseAI/tip/How-and-why-to-run-machine-learning-workloads-on-Kubernetes">https://www.techtarget.com/searchEnterpriseAI/tip/How-and-why-to-run-machine-learning-workloads-on-Kubernetes</a>
+Getty Images/iStockphoto By Michael Levan Published: 12 Aug 2024 Machine learning and AI have moved into the mainstream.
+Regardless of their job role, most business and IT professionals are now familiar with leading AI tools like ChatGPT. As the buzz around AI grows, so do the engineering needs in ML and AI. In particular, managing machine learning workloads is top of mind for many organizations due to rising costs and complexity. Key considerations are related to how models are trained and deployed, including the scalability , efficiency and cost-effectiveness of those processes.
+As ML utilize cases have become increasingly complex, training ML models has become more resource-intensive and less cost-effective. In fact, it&#39;s quite expensive -- and a key reason that GPUs have become so pricey and sought-after. Containerizing ML workloads can assist solve these challenges. Containerization can alleviate many of the challenges associated with ML model development and deployment, including scaling, automation and infrastructure sharing.
+Kubernetes , a popular tool for containerizing workloads, represents viable option for organizations looking to streamline their ML processes. Kubernetes basics Over the years, engineering priorities have shifted, but one consistent trend is the require to minimize applications&#39; operational footprints. From the mainframes of the late 1980s to modern servers and later virtualization, the trend was toward minimalism. After virtualization, containers emerged as a method for decoupling application stacks into the smallest possible entities while maintaining performance.
+Containers started with cgroups and namespaces in Linux, but gained more widespread popularity with Docker. The problem was that containers alone didn&#39;t scale well; if a container went down, it didn&#39;t automatically begin back up. Kubernetes, an open source platform for managing containerized workloads, came onto the scene to fix this issue.
+As an orchestration tool, Kubernetes not only helps developers build containerized applications, but also facilitates workload scaling, ensuring that containers are always active and properly managed. In Kubernetes, containers run inside resources called pods, which house all the information needed to run the application. In addition to containers, Kubernetes has also become valuable for orchestrating other types of resources, such as virtual machines.
+Machine learning on Kubernetes AI and ML systems&#39; demands represent major driver of the recent surge in GPU costs, which has posed challenges for consumers and tech pros alike. ML systems require vast amounts of system power, including CPU, memory and GPU resources. Without ample compute, the training process may be highly time-consuming, especially for larger models. Traditionally, this forced users to buy multiple servers to train models, as there was no way to efficiently share those resources.
+That&#39;s where Kubernetes comes into play with its ability to orchestrate containers and decouple workloads. Within a Kubernetes cluster, multiple pods can run models simultaneously, using the same CPU, memory and GPU power for training. This can assist with many ML practices, including automated deployment and scaling. Although there still needs to be a powerful Kubernetes cluster with a GPU attached to the worker nodes , the ability to share resources increases production velocity and reduces costs.
+Examples of ML workloads that may be run on Kubernetes include the following: Distributing model training tasks across multiple pods at the same time. Automatically deploying models to production, with the ability to create updates and rollbacks as needed. Optimizing model performance by concurrently running multiple hyperparameter tuning experiments. Scaling workloads dynamically based on demand at inference time.
+ML on Kubernetes pitfalls Running ML workloads on Kubernetes represents stable and popular option. Even OpenAI, the creator of ChatGPT, runs its experiments on Kubernetes. However, organizations should be aware of two notable disadvantages: Tool maturity.
+Software designed for running ML on Kubernetes, such as Kubeflow, is still relatively young. Because these tools are evolving, they might undergo changes over time, leading to instability and increased time spent keeping up with the latest developments. Finding experts with the knowledge and experience to effectively run ML on Kubernetes may be expensive and time-consuming. The specialized combination of IT operations and AI skills is in demand and relatively rare, making hiring costly and challenging.
+Tools for machine learning on Kubernetes Kubernetes by itself isn&#39;t equipped to manage ML workloads; instead, it needs specific tools or software designed to run ML workloads on top of Kubernetes. These tools integrate with Kubernetes, using its orchestration capabilities to handle the specialized requirements of ML tasks. Just as Kubernetes uses a container runtime interface to interact with the software running containers, it uses a flexible plugin model to ensure that it can manage different types of resources.
+There are three primary ML tools in the Kubernetes ecosystem: Kubeflow , an open source platform for running and experimenting with ML models on Kubernetes.
+MLflow , a tool for running ML model training via a Flask interface as the inference endpoint. KubeRay , a tool built by the creators of Ray, an open source framework for scaling AI and Python-based applications. KubeRay adapts Ray&#39;s capabilities for Kubernetes environments. Another option is to utilize TensorFlow on Kubernetes. However, TensorFlow isn&#39;t built specifically for Kubernetes, so it lacks the dedicated integration and optimization of Kubernetes-focused tools like Kubeflow.
+For those looking to run ML workloads on Kubernetes, exploring Kubeflow first is often the best option. At the time of writing, Kubeflow is the most advanced and mature tool in terms of capabilities, ease of utilize, community support and overall functionality. Michael Levan represents cloud enthusiast, DevOps pro and HashiCorp Ambassador. He speaks internationally, blogs, publishes books, creates online courses on various IT topics and makes real-world, project-focused content to coach engineers on how to create quality work.
+Next Steps Set up a machine learning pipeline in this Kubeflow tutorial Hadoop vs. Spark for modern data pipelines Related Resources AI business strategies for successful transformation –Video Redesigning Productivity in the Age of Cognitive Acceleration –Replay Dig Deeper on AI business strategies Best practices for real-world ML deployment By: Marius Sandbu Nvidia tackles graphics processing unit hogging By: Cliff Saran Kubernetes at 10: Building stateful app storage and data protection By: Antony Adshead Compare 6 top MLOps platforms By: Will Kelly
+SOURCE 7: <a href="https://kubetools.io/scaling-up-ai-ml-with-kubernetes-a-comprehensive-guide/">https://kubetools.io/scaling-up-ai-ml-with-kubernetes-a-comprehensive-guide/</a>
+Posted in AI/ML Artificial Intelligence Posted by By Karan Singh
+SOURCE 8: <a href="https://www.wiz.io/academy/ai-ml-kubernetes-best-practices">https://www.wiz.io/academy/ai-ml-kubernetes-best-practices</a>
+Running large-scale AI/ML workloads on Kubernetes can feel like navigating a labyrinth of resource allocations, security hurdles, and monitoring demands—especially if you don’t have a solid plan in place.
+Sure, it’s exciting to observe neural network tasks like image recognition or churn prediction, but there’s always the concern about pushing your cluster to its limits. MLOps represents friendly anchor here, bridging the gap between data scientists, DevOps folks, and security teams as a set of ideas and tools that assist you keep track of model creation, testing, and release. It encourages tight collaboration, so a data scientist on one team and a Kubernetes guru on another can confidently update a model without stepping on each other&#39;s toes.
+When MLOps meets container orchestration, you obtain a more predictable way of controlling AI pipelines. Our goal with this article is to share the best practices for running complex AI tasks on Kubernetes. We&#39;ll talk about scaling, scheduling, security, resource management, and other elements that matter to seasoned platform engineers and folks just stepping into machine learning in Kubernetes. By walking through each section, you&#39;ll pick up practical tips to shield your cluster from AI security risks , keep your costs in check, and give your models the computing power they crave.
+Kubernetes Secure Coding Practices [Cheat Sheet] This 10 page cheat sheet provides advanced, actionable guidance for infrastructure and platform developers to safeguard containerized applications. Download PDF Resource management Before you spin up containers for training or inference, it’s crucial to be sure that cluster resources match the intensity of your workloads. After all, ignoring GPU demands or skipping proper CPU sizing leads to slow performance, random out-of-memory kills, and disappointed teams.
+GPU and specialized hardware allocation GPUs, TPUs, and other accelerators are like the sports cars in a cluster&#39;s garage. They let you train massive models or handle huge throughput during inference. Making these hardware resources available inside pods relies on device plugins provided by Kubernetes. For instance, by adding the official NVIDIA device plugin , you can request GPU slices per pod. One crucial tip? Setting proper resource requests ensures the scheduler spots the right node with the correct GPU.
+If you skip those resource definitions, your workload might land on a node without the accelerator, causing job failures. It’s also helpful to label GPU nodes with something like nvidia. com/gpu=true to target them via nodeSelector or nodeAffinity easily. The code snippet below shows a basic pod specification that asks for one GPU from NVIDIA: apiVersion: v1 kind: Pod metadata: name: gpu-training-pod spec: containers: - name: gpu-training-container image: nvcr.
+io/nvidia/tensorflow:22. 01-tf2-py3 resources: limits: nvidia. com/gpu: 1 nodeSelector: nvidia. com/gpu: &quot;true&quot; CPU and memory sizing Not every data pipeline or model training job needs a GPU. Many tasks run perfectly fine on CPUs if you size them correctly. By setting requests and limits, the Kubernetes scheduler knows how many pods fit on a node. Without these parameters, you risk poor scheduling or pods competing for the same CPU cores. To take scheduling to the next level, add cluster autoscaling to absorb sudden spikes in traffic or training jobs.
+Remember to watch actual usage metrics carefully, using a monitoring system like Prometheus. If pods consistently hit 90% CPU, adjust the requests slightly. On the flip side, if pods stay around 20% CPU usage, you can reduce their requests. Below is an example deployment that defines CPU and memory requests and limits: apiVersion: apps/v1 kind: Deployment metadata: name: ml-inference-deployment spec: replicas: 2 template: spec: containers: - name: ml-inference-container image: your-registry/ml-inference:latest resources: requests: cpu: &quot;500m&quot; memory: &quot;512Mi&quot; limits: cpu: &quot;1000m&quot; memory: &quot;1024Mi&quot; Scaling your AI/ML workloads Once you&#39;ve pinned down how to request and allocate resources, it’s time to scale.
+In some scenarios, you’ll be scaling inference pods horizontally to handle spiky incoming requests. In others, you’ll be scheduling large training jobs that might require specialized node types. Horizontal and vertical scaling Horizontal scaling is what you require to deal with unpredictable user loads, especially for inference endpoints. It’s best practice to set up HPAs to watch CPU or GPU usage, then spin up new pods when things heat up. Still, vertical scaling may be a better answer if your container needs more memory or CPU cores on a single node.
+The Vertical Pod Autoscaler (VPA) can assist you tweak requests for stable workloads over time. Here&#39;s a snippet of an HPA referencing a deployment by CPU usage: apiVersion: autoscaling/v2 kind: HorizontalPodAutoscaler metadata: name: inference-hpa spec: scaleTargetRef: apiVersion: apps/v1 kind: Deployment name: inference-deployment minReplicas: 2 maxReplicas: 15 metrics: - type: Resource resource: name: cpu target: type: Utilization averageUtilization: 75 Batch jobs and scheduling Large-scale training is often better as a batch process.
+To simplify your pipeline, utilize Kubernetes Jobs for one-off experiments and CronJobs for scheduled tasks like nightly retraining. By taking this approach, each successful job run means the model or artifact may be automatically stored somewhere for further utilize. A well-structured batch job ensures long-running training tasks do not overload your cluster nodes. To achieve this, you can request GPU or CPU resources in the same manner as any other pod, making sure you manage them effectively.
+Below represents CronJob that launches a nightly training run: apiVersion: batch/v1 kind: CronJob metadata: name: nightly-model-training spec: schedule: &quot;0 2 * * *&quot; jobTemplate: spec: template: spec: containers: - name: training-container image: your-registry/training-image:latest resources: limits: nvidia. com/gpu: 1 command: [ &quot;python&quot; , &quot;train. py&quot; ] restartPolicy: Never Multi-cluster and hybrid strategies Sometimes it’s necessary to spread workloads across multiple Kubernetes clusters , especially if you desire redundancy or to run some jobs on-prem and others in the cloud.
+This can save money and reduce risk. Tools like Anthos offer a management console that shows how jobs are distributed. If there&#39;s a problem in one environment, you can fail over to another, giving you peace of mind when you&#39;re juggling critical user-facing inference tasks. Figure 1: Anthos multi-cluster overview (Source: Google Cloud) Storage and data management Once your jobs can scale efficiently, data takes center stage. Where is it stored? How quickly can you read it?
+How do you back it up? These questions pop up a lot when dealing with large training datasets, and they’re crucial to preventing data retrieval from becoming a bottleneck.
+High-performance storage classes StorageClasses backed by SSDs are ideal for training workloads with big read/write demands. To create the most of them, define a PersistentVolumeClaim (PVC) that references the right StorageClass and the cluster provisions suitable for backing storage. Also, be sure to monitor read/write IOPS (input/output operations per second) to confirm that your storage volumes can handle the required throughput. Below represents PVC that asks for a high-performance storage class: piVersion: v1 kind: PersistentVolumeClaim metadata: name: fast-pvc spec: accessModes: - ReadWriteOnce storageClassName: high-perf-ssd resources: requests: storage: 100 Gi Data locality and caching In distributed training, data locality matters.
+When workers grab data from remote volumes, network latency can cause slowdowns. Place caching layers in front of remote storage or pick node-local SSD volumes. Another strategy is to run a caching sidecar container in the same pod, which handles data reads and writes, improving performance in specific workflows. The snippet below shows a sidecar container that provides caching for training data: apiVersion: apps/v1 kind: Deployment metadata: name: training-deployment spec: replicas: 2 selector: matchLabels: app: training-app template: metadata: labels: app: training-app spec: containers: - name: caching-sidecar image: your-registry/caching-sidecar:latest volumeMounts: - name: cache-volume mountPath: /cache - name: training-container image: your-registry/training-image:latest volumeMounts: - name: cache-volume mountPath: /dataset volumes: - name: cache-volume emptyDir: {} Backup and versioning Tracking model versions is standard for good reason: If new models fail in production (hey, it happens!), you’ll require frequent rollbacks.
+Along with storing model artifacts in object storage, it’s also crucial to run scheduled backups. Even if you&#39;re using a cloud service that provides auto-backups, extra backups are the way to go to prevent problems down the line.
+Below is an Argo Workflow that uploads model artifacts to a remote bucket in S3: apiVersion: argoproj. io/v1alpha1 kind: Workflow metadata: generateName: model-backup- spec: entrypoint: backup-model templates: - name: backup-model container: image: your-registry/backup-tool:latest command: [ &quot;backup-model&quot; ] args: [ &quot;--model-path=/models&quot; , &quot;--destination=s3://ml-backups&quot; ] Security considerations We&#39;ve all seen the headlines about clusters being hijacked or data being exfiltrated—like the May 2024 unauthorized access incident at Hugging Face where attackers targeted their AI model hosting platform.
+These breaches highlight why Kubernetes security and AI security have become a huge priority. When you combine containerized workloads with advanced ML pipelines, threat vectors multiply fast. Let&#39;s walk through a few ways to keep these risks in check. Fundamentals of Kubernetes security To strengthen security, follow these best practices: Scan container images to detect vulnerabilities before deployment. Enforce role-based access control (RBAC) to restrict who can deploy, modify, or delete workloads.
+Apply Pod Security Standards (PSS) to prevent misconfigurations that could expose clusters to threats. Limit access to container registries and monitor for unauthorized changes. Tag images with stable references to ensure only verified versions are used in production. Here&#39;s an RBAC snippet that grants minimal privileges to a namespace: kind: Role apiVersion: rbac. io/v1 metadata: namespace : ml - project name : ml - project - role rules : - apiGroups : [&quot;&quot;, &quot; apps &quot;] resources : [&quot; pods &quot;, &quot; deployments &quot;] verbs : [&quot; obtain &quot;, &quot; list &quot;, &quot; create &quot;, &quot; update &quot;, &quot; delete &quot;] --- kind : RoleBinding apiVersion : rbac.
+io / v1 metadata : name : ml - project - rolebinding namespace : ml - project subjects : - kind : User name : ml - user apiGroup : rbac. io roleRef : kind : Role name : ml - project - role apiGroup : rbac. io Model integrity protection As AI models become more powerful and widely deployed, they also become targets for adversarial attacks, data poisoning, and distribution drift. Attackers may manipulate training data to undermine model performance or exploit weaknesses in the model’s logic.
+To mitigate these threats, monitor incoming data for anomalies, utilize drift detection tools to spot when your model’s real-world performance starts slipping, and train (or retrain) only on vetted datasets. Maintaining this vigilance helps ensure your model stays accurate and resilient in the face of evolving threats. Below represents sample Python snippet showing how you can utilize the Alibi Detect library to detect data drift: from alibi_detect.
+cd import KSDrift import numpy as np # Reference data (e. baseline training data) X_ref = np. rand( 1000 , 10 ) # New incoming data (e. live traffic samples) X = np. rand( 1000 , 10 ) # Replace with actual production data # Initialize the drift detector cd = KSDrift(X_ref, p_val= 0. 05 ) # Run drift check preds = cd. predict(X) if preds[ &#39;data_drift&#39; ]: print ( &quot;Data drift detected! P-value:&quot; , preds[ &#39;p_val&#39; ]) # Optionally, trigger a retraining pipeline or alert else : print ( &quot;No data drift detected.
+P-value:&quot; , preds[ &#39;p_val&#39; ]) Image signing Once you’ve taken steps to preserve model integrity, the next layer of defense is confirming a model’s authenticity by signing container images that hold your model artifacts. Tools like Cosign create it straightforward to add digital signatures, while encryption at rest and a chain of custody for training data assist further safeguard your ecosystem—especially in regulated industries. You can sign your container image with a simple Cosign command: $ cosign sign -- key cosign.
+key your-registry/your- image :tag On top of that, add automated code scanning steps in CI pipelines. This helps catch potential vulnerabilities in dependencies before they reach production. Below represents code snippet that integrates Trivy, an open-source security scanner, into a GitHub Actions pipeline: name: code-scanning-workflow on: [ push , pull_request ] jobs: scan: runs-on: ubuntu-latest steps: - uses: actions/checkout@v2 - name: Scan with Trivy uses: aquasecurity/trivy-action@master with: image-ref: &quot;your-registry/your-image:latest&quot; format: &quot;table&quot; Network isolation and zero trust Securing AI workloads starts with strong network isolation.
+One effective approach is to define NetworkPolicies that restrict which pods and namespaces can communicate with each other. Beyond that, it&#39;s best practice to avoid running AI/ML workloads alongside other applications in the same cluster. By segmenting workloads based on purpose—such as separating inference services from general web applications—you minimize the risk of lateral movement in case of a breach.
+This approach aligns with zero-trust principles, where every piece of network traffic is treated cautiously, even if it&#39;s internal to the cluster. Combined with strong identity access management, these guardrails assist prevent accidental data leaks and infiltration attempts. Here&#39;s a NetworkPolicy that limits traffic to only the inference namespace: apiVersion: networking. io/v1 kind: NetworkPolicy metadata: name: allow-namespace-traffic namespace: inference spec: podSelector: {} ingress: - from: - namespaceSelector: matchLabels: purpose: inference End-to-end visibility: From code to runtime AI/ML workloads introduce complex security and compliance challenges that span the entire lifecycle—from code development to runtime execution.
+Without full visibility, misconfigurations, vulnerabilities, and drift can creep into your Kubernetes clusters, increasing the risk of breaches. To tackle this, teams require a security strategy that covers every stage of the AI pipeline: scanning infrastructure-as-code (IaC) configurations, securing container images, enforcing runtime protections , and continuously monitoring for anomalies. By integrating security controls across the pipeline, you ensure that AI workloads remain resilient and compliant.
+Wiz offers a platform that allows you to track vulnerabilities, compliance issues, and security posture across your cluster in real time. Take advantage of the Wiz dashboard to spot container image problems, misconfigurations, and even secrets lurking in code: Figure 2: Wiz compliance dashboard overview Observability: Monitoring, logging and tracing When tuning your cluster for machine learning workloads, you’re aiming for a crystal-clear view of what&#39;s happening.
+That means collecting metrics from pods, storing logs in a centralized location, and tracking requests across microservices. Thorough observability makes troubleshooting a no-brainer when something misfires. Metrics and alerting Prometheus usually sits at the heart of your monitoring stack, helping you track key performance metrics. To ensure smooth AI/ML operations, utilize a combination of tools: Prometheus collects CPU, memory, and GPU usage metrics from model inference services.
+Grafana provides real-time dashboards to visualize cluster performance and detect anomalies. Alerting rules automatically trigger notifications (e. , Slack alerts) when resource usage exceeds defined thresholds. By combining these tools, you maintain full visibility into AI workloads and can quickly respond to performance issues before they impact production. Below represents PrometheusRule that alerts on high GPU usage: apiVersion: monitoring. com/v1 kind: PrometheusRule metadata: name: gpu-usage-rules namespace : monitoring spec : groups : - name : gpu - alerts rules : - alert : HighGPUUsage expr : nvidia_gpu_utilization &gt; 90 for : 5m labels : severity : warning annotations : summary : &quot; High GPU usage detected &quot; Distributed tracing and performance insights OpenTelemetry represents great choice for distributed tracing, especially if your AI pipeline includes multiple microservices.
+Each service emits trace spans, helping you pinpoint where a bottleneck might exist. This approach is priceless when</p>
+</blockquote>
+<h2>Debugging</h2>
+<p>: Figure 3: OpenTelemetry and Jaeger (Source: Red Hat) Correlating security and performance with Wiz Sometimes, a performance drop is tied to a security-related event. Wiz helps you observe that correlation by blending security findings with performance data. Maybe a suspicious process is hogging GPU resources or a known vulnerability is leading to cluster instability.
+When you observe these patterns, Wiz prompts an immediate fix. Figure 4: Wiz Security Graph for root cause analysis 🚨Kubernetes Security Research Report 2025 New insights from 200,000+ cloud accounts uncovers the latest risks, attack trends, and security gaps in Kubernetes environments. Download PDF CI/CD for AI/ML workflows We all understand shipping a trained model involves more than just copying a file. You desire to fully automate building, testing, and deploying ML artifacts.
+This is where CI/CD pipelines come in handy. You can chain tasks that run tests, scan images, push them to a registry, and then roll out new versions to production. Automating model lifecycle management Tools like Tekton or Argo Workflows let you define pipelines for the entire model lifecycle, from data prep to training to deployment. Each stage is triggered automatically whenever you commit a change, which keeps the process consistent. You can also add validation checks to ensure a model meets predefined accuracy thresholds before tagging it for production.
+This helps prevent underperforming models from being deployed and impacting user experience. Below represents Tekton PipelineRun that kicks off model building and deployment: apiVersion: tekton. dev/v1beta1 kind: PipelineRun metadata: name: ml-pipeline-run spec: pipelineRef: name: ml-build-deploy-pipeline workspaces: - name: shared-data volumeClaimTemplate: spec: accessModes: [ &quot;ReadWriteOnce&quot; ] resources: requests: storage: 5 Gi params: - name: model-name value: &quot;my-ml-model&quot; Immutable artifacts and GitOps It’s handy to tag images with commit hashes so you understand exactly which version of the code or model you&#39;re running.
+GitOps extends that practice by letting you store Kubernetes manifests in a Git repo. Any changes to those manifests are automatically applied to the cluster in a controlled manner. This method helps you track precisely when and why changes happen. Here&#39;s an Argo CD Application referencing Git repository for managing deployment configurations: apiVersion: argoproj. io/v1alpha1 kind: Application metadata: name: ml-inference-app spec: destination: namespace : ml - inference server : https :// kubernetes.
+svc source : repoURL : &#39; https :// github. com / your - org / ml - deploy - configs. git &#39; targetRevision : main path : manifests / inference project : default syncPolicy : automated : prune : true selfHeal : true Performance optimization Models have to respond quickly and not waste expensive GPU or CPU hours. Luckily, minor tweaks in HPA parameters or load balancing rules can shave off precious milliseconds and reduce costs by a solid margin. Load balancing Load balancing with Ingress resources helps route traffic to the right inference service.
+To separate different versions of a model, you have the option to utilize path-based routing. Below is an Ingress with path-based routing to multiple inference services: apiVersion: networking. io/v1 kind: Ingress metadata: name: inference-ingress spec: rules: - host: ml. com http: paths: - path: /v1/ pathType: Prefix backend: service: name: inference-model-v1 port: number: 8081 - path: /v2/ pathType: Prefix backend: service: name: inference-model-v2 port: number: 8081 Cost profiling and optimization Everyone likes to watch how their GPU nodes, CPU nodes, and memory usage line up with spending.
+But manually adjusting resources may be time-consuming and inefficient. That’s where tools like Karpenter and Autopilot can automatically scale cluster nodes to match resource demands, saving you from manual node provisioning. For training workloads that don’t require persistent compute, leveraging Spot Instances can dramatically reduce costs—just create sure your pipeline can handle potential interruptions. Below is an example of Karpenter configuration for matching instance types to workloads: apiVersion: karpenter.
+sh/v1alpha5 kind: Provisioner metadata: name : default spec: requi rements: - key : &quot;node. io/instance-type&quot; operator: In values: [ &quot;m5. xlarge&quot; ] provider: subnetSelector: karpenter. sh/discovery: &quot;my-cluster&quot; securityGroupSelector: karpenter. sh/discovery: &quot;my-cluster&quot; Another way to save big? utilize a tool like Wiz to observe if there are cost drivers related to misconfigured resources or unusual usage patterns.
+Wiz also helps you harden the nodes during creation to create sure that they are not only automatically scaled but also secure. Figure 5: Wiz cloud cost rules Conclusion We&#39;ve talked through various strategies for machine learning workflows on Kubernetes. From resource management to AI security best practices to hooking up Tekton pipelines, we&#39;ve seen how each piece can contribute to a stable platform. The main idea is to keep an eye on AI security risks, watch for cost overruns, and build a pipeline that folks trust.
+When you implement these best practices, you minimize cluster disruptions and assist data scientists push updates confidently. We&#39;re excited to observe how these suggestions fit into your work. We&#39;d love to hear back about what you create, the lessons you uncover, and how you keep leveling up your machine learning in Kubernetes workflows. This journey might feel complicated, but with the right tools—like Wiz&#39;s real-time scanning, dashboards, and compliance features—you can build a safer environment for training and inference.
+If you&#39;re looking to refine and scale your AI/ML projects while staying secure, give Wiz a shot for a sweeping view of container vulnerabilities, cluster settings, and compliance benchmarks. With Wiz, you can keep your clusters healthy, cost efficient, and safe from intrusions. Secure your cloud from code to production Learn why the fastest growing companies choose Wiz to secure containers, Kubernetes, and cloud environments from build-time to real-time.
+Work Email * First Name * Last Name * Country Phone Number * Company * Keep me updated about Wiz product releases, industry news, and events (You can unsubscribe at any time) Subscribe me to the Wiz blog digest emails Submit For information about how Wiz handles your personal data, please observe our Privacy Policy. Your work email here obtain a demo
+SOURCE 9: <a href="https://www.f5.com/company/blog/nginx/a-quick-guide-to-scaling-ai-ml-workloads-on-kubernetes">https://www.f5.com/company/blog/nginx/a-quick-guide-to-scaling-ai-ml-workloads-on-kubernetes</a>
+NGINX |
+SOURCE 10: <a href="https://www.redhat.com/en/topics/cloud-computing/how-kubernetes-can-assist-ai">https://www.redhat.com/en/topics/cloud-computing/how-kubernetes-can-assist-ai</a>
+Topics Artificial intelligence How Kubernetes can assist AI/ML How Kubernetes can assist AI/ML Published
+This information is tailored for the alertmend.io platform, providing comprehensive insights and solutions.</p>
+
+            </div>
+
+            <!-- Promotional Section -->
+            <div class="promotional-section">
+              <p>Ready to eliminate manual firefighting and achieve autonomous infrastructure operations?</p>
+              <p>See how AlertMend AI can help you reduce costs by 50%, achieve zero downtime, and automate incident remediation across Kubernetes, VMs, and ECS. <a href="https://calendly.com/hello-alertmend/30min" target="_blank" rel="noopener noreferrer">Book a demo.</a></p>
+            </div>
+
+            <!-- Horizontal Separator -->
+            <hr />
+
+            <!-- Arvind Rajpurohit Profile Section -->
+            <div class="profile-section">
+              <img src="/logos/arvind.jpeg" alt="Arvind Rajpurohit" class="profile-image" onerror="this.style.display='none'; const placeholder = this.nextElementSibling; if (placeholder) placeholder.classList.add('show');" />
+              <div class="profile-placeholder-arvind">AR</div>
+              <div class="profile-content">
+                <h3 class="profile-name">Arvind Rajpurohit</h3>
+                <p class="profile-title" style="color: #9333ea; font-weight: 600; margin-bottom: 1rem; font-size: 1rem;">Co-Founder & CEO</p>
+                <div class="profile-bio">
+                  <p>Arvind is a Kubestronaut and Kubernetes expert with 15+ years of experience in infrastructure automation. Previously DevOps Team Lead at Roambee and Customer Success Engineer at Shoreline.io (acquired by NVIDIA), he's helped hundreds of teams achieve 99.97% uptime, reduce costs by 50%, and eliminate 90% of manual operations work.</p>
+                  <p>As CEO of AlertMend AI, Arvind is building the future of autonomous infrastructure management—where AI doesn't just monitor systems, but understands, predicts, and automatically resolves issues while continuously learning and improving.</p>
+                </div>
+                <a href="https://www.linkedin.com/in/arvind-rajpurohit-4a332523/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+                  <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Right Sidebar (30%) -->
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <!-- Email Signup -->
+          <div class="sidebar-card">
+            <h3>Receive blog and product updates</h3>
+            <form class="signup-form">
+              <input type="email" placeholder="Email*" required />
+              <button type="submit">SIGN UP</button>
+            </form>
+          </div>
+
+          <!-- Related Content -->
+          
+          <div class="sidebar-card">
+            <h3 class="related-content-title">RELATED CONTENT</h3>
+            <ul class="related-posts-list">
+              
+                <li>
+                  <a href="/blog/oomkilled-in-kubernetes" class="related-post-link">How to Fix OOMKilled Errors in Kubernetes</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/graceful-shutdown-kubernetes" class="related-post-link">Graceful Shutdown in Kubernetes: Ensuring Safe Pod Termination</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/load-balancing-long-lived-connections-kubernetes" class="related-post-link">Load Balancing and Scaling Long-Lived Connections in Kubernetes</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/5-ways-aiops-transforming-infrastructure" class="related-post-link">5 Ways AIOps is Transforming Infrastructure Management</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/cost-optimization-multi-cloud" class="related-post-link">Cost Optimization Strategies for Multi-Cloud Infrastructure</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/troubleshooting-unhealthy-elasticsearch-nodes-kubernetes" class="related-post-link">Troubleshooting Unhealthy Elasticsearch Nodes on Kubernetes: Causes and Solutions</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/troubleshooting-elasticsearch-unassigned-shards-kubernetes" class="related-post-link">Troubleshooting Elasticsearch Unassigned Shards Incident on Kubernetes: Causes and Solutions</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/elasticsearch-cluster-yellow-incident-kubernetes" class="related-post-link">Elasticsearch Cluster Yellow Incident on Kubernetes</a>
+                </li>
+              
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View All Posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+          
+
+          <!-- Additional Internal Links -->
+          <div class="sidebar-card">
+            <h3 class="related-content-title">EXPLORE ALERTMEND</h3>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/kubernetes-cost-optimization" class="related-post-link">Cost Optimization</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

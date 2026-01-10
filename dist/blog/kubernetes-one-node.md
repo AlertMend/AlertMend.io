@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes One Node"
+title: "kubernetes one node Guide Guide"
 excerpt: "Setting up a Kubernetes one node cluster is an ideal starting point for developers and organizations aiming to explore Kubernetes' capabilities without requi..."
 date: "2025-12-18"
 category: "Kubernetes"

@@ -1,5 +1,5 @@
 ---
-title: "Automated URL Status Checks"
+title: "Automated Url Status Checks Guide"
 excerpt: "Automated Url Status Checks Elevating Your System Health with Automated URL Status Checks In today's fast-paced digital environment, ensuring that your..."
 date: "2025-12-18"
 category: "URL Monitoring"

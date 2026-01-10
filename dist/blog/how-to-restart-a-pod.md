@@ -1,5 +1,5 @@
 ---
-title: "How to Restart a Pod"
+title: "How to Restart a Pod Guide Guide"
 excerpt: "In the dynamic landscape of containers and microservices, Kubernetes has emerged as a leading orchestration platform, efficiently managing containerized appl..."
 date: "2025-12-18"
 category: "Kubernetes"

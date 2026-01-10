@@ -1,5 +1,5 @@
 ---
-title: "Opa Architecture"
+title: "opa architecture Guide Guide Complete Guide"
 excerpt: "Open Policy Agent (OPA) architecture represents a significant evolution in the realm of policy enforcement within distributed systems"
 date: "2025-12-18"
 category: "Kubernetes"

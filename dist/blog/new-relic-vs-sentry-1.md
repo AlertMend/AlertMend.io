@@ -1,5 +1,5 @@
 ---
-title: "New Relic Vs Sentry"
+title: "new relic vs sentry 1 Guide Guide"
 excerpt: "new relic vs sentry  Navigating the Monitoring Landscape: New Relic vs."
 date: "2025-12-18"
 category: "DevOps"

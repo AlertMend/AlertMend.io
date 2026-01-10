@@ -1,5 +1,5 @@
 ---
-title: "API Health Check Strategies"
+title: "Api Health Check Strategies Guide"
 excerpt: "Api Health Check Strategies Navigating API Health Check Strategies in Modern DevOps In the rapidly evolving landscape of DevOps, API health check..."
 date: "2025-12-18"
 category: "API Monitoring"

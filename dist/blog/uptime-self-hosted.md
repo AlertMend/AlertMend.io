@@ -1,5 +1,5 @@
 ---
-title: "Uptime Self Hosted"
+title: "Uptime Self Hosted Guide Guide"
 excerpt: "In today's digital-first world, maintaining the uptime of your applications and websites is paramount. Downtime not only affects user satisfaction but can al..."
 date: "2025-12-18"
 category: "Kubernetes"

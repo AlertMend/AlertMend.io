@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes Tutorial Pdf"
+title: "kubernetes tutorial pdf Guide Guide"
 excerpt: "In the world of DevOps and system administration, Kubernetes has emerged as a critical technology for managing containerized applications"
 date: "2025-12-18"
 category: "Kubernetes"

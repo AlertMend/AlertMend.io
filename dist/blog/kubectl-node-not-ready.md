@@ -1,5 +1,5 @@
 ---
-title: "Kubectl Node Not Ready"
+title: "kubectl node not ready Guide Guide"
 excerpt: "When deploying applications on Kubernetes, encountering the \"kubectl node not ready\" status can disrupt operations significantly"
 date: "2025-12-18"
 category: "Kubernetes"

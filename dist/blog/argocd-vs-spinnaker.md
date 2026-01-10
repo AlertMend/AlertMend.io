@@ -1,5 +1,5 @@
 ---
-title: "Argocd vs Spinnaker"
+title: "argocd vs spinnaker Guide Guide"
 excerpt: "In the realm of continuous delivery and deployment, selecting the right tool can dramatically impact your DevOps strategy"
 date: "2025-12-18"
 category: "Kubernetes"

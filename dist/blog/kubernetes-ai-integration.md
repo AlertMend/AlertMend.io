@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes AI Integration"
+title: "Kubernetes Ai Integration Guide"
 excerpt: "Kubernetes Ai Integration Harnessing the Power of Kubernetes AI Integration for Future-Ready DevOps In today's rapidly evolving technological landscape,..."
 date: "2025-12-18"
 category: "Kubernetes"

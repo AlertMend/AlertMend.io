@@ -1,5 +1,5 @@
 ---
-title: "Rancher Alternative"
+title: "rancher alternative Guide Guide"
 excerpt: "In the rapidly evolving world of Kubernetes management, finding a suitable Rancher alternative has become a crucial consideration for many development teams"
 date: "2025-12-18"
 category: "Kubernetes"

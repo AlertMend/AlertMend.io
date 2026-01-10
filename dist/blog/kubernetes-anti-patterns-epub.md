@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes Anti-patterns Epub"
+title: "kubernetes anti-patterns epub Guide"
 excerpt: "As Kubernetes continues to dominate the realm of container orchestration, understanding and navigating Kubernetes anti-patterns becomes crucial for optimal d..."
 date: "2025-12-18"
 category: "Kubernetes"

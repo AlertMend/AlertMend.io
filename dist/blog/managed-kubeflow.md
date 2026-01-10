@@ -1,5 +1,5 @@
 ---
-title: "Managed Kubeflow"
+title: "managed kubeflow Guide Guide Complete Guide"
 excerpt: "In the realm of machine learning and artificial intelligence, managed Kubeflow has emerged as a pivotal technology for organizations aiming to streamline the..."
 date: "2025-12-18"
 category: "Kubernetes"

@@ -1,5 +1,5 @@
 ---
-title: "Fatal Not Git Repository"
+title: "fatal not git repository Guide"
 excerpt: "Complete guide to fixing the fatal: not a git repository error. Learn common causes, troubleshooting steps, and solutions for Git repository issues."
 date: "2025-12-18"
 category: "Troubleshooting"
