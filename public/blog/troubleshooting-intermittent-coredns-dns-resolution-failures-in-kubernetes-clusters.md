@@ -1,3 +1,12 @@
+---
+title: "Troubleshooting Intermittent Coredns Dns Resolution Failu..."
+excerpt: "Navigating the complexities of Kubernetes comes with its unique set of challenges, one of which is troubleshooting intermittent CoreDNS DNS resolution failur..."
+date: "2025-12-18"
+category: "Kubernetes"
+author: "AlertMend Team"
+keywords: "AlertMend AI, AIOps, DevOps, Troubleshooting, Intermittent, Coredns, Dns, Resolution"
+---
+
 # Troubleshooting Intermittent Coredns Dns Resolution Failures In Kubernetes Clusters
 
 *Generated on 2025-12-27 23:06:40*

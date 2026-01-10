@@ -1,3 +1,12 @@
+---
+title: "Proton Outage Analysis"
+excerpt: "================================================================================ REFERENCE CONTENT FROM TOP 6 GOOGLE SEARCH RESULTS"
+date: "2025-12-18"
+category: "Kubernetes"
+author: "AlertMend Team"
+keywords: "AlertMend AI, AIOps, DevOps, Proton, Outage, Analysis, Lessons, From"
+---
+
 # Proton Outage Analysis: Lessons From Kubernetes Migration Failures
 
 *Generated on 2025-12-25 15:45:24*

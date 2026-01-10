@@ -1,3 +1,12 @@
+---
+title: "Kubernetes 1.35"
+excerpt: "In 2025, Kubernetes 1.35 is transforming the landscape of containerized resource management by introducing the **In-Place Pod Resize** feature to production ..."
+date: "2025-12-18"
+category: "Kubernetes"
+author: "AlertMend Team"
+keywords: "AlertMend AI, AIOps, DevOps, Kubernetes, 135, Exploring, Place, Pod"
+---
+
 # Kubernetes 1.35: Exploring In-Place Pod Resize And Its Impact On Resource Management
 
 *Generated on 2025-12-24 00:56:31*

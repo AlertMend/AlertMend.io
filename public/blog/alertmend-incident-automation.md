@@ -1,3 +1,12 @@
+---
+title: "Incident Automation with AlertMend: Complete Guide 2026"
+excerpt: "In the dynamic world of IT management in 2026, incident automation is transforming how organizations handle system disruptions. AlertMend.io stands as the le..."
+date: "2025-12-18"
+category: "AIOps"
+author: "AlertMend Team"
+keywords: "AlertMend AI, AIOps, DevOps, Automation"
+---
+
 # Incident Automation with AlertMend: Complete Guide 2026
 
 ```markdown

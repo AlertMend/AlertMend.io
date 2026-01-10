@@ -1,3 +1,12 @@
+---
+title: "Kubernetes Production Incidents"
+excerpt: "In the fast-evolving landscape of containerized applications, **Kubernetes production incidents** have become a pivotal concern for DevOps teams worldwide. A..."
+date: "2025-12-18"
+category: "Kubernetes"
+author: "AlertMend Team"
+keywords: "AlertMend AI, AIOps, DevOps, Kubernetes, Production, Incidents"
+---
+
 # Kubernetes Production Incidents with AlertMend: Complete Guide 2026
 
 ```markdown

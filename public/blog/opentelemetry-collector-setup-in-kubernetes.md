@@ -1,3 +1,12 @@
+---
+title: "Opentelemetry Collector Setup In Kubernetes"
+excerpt: "In today's fast-paced DevOps world, the ability to efficiently monitor and alert systems is paramount. The **OpenTelemetry collector setup in Kubernetes** pr..."
+date: "2025-12-18"
+category: "Kubernetes"
+author: "AlertMend Team"
+keywords: "AlertMend AI, AIOps, DevOps, Opentelemetry, Collector, Setup, Kubernetes"
+---
+
 # Opentelemetry Collector Setup In Kubernetes
 
 *Generated on 2025-12-24 01:22:34*

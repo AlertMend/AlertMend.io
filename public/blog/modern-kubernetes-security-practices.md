@@ -1,3 +1,12 @@
+---
+title: "Modern Kubernetes Security Practices"
+excerpt: "In 2025, securing Kubernetes environments has never been more critical as the reliance on cloud-native applications continues to grow."
+date: "2025-12-18"
+category: "Kubernetes"
+author: "AlertMend Team"
+keywords: "AlertMend AI, AIOps, DevOps, Modern, Kubernetes, Security, Practices"
+---
+
 # Modern Kubernetes Security Practices
 
 *Generated on 2025-12-25 14:59:13*

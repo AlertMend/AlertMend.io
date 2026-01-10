@@ -1,4 +1,13 @@
-## Mastering Major Incident Management with AlertMend.io
+---
+title: "Mastering Major Incident Management"
+excerpt: "In the rapidly evolving world of IT and DevOps, managing major incidents effectively is crucial. In 2026, businesses face unprecedented challenges due to inc..."
+date: "2025-12-18"
+category: "AIOps"
+author: "AlertMend Team"
+keywords: "AlertMend AI, AIOps, DevOps, Major, Management"
+---
+
+# Mastering Major Incident Management with AlertMend.io
 In the rapidly evolving world of IT and DevOps, managing major incidents effectively is crucial.
 In 2026, businesses face unprecedented challenges due to increasing technological complexity and heightened user expectations. Major incident management refers to the process of identifying, responding to, and
 ## Resolving

@@ -1,3 +1,12 @@
+---
+title: "Understanding Kubernetes' Role In Modern Cloud Infrastruc..."
+excerpt: "Born from Google's internal systems, Kubernetes has emerged as the industry standard for container orchestration. This open-source platform automates the dep..."
+date: "2025-12-18"
+category: "Kubernetes"
+author: "AlertMend Team"
+keywords: "AlertMend AI, AIOps, DevOps, Understanding, Kubernetes, Role, Modern, Cloud"
+---
+
 # Understanding Kubernetes' Role In Modern Cloud Infrastructure Development
 
 *Generated on 2025-12-24 01:05:00*

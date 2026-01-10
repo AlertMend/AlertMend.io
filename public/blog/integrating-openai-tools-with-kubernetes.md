@@ -1,3 +1,12 @@
+---
+title: "Integrating Openai Tools With Kubernetes"
+excerpt: "The fusion of AI with cloud-native technologies is transforming digital landscapes, and integrating OpenAI tools with Kubernetes stands at the forefront of t..."
+date: "2025-12-18"
+category: "Kubernetes"
+author: "AlertMend Team"
+keywords: "AlertMend AI, AIOps, DevOps, Integrating, Openai, Tools, Kubernetes"
+---
+
 # Integrating Openai Tools With Kubernetes
 
 *Generated on 2025-12-25 15:01:01*

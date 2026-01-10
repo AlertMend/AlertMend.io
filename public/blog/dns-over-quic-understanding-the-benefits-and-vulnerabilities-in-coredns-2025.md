@@ -1,3 +1,12 @@
+---
+title: "Dns-Over-Quic"
+excerpt: "The landscape of DNS protocol is rapidly evolving, and **DNS-over-QUIC** has emerged as a pivotal advancement in 2025. CoreDNS, a leading DNS server known fo..."
+date: "2025-12-18"
+category: "Kubernetes"
+author: "AlertMend Team"
+keywords: "AlertMend AI, AIOps, DevOps, Dns, Over, Quic, Understanding, Benefits"
+---
+
 # Dns-Over-Quic: Understanding The Benefits And Vulnerabilities In Coredns 2025
 
 *Generated on 2025-12-27 23:08:43*

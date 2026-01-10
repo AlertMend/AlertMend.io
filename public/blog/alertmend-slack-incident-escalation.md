@@ -1,3 +1,12 @@
+---
+title: "Slack Incident Escalation"
+excerpt: "In today's fast-paced digital landscape, organizations are constantly striving to maintain uninterrupted service delivery. **Slack incident escalation** play..."
+date: "2025-12-18"
+category: "AIOps"
+author: "AlertMend Team"
+keywords: "AlertMend AI, AIOps, DevOps, Slack, Escalation"
+---
+
 # Slack Incident Escalation with AlertMend: Complete Guide 2026
 
 ```markdown

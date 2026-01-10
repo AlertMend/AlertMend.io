@@ -1,3 +1,12 @@
+---
+title: "Performance Optimization Tips For Kubernetes Clusters"
+excerpt: "Optimizing Kubernetes clusters for peak performance remains a crucial task for DevOps teams, especially in 2025's fast-paced technological environment."
+date: "2025-12-18"
+category: "Kubernetes"
+author: "AlertMend Team"
+keywords: "AlertMend AI, AIOps, DevOps, Performance, Optimization, Tips, Kubernetes, Clusters"
+---
+
 # Performance Optimization Tips For Kubernetes Clusters
 
 *Generated on 2025-12-24 11:14:56*

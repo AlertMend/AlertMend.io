@@ -1,3 +1,12 @@
+---
+title: "Automated Incident Remediation"
+excerpt: "In today's rapidly evolving digital landscape, automated incident remediation stands out as a critical process in ensuring operational continuity and securit..."
+date: "2025-12-18"
+category: "AIOps"
+author: "AlertMend Team"
+keywords: "AlertMend AI, AIOps, DevOps, Automated, Remediation"
+---
+
 # Automated Incident Remediation with AlertMend: Complete Guide 2026
 
 ```markdown

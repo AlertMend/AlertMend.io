@@ -1,3 +1,12 @@
+---
+title: "Optimizing Coredns Plugin Performance"
+excerpt: "In the fast-paced world of DevOps and system monitoring, optimizing CoreDNS plugin performance is vital for seamless operations."
+date: "2025-12-18"
+category: "Kubernetes"
+author: "AlertMend Team"
+keywords: "AlertMend AI, AIOps, DevOps, Optimizing, Coredns, Plugin, Performance, 2025"
+---
+
 # Optimizing Coredns Plugin Performance In 2025
 
 *Generated on 2025-12-27 23:13:41*
