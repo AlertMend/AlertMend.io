@@ -1,5 +1,5 @@
 ---
-title: "Argocd Drift Detection"
+title: "argocd drift detection Guide Guide"
 excerpt: "In the dynamic landscape of Kubernetes environments, argocd drift detection emerges as a crucial capability for maintaining the integrity and consistency of ..."
 date: "2025-12-18"
 category: "Kubernetes"

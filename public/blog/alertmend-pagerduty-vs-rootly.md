@@ -1,5 +1,5 @@
 ---
-title: "Pagerduty Vs Rootly"
+title: "Pagerduty Vs Rootly Alertmend Guide"
 excerpt: "In 2026, effective incident management is paramount to maintaining seamless IT operations and ensuring business continuity. With the increasing complexity of..."
 date: "2025-12-18"
 category: "AIOps"

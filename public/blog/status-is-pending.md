@@ -1,5 +1,5 @@
 ---
-title: "Status is Pending"
+title: "status is pending Guide Guide Complete Guide"
 excerpt: "In the fast-paced world of DevOps and system monitoring, encountering a \"status is pending\" notification can often leave teams in a state of uncertainty"
 date: "2025-12-18"
 category: "Kubernetes"

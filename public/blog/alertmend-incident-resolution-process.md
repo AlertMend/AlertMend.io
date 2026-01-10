@@ -1,5 +1,5 @@
 ---
-title: "Incident Resolution Process"
+title: "Mastering the Incident Resolution Process"
 excerpt: "In 2026, the landscape of incident resolution is more complex than ever before. With the increasing intricacy of IT systems and the constant demand for unint..."
 date: "2025-12-18"
 category: "AIOps"

@@ -1,5 +1,5 @@
 ---
-title: "Incident Response Systems"
+title: "Mastering Incident Response Systems"
 excerpt: "In 2026, the landscape of IT security and system monitoring is evolving at a rapid pace, demanding sophisticated solutions to safeguard organizational assets..."
 date: "2025-12-18"
 category: "AIOps"

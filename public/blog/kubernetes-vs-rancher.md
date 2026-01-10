@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes vs Rancher"
+title: "kubernetes vs rancher Guide Guide"
 excerpt: "In the evolving landscape of container orchestration, understanding the key differences between Kubernetes and Rancher is crucial for organizations looking t..."
 date: "2025-12-18"
 category: "Kubernetes"

@@ -1,5 +1,5 @@
 ---
-title: "AI Kubernetes Optimization"
+title: "Ai Kubernetes Optimization Guide"
 excerpt: "Ai Kubernetes Optimization The Future of System Monitoring: AI Kubernetes Optimization In today's fast-paced tech landscape, managing Kubernetes..."
 date: "2025-12-18"
 category: "Kubernetes"

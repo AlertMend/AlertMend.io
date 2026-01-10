@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes 1.35"
+title: "Kubernetes 1.35 135 Exploring Place"
 excerpt: "In 2025, Kubernetes 1.35 is transforming the landscape of containerized resource management by introducing the **In-Place Pod Resize** feature to production ..."
 date: "2025-12-18"
 category: "Kubernetes"

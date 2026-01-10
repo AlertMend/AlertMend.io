@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes Node Not Ready"
+title: "kubernetes node not ready Guide"
 excerpt: "Experiencing a Kubernetes node not ready error can be both frustrating and disruptive, especially when orchestrating complex microservices environments"
 date: "2025-12-18"
 category: "Kubernetes"

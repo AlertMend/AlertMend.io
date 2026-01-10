@@ -1,5 +1,5 @@
 ---
-title: "Incident Automation Tools"
+title: "Mastering Incident Automation Tools"
 excerpt: "In an era where IT ecosystems are increasingly complex and interconnected, incident automation tools have emerged as indispensable assets for businesses stri..."
 date: "2025-12-18"
 category: "AIOps"

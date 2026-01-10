@@ -1,5 +1,5 @@
 ---
-title: "Rootly Pricing Alternative"
+title: "Rootly Pricing Alternative Alertmend"
 excerpt: "In the rapidly evolving realm of DevOps and system monitoring, choosing the right incident management platform can significantly impact your team's efficienc..."
 date: "2025-12-18"
 category: "AIOps"

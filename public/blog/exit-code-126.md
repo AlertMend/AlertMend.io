@@ -1,5 +1,5 @@
 ---
-title: "Exit Code 126 Guide"
+title: "exit code 126 Guide Guide Complete Guide"
 excerpt: "In the world of DevOps and system monitoring, encountering an exit code 126 can be a stumbling block for smooth operations"
 date: "2025-12-18"
 category: "Troubleshooting"

@@ -1,5 +1,5 @@
 ---
-title: "Kubectl Restart All Pods"
+title: "kubectl restart all pods Guide"
 excerpt: "In the dynamic landscape of Kubernetes, managing pod lifecycles efficiently is crucial for maintaining optimal performance and reliability"
 date: "2025-12-18"
 category: "Kubernetes"

@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes And Ai"
+title: "Kubernetes And Ai Guide Running"
 excerpt: "================================================================================ REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS"
 date: "2025-12-18"
 category: "Kubernetes"

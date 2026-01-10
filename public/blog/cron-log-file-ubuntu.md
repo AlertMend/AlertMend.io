@@ -1,5 +1,5 @@
 ---
-title: "Cron Log File Ubuntu"
+title: "cron log file ubuntu Guide Guide"
 excerpt: "cron log file ubuntu  Unlocking the Potential of Cron Log Files in Ubuntu In the realm of system monitoring and automation, understanding cron log files in..."
 date: "2025-12-18"
 category: "DevOps"

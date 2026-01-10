@@ -1,5 +1,5 @@
 ---
-title: "Kubectl And Ai"
+title: "Kubectl and AI: Kubernetes Management Guide"
 excerpt: "The landscape of Kubernetes management is evolving rapidly, with artificial intelligence (AI) at the forefront of this transformation."
 date: "2025-12-18"
 category: "Kubernetes"

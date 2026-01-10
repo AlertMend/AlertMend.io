@@ -1,5 +1,5 @@
 ---
-title: "Setting Context"
+title: "setting context Guide Guide Complete Guide"
 excerpt: "Setting context is an essential practice in effective communication, especially within the dynamic environment of DevOps"
 date: "2025-12-18"
 category: "Kubernetes"

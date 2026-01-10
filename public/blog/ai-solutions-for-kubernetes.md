@@ -1,5 +1,5 @@
 ---
-title: "AI Solutions For Kubernetes"
+title: "Ai Solutions For Kubernetes Guide"
 excerpt: "Ai Solutions For Kubernetes Revolutionizing Kubernetes with AI: A Guide to Enhanced Orchestration In today's fast-evolving technological landscape, the..."
 date: "2025-12-18"
 category: "Kubernetes"

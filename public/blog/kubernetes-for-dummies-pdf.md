@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes for Dummies Pdf"
+title: "kubernetes for dummies pdf Guide"
 excerpt: "In the rapidly evolving world of cloud computing, Kubernetes for Dummies PDF is a key resource for understanding the intricate workings of container orchestr..."
 date: "2025-12-18"
 category: "Kubernetes"

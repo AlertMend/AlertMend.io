@@ -1,5 +1,5 @@
 ---
-title: "Aiops 2025"
+title: "AIOps 2025: Automating IT Operations Guide"
 excerpt: "As we navigate through 2025, businesses are continuously striving for efficiency in their IT operations. With the exponential growth in data volume and compl..."
 date: "2025-12-18"
 category: "AIOps"

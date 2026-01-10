@@ -1,5 +1,5 @@
 ---
-title: "Ubuntu Ping Complete Guide"
+title: "ubuntu ping ## Ubuntu Ping： If you've ever installed a"
 excerpt: "ubuntu ping ## Ubuntu Ping： If you've ever installed a new version of Ubuntu only to find that the ubiquitous ping command is missing, you're not alone."
 date: "2025-12-18"
 category: "DevOps"

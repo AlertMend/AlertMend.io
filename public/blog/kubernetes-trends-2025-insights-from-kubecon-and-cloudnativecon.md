@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes Trends 2025"
+title: "Kubernetes Trends 2025 Insights"
 excerpt: "Kubernetes Trends 2025: Insights from KubeCon and CloudNativeCon highlight the vibrant evolution of Kubernetes and its growing ecosystem."
 date: "2025-12-18"
 category: "Kubernetes"

@@ -1,5 +1,5 @@
 ---
-title: "Maxunavailable Pdb"
+title: "maxunavailable pdb Guide Guide"
 excerpt: "In the dynamic landscape of Kubernetes, managing pod disruptions effectively is crucial for maintaining application availability"
 date: "2025-12-18"
 category: "Kubernetes"

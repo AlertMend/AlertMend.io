@@ -1,5 +1,5 @@
 ---
-title: "Spinnaker vs Argocd"
+title: "spinnaker vs argocd Guide Guide"
 excerpt: "In the ever-evolving field of DevOps, choosing the right continuous deployment tool is crucial for maintaining seamless operations"
 date: "2025-12-18"
 category: "Kubernetes"

@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes Contributor Events"
+title: "Kubernetes Contributor Events How"
 excerpt: "In the fast-evolving world of DevOps and cloud-native technologies, **Kubernetes contributor events: how to get involved in 2025** is a topic of great import..."
 date: "2025-12-18"
 category: "Kubernetes"

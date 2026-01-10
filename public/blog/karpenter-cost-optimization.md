@@ -1,5 +1,5 @@
 ---
-title: "Karpenter Cost Optimization"
+title: "karpenter cost optimization Guide"
 excerpt: "In the evolving landscape of cloud computing, managing resources efficiently has become a critical necessity for businesses"
 date: "2025-12-18"
 category: "Kubernetes"

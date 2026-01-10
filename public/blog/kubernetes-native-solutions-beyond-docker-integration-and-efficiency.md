@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes Native Solutions"
+title: "Kubernetes Native Solutions Beyond"
 excerpt: "In 2025, Kubernetes Native Solutions are redefining how enterprises manage and monitor their systems, going far beyond traditional Docker integration and eff..."
 date: "2025-12-18"
 category: "Kubernetes"

@@ -1,5 +1,5 @@
 ---
-title: "Dns-Over-Quic"
+title: "DNS Over QUIC: CoreDNS Benefits Guide"
 excerpt: "The landscape of DNS protocol is rapidly evolving, and **DNS-over-QUIC** has emerged as a pivotal advancement in 2025. CoreDNS, a leading DNS server known fo..."
 date: "2025-12-18"
 category: "Kubernetes"

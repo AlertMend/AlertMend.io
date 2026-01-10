@@ -1,5 +1,5 @@
 ---
-title: "Proton Outage Analysis"
+title: "Proton Outage Analysis Lessons"
 excerpt: "================================================================================ REFERENCE CONTENT FROM TOP 6 GOOGLE SEARCH RESULTS"
 date: "2025-12-18"
 category: "Kubernetes"

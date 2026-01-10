@@ -1,5 +1,5 @@
 ---
-title: "Mastering On-Call Alerting"
+title: "Mastering On-Call Alerting Alertmend"
 excerpt: "In today's fast-paced digital landscape, effective on-call alerting is essential for maintaining system reliability and ensuring rapid incident response."
 date: "2025-12-18"
 category: "AIOps"

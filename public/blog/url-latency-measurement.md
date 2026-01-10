@@ -1,5 +1,5 @@
 ---
-title: "URL Latency Measurement"
+title: "Url Latency Measurement Guide Guide"
 excerpt: "A comprehensive guide covering essential topics, best practices, and practical solutions for system management and DevOps operations."
 date: "2025-12-18"
 category: "URL Monitoring"

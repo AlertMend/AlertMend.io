@@ -1,5 +1,5 @@
 ---
-title: "Proactive Aiops"
+title: "Proactive Aiops Moving From Reactive"
 excerpt: "In the dynamic IT landscape of 2025, **Proactive AIOps: Moving from Reactive Troubleshooting to Intelligent Automation** has emerged as a game-changer for or..."
 date: "2025-12-18"
 category: "AIOps"

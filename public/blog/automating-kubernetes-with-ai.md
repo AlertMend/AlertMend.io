@@ -1,5 +1,5 @@
 ---
-title: "Automating Kubernetes With AI"
+title: "Automating Kubernetes With Ai Guide"
 excerpt: "Automating Kubernetes With Ai Automating Kubernetes with AI: Revolutionizing DevOps Strategies In today's fast-paced technology landscape, the efficient..."
 date: "2025-12-18"
 category: "Kubernetes"

@@ -1,5 +1,5 @@
 ---
-title: "Not a Git Repository Git"
+title: "not a git repository git Guide"
 excerpt: "Guide to fixing the not a git repository git error. Learn how to diagnose and resolve Git repository issues with practical solutions and best practices."
 date: "2025-12-18"
 category: "DevOps"

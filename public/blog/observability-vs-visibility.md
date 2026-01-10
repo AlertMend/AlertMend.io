@@ -1,5 +1,5 @@
 ---
-title: "Observability Vs Visibility"
+title: "Observability Vs Visibility Guide"
 excerpt: "In the rapidly evolving landscape of cloud-native environments and microservices architecture, understanding the nuances between observability and visibility..."
 date: "2025-12-18"
 category: "Kubernetes"

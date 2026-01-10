@@ -1,5 +1,5 @@
 ---
-title: "Wordpress Devops"
+title: "wordpress devops Guide Guide Complete Guide"
 excerpt: "wordpress devops  Transforming WordPress Development with DevOps Mastery In the ever-evolving digital landscape, achieving seamless WordPress management is..."
 date: "2025-12-18"
 category: "Kubernetes"

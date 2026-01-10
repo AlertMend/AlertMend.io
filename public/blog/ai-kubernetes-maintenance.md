@@ -1,5 +1,5 @@
 ---
-title: "AI Kubernetes Maintenance"
+title: "Ai Kubernetes Maintenance Guide"
 excerpt: "Ai Kubernetes Maintenance Leveraging AI for Kubernetes Maintenance: A Comprehensive Guide In the rapidly evolving landscape of cloud computing, AI..."
 date: "2025-12-18"
 category: "Kubernetes"

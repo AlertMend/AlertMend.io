@@ -1,5 +1,5 @@
 ---
-title: "AI-Based Kubernetes Scaling"
+title: "Ai-Based Kubernetes Scaling Guide"
 excerpt: "Harnessing AI-Based Kubernetes Scaling for Optimized DevOps In the dynamic realm of DevOps, AI-based Kubernetes scaling emerges as a pivotal innovation."
 date: "2025-12-18"
 category: "Kubernetes"

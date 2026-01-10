@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes AI Troubleshooting"
+title: "Kubernetes Ai Troubleshooting Guide"
 excerpt: "Kubernetes Ai Troubleshooting Mastering Kubernetes AI Troubleshooting in Modern DevOps In the dynamic landscape of DevOps, Kubernetes AI troubleshooting..."
 date: "2025-12-18"
 category: "Kubernetes"
