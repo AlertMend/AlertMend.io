@@ -1,7 +1,7 @@
 ---
 title: "cron job every 6 hours Guide Guide"
 excerpt: "cron job every 6 hours  Unlocking the Potential of a Cron Job Every 6 Hours for System Efficiency In today's fast-paced digital environment, efficient..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, cron, every, hours"

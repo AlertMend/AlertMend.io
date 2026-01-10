@@ -1,7 +1,7 @@
 ---
 title: "Mastering Kubernetes Auto Remediation"
 excerpt: "In the fast-paced world of DevOps, where agility and resilience are paramount, Kubernetes has emerged as a pivotal technology."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Kubernetes, Auto, Remediation"

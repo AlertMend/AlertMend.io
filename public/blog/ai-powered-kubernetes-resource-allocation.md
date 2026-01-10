@@ -1,7 +1,7 @@
 ---
 title: "AI-Powered Kubernetes Resource Allocation"
 excerpt: "Ai-Powered Kubernetes Resource Allocation Unlocking the Potential of AI-Powered Kubernetes Resource Allocation In the rapidly evolving landscape of cloud..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "ai-powered, kubernetes, resource, allocation, AlertMend AI, AIOps, DevOps"

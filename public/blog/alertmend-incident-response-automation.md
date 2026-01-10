@@ -1,7 +1,7 @@
 ---
 title: "Mastering Incident Response Automation"
 excerpt: "In the rapidly evolving landscape of cybersecurity, incident response automation has emerged as a pivotal strategy to efficiently manage the increasing volum..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Response, Automation"

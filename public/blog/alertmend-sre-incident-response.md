@@ -1,7 +1,7 @@
 ---
 title: "Mastering SRE Incident Response"
 excerpt: "In today's rapidly evolving digital landscape, the importance of effective **SRE incident response** cannot be overstated."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Sre, Response"

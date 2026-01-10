@@ -1,7 +1,7 @@
 ---
 title: "demolition robot Guide Guide Complete Guide"
 excerpt: "demolition robot  Demolition Robots: Transforming the Future of Construction Have you ever wondered how modern demolition tasks are executed with precision and."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Blog"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, demolition, robot"

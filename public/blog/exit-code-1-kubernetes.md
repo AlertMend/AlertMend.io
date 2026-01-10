@@ -1,7 +1,7 @@
 ---
 title: "exit code 1 kubernetes Guide Guide"
 excerpt: "Encountering exit code 1 in Kubernetes can be a perplexing challenge for developers and DevOps engineers"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "exit, code, kubernetes, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

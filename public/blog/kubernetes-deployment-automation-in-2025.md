@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes Deployment Automation"
 excerpt: "In the rapidly evolving landscape of **Kubernetes deployment automation in 2025**, Kubernetes has transformed the way applications are managed by providing a..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Kubernetes, Deployment, Automation, 2025"

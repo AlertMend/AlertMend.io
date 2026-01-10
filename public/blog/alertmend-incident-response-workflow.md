@@ -1,7 +1,7 @@
 ---
 title: "Navigating Incident Response Workflows"
 excerpt: "In 2026, mastering the complexities of incident response workflows is more crucial than ever. With the rapid evolution of technology, organizations face incr..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Response, Workflow"

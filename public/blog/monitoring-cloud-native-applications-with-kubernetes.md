@@ -1,7 +1,7 @@
 ---
 title: "Monitoring Cloud-Native Applications"
 excerpt: "In the ever-evolving digital landscape of 2025, **monitoring cloud-native applications with Kubernetes** has become a pivotal practice for businesses seeking..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Monitoring, Cloud, Native, Applications, Kubernetes"

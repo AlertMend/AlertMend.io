@@ -1,7 +1,7 @@
 ---
 title: "Unlocking IT Efficiency Alertmend"
 excerpt: "In the fast-paced world of 2026, automated runbooks are revolutionizing the way IT operations are managed, offering unparalleled efficiency, precision, and r..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Automated, Runbooks"

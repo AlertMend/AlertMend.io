@@ -1,7 +1,7 @@
 ---
 title: "Deny Access To Computer From Network"
 excerpt: "Learn how to configure the 'Deny access to this computer from the network' security policy in Windows environments to prevent unauthorized network access."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Troubleshooting"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, deny, access, this, computer, from, Troubleshooting"

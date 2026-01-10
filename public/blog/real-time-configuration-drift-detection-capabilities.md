@@ -1,7 +1,7 @@
 ---
 title: "Real-time Configuration Drift Detection"
 excerpt: "real-time configuration drift detection capabilities Exploring Real-Time Configuration Drift Detection Capabilities In today's fast-paced digital..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "real, time, configuration, drift, detection, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

@@ -1,7 +1,7 @@
 ---
 title: "Aiops Trends In Cloud-Native Application"
 excerpt: "As 2025 unfolds, the landscape of cloud-native application management is evolving rapidly with the integration of Artificial Intelligence for IT Operations (..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Aiops, Trends, Cloud, Native, Application"

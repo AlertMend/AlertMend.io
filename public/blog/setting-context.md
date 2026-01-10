@@ -1,7 +1,7 @@
 ---
 title: "setting context Guide Guide Complete Guide"
 excerpt: "Setting context is an essential practice in effective communication, especially within the dynamic environment of DevOps"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "setting, context, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

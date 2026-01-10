@@ -1,7 +1,7 @@
 ---
 title: "Pod Rightsizing Tools for Enterprise"
 excerpt: "Efficient resource management is a cornerstone of successful enterprise operations, especially when it comes to handling large-scale applications within Kube..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "rightsizing, tools, enterprise, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

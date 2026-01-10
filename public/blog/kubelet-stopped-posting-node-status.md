@@ -1,7 +1,7 @@
 ---
 title: "Kubelet Stopped Posting Node Status"
 excerpt: "Troubleshooting guide for kubelet stopped posting node status errors in Kubernetes. Learn how to diagnose and fix node status issues and cluster problems."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubelet, stopped, posting, node, status, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

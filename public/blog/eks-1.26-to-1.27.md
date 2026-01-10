@@ -1,7 +1,7 @@
 ---
 title: "eks 1.26 to 1.27 Guide Guide Complete Guide"
 excerpt: "The journey of upgrading from EKS 1. 27 is pivotal for businesses leveraging cloud-native solutions"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

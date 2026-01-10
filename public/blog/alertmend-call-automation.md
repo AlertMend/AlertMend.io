@@ -1,7 +1,7 @@
 ---
 title: "Revolutionizing On Call Automation"
 excerpt: "In today's fast-paced digital landscape, ensuring seamless system operations and timely incident resolution is crucial. As we step into 2026, on call automat..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Call, Automation"

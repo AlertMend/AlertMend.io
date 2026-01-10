@@ -1,7 +1,7 @@
 ---
 title: "kubernetes node not ready Guide"
 excerpt: "Experiencing a Kubernetes node not ready error can be both frustrating and disruptive, especially when orchestrating complex microservices environments"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubernetes, node, ready, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

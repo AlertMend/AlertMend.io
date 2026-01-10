@@ -1,7 +1,7 @@
 ---
 title: "mailgun statuspage Guide Guide"
 excerpt: "mailgun statuspage  Understanding the Importance of Mailgun StatusPage in System Monitoring In the world of DevOps and system monitoring, knowing the status of."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, mailgun, statuspage"

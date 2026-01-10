@@ -1,7 +1,7 @@
 ---
 title: "Mastering Incident Management for SMBs"
 excerpt: "In today's digital landscape, effective **incident management for SMBs** is crucial for maintaining business continuity and service reliability."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Management, Smb"

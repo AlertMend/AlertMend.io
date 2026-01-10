@@ -1,7 +1,7 @@
 ---
 title: "Mastering Kubernetes Self-Healing for"
 excerpt: "Kubernetes self-healing capabilities have revolutionized the way containerized applications are maintained, ensuring system reliability and performance."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Kubernetes, Self, Healing"

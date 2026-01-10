@@ -1,7 +1,7 @@
 ---
 title: "kubernetes visibility Guide Guide"
 excerpt: "In the dynamic world of containerized applications, Kubernetes visibility is essential for optimizing performance and ensuring security"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubernetes, visibility, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

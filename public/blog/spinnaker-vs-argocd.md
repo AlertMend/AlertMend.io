@@ -1,7 +1,7 @@
 ---
 title: "spinnaker vs argocd Guide Guide"
 excerpt: "In the ever-evolving field of DevOps, choosing the right continuous deployment tool is crucial for maintaining seamless operations"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "spinnaker, argocd, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

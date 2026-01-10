@@ -1,7 +1,7 @@
 ---
 title: "Mastering Kubernetes Incident Automation"
 excerpt: "In the ever-evolving landscape of Kubernetes, the need for effective incident automation is more crucial than ever in 2026."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Kubernetes, Automation"

@@ -1,7 +1,7 @@
 ---
 title: "503 No Healthy Upstream Error Guide"
 excerpt: "Complete troubleshooting guide for 503 no healthy upstream errors in Kubernetes and Nginx. Learn diagnostic techniques, common causes, and proven solutions."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "503 no healthy upstream, upstream error, nginx 503 error, kubernetes service unavailable, load balancer troubleshooting, reverse proxy errors, service health checks, AlertMend AI, AIOps, DevOps"

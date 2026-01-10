@@ -1,7 +1,7 @@
 ---
 title: "Mastering Runbook Automation Alertmend"
 excerpt: "In the rapidly evolving landscape of IT operations in 2026, **runbook automation** emerges as a pivotal tool for enhancing efficiency, minimizing errors, and..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Runbook, Automation"

@@ -1,7 +1,7 @@
 ---
 title: "Migrating From Promtail To Alloy"
 excerpt: "In the ever-evolving world of DevOps, staying ahead with the latest technology is crucial. As Promtail reaches its deprecation phase, migrating from Promtail..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Migrating, From, Promtail, Alloy, Comprehensive"

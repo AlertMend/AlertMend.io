@@ -1,7 +1,7 @@
 ---
 title: "Ai-Driven Anomaly Detection In Kubernetes"
 excerpt: "In the rapidly evolving landscape of DevOps, **AI-driven anomaly detection in Kubernetes** has emerged as a critical tool for maintaining robust and secure c..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Ai, Driven, Anomaly, Detection, Kubernetes"

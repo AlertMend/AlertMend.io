@@ -1,7 +1,7 @@
 ---
 title: "K8s Node Notready Troubleshooting"
 excerpt: "In the dynamic world of Kubernetes, encountering a k8s node notready status is a common challenge that can disrupt operations"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "node, notready, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

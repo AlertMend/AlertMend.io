@@ -1,7 +1,7 @@
 ---
 title: "argocd drift detection Guide Guide"
 excerpt: "In the dynamic landscape of Kubernetes environments, argocd drift detection emerges as a crucial capability for maintaining the integrity and consistency of ..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "argocd, drift, detection, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

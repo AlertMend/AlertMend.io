@@ -1,7 +1,7 @@
 ---
 title: "Unable to Get Local Issuer Certificate Npm"
 excerpt: "Encountering the unable to get local issuer certificate npm error can disrupt your development workflow when working with Node."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Security"
 author: "AlertMend Team"
 keywords: "unable, local, issuer, certificate, Security, AlertMend AI, AIOps"

@@ -1,7 +1,7 @@
 ---
 title: "condor career Guide Guide Complete Guide"
 excerpt: "Embarking on a career journey in system monitoring, alerting, and DevOps solutions offers numerous growth opportunities"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "condor, career, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

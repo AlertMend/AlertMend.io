@@ -1,7 +1,7 @@
 ---
 title: "Fatal: Cannot do a Partial Commit During A"
 excerpt: "In the world of software development, merge conflicts are a familiar challenge, often leading to the puzzling error: \"fatal: cannot do a partial commit durin"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Troubleshooting"
 author: "AlertMend Team"
 keywords: "fatal, cannot, partial, commit, during, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"

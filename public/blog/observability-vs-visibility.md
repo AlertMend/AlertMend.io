@@ -1,7 +1,7 @@
 ---
 title: "Observability Vs Visibility Guide"
 excerpt: "In the rapidly evolving landscape of cloud-native environments and microservices architecture, understanding the nuances between observability and visibility..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, observability, visibility, Kubernetes"

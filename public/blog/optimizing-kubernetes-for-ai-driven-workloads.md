@@ -1,7 +1,7 @@
 ---
 title: "Optimizing Kubernetes For Ai-Driven Workloads"
 excerpt: "As artificial intelligence continues to transform industries and drive innovation, the need for efficient infrastructure to support AI workloads has never be..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Optimizing, Kubernetes, Ai, Driven, Workloads"

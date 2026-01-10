@@ -1,7 +1,7 @@
 ---
 title: "How to Restart Pods in Kubernetes"
 excerpt: "The art of managing Kubernetes pods effectively is essential for maintaining a robust and responsive infrastructure"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "restart, pods, kubernetes, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

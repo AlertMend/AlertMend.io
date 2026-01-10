@@ -1,7 +1,7 @@
 ---
 title: "karpenter cost optimization Guide"
 excerpt: "In the evolving landscape of cloud computing, managing resources efficiently has become a critical necessity for businesses"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "karpenter, cost, optimization, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

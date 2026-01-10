@@ -1,7 +1,7 @@
 ---
 title: "Strategies For Preventing Coredns Server"
 excerpt: "In the dynamic world of DevOps and system monitoring, ensuring robust DNS server performance is crucial. With CoreDNS playing a pivotal role in Kubernetes cl..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Strategies, Preventing, Coredns, Server, Crashes"

@@ -1,7 +1,7 @@
 ---
 title: "Mastering SRE Runbooks for Modern DevOps"
 excerpt: "In the dynamic landscape of 2026, where technology rapidly evolves, mastering SRE runbooks is paramount for ensuring system reliability and operational effic..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Sre, Runbooks"

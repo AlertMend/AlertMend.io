@@ -1,7 +1,7 @@
 ---
 title: "kubernetes vs eks Guide Guide Complete Guide"
 excerpt: "In the ever-evolving landscape of cloud computing, the debate between Kubernetes vs EKS continues to captivate DevOps professionals and IT managers alike"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubernetes, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

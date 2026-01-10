@@ -1,7 +1,7 @@
 ---
 title: "Vps Mx Mail Server Configuration Guide"
 excerpt: "Understanding the Essentials of VPS MX for DevOps In today's fast-paced digital world, having reliable and efficient web hosting solutions is more crucial..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps"

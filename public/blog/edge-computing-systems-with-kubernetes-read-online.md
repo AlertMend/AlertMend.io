@@ -1,7 +1,7 @@
 ---
 title: "Edge Computing Systems With Kubernetes"
 excerpt: "In today's digital landscape, edge computing is revolutionizing how data is processed and services are delivered. By bringing computation closer to data sour..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "edge, computing, systems, with, kubernetes, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

@@ -1,7 +1,7 @@
 ---
 title: "Leveraging Slack Incident Automation"
 excerpt: "In the rapidly evolving landscape of DevOps, efficiently managing incidents has become crucial to maintaining system integrity and reliability."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Slack, Automation"

@@ -1,7 +1,7 @@
 ---
 title: "Gitlab Unable to Get Local Issuer Certificate"
 excerpt: "When dealing with GitLab, encountering the error gitlab unable to get local issuer certificate can be particularly perplexing for developers and DevOps teams"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "gitlab, unable, local, issuer, certificate, DevOps, AlertMend AI, AIOps"

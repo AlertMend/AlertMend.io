@@ -1,7 +1,7 @@
 ---
 title: "Not a Git Repository or Any of the Parent"
 excerpt: "The error message not a git repository or any of the parent directories is a common hurdle that developers encounter while using Git. Learn solutions."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "repository, parent, DevOps, AlertMend AI, AIOps"

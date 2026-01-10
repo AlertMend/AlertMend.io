@@ -1,7 +1,7 @@
 ---
 title: "Generative Ai In Kubernetes Software"
 excerpt: "The intersection of **generative AI in Kubernetes software development** is reshaping how organizations approach DevOps in 2025."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Generative, Ai, Kubernetes, Software, Development"

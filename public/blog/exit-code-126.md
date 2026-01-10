@@ -1,7 +1,7 @@
 ---
 title: "exit code 126 Guide Guide Complete Guide"
 excerpt: "In the world of DevOps and system monitoring, encountering an exit code 126 can be a stumbling block for smooth operations"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Troubleshooting"
 author: "AlertMend Team"
 keywords: "exit, code, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"

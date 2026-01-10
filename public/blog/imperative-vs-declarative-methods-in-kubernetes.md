@@ -1,7 +1,7 @@
 ---
 title: "Imperative Vs Declarative Methods In"
 excerpt: "In the realm of Kubernetes, The imperative method offers a hands-on approach where specific commands are executed directly."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Imperative, Vs, Declarative, Methods, Kubernetes"

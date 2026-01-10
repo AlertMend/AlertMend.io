@@ -1,7 +1,7 @@
 ---
 title: "Unleashing the Power of Slack Ops"
 excerpt: "In today's fast-paced digital world, where agility and responsiveness are paramount, **Slack Ops incident management** has become a pivotal strategy for stre..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Slack, Ops, Management"

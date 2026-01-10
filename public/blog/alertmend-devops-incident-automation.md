@@ -1,7 +1,7 @@
 ---
 title: "Mastering DevOps Incident Automation"
 excerpt: "In today's rapidly evolving technological landscape, devops incident automation has become a cornerstone for efficient system management and reliability."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Devops, Automation"

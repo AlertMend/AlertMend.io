@@ -1,7 +1,7 @@
 ---
 title: "Self-Healing Kubernetes Clusters With Ai"
 excerpt: "In 2025, the landscape of Kubernetes management has significantly evolved, introducing **self-healing Kubernetes clusters with AI operators**."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Self, Healing, Kubernetes, Clusters, Ai"

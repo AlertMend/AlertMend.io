@@ -1,7 +1,7 @@
 ---
 title: "Best Practices for Disclosing Open Source"
 excerpt: "best practices for disclosing open source components to customers Embracing Open Source: Best Practices for Disclosing Components to Customers In today's..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "best, practices, disclosing, open, source, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

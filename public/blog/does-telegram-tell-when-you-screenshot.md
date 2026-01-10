@@ -1,7 +1,7 @@
 ---
 title: "Does Telegram Tell When You Screenshot"
 excerpt: "In the dynamic world of Kubernetes, understanding the activities within your clusters is crucial for maintaining a secure and resilient infrastructure. Just ..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, does, telegram, tell, when, screenshot"

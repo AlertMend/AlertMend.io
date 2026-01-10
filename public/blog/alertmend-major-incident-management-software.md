@@ -1,7 +1,7 @@
 ---
 title: "Mastering Major Incident Management Software"
 excerpt: "In the rapidly evolving landscape of IT operations, **major incident management software** has become pivotal in ensuring seamless business continuity and op..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Major, Management, Software"

@@ -1,7 +1,7 @@
 ---
 title: "Child Process Exited With Code 1"
 excerpt: "In the realm of system monitoring and DevOps, encountering the error message \"child process exited with code 1\" can be a source of frustration and confusion"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "child, process, exited, with, code, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

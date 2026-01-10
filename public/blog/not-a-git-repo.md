@@ -1,7 +1,7 @@
 ---
 title: "not a git repo Guide Guide Complete Guide"
 excerpt: "Complete guide to fixing the not a git repo error. Learn how to diagnose and resolve Git repository issues with step-by-step troubleshooting instructions."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "repo, DevOps, AlertMend AI, AIOps"

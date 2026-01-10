@@ -1,7 +1,7 @@
 ---
 title: "Mastering the Major Incident Process"
 excerpt: "In the fast-paced world of DevOps and IT management, efficiently handling major incidents is pivotal for maintaining service reliability and customer satisfa..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Major, Process"

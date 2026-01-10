@@ -1,7 +1,7 @@
 ---
 title: "Real-time Kubernetes Resource Optimization"
 excerpt: "real-time kubernetes resource optimization solutions Introduction to Real-Time Kubernetes Resource Optimization Solutions In today's fast-evolving tech..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "real, time, kubernetes, resource, optimization, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

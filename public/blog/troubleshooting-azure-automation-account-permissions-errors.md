@@ -1,7 +1,7 @@
 ---
 title: "Troubleshooting Azure Automation Account"
 excerpt: "In the rapidly evolving landscape of DevOps and system monitoring, effective automation is paramount. However, even the most robust systems can experience hi..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Troubleshooting, Azure, Automation, Account, Permissions"

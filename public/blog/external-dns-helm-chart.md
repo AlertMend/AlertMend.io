@@ -1,7 +1,7 @@
 ---
 title: "external-dns helm chart Guide Guide"
 excerpt: "In today’s dynamic cloud environments, managing DNS records efficiently is crucial for maintaining seamless service delivery"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "external, helm, chart, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

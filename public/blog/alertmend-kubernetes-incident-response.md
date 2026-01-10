@@ -1,7 +1,7 @@
 ---
 title: "Mastering Kubernetes Incident Response"
 excerpt: "In the fast-paced world of DevOps, Kubernetes has emerged as a fundamental tool for managing containerized applications across distributed environments."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Kubernetes, Response"
