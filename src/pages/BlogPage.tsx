@@ -12,28 +12,42 @@ export default function BlogPage() {
   const navigate = useNavigate()
   
   // Sort posts by date (newest first) and ensure excerpts are properly handled
-  // Ensure blogPosts is available and is an array
+  // Ensure blogPosts is available and is an array - use empty array as fallback
   const sortedPosts = useMemo(() => {
-    if (!blogPosts || !Array.isArray(blogPosts) || blogPosts.length === 0) {
+    try {
+      const posts = blogPosts || []
+      if (!Array.isArray(posts) || posts.length === 0) {
+        return []
+      }
+      return [...posts]
+        .map(post => {
+          // Ensure excerpt is always a string and properly trimmed
+          let excerpt = ''
+          if (post && post.excerpt) {
+            if (typeof post.excerpt === 'string') {
+              excerpt = post.excerpt.trim()
+            } else if (typeof post.excerpt === 'object' && post.excerpt !== null) {
+              excerpt = String(post.excerpt).trim()
+            }
+          }
+          return {
+            ...post,
+            excerpt: excerpt || ''
+          }
+        })
+        .sort((a, b) => {
+          try {
+            const dateA = new Date(a.date || 0).getTime()
+            const dateB = new Date(b.date || 0).getTime()
+            return dateB - dateA
+          } catch {
+            return 0
+          }
+        })
+    } catch (error) {
+      console.error('Error processing blog posts:', error)
       return []
     }
-    return [...blogPosts]
-      .map(post => {
-        // Ensure excerpt is always a string and properly trimmed
-        let excerpt = ''
-        if (post.excerpt) {
-          if (typeof post.excerpt === 'string') {
-            excerpt = post.excerpt.trim()
-          } else if (typeof post.excerpt === 'object' && post.excerpt !== null) {
-            excerpt = String(post.excerpt).trim()
-          }
-        }
-        return {
-          ...post,
-          excerpt: excerpt
-        }
-      })
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   }, [])
   
   // Generate unique meta description for blog list page
