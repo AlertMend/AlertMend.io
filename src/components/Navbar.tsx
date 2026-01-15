@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Menu, X, Zap, Bell, Activity, DollarSign, ChevronDown, Play } from 'lucide-react'
 import AlertMendLogo from './AlertMendLogo'
-import { trackRegisterClick, trackPlaygroundClick, trackBookDemoClick } from '../utils/analytics'
+import { trackRegisterClick, trackPlaygroundClick, trackBookDemoClick, trackNavigationClick } from '../utils/analytics'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -136,9 +136,23 @@ export default function Navbar() {
 
   const handleClick = (item: typeof navItems[0]) => {
     if (item.hasDropdown) {
+      // Track Solutions dropdown click
+      if (blogTracking) {
+        trackNavigationClick('Solutions', blogTracking.source, blogTracking.slug)
+      } else {
+        trackNavigationClick('Solutions', 'navbar', null, { solution: currentSolution || 'default' })
+      }
       setIsSolutionsOpen(!isSolutionsOpen)
       return
     }
+    
+    // Track navigation click
+    if (blogTracking) {
+      trackNavigationClick(item.name, blogTracking.source, blogTracking.slug)
+    } else {
+      trackNavigationClick(item.name, 'navbar', null, { solution: currentSolution || 'default' })
+    }
+    
     setIsOpen(false)
     setIsSolutionsOpen(false)
     
@@ -187,6 +201,14 @@ export default function Navbar() {
   }
 
   const handleSolutionClick = (solutionId: string) => {
+    // Track solution selection from dropdown
+    const solutionName = solutions.find(s => s.id === solutionId)?.name || solutionId
+    if (blogTracking) {
+      trackNavigationClick(`Solutions - ${solutionName}`, blogTracking.source, blogTracking.slug)
+    } else {
+      trackNavigationClick(`Solutions - ${solutionName}`, 'navbar', null, { solution: currentSolution || 'default' })
+    }
+    
     setIsSolutionsOpen(false)
     setIsOpen(false)
     if (solutionId === 'default') {

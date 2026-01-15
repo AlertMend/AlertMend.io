@@ -129,3 +129,34 @@ export function trackBookDemoClick(
 
   trackEvent('book_demo_click', params)
 }
+
+/**
+ * Track a navigation menu click event with blog source information
+ * @param menuItem - Name of the menu item clicked (e.g., 'How It Works', 'Solutions', 'Benefits', 'Case Studies', 'Blog', 'Pricing')
+ * @param source - Source of the click (e.g., 'blog-list', 'blog-post', 'navbar')
+ * @param blogSlug - Blog post slug if clicking from a blog post
+ * @param additionalParams - Any additional parameters to include
+ */
+export function trackNavigationClick(
+  menuItem: string,
+  source: string,
+  blogSlug?: string | null,
+  additionalParams?: Record<string, any>
+) {
+  const params: Record<string, any> = {
+    event_category: 'navigation',
+    event_label: 'navigation_menu_click',
+    menu_item: menuItem,
+    source: source,
+    ...additionalParams,
+  }
+
+  if (blogSlug) {
+    params.blog_slug = blogSlug
+    params.content_type = 'blog_post'
+  } else if (source === 'blog-list') {
+    params.content_type = 'blog_list'
+  }
+
+  trackEvent('navigation_click', params)
+}
