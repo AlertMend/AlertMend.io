@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Menu, X, Zap, Bell, Activity, DollarSign, ChevronDown, Play } from 'lucide-react'
 import AlertMendLogo from './AlertMendLogo'
-import { trackRegisterClick, trackPlaygroundClick, trackBookDemoClick, trackNavigationClick } from '../utils/analytics'
+import { trackRegisterClick, trackPlaygroundClick, trackBookDemoClick, trackNavigationClick, storeBlogSource } from '../utils/analytics'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -27,6 +27,34 @@ export default function Navbar() {
   }
   
   const currentSolution = getCurrentSolution()
+
+  // Get page-based source for non-blog pages
+  const getPageSource = () => {
+    const pathname = location.pathname
+    
+    // Map common pages to readable source names
+    if (pathname === '/') {
+      return 'homepage'
+    } else if (pathname === '/pricing') {
+      return 'pricing'
+    } else if (pathname === '/case-studies') {
+      return 'case-studies'
+    } else if (pathname.startsWith('/case-studies/')) {
+      return 'case-study-detail'
+    } else if (pathname === '/about') {
+      return 'about'
+    } else if (pathname === '/contact') {
+      return 'contact'
+    } else if (pathname === '/partners') {
+      return 'partners'
+    } else if (pathname === '/careers') {
+      return 'careers'
+    } else if (currentSolution) {
+      return `solution-${currentSolution}`
+    }
+    
+    return 'navbar'
+  }
 
   // Detect if we're on a blog page and extract blog slug
   const getBlogTrackingInfo = () => {
@@ -56,6 +84,13 @@ export default function Navbar() {
 
   const blogTracking = getBlogTrackingInfo()
 
+  // Store blog source in sessionStorage when on blog pages
+  useEffect(() => {
+    if (blogTracking) {
+      storeBlogSource(blogTracking.source, blogTracking.slug)
+    }
+  }, [blogTracking?.source, blogTracking?.slug])
+
   // Solution-specific signup URLs
   const signupUrls: Record<string, string> = {
     'default': 'https://demo.alertmend.io/signup',
@@ -65,34 +100,43 @@ export default function Navbar() {
     'kubernetes-cost-optimization': 'https://demo.alertmend.io/signup?service=cost-optimization',
   }
 
+  // Get page source for URL parameters
+  const pageSource = getPageSource()
+  
   // Get base signup URL for current solution or default
   let baseSignupUrl = signupUrls[currentSolution || 'default'] || signupUrls['default']
   
-  // Add blog tracking parameters if on a blog page
-  let signupUrl = baseSignupUrl
+  // Add source tracking parameters to signup URL
+  const signupUrlObj = new URL(baseSignupUrl)
   if (blogTracking) {
-    const url = new URL(baseSignupUrl)
-    url.searchParams.set('source', blogTracking.source)
+    // If on blog page, use blog source
+    signupUrlObj.searchParams.set('source', blogTracking.source)
     if (blogTracking.slug) {
       // Normalize slug: remove .html extension, lowercase, convert underscores to hyphens
       let normalizedSlug = blogTracking.slug.replace(/\.html$/, '').toLowerCase().replace(/_/g, '-')
-      url.searchParams.set('blog_slug', normalizedSlug)
+      signupUrlObj.searchParams.set('blog_slug', normalizedSlug)
     }
-    signupUrl = url.toString()
+  } else {
+    // For non-blog pages, use page source
+    signupUrlObj.searchParams.set('source', pageSource)
   }
+  const signupUrl = signupUrlObj.toString()
 
-  // Get playground URL with blog tracking parameters
-  let playgroundUrl = 'https://demo.alertmend.io/playground'
+  // Get playground URL with source tracking parameters
+  const playgroundUrlObj = new URL('https://demo.alertmend.io/playground')
   if (blogTracking) {
-    const url = new URL(playgroundUrl)
-    url.searchParams.set('source', blogTracking.source)
+    // If on blog page, use blog source
+    playgroundUrlObj.searchParams.set('source', blogTracking.source)
     if (blogTracking.slug) {
       // Normalize slug: remove .html extension, lowercase, convert underscores to hyphens
       let normalizedSlug = blogTracking.slug.replace(/\.html$/, '').toLowerCase().replace(/_/g, '-')
-      url.searchParams.set('blog_slug', normalizedSlug)
+      playgroundUrlObj.searchParams.set('blog_slug', normalizedSlug)
     }
-    playgroundUrl = url.toString()
+  } else {
+    // For non-blog pages, use page source
+    playgroundUrlObj.searchParams.set('source', pageSource)
   }
+  const playgroundUrl = playgroundUrlObj.toString()
 
   const solutions = [
     { id: 'default', name: 'Platform Overview', icon: Zap, color: 'text-purple-600' },
@@ -311,10 +355,12 @@ export default function Navbar() {
                 type="button"
                 onClick={() => {
                   // Track playground click in Google Analytics
+                  const currentPage = location.pathname
+                  const pageSource = getPageSource()
                   if (blogTracking) {
-                    trackPlaygroundClick(blogTracking.source, blogTracking.slug)
+                    trackPlaygroundClick(blogTracking.source, blogTracking.slug, currentPage)
                   } else {
-                    trackPlaygroundClick('navbar', null, { solution: currentSolution || 'default' })
+                    trackPlaygroundClick(pageSource, null, currentPage, { solution: currentSolution || 'default' })
                   }
                   window.open(playgroundUrl, '_blank')
                 }}
@@ -327,10 +373,12 @@ export default function Navbar() {
                 type="button"
                 onClick={() => {
                   // Track registration click in Google Analytics
+                  const currentPage = location.pathname
+                  const pageSource = getPageSource()
                   if (blogTracking) {
-                    trackRegisterClick(blogTracking.source, blogTracking.slug)
+                    trackRegisterClick(blogTracking.source, blogTracking.slug, currentPage)
                   } else {
-                    trackRegisterClick('navbar', null, { solution: currentSolution || 'default' })
+                    trackRegisterClick(pageSource, null, currentPage, { solution: currentSolution || 'default' })
                   }
                   window.open(signupUrl, '_blank')
                 }}
@@ -342,10 +390,12 @@ export default function Navbar() {
                 type="button"
                 onClick={() => {
                   // Track book demo click in Google Analytics
+                  const currentPage = location.pathname
+                  const pageSource = getPageSource()
                   if (blogTracking) {
-                    trackBookDemoClick(blogTracking.source, blogTracking.slug)
+                    trackBookDemoClick(blogTracking.source, blogTracking.slug, currentPage)
                   } else {
-                    trackBookDemoClick('navbar', null, { solution: currentSolution || 'default' })
+                    trackBookDemoClick(pageSource, null, currentPage, { solution: currentSolution || 'default' })
                   }
                   window.open('https://calendly.com/hello-alertmend/30min', '_blank')
                 }}
@@ -432,10 +482,12 @@ export default function Navbar() {
                 onClick={() => {
                   setIsOpen(false)
                   // Track playground click in Google Analytics
+                  const currentPage = location.pathname
+                  const pageSource = getPageSource()
                   if (blogTracking) {
-                    trackPlaygroundClick(blogTracking.source, blogTracking.slug)
+                    trackPlaygroundClick(blogTracking.source, blogTracking.slug, currentPage)
                   } else {
-                    trackPlaygroundClick('navbar', null, { solution: currentSolution || 'default' })
+                    trackPlaygroundClick(pageSource, null, currentPage, { solution: currentSolution || 'default' })
                   }
                   window.open(playgroundUrl, '_blank')
                 }}
@@ -449,10 +501,12 @@ export default function Navbar() {
                 onClick={() => {
                   setIsOpen(false)
                   // Track registration click in Google Analytics
+                  const currentPage = location.pathname
+                  const pageSource = getPageSource()
                   if (blogTracking) {
-                    trackRegisterClick(blogTracking.source, blogTracking.slug)
+                    trackRegisterClick(blogTracking.source, blogTracking.slug, currentPage)
                   } else {
-                    trackRegisterClick('navbar', null, { solution: currentSolution || 'default' })
+                    trackRegisterClick(pageSource, null, currentPage, { solution: currentSolution || 'default' })
                   }
                   window.open(signupUrl, '_blank')
                 }}
@@ -465,10 +519,12 @@ export default function Navbar() {
                 onClick={() => {
                   setIsOpen(false)
                   // Track book demo click in Google Analytics
+                  const currentPage = location.pathname
+                  const pageSource = getPageSource()
                   if (blogTracking) {
-                    trackBookDemoClick(blogTracking.source, blogTracking.slug)
+                    trackBookDemoClick(blogTracking.source, blogTracking.slug, currentPage)
                   } else {
-                    trackBookDemoClick('navbar', null, { solution: currentSolution || 'default' })
+                    trackBookDemoClick(pageSource, null, currentPage, { solution: currentSolution || 'default' })
                   }
                   window.open('https://calendly.com/hello-alertmend/30min', '_blank')
                 }}

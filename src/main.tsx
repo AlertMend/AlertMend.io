@@ -5,6 +5,7 @@ import { HelmetProvider } from './lib/helmet'
 import App from './App.tsx'
 import './index.css'
 import { setupCanonicalObserver } from './utils/urlUtils'
+import { getBlogSource } from './utils/analytics'
 
 // TypeScript declaration for Google Analytics gtag
 declare global {
@@ -35,22 +36,35 @@ function PageTracker() {
         const pageTitle = document.title
         const pageLocation = window.location.href
 
+        // Get blog source information if available
+        const blogSource = getBlogSource()
+        const pageViewParams: Record<string, any> = {
+          page_path: pagePath,
+          page_title: pageTitle,
+          page_location: pageLocation,
+        }
+
+        // Add blog source information if available
+        if (blogSource) {
+          pageViewParams.blog_source = blogSource.source
+          if (blogSource.blogSlug) {
+            pageViewParams.blog_slug = blogSource.blogSlug
+            pageViewParams.content_type = 'blog_post'
+          } else if (blogSource.source === 'blog-list') {
+            pageViewParams.content_type = 'blog_list'
+          }
+        }
+
         // Check if gtag is available
         if (window.gtag) {
           // For GA4 SPA tracking, use config with page_path update
           // This is the recommended method for single-page applications
-          window.gtag('config', 'G-Z8QSJ5NK95', {
-            page_path: pagePath,
-            page_title: pageTitle,
-            page_location: pageLocation,
-          })
+          window.gtag('config', 'G-Z8QSJ5NK95', pageViewParams)
         } else if (window.dataLayer) {
           // Fallback: push directly to dataLayer if gtag isn't available yet
           window.dataLayer.push({
             event: 'page_view',
-            page_path: pagePath,
-            page_title: pageTitle,
-            page_location: pageLocation,
+            ...pageViewParams,
           })
         } else if (retries > 0) {
           // Retry after a short delay if neither is available
