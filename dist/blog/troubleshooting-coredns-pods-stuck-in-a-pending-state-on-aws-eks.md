@@ -1,7 +1,7 @@
 ---
 title: "Troubleshooting Coredns Pods Stuck In A"
 excerpt: "In the rapidly evolving world of DevOps, ensuring the seamless operation of Kubernetes clusters is crucial for maintaining high availability and performance."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Troubleshooting, Coredns, Pods, Stuck, Pending"

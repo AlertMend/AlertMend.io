@@ -1,7 +1,7 @@
 ---
 title: "Managing Microservices In Kubernetes"
 excerpt: "Learn about managing microservices in kubernetes post-migration."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Managing, Microservices, Kubernetes, Post, Migration"

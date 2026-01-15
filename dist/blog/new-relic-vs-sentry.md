@@ -1,7 +1,7 @@
 ---
 title: "new relic vs sentry Guide Guide"
 excerpt: "new relic vs sentry  Navigating System Monitoring: New Relic vs Sentry In the dynamic world of system monitoring and application performance management,..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, relic, sentry"

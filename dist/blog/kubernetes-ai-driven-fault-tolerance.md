@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes AI-Driven Fault Tolerance"
 excerpt: "Kubernetes Ai-Driven Fault Tolerance Harnessing Kubernetes AI-Driven Fault Tolerance for Resilient Systems In an era where distributed systems power..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubernetes, ai-driven, fault, tolerance, AlertMend AI, AIOps, DevOps"

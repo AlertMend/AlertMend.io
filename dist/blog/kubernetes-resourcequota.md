@@ -1,7 +1,7 @@
 ---
 title: "kubernetes resourcequota Guide"
 excerpt: "In the dynamic world of Kubernetes, managing resource allocation efficiently is crucial to maintaining a stable environment"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubernetes, resourcequota, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

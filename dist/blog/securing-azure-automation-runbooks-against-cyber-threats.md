@@ -1,7 +1,7 @@
 ---
 title: "Securing Azure Automation Runbooks"
 excerpt: "In 2025, securing Azure automation runbooks against cyber threats has become a critical focus for businesses leveraging cloud environments."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Securing, Azure, Automation, Runbooks, Against"

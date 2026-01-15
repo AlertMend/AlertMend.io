@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Menu, X, Zap, Bell, Activity, DollarSign, ChevronDown, Play } from 'lucide-react'
 import AlertMendLogo from './AlertMendLogo'
+import { trackRegisterClick, trackPlaygroundClick, trackBookDemoClick } from '../utils/analytics'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -27,6 +28,34 @@ export default function Navbar() {
   
   const currentSolution = getCurrentSolution()
 
+  // Detect if we're on a blog page and extract blog slug
+  const getBlogTrackingInfo = () => {
+    const pathname = location.pathname
+    
+    // Check if on blog listing page
+    if (pathname === '/blog') {
+      return { source: 'blog-list', slug: null }
+    }
+    
+    // Check if on blog post page (/blog/:slug)
+    const blogPostMatch = pathname.match(/^\/blog\/(.+)$/)
+    if (blogPostMatch) {
+      const slug = blogPostMatch[1]
+      return { source: 'blog-post', slug }
+    }
+    
+    // Check if on legacy blog post page (/blogs/:slug.html)
+    const legacyBlogMatch = pathname.match(/^\/blogs\/(.+)\.html$/)
+    if (legacyBlogMatch) {
+      const slug = legacyBlogMatch[1]
+      return { source: 'blog-post', slug }
+    }
+    
+    return null
+  }
+
+  const blogTracking = getBlogTrackingInfo()
+
   // Solution-specific signup URLs
   const signupUrls: Record<string, string> = {
     'default': 'https://demo.alertmend.io/signup',
@@ -36,8 +65,34 @@ export default function Navbar() {
     'kubernetes-cost-optimization': 'https://demo.alertmend.io/signup?service=cost-optimization',
   }
 
-  // Get signup URL for current solution or default
-  const signupUrl = signupUrls[currentSolution || 'default'] || signupUrls['default']
+  // Get base signup URL for current solution or default
+  let baseSignupUrl = signupUrls[currentSolution || 'default'] || signupUrls['default']
+  
+  // Add blog tracking parameters if on a blog page
+  let signupUrl = baseSignupUrl
+  if (blogTracking) {
+    const url = new URL(baseSignupUrl)
+    url.searchParams.set('source', blogTracking.source)
+    if (blogTracking.slug) {
+      // Normalize slug: remove .html extension, lowercase, convert underscores to hyphens
+      let normalizedSlug = blogTracking.slug.replace(/\.html$/, '').toLowerCase().replace(/_/g, '-')
+      url.searchParams.set('blog_slug', normalizedSlug)
+    }
+    signupUrl = url.toString()
+  }
+
+  // Get playground URL with blog tracking parameters
+  let playgroundUrl = 'https://demo.alertmend.io/playground'
+  if (blogTracking) {
+    const url = new URL(playgroundUrl)
+    url.searchParams.set('source', blogTracking.source)
+    if (blogTracking.slug) {
+      // Normalize slug: remove .html extension, lowercase, convert underscores to hyphens
+      let normalizedSlug = blogTracking.slug.replace(/\.html$/, '').toLowerCase().replace(/_/g, '-')
+      url.searchParams.set('blog_slug', normalizedSlug)
+    }
+    playgroundUrl = url.toString()
+  }
 
   const solutions = [
     { id: 'default', name: 'Platform Overview', icon: Zap, color: 'text-purple-600' },
@@ -232,7 +287,15 @@ export default function Navbar() {
             <div className="ml-4 pl-4 border-l border-gray-200 flex items-center gap-2.5">
               <button 
                 type="button"
-                onClick={() => window.open('https://demo.alertmend.io/playground', '_blank')}
+                onClick={() => {
+                  // Track playground click in Google Analytics
+                  if (blogTracking) {
+                    trackPlaygroundClick(blogTracking.source, blogTracking.slug)
+                  } else {
+                    trackPlaygroundClick('navbar', null, { solution: currentSolution || 'default' })
+                  }
+                  window.open(playgroundUrl, '_blank')
+                }}
                 className="group flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-purple-700 rounded-lg hover:bg-purple-800 transition-all duration-200 shadow-sm hover:shadow-md"
               >
                 <Play className="h-4 w-4 group-hover:scale-110 transition-transform" />
@@ -240,14 +303,30 @@ export default function Navbar() {
               </button>
               <button 
                 type="button"
-                onClick={() => window.open(signupUrl, '_blank')}
+                onClick={() => {
+                  // Track registration click in Google Analytics
+                  if (blogTracking) {
+                    trackRegisterClick(blogTracking.source, blogTracking.slug)
+                  } else {
+                    trackRegisterClick('navbar', null, { solution: currentSolution || 'default' })
+                  }
+                  window.open(signupUrl, '_blank')
+                }}
                 className="px-4 py-2 text-sm font-medium text-purple-700 hover:text-purple-900 hover:bg-gray-50 rounded-lg transition-all duration-200"
               >
                 Register
               </button>
               <button 
                 type="button"
-                onClick={() => window.open('https://calendly.com/hello-alertmend/30min', '_blank')}
+                onClick={() => {
+                  // Track book demo click in Google Analytics
+                  if (blogTracking) {
+                    trackBookDemoClick(blogTracking.source, blogTracking.slug)
+                  } else {
+                    trackBookDemoClick('navbar', null, { solution: currentSolution || 'default' })
+                  }
+                  window.open('https://calendly.com/hello-alertmend/30min', '_blank')
+                }}
                 className="bg-gradient-to-r from-purple-800 to-purple-900 text-white px-5 py-2 rounded-lg hover:from-purple-900 hover:to-purple-950 transition-all shadow-sm hover:shadow-md font-semibold text-sm"
               >
                 Book a Demo
@@ -330,7 +409,13 @@ export default function Navbar() {
                 type="button"
                 onClick={() => {
                   setIsOpen(false)
-                  window.open('https://playground.alertmend.ai', '_blank')
+                  // Track playground click in Google Analytics
+                  if (blogTracking) {
+                    trackPlaygroundClick(blogTracking.source, blogTracking.slug)
+                  } else {
+                    trackPlaygroundClick('navbar', null, { solution: currentSolution || 'default' })
+                  }
+                  window.open(playgroundUrl, '_blank')
                 }}
                 className="w-full flex items-center justify-center gap-2 text-white bg-purple-700 px-4 py-2.5 rounded-lg hover:bg-purple-800 transition-all font-semibold text-sm shadow-sm"
               >
@@ -341,6 +426,12 @@ export default function Navbar() {
                 type="button"
                 onClick={() => {
                   setIsOpen(false)
+                  // Track registration click in Google Analytics
+                  if (blogTracking) {
+                    trackRegisterClick(blogTracking.source, blogTracking.slug)
+                  } else {
+                    trackRegisterClick('navbar', null, { solution: currentSolution || 'default' })
+                  }
                   window.open(signupUrl, '_blank')
                 }}
                 className="w-full text-purple-700 hover:text-purple-900 px-4 py-2.5 rounded-lg hover:bg-gray-50 transition-all font-medium text-sm border border-gray-200"
@@ -351,6 +442,12 @@ export default function Navbar() {
                 type="button"
                 onClick={() => {
                   setIsOpen(false)
+                  // Track book demo click in Google Analytics
+                  if (blogTracking) {
+                    trackBookDemoClick(blogTracking.source, blogTracking.slug)
+                  } else {
+                    trackBookDemoClick('navbar', null, { solution: currentSolution || 'default' })
+                  }
                   window.open('https://calendly.com/hello-alertmend/30min', '_blank')
                 }}
                 className="w-full bg-gradient-to-r from-purple-800 to-purple-900 text-white px-4 py-2.5 rounded-lg hover:from-purple-900 hover:to-purple-950 transition-all shadow-sm font-semibold text-sm"

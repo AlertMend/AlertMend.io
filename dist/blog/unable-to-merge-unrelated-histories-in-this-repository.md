@@ -1,7 +1,7 @@
 ---
 title: "Unable to Merge Unrelated Histories"
 excerpt: "Troubleshooting guide for unable to merge unrelated histories error. Learn how to fix Git merge issues and combine unrelated repository histories."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "unable, merge, unrelated, histories, this, DevOps, AlertMend AI, AIOps"

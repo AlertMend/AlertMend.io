@@ -1,7 +1,7 @@
 ---
 title: "Real-time Pod Rightsizing Software"
 excerpt: "In the dynamic world of Kubernetes, efficient resource management is crucial for maintaining optimal performance and cost-effectiveness"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "real, time, rightsizing, software, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

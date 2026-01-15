@@ -1,7 +1,7 @@
 ---
 title: "Using Kubectl For Real-Time Event Streaming"
 excerpt: "In the ever-evolving landscape of Kubernetes, keeping a finger on the pulse of your cluster is crucial. Event streaming is an essential method for observing ..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Using, Kubectl, Real, Time, Event"

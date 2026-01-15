@@ -1,7 +1,7 @@
 ---
 title: "what is a keyword monitor 1 Guide"
 excerpt: "what is a keyword monitor  Navigating the World of Keyword Monitoring: A Comprehensive Guide In the ever-evolving landscape of digital marketing and search..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, what, keyword, monitor"

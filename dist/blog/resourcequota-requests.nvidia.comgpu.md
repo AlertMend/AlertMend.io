@@ -1,7 +1,7 @@
 ---
 title: "Resourcequota Requests.nvidia.com/gpu"
 excerpt: "In the world of Kubernetes, managing resources efficiently is critical, especially when dealing with specialized hardware like GPUs"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "resourcequota, requests, nvidia, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

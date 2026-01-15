@@ -1,7 +1,7 @@
 ---
 title: "Mastering Kubernetes Runbook Automation"
 excerpt: "As the DevOps landscape evolves in 2026, **Kubernetes runbook automation** emerges as a pivotal solution for managing complex operations across cloud-native ..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Kubernetes, Runbook, Automation"

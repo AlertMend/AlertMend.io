@@ -1,7 +1,7 @@
 ---
 title: "Multi-Az Aks Clusters High Availability Guide"
 excerpt: "As organizations continue to rely on cloud-based solutions for robust, scalable infrastructure, In this comprehensive guide, you will learn about the core co..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Multi, Az, Aks, Clusters, High"

@@ -1,7 +1,7 @@
 ---
 title: "kubectl node not ready Guide Guide"
 excerpt: "When deploying applications on Kubernetes, encountering the \"kubectl node not ready\" status can disrupt operations significantly"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubectl, node, ready, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

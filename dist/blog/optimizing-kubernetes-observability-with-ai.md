@@ -1,7 +1,7 @@
 ---
 title: "Optimizing Kubernetes Observability With Ai"
 excerpt: "In today's rapidly evolving digital landscape, optimizing Kubernetes observability with AI has become a cornerstone for efficient system management."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Optimizing, Kubernetes, Observability, Ai"

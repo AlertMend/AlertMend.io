@@ -1,7 +1,7 @@
 ---
 title: "Model Control Protocol For Ai-Powered"
 excerpt: "In the rapidly evolving world of DevOps and AI, The **model control protocol for AI-powered Kubernetes** acts as a standardized interface that connects AI mo..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Model, Control, Protocol, Ai, Powered"

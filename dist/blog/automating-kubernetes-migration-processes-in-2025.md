@@ -1,7 +1,7 @@
 ---
 title: "Automating Kubernetes Migration Processes"
 excerpt: "As businesses continue to embrace cloud-native technologies, **automating Kubernetes migration processes in 2025** has become crucial for streamlined operati..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Automating, Kubernetes, Migration, Processes, 2025"

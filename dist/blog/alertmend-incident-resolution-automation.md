@@ -1,7 +1,7 @@
 ---
 title: "Incident Resolution Automation"
 excerpt: "In 2026, incident resolution automation has emerged as a pivotal force in the realm of DevOps, transforming the way organizations manage and mitigate system ..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Resolution, Automation"

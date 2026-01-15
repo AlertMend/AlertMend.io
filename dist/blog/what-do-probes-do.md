@@ -1,7 +1,7 @@
 ---
 title: "what do probes do Guide Guide Complete Guide"
 excerpt: "In the realm of system monitoring, understanding what probes do can significantly enhance the effectiveness of your DevOps strategies"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "what, probes, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

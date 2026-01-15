@@ -1,7 +1,7 @@
 ---
 title: "Using Kubernetes Vertical Scaling Introduced"
 excerpt: "The advent of **using Kubernetes vertical scaling introduced in 2025** marks a significant transformation in resource management for containerized environments."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Using, Kubernetes, Vertical, Scaling, Introduced"

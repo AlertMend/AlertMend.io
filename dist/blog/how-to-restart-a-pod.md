@@ -1,7 +1,7 @@
 ---
 title: "How to Restart a Pod Guide Guide"
 excerpt: "In the dynamic landscape of containers and microservices, Kubernetes has emerged as a leading orchestration platform, efficiently managing containerized appl..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "restart, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

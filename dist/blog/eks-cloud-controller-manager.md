@@ -1,7 +1,7 @@
 ---
 title: "eks cloud controller manager Guide"
 excerpt: "In the ever-evolving landscape of cloud infrastructure, the EKS cloud controller manager plays a pivotal role in integrating Kubernetes clusters with Amazon ..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "cloud, controller, manager, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

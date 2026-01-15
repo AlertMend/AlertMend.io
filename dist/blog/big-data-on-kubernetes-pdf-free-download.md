@@ -1,7 +1,7 @@
 ---
 title: "Big Data on Kubernetes Pdf Free Download"
 excerpt: "In the realm of modern data management, big data on Kubernetes pdf free download resources have become invaluable for data engineers and developers"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "data, kubernetes, free, download, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

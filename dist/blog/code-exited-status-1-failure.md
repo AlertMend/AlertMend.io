@@ -1,7 +1,7 @@
 ---
 title: "code exited status 1/failure Guide"
 excerpt: "Encountering the code exited status 1/failure error can be challenging in system monitoring."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "code, exited, status, failure, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

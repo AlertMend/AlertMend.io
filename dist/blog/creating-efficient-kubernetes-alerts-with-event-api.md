@@ -1,7 +1,7 @@
 ---
 title: "Creating Efficient Kubernetes Alerts"
 excerpt: "Learn how to create efficient Kubernetes alerts using the Event API to monitor and respond to cluster activities in real-time, improving observability."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Creating, Efficient, Kubernetes, Alerts, Event"

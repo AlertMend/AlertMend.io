@@ -1,7 +1,7 @@
 ---
 title: "Incident Resolution In Devops Pipelines"
 excerpt: "Incident Resolution In Devops Pipelines Unlocking Efficiency in DevOps Pipelines: A Guide to Incident Resolution In the rapidly evolving landscape of..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Incident Management"
 author: "AlertMend Team"
 keywords: "incident, resolution, devops, pipelines, AlertMend AI, AIOps, DevOps"

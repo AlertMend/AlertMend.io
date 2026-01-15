@@ -1,7 +1,7 @@
 ---
 title: "Mastering DevOps Runbook Automation"
 excerpt: "In today's fast-paced digital landscape, where businesses are pushing the boundaries of technology, **DevOps runbook automation** stands out as a crucial app..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Devops, Runbook, Automation"

@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes Resource Optimization Solutions"
 excerpt: "As organizations increasingly adopt Kubernetes for container orchestration, the challenge of effectively managing resources becomes critical"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubernetes, resource, optimization, solutions, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

@@ -1,7 +1,7 @@
 ---
 title: "eks costs Guide Guide Complete Guide"
 excerpt: "Understanding how to manage costs effectively is crucial for businesses using Amazon Elastic Kubernetes Service (EKS)"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "costs, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

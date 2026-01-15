@@ -1,7 +1,7 @@
 ---
 title: "AI In Kubernetes Devops Workflows"
 excerpt: "Ai In Kubernetes Devops Workflows Transforming DevOps with AI in Kubernetes Workflows In today's fast-paced tech landscape, integrating AI in Kubernetes..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubernetes, devops, workflows, AlertMend AI, AIOps, DevOps"

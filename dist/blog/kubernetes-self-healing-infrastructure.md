@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes Self-Healing Infrastructure"
 excerpt: "Kubernetes Self-Healing Infrastructure Harnessing Kubernetes Self-Healing Infrastructure for Resilient DevOps In today's dynamic IT landscapes, the..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubernetes, self-healing, infrastructure, AlertMend AI, AIOps, DevOps"

@@ -1,7 +1,7 @@
 ---
 title: "argocd vs jenkins Guide Guide Complete Guide"
 excerpt: "In the ever-evolving world of software development, choosing the right tools for your Continuous Integration and Continuous Deployment (CI/CD) pipelines is c..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "argocd, jenkins, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

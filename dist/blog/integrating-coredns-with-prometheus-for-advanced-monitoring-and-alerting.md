@@ -1,7 +1,7 @@
 ---
 title: "Integrating Coredns With Prometheus For"
 excerpt: "In 2025, the landscape of system monitoring and alerting solutions is rapidly evolving, with DevOps teams increasingly recognizing the importance of robust t..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Integrating, Coredns, Prometheus, Advanced, Monitoring"

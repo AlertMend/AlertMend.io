@@ -1,7 +1,7 @@
 ---
 title: "Automated Kubernetes Cost Optimization"
 excerpt: "In the rapidly evolving landscape of cloud computing, managing costs effectively is a top priority for businesses using Kubernetes"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "automated, kubernetes, cost, optimization, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

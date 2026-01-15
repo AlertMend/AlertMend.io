@@ -1,7 +1,7 @@
 ---
 title: "Mastering SRE On-Call Management"
 excerpt: "In the dynamic landscape of DevOps and system reliability, **SRE on call** remains a pivotal practice in ensuring that applications remain robust and service..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Sre, Call, Guide"

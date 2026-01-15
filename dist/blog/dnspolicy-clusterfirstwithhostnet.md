@@ -1,7 +1,7 @@
 ---
 title: "Dnspolicy Clusterfirstwithhostnet"
 excerpt: "In the dynamic world of Kubernetes, understanding DNS policies is pivotal for seamless cluster operations"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "dnspolicy, clusterfirstwithhostnet, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

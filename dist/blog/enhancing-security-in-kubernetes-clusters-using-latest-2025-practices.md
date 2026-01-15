@@ -1,7 +1,7 @@
 ---
 title: "Enhancing Security In Kubernetes"
 excerpt: "As technology continues to evolve at an unprecedented pace, enhancing security in Kubernetes clusters using the latest 2025 practices has become paramount fo..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Enhancing, Security, Kubernetes, Clusters, Using"

@@ -1,7 +1,7 @@
 ---
 title: "Automated Kubernetes Monitoring"
 excerpt: "Automated Kubernetes Monitoring Unlocking the Potential of Automated Kubernetes Monitoring with Alertmend.io In the fast-evolving world of cloud-native..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "automated, kubernetes, monitoring, AlertMend AI, AIOps, DevOps"

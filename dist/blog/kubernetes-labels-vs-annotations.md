@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes Labels vs Annotations"
 excerpt: "In the ever-evolving world of Kubernetes, managing metadata effectively is crucial for efficient system monitoring and operational management"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubernetes, labels, annotations, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

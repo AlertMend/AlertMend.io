@@ -1,7 +1,7 @@
 ---
 title: "Mastering Azure Incident Management"
 excerpt: "In 2026, incident management within the Azure ecosystem is more critical than ever, given the expanding digital landscape and increasing complexity of cloud ..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Azure, Management"

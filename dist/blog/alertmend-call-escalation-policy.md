@@ -1,7 +1,7 @@
 ---
 title: "Mastering On Call Escalation Policies"
 excerpt: "In the dynamic landscape of IT infrastructure management and DevOps practices, effective incident management is crucial. As we step into 2026, organizations ..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Call, Escalation, Policy"

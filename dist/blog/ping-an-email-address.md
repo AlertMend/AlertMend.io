@@ -1,7 +1,7 @@
 ---
 title: "ping an email address Guide Guide"
 excerpt: "ping an email address  Unleashing the Power of Email Verification: How to Ping an Email Address In today's digitally driven world, ensuring the validity of..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, ping, email, address"

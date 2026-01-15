@@ -1,7 +1,7 @@
 ---
 title: "Machine Learning For Kubernetes Optimization"
 excerpt: "Machine Learning For Kubernetes Optimization Harnessing Machine Learning for Kubernetes Optimization Imagine a world where your Kubernetes clusters..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "machine, learning, kubernetes, optimiza..., AlertMend AI, AIOps, DevOps"

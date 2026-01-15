@@ -1,7 +1,7 @@
 ---
 title: "Deepseek R1 Claude-3-5-sonnet-20241022"
 excerpt: "In the rapidly evolving world of artificial intelligence, selecting the right model for your needs can be a daunting task"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "deepseek, claude, sonnet, 20241022, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

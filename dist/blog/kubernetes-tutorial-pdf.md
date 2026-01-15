@@ -1,7 +1,7 @@
 ---
 title: "kubernetes tutorial pdf Guide Guide"
 excerpt: "In the world of DevOps and system administration, Kubernetes has emerged as a critical technology for managing containerized applications"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubernetes, tutorial, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

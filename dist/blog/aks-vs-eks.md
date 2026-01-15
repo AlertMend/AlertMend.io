@@ -1,7 +1,7 @@
 ---
 title: "AKS vs EKS: Managed Kubernetes Guide"
 excerpt: "Compare Azure Kubernetes Service (AKS) and Amazon Elastic Kubernetes Service (EKS) to choose the right managed Kubernetes platform for your needs."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

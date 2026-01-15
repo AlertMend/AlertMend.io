@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes in Production Best Practices Pdf"
 excerpt: "Kubernetes has revolutionized how organizations deploy, scale, and manage containerized applications"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubernetes, production, best, practices, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

@@ -1,7 +1,7 @@
 ---
 title: "Origin Does Not Appear to be a Git Repository"
 excerpt: "When working with Git, encountering errors is a part of the learning curve. One common issue is the \"origin does not appear to be a git repository\" error"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "origin, does, appear, repository, DevOps, AlertMend AI, AIOps"

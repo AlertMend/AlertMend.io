@@ -1,7 +1,7 @@
 ---
 title: "kubernetes anti-patterns epub Guide"
 excerpt: "As Kubernetes continues to dominate the realm of container orchestration, understanding and navigating Kubernetes anti-patterns becomes crucial for optimal d..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubernetes, anti, patterns, epub, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

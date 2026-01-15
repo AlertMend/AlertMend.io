@@ -1,7 +1,7 @@
 ---
 title: "Mastering Incident Response Orchestration"
 excerpt: "In the ever-evolving landscape of cybersecurity in 2026, incident response orchestration has emerged as a pivotal strategy for organizations striving to prot..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Response, Orchestration"

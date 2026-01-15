@@ -1,7 +1,7 @@
 ---
 title: "Unleashing the Power of Slack Incident Bots"
 excerpt: "In the fast-paced world of DevOps and system monitoring, handling incidents efficiently is crucial to maintaining system reliability and minimizing downtime."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Slack, Bot"

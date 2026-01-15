@@ -1,7 +1,7 @@
 ---
 title: "Switching From Weave To Calico"
 excerpt: "Navigating the intricacies of Kubernetes networking is crucial for modern DevOps practices. As of 2025, **switching from Weave to Calico** represents an esse..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Switching, From, Weave, Calico, Kubernetes"

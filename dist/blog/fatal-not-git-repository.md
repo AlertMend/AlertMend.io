@@ -1,7 +1,7 @@
 ---
 title: "fatal not git repository Guide"
 excerpt: "Complete guide to fixing the fatal: not a git repository error. Learn common causes, troubleshooting steps, and solutions for Git repository issues."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Troubleshooting"
 author: "AlertMend Team"
 keywords: "fatal, repository, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"

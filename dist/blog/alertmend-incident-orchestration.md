@@ -1,7 +1,7 @@
 ---
 title: "Navigating Incident Orchestration"
 excerpt: "In the rapidly evolving world of DevOps and system management, **incident orchestration** stands out as a pivotal process that ensures seamless integration o..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Orchestration"

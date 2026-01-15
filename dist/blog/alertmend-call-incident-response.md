@@ -1,7 +1,7 @@
 ---
 title: "Mastering On-Call Incident Response"
 excerpt: "In the dynamic world of DevOps and system monitoring, the concept of **on-call incident response** has evolved significantly."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Call, Response"

@@ -1,7 +1,7 @@
 ---
 title: "maxunavailable pdb Guide Guide"
 excerpt: "In the dynamic landscape of Kubernetes, managing pod disruptions effectively is crucial for maintaining application availability"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "maxunavailable, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

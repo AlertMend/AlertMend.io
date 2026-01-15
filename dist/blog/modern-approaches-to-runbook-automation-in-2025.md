@@ -1,7 +1,7 @@
 ---
 title: "Modern Approaches To Runbook Automation"
 excerpt: "In the ever-evolving landscape of IT and DevOps, mastering **modern approaches to runbook automation in 2025** is pivotal for organizations looking to stream..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Modern, Approaches, Runbook, Automation, 2025"

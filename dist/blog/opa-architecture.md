@@ -1,7 +1,7 @@
 ---
 title: "opa architecture Guide Guide Complete Guide"
 excerpt: "Open Policy Agent (OPA) architecture represents a significant evolution in the realm of policy enforcement within distributed systems"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "architecture, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

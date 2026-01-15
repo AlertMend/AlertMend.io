@@ -8,13 +8,15 @@
     <link rel="apple-touch-icon" href="/logos/alertmend-logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- Google tag (gtag.js) - load only outside localhost -->
+    <!-- Google tag (gtag.js) -->
     <script>
       (function() {
         const host = window.location.hostname
         const isLocal = host === 'localhost' || host === '127.0.0.1'
-        if (isLocal) return
-
+        
+        // Enable GA on localhost for testing (you can disable this in production if needed)
+        // For testing, we'll load GA on localhost but you can filter these events in GA dashboard
+        
         const script = document.createElement('script')
         script.async = true
         script.src = 'https://www.googletagmanager.com/gtag/js?id=G-Z8QSJ5NK95'
@@ -23,7 +25,12 @@
         window.dataLayer = window.dataLayer || []
         function gtag(){window.dataLayer.push(arguments)}
         gtag('js', new Date())
-        gtag('config', 'G-Z8QSJ5NK95')
+        gtag('config', 'G-Z8QSJ5NK95', {
+          // Add debug_mode for localhost testing
+          debug_mode: isLocal,
+          // Add custom parameter to identify localhost events
+          custom_map: isLocal ? { dimension1: 'localhost' } : {}
+        })
       })();
     </script>
     

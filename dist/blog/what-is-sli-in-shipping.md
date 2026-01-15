@@ -1,7 +1,7 @@
 ---
 title: "what is sli in shipping Guide Guide"
 excerpt: "what is sli in shipping Navigating the Shipper's Letter of Instruction: A Vital Component in Shipping In the complex world of shipping logistics,..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Troubleshooting"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, what, shipping, Troubleshooting"

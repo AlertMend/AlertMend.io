@@ -1,7 +1,7 @@
 ---
 title: "How to Get Status of Kubernates Node Using"
 excerpt: "In the realm of Kubernetes cluster management, understanding the status of your nodes is crucial for maintaining system health and efficiency"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "status, kubernates, node, using, golang, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

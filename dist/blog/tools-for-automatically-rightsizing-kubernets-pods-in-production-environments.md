@@ -1,7 +1,7 @@
 ---
 title: "Tools for Automatically Rightsizing"
 excerpt: "In today’s fast-paced tech landscape, tools for automatically rightsizing Kubernetes pods in production environments have become essential for maintaining ef..."
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "tools, automatically, rightsizing, kubernets, pods, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"

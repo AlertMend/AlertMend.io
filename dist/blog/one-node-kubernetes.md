@@ -1,7 +1,7 @@
 ---
 title: "one node kubernetes Guide Guide"
 excerpt: "In the realm of container orchestration, Kubernetes stands out as a pivotal tool for managing containerized applications across diverse environments"
-date: "2025-12-18"
+date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "node, kubernetes, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
