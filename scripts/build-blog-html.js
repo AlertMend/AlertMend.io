@@ -746,6 +746,26 @@ markdownFiles.forEach(file => {
       tempDesc = `Expert guide on ${cleanTitle.toLowerCase()} for ${metadata.category || 'Kubernetes'}. Learn best practices.`
     }
     const finalMetaDescription = tempDesc
+
+    // Build tracking URLs for static blog HTML pages.
+    // These pages don't run the React `Navbar`, so we must embed source tracking directly.
+    const normalizedBlogSlug = String(slug).replace(/\.html$/, '').toLowerCase().replace(/_/g, '-')
+    const blogSourceParam = 'blog-post'
+
+    const signupTrackingUrlObj = new URL('https://demo.alertmend.io/signup')
+    signupTrackingUrlObj.searchParams.set('source', blogSourceParam)
+    signupTrackingUrlObj.searchParams.set('blog_slug', normalizedBlogSlug)
+    const signupTrackingUrl = signupTrackingUrlObj.toString()
+
+    const playgroundTrackingUrlObj = new URL('https://demo.alertmend.io/playground')
+    playgroundTrackingUrlObj.searchParams.set('source', blogSourceParam)
+    playgroundTrackingUrlObj.searchParams.set('blog_slug', normalizedBlogSlug)
+    const playgroundTrackingUrl = playgroundTrackingUrlObj.toString()
+
+    const calendlyTrackingUrlObj = new URL('https://calendly.com/hello-alertmend/30min')
+    calendlyTrackingUrlObj.searchParams.set('source', blogSourceParam)
+    calendlyTrackingUrlObj.searchParams.set('blog_slug', normalizedBlogSlug)
+    const calendlyTrackingUrl = calendlyTrackingUrlObj.toString()
     
     // Function to create HTML head with specific canonical URL
     const createHTMLHead = (canonicalUrl) => `<!DOCTYPE html>
@@ -1525,15 +1545,15 @@ markdownFiles.forEach(file => {
 
         <!-- Desktop Actions -->
         <div class="navbar-actions">
-          <a href="https://demo.alertmend.io/playground" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-playground">
+          <a href="${playgroundTrackingUrl}" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-playground">
             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             Playground
           </a>
-          <a href="https://demo.alertmend.io/signup" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-secondary">Register</a>
-          <a href="https://calendly.com/hello-alertmend/30min" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-primary">Book a Demo</a>
+          <a href="${signupTrackingUrl}" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-secondary">Register</a>
+          <a href="${calendlyTrackingUrl}" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-primary">Book a Demo</a>
         </div>
 
         <!-- Mobile Menu Button -->
@@ -1595,7 +1615,7 @@ markdownFiles.forEach(file => {
             <!-- Promotional Section -->
             <div class="promotional-section">
               <p>Ready to eliminate manual firefighting and achieve autonomous infrastructure operations?</p>
-              <p>See how AlertMend AI can help you reduce costs by 50%, achieve zero downtime, and automate incident remediation across Kubernetes, VMs, and ECS. <a href="https://calendly.com/hello-alertmend/30min" target="_blank" rel="noopener noreferrer">Book a demo.</a></p>
+              <p>See how AlertMend AI can help you reduce costs by 50%, achieve zero downtime, and automate incident remediation across Kubernetes, VMs, and ECS. <a href="${calendlyTrackingUrl}" target="_blank" rel="noopener noreferrer">Book a demo.</a></p>
             </div>
 
             <!-- Horizontal Separator -->
