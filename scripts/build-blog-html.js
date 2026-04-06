@@ -752,7 +752,7 @@ markdownFiles.forEach(file => {
     const normalizedBlogSlug = String(slug).replace(/\.html$/, '').toLowerCase().replace(/_/g, '-')
     const blogSourceParam = 'blog-post'
 
-    const signupTrackingUrlObj = new URL('https://demo.alertmend.io/signup')
+    const signupTrackingUrlObj = new URL('https://app.alertmend.io/signup')
     signupTrackingUrlObj.searchParams.set('source', blogSourceParam)
     signupTrackingUrlObj.searchParams.set('blog_slug', normalizedBlogSlug)
     const signupTrackingUrl = signupTrackingUrlObj.toString()

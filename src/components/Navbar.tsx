@@ -93,11 +93,11 @@ export default function Navbar() {
 
   // Solution-specific signup URLs
   const signupUrls: Record<string, string> = {
-    'default': 'https://demo.alertmend.io/signup',
-    'auto-remediation': 'https://demo.alertmend.io/signup?service=remediation',
-    'kubernetes-management': 'https://demo.alertmend.io/signup?service=monitoring',
-    'on-call-management': 'https://demo.alertmend.io/signup?service=on-call',
-    'kubernetes-cost-optimization': 'https://demo.alertmend.io/signup?service=cost-optimization',
+    'default': 'https://app.alertmend.io/signup',
+    'auto-remediation': 'https://app.alertmend.io/signup?service=remediation',
+    'kubernetes-management': 'https://app.alertmend.io/signup?service=monitoring',
+    'on-call-management': 'https://app.alertmend.io/signup?service=on-call',
+    'kubernetes-cost-optimization': 'https://app.alertmend.io/signup?service=cost-optimization',
   }
 
   // Get page source for URL parameters
