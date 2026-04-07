@@ -757,7 +757,7 @@ markdownFiles.forEach(file => {
     signupTrackingUrlObj.searchParams.set('blog_slug', normalizedBlogSlug)
     const signupTrackingUrl = signupTrackingUrlObj.toString()
 
-    const playgroundTrackingUrlObj = new URL('https://demo.alertmend.io/playground')
+    const playgroundTrackingUrlObj = new URL('https://app.alertmend.io/playground')
     playgroundTrackingUrlObj.searchParams.set('source', blogSourceParam)
     playgroundTrackingUrlObj.searchParams.set('blog_slug', normalizedBlogSlug)
     const playgroundTrackingUrl = playgroundTrackingUrlObj.toString()

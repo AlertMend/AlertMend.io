@@ -123,7 +123,7 @@ export default function Navbar() {
   const signupUrl = signupUrlObj.toString()
 
   // Get playground URL with source tracking parameters
-  const playgroundUrlObj = new URL('https://demo.alertmend.io/playground')
+  const playgroundUrlObj = new URL('https://app.alertmend.io/playground')
   if (blogTracking) {
     // If on blog page, use blog source
     playgroundUrlObj.searchParams.set('source', blogTracking.source)
