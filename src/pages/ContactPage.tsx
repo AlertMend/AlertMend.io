@@ -26,7 +26,7 @@ export default function ContactPage() {
     setErrorMessage('')
 
     try {
-      const response = await fetch('https://api-demo.alertmend.io/contact', {
+      const response = await fetch('https://api.alertmend.io/contact', {
         method: 'POST',
         headers: {
           'Accept': 'application/json, text/plain, */*',

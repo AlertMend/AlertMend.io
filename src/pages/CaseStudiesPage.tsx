@@ -108,7 +108,7 @@ export default function CaseStudiesPage() {
                     <button 
                       onClick={(e) => {
                         e.stopPropagation()
-                        navigate(`/case-studies/${study.company.toLowerCase().replace(/\s+/g, '-')}`)
+                        navigate(`/case-studies/${generateCaseStudySlug(study.category, study.company)}`)
                       }}
                       className="text-purple-700 font-semibold text-sm hover:text-purple-900 flex items-center space-x-2 group-hover:translate-x-1 transition-transform"
                     >
