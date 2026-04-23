@@ -65,7 +65,7 @@ export function generateUniqueMetaDescription(
       truncated = truncated.substring(0, lastSpace)
     }
     // Remove trailing punctuation
-    truncated = truncated.replace(/[.,;:!?\-—–\s]+$/, '').trim()
+    truncated = truncated.replace(/[.,;:!?\--–\s]+$/, '').trim()
     description = truncated + '...'
   }
   
@@ -99,7 +99,7 @@ export function truncateDescription(
     if (lastSpace > maxLength * 0.7) {
       truncated = truncated.substring(0, lastSpace)
     }
-    truncated = truncated.replace(/[.,;:!?\-—–\s]+$/, '').trim()
+    truncated = truncated.replace(/[.,;:!?\--–\s]+$/, '').trim()
     return truncated + '...'
   }
   
@@ -185,7 +185,7 @@ export function ensureUniqueMetaDescription(
       if (lastSpace > availableLength * 0.7) {
         truncated = truncated.substring(0, lastSpace)
       }
-      truncated = truncated.replace(/[.,;:!?\-—–\s]+$/, '').trim()
+      truncated = truncated.replace(/[.,;:!?\--–\s]+$/, '').trim()
       uniqueDescription = truncated + '...' + uniqueSuffix
     } else {
       // If not enough room, just truncate description

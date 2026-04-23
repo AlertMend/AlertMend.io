@@ -26,7 +26,7 @@ export default function Hero({ solutionId = 'default' }: HeroProps) {
     'default': {
       badge: { icon: Search, text: 'AI-Powered Infrastructure Automation', color: 'purple' },
       title: 'Maximize Reliability. Minimize Costs. Multiply Engineering Impact.',
-      description: 'Our AI eliminates manual DevOps work, reduces cloud waste, and keeps systems resilient—so your team delivers faster with fewer resources.',
+      description: 'Our AI eliminates manual DevOps work, reduces cloud waste, and keeps systems resilient-so your team delivers faster with fewer resources.',
       metrics: [
         { value: '50%', label: 'Cost Savings', color: 'text-green-600' },
         { value: '90%', label: 'Time Saved', color: 'text-green-600' },

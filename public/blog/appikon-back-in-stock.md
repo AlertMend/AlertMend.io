@@ -41,7 +41,7 @@ Implementing the Appikon Back In Stock system is straightforward and requires mi
 
 1. **Install the Appikon App:** Begin by installing the app through the Shopify App Store.
 2. **Customize Notifications:** Use the app's customization tools to design alerts that reflect your brand's identity.
-3. **Select Notification Channels:** Choose how you want to notify customers—via email, SMS, or both.
+3. **Select Notification Channels:** Choose how you want to notify customers-via email, SMS, or both.
 4. **Integrate with Marketing Platforms:** Connect Appikon with your existing email marketing tools for seamless communication.
 5. **Monitor and Adjust:** Regularly review analytics to optimize your inventory management strategy based on customer demand.
 

@@ -130,7 +130,7 @@ export const caseStudiesData = [
       after: { compute: '$422.42/mo', storage: '$25.66/mo' },
     },
     testimonial: {
-      quote: 'AlertMend helped us take control of our Kubernetes costs without adding any manual effort. Within a week, we cut GKE expenses in half, cleaned up unused storage, and right-sized workloads — all without touching a single YAML file. It\'s like having an AI-powered infra co-pilot that just works.',
+      quote: 'AlertMend helped us take control of our Kubernetes costs without adding any manual effort. Within a week, we cut GKE expenses in half, cleaned up unused storage, and right-sized workloads - all without touching a single YAML file. It\'s like having an AI-powered infra co-pilot that just works.',
       author: 'Rajnish Sharma',
       role: 'Founder and CEO of WareFlex',
     },
@@ -146,7 +146,7 @@ export const caseStudiesData = [
     region: 'Global (HQ in Silicon Valley)',
     infrastructure: 'Kubernetes (3,000+ Pods in Production)',
     challenge: [
-      '3,000+ pods meant thousands of potential failure points — from failing containers to PVC bloat and service restarts',
+      '3,000+ pods meant thousands of potential failure points - from failing containers to PVC bloat and service restarts',
       'Prometheus and Kubernetes surfaced alerts, but lacked context, RCA, or resolution paths',
       'Engineers manually investigated incidents by jumping between kubectl, logs, dashboards, and resource specs',
       'Missed health signals (like readiness issues or silent OOM kills) led to performance degradation',
@@ -175,7 +175,7 @@ export const caseStudiesData = [
       { metric: '15-20h', label: 'Saved per week in manual debugging', icon: TrendingDown, color: 'text-purple-600' },
     ],
     testimonial: {
-      quote: 'AlertMend became our control tower for Kubernetes. It gave our team instant visibility, pinpointed root causes, and saved hours of manual debugging every week. Managing 3,000+ pods doesn\'t feel chaotic anymore — we finally have clarity and control.',
+      quote: 'AlertMend became our control tower for Kubernetes. It gave our team instant visibility, pinpointed root causes, and saved hours of manual debugging every week. Managing 3,000+ pods doesn\'t feel chaotic anymore - we finally have clarity and control.',
       author: 'Shailesh Mangal',
       role: 'CTO of Decklar',
     },
@@ -191,9 +191,9 @@ export const caseStudiesData = [
     region: 'Vietnam',
     infrastructure: 'Google Cloud VMs (no Kubernetes)',
     challenge: [
-      'Core AI services inside VMs would occasionally freeze, deadlock, or stop processing jobs — without crashing or failing health checks',
+      'Core AI services inside VMs would occasionally freeze, deadlock, or stop processing jobs - without crashing or failing health checks',
       'GCP VM health appeared normal, masking issues at the application level',
-      'Manual restarts were required via SSH or GCP Console — often after users were already affected',
+      'Manual restarts were required via SSH or GCP Console - often after users were already affected',
       'No 24/7 monitoring, so incidents frequently went undetected overnight',
       'Engineers lost hours each week reacting to the same issues repeatedly',
     ],

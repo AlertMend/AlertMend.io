@@ -65,6 +65,6 @@ alertmend.io offers robust solutions to streamline the diagnosis and resolution 
 
 ## Summary and Key Takeaways
 
-Understanding the "error command failed with exit code 137" is crucial for maintaining the health and performance of containerized applications. By recognizing the primary causes—such as memory leaks, high demand, and misconfigured limits—you can implement effective strategies to mitigate these issues. Leveraging alertmend.io's powerful monitoring and alerting capabilities allows for proactive management, ensuring that your applications remain stable and efficient.
+Understanding the "error command failed with exit code 137" is crucial for maintaining the health and performance of containerized applications. By recognizing the primary causes-such as memory leaks, high demand, and misconfigured limits-you can implement effective strategies to mitigate these issues. Leveraging alertmend.io's powerful monitoring and alerting capabilities allows for proactive management, ensuring that your applications remain stable and efficient.
 
 In conclusion, maintaining optimal resource configurations and employing comprehensive monitoring solutions are essential practices in preventing exit code 137 disruptions. By doing so, you can uphold the reliability and resilience of your DevOps environment.

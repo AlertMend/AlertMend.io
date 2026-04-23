@@ -17,7 +17,7 @@ In today's dynamic IT landscapes, the resilience of systems is paramount. Enter 
 
 ### Understanding the Mechanics of Self-Healing
 
-At the heart of **Kubernetes self-healing infrastructure** is its ability to autonomously detect and rectify issues within containerized applications. When a container failure is detected, Kubernetes swiftly responds by either restarting the container or deploying a new instance to maintain the application's seamless operation. This proactive approach is facilitated through health checks—liveness and readiness probes—that ensure containers remain responsive and ready to serve traffic. 
+At the heart of **Kubernetes self-healing infrastructure** is its ability to autonomously detect and rectify issues within containerized applications. When a container failure is detected, Kubernetes swiftly responds by either restarting the container or deploying a new instance to maintain the application's seamless operation. This proactive approach is facilitated through health checks-liveness and readiness probes-that ensure containers remain responsive and ready to serve traffic. 
 
 The liveness probe determines if a container is functioning correctly, while the readiness probe checks if it can handle traffic. If either probe detects a failure, Kubernetes takes corrective action, thereby reinforcing the resilience of applications hosted on the platform.
 
@@ -25,7 +25,7 @@ The liveness probe determines if a container is functioning correctly, while the
 
 Self-healing within Kubernetes offers significant advantages, including reducing downtime and eliminating the need for manual intervention in many cases. This automation supports continuous business operations and enhances customer satisfaction by ensuring minimal service disruption. However, the feature's effectiveness hinges on well-defined desired states and robust configurations. It's essential for organizations to maintain updated pod templates and configuration files, enabling quick rollbacks or adaptations as necessary.
 
-That said, it's important to note that while Kubernetes handles application layer problems adeptly, issues at the infrastructure level—such as hardware failures—may require additional tools for comprehensive monitoring and resolution.
+That said, it's important to note that while Kubernetes handles application layer problems adeptly, issues at the infrastructure level-such as hardware failures-may require additional tools for comprehensive monitoring and resolution.
 
 ## Implementing Self-Healing Best Practices
 

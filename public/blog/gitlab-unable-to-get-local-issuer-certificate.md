@@ -71,6 +71,6 @@ Integrating monitoring and alerting solutions like **alertmend.io** can streamli
 
 ## Key Takeaways
 
-In summary, the **gitlab unable to get local issuer certificate** error is a common challenge that can disrupt secure communications in GitLab environments. By understanding its causes—such as incomplete certificate chains or outdated CA certificates—and employing the discussed solutions, teams can enhance their security posture and minimize downtime. Leveraging tools like alertmend.io can further aid in monitoring SSL issues and ensuring smooth system operations.
+In summary, the **gitlab unable to get local issuer certificate** error is a common challenge that can disrupt secure communications in GitLab environments. By understanding its causes-such as incomplete certificate chains or outdated CA certificates-and employing the discussed solutions, teams can enhance their security posture and minimize downtime. Leveraging tools like alertmend.io can further aid in monitoring SSL issues and ensuring smooth system operations.
 
 For further assistance, explore the additional resources and expert guides available on alertmend.io to enhance your DevOps practices and SSL management strategies.

@@ -21,7 +21,7 @@ As Promtail reaches its deprecation phase, migrating from Promtail to Alloy offe
 : Promtail vs.
 Alloy
 ### Why Migrating Matters in 2025
-With Promtail's support winding down by early 2026, Alloy emerges as a powerful, unified solution for handling metrics, logs, and traces. By migrating, users benefit from enhanced performance, reduced complexity, and ongoing support—a necessity in today's fast-paced tech landscape.
+With Promtail's support winding down by early 2026, Alloy emerges as a powerful, unified solution for handling metrics, logs, and traces. By migrating, users benefit from enhanced performance, reduced complexity, and ongoing support-a necessity in today's fast-paced tech landscape.
 ### The Alloy Advantage
 Alloy consolidates functionalities previously handled by multiple agents, including Promtail, into a singular, efficient platform.
 This integration not only simplifies your observability stack but also boosts performance and scalability, catering to diverse data collection needs with ease.

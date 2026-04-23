@@ -4142,7 +4142,7 @@
   {
     "slug": "the-site-is-due-maintenance",
     "title": "The Site Is Due Maintenance Guide",
-    "excerpt": "In the digital landscape, maintaining a website is akin to servicing a high-performance vehicle—essential for optimal functionality and longevity. Although d...",
+    "excerpt": "In the digital landscape, maintaining a website is akin to servicing a high-performance vehicle-essential for optimal functionality and longevity. Although d...",
     "date": "2026-01-10",
     "category": "Troubleshooting",
     "author": "AlertMend Team",
@@ -5105,7 +5105,7 @@
   {
     "slug": "load-balancing-and-scaling-long-lived-connections-in-kubernetes",
     "title": "Load Balancing and Scaling Long-Lived",
-    "excerpt": "Understand how Kubernetes handles WebSockets, gRPC, and database connections—and learn how to properly scale and load balance persistent traffic.",
+    "excerpt": "Understand how Kubernetes handles WebSockets, gRPC, and database connections-and learn how to properly scale and load balance persistent traffic.",
     "date": "2025-07-30",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",
@@ -5456,7 +5456,7 @@
   {
     "slug": "kubernetes-node-pressure-blog",
     "title": "🚨 Mastering Kubernetes Node Pressure",
-    "excerpt": "In Kubernetes, node pressure issues arise when a node’s resources—such as disk space, memory, or process IDs (PIDs)—are heavily utilized or exhausted.",
+    "excerpt": "In Kubernetes, node pressure issues arise when a node’s resources-such as disk space, memory, or process IDs (PIDs)-are heavily utilized or exhausted.",
     "date": "2025-04-25",
     "category": "Kubernetes",
     "author": "Himanshu Bansal",

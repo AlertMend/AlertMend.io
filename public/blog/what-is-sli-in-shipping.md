@@ -19,7 +19,7 @@ At its core, the Shipper's Letter of Instruction is a document crafted by the sh
 
 ### The Significance of SLI in International Trade
 
-For businesses engaged in international trade, the SLI is more than just a set of instructions—it's a safeguard against common shipping pitfalls. By detailing the contents, value, and destination of goods, shippers can prevent misrouting and ensure compliance with regulatory requirements. This document also empowers freight forwarders by granting them authority to handle electronic filings, such as the Electronic Export Information (EEI), with the Automated Export System (AES) in the United States, streamlining the export process significantly.
+For businesses engaged in international trade, the SLI is more than just a set of instructions-it's a safeguard against common shipping pitfalls. By detailing the contents, value, and destination of goods, shippers can prevent misrouting and ensure compliance with regulatory requirements. This document also empowers freight forwarders by granting them authority to handle electronic filings, such as the Electronic Export Information (EEI), with the Automated Export System (AES) in the United States, streamlining the export process significantly.
 
 ## Practical Insights: Crafting an Effective Shipper's Letter of Instruction
 

@@ -30,7 +30,7 @@ export default function K8sManagement() {
             </h2>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed text-balance">
               Multi-cluster visibility. Contextual workspaces. Real-time insights. 
-              Status, history, dependencies—all in one place. All intelligently organized.
+              Status, history, dependencies-all in one place. All intelligently organized.
             </p>
 
             <div className="space-y-4 mb-8">

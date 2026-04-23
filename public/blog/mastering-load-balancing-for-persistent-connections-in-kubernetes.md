@@ -19,7 +19,7 @@ In this blog, we’ll explore why Kubernetes’ default networking model doesn�
 
 Kubernetes Services abstract access to Pods behind a stable IP. For stateless HTTP calls, this works seamlessly. Each request maps to a new connection, and kube-proxy’s iptables or IPVS rules randomly assign a backend Pod.
 
-But with long-lived TCP connections — WebSockets, gRPC streams, AMQP queues, or persistent DB sessions — the connection stays pinned to a single Pod, breaking the illusion of balanced load.
+But with long-lived TCP connections - WebSockets, gRPC streams, AMQP queues, or persistent DB sessions - the connection stays pinned to a single Pod, breaking the illusion of balanced load.
 
 ---
 

@@ -13,7 +13,7 @@ keywords: "kubectl get svc, Kubernetes services, service discovery, service mana
 
 The `kubectl get svc` command is a fundamental tool for listing and managing Kubernetes services. It provides critical insights into services running in your cluster, displaying essential data in a tabular format that makes it easy to understand service status and configuration.
 
-This command interacts with the Kubernetes API to retrieve service information. You can customize the output using various flags and options—specify namespaces, format output as JSON or YAML, use label selectors to filter services, and more. This flexibility is invaluable when managing large clusters where precision is necessary to avoid information overload.
+This command interacts with the Kubernetes API to retrieve service information. You can customize the output using various flags and options-specify namespaces, format output as JSON or YAML, use label selectors to filter services, and more. This flexibility is invaluable when managing large clusters where precision is necessary to avoid information overload.
 
 ### Command Usage and Options
 

@@ -21,7 +21,7 @@ In the rapidly evolving landscape of cloud computing, Kubernetes has emerged as 
 - **Reinforcement learning**: Continuously refines scaling policies by learning from real-time data, ensuring optimal performance.
 - **Anomaly detection**: Identifies unusual workload patterns early, allowing for timely adjustments.
 
-AI's ability to consider multiple metrics—beyond just CPU and memory—enables more nuanced decision-making. Metrics like requests per second, database query rates, and network bandwidth usage are analyzed to ensure comprehensive resource allocation.
+AI's ability to consider multiple metrics-beyond just CPU and memory-enables more nuanced decision-making. Metrics like requests per second, database query rates, and network bandwidth usage are analyzed to ensure comprehensive resource allocation.
 
 ## Addressing Traditional Challenges with Advanced Solutions
 

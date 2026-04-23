@@ -27,11 +27,11 @@ The choice of monitoring tools significantly impacts the efficiency of your API 
 
 ### Tailoring Alerts to Operational Needs
 
-Once you've selected your tools, the next step is to configure your alert rules. This involves setting specific conditions under which alerts are triggered. Utilizing different types of alerts—such as threshold-based for predefined limits or anomaly-based for unexpected patterns—can cater to diverse operational scenarios. Ensure these rules are tested rigorously to confirm their accuracy and responsiveness.
+Once you've selected your tools, the next step is to configure your alert rules. This involves setting specific conditions under which alerts are triggered. Utilizing different types of alerts-such as threshold-based for predefined limits or anomaly-based for unexpected patterns-can cater to diverse operational scenarios. Ensure these rules are tested rigorously to confirm their accuracy and responsiveness.
 
 ### Managing Alert Channels
 
-Efficient communication of alerts is crucial to preventing information overload and ensuring the right stakeholders are informed promptly. By selecting suitable channels—be it email, SMS, or integrated apps—you can tailor alert delivery to match the preferences and responsibilities of different team members. This helps in minimizing alert fatigue and improves response times through prioritization and escalation policies.
+Efficient communication of alerts is crucial to preventing information overload and ensuring the right stakeholders are informed promptly. By selecting suitable channels-be it email, SMS, or integrated apps-you can tailor alert delivery to match the preferences and responsibilities of different team members. This helps in minimizing alert fatigue and improves response times through prioritization and escalation policies.
 
 ## Implementing API Monitoring Alerts on alertmend.io
 

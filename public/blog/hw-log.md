@@ -15,7 +15,7 @@ In today's fast-paced digital landscape, effective system monitoring is crucial 
 
 ## Exploring the Fundamentals of HW Log
 
-The hw log serves as a comprehensive record of a system's hardware operations. These logs capture a wealth of information—from hardware status updates to error messages—offering invaluable insights into system health. By analyzing these logs, IT teams can identify potential hardware issues before they escalate into critical problems. This proactive approach not only aids in maintaining seamless operations but also boosts the overall reliability of the system.
+The hw log serves as a comprehensive record of a system's hardware operations. These logs capture a wealth of information-from hardware status updates to error messages-offering invaluable insights into system health. By analyzing these logs, IT teams can identify potential hardware issues before they escalate into critical problems. This proactive approach not only aids in maintaining seamless operations but also boosts the overall reliability of the system.
 
 ### Key Components of HW Log
 

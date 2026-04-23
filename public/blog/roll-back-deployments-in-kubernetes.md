@@ -9,7 +9,7 @@ keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kub
 
 # How to Roll Back Deployments in Kubernetes
 
-Kubernetes is built for safe, reliable software delivery — but even the best-planned deployments can introduce bugs into production. When this happens, rolling back to a previous working version becomes critical.
+Kubernetes is built for safe, reliable software delivery - but even the best-planned deployments can introduce bugs into production. When this happens, rolling back to a previous working version becomes critical.
 
 Let’s walk through how Kubernetes handles deployment rollbacks, the underlying mechanics, and why you should **think twice before using rollback features in production environments**.
 
@@ -27,7 +27,7 @@ For example:
 
 If you update your container image from `v1.0.0` to `v1.1.0`, Kubernetes incrementally shifts traffic to the newer Pods while retiring the old ones.
 
-> Rolling updates are ideal for zero-downtime deployments — as long as the new version is API-compatible.
+> Rolling updates are ideal for zero-downtime deployments - as long as the new version is API-compatible.
 
 ---
 
@@ -74,7 +74,7 @@ kubectl get replicaset <replica-name> -o yaml
 
 ## Why You Should Avoid `rollout undo` in Production
 
-While `kubectl rollout undo` works, it introduces **state drift** — your cluster becomes out of sync with your Git repository.
+While `kubectl rollout undo` works, it introduces **state drift** - your cluster becomes out of sync with your Git repository.
 
 ### Why This Is Dangerous
 
@@ -92,7 +92,7 @@ The recommended approach in modern environments is:
 2. Commit and push the updated YAML  
 3. Let your CI/CD pipeline redeploy the reverted version  
 
-> This ensures your **live cluster stays perfectly aligned** with your Git source — the foundation of true **Infrastructure as Code**.
+> This ensures your **live cluster stays perfectly aligned** with your Git source - the foundation of true **Infrastructure as Code**.
 
 ---
 

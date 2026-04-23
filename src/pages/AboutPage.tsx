@@ -69,7 +69,7 @@ export default function AboutPage() {
                     AlertMend AI was born from the frustration of endless on-call rotations, 3 AM incident responses, and the constant firefighting that comes with managing complex infrastructure across Kubernetes, VMs, and ECS.
                   </p>
                   <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                    Our team of experienced SREs and DevOps engineers set out to build an AI-powered platform that could not just monitor infrastructure, but truly understand it, predict issues, and automatically resolve them—all while learning and improving over time.
+                    Our team of experienced SREs and DevOps engineers set out to build an AI-powered platform that could not just monitor infrastructure, but truly understand it, predict issues, and automatically resolve them-all while learning and improving over time.
                   </p>
                   <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
                     Today, AlertMend AI helps hundreds of teams achieve up to 99.97% uptime, reduce infrastructure costs by up to 50%, and eliminate up to 90% of manual operations work. We're just getting started.

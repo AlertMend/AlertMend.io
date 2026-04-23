@@ -155,7 +155,7 @@ export default function Features() {
           <h2>One platform. Every operational surface.</h2>
           <p>
             30+ capabilities across observability, incident response, FinOps, automation,
-            GPU &amp; MLOps, and compliance — designed to feel like one product.
+            GPU &amp; MLOps, and compliance - designed to feel like one product.
           </p>
         </div>
 

@@ -17,11 +17,11 @@ In today's fast-paced digital landscape, understanding the nuances of **behavior
 
 ### Evaluating Performance Metrics for AI Agents
 
-Understanding performance metrics is akin to deciphering the health check-up of an AI agent. Core metrics such as response time, task completion rates, and error frequency offer vital insights into agent performance. **Response time analysis** is critical—users expect swift responses, often within milliseconds, but this speed should not compromise accuracy. Monitoring tools, like those provided by alertmend.io, can help you set thresholds to alert you when response times deviate from established benchmarks.
+Understanding performance metrics is akin to deciphering the health check-up of an AI agent. Core metrics such as response time, task completion rates, and error frequency offer vital insights into agent performance. **Response time analysis** is critical-users expect swift responses, often within milliseconds, but this speed should not compromise accuracy. Monitoring tools, like those provided by alertmend.io, can help you set thresholds to alert you when response times deviate from established benchmarks.
 
 **Task completion rates** further break down how effectively an AI agent meets user expectations. By categorizing these rates by task type, organizations can pinpoint areas that require additional training or adjustments. For instance, a customer support bot may excel in addressing simple FAQs but falter in more complex troubleshooting, highlighting areas for improvement.
 
-Tracking **error frequency** is indispensable. Not all errors have the same impact, and understanding their context—whether they stem from infrastructure, training data, or integration issues—can prevent future mishaps. Identifying patterns and correlating them with user activity allows for more informed troubleshooting and resource allocation.
+Tracking **error frequency** is indispensable. Not all errors have the same impact, and understanding their context-whether they stem from infrastructure, training data, or integration issues-can prevent future mishaps. Identifying patterns and correlating them with user activity allows for more informed troubleshooting and resource allocation.
 
 ### Real-World Scenarios and Challenges
 

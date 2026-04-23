@@ -43,7 +43,7 @@ Integrating keyword monitoring into a comprehensive system monitoring strategy, 
    
 2. **Utilize alertmend.io Capabilities:** Leverage the platform's robust monitoring features to set up keyword tracking, ensuring all important content is accounted for.
 
-3. **Configure Regular Monitoring Intervals:** Depending on your site’s dynamics, decide on suitable intervals for the keyword checks—whether it’s hourly, daily, or weekly.
+3. **Configure Regular Monitoring Intervals:** Depending on your site’s dynamics, decide on suitable intervals for the keyword checks-whether it’s hourly, daily, or weekly.
 
 4. **Set Up Real-Time Alerts:** Customize notifications through alertmend.io to receive alerts via email, SMS, or integrated systems whenever a keyword issue is detected.
 

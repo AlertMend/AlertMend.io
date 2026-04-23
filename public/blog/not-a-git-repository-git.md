@@ -11,7 +11,7 @@ keywords: "repository, DevOps, AlertMend AI, AIOps"
 
 ## Demystifying the "Not a Git Repository" Error in Git
 
-Encountering the "not a git repository git" error can be a frustrating roadblock for developers working with version control. This common issue typically surfaces when attempting to run Git commands in a directory that Git doesn't recognize as a repository. In this article, we will explore what causes this error, how to fix it, and best practices to prevent it from happening in the future—all while linking these concepts to the system monitoring and DevOps solutions offered by alertmend.io.
+Encountering the "not a git repository git" error can be a frustrating roadblock for developers working with version control. This common issue typically surfaces when attempting to run Git commands in a directory that Git doesn't recognize as a repository. In this article, we will explore what causes this error, how to fix it, and best practices to prevent it from happening in the future-all while linking these concepts to the system monitoring and DevOps solutions offered by alertmend.io.
 
 ## Understanding the "Not a Git Repository" Error
 

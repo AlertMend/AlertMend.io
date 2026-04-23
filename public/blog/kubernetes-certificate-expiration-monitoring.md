@@ -68,4 +68,4 @@ In the realm of Kubernetes, effectively managing certificate expiration is key t
 - **Visualize Data**: Use Grafana to create dashboards that provide a clear view of certificate statuses and alerts.
 - **Regular Reviews**: Periodically audit your monitoring setup to adapt to new challenges and technologies.
 
-By adopting these approaches, you'll be better equipped to handle the complexities of Kubernetes environments, ensuring that your certificates—and by extension, your operations—remain robust and reliable.
+By adopting these approaches, you'll be better equipped to handle the complexities of Kubernetes environments, ensuring that your certificates-and by extension, your operations-remain robust and reliable.

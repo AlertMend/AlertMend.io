@@ -14,7 +14,7 @@ In the rapidly evolving digital landscape, Kubernetes, DevOps, and AIOps are at 
 
 ## Understanding Kubernetes, DevOps, and AIOps
 
-Kubernetes is the leading solution for container orchestration, automating the deployment, scaling, and management of applications. Proficiency in its architecture—comprising pods, nodes, and services—is essential for effective infrastructure oversight. DevOps represents a cultural and technical amalgamation that bridges development and operations, facilitating swift software delivery. AIOps enhances this integration through AI-driven automation, optimizing IT operations with machine learning. Together, these fields streamline processes, reduce downtime, and boost organizational efficiency.
+Kubernetes is the leading solution for container orchestration, automating the deployment, scaling, and management of applications. Proficiency in its architecture-comprising pods, nodes, and services-is essential for effective infrastructure oversight. DevOps represents a cultural and technical amalgamation that bridges development and operations, facilitating swift software delivery. AIOps enhances this integration through AI-driven automation, optimizing IT operations with machine learning. Together, these fields streamline processes, reduce downtime, and boost organizational efficiency.
 
 ### Key Concepts
 

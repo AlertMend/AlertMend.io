@@ -45,7 +45,7 @@ Attempting to access memory that has already been freed (often referred to as a 
 
 ## Technical Details and Explanations
 
-SIGSEGV errors are more than just a programming oversight—they are a critical aspect of memory management systems in operating systems. Modern systems employ Memory Management Units (MMUs) that allocate memory to processes, ensuring isolation and security. A SIGSEGV signal is an indication that a program has breached these protections, accessing memory that wasn't allocated to it.
+SIGSEGV errors are more than just a programming oversight-they are a critical aspect of memory management systems in operating systems. Modern systems employ Memory Management Units (MMUs) that allocate memory to processes, ensuring isolation and security. A SIGSEGV signal is an indication that a program has breached these protections, accessing memory that wasn't allocated to it.
 
 ### Memory Protection Mechanisms
 

@@ -14,7 +14,7 @@ In the dynamic realm of modern technology, maintaining high equipment uptime is 
 
 ## Understanding Uptime in Kubernetes Environments
 
-Uptime is the measure of a system's operational duration and accessibility to users. Kubernetes, with its distributed nature and microservices architecture, brings unique challenges to maintaining high uptime. It orchestrates containers, manages resources, and configures networks—all vital for uptime. Issues like pod failures, resource contention, and misconfigurations can disrupt these processes, causing downtime.
+Uptime is the measure of a system's operational duration and accessibility to users. Kubernetes, with its distributed nature and microservices architecture, brings unique challenges to maintaining high uptime. It orchestrates containers, manages resources, and configures networks-all vital for uptime. Issues like pod failures, resource contention, and misconfigurations can disrupt these processes, causing downtime.
 
 ### Key Components Affecting Uptime
 

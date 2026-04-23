@@ -28,7 +28,7 @@ Modern desktop notification solutions boast a range of features designed to fit 
 
 1. **Cross-Platform Support:** These applications often work on Windows, macOS, and Linux, ensuring that every team member, regardless of their device, stays informed.
    
-2. **Customizable Alerts:** Tailor notifications with your brand's logo and colors, or even choose the type of alert—be it sound, pop-up, or ticker.
+2. **Customizable Alerts:** Tailor notifications with your brand's logo and colors, or even choose the type of alert-be it sound, pop-up, or ticker.
 
 3. **Integration Capabilities:** Easily connect with existing systems such as email clients or monitoring tools, ensuring seamless operation.
 
@@ -36,7 +36,7 @@ Modern desktop notification solutions boast a range of features designed to fit 
 
 ## Implementing Desktop Notification Software in DevOps
 
-For DevOps teams, desktop notification software is not just a tool—it's a necessity. These systems allow for immediate alerts on system health, application performance issues, or deployment statuses. 
+For DevOps teams, desktop notification software is not just a tool-it's a necessity. These systems allow for immediate alerts on system health, application performance issues, or deployment statuses. 
 
 ### Real-World Applications
 

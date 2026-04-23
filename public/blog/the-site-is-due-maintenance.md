@@ -1,6 +1,6 @@
 ---
 title: "The Site Is Due Maintenance Guide"
-excerpt: "In the digital landscape, maintaining a website is akin to servicing a high-performance vehicle—essential for optimal functionality and longevity. Although d..."
+excerpt: "In the digital landscape, maintaining a website is akin to servicing a high-performance vehicle-essential for optimal functionality and longevity. Although d..."
 date: "2026-01-10"
 category: "Troubleshooting"
 author: "AlertMend Team"
@@ -10,7 +10,7 @@ keywords: "AlertMend AI, AIOps, DevOps, site, maintenance, Troubleshooting"
 
 ## Introduction
 
-In the digital landscape, maintaining a website is akin to servicing a high-performance vehicle—essential for optimal functionality and longevity. Although downtime can be inconvenient, it often serves as a crucial period for updates, security patches, and performance enhancements. Understanding site maintenance protocols is vital for ensuring minimal disruption and maximum efficiency, especially in environments leveraging Kubernetes, DevOps, and AIOps methodologies.
+In the digital landscape, maintaining a website is akin to servicing a high-performance vehicle-essential for optimal functionality and longevity. Although downtime can be inconvenient, it often serves as a crucial period for updates, security patches, and performance enhancements. Understanding site maintenance protocols is vital for ensuring minimal disruption and maximum efficiency, especially in environments leveraging Kubernetes, DevOps, and AIOps methodologies.
 
 This blog post explores the intricacies of site maintenance, focusing on planned downtimes and their importance in maintaining robust and resilient web services. We'll delve into key concepts, diagnostic workflows, common causes and solutions, best practices, and how AlertMend AI can automate detection and remediation to streamline maintenance processes.
 

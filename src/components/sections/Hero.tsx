@@ -26,7 +26,7 @@ export default function Hero() {
         <div className={styles.tagline}>Your DevOps from day one.</div>
         <p className={styles.sub}>
           The <b style={{ color: 'var(--text)' }}>AIOps platform</b> for everything in production
-          — from microservices to <b style={{ color: 'var(--text)' }}>GPU fleets and ML pipelines</b>.
+          - from microservices to <b style={{ color: 'var(--text)' }}>GPU fleets and ML pipelines</b>.
           AI triage in ~15 seconds, runbooks across pods and VM fleets, and FinOps that cuts your
           Kubernetes, AWS and GPU bill in half.
         </p>

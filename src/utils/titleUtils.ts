@@ -39,7 +39,7 @@ export function truncateBlogTitle(
   }
   
   // Remove trailing punctuation and whitespace
-  truncatedTitle = truncatedTitle.replace(/[.,;:!?\-—–\s]+$/, '').trim()
+  truncatedTitle = truncatedTitle.replace(/[.,;:!?\--–\s]+$/, '').trim()
   
   return truncatedTitle + '...' + suffix
 }
@@ -93,7 +93,7 @@ export function truncateH2Heading(
     }
     
     // Remove trailing punctuation and whitespace
-    truncated = truncated.replace(/[.,;:!?\-—–\s]+$/, '').trim()
+    truncated = truncated.replace(/[.,;:!?\--–\s]+$/, '').trim()
     
     // Only add ellipsis if we actually truncated
     if (truncated.length < heading.length) {

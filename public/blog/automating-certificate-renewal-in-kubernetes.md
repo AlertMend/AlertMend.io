@@ -89,7 +89,7 @@ When deploying such solutions, ensure that your monitoring setup checks for cert
 
 ### Key Takeaways and Next Steps
 
-Automating certificate renewal in Kubernetes is not just a convenience—it's a necessity for maintaining secure, efficient, and compliant operations. By implementing automation tools and strategies, you can protect your systems from potential vulnerabilities associated with expired certificates. Moreover, leveraging monitoring platforms like Alertmend.io can provide comprehensive oversight and management of your clusters.
+Automating certificate renewal in Kubernetes is not just a convenience-it's a necessity for maintaining secure, efficient, and compliant operations. By implementing automation tools and strategies, you can protect your systems from potential vulnerabilities associated with expired certificates. Moreover, leveraging monitoring platforms like Alertmend.io can provide comprehensive oversight and management of your clusters.
 
 To further enhance your DevOps practices, consider exploring additional resources or joining communities focused on Kubernetes and security automation. This will keep you updated on the latest trends and innovations, ensuring your infrastructure remains resilient and forward-looking.
 

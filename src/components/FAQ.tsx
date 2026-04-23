@@ -7,7 +7,7 @@ export default function FAQ() {
   const faqs = [
     {
       question: 'What problems does AlertMend solve?',
-      answer: 'AlertMend eliminates Kubernetes firefighting by automating incident detection, root-cause analysis, and remediation. It fixes issues like CrashLoopBackOff, OOMKilled, 5xx errors, failing rollouts, node pressure, disk full, cost inefficiencies, and more—without manual intervention.',
+      answer: 'AlertMend eliminates Kubernetes firefighting by automating incident detection, root-cause analysis, and remediation. It fixes issues like CrashLoopBackOff, OOMKilled, 5xx errors, failing rollouts, node pressure, disk full, cost inefficiencies, and more-without manual intervention.',
     },
     {
       question: 'How does AlertMend automatically fix CrashLoopBackOff errors in Kubernetes?',
@@ -23,7 +23,7 @@ export default function FAQ() {
     },
     {
       question: 'How is AlertMend different from monitoring tools like Prometheus, Datadog, and Grafana?',
-      answer: 'Monitoring tools show alerts. AlertMend fixes the root cause. It takes signals from Datadog/Prometheus/CloudWatch and performs automated remediation—reducing MTTR and minimizing on-call fatigue.',
+      answer: 'Monitoring tools show alerts. AlertMend fixes the root cause. It takes signals from Datadog/Prometheus/CloudWatch and performs automated remediation-reducing MTTR and minimizing on-call fatigue.',
     },
     {
       question: 'Does AlertMend support GitOps and CI/CD error troubleshooting?',
@@ -47,7 +47,7 @@ export default function FAQ() {
     },
     {
       question: 'Does AlertMend replace PagerDuty, OpsGenie, or Grafana OnCall?',
-      answer: 'AlertMend includes an intelligent on-call system with Slack/Teams/WhatsApp/phone alerts, but unlike PagerDuty—it also remediates the incident automatically. Fewer alerts. Faster fixes.',
+      answer: 'AlertMend includes an intelligent on-call system with Slack/Teams/WhatsApp/phone alerts, but unlike PagerDuty-it also remediates the incident automatically. Fewer alerts. Faster fixes.',
     },
     {
       question: 'Can AlertMend detect and fix "openocd exited with code 1" or other exit code errors?',
@@ -59,7 +59,7 @@ export default function FAQ() {
     },
     {
       question: 'Can AlertMend help SRE/DevOps teams reduce on-call noise?',
-      answer: 'Yes. By automating noisy and repeatable tasks—restart loops, disk full issues, node drains, rollout failures—AlertMend reduces alert fatigue by up to 80%.',
+      answer: 'Yes. By automating noisy and repeatable tasks-restart loops, disk full issues, node drains, rollout failures-AlertMend reduces alert fatigue by up to 80%.',
     },
     {
       question: 'How does AlertMend integrate with AWS, GCP, Azure, and on-prem?',

@@ -51,7 +51,7 @@ By integrating codoor with alertmend.io, businesses can create a robust security
 
 ### Troubleshooting Common Issues
 
-When encountering issues such as **code entry failures or system lockouts**, having a clear troubleshooting guide is invaluable. Ensuring that all personnel are trained to handle basic troubleshooting steps—such as checking battery status and confirming code accuracy—can prevent minor issues from escalating.
+When encountering issues such as **code entry failures or system lockouts**, having a clear troubleshooting guide is invaluable. Ensuring that all personnel are trained to handle basic troubleshooting steps-such as checking battery status and confirming code accuracy-can prevent minor issues from escalating.
 
 ## Summary and Key Takeaways
 

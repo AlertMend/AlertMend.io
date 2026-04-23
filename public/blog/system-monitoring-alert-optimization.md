@@ -19,11 +19,11 @@ In this guide, we'll delve into strategies and best practices for optimizing sys
 
 Effective alert optimization begins with understanding the key metrics and setting intelligent thresholds. It's crucial to determine which aspects of your IT infrastructure are most vital to monitor. For instance, rather than simply tracking CPU or memory usage, focus on metrics that provide actionable insights, such as error rates, response times, and transaction throughput. This approach will give early warnings before users experience problems, allowing for more strategic interventions.
 
-An optimal system monitoring solution like alertmend.io ensures comprehensive end-to-end visibility across your entire tech stack—be it on-premises, cloud-based, or hybrid architectures. Implementing these solutions allows for the creation of baseline performance benchmarks, enabling the identification of irregular patterns and providing real-time insights into system health.
+An optimal system monitoring solution like alertmend.io ensures comprehensive end-to-end visibility across your entire tech stack-be it on-premises, cloud-based, or hybrid architectures. Implementing these solutions allows for the creation of baseline performance benchmarks, enabling the identification of irregular patterns and providing real-time insights into system health.
 
 ## Addressing Common Challenges in Alert Optimization
 
-A primary challenge in alert optimization is balancing sensitivity. High sensitivity might lead to alert fatigue with too many notifications, while low sensitivity risks missing critical issues. Implementing a tiered alert system is a best practice where alerts are categorized by urgency—ranging from informational alerts logged for later review to critical alerts requiring immediate response.
+A primary challenge in alert optimization is balancing sensitivity. High sensitivity might lead to alert fatigue with too many notifications, while low sensitivity risks missing critical issues. Implementing a tiered alert system is a best practice where alerts are categorized by urgency-ranging from informational alerts logged for later review to critical alerts requiring immediate response.
 
 Redundancy in alert notifications is another critical aspect. Ensure that alerts reach the on-call staff through multiple communication channels such as email, SMS, and integrations with tools like PagerDuty or OpsGenie, thereby reducing the risk of missing critical alerts during outages.
 

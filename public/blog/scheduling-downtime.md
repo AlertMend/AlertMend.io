@@ -34,7 +34,7 @@ These activities are crucial for maintaining high standards of quality and safet
 
 ### Impact Assessment and Coordination
 
-Before scheduling downtime, it's essential to assess the potential impact on operations. Identify natural lulls in production, such as shift changes or slower seasons, to minimize disruption. Coordination across departments is vital—engage with teams in production, quality control, and IT to ensure everyone is aligned and prepared for the downtime.
+Before scheduling downtime, it's essential to assess the potential impact on operations. Identify natural lulls in production, such as shift changes or slower seasons, to minimize disruption. Coordination across departments is vital-engage with teams in production, quality control, and IT to ensure everyone is aligned and prepared for the downtime.
 
 ### Leveraging Historical Data for Timing
 

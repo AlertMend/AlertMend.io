@@ -1,6 +1,6 @@
 ---
 title: "🚨 Mastering Kubernetes Node Pressure"
-excerpt: "In Kubernetes, node pressure issues arise when a node’s resources—such as disk space, memory, or process IDs (PIDs)—are heavily utilized or exhausted."
+excerpt: "In Kubernetes, node pressure issues arise when a node’s resources-such as disk space, memory, or process IDs (PIDs)-are heavily utilized or exhausted."
 date: "2025-04-25"
 category: "Kubernetes"
 author: "Himanshu Bansal"
@@ -10,7 +10,7 @@ keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kub
 # 🚨 **Mastering Kubernetes Node Pressure: Types, Causes, and Solutions**
 ---
 
-In Kubernetes, **node pressure** issues arise when a node's resources—such as disk space, memory, or process IDs (PIDs)—are heavily utilized or exhausted. These issues can degrade cluster performance, cause evictions, or prevent new pods from scheduling. This blog will explain what node pressure is, its common causes, and strategies to resolve and prevent these issues.
+In Kubernetes, **node pressure** issues arise when a node's resources-such as disk space, memory, or process IDs (PIDs)-are heavily utilized or exhausted. These issues can degrade cluster performance, cause evictions, or prevent new pods from scheduling. This blog will explain what node pressure is, its common causes, and strategies to resolve and prevent these issues.
 
 ---
 

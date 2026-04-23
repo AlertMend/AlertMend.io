@@ -42,7 +42,7 @@ Timely alerts are vital in minimizing downtime. Configuring alertmend.io to send
 
 ## Implementing Effective URL Monitoring Strategies
 
-Creating a reliable URL monitoring strategy involves more than just setting up tools—it's about designing a comprehensive plan that aligns with your organization's needs and resources. Here’s how you can implement effective monitoring practices with alertmend.io:
+Creating a reliable URL monitoring strategy involves more than just setting up tools-it's about designing a comprehensive plan that aligns with your organization's needs and resources. Here’s how you can implement effective monitoring practices with alertmend.io:
 
 ### Step-by-Step Monitoring Setup
 

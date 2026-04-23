@@ -35,7 +35,7 @@ export default function AgenticAI() {
             Not Another AI Assistant. This One Actually Works.
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto text-balance leading-relaxed">
-            Agentic AI that resolves the toughest cloud-native issues—failed containers, cascading errors, 
+            Agentic AI that resolves the toughest cloud-native issues-failed containers, cascading errors, 
             faulty add-ons, CRDs, workload breakdowns. Trained on thousands of production environments. 
             95% accuracy. Battle-tested.
           </p>
@@ -67,7 +67,7 @@ export default function AgenticAI() {
               </h3>
               <p className="text-lg text-gray-300 mb-6">
                 Our agentic AI system uses specialized agents that work together to understand context, 
-                analyze root causes, and execute remediation—all autonomously.
+                analyze root causes, and execute remediation-all autonomously.
               </p>
               <ul className="space-y-3">
                 {[

@@ -671,7 +671,7 @@ AlertMend AI can automatically:
 
 ## Conclusion
 
-502 Bad Gateway errors in Kubernetes can stem from various causes including unhealthy backend pods, service misconfiguration, Ingress issues, network policies, and resource constraints. By following a systematic diagnostic approach—checking pod health, verifying service endpoints, examining Ingress configuration, and testing connectivity—you can quickly identify and resolve 502 errors. Implementing proper health checks, monitoring, and automated remediation with AlertMend AI helps prevent these issues and maintains service reliability in your Kubernetes cluster.
+502 Bad Gateway errors in Kubernetes can stem from various causes including unhealthy backend pods, service misconfiguration, Ingress issues, network policies, and resource constraints. By following a systematic diagnostic approach-checking pod health, verifying service endpoints, examining Ingress configuration, and testing connectivity-you can quickly identify and resolve 502 errors. Implementing proper health checks, monitoring, and automated remediation with AlertMend AI helps prevent these issues and maintains service reliability in your Kubernetes cluster.
 
 ---
 

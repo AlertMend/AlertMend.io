@@ -45,7 +45,7 @@ Kubernetes employs several strategies to manage memory and prevent OOMKilled err
 
 - **Memory Requests and Limits**: Define the minimum and maximum memory a container can use. Properly setting these values ensures efficient memory allocation.
 
-- **Quality of Service (QoS) Classes**: Kubernetes assigns pods to QoS classes—Guaranteed, Burstable, and BestEffort—based on their memory requests and limits, influencing termination priority.
+- **Quality of Service (QoS) Classes**: Kubernetes assigns pods to QoS classes-Guaranteed, Burstable, and BestEffort-based on their memory requests and limits, influencing termination priority.
 
 ### Monitoring Tools
 

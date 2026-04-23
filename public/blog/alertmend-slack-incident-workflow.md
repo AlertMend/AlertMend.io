@@ -22,7 +22,7 @@ The significance of Slack incident workflows lies in their ability to facilitate
 - **Comprehensive Reporting**: The platform offers detailed analytics and reports, enabling teams to conduct thorough post-incident reviews and refine their strategies.
 
 ### Exploring the Fundamentals of Slack Incident Workflow
-Slack incident workflows are structured processes that guide teams through the lifecycle of an incident—from detection to resolution.
+Slack incident workflows are structured processes that guide teams through the lifecycle of an incident-from detection to resolution.
 ## Understanding
 #### Incident Lifecycle Overview
 1.

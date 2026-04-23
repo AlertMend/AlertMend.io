@@ -17,7 +17,7 @@ In the realm of system monitoring and DevOps, the ability to ensure policy corre
 
 ### What Is OPA Test?
 
-OPA test is a command-line utility provided by the Open Policy Agent framework, designed to validate policy logic written in Rego—a high-level declarative language. The primary function of opa test is to execute predefined test cases against policy rules, ensuring they behave as expected in various scenarios. This process is essential for maintaining robust system policies, especially when employing comprehensive monitoring solutions like alertmend.io.
+OPA test is a command-line utility provided by the Open Policy Agent framework, designed to validate policy logic written in Rego-a high-level declarative language. The primary function of opa test is to execute predefined test cases against policy rules, ensuring they behave as expected in various scenarios. This process is essential for maintaining robust system policies, especially when employing comprehensive monitoring solutions like alertmend.io.
 
 ### Key Features and Benefits
 

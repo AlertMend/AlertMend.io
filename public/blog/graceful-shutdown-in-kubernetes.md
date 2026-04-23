@@ -10,7 +10,7 @@ keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kub
 
 ## Why Graceful Shutdown Matters
 
-Kubernetes Pods are dynamic by nature — created and destroyed frequently during rolling updates, scaling, node failures, and more.
+Kubernetes Pods are dynamic by nature - created and destroyed frequently during rolling updates, scaling, node failures, and more.
 
 But what happens if a Pod is serving live traffic or handling a long-running task and is abruptly terminated?
 
@@ -93,7 +93,7 @@ Examples:
 - Video processing jobs  
 - Real-time streaming
 
-Don't kill them early — let them finish.
+Don't kill them early - let them finish.
 
 ### Use Rainbow Deployments:
 

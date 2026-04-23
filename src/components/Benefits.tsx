@@ -26,7 +26,7 @@ export default function Benefits({ solutionId = 'default' }: BenefitsProps) {
   // Default benefits (used when solutionId is 'default' or not specified)
   const defaultBenefits: SolutionBenefits = {
     title: 'Automate Operations. Maximize Uptime. Multiply Engineering Impact.',
-    description: 'Our AI eliminates manual work, reduces cloud waste, and keeps systems running smoothly—so your team delivers faster with fewer resources.',
+    description: 'Our AI eliminates manual work, reduces cloud waste, and keeps systems running smoothly-so your team delivers faster with fewer resources.',
     benefits: [
       {
         icon: Shield,
@@ -68,7 +68,7 @@ export default function Benefits({ solutionId = 'default' }: BenefitsProps) {
   const solutionBenefits: Record<string, SolutionBenefits> = {
     'auto-remediation': {
       title: 'Automated Remediation. Zero Manual Intervention. Maximum Reliability.',
-      description: 'Self-healing infrastructure that automatically detects, analyzes, and resolves incidents—eliminating on-call firefighting and reducing MTTR to seconds.',
+      description: 'Self-healing infrastructure that automatically detects, analyzes, and resolves incidents-eliminating on-call firefighting and reducing MTTR to seconds.',
       benefits: [
         {
           icon: Zap,

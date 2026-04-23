@@ -34,7 +34,7 @@ The technical explanation for AlertMend.io’s advanced response mechanisms lies
 The platform integrates with existing IT infrastructure to execute predefined response actions, ranging from simple notifications to intricate recovery procedures. This automation facilitates rapid incident resolution, significantly reducing downtime and operational disruptions.
 #### Real-World Application Scenarios
 AlertMend.io’s incident automation capabilities are exemplified in various real-world scenarios, such as large-scale data center management and cloud infrastructure operations.
-By implementing automated workflows, organizations have reported significant reductions in incident resolution times—from hours to minutes—demonstrating the tangible benefits of the platform’s technology.
+By implementing automated workflows, organizations have reported significant reductions in incident resolution times-from hours to minutes-demonstrating the tangible benefits of the platform’s technology.
 ### Integration and Seamless Connectivity
 #### Overcoming Integration Challenges with AlertMend.io
 AlertMend.io addresses integration challenges through its robust API capabilities, which enable seamless connectivity with diverse IT systems.
