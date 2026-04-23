@@ -1,0 +1,16 @@
+/*
+ * Layering helpers for the global app shell.
+ *
+ * The site now uses a single light theme everywhere (matching the original
+ * alertmend.io palette). Legacy pages render with their native Tailwind
+ * light-theme styles. This file only ensures the foreground content
+ * (header / main / footer) sits above the fixed AmbientBackground layer
+ * that lives at z-index: -1.
+ */
+
+body.alertmend-dark > #root > header,
+body.alertmend-dark > #root > main,
+body.alertmend-dark > #root > footer {
+  position: relative;
+  z-index: 1;
+}

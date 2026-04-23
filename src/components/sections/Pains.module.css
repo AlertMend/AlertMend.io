@@ -1,0 +1,26 @@
+.grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+}
+.pain {
+  padding: 28px; border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 18px -10px rgba(76, 29, 149, 0.18);
+  transition: all 0.25s;
+}
+.pain:hover {
+  border-color: rgba(220, 38, 38, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px -16px rgba(220, 38, 38, 0.25);
+  background: #fff;
+}
+.icoBox {
+  width: 42px; height: 42px; border-radius: 10px;
+  background: rgba(248, 113, 113, 0.1); color: var(--red);
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+}
+.pain h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.pain p { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+@media (max-width: 980px) { .grid { grid-template-columns: 1fr; } }

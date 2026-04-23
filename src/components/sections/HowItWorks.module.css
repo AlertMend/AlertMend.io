@@ -1,0 +1,22 @@
+.flow {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; position: relative;
+}
+.step {
+  padding: 28px 24px; border-radius: var(--radius);
+  background: var(--surface); border: 1px solid var(--border);
+  box-shadow: 0 4px 18px -10px rgba(76, 29, 149, 0.16);
+  position: relative;
+}
+.num {
+  position: absolute; top: -12px; left: 24px;
+  width: 28px; height: 28px; border-radius: 8px;
+  background: var(--grad-primary); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+  box-shadow: 0 6px 20px -4px rgba(126, 34, 206, 0.45);
+}
+.step h4 { font-size: 16px; font-weight: 600; margin: 8px 0 8px; color: var(--text); }
+.step p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+@media (max-width: 980px) { .flow { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .flow { grid-template-columns: 1fr; } }

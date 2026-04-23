@@ -1,0 +1,245 @@
+/* ---------- Sticky header ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  background: rgba(255, 255, 255, 0.72);
+  border-bottom: 1px solid transparent;
+  transition: background 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.25s ease, padding 0.2s ease;
+}
+.scrolled {
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom-color: rgba(126, 34, 206, 0.12);
+  box-shadow: 0 8px 30px -18px rgba(76, 29, 149, 0.22);
+}
+
+.nav {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px;
+  padding: 14px 24px;
+}
+
+/* ---------- Primary links ---------- */
+.links {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+.link {
+  position: relative;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-dim);
+  letter-spacing: -0.005em;
+  padding: 8px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: color 0.18s ease, background 0.18s ease;
+}
+.link::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 4px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #6b21a8, #c026d3);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.link:hover {
+  color: var(--text);
+  background: rgba(126, 34, 206, 0.06);
+}
+.link:hover::after { transform: scaleX(0.6); }
+.linkActive {
+  color: var(--text);
+}
+.linkActive::after { transform: scaleX(1); }
+
+/* ---------- CTA cluster ----------
+   Goal: a calm "Sign in"-style ghost link sitting next to one prominent
+   pill-shaped primary CTA. Both use the same height so the cluster reads
+   as a single component, not two competing buttons. */
+.cta {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-shrink: 0;
+}
+/* Reset border + heavy box-shadow on the ghost in the nav so it reads as
+   a quiet text link rather than a second button. */
+.ctaGhost.ctaGhost {
+  height: 38px;
+  padding: 0 14px;
+  font-size: 13.5px;
+  font-weight: 500;
+  border-radius: 999px;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  color: var(--text-dim);
+}
+.ctaGhost.ctaGhost:hover {
+  background: rgba(126, 34, 206, 0.08);
+  border-color: transparent;
+  color: var(--text);
+  box-shadow: none;
+  transform: none;
+}
+/* Pill primary that's tight, balanced and clearly the action. */
+.ctaPrimary.ctaPrimary {
+  height: 38px;
+  padding: 0 18px 0 18px;
+  font-size: 13.5px;
+  font-weight: 600;
+  border-radius: 999px;
+  letter-spacing: -0.005em;
+  gap: 6px;
+}
+.ctaPrimary :global(.arrow) {
+  margin-right: -2px;
+  opacity: 0.95;
+}
+
+/* ---------- Hamburger (hidden on desktop) ---------- */
+.hamburger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid var(--border-strong);
+  cursor: pointer;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  box-shadow: 0 1px 2px rgba(76, 29, 149, 0.06);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.hamburger:hover {
+  background: var(--bg-2);
+  border-color: rgba(126, 34, 206, 0.45);
+}
+.hamburger span {
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text-dim);
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+.hamburgerOpen span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburgerOpen span:nth-child(2) { opacity: 0; }
+.hamburgerOpen span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- Mobile drawer ---------- */
+.scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 5, 40, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 60;
+}
+.scrimOpen { opacity: 1; pointer-events: auto; }
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(86vw, 340px);
+  background: #ffffff;
+  border-left: 1px solid var(--border-strong);
+  box-shadow: -16px 0 50px -16px rgba(76, 29, 149, 0.25);
+  transform: translateX(100%);
+  transition: transform 0.32s cubic-bezier(0.32, 0.72, 0.2, 1);
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 18px 24px;
+  gap: 12px;
+}
+.drawerOpen { transform: translateX(0); }
+
+.drawerHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+.drawerClose {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--border-strong);
+  color: var(--text-dim);
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+.drawerClose:hover { background: rgba(126, 34, 206, 0.08); color: var(--text); }
+
+.drawerLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 0;
+}
+.drawerLinks a {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  transition: background 0.18s ease;
+}
+.drawerLinks a:hover { background: rgba(126, 34, 206, 0.08); }
+
+.drawerCta {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.drawerCta :global(.btn) { width: 100%; padding: 12px 18px; font-size: 14.5px; }
+
+/* ---------- Responsive ----------
+   Breakpoints:
+   - >960px : full nav (brand + links + ghost + primary)
+   - 540-960: brand + primary CTA + hamburger (links live in drawer)
+   - <540px : brand + hamburger only (CTAs live in drawer)
+*/
+@media (max-width: 1100px) {
+  .links { gap: 2px; }
+  .link { padding: 8px 10px; font-size: 13.5px; }
+}
+@media (max-width: 960px) {
+  .links { display: none; }
+  .ctaGhost { display: none; }
+  .hamburger { display: inline-flex; }
+}
+@media (max-width: 540px) {
+  .ctaPrimary { display: none; }
+}

@@ -1,89 +1,69 @@
-import Navbar from '../components/Navbar'
-import Hero from '../components/Hero'
-import ROIMetrics from '../components/ROIMetrics'
-import HowItWorks from '../components/HowItWorks'
-import Solutions from '../components/Solutions'
-import Integrations from '../components/Integrations'
-import Benefits from '../components/Benefits'
-import CaseStudies from '../components/CaseStudies'
-import LatestBlogPosts from '../components/LatestBlogPosts'
-import CTA from '../components/CTA'
-import LanguageSupport from '../components/LanguageSupport'
-import FAQ from '../components/FAQ'
-import Footer from '../components/Footer'
+import Hero from '../components/sections/Hero'
+import Pains from '../components/sections/Pains'
+import Features from '../components/sections/Features'
+import AISpotlight from '../components/sections/AISpotlight'
+import Services from '../components/sections/Services'
+import MLOps from '../components/sections/MLOps'
+import Runbooks from '../components/sections/Runbooks'
+import HowItWorks from '../components/sections/HowItWorks'
+import Integrations from '../components/sections/Integrations'
+import Outcomes from '../components/sections/Outcomes'
+import FinalCTA from '../components/sections/FinalCTA'
 import SEO from '../components/SEO'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
 
 export default function HomePage() {
-  const solutionId = 'default'
-  
-  // Generate unique meta description for homepage
-  const baseDescription = "AlertMend AI empowers DevOps teams with an autonomous AI agent that troubleshoots Kubernetes alerts 10x faster, reduces MTTR, and optimizes cloud costs. Agentic AI for production diagnosis and infrastructure automation."
+  const baseDescription =
+    "AlertMend is AI-Powered Observability and Automation. AI-generated RCAs in ~15 seconds, on-call automation, FinOps for Kubernetes & AWS, and runbooks that fan out across your fleet."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'home', 'homepage')
 
   return (
-    <div className="min-h-screen bg-white">
+    <>
       <SEO
-        title="AlertMend: Autonomous AI SRE Platform"
+        title="AlertMend: AI-Powered Observability and Automation for Kubernetes & AWS"
         description={uniqueDescription}
-        keywords="AIOps, Kubernetes, incident management, auto-remediation, SRE, DevOps, cloud-native, cost optimization, VM monitoring, ECS management, infrastructure automation, AI operations, Kubernetes monitoring, container orchestration, observability"
+        keywords="AIOps, Kubernetes, incident management, auto-remediation, SRE, DevOps, cloud-native, cost optimization, VM monitoring, ECS management, infrastructure automation, AI operations, Kubernetes monitoring, container orchestration, observability, GPU MLOps, runbooks, FinOps"
         canonical="/"
         structuredData={{
-          "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
-          "name": "AlertMend AI",
-          "applicationCategory": "DevOpsApplication",
-          "operatingSystem": "Kubernetes, Cloud, AWS, GCP, Azure",
-          "offers": {
-            "@type": "Offer",
-            "price": "99",
-            "priceCurrency": "USD"
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: 'AlertMend AI',
+          applicationCategory: 'DevOpsApplication',
+          operatingSystem: 'Kubernetes, Cloud, AWS, GCP, Azure',
+          offers: {
+            '@type': 'Offer',
+            price: '99',
+            priceCurrency: 'USD',
           },
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "ratingCount": "150"
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: '4.8',
+            ratingCount: '150',
           },
-          "description": "AIOps platform for Kubernetes, VMs, and ECS that auto-detects, analyzes, and fixes incidents. Eliminate on-call firefighting and reduce costs by 50%.",
-          "url": "https://alertmend.io",
-          "provider": {
-            "@type": "Organization",
-            "name": "AlertMend AI",
-            "url": "https://alertmend.io",
-            "logo": "https://alertmend.io/logos/alertmend-logo.svg",
-            "email": "hello@alertmend.io"
+          description:
+            'AIOps platform for Kubernetes, VMs, and ECS that auto-detects, analyzes, and fixes incidents. Eliminate on-call firefighting and reduce costs by 50%.',
+          url: 'https://alertmend.io',
+          provider: {
+            '@type': 'Organization',
+            name: 'AlertMend AI',
+            url: 'https://alertmend.io',
+            logo: 'https://alertmend.io/logos/alertmend-logo.svg',
+            email: 'hello@alertmend.io',
           },
-          "logo": "https://alertmend.io/logos/alertmend-logo.svg"
+          logo: 'https://alertmend.io/logos/alertmend-logo.svg',
         }}
       />
-      <Navbar />
-      {/* Streamlined Flow: Hero → ROI → (How It Works if solution selected) → Solutions (only if default) → Benefits → Proof → CTA */}
-      <Hero solutionId={solutionId} />
-      
-      <ROIMetrics />
-      
-      {/* Show How It Works for specific solutions */}
-      {solutionId !== 'default' && <HowItWorks solutionId={solutionId} />}
-      
-      {/* Show Solutions section only for default page */}
-      {solutionId === 'default' && <Solutions />}
-      
+      <Hero />
+      <Pains />
+      <Features />
+      <AISpotlight />
+      <Services />
+      <MLOps />
+      <Runbooks />
+      <HowItWorks />
       <Integrations />
-      
-      <Benefits solutionId={solutionId} />
-      
-      <CaseStudies />
-      
-      <LatestBlogPosts />
-      
-      <CTA solutionId={solutionId} />
-      
-      <LanguageSupport />
-      
-      <FAQ />
-      
-      <Footer />
-    </div>
+      <Outcomes />
+      <FinalCTA />
+    </>
   )
 }
-

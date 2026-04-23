@@ -4,6 +4,8 @@ import { BrowserRouter, useLocation } from 'react-router-dom'
 import { HelmetProvider } from './lib/helmet'
 import App from './App.tsx'
 import './index.css'
+import './styles/global.css'
+import './styles/legacy-dark.css'
 import { setupCanonicalObserver } from './utils/urlUtils'
 import { getBlogSource } from './utils/analytics'
 

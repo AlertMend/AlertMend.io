@@ -1,0 +1,276 @@
+.section {
+  background: linear-gradient(180deg, transparent 0%, rgba(126, 34, 206, 0.04) 50%, transparent 100%);
+}
+
+/* ---- Boards row ---- */
+.boards {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+}
+.board {
+  display: flex; flex-direction: column;
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: 0 16px 50px -24px rgba(76, 29, 149, 0.22);
+  position: relative;
+}
+.board::before {
+  content: ''; position: absolute; inset: -30px -10px auto;
+  height: 80px;
+  background: radial-gradient(ellipse at top, rgba(126, 34, 206, 0.10), transparent 70%);
+  filter: blur(30px); z-index: 0; pointer-events: none;
+}
+
+.boardHead {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-2);
+  position: relative; z-index: 1;
+}
+.boardTitleWrap { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.boardIco {
+  width: 32px; height: 32px; border-radius: 9px;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.boardTitle {
+  font-size: 14px; font-weight: 700; color: var(--text); letter-spacing: -0.01em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.boardSub {
+  font-size: 11px; color: var(--muted); margin-top: 2px;
+  font-family: 'JetBrains Mono', monospace;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+.pillOk {
+  color: #047857;
+  background: rgba(5, 150, 105, 0.1);
+  border: 1px solid rgba(5, 150, 105, 0.3);
+}
+.pillWarn {
+  color: #b45309;
+  background: rgba(217, 119, 6, 0.1);
+  border: 1px solid rgba(217, 119, 6, 0.3);
+}
+.pillCrit {
+  color: #b91c1c;
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+}
+.pillDot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+  animation: pulse 2s infinite;
+}
+
+.boardFoot {
+  margin-top: auto;
+  padding: 12px 18px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-2);
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 12px; color: var(--muted);
+  gap: 12px; flex-wrap: wrap;
+  position: relative; z-index: 1;
+}
+.boardFoot b { color: var(--text); font-weight: 600; }
+.foundLink { color: var(--accent); font-weight: 600; }
+
+/* ---- GPU board ---- */
+.gpuList {
+  padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 10px;
+  position: relative; z-index: 1;
+}
+.gpu {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+}
+.gpuTop {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 6px;
+}
+.gpuName {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  color: var(--text); font-weight: 600;
+}
+.gpuDot {
+  width: 7px; height: 7px; border-radius: 50%;
+}
+.gpuDot.ok { background: var(--green); box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.18); }
+.gpuDot.warn { background: var(--amber); box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.18); }
+.gpuDot.crit { background: var(--red); box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.18); animation: pulseDot 1.4s infinite; }
+
+.gpuTemp {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--muted);
+}
+.gpuBars { display: flex; flex-direction: column; gap: 4px; }
+.gpuBarRow {
+  display: grid; grid-template-columns: 28px 1fr 36px;
+  gap: 8px; align-items: center;
+}
+.gpuBarLbl {
+  font-size: 10px; color: var(--muted);
+  font-family: 'JetBrains Mono', monospace; text-transform: uppercase;
+}
+.gpuBar {
+  height: 6px; border-radius: 999px;
+  background: rgba(126, 34, 206, 0.1);
+  overflow: hidden;
+}
+.gpuBarFill {
+  display: block; height: 100%; border-radius: 999px;
+  transition: width 0.4s ease;
+}
+.gpuBarFill.ok { background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+.gpuBarFill.warn { background: linear-gradient(90deg, var(--amber), #f97316); }
+.gpuBarFill.crit { background: linear-gradient(90deg, var(--red), #ef4444); }
+.gpuBarVal {
+  font-size: 11px; color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace; text-align: right;
+}
+
+/* ---- Training board ---- */
+.trainGrid {
+  padding: 16px 18px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  position: relative; z-index: 1;
+}
+.statLbl {
+  font-size: 10px; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;
+  margin-bottom: 4px;
+}
+.statVal { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.statNum {
+  font-size: 22px; font-weight: 700; color: var(--text);
+  letter-spacing: -0.02em; line-height: 1;
+  font-family: 'JetBrains Mono', monospace;
+}
+.statSlash {
+  font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace;
+}
+.statTrend {
+  font-size: 11px; color: #047857; font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+}
+.statHint {
+  font-size: 11px; color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+}
+.statBad { color: #b45309 !important; }
+.unit { font-size: 12px; color: var(--muted); margin-left: 2px; font-weight: 500; }
+
+.chart {
+  padding: 0 18px 16px;
+  position: relative; z-index: 1;
+}
+.chartLbl {
+  font-size: 10px; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin-bottom: 8px; font-weight: 700;
+}
+.chartSvg {
+  width: 100%; height: 110px; display: block;
+  background: linear-gradient(180deg, rgba(126, 34, 206, 0.04), transparent);
+  border-radius: 8px;
+}
+
+/* ---- Inference board ---- */
+.infGrid {
+  padding: 16px 18px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  position: relative; z-index: 1;
+}
+.infCell {
+  padding: 10px 12px;
+  border-radius: 9px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+}
+
+.histogram {
+  display: flex; align-items: flex-end; gap: 4px;
+  height: 110px;
+  padding: 6px 8px;
+  background: linear-gradient(180deg, rgba(126, 34, 206, 0.04), transparent);
+  border-radius: 8px;
+}
+.histBar {
+  flex: 1; min-width: 0;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  border-radius: 3px 3px 0 0;
+  opacity: 0.85;
+  transition: height 0.4s ease;
+}
+.histBar[data-bad="true"] {
+  background: linear-gradient(180deg, var(--amber), #f97316);
+}
+
+/* ---- Failures catalog ---- */
+.failures { margin-top: 64px; }
+.failuresHead {
+  text-align: center; max-width: 720px; margin: 0 auto 36px;
+}
+.failuresHead h3 {
+  font-size: clamp(24px, 2.8vw, 32px);
+  font-weight: 700; letter-spacing: -0.02em; line-height: 1.15;
+  margin-top: 14px; margin-bottom: 12px;
+  background: var(--grad-text);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.failuresHead p { color: var(--muted); font-size: 15px; line-height: 1.55; }
+
+.failGrid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+}
+.failCard {
+  display: flex; gap: 12px;
+  padding: 16px; border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 18px -10px rgba(76, 29, 149, 0.18);
+  transition: all 0.2s;
+}
+.failCard:hover {
+  border-color: rgba(126, 34, 206, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px -16px rgba(126, 34, 206, 0.28);
+}
+.failIco {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: linear-gradient(135deg, rgba(126, 34, 206, 0.12), rgba(79, 70, 229, 0.1));
+  border: 1px solid rgba(126, 34, 206, 0.22);
+  color: var(--accent);
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.failTitle {
+  font-size: 13.5px; font-weight: 600; color: var(--text);
+  letter-spacing: -0.01em; margin-bottom: 3px;
+}
+.failDesc {
+  font-size: 12px; color: var(--muted); line-height: 1.45;
+}
+
+@media (max-width: 980px) {
+  .boards { grid-template-columns: 1fr; }
+  .failGrid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 540px) {
+  .failGrid { grid-template-columns: 1fr; }
+  .trainGrid, .infGrid { grid-template-columns: 1fr; }
+}

@@ -1,5 +1,10 @@
-import { Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
+import AmbientBackground from './components/layout/AmbientBackground'
+import Nav from './components/layout/Nav'
+import Footer from './components/layout/Footer'
+import { useScrollReveal } from './hooks/useScrollReveal'
 import HomePage from './pages/HomePage'
 import CaseStudiesPage from './pages/CaseStudiesPage'
 import CaseStudyDetailPage from './pages/CaseStudyDetailPage'
@@ -31,50 +36,74 @@ import TutorialsPage from './pages/TutorialsPage'
 import WebinarsPage from './pages/WebinarsPage'
 import NotFoundPage from './pages/NotFoundPage'
 
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
+  }, [pathname])
+  return null
+}
+
 function App() {
+  // Apply the dark theme to <body> for the entire app.
+  useEffect(() => {
+    document.body.classList.add('alertmend-dark')
+    return () => {
+      document.body.classList.remove('alertmend-dark')
+    }
+  }, [])
+
+  // Re-trigger scroll-reveal on every route change so newly mounted sections animate in.
+  useScrollReveal()
+
   return (
     <>
-      <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/case-studies" element={<CaseStudiesPage />} />
-      <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
-      <Route path="/solutions/:id" element={<SolutionDetailPage />} />
-      <Route path="/auto-remediation" element={<SolutionDetailPage />} />
-      <Route path="/kubernetes-management" element={<SolutionDetailPage />} />
-      <Route path="/on-call-management" element={<SolutionDetailPage />} />
-      <Route path="/kubernetes-cost-optimization" element={<SolutionDetailPage />} />
-      <Route path="/pricing" element={<PricingPage />} />
-      <Route path="/documentation" element={<DocumentationPage />} />
-      <Route path="/documentation/slack-app-approval" element={<SlackAppApprovalPage />} />
-      <Route path="/documentation/slack-token-channel" element={<SlackTokenChannelPage />} />
-      <Route path="/documentation/slack-rca-channel" element={<SlackRCAChannelPage />} />
-      <Route path="/documentation/ms-teams-approval" element={<MSTeamsApprovalPage />} />
-      <Route path="/documentation/ms-teams-rf" element={<MSTeamsRFPage />} />
-      <Route path="/documentation/ms-teams-webhook" element={<MSTeamsWebhookPage />} />
-      <Route path="/documentation/datadog-webhook" element={<DatadogWebhookPage />} />
-      <Route path="/documentation/alertmend-vm-actions" element={<AlertMendVMActionsPage />} />
-      <Route path="/about" element={<AboutPage />} />
-      <Route path="/blog" element={<BlogPage />} />
-      <Route path="/blog/:slug" element={<BlogPostDetailPage />} />
-      <Route path="/blogs/:slug.html" element={<BlogPostDetailPage />} />
-      <Route path="/blogs/*" element={<LegacyBlogPage />} />
-      <Route path="/careers" element={<CareersPage />} />
-      <Route path="/contact" element={<ContactPage />} />
-      <Route path="/partners" element={<PartnersPage />} />
-      <Route path="/privacy" element={<PrivacyPage />} />
-      <Route path="/terms" element={<TermsPage />} />
-      <Route path="/security" element={<SecurityPage />} />
-      <Route path="/compliance" element={<CompliancePage />} />
-      <Route path="/help" element={<HelpCenterPage />} />
-      <Route path="/community" element={<CommunityPage />} />
-      <Route path="/tutorials" element={<TutorialsPage />} />
-      <Route path="/webinars" element={<WebinarsPage />} />
-      <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <AmbientBackground />
+      <Nav />
+      <ScrollToTop />
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/case-studies" element={<CaseStudiesPage />} />
+          <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
+          <Route path="/solutions/:id" element={<SolutionDetailPage />} />
+          <Route path="/auto-remediation" element={<SolutionDetailPage />} />
+          <Route path="/kubernetes-management" element={<SolutionDetailPage />} />
+          <Route path="/on-call-management" element={<SolutionDetailPage />} />
+          <Route path="/kubernetes-cost-optimization" element={<SolutionDetailPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/documentation" element={<DocumentationPage />} />
+          <Route path="/documentation/slack-app-approval" element={<SlackAppApprovalPage />} />
+          <Route path="/documentation/slack-token-channel" element={<SlackTokenChannelPage />} />
+          <Route path="/documentation/slack-rca-channel" element={<SlackRCAChannelPage />} />
+          <Route path="/documentation/ms-teams-approval" element={<MSTeamsApprovalPage />} />
+          <Route path="/documentation/ms-teams-rf" element={<MSTeamsRFPage />} />
+          <Route path="/documentation/ms-teams-webhook" element={<MSTeamsWebhookPage />} />
+          <Route path="/documentation/datadog-webhook" element={<DatadogWebhookPage />} />
+          <Route path="/documentation/alertmend-vm-actions" element={<AlertMendVMActionsPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/blog/:slug" element={<BlogPostDetailPage />} />
+          <Route path="/blogs/:slug.html" element={<BlogPostDetailPage />} />
+          <Route path="/blogs/*" element={<LegacyBlogPage />} />
+          <Route path="/careers" element={<CareersPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/partners" element={<PartnersPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/security" element={<SecurityPage />} />
+          <Route path="/compliance" element={<CompliancePage />} />
+          <Route path="/help" element={<HelpCenterPage />} />
+          <Route path="/community" element={<CommunityPage />} />
+          <Route path="/tutorials" element={<TutorialsPage />} />
+          <Route path="/webinars" element={<WebinarsPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+      <Footer />
       <Analytics />
     </>
   )
 }
 
 export default App
-
