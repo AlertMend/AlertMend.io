@@ -20,6 +20,7 @@ const routeLinks = [
 
 const SIGNUP_URL = 'https://app.alertmend.io/signup';
 const PLAYGROUND_URL = 'https://app.alertmend.io/playground?source=homepage';
+const CALENDLY_URL = 'https://calendly.com/hello-alertmend/30min';
 
 export default function Nav() {
   const scrolled = useScrolled(8);
@@ -120,10 +121,15 @@ export default function Nav() {
             >
               Register
             </a>
-            <Link to="/contact" className={`btn btn-primary ${styles.ctaPrimary}`}>
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`btn btn-primary ${styles.ctaPrimary}`}
+            >
               Book a demo
               <Icon name="arrow" size={14} className="arrow" strokeWidth={2.5} />
-            </Link>
+            </a>
           </div>
 
           <button
@@ -199,10 +205,16 @@ export default function Nav() {
           >
             Register
           </a>
-          <Link to="/contact" className="btn btn-primary" onClick={() => setDrawerOpen(false)}>
+          <a
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary"
+            onClick={() => setDrawerOpen(false)}
+          >
             Book a demo
             <Icon name="arrow" size={14} className="arrow" strokeWidth={2.5} />
-          </Link>
+          </a>
         </div>
       </aside>
     </>

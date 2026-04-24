@@ -1,7 +1,8 @@
-import { Link } from 'react-router-dom';
 import Icon from '../ui/Icon';
 import BrandLogo, { simpleIconsUrl, svgPornUrl } from '../ui/BrandLogo';
 import styles from './Hero.module.css';
+
+const CALENDLY_URL = 'https://calendly.com/hello-alertmend/30min';
 
 const evidence = [
   <>Pulled <b>pod events, logs, metrics</b> for the last 15m</>,
@@ -32,10 +33,15 @@ export default function Hero() {
         </p>
 
         <div className={styles.heroCta}>
-          <Link to="/contact" className="btn btn-primary btn-lg">
+          <a
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary btn-lg"
+          >
             Book a demo
             <Icon name="arrow" size={16} className="arrow" strokeWidth={2.5} />
-          </Link>
+          </a>
           <a href="#features" className="btn btn-ghost btn-lg">
             See it in action
           </a>

@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import Icon from '../ui/Icon';
 import styles from './FinalCTA.module.css';
 
+const CALENDLY_URL = 'https://calendly.com/hello-alertmend/30min';
+
 export default function FinalCTA() {
   return (
     <section id="pricing" className="tight">
@@ -15,14 +17,19 @@ export default function FinalCTA() {
             You walk away with a prioritized list of risks to fix, no incident required.
           </p>
           <div className={styles.cta}>
-            <Link to="/contact" className="btn btn-primary btn-lg">
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary btn-lg"
+            >
               Book a demo
               <Icon name="arrow" size={16} className="arrow" strokeWidth={2.5} />
-            </Link>
-            <a href="mailto:hello@alertmend.io" className="btn btn-ghost btn-lg">
+            </a>
+            <Link to="/contact" className="btn btn-ghost btn-lg">
               <Icon name="message" size={16} />
               Talk with us
-            </a>
+            </Link>
           </div>
           <div className={styles.meta}>
             <span>

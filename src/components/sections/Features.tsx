@@ -15,7 +15,7 @@ type Card = {
 const cards: Card[] = [
   {
     variant: 'wideTall',
-    ico: <Icon name="cube" size={22} />,
+    ico: <K8sLogo size={22} />,
     title: 'Kubernetes cluster overview',
     body: (
       <>
@@ -205,10 +205,41 @@ export default function Features() {
   );
 }
 
-/** Inline SVG mock of a Kubernetes overview dashboard (since we don't have a screenshot). */
+/** Inline SVG mock of a Kubernetes overview dashboard, branded with the K8s
+ *  helm icon and real-sounding pod names so it reads as a product surface
+ *  rather than abstract placeholder bars. */
 function KubernetesPreview() {
+  const stats = [
+    { label: 'Pods', value: '1,247', sub: '↑ 12' },
+    { label: 'Nodes', value: '24', sub: 'healthy' },
+    { label: 'Deploys', value: '89', sub: '3 rolling' },
+    { label: 'Namespaces', value: '17', sub: '' },
+  ];
+  const incidents = [
+    {
+      sev: '#dc2626',
+      sevLabel: 'CRIT',
+      title: 'RESTART STORM',
+      pod: 'log-ingester-86b9968-cvklg',
+      ns: 'observability',
+    },
+    {
+      sev: '#d97706',
+      sevLabel: 'WARN',
+      title: 'OOMKilled',
+      pod: 'payments-svc-7c4d8f-q9p2m',
+      ns: 'payments',
+    },
+  ];
+
   return (
-    <svg viewBox="0 0 760 280" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+    <svg
+      viewBox="0 0 760 280"
+      preserveAspectRatio="xMidYMid meet"
+      width="100%"
+      height="100%"
+      fontFamily="-apple-system, system-ui, sans-serif"
+    >
       <defs>
         <linearGradient id="kbg" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#faf5ff" />
@@ -219,43 +250,229 @@ function KubernetesPreview() {
           <stop offset="100%" stopColor="#4f46e5" />
         </linearGradient>
       </defs>
+
       <rect width="760" height="280" fill="url(#kbg)" />
-      {/* top bar */}
-      <rect x="0" y="0" width="760" height="36" fill="rgba(126,34,206,0.05)" />
-      <circle cx="20" cy="18" r="5" fill="#7e22ce" />
-      <rect x="34" y="13" width="92" height="10" rx="3" fill="rgba(59,7,100,0.55)" />
-      <rect x="140" y="13" width="60" height="10" rx="3" fill="rgba(59,7,100,0.25)" />
-      <rect x="700" y="11" width="44" height="14" rx="4" fill="rgba(126,34,206,0.18)" />
-      {/* Cluster header */}
-      <rect x="20" y="52" width="180" height="14" rx="3" fill="rgba(59,7,100,0.85)" />
-      <rect x="20" y="74" width="240" height="9" rx="3" fill="rgba(107,33,168,0.5)" />
-      {/* Stat tiles */}
-      {[0, 1, 2, 3].map((i) => (
-        <g key={i} transform={`translate(${20 + i * 138} 100)`}>
+
+      {/* Top bar with K8s logo, cluster selector, AlertMend Kubernetes Agent badge */}
+      <rect x="0" y="0" width="760" height="38" fill="rgba(126,34,206,0.05)" />
+      <g transform="translate(16 8)">
+        <K8sLogo size={22} />
+      </g>
+      <text x="46" y="24" fontSize="12" fontWeight="700" fill="#3b0764">
+        prod-us-west-2
+      </text>
+      <text x="46" y="24" dx="116" fontSize="11" fill="rgba(107,33,168,0.7)">
+        · last 24h
+      </text>
+      {/* Branded "AlertMend Kubernetes Agent" pill, top-right.
+          Width sized to fit "AlertMend  ·  Kubernetes Agent  ●  LIVE" with
+          breathing room, and positioned with a comfortable right margin so
+          the SVG's `xMidYMid slice` aspect-ratio scaling can't clip it. */}
+      <g transform="translate(478 7)">
+        <rect
+          width="266"
+          height="24"
+          rx="12"
+          fill="#ffffff"
+          stroke="rgba(126,34,206,0.35)"
+        />
+        {/* AlertMend brandmark */}
+        <image
+          href="/logos/alertmend-logo.png"
+          x="8"
+          y="4"
+          width="16"
+          height="16"
+          preserveAspectRatio="xMidYMid meet"
+        />
+        <text x="30" y="16" fontSize="10" fontWeight="800" fill="#3b0764" letterSpacing="0.01em">
+          AlertMend
+        </text>
+        <text x="86" y="16" fontSize="10" fontWeight="500" fill="rgba(107,33,168,0.55)">
+          ·
+        </text>
+        <text x="94" y="16" fontSize="10" fontWeight="600" fill="#6b21a8" letterSpacing="0.005em">
+          Kubernetes Agent
+        </text>
+        {/* Live dot */}
+        <circle cx="220" cy="12" r="3" fill="#10b981">
+          <animate attributeName="opacity" values="1;0.4;1" dur="1.6s" repeatCount="indefinite" />
+        </circle>
+        <text x="228" y="15.5" fontSize="8.5" fontWeight="800" fill="#047857" letterSpacing="0.07em">
+          LIVE
+        </text>
+      </g>
+
+      {/* Section heading */}
+      <text x="20" y="62" fontSize="13" fontWeight="700" fill="#1f0a47">
+        Cluster overview
+      </text>
+      <text x="20" y="80" fontSize="10" fill="rgba(107,33,168,0.7)">
+        4 namespaces with active incidents
+      </text>
+
+      {/* Stat tiles with K8s resource icons */}
+      {stats.map((s, i) => (
+        <g key={i} transform={`translate(${20 + i * 138} 92)`}>
           <rect width="124" height="58" rx="10" fill="#ffffff" stroke="rgba(126,34,206,0.18)" />
-          <rect x="12" y="12" width="40" height="8" rx="2" fill="rgba(107,33,168,0.45)" />
-          <rect x="12" y="28" width="62" height="14" rx="3" fill="url(#kacc)" />
+          <g transform="translate(12 12)">
+            <ResourceGlyph kind={s.label} />
+          </g>
+          <text x="40" y="22" fontSize="9" fontWeight="700" fill="rgba(107,33,168,0.7)" letterSpacing="0.06em">
+            {s.label.toUpperCase()}
+          </text>
+          <text x="40" y="40" fontSize="16" fontWeight="800" fill="#1f0a47">
+            {s.value}
+          </text>
+          {s.sub ? (
+            <text x="40" y="51" fontSize="8.5" fill="#047857" fontWeight="600">
+              {s.sub}
+            </text>
+          ) : null}
         </g>
       ))}
+
       {/* Incident cards */}
-      {[
-        { y: 178, color: '#dc2626', label: 'RESTART STORM · log-ingester' },
-        { y: 218, color: '#d97706', label: 'OOMKilled · payments-svc' },
-      ].map((row, i) => (
-        <g key={i} transform={`translate(20 ${row.y})`}>
-          <rect width="430" height="34" rx="8" fill="#ffffff" stroke={`${row.color}88`} />
-          <circle cx="14" cy="17" r="4" fill={row.color} />
-          <rect x="26" y="13" width="270" height="9" rx="2" fill="rgba(59,7,100,0.6)" />
-          <rect x="350" y="11" width="68" height="14" rx="4" fill="rgba(126,34,206,0.14)" stroke="rgba(126,34,206,0.4)" />
+      {incidents.map((row, i) => (
+        <g key={i} transform={`translate(20 ${168 + i * 40})`}>
+          <rect width="430" height="34" rx="8" fill="#ffffff" stroke={`${row.sev}55`} />
+          {/* Pod glyph */}
+          <g transform="translate(10 9)">
+            <PodGlyph color={row.sev} />
+          </g>
+          <rect x="32" y="9" width="42" height="14" rx="4" fill={`${row.sev}1a`} />
+          <text x="53" y="19" textAnchor="middle" fontSize="8" fontWeight="800" fill={row.sev} letterSpacing="0.05em">
+            {row.sevLabel}
+          </text>
+          <text x="84" y="15" fontSize="10" fontWeight="700" fill="#1f0a47">
+            {row.title}
+          </text>
+          <text x="84" y="27" fontSize="9" fill="rgba(59,7,100,0.65)" fontFamily="ui-monospace, Menlo, monospace">
+            {row.pod}
+            <tspan dx="6" fill="rgba(107,33,168,0.55)">· ns: {row.ns}</tspan>
+          </text>
+          {/* View RCA chip */}
+          <g transform="translate(345 8)">
+            <rect width="74" height="18" rx="9" fill="rgba(126,34,206,0.1)" stroke="rgba(126,34,206,0.4)" />
+            <text x="37" y="12.5" textAnchor="middle" fontSize="9" fontWeight="700" fill="#6b21a8" letterSpacing="0.04em">
+              VIEW RCA
+            </text>
+          </g>
         </g>
       ))}
-      {/* Right panel chart */}
-      <rect x="470" y="178" width="270" height="74" rx="10" fill="#ffffff" stroke="rgba(126,34,206,0.18)" />
-      <polyline
-        points="480,238 510,222 540,228 570,210 600,216 630,196 660,202 690,184 720,192 740,178"
-        fill="none"
-        stroke="url(#kacc)"
-        strokeWidth="2.5"
+
+      {/* Right panel chart - CPU trend */}
+      <g>
+        <rect x="470" y="168" width="270" height="74" rx="10" fill="#ffffff" stroke="rgba(126,34,206,0.18)" />
+        <text x="482" y="184" fontSize="9" fontWeight="700" fill="rgba(107,33,168,0.7)" letterSpacing="0.06em">
+          CPU · prod-us-west-2
+        </text>
+        <text x="724" y="184" textAnchor="end" fontSize="9" fill="#047857" fontWeight="600">
+          ↑ 22%
+        </text>
+        {/* faint baseline grid */}
+        <line x1="480" y1="216" x2="730" y2="216" stroke="rgba(126,34,206,0.08)" />
+        <line x1="480" y1="228" x2="730" y2="228" stroke="rgba(126,34,206,0.08)" />
+        <polyline
+          points="480,232 510,220 540,224 570,210 600,214 630,196 660,202 690,186 720,194 730,180"
+          fill="none"
+          stroke="url(#kacc)"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        {/* end-point dot */}
+        <circle cx="730" cy="180" r="3" fill="#7e22ce" />
+      </g>
+    </svg>
+  );
+}
+
+/** Authentic Kubernetes "helm wheel" mark, simplified for a small SVG slot. */
+function K8sLogo({ size = 22 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
+      {/* Hexagon shell */}
+      <polygon
+        points="12,1 22,6.5 22,17.5 12,23 2,17.5 2,6.5"
+        fill="rgba(126,34,206,0.1)"
+        stroke="#326ce5"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+      />
+      {/* 7-spoke helm wheel */}
+      <g stroke="#326ce5" strokeWidth="1.1" fill="none">
+        <circle cx="12" cy="12" r="3" />
+        <circle cx="12" cy="12" r="6.2" />
+        {Array.from({ length: 7 }).map((_, i) => {
+          const a = (i / 7) * Math.PI * 2 - Math.PI / 2;
+          const x1 = 12 + Math.cos(a) * 3;
+          const y1 = 12 + Math.sin(a) * 3;
+          const x2 = 12 + Math.cos(a) * 6.2;
+          const y2 = 12 + Math.sin(a) * 6.2;
+          return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} />;
+        })}
+      </g>
+    </svg>
+  );
+}
+
+/** Tiny resource glyph for a stat tile (Pods, Nodes, Deploys, Namespaces). */
+function ResourceGlyph({ kind }: { kind: string }) {
+  const stroke = '#7e22ce';
+  if (kind === 'Pods') {
+    // hex pod
+    return (
+      <svg width="20" height="20" viewBox="0 0 24 24">
+        <polygon
+          points="12,2 21,7 21,17 12,22 3,17 3,7"
+          fill="rgba(126,34,206,0.12)"
+          stroke={stroke}
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
+      </svg>
+    );
+  }
+  if (kind === 'Nodes') {
+    // server stack
+    return (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="1.6">
+        <rect x="3" y="4" width="18" height="6" rx="1.5" />
+        <rect x="3" y="14" width="18" height="6" rx="1.5" />
+        <circle cx="7" cy="7" r="0.9" fill={stroke} stroke="none" />
+        <circle cx="7" cy="17" r="0.9" fill={stroke} stroke="none" />
+      </svg>
+    );
+  }
+  if (kind === 'Deploys') {
+    // rocket / arrow up-right
+    return (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M5 19L19 5" />
+        <path d="M9 5h10v10" />
+      </svg>
+    );
+  }
+  // Namespaces - braces
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={stroke} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M8 3H6a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2" />
+      <path d="M16 3h2a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2" />
+    </svg>
+  );
+}
+
+/** Hex pod glyph used inside incident rows. */
+function PodGlyph({ color }: { color: string }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24">
+      <polygon
+        points="12,2 21,7 21,17 12,22 3,17 3,7"
+        fill={`${color}1a`}
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinejoin="round"
       />
     </svg>
   );
