@@ -9,16 +9,6 @@
   text-align: center;
   position: relative; overflow: hidden;
 }
-.final::before {
-  content: ''; position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(126, 34, 206, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(126, 34, 206, 0.06) 1px, transparent 1px);
-  background-size: 32px 32px;
-  mask-image: radial-gradient(ellipse at center, black, transparent 70%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black, transparent 70%);
-  pointer-events: none;
-}
 .h2 {
   font-size: clamp(32px, 4.5vw, 52px); line-height: 1.1; letter-spacing: -0.03em; font-weight: 800;
   background: var(--grad-text);

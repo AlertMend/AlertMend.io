@@ -54,8 +54,6 @@
 .stage {
   position: relative;
   height: 480px;
-  background-image: radial-gradient(circle at 1px 1px, rgba(126, 34, 206, 0.12) 1px, transparent 0);
-  background-size: 24px 24px;
   background-color: #faf5ff;
   overflow: hidden;
 }
