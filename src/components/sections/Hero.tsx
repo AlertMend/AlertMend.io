@@ -3,6 +3,7 @@ import BrandLogo, { simpleIconsUrl, svgPornUrl } from '../ui/BrandLogo';
 import styles from './Hero.module.css';
 
 const CALENDLY_URL = 'https://calendly.com/hello-alertmend/30min';
+const PLAYGROUND_URL = 'https://app.alertmend.io/playground?source=homepage';
 
 const evidence = [
   <>Pulled <b>pod events, logs, metrics</b> for the last 15m</>,
@@ -42,7 +43,12 @@ export default function Hero() {
             Book a demo
             <Icon name="arrow" size={16} className="arrow" strokeWidth={2.5} />
           </a>
-          <a href="#features" className="btn btn-ghost btn-lg">
+          <a
+            href={PLAYGROUND_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-ghost btn-lg"
+          >
             See it in action
           </a>
         </div>
