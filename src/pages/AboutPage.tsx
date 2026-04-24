@@ -149,10 +149,10 @@ export default function AboutPage() {
                     href="https://www.linkedin.com/in/arvind-rajpurohit-4a332523/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg font-semibold hover:from-purple-700 hover:to-purple-800 transition-all shadow-md hover:shadow-lg hover:scale-105"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 !text-white rounded-lg font-semibold hover:from-purple-700 hover:to-purple-800 transition-all shadow-md hover:shadow-lg hover:scale-105"
                   >
-                    <Linkedin className="h-5 w-5" />
-                    <span>Connect on LinkedIn</span>
+                    <Linkedin className="h-5 w-5 text-white" />
+                    <span className="text-white">Connect on LinkedIn</span>
                   </a>
                 </div>
               </div>
@@ -191,10 +191,10 @@ export default function AboutPage() {
                     href="https://www.linkedin.com/in/dineshagrawal85/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg font-semibold hover:from-purple-700 hover:to-purple-800 transition-all shadow-md hover:shadow-lg hover:scale-105"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 !text-white rounded-lg font-semibold hover:from-purple-700 hover:to-purple-800 transition-all shadow-md hover:shadow-lg hover:scale-105"
                   >
-                    <Linkedin className="h-5 w-5" />
-                    <span>Connect on LinkedIn</span>
+                    <Linkedin className="h-5 w-5 text-white" />
+                    <span className="text-white">Connect on LinkedIn</span>
                   </a>
                 </div>
               </div>
