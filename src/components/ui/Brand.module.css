@@ -1,63 +1,21 @@
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 11px;
-  font-weight: 700;
-  font-size: 18px;
-  letter-spacing: -0.015em;
-  color: var(--text);
+  gap: 12px;
   text-decoration: none;
   line-height: 1;
-  padding: 4px 6px 4px 4px;
-  border-radius: 12px;
-  transition: transform 0.18s ease, background 0.2s ease;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: opacity 0.15s ease;
 }
-.brand:hover { background: rgba(126, 34, 206, 0.06); }
-.brand:active { transform: translateY(1px); }
+.brand:hover { opacity: 0.85; }
 
-/* Glassy chip behind the logo so it pops on the white nav */
-.markChip {
-  position: relative;
-  width: 36px;
-  height: 36px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  border-radius: 10px;
-  background:
-    linear-gradient(135deg, rgba(126, 34, 206, 0.10), rgba(192, 38, 211, 0.06)),
-    #ffffff;
-  border: 1px solid rgba(126, 34, 206, 0.18);
-  box-shadow:
-    0 4px 14px -6px rgba(126, 34, 206, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
-}
-.brand:hover .markChip {
-  box-shadow:
-    0 8px 22px -8px rgba(126, 34, 206, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  transform: translateY(-1px);
-}
-
-.mark {
-  width: 22px;
-  height: 24px;
-  display: inline-block;
-  background: linear-gradient(135deg, #581c87 0%, #4f46e5 50%, #c026d3 100%);
-  -webkit-mask: url('/alertmend-logo.svg') center / contain no-repeat;
-          mask: url('/alertmend-logo.svg') center / contain no-repeat;
-  filter: drop-shadow(0 1px 1px rgba(76, 29, 149, 0.18));
-}
-
-.word {
-  background: linear-gradient(135deg, #3b0764 0%, #4f46e5 60%, #c026d3 100%);
-  -webkit-background-clip: text;
-          background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: -0.018em;
-  font-weight: 700;
+.fullLogo {
+  display: block;
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(76, 29, 149, 0.18));
 }
 
 .tag {

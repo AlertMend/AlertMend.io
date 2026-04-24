@@ -72,7 +72,7 @@ Alertmend.io provides robust solutions for monitoring and alerting within Kubern
 ## Resolving
 ## Moving Forward with Kubernetes Security
 ### Key Takeaways and Next Steps
-The journey through **modern Kubernetes security practices** emphasizes the importance of a proactive, layered approach to securing containerized environments. By integrating security into every phase of the Kubernetes lifecycle—from build to runtime—organizations can significantly reduce their risk exposure.
+The journey through **modern Kubernetes security practices** emphasizes the importance of a proactive, layered approach to securing containerized environments. By integrating security into every phase of the Kubernetes lifecycle-from build to runtime-organizations can significantly reduce their risk exposure.
 Moving forward, consider adopting a continuous improvement strategy that includes regular assessments and leveraging advanced tools like service meshes and Alertmend.io for enhanced security management.
 ### Embrace the Future of Kubernetes Security
 In an era where digital threats are continually evolving, staying ahead means embracing innovation in security practices.

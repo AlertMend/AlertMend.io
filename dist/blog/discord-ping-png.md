@@ -11,7 +11,7 @@ keywords: "AlertMend AI, AIOps, DevOps, discord, ping"
 
 ## Exploring the World of Discord Ping PNG: A Visual Guide
 
-Have you ever considered the influence of a simple Discord ping PNG on your online community? Whether you're curating a lively Discord server or just dipping your toes into digital design, the right icon can make all the difference. Understanding how Discord ping PNG files work—and how to use them creatively—can enhance your server's visual appeal and functionality.
+Have you ever considered the influence of a simple Discord ping PNG on your online community? Whether you're curating a lively Discord server or just dipping your toes into digital design, the right icon can make all the difference. Understanding how Discord ping PNG files work-and how to use them creatively-can enhance your server's visual appeal and functionality.
 
 In this comprehensive guide, we'll delve into the essentials of Discord ping PNGs, explore their diverse applications, and offer practical advice for seamless integration. Perfect for digital enthusiasts and community managers alike, this guide will equip you with everything you need to know.
 
@@ -39,7 +39,7 @@ Customizing your server with aesthetic Discord ping PNGs can transform the user 
 
 ### Creating Custom Discord Ping Icons
 
-Creating your own Discord ping PNGs can be an enjoyable and rewarding task. Use graphic design software like Adobe Illustrator or free alternatives like GIMP to craft icons that perfectly fit your server’s personality. Pay attention to resolution—icons should be created at an appropriate size (e.g., 128x128 pixels) to ensure clarity without slowing down your server.
+Creating your own Discord ping PNGs can be an enjoyable and rewarding task. Use graphic design software like Adobe Illustrator or free alternatives like GIMP to craft icons that perfectly fit your server’s personality. Pay attention to resolution-icons should be created at an appropriate size (e.g., 128x128 pixels) to ensure clarity without slowing down your server.
 
 #### **Step-by-Step Guide to Designing a Discord Ping Icon:**
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Brand from '../ui/Brand';
 import Icon from '../ui/Icon';
 import { useScrolled } from '../../hooks/useScrolled';
@@ -20,7 +20,6 @@ const routeLinks = [
 export default function Nav() {
   const scrolled = useScrolled(8);
   const location = useLocation();
-  const navigate = useNavigate();
   const onHome = location.pathname === '/';
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -49,39 +48,25 @@ export default function Nav() {
     return () => document.removeEventListener('keydown', onKey);
   }, [drawerOpen]);
 
-  // Smooth-scroll in-page hash links when already on home.
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (!onHome) return;
-      const target = e.target as HTMLElement;
-      const a = target.closest('a[href^="#"]') as HTMLAnchorElement | null;
-      if (!a) return;
-      const id = a.getAttribute('href');
-      if (!id || id.length <= 1) return;
-      const el = document.querySelector(id);
-      if (!el) return;
-      e.preventDefault();
-      const y = (el as HTMLElement).getBoundingClientRect().top + window.scrollY - 70;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    };
-    document.addEventListener('click', handler);
-    return () => document.removeEventListener('click', handler);
-  }, [onHome]);
-
-  // After navigating to home with a hash, smooth-scroll to the section.
+  // Whenever we land on / with a hash (either from a fresh route or from
+  // clicking a same-page hash link), smooth-scroll to the target section.
+  // Retry briefly because the section may not be mounted on first paint.
   useEffect(() => {
     if (!onHome || !location.hash) return;
-    const el = document.querySelector(location.hash);
-    if (!el) return;
-    const y = (el as HTMLElement).getBoundingClientRect().top + window.scrollY - 70;
-    window.scrollTo({ top: y, behavior: 'smooth' });
-  }, [onHome, location.hash]);
-
-  const handleSectionClick = (hash: string) => (e: React.MouseEvent) => {
-    if (onHome) return; // Anchor scroll handled above
-    e.preventDefault();
-    navigate(`/${hash}`);
-  };
+    let raf = 0;
+    let attempts = 0;
+    const tryScroll = () => {
+      const el = document.querySelector(location.hash);
+      if (el) {
+        const y = (el as HTMLElement).getBoundingClientRect().top + window.scrollY - 70;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        return;
+      }
+      if (attempts++ < 30) raf = requestAnimationFrame(tryScroll);
+    };
+    raf = requestAnimationFrame(tryScroll);
+    return () => cancelAnimationFrame(raf);
+  }, [onHome, location.hash, location.key]);
 
   const isRouteActive = (to: string) =>
     location.pathname === to || location.pathname.startsWith(`${to}/`);
@@ -94,14 +79,13 @@ export default function Nav() {
 
           <nav className={styles.links} aria-label="Primary">
             {sectionLinks.map((l) => (
-              <a
+              <Link
                 key={l.hash}
-                href={onHome ? l.hash : `/${l.hash}`}
-                onClick={handleSectionClick(l.hash)}
+                to={{ pathname: '/', hash: l.hash }}
                 className={styles.link}
               >
                 {l.label}
-              </a>
+              </Link>
             ))}
             {routeLinks.map((l) => (
               <Link
@@ -163,16 +147,13 @@ export default function Nav() {
         </div>
         <nav className={styles.drawerLinks} aria-label="Mobile">
           {sectionLinks.map((l) => (
-            <a
+            <Link
               key={l.hash}
-              href={onHome ? l.hash : `/${l.hash}`}
-              onClick={(e) => {
-                handleSectionClick(l.hash)(e);
-                setDrawerOpen(false);
-              }}
+              to={{ pathname: '/', hash: l.hash }}
+              onClick={() => setDrawerOpen(false)}
             >
               {l.label}
-            </a>
+            </Link>
           ))}
           {routeLinks.map((l) => (
             <Link key={l.to} to={l.to}>

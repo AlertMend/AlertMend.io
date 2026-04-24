@@ -513,6 +513,6 @@ Key takeaways:
 - Prevention through proper permission management is essential
 - Monitoring tools like AlertMend.io can help detect and prevent these issues proactively
 
-Remember that security and functionality must be balanced—always follow the principle of least privilege while ensuring applications have necessary permissions to function correctly.
+Remember that security and functionality must be balanced-always follow the principle of least privilege while ensuring applications have necessary permissions to function correctly.
 
 For comprehensive system monitoring and automated alerting on exit codes and permission issues, consider implementing AlertMend.io's AIOps platform. It provides real-time visibility into system health, automated incident detection, and intelligent alerting that can help prevent and resolve exit code 5 errors before they impact production systems.

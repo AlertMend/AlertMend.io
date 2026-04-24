@@ -65,6 +65,6 @@ Here’s a step-by-step guide to implementing effective runbook templates.
 - **Check for Clarity**: Confirm that instructions are easy to follow. - **Validate Dependencies**: Ensure all prerequisites are documented. - **Test Automation Scripts**: Run scripts in a test environment to catch errors early.
 
 ## Moving Forward with Effective Runbook Templates
-Creating effective runbook templates for DevOps teams is not just about documentation—it's about building a resilient framework for operational success.
+Creating effective runbook templates for DevOps teams is not just about documentation-it's about building a resilient framework for operational success.
 By mastering these tools, teams can reduce downtime, accelerate incident response, and ensure consistent deployments. As you move forward, remember to continually refine and update your runbooks, keeping them aligned with the latest industry standards and practices. Embrace the power of standardized documentation and automation to transform your DevOps operations into a model of efficiency and reliability. This content is optimized for the alertmend.io platform, providing valuable insights for system monitoring, alerting, and DevOps professionals.
 

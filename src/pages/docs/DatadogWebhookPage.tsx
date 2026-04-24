@@ -1,5 +1,3 @@
-import Navbar from '../../components/Navbar'
-import Footer from '../../components/Footer'
 import SEO from '../../components/SEO'
 import { ensureUniqueMetaDescription } from '../../utils/descriptionUtils'
 
@@ -15,7 +13,6 @@ export default function DatadogWebhookPage() {
         keywords="Datadog webhook, Datadog integration, custom webhook, AlertMend Datadog setup"
         canonical="/documentation/datadog-webhook"
       />
-      <Navbar />
       <main className="pt-24">
         <section className="py-12 md:py-16 container-padding">
           <div className="max-w-4xl mx-auto">
@@ -167,7 +164,6 @@ export default function DatadogWebhookPage() {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   )
 }

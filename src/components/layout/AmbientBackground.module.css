@@ -6,15 +6,6 @@
     radial-gradient(ellipse 50% 40% at 10% 60%, rgba(236, 72, 153, 0.06), transparent 60%),
     var(--bg);
 }
-.canvas::before {
-  content: ''; position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(126, 34, 206, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(126, 34, 206, 0.05) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 100% 80% at 50% 0%, black 0%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 100% 80% at 50% 0%, black 0%, transparent 80%);
-}
 .orb {
   position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: -1;
   animation: float 20s ease-in-out infinite;

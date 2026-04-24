@@ -1,5 +1,3 @@
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import Breadcrumb from '../components/Breadcrumb'
 import { HelpCircle, Search, Book, MessageCircle } from 'lucide-react'
@@ -38,7 +36,6 @@ export default function HelpCenterPage() {
           items: [{ label: 'Help Center' }]
         }}
       />
-      <Navbar />
       <main className="pt-24">
         <section className="py-20 md:py-32 container-padding bg-gradient-to-b from-white via-primary-50/30 to-white">
           <div className="max-w-7xl mx-auto">
@@ -95,7 +92,6 @@ export default function HelpCenterPage() {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   )
 }

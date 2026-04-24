@@ -1,5 +1,3 @@
-import Navbar from '../../components/Navbar'
-import Footer from '../../components/Footer'
 import SEO from '../../components/SEO'
 import { ensureUniqueMetaDescription } from '../../utils/descriptionUtils'
 
@@ -15,7 +13,6 @@ export default function MSTeamsWebhookPage() {
         keywords="MS Teams webhook, Teams incoming webhook, webhook URL, AlertMend Teams webhook"
         canonical="/documentation/ms-teams-webhook"
       />
-      <Navbar />
       <main className="pt-24">
         <section className="py-12 md:py-16 container-padding">
           <div className="max-w-4xl mx-auto">
@@ -153,7 +150,6 @@ export default function MSTeamsWebhookPage() {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   )
 }

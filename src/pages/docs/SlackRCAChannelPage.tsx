@@ -1,5 +1,3 @@
-import Navbar from '../../components/Navbar'
-import Footer from '../../components/Footer'
 import SEO from '../../components/SEO'
 import { ensureUniqueMetaDescription } from '../../utils/descriptionUtils'
 
@@ -15,7 +13,6 @@ export default function SlackRCAChannelPage() {
         keywords="Slack RCA, root cause analysis, Slack notifications, AlertMend RCA setup"
         canonical="/documentation/slack-rca-channel"
       />
-      <Navbar />
       <main className="pt-24">
         <section className="py-12 md:py-16 container-padding">
           <div className="max-w-4xl mx-auto">
@@ -126,7 +123,6 @@ export default function SlackRCAChannelPage() {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   )
 }

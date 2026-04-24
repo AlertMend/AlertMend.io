@@ -80,7 +80,7 @@ Use monitoring and auditing tools to track the behavior of privileged containers
 | **Feature**                        | **Privileged Containers**                           | **Non-Privileged Containers**                        |
 |------------------------------------|-----------------------------------------------------|-----------------------------------------------------|
 | **Host Access**                    | Full access to host resources                       | Limited, sandboxed access                           |
-| **Security Risks**                 | High—can bypass security policies                   | Lower—enforced isolation from host                   |
+| **Security Risks**                 | High-can bypass security policies                   | Lower-enforced isolation from host                   |
 | **Use Cases**                      | Monitoring, system tools requiring host interaction | General applications without special permissions    |
 | **Management**                     | Requires strict monitoring and auditing             | Lower overhead for monitoring and auditing          |
 
@@ -100,4 +100,4 @@ In one use case, privileged containers were used for a critical network monitori
 
 ## 🌐 **Conclusion**
 
-Privileged containers in Kubernetes can provide the necessary access for certain applications but come with serious security risks. By following best practices—minimizing their use, applying strict security contexts, using Pod Security Admission (PSA), and monitoring container behavior—you can mitigate the risks while maintaining the required functionality.
+Privileged containers in Kubernetes can provide the necessary access for certain applications but come with serious security risks. By following best practices-minimizing their use, applying strict security contexts, using Pod Security Admission (PSA), and monitoring container behavior-you can mitigate the risks while maintaining the required functionality.

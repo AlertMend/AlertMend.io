@@ -1,5 +1,3 @@
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import Breadcrumb from '../components/Breadcrumb'
 import { Check } from 'lucide-react'
@@ -81,7 +79,6 @@ export default function PricingPage() {
           items: [{ label: 'Pricing' }]
         }}
       />
-      <Navbar />
       <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-purple-50/30 via-white to-blue-50/30">
           <div className="max-w-7xl mx-auto">
             <div className="mb-8">
@@ -157,7 +154,6 @@ export default function PricingPage() {
 
           </div>
         </section>
-      <Footer />
     </div>
   )
 }

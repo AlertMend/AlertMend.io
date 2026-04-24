@@ -1,5 +1,3 @@
-import Navbar from '../../components/Navbar'
-import Footer from '../../components/Footer'
 import SEO from '../../components/SEO'
 import { ensureUniqueMetaDescription } from '../../utils/descriptionUtils'
 
@@ -15,7 +13,6 @@ export default function SlackAppApprovalPage() {
         keywords="Slack integration, Slack app approval, AlertMend Slack setup, notification configuration"
         canonical="/documentation/slack-app-approval"
       />
-      <Navbar />
       <main className="pt-24">
         <section className="py-12 md:py-16 container-padding">
           <div className="max-w-4xl mx-auto">
@@ -98,7 +95,6 @@ export default function SlackAppApprovalPage() {
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   )
 }

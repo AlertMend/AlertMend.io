@@ -1,5 +1,3 @@
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import Breadcrumb from '../components/Breadcrumb'
 import { Code, Zap, Settings, FileText, MessageSquare, Webhook, Server } from 'lucide-react'
@@ -110,7 +108,6 @@ export default function DocumentationPage() {
         keywords="AlertMend documentation, AIOps documentation, Kubernetes monitoring guide, infrastructure automation docs, AlertMend setup"
         canonical="/documentation"
       />
-      <Navbar />
       <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-purple-50/30 via-white to-blue-50/30">
           <div className="max-w-7xl mx-auto">
             <div className="mb-8">
@@ -166,7 +163,6 @@ export default function DocumentationPage() {
             </div>
           </div>
         </section>
-      <Footer />
     </div>
   )
 }

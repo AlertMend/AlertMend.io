@@ -37,10 +37,13 @@ import WebinarsPage from './pages/WebinarsPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 function ScrollToTop() {
-  const { pathname } = useLocation()
+  const { pathname, hash } = useLocation()
   useEffect(() => {
+    // Skip the auto scroll-to-top when navigating to an in-page anchor
+    // (e.g. /#features). The Nav handles smooth-scrolling to the section.
+    if (hash) return
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
-  }, [pathname])
+  }, [pathname, hash])
   return null
 }
 

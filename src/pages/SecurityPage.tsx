@@ -1,5 +1,3 @@
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import Breadcrumb from '../components/Breadcrumb'
 import { Shield, Lock, Eye, CheckCircle2 } from 'lucide-react'
@@ -41,7 +39,6 @@ export default function SecurityPage() {
         keywords="AlertMend security, enterprise security, SOC 2, ISO 27001, GDPR compliance, data encryption, infrastructure security, AIOps security"
         canonical="/security"
       />
-      <Navbar />
       <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-purple-50/30 via-white to-blue-50/30">
           <div className="max-w-7xl mx-auto">
             <div className="mb-8">
@@ -102,7 +99,6 @@ export default function SecurityPage() {
             </div>
           </div>
         </section>
-      <Footer />
     </div>
   )
 }

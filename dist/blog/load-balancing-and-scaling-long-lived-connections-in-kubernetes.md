@@ -1,6 +1,6 @@
 ---
 title: "Load Balancing and Scaling Long-Lived"
-excerpt: "Understand how Kubernetes handles WebSockets, gRPC, and database connections—and learn how to properly scale and load balance persistent traffic."
+excerpt: "Understand how Kubernetes handles WebSockets, gRPC, and database connections-and learn how to properly scale and load balance persistent traffic."
 date: "2025-07-30"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
@@ -42,7 +42,7 @@ Kubernetes **does not distribute traffic evenly**. Here’s what happens:
 3. That connection stays open indefinitely.
 4. All requests flow to the same Pod.
 
-> Result: One Pod handles everything, while others remain idle — defeating the purpose of scaling.
+> Result: One Pod handles everything, while others remain idle - defeating the purpose of scaling.
 
 ---
 

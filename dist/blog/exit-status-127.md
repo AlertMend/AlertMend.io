@@ -61,6 +61,6 @@ Alertmend.io offers robust tools for monitoring system operations and managing a
 
 ## Summary and Key Takeaways
 
-In summary, exit status 127 is a clear indicator that the system cannot find a specified command. By understanding its causes—such as PATH misconfigurations or missing executables—and implementing the outlined solutions, you can effectively manage and mitigate this issue. Leveraging the capabilities of alertmend.io can further enhance system monitoring and alert management, ensuring seamless operation in a DevOps environment. 
+In summary, exit status 127 is a clear indicator that the system cannot find a specified command. By understanding its causes-such as PATH misconfigurations or missing executables-and implementing the outlined solutions, you can effectively manage and mitigate this issue. Leveraging the capabilities of alertmend.io can further enhance system monitoring and alert management, ensuring seamless operation in a DevOps environment. 
 
 For further assistance, explore the resources available on alertmend.io, where you can find additional support and tools for managing system errors and alerts.

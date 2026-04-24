@@ -131,4 +131,4 @@ Monitoring plays a critical role in detecting over-allocated resources, underuti
 
 ## 🎯 **Conclusion: Achieving a Balanced Kubernetes Cluster**
 
-Effective resource management in Kubernetes involves more than just setting limits and requests—it requires continuous monitoring and tuning to align with workload patterns. By implementing resource quotas and leveraging Kubernetes autoscaling capabilities, you can ensure that your applications remain stable, your resources are used efficiently, and operational costs are kept under control.
+Effective resource management in Kubernetes involves more than just setting limits and requests-it requires continuous monitoring and tuning to align with workload patterns. By implementing resource quotas and leveraging Kubernetes autoscaling capabilities, you can ensure that your applications remain stable, your resources are used efficiently, and operational costs are kept under control.

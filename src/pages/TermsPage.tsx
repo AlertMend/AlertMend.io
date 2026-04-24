@@ -1,5 +1,3 @@
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import Breadcrumb from '../components/Breadcrumb'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
@@ -17,7 +15,6 @@ export default function TermsPage() {
         keywords="AlertMend terms of service, terms and conditions, AIOps terms, service agreement, legal terms"
         canonical="/terms"
       />
-      <Navbar />
       <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-purple-50/30 via-white to-blue-50/30">
           <div className="max-w-4xl mx-auto">
             <div className="mb-8">
@@ -66,7 +63,6 @@ export default function TermsPage() {
             </div>
           </div>
         </section>
-      <Footer />
     </div>
   )
 }

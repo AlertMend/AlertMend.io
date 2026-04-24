@@ -98,7 +98,7 @@ ST-Link V2 and similar probes commonly fail due to outdated firmware, USB driver
 
 ### How to Troubleshoot JTAG Scan Chain Interrogation Failures?
 
-Troubleshooting JTAG scan chain interrogation failures requires a stepwise approach: confirm wiring, measure signal integrity, validate pull-ups/pull-downs, and then isolate components by testing with a minimal wiring harness or breakout board. The reasoned approach is to map scan chain error patterns to physical faults—missing TAP IDs often indicate open or swapped lines, while corrupted IDs suggest timing or signal integrity problems. Use a logic analyzer or oscilloscope where available to observe TCK/TMS transitions, and employ shorter cables or shielded wires to reduce noise. If physical fixes do not resolve the issue, test each TAP by temporarily powering only the probe and the first device in the chain to identify the failing link.
+Troubleshooting JTAG scan chain interrogation failures requires a stepwise approach: confirm wiring, measure signal integrity, validate pull-ups/pull-downs, and then isolate components by testing with a minimal wiring harness or breakout board. The reasoned approach is to map scan chain error patterns to physical faults-missing TAP IDs often indicate open or swapped lines, while corrupted IDs suggest timing or signal integrity problems. Use a logic analyzer or oscilloscope where available to observe TCK/TMS transitions, and employ shorter cables or shielded wires to reduce noise. If physical fixes do not resolve the issue, test each TAP by temporarily powering only the probe and the first device in the chain to identify the failing link.
 
 ## What IDE-Specific Solutions Help Overcome OpenOCD Exit Code 1?
 
@@ -134,7 +134,7 @@ Best practices for Eclipse and STM32CubeIDE include using explicit remote GDB se
 
 ## How Does AlertMend AI Enhance Troubleshooting for OpenOCD Exit Code 1?
 
-AlertMend AI enhances troubleshooting by automatically parsing OpenOCD logs, correlating error signatures with probable root causes, and suggesting prioritized remediation steps to reduce trial-and-error. The mechanism is that AlertMend AI analyzes log text, configuration snippets, and environment metadata to produce a ranked list of likely issues—hardware wiring faults, driver mismatches, or config file errors—along with concrete commands or edits to try next. For engineering teams, this translates to faster mean time to repair for openocd code 1 incidents and fewer context switches while debugging embedded targets. The features include automated log ingestion, root-cause scoring, and suggested configuration edits that can be integrated into developer tools for a streamlined fix workflow.
+AlertMend AI enhances troubleshooting by automatically parsing OpenOCD logs, correlating error signatures with probable root causes, and suggesting prioritized remediation steps to reduce trial-and-error. The mechanism is that AlertMend AI analyzes log text, configuration snippets, and environment metadata to produce a ranked list of likely issues-hardware wiring faults, driver mismatches, or config file errors-along with concrete commands or edits to try next. For engineering teams, this translates to faster mean time to repair for openocd code 1 incidents and fewer context switches while debugging embedded targets. The features include automated log ingestion, root-cause scoring, and suggested configuration edits that can be integrated into developer tools for a streamlined fix workflow.
 
 ### Key Benefits of AI-Driven Root Cause Analysis
 

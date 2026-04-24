@@ -1,7 +1,5 @@
 import { useNavigate } from 'react-router-dom'
 import { Home, ArrowLeft } from 'lucide-react'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 
 export default function NotFoundPage() {
@@ -14,7 +12,6 @@ export default function NotFoundPage() {
         description="The page you're looking for doesn't exist."
         noindex={true}
       />
-      <Navbar />
       <div className="flex flex-col items-center justify-center min-h-[60vh] px-4 py-20">
         <div className="text-center max-w-2xl">
           <h1 className="text-9xl font-bold text-purple-100 mb-4">404</h1>
@@ -40,7 +37,6 @@ export default function NotFoundPage() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   )
 }

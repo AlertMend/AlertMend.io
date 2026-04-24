@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import Breadcrumb from '../components/Breadcrumb'
 import { Facebook, Twitter, Linkedin, Link as LinkIcon, ArrowRight } from 'lucide-react'
@@ -45,14 +43,12 @@ export default function LegacyBlogPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-white">
-        <Navbar />
         <div className="pt-32 pb-20 flex items-center justify-center">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
             <p className="text-purple-700">Loading post...</p>
           </div>
         </div>
-        <Footer />
       </div>
     )
   }
@@ -60,7 +56,6 @@ export default function LegacyBlogPage() {
   if (!post || !canonicalSlug) {
     return (
       <div className="min-h-screen bg-white">
-        <Navbar />
         <div className="pt-32 pb-20 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-purple-900 mb-4">Post Not Found</h1>
@@ -72,7 +67,6 @@ export default function LegacyBlogPage() {
             </button>
           </div>
         </div>
-        <Footer />
       </div>
     )
   }
@@ -152,7 +146,6 @@ export default function LegacyBlogPage() {
           ]
         }}
       />
-      <Navbar />
       <main className="pt-24">
         <article className="pt-8 pb-8 md:pb-12 container-padding">
           <div className="max-w-7xl mx-auto">
@@ -427,7 +420,6 @@ export default function LegacyBlogPage() {
           </div>
         </article>
       </main>
-      <Footer />
     </div>
   )
 }

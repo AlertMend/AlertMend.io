@@ -14,3 +14,26 @@ body.alertmend-dark > #root > footer {
   position: relative;
   z-index: 1;
 }
+
+/*
+ * Tighten the top breathing room across legacy pages.
+ * Legacy templates use big Tailwind top paddings (pt-20/pt-24/pt-28/pt-32)
+ * that, combined with the fixed nav, leave a noticeable empty band at the
+ * top of every page. Compress these so the page content starts higher
+ * without changing intra-section spacing.
+ */
+body.alertmend-dark main > section:first-of-type.pt-32,
+body.alertmend-dark main > section:first-of-type.pt-28,
+body.alertmend-dark main > section:first-of-type.pt-24,
+body.alertmend-dark main > section:first-of-type.pt-20,
+body.alertmend-dark main > section:first-of-type.pt-16 {
+  padding-top: 40px;
+}
+@media (min-width: 768px) {
+  body.alertmend-dark main > section:first-of-type[class*="md:pt-32"],
+  body.alertmend-dark main > section:first-of-type[class*="md:pt-28"],
+  body.alertmend-dark main > section:first-of-type[class*="md:pt-24"],
+  body.alertmend-dark main > section:first-of-type[class*="md:pt-20"] {
+    padding-top: 48px;
+  }
+}

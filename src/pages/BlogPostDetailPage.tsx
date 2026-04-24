@@ -2,8 +2,6 @@ import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import Breadcrumb from '../components/Breadcrumb'
 import { Linkedin, ArrowRight } from 'lucide-react'
@@ -67,7 +65,6 @@ export default function BlogPostDetailPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-white">
-        <Navbar />
         {loadingCanonicalUrl && (
           <SEO
             title="Loading..."
@@ -81,7 +78,6 @@ export default function BlogPostDetailPage() {
             <p className="text-purple-700">Loading post...</p>
           </div>
         </div>
-        <Footer />
       </div>
     )
   }
@@ -89,7 +85,6 @@ export default function BlogPostDetailPage() {
   if (!post) {
     return (
       <div className="min-h-screen bg-white">
-        <Navbar />
         <div className="pt-32 pb-20 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-purple-900 mb-4">Post Not Found</h1>
@@ -101,7 +96,6 @@ export default function BlogPostDetailPage() {
             </button>
           </div>
         </div>
-        <Footer />
       </div>
     )
   }
@@ -210,7 +204,6 @@ export default function BlogPostDetailPage() {
   
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
       <SEO
         title={seoTitle}
         description={metaDescription}
@@ -532,7 +525,6 @@ export default function BlogPostDetailPage() {
           </div>
         </article>
       </main>
-      <Footer />
     </div>
   )
 }

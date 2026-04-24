@@ -25,7 +25,7 @@ Auto-remediation pipelines are integral to maintaining the health and performanc
 - **Analysis Engines**: Leverage AI and machine learning models to interpret data and pinpoint root causes effectively. - **Remediation Logic**: Incorporate Kubernetes Operators and automation scripts to execute predefined corrective actions.
 
 ### The Importance of Automation
-In the ever-evolving DevOps landscape, automation is not just a convenience—it's a necessity.
+In the ever-evolving DevOps landscape, automation is not just a convenience-it's a necessity.
 Auto-remediation pipelines ensure that clusters are self-healing, reducing human intervention and minimizing errors. This automated approach streamlines operations, enhances reliability, and bolsters system security.
 ## Challenges and Solutions in Auto-Remediation Implementation
 Implementing auto-remediation pipelines in managed Kubernetes clusters can be daunting.

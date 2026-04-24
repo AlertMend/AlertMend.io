@@ -10,7 +10,7 @@ keywords: "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kub
 # Kubernetes DNS Configuration Guide
 ---
 
-Kubernetes DNS plays a vital role in managing network communications within a cluster. It simplifies service discovery and ensures that all components—pods, services, and external systems—can communicate efficiently without relying on static IP addresses. This blog will explore the basics of Kubernetes DNS, how it works, and troubleshooting common DNS-related issues.
+Kubernetes DNS plays a vital role in managing network communications within a cluster. It simplifies service discovery and ensures that all components-pods, services, and external systems-can communicate efficiently without relying on static IP addresses. This blog will explore the basics of Kubernetes DNS, how it works, and troubleshooting common DNS-related issues.
 
 ---
 

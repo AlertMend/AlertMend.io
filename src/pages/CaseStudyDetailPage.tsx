@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Quote, CheckCircle2, ArrowRight, Building2 } from 'lucide-react'
 import { findCaseStudyBySlug, generateCaseStudySlug } from '../data/caseStudies'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import Breadcrumb from '../components/Breadcrumb'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
@@ -49,7 +47,6 @@ export default function CaseStudyDetailPage() {
           title="Case Study Not Found | AlertMend AI"
           description="The requested case study could not be found."
         />
-        <Navbar />
         <div className="pt-24 pb-20 text-center relative overflow-hidden gradient-bg-white">
           <h1 className="text-3xl font-bold text-purple-900 mb-4">Case Study Not Found</h1>
           <button
@@ -59,7 +56,6 @@ export default function CaseStudyDetailPage() {
             Back to Case Studies
           </button>
         </div>
-        <Footer />
       </div>
     )
   }
@@ -109,7 +105,6 @@ export default function CaseStudyDetailPage() {
           ]
         }}
       />
-      <Navbar />
       <section className="pt-24 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden gradient-bg-white">
         <div className="max-w-5xl mx-auto">
           <Breadcrumb items={[
@@ -318,24 +313,47 @@ export default function CaseStudyDetailPage() {
           </div>
 
           {/* CTA Section */}
-          <div className="bg-gradient-to-r from-purple-700 to-purple-600 rounded-2xl p-8 md:p-12 text-white text-center shadow-xl">
-            <h3 className="text-2xl md:text-3xl font-bold mb-4">
+          <div
+            className="relative overflow-hidden rounded-3xl border border-purple-200/70 px-8 py-14 md:px-16 md:py-20 text-center shadow-[0_24px_60px_-28px_rgba(76,29,149,0.32)]"
+            style={{
+              background:
+                'radial-gradient(ellipse 60% 80% at 0% 100%, rgba(126,34,206,0.18), transparent 70%), radial-gradient(ellipse 60% 80% at 100% 0%, rgba(192,38,211,0.14), transparent 70%), linear-gradient(180deg, #ffffff, #faf5ff)',
+            }}
+          >
+            <span className="relative z-10 inline-flex items-center gap-2 rounded-full border border-purple-300/60 bg-white/70 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.08em] text-purple-700 backdrop-blur-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-br from-purple-600 to-fuchsia-500 shadow-[0_0_0_3px_rgba(126,34,206,0.12)]" />
+              Get started
+            </span>
+            <h3
+              className="relative z-10 mx-auto mt-5 max-w-3xl text-3xl md:text-5xl font-extrabold tracking-tight leading-[1.1]"
+              style={{
+                background: 'linear-gradient(135deg, #3b0764 0%, #4f46e5 50%, #c026d3 100%)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
               Ready to Transform Your Operations?
             </h3>
-            <p className="text-lg text-purple-100 mb-8 max-w-2xl mx-auto">
-              Join teams using AlertMend AI to eliminate manual firefighting, cut costs, and achieve zero downtime
+            <p className="relative z-10 mx-auto mt-5 mb-9 max-w-2xl text-base md:text-lg text-slate-600 leading-relaxed">
+              Join teams using AlertMend AI to eliminate manual firefighting, cut costs, and achieve zero downtime.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
+            <div className="relative z-10 flex flex-col sm:flex-row gap-3 justify-center items-center">
+              <button
                 onClick={() => window.open('https://calendly.com/hello-alertmend/30min', '_blank')}
-                className="bg-white text-purple-800 px-8 py-4 rounded-xl font-semibold hover:bg-purple-50 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+                className="group inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-[15px] font-semibold text-white transition-all hover:-translate-y-0.5"
+                style={{
+                  background: 'linear-gradient(135deg, #6b21a8 0%, #4f46e5 50%, #c026d3 100%)',
+                  boxShadow:
+                    '0 14px 40px -10px rgba(126,34,206,0.55), inset 0 1px 0 rgba(255,255,255,0.25)',
+                }}
               >
                 <span>Book a Demo</span>
-                <ArrowRight className="h-5 w-5" />
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
-              <button 
+              <button
                 onClick={() => navigate('/case-studies')}
-                className="border-2 border-white/40 text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/10 hover:border-white/60 transition-all"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-purple-300 bg-white px-7 py-3.5 text-[15px] font-semibold text-purple-800 shadow-[0_1px_2px_rgba(76,29,149,0.06)] transition-all hover:border-purple-500 hover:bg-purple-50"
               >
                 View All Case Studies
               </button>
@@ -343,7 +361,6 @@ export default function CaseStudyDetailPage() {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   )
 }

@@ -1,7 +1,6 @@
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { Bell, Activity, Zap, DollarSign, Phone, MessageSquare, TrendingUp, CheckCircle2, BarChart3, AlertTriangle, Gauge, Shield, Target, Users } from 'lucide-react'
-import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import ROIMetrics from '../components/ROIMetrics'
 import HowItWorks from '../components/HowItWorks'
@@ -11,7 +10,6 @@ import CaseStudies from '../components/CaseStudies'
 import CTA from '../components/CTA'
 import LanguageSupport from '../components/LanguageSupport'
 import FAQ from '../components/FAQ'
-import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
 
@@ -339,7 +337,6 @@ export default function SolutionDetailPage() {
   if (!solution) {
     return (
       <div className="min-h-screen bg-white">
-        <Navbar />
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-purple-900 mb-4">Solution Not Found</h1>
@@ -351,7 +348,6 @@ export default function SolutionDetailPage() {
             </button>
           </div>
         </div>
-        <Footer />
       </div>
     )
   }
@@ -399,7 +395,6 @@ export default function SolutionDetailPage() {
         keywords={`${solution.title}, ${solution.subtitle}, AlertMend AI, AIOps, Kubernetes, infrastructure automation, ${selectedSolutionId === 'auto-remediation' ? 'auto-remediation, incident management' : selectedSolutionId === 'kubernetes-management' ? 'Kubernetes management, cluster monitoring' : selectedSolutionId === 'on-call-management' ? 'on-call management, incident alerts' : 'cost optimization, Kubernetes cost management'}`}
         canonical={`/${selectedSolutionId}`}
       />
-      <Navbar />
       
       <Hero solutionId={selectedSolutionId} />
       
@@ -419,7 +414,6 @@ export default function SolutionDetailPage() {
       
       <FAQ />
 
-      <Footer />
     </div>
   )
 }

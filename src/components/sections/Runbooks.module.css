@@ -66,12 +66,19 @@
 
 .node {
   position: absolute;
-  width: 200px; padding: 12px 14px;
-  border-radius: 12px;
+  width: 180px; padding: 10px 12px;
+  border-radius: 11px;
   background: #ffffff;
   border: 1px solid var(--border);
   box-shadow: 0 8px 24px -10px rgba(76, 29, 149, 0.2);
   transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(8px) scale(0.97);
+  animation: nodeIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes nodeIn {
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 .node:hover {
   transform: translateY(-2px);
@@ -84,53 +91,113 @@
 .remediate { border-color: rgba(126, 34, 206, 0.4); }
 .summary { border-color: rgba(5, 150, 105, 0.3); }
 
+/* Subtle diagonal shine that sweeps across nodes occasionally */
+.nodeShine {
+  position: absolute;
+  top: 0; left: -60%;
+  width: 50%; height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(168, 85, 247, 0.08) 50%,
+    transparent 80%
+  );
+  transform: skewX(-18deg);
+  pointer-events: none;
+  animation: nodeShine 6s ease-in-out infinite;
+}
+.node:nth-child(2n) .nodeShine { animation-delay: 1.4s; }
+.node:nth-child(3n) .nodeShine { animation-delay: 2.6s; }
+.node:nth-child(5n) .nodeShine { animation-delay: 3.8s; }
+@keyframes nodeShine {
+  0%, 60%, 100% { left: -60%; opacity: 0; }
+  70% { opacity: 1; }
+  90% { left: 120%; opacity: 0.4; }
+}
+
 .nodeH {
-  display: flex; align-items: center; gap: 8px;
-  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 7px;
+  margin-bottom: 6px;
 }
 .nodeIco {
-  width: 24px; height: 24px; border-radius: 7px;
+  width: 22px; height: 22px; border-radius: 6px;
   display: inline-flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
 .nodeKind {
-  font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.06em;
   text-transform: uppercase; color: var(--muted);
+  flex: 1; min-width: 0;
+}
+.nodeBrand {
+  width: 14px; height: 14px; flex-shrink: 0;
+  border-radius: 3px;
+  filter: drop-shadow(0 1px 2px rgba(20, 10, 40, 0.12));
 }
 .nodeTitle {
-  font-size: 14px; font-weight: 600; color: var(--text);
+  font-size: 13px; font-weight: 600; color: var(--text);
   letter-spacing: -0.01em;
+  line-height: 1.25;
 }
 .nodeSub {
-  font-size: 11px; color: var(--text-dim); margin-top: 3px; line-height: 1.4;
+  font-size: 10.5px; color: var(--text-dim); margin-top: 3px; line-height: 1.35;
   font-family: 'JetBrains Mono', monospace;
 }
 
 .palette {
-  padding: 14px 16px;
+  padding: 16px;
   background: var(--bg-2);
   border-top: 1px solid var(--border);
+  display: grid;
+  gap: 14px;
+}
+.paletteGroup {
+  display: grid;
+  gap: 8px;
 }
 .paletteLabel {
-  font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.10em;
   text-transform: uppercase; color: var(--muted);
-  margin-bottom: 8px;
 }
 .chipRow { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip {
-  font-size: 11px; padding: 4px 10px; border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; padding: 5px 10px; border-radius: 999px;
   background: #ffffff;
   border: 1px solid var(--border);
   color: var(--text-dim);
   font-family: 'JetBrains Mono', monospace;
   transition: all 0.2s;
+  cursor: default;
 }
 .chip:hover {
   background: rgba(126, 34, 206, 0.08);
   border-color: rgba(126, 34, 206, 0.3);
   color: var(--accent);
+  transform: translateY(-1px);
 }
-.chipSoon { opacity: 0.55; font-style: italic; }
+.chipBrand {
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  color: var(--text);
+  padding-left: 7px;
+}
+.chipLogo {
+  width: 14px; height: 14px; flex-shrink: 0;
+  display: block;
+  filter: drop-shadow(0 1px 1px rgba(20, 10, 40, 0.10));
+}
+.chipSoon { opacity: 0.6; }
+.chipSoonTag {
+  display: inline-block;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 1px 6px; border-radius: 999px;
+  background: rgba(126, 34, 206, 0.12);
+  color: var(--accent);
+  margin-left: 2px;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
 
 .rail { display: grid; gap: 12px; align-content: start; }
 .railCard {

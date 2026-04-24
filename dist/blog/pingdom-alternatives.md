@@ -51,7 +51,7 @@ Alertmend.io excels in delivering targeted solutions for system monitoring and a
 
 2. **Integrate with Existing Tools**: Alertmend.io supports a variety of integrations with popular DevOps tools, making it easy to incorporate into your existing workflow.
 
-3. **Configure Monitoring Checks**: Define what aspects of your systems need monitoring—be it HTTP(s) status, server uptime, or API performance.
+3. **Configure Monitoring Checks**: Define what aspects of your systems need monitoring-be it HTTP(s) status, server uptime, or API performance.
 
 4. **Customize Alerting Rules**: Set up custom alerts based on the criticality of the monitored services. Alerts can be sent via email, SMS, or integrated messaging apps like Slack.
 

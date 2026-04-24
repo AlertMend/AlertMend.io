@@ -17,7 +17,7 @@ In the ever-evolving realm of Kubernetes management, finding the right tool for 
 
 ### Comprehensive Multi-Cluster Management
 
-A primary consideration when evaluating **Rancher alternatives** is their ability to manage multiple Kubernetes clusters seamlessly. Look for platforms that provide a unified control plane, enabling streamlined management across diverse environments—be it on-premises, cloud-based, or hybrid setups. Efficient multi-cluster management tools often feature centralized dashboards that facilitate deployment, updates, and configuration management across all clusters.
+A primary consideration when evaluating **Rancher alternatives** is their ability to manage multiple Kubernetes clusters seamlessly. Look for platforms that provide a unified control plane, enabling streamlined management across diverse environments-be it on-premises, cloud-based, or hybrid setups. Efficient multi-cluster management tools often feature centralized dashboards that facilitate deployment, updates, and configuration management across all clusters.
 
 ### Security and Compliance Considerations
 

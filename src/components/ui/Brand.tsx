@@ -6,10 +6,15 @@ type Props = { withTag?: boolean };
 export default function Brand({ withTag = false }: Props) {
   return (
     <Link to="/" className={styles.brand} aria-label="AlertMend home">
-      <span className={styles.markChip} aria-hidden>
-        <span className={styles.mark} role="img" aria-label="AlertMend logo" />
-      </span>
-      <span className={styles.word}>AlertMend</span>
+      <img
+        src="/alertmend-full-logo.svg"
+        alt="AlertMend"
+        className={styles.fullLogo}
+        width="160"
+        height="40"
+        loading="eager"
+        decoding="async"
+      />
       {withTag && (
         <span className={styles.tag}>
           AI-Powered Observability

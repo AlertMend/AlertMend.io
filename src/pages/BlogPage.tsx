@@ -1,5 +1,3 @@
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import SEO from '../components/SEO'
 import Breadcrumb from '../components/Breadcrumb'
 import { Calendar, ArrowRight } from 'lucide-react'
@@ -64,13 +62,11 @@ export default function BlogPage() {
           canonical="/blog"
           keywords="AIOps blog, Kubernetes best practices, infrastructure automation, DevOps insights, SRE articles, cloud-native operations"
         />
-        <Navbar />
         <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto text-center">
             <p className="text-gray-600">Loading blog posts...</p>
           </div>
         </section>
-        <Footer />
       </div>
     )
   }
@@ -83,78 +79,97 @@ export default function BlogPage() {
         canonical="/blog"
         keywords="AIOps blog, Kubernetes best practices, infrastructure automation, DevOps insights, SRE articles, cloud-native operations"
       />
-      <Navbar />
-      <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-purple-50/30 via-white to-blue-50/30">
-          <div className="max-w-7xl mx-auto">
-            <div className="mb-8">
-              <Breadcrumb items={[{ label: 'Blog' }]} />
-            </div>
-            <div className="text-center mb-12 md:mb-16">
-              <div className="inline-block px-5 py-2 bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 rounded-full text-sm font-bold mb-8 shadow-md border border-purple-200/50">
-                Blog
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-purple-950 mb-6 leading-tight">
-                Latest Insights & Updates
-              </h1>
-              <p className="text-xl md:text-2xl text-purple-700 max-w-3xl mx-auto leading-relaxed mb-12">
-                Stay updated with the latest trends, best practices, and insights in AIOps and infrastructure management.
-              </p>
-            </div>
+      <section className="relative overflow-hidden pt-20 pb-24 md:pt-28 md:pb-32 px-4 sm:px-6 lg:px-8">
+        {/* Ambient washes */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10"
+          style={{
+            background:
+              'radial-gradient(ellipse 80% 50% at 50% -10%, rgba(126,34,206,0.10), transparent 60%), radial-gradient(ellipse 50% 40% at 90% 10%, rgba(192,38,211,0.08), transparent 60%), radial-gradient(ellipse 50% 40% at 10% 30%, rgba(79,70,229,0.07), transparent 60%)',
+          }}
+        />
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-8">
+            <Breadcrumb items={[{ label: 'Blog' }]} />
+          </div>
+          <div className="text-center mb-14 md:mb-20">
+            <span className="inline-flex items-center gap-2 rounded-full border border-purple-300/60 bg-white/70 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.08em] text-purple-700 backdrop-blur-sm shadow-[0_8px_24px_-12px_rgba(126,34,206,0.35)]">
+              <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-br from-purple-600 to-fuchsia-500 shadow-[0_0_0_3px_rgba(126,34,206,0.12)]" />
+              Blog
+            </span>
+            <h1
+              className="mx-auto mt-6 max-w-4xl text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05]"
+              style={{
+                background: 'linear-gradient(135deg, #3b0764 0%, #4f46e5 50%, #c026d3 100%)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
+              Latest insights & updates
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-slate-600 leading-relaxed">
+              Field notes from the AlertMend team on AIOps, Kubernetes, GPU &amp; ML pipelines, incident response, and SRE automation.
+            </p>
+          </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {sortedPosts.map((post) => {
-                // Ensure title is not empty or slug - use title if it exists and is different from slug
-                const displayTitle = (post.title && post.title.trim() && post.title !== post.slug) ? post.title : post.slug
-                // Ensure excerpt is always checked and displayed if available - post.excerpt is already normalized in useMemo
-                const displayExcerpt = post.excerpt && post.excerpt.length > 0 ? post.excerpt : null
-                return (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
+            {sortedPosts.map((post) => {
+              const displayTitle = (post.title && post.title.trim() && post.title !== post.slug) ? post.title : post.slug
+              const displayExcerpt = post.excerpt && post.excerpt.length > 0 ? post.excerpt : null
+              return (
                 <article
                   key={post.slug}
                   onClick={() => navigate(`/blog/${post.slug}`)}
-                  className="group bg-white rounded-xl p-8 border border-gray-200 hover:border-purple-300 hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col h-full"
+                  className="group relative flex h-full cursor-pointer flex-col rounded-2xl border border-purple-100 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-purple-300 shadow-[0_4px_18px_-10px_rgba(76,29,149,0.18)] hover:shadow-[0_24px_40px_-20px_rgba(126,34,206,0.32)]"
                 >
-                  <div className="flex items-center gap-2 flex-wrap mb-4">
-                    <div className="inline-block px-3 py-1.5 bg-purple-50 text-purple-700 rounded-md text-xs font-semibold">
+                  <div className="mb-5 flex flex-wrap items-center gap-1.5">
+                    <span className="inline-flex items-center rounded-full border border-purple-200 bg-purple-50/80 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-purple-700">
                       {post.category}
-                    </div>
+                    </span>
                     {post.tags && post.tags.length > 0 && (
-                      <div className="flex items-center gap-1.5 flex-wrap">
+                      <>
                         {post.tags
                           .filter(tag => tag.toLowerCase() !== post.category.toLowerCase())
+                          .slice(0, 2)
                           .map((tag, index) => (
                             <span
                               key={index}
-                              className="inline-flex items-center px-2.5 py-1 bg-gray-100 text-gray-700 rounded-md text-xs font-medium border border-gray-200"
+                              className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[11px] font-medium text-slate-600"
                             >
                               {tag}
                             </span>
                           ))}
-                      </div>
+                      </>
                     )}
                   </div>
-                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 leading-tight group-hover:text-purple-700 transition-colors">{displayTitle}</h2>
+                  <h2 className="mb-3 text-xl md:text-[22px] font-bold leading-snug tracking-tight text-purple-950 transition-colors group-hover:text-purple-700">
+                    {displayTitle}
+                  </h2>
                   {displayExcerpt ? (
-                    <p className="text-gray-600 mb-6 leading-relaxed line-clamp-3 flex-grow text-base">{displayExcerpt}</p>
+                    <p className="mb-6 line-clamp-3 flex-grow text-[15px] leading-relaxed text-slate-600">{displayExcerpt}</p>
                   ) : (
-                    <p className="text-gray-600 mb-6 leading-relaxed line-clamp-3 flex-grow text-base italic">Read more about {displayTitle}...</p>
+                    <p className="mb-6 line-clamp-3 flex-grow text-[15px] leading-relaxed text-slate-500 italic">
+                      Read more about {displayTitle}...
+                    </p>
                   )}
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                    <div className="flex items-center gap-2 text-gray-500 text-sm">
-                      <Calendar className="h-4 w-4" />
+                  <div className="mt-auto flex items-center justify-between border-t border-purple-100/70 pt-4">
+                    <div className="flex items-center gap-2 text-[13px] text-slate-500">
+                      <Calendar className="h-3.5 w-3.5" />
                       <span>{formatDate(post.date)}</span>
                     </div>
-                    <div className="text-purple-600 group-hover:text-purple-800 font-semibold text-sm flex items-center gap-2 transition-colors">
-                      Read More
-                      <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    <div className="flex items-center gap-1.5 text-[13px] font-semibold text-purple-700 transition-colors group-hover:text-fuchsia-600">
+                      Read more
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                     </div>
                   </div>
                 </article>
-                )
-              })}
-            </div>
+              )
+            })}
           </div>
-        </section>
-      <Footer />
+        </div>
+      </section>
     </div>
   )
 }

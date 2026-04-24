@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Brand from '../ui/Brand';
+import ComplianceLogo from '../ui/ComplianceLogo';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -47,6 +48,42 @@ export default function Footer() {
             </ul>
           </div>
         </div>
+        <div className={styles.compliance}>
+          <span className={styles.complianceLabel}>Security &amp; compliance</span>
+          <div className={styles.complianceList}>
+            <div className={styles.complianceBadge}>
+              <ComplianceLogo standard="soc2" size={32} className={styles.complianceLogo} />
+              <div className={styles.complianceText}>
+                <span className={styles.complianceName}>SOC 2 Type II</span>
+                <span className={styles.complianceStatus}>
+                  <span className={styles.complianceDot} aria-hidden />
+                  In progress
+                </span>
+              </div>
+            </div>
+            <div className={styles.complianceBadge}>
+              <ComplianceLogo standard="iso27001" size={32} className={styles.complianceLogo} />
+              <div className={styles.complianceText}>
+                <span className={styles.complianceName}>ISO 27001</span>
+                <span className={styles.complianceStatus}>
+                  <span className={styles.complianceDot} aria-hidden />
+                  In progress
+                </span>
+              </div>
+            </div>
+            <div className={styles.complianceBadge}>
+              <ComplianceLogo standard="gdpr" size={32} className={styles.complianceLogo} />
+              <div className={styles.complianceText}>
+                <span className={styles.complianceName}>GDPR</span>
+                <span className={styles.complianceStatus}>
+                  <span className={styles.complianceDot} aria-hidden />
+                  In progress
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className={styles.bottom}>
           <div>© {new Date().getFullYear()} AlertMend AI. All rights reserved.</div>
           <div>Built for engineers who'd rather ship than babysit dashboards.</div>

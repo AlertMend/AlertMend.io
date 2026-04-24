@@ -55,7 +55,7 @@ Addressing a system outage requires a structured approach. Here’s a step-by-st
 
 1. **Initial Assessment**: Quickly determine the scope and impact of the outage using monitoring data.
    
-2. **Root Cause Analysis**: Identify the underlying issue—whether hardware, software, network, or human-related—through systematic investigation.
+2. **Root Cause Analysis**: Identify the underlying issue-whether hardware, software, network, or human-related-through systematic investigation.
 
 3. **Implement Immediate Fixes**: Apply quick solutions or workarounds to restore critical functionalities.
 
