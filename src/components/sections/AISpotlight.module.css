@@ -3,24 +3,30 @@
 }
 
 .spotlight {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
 }
 
-.text :global(.sec-tag) { margin-bottom: 16px; }
+/* Nudge the text column down a hair so the eyebrow tag visually lines up
+   with the first row of the RCA card on the right. */
+.text { padding-top: 4px; }
+.text :global(.sec-tag) { margin-bottom: 14px; }
 .h2 {
   font-size: clamp(28px, 3.5vw, 42px); line-height: 1.1; letter-spacing: -0.025em;
   font-weight: 700;
   background: var(--grad-text);
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
-.p { color: var(--muted); font-size: 16px; line-height: 1.6; margin-bottom: 24px; }
+.p { color: var(--muted); font-size: 16px; line-height: 1.6; margin-bottom: 22px; }
 
-.list { display: grid; gap: 14px; margin-bottom: 28px; list-style: none; padding: 0; }
+.list { display: grid; gap: 10px; margin-bottom: 24px; list-style: none; padding: 0; }
 .list li {
   display: flex; align-items: flex-start; gap: 12px;
-  padding: 14px 16px; border-radius: 12px;
+  padding: 12px 14px; border-radius: 12px;
   background: var(--surface); border: 1px solid var(--border);
   box-shadow: 0 4px 18px -10px rgba(76, 29, 149, 0.15);
   font-size: 14px; color: var(--text-dim);
@@ -43,7 +49,7 @@
 }
 
 .rca {
-  padding: 22px; font-family: 'JetBrains Mono', monospace; font-size: 13px;
+  padding: 20px 22px 22px; font-family: 'JetBrains Mono', monospace; font-size: 13px;
   color: var(--text);
 }
 .rcaTop {
@@ -70,7 +76,7 @@
 .k { color: var(--text); }
 
 .box {
-  margin-top: 14px; padding: 14px; border-radius: 10px;
+  margin-top: 12px; padding: 12px 14px; border-radius: 10px;
 }
 .sumBox {
   background: rgba(126, 34, 206, 0.05);
@@ -113,7 +119,7 @@
   color: var(--text); line-height: 1.55;
 }
 
-.remBlock { margin-top: 14px; }
+.remBlock { margin-top: 12px; }
 .remLabel {
   font-size: 11px; color: var(--muted); font-weight: 700;
   letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px;
@@ -125,7 +131,7 @@
 }
 
 .tagRow {
-  display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap;
+  display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;
 }
 .deepTag {
   font-family: 'JetBrains Mono', monospace; font-size: 11px;

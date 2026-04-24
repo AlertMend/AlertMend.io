@@ -341,15 +341,16 @@ export default function CaseStudyDetailPage() {
             <div className="relative z-10 flex flex-col sm:flex-row gap-3 justify-center items-center">
               <button
                 onClick={() => window.open('https://calendly.com/hello-alertmend/30min', '_blank')}
-                className="group inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-[15px] font-semibold text-white transition-all hover:-translate-y-0.5"
+                className="group inline-flex items-center justify-center gap-2 rounded-xl px-7 py-3.5 text-[15px] font-semibold !text-white transition-all hover:-translate-y-0.5"
                 style={{
                   background: 'linear-gradient(135deg, #6b21a8 0%, #4f46e5 50%, #c026d3 100%)',
                   boxShadow:
                     '0 14px 40px -10px rgba(126,34,206,0.55), inset 0 1px 0 rgba(255,255,255,0.25)',
+                  color: '#ffffff',
                 }}
               >
-                <span>Book a Demo</span>
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <span className="text-white">Book a Demo</span>
+                <ArrowRight className="h-4 w-4 text-white transition-transform group-hover:translate-x-1" />
               </button>
               <button
                 onClick={() => navigate('/case-studies')}

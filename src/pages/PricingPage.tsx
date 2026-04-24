@@ -1,11 +1,12 @@
 import SEO from '../components/SEO'
 import Breadcrumb from '../components/Breadcrumb'
 import { Check } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
 
+const SIGNUP_URL = 'https://app.alertmend.io/signup'
+const DEMO_URL = 'https://calendly.com/hello-alertmend/30min'
+
 export default function PricingPage() {
-  const navigate = useNavigate()
   
   // Generate unique meta description for pricing page
   const baseDescription = "AlertMend AI: AIOps pricing for Kubernetes, VMs, and ECS. Automate incident resolution, cut costs, and achieve zero downtime. Explore plans now!"
@@ -134,11 +135,8 @@ export default function PricingPage() {
                   </ul>
                   <button
                     onClick={() => {
-                      if (plan.buttonText === 'Book a demo') {
-                        window.open('https://calendly.com/hello-alertmend/30min', '_blank')
-                      } else {
-                        navigate('/#cta')
-                      }
+                      const url = plan.buttonText === 'Book a demo' ? DEMO_URL : SIGNUP_URL
+                      window.open(url, '_blank', 'noopener,noreferrer')
                     }}
                     className={`w-full py-3 rounded-xl font-bold text-sm transition-all ${
                       plan.popular

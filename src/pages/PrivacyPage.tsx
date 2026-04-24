@@ -1,17 +1,19 @@
 import SEO from '../components/SEO'
 import Breadcrumb from '../components/Breadcrumb'
-import { ExternalLink } from 'lucide-react'
+import { ExternalLink, FileText, Mail } from 'lucide-react'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
 
+// To embed the live Google Doc inline, set ENABLE_EMBED to true AFTER
+// publishing the doc via File > Share > Publish to web in Google Docs.
+// Until then, /preview and /pub URLs are blocked by Google's X-Frame-Options
+// for un-published docs and render as a "This content is blocked" panel,
+// so we default to a clean fallback card with a prominent external link.
+const ENABLE_EMBED = false
+
 export default function PrivacyPage() {
-  // Google Docs Privacy Policy URL
-  const privacyPolicyUrl = 'https://docs.google.com/document/d/1-0dRnRwBy7DGAh-7f4qDDjX6fPBVOifXCd2j3OEIjOI/edit?tab=t.0#heading=h.sndgwapwljbv'
-  
-  // Extract document ID for embed URL
-  // For embedding, the doc needs to be published. Use this format:
-  // https://docs.google.com/document/d/DOCUMENT_ID/preview
   const documentId = '1-0dRnRwBy7DGAh-7f4qDDjX6fPBVOifXCd2j3OEIjOI'
-  const embedUrl = `https://docs.google.com/document/d/${documentId}/preview`
+  const privacyPolicyUrl = `https://docs.google.com/document/d/${documentId}/edit?tab=t.0#heading=h.sndgwapwljbv`
+  const embedUrl = `https://docs.google.com/document/d/${documentId}/pub?embedded=true`
   
   // Generate unique meta description for privacy page
   const baseDescription = "AlertMend AI Privacy: Understand how AlertMend AI collects and protects your data. Review our policy and contact us for more information."
@@ -43,57 +45,67 @@ export default function PrivacyPage() {
               <p className="text-xl md:text-2xl text-purple-700 max-w-3xl mx-auto leading-relaxed mb-12">Your privacy is important to us</p>
             </div>
 
-            {/* Embedded Google Doc */}
-            <div className="bg-white rounded-3xl p-8 md:p-12 border-2 border-gray-200 shadow-lg mb-8">
-              <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-purple-950">Our Privacy Policy</h2>
+            {!ENABLE_EMBED ? (
+              /* Clean fallback card. Used while the Google Doc has not been
+                 "Published to web" - in that state the /preview and /pub
+                 URLs both render Google's "This content is blocked" panel,
+                 which looks broken. */
+              <div className="bg-white rounded-3xl p-10 md:p-14 border-2 border-purple-100 shadow-lg mb-8 text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-purple-50 text-purple-600 mb-6">
+                  <FileText className="h-8 w-8" />
+                </div>
+                <h2 className="text-2xl md:text-3xl font-bold text-purple-950 mb-3">
+                  Our Privacy Policy
+                </h2>
+                <p className="text-base md:text-lg text-gray-600 max-w-xl mx-auto mb-8 leading-relaxed">
+                  The full AlertMend Privacy Policy is maintained as a living document. Open
+                  it in Google Docs to read the latest version.
+                </p>
                 <a
                   href={privacyPolicyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-purple-600 hover:text-purple-700 font-semibold transition-colors"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-800 to-purple-900 !text-white px-7 py-3.5 rounded-xl font-semibold hover:from-purple-900 hover:to-purple-950 transition-all shadow-lg hover:shadow-xl"
+                  style={{ color: '#ffffff' }}
                 >
-                  <span>Open in Google Docs</span>
-                  <ExternalLink className="h-4 w-4" />
+                  <span className="text-white">Read the Privacy Policy</span>
+                  <ExternalLink className="h-5 w-5 text-white" />
                 </a>
               </div>
-              
-              <div className="border border-gray-200 rounded-lg overflow-hidden bg-gray-50" style={{ minHeight: '600px' }}>
-                <iframe
-                  src={embedUrl}
-                  className="w-full h-full"
-                  style={{ minHeight: '600px', border: 'none' }}
-                  title="AlertMend Privacy Policy"
-                  allow="clipboard-read; clipboard-write"
-                  onError={() => {
-                    console.log('Iframe failed to load. Document may need to be published.')
-                  }}
-                />
+            ) : (
+              /* Embed (only renders when the doc has been published to web) */
+              <div className="bg-white rounded-3xl p-6 md:p-8 border-2 border-gray-200 shadow-lg mb-8">
+                <div className="mb-5 flex items-center justify-between flex-wrap gap-3">
+                  <h2 className="text-xl md:text-2xl font-bold text-purple-950">
+                    Our Privacy Policy
+                  </h2>
+                  <a
+                    href={privacyPolicyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-semibold transition-colors text-sm"
+                  >
+                    <span>Open in Google Docs</span>
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                </div>
+                <div className="border border-gray-200 rounded-xl overflow-hidden bg-gray-50">
+                  <iframe
+                    src={embedUrl}
+                    title="AlertMend Privacy Policy"
+                    className="w-full block"
+                    style={{ height: '80vh', minHeight: '720px', border: 'none' }}
+                  />
+                </div>
               </div>
-              <p className="text-sm text-gray-500 mt-4 text-center">
-                Note: If the document doesn't appear above, please ensure it's published in Google Docs, or click the link below to view it directly.
-              </p>
-            </div>
-
-            {/* Fallback message and direct link */}
-            <div className="bg-purple-50 rounded-2xl p-6 border border-purple-200 text-center">
-              <p className="text-purple-700 mb-4">
-                If the document doesn't load, you can view it directly on Google Docs.
-              </p>
-              <a
-                href={privacyPolicyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-800 to-purple-900 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-900 hover:to-purple-950 transition-all shadow-lg hover:shadow-xl"
-              >
-                <span>View Privacy Policy</span>
-                <ExternalLink className="h-5 w-5" />
-              </a>
-            </div>
+            )}
 
             {/* Contact Information */}
             <div className="mt-8 text-center">
-              <p className="text-purple-700 mb-2">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-purple-50 text-purple-600 mb-3">
+                <Mail className="h-6 w-6" />
+              </div>
+              <p className="text-purple-900 font-semibold mb-2">
                 Questions about our Privacy Policy?
               </p>
               <a

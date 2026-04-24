@@ -11,9 +11,29 @@ export default function Footer() {
           <div className={styles.brandCol}>
             <Brand />
             <p>
-              Production operations for Kubernetes &amp; AWS. Connect inventory, observe everything,
-              automate the toil. AI-native. Works with your stack.
+              Production operations across your entire cloud. Connect inventory, observe
+              everything, automate the toil. AI-native. Works with your stack.
             </p>
+            <div className={styles.backedBy}>
+              <span className={styles.backedByLabel}>Backed by</span>
+              <a
+                href="https://www.antler.co/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.backedByLink}
+                aria-label="Antler"
+              >
+                <img
+                  src="/logos/antler-logo.png"
+                  alt="Antler"
+                  className={styles.backedByLogo}
+                  loading="lazy"
+                  decoding="async"
+                  width={96}
+                  height={28}
+                />
+              </a>
+            </div>
           </div>
           <div className={styles.col}>
             <h5>Platform</h5>

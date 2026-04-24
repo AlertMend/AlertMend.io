@@ -13,9 +13,13 @@ const sectionLinks = [
 ];
 
 const routeLinks = [
+  { to: '/case-studies', label: 'Case Studies' },
   { to: '/blog', label: 'Blog' },
-  { to: '/case-studies', label: 'Customers' },
+  { to: '/pricing', label: 'Pricing' },
 ];
+
+const SIGNUP_URL = 'https://app.alertmend.io/signup';
+const PLAYGROUND_URL = 'https://app.alertmend.io/playground?source=homepage';
 
 export default function Nav() {
   const scrolled = useScrolled(8);
@@ -99,9 +103,23 @@ export default function Nav() {
           </nav>
 
           <div className={styles.cta}>
-            <Link to="/contact" className={`btn btn-ghost ${styles.ctaGhost}`}>
-              Talk to us
-            </Link>
+            <a
+              href={PLAYGROUND_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`btn btn-primary ${styles.ctaPlayground}`}
+            >
+              <Icon name="play" size={12} style={{ color: '#ffffff' }} />
+              Playground
+            </a>
+            <a
+              href={SIGNUP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${styles.link} ${styles.ctaRegister}`}
+            >
+              Register
+            </a>
             <Link to="/contact" className={`btn btn-primary ${styles.ctaPrimary}`}>
               Book a demo
               <Icon name="arrow" size={14} className="arrow" strokeWidth={2.5} />
@@ -162,10 +180,26 @@ export default function Nav() {
           ))}
         </nav>
         <div className={styles.drawerCta}>
-          <Link to="/contact" className="btn btn-ghost">
-            Talk to us
-          </Link>
-          <Link to="/contact" className="btn btn-primary">
+          <a
+            href={PLAYGROUND_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-primary"
+            onClick={() => setDrawerOpen(false)}
+          >
+            <Icon name="play" size={12} style={{ color: '#ffffff' }} />
+            Playground
+          </a>
+          <a
+            href={SIGNUP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-ghost"
+            onClick={() => setDrawerOpen(false)}
+          >
+            Register
+          </a>
+          <Link to="/contact" className="btn btn-primary" onClick={() => setDrawerOpen(false)}>
             Book a demo
             <Icon name="arrow" size={14} className="arrow" strokeWidth={2.5} />
           </Link>

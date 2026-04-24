@@ -10,6 +10,38 @@
 .brandCol p {
   font-size: 14px; color: var(--muted); margin-top: 14px; max-width: 320px; line-height: 1.55;
 }
+
+.backedBy {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--bg-2, #faf5ff);
+  border: 1px solid var(--border);
+  width: fit-content;
+}
+.backedByLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.backedByLink {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+  transition: opacity 0.2s ease;
+}
+.backedByLink:hover { opacity: 0.85; }
+.backedByLogo {
+  height: 22px;
+  width: auto;
+  display: block;
+}
 .col h5 {
   font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em;
   color: var(--text); font-weight: 700; margin-bottom: 14px;
