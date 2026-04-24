@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import SEO from '../components/SEO'
 import Breadcrumb from '../components/Breadcrumb'
+import BlogSignupForm from '../components/BlogSignupForm'
 import { Facebook, Twitter, Linkedin, Link as LinkIcon, ArrowRight } from 'lucide-react'
 import { getBlogPost, formatDate, BlogPost, blogPosts } from '../utils/blogUtils'
 import { truncateBlogTitle, truncateH2Heading } from '../utils/titleUtils'
@@ -342,19 +343,7 @@ export default function LegacyBlogPage() {
                   {/* Email Signup */}
                   <div className="bg-purple-50 rounded-xl p-6 border border-purple-100">
                     <h3 className="text-lg font-bold text-purple-900 mb-4">Receive blog and product updates</h3>
-                    <form className="space-y-3">
-                      <input
-                        type="email"
-                        placeholder="Email*"
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                      />
-                      <button
-                        type="submit"
-                        className="w-full bg-gradient-to-r from-purple-800 to-purple-900 text-white font-semibold py-3 rounded-lg hover:from-purple-900 hover:to-purple-950 transition-all shadow-lg hover:shadow-xl"
-                      >
-                        SIGN UP
-                      </button>
-                    </form>
+                    <BlogSignupForm />
                   </div>
 
                   {/* Related Content */}

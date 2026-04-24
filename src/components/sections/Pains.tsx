@@ -55,7 +55,7 @@ export default function Pains() {
       <div className="container">
         <div className="sec-head reveal">
           <span className="sec-tag">The problem</span>
-          <h2>The Bigger Your Cloud Gets, the Harder It Is to Run.</h2>
+          <h2>The Bigger Your Cloud Gets, the Harder it is to Run.</h2>
           <p>
             More services. More clusters. More alerts. Every new layer of scale lands on the same
             small platform team.
