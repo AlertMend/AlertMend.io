@@ -83,7 +83,7 @@ const nodes: Node[] = [
   },
 ];
 
-type Chip = { label: string; logo?: string; soon?: boolean };
+type Chip = { label: string; logo?: string; domain?: string; soon?: boolean };
 
 const actionBlocks: Chip[] = [
   { label: 'Command' },
@@ -96,20 +96,20 @@ const actionBlocks: Chip[] = [
 ];
 
 const integrations: Chip[] = [
-  { label: 'Slack', logo: svgPornUrl('slack') },
-  { label: 'Microsoft Teams', logo: simpleIconsUrl('microsoftteams') },
-  { label: 'Google Meet', logo: simpleIconsUrl('googlemeet') },
-  { label: 'Prometheus', logo: simpleIconsUrl('prometheus') },
-  { label: 'Datadog', logo: simpleIconsUrl('datadog') },
-  { label: 'PagerDuty', logo: simpleIconsUrl('pagerduty') },
-  { label: 'Jira', logo: simpleIconsUrl('jira') },
-  { label: 'GitHub', logo: simpleIconsUrl('github', '181717') },
-  { label: 'GitLab', logo: svgPornUrl('gitlab') },
-  { label: 'Kubernetes', logo: simpleIconsUrl('kubernetes') },
-  { label: 'AWS', logo: simpleIconsUrl('amazonwebservices', 'FF9900') },
-  { label: 'CloudWatch', logo: simpleIconsUrl('amazoncloudwatch'), soon: true },
-  { label: 'Azure Monitor', logo: simpleIconsUrl('microsoftazure'), soon: true },
-  { label: 'Grafana', logo: simpleIconsUrl('grafana'), soon: true },
+  { label: 'Slack', logo: svgPornUrl('slack'), domain: 'slack.com' },
+  { label: 'Microsoft Teams', logo: simpleIconsUrl('microsoftteams'), domain: 'microsoft.com' },
+  { label: 'Google Meet', logo: simpleIconsUrl('googlemeet'), domain: 'meet.google.com' },
+  { label: 'Prometheus', logo: simpleIconsUrl('prometheus'), domain: 'prometheus.io' },
+  { label: 'Datadog', logo: simpleIconsUrl('datadog'), domain: 'datadoghq.com' },
+  { label: 'PagerDuty', logo: simpleIconsUrl('pagerduty'), domain: 'pagerduty.com' },
+  { label: 'Jira', logo: simpleIconsUrl('jira'), domain: 'atlassian.com' },
+  { label: 'GitHub', logo: simpleIconsUrl('github', '181717'), domain: 'github.com' },
+  { label: 'GitLab', logo: simpleIconsUrl('gitlab', 'FC6D26'), domain: 'gitlab.com' },
+  { label: 'Kubernetes', logo: svgPornUrl('kubernetes'), domain: 'kubernetes.io' },
+  { label: 'AWS', logo: svgPornUrl('aws'), domain: 'aws.amazon.com' },
+  { label: 'CloudWatch', logo: svgPornUrl('aws-cloudwatch'), domain: 'aws.amazon.com' },
+  { label: 'Azure Monitor', logo: svgPornUrl('microsoft-azure'), domain: 'azure.microsoft.com' },
+  { label: 'Grafana', logo: svgPornUrl('grafana'), domain: 'grafana.com' },
 ];
 
 const rail = [
@@ -285,7 +285,12 @@ export default function Runbooks() {
                       key={p.label}
                       className={`${styles.chip} ${styles.chipBrand} ${p.soon ? styles.chipSoon : ''}`}
                     >
-                      <BrandLogo src={p.logo!} alt="" className={styles.chipLogo} />
+                      <BrandLogo
+                        src={p.logo!}
+                        domain={p.domain}
+                        alt=""
+                        className={styles.chipLogo}
+                      />
                       {p.label}
                       {p.soon && <span className={styles.chipSoonTag}>soon</span>}
                     </span>

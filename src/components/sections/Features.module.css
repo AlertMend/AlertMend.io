@@ -28,6 +28,13 @@
   display: inline-flex; align-items: center; justify-content: center;
   margin-bottom: 16px; color: var(--accent);
 }
+
+/* Brand-logo image (e.g. official Kubernetes mark) sized to fit the icoBox
+   slot without losing its native aspect ratio. */
+.k8sIcoLogo {
+  width: 26px; height: 26px;
+  display: block;
+}
 .card h4 { font-size: 18px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 8px; color: var(--text); }
 .card p { font-size: 14px; color: var(--muted); line-height: 1.55; }
 

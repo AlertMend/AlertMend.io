@@ -1,6 +1,10 @@
 import type { ReactNode } from 'react';
 import Icon from '../ui/Icon';
+import BrandLogo, { svgPornUrl } from '../ui/BrandLogo';
 import styles from './Features.module.css';
+
+/** Official Kubernetes logo (full-color helm wheel) served by svgporn. */
+const K8S_LOGO_URL = svgPornUrl('kubernetes');
 
 type Card = {
   variant?: 'wide' | 'tall' | 'wideTall' | 'full';
@@ -15,7 +19,13 @@ type Card = {
 const cards: Card[] = [
   {
     variant: 'wideTall',
-    ico: <K8sLogo size={22} />,
+    ico: (
+      <BrandLogo
+        src={K8S_LOGO_URL}
+        alt="Kubernetes"
+        className={styles.k8sIcoLogo}
+      />
+    ),
     title: 'Kubernetes cluster overview',
     body: (
       <>
@@ -255,9 +265,12 @@ function KubernetesPreview() {
 
       {/* Top bar with K8s logo, cluster selector, AlertMend Kubernetes Agent badge */}
       <rect x="0" y="0" width="760" height="38" fill="rgba(126,34,206,0.05)" />
-      <g transform="translate(16 8)">
-        <K8sLogo size={22} />
-      </g>
+      <image
+        href={K8S_LOGO_URL}
+        x="16" y="8" width="22" height="22"
+        preserveAspectRatio="xMidYMid meet"
+      />
+    
       <text x="46" y="24" fontSize="12" fontWeight="700" fill="#3b0764">
         prod-us-west-2
       </text>
@@ -383,35 +396,6 @@ function KubernetesPreview() {
         />
         {/* end-point dot */}
         <circle cx="730" cy="180" r="3" fill="#7e22ce" />
-      </g>
-    </svg>
-  );
-}
-
-/** Authentic Kubernetes "helm wheel" mark, simplified for a small SVG slot. */
-function K8sLogo({ size = 22 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
-      {/* Hexagon shell */}
-      <polygon
-        points="12,1 22,6.5 22,17.5 12,23 2,17.5 2,6.5"
-        fill="rgba(126,34,206,0.1)"
-        stroke="#326ce5"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
-      {/* 7-spoke helm wheel */}
-      <g stroke="#326ce5" strokeWidth="1.1" fill="none">
-        <circle cx="12" cy="12" r="3" />
-        <circle cx="12" cy="12" r="6.2" />
-        {Array.from({ length: 7 }).map((_, i) => {
-          const a = (i / 7) * Math.PI * 2 - Math.PI / 2;
-          const x1 = 12 + Math.cos(a) * 3;
-          const y1 = 12 + Math.sin(a) * 3;
-          const x2 = 12 + Math.cos(a) * 6.2;
-          const y2 = 12 + Math.sin(a) * 6.2;
-          return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} />;
-        })}
       </g>
     </svg>
   );

@@ -105,10 +105,10 @@ export default function CareersPage() {
               </p>
               <a
                 href="mailto:careers@alertmend.io"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-800 to-purple-900 text-white px-8 py-4 rounded-xl font-semibold hover:from-purple-900 hover:to-purple-950 transition-all shadow-lg hover:shadow-xl"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-800 to-purple-900 !text-white px-8 py-4 rounded-xl font-semibold hover:from-purple-900 hover:to-purple-950 transition-all shadow-lg hover:shadow-xl"
               >
-                Send Resume
-                <ArrowRight className="h-5 w-5" />
+                <span className="text-white">Send Resume</span>
+                <ArrowRight className="h-5 w-5 text-white" />
               </a>
             </div>
           </div>

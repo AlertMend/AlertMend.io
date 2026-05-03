@@ -49,16 +49,127 @@
 }
 
 .rca {
-  padding: 20px 22px 22px; font-family: 'JetBrains Mono', monospace; font-size: 13px;
+  padding: 0; font-family: 'JetBrains Mono', monospace; font-size: 13px;
   color: var(--text);
+  position: relative;
+  overflow: hidden;
 }
-.rcaTop {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 12px; padding-bottom: 12px;
+
+/* --------- Agent header (branded "AlertMend AI" identity bar) --------- */
+.agentHead {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+  padding: 12px 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(126, 34, 206, 0.06) 0%,
+    rgba(126, 34, 206, 0.02) 100%
+  );
+  border-bottom: 1px solid rgba(126, 34, 206, 0.14);
+}
+.agentBrand {
+  display: inline-flex; align-items: center; gap: 8px;
+}
+/* AlertMend brand logo as the "AI agent" identity mark in the header.
+   Kept on its own (no chrome behind it) so the actual brand reads cleanly,
+   with a subtle pulsing drop-shadow that signals an active AI worker. */
+.agentLogo {
+  width: 24px; height: 24px;
+  display: block;
+  flex-shrink: 0;
+  border-radius: 6px;
+  filter: drop-shadow(0 0 0 rgba(168, 85, 247, 0));
+}
+:global(.reveal.visible) .agentLogo {
+  animation: agentLogoPulse 2.6s ease-in-out infinite;
+}
+@keyframes agentLogoPulse {
+  0%, 100% { filter: drop-shadow(0 1px 2px rgba(126, 34, 206, 0.18))
+                     drop-shadow(0 0 0 rgba(168, 85, 247, 0)); }
+  50%      { filter: drop-shadow(0 1px 2px rgba(126, 34, 206, 0.2))
+                     drop-shadow(0 0 8px rgba(168, 85, 247, 0.45)); }
+}
+.agentName {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: #3b0764;
+  letter-spacing: -0.005em;
+}
+.agentVer {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; font-weight: 600;
+  color: #6b21a8;
+  background: rgba(126, 34, 206, 0.1);
+  padding: 2px 6px; border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+
+/* --------- Incident header (target identification panel) --------- */
+.incHead {
+  padding: 14px 18px 12px;
   border-bottom: 1px solid var(--border);
 }
-.rcaTopLeft { display: flex; align-items: center; gap: 10px; }
-.cluster { font-size: 11px; color: var(--muted); }
+.incTopRow {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.critDot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: #b91c1c;
+  box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.55);
+  animation: critPulse 1.6s ease-out infinite;
+}
+@keyframes critPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.55); }
+  70%  { box-shadow: 0 0 0 6px rgba(220, 38, 38, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+.incResource {
+  display: flex; align-items: center; gap: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 13px;
+}
+.incCaret {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* --------- Body padding wrapper for everything below incident head --- */
+.rca > .box,
+.rca > .remBlock,
+.rca > .tagRow {
+  margin-left: 18px;
+  margin-right: 18px;
+}
+.rca > .tagRow:last-child {
+  margin-bottom: 18px;
+}
+
+/* Single elegant scanner: a soft purple band drifts from top to bottom of
+   the card while content streams in. Runs once, slowly, with a long
+   ease-in/out curve so it feels like ambient activity rather than a sweep. */
+.scan {
+  position: absolute; left: 0; right: 0;
+  top: -120px; height: 120px;
+  pointer-events: none; opacity: 0; z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(168, 85, 247, 0) 0%,
+    rgba(168, 85, 247, 0.12) 50%,
+    rgba(99, 102, 241, 0) 100%
+  );
+  filter: blur(8px);
+}
+:global(.reveal.visible) .scan {
+  animation: rcaScan 5.4s cubic-bezier(0.65, 0, 0.35, 1) 0.4s 1 forwards;
+}
+@keyframes rcaScan {
+  0%   { top: -120px; opacity: 0; }
+  10%  { opacity: 0.7; }
+  90%  { opacity: 0.7; }
+  100% { top: 100%; opacity: 0; }
+}
+.cluster { font-size: 10.5px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
 .badge {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 10px; padding: 3px 8px; border-radius: 6px;
@@ -67,26 +178,40 @@
 .crit { background: rgba(220, 38, 38, 0.12); color: #b91c1c; }
 .ok { background: rgba(5, 150, 105, 0.12); color: #047857; }
 
-.row { display: flex; gap: 12px; padding: 10px 0; padding-top: 0; }
-.rowLabel {
-  font-size: 11px; color: var(--muted); min-width: 90px;
-  text-transform: uppercase; letter-spacing: 0.06em;
-}
 .line { color: var(--text-dim); }
 .k { color: var(--text); }
 
+/* --------- Section head shared (icon + label + optional right-side meta) -- */
+.sectionHead {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 10px;
+}
+.sectionLabel {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 0;
+}
+.sectionIco {
+  width: 18px; height: 18px;
+  border-radius: 5px;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.sectionIcoSum  { background: rgba(126, 34, 206, 0.14); color: #6b21a8; }
+.sectionIcoEv   { background: rgba(99, 102, 241, 0.14); color: #4f46e5; }
+.sectionIcoConc { background: rgba(5, 150, 105, 0.14);  color: #047857; }
+.sectionIcoRem  { background: rgba(168, 85, 247, 0.14); color: #7e22ce; }
+
+/* --------- Boxes --------- */
 .box {
   margin-top: 12px; padding: 12px 14px; border-radius: 10px;
 }
 .sumBox {
   background: rgba(126, 34, 206, 0.05);
   border: 1px solid rgba(126, 34, 206, 0.18);
-  margin-top: 8px;
+  margin-top: 14px;
 }
-.sumLabel {
-  font-size: 11px; color: var(--accent); font-weight: 700;
-  letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px;
-}
+.sumLabel { color: var(--accent); }
 .sumText {
   font-family: 'Inter', sans-serif; font-size: 13px;
   color: var(--text-dim); line-height: 1.55;
@@ -96,12 +221,54 @@
   background: var(--bg-2);
   border: 1px solid var(--border);
 }
-.evLabel {
-  font-size: 11px; color: var(--muted); font-weight: 700;
-  letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px;
+.evLabel { color: var(--muted); }
+.evCount {
+  margin-left: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--muted);
+  padding: 2px 7px; border-radius: 4px;
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.18);
+  letter-spacing: 0.02em;
 }
+
+/* Evidence source chips — start in "pending" state, animate to "done" green
+   in lockstep with each evidence line streaming in. */
+.evSources {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 10px;
+}
+.evChip {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.01em;
+  padding: 3px 8px 3px 6px;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.06);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  color: rgba(75, 85, 99, 0.9);
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+.evChipDot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  flex-shrink: 0;
+  transition: background 0.3s ease;
+}
+.evChipDone {
+  background: rgba(5, 150, 105, 0.1);
+  border-color: rgba(5, 150, 105, 0.4);
+  color: #047857;
+}
+.evChipDone .evChipDot {
+  background: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+}
+
 .evLine {
   margin-bottom: 6px; color: var(--text-dim);
+  font-size: 12.5px;
 }
 .evLine:last-child { margin-bottom: 0; }
 .evArrow { color: var(--accent); margin-right: 4px; }
@@ -110,35 +277,355 @@
   background: rgba(5, 150, 105, 0.06);
   border: 1px solid rgba(5, 150, 105, 0.22);
 }
-.concLabel {
-  font-size: 11px; color: #047857; font-weight: 700;
-  letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px;
-}
+.concLabel { color: #047857; }
 .concText {
   font-family: 'Inter', sans-serif; font-size: 13px;
   color: var(--text); line-height: 1.55;
 }
 
-.remBlock { margin-top: 12px; }
-.remLabel {
-  font-size: 11px; color: var(--muted); font-weight: 700;
-  letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px;
-  font-family: 'JetBrains Mono', monospace;
+/* Confidence meter — sits in the conclusion section head, fills from 0%
+   to 94% during the analysis phase. */
+.conf {
+  margin-left: auto;
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
 }
+.confLabel {
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 9.5px;
+}
+.confTrack {
+  width: 64px; height: 5px;
+  background: rgba(5, 150, 105, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+.confFill {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 0%;
+  background: linear-gradient(90deg, #10b981 0%, #047857 100%);
+  border-radius: 999px;
+  box-shadow: 0 0 8px -1px rgba(16, 185, 129, 0.5);
+}
+.confValue {
+  font-weight: 800; color: #047857;
+  letter-spacing: 0.02em;
+  min-width: 28px; text-align: right;
+}
+
+.remBlock { margin-top: 12px; }
+.remLabel { color: var(--muted); }
 .remList {
-  font-family: 'Inter', sans-serif; padding-left: 20px;
-  color: var(--text-dim); font-size: 13px; line-height: 1.7;
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 8px;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dim); font-size: 13px; line-height: 1.55;
+}
+.remList li {
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.remNum {
+  flex-shrink: 0;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 800;
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+  box-shadow: 0 2px 6px -2px rgba(126, 34, 206, 0.4);
 }
 
 .tagRow {
-  display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;
+  display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap;
 }
 .deepTag {
-  font-family: 'JetBrains Mono', monospace; font-size: 11px;
-  padding: 4px 10px; border-radius: 6px;
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+  padding: 5px 10px; border-radius: 6px;
   background: var(--bg-2);
   border: 1px solid var(--border);
   color: var(--text-dim);
+  font-weight: 600;
 }
+.deepTag :global(svg) { color: var(--accent); }
 
 @media (max-width: 980px) { .spotlight { grid-template-columns: 1fr; gap: 40px; } }
+
+/* ---------- Generating-RCA streaming animation ----------
+   Each block fades + lifts in sequence once the parent .reveal becomes
+   visible, simulating the RCA being assembled in real time. The final
+   resting state matches the static design, so the layout is identical
+   after the animation finishes. */
+
+/* ------- RCA status pill: cycles through real engineering phases -------
+   The wrapper is wider to accommodate the longest phase label. Each phase
+   pill is absolutely positioned and crossfades into the next, leaving the
+   final resolved badge at the end. */
+.rcaStatus {
+  position: relative;
+  display: inline-block;
+  min-width: 178px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.statusGen,
+.statusFinal {
+  position: absolute;
+  top: 0; right: 0;
+  white-space: nowrap;
+  opacity: 0;
+}
+.statusGen {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(126, 34, 206, 0.12);
+  color: #6b21a8;
+}
+.statusDot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #a855f7;
+  box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.6);
+  animation: statusPulse 1.4s ease-out infinite;
+}
+@keyframes statusPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.55); }
+  70%  { box-shadow: 0 0 0 7px rgba(168, 85, 247, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
+}
+
+/* Phase 1 — "Collecting evidence…": 0s → end of evidence stream.
+   Phase 2 — "Analyzing patterns…": pause before the conclusion lands.
+   Phase 3 — "Generating remediation…": while remediation streams in.
+   Final  — "RCA · 14.8s": settles in with a soft spring at the end.
+
+   Pills use a vertical slide+fade swap with a refined out-expo curve so the
+   cycling feels continuous, not jump-cut. Tighter overall timing (~6.6s
+   total) keeps it snappy without losing the deliberate "thinking" feel. */
+:global(.reveal.visible) .statusP1 {
+  animation:
+    statusIn  0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.0s both,
+    statusOut 0.35s cubic-bezier(0.7, 0, 0.84, 0) 3.6s forwards;
+}
+:global(.reveal.visible) .statusP2 {
+  animation:
+    statusIn  0.45s cubic-bezier(0.16, 1, 0.3, 1) 3.95s both,
+    statusOut 0.35s cubic-bezier(0.7, 0, 0.84, 0) 5.0s forwards;
+}
+:global(.reveal.visible) .statusP3 {
+  animation:
+    statusIn  0.45s cubic-bezier(0.16, 1, 0.3, 1) 5.35s both,
+    statusOut 0.35s cubic-bezier(0.7, 0, 0.84, 0) 6.3s forwards;
+}
+:global(.reveal.visible) .statusFinal {
+  animation: statusInPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 6.55s both;
+}
+@keyframes statusIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes statusOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-6px); }
+}
+@keyframes statusInPop {
+  0%   { opacity: 0; transform: scale(0.8) translateY(4px); }
+  60%  { opacity: 1; transform: scale(1.04) translateY(0); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ------- Streamed sections (refined timing & easing) -------
+   All entries use `out-expo` (cubic-bezier(0.16, 1, 0.3, 1)) which has a
+   crisp landing without overshooting — feels controlled and intentional,
+   not bouncy.
+
+   Compressed timeline (~6.6s end-to-end):
+     0.3s  · Incident header
+     0.7s  · Executive summary
+     1.6s  · Evidence box (header + chips appear in pending state)
+     2.0s  · Evidence line 1   ↳ chip 1 flips green
+     2.5s  · Evidence line 2   ↳ chip 2 flips green   (~500ms cadence)
+     3.0s  · Evidence line 3   ↳ chip 3 flips green
+     3.5s  · Evidence line 4   ↳ chip 4 flips green
+     ↳ pause ~0.5s while status shifts to "Analyzing…"
+     4.2s  · Conclusion block
+     4.5s  · Confidence meter fills 0% → 94%  (with shimmer)
+     ↳ pause while status shifts to "Generating remediation…"
+     5.5s  · Remediation block
+     5.7s  · Remediation step 1
+     5.9s  · Remediation step 2
+     6.1s  · Remediation step 3
+     6.4s  · Deep-link tags
+     6.55s · Status flips to "RCA · 14.8s"
+*/
+:global(.reveal.visible) .streamResource,
+:global(.reveal.visible) .sumBox,
+:global(.reveal.visible) .evBox,
+:global(.reveal.visible) .concBox,
+:global(.reveal.visible) .remBlock,
+:global(.reveal.visible) .tagRow {
+  animation: rcaStreamIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+:global(.reveal.visible) .streamResource { animation-delay: 0.3s; }
+:global(.reveal.visible) .sumBox         { animation-delay: 0.7s; }
+:global(.reveal.visible) .evBox          { animation-delay: 1.6s; }
+:global(.reveal.visible) .concBox        { animation-delay: 4.2s; }
+:global(.reveal.visible) .remBlock       { animation-delay: 5.5s; }
+:global(.reveal.visible) .tagRow         { animation-delay: 6.4s; }
+
+/* Active-section glow: when each box first lands, its border briefly
+   illuminates with a soft purple ring, then settles back to the default.
+   This makes the "currently working" section feel alive without adding
+   chrome to finished sections. */
+:global(.reveal.visible) .sumBox  { animation: rcaStreamIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.7s backwards,
+                                                sectionGlow 1.2s ease-out 0.7s both; }
+:global(.reveal.visible) .evBox   { animation: rcaStreamIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 1.6s backwards,
+                                                sectionGlow 2.4s ease-out 1.6s both; }
+:global(.reveal.visible) .concBox { animation: rcaStreamIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 4.2s backwards,
+                                                sectionGlow 1.6s ease-out 4.2s both; }
+:global(.reveal.visible) .remBlock {
+  animation: rcaStreamIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) 5.5s backwards;
+}
+@keyframes sectionGlow {
+  0%   { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
+  20%  { box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.18),
+                     0 6px 24px -8px rgba(126, 34, 206, 0.35); }
+  100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
+}
+
+/* Evidence lines stream in at a steady ~500ms cadence — feels like signals
+   landing rather than a CSS stagger. */
+:global(.reveal.visible) .evBox .evLine {
+  animation: rcaStreamIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+:global(.reveal.visible) .evLine:nth-of-type(1) { animation-delay: 2.0s; }
+:global(.reveal.visible) .evLine:nth-of-type(2) { animation-delay: 2.5s; }
+:global(.reveal.visible) .evLine:nth-of-type(3) { animation-delay: 3.0s; }
+:global(.reveal.visible) .evLine:nth-of-type(4) { animation-delay: 3.5s; }
+
+/* Source chips flip from pending purple-grey → done green in lockstep with
+   each evidence line landing. The dot blooms with a green halo on the way
+   in for a moment of "ack received" feedback. */
+:global(.reveal.visible) .evChip1,
+:global(.reveal.visible) .evChip2,
+:global(.reveal.visible) .evChip3,
+:global(.reveal.visible) .evChip4 {
+  animation: chipFlip 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+:global(.reveal.visible) .evChip1 { animation-delay: 2.0s; }
+:global(.reveal.visible) .evChip2 { animation-delay: 2.5s; }
+:global(.reveal.visible) .evChip3 { animation-delay: 3.0s; }
+:global(.reveal.visible) .evChip4 { animation-delay: 3.5s; }
+@keyframes chipFlip {
+  0%   { background: rgba(99, 102, 241, 0.06);
+         border-color: rgba(99, 102, 241, 0.2);
+         color: rgba(75, 85, 99, 0.9);
+         transform: translateY(0) scale(1); }
+  40%  { transform: translateY(-1px) scale(1.04); }
+  100% { background: rgba(5, 150, 105, 0.1);
+         border-color: rgba(5, 150, 105, 0.4);
+         color: #047857;
+         transform: translateY(0) scale(1); }
+}
+:global(.reveal.visible) .evChip1 .evChipDot { animation: chipDotFlip 0.55s cubic-bezier(0.16, 1, 0.3, 1) 2.0s both; }
+:global(.reveal.visible) .evChip2 .evChipDot { animation: chipDotFlip 0.55s cubic-bezier(0.16, 1, 0.3, 1) 2.5s both; }
+:global(.reveal.visible) .evChip3 .evChipDot { animation: chipDotFlip 0.55s cubic-bezier(0.16, 1, 0.3, 1) 3.0s both; }
+:global(.reveal.visible) .evChip4 .evChipDot { animation: chipDotFlip 0.55s cubic-bezier(0.16, 1, 0.3, 1) 3.5s both; }
+@keyframes chipDotFlip {
+  0%   { background: rgba(99, 102, 241, 0.35);
+         box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+  40%  { background: #10b981;
+         box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.32); }
+  100% { background: #10b981;
+         box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18); }
+}
+
+/* Confidence meter fills smoothly with a continuous in-out curve, plus a
+   moving highlight that travels across the bar as it fills. */
+:global(.reveal.visible) .confFill {
+  animation: confFill 1.0s cubic-bezier(0.65, 0, 0.35, 1) 4.5s both;
+}
+:global(.reveal.visible) .confFill::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  animation: confShimmer 1.0s cubic-bezier(0.65, 0, 0.35, 1) 4.5s both;
+}
+@keyframes confFill {
+  from { width: 0%; }
+  to   { width: 94%; }
+}
+@keyframes confShimmer {
+  from { transform: translateX(-100%); opacity: 0.9; }
+  to   { transform: translateX(100%); opacity: 0; }
+}
+
+/* Remediation steps stream in with a tight ~200ms cadence, fast enough to
+   feel like one continuous "writing" motion. */
+:global(.reveal.visible) .remList li {
+  animation: rcaStreamIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+:global(.reveal.visible) .remList li:nth-child(1) { animation-delay: 5.7s; }
+:global(.reveal.visible) .remList li:nth-child(2) { animation-delay: 5.9s; }
+:global(.reveal.visible) .remList li:nth-child(3) { animation-delay: 6.1s; }
+
+/* Deep-link tags stagger in like a final flourish. */
+:global(.reveal.visible) .tagRow .deepTag {
+  animation: rcaStreamIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+:global(.reveal.visible) .tagRow .deepTag:nth-child(1) { animation-delay: 6.5s; }
+:global(.reveal.visible) .tagRow .deepTag:nth-child(2) { animation-delay: 6.6s; }
+:global(.reveal.visible) .tagRow .deepTag:nth-child(3) { animation-delay: 6.7s; }
+
+@keyframes rcaStreamIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.985); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Reduced-motion: skip the entire build and show the resolved state. */
+@media (prefers-reduced-motion: reduce) {
+  .scan { display: none; }
+  .statusP1, .statusP2, .statusP3 { display: none; }
+  .statusFinal { opacity: 1; }
+  .agentLogo { animation: none; filter: none; }
+  .critDot { animation: none; }
+  .confFill { width: 94%; }
+  .confFill::after { display: none; }
+  /* All chips show as done. */
+  .evChip {
+    background: rgba(5, 150, 105, 0.1);
+    border-color: rgba(5, 150, 105, 0.4);
+    color: #047857;
+  }
+  .evChip .evChipDot {
+    background: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+  }
+  :global(.reveal.visible) .streamResource,
+  :global(.reveal.visible) .sumBox,
+  :global(.reveal.visible) .evBox,
+  :global(.reveal.visible) .evBox .evLine,
+  :global(.reveal.visible) .evChip1,
+  :global(.reveal.visible) .evChip2,
+  :global(.reveal.visible) .evChip3,
+  :global(.reveal.visible) .evChip4,
+  :global(.reveal.visible) .concBox,
+  :global(.reveal.visible) .remBlock,
+  :global(.reveal.visible) .remList li,
+  :global(.reveal.visible) .tagRow,
+  :global(.reveal.visible) .tagRow .deepTag,
+  :global(.reveal.visible) .statusFinal {
+    animation: none !important;
+  }
+  .statusDot { animation: none; }
+}

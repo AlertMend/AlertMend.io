@@ -4,7 +4,7 @@
 
 /* ---- Boards row ---- */
 .boards {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
 }
 .board {
   display: flex; flex-direction: column;
@@ -24,12 +24,24 @@
 
 .boardHead {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 16px 18px;
+  padding: 18px 20px;
   border-bottom: 1px solid var(--border);
   background: var(--bg-2);
   position: relative; z-index: 1;
+  gap: 16px;
 }
-.boardTitleWrap { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.boardTitleWrap {
+  display: flex; align-items: center; gap: 12px;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+/* The inner anonymous div that holds .boardTitle + .boardSub.  Needs
+   min-width: 0 so its children's text-overflow: ellipsis can engage,
+   otherwise long subtitles push into the status pill. */
+.boardTitleWrap > div {
+  min-width: 0;
+  flex: 1 1 auto;
+}
 .boardIco {
   width: 32px; height: 32px; border-radius: 9px;
   display: inline-flex; align-items: center; justify-content: center;
@@ -38,11 +50,13 @@
 .boardTitle {
   font-size: 14px; font-weight: 700; color: var(--text); letter-spacing: -0.01em;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 100%;
 }
 .boardSub {
   font-size: 11px; color: var(--muted); margin-top: 2px;
   font-family: 'JetBrains Mono', monospace;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .pill {
@@ -73,12 +87,12 @@
 
 .boardFoot {
   margin-top: auto;
-  padding: 12px 18px;
+  padding: 14px 20px;
   border-top: 1px solid var(--border);
   background: var(--bg-2);
   display: flex; align-items: center; justify-content: space-between;
   font-size: 12px; color: var(--muted);
-  gap: 12px; flex-wrap: wrap;
+  gap: 10px 14px; flex-wrap: wrap;
   position: relative; z-index: 1;
 }
 .boardFoot b { color: var(--text); font-weight: 600; }
@@ -86,27 +100,30 @@
 
 /* ---- GPU board ---- */
 .gpuList {
-  padding: 14px 16px;
-  display: flex; flex-direction: column; gap: 10px;
+  padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 12px;
   position: relative; z-index: 1;
 }
 .gpu {
-  padding: 10px 12px;
+  padding: 12px 14px;
   border-radius: 10px;
   background: var(--bg-2);
   border: 1px solid var(--border);
 }
 .gpuTop {
   display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
+  gap: 8px;
 }
 .gpuName {
   display: inline-flex; align-items: center; gap: 8px;
   font-family: 'JetBrains Mono', monospace; font-size: 12px;
   color: var(--text); font-weight: 600;
+  min-width: 0;
 }
 .gpuDot {
   width: 7px; height: 7px; border-radius: 50%;
+  flex-shrink: 0;
 }
 .gpuDot.ok { background: var(--green); box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.18); }
 .gpuDot.warn { background: var(--amber); box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.18); }
@@ -115,18 +132,20 @@
 .gpuTemp {
   font-family: 'JetBrains Mono', monospace; font-size: 11px;
   color: var(--muted);
+  flex-shrink: 0;
 }
-.gpuBars { display: flex; flex-direction: column; gap: 4px; }
+.gpuBars { display: flex; flex-direction: column; gap: 7px; }
 .gpuBarRow {
-  display: grid; grid-template-columns: 28px 1fr 36px;
-  gap: 8px; align-items: center;
+  display: grid; grid-template-columns: 30px 1fr 40px;
+  gap: 10px; align-items: center;
 }
 .gpuBarLbl {
   font-size: 10px; color: var(--muted);
   font-family: 'JetBrains Mono', monospace; text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 .gpuBar {
-  height: 6px; border-radius: 999px;
+  height: 7px; border-radius: 999px;
   background: rgba(126, 34, 206, 0.1);
   overflow: hidden;
 }
@@ -144,19 +163,20 @@
 
 /* ---- Training board ---- */
 .trainGrid {
-  padding: 16px 18px;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+  padding: 18px 20px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  row-gap: 18px; column-gap: 16px;
   position: relative; z-index: 1;
 }
 .statLbl {
   font-size: 10px; color: var(--muted);
   text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .statVal { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
 .statNum {
   font-size: 22px; font-weight: 700; color: var(--text);
-  letter-spacing: -0.02em; line-height: 1;
+  letter-spacing: -0.02em; line-height: 1.05;
   font-family: 'JetBrains Mono', monospace;
 }
 .statSlash {
@@ -174,7 +194,7 @@
 .unit { font-size: 12px; color: var(--muted); margin-left: 2px; font-weight: 500; }
 
 .chart {
-  padding: 0 18px 16px;
+  padding: 4px 20px 18px;
   position: relative; z-index: 1;
 }
 .chartLbl {
@@ -190,21 +210,28 @@
 
 /* ---- Inference board ---- */
 .infGrid {
-  padding: 16px 18px;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  padding: 18px 20px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
   position: relative; z-index: 1;
 }
 .infCell {
-  padding: 10px 12px;
+  padding: 12px 14px;
   border-radius: 9px;
   background: var(--bg-2);
   border: 1px solid var(--border);
+  /* Keep all four KPI cells visually equal regardless of whether they
+     have a sub-hint line, so the 2x2 grid never looks lopsided. */
+  display: flex; flex-direction: column; justify-content: center;
+  min-height: 78px;
 }
+/* A bit more breathing between the label and the big number inside KPI
+   cells, matching the .trainGrid rhythm. */
+.infCell .statLbl { margin-bottom: 6px; }
 
 .histogram {
-  display: flex; align-items: flex-end; gap: 4px;
+  display: flex; align-items: flex-end; gap: 5px;
   height: 110px;
-  padding: 6px 8px;
+  padding: 8px 10px;
   background: linear-gradient(180deg, rgba(126, 34, 206, 0.04), transparent);
   border-radius: 8px;
 }
@@ -235,16 +262,19 @@
 .failuresHead p { color: var(--muted); font-size: 15px; line-height: 1.55; }
 
 .failGrid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
 }
 .failCard {
   display: flex; gap: 12px;
-  padding: 16px; border-radius: var(--radius);
+  padding: 18px; border-radius: var(--radius);
   background: var(--surface);
   border: 1px solid var(--border);
   box-shadow: 0 4px 18px -10px rgba(76, 29, 149, 0.18);
   transition: all 0.2s;
+  align-items: flex-start;
+  min-width: 0;
 }
+.failCard > div { min-width: 0; }
 .failCard:hover {
   border-color: rgba(126, 34, 206, 0.4);
   transform: translateY(-2px);

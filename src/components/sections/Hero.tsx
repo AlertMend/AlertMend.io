@@ -151,8 +151,14 @@ export default function Hero() {
                 <div className={styles.agent}>
                   <div className={styles.agentHead}>
                     <span className={styles.aiBadge}>
-                      <Icon name="aiOrb" size={16} strokeWidth={2.2} className={styles.aiIco} />
-                      AI Root Cause Analysis
+                      <img
+                        src="/logos/alertmend-logo.png"
+                        alt="AlertMend"
+                        className={styles.aiIco}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      AlertMend AI · RCA
                     </span>
                     <span className={styles.timer}>
                       <Icon name="clock" size={12} strokeWidth={2.5} />
