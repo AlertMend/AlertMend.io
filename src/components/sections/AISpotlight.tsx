@@ -42,17 +42,15 @@ export default function AISpotlight() {
       <div className="container">
         <div className={styles.spotlight}>
           <div className={`${styles.text} reveal`}>
-            <span className="sec-tag">Flagship · AI RCAs</span>
+            <span className="sec-tag">Flagship · AI RCA's</span>
             <h2 className={styles.h2}>
-              Every Kubernetes alert gets a structured root cause in ~15 seconds.
+              From paged to root cause in <span className="hero-h-accent">15 seconds</span>.
             </h2>
             <p className={styles.p}>
-              A Kubernetes-specialized model auto-collects the evidence (pod YAML, container status,
-              logs, node metrics, events), reaches a conclusion{' '}
-              <b style={{ color: 'var(--text)' }}>with confidence level</b>, and posts the
-              remediation steps directly into the Slack alert thread. It also runs proactively on
-              failures the platform discovers itself: restart storms, OOM loops, scheduling stalls,
-              even when no external alert paged.
+              AlertMend pulls the evidence, names the cause{' '}
+              <b style={{ color: 'var(--text)' }}>with a confidence score</b>, and posts
+              fix-ready steps into your Slack thread. Even for issues no monitor flagged:
+              restart storms, OOM loops, stuck scheduling.
             </p>
             <ul className={styles.list}>
               {bullets.map((b, i) => (
@@ -224,7 +222,7 @@ export default function AISpotlight() {
                 </div>
                 <div className={styles.concText}>
                   A single H100 on gpu-h100-04 is HW-throttling from inadequate cooling, blocking
-                  the all-reduce ring and freezing the entire job — burning ~$98/hr across 7
+                  the all-reduce ring and freezing the entire job. Cost so far: ~$98/hr across 7
                   idle GPUs.
                 </div>
               </div>

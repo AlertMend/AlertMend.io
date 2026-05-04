@@ -10,6 +10,7 @@ import { getBlogPost, formatDate, BlogPost, blogPosts } from '../utils/blogUtils
 import { truncateBlogTitle, truncateH2Heading } from '../utils/titleUtils'
 import { generateUniqueMetaDescription } from '../utils/descriptionUtils'
 import { extractSlugFromOldUrl } from '../utils/blogSlugMapper'
+import { normalizeBlogMarkdown } from '../utils/markdownNormalize'
 
 /**
  * Component to handle legacy blog URLs (/blogs/*.html)
@@ -250,7 +251,7 @@ export default function LegacyBlogPage() {
                             img: ({ node, ...props }) => <img className="rounded-lg my-8 w-full" {...props} />,
                           }}
                         >
-                          {post.content || ''}
+                          {normalizeBlogMarkdown(post.content || '')}
                         </ReactMarkdown>
                       </div>
                     </div>

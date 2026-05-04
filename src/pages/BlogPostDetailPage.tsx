@@ -10,6 +10,7 @@ import { getBlogPost, formatDate, BlogPost, blogPosts } from '../utils/blogUtils
 import { truncateBlogTitle, truncateH2Heading } from '../utils/titleUtils'
 import { generateUniqueMetaDescription } from '../utils/descriptionUtils'
 import { mapOldBlogUrlToSlug } from '../utils/blogSlugMapper'
+import { normalizeBlogMarkdown } from '../utils/markdownNormalize'
 
 export default function BlogPostDetailPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -190,7 +191,11 @@ export default function BlogPostDetailPage() {
   
   // Use original title for display (no modifications)
   const displayTitle = post.title
-  const displayContent = getModifiedContent(post.content || '')
+  // Repair structural markdown issues introduced by the upstream content
+  // pipeline (empty headings, split-across-lines headings, orphan list
+  // markers, inline code-fence opens) before tone-modifying the prose.
+  const normalizedContent = normalizeBlogMarkdown(post.content || '')
+  const displayContent = getModifiedContent(normalizedContent)
   
   // Truncate title to 30-60 characters for SEO (use original title)
   const seoTitle = truncateBlogTitle(post.title)

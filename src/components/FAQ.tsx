@@ -35,7 +35,7 @@ export default function FAQ() {
     },
     {
       question: 'Does AlertMend reduce cloud and Kubernetes costs?',
-      answer: 'AlertMend reduces cloud spend by 40–70% with AI-driven rightsizing, autoscaling optimization, unused resource cleanup, spot instance controls, stale PVC removal, and cluster-efficiency tuning.',
+      answer: 'AlertMend reduces cloud spend by 40 to 70% with AI-driven rightsizing, autoscaling optimization, unused resource cleanup, spot instance controls, stale PVC removal, and cluster-efficiency tuning.',
     },
     {
       question: 'How does AlertMend compare to Komodor?',

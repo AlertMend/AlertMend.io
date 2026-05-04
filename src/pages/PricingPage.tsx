@@ -97,13 +97,13 @@ export default function PricingPage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16 items-stretch">
               {plans.map((plan, index) => (
                 <div
                   key={index}
-                  className={`relative bg-white rounded-xl p-8 border-2 transition-all duration-300 hover:shadow-xl ${
+                  className={`relative flex flex-col h-full bg-white rounded-xl p-8 border-2 transition-all duration-300 hover:shadow-xl ${
                     plan.popular
-                      ? 'border-purple-400 shadow-xl scale-105'
+                      ? 'border-purple-400 shadow-xl lg:scale-105'
                       : 'border-gray-200 shadow-lg hover:border-purple-200'
                   }`}
                 >
@@ -114,18 +114,27 @@ export default function PricingPage() {
                       </div>
                     </div>
                   )}
+                  {/* Header block reserves consistent vertical slots for the
+                      label badge and description so titles + features lists
+                      align across cards whether or not those fields are
+                      populated.  The description slot is a *fixed* height
+                      (not min) sized for a 2-line wrap so an empty
+                      description and a 2-line description take the same
+                      vertical space. */}
                   <div className="text-center mb-6">
-                    {plan.label && (
-                      <div className="inline-block px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-bold mb-3 border border-purple-200">
-                        {plan.label}
-                      </div>
-                    )}
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">{plan.name}</h3>
-                    {plan.description && (
-                      <p className="text-gray-600 text-sm font-medium">{plan.description}</p>
-                    )}
+                    <div className="h-7 mb-3 flex items-center justify-center">
+                      {plan.label && (
+                        <span className="inline-block px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-bold border border-purple-200">
+                          {plan.label}
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight">{plan.name}</h3>
+                    <p className="text-gray-600 text-sm font-medium h-[48px] flex items-center justify-center leading-tight">
+                      {plan.description || '\u00A0'}
+                    </p>
                   </div>
-                  <ul className="space-y-3 mb-8">
+                  <ul className="space-y-3 mb-8 flex-1">
                     {plan.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-3">
                         <Check className="h-5 w-5 text-purple-600 flex-shrink-0 mt-0.5" />
@@ -138,9 +147,9 @@ export default function PricingPage() {
                       const url = plan.buttonText === 'Book a demo' ? DEMO_URL : SIGNUP_URL
                       window.open(url, '_blank', 'noopener,noreferrer')
                     }}
-                    className={`w-full py-3 rounded-xl font-bold text-sm transition-all ${
+                    className={`w-full mt-auto py-3 rounded-xl font-bold text-sm transition-all ${
                       plan.popular
-                        ? 'bg-gradient-to-r from-purple-800 to-purple-900 text-white hover:from-purple-900 hover:to-purple-950 shadow-lg hover:shadow-xl'
+                        ? 'bg-gradient-to-r from-purple-800 to-purple-900 !text-white hover:from-purple-900 hover:to-purple-950 shadow-lg hover:shadow-xl'
                         : 'bg-gray-100 text-purple-900 hover:bg-gray-200 border border-gray-200'
                     }`}
                   >

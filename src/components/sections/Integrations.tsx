@@ -35,7 +35,10 @@ export default function Integrations() {
       <div className="container">
         <div className="sec-head reveal">
           <span className="sec-tag">Integrations</span>
-          <h2>Wires into your stack. Doesn't replace it.</h2>
+          <h2>
+            You bring the stack. We bring the{' '}
+            <span className="hero-h-accent">autonomy</span>.
+          </h2>
           <p>
             Ingest from Alertmanager, Datadog, Victoria Metrics, custom webhooks. Page through
             Slack, Teams, PagerDuty, WhatsApp, email, phone. File into Jira. Store in S3. Run
