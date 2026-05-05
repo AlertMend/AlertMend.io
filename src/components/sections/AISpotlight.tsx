@@ -47,10 +47,13 @@ export default function AISpotlight() {
               From paged to root cause in <span className="hero-h-accent">15 seconds</span>.
             </h2>
             <p className={styles.p}>
-              AlertMend pulls the evidence, names the cause{' '}
-              <b style={{ color: 'var(--text)' }}>with a confidence score</b>, and posts
-              fix-ready steps into your Slack thread. Even for issues no monitor flagged:
-              restart storms, OOM loops, stuck scheduling.
+              In about 15 seconds, AlertMend reads live logs and metrics, spots patterns that look
+              like failure before your graphs turn red, explains the likely cause{' '}
+              <b style={{ color: 'var(--text)' }}>with a confidence score</b>, and posts clear next
+              steps in Slack, Teams, or wherever your team already works. Think early warnings, not
+              after action reports: a GPU job trending toward a stuck training run while spend keeps
+              climbing, disk or quota pressure building before requests fail, or memory use creeping
+              toward an out-of-memory kill before your paging rule ever fires.
             </p>
             <ul className={styles.list}>
               {bullets.map((b, i) => (

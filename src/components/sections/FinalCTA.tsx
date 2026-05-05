@@ -9,12 +9,15 @@ export default function FinalCTA() {
     <section id="pricing" className="tight">
       <div className={`container reveal`}>
         <div className={styles.final}>
-          <span className="sec-tag">Free cluster health check</span>
-          <h2 className={styles.h2}>Find your cluster's weak spots, before they page you.</h2>
+          <span className="sec-tag">Free infrastructure health check</span>
+          <h2 className={styles.h2}>
+            Find the incidents.{' '}
+            <span className="hero-h-accent">Before they find you.</span>
+          </h2>
           <p className={styles.p}>
-            On the call, AlertMend scans your live cluster end to end: workloads trending toward
-            OOM, restart-prone pods, misconfigured limits, over-provisioned spend, unowned alerts.
-            You walk away with a prioritized list of risks to fix, no incident required.
+            On the call, AlertMend reads your live infrastructure and hands you the things that
+            are about to break: OOM-prone workloads, restart loops, broken limits, idle spend,
+            unowned alerts. You leave with a prioritized fix list. No outage required.
           </p>
           <div className={styles.cta}>
             <a

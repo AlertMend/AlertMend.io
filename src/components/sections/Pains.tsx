@@ -55,10 +55,11 @@ export default function Pains() {
       <div className="container">
         <div className="sec-head reveal">
           <span className="sec-tag">The problem</span>
-          <h2>The Bigger Your Cloud Gets, the Harder it is to Run.</h2>
+          <h2>Scaling is easy. Keeping everything reliable is not.</h2>
           <p>
-            More services. More clusters. More alerts. Every new layer of scale lands on the same
-            small platform team.
+            Every launch adds another surface to watch. Downtime hurts revenue and renewals. Waste in
+            the cloud quietly eats margin. Shipping slows when teams spend nights replaying the same
+            incidents instead of building what you sold on the roadmap.
           </p>
         </div>
         <div className={`${styles.grid} reveal`}>

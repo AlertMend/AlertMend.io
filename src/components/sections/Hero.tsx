@@ -215,24 +215,31 @@ export default function Hero() {
                   </div>
 
                   <div className={styles.actions}>
-                    <span className={`${styles.act} ${styles.actPrimary}`}>
-                      <BrandLogo
-                        src={simpleIconsUrl('github', 'ffffff')}
-                        alt=""
-                        className={styles.actLogo}
-                      />
+                    <span className={`${styles.act} ${styles.actGhost}`}>
+                      <span className={`${styles.actIcoBox} ${styles.actIcoBoxGh}`}>
+                        <BrandLogo
+                          src={simpleIconsUrl('github', '0f172a')}
+                          alt=""
+                          className={styles.actLogo}
+                        />
+                      </span>
                       Generate PR
                     </span>
                     <span className={`${styles.act} ${styles.actGhost}`}>
-                      <Icon name="shieldCheck" size={14} strokeWidth={2.2} />
+                      <span className={`${styles.actIcoBox} ${styles.actIcoBoxPlay}`}>
+                        <Icon name="play" size={11} strokeWidth={2.6} />
+                      </span>
                       Run runbook
                     </span>
                     <span className={`${styles.act} ${styles.actGhost}`}>
-                      <BrandLogo
-                        src={svgPornUrl('slack')}
-                        alt=""
-                        className={styles.actLogo}
-                      />
+                      <span className={`${styles.actIcoBox} ${styles.actIcoBoxSlack}`}>
+                        <BrandLogo
+                          src={svgPornUrl('slack-icon')}
+                          domain="slack.com"
+                          alt=""
+                          className={styles.actLogo}
+                        />
+                      </span>
                       Post to Slack
                     </span>
                   </div>

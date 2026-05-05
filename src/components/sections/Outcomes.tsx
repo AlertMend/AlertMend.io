@@ -2,22 +2,22 @@ import styles from './Outcomes.module.css';
 
 const quotes = [
   {
-    body: "RCAs land in the Slack thread before the on-call engineer finishes opening their laptop. We've cut MTTR by an order of magnitude on Kubernetes incidents.",
-    initials: 'PE',
-    name: 'Platform Engineering Lead',
-    role: 'B2B SaaS · 40 services',
+    body: "AlertMend became our control tower for Kubernetes. It pinpoints root causes and saves hours of manual debugging every week. Managing 3,000+ pods doesn't feel chaotic anymore.",
+    initials: 'SM',
+    name: 'Shailesh Mangal',
+    role: 'CTO, Decklar',
   },
   {
-    body: 'The right-sizing recommendations with one-click YAML apply paid for the platform in the first month. Our Kubernetes spend dropped 38%.',
-    initials: 'DI',
-    name: 'Director of Infrastructure',
-    role: 'FinTech · multi-region EKS',
+    body: "Within a week, AlertMend cut our GKE costs in half, cleaned up unused storage, and right-sized workloads, all without touching a single YAML file. It's like having an AI-powered infra co-pilot that just works.",
+    initials: 'RS',
+    name: 'Rajnish Sharma',
+    role: 'Founder & CEO, WareFlex',
   },
   {
-    body: 'We replaced four tools with AlertMend (alerting, incident, on-call rotations, and runbooks) and our team finally stopped fighting the toolchain.',
-    initials: 'SR',
-    name: 'Staff SRE',
-    role: 'Healthcare · regulated workload',
+    body: 'AlertMend streamlined our incident management. Faster resolutions, less manual work, and a more focused team. Peace of mind is invaluable.',
+    initials: 'YA',
+    name: 'Yasser Ansari',
+    role: 'CEO, Polymer Search',
   },
 ];
 
