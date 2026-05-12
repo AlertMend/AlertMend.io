@@ -1,14 +1,14 @@
 .footer {
-  padding: 60px 0 32px;
+  padding: 60px 0 28px;
   border-top: 1px solid var(--border);
   margin-top: 64px;
 }
 .grid {
   display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 36px;
 }
 .brandCol p {
-  font-size: 14px; color: var(--muted); margin-top: 14px; max-width: 320px; line-height: 1.55;
+  font-size: 14px; color: var(--muted); margin-top: 14px; max-width: 320px; line-height: 1.6;
 }
 
 .backedBy {
@@ -17,8 +17,8 @@
   gap: 12px;
   margin-top: 18px;
   padding: 10px 14px;
-  border-radius: 10px;
-  background: var(--bg-2, #faf5ff);
+  border-radius: 6px;
+  background: var(--bg-2);
   border: 1px solid var(--border);
   width: fit-content;
 }
@@ -50,7 +50,7 @@
 .col li a {
   font-size: 14px; color: var(--muted); transition: color 0.2s;
 }
-.col li a:hover { color: var(--accent); }
+.col li a:hover { color: var(--text); }
 .compliance {
   padding: 20px 0 24px;
   border-top: 1px solid var(--border);
@@ -75,12 +75,12 @@
   align-items: center;
   gap: 10px;
   padding: 8px 14px 8px 10px;
-  border-radius: 12px;
-  background: var(--bg-2, #faf5ff);
+  border-radius: 6px;
+  background: var(--bg-2);
   border: 1px solid var(--border);
   color: var(--text);
 }
-.complianceLogo { flex-shrink: 0; border-radius: 6px; display: block; }
+.complianceLogo { flex-shrink: 0; border-radius: 4px; display: block; }
 .complianceText {
   display: flex; flex-direction: column; gap: 3px; align-items: flex-start; line-height: 1;
 }
@@ -116,7 +116,7 @@
 }
 
 .bottom {
-  padding-top: 24px; border-top: 1px solid var(--border);
+  padding-top: 22px; border-top: 1px solid var(--border);
   display: flex; justify-content: space-between; align-items: center;
   font-size: 13px; color: var(--muted); flex-wrap: wrap; gap: 12px;
 }

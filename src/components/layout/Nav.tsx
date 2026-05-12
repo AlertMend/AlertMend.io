@@ -5,17 +5,18 @@ import Icon from '../ui/Icon';
 import { useScrolled } from '../../hooks/useScrolled';
 import styles from './Nav.module.css';
 
+// Industry-standard structure: ~5 top-level items. Deep section anchors
+// ("AI RCAs", "MLOps") are reachable via the Platform link and by scrolling
+// — keeping them at the top level made the bar feel busy.
 const sectionLinks = [
   { hash: '#features', label: 'Platform' },
-  { hash: '#ai', label: 'AI RCAs' },
-  { hash: '#mlops', label: 'MLOps' },
-  { hash: '#integrations', label: 'Integrations' },
 ];
 
 const routeLinks = [
-  { to: '/case-studies', label: 'Case Studies' },
-  { to: '/blog', label: 'Blog' },
   { to: '/pricing', label: 'Pricing' },
+  { to: '/case-studies', label: 'Customers' },
+  { to: '/documentation', label: 'Docs' },
+  { to: '/blog', label: 'Blog' },
 ];
 
 const SIGNUP_URL = 'https://app.alertmend.io/signup';
@@ -108,18 +109,19 @@ export default function Nav() {
               href={PLAYGROUND_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className={`btn btn-primary ${styles.ctaPlayground}`}
+              className={styles.ctaPlayground}
             >
-              <Icon name="play" size={12} style={{ color: '#ffffff' }} />
-              Playground
+              <span className={styles.liveDot} aria-hidden />
+              <span className={styles.liveLabel}>Live</span>
+              <span className={styles.playgroundLabel}>Playground</span>
             </a>
             <a
               href={SIGNUP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${styles.link} ${styles.ctaRegister}`}
+              className={`${styles.link} ${styles.ctaSignIn}`}
             >
-              Register
+              Sign in
             </a>
             <a
               href={CALENDLY_URL}
@@ -190,10 +192,10 @@ export default function Nav() {
             href={PLAYGROUND_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-primary"
+            className="btn btn-ghost"
             onClick={() => setDrawerOpen(false)}
           >
-            <Icon name="play" size={12} style={{ color: '#ffffff' }} />
+            <Icon name="play" size={12} strokeWidth={1.8} />
             Playground
           </a>
           <a
@@ -203,7 +205,7 @@ export default function Nav() {
             className="btn btn-ghost"
             onClick={() => setDrawerOpen(false)}
           >
-            Register
+            Sign in
           </a>
           <a
             href={CALENDLY_URL}

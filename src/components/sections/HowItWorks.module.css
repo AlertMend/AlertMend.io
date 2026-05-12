@@ -4,19 +4,24 @@
 .step {
   padding: 28px 24px; border-radius: var(--radius);
   background: var(--surface); border: 1px solid var(--border);
-  box-shadow: 0 4px 18px -10px rgba(76, 29, 149, 0.16);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
   position: relative;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.step:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -16px rgba(0, 0, 0, 0.18);
 }
 .num {
   position: absolute; top: -12px; left: 24px;
-  width: 28px; height: 28px; border-radius: 8px;
-  background: var(--grad-primary); color: #fff;
+  width: 26px; height: 26px; border-radius: 6px;
+  background: #0a0a0a; color: #fff;
   display: inline-flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 700;
-  box-shadow: 0 6px 20px -4px rgba(126, 34, 206, 0.45);
+  font-size: 12px; font-weight: 700;
 }
 .step h4 { font-size: 16px; font-weight: 600; margin: 8px 0 8px; color: var(--text); }
-.step p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+.step p { font-size: 13px; color: var(--muted); line-height: 1.6; }
 
 @media (max-width: 980px) { .flow { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 540px) { .flow { grid-template-columns: 1fr; } }

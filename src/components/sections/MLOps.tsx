@@ -56,8 +56,8 @@ export default function MLOps() {
           <div className={styles.board}>
             <div className={styles.boardHead}>
               <div className={styles.boardTitleWrap}>
-                <span className={styles.boardIco} style={{ background: 'rgba(168,85,247,0.18)', color: '#d8b4fe' }}>
-                  <Icon name="cpu" size={16} strokeWidth={2.2} />
+                <span className={styles.boardIco}>
+                  <Icon name="cpu" size={16} strokeWidth={1.6} />
                 </span>
                 <div>
                   <div className={styles.boardTitle}>GPU fleet</div>
@@ -115,8 +115,8 @@ export default function MLOps() {
           <div className={styles.board}>
             <div className={styles.boardHead}>
               <div className={styles.boardTitleWrap}>
-                <span className={styles.boardIco} style={{ background: 'rgba(99,102,241,0.18)', color: '#a5b4fc' }}>
-                  <Icon name="trending" size={16} strokeWidth={2.2} />
+                <span className={styles.boardIco}>
+                  <Icon name="trending" size={16} strokeWidth={1.6} />
                 </span>
                 <div>
                   <div className={styles.boardTitle}>Training run · llama-ft-7b</div>
@@ -188,8 +188,8 @@ export default function MLOps() {
           <div className={styles.board}>
             <div className={styles.boardHead}>
               <div className={styles.boardTitleWrap}>
-                <span className={styles.boardIco} style={{ background: 'rgba(52,211,153,0.16)', color: 'var(--green)' }}>
-                  <Icon name="gauge" size={16} strokeWidth={2.2} />
+                <span className={styles.boardIco}>
+                  <Icon name="gauge" size={16} strokeWidth={1.6} />
                 </span>
                 <div>
                   <div className={styles.boardTitle}>Inference · vLLM serving</div>
@@ -256,13 +256,13 @@ export default function MLOps() {
           <div className={styles.failGrid}>
             {failureModes.map((f) => (
               <div key={f.label} className={styles.failCard}>
-                <span className={styles.failIco}>
-                  <Icon name={f.ico as any} size={18} strokeWidth={2.2} />
-                </span>
-                <div>
+                <div className={styles.failHead}>
+                  <span className={styles.failIco}>
+                    <Icon name={f.ico as any} size={16} strokeWidth={1.6} />
+                  </span>
                   <div className={styles.failTitle}>{f.label}</div>
-                  <div className={styles.failDesc}>{f.desc}</div>
                 </div>
+                <div className={styles.failDesc}>{f.desc}</div>
               </div>
             ))}
           </div>
