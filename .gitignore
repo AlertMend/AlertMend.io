@@ -13,6 +13,15 @@ Gemfile.lock
 # NPM Modules
 node_modules
 
+# Local agent / tool artifacts
+.claude/
+.playwright-mcp/
+
+# Local screenshot artifacts from design iteration
+/*.png
+!public/**/*.png
+!src/**/*.png
+
 # Gems
 *.gem
 

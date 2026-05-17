@@ -1,28 +1,48 @@
 /* ---------- Reset & tokens ---------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
+  /* Surfaces — white / near-white */
   --bg: #ffffff;
-  --bg-2: #faf5ff;
+  --bg-2: #fafafa;
   --surface: #ffffff;
-  --surface-strong: #faf5ff;
-  --border: rgba(126, 34, 206, 0.14);
-  --border-strong: rgba(126, 34, 206, 0.28);
-  --text: #3b0764;          /* purple-950 */
-  --text-dim: #6b21a8;      /* purple-800 */
-  --text-mute: #7e22ce;     /* purple-700 */
-  --muted: #6b7280;         /* slate-500 for secondary copy */
-  --accent: #7e22ce;        /* purple-700 */
-  --accent-2: #4f46e5;      /* indigo-600 */
-  --accent-3: #c026d3;      /* fuchsia-600 */
+  --surface-strong: #f4f4f5;     /* zinc-100 */
+
+  /* Borders */
+  --border: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.14);
+
+  /* Text — black-dominant on white */
+  --text: #0a0a0a;                /* near-black */
+  --text-dim: #27272a;            /* zinc-800 */
+  --text-mute: #52525b;           /* zinc-600 */
+  --muted: #71717a;               /* zinc-500 — for secondary copy */
+
+  /* Accents — restrained purple as the only color */
+  --accent: #6d28d9;              /* violet-700 — used for sec-tag, focus, badges */
+  --accent-soft: #ede9fe;         /* violet-100 — soft fills */
+  --accent-deep: #4c1d95;         /* violet-900 — hover/active */
+  --accent-2: #18181b;            /* zinc-900 — replaces secondary purple */
+  --accent-3: #a855f7;            /* violet-500 — used sparingly for highlights */
+
+  /* Status */
   --green: #059669;
   --amber: #d97706;
   --red: #dc2626;
-  --radius: 16px;
-  --radius-lg: 24px;
-  --shadow-glow: 0 20px 60px -20px rgba(126, 34, 206, 0.35);
-  --shadow-card: 0 12px 40px -12px rgba(76, 29, 149, 0.18);
-  --grad-primary: linear-gradient(135deg, #6b21a8 0%, #4f46e5 50%, #c026d3 100%);
-  --grad-text: linear-gradient(135deg, #3b0764 0%, #4f46e5 50%, #c026d3 100%);
+
+  /* Radii — tight */
+  --radius: 8px;
+  --radius-lg: 10px;
+  --radius-sm: 6px;
+  --radius-pill: 999px;
+
+  /* Shadows — softer, neutral */
+  --shadow-glow: 0 18px 50px -22px rgba(0, 0, 0, 0.18);
+  --shadow-card: 0 8px 24px -14px rgba(0, 0, 0, 0.10);
+
+  /* Gradients — black-dominant, purple used as restrained accent */
+  --grad-primary: linear-gradient(135deg, #18181b 0%, #0a0a0a 100%);
+  --grad-text: linear-gradient(135deg, #0a0a0a 0%, #27272a 100%);
+  --grad-accent: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%);
 }
 html {
   -webkit-text-size-adjust: 100%;
@@ -43,46 +63,45 @@ body.alertmend-dark a { color: inherit; text-decoration: none; }
 /* Inherit the body font + show a pointer for buttons. We deliberately do NOT
    reset background / color / border globally, because legacy Tailwind pages
    (Pricing, About, Blog, etc.) style their buttons with utility classes
-   (`bg-*`, `text-*`, `border`) that would otherwise be wiped out. The new
-   homepage's `.btn` family sets its own background / color / border
-   explicitly, so it does not need a global reset. */
+   (`bg-*`, `text-*`, `border`) that would otherwise be wiped out. */
 body.alertmend-dark button { font-family: inherit; cursor: pointer; }
+
+/* Selection color stays subtly on-brand */
+::selection { background: var(--accent); color: #ffffff; }
 
 /* ---------- Layout ---------- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-section { padding: 72px 0; position: relative; }
-section.tight { padding: 48px 0; }
-/* First section after the nav gets a tighter top so the page doesn't start with a big empty band */
+section { padding: 80px 0; position: relative; }
+section.tight { padding: 56px 0; }
+/* First section after the nav. Give the H1 enough breathing room from the
+   sticky nav so the page doesn't feel cramped at the top of the viewport. */
 main > section:first-of-type,
-.page-top { padding-top: 36px; }
+.page-top { padding-top: 80px; }
 
 /* ---------- Buttons ----------
-   NOTE on specificity: `body.alertmend-dark a { color: inherit }` (0,1,1) is
-   higher specificity than a plain `.btn-primary` (0,1,0). Any `.btn-*` that
-   renders as an <a> / <Link> would inherit the dark page text and read
-   as near-black on the purple gradient. We scope button color/background
-   rules under `body.alertmend-dark` so they always win on this site. */
+   Black primary button is the dominant CTA language; purple is reserved
+   for accent text / dots / focus rings. Specificity is scoped under
+   `body.alertmend-dark` so legacy Tailwind utility-class buttons on
+   other pages are unaffected. */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  padding: 11px 20px; border-radius: 10px;
+  padding: 11px 20px; border-radius: 6px;
   font-weight: 600; font-size: 14px; letter-spacing: -0.005em;
-  transition: all 0.2s ease; white-space: nowrap;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease,
+              box-shadow 0.18s ease, transform 0.06s ease;
+  white-space: nowrap;
   border: 1px solid transparent;
 }
 body.alertmend-dark .btn-primary,
 body.alertmend-dark a.btn-primary,
 body.alertmend-dark a.btn-primary:visited {
-  background: var(--grad-primary);
+  background: #0a0a0a;
   color: #ffffff;
   -webkit-text-fill-color: #ffffff;
-  background-clip: border-box;
-  -webkit-background-clip: border-box;
-  box-shadow:
-    0 10px 28px -10px rgba(168, 85, 247, 0.55),
-    0 4px 14px -6px rgba(192, 38, 211, 0.32),
-    inset 0 1px 0 rgba(255, 255, 255, 0.28),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
-  text-shadow: 0 1px 1px rgba(59, 7, 100, 0.2);
+  border-color: #0a0a0a;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset,
+              0 1px 2px rgba(0, 0, 0, 0.18),
+              0 6px 18px -10px rgba(0, 0, 0, 0.35);
 }
 body.alertmend-dark .btn-primary *,
 body.alertmend-dark .btn-primary svg,
@@ -92,96 +111,87 @@ body.alertmend-dark .btn-primary svg * {
   stroke: currentColor;
 }
 body.alertmend-dark .btn-primary:hover {
-  box-shadow:
-    0 12px 32px -10px rgba(168, 85, 247, 0.6),
-    0 4px 14px -6px rgba(192, 38, 211, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
-  filter: brightness(1.04);
+  background: #18181b;
+  border-color: #18181b;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.10) inset,
+              0 2px 4px rgba(0, 0, 0, 0.20),
+              0 8px 22px -10px rgba(0, 0, 0, 0.40);
 }
+body.alertmend-dark .btn-primary:active { transform: translateY(0.5px); }
+
 body.alertmend-dark .btn-ghost,
 body.alertmend-dark a.btn-ghost,
 body.alertmend-dark a.btn-ghost:visited {
   background: #ffffff;
-  color: var(--text-dim);
+  color: var(--text);
   -webkit-text-fill-color: currentColor;
   border-color: var(--border-strong);
-  box-shadow: 0 1px 2px rgba(76, 29, 149, 0.06);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
 }
 body.alertmend-dark .btn-ghost:hover {
   background: var(--bg-2);
-  border-color: rgba(126, 34, 206, 0.45);
+  border-color: #18181b;
   color: var(--text);
 }
-.btn-lg { padding: 14px 26px; font-size: 15px; border-radius: 12px; }
-.btn .arrow { transition: transform 0.2s; }
-.btn:hover .arrow { transform: translateX(3px); }
+.btn-lg { padding: 13px 24px; font-size: 15px; border-radius: 6px; }
+.btn .arrow { transition: transform 0.18s ease; }
+.btn:hover .arrow { transform: translateX(2px); }
+
+/* Focus ring uses the accent purple — visible but not loud */
+body.alertmend-dark .btn:focus-visible,
+body.alertmend-dark a.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--accent);
+}
 
 /* ---------- Section heading ---------- */
 .sec-head { text-align: center; max-width: 720px; margin: 0 auto 56px; }
 .sec-tag {
   display: inline-flex; align-items: center; gap: 10px;
-  font-size: 12px; font-weight: 700;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--accent);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text-mute);
   margin-bottom: 14px;
   padding: 0; border: 0; background: none;
 }
 .sec-tag::before {
   content: '';
-  width: 7px; height: 7px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), var(--accent-3));
-  box-shadow:
-    0 0 0 4px rgba(126, 34, 206, 0.10),
-    0 0 12px rgba(126, 34, 206, 0.55);
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(109, 40, 217, 0.10);
   flex-shrink: 0;
-  animation: secTagPulse 2.4s ease-in-out infinite;
-}
-@keyframes secTagPulse {
-  0%, 100% {
-    box-shadow:
-      0 0 0 4px rgba(126, 34, 206, 0.10),
-      0 0 12px rgba(126, 34, 206, 0.45);
-  }
-  50% {
-    box-shadow:
-      0 0 0 5px rgba(126, 34, 206, 0.16),
-      0 0 18px rgba(126, 34, 206, 0.70);
-  }
 }
 .sec-head h2 {
-  font-size: clamp(32px, 4vw, 48px); line-height: 1.1; letter-spacing: -0.025em;
+  font-size: clamp(30px, 3.8vw, 44px); line-height: 1.1; letter-spacing: -0.025em;
   font-weight: 700;
-  background: var(--grad-text);
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text);
 }
 .sec-head p {
-  margin-top: 18px; font-size: 17px; color: var(--muted); line-height: 1.55;
+  margin-top: 16px; font-size: 16px; color: var(--muted); line-height: 1.6;
 }
 
+/* Inline accent for highlighting a word in headlines.
+   Use sparingly — this is the one place purple is loud. */
 .hero-h-accent {
-  background: var(--grad-primary);
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--accent);
 }
 
 /* ---------- Reveal animations ---------- */
 .reveal {
-  opacity: 0; transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ---------- Pulse keyframes (used by multiple components) ---------- */
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7); }
-  70% { box-shadow: 0 0 0 10px rgba(52, 211, 153, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.5); }
+  70% { box-shadow: 0 0 0 10px rgba(5, 150, 105, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
 }
 @keyframes pulseDot {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.4); }
+  50% { opacity: 0.55; transform: scale(1.35); }
 }
 @keyframes float {
   0%, 100% { transform: translate(0, 0); }

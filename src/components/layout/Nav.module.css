@@ -5,15 +5,15 @@
   z-index: 50;
   backdrop-filter: blur(18px) saturate(160%);
   -webkit-backdrop-filter: blur(18px) saturate(160%);
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.78);
   border-bottom: 1px solid transparent;
   transition: background 0.2s ease, border-color 0.2s ease,
     box-shadow 0.25s ease, padding 0.2s ease;
 }
 .scrolled {
-  background: rgba(255, 255, 255, 0.92);
-  border-bottom-color: rgba(126, 34, 206, 0.12);
-  box-shadow: 0 8px 30px -18px rgba(76, 29, 149, 0.22);
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom-color: var(--border);
+  box-shadow: 0 6px 24px -18px rgba(0, 0, 0, 0.14);
 }
 
 .nav {
@@ -40,7 +40,7 @@
   color: var(--text-dim);
   letter-spacing: -0.005em;
   padding: 8px 12px;
-  border-radius: 6px;
+  border-radius: 4px;
   white-space: nowrap;
   transition: color 0.15s ease;
 }
@@ -48,13 +48,10 @@
   color: var(--text);
 }
 .linkActive {
-  color: #6b21a8;
+  color: var(--accent-deep);
 }
 
-/* ---------- CTA cluster ----------
-   Goal: a calm "Sign in"-style ghost link sitting next to one prominent
-   pill-shaped primary CTA. Both use the same height so the cluster reads
-   as a single component, not two competing buttons. */
+/* ---------- CTA cluster ---------- */
 .cta {
   display: flex;
   gap: 8px;
@@ -62,49 +59,75 @@
   flex-shrink: 0;
 }
 
-/* "Playground" CTA - lighter purple gradient, play icon, pill shape. */
+/* "Live · Playground" pill — communicates that this is the *running*
+   product, not marketing copy. Subtle purple-tinted chip with a pulsing
+   live dot. Still quieter than the primary "Book a demo" button. */
 .ctaPlayground.ctaPlayground {
-  height: 38px;
-  padding: 0 16px;
-  font-size: 13.5px;
-  font-weight: 600;
-  border-radius: 999px;
-  letter-spacing: -0.005em;
-  gap: 6px;
-  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
-  color: #ffffff;
-  -webkit-text-fill-color: #ffffff;
-  border: none;
-  box-shadow: 0 6px 18px -8px rgba(168, 85, 247, 0.55);
-}
-.ctaPlayground.ctaPlayground:hover {
-  filter: brightness(1.05);
-  box-shadow: 0 8px 22px -8px rgba(168, 85, 247, 0.65);
-  transform: none;
-}
-
-/* "Register" - quiet text link between the two pill CTAs. */
-.ctaRegister.ctaRegister {
-  height: 38px;
+  height: 32px;
   display: inline-flex;
   align-items: center;
-  padding: 0 4px;
+  gap: 8px;
+  padding: 0 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--accent-deep);
+  background: var(--accent-soft);
+  border: 1px solid rgba(109, 40, 217, 0.22);
+  border-radius: 999px;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  transition: background 0.18s ease, border-color 0.18s ease,
+              color 0.18s ease, box-shadow 0.18s ease;
+}
+.ctaPlayground.ctaPlayground:hover {
+  background: #ddd6fe;
+  border-color: rgba(109, 40, 217, 0.42);
+  color: var(--accent-deep);
+  box-shadow: 0 6px 16px -10px rgba(109, 40, 217, 0.45);
+}
+
+.liveDot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.55);
+  animation: navLivePulse 1.6s ease-out infinite;
+  flex-shrink: 0;
+}
+@keyframes navLivePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.55); }
+  70%  { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+.liveLabel {
+  font-size: 10px; font-weight: 800; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #047857;
+}
+.playgroundLabel {
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+/* "Sign in" — quiet text link */
+.ctaSignIn.ctaSignIn {
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 6px;
   font-size: 13.5px;
   font-weight: 500;
   color: var(--text-dim);
   white-space: nowrap;
 }
-.ctaRegister.ctaRegister:hover {
+.ctaSignIn.ctaSignIn:hover {
   color: var(--text);
 }
-/* Reset border + heavy box-shadow on the ghost in the nav so it reads as
-   a quiet text link rather than a second button. */
 .ctaGhost.ctaGhost {
-  height: 38px;
+  height: 36px;
   padding: 0 14px;
   font-size: 13.5px;
   font-weight: 500;
-  border-radius: 999px;
+  border-radius: 6px;
   background: transparent;
   border-color: transparent;
   box-shadow: none;
@@ -117,13 +140,12 @@
   box-shadow: none;
   transform: none;
 }
-/* Pill primary that's tight, balanced and clearly the action. */
 .ctaPrimary.ctaPrimary {
-  height: 38px;
-  padding: 0 18px 0 18px;
+  height: 36px;
+  padding: 0 16px;
   font-size: 13.5px;
   font-weight: 600;
-  border-radius: 999px;
+  border-radius: 6px;
   letter-spacing: -0.005em;
   gap: 6px;
 }
@@ -135,9 +157,9 @@
 /* ---------- Hamburger (hidden on desktop) ---------- */
 .hamburger {
   display: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 6px;
   background: #ffffff;
   border: 1px solid var(--border-strong);
   cursor: pointer;
@@ -146,12 +168,12 @@
   justify-content: center;
   flex-direction: column;
   gap: 5px;
-  box-shadow: 0 1px 2px rgba(76, 29, 149, 0.06);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 .hamburger:hover {
   background: var(--bg-2);
-  border-color: rgba(126, 34, 206, 0.45);
+  border-color: #18181b;
 }
 .hamburger span {
   width: 18px;
@@ -168,7 +190,7 @@
 .scrim {
   position: fixed;
   inset: 0;
-  background: rgba(20, 5, 40, 0.45);
+  background: rgba(0, 0, 0, 0.40);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   opacity: 0;
@@ -186,7 +208,7 @@
   width: min(86vw, 340px);
   background: #ffffff;
   border-left: 1px solid var(--border-strong);
-  box-shadow: -16px 0 50px -16px rgba(76, 29, 149, 0.25);
+  box-shadow: -16px 0 50px -16px rgba(0, 0, 0, 0.18);
   transform: translateX(100%);
   transition: transform 0.32s cubic-bezier(0.32, 0.72, 0.2, 1);
   z-index: 70;
@@ -194,8 +216,6 @@
   flex-direction: column;
   padding: 18px 18px 24px;
   gap: 12px;
-  /* When closed, make sure the off-screen panel can't intercept clicks
-     near the right edge of the viewport. */
   pointer-events: none;
   visibility: hidden;
 }
@@ -214,8 +234,8 @@
   margin-bottom: 8px;
 }
 .drawerClose {
-  width: 38px; height: 38px;
-  border-radius: 10px;
+  width: 36px; height: 36px;
+  border-radius: 6px;
   background: var(--bg-2);
   border: 1px solid var(--border-strong);
   color: var(--text-dim);
@@ -223,7 +243,7 @@
   cursor: pointer;
   transition: background 0.18s ease, color 0.18s ease;
 }
-.drawerClose:hover { background: rgba(126, 34, 206, 0.08); color: var(--text); }
+.drawerClose:hover { background: var(--surface-strong); color: var(--text); }
 
 .drawerLinks {
   display: flex;
@@ -234,14 +254,14 @@
 .drawerLinks a {
   display: block;
   padding: 12px 14px;
-  border-radius: 10px;
+  border-radius: 6px;
   font-size: 15px;
   font-weight: 500;
   color: var(--text);
   text-decoration: none;
   transition: background 0.18s ease;
 }
-.drawerLinks a:hover { background: rgba(126, 34, 206, 0.08); }
+.drawerLinks a:hover { background: var(--surface-strong); }
 
 .drawerCta {
   margin-top: auto;
@@ -254,23 +274,24 @@
 .drawerCta :global(.btn) { width: 100%; padding: 12px 18px; font-size: 14.5px; }
 
 /* ---------- Responsive ----------
-   Breakpoints:
-   - >960px : full nav (brand + links + ghost + primary)
-   - 540-960: brand + primary CTA + hamburger (links live in drawer)
-   - <540px : brand + hamburger only (CTAs live in drawer)
-*/
+   Specificity note: `.ctaPlayground.ctaPlayground` (doubled) is used at
+   desktop sizes to win against `body.alertmend-dark` selectors. The hide
+   rules below must match the doubled specificity or they get overridden. */
 @media (max-width: 1180px) {
   .links { gap: 2px; }
   .link { padding: 8px 10px; font-size: 13.5px; }
-  .ctaRegister { display: none; }
+  .ctaSignIn.ctaSignIn { display: none; }
 }
 @media (max-width: 1020px) {
   .links { display: none; }
-  .ctaGhost,
-  .ctaPlayground,
-  .ctaRegister { display: none; }
+  .ctaGhost.ctaGhost,
+  .ctaPlayground.ctaPlayground,
+  .ctaSignIn.ctaSignIn { display: none; }
   .hamburger { display: inline-flex; }
 }
 @media (max-width: 540px) {
-  .ctaPrimary { display: none; }
+  /* On the tightest widths, drop the primary CTA from the bar (it lives in
+     the drawer). Brand + hamburger only — clean and unmistakable. */
+  .ctaPrimary.ctaPrimary { display: none; }
+  .nav { padding: 12px 16px; gap: 12px; }
 }

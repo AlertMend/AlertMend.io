@@ -39,19 +39,19 @@ const cards: Card[] = [
     tags: ['overview', 'incidents', 'copilot', 'drill-down'],
   },
   {
-    ico: <Icon name="message" size={22} />,
+    ico: <Icon name="message" size={16} strokeWidth={1.6} />,
     title: 'AlertMend AI chat',
     body: 'Ask cluster questions in plain language. Grounded in your real inventory, events, logs and metrics. Not generic suggestions.',
     tags: ['natural-language', 'grounded'],
   },
   {
-    ico: <Icon name="shieldCheck" size={22} />,
+    ico: <Icon name="shieldCheck" size={16} strokeWidth={1.6} />,
     title: 'Health rules',
     body: 'Per-cluster monitors for pods, nodes, PVCs, jobs, deploys. Severity, live state, operational toggle, without redeploying YAML.',
     tags: ['workflow-pod', 'deploy', 'availability'],
   },
   {
-    ico: <Icon name="database" size={22} />,
+    ico: <Icon name="database" size={16} strokeWidth={1.6} />,
     title: 'Kubernetes logs (SQL)',
     body: (
       <>
@@ -62,19 +62,19 @@ const cards: Card[] = [
     tags: ['sql', 'streams', 'indexed'],
   },
   {
-    ico: <Icon name="bar" size={22} />,
+    ico: <Icon name="bar" size={16} strokeWidth={1.6} />,
     title: 'Metrics & dashboards',
     body: 'Custom panels, data-source selectors, auto-refresh, persisted via the workspace API. One source of truth across teams.',
     tags: ['panels', 'workspace-api'],
   },
   {
-    ico: <Icon name="compass" size={22} />,
+    ico: <Icon name="compass" size={16} strokeWidth={1.6} />,
     title: 'API monitors',
     body: 'Synthetic HTTP(S) checks with status, body or response-value rules. 90-day uptime ribbons. Wired into incidents & escalation paths.',
     tags: ['synthetic', 'uptime', 'slack'],
   },
   {
-    ico: <Icon name="cpu" size={22} />,
+    ico: <Icon name="cpu" size={16} strokeWidth={1.6} />,
     title: 'GPU & MLOps observability',
     body: (
       <>
@@ -88,7 +88,7 @@ const cards: Card[] = [
   },
   {
     variant: 'wide',
-    ico: <Icon name="workflow" size={22} />,
+    ico: <Icon name="workflow" size={16} strokeWidth={1.6} />,
     title: 'Runbooks · visual workflows that act',
     body: 'Trigger on alerts, cron, health policy or webhooks. Run the same command across an entire VM fleet, or fan out into every pod that matches a label. Branch on output. Pause for Slack/Teams approval. Archive logs to S3, then post a closing summary to chat. Same definition, every time.',
     tags: [
@@ -104,7 +104,7 @@ const cards: Card[] = [
     ],
   },
   {
-    ico: <Icon name="dollar" size={22} />,
+    ico: <Icon name="dollar" size={16} strokeWidth={1.6} />,
     title: 'Kubernetes FinOps',
     body: (
       <>
@@ -116,7 +116,7 @@ const cards: Card[] = [
     tags: ['right-sizing', 'yaml-apply'],
   },
   {
-    ico: <Icon name="activity" size={22} />,
+    ico: <Icon name="activity" size={16} strokeWidth={1.6} />,
     title: 'AWS cost optimization',
     body: (
       <>
@@ -128,14 +128,14 @@ const cards: Card[] = [
     tags: ['ec2', 'rds', 'savings'],
   },
   {
-    ico: <Icon name="phone" size={22} />,
+    ico: <Icon name="phone" size={16} strokeWidth={1.6} />,
     title: 'On-call programs',
     body: 'Schedules & rotations with timezones. Escalation paths chain email → WhatsApp → phone with wait timers. Sustainable paging at scale.',
     tags: ['schedules', 'escalation', 'whatsapp'],
   },
   {
     variant: 'full',
-    ico: <Icon name="shield" size={22} />,
+    ico: <Icon name="shield" size={16} strokeWidth={1.6} />,
     title: 'RBAC, audit & compliance, built in',
     body: 'Granular role-based access controls scope navigation, data and mutating actions. Every page navigation, click and apply is captured in the audit trail with per-user filters and error-only views, for security reviews, break-glass checks and SoC-style separation of duties.',
     custom: (
@@ -175,9 +175,11 @@ export default function Features() {
               return (
                 <div key={i} className={`${styles.card} ${styles.full}`}>
                   <div className={styles.fullInner}>
-                    <div className={styles.icoBox}>{c.ico}</div>
                     <div>
-                      <h4 style={{ marginBottom: 4 }}>{c.title}</h4>
+                      <div className={styles.head}>
+                        <span className={styles.ico}>{c.ico}</span>
+                        <h4 style={{ marginBottom: 0 }}>{c.title}</h4>
+                      </div>
                       <p>{c.body}</p>
                     </div>
                     {c.custom}
@@ -187,8 +189,10 @@ export default function Features() {
             }
             return (
               <div key={i} className={`${styles.card} ${variantClass(c.variant)}`}>
-                <div className={styles.icoBox}>{c.ico}</div>
-                <h4>{c.title}</h4>
+                <div className={styles.head}>
+                  <span className={styles.ico}>{c.ico}</span>
+                  <h4>{c.title}</h4>
+                </div>
                 <p>{c.body}</p>
                 {c.preview && (
                   <div className={styles.preview}>

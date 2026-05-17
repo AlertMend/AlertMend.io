@@ -1,36 +1,129 @@
 .final {
-  padding: 64px 56px; border-radius: var(--radius-lg);
+  padding: 72px 56px;
+  border-radius: 12px;
+  /* Deep zinc base with layered radial purple glows from top-right + bottom-left
+     and a subtle dot pattern. Reads richer than a flat black panel. */
   background:
-    radial-gradient(ellipse 60% 80% at 0% 100%, rgba(126, 34, 206, 0.18), transparent 70%),
-    radial-gradient(ellipse 60% 80% at 100% 0%, rgba(192, 38, 211, 0.14), transparent 70%),
-    linear-gradient(180deg, #ffffff, #faf5ff);
-  border: 1px solid rgba(126, 34, 206, 0.22);
-  box-shadow: 0 24px 60px -28px rgba(76, 29, 149, 0.32);
+    radial-gradient(ellipse 50% 60% at 100% 0%, rgba(168, 85, 247, 0.28), transparent 60%),
+    radial-gradient(ellipse 60% 70% at 0% 100%, rgba(109, 40, 217, 0.32), transparent 60%),
+    linear-gradient(180deg, #1a1325 0%, #0f0a1a 100%);
+  color: #ffffff;
+  border: 1px solid rgba(168, 85, 247, 0.18);
   text-align: center;
   position: relative; overflow: hidden;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 30px 60px -30px rgba(76, 29, 149, 0.45);
 }
-.h2 {
-  font-size: clamp(32px, 4.5vw, 52px); line-height: 1.1; letter-spacing: -0.03em; font-weight: 800;
-  background: var(--grad-text);
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Subtle dotted texture, low opacity, sits behind text. */
+.final::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-position: 0 0;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, #000 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, #000 30%, transparent 80%);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Section tag (eyebrow) — repainted for the dark surface. */
+.final :global(.sec-tag) {
+  color: rgba(255, 255, 255, 0.65);
   position: relative;
 }
+.final :global(.sec-tag)::before {
+  background: #c4b5fd;
+  box-shadow: 0 0 0 4px rgba(196, 181, 253, 0.18);
+}
+
+.h2 {
+  font-size: clamp(32px, 4.4vw, 50px);
+  line-height: 1.08; letter-spacing: -0.03em; font-weight: 700;
+  color: #ffffff;
+  position: relative;
+  margin-top: 6px;
+}
+/* The inline `.hero-h-accent` span inside the heading lives in global.css
+   as `color: var(--accent)` — repaint it to a brighter violet for this
+   dark panel. */
+.final .h2 :global(.hero-h-accent) {
+  color: #c4b5fd;
+  background: linear-gradient(135deg, #ddd6fe 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .p {
-  max-width: 580px; margin: 18px auto 32px;
-  font-size: 17px; color: var(--muted); line-height: 1.55;
+  max-width: 600px; margin: 20px auto 32px;
+  font-size: 17px; color: rgba(255, 255, 255, 0.78); line-height: 1.6;
   position: relative;
 }
 .cta {
-  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
   position: relative;
 }
 .meta {
-  margin-top: 24px; font-size: 13px; color: var(--muted);
-  display: flex; justify-content: center; gap: 18px; flex-wrap: wrap;
+  margin-top: 28px; font-size: 13px; color: rgba(255, 255, 255, 0.62);
+  display: flex; justify-content: center; gap: 22px; flex-wrap: wrap;
   position: relative;
 }
 .meta span { display: flex; align-items: center; gap: 6px; }
-.meta svg { color: var(--green); }
+.meta svg { color: #34d399; }
 
-@media (max-width: 980px) { .final { padding: 48px 28px; } }
+/* On the dark panel the standard light-mode .btn-primary (black on white)
+   disappears. Force the inverted treatment here. Doubled selector + body
+   prefix beats `body.alertmend-dark .btn-primary` in `global.css`. */
+:global(body.alertmend-dark) .final :global(.btn-primary),
+:global(body.alertmend-dark) .final :global(a.btn-primary),
+:global(body.alertmend-dark) .final :global(a.btn-primary:visited) {
+  background: #ffffff;
+  color: #0a0a0a;
+  -webkit-text-fill-color: #0a0a0a;
+  border-color: #ffffff;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 6px 20px -8px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+:global(body.alertmend-dark) .final :global(.btn-primary):hover {
+  background: #fafafa;
+  border-color: #fafafa;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 8px 24px -8px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.20);
+  transform: translateY(-1px);
+}
+:global(body.alertmend-dark) .final :global(.btn-primary) *,
+:global(body.alertmend-dark) .final :global(.btn-primary) svg,
+:global(body.alertmend-dark) .final :global(.btn-primary) svg * {
+  color: #0a0a0a;
+  -webkit-text-fill-color: #0a0a0a;
+  stroke: currentColor;
+}
+
+:global(body.alertmend-dark) .final :global(.btn-ghost),
+:global(body.alertmend-dark) .final :global(a.btn-ghost),
+:global(body.alertmend-dark) .final :global(a.btn-ghost:visited) {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+:global(body.alertmend-dark) .final :global(.btn-ghost):hover {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.42);
+  color: #ffffff;
+}
+:global(body.alertmend-dark) .final :global(.btn-ghost) svg {
+  color: #ffffff;
+}
+
+@media (max-width: 980px) {
+  .final { padding: 52px 24px; }
+}

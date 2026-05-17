@@ -33,7 +33,7 @@
   }
   
   body {
-    @apply bg-white text-purple-800 font-sans;
+    @apply bg-white text-zinc-900 font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   
@@ -208,17 +208,17 @@
   }
   
   thead {
-    background: #faf5ff;
+    background: #fafafa;
   }
-  
+
   th {
     padding: 1rem;
     text-align: left;
     font-weight: 600;
-    color: #581c87;
-    border-right: 1px solid #e9d5ff;
-    border-bottom: 2px solid #c084fc;
-    background: #faf5ff;
+    color: #18181b;
+    border-right: 1px solid #e4e4e7;
+    border-bottom: 2px solid #d4d4d8;
+    background: #fafafa;
     font-size: 0.9375rem;
   }
   
@@ -257,7 +257,7 @@
   }
   
   tbody tr:hover {
-    background: #f3e8ff;
+    background: #f4f4f5;
   }
   
   @media (max-width: 768px) {
