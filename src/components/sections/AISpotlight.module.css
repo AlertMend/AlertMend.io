@@ -57,6 +57,24 @@
     0 8px 24px -16px rgba(9, 9, 11, 0.40);
 }
 
+/* The pre-recorded RCA screencast (see AISpotlight.tsx). The intrinsic
+ * size of the capture is 1088×1730 (the .visual element captured at
+ * 2x DPR over a 544×865 layout box), so a `width: 100%` + `height:
+ * auto` keeps the panel's aspect ratio exactly the same as the live
+ * RCA used to be. `display: block` removes the inline-baseline gap
+ * that <video> ships with by default; without it the visual gets a
+ * thin transparent strip below the video that breaks the rounded
+ * corners. */
+.video {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Hint the compositor that this element is a candidate for a
+   * dedicated GPU layer. Cheap but it does help on Safari, where the
+   * default H.264 fallback path can fight with the page paint. */
+  transform: translateZ(0);
+}
+
 .rca {
   padding: 0; font-family: 'JetBrains Mono', monospace; font-size: 13px;
   color: var(--text);
@@ -152,6 +170,37 @@
 }
 .rca > .tagRow:last-child {
   margin-bottom: 18px;
+}
+
+/* GIF-style replay fade-out.
+ *
+ * The React component remounts the `.rca` subtree every LOOP_INTERVAL_MS
+ * (11.5s) to restart all the staggered inner animations. Without any
+ * visual handoff, the resolved RCA would just pop out and the next
+ * empty cycle would pop in, which reads as a flicker.
+ *
+ * Holding opacity 1 for 0-94% of the cycle and easing down to 0 in the
+ * last 6% (~700ms of an 11.5s cycle) gives the visitor a soft "fade and
+ * replay" that feels like a deliberate loop instead of a glitch. The
+ * animation runs only inside .reveal.visible (matching the other
+ * animation blocks in this file) so the panel doesn't fade pre-reveal,
+ * and `forwards` keeps the element at opacity 0 right up to the moment
+ * React swaps it out for the fresh cycle. */
+:global(.reveal.visible) .rca {
+  animation: rcaLoopFade 11.5s ease-in forwards;
+}
+@keyframes rcaLoopFade {
+  0%,
+  94% { opacity: 1; }
+  100% { opacity: 0; }
+}
+/* Reduced-motion users get the resolved state once and keep it — no
+ * fade, no replay. Mirrors the existing reduced-motion block below. */
+@media (prefers-reduced-motion: reduce) {
+  :global(.reveal.visible) .rca {
+    animation: none;
+    opacity: 1;
+  }
 }
 
 /* Single elegant scanner: a soft purple band drifts from top to bottom of
@@ -511,10 +560,28 @@
 :global(.reveal.visible) .evBox .evLine {
   animation: rcaStreamIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
-:global(.reveal.visible) .evLine:nth-of-type(1) { animation-delay: 2.0s; }
-:global(.reveal.visible) .evLine:nth-of-type(2) { animation-delay: 2.5s; }
-:global(.reveal.visible) .evLine:nth-of-type(3) { animation-delay: 3.0s; }
-:global(.reveal.visible) .evLine:nth-of-type(4) { animation-delay: 3.5s; }
+/* Each evLine has its own dedicated class so animation-delay matches
+ * the line index regardless of where the lines sit among their div
+ * siblings.
+ *
+ * The selectors below MUST match the specificity of the base
+ * `.reveal.visible .evBox .evLine { animation: rcaStreamIn... }` rule
+ * above (0,4,0). Otherwise the shorthand `animation:` from the base
+ * rule wins and resets animation-delay back to 0 (CSS shorthand
+ * resets all sub-properties to their initial values), making every
+ * line animate at t=0 simultaneously.
+ *
+ * Pre-existing nth-of-type version of these rules silently broke for
+ * a different reason: .sectionHead + .evSources occupy nth-of-type
+ * 1–2 in the parent, so .evLine elements actually sat at positions
+ * 3–6 — and the rule for `:nth-of-type(1)` matched no element at all
+ * while `:nth-of-type(3..4)` matched the wrong lines with the wrong
+ * delays. Either way the captured GIF previously showed lines 3 & 4
+ * landing at t=0 and lines 1 & 2 landing late. */
+:global(.reveal.visible) .evBox .evLine1 { animation-delay: 2.0s; }
+:global(.reveal.visible) .evBox .evLine2 { animation-delay: 2.5s; }
+:global(.reveal.visible) .evBox .evLine3 { animation-delay: 3.0s; }
+:global(.reveal.visible) .evBox .evLine4 { animation-delay: 3.5s; }
 
 /* Source chips flip from pending purple-grey → done green in lockstep with
    each evidence line landing. The dot blooms with a green halo on the way

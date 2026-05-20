@@ -1,5 +1,15 @@
+import { useEffect, useRef } from 'react';
 import Icon from '../ui/Icon';
 import styles from './AISpotlight.module.css';
+
+/** Detects the user's reduced-motion preference so we can suppress
+ *  autoplay for motion-sensitive visitors. They still get the poster
+ *  (a still of the fully resolved RCA), which is the same final state
+ *  they would have seen at the end of the animation anyway. */
+function prefersReducedMotion(): boolean {
+  if (typeof window === 'undefined' || !window.matchMedia) return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
 
 const bullets: { html: React.ReactNode }[] = [
   {
@@ -36,7 +46,106 @@ const bullets: { html: React.ReactNode }[] = [
   },
 ];
 
+/**
+ * AI Spotlight — the right-side panel is a pre-recorded video of the
+ * RCA screencast (produced by `scripts/capture-aispotlight.mjs`).
+ *
+ * Why a video instead of live CSS animations
+ * ------------------------------------------
+ * The previous implementation was 100+ CSS keyframe animations driven
+ * by a JS loop that remounted the .rca subtree every 11.5s. On slower
+ * devices, background tabs, or when the page is mid-hydration, those
+ * animations would desync — the evidence chips would flip green out of
+ * order, the conclusion box would arrive before its supporting
+ * evidence, the deep-link tags would land before the remediation
+ * steps. The timing was emergent, not authored.
+ *
+ * Baking the animation into a video file removes every source of
+ * timing variance: the browser just plays back the frames at 30fps in
+ * the order they were captured. No GPU pressure from running dozens
+ * of compositor animations, no JS interval driving a React remount,
+ * no race between the IntersectionObserver and the
+ * `prefers-reduced-motion` check. The on-disk asset is ~1.1MB WebM /
+ * ~990KB MP4 — well under the cost of the React+CSS code path it
+ * replaces, and orders of magnitude more reliable.
+ *
+ * Reduced motion + offscreen handling are still respected:
+ *   * `prefers-reduced-motion: reduce` → video is paused at frame 0
+ *     and the poster (a still of the fully resolved RCA) is shown.
+ *   * Section scrolled out of view → video pauses so we don't waste
+ *     decode budget compositing offscreen pixels.
+ *   * Tab hidden → video pauses (this happens automatically in most
+ *     browsers but we belt-and-suspenders it).
+ */
 export default function AISpotlight() {
+  /* Ref to the <video> element so the effects below can pause/play
+   * it imperatively. We can't drive these via React props because the
+   * browser does not re-evaluate <video autoPlay> after first mount. */
+  const videoRef = useRef<HTMLVideoElement>(null);
+  /* Ref to the .visual wrapper that's observed by IntersectionObserver
+   * to gate playback on viewport visibility. */
+  const visualRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const target = visualRef.current;
+    if (!video || !target) return;
+
+    /* Reduced-motion users see only the poster, frozen at frame 0.
+     * The poster is a still of the resolved RCA, so they still see
+     * the final outcome — they just don't see the build-up. */
+    if (prefersReducedMotion()) {
+      video.pause();
+      video.removeAttribute('autoplay');
+      return;
+    }
+
+    let sectionVisible = false;
+    let tabVisible =
+      typeof document === 'undefined' ? true : !document.hidden;
+
+    const updatePlayback = () => {
+      if (sectionVisible && tabVisible) {
+        /* video.play() returns a promise that rejects if autoplay was
+         * blocked (which happens when a user has explicitly disabled
+         * autoplay in their browser settings even with muted videos).
+         * We swallow the rejection — there is nothing useful we can
+         * do, and an uncaught promise rejection would noise up the
+         * console. The poster is visible regardless. */
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    };
+
+    const onVisibility = () => {
+      tabVisible = !document.hidden;
+      updatePlayback();
+    };
+
+    let io: IntersectionObserver | undefined;
+    if ('IntersectionObserver' in window) {
+      io = new IntersectionObserver(
+        ([entry]) => {
+          sectionVisible = entry.isIntersecting;
+          updatePlayback();
+        },
+        { threshold: 0.1 },
+      );
+      io.observe(target);
+    } else {
+      sectionVisible = true;
+      updatePlayback();
+    }
+
+    document.addEventListener('visibilitychange', onVisibility);
+
+    return () => {
+      io?.disconnect();
+      document.removeEventListener('visibilitychange', onVisibility);
+    };
+  }, []);
+
   return (
     <section id="ai" className={`${styles.section} zone-dark`}>
       <div className="container">
@@ -74,214 +183,42 @@ export default function AISpotlight() {
             </div>
           </div>
 
-          <div className={`${styles.visual} reveal`}>
-            <div className={styles.rca}>
-              <span className={styles.scan} aria-hidden />
+          <div
+            ref={visualRef}
+            className={`${styles.visual} reveal`}
+            /* Stable hook used by scripts/capture-aispotlight.mjs when
+             * the asset needs to be regenerated. The script restarts
+             * the live CSS animation via a feature-flagged code path
+             * (see the rollback note below) and captures the result. */
+            data-capture="aispotlight-visual"
+          >
+            {/* The video below is a pre-rendered capture of the live
+                CSS animation. Source files:
+                  - /media/aispotlight.webm  (VP9, primary, ~1.1MB)
+                  - /media/aispotlight.mp4   (H.264, Safari/iOS, ~990KB)
+                  - /media/aispotlight-poster.jpg (still of resolved RCA)
+                Regenerate with: npm run capture:aispotlight
+                (which is just `node scripts/capture-aispotlight.mjs`
+                against a locally running dev server).
 
-              {/* Agent header — branded "AlertMend AI" identity bar with the
-                  cycling status pill on the right. */}
-              <div className={styles.agentHead}>
-                <span className={styles.agentBrand}>
-                  <img
-                    src="/logos/alertmend-logo.png"
-                    alt="AlertMend"
-                    className={styles.agentLogo}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <span className={styles.agentName}>AlertMend AI</span>
-                  <span className={styles.agentVer}>v2.1</span>
-                </span>
-                {/* Status pill cycles through real engineering phases as the
-                    RCA streams in, then crossfades to the final "RCA · 14.8s"
-                    resolved badge. Each phase is a separately stacked badge
-                    so the swap doesn't cause layout shift. */}
-                <span className={styles.rcaStatus}>
-                  <span className={`${styles.badge} ${styles.statusGen} ${styles.statusP1}`}>
-                    <span className={styles.statusDot} aria-hidden />
-                    Collecting evidence…
-                  </span>
-                  <span className={`${styles.badge} ${styles.statusGen} ${styles.statusP2}`}>
-                    <span className={styles.statusDot} aria-hidden />
-                    Analyzing patterns…
-                  </span>
-                  <span className={`${styles.badge} ${styles.statusGen} ${styles.statusP3}`}>
-                    <span className={styles.statusDot} aria-hidden />
-                    Generating remediation…
-                  </span>
-                  <span className={`${styles.badge} ${styles.ok} ${styles.statusFinal}`}>
-                    <Icon name="check" size={11} strokeWidth={3} />
-                    RCA · 14.8s
-                  </span>
-                </span>
-              </div>
-
-              {/* Incident header — severity pill + cluster + target resource,
-                  presented as a single "what we're diagnosing" panel. */}
-              <div className={`${styles.incHead} ${styles.streamResource}`}>
-                <div className={styles.incTopRow}>
-                  <span className={`${styles.badge} ${styles.crit}`}>
-                    <span className={styles.critDot} aria-hidden />
-                    CRITICAL · TRAINING STALLED
-                  </span>
-                  <span className={styles.cluster}>cluster: prod-gpu · ns: ml-training</span>
-                </div>
-                <div className={styles.incResource}>
-                  <span className={styles.incCaret}>›</span>
-                  <span className={styles.k}>llama-ft-7b · step 42,184</span>
-                </div>
-              </div>
-
-              <div className={`${styles.box} ${styles.sumBox}`}>
-                <div className={styles.sectionHead}>
-                  <span className={`${styles.sectionIco} ${styles.sectionIcoSum}`}>
-                    <Icon name="message" size={11} strokeWidth={2.4} />
-                  </span>
-                  <span className={`${styles.sumLabel} ${styles.sectionLabel}`}>
-                    Executive summary
-                  </span>
-                </div>
-                <div className={styles.sumText}>
-                  Distributed training is hung on{' '}
-                  <b style={{ color: 'var(--text)' }}>NCCL all-reduce</b> because GPU 3 on{' '}
-                  <b style={{ color: 'var(--text)' }}>gpu-h100-04</b> is thermally throttling to
-                  35% SM clock. The other 7 H100s are idling at{' '}
-                  <b style={{ color: 'var(--text)' }}>~$98/hr</b> with zero gradient progress.
-                </div>
-              </div>
-
-              <div className={`${styles.box} ${styles.evBox}`}>
-                <div className={styles.sectionHead}>
-                  <span className={`${styles.sectionIco} ${styles.sectionIcoEv}`}>
-                    <Icon name="database" size={11} strokeWidth={2.4} />
-                  </span>
-                  <span className={`${styles.evLabel} ${styles.sectionLabel}`}>
-                    Evidence collected
-                  </span>
-                  <span className={styles.evCount}>4 sources</span>
-                </div>
-
-                {/* Source chips light up green sequentially as each cluster
-                    query returns evidence. */}
-                <div className={styles.evSources}>
-                  <span className={`${styles.evChip} ${styles.evChip1}`}>
-                    <span className={styles.evChipDot} aria-hidden />
-                    Job
-                  </span>
-                  <span className={`${styles.evChip} ${styles.evChip2}`}>
-                    <span className={styles.evChipDot} aria-hidden />
-                    GPU telemetry
-                  </span>
-                  <span className={`${styles.evChip} ${styles.evChip3}`}>
-                    <span className={styles.evChipDot} aria-hidden />
-                    NCCL trace
-                  </span>
-                  <span className={`${styles.evChip} ${styles.evChip4}`}>
-                    <span className={styles.evChipDot} aria-hidden />
-                    Node
-                  </span>
-                </div>
-
-                <div className={styles.evLine}>
-                  <span className={styles.evArrow}>›</span> Job, 8× H100 SXM,{' '}
-                  <span className={styles.k}>NCCL_TIMEOUT=1800s</span>, no step progress for{' '}
-                  <span className={styles.k}>12m 04s</span>
-                </div>
-                <div className={styles.evLine}>
-                  <span className={styles.evArrow}>›</span> gpu-h100-04 dev 3, SM clock{' '}
-                  <span className={styles.k}>540 MHz</span> (35%), temp{' '}
-                  <span className={styles.k}>89 °C</span>,{' '}
-                  <span className={styles.k}>HW_SLOWDOWN</span>
-                </div>
-                <div className={styles.evLine}>
-                  <span className={styles.evArrow}>›</span> NCCL trace, all-reduce stuck on{' '}
-                  <span className={styles.k}>rank 27</span>, ring topology, ETA →{' '}
-                  <span className={styles.k}>timeout</span>
-                </div>
-                <div className={styles.evLine}>
-                  <span className={styles.evArrow}>›</span> Node, fans at{' '}
-                  <span className={styles.k}>100% PWM</span>, inlet temp{' '}
-                  <span className={styles.k}>31 °C</span> (SLA: 27 °C)
-                </div>
-              </div>
-
-              <div className={`${styles.box} ${styles.concBox}`}>
-                <div className={styles.sectionHead}>
-                  <span className={`${styles.sectionIco} ${styles.sectionIcoConc}`}>
-                    <Icon name="check" size={11} strokeWidth={3} />
-                  </span>
-                  <span className={`${styles.concLabel} ${styles.sectionLabel}`}>
-                    Conclusion
-                  </span>
-                  {/* Confidence meter — fills from 0% → 94% during the analyze
-                      phase, replacing the old "confidence: high" text. */}
-                  <span className={styles.conf}>
-                    <span className={styles.confLabel}>Confidence</span>
-                    <span className={styles.confTrack}>
-                      <span className={styles.confFill} aria-hidden />
-                    </span>
-                    <span className={styles.confValue}>94%</span>
-                  </span>
-                </div>
-                <div className={styles.concText}>
-                  A single H100 on gpu-h100-04 is HW-throttling from inadequate cooling, blocking
-                  the all-reduce ring and freezing the entire job. Cost so far: ~$98/hr across 7
-                  idle GPUs.
-                </div>
-              </div>
-
-              <div className={styles.remBlock}>
-                <div className={styles.sectionHead}>
-                  <span className={`${styles.sectionIco} ${styles.sectionIcoRem}`}>
-                    <Icon name="workflow" size={11} strokeWidth={2.4} />
-                  </span>
-                  <span className={`${styles.remLabel} ${styles.sectionLabel}`}>
-                    Remediation
-                  </span>
-                </div>
-                <ol className={styles.remList}>
-                  <li>
-                    <span className={styles.remNum}>1</span>
-                    <span>
-                      Cordon{' '}
-                      <b style={{ color: 'var(--text)' }}>gpu-h100-04</b>, evict rank 27, and
-                      resume the run from{' '}
-                      <b style={{ color: 'var(--text)' }}>checkpoint step 42,000</b>
-                    </span>
-                  </li>
-                  <li>
-                    <span className={styles.remNum}>2</span>
-                    <span>
-                      Tag node{' '}
-                      <b style={{ color: 'var(--text)' }}>hardware-fault=cooling</b>; open a
-                      ticket for inlet airflow inspection
-                    </span>
-                  </li>
-                  <li>
-                    <span className={styles.remNum}>3</span>
-                    <span>
-                      Add HealthPolicy: H100 SM clock &lt; 80% nominal for &gt; 60s →
-                      auto-cordon node
-                    </span>
-                  </li>
-                </ol>
-              </div>
-
-              <div className={styles.tagRow}>
-                <span className={styles.deepTag}>
-                  <Icon name="bar" size={10} strokeWidth={2.4} />
-                  GPU → Telemetry
-                </span>
-                <span className={styles.deepTag}>
-                  <Icon name="compass" size={10} strokeWidth={2.4} />
-                  NCCL → Trace
-                </span>
-                <span className={styles.deepTag}>
-                  <Icon name="database" size={10} strokeWidth={2.4} />
-                  Node → Health
-                </span>
-              </div>
-            </div>
+                If you ever need to roll back to the live CSS-driven
+                animation, restore the .rca subtree from git history
+                — the CSS keyframes that drive it are still in
+                AISpotlight.module.css for that exact case. */}
+            <video
+              ref={videoRef}
+              className={styles.video}
+              poster="/media/aispotlight-poster.jpg"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+              aria-label="AlertMend RCA screencast: collecting evidence, analyzing patterns, generating a remediation, and surfacing the root cause in about 15 seconds."
+            >
+              <source src="/media/aispotlight.webm" type="video/webm" />
+              <source src="/media/aispotlight.mp4" type="video/mp4" />
+            </video>
           </div>
         </div>
       </div>

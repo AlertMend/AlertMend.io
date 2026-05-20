@@ -1926,10 +1926,30 @@
   100% { width: 0%; }
 }
 @keyframes rcaTimerCycle {
-  0%   { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); transform: scale(1); }
-  3%   { box-shadow: 0 0 0 8px rgba(5, 150, 105, 0.16); transform: scale(1.04); }
-  10%  { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); transform: scale(1); }
-  100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); transform: scale(1); }
+  /* Narratively the "Resolved in 14.2s" pill must NOT exist while the
+   * RCA is still investigating — it should pop in only at the moment
+   * the AI finishes (~7s into each 14s modal cycle, the same beat the
+   * conclusion + confidence bar land).
+   *
+   * Mechanics: this animation has `animation-delay: 7s` + `both` fill
+   * mode, so until t=7s of the modal cycle the element holds the 0%
+   * keyframe — hidden, scaled down. The pill then pops in with an
+   * elastic-ish scale + green halo for the "ack, done" feel, holds
+   * through the resolved phase, and fades back out just before the
+   * modal animation cycle wraps so the next investigating phase
+   * doesn't show the pill prematurely. */
+  0%   { opacity: 0; transform: scale(0.86);
+         box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
+  2%   { opacity: 1; transform: scale(1.06);
+         box-shadow: 0 0 0 8px rgba(5, 150, 105, 0.18); }
+  10%  { opacity: 1; transform: scale(1);
+         box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
+  48%  { opacity: 1; transform: scale(1);
+         box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
+  52%  { opacity: 0; transform: scale(0.94);
+         box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
+  100% { opacity: 0; transform: scale(0.86);
+         box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
 }
 
 @media (prefers-reduced-motion: reduce) {

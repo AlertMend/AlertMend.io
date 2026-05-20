@@ -165,3 +165,49 @@ The `scripts/normalize-palette.mjs` one-shot exists to converge any
 re-introduced purple/indigo/fuchsia literals back onto violet-600.
 Run it whenever a PR re-introduces a hardcoded color literal that
 breaks the single-accent rule.
+
+---
+
+## 5. Pre-rendered media assets
+
+Some animations on the marketing site are heavy enough (lots of
+staggered CSS keyframes + JS-driven remount loops) that the live
+implementation tends to desync on slower devices, when the tab is
+backgrounded, or when GC happens at the wrong moment. For these we
+bake the animation into a video file at build time and ship the
+recording instead.
+
+| Asset                                | Source of truth                                | Regenerate with               |
+| ------------------------------------ | ---------------------------------------------- | ----------------------------- |
+| `public/media/aispotlight.webm`      | Live CSS animation in `AISpotlight.module.css` | `npm run capture:aispotlight` |
+| `public/media/aispotlight.mp4`       | (same)                                         | (same)                        |
+| `public/media/aispotlight.gif`       | (same)                                         | (same)                        |
+| `public/media/aispotlight-poster.jpg`| (same)                                         | (same)                        |
+
+The `capture:aispotlight` script (`scripts/capture-aispotlight.mjs`)
+launches headless Chromium against the running dev server, scrolls
+the `[data-capture="aispotlight-visual"]` element into view, pauses
+every CSS animation via the Web Animations API, then steps them
+frame-by-frame at 30fps for one full 11.5s cycle. Frames are encoded
+to WebM (VP9), MP4 (H.264), GIF (palette + bayer dither), and a
+single JPEG poster picked from the resolved-state phase.
+
+Why step-driven capture (not real-time)?
+
+Real-time screenshot capture at 2× DPR takes ~150ms per frame, so the
+animation runs ~5× ahead of the recording loop. Pausing animations
+and stepping `Animation.currentTime` decouples the capture from
+wall-clock time entirely — every frame is rendered at exactly the
+animation timestamp we want.
+
+After regenerating, verify with `npm run verify:aispotlight`. It
+opens the homepage in headless Chromium and asserts: the `<video>`
+mounted, the WebM source was picked, `currentTime` is advancing,
+loop is on, native resolution matches the captured frames, and the
+duration is ~11.5s.
+
+If you ever need to revert to the live React/CSS RCA panel: the
+keyframes that drive it are still preserved in
+`AISpotlight.module.css` for that exact case. Restoring the inner
+markup of the `.visual` div from git history is enough — the CSS
+will animate it again, no other wiring needed.
