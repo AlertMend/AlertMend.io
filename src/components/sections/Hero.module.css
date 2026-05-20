@@ -285,6 +285,22 @@
   box-shadow: var(--shadow-card), 0 0 0 1px rgba(124, 58, 237, 0.08);
 }
 
+/* Pre-recorded auto-demo video (see Hero.tsx). The capture is 1100×727
+ * intrinsic pixels (downscaled to 1280 max width by the capture
+ * script), so `width: 100%; height: auto` keeps the aspect ratio
+ * identical to the live demo this used to wrap. `display: block`
+ * removes the inline-baseline gap that would otherwise leave a thin
+ * transparent strip under the video, breaking the rounded corners. */
+.video {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Hint the compositor that this element should get its own layer.
+   * Cheap, but helps Safari decode the H.264 fallback without fighting
+   * the page paint above-the-fold. */
+  transform: translateZ(0);
+}
+
 /* ---- Browser bar (Mac traffic lights + chrome controls + URL) ---- */
 .browserBar {
   display: flex; align-items: center; gap: 12px;

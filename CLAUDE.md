@@ -183,31 +183,49 @@ recording instead.
 | `public/media/aispotlight.mp4`       | (same)                                         | (same)                        |
 | `public/media/aispotlight.gif`       | (same)                                         | (same)                        |
 | `public/media/aispotlight-poster.jpg`| (same)                                         | (same)                        |
+| `public/media/hero.webm`             | Live JS state machine in `Hero.tsx`            | `npm run capture:hero`        |
+| `public/media/hero.mp4`              | (same)                                         | (same)                        |
+| `public/media/hero.gif`              | (same)                                         | (same)                        |
+| `public/media/hero-poster.jpg`       | (same)                                         | (same)                        |
 
-The `capture:aispotlight` script (`scripts/capture-aispotlight.mjs`)
-launches headless Chromium against the running dev server, scrolls
-the `[data-capture="aispotlight-visual"]` element into view, pauses
-every CSS animation via the Web Animations API, then steps them
-frame-by-frame at 30fps for one full 11.5s cycle. Frames are encoded
-to WebM (VP9), MP4 (H.264), GIF (palette + bayer dither), and a
-single JPEG poster picked from the resolved-state phase.
+There are two capture strategies, picked based on what's driving the
+animation:
 
-Why step-driven capture (not real-time)?
+**AI Spotlight (step-driven, `scripts/capture-aispotlight.mjs`).** The
+panel is dozens of CSS keyframe animations gated by a single class
+toggle. The capture script pauses every CSS animation via the Web
+Animations API, then steps `Animation.currentTime` frame-by-frame at
+30fps for one full 11.5s cycle. Screenshot duration becomes
+irrelevant — every frame is rendered at exactly the animation
+timestamp we want. Why we don't use real-time capture here: at 2×
+DPR each screenshot takes ~150ms, so a real-time recording would
+drift ~5× behind the animation timeline.
 
-Real-time screenshot capture at 2× DPR takes ~150ms per frame, so the
-animation runs ~5× ahead of the recording loop. Pausing animations
-and stepping `Animation.currentTime` decouples the capture from
-wall-clock time entirely — every frame is rendered at exactly the
-animation timestamp we want.
+**Hero (record-then-trim, `scripts/capture-hero.mjs`).** The auto-demo
+is a JS state machine (cursor glides, click rings fire, modal opens,
+RCA streams, PR button clicked, etc.) where the visual state can't
+be cleanly derived from a single time variable. The script uses
+Playwright's `recordVideo` API to capture the page at the browser's
+native compositor rate, then waits for `data-cursor-phase="gliding"`
+to detect the start of cycle 1, then trims with ffmpeg to exactly
+one cycle (20.38s) starting and ending at the same "idle, about to
+glide" frame so the loop is seamless. Output is cropped to the
+`[data-capture="hero-demo"]` bounding box and downscaled to a max
+delivery width of 1280px.
 
-After regenerating, verify with `npm run verify:aispotlight`. It
-opens the homepage in headless Chromium and asserts: the `<video>`
-mounted, the WebM source was picked, `currentTime` is advancing,
-loop is on, native resolution matches the captured frames, and the
-duration is ~11.5s.
+Both pipelines emit WebM (VP9), MP4 (H.264), GIF (palette + bayer
+dither), and a single JPEG poster picked from the most informative
+phase of the cycle.
 
-If you ever need to revert to the live React/CSS RCA panel: the
-keyframes that drive it are still preserved in
-`AISpotlight.module.css` for that exact case. Restoring the inner
-markup of the `.visual` div from git history is enough — the CSS
-will animate it again, no other wiring needed.
+After regenerating, verify with `npm run verify:aispotlight` or
+`npm run verify:hero`. Both open the homepage in headless Chromium
+and assert: the `<video>` mounted, the WebM source was picked,
+`currentTime` is advancing, loop is on, native resolution matches
+the captured frames, and the duration is correct.
+
+If you ever need to revert either section to its live animation:
+the CSS keyframes that drove the AISpotlight RCA panel still live
+in `AISpotlight.module.css`, and the JS state machine for the Hero
+auto-demo is in git history (`Hero.tsx` is the file). Restoring the
+inner markup is enough — the CSS / state machine will animate it
+again, no other wiring needed.

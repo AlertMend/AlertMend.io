@@ -12,6 +12,8 @@
     "build": "npm run generate:blog-list && npm run build:sitemap && npm run build:blog && npm run validate:blogs && tsc && vite build && npm run prerender",
     "capture:aispotlight": "node scripts/capture-aispotlight.mjs",
     "verify:aispotlight": "node scripts/verify-aispotlight-video.mjs",
+    "capture:hero": "node scripts/capture-hero.mjs",
+    "verify:hero": "node scripts/verify-hero-video.mjs",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
