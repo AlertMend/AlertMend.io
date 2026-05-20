@@ -38,7 +38,7 @@ const bullets: { html: React.ReactNode }[] = [
 
 export default function AISpotlight() {
   return (
-    <section id="ai" className={styles.section}>
+    <section id="ai" className={`${styles.section} zone-dark`}>
       <div className="container">
         <div className={styles.spotlight}>
           <div className={`${styles.text} reveal`}>

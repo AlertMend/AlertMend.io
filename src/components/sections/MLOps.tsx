@@ -36,7 +36,7 @@ function statusColor(s: GPU['status']) {
 
 export default function MLOps() {
   return (
-    <section id="mlops" className={styles.section}>
+    <section id="mlops" className={`${styles.section} zone-soft`}>
       <div className="container">
         <div className="sec-head reveal">
           <span className="sec-tag">GPU &amp; ML pipelines</span>
@@ -56,8 +56,8 @@ export default function MLOps() {
           <div className={styles.board}>
             <div className={styles.boardHead}>
               <div className={styles.boardTitleWrap}>
-                <span className={styles.boardIco}>
-                  <Icon name="cpu" size={16} strokeWidth={1.6} />
+                <span className={styles.boardIco} style={{ background: 'rgba(124,58,237,0.18)', color: '#d8b4fe' }}>
+                  <Icon name="cpu" size={16} strokeWidth={2.2} />
                 </span>
                 <div>
                   <div className={styles.boardTitle}>GPU fleet</div>
@@ -115,8 +115,8 @@ export default function MLOps() {
           <div className={styles.board}>
             <div className={styles.boardHead}>
               <div className={styles.boardTitleWrap}>
-                <span className={styles.boardIco}>
-                  <Icon name="trending" size={16} strokeWidth={1.6} />
+                <span className={styles.boardIco} style={{ background: 'rgba(124,58,237,0.18)', color: '#a5b4fc' }}>
+                  <Icon name="trending" size={16} strokeWidth={2.2} />
                 </span>
                 <div>
                   <div className={styles.boardTitle}>Training run · llama-ft-7b</div>
@@ -163,11 +163,11 @@ export default function MLOps() {
               <svg viewBox="0 0 360 120" preserveAspectRatio="none" className={styles.chartSvg}>
                 <defs>
                   <linearGradient id="lossfill" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#a855f7" stopOpacity="0.35" />
-                    <stop offset="100%" stopColor="#a855f7" stopOpacity="0" />
+                    <stop offset="0%" stopColor="#7c3aed" stopOpacity="0.35" />
+                    <stop offset="100%" stopColor="#7c3aed" stopOpacity="0" />
                   </linearGradient>
                   <linearGradient id="lossstroke" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor="#a855f7" />
+                    <stop offset="0%" stopColor="#7c3aed" />
                     <stop offset="100%" stopColor="#6366f1" />
                   </linearGradient>
                 </defs>
@@ -188,8 +188,8 @@ export default function MLOps() {
           <div className={styles.board}>
             <div className={styles.boardHead}>
               <div className={styles.boardTitleWrap}>
-                <span className={styles.boardIco}>
-                  <Icon name="gauge" size={16} strokeWidth={1.6} />
+                <span className={styles.boardIco} style={{ background: 'rgba(52,211,153,0.16)', color: 'var(--green)' }}>
+                  <Icon name="gauge" size={16} strokeWidth={2.2} />
                 </span>
                 <div>
                   <div className={styles.boardTitle}>Inference · vLLM serving</div>
@@ -256,13 +256,13 @@ export default function MLOps() {
           <div className={styles.failGrid}>
             {failureModes.map((f) => (
               <div key={f.label} className={styles.failCard}>
-                <div className={styles.failHead}>
-                  <span className={styles.failIco}>
-                    <Icon name={f.ico as any} size={16} strokeWidth={1.6} />
-                  </span>
+                <span className={styles.failIco}>
+                  <Icon name={f.ico as any} size={18} strokeWidth={2.2} />
+                </span>
+                <div>
                   <div className={styles.failTitle}>{f.label}</div>
+                  <div className={styles.failDesc}>{f.desc}</div>
                 </div>
-                <div className={styles.failDesc}>{f.desc}</div>
               </div>
             ))}
           </div>

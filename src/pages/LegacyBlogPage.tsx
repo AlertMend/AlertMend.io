@@ -47,8 +47,8 @@ export default function LegacyBlogPage() {
       <div className="min-h-screen bg-white">
         <div className="pt-32 pb-20 flex items-center justify-center">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
-            <p className="text-purple-700">Loading post...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-violet-600 mx-auto mb-4"></div>
+            <p className="text-violet-600">Loading post...</p>
           </div>
         </div>
       </div>
@@ -60,10 +60,10 @@ export default function LegacyBlogPage() {
       <div className="min-h-screen bg-white">
         <div className="pt-32 pb-20 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-purple-900 mb-4">Post Not Found</h1>
+            <h1 className="text-3xl font-bold text-zinc-900 mb-4">Post Not Found</h1>
             <button
               onClick={() => navigate('/blog')}
-              className="text-purple-600 hover:text-purple-800 underline"
+              className="text-violet-600 hover:text-violet-700 underline"
             >
               Return to Blog
             </button>
@@ -163,17 +163,17 @@ export default function LegacyBlogPage() {
                 <div className="flex gap-6">
                   {/* Social Share Icons */}
                   <div className="flex flex-col gap-3 pt-2">
-                    <a href="#" className="w-10 h-10 rounded-full bg-gray-100 hover:bg-purple-100 flex items-center justify-center transition-colors">
-                      <Facebook className="h-5 w-5 text-gray-600" />
+                    <a href="#" className="w-10 h-10 rounded-full bg-zinc-100 hover:bg-violet-50 flex items-center justify-center transition-colors">
+                      <Facebook className="h-5 w-5 text-zinc-500" />
                     </a>
-                    <a href="#" className="w-10 h-10 rounded-full bg-gray-100 hover:bg-purple-100 flex items-center justify-center transition-colors">
-                      <Twitter className="h-5 w-5 text-gray-600" />
+                    <a href="#" className="w-10 h-10 rounded-full bg-zinc-100 hover:bg-violet-50 flex items-center justify-center transition-colors">
+                      <Twitter className="h-5 w-5 text-zinc-500" />
                     </a>
-                    <a href="#" className="w-10 h-10 rounded-full bg-gray-100 hover:bg-purple-100 flex items-center justify-center transition-colors">
-                      <Linkedin className="h-5 w-5 text-gray-600" />
+                    <a href="#" className="w-10 h-10 rounded-full bg-zinc-100 hover:bg-violet-50 flex items-center justify-center transition-colors">
+                      <Linkedin className="h-5 w-5 text-zinc-500" />
                     </a>
-                    <a href="#" className="w-10 h-10 rounded-full bg-gray-100 hover:bg-purple-100 flex items-center justify-center transition-colors">
-                      <LinkIcon className="h-5 w-5 text-gray-600" />
+                    <a href="#" className="w-10 h-10 rounded-full bg-zinc-100 hover:bg-violet-50 flex items-center justify-center transition-colors">
+                      <LinkIcon className="h-5 w-5 text-zinc-500" />
                     </a>
                   </div>
 
@@ -181,34 +181,34 @@ export default function LegacyBlogPage() {
                   <div className="flex-1">
                     {/* Header */}
                     <header className="mb-8">
-                      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-purple-950 mb-6 leading-tight">
+                      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-zinc-950 mb-6 leading-tight">
                         {post.title}
                       </h1>
                       
                       {/* Author Info */}
                       <div className="flex items-center gap-4 mb-4">
-                        <div className="w-10 h-10 rounded-full bg-purple-200 flex items-center justify-center text-purple-700 font-semibold">
+                        <div className="w-10 h-10 rounded-full bg-violet-100 flex items-center justify-center text-violet-600 font-semibold">
                           {post.author?.charAt(0) || 'A'}
                         </div>
                         <div>
-                          <div className="font-semibold text-gray-900">{post.author || 'AlertMend Team'}</div>
-                          <div className="text-sm text-gray-600">{readTime} • {formatDate(post.date)}</div>
+                          <div className="font-semibold text-zinc-900">{post.author || 'AlertMend Team'}</div>
+                          <div className="text-sm text-zinc-500">{readTime} • {formatDate(post.date)}</div>
                         </div>
                       </div>
 
                       {/* Tag */}
-                      <div className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-md text-sm font-semibold">
+                      <div className="inline-block px-3 py-1 bg-violet-50 text-violet-700 rounded-md text-sm font-semibold">
                         {post.category}
                       </div>
                     </header>
 
                     {/* Content */}
                     <div className="prose prose-lg max-w-none">
-                      <div className="text-gray-800 leading-7">
+                      <div className="text-zinc-700 leading-7">
                         <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
                           components={{
-                            h1: ({ node, ...props }) => <h2 className="text-3xl md:text-4xl font-bold text-purple-950 mt-10 mb-5 first:mt-0 leading-tight" {...props} />,
+                            h1: ({ node, ...props }) => <h2 className="text-3xl md:text-4xl font-bold text-zinc-950 mt-10 mb-5 first:mt-0 leading-tight" {...props} />,
                             h2: ({ node, children, ...props }: any) => {
                               let headingText = ''
                               if (typeof children === 'string') {
@@ -229,25 +229,25 @@ export default function LegacyBlogPage() {
                                 headingText = String(children)
                               }
                               const truncatedText = truncateH2Heading(headingText.trim())
-                              return <h2 className="text-2xl md:text-3xl font-bold text-purple-950 mt-10 mb-5 leading-tight" {...props}>{truncatedText}</h2>
+                              return <h2 className="text-2xl md:text-3xl font-bold text-zinc-950 mt-10 mb-5 leading-tight" {...props}>{truncatedText}</h2>
                             },
-                            h3: ({ node, ...props }) => <h3 className="text-xl md:text-2xl font-bold text-purple-950 mt-8 mb-4 leading-tight" {...props} />,
-                            p: ({ node, ...props }) => <p className="text-gray-800 leading-7 mb-6 text-lg" {...props} />,
-                            ul: ({ node, ...props }) => <ul className="list-disc mb-6 space-y-3 text-gray-800 ml-6 text-lg leading-7" {...props} />,
-                            ol: ({ node, ...props }) => <ol className="list-decimal mb-6 space-y-3 text-gray-800 ml-6 text-lg leading-7" {...props} />,
-                            li: ({ node, ...props }) => <li className="text-gray-800 leading-7" {...props} />,
-                            blockquote: ({ node, ...props }) => <blockquote className="border-l-4 border-purple-400 pl-6 italic text-gray-700 my-8 text-lg leading-7" {...props} />,
+                            h3: ({ node, ...props }) => <h3 className="text-xl md:text-2xl font-bold text-zinc-950 mt-8 mb-4 leading-tight" {...props} />,
+                            p: ({ node, ...props }) => <p className="text-zinc-700 leading-7 mb-6 text-lg" {...props} />,
+                            ul: ({ node, ...props }) => <ul className="list-disc mb-6 space-y-3 text-zinc-700 ml-6 text-lg leading-7" {...props} />,
+                            ol: ({ node, ...props }) => <ol className="list-decimal mb-6 space-y-3 text-zinc-700 ml-6 text-lg leading-7" {...props} />,
+                            li: ({ node, ...props }) => <li className="text-zinc-700 leading-7" {...props} />,
+                            blockquote: ({ node, ...props }) => <blockquote className="border-l-4 border-violet-300 pl-6 italic text-zinc-700 my-8 text-lg leading-7" {...props} />,
                             code: ({ node, inline, ...props }: any) => 
                               inline ? (
-                                <code className="bg-gray-100 text-purple-700 px-2 py-1 rounded text-base font-mono" {...props} />
+                                <code className="bg-zinc-100 text-violet-600 px-2 py-1 rounded text-base font-mono" {...props} />
                               ) : (
-                                <code className="block bg-gray-900 text-gray-100 p-5 rounded-lg overflow-x-auto my-6 text-sm leading-6" {...props} />
+                                <code className="block bg-zinc-950 text-gray-100 p-5 rounded-lg overflow-x-auto my-6 text-sm leading-6" {...props} />
                               ),
-                            pre: ({ node, ...props }) => <pre className="bg-gray-900 text-gray-100 p-5 rounded-lg overflow-x-auto my-6 text-sm leading-6" {...props} />,
-                            a: ({ node, ...props }) => <a className="text-blue-600 hover:text-blue-800 underline" {...props} />,
-                            strong: ({ node, ...props }) => <strong className="font-bold text-purple-950" {...props} />,
-                            em: ({ node, ...props }) => <em className="italic text-gray-800" {...props} />,
-                            hr: ({ node, ...props }) => <hr className="my-8 border-gray-200" {...props} />,
+                            pre: ({ node, ...props }) => <pre className="bg-zinc-950 text-gray-100 p-5 rounded-lg overflow-x-auto my-6 text-sm leading-6" {...props} />,
+                            a: ({ node, ...props }) => <a className="text-violet-600 hover:text-violet-700 underline" {...props} />,
+                            strong: ({ node, ...props }) => <strong className="font-bold text-zinc-950" {...props} />,
+                            em: ({ node, ...props }) => <em className="italic text-zinc-700" {...props} />,
+                            hr: ({ node, ...props }) => <hr className="my-8 border-zinc-200" {...props} />,
                             img: ({ node, ...props }) => <img className="rounded-lg my-8 w-full" {...props} />,
                           }}
                         >
@@ -257,15 +257,15 @@ export default function LegacyBlogPage() {
                     </div>
 
                     {/* Promotional Section */}
-                    <div className="mt-12 pt-8 border-t border-gray-200">
-                      <p className="text-gray-800 text-lg leading-7 mb-3">
+                    <div className="mt-12 pt-8 border-t border-zinc-200">
+                      <p className="text-zinc-700 text-lg leading-7 mb-3">
                         Ready to eliminate manual firefighting and achieve autonomous infrastructure operations?
                       </p>
-                      <p className="text-gray-800 text-lg leading-7 mb-6">
+                      <p className="text-zinc-700 text-lg leading-7 mb-6">
                         See how AlertMend AI can help you reduce costs by 50%, achieve zero downtime, and automate incident remediation across Kubernetes, VMs, and ECS.{' '}
                         <button
                           onClick={() => window.open('https://calendly.com/hello-alertmend/30min', '_blank')}
-                          className="text-purple-700 hover:text-purple-900 font-semibold underline inline-flex items-center gap-1"
+                          className="text-violet-600 hover:text-zinc-900 font-semibold underline inline-flex items-center gap-1"
                         >
                           Book a demo.
                           <ArrowRight className="h-4 w-4" />
@@ -274,7 +274,7 @@ export default function LegacyBlogPage() {
                     </div>
 
                     {/* Horizontal Separator */}
-                    <hr className="my-8 border-gray-200" />
+                    <hr className="my-8 border-zinc-200" />
 
                      {/* Arvind Rajpurohit Profile Section */}
                      <div className="flex flex-col sm:flex-row gap-6 pb-8">
@@ -283,7 +283,7 @@ export default function LegacyBlogPage() {
                          <img
                            src="/logos/arvind.jpeg"
                            alt="Arvind Rajpurohit"
-                           className="w-32 h-32 rounded-lg object-cover border border-gray-200"
+                           className="w-32 h-32 rounded-lg object-cover border border-zinc-200"
                            style={{ display: 'block', position: 'relative', zIndex: 10 }}
                            onError={(e) => {
                              const target = e.target as HTMLImageElement
@@ -302,7 +302,7 @@ export default function LegacyBlogPage() {
                            }}
                          />
                          <div 
-                           className="profile-placeholder-arvind w-32 h-32 rounded-lg bg-purple-100 border border-gray-200 flex items-center justify-center text-purple-700 font-bold text-2xl absolute top-0 left-0"
+                           className="profile-placeholder-arvind w-32 h-32 rounded-lg bg-violet-50 border border-zinc-200 flex items-center justify-center text-violet-600 font-bold text-2xl absolute top-0 left-0"
                            style={{ display: 'none', zIndex: 0 }}
                          >
                            AR
@@ -311,11 +311,11 @@ export default function LegacyBlogPage() {
 
                        {/* Profile Content */}
                        <div className="flex-1">
-                         <h3 className="text-2xl font-bold text-purple-950 mb-2">
+                         <h3 className="text-2xl font-bold text-zinc-950 mb-2">
                            Arvind Rajpurohit
                          </h3>
-                         <p className="text-purple-700 font-semibold mb-4">Co-Founder & CEO</p>
-                         <div className="text-gray-800 leading-7 space-y-4 mb-4">
+                         <p className="text-violet-600 font-semibold mb-4">Co-Founder & CEO</p>
+                         <div className="text-zinc-700 leading-7 space-y-4 mb-4">
                            <p>
                              Arvind is a Kubestronaut and Kubernetes expert with 15+ years of experience in infrastructure automation. Previously DevOps Team Lead at Roambee and Customer Success Engineer at Shoreline.io (acquired by NVIDIA), he's helped hundreds of teams achieve 99.97% uptime, reduce costs by 50%, and eliminate 90% of manual operations work.
                            </p>
@@ -328,7 +328,7 @@ export default function LegacyBlogPage() {
                            href="https://www.linkedin.com/in/arvind-rajpurohit-4a332523/"
                            target="_blank"
                            rel="noopener noreferrer"
-                           className="inline-flex items-center text-purple-700 hover:text-purple-900 transition-colors"
+                           className="inline-flex items-center text-violet-600 hover:text-zinc-900 transition-colors"
                          >
                            <Linkedin className="h-5 w-5" />
                          </a>
@@ -342,21 +342,21 @@ export default function LegacyBlogPage() {
               <div className="lg:col-span-4">
                 <div className="space-y-6 sticky top-24">
                   {/* Email Signup */}
-                  <div className="bg-purple-50 rounded-xl p-6 border border-purple-100">
-                    <h3 className="text-lg font-bold text-purple-900 mb-4">Receive blog and product updates</h3>
+                  <div className="bg-zinc-50 rounded-xl p-6 border border-zinc-200">
+                    <h3 className="text-lg font-bold text-zinc-900 mb-4">Receive blog and product updates</h3>
                     <BlogSignupForm />
                   </div>
 
                   {/* Related Content */}
                   {relatedPosts.length > 0 && (
-                    <div className="bg-purple-50 rounded-xl p-6 border border-purple-100 mb-6">
-                      <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-4">RELATED CONTENT</h3>
+                    <div className="bg-zinc-50 rounded-xl p-6 border border-zinc-200 mb-6">
+                      <h3 className="text-sm font-bold text-zinc-900 uppercase tracking-wide mb-4">RELATED CONTENT</h3>
                       <ul className="space-y-3">
                         {relatedPosts.map((relatedPost) => (
                           <li key={relatedPost.slug}>
                             <a
                               href={`/blog/${relatedPost.slug}`}
-                              className="text-left text-blue-600 hover:text-blue-800 underline text-sm leading-relaxed"
+                              className="text-left text-violet-600 hover:text-violet-700 underline text-sm leading-relaxed"
                             >
                               {relatedPost.title}
                             </a>
@@ -365,7 +365,7 @@ export default function LegacyBlogPage() {
                       </ul>
                       <a 
                         href="/blog"
-                        className="mt-4 text-purple-600 hover:text-purple-800 text-sm font-medium flex items-center gap-1"
+                        className="mt-4 text-violet-600 hover:text-violet-700 text-sm font-medium flex items-center gap-1"
                       >
                         View All Posts
                         <ArrowRight className="h-4 w-4" />
@@ -374,32 +374,32 @@ export default function LegacyBlogPage() {
                   )}
 
                   {/* Additional Internal Links */}
-                  <div className="bg-white rounded-xl p-6 border border-gray-200">
-                    <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-4">EXPLORE ALERTMEND</h3>
+                  <div className="bg-white rounded-xl p-6 border border-zinc-200">
+                    <h3 className="text-sm font-bold text-zinc-900 uppercase tracking-wide mb-4">EXPLORE ALERTMEND</h3>
                     <ul className="space-y-2 text-sm">
                       <li>
-                        <a href="/" className="text-blue-600 hover:text-blue-800 underline">Home</a>
+                        <a href="/" className="text-violet-600 hover:text-violet-700 underline">Home</a>
                       </li>
                       <li>
-                        <a href="/auto-remediation" className="text-blue-600 hover:text-blue-800 underline">Automated Incident Remediation</a>
+                        <a href="/auto-remediation" className="text-violet-600 hover:text-violet-700 underline">Automated Incident Remediation</a>
                       </li>
                       <li>
-                        <a href="/kubernetes-management" className="text-blue-600 hover:text-blue-800 underline">Kubernetes Management</a>
+                        <a href="/kubernetes-management" className="text-violet-600 hover:text-violet-700 underline">Kubernetes Management</a>
                       </li>
                       <li>
-                        <a href="/on-call-management" className="text-blue-600 hover:text-blue-800 underline">On-Call Management</a>
+                        <a href="/on-call-management" className="text-violet-600 hover:text-violet-700 underline">On-Call Management</a>
                       </li>
                       <li>
-                        <a href="/kubernetes-cost-optimization" className="text-blue-600 hover:text-blue-800 underline">Cost Optimization</a>
+                        <a href="/kubernetes-cost-optimization" className="text-violet-600 hover:text-violet-700 underline">Cost Optimization</a>
                       </li>
                       <li>
-                        <a href="/case-studies" className="text-blue-600 hover:text-blue-800 underline">Case Studies</a>
+                        <a href="/case-studies" className="text-violet-600 hover:text-violet-700 underline">Case Studies</a>
                       </li>
                       <li>
-                        <a href="/pricing" className="text-blue-600 hover:text-blue-800 underline">Pricing</a>
+                        <a href="/pricing" className="text-violet-600 hover:text-violet-700 underline">Pricing</a>
                       </li>
                       <li>
-                        <a href="/blog" className="text-blue-600 hover:text-blue-800 underline">All Blog Posts</a>
+                        <a href="/blog" className="text-violet-600 hover:text-violet-700 underline">All Blog Posts</a>
                       </li>
                     </ul>
                   </div>

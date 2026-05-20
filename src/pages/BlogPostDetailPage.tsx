@@ -76,8 +76,8 @@ export default function BlogPostDetailPage() {
         )}
         <div className="pt-32 pb-20 flex items-center justify-center">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
-            <p className="text-purple-700">Loading post...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-violet-600 mx-auto mb-4"></div>
+            <p className="text-zinc-600">Loading post...</p>
           </div>
         </div>
       </div>
@@ -89,10 +89,10 @@ export default function BlogPostDetailPage() {
       <div className="min-h-screen bg-white">
         <div className="pt-32 pb-20 flex items-center justify-center">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-purple-900 mb-4">Post Not Found</h1>
+            <h1 className="text-3xl font-bold text-zinc-950 mb-4">Post Not Found</h1>
             <button
               onClick={() => navigate('/blog')}
-              className="text-purple-600 hover:text-purple-800 underline"
+              className="text-violet-600 hover:text-violet-700 underline"
             >
               Return to Blog
             </button>
@@ -266,23 +266,23 @@ export default function BlogPostDetailPage() {
                   <div className="flex-1">
                     {/* Header */}
                     <header className="mb-8">
-                      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-purple-950 mb-6 leading-tight">
+                      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-zinc-950 mb-6 leading-tight tracking-tight">
                         {displayTitle}
                       </h1>
                       
                       {/* Author Info */}
                       <div className="flex items-center gap-4 mb-4">
-                        <div className="w-10 h-10 rounded-full bg-purple-200 flex items-center justify-center text-purple-700 font-semibold">
+                        <div className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-white font-semibold">
                           {post.author?.charAt(0) || 'A'}
                         </div>
                         <div>
-                          <div className="font-semibold text-gray-900">{post.author || 'AlertMend Team'}</div>
-                          <div className="text-sm text-gray-600">{readTime} • {formatDate(post.date)}</div>
+                          <div className="font-semibold text-zinc-900">{post.author || 'AlertMend Team'}</div>
+                          <div className="text-sm text-zinc-500">{readTime} • {formatDate(post.date)}</div>
                         </div>
                       </div>
 
-                      {/* Tag */}
-                      <div className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-md text-sm font-semibold">
+                      {/* Category tag */}
+                      <div className="inline-block px-2.5 py-0.5 bg-violet-50 text-violet-700 border border-violet-200 rounded-md text-xs font-semibold uppercase tracking-wider">
                         {post.category}
                       </div>
                     </header>
@@ -293,7 +293,7 @@ export default function BlogPostDetailPage() {
                         <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
                           components={{
-                            h1: ({ node, ...props }) => <h2 className="text-3xl md:text-4xl font-bold text-purple-950 mt-10 mb-5 first:mt-0 leading-tight" {...props} />,
+                            h1: ({ node, ...props }) => <h2 className="text-3xl md:text-4xl font-bold text-zinc-950 mt-10 mb-5 first:mt-0 leading-tight tracking-tight" {...props} />,
                             h2: ({ node, children, ...props }: any) => {
                               // Extract text from children (can be string, array, or ReactNode)
                               let headingText = ''
@@ -315,25 +315,25 @@ export default function BlogPostDetailPage() {
                                 headingText = String(children)
                               }
                               const truncatedText = truncateH2Heading(headingText.trim())
-                              return <h2 className="text-2xl md:text-3xl font-bold text-purple-950 mt-10 mb-5 leading-tight" {...props}>{truncatedText}</h2>
+                              return <h2 className="text-2xl md:text-3xl font-bold text-zinc-950 mt-10 mb-5 leading-tight tracking-tight" {...props}>{truncatedText}</h2>
                             },
-                            h3: ({ node, ...props }) => <h3 className="text-xl md:text-2xl font-bold text-purple-950 mt-8 mb-4 leading-tight" {...props} />,
-                            p: ({ node, ...props }) => <p className="text-gray-800 leading-7 mb-6 text-lg" {...props} />,
-                            ul: ({ node, ...props }) => <ul className="list-disc mb-6 space-y-3 text-gray-800 ml-6 text-lg leading-7" {...props} />,
-                            ol: ({ node, ...props }) => <ol className="list-decimal mb-6 space-y-3 text-gray-800 ml-6 text-lg leading-7" {...props} />,
-                            li: ({ node, ...props }) => <li className="text-gray-800 leading-7" {...props} />,
-                            blockquote: ({ node, ...props }) => <blockquote className="border-l-4 border-purple-400 pl-6 italic text-gray-700 my-8 text-lg leading-7" {...props} />,
+                            h3: ({ node, ...props }) => <h3 className="text-xl md:text-2xl font-bold text-zinc-950 mt-8 mb-4 leading-tight tracking-tight" {...props} />,
+                            p: ({ node, ...props }) => <p className="text-zinc-700 leading-7 mb-6 text-lg" {...props} />,
+                            ul: ({ node, ...props }) => <ul className="list-disc mb-6 space-y-3 text-zinc-700 ml-6 text-lg leading-7" {...props} />,
+                            ol: ({ node, ...props }) => <ol className="list-decimal mb-6 space-y-3 text-zinc-700 ml-6 text-lg leading-7" {...props} />,
+                            li: ({ node, ...props }) => <li className="text-zinc-700 leading-7" {...props} />,
+                            blockquote: ({ node, ...props }) => <blockquote className="border-l-2 border-violet-500 bg-violet-50/40 pl-5 pr-4 py-2 italic text-zinc-700 my-8 text-lg leading-7 rounded-r-md" {...props} />,
                             code: ({ node, inline, ...props }: any) => 
                               inline ? (
-                                <code className="bg-gray-100 text-purple-700 px-2 py-1 rounded text-base font-mono" {...props} />
+                                <code className="bg-violet-50 text-violet-700 border border-violet-100 px-1.5 py-0.5 rounded text-[0.92em] font-mono" {...props} />
                               ) : (
-                                <code className="block bg-gray-900 text-gray-100 p-5 rounded-lg overflow-x-auto my-6 text-sm leading-6" {...props} />
+                                <code className="block bg-zinc-950 text-zinc-100 p-5 rounded-lg overflow-x-auto my-6 text-sm leading-6" {...props} />
                               ),
-                            pre: ({ node, ...props }) => <pre className="bg-gray-900 text-gray-100 p-5 rounded-lg overflow-x-auto my-6 text-sm leading-6" {...props} />,
-                            a: ({ node, ...props }) => <a className="text-blue-600 hover:text-blue-800 underline" {...props} />,
-                            strong: ({ node, ...props }) => <strong className="font-bold text-purple-950" {...props} />,
-                            em: ({ node, ...props }) => <em className="italic text-gray-800" {...props} />,
-                            hr: ({ node, ...props }) => <hr className="my-8 border-gray-200" {...props} />,
+                            pre: ({ node, ...props }) => <pre className="bg-zinc-950 text-zinc-100 p-5 rounded-lg overflow-x-auto my-6 text-sm leading-6" {...props} />,
+                            a: ({ node, ...props }) => <a className="text-violet-600 hover:text-violet-700 underline underline-offset-2" {...props} />,
+                            strong: ({ node, ...props }) => <strong className="font-bold text-zinc-950" {...props} />,
+                            em: ({ node, ...props }) => <em className="italic text-zinc-700" {...props} />,
+                            hr: ({ node, ...props }) => <hr className="my-8 border-zinc-200" {...props} />,
                             img: ({ node, ...props }) => <img className="rounded-lg my-8 w-full" {...props} />,
                             table: ({ node, ...props }) => (
                               <div className="table-wrapper">
@@ -348,15 +348,15 @@ export default function BlogPostDetailPage() {
                     </div>
 
                     {/* Promotional Section */}
-                    <div className="mt-12 pt-8 border-t border-gray-200">
-                      <p className="text-gray-800 text-lg leading-7 mb-3">
+                    <div className="mt-12 pt-8 border-t border-zinc-200">
+                      <p className="text-zinc-700 text-lg leading-7 mb-3">
                         Ready to eliminate manual firefighting and achieve autonomous infrastructure operations?
                       </p>
-                      <p className="text-gray-800 text-lg leading-7 mb-6">
+                      <p className="text-zinc-700 text-lg leading-7 mb-6">
                         See how AlertMend AI can help you reduce costs by 50%, achieve zero downtime, and automate incident remediation across Kubernetes, VMs, and ECS.{' '}
                         <button
                           onClick={() => window.open('https://calendly.com/hello-alertmend/30min', '_blank')}
-                          className="text-purple-700 hover:text-purple-900 font-semibold underline inline-flex items-center gap-1"
+                          className="text-violet-600 hover:text-violet-700 font-semibold underline underline-offset-2 inline-flex items-center gap-1"
                         >
                           Book a demo.
                           <ArrowRight className="h-4 w-4" />
@@ -365,7 +365,7 @@ export default function BlogPostDetailPage() {
                     </div>
 
                     {/* Horizontal Separator */}
-                    <hr className="my-8 border-gray-200" />
+                    <hr className="my-8 border-zinc-200" />
 
                      {/* Arvind Rajpurohit Profile Section */}
                      <div className="flex flex-col sm:flex-row gap-6 pb-8">
@@ -374,10 +374,9 @@ export default function BlogPostDetailPage() {
                          <img
                            src="/logos/arvind.jpeg"
                            alt="Arvind Rajpurohit"
-                           className="w-32 h-32 rounded-lg object-cover border border-gray-200"
+                           className="w-32 h-32 rounded-lg object-cover border border-zinc-200"
                            style={{ display: 'block', position: 'relative', zIndex: 10 }}
                            onError={(e) => {
-                             // Fallback to placeholder if image doesn't exist
                              const target = e.target as HTMLImageElement
                              target.style.display = 'none'
                              const placeholder = target.parentElement?.querySelector('.profile-placeholder-arvind') as HTMLElement
@@ -386,7 +385,6 @@ export default function BlogPostDetailPage() {
                              }
                            }}
                            onLoad={(e) => {
-                             // Ensure placeholder is hidden when image loads successfully
                              const target = e.target as HTMLImageElement
                              const placeholder = target.parentElement?.querySelector('.profile-placeholder-arvind') as HTMLElement
                              if (placeholder) {
@@ -395,7 +393,7 @@ export default function BlogPostDetailPage() {
                            }}
                          />
                          <div 
-                           className="profile-placeholder-arvind w-32 h-32 rounded-lg bg-purple-100 border border-gray-200 flex items-center justify-center text-purple-700 font-bold text-2xl absolute top-0 left-0"
+                           className="profile-placeholder-arvind w-32 h-32 rounded-lg bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-700 font-bold text-2xl absolute top-0 left-0"
                            style={{ display: 'none', zIndex: 0 }}
                          >
                            AR
@@ -404,11 +402,11 @@ export default function BlogPostDetailPage() {
 
                        {/* Profile Content */}
                        <div className="flex-1">
-                         <h3 className="text-2xl font-bold text-purple-950 mb-2">
+                         <h3 className="text-2xl font-bold text-zinc-950 mb-2">
                            Arvind Rajpurohit
                          </h3>
-                         <p className="text-purple-700 font-semibold mb-4">Co-Founder & CEO</p>
-                         <div className="text-gray-800 leading-7 space-y-4 mb-4">
+                         <p className="text-violet-600 font-semibold mb-4">Co-Founder &amp; CEO</p>
+                         <div className="text-zinc-700 leading-7 space-y-4 mb-4">
                            <p>
                              Arvind Rajpurohit - 15+ years in Kubernetes and infrastructure automation. Former DevOps Lead at Roambee and Customer Success Engineer at Shoreline.io (acquired by NVIDIA). Helped teams reach 99.97% uptime, reduce costs by 50%, and cut manual work by 90%.
                            </p>
@@ -421,7 +419,7 @@ export default function BlogPostDetailPage() {
                            href="https://www.linkedin.com/in/arvind-rajpurohit-4a332523/"
                            target="_blank"
                            rel="noopener noreferrer"
-                           className="inline-flex items-center text-purple-700 hover:text-purple-900 transition-colors"
+                           className="inline-flex items-center text-zinc-500 hover:text-violet-600 transition-colors"
                          >
                            <Linkedin className="h-5 w-5" />
                          </a>
@@ -435,15 +433,15 @@ export default function BlogPostDetailPage() {
               <div className="lg:col-span-4">
                 <div className="space-y-6 sticky top-24">
                   {/* Email Signup */}
-                  <div className="bg-purple-50 rounded-xl p-6 border border-purple-100">
-                    <h3 className="text-lg font-bold text-purple-900 mb-4">Receive blog and product updates</h3>
+                  <div className="bg-zinc-50 rounded-lg p-6 border border-zinc-200">
+                    <h3 className="text-lg font-bold text-zinc-950 mb-4">Receive blog and product updates</h3>
                     <BlogSignupForm />
                   </div>
 
                   {/* Related Content */}
                   {relatedPosts.length > 0 && (
-                    <div className="bg-purple-50 rounded-xl p-6 border border-purple-100 mb-6">
-                      <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-4">RELATED CONTENT</h3>
+                    <div className="bg-zinc-50 rounded-lg p-6 border border-zinc-200 mb-6">
+                      <h3 className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.12em] mb-4">Related content</h3>
                       <ul className="space-y-3">
                         {relatedPosts.map((relatedPost) => (
                           <li key={relatedPost.slug}>
@@ -457,7 +455,7 @@ export default function BlogPostDetailPage() {
                                   navigate(`/blog/${relatedPost.slug}`)
                                 }
                               }}
-                              className="text-left text-blue-600 hover:text-blue-800 underline text-sm leading-relaxed cursor-pointer block"
+                              className="text-left text-zinc-700 hover:text-violet-600 text-sm leading-relaxed cursor-pointer block transition-colors"
                             >
                               {relatedPost.title}
                             </a>
@@ -474,41 +472,41 @@ export default function BlogPostDetailPage() {
                             navigate('/blog')
                           }
                         }}
-                        className="mt-4 text-purple-600 hover:text-purple-800 text-sm font-medium flex items-center gap-1 cursor-pointer"
+                        className="mt-4 text-violet-600 hover:text-violet-700 text-sm font-semibold flex items-center gap-1 cursor-pointer"
                       >
-                        View All Posts
+                        View all posts
                         <ArrowRight className="h-4 w-4" />
                       </a>
                     </div>
                   )}
 
                   {/* Additional Internal Links */}
-                  <div className="bg-white rounded-xl p-6 border border-gray-200">
-                    <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wide mb-4">EXPLORE ALERTMEND</h3>
+                  <div className="bg-white rounded-lg p-6 border border-zinc-200">
+                    <h3 className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.12em] mb-4">Explore AlertMend</h3>
                     <ul className="space-y-2 text-sm">
                       <li>
-                        <a href="/" className="text-blue-600 hover:text-blue-800 underline">Home</a>
+                        <a href="/" className="text-zinc-700 hover:text-violet-600 transition-colors">Home</a>
                       </li>
                       <li>
-                        <a href="/auto-remediation" className="text-blue-600 hover:text-blue-800 underline">Automated Incident Remediation</a>
+                        <a href="/auto-remediation" className="text-zinc-700 hover:text-violet-600 transition-colors">Automated Incident Remediation</a>
                       </li>
                       <li>
-                        <a href="/kubernetes-management" className="text-blue-600 hover:text-blue-800 underline">Kubernetes Management</a>
+                        <a href="/kubernetes-management" className="text-zinc-700 hover:text-violet-600 transition-colors">Kubernetes Management</a>
                       </li>
                       <li>
-                        <a href="/on-call-management" className="text-blue-600 hover:text-blue-800 underline">On-Call Management</a>
+                        <a href="/on-call-management" className="text-zinc-700 hover:text-violet-600 transition-colors">On-Call Management</a>
                       </li>
                       <li>
-                        <a href="/kubernetes-cost-optimization" className="text-blue-600 hover:text-blue-800 underline">Cost Optimization</a>
+                        <a href="/kubernetes-cost-optimization" className="text-zinc-700 hover:text-violet-600 transition-colors">Cost Optimization</a>
                       </li>
                       <li>
-                        <a href="/case-studies" className="text-blue-600 hover:text-blue-800 underline">Case Studies</a>
+                        <a href="/case-studies" className="text-zinc-700 hover:text-violet-600 transition-colors">Case Studies</a>
                       </li>
                       <li>
-                        <a href="/pricing" className="text-blue-600 hover:text-blue-800 underline">Pricing</a>
+                        <a href="/pricing" className="text-zinc-700 hover:text-violet-600 transition-colors">Pricing</a>
                       </li>
                       <li>
-                        <a href="/blog" className="text-blue-600 hover:text-blue-800 underline">All Blog Posts</a>
+                        <a href="/blog" className="text-zinc-700 hover:text-violet-600 transition-colors">All Blog Posts</a>
                       </li>
                     </ul>
                   </div>

@@ -13,7 +13,7 @@
 .scrolled {
   background: rgba(255, 255, 255, 0.94);
   border-bottom-color: var(--border);
-  box-shadow: 0 6px 24px -18px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 1px 0 var(--border), 0 6px 20px -16px rgba(9, 9, 11, 0.10);
 }
 
 .nav {
@@ -21,13 +21,13 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 24px;
-  padding: 14px 24px;
+  padding: 12px 24px;
 }
 
 /* ---------- Primary links ---------- */
 .links {
   display: flex;
-  gap: 4px;
+  gap: 2px;
   align-items: center;
   justify-content: center;
   flex-wrap: nowrap;
@@ -40,7 +40,7 @@
   color: var(--text-dim);
   letter-spacing: -0.005em;
   padding: 8px 12px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   white-space: nowrap;
   transition: color 0.15s ease;
 }
@@ -48,106 +48,83 @@
   color: var(--text);
 }
 .linkActive {
-  color: var(--accent-deep);
+  color: var(--text);
+  font-weight: 600;
 }
 
-/* ---------- CTA cluster ---------- */
+/* ---------- CTA cluster ----------
+   Right side reads: Sign in (quiet text) · ● LIVE Playground (violet
+   pill, signals running product) · Book a demo (near-black primary).
+   The Playground pill is the only chromatic element in the nav so it
+   draws curiosity without out-shouting the demo CTA. */
 .cta {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
   flex-shrink: 0;
 }
 
-/* "Live · Playground" pill — communicates that this is the *running*
-   product, not marketing copy. Subtle purple-tinted chip with a pulsing
-   live dot. Still quieter than the primary "Book a demo" button. */
-.ctaPlayground.ctaPlayground {
-  height: 32px;
+/* Quiet "Sign in" text link. */
+.ctaSignIn.ctaSignIn {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-dim);
+  padding: 8px 10px;
+}
+.ctaSignIn.ctaSignIn:hover { color: var(--text); }
+
+/* "● LIVE Playground" pill — violet accent ring, pulsing dot.
+   Looks like a status indicator from the product itself, not a button. */
+.ctaPlayground {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 12px;
+  gap: 7px;
+  height: 32px;
+  padding: 0 12px 0 10px;
   font-size: 12.5px;
   font-weight: 600;
-  color: var(--accent-deep);
+  color: var(--accent-strong);
   background: var(--accent-soft);
-  border: 1px solid rgba(109, 40, 217, 0.22);
+  border: 1px solid rgba(124, 58, 237, 0.22);
   border-radius: 999px;
   letter-spacing: -0.005em;
   white-space: nowrap;
-  transition: background 0.18s ease, border-color 0.18s ease,
-              color 0.18s ease, box-shadow 0.18s ease;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
-.ctaPlayground.ctaPlayground:hover {
-  background: #ddd6fe;
-  border-color: rgba(109, 40, 217, 0.42);
-  color: var(--accent-deep);
-  box-shadow: 0 6px 16px -10px rgba(109, 40, 217, 0.45);
+.ctaPlayground:hover {
+  background: #ddd6fe; /* violet-200 */
+  border-color: rgba(124, 58, 237, 0.36);
+  color: var(--accent-strong);
 }
-
-.liveDot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.55);
-  animation: navLivePulse 1.6s ease-out infinite;
-  flex-shrink: 0;
+.ctaPlaygroundDot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.18);
+  animation: playgroundDotPulse 1.8s ease-in-out infinite;
+  flex: none;
 }
-@keyframes navLivePulse {
-  0%   { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.55); }
-  70%  { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+.ctaPlaygroundLive {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.10em;
+  color: var(--accent);
 }
-.liveLabel {
-  font-size: 10px; font-weight: 800; letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #047857;
-}
-.playgroundLabel {
-  font-weight: 600;
-  letter-spacing: -0.005em;
+@keyframes playgroundDotPulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.14); }
+  50%      { box-shadow: 0 0 0 5px rgba(124, 58, 237, 0.26); }
 }
 
-/* "Sign in" — quiet text link */
-.ctaSignIn.ctaSignIn {
-  height: 36px;
-  display: inline-flex;
-  align-items: center;
-  padding: 0 6px;
-  font-size: 13.5px;
-  font-weight: 500;
-  color: var(--text-dim);
-  white-space: nowrap;
-}
-.ctaSignIn.ctaSignIn:hover {
-  color: var(--text);
-}
-.ctaGhost.ctaGhost {
-  height: 36px;
-  padding: 0 14px;
-  font-size: 13.5px;
-  font-weight: 500;
-  border-radius: 6px;
-  background: transparent;
-  border-color: transparent;
-  box-shadow: none;
-  color: var(--text-dim);
-}
-.ctaGhost.ctaGhost:hover {
-  background: transparent;
-  border-color: transparent;
-  color: var(--text);
-  box-shadow: none;
-  transform: none;
-}
+/* Primary "Book a demo" button — the only high-emphasis action. */
 .ctaPrimary.ctaPrimary {
   height: 36px;
   padding: 0 16px;
   font-size: 13.5px;
   font-weight: 600;
-  border-radius: 6px;
+  border-radius: 999px;
   letter-spacing: -0.005em;
   gap: 6px;
+  margin-left: 4px;
 }
 .ctaPrimary :global(.arrow) {
   margin-right: -2px;
@@ -159,7 +136,7 @@
   display: none;
   width: 38px;
   height: 38px;
-  border-radius: 6px;
+  border-radius: var(--radius);
   background: #ffffff;
   border: 1px solid var(--border-strong);
   cursor: pointer;
@@ -168,18 +145,18 @@
   justify-content: center;
   flex-direction: column;
   gap: 5px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+  box-shadow: 0 1px 2px rgba(9, 9, 11, 0.04);
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 .hamburger:hover {
   background: var(--bg-2);
-  border-color: #18181b;
+  border-color: rgba(9, 9, 11, 0.28);
 }
 .hamburger span {
   width: 18px;
   height: 2px;
   border-radius: 2px;
-  background: var(--text-dim);
+  background: var(--text);
   transition: transform 0.25s ease, opacity 0.2s ease;
 }
 .hamburgerOpen span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -190,7 +167,7 @@
 .scrim {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.40);
+  background: rgba(9, 9, 11, 0.42);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   opacity: 0;
@@ -208,13 +185,13 @@
   width: min(86vw, 340px);
   background: #ffffff;
   border-left: 1px solid var(--border-strong);
-  box-shadow: -16px 0 50px -16px rgba(0, 0, 0, 0.18);
+  box-shadow: -16px 0 50px -16px rgba(9, 9, 11, 0.20);
   transform: translateX(100%);
   transition: transform 0.32s cubic-bezier(0.32, 0.72, 0.2, 1);
   z-index: 70;
   display: flex;
   flex-direction: column;
-  padding: 18px 18px 24px;
+  padding: 16px 16px 22px;
   gap: 12px;
   pointer-events: none;
   visibility: hidden;
@@ -231,11 +208,11 @@
   justify-content: space-between;
   padding-bottom: 10px;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .drawerClose {
-  width: 36px; height: 36px;
-  border-radius: 6px;
+  width: 38px; height: 38px;
+  border-radius: var(--radius);
   background: var(--bg-2);
   border: 1px solid var(--border-strong);
   color: var(--text-dim);
@@ -254,14 +231,14 @@
 .drawerLinks a {
   display: block;
   padding: 12px 14px;
-  border-radius: 6px;
+  border-radius: var(--radius);
   font-size: 15px;
   font-weight: 500;
   color: var(--text);
   text-decoration: none;
   transition: background 0.18s ease;
 }
-.drawerLinks a:hover { background: var(--surface-strong); }
+.drawerLinks a:hover { background: var(--bg-2); }
 
 .drawerCta {
   margin-top: auto;
@@ -272,26 +249,25 @@
   border-top: 1px solid var(--border);
 }
 .drawerCta :global(.btn) { width: 100%; padding: 12px 18px; font-size: 14.5px; }
+.drawerCta .ctaPlayground { width: 100%; height: 40px; justify-content: center; }
 
 /* ---------- Responsive ----------
-   Specificity note: `.ctaPlayground.ctaPlayground` (doubled) is used at
-   desktop sizes to win against `body.alertmend-dark` selectors. The hide
-   rules below must match the doubled specificity or they get overridden. */
+   Breakpoints follow the 390px-baseline rule:
+   - >1020px : full nav (brand + 5 links + sign-in + playground + demo)
+   - 540-1020: brand + ● LIVE Playground + demo + hamburger
+   - <540px  : brand + hamburger only (all CTAs live in the drawer)
+*/
 @media (max-width: 1180px) {
-  .links { gap: 2px; }
+  .links { gap: 0; }
   .link { padding: 8px 10px; font-size: 13.5px; }
-  .ctaSignIn.ctaSignIn { display: none; }
+  .ctaSignIn { display: none; }
 }
 @media (max-width: 1020px) {
   .links { display: none; }
-  .ctaGhost.ctaGhost,
-  .ctaPlayground.ctaPlayground,
-  .ctaSignIn.ctaSignIn { display: none; }
+  .ctaSignIn { display: none; }
   .hamburger { display: inline-flex; }
 }
 @media (max-width: 540px) {
-  /* On the tightest widths, drop the primary CTA from the bar (it lives in
-     the drawer). Brand + hamburger only — clean and unmistakable. */
-  .ctaPrimary.ctaPrimary { display: none; }
-  .nav { padding: 12px 16px; gap: 12px; }
+  .ctaPrimary,
+  .ctaPlayground { display: none; }
 }

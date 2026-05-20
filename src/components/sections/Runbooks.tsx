@@ -31,7 +31,7 @@ const nodes: Node[] = [
   {
     kind: undefined,
     position: { left: '28%', top: '130px' },
-    ico: { name: 'cmdline', bg: 'rgba(99,102,241,0.16)', fg: '#6366f1' },
+    ico: { name: 'cmdline', bg: 'rgba(124,58,237,0.16)', fg: '#6366f1' },
     label: 'Command',
     title: 'Run pod diagnostic',
     sub: 'kubectl describe + logs · last 5m',
@@ -48,7 +48,7 @@ const nodes: Node[] = [
   {
     kind: 'approval',
     position: { left: '76%', top: '40px' },
-    ico: { name: 'check-thick', bg: 'rgba(168,85,247,0.18)', fg: '#a855f7' },
+    ico: { name: 'check-thick', bg: 'rgba(124,58,237,0.18)', fg: '#7c3aed' },
     label: 'Approval · Slack',
     title: 'Approve restart',
     sub: '@oncall · 5 min timeout',
@@ -66,7 +66,7 @@ const nodes: Node[] = [
   {
     kind: 'remediate',
     position: { left: '28%', top: '320px' },
-    ico: { name: 'rotate', bg: 'rgba(168,85,247,0.18)', fg: '#a855f7' },
+    ico: { name: 'rotate', bg: 'rgba(124,58,237,0.18)', fg: '#7c3aed' },
     label: 'Remediation',
     title: 'Rollout restart',
     sub: 'Fan out · all pods · label tier=api',
@@ -182,13 +182,13 @@ export default function Runbooks() {
               <svg className={styles.edges} viewBox="0 0 1000 460" preserveAspectRatio="none" aria-hidden>
                 <defs>
                   <linearGradient id="rbedge" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor="#a855f7" stopOpacity="0.7" />
+                    <stop offset="0%" stopColor="#7c3aed" stopOpacity="0.7" />
                     <stop offset="100%" stopColor="#6366f1" stopOpacity="0.7" />
                   </linearGradient>
                   <radialGradient id="rbpulse" cx="0.5" cy="0.5" r="0.5">
-                    <stop offset="0%" stopColor="#a855f7" stopOpacity="1" />
-                    <stop offset="60%" stopColor="#a855f7" stopOpacity="0.6" />
-                    <stop offset="100%" stopColor="#a855f7" stopOpacity="0" />
+                    <stop offset="0%" stopColor="#7c3aed" stopOpacity="1" />
+                    <stop offset="60%" stopColor="#7c3aed" stopOpacity="0.6" />
+                    <stop offset="100%" stopColor="#7c3aed" stopOpacity="0" />
                   </radialGradient>
                   <marker
                     id="rbarrow"
@@ -231,7 +231,7 @@ export default function Runbooks() {
                         <mpath xlinkHref={`#${p.id}`} />
                       </animateMotion>
                     </circle>
-                    <circle r="2.5" fill="#a855f7">
+                    <circle r="2.5" fill="#7c3aed">
                       <animateMotion dur={p.dur} begin={p.begin} repeatCount="indefinite" rotate="auto">
                         <mpath xlinkHref={`#${p.id}`} />
                       </animateMotion>

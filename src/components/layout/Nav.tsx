@@ -5,18 +5,33 @@ import Icon from '../ui/Icon';
 import { useScrolled } from '../../hooks/useScrolled';
 import styles from './Nav.module.css';
 
-// Industry-standard structure: ~5 top-level items. Deep section anchors
-// ("AI RCAs", "MLOps") are reachable via the Platform link and by scrolling
-// — keeping them at the top level made the bar feel busy.
-const sectionLinks = [
-  { hash: '#features', label: 'Platform' },
-];
+/* ============================================================
+   Navigation — industry-standard 5 primary links
 
-const routeLinks = [
-  { to: '/pricing', label: 'Pricing' },
-  { to: '/case-studies', label: 'Customers' },
-  { to: '/documentation', label: 'Docs' },
-  { to: '/blog', label: 'Blog' },
+   Most SaaS navs (Linear, Vercel, Datadog, Sentry) settle on
+   ~5 primary links so the eye can scan the bar in one glance.
+   We collapse the old 4-section + 3-route split into a clean
+   5-link primary group: Platform → AI RCAs → Integrations →
+   Pricing → Customers → Blog (Customers points at the case
+   studies index).
+
+   The right cluster is intentionally quiet: a small "Sign in"
+   text link, a `● LIVE Playground` pill that signals the
+   running product without competing for the primary CTA, and
+   the single high-emphasis `Book a demo` button. The Playground
+   pill is the only chip in the nav that uses violet, so the eye
+   resolves "real product → live → click here", with the demo
+   button still winning as the primary action.
+   ============================================================ */
+const primaryLinks: Array<
+  | { kind: 'hash'; hash: string; label: string }
+  | { kind: 'route'; to: string; label: string }
+> = [
+  { kind: 'hash', hash: '#features', label: 'Platform' },
+  { kind: 'hash', hash: '#ai', label: 'AI RCAs' },
+  { kind: 'hash', hash: '#integrations', label: 'Integrations' },
+  { kind: 'route', to: '/pricing', label: 'Pricing' },
+  { kind: 'route', to: '/case-studies', label: 'Customers' },
 ];
 
 const SIGNUP_URL = 'https://app.alertmend.io/signup';
@@ -29,12 +44,10 @@ export default function Nav() {
   const onHome = location.pathname === '/';
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  // Close the mobile drawer whenever the route or hash changes.
   useEffect(() => {
     setDrawerOpen(false);
   }, [location.pathname, location.hash]);
 
-  // Lock body scroll when the drawer is open.
   useEffect(() => {
     if (!drawerOpen) return;
     const prev = document.body.style.overflow;
@@ -44,7 +57,6 @@ export default function Nav() {
     };
   }, [drawerOpen]);
 
-  // Close on Escape.
   useEffect(() => {
     if (!drawerOpen) return;
     const onKey = (e: KeyboardEvent) => {
@@ -54,9 +66,9 @@ export default function Nav() {
     return () => document.removeEventListener('keydown', onKey);
   }, [drawerOpen]);
 
-  // Whenever we land on / with a hash (either from a fresh route or from
-  // clicking a same-page hash link), smooth-scroll to the target section.
-  // Retry briefly because the section may not be mounted on first paint.
+  /* Smooth-scroll to anchors when landing on `/#section` (either from a
+     fresh route or a same-page hash click). Retries briefly because the
+     section may not be mounted on first paint. */
   useEffect(() => {
     if (!onHome || !location.hash) return;
     let raf = 0;
@@ -77,6 +89,30 @@ export default function Nav() {
   const isRouteActive = (to: string) =>
     location.pathname === to || location.pathname.startsWith(`${to}/`);
 
+  const renderLink = (
+    l: (typeof primaryLinks)[number],
+    onClick?: () => void,
+  ) =>
+    l.kind === 'hash' ? (
+      <Link
+        key={l.hash}
+        to={{ pathname: '/', hash: l.hash }}
+        className={styles.link}
+        onClick={onClick}
+      >
+        {l.label}
+      </Link>
+    ) : (
+      <Link
+        key={l.to}
+        to={l.to}
+        className={`${styles.link} ${isRouteActive(l.to) ? styles.linkActive : ''}`}
+        onClick={onClick}
+      >
+        {l.label}
+      </Link>
+    );
+
   return (
     <>
       <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
@@ -84,37 +120,15 @@ export default function Nav() {
           <Brand />
 
           <nav className={styles.links} aria-label="Primary">
-            {sectionLinks.map((l) => (
-              <Link
-                key={l.hash}
-                to={{ pathname: '/', hash: l.hash }}
-                className={styles.link}
-              >
-                {l.label}
-              </Link>
-            ))}
-            {routeLinks.map((l) => (
-              <Link
-                key={l.to}
-                to={l.to}
-                className={`${styles.link} ${isRouteActive(l.to) ? styles.linkActive : ''}`}
-              >
-                {l.label}
-              </Link>
-            ))}
+            {primaryLinks.map((l) => renderLink(l))}
           </nav>
 
           <div className={styles.cta}>
-            <a
-              href={PLAYGROUND_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.ctaPlayground}
-            >
-              <span className={styles.liveDot} aria-hidden />
-              <span className={styles.liveLabel}>Live</span>
-              <span className={styles.playgroundLabel}>Playground</span>
-            </a>
+            {/* Quiet right cluster. Sign in + Playground sit at low
+                emphasis so the primary "Book a demo" wins the eye. The
+                Playground pill carries the only violet accent in the
+                nav, signalling "running product" without competing
+                with the demo CTA. */}
             <a
               href={SIGNUP_URL}
               target="_blank"
@@ -122,6 +136,17 @@ export default function Nav() {
               className={`${styles.link} ${styles.ctaSignIn}`}
             >
               Sign in
+            </a>
+            <a
+              href={PLAYGROUND_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.ctaPlayground}
+              aria-label="Open the live playground"
+            >
+              <span className={styles.ctaPlaygroundDot} aria-hidden="true" />
+              <span className={styles.ctaPlaygroundLive}>LIVE</span>
+              <span>Playground</span>
             </a>
             <a
               href={CALENDLY_URL}
@@ -172,31 +197,19 @@ export default function Nav() {
           </button>
         </div>
         <nav className={styles.drawerLinks} aria-label="Mobile">
-          {sectionLinks.map((l) => (
-            <Link
-              key={l.hash}
-              to={{ pathname: '/', hash: l.hash }}
-              onClick={() => setDrawerOpen(false)}
-            >
-              {l.label}
-            </Link>
-          ))}
-          {routeLinks.map((l) => (
-            <Link key={l.to} to={l.to}>
-              {l.label}
-            </Link>
-          ))}
+          {primaryLinks.map((l) => renderLink(l, () => setDrawerOpen(false)))}
         </nav>
         <div className={styles.drawerCta}>
           <a
             href={PLAYGROUND_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-ghost"
+            className={styles.ctaPlayground}
             onClick={() => setDrawerOpen(false)}
           >
-            <Icon name="play" size={12} strokeWidth={1.8} />
-            Playground
+            <span className={styles.ctaPlaygroundDot} aria-hidden="true" />
+            <span className={styles.ctaPlaygroundLive}>LIVE</span>
+            <span>Playground</span>
           </a>
           <a
             href={SIGNUP_URL}

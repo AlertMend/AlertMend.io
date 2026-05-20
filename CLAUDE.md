@@ -1,71 +1,167 @@
-# CLAUDE.md
+# CLAUDE.md — AlertMend.io build & rendering guide
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This document explains how the marketing site is built and the three
+rendering paths that produce final, deployable HTML. Read this **first**
+when changing anything that affects the production output (build
+pipeline, SEO meta, blog content, prerendered routes).
 
-## Commands
+---
+
+## 1. Build pipeline
+
+The `npm run build` script chains six steps in this exact order:
 
 ```bash
-npm install              # install deps
-npm run dev              # Vite dev server (SPA only — does NOT generate blog HTML)
-npm run lint             # ESLint, --max-warnings 0
-npm run preview          # preview the built dist/
-
-# Build pipeline (each step can be run individually)
-npm run generate:blog-list   # scan public/blog/*.md → src/utils/blogList.json
-npm run build:sitemap        # scripts/generate-sitemap.js → public/sitemap.xml
-npm run build:blog           # markdown → dist/blogs/*.html AND dist/blog/<slug>/index.html, then fix-html-descriptions.js
-npm run validate:blogs       # SEO compliance gate; ❌ on errors, ⚠️ on warnings (see VALIDATION.md)
-npm run prerender            # SSR marketing routes from scripts/prerender-routes.tsx (needs vite build first)
-
-npm run build                # full pipeline: generate:blog-list → build:sitemap → build:blog → validate:blogs → tsc → vite build → prerender
+npm run generate:blog-list    # 1. write src/utils/blogList.json
+&& npm run build:sitemap      # 2. write public/sitemap.xml
+&& npm run build:blog         # 3. emit dist/blogs/*.html (HTML path)
+&& npm run validate:blogs     # 4. lint blog frontmatter + content
+&& tsc                        # 5. type-check the React app
+&& vite build                 # 6. bundle to dist/ + dist/.vite/manifest.json
+&& npm run prerender          # 7. static-snapshot React routes (SPA path)
 ```
 
-There is no test runner configured. CI (`.github/workflows/validate-blogs.yml`) only runs `validate:blogs` on PRs that touch `public/blog/**` or the blog scripts.
+Each step writes to disk and is consumed by the next. The order matters:
 
-## Architecture
+| Step | Reads                                          | Writes                                                     |
+| ---- | ---------------------------------------------- | ---------------------------------------------------------- |
+| 1    | `new_blogs/` markdown front-matter             | `src/utils/blogList.json`                                  |
+| 2    | route list + blog list                         | `public/sitemap.xml`                                       |
+| 3    | `new_blogs/*.md`                               | `dist/blogs/<slug>.html` (one per post, prerendered)       |
+| 4    | `new_blogs/*.md`                               | exit code (fails build on missing front-matter)            |
+| 5    | `src/**/*.{ts,tsx}`                            | no artifact — just type checks                             |
+| 6    | `index.html`, `src/main.tsx`, all `src/**`     | `dist/index.html`, `dist/assets/*`, `dist/.vite/manifest.json` |
+| 7    | `dist/.vite/manifest.json`, all React routes   | `dist/<route>/index.html` (one snapshot per route)         |
 
-Vite + React 18 + TypeScript SPA marketing site deployed on Vercel. The non-obvious complexity is the blog pipeline and the dual prerendering strategy — most pages are React-rendered into static HTML at build time, while blog posts are generated *outside* of React directly from markdown.
+Vercel serves `dist/` as a static directory. Any URL that has a
+prerendered `index.html` is served directly; everything else falls back
+to `dist/index.html` and React Router takes over on the client.
 
-### Three rendering paths
+### Local dev
 
-1. **Marketing pages** (`/`, `/pricing`, `/about`, etc.) — `scripts/prerender-routes.tsx` mounts `<App>` under `StaticRouter` with `react-helmet-async`, serializes to HTML, and writes `dist/<route>/index.html`. Requires `dist/.vite/manifest.json` from `vite build` to wire up CSS/JS chunks. The `routesToPrerender` list in that script must be kept in sync with `App.tsx` routes and `vercel.json` rewrites.
-2. **Blog posts via clean URL** (`/blog/<slug>`) — `dist/blog/<slug>/index.html` written by `scripts/build-blog-html.js` directly from `public/blog/<slug>.md` using `marked` (no React on the generation path). Same file is served by Vercel rewrites; React Router also handles this path in the browser via `BlogPostDetailPage.tsx`.
-3. **Blog posts via legacy `.html` URL** (`/blogs/<Title-Case-Slug>.html`) — same generator writes a second copy to `dist/blogs/*.html`. Filenames are Title-Case-With-Hyphens; the slug→filename mapping has hand-picked overrides in `canonicalFilenameOverrides` inside `build-blog-html.js`. These files are kept for SEO/incoming links; the React app has a `/blogs/*` legacy route.
+```bash
+npm run dev          # Vite dev server, HMR, no prerender, no blog HTML
+npm run preview      # serve dist/ over a local static server
+```
 
-### Blog data flow
+Dev mode skips the blog-HTML and prerender steps — those only run as
+part of `npm run build`. To smoke-test prerendered output locally:
 
-`public/blog/*.md` (frontmatter: title/excerpt/date/category/author/keywords) is the source of truth. `generate:blog-list` parses frontmatter into `src/utils/blogList.json` which is statically imported by `src/utils/blogUtils.ts` and used to render the blog list page. The runtime React `BlogPostDetailPage` *also* `fetch()`s the raw `.md` at request time and renders with `react-markdown` — so the same content has three rendering implementations (build-blog-html.js, React Markdown, and the post-processed HTML files). Keep markdown parsing behavior aligned between `scripts/build-blog-html.js` and `BlogPostDetailPage.tsx` when changing how posts render.
+```bash
+npm run build && npm run preview
+```
 
-The `blogPosts` array hard-coded at the top of `scripts/build-blog-html.js` is *not* the full list — only ~25 curated featured posts. The script iterates `public/blog/*.md` itself, so adding a new markdown file is enough to generate HTML, but featured/highlighted posts must also be added there.
+---
 
-### SEO is a hard constraint, not a guideline
+## 2. The three rendering paths
 
-Validation gates the build. The full ruleset lives in `README.md` and `VALIDATION.md`; the enforcement code is in:
+The site produces three different kinds of HTML, each with its own
+pipeline and intended audience.
 
-- `src/utils/titleUtils.ts` — title 30-60 chars (incl. ` | AlertMend AI` suffix), H2s 50-70 chars
-- `src/utils/descriptionUtils.ts` — meta description 50-160 chars, unique per page
-- `src/utils/urlUtils.ts` — canonical URL normalization (lowercase, no trailing slash, underscores→hyphens, no query/hash)
-- `src/components/SEO.tsx` — single source of truth for meta tags via `react-helmet-async`
-- `scripts/validate-blogs.js` — fails the build if rules are violated
-- `scripts/fix-html-descriptions.js` — auto-runs after `build:blog` to repair descriptions <50 chars
+### Path A — Marketing prerender (React → static HTML)
 
-Watch out: the SEO base URL is **`https://www.alertmend.io`** in `src/utils/urlUtils.ts` and `src/components/SEO.tsx`, but the sitemap, robots.txt, and README quote **`https://alertmend.io`** (no `www`). Be deliberate about which you use.
+**Source:** `src/pages/*.tsx` (Home, Pricing, About, Case Studies, etc.)
+**Pipeline:** `vite build` → `scripts/prerender-routes.tsx`
+**Output:** `dist/<route>/index.html`
 
-### Helmet wrapper
+Each marketing route is rendered once at build time via
+`ReactDOMServer.renderToString` inside `scripts/prerender-routes.tsx`.
+The result is a fully-formed HTML document with the React shell
+hydrated on the client. SEO meta, Open Graph tags, and structured data
+are injected via `react-helmet-async` and survive the static snapshot.
 
-`src/lib/helmet.ts` exists because `react-helmet-async` exports differently under ESM (Vite browser build) vs CommonJS (Node-side `tsx` prerender). Import `Helmet`/`HelmetProvider` from `./lib/helmet`, not from `react-helmet-async` directly, or prerender will break.
+Why this matters:
+- The HTML in `dist/<route>/index.html` is what Google, LinkedIn, and
+  Slack unfurlers read. Bug in this output = bug in social previews.
+- Anything that depends on runtime browser APIs (`window`, `document`,
+  `IntersectionObserver`) must be guarded or it will crash the
+  prerender. The `useScrollReveal` hook is a typical example — it's
+  safe because it runs inside `useEffect`.
+- All marketing CSS modules and `src/styles/global.css` are inlined
+  via `<link rel="stylesheet">` tags injected from the Vite manifest;
+  see `getAllCssFiles` in the prerender script.
 
-### Vercel routing
+### Path B — Blog HTML generator (Markdown → static HTML)
 
-`vercel.json` rewrites every named route to its prerendered `<route>/index.html`. `/blog/:slug` and `/blog/:slug.html` rewrite to `/index.html` (so the React SPA handles them — the prerender does *not* cover individual blog posts; those come from the build-blog-html output served as static files alongside SPA fallback). The catch-all `/(.*)` → `/index.html` is the SPA fallback. CSP and security headers are also set here.
+**Source:** `new_blogs/<slug>.md` (markdown with YAML front-matter)
+**Pipeline:** `scripts/build-blog-html.js` + `scripts/fix-html-descriptions.js`
+**Output:** `dist/blogs/<slug>.html` (also served at `/blogs/<slug>.html`)
 
-### TypeScript projects
+A blog post lives in two places at once:
+- `new_blogs/<slug>.md` — the canonical markdown source
+- `dist/blogs/<slug>.html` — a hand-templated, SEO-optimised standalone
+  HTML page generated by `marked` + a string template inside
+  `build-blog-html.js`
 
-`tsconfig.json` (app, `strict`, `noUnusedLocals`/`noUnusedParameters` on) → `tsconfig.node.json` (Vite config) and `tsconfig.prerender.json` (the prerender script). `tsc` in the build only typechecks (`noEmit: true`); Vite handles emit.
+The HTML build uses its own page chrome (header / footer / canonical
+link) and is what Google primarily ranks for `/blogs/*.html` URLs.
+**This page does NOT use React.** It's a plain HTML document with
+inline CSS, designed to be index-friendly and crawl-fast.
 
-## Adding a blog post
+After build, `fix-html-descriptions.js` patches each HTML file's
+`<meta name="description">` so duplicates across the corpus are
+disambiguated (see `META_DESCRIPTION_TESTS.md`).
 
-1. Drop `public/blog/<slug>.md` with the frontmatter block (`title`, `excerpt` 50-160 chars, `date`, `category`, `author`, optional `keywords`).
-2. `npm run build:blog` regenerates static HTML in `dist/blog/<slug>/index.html` and `dist/blogs/<Title-Case>.html`.
-3. To feature the post on the homepage/related-posts surfaces, add an entry to the `blogPosts` array at the top of `scripts/build-blog-html.js`.
-4. `npm run validate:blogs` before committing — CI runs this on PRs that touch blog files.
+### Path C — Runtime React markdown (client-side rendering)
+
+**Source:** `new_blogs/<slug>.md`, loaded at runtime over fetch
+**Pipeline:** `src/pages/BlogPostDetailPage.tsx` → `react-markdown` + `remark-gfm`
+**Output:** rendered into the React app shell at `/blog/<slug>`
+
+When a visitor navigates to `/blog/<slug>` (note: no `.html`), the
+React app fetches the same `new_blogs/<slug>.md` over HTTP, normalises
+it with `normalizeBlogMarkdown`, and renders it with `react-markdown`
+inside the standard marketing chrome (Nav + Footer). This path:
+- Inherits the marketing design system (sec-tag, btn, zone-* etc.).
+- Supports cross-linking back into other React routes without a hard
+  reload.
+- Is the path used by in-app "Related posts" / blog index navigation.
+
+`/blog/<slug>` and `/blogs/<slug>.html` therefore render the *same
+content* through *different pipelines*. The `canonical` URL on the
+React route always points at the React URL; the HTML standalone always
+points at itself. Both link to each other through hreflang/canonical
+chains.
+
+---
+
+## 3. Quick reference
+
+| Need to…                          | Edit                                       | Re-run                          |
+| --------------------------------- | ------------------------------------------ | ------------------------------- |
+| Change marketing copy / sections  | `src/components/sections/*` or `src/pages/*` | `npm run dev` (HMR)            |
+| Tune the design tokens / palette  | `src/styles/global.css`                    | `npm run dev` (HMR)            |
+| Add a new blog post               | `new_blogs/<slug>.md` + front-matter       | `npm run build:blog` (or full build) |
+| Add a new top-level route         | `src/App.tsx` + new page in `src/pages/`   | `npm run build` (prerender)    |
+| Update sitemap                    | `scripts/generate-sitemap.js` (route list) | `npm run build:sitemap`         |
+| Validate blog format              | n/a — runs automatically                   | `npm run validate:blogs`        |
+
+---
+
+## 4. Design system
+
+The marketing pages share one design system defined in
+`src/styles/global.css`. See that file for the canonical token list,
+but the high-order rules are:
+
+- **Palette:** near-black + zinc neutrals with a single restrained
+  violet accent (`--accent: #7c3aed`). No second hue. Don't introduce
+  indigo, fuchsia, or pink — everything resolves to the same violet.
+- **Radii:** `--radius-sm: 6px`, `--radius: 8px`, `--radius-lg: 10px`.
+  No 14/16/24 corners on the homepage.
+- **Shadows:** neutral near-black layers via `--shadow-card` /
+  `--shadow-card-strong`. No purple-tinted glow on raw cards.
+- **Icon treatment:** inline thin icons (`size={16}`, `strokeWidth={1.6}`)
+  sitting flush above the card title. No stacked icon plates with
+  chromatic backgrounds.
+- **Section heads:** `.sec-tag` (violet eyebrow) + `<h2>` (near-black)
+  + supporting `<p>` (zinc-500). Centered, max-width 720px.
+- **Buttons:** `.btn-primary` is near-black on light surfaces. The
+  only place a *white* primary button is used is `FinalCTA`, which
+  overrides the cascade with a higher-specificity local rule (see
+  `FinalCTA.module.css`).
+
+The `scripts/normalize-palette.mjs` one-shot exists to converge any
+re-introduced purple/indigo/fuchsia literals back onto violet-600.
+Run it whenever a PR re-introduces a hardcoded color literal that
+breaks the single-accent rule.

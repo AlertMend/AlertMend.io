@@ -1,27 +1,31 @@
-.hero { padding: 48px 0 56px; text-align: center; position: relative; }
+.hero { padding: 36px 0 48px; text-align: center; position: relative; }
 
 .h1 {
   margin-top: 0;
-  font-size: clamp(36px, 5.4vw, 64px);
-  line-height: 1.06; letter-spacing: -0.035em; font-weight: 700;
-  color: var(--text);
+  font-size: clamp(36px, 5.6vw, 70px);
+  line-height: 1.08; letter-spacing: -0.035em; font-weight: 800;
+  background: var(--grad-text);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .row { display: inline-block; white-space: nowrap; }
 .accent {
-  color: var(--accent);
+  background: var(--grad-primary);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .tagline {
-  display: block; width: fit-content; margin: 18px auto 0;
-  font-size: clamp(15px, 1.4vw, 18px); font-weight: 500; letter-spacing: -0.005em;
+  display: block; width: fit-content; margin: 20px auto 0;
+  font-size: clamp(16px, 1.5vw, 20px); font-weight: 600; letter-spacing: -0.005em;
   color: var(--text-mute);
 }
 .sub {
-  max-width: 720px; margin: 22px auto 0;
-  font-size: clamp(15px, 1.3vw, 18px); color: var(--muted);
-  line-height: 1.6;
+  max-width: 720px; margin: 24px auto 0;
+  font-size: clamp(16px, 1.4vw, 19px); color: var(--muted);
+  line-height: 1.55;
 }
 .heroCta {
-  display: flex; gap: 12px; justify-content: center; margin-top: 32px; flex-wrap: wrap;
+  display: flex; gap: 14px; justify-content: center; margin-top: 36px; flex-wrap: wrap;
 }
 .heroMeta {
   margin-top: 22px; font-size: 13px; color: var(--muted);
@@ -29,6 +33,28 @@
 }
 .heroMeta span { display: inline-flex; align-items: center; gap: 6px; }
 .check { color: var(--green); }
+
+/* Tertiary "playground" link — small text affordance below the meta line.
+   Kept visually quiet so the eye still resolves to the two real CTAs first. */
+.tertiaryCta {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+}
+.tertiaryLink {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 600;
+  color: var(--accent);
+  border-bottom: 1px dashed rgba(124, 58, 237, 0.3);
+  padding-bottom: 1px;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+.tertiaryLink:hover {
+  color: var(--text);
+  border-bottom-color: rgba(124, 58, 237, 0.6);
+}
+.tertiaryLink :global(.arrow) { transition: transform 0.2s; }
+.tertiaryLink:hover :global(.arrow) { transform: translateX(3px); }
 
 /* Compliance roadmap strip */
 .compliance {
@@ -44,8 +70,8 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--text-mute);
-  opacity: 0.8;
+  color: var(--text-dim, #6d28d9);
+  opacity: 0.75;
 }
 .complianceList {
   display: flex;
@@ -58,20 +84,20 @@
   align-items: center;
   gap: 12px;
   padding: 10px 16px 10px 12px;
-  border-radius: 8px;
+  border-radius: 14px;
   background: #ffffff;
-  border: 1px solid var(--border);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--border, rgba(124, 58, 237, 0.18));
+  box-shadow: 0 1px 2px rgba(20, 10, 40, 0.04), 0 6px 18px rgba(124, 58, 237, 0.07);
   transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
 }
 .complianceBadge:hover {
-  transform: translateY(-1px);
-  border-color: var(--border-strong);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 10px 22px -14px rgba(0, 0, 0, 0.18);
+  transform: translateY(-2px);
+  border-color: rgba(124, 58, 237, 0.32);
+  box-shadow: 0 2px 4px rgba(20, 10, 40, 0.05), 0 12px 28px rgba(124, 58, 237, 0.12);
 }
 .complianceLogo {
   flex-shrink: 0;
-  border-radius: 6px;
+  border-radius: 8px;
   display: block;
 }
 .complianceText {
@@ -117,186 +143,1532 @@
   .complianceStatus { font-size: 9px; padding: 2px 7px; }
 }
 
-/* Browser mockup */
-.mockup { margin: 56px auto 0; max-width: 1100px; position: relative; }
+/* ---------- Hero browser-shell mockup ----------
+   The hero mock is presented as a real app screenshot: Chrome-style browser
+   chrome → tab strip → app sidebar (AlertMend brand + nav) → app top bar
+   (breadcrumb / severity / owner / firing timer) → workspace (incident +
+   AI RCA) → audit-log strip. Every layer is intentional so the surface
+   reads as "this is the actual product", not "this is a marketing card". */
+.mockup { margin: 64px auto 0; max-width: 1100px; position: relative; }
+
+/* ===================================================================
+   "Auto-play demo" badge — sits just above the mockup with a pulsing
+   red dot, reads like a LIVE indicator on TV. Tells the visitor up
+   front that this is a self-running demo, not a static screenshot.
+   =================================================================== */
+.demoBadge {
+  position: absolute;
+  top: -36px;
+  right: 8px;
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  color: #ffffff;
+  font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
+  box-shadow: 0 4px 16px -8px rgba(15, 23, 42, 0.4);
+  z-index: 5;
+}
+.demoBadgeDot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.22);
+  animation: bannerDotPulse 1.6s ease-in-out infinite;
+}
+
+/* ===================================================================
+   Animated screencast cursor
+
+   Position is driven by an inline `transform: translate3d(x, y, 0)` set
+   from React state. CSS handles the smooth motion via `transition` on
+   transform. The inner span (.demoCursorInner) handles the scale + the
+   click ripple, so it can compose with the outer translate without the
+   two transforms fighting each other.
+   =================================================================== */
+.demoCursor {
+  position: absolute;
+  top: 0; left: 0;
+  width: 22px; height: 22px;
+  pointer-events: none;
+  z-index: 30; /* above the modal backdrop (z-index 20) so the cursor
+                  remains visible while it interacts with modal contents
+                  like the Generate PR button. */
+  /* Translate to (0,0) is the "neutral" — actual position is set via
+     inline style. Center the cursor on its target by offsetting -50%
+     of its own size in the inner element. */
+  transform: translate3d(0, 0, 0);
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+/* Inner wrapper: handles offset (so the cursor center sits exactly on
+   its target), opacity, and scale-during-press. */
+.demoCursorInner {
+  display: block;
+  position: relative;
+  width: 22px; height: 22px;
+  /* Shift up-and-left so the center of the cursor SVG (the click point)
+     lands on the target, not the top-left of the bounding box. */
+  margin: -11px 0 0 -11px;
+  filter: drop-shadow(0 2px 4px rgba(15, 23, 42, 0.32));
+  transition: opacity 0.32s ease, transform 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+}
+.demoCursor svg { display: block; width: 100%; height: 100%; }
+
+/* Idle / gliding / PR-gliding — visible, neutral scale. */
+.demoCursor_idle       .demoCursorInner,
+.demoCursor_gliding    .demoCursorInner,
+.demoCursor_pr_gliding .demoCursorInner {
+  opacity: 1;
+  transform: scale(1);
+}
+/* Pressing — visible with a subtle scale-down to telegraph the click. */
+.demoCursor_pressing    .demoCursorInner,
+.demoCursor_pr_pressing .demoCursorInner {
+  opacity: 1;
+  transform: scale(0.84);
+}
+/* Hidden — invisible (during RCA stream and at end of cycle). */
+.demoCursor_hidden .demoCursorInner {
+  opacity: 0;
+  transform: scale(1);
+}
+
+/* Click ripple — fires during press, anchored to the cursor's click
+   point (which is offset via .demoCursorInner's negative margin). */
+.demoCursorInner::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: rgba(124, 58, 237, 0.42);
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .demoCursor_pressing    .demoCursorInner::after,
+  .demoCursor_pr_pressing .demoCursorInner::after {
+    animation: demoCursorRipple 0.6s ease-out;
+  }
+}
+@keyframes demoCursorRipple {
+  0%   { transform: translate(-50%, -50%) scale(0);    opacity: 0.55; }
+  100% { transform: translate(-50%, -50%) scale(2.8);  opacity: 0;    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demoCursor          { transition: none; }
+  .demoCursorInner     { transition: opacity 0.2s ease; }
+  .demoCursorInner::after { display: none; }
+}
+
+/* On small screens, the modal stacks awkwardly — hide the cursor and
+   let the modal still auto-open. */
+@media (max-width: 720px) {
+  .demoCursor { display: none; }
+}
+.mockup::before {
+  content: ''; position: absolute; inset: -40px -20px;
+  background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.18) 0%, transparent 70%);
+  filter: blur(60px); z-index: -1;
+}
 .browser {
-  border-radius: 10px; overflow: hidden;
+  border-radius: 14px; overflow: hidden;
   background: #ffffff;
   border: 1px solid var(--border-strong);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-card), 0 0 0 1px rgba(124, 58, 237, 0.08);
 }
+
+/* ---- Browser bar (Mac traffic lights + chrome controls + URL) ---- */
 .browserBar {
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: 12px;
   padding: 10px 14px;
-  background: #fafafa;
-  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, #f1f3f7 0%, #e9ecf2 100%);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
 }
-.dots { display: flex; gap: 6px; }
-.dots span { width: 11px; height: 11px; border-radius: 50%; background: rgba(0, 0, 0, 0.10); }
+.dots { display: flex; gap: 6px; flex: none; }
+.dots span {
+  width: 11px; height: 11px; border-radius: 50%;
+  background: rgba(124, 58, 237, 0.18);
+}
 .dots span:nth-child(1) { background: #ff5f57; }
 .dots span:nth-child(2) { background: #febc2e; }
 .dots span:nth-child(3) { background: #28c840; }
-.url {
-  flex: 1; margin-left: 16px; padding: 5px 12px; border-radius: 4px;
-  background: #ffffff;
-  border: 1px solid var(--border);
-  font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted);
-  max-width: 420px; text-align: center; margin-right: auto; min-width: 0;
+.chromeBtns {
+  display: inline-flex; align-items: center; gap: 4px; flex: none;
+  margin-left: 4px;
 }
-.screen { width: 100%; display: block; background: #ffffff; }
+.chromeBtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: rgba(15, 23, 42, 0.45);
+  font-weight: 500;
+  font-family: -apple-system, system-ui, sans-serif;
+  line-height: 1;
+}
+.chromeBtn:hover { background: rgba(15, 23, 42, 0.06); color: rgba(15, 23, 42, 0.8); }
 
-/* RCA stage */
-.stage {
-  display: grid; grid-template-columns: 280px 1fr; gap: 18px;
-  padding: 22px;
-  background: #fafafa;
-  text-align: left;
-  align-items: stretch;
-}
-.card {
+.url {
+  flex: 1; padding: 6px 14px; border-radius: 999px;
   background: #ffffff;
-  border: 1px solid var(--border);
-  border-radius: 8px; padding: 16px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  display: inline-flex; align-items: center; gap: 8px;
+  max-width: 480px; min-width: 0;
+  margin: 0 auto;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+.urlLock {
+  display: inline-flex; align-items: center; justify-content: center;
+  color: #047857;
+  flex: none;
+}
+.urlHost { color: var(--text); font-weight: 600; }
+.urlPath {
+  color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.chromeTrailing {
+  display: inline-flex; flex: none; gap: 4px;
+}
+.chromeTrailingBtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  color: rgba(15, 23, 42, 0.5);
+}
+
+/* ---- Browser tab strip ---- */
+.tabStrip {
+  display: flex; align-items: flex-end;
+  gap: 4px;
+  padding: 0 14px;
+  background: linear-gradient(180deg, #e9ecf2 0%, #f7f8fb 100%);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.05);
+}
+.activeTab {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 12px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-bottom: 1px solid #ffffff;
+  border-radius: 8px 8px 0 0;
+  font-size: 12px; color: var(--text);
+  font-weight: 500;
+  margin-bottom: -1px;
+  max-width: 280px;
+}
+.tabIco {
+  width: 14px; height: 14px;
+  border-radius: 3px;
+  flex: none;
+}
+.tabTitle {
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  min-width: 0;
+}
+.tabClose {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px;
+  border-radius: 4px;
+  color: rgba(15, 23, 42, 0.4);
+  flex: none;
+}
+.tabPlus {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  color: rgba(15, 23, 42, 0.4);
+  margin-bottom: 4px;
+}
+
+/* ===================================================================
+   Cluster Overview app shell
+
+   Browser chrome → app shell with a thin icon rail on the left → main
+   workspace with sub-tabs + cluster filters → status banner → 3-column
+   body (Active Incidents + Deployments | Cluster Insights | AI Copilot).
+   This is a near-1:1 reproduction of the AlertMend Cluster Overview
+   screen, animated so the surface reads as a live cluster (banner pulse,
+   ticking "last updated", incrementing restart count, AI Copilot avatar
+   breathing, suggestion crossfade, View RCA shimmer).
+   =================================================================== */
+.appShell {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  background: #ffffff;
+  min-height: 0;
+  /* Reset the centered inheritance from the .hero `text-align: center` so
+     all the workspace text reads naturally left-aligned (descriptions,
+     pod names, deployment metadata, etc.). Without this, paragraphs and
+     wrapping lines inside the cards center themselves. */
+  text-align: left;
+}
+
+/* ----- Thin icon rail (no labels — like the live product) ----- */
+.iconRail {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 10px 0;
+  background: linear-gradient(180deg, #faf9fc 0%, #f5f3fa 100%);
+  border-right: 1px solid rgba(15, 23, 42, 0.06);
+  gap: 6px;
+}
+.brandMark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  margin-bottom: 8px;
+  box-shadow: 0 4px 10px -4px rgba(124, 58, 237, 0.45);
+}
+.brandMarkImg { width: 18px; height: 18px; border-radius: 4px; }
+.railList {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 2px;
+  flex: 1;
+}
+.railItem {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: 7px;
+  color: rgba(15, 23, 42, 0.45);
+  cursor: default;
+}
+.railItemActive {
+  background: rgba(124, 58, 237, 0.14);
+  color: var(--accent);
+  box-shadow: inset 0 0 0 1px rgba(124, 58, 237, 0.22);
+}
+.railUser {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--grad-primary);
+  color: #ffffff;
+  font-size: 11px; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-top: 8px;
+}
+
+/* ----- Main workspace ----- */
+.appMain {
+  display: flex; flex-direction: column;
+  min-width: 0;
+  background: #ffffff;
+}
+
+/* ----- Top bar: Overview/Details tabs + Duration/Cluster filters ----- */
+.appBar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+  padding: 8px 16px 0;
+  background: #ffffff;
+  font-size: 12px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+.appBarLeft {
+  display: inline-flex; align-items: flex-end;
+  gap: 4px;
+  margin-bottom: -1px;
+}
+.appBarRight {
+  display: inline-flex; align-items: center;
+  gap: 14px;
+  padding-bottom: 8px;
+}
+.subTab {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 12px;
+  font-size: 12px; font-weight: 500;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  cursor: default;
+}
+.subTab :global(svg) { color: rgba(15, 23, 42, 0.4); }
+.subTabActive {
+  color: var(--text);
+  font-weight: 600;
+  border-bottom-color: var(--accent);
+}
+.subTabActive :global(svg) {
+  color: var(--green);
+  background: rgba(5, 150, 105, 0.14);
+  border-radius: 50%;
+  padding: 2px;
+  width: 14px; height: 14px;
+}
+.filter {
+  display: flex; flex-direction: column; gap: 2px;
+  font-size: 11px;
+}
+.filterLabel {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+.filterValue {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  font-size: 11.5px; font-weight: 600;
+  color: var(--text);
+  min-width: 150px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.filterChev {
+  margin-left: auto;
+  color: rgba(15, 23, 42, 0.4);
+  font-size: 9px;
+  font-family: -apple-system, sans-serif;
+}
+
+/* ----- Status banner: red pulsing dot + ticking last-updated stamp ---- */
+.statusBanner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+  padding: 9px 16px;
+  background: linear-gradient(180deg, rgba(254, 226, 226, 0.65) 0%, rgba(254, 242, 242, 0.45) 100%);
+  border-bottom: 1px solid rgba(220, 38, 38, 0.12);
+  font-size: 12px;
+  color: #b91c1c;
+}
+.statusBannerLeft {
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.statusBannerLeft b { color: #7f1d1d; font-weight: 700; }
+.statusBannerDot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #dc2626;
+  flex: none;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+  animation: bannerDotPulse 1.6s ease-in-out infinite;
+}
+.statusUpdated {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: rgba(127, 29, 29, 0.65);
+  font-size: 11px;
+}
+.statusUpdatedDot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: #10b981;
+  flex: none;
+  margin-left: 2px;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.18);
+  animation: bannerDotPulseGreen 2.4s ease-in-out infinite;
+}
+
+/* ----- 3-column body layout ----- */
+.body {
+  display: grid;
+  grid-template-columns: 220px 1fr 240px;
+  gap: 12px;
+  padding: 14px 16px 18px;
+  background:
+    radial-gradient(ellipse 600px 280px at 80% 0%, rgba(124, 58, 237, 0.04), transparent 70%),
+    linear-gradient(180deg, #ffffff 0%, #faf9fc 100%);
+  min-height: 0;
+}
+.col { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.colWide { /* middle column — consumes remaining space */ }
+
+/* ----- Left column mini cards (Active Incidents, Deployments) ----- */
+.miniCard {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  border-radius: 10px;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.02), 0 4px 14px -10px rgba(15, 23, 42, 0.18);
+  overflow: hidden;
+}
+.miniHead {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  font-size: 11.5px;
+}
+.miniHeadLeft {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-weight: 700;
+  color: var(--text);
+}
+.miniHeadLeft :global(svg) { color: var(--accent); }
+.miniHeadCount {
+  font-size: 10.5px;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+}
+.miniHeadOk {
+  color: #047857;
+  background: rgba(5, 150, 105, 0.1);
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(5, 150, 105, 0.22);
+}
+.miniBody {
+  padding: 12px;
+  font-size: 11.5px;
+  color: var(--text-dim);
+}
+.miniEmpty {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--muted);
+  font-size: 11.5px;
+  padding: 8px 0;
+}
+.miniEmptyDot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(15, 23, 42, 0.18);
+}
+
+.deployItem { display: flex; flex-direction: column; gap: 4px; }
+.deployName {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; font-weight: 600;
+  color: var(--text);
+}
+.deployVer {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: var(--muted);
+}
+.deployRow { display: inline-flex; align-items: center; gap: 8px; margin-top: 2px; }
+.deploySuccess {
+  font-size: 9px; font-weight: 800;
+  color: #047857;
+  background: rgba(5, 150, 105, 0.12);
+  border: 1px solid rgba(5, 150, 105, 0.28);
+  padding: 1px 6px; border-radius: 4px;
+  letter-spacing: 0.06em;
+  font-family: 'JetBrains Mono', monospace;
+}
+.deployTime { font-size: 10px; color: var(--muted); }
+
+/* ----- Middle column: Cluster Insights with restart-storm cards ----- */
+.insightsCard {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  border-radius: 10px;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.02), 0 6px 18px -14px rgba(15, 23, 42, 0.2);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  min-height: 0;
+}
+.insightsHead {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  background: linear-gradient(180deg, #faf9fc 0%, #ffffff 100%);
+}
+.insightsTitle {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 700;
+  color: var(--text);
+}
+.insightsIco {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: rgba(217, 119, 6, 0.12);
+  color: #b45309;
+  border: 1px solid rgba(217, 119, 6, 0.22);
+}
+.insightsLive {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 700;
+  color: #047857;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.insightsLiveDot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+  animation: bannerDotPulseGreen 2s ease-in-out infinite;
+}
+
+.insightsList {
+  list-style: none; padding: 0; margin: 0;
   display: flex; flex-direction: column;
 }
-.cardHead {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 12px;
+.insight {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.05);
 }
-.cardTitle {
-  font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+.insight:last-child { border-bottom: none; }
+.insightHead {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 6px;
+}
+.insightBadge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 9.5px; font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #b45309;
+  text-transform: uppercase;
+}
+.insightBadgeIco {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: rgba(217, 119, 6, 0.14);
+  color: #b45309;
+  font-size: 9px; font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+}
+.insightCount {
+  display: inline-flex; align-items: baseline; gap: 4px;
+  font-size: 10px; font-weight: 600;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  white-space: nowrap;
+}
+.insightTitle {
+  font-size: 12.5px; font-weight: 600;
+  color: var(--text);
+  display: flex; align-items: baseline; gap: 4px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+  min-width: 0;
+}
+.insightTitleName {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text);
+  font-weight: 700;
+  /* `anywhere` lets the long pod name break at hash boundaries when the
+     column is narrow, but keeps it on one line when there's room — much
+     cleaner than `break-all` which split awkwardly mid-word. */
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+.insightTitleSep { color: var(--muted); }
+.insightTitleCount {
+  color: var(--accent);
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+}
+.insightDesc {
+  margin: 0 0 4px;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.insightDesc code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  color: var(--text-dim);
+}
+.insightMeta {
+  font-size: 10.5px;
+  color: var(--muted);
+  margin-bottom: 6px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.insightFoot {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+}
+.insightCode {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+  min-width: 0; max-width: 60%;
+}
+.insightRcaLink {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 700;
+  color: var(--accent);
+  border-bottom: 1px solid rgba(124, 58, 237, 0.32);
+  padding-bottom: 1px;
+  flex: none;
+}
+.insightRcaLink :global(svg) { transition: transform 0.18s ease; }
+
+/* "Fresh arrival" pulse — the topmost insight has a brief highlight that
+   loops every 12s, signalling that new evidence is constantly streaming. */
+.insightFresh {
+  position: relative;
+}
+.insightFresh::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(124, 58, 237, 0.08), transparent 40%);
+  pointer-events: none;
+  animation: insightFreshPulse 12s ease-in-out infinite;
+}
+
+/* ----- Right column: AI Copilot ----- */
+.copilotCard {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  border-radius: 10px;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.02), 0 6px 18px -14px rgba(15, 23, 42, 0.2);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+.copilotHead {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  font-size: 13px; font-weight: 700;
+  color: var(--text);
+  background: linear-gradient(180deg, #faf9fc 0%, #ffffff 100%);
+}
+.copilotIco {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.18), rgba(124, 58, 237, 0.14));
+  border: 1px solid rgba(124, 58, 237, 0.22);
+  flex: none;
+  position: relative;
+  animation: copilotBreathe 3.4s ease-in-out infinite;
+}
+.copilotIcoImg { width: 14px; height: 14px; border-radius: 3px; }
+
+.copilotIntro {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 14px 14px 10px;
+}
+.copilotIntroAv {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #6366f1, #7c3aed);
+  color: #ffffff;
+  flex: none;
+  box-shadow: 0 4px 12px -4px rgba(124, 58, 237, 0.42);
+}
+.copilotIntroText {
+  font-size: 12px; line-height: 1.5;
+  color: var(--text-dim);
+}
+.copilotIntroText b { color: var(--accent); font-weight: 700; }
+
+.copilotSugs {
+  display: flex; flex-direction: column;
+  gap: 6px;
+  padding: 0 14px 12px;
+  margin-top: auto;
+}
+.sug {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 7px;
+  background: rgba(15, 23, 42, 0.03);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  font-size: 11.5px; font-weight: 500;
+  color: var(--text-dim);
+  cursor: default;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+/* The two suggestion chips alternate "active" emphasis on a 6s loop —
+   creates the impression of a copilot cycling its hints. */
+.sugA { animation: sugCycleA 6s ease-in-out infinite; }
+.sugB { animation: sugCycleB 6s ease-in-out infinite; }
+
+.copilotInput {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  background: linear-gradient(180deg, #ffffff 0%, #faf9fc 100%);
+}
+.copilotInputText {
+  flex: 1;
+  font-size: 11.5px;
   color: var(--muted);
 }
-.firingPill {
+.copilotInputBtn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  background: var(--grad-primary);
+  color: #ffffff;
+  flex: none;
+  box-shadow: 0 4px 12px -4px rgba(124, 58, 237, 0.45);
+}
+
+/* ===========================================================
+   Live-cluster animations
+
+   Banner red dot pulse, "last updated" timestamp ticker, restart-count
+   ramp on the live insight card, AI Copilot avatar breathing, suggestion
+   crossfade. Paused on hover so visitors can read freely.
+   =========================================================== */
+
+/* Stacked-span ticker: rotates through 4 values on a 12s loop. Each span
+   is visible for ~3s, then crossfades to the next. Used for both the
+   "Last updated" timestamp and the live restart count on the first
+   insight card.
+
+   Implementation: `inline-grid` with all four ticks sharing a single
+   grid cell. The cell auto-sizes to the widest tick, so the wrapper
+   width fits the longest value (`11 seconds` for the timestamp, `50`
+   for the count) with no min-width hack and no layout jitter as the
+   visible value rotates. */
+.tickerWrap {
+  display: inline-grid;
+  grid-template-areas: "tick";
+  vertical-align: baseline;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+.tick {
+  grid-area: tick;
+  white-space: nowrap;
+  opacity: 0;
+  font-weight: inherit;
+  color: inherit;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tick1 { animation: tickRotate 12s ease-in-out infinite both; animation-delay:  0s; }
+  .tick2 { animation: tickRotate 12s ease-in-out infinite both; animation-delay:  3s; }
+  .tick3 { animation: tickRotate 12s ease-in-out infinite both; animation-delay:  6s; }
+  .tick4 { animation: tickRotate 12s ease-in-out infinite both; animation-delay:  9s; }
+
+  /* "View RCA" link gets a subtle ambient pulse so the call-to-drill-in
+     reads as alive but doesn't dominate. */
+  .insightRcaLink {
+    animation: rcaShimmer 3.6s ease-in-out infinite;
+  }
+
+  /* Pause the whole live-feel cycle on hover so visitors can read the
+     surface without it shifting underneath them. */
+  .browser:hover .tick1,
+  .browser:hover .tick2,
+  .browser:hover .tick3,
+  .browser:hover .tick4,
+  .browser:hover .insightRcaLink,
+  .browser:hover .copilotIco,
+  .browser:hover .sug,
+  .browser:hover .insightFresh::before,
+  .browser:hover .statusBannerDot,
+  .browser:hover .statusUpdatedDot,
+  .browser:hover .insightsLiveDot {
+    animation-play-state: paused;
+  }
+}
+
+/* Each tick has a 12s cycle, visible for the first 25% of its window. Out-
+   curve includes a small upward lift so the swap reads as a deliberate
+   refresh rather than a flicker. */
+@keyframes tickRotate {
+  0%   { opacity: 0; transform: translateY(4px); }
+  4%   { opacity: 1; transform: translateY(0); }
+  21%  { opacity: 1; transform: translateY(0); }
+  25%  { opacity: 0; transform: translateY(-4px); }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
+
+@keyframes bannerDotPulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15); transform: scale(1); }
+  50%      { box-shadow: 0 0 0 5px rgba(220, 38, 38, 0.25); transform: scale(1.08); }
+}
+@keyframes bannerDotPulseGreen {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.18); transform: scale(1); }
+  50%      { box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.32); transform: scale(1.1); }
+}
+
+@keyframes copilotBreathe {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(124, 58, 237, 0);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.18);
+    transform: scale(1.04);
+  }
+}
+
+/* Suggestion chips alternate "active" treatment so the panel feels like a
+   running copilot. SugA emphasizes the first half of the 6s cycle, SugB
+   the second half — they're mirror images. */
+@keyframes sugCycleA {
+  0%, 50%, 100% {
+    background: rgba(15, 23, 42, 0.03);
+    border-color: rgba(15, 23, 42, 0.06);
+    color: var(--text-dim);
+  }
+  20%, 30% {
+    background: rgba(124, 58, 237, 0.06);
+    border-color: rgba(124, 58, 237, 0.22);
+    color: var(--text);
+  }
+}
+@keyframes sugCycleB {
+  0%, 50%, 100% {
+    background: rgba(15, 23, 42, 0.03);
+    border-color: rgba(15, 23, 42, 0.06);
+    color: var(--text-dim);
+  }
+  70%, 80% {
+    background: rgba(124, 58, 237, 0.06);
+    border-color: rgba(124, 58, 237, 0.22);
+    color: var(--text);
+  }
+}
+
+/* "Fresh arrival" highlight on the topmost insight card. */
+@keyframes insightFreshPulse {
+  0%, 100% { opacity: 0; }
+  4%       { opacity: 1; }
+  10%      { opacity: 0.5; }
+  20%      { opacity: 0; }
+}
+
+/* "View RCA" link ambient color + underline shift. */
+@keyframes rcaShimmer {
+  0%, 100% { color: var(--accent); border-bottom-color: rgba(124, 58, 237, 0.32); }
+  50%      { color: #7c3aed;        border-bottom-color: rgba(124, 58, 237, 0.45); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No motion: render the live-state at rest — last tick visible, banner
+     dots steady, copilot still. */
+  .tick1, .tick2, .tick3 { display: none; }
+  .tick4 { opacity: 1; transform: none; animation: none; }
+  .statusBannerDot, .statusUpdatedDot, .insightsLiveDot,
+  .copilotIco, .sug, .insightRcaLink, .insightFresh::before {
+    animation: none;
+  }
+}
+
+/* ===========================================================
+   Responsive
+   =========================================================== */
+@media (max-width: 980px) {
+  .body { grid-template-columns: 1fr; }
+  .url { max-width: none; }
+  .appBar { flex-wrap: wrap; padding: 8px 14px 0; gap: 8px; }
+  .appBarRight { flex-wrap: wrap; }
+}
+@media (max-width: 720px) {
+  .iconRail { display: none; }
+  .appShell { grid-template-columns: 1fr; }
+  .tabStrip { display: none; }
+  .filter { min-width: 0; }
+  .filterValue { min-width: 0; }
+}
+@media (max-width: 540px) {
+  /* Hero h1 has to wrap at ≤390px or "AI-Powered Observability" overflows
+     past the viewport. Drop `white-space: nowrap` on the row, shrink
+     the clamp floor, and let each phrase break naturally. */
+  .hero { padding: 24px 0 40px; }
+  .h1 {
+    font-size: clamp(30px, 8vw, 44px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+  .row { white-space: normal; display: inline; }
+  .sub { font-size: 15px; margin-top: 18px; }
+  .tagline { font-size: 15px; margin-top: 14px; }
+  .heroCta { flex-direction: column; align-items: stretch; margin-top: 28px; }
+  .heroMeta { font-size: 12.5px; gap: 10px 14px; margin-top: 18px; }
+  .chromeBtns, .chromeTrailing { display: none; }
+  .statusBanner { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .mockup { margin-top: 36px; }
+  .demoBadge { right: 0; }
+}
+@media (max-width: 390px) {
+  .h1 { font-size: 28px; }
+}
+
+/* ===================================================================
+   Active Incidents row (clickable button inside the mini card)
+
+   The empty-state was replaced with one real incident row so the
+   surface has a clear "click here" affordance. The whole card row is a
+   button, so keyboard + screen-reader users get a real interactive
+   target.
+   =================================================================== */
+.miniHeadAlert {
+  color: #b91c1c !important;
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(220, 38, 38, 0.32);
+  padding: 1px 8px;
+  border-radius: 999px;
+}
+.activeIncident {
+  position: relative;
+  display: flex; flex-direction: column; gap: 6px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(254, 226, 226, 0.45) 0%, rgba(254, 242, 242, 0.25) 100%);
+  border: 1px solid rgba(220, 38, 38, 0.18);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  /* `isolate` so the ::after ring overlay below stacks correctly above
+     the gradient background but never escapes the rounded corners. */
+  isolation: isolate;
+  overflow: hidden;
+}
+.activeIncident:hover {
+  transform: translateY(-1px);
+  border-color: rgba(220, 38, 38, 0.4);
+  box-shadow: 0 6px 18px -10px rgba(220, 38, 38, 0.5);
+}
+.activeIncident:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+/* Pressed-feedback: scale down and add a quick purple ring flash so the
+   click feels tactile and telegraphs the modal opening. The ring uses
+   ::after so it doesn't disturb the button's layout. */
+.activeIncident:active {
+  transform: scale(0.985);
+  transition-duration: 0.06s;
+}
+.activeIncident::after {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: 0 0 0 0 rgba(124, 58, 237, 0);
+  transition: box-shadow 0.6s ease;
+}
+.activeIncident:active::after {
+  box-shadow: 0 0 0 6px rgba(124, 58, 237, 0.18);
+  transition-duration: 0s;
+}
+
+/* Auto-demo attention pulse — runs continuously while the hero is in
+   auto-cycle mode so the visitor's eye is drawn to the row before the
+   modal pops up. Short, gentle, low-energy: a faint purple halo that
+   inflates and deflates every 2.4s. Stops the moment the visitor takes
+   any manual action (autoCycling flips to false → class is removed). */
+@media (prefers-reduced-motion: no-preference) {
+  .activeIncidentAuto {
+    animation: activeIncidentAttention 2.4s ease-in-out infinite;
+  }
+}
+@keyframes activeIncidentAttention {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
+  50%      { box-shadow: 0 0 0 6px rgba(124, 58, 237, 0.14); }
+}
+
+/* "Pressed by the auto-demo" cue — applied for ~300ms right before
+   each auto-open so the visitor visibly sees the row depress, then
+   the modal pops. This is the visual link between "incident clicked"
+   and "modal opened" — without it, the modal would feel like it
+   appears out of nowhere. */
+.activeIncidentPressing {
+  transform: scale(0.985);
+  /* Suppress the gentle attention pulse during the press so the strong
+     press ring isn't muddied by the gentle one. */
+  animation: activeIncidentPress 0.32s cubic-bezier(0.4, 0, 0.2, 1) both !important;
+}
+@keyframes activeIncidentPress {
+  0%   {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.42);
+  }
+  40%  {
+    transform: scale(0.985);
+    box-shadow: 0 0 0 8px rgba(124, 58, 237, 0.42);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 14px rgba(124, 58, 237, 0);
+  }
+}
+.activeIncidentTop {
+  display: flex; align-items: center; gap: 6px;
+}
+.activeIncidentDot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #dc2626;
+  flex: none;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.18);
+  animation: bannerDotPulse 1.6s ease-in-out infinite;
+}
+.activeIncidentName {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; font-weight: 700;
+  color: var(--text);
+  flex: 1; min-width: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.activeIncidentSev {
+  font-size: 9px; font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #b91c1c;
+  background: #ffffff;
+  border: 1px solid rgba(220, 38, 38, 0.36);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  flex: none;
+}
+.activeIncidentMeta {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10.5px;
+  flex-wrap: wrap;
+}
+.activeIncidentExit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; font-weight: 700;
+  padding: 1px 5px; border-radius: 4px;
+  background: rgba(220, 38, 38, 0.14);
+  border: 1px solid rgba(220, 38, 38, 0.32);
+  color: #b91c1c;
+  letter-spacing: 0.02em;
+  flex: none;
+}
+.activeIncidentState {
+  font-size: 10.5px;
+  color: #b91c1c;
+  font-weight: 600;
+}
+.activeIncidentFoot {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 8px;
+  margin-top: 2px;
+  padding-top: 6px;
+  border-top: 1px dashed rgba(220, 38, 38, 0.18);
+}
+.activeIncidentTime { font-size: 10px; color: var(--muted); }
+.activeIncidentRca {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 10.5px; font-weight: 700;
+  color: var(--accent);
+}
+.activeIncident:hover .activeIncidentRca :global(svg) {
+  transform: translateX(2px);
+  transition: transform 0.18s ease;
+}
+
+/* ===================================================================
+   RCA detail modal — opens on Active Incidents click
+
+   Backdrop overlays the entire .mockup container with a dark blur,
+   modal sits centered. The full RCA card animation runs inside on
+   mount: 4 evidence steps stream in, diff lines flicker line-by-line,
+   root-cause block lifts in, confidence bar fills 0→94%, timer pill
+   pulses green when "resolved". The cycle then loops every 14s for
+   visitors who linger. Hovering the modal pauses everything so the
+   resolved state can be read in full.
+   =================================================================== */
+.rcaBackdrop {
+  position: absolute; inset: 0;
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 20;
+  border-radius: 14px;
+  /* Backdrop fades in over 360ms with a progressive blur ramp (0 → 8px)
+     so the cluster overview doesn't just suddenly dim — it visibly
+     defocuses behind the modal. */
+  animation: rcaBackdropIn 0.36s ease-out both;
+  overflow: auto;
+}
+.rcaModal {
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow:
+    0 24px 72px -20px rgba(15, 23, 42, 0.55),
+    0 12px 36px -12px rgba(109, 40, 217, 0.3),
+    0 0 0 1px rgba(124, 58, 237, 0.08);
+  width: min(960px, 100%);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  /* Modal scales from 0.92 + lifts 24px, with a slight overshoot at 65%
+     so it feels like it's "popping" out of the cluster overview rather
+     than fading politely. */
+  animation: rcaModalIn 0.46s cubic-bezier(0.34, 1.42, 0.5, 1) both;
+  transform-origin: 50% 30%;
+}
+.rcaModalHead {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  background: linear-gradient(180deg, #faf9fc 0%, #ffffff 100%);
+  animation: rcaHeadSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+}
+.rcaModalCrumb {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; flex: 1; min-width: 0;
+}
+.rcaModalCrumbDim { color: var(--muted); font-weight: 500; }
+.rcaModalCrumbSep { color: rgba(15, 23, 42, 0.3); }
+.rcaModalCrumbCur {
+  color: var(--text); font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -0.01em;
+}
+.rcaModalSev {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 999px;
+  background: linear-gradient(180deg, rgba(220, 38, 38, 0.12), rgba(220, 38, 38, 0.08));
+  border: 1px solid rgba(220, 38, 38, 0.32);
+  font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #b91c1c;
+  font-family: 'JetBrains Mono', monospace;
+  flex: none;
+}
+.rcaModalSevDot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #dc2626;
+  animation: bannerDotPulse 1.6s ease-in-out infinite;
+}
+.rcaModalClose {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  flex: none;
+}
+.rcaModalClose:hover {
+  background: rgba(15, 23, 42, 0.05);
+  color: var(--text);
+  border-color: rgba(15, 23, 42, 0.16);
+}
+.rcaModalClose:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ----- RCA stage: incident card on left, agent card on right ----- */
+.rcaStage {
+  --rca-loop: 14s;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 18px;
+  padding: 18px;
+  background:
+    radial-gradient(ellipse 500px 240px at 80% 0%, rgba(124, 58, 237, 0.06), transparent 70%),
+    radial-gradient(ellipse 420px 220px at 0% 100%, rgba(109, 40, 217, 0.05), transparent 70%),
+    linear-gradient(180deg, #ffffff 0%, #faf5ff 100%);
+  text-align: left;
+}
+.rcaCard {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 18px -10px rgba(109, 40, 217, 0.18);
+  display: flex; flex-direction: column;
+  animation: rcaCardSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+}
+.rcaCardHead {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.rcaCardTitle {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted);
+}
+.rcaFiringPill {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 3px 9px; border-radius: 999px; font-size: 11px; font-weight: 600;
-  background: rgba(220, 38, 38, 0.08); color: #b91c1c;
-  border: 1px solid rgba(220, 38, 38, 0.25);
+  background: rgba(220, 38, 38, 0.1); color: #b91c1c;
+  border: 1px solid rgba(220, 38, 38, 0.3);
 }
-.firingDot {
+.rcaFiringDot {
   width: 6px; height: 6px; border-radius: 50%; background: #dc2626;
-  animation: pulseDot 1.4s ease-in-out infinite;
+  animation: bannerDotPulse 1.4s ease-in-out infinite;
 }
-.incidentName {
+.rcaIncidentName {
   font-size: 16px; font-weight: 700; color: var(--text); margin: 0 0 4px;
   font-family: 'JetBrains Mono', monospace;
 }
-.incidentState { font-size: 13px; color: #b91c1c; font-weight: 600; margin-bottom: 14px; }
-.timeline {
-  margin-top: 16px; padding-top: 14px;
+/* Full pod ID line under the deployment name. Same data shown in the
+   Cluster Insights list on the overview so visitors can verify the
+   modal is opening the exact pod they clicked. */
+.rcaPodName {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: var(--muted);
+  margin-bottom: 8px;
+  overflow-wrap: anywhere;
+}
+.rcaPodName :global(svg) { color: rgba(15, 23, 42, 0.4); flex: none; }
+.rcaIncidentState {
+  font-size: 13px; color: #b91c1c; font-weight: 600;
+  margin-bottom: 14px;
+}
+.rcaMeta {
+  display: grid; grid-template-columns: auto 1fr;
+  gap: 7px 12px; font-size: 12px;
+  align-items: center;
+  margin: 0 0 14px;
+}
+.rcaMeta dt { color: var(--muted); }
+.rcaMeta dd {
+  color: var(--text-dim); margin: 0;
+  display: inline-flex; align-items: center; gap: 6px;
+  min-width: 0;
+}
+.rcaMeta dd b { color: var(--text); font-weight: 600; }
+.rcaMetaLogo {
+  width: 14px; height: 14px; flex: none; object-fit: contain;
+  display: inline-block;
+  filter: drop-shadow(0 1px 2px rgba(109, 40, 217, 0.18));
+}
+.rcaMetaSource { flex-wrap: wrap; gap: 4px 6px; }
+.rcaMetaSrcItem { display: inline-flex; align-items: center; gap: 5px; }
+.rcaMetaSep { color: var(--muted); }
+
+.rcaTimeline {
+  margin-top: 4px; padding-top: 12px;
   border-top: 1px solid var(--border);
 }
-.timelineLabel {
+.rcaTimelineLabel {
   font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--muted); margin-bottom: 8px;
 }
-.timelineList {
+.rcaTimelineList {
   list-style: none; padding: 0; margin: 0;
   display: flex; flex-direction: column; gap: 8px;
 }
-.timelineList li {
-  display: grid; grid-template-columns: 8px 28px 1fr; align-items: center; gap: 8px;
+.rcaTimelineList li {
+  display: grid; grid-template-columns: 8px 28px 1fr;
+  align-items: center; gap: 8px;
   font-size: 11.5px; color: var(--text-dim);
 }
-.tlDot {
+.rcaTlDot {
   width: 7px; height: 7px; border-radius: 50%;
   background: var(--muted);
 }
-.tlDot[data-kind='warn'] { background: var(--amber); box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15); }
-.tlDot[data-kind='info'] { background: #0a0a0a; box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.10); }
-.tlTime {
-  font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
-  color: var(--muted);
-}
-.tlText { color: var(--text-dim); }
-.tlText code {
+.rcaTlDot[data-kind='warn'] { background: #d97706; box-shadow: 0 0 8px rgba(217, 119, 6, 0.4); }
+.rcaTlDot[data-kind='info'] { background: var(--accent-2); box-shadow: 0 0 8px rgba(109, 40, 217, 0.4); }
+.rcaTlTime { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--muted); }
+.rcaTlText { color: var(--text-dim); }
+.rcaTlText code {
   font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
   padding: 1px 5px; border-radius: 4px;
-  background: var(--surface-strong); color: var(--text);
+  background: var(--bg-2); color: var(--text);
   border: 1px solid var(--border);
 }
 
-.meta { display: grid; grid-template-columns: auto 1fr; gap: 7px 12px; font-size: 12px; align-items: center; }
-.meta dt { color: var(--muted); }
-.meta dd { color: var(--text-dim); margin: 0; display: inline-flex; align-items: center; gap: 6px; min-width: 0; }
-.meta dd b { color: var(--text); font-weight: 600; }
-.metaLogo {
-  width: 14px; height: 14px; flex: none; object-fit: contain;
-  display: inline-block;
+/* ----- Agent card (right column) ----- */
+.rcaAgent {
+  display: flex; flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  animation: rcaAgentSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.26s both;
 }
-.metaSource { flex-wrap: wrap; gap: 4px 6px; }
-.metaSrcItem { display: inline-flex; align-items: center; gap: 5px; }
-.metaSep { color: var(--muted); }
-
-.agent { display: flex; flex-direction: column; gap: 14px; }
-.agentHead {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+.rcaAgentHead {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
 }
-.aiBadge {
+.rcaAiBadge {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 6px 10px; border-radius: 6px;
-  background: var(--accent-soft);
-  border: 1px solid rgba(109, 40, 217, 0.20);
-  font-size: 12.5px; font-weight: 700; color: var(--accent-deep);
+  padding: 6px 12px; border-radius: 10px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(109, 40, 217, 0.12));
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  font-size: 13px; font-weight: 700; color: var(--text);
 }
-.aiIco {
+.rcaAiIco {
   width: 18px; height: 18px;
   display: block; flex-shrink: 0;
   border-radius: 4px;
+  filter: drop-shadow(0 1px 2px rgba(124, 58, 237, 0.18));
 }
-.timer {
+.rcaTimer {
   display: inline-flex; align-items: center; gap: 6px;
-  font-size: 12px; color: #047857; font-weight: 600;
+  font-size: 12px; color: #047857; font-weight: 700;
   padding: 4px 10px; border-radius: 999px;
-  background: rgba(5, 150, 105, 0.08); border: 1px solid rgba(5, 150, 105, 0.22);
+  background: rgba(5, 150, 105, 0.08);
+  border: 1px solid rgba(5, 150, 105, 0.32);
 }
-.steps { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
-.step {
+.rcaTimer :global(svg) { color: #047857; }
+
+.rcaSteps { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.rcaStep {
   display: flex; align-items: flex-start; gap: 10px;
   font-size: 13px; color: var(--text-dim);
   opacity: 1;
 }
-.checkIco {
+.rcaCheckIco {
   width: 18px; height: 18px; flex: none; margin-top: 1px;
   border-radius: 50%; background: rgba(5, 150, 105, 0.12);
   display: inline-flex; align-items: center; justify-content: center;
   color: var(--green);
 }
-.step b { color: var(--text); font-weight: 600; }
-.step code {
+.rcaStep b { color: var(--text); font-weight: 600; }
+.rcaStep code {
   font-family: 'JetBrains Mono', monospace; font-size: 12px;
   padding: 1px 6px; border-radius: 4px;
-  background: var(--surface-strong); color: var(--text);
-  border: 1px solid var(--border);
+  background: rgba(124, 58, 237, 0.1); color: var(--accent);
+  border: 1px solid rgba(124, 58, 237, 0.18);
 }
 
-.diff {
-  background: #ffffff;
+.rcaDiff {
+  background: #fafafa;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   overflow: hidden;
 }
-.diffHead {
+.rcaDiffHead {
   display: flex; align-items: center; gap: 8px;
   padding: 7px 12px;
-  background: #fafafa;
+  background: var(--bg-2);
   border-bottom: 1px solid var(--border);
   font-size: 11.5px;
 }
-.diffIco { width: 12px; height: 12px; flex: none; object-fit: contain; }
-.diffPath {
+.rcaDiffIco { width: 12px; height: 12px; flex: none; object-fit: contain; }
+.rcaDiffPath {
   color: var(--text-dim); flex: 1; min-width: 0;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   font-family: 'JetBrains Mono', monospace;
 }
-.diffBadge {
+.rcaDiffBadge {
+  display: inline-flex; align-items: center;
+  gap: 4px;
   font-size: 10px; padding: 2px 8px; border-radius: 999px;
-  background: var(--surface-strong); color: var(--text-dim);
-  border: 1px solid var(--border);
+  background: rgba(124, 58, 237, 0.12); color: var(--accent);
+  border: 1px solid rgba(124, 58, 237, 0.3);
   font-weight: 600; letter-spacing: 0.02em; flex: none;
+  font-variant-numeric: tabular-nums;
 }
-.diffBody {
+.rcaDiffBadgeSep {
+  /* Separator between the +N and −N groups. Static. */
+  opacity: 0.6;
+}
+/* Ticker group: all the candidate values share a single grid cell so
+   the badge auto-sizes to the widest tick (no jitter as the value
+   changes from "+0" to "+1" etc). */
+.rcaDiffGroup {
+  display: inline-grid;
+  grid-template-areas: "tick";
+  place-items: center;
+}
+.rcaDiffTick {
+  grid-area: tick;
+  opacity: 0;
+  transform: scale(0.85);
+  transform-origin: center;
+  font-weight: 700;
+}
+
+/* Per-tick keyframes — each tick is visible exactly when its
+   corresponding diff line becomes fully visible (line delay + 210ms
+   fade-in). 14s loop, percentages computed from when the line above
+   the badge is actually rendered.
+
+     34.0% = 4.76s  = -1 line settles → flip −0 to −1
+     36.5% = 5.11s  = +1 line settles → flip +0 to +1
+     39.0% = 5.46s  = +2 line settles → +1 to +2
+     41.5% = 5.81s  = +3 line settles → +2 to +3
+     44.0% = 6.16s  = +4 line settles → +3 to +4
+     88%   = 12.32s = whole diff begins fading out
+     93%   = 13s    = badge fully fades
+     100%  = 14s    = loop reset
+
+   Each tick "pops" on entry (scale 0.7 → 1.18 → 1) so the increment
+   reads as a deliberate count-up, not a passive crossfade. */
+@media (prefers-reduced-motion: no-preference) {
+  .rcaDiffPlus0  { animation: rcaDiffPlus0  14s linear infinite both; }
+  .rcaDiffPlus1  { animation: rcaDiffPlus1  14s linear infinite both; }
+  .rcaDiffPlus2  { animation: rcaDiffPlus2  14s linear infinite both; }
+  .rcaDiffPlus3  { animation: rcaDiffPlus3  14s linear infinite both; }
+  .rcaDiffPlus4  { animation: rcaDiffPlus4  14s linear infinite both; }
+  .rcaDiffMinus0 { animation: rcaDiffMinus0 14s linear infinite both; }
+  .rcaDiffMinus1 { animation: rcaDiffMinus1 14s linear infinite both; }
+
+  /* Whole badge glows briefly during the increment phase (~4.5–6.2s)
+     so the visitor's eye is drawn here while the counter ticks up. */
+  .rcaDiffBadge {
+    animation: rcaDiffBadgePulse 14s ease-in-out infinite;
+  }
+}
+
+/* −0 visible 0–34%, then hidden. */
+@keyframes rcaDiffMinus0 {
+  0%, 33%    { opacity: 1; transform: scale(1); }
+  34%, 100%  { opacity: 0; transform: scale(0.85); }
+}
+/* −1 lands at 34% and HOLDS through the resolved phase. */
+@keyframes rcaDiffMinus1 {
+  0%, 33%    { opacity: 0; transform: scale(0.7); }
+  34%        { opacity: 1; transform: scale(1.22); }
+  35%        { opacity: 1; transform: scale(1); }
+  88%        { opacity: 1; transform: scale(1); }
+  93%, 100%  { opacity: 0; transform: scale(0.85); }
+}
+
+/* +0 visible 0–36.5%, then hidden. */
+@keyframes rcaDiffPlus0 {
+  0%, 35.5% { opacity: 1; transform: scale(1); }
+  36.5%, 100% { opacity: 0; transform: scale(0.85); }
+}
+/* +1 visible 36.5–39%. */
+@keyframes rcaDiffPlus1 {
+  0%, 35.5%   { opacity: 0; transform: scale(0.7); }
+  36.5%       { opacity: 1; transform: scale(1.18); }
+  37.5%       { opacity: 1; transform: scale(1); }
+  39%, 100%   { opacity: 0; transform: scale(0.85); }
+}
+/* +2 visible 39–41.5%. */
+@keyframes rcaDiffPlus2 {
+  0%, 38%     { opacity: 0; transform: scale(0.7); }
+  39%         { opacity: 1; transform: scale(1.18); }
+  40%         { opacity: 1; transform: scale(1); }
+  41.5%, 100% { opacity: 0; transform: scale(0.85); }
+}
+/* +3 visible 41.5–44%. */
+@keyframes rcaDiffPlus3 {
+  0%, 40.5%   { opacity: 0; transform: scale(0.7); }
+  41.5%       { opacity: 1; transform: scale(1.18); }
+  42.5%       { opacity: 1; transform: scale(1); }
+  44%, 100%   { opacity: 0; transform: scale(0.85); }
+}
+/* +4 lands at 44% and HOLDS through the resolved phase to 88%. */
+@keyframes rcaDiffPlus4 {
+  0%, 43%   { opacity: 0; transform: scale(0.7); }
+  44%       { opacity: 1; transform: scale(1.22); }
+  45%       { opacity: 1; transform: scale(1); }
+  88%       { opacity: 1; transform: scale(1); }
+  93%, 100% { opacity: 0; transform: scale(0.85); }
+}
+
+/* Badge glow during the increment window 33–45% (4.62s – 6.30s). */
+@keyframes rcaDiffBadgePulse {
+  0%, 31%, 46%, 100% {
+    background: rgba(124, 58, 237, 0.12);
+    border-color: rgba(124, 58, 237, 0.3);
+    box-shadow: 0 0 0 0 rgba(124, 58, 237, 0);
+  }
+  33%, 45% {
+    background: rgba(124, 58, 237, 0.22);
+    border-color: rgba(124, 58, 237, 0.55);
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No motion: render the resolved end-state — +4 and −1 visible,
+     all intermediate ticks hidden. Badge sits at its resting style. */
+  .rcaDiffTick { opacity: 0; transform: none; animation: none; }
+  .rcaDiffPlus4, .rcaDiffMinus1 { opacity: 1; }
+  .rcaDiffBadge { animation: none; }
+}
+.rcaDiffBody {
   margin: 0; padding: 8px 12px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 11.5px; line-height: 1.7;
@@ -304,103 +1676,284 @@
   white-space: pre; overflow-x: auto;
   background: #ffffff;
 }
-.diffMinus { color: #b91c1c; background: rgba(220, 38, 38, 0.06); margin: 0 -12px; padding: 0 12px; }
-.diffPlus { color: #047857; background: rgba(5, 150, 105, 0.07); margin: 0 -12px; padding: 0 12px; }
+.rcaDiffMinus { color: #b91c1c; background: rgba(220, 38, 38, 0.07); margin: 0 -12px; padding: 0 12px; }
+.rcaDiffPlus  { color: #047857; background: rgba(5, 150, 105, 0.08); margin: 0 -12px; padding: 0 12px; }
 
-.result {
-  background: #fafafa;
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
-  border-radius: 8px; padding: 14px 16px;
+.rcaResult {
+  background: linear-gradient(180deg, rgba(124, 58, 237, 0.06), rgba(109, 40, 217, 0.04));
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  border-radius: 12px; padding: 14px 16px;
 }
-.resultLabel {
+.rcaResultLabel {
   font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--accent); margin-bottom: 6px;
 }
-.resultText {
-  font-size: 14px; color: var(--text); line-height: 1.55; font-weight: 500;
+.rcaResultText {
+  font-size: 13.5px; color: var(--text); line-height: 1.5; font-weight: 500;
 }
-.resultText code {
-  font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
+.rcaResultText code {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
   color: var(--text-mute);
 }
-.conf {
+.rcaConf {
   margin-top: 10px; display: flex; align-items: center; gap: 10px;
   font-size: 12px; color: var(--muted);
 }
-.confBar {
-  flex: 1; height: 5px; border-radius: 999px; background: rgba(0, 0, 0, 0.08);
+.rcaConfBar {
+  flex: 1; height: 6px; border-radius: 999px;
+  background: rgba(124, 58, 237, 0.1);
   overflow: hidden;
 }
-.confBar span {
+.rcaConfBar span {
   display: block; height: 100%; width: 94%;
   background: linear-gradient(90deg, var(--green), #10b981);
   border-radius: 999px;
 }
-.conf b { color: #047857; font-weight: 700; }
+.rcaConf b { color: #047857; font-weight: 700; }
 
-.actions { display: flex; gap: 8px; flex-wrap: wrap; }
-.act {
+/* ----- Action row: Generate PR / Run runbook / Post to Slack ----- */
+.rcaActions {
+  display: flex; flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 18px 16px;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+  background: linear-gradient(180deg, #faf9fc 0%, #f5f3fa 100%);
+  animation: rcaActionsSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.36s both;
+}
+.rcaActionBtn {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 13px; font-weight: 600;
-  letter-spacing: -0.005em;
-  border: 1px solid var(--border-strong);
-  cursor: default;
-  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
-}
-/* All three action chips are peers: the row is a *demo* of what the
-   platform does, not a CTA bar. Real "click me" buttons are the Hero
-   CTAs ("Book a demo" / "See it in action") above. */
-.actGhost {
+  padding: 8px 14px;
+  border-radius: 8px;
   background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  font: inherit;
+  font-size: 12px; font-weight: 600;
   color: var(--text);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
-.actGhost:hover {
-  border-color: #18181b;
+.rcaActionBtn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(124, 58, 237, 0.32);
+  box-shadow: 0 6px 16px -10px rgba(124, 58, 237, 0.42);
 }
-.actIcoBox {
+.rcaActionBtn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.rcaActionIco {
   width: 18px; height: 18px;
-  border-radius: 4px;
+  border-radius: 5px;
   display: inline-flex; align-items: center; justify-content: center;
   flex: none;
-  background: var(--surface-strong);
-  color: var(--text);
 }
-.actIcoBoxGh {
-  background: #f4f4f5;
-  color: #0f172a;
-}
-.actIcoBoxPlay {
-  background: rgba(52, 211, 153, 0.14);
+.rcaActionIcoGh    { background: #f1f5f9; color: #0f172a; }
+.rcaActionIcoPlay  { background: rgba(52, 211, 153, 0.14); color: #047857; }
+.rcaActionIcoSlack { background: #ffffff; border: 1px solid #f1f5f9; }
+.rcaActionIcoDone  {
+  background: rgba(5, 150, 105, 0.18);
   color: #047857;
+  border: 1px solid rgba(5, 150, 105, 0.36);
 }
-.actIcoBoxSlack {
-  background: #ffffff;
-  border: 1px solid var(--border);
+.rcaActionLogo { width: 12px; height: 12px; flex: none; object-fit: contain; }
+
+/* "PR created" success state — the Generate PR button morphs to green
+   when the auto-demo cursor presses it. The button gets a brief overshoot
+   bounce on transition, the icon swaps to a checkmark, and the label
+   reads "PR #142 created". Communicates "fix landed" without the visitor
+   needing to read the diff. */
+.rcaActionBtnDone {
+  background: linear-gradient(180deg, rgba(5, 150, 105, 0.1), rgba(5, 150, 105, 0.06));
+  border-color: rgba(5, 150, 105, 0.36);
+  color: #047857;
+  box-shadow: 0 6px 16px -10px rgba(5, 150, 105, 0.5);
+  animation: rcaActionDoneBounce 0.42s cubic-bezier(0.4, 1.4, 0.5, 1);
 }
-.actIcoBox svg { width: 11px; height: 11px; }
-.actIcoBox .actLogo { width: 12px; height: 12px; }
-.act svg { width: 14px; height: 14px; }
-.actLogo { width: 14px; height: 14px; flex: none; object-fit: contain; display: inline-block; }
+.rcaActionBtnDone:hover {
+  border-color: rgba(5, 150, 105, 0.5);
+  box-shadow: 0 8px 20px -10px rgba(5, 150, 105, 0.6);
+}
+.rcaActionDoneLabel {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-weight: 700;
+}
+.rcaActionPrNum {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 0 4px;
+  border-radius: 4px;
+  background: rgba(5, 150, 105, 0.16);
+  color: #065f46;
+}
+@keyframes rcaActionDoneBounce {
+  0%   { transform: scale(0.94); }
+  55%  { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rcaActionBtnDone { animation: none; }
+}
+
+/* ===========================================================
+   RCA modal entry + loop animations (re-mounted whenever the
+   modal opens, so all timelines restart from t=0 each time)
+   =========================================================== */
+@keyframes rcaBackdropIn {
+  0%   {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+@keyframes rcaModalIn {
+  0%   { opacity: 0; transform: translateY(24px) scale(0.92); }
+  60%  { opacity: 1; transform: translateY(-4px) scale(1.012); }
+  85%  { transform: translateY(1px) scale(0.998); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+/* Incident card slides in from the left, agent card from the right —
+   gives the modal contents a slight cinematic reveal as the modal
+   container settles into place. */
+@keyframes rcaCardSlideIn {
+  0%   { opacity: 0; transform: translateX(-14px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes rcaAgentSlideIn {
+  0%   { opacity: 0; transform: translateX(14px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+/* Modal header fades in from the top with a small lift. */
+@keyframes rcaHeadSlideIn {
+  0%   { opacity: 0; transform: translateY(-6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+/* Action row fades up from the bottom last, completing the assembly. */
+@keyframes rcaActionsSlideIn {
+  0%   { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Steps stream in one by one over the first 5 seconds. */
+  .rcaStep {
+    opacity: 0;
+    animation: rcaStepCycle var(--rca-loop) cubic-bezier(0.16, 1, 0.3, 1) infinite both;
+  }
+  .rcaStep:nth-child(1) { animation-delay: 0.4s; }
+  .rcaStep:nth-child(2) { animation-delay: 1.6s; }
+  .rcaStep:nth-child(3) { animation-delay: 2.8s; }
+  .rcaStep:nth-child(4) { animation-delay: 4.0s; }
+
+  /* Diff "writes" itself line by line. Each line fades in fast (210ms,
+     1.5% of the 14s loop) and is spaced 350ms after the previous one
+     so each beat reads as a distinct "AlertMend just typed this line".
+     Earlier this was 200ms stagger × 560ms fade-in — lines crossfaded
+     into each other instead of typing in sequence, which read as muddy. */
+  .rcaDiffBody > span {
+    opacity: 0;
+    animation: rcaDiffCycle var(--rca-loop) cubic-bezier(0.16, 1, 0.3, 1) infinite both;
+  }
+  .rcaDiffBody > span:nth-child(1) { animation-delay: 4.55s; } /* - line */
+  .rcaDiffBody > span:nth-child(2) { animation-delay: 4.90s; } /* +1   */
+  .rcaDiffBody > span:nth-child(3) { animation-delay: 5.25s; } /* +2   */
+  .rcaDiffBody > span:nth-child(4) { animation-delay: 5.60s; } /* +3   */
+  .rcaDiffBody > span:nth-child(5) { animation-delay: 5.95s; } /* +4   */
+
+  /* Root-cause block lifts in after the diff settles. */
+  .rcaResult {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: rcaResultCycle var(--rca-loop) cubic-bezier(0.16, 1, 0.3, 1) 6.4s infinite both;
+  }
+
+  /* Confidence bar fills 0% → 94% as the result lands. */
+  .rcaConfBar span {
+    width: 0%;
+    animation: rcaConfCycle var(--rca-loop) cubic-bezier(0.65, 0, 0.35, 1) 7.0s infinite both;
+  }
+
+  /* Timer pill gets a green halo when the RCA "resolves". */
+  .rcaTimer {
+    animation: rcaTimerCycle var(--rca-loop) ease-out 7.0s infinite both;
+  }
+
+  /* Pause everything on hover so visitors can read the resolved state
+     without it cycling away. */
+  .rcaModal:hover .rcaStep,
+  .rcaModal:hover .rcaDiffBody > span,
+  .rcaModal:hover .rcaResult,
+  .rcaModal:hover .rcaConfBar span,
+  .rcaModal:hover .rcaTimer {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes rcaStepCycle {
+  0%   { opacity: 0; transform: translateY(6px); }
+  4%   { opacity: 1; transform: translateY(0); }
+  64%  { opacity: 1; transform: translateY(0); }
+  72%  { opacity: 0; transform: translateY(-3px); }
+  100% { opacity: 0; transform: translateY(-3px); }
+}
+@keyframes rcaDiffCycle {
+  /* Fast "typewriter" fade — line is fully visible 210ms after its
+     animation-delay fires, then holds through the resolved phase
+     until the whole modal recycles at ~13s. The slight translateX
+     gives the line a tiny "snap" left-to-right as it commits. */
+  0%   { opacity: 0; transform: translateX(-4px); }
+  1.5% { opacity: 1; transform: translateX(0); }
+  88%  { opacity: 1; transform: translateX(0); }
+  93%  { opacity: 0; transform: translateX(-3px); }
+  100% { opacity: 0; transform: translateX(-3px); }
+}
+@keyframes rcaResultCycle {
+  0%   { opacity: 0; transform: translateY(8px); }
+  6%   { opacity: 1; transform: translateY(0); }
+  46%  { opacity: 1; transform: translateY(0); }
+  56%  { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 0; transform: translateY(4px); }
+}
+@keyframes rcaConfCycle {
+  0%   { width: 0%; }
+  6%   { width: 94%; }
+  46%  { width: 94%; }
+  54%  { width: 0%; }
+  100% { width: 0%; }
+}
+@keyframes rcaTimerCycle {
+  0%   { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); transform: scale(1); }
+  3%   { box-shadow: 0 0 0 8px rgba(5, 150, 105, 0.16); transform: scale(1.04); }
+  10%  { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); transform: scale(1); }
+  100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No motion: render the resolved end-state. */
+  .rcaStep,
+  .rcaDiffBody > span,
+  .rcaResult {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  .rcaConfBar span { width: 94%; animation: none; }
+  .rcaTimer { animation: none; }
+  .rcaBackdrop,
+  .rcaModal,
+  .rcaModalHead,
+  .rcaCard,
+  .rcaAgent,
+  .rcaActions { animation: none; opacity: 1; transform: none; }
+}
 
 @media (max-width: 720px) {
-  .stage { grid-template-columns: 1fr; min-height: 0; padding: 16px; gap: 14px; }
-}
-@media (max-width: 640px) {
-  /* Allow the H1 to wrap naturally; nowrap rows blow past the viewport. */
-  .row { white-space: normal; display: inline; }
-  .h1 { font-size: clamp(30px, 9vw, 44px); line-height: 1.1; }
-  .sub { font-size: 15px; }
-  /* Meta row: stack vertically; the inline `·` separator spans (every other
-     child) become noise across multiple lines, so hide them. */
-  .heroMeta { flex-direction: column; gap: 8px; align-items: center; }
-  .heroMeta > span:nth-child(2n) { display: none; }
-}
-@media (max-width: 540px) {
-  .heroCta { flex-direction: column; align-items: stretch; }
-  .hero { padding: 32px 0 40px; }
-  .mockup { margin-top: 36px; }
+  /* Stack incident card + agent card on phones; keep the modal full-width. */
+  .rcaStage { grid-template-columns: 1fr; padding: 14px; gap: 14px; }
+  .rcaActions { padding: 12px 14px; }
+  .rcaModalHead { padding: 10px 12px; }
 }

@@ -38,7 +38,7 @@ export const findCaseStudyBySlug = (slug: string) => {
 export const caseStudiesData = [
   {
     company: 'Polymer Search',
-    logo: '/logos/polymer-logo.png', // Placeholder: Add logo to public/logos/polymer-logo.png
+    logo: '/logos/polymer-logo.svg',
     title: 'AlertMend Became Polymer\'s Off-Hours SRE',
     companySize: '11–50',
     industry: 'AI / SaaS / Data Analytics',

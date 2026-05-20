@@ -59,12 +59,12 @@ export default function Breadcrumb({ items, showSolutions = false }: BreadcrumbP
         </script>
       </Helmet>
       <nav 
-        className="mb-6 text-sm text-purple-700 flex items-center flex-wrap gap-2" 
+        className="mb-6 text-sm text-zinc-500 flex items-center flex-wrap gap-2" 
         aria-label="Breadcrumb"
       >
         <button
           onClick={() => navigate('/')}
-          className="flex items-center hover:text-purple-900 transition-colors font-medium"
+          className="flex items-center hover:text-violet-600 transition-colors font-medium"
           aria-label="Home"
         >
           <Home className="h-4 w-4 mr-1" />
@@ -74,22 +74,22 @@ export default function Breadcrumb({ items, showSolutions = false }: BreadcrumbP
         {/* Show Solutions section if on solution page or if showSolutions is true */}
         {(isSolutionPage || showSolutions) && (
           <>
-            <ChevronRight className="h-4 w-4 text-purple-400" />
-            <span className="text-purple-600 font-medium">Solutions</span>
-            <ChevronRight className="h-4 w-4 text-purple-400" />
+            <ChevronRight className="h-4 w-4 text-zinc-300" />
+            <span className="text-zinc-700 font-medium">Solutions</span>
+            <ChevronRight className="h-4 w-4 text-zinc-300" />
             <div className="flex items-center flex-wrap gap-2">
               {allSolutions.map((solution, index) => {
                 const SolutionIcon = solution.icon
                 const isActive = currentPath.includes(solution.id)
                 return (
                   <div key={solution.id} className="flex items-center gap-2">
-                    {index > 0 && <span className="text-purple-300">•</span>}
+                    {index > 0 && <span className="text-zinc-300">•</span>}
                     <button
                       onClick={() => navigate(solution.path)}
                       className={`flex items-center gap-1.5 px-2 py-1 rounded-md transition-all ${
                         isActive
-                          ? 'text-purple-900 bg-purple-100 font-semibold'
-                          : 'text-purple-600 hover:text-purple-900 hover:bg-purple-50'
+                          ? 'text-violet-700 bg-violet-50 border border-violet-200 font-semibold'
+                          : 'text-zinc-600 hover:text-violet-600 hover:bg-zinc-50'
                       }`}
                     >
                       <SolutionIcon className="h-3.5 w-3.5" />
@@ -105,16 +105,16 @@ export default function Breadcrumb({ items, showSolutions = false }: BreadcrumbP
         {/* Regular breadcrumb items */}
         {items.map((item, index) => (
           <div key={index} className="flex items-center gap-2">
-            <ChevronRight className="h-4 w-4 text-purple-400" />
+            <ChevronRight className="h-4 w-4 text-zinc-300" />
             {item.path && index < items.length - 1 ? (
               <button
                 onClick={() => navigate(item.path!)}
-                className="hover:text-purple-900 transition-colors font-medium"
+                className="hover:text-violet-600 transition-colors font-medium"
               >
                 {item.label}
               </button>
             ) : (
-              <span className="text-purple-900 font-semibold" aria-current="page">
+              <span className="text-zinc-900 font-semibold" aria-current="page">
                 {item.label}
               </span>
             )}

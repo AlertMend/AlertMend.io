@@ -1,129 +1,147 @@
+/* ============================================================
+   Final CTA card
+
+   The closer for the page — sits on a deep purple-tinted base so
+   it visually closes the document the way a book back-cover does.
+   Two radial corner glows (top-right, bottom-left) anchor the
+   brand violet at the corners, and a tiny-dot texture mask gives
+   the surface a subtle grain so it doesn't read as a flat block
+   of color.
+   ============================================================ */
 .final {
-  padding: 72px 56px;
+  position: relative;
+  padding: 56px 56px;
   border-radius: 12px;
-  /* Deep zinc base with layered radial purple glows from top-right + bottom-left
-     and a subtle dot pattern. Reads richer than a flat black panel. */
+  /* Deep purple-tinted base: violet-950 over near-black, so the
+     accent reads as "evening sky" rather than a saturated marketing
+     block. Two radial corner glows layer on top to anchor the
+     brand color in the corners. */
   background:
-    radial-gradient(ellipse 50% 60% at 100% 0%, rgba(168, 85, 247, 0.28), transparent 60%),
-    radial-gradient(ellipse 60% 70% at 0% 100%, rgba(109, 40, 217, 0.32), transparent 60%),
-    linear-gradient(180deg, #1a1325 0%, #0f0a1a 100%);
-  color: #ffffff;
-  border: 1px solid rgba(168, 85, 247, 0.18);
-  text-align: center;
-  position: relative; overflow: hidden;
+    radial-gradient(ellipse 70% 70% at 100% 0%, rgba(167, 139, 250, 0.22), transparent 60%),
+    radial-gradient(ellipse 70% 70% at 0% 100%, rgba(124, 58, 237, 0.30), transparent 60%),
+    linear-gradient(180deg, #1e1b3a 0%, #15132a 100%);
+  border: 1px solid rgba(167, 139, 250, 0.20);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.06) inset,
-    0 30px 60px -30px rgba(76, 29, 149, 0.45);
-}
-/* Subtle dotted texture, low opacity, sits behind text. */
-.final::before {
-  content: '';
-  position: absolute; inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-  background-size: 22px 22px;
-  background-position: 0 0;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, #000 30%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, #000 30%, transparent 80%);
-  pointer-events: none;
-  opacity: 0.6;
+    0 24px 60px -28px rgba(9, 9, 11, 0.55);
+  color: #fafafa;
+  text-align: center;
+  overflow: hidden;
+  isolation: isolate;
 }
 
-/* Section tag (eyebrow) — repainted for the dark surface. */
-.final :global(.sec-tag) {
-  color: rgba(255, 255, 255, 0.65);
-  position: relative;
+/* Dotted texture mask — radial-dot pattern at low opacity, faded
+   from the top so the surface gets a quiet "screen-printed" grain
+   without competing with the headline. Pure CSS, no PNG. */
+.final::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 18px 18px;
+  background-position: 0 0;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
 }
+
+.final > * { position: relative; z-index: 1; }
+
+/* The sec-tag inherits the global pulse but recolors for the
+   dark surface. */
+.final :global(.sec-tag) { color: #c4b5fd; }
 .final :global(.sec-tag)::before {
   background: #c4b5fd;
-  box-shadow: 0 0 0 4px rgba(196, 181, 253, 0.18);
+  box-shadow: 0 0 0 3px rgba(196, 181, 253, 0.20);
 }
 
 .h2 {
-  font-size: clamp(32px, 4.4vw, 50px);
-  line-height: 1.08; letter-spacing: -0.03em; font-weight: 700;
+  font-size: clamp(32px, 4.5vw, 48px);
+  line-height: 1.1; letter-spacing: -0.025em;
+  font-weight: 700;
   color: #ffffff;
-  position: relative;
-  margin-top: 6px;
+  background: none;
+  -webkit-text-fill-color: #ffffff;
+  max-width: 720px;
+  margin: 0 auto;
 }
-/* The inline `.hero-h-accent` span inside the heading lives in global.css
-   as `color: var(--accent)` — repaint it to a brighter violet for this
-   dark panel. */
-.final .h2 :global(.hero-h-accent) {
+/* Accent phrase inside the headline picks up the soft violet so
+   the second clause reads as the lift. */
+.h2 :global(.hero-h-accent) {
   color: #c4b5fd;
-  background: linear-gradient(135deg, #ddd6fe 0%, #a78bfa 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-text-fill-color: #c4b5fd;
 }
 
 .p {
-  max-width: 600px; margin: 20px auto 32px;
-  font-size: 17px; color: rgba(255, 255, 255, 0.78); line-height: 1.6;
-  position: relative;
+  max-width: 580px; margin: 16px auto 28px;
+  font-size: 16px; color: rgba(244, 244, 245, 0.78); line-height: 1.55;
 }
+
 .cta {
   display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-  position: relative;
 }
+
+/* ----- High-specificity white primary button -----
+   The global cascade paints `.btn-primary` near-black, which would
+   disappear on this dark surface. We override here with enough
+   specificity (`.final` + a local class) to beat the global
+   `body.alertmend-dark .btn-primary` rule (0,2,1 vs 0,2,1 — same
+   weight, later in document order wins). */
+.final .ctaPrimary,
+.final a.ctaPrimary,
+.final a.ctaPrimary:visited {
+  background: #ffffff;
+  color: var(--text);
+  -webkit-text-fill-color: var(--text);
+  border-color: #ffffff;
+  box-shadow:
+    0 1px 2px rgba(9, 9, 11, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+.final .ctaPrimary *,
+.final .ctaPrimary svg,
+.final .ctaPrimary svg * {
+  color: var(--text);
+  -webkit-text-fill-color: var(--text);
+  stroke: currentColor;
+}
+.final .ctaPrimary:hover {
+  background: #fafafa;
+  border-color: #fafafa;
+  box-shadow:
+    0 4px 14px -4px rgba(9, 9, 11, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+/* Ghost button stays light-on-dark, matching the spotlight zone style. */
+.final .ctaGhost,
+.final a.ctaGhost,
+.final a.ctaGhost:visited {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fafafa;
+  -webkit-text-fill-color: #fafafa;
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: none;
+}
+.final .ctaGhost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.32);
+  color: #ffffff;
+}
+
 .meta {
-  margin-top: 28px; font-size: 13px; color: rgba(255, 255, 255, 0.62);
-  display: flex; justify-content: center; gap: 22px; flex-wrap: wrap;
-  position: relative;
+  margin-top: 22px; font-size: 13px;
+  color: rgba(244, 244, 245, 0.66);
+  display: flex; justify-content: center; gap: 18px; flex-wrap: wrap;
 }
 .meta span { display: flex; align-items: center; gap: 6px; }
 .meta svg { color: #34d399; }
 
-/* On the dark panel the standard light-mode .btn-primary (black on white)
-   disappears. Force the inverted treatment here. Doubled selector + body
-   prefix beats `body.alertmend-dark .btn-primary` in `global.css`. */
-:global(body.alertmend-dark) .final :global(.btn-primary),
-:global(body.alertmend-dark) .final :global(a.btn-primary),
-:global(body.alertmend-dark) .final :global(a.btn-primary:visited) {
-  background: #ffffff;
-  color: #0a0a0a;
-  -webkit-text-fill-color: #0a0a0a;
-  border-color: #ffffff;
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.5) inset,
-    0 6px 20px -8px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.15);
-}
-:global(body.alertmend-dark) .final :global(.btn-primary):hover {
-  background: #fafafa;
-  border-color: #fafafa;
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.6) inset,
-    0 8px 24px -8px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(255, 255, 255, 0.20);
-  transform: translateY(-1px);
-}
-:global(body.alertmend-dark) .final :global(.btn-primary) *,
-:global(body.alertmend-dark) .final :global(.btn-primary) svg,
-:global(body.alertmend-dark) .final :global(.btn-primary) svg * {
-  color: #0a0a0a;
-  -webkit-text-fill-color: #0a0a0a;
-  stroke: currentColor;
-}
-
-:global(body.alertmend-dark) .final :global(.btn-ghost),
-:global(body.alertmend-dark) .final :global(a.btn-ghost),
-:global(body.alertmend-dark) .final :global(a.btn-ghost:visited) {
-  background: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
-  -webkit-text-fill-color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-:global(body.alertmend-dark) .final :global(.btn-ghost):hover {
-  background: rgba(255, 255, 255, 0.10);
-  border-color: rgba(255, 255, 255, 0.42);
-  color: #ffffff;
-}
-:global(body.alertmend-dark) .final :global(.btn-ghost) svg {
-  color: #ffffff;
-}
-
-@media (max-width: 980px) {
-  .final { padding: 52px 24px; }
+@media (max-width: 980px) { .final { padding: 48px 28px; } }
+@media (max-width: 540px) {
+  .final { padding: 36px 20px; border-radius: 10px; }
+  .p { font-size: 15px; }
+  .meta { gap: 12px 18px; font-size: 12.5px; }
 }

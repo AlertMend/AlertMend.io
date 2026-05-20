@@ -1,37 +1,65 @@
-/* Ambient page background.
-   Pure CSS — no images, no network requests. Two layers:
-   1. The base layer holds soft purple radial washes at corners.
-   2. A `::before` overlay paints a subtle 56px grid (purple at 5% opacity),
-      then a radial mask fades the grid to transparent toward the edges so
-      it never competes with content.
-   Fixed position so the grid feels like a paper substrate, not a moving
-   surface. GPU-cheap: it's just a couple of gradients. */
-.canvas {
-  position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
-  background:
-    /* Top-left soft violet wash */
-    radial-gradient(ellipse 55% 50% at 10% 0%, rgba(168, 85, 247, 0.10), transparent 60%),
-    /* Bottom-right deeper violet wash */
-    radial-gradient(ellipse 65% 55% at 95% 95%, rgba(124, 58, 237, 0.08), transparent 65%),
-    /* Center subtle warm-white lift so the page feels less flat */
-    radial-gradient(ellipse 60% 45% at 50% 40%, rgba(245, 243, 255, 0.5), transparent 75%),
-    var(--bg);
-}
-.canvas::before {
-  content: '';
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(to right, rgba(109, 40, 217, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(109, 40, 217, 0.05) 1px, transparent 1px);
-  background-size: 56px 56px;
-  background-position: -1px -1px;
-  /* Fade the grid toward edges and the lower half so headline + content
-     have a clean reading area. Top portion gets the visible grid texture. */
-  mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.7) 40%, transparent 85%);
-  -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 0%, rgba(0, 0, 0, 0.7) 40%, transparent 85%);
+/* ============================================================
+   Ambient background — CSS only, no network fetches.
+
+   1. `.grid` paints a 1px zinc grid on white, masked so it fades
+      past the fold (the homepage doesn't need texture below the
+      first ~2 viewports).
+   2. `.wash` + `.washA/B/C` paint three corner radial violet
+      washes — top-left, top-right, bottom-center — so the brand
+      hue is *anchored* in the page rather than smeared across it.
+
+   All four layers are `pointer-events: none`, `z-index: -1`, and
+   sit `position: fixed` so they don't scroll with content. The
+   page background itself is white (`--bg`); these layers sit on
+   top of it.
+   ============================================================ */
+.grid {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   pointer-events: none;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(9, 9, 11, 0.04) 1px, transparent 1px) 0 0 / 100% 56px,
+    linear-gradient(90deg, rgba(9, 9, 11, 0.04) 1px, transparent 1px) 0 0 / 56px 100%;
+  /* Fade the grid out past the fold so it doesn't compete with
+     section content. The mask is a vertical gradient measured in
+     viewport heights; everything below ~140vh is fully transparent. */
+  mask-image: linear-gradient(180deg, #000 0%, #000 60vh, rgba(0, 0, 0, 0.4) 110vh, transparent 140vh);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 60vh, rgba(0, 0, 0, 0.4) 110vh, transparent 140vh);
 }
 
-/* Legacy orb classes kept inert until the markup is cleaned up. */
-.orb { display: none; }
-.a, .b, .c { display: none; }
+.wash {
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+}
+/* Top-left — anchors the brand under the nav/Hero h1. */
+.washA {
+  width: 520px; height: 520px;
+  top: -160px; left: -160px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.22) 0%, transparent 70%);
+}
+/* Top-right — balances the top-left wash across the fold. */
+.washB {
+  width: 460px; height: 460px;
+  top: -120px; right: -140px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.16) 0%, transparent 70%);
+}
+/* Bottom-center — soft glow under the first card row to keep the
+   hero feeling lit without painting the whole page violet. */
+.washC {
+  width: 720px; height: 380px;
+  top: 60vh; left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(124, 58, 237, 0.10) 0%, transparent 70%);
+  opacity: 0.7;
+}
+
+@media (max-width: 540px) {
+  .washA, .washB { width: 320px; height: 320px; filter: blur(60px); }
+  .washC { width: 480px; height: 280px; }
+}

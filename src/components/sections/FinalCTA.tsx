@@ -24,12 +24,12 @@ export default function FinalCTA() {
               href={CALENDLY_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary btn-lg"
+              className={`btn btn-primary btn-lg ${styles.ctaPrimary}`}
             >
               Book a demo
               <Icon name="arrow" size={16} className="arrow" strokeWidth={2.5} />
             </a>
-            <Link to="/contact" className="btn btn-ghost btn-lg">
+            <Link to="/contact" className={`btn btn-ghost btn-lg ${styles.ctaGhost}`}>
               <Icon name="message" size={16} />
               Talk with us
             </Link>

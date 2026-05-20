@@ -62,17 +62,17 @@ export default function BlogSignupForm() {
         onChange={(e) => setEmail(e.target.value)}
         disabled={isSubmitting}
         aria-label="Email address"
-        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 disabled:opacity-60"
+        className="w-full px-4 py-2.5 rounded-md border border-zinc-300 bg-white text-zinc-900 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 disabled:opacity-60 transition-colors"
       />
       <button
         type="submit"
         disabled={isSubmitting || !email}
-        className="w-full bg-gradient-to-r from-purple-800 to-purple-900 text-white font-semibold py-3 rounded-lg hover:from-purple-900 hover:to-purple-950 transition-all shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed"
+        className="w-full bg-zinc-950 text-white font-semibold py-2.5 rounded-md hover:bg-zinc-900 transition-colors shadow-[0_1px_2px_rgba(9,9,11,0.16)] disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        {isSubmitting ? 'SIGNING UP…' : 'SIGN UP'}
+        {isSubmitting ? 'Signing up…' : 'Sign up'}
       </button>
       {status === 'success' && (
-        <p className="text-sm text-green-700 font-medium" role="status">
+        <p className="text-sm text-emerald-700 font-medium" role="status">
           {message}
         </p>
       )}

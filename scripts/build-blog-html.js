@@ -895,7 +895,7 @@ markdownFiles.forEach(file => {
       text-decoration: none;
     }
     .social-icon:hover {
-      background: #f3e8ff;
+      background: #ede9fe;
     }
     .article-content {
       flex: 1;
@@ -907,7 +907,7 @@ markdownFiles.forEach(file => {
       margin-bottom: 32px;
     }
     h1 {
-      color: #581c87;
+      color: #4c1d95;
       font-size: 2.25rem;
       font-weight: 700;
       line-height: 1.2;
@@ -924,7 +924,7 @@ markdownFiles.forEach(file => {
       }
     }
     h2 {
-      color: #581c87;
+      color: #4c1d95;
       font-size: 1.875rem;
       font-weight: 700;
       margin-top: 40px;
@@ -937,7 +937,7 @@ markdownFiles.forEach(file => {
       }
     }
     h3 {
-      color: #581c87;
+      color: #4c1d95;
       font-size: 1.5rem;
       font-weight: 700;
       margin-top: 32px;
@@ -950,7 +950,7 @@ markdownFiles.forEach(file => {
       }
     }
     h4, h5, h6 {
-      color: #581c87;
+      color: #4c1d95;
       font-weight: 600;
       margin-top: 24px;
       margin-bottom: 12px;
@@ -971,11 +971,11 @@ markdownFiles.forEach(file => {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: #e9d5ff;
+      background: #ddd6fe;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #9333ea;
+      color: #7c3aed;
       font-weight: 600;
       font-size: 1rem;
     }
@@ -1004,7 +1004,7 @@ markdownFiles.forEach(file => {
     }
     code {
       background: #f3f4f6;
-      color: #9333ea;
+      color: #7c3aed;
       padding: 0.2em 0.4em;
       border-radius: 4px;
       font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
@@ -1028,7 +1028,7 @@ markdownFiles.forEach(file => {
       font-size: 0.875rem;
     }
     a {
-      color: #9333ea;
+      color: #7c3aed;
       text-decoration: none;
       font-weight: 500;
       transition: color 0.2s;
@@ -1048,7 +1048,7 @@ markdownFiles.forEach(file => {
       color: #1f2937;
     }
     blockquote {
-      border-left: 4px solid #a855f7;
+      border-left: 4px solid #7c3aed;
       padding-left: 24px;
       margin: 32px 0;
       color: #374151;
@@ -1081,16 +1081,16 @@ markdownFiles.forEach(file => {
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
     }
     thead {
-      background: #faf5ff;
+      background: #fafafa;
     }
     th {
       padding: 1rem;
       text-align: left;
       font-weight: 600;
-      color: #581c87;
-      border-right: 1px solid #e9d5ff;
-      border-bottom: 2px solid #c084fc;
-      background: #faf5ff;
+      color: #4c1d95;
+      border-right: 1px solid #ddd6fe;
+      border-bottom: 2px solid #a78bfa;
+      background: #fafafa;
       font-size: 0.9375rem;
     }
     th:first-child {
@@ -1121,7 +1121,7 @@ markdownFiles.forEach(file => {
       background: #f9fafb;
     }
     tbody tr:hover {
-      background: #f3e8ff;
+      background: #ede9fe;
     }
     @media (max-width: 768px) {
       .table-wrapper {
@@ -1184,11 +1184,11 @@ markdownFiles.forEach(file => {
       width: 128px;
       height: 128px;
       border-radius: 8px;
-      background: #f3e8ff;
+      background: #ede9fe;
       border: 1px solid #e5e7eb;
       align-items: center;
       justify-content: center;
-      color: #9333ea;
+      color: #7c3aed;
       font-weight: 700;
       font-size: 2rem;
       flex-shrink: 0;
@@ -1199,7 +1199,7 @@ markdownFiles.forEach(file => {
     .profile-name {
       font-size: 1.5rem;
       font-weight: 700;
-      color: #581c87;
+      color: #4c1d95;
       margin-bottom: 8px;
     }
     .profile-bio {
@@ -1215,7 +1215,7 @@ markdownFiles.forEach(file => {
     .linkedin-link {
       display: inline-flex;
       align-items: center;
-      color: #9333ea;
+      color: #7c3aed;
       text-decoration: none;
       transition: color 0.2s;
     }
@@ -1231,7 +1231,7 @@ markdownFiles.forEach(file => {
       text-align: center;
     }
     footer a {
-      color: #9333ea;
+      color: #7c3aed;
       font-weight: 600;
     }
     .sidebar {
@@ -1250,15 +1250,15 @@ markdownFiles.forEach(file => {
       top: 96px;
     }
     .sidebar-card {
-      background: #faf5ff;
+      background: #fafafa;
       border-radius: 12px;
       padding: 24px;
-      border: 1px solid #e9d5ff;
+      border: 1px solid #ddd6fe;
     }
     .sidebar-card h3 {
       font-size: 1.125rem;
       font-weight: 700;
-      color: #581c87;
+      color: #4c1d95;
       margin-bottom: 16px;
       margin-top: 0;
     }
@@ -1276,23 +1276,22 @@ markdownFiles.forEach(file => {
     }
     .signup-form input:focus {
       outline: none;
-      border-color: #9333ea;
-      box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+      border-color: #7c3aed;
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.18);
     }
     .signup-form button {
       width: 100%;
-      padding: 12px;
-      background: linear-gradient(to right, #6b21a8, #581c87);
+      padding: 10px 12px;
+      background: #09090b;
       color: white;
       font-weight: 600;
-      border-radius: 8px;
+      border-radius: 6px;
       border: none;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: background 0.15s ease;
     }
     .signup-form button:hover {
-      background: linear-gradient(to right, #581c87, #4c1d95);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      background: #27272a;
     }
     .related-content-title {
       font-size: 0.875rem;
@@ -1330,7 +1329,7 @@ markdownFiles.forEach(file => {
       align-items: center;
       gap: 4px;
       margin-top: 16px;
-      color: #9333ea;
+      color: #7c3aed;
       font-size: 0.875rem;
       font-weight: 500;
       text-decoration: none;
@@ -1415,12 +1414,10 @@ markdownFiles.forEach(file => {
       object-fit: contain;
     }
     .navbar-logo-text {
-      font-size: 1.25rem;
+      font-size: 1.0625rem;
       font-weight: 700;
-      background: linear-gradient(to right, #6b21a8, #7c3aed);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      letter-spacing: -0.01em;
+      color: #09090b;
     }
     .navbar-links {
       display: none;
@@ -1433,21 +1430,21 @@ markdownFiles.forEach(file => {
       }
     }
     .navbar-link {
-      padding: 8px 16px;
+      padding: 6px 12px;
       font-size: 0.875rem;
       font-weight: 500;
-      color: #7c3aed;
+      color: #3f3f46;
       text-decoration: none;
-      border-radius: 8px;
-      transition: all 0.2s;
+      border-radius: 6px;
+      transition: color 0.15s ease, background 0.15s ease;
     }
     .navbar-link:hover {
-      color: #581c87;
-      background: #f9fafb;
+      color: #09090b;
+      background: #f4f4f5;
     }
     .navbar-link.active {
-      color: #7c3aed;
-      background: #faf5ff;
+      color: #09090b;
+      background: #fafafa;
     }
     .navbar-actions {
       display: none;
@@ -1476,30 +1473,34 @@ markdownFiles.forEach(file => {
       gap: 6px;
     }
     .navbar-button-primary {
-      background: linear-gradient(to right, #6b21a8, #581c87);
+      background: #09090b;
       color: white;
       font-weight: 600;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      border-radius: 999px;
+      padding: 8px 14px;
+      box-shadow: 0 1px 2px rgba(9, 9, 11, 0.08);
     }
     .navbar-button-primary:hover {
-      background: linear-gradient(to right, #581c87, #4c1d95);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      background: #27272a;
     }
     .navbar-button-secondary {
-      color: #7c3aed;
+      color: #3f3f46;
       background: transparent;
     }
     .navbar-button-secondary:hover {
-      color: #581c87;
-      background: #f9fafb;
+      color: #09090b;
+      background: #f4f4f5;
     }
     .navbar-button-playground {
-      background: #7c3aed;
-      color: white;
+      background: #ede9fe;
+      color: #6d28d9;
       font-weight: 600;
+      border-radius: 999px;
+      padding: 6px 12px;
+      border: 1px solid rgba(124, 58, 237, 0.22);
     }
     .navbar-button-playground:hover {
-      background: #6b21a8;
+      background: #ddd6fe;
     }
     .mobile-menu-button {
       display: flex;
@@ -1627,7 +1628,7 @@ markdownFiles.forEach(file => {
               <div class="profile-placeholder-arvind">AR</div>
               <div class="profile-content">
                 <h3 class="profile-name">Arvind Rajpurohit</h3>
-                <p class="profile-title" style="color: #9333ea; font-weight: 600; margin-bottom: 1rem; font-size: 1rem;">Co-Founder & CEO</p>
+                <p class="profile-title" style="color: #7c3aed; font-weight: 600; margin-bottom: 1rem; font-size: 1rem;">Co-Founder & CEO</p>
                 <div class="profile-bio">
                   <p>Arvind is a Kubestronaut and Kubernetes expert with 15+ years of experience in infrastructure automation. Previously DevOps Team Lead at Roambee and Customer Success Engineer at Shoreline.io (acquired by NVIDIA), he's helped hundreds of teams achieve 99.97% uptime, reduce costs by 50%, and eliminate 90% of manual operations work.</p>
                   <p>As CEO of AlertMend AI, Arvind is building the future of autonomous infrastructure management - where AI doesn't just monitor systems, but understands, predicts, and automatically resolves issues while continuously learning and improving.</p>
@@ -1771,28 +1772,28 @@ const blogCardsHTML = allBlogPosts.map(post => {
   const filteredTags = post.tags ? post.tags.filter(tag => tag.toLowerCase() !== post.category.toLowerCase()) : []
   const tagsHTML = filteredTags.length > 0 
     ? `<div class="flex items-center gap-1.5 flex-wrap">
-        ${filteredTags.map(tag => `<span class="inline-flex items-center px-2.5 py-1 bg-gray-100 text-gray-700 rounded-md text-xs font-medium border border-gray-200">${tag}</span>`).join('')}
+        ${filteredTags.map(tag => `<span class="inline-flex items-center px-2.5 py-1 bg-zinc-100 text-zinc-700 rounded-md text-xs font-medium border border-zinc-200">${tag}</span>`).join('')}
       </div>`
     : ''
   
   return `
-    <article class="group bg-white rounded-xl p-8 border border-gray-200 hover:border-purple-300 hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col h-full" onclick="window.location.href='/blog/${post.slug}'">
+    <article class="group bg-white rounded-xl p-8 border border-zinc-200 hover:border-zinc-300 hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col h-full" onclick="window.location.href='/blog/${post.slug}'">
       <div class="flex items-center gap-2 flex-wrap mb-4">
-        <div class="inline-block px-3 py-1.5 bg-purple-50 text-purple-700 rounded-md text-xs font-semibold">
+        <div class="inline-block px-3 py-1.5 bg-zinc-50 text-violet-600 rounded-md text-xs font-semibold">
           ${post.category}
         </div>
         ${tagsHTML}
       </div>
-      <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-4 leading-tight group-hover:text-purple-700 transition-colors">${post.title}</h2>
-      <p class="text-gray-600 mb-6 leading-relaxed line-clamp-3 flex-grow text-base">${post.excerpt}</p>
+      <h2 class="text-xl md:text-2xl font-bold text-zinc-900 mb-4 leading-tight group-hover:text-violet-600 transition-colors">${post.title}</h2>
+      <p class="text-zinc-500 mb-6 leading-relaxed line-clamp-3 flex-grow text-base">${post.excerpt}</p>
       <div class="flex items-center justify-between pt-4 border-t border-gray-100">
-        <div class="flex items-center gap-2 text-gray-500 text-sm">
+        <div class="flex items-center gap-2 text-zinc-500 text-sm">
           <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
           <span>${formatDate(post.date)}</span>
         </div>
-        <div class="text-purple-600 group-hover:text-purple-800 font-semibold text-sm flex items-center gap-2 transition-colors">
+        <div class="text-violet-600 group-hover:text-violet-700 font-semibold text-sm flex items-center gap-2 transition-colors">
           Read More
           <svg class="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -1827,17 +1828,17 @@ const blogListingHTML = `<!DOCTYPE html>
         extend: {
           colors: {
             purple: {
-              50: '#faf5ff',
-              100: '#f3e8ff',
-              200: '#e9d5ff',
-              300: '#d8b4fe',
-              400: '#c084fc',
-              500: '#a855f7',
-              600: '#9333ea',
-              700: '#7e22ce',
-              800: '#6b21a8',
-              900: '#581c87',
-              950: '#3b0764',
+              50: '#fafafa',
+              100: '#ede9fe',
+              200: '#ddd6fe',
+              300: '#c4b5fd',
+              400: '#a78bfa',
+              500: '#7c3aed',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              800: '#5b21b6',
+              900: '#4c1d95',
+              950: '#09090b',
             }
           }
         }
@@ -1858,23 +1859,24 @@ const blogListingHTML = `<!DOCTYPE html>
   
 </head>
 <body class="min-h-screen bg-white">
-  <section class="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-purple-50/30 via-white to-blue-50/30">
+  <section class="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-white">
     <div class="max-w-7xl mx-auto">
       <div class="mb-8">
-        <nav class="text-sm text-purple-600">
-          <a href="/" class="hover:text-purple-800">Home</a>
+        <nav class="text-sm text-violet-600">
+          <a href="/" class="hover:text-violet-700">Home</a>
           <span class="mx-2">/</span>
-          <span class="text-gray-600">Blog</span>
+          <span class="text-zinc-500">Blog</span>
         </nav>
       </div>
       <div class="text-center mb-12 md:mb-16">
-        <div class="inline-block px-5 py-2 bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 rounded-full text-sm font-bold mb-8 shadow-md border border-purple-200/50">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-violet-50 text-violet-700 rounded-full text-[11px] font-bold uppercase tracking-[0.16em] mb-8 border border-violet-200">
+          <span class="h-1.5 w-1.5 rounded-full bg-violet-600"></span>
           Blog
         </div>
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-purple-950 mb-6 leading-tight">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-zinc-950 mb-6 leading-tight tracking-tight">
           Latest Insights & Updates
         </h1>
-        <p class="text-xl md:text-2xl text-purple-700 max-w-3xl mx-auto leading-relaxed mb-12">
+        <p class="text-xl md:text-2xl text-zinc-500 max-w-3xl mx-auto leading-relaxed mb-12">
           Stay updated with the latest trends, best practices, and insights in AIOps and infrastructure management.
         </p>
       </div>

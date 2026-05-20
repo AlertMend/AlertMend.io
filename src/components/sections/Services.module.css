@@ -1,6 +1,7 @@
-.section {
-  background: transparent;
-}
+/* Services intentionally renders on plain white now — it's the breathing
+   room between the dark AISpotlight band above and the lavender MLOps band
+   below. The class is kept as a hook for layout-scoped rules. */
+.section { /* no background; global page bg shows through */ }
 
 .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
 
@@ -8,14 +9,14 @@
   padding: 20px; border-radius: var(--radius);
   background: var(--surface);
   border: 1px solid var(--border);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: none;
+  transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
   position: relative; overflow: hidden;
 }
 .card:hover {
   border-color: var(--border-strong);
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px -18px rgba(0, 0, 0, 0.20);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-card);
 }
 
 .head {
@@ -23,24 +24,23 @@
   margin-bottom: 14px;
 }
 .logoChip {
-  width: 36px; height: 36px; border-radius: 6px;
-  background: #ffffff;
+  width: 28px; height: 28px; border-radius: var(--radius-sm);
+  background: var(--surface);
   border: 1px solid var(--border);
   display: inline-flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
 .logoImg {
-  width: 22px; height: 22px;
+  width: 18px; height: 18px;
   object-fit: contain;
   display: block;
 }
 .moreIco {
-  width: 36px; height: 36px; border-radius: 6px;
-  background: var(--accent-soft);
-  color: var(--accent);
+  width: 18px; height: 18px;
+  color: var(--text-dim);
   display: inline-flex; align-items: center; justify-content: center;
-  border: 1px solid rgba(109, 40, 217, 0.20);
 }
+.moreIco :global(svg) { width: 16px; height: 16px; stroke-width: 1.6; }
 .name {
   font-size: 15px; font-weight: 600; color: var(--text);
   letter-spacing: -0.01em; line-height: 1.2;
@@ -54,16 +54,16 @@
   border: 1px solid var(--border);
   color: var(--text-dim);
   font-family: 'JetBrains Mono', monospace;
-  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+  transition: all 0.2s;
 }
 .card:hover .mode {
-  background: var(--surface-strong);
-  border-color: var(--border-strong);
-  color: var(--text);
+  background: var(--accent-soft);
+  border-color: rgba(124, 58, 237, 0.22);
+  color: var(--accent-strong);
 }
 
 .more {
-  background: #fafafa;
+  background: var(--bg-2);
   border-style: dashed;
   border-color: var(--border-strong);
 }
@@ -71,11 +71,11 @@
 .foot {
   margin-top: 32px;
   display: flex; justify-content: space-between; align-items: center;
-  gap: 20px; padding: 22px 24px; border-radius: var(--radius);
+  gap: 20px; padding: 20px 22px; border-radius: var(--radius);
   background: var(--bg-2);
   border: 1px solid var(--border);
 }
-.footText { font-size: 14px; color: var(--text-dim); line-height: 1.6; }
+.footText { font-size: 14px; color: var(--text-dim); line-height: 1.55; }
 .footText b { color: var(--text); font-weight: 600; }
 
 @media (max-width: 980px) {

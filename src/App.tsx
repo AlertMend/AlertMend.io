@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage'
 import CaseStudiesPage from './pages/CaseStudiesPage'
 import CaseStudyDetailPage from './pages/CaseStudyDetailPage'
 import SolutionDetailPage from './pages/SolutionDetailPage'
+import IntegrationDetailPage from './pages/IntegrationDetailPage'
 import PricingPage from './pages/PricingPage'
 import DocumentationPage from './pages/DocumentationPage'
 import SlackAppApprovalPage from './pages/docs/SlackAppApprovalPage'
@@ -70,6 +71,7 @@ function App() {
           <Route path="/case-studies" element={<CaseStudiesPage />} />
           <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
           <Route path="/solutions/:id" element={<SolutionDetailPage />} />
+          <Route path="/integrations/:slug" element={<IntegrationDetailPage />} />
           <Route path="/auto-remediation" element={<SolutionDetailPage />} />
           <Route path="/kubernetes-management" element={<SolutionDetailPage />} />
           <Route path="/on-call-management" element={<SolutionDetailPage />} />

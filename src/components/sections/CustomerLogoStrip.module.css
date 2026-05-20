@@ -1,0 +1,67 @@
+/* The customer-proof strip sits directly under the hero. Tight vertical
+   padding (no big band) so it feels like a footnote on the hero rather
+   than a separate "section", but a hairline divider on top draws a
+   clean editorial line between the hero CTA stack and the social proof. */
+.section {
+  padding: 28px 0 36px;
+  border-top: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.label {
+  margin: 0 auto 18px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 28px 56px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+}
+
+.logoImg {
+  /* Customer marks vary in intrinsic aspect; we cap height and let width
+     run free so each logo reads at its natural proportions. */
+  height: 30px;
+  width: auto;
+  max-width: 180px;
+  object-fit: contain;
+  object-position: center;
+  /* Customer logos arrive at slightly different perceptual weights from
+     their source sites. A small uniform desaturation keeps the row
+     visually quiet — Datadog/Vercel use the same trick on their proof
+     strips so brand colors don't compete with the hero. */
+  filter: grayscale(0.15) opacity(0.92);
+  transition: filter 200ms ease;
+}
+.item:hover .logoImg {
+  filter: none;
+}
+
+.sub {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+@media (max-width: 540px) {
+  .section { padding: 22px 0 28px; }
+  .list { gap: 22px 32px; }
+  .logoImg { height: 26px; }
+}

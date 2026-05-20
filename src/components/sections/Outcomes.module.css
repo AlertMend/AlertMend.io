@@ -1,23 +1,120 @@
-.row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.quote {
-  padding: 28px; border-radius: var(--radius);
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+/* Each tile is a single, complete proof point: oversized metric → context
+   sentence → grounding quote → "verify it" link. The vertical hierarchy is
+   intentional — eye lands on the number, then the story unfolds below. */
+.tile {
+  display: flex; flex-direction: column;
+  padding: 28px;
+  border-radius: var(--radius);
   background: var(--surface);
   border: 1px solid var(--border);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+  box-shadow: none;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.tile:hover {
+  transform: translateY(-1px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-card);
+}
+
+/* ---- Big-number block ---- */
+.tileHead {
+  display: flex; flex-direction: column; gap: 6px;
+  margin-bottom: 14px;
+}
+.numberWrap {
+  display: inline-flex; align-items: baseline; gap: 4px;
+  font-feature-settings: "tnum" 1, "ss01" 1;
+}
+.number {
+  font-size: clamp(56px, 7vw, 88px);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  color: var(--text);
+}
+.suffix {
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1;
+  font-weight: 700;
+  color: var(--accent);
+}
+.label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.context {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.55;
+  margin: 0 0 18px;
+}
+
+/* ---- Embedded quote (smaller, supporting role under the metric) ---- */
+.quote {
+  margin: 0 0 18px;
+  padding: 16px 18px;
+  border-left: 2px solid rgba(124, 58, 237, 0.32);
+  background: rgba(124, 58, 237, 0.04);
+  border-radius: 0 10px 10px 0;
+  position: relative;
 }
 .qmark {
-  font-family: Georgia, serif; font-size: 36px; line-height: 0.5;
-  color: var(--accent); display: block; height: 18px;
+  position: absolute; top: -2px; left: 12px;
+  font-family: Georgia, serif;
+  font-size: 28px; line-height: 1;
+  color: rgba(124, 58, 237, 0.5);
+  user-select: none;
 }
-.quote p { font-size: 15px; color: var(--text); line-height: 1.6; margin: 12px 0 18px; }
-.who { display: flex; align-items: center; gap: 12px; }
+.quote p {
+  font-size: 13.5px;
+  color: var(--text);
+  line-height: 1.55;
+  margin: 4px 0 12px;
+  padding-left: 8px;
+}
+.who {
+  display: flex; align-items: center; gap: 10px;
+  padding-left: 8px;
+}
 .av {
-  width: 36px; height: 36px; border-radius: 50%;
-  background: #18181b;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--text);
   display: inline-flex; align-items: center; justify-content: center;
-  color: #fff; font-weight: 700; font-size: 13px;
+  color: #ffffff; font-weight: 700; font-size: 12px;
+  flex: none;
 }
-.name { font-size: 13px; font-weight: 600; color: var(--text); }
-.role { font-size: 12px; color: var(--muted); }
+.whoText { display: flex; flex-direction: column; min-width: 0; }
+.name { font-size: 12px; font-weight: 600; color: var(--text); line-height: 1.3; }
+.role { font-size: 11px; color: var(--muted); line-height: 1.3; }
 
-@media (max-width: 980px) { .row { grid-template-columns: 1fr; } }
+/* ---- Verify-the-claim link ---- */
+.caseLink {
+  margin-top: auto;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 600;
+  color: var(--accent);
+  border-bottom: 1px dashed rgba(124, 58, 237, 0.3);
+  padding-bottom: 1px;
+  align-self: flex-start;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+.caseLink:hover {
+  color: var(--text);
+  border-bottom-color: rgba(124, 58, 237, 0.6);
+}
+.caseLink :global(.arrow) { transition: transform 0.2s; }
+.caseLink:hover :global(.arrow) { transform: translateX(3px); }
+
+@media (max-width: 980px) {
+  .grid { grid-template-columns: 1fr; }
+}

@@ -1,4 +1,5 @@
 import Hero from '../components/sections/Hero'
+import CustomerLogoStrip from '../components/sections/CustomerLogoStrip'
 import Pains from '../components/sections/Pains'
 import Features from '../components/sections/Features'
 import AISpotlight from '../components/sections/AISpotlight'
@@ -54,6 +55,7 @@ export default function HomePage() {
         }}
       />
       <Hero />
+      <CustomerLogoStrip />
       <Pains />
       <Features />
       <AISpotlight />

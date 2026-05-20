@@ -260,25 +260,25 @@ function KubernetesPreview() {
           <stop offset="100%" stopColor="#ffffff" />
         </linearGradient>
         <linearGradient id="kacc" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#7e22ce" />
-          <stop offset="100%" stopColor="#4f46e5" />
+          <stop offset="0%" stopColor="#7c3aed" />
+          <stop offset="100%" stopColor="#7c3aed" />
         </linearGradient>
       </defs>
 
       <rect width="760" height="280" fill="url(#kbg)" />
 
       {/* Top bar with K8s logo, cluster selector, AlertMend Kubernetes Agent badge */}
-      <rect x="0" y="0" width="760" height="38" fill="rgba(126,34,206,0.05)" />
+      <rect x="0" y="0" width="760" height="38" fill="rgba(124,58,237,0.05)" />
       <image
         href={K8S_LOGO_URL}
         x="16" y="8" width="22" height="22"
         preserveAspectRatio="xMidYMid meet"
       />
     
-      <text x="46" y="24" fontSize="12" fontWeight="700" fill="#3b0764">
+      <text x="46" y="24" fontSize="12" fontWeight="700" fill="#09090b">
         prod-us-west-2
       </text>
-      <text x="46" y="24" dx="116" fontSize="11" fill="rgba(107,33,168,0.7)">
+      <text x="46" y="24" dx="116" fontSize="11" fill="rgba(109,40,217,0.7)">
         · last 24h
       </text>
       {/* Branded "AlertMend Kubernetes Agent" pill, top-right.
@@ -291,7 +291,7 @@ function KubernetesPreview() {
           height="24"
           rx="12"
           fill="#ffffff"
-          stroke="rgba(126,34,206,0.35)"
+          stroke="rgba(124,58,237,0.35)"
         />
         {/* AlertMend brandmark */}
         <image
@@ -302,13 +302,13 @@ function KubernetesPreview() {
           height="16"
           preserveAspectRatio="xMidYMid meet"
         />
-        <text x="30" y="16" fontSize="10" fontWeight="800" fill="#3b0764" letterSpacing="0.01em">
+        <text x="30" y="16" fontSize="10" fontWeight="800" fill="#09090b" letterSpacing="0.01em">
           AlertMend
         </text>
-        <text x="86" y="16" fontSize="10" fontWeight="500" fill="rgba(107,33,168,0.55)">
+        <text x="86" y="16" fontSize="10" fontWeight="500" fill="rgba(109,40,217,0.55)">
           ·
         </text>
-        <text x="94" y="16" fontSize="10" fontWeight="600" fill="#6b21a8" letterSpacing="0.005em">
+        <text x="94" y="16" fontSize="10" fontWeight="600" fill="#6d28d9" letterSpacing="0.005em">
           Kubernetes Agent
         </text>
         {/* Live dot */}
@@ -324,18 +324,18 @@ function KubernetesPreview() {
       <text x="20" y="62" fontSize="13" fontWeight="700" fill="#1f0a47">
         Cluster overview
       </text>
-      <text x="20" y="80" fontSize="10" fill="rgba(107,33,168,0.7)">
+      <text x="20" y="80" fontSize="10" fill="rgba(109,40,217,0.7)">
         4 namespaces with active incidents
       </text>
 
       {/* Stat tiles with K8s resource icons */}
       {stats.map((s, i) => (
         <g key={i} transform={`translate(${20 + i * 138} 92)`}>
-          <rect width="124" height="58" rx="10" fill="#ffffff" stroke="rgba(126,34,206,0.18)" />
+          <rect width="124" height="58" rx="10" fill="#ffffff" stroke="rgba(124,58,237,0.18)" />
           <g transform="translate(12 12)">
             <ResourceGlyph kind={s.label} />
           </g>
-          <text x="40" y="22" fontSize="9" fontWeight="700" fill="rgba(107,33,168,0.7)" letterSpacing="0.06em">
+          <text x="40" y="22" fontSize="9" fontWeight="700" fill="rgba(109,40,217,0.7)" letterSpacing="0.06em">
             {s.label.toUpperCase()}
           </text>
           <text x="40" y="40" fontSize="16" fontWeight="800" fill="#1f0a47">
@@ -366,12 +366,12 @@ function KubernetesPreview() {
           </text>
           <text x="84" y="27" fontSize="9" fill="rgba(59,7,100,0.65)" fontFamily="ui-monospace, Menlo, monospace">
             {row.pod}
-            <tspan dx="6" fill="rgba(107,33,168,0.55)">· ns: {row.ns}</tspan>
+            <tspan dx="6" fill="rgba(109,40,217,0.55)">· ns: {row.ns}</tspan>
           </text>
           {/* View RCA chip */}
           <g transform="translate(345 8)">
-            <rect width="74" height="18" rx="9" fill="rgba(126,34,206,0.1)" stroke="rgba(126,34,206,0.4)" />
-            <text x="37" y="12.5" textAnchor="middle" fontSize="9" fontWeight="700" fill="#6b21a8" letterSpacing="0.04em">
+            <rect width="74" height="18" rx="9" fill="rgba(124,58,237,0.1)" stroke="rgba(124,58,237,0.4)" />
+            <text x="37" y="12.5" textAnchor="middle" fontSize="9" fontWeight="700" fill="#6d28d9" letterSpacing="0.04em">
               VIEW RCA
             </text>
           </g>
@@ -380,16 +380,16 @@ function KubernetesPreview() {
 
       {/* Right panel chart - CPU trend */}
       <g>
-        <rect x="470" y="168" width="270" height="74" rx="10" fill="#ffffff" stroke="rgba(126,34,206,0.18)" />
-        <text x="482" y="184" fontSize="9" fontWeight="700" fill="rgba(107,33,168,0.7)" letterSpacing="0.06em">
+        <rect x="470" y="168" width="270" height="74" rx="10" fill="#ffffff" stroke="rgba(124,58,237,0.18)" />
+        <text x="482" y="184" fontSize="9" fontWeight="700" fill="rgba(109,40,217,0.7)" letterSpacing="0.06em">
           CPU · prod-us-west-2
         </text>
         <text x="724" y="184" textAnchor="end" fontSize="9" fill="#047857" fontWeight="600">
           ↑ 22%
         </text>
         {/* faint baseline grid */}
-        <line x1="480" y1="216" x2="730" y2="216" stroke="rgba(126,34,206,0.08)" />
-        <line x1="480" y1="228" x2="730" y2="228" stroke="rgba(126,34,206,0.08)" />
+        <line x1="480" y1="216" x2="730" y2="216" stroke="rgba(124,58,237,0.08)" />
+        <line x1="480" y1="228" x2="730" y2="228" stroke="rgba(124,58,237,0.08)" />
         <polyline
           points="480,232 510,220 540,224 570,210 600,214 630,196 660,202 690,186 720,194 730,180"
           fill="none"
@@ -399,7 +399,7 @@ function KubernetesPreview() {
           strokeLinejoin="round"
         />
         {/* end-point dot */}
-        <circle cx="730" cy="180" r="3" fill="#7e22ce" />
+        <circle cx="730" cy="180" r="3" fill="#7c3aed" />
       </g>
     </svg>
   );
@@ -407,14 +407,14 @@ function KubernetesPreview() {
 
 /** Tiny resource glyph for a stat tile (Pods, Nodes, Deploys, Namespaces). */
 function ResourceGlyph({ kind }: { kind: string }) {
-  const stroke = '#7e22ce';
+  const stroke = '#7c3aed';
   if (kind === 'Pods') {
     // hex pod
     return (
       <svg width="20" height="20" viewBox="0 0 24 24">
         <polygon
           points="12,2 21,7 21,17 12,22 3,17 3,7"
-          fill="rgba(126,34,206,0.12)"
+          fill="rgba(124,58,237,0.12)"
           stroke={stroke}
           strokeWidth="1.5"
           strokeLinejoin="round"

@@ -1,33 +1,7 @@
-import BrandLogo, { svgPornUrl } from '../ui/BrandLogo';
+import { Link } from 'react-router-dom';
+import BrandLogo from '../ui/BrandLogo';
+import { integrations } from '../../data/integrations';
 import styles from './Integrations.module.css';
-
-type Integration = {
-  name: string;
-  src?: string;
-  slug?: string;
-  domain?: string;
-};
-
-const integrations: Integration[] = [
-  { name: 'Kubernetes', slug: 'kubernetes', domain: 'kubernetes.io' },
-  { name: 'AWS', src: svgPornUrl('aws'), domain: 'aws.amazon.com' },
-  { name: 'Google Cloud', slug: 'googlecloud', domain: 'cloud.google.com' },
-  { name: 'Azure', src: svgPornUrl('microsoft-azure'), domain: 'azure.microsoft.com' },
-  { name: 'Prometheus', slug: 'prometheus', domain: 'prometheus.io' },
-  { name: 'Grafana', slug: 'grafana', domain: 'grafana.com' },
-  { name: 'Datadog', slug: 'datadog', domain: 'datadoghq.com' },
-  { name: 'Victoria Metrics', slug: 'victoriametrics', domain: 'victoriametrics.com' },
-  { name: 'Slack', src: svgPornUrl('slack'), domain: 'slack.com' },
-  { name: 'MS Teams', src: svgPornUrl('microsoft-teams'), domain: 'microsoft.com' },
-  { name: 'PagerDuty', slug: 'pagerduty', domain: 'pagerduty.com' },
-  { name: 'Jira', slug: 'jira', domain: 'atlassian.com' },
-  { name: 'SendGrid', src: svgPornUrl('sendgrid'), domain: 'sendgrid.com' },
-  { name: 'Google Meet', slug: 'googlemeet', domain: 'meet.google.com' },
-  { name: 'Jenkins', slug: 'jenkins', domain: 'jenkins.io' },
-  { name: 'GitHub Actions', slug: 'githubactions', domain: 'github.com' },
-  { name: 'GitLab CI', slug: 'gitlab', domain: 'gitlab.com' },
-  { name: 'WhatsApp', slug: 'whatsapp', domain: 'whatsapp.com' },
-];
 
 export default function Integrations() {
   return (
@@ -47,18 +21,24 @@ export default function Integrations() {
         </div>
         <div className={`${styles.grid} reveal`}>
           {integrations.map((i) => (
-            <div key={i.name} className={styles.cell}>
+            <Link
+              key={i.slug}
+              to={`/integrations/${i.slug}`}
+              className={styles.cell}
+              aria-label={`${i.name} integration — ${i.tagline}`}
+            >
               <span className={styles.logoChip}>
                 <BrandLogo
-                  src={i.src}
-                  slug={i.slug}
+                  src={i.logoSrc}
+                  slug={i.iconSlug}
+                  tint={i.logoTint}
                   domain={i.domain}
                   alt={i.name}
                   className={styles.logoImg}
                 />
               </span>
-              <span>{i.name}</span>
-            </div>
+              <span className={styles.cellName}>{i.name}</span>
+            </Link>
           ))}
         </div>
       </div>
