@@ -453,6 +453,6 @@ const metaDescription = generateUniqueMetaDescription(
 ## 🔗 Links
 
 - **Website:** https://alertmend.io
-- **Playground:** https://app.alertmend.io/playground
+- **Playground:** https://demo.alertmend.io
 - **Book a Demo:** https://calendly.com/hello-alertmend/30min
 - **Signup:** https://app.alertmend.io/signup

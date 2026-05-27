@@ -35,7 +35,7 @@ const primaryLinks: Array<
 ];
 
 const SIGNUP_URL = 'https://app.alertmend.io/signup';
-const PLAYGROUND_URL = 'https://app.alertmend.io/playground?source=homepage';
+const PLAYGROUND_URL = 'https://demo.alertmend.io';
 const CALENDLY_URL = 'https://calendly.com/hello-alertmend/30min';
 
 export default function Nav() {

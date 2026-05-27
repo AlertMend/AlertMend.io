@@ -757,10 +757,10 @@ markdownFiles.forEach(file => {
     signupTrackingUrlObj.searchParams.set('blog_slug', normalizedBlogSlug)
     const signupTrackingUrl = signupTrackingUrlObj.toString()
 
-    const playgroundTrackingUrlObj = new URL('https://app.alertmend.io/playground')
-    playgroundTrackingUrlObj.searchParams.set('source', blogSourceParam)
-    playgroundTrackingUrlObj.searchParams.set('blog_slug', normalizedBlogSlug)
-    const playgroundTrackingUrl = playgroundTrackingUrlObj.toString()
+    const playgroundTrackingUrl = 'https://demo.alertmend.io'
+    
+    
+    
 
     const calendlyTrackingUrlObj = new URL('https://calendly.com/hello-alertmend/30min')
     calendlyTrackingUrlObj.searchParams.set('source', blogSourceParam)
