@@ -1,0 +1,21 @@
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+.violet  { color: var(--accent-strong); background: var(--accent-soft); border-color: rgba(124, 58, 237, 0.18); }
+.green   { color: var(--green);         background: var(--green-soft);  border-color: rgba(5, 150, 105, 0.18); }
+.amber   { color: var(--amber);         background: var(--amber-soft);  border-color: rgba(217, 119, 6, 0.18); }
+.red     { color: var(--red);           background: var(--red-soft);    border-color: rgba(220, 38, 38, 0.18); }
+.neutral { color: var(--text-dim);      background: var(--surface-strong); border-color: var(--border); }

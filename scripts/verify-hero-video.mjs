@@ -1,4 +1,11 @@
-/**
+\
+
+
+
+
+
+
+]]/**
  * Smoke test: open the dev server in headless Chromium, find the
  * Hero <video>, and confirm it loads, autoplays muted, loops, and
  * has the expected source/dimensions/duration. Companion to
@@ -75,8 +82,11 @@ if (stats.muted === true) ok('Muted (required for autoplay)');
 else fail(`Muted is ${stats.muted}`);
 
 /* CYCLE_MS in capture-hero.mjs is 20.38s; allow a generous window. */
-if (stats.duration > 19 && stats.duration < 22) ok(`Duration ≈ 20.4s (got ${stats.duration.toFixed(2)}s)`);
-else fail(`Duration is ${stats.duration}, expected ~20.4s`);
+/* Trimmed window is PRESS → RCA → PR_GLIDE → ~half of PR_PRESS (see
+ * scripts/capture-hero.mjs TRIM_MS = 11200). Allow ±1s slack so this
+ * passes regardless of small VP9 GOP rounding. */
+if (stats.duration > 10 && stats.duration < 13) ok(`Duration ≈ 11.2s (got ${stats.duration.toFixed(2)}s)`);
+else fail(`Duration is ${stats.duration}, expected ~11.2s`);
 
 if (stats.currentSrc && stats.currentSrc.endsWith('.webm')) ok('Browser picked the WebM source (primary)');
 else if (stats.currentSrc && stats.currentSrc.endsWith('.mp4')) ok('Browser picked the MP4 source (Safari/iOS fallback)');
