@@ -7,7 +7,7 @@ const CALENDLY_URL = 'https://calendly.com/hello-alertmend/30min';
  *  offers both a high-touch path (Book a demo) and a low-touch path (free
  *  trial), the way Datadog/Linear/Vercel split traffic by intent. */
 const SIGNUP_URL = 'https://app.alertmend.io/signup?source=homepage-hero';
-const PLAYGROUND_URL = 'https://app.alertmend.io/playground?source=homepage';
+const PLAYGROUND_URL = 'https://demo.alertmend.io';
 
 /** Detects the user's reduced-motion preference so we can suppress
  *  autoplay for motion-sensitive visitors. They still get the poster

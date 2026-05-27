@@ -154,7 +154,7 @@ Use these as anchors in a deal:
 
 - **Free cluster health check.** A read-only scan of a live cluster. Output: prioritized list of OOM-trending workloads, restart-prone pods, misconfigured limits, over-provisioned spend, unowned alerts. No incident required, results in minutes.
 - **Live in 1 day.** No tool replacement required, no credit card.
-- **[Book a demo](https://calendly.com/hello-alertmend/30min)** · **[Try the playground](https://app.alertmend.io/playground?source=homepage)** · **[Sign up](https://app.alertmend.io/signup)**
+- **[Book a demo](https://calendly.com/hello-alertmend/30min)** · **[Try the playground](https://demo.alertmend.io?source=homepage)** · **[Sign up](https://app.alertmend.io/signup)**
 
 ---
 
