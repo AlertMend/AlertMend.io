@@ -11,6 +11,9 @@ import { truncateBlogTitle, truncateH2Heading } from '../utils/titleUtils'
 import { generateUniqueMetaDescription } from '../utils/descriptionUtils'
 import { mapOldBlogUrlToSlug } from '../utils/blogSlugMapper'
 import { normalizeBlogMarkdown } from '../utils/markdownNormalize'
+import DocLingMonitoringBlog, { DOCLING_BLOG_FAQ, DOCLING_HOWTO_STEPS } from '../components/blog/DocLingMonitoringBlog'
+import { isEnhancedBlog } from '../components/blog/enhancedBlogRegistry'
+import { attachScrollReveal } from '../hooks/useScrollReveal'
 
 export default function BlogPostDetailPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -63,6 +66,21 @@ export default function BlogPostDetailPage() {
       })
     }
   }, [slug])
+
+  // Blog content loads async (fetch markdown). useScrollReveal runs on route change
+  // before the article mounts, so `.reveal` sections stay at opacity:0 unless we
+  // re-attach the observer once the post is rendered.
+  useEffect(() => {
+    if (loading || !post) return undefined;
+    let io: IntersectionObserver | undefined;
+    const raf = requestAnimationFrame(() => {
+      io = attachScrollReveal();
+    });
+    return () => {
+      cancelAnimationFrame(raf);
+      io?.disconnect();
+    };
+  }, [loading, post])
 
   if (loading) {
     return (
@@ -207,6 +225,45 @@ export default function BlogPostDetailPage() {
     isHtmlVersion ? post.content : displayContent,
     post.category
   )
+
+  const useEnhancedLayout = !isHtmlVersion && isEnhancedBlog(post.slug)
+  const ogImage = post.slug === 'monitor-docling-using-alertmend'
+    ? 'https://alertmend.io/media/blog/docling-hero.svg'
+    : 'https://alertmend.io/og-image.jpg'
+
+  const faqStructuredData = useEnhancedLayout
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: DOCLING_BLOG_FAQ.map((item) => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.a,
+          },
+        })),
+      }
+    : null
+
+  const howToStructuredData = useEnhancedLayout
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: 'How to monitor Docling (docling-serve) in production',
+        description: metaDescription,
+        totalTime: 'PT15M',
+        tool: [{ '@type': 'HowToTool', name: 'AlertMend' }],
+        step: DOCLING_HOWTO_STEPS.map((step, index) => ({
+          '@type': 'HowToStep',
+          position: index + 1,
+          name: step.title,
+          text: step.body,
+        })),
+      }
+    : null
+
+  const doclingStructuredExtras = [faqStructuredData, howToStructuredData].filter(Boolean) as object[]
   
   return (
     <div className="min-h-screen bg-white">
@@ -215,13 +272,14 @@ export default function BlogPostDetailPage() {
         description={metaDescription}
         keywords={post.keywords || `${post.category}, AlertMend AI, AIOps, Kubernetes, DevOps`}
         canonical={blogPostUrl}
+        ogImage={ogImage}
         ogType="article"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "BlogPosting",
           "headline": seoTitle,
           "description": metaDescription,
-          "image": "https://alertmend.io/og-image.jpg",
+          "image": ogImage,
           "datePublished": post.date,
           "dateModified": post.date,
           "author": {
@@ -248,6 +306,7 @@ export default function BlogPostDetailPage() {
             { label: post.title }
           ]
         }}
+        extraStructuredData={doclingStructuredExtras.length > 0 ? doclingStructuredExtras : undefined}
       />
       <main className="pt-24">
         <article className="pt-8 pb-8 md:pb-12 container-padding">
@@ -288,8 +347,11 @@ export default function BlogPostDetailPage() {
                     </header>
 
                     {/* Content */}
-                    <div className="prose prose-lg max-w-none">
+                    <div className={useEnhancedLayout ? 'max-w-none' : 'prose prose-lg max-w-none'}>
                       <div className="text-gray-800 leading-7">
+                        {useEnhancedLayout ? (
+                          <DocLingMonitoringBlog />
+                        ) : (
                         <ReactMarkdown
                           remarkPlugins={[remarkGfm]}
                           components={{
@@ -344,10 +406,12 @@ export default function BlogPostDetailPage() {
                         >
                           {displayContent}
                         </ReactMarkdown>
+                        )}
                       </div>
                     </div>
 
-                    {/* Promotional Section */}
+                    {/* Promotional Section — skip when enhanced layout has its own CTA */}
+                    {!useEnhancedLayout && (
                     <div className="mt-12 pt-8 border-t border-zinc-200">
                       <p className="text-zinc-700 text-lg leading-7 mb-3">
                         Ready to eliminate manual firefighting and achieve autonomous infrastructure operations?
@@ -363,6 +427,7 @@ export default function BlogPostDetailPage() {
                         </button>
                       </p>
                     </div>
+                    )}
 
                     {/* Horizontal Separator */}
                     <hr className="my-8 border-zinc-200" />

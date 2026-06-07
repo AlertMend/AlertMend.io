@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Monitor DocLing Using AlertMend | AlertMend AI</title>
+  <meta name="description" content="Monitor DocLing every way it runs—Python library, CLI, Docling Serve API, Docker, Kubernetes, or MCP—with AlertMend health checks and...">
+  <meta name="keywords" content="DocLing monitoring, docling-serve, DocLing CLI, document parsing, RAG pipeline, MCP, AlertMend, Kubernetes">
+  <meta name="author" content="AlertMend Team">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://www.alertmend.io/blogs/Monitor-Docling-Using-Alertmend.html">
+  <!-- Favicon - uses SVG logo -->
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/logos/alertmend-logo.svg" />
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.alertmend.io/blogs/Monitor-Docling-Using-Alertmend.html">
+  <meta property="og:title" content="How to Monitor DocLing Using AlertMend | AlertMend AI">
+  <meta property="og:description" content="Monitor DocLing every way it runs—Python library, CLI, Docling Serve API, Docker, Kubernetes, or MCP—with AlertMend health checks and...">
+  <meta property="og:image" content="https://alertmend.io/og-image.jpg">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.alertmend.io/blogs/Monitor-Docling-Using-Alertmend.html">
+  <meta name="twitter:title" content="How to Monitor DocLing Using AlertMend | AlertMend AI">
+  <meta name="twitter:description" content="Monitor DocLing every way it runs—Python library, CLI, Docling Serve API, Docker, Kubernetes, or MCP—with AlertMend health checks and...">
+  <meta name="twitter:image" content="https://alertmend.io/og-image.jpg">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "How to Monitor DocLing Using AlertMend | AlertMend AI",
+    "description": "Monitor DocLing every way it runs—Python library, CLI, Docling Serve API, Docker, Kubernetes, or MCP—with AlertMend health checks and...",
+    "image": "https://alertmend.io/og-image.jpg",
+    "datePublished": "2026-06-06",
+    "dateModified": "2026-06-06",
+    "author": {
+      "@type": "Person",
+      "name": "AlertMend Team"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "AlertMend AI",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://alertmend.io/logos/alertmend-logo.svg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.alertmend.io/blogs/Monitor-Docling-Using-Alertmend.html"
+    },
+    "articleSection": "AIOps"
+  }
+  </script>
+  
+  <!-- SearchAtlas Dynamic Optimization -->
+  <script nowprocket nitro-exclude type="text/javascript" id="sa-dynamic-optimization" data-uuid="6df6e583-765f-486e-af01-8883dae4a8f2" src="data:text/javascript;base64,dmFyIHNjcmlwdCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoInNjcmlwdCIpO3NjcmlwdC5zZXRBdHRyaWJ1dGUoIm5vd3Byb2NrZXQiLCAiIik7c2NyaXB0LnNldEF0dHJpYnV0ZSgibml0cm8tZXhjbHVkZSIsICIiKTtzY3JpcHQuc3JjID0gImh0dHBzOi8vZGFzaGJvYXJkLnNlYXJjaGF0bGFzLmNvbS9zY3JpcHRzL2R5bmFtaWNfb3B0aW1pemF0aW9uLmpzIjtzY3JpcHQuZGF0YXNldC51dWlkID0gIjZkZjZlNTgzLTc2NWYtNDg2ZS1hZjAxLTg4ODNkYWU0YThmMiI7c2NyaXB0LmlkID0gInNhLWR5bmFtaWMtb3B0aW1pemF0aW9uLWxvYWRlciI7ZG9jdW1lbnQuaGVhZC5hcHBlbmRDaGlsZChzY3JpcHQpOw=="></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.7;
+      color: #1f2937;
+      background: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .main-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 96px 16px 32px;
+      margin-top: 64px;
+    }
+    @media (min-width: 640px) {
+      .main-container {
+        padding: 96px 24px 32px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .main-container {
+        padding: 96px 32px 48px;
+      }
+    }
+    .content-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-top: 32px;
+    }
+    @media (min-width: 1024px) {
+      .content-wrapper {
+        grid-template-columns: 8fr 4fr;
+        gap: 32px;
+      }
+    }
+    .main-content {
+      display: flex;
+      gap: 24px;
+    }
+    .social-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-top: 8px;
+    }
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .social-icon:hover {
+      background: #ede9fe;
+    }
+    .article-content {
+      flex: 1;
+    }
+    article {
+      background: #ffffff;
+    }
+    header {
+      margin-bottom: 32px;
+    }
+    h1 {
+      color: #4c1d95;
+      font-size: 2.25rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 3rem;
+      }
+    }
+    @media (min-width: 1024px) {
+      h1 {
+        font-size: 3.75rem;
+      }
+    }
+    h2 {
+      color: #4c1d95;
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    @media (min-width: 768px) {
+      h2 {
+        font-size: 2.25rem;
+      }
+    }
+    h3 {
+      color: #4c1d95;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    @media (min-width: 768px) {
+      h3 {
+        font-size: 1.875rem;
+      }
+    }
+    h4, h5, h6 {
+      color: #4c1d95;
+      font-weight: 600;
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+    p {
+      margin-bottom: 24px;
+      font-size: 1.125rem;
+      line-height: 1.75;
+      color: #1f2937;
+    }
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #ddd6fe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7c3aed;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .author-details {
+      display: flex;
+      flex-direction: column;
+    }
+    .author-name {
+      font-weight: 600;
+      color: #111827;
+      font-size: 1rem;
+    }
+    .author-meta {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+    .category-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #dbeafe;
+      color: #1e40af;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-top: 16px;
+    }
+    code {
+      background: #f3f4f6;
+      color: #7c3aed;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+      font-size: 0.9em;
+      border: 1px solid #e5e7eb;
+    }
+    pre {
+      background: #1f2937;
+      color: #f9fafb;
+      padding: 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border: 1px solid #374151;
+    }
+    pre code {
+      background: none;
+      color: #f9fafb;
+      padding: 0;
+      border: none;
+      font-size: 0.875rem;
+    }
+    a {
+      color: #7c3aed;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #7c3aed;
+      text-decoration: underline;
+    }
+    ul, ol {
+      margin-bottom: 24px;
+      padding-left: 24px;
+      font-size: 1.125rem;
+      line-height: 1.75;
+    }
+    li {
+      margin-bottom: 12px;
+      color: #1f2937;
+    }
+    blockquote {
+      border-left: 4px solid #7c3aed;
+      padding-left: 24px;
+      margin: 32px 0;
+      color: #374151;
+      font-style: italic;
+      font-size: 1.125rem;
+      line-height: 1.75;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin: 2rem 0;
+      -webkit-overflow-scrolling: touch;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0;
+      font-size: 1rem;
+      background: #ffffff;
+      border: 2px solid #d1d5db;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    }
+    thead {
+      background: #fafafa;
+    }
+    th {
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      color: #4c1d95;
+      border-right: 1px solid #ddd6fe;
+      border-bottom: 2px solid #a78bfa;
+      background: #fafafa;
+      font-size: 0.9375rem;
+    }
+    th:first-child {
+      border-left: none;
+    }
+    th:last-child {
+      border-right: none;
+    }
+    td {
+      padding: 1rem;
+      text-align: left;
+      border-right: 1px solid #e5e7eb;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+    td:first-child {
+      border-left: none;
+    }
+    td:last-child {
+      border-right: none;
+    }
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+    tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+    tbody tr:hover {
+      background: #ede9fe;
+    }
+    @media (max-width: 768px) {
+      .table-wrapper {
+        margin: 1.5rem 0;
+      }
+      table {
+        font-size: 0.875rem;
+      }
+      th, td {
+        padding: 0.75rem;
+      }
+    }
+    hr {
+      border: none;
+      border-top: 2px solid #e5e7eb;
+      margin: 3rem 0;
+    }
+    .content {
+      font-size: 1.125rem;
+      line-height: 1.75;
+      color: #1f2937;
+    }
+    .promotional-section {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid #e5e7eb;
+    }
+    .promotional-section p {
+      color: #1f2937;
+      font-size: 1.125rem;
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+    .profile-section {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #e5e7eb;
+      margin-top: 32px;
+    }
+    @media (min-width: 640px) {
+      .profile-section {
+        flex-direction: row;
+      }
+    }
+    .profile-image {
+      flex-shrink: 0;
+      width: 128px;
+      height: 128px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid #e5e7eb;
+    }
+    .profile-content {
+      flex: 1;
+    }
+    .profile-placeholder-arvind {
+      display: none;
+      width: 128px;
+      height: 128px;
+      border-radius: 8px;
+      background: #ede9fe;
+      border: 1px solid #e5e7eb;
+      align-items: center;
+      justify-content: center;
+      color: #7c3aed;
+      font-weight: 700;
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    .profile-placeholder-arvind.show {
+      display: flex;
+    }
+    .profile-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #4c1d95;
+      margin-bottom: 8px;
+    }
+    .profile-bio {
+      color: #1f2937;
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .profile-bio p {
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+    .linkedin-link {
+      display: inline-flex;
+      align-items: center;
+      color: #7c3aed;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .linkedin-link:hover {
+      color: #7c3aed;
+    }
+    footer {
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px solid #e5e7eb;
+      color: #6b7280;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+    footer a {
+      color: #7c3aed;
+      font-weight: 600;
+    }
+    .sidebar {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .sidebar {
+        display: block;
+      }
+    }
+    .sidebar-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: sticky;
+      top: 96px;
+    }
+    .sidebar-card {
+      background: #fafafa;
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid #ddd6fe;
+    }
+    .sidebar-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #4c1d95;
+      margin-bottom: 16px;
+      margin-top: 0;
+    }
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .signup-form input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 1rem;
+    }
+    .signup-form input:focus {
+      outline: none;
+      border-color: #7c3aed;
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.18);
+    }
+    .signup-form button {
+      width: 100%;
+      padding: 10px 12px;
+      background: #09090b;
+      color: white;
+      font-weight: 600;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .signup-form button:hover {
+      background: #27272a;
+    }
+    .related-content-title {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: #111827;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      margin-top: 0;
+    }
+    .related-posts-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .related-posts-list li {
+      margin: 0;
+    }
+    .related-post-link {
+      color: #2563eb;
+      text-decoration: underline;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      display: block;
+      transition: color 0.2s;
+    }
+    .related-post-link:hover {
+      color: #1e40af;
+    }
+    .view-more-link {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 16px;
+      color: #7c3aed;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .view-more-link:hover {
+      color: #7c3aed;
+    }
+    @media (max-width: 768px) {
+      .main-container {
+        padding: 80px 16px 32px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 1.75rem;
+      }
+      h3 {
+        font-size: 1.25rem;
+      }
+      p, ul, ol {
+        font-size: 1rem;
+      }
+      .social-sidebar {
+        display: none;
+      }
+      .main-content {
+        flex-direction: column;
+      }
+    }
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      z-index: 50;
+    }
+    .navbar-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+    @media (min-width: 640px) {
+      .navbar-container {
+        padding: 0 24px;
+      }
+    }
+    @media (min-width: 1024px) {
+      .navbar-container {
+        padding: 0 32px;
+      }
+    }
+    .navbar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 64px;
+    }
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: inherit;
+      padding: 6px 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .navbar-logo:hover {
+      background: #f9fafb;
+    }
+    .navbar-logo-icon {
+      width: auto;
+      height: 32px;
+      max-height: 32px;
+      object-fit: contain;
+    }
+    .navbar-logo-text {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #09090b;
+    }
+    .navbar-links {
+      display: none;
+      align-items: center;
+      gap: 4px;
+    }
+    @media (min-width: 1024px) {
+      .navbar-links {
+        display: flex;
+      }
+    }
+    .navbar-link {
+      padding: 6px 12px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #3f3f46;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: color 0.15s ease, background 0.15s ease;
+    }
+    .navbar-link:hover {
+      color: #09090b;
+      background: #f4f4f5;
+    }
+    .navbar-link.active {
+      color: #09090b;
+      background: #fafafa;
+    }
+    .navbar-actions {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      margin-left: 16px;
+      padding-left: 16px;
+      border-left: 1px solid #e5e7eb;
+    }
+    @media (min-width: 1024px) {
+      .navbar-actions {
+        display: flex;
+      }
+    }
+    .navbar-button {
+      padding: 8px 16px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .navbar-button-primary {
+      background: #09090b;
+      color: white;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 8px 14px;
+      box-shadow: 0 1px 2px rgba(9, 9, 11, 0.08);
+    }
+    .navbar-button-primary:hover {
+      background: #27272a;
+    }
+    .navbar-button-secondary {
+      color: #3f3f46;
+      background: transparent;
+    }
+    .navbar-button-secondary:hover {
+      color: #09090b;
+      background: #f4f4f5;
+    }
+    .navbar-button-playground {
+      background: #ede9fe;
+      color: #6d28d9;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 6px 12px;
+      border: 1px solid rgba(124, 58, 237, 0.22);
+    }
+    .navbar-button-playground:hover {
+      background: #ddd6fe;
+    }
+    .mobile-menu-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: #374151;
+    }
+    @media (min-width: 1024px) {
+      .mobile-menu-button {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-content">
+        <!-- Logo -->
+        <a href="/" class="navbar-logo">
+          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'; this.parentElement.querySelector('.navbar-logo-text').style.display='inline';" />
+          <svg class="navbar-logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <span class="navbar-logo-text" style="display: none;">AlertMend AI</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="navbar-links">
+          <a href="/#how-it-works" class="navbar-link">How It Works</a>
+          <a href="/#solutions" class="navbar-link">Solutions</a>
+          <a href="/#benefits" class="navbar-link">Benefits</a>
+          <a href="/case-studies" class="navbar-link">Case Studies</a>
+          <a href="/blog" class="navbar-link active">Blog</a>
+          <a href="/pricing" class="navbar-link">Pricing</a>
+        </div>
+
+        <!-- Desktop Actions -->
+        <div class="navbar-actions">
+          <a href="https://demo.alertmend.io" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-playground">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Playground
+          </a>
+          <a href="https://app.alertmend.io/signup?source=blog-post&blog_slug=monitor-docling-using-alertmend" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-secondary">Register</a>
+          <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=monitor-docling-using-alertmend" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-primary">Book a Demo</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-button" aria-label="Toggle menu">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <div class="content-wrapper">
+      <!-- Main Content Area (70%) -->
+      <div class="main-content">
+        <!-- Social Share Icons (Left Sidebar) -->
+        <div class="social-sidebar">
+          <a href="#" class="social-icon" aria-label="Share on Facebook">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Share on Twitter">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Share on LinkedIn">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Copy link">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8.465 11.293c1.133-1.133 3.109-1.133 4.242 0l.707.707 1.414-1.414-.707-.707c-1.498-1.498-3.94-1.498-5.439 0l-.707.707 1.414 1.414.707-.707zm-2.829 2.829l.707.707c1.498 1.498 3.94 1.498 5.439 0l.707-.707-1.414-1.414-.707.707c-1.133 1.133-3.109 1.133-4.242 0l-.707-.707-1.414 1.414zm11.314-8.485l-6.364 6.364c-.39.39-1.023.39-1.414 0s-.39-1.023 0-1.414l6.364-6.364c.39-.39 1.023-.39 1.414 0s.39 1.023 0 1.414z"/></svg>
+          </a>
+        </div>
+
+        <!-- Article Content -->
+        <div class="article-content">
+          <article>
+            <header>
+              <h1>How to Monitor DocLing Using AlertMend</h1>
+              
+              <!-- Author Info -->
+              <div class="author-info">
+                <div class="author-avatar">
+                  A
+                </div>
+                <div class="author-details">
+                  <div class="author-name">AlertMend Team</div>
+                  <div class="author-meta">4 min read • June 6, 2026</div>
+                </div>
+              </div>
+
+              <!-- Category Tag -->
+              <div class="category-tag">AIOps</div>
+            </header>
+
+            <!-- Content -->
+            <div class="content">
+              <h2>How to Monitor DocLing Using AlertMend</h2>
+<p><img src="/media/blog/docling-hero.svg" alt="DocLing monitoring architecture — PDF to JSON pipeline with AlertMend health checks"></p>
+<p><a href="https://github.com/docling-project/docling">DocLing</a> is an open-source toolkit for parsing PDFs, Office documents, and other formats into structured data. <strong>It does not run one way</strong>—teams embed it as a Python library, batch-convert from the CLI, expose it via <a href="https://github.com/docling-project/docling-serve">Docling Serve</a>, deploy on Kubernetes, or connect AI agents through <a href="https://docling-project.github.io/docling/usage/mcp/">MCP</a>.</p>
+<p>This guide shows how to monitor DocLing with <strong>AlertMend</strong> for each deployment pattern.</p>
+<h2>Ways DocLing runs in production</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>How it works</th>
+<th>Primary AlertMend check</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Python library</strong></td>
+<td><code>pip install docling</code>, call <code>DocumentConverter</code> in your app</td>
+<td>Log alerts + conversion duration metrics</td>
+</tr>
+<tr>
+<td><strong>CLI &amp; batch jobs</strong></td>
+<td><code>docling file.pdf</code> via CronJob, Airflow, or CI</td>
+<td>Job failure alerts + duration SLAs</td>
+</tr>
+<tr>
+<td><strong>Docling Serve</strong></td>
+<td>FastAPI REST API (<code>docling-serve run</code> or Docker on port 5001)</td>
+<td>URL <code>/health</code> + <code>/v1/convert/*</code> latency SLOs</td>
+</tr>
+<tr>
+<td><strong>Kubernetes</strong></td>
+<td>docling-serve containers behind a Service/Ingress</td>
+<td>URL checks + pod OOM/restart auto-remediation</td>
+</tr>
+<tr>
+<td><strong>MCP server</strong></td>
+<td>Document tools for LangChain, CrewAI, and agents</td>
+<td>Tool timeout alerts + backend health</td>
+</tr>
+</tbody></table></div>
+<h2>What to monitor (every mode)</h2>
+<ul>
+<li><strong>Availability</strong> — HTTP <code>/health</code> for Serve, job success for CLI, process uptime for embedded runs</li>
+<li><strong>Latency</strong> — p95 conversion time; spikes often precede OOM kills on large PDFs</li>
+<li><strong>Error rate</strong> — HTTP 5xx, non-zero CLI exit codes, or logged conversion exceptions</li>
+<li><strong>Resource pressure</strong> — Memory and CPU; OCR/VLM models can exhaust smaller instances</li>
+<li><strong>Async queue depth</strong> — For docling-serve task mode, alert when backlog outpaces workers</li>
+</ul>
+<h2>Monitoring Docling Serve (Docker / VM / K8s)</h2>
+<p>Docling Serve is the most common production API. Default port is <strong>5001</strong>:</p>
+<pre><code class="language-bash"># Health check
+curl -sf http://localhost:5001/health
+
+# Synchronous conversion
+curl -sf -X POST http://localhost:5001/v1/convert/file \
+  -F &quot;files=@sample.pdf&quot; -w &quot;%{http_code}&quot;
+</code></pre>
+<p>For <strong>async</strong> jobs, use <code>/v1/convert/source</code> and poll <code>/v1/status/{task_id}</code>. Alert when tasks stay pending too long.</p>
+<p>On Kubernetes, combine URL monitoring with pod restart and OOMKilled alerts. Enable auto-remediation to restart unhealthy replicas.</p>
+<h2>Monitoring the Python library &amp; CLI</h2>
+<p>When DocLing runs in-process or as a batch job, HTTP probes do not apply:</p>
+<ul>
+<li><strong>Library:</strong> Emit metrics on <code>convert()</code> duration and exceptions; alert on error rate spikes in logs</li>
+<li><strong>CLI / CronJob:</strong> Alert on non-zero exit codes and missed schedule windows; watch job duration trends</li>
+<li><strong>Kubernetes CronJobs:</strong> Use AlertMend Kubernetes alerts on Job failure events</li>
+</ul>
+<h2>Mode comparison: AlertMend coverage</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Signal</th>
+<th>Library / CLI</th>
+<th>Docling Serve</th>
+<th>Kubernetes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Process / job down</td>
+<td>Log + job alerts</td>
+<td>URL <code>/health</code></td>
+<td>URL + pod events</td>
+</tr>
+<tr>
+<td>Slow conversions</td>
+<td>App metrics</td>
+<td>Latency SLOs</td>
+<td>Latency + HPA metrics</td>
+</tr>
+<tr>
+<td>OOM / crashes</td>
+<td>Host/pod memory</td>
+<td>Container alerts</td>
+<td>Auto-remediation</td>
+</tr>
+<tr>
+<td>Bad output</td>
+<td>Synthetic sample doc</td>
+<td><code>/v1/convert/file</code> check</td>
+<td>Same via Ingress</td>
+</tr>
+</tbody></table></div>
+<h2>Frequently asked questions</h2>
+<h3>What are the different ways to run DocLing?</h3>
+<p>DocLing can run as a Python library, CLI, Docling Serve REST API (pip or Docker), on Kubernetes, or as an MCP server for AI agents. Each mode needs a slightly different monitoring playbook.</p>
+<h3>How do I monitor Docling Serve specifically?</h3>
+<p>Use GET <code>/health</code> on port 5001, latency SLOs on <code>/v1/convert/file</code>, and task-status polling for async jobs. Pin Docker images explicitly—GPU variants (<code>docling-serve-cu*</code>) use version tags only.</p>
+<h3>Can AlertMend monitor DocLing without Kubernetes?</h3>
+<p>Yes. For Docker or VM deployments, use URL monitoring and host alerts. For library or CLI setups, use log-based alerts and job failure notifications.</p>
+<p>DocLing is only useful when documents convert reliably—regardless of how you deploy it. AlertMend adapts to your setup.</p>
+<p>Ready to set this up? <a href="https://calendly.com/hello-alertmend/30min">Book a demo</a>.</p>
+
+            </div>
+
+            <!-- Promotional Section -->
+            <div class="promotional-section">
+              <p>Ready to eliminate manual firefighting and achieve autonomous infrastructure operations?</p>
+              <p>See how AlertMend AI can help you reduce costs by 50%, achieve zero downtime, and automate incident remediation across Kubernetes, VMs, and ECS. <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=monitor-docling-using-alertmend" target="_blank" rel="noopener noreferrer">Book a demo.</a></p>
+            </div>
+
+            <!-- Horizontal Separator -->
+            <hr />
+
+            <!-- Arvind Rajpurohit Profile Section -->
+            <div class="profile-section">
+              <img src="/logos/arvind.jpeg" alt="Arvind Rajpurohit" class="profile-image" onerror="this.style.display='none'; const placeholder = this.nextElementSibling; if (placeholder) placeholder.classList.add('show');" />
+              <div class="profile-placeholder-arvind">AR</div>
+              <div class="profile-content">
+                <h3 class="profile-name">Arvind Rajpurohit</h3>
+                <p class="profile-title" style="color: #7c3aed; font-weight: 600; margin-bottom: 1rem; font-size: 1rem;">Co-Founder & CEO</p>
+                <div class="profile-bio">
+                  <p>Arvind is a Kubestronaut and Kubernetes expert with 15+ years of experience in infrastructure automation. Previously DevOps Team Lead at Roambee and Customer Success Engineer at Shoreline.io (acquired by NVIDIA), he's helped hundreds of teams achieve 99.97% uptime, reduce costs by 50%, and eliminate 90% of manual operations work.</p>
+                  <p>As CEO of AlertMend AI, Arvind is building the future of autonomous infrastructure management - where AI doesn't just monitor systems, but understands, predicts, and automatically resolves issues while continuously learning and improving.</p>
+                </div>
+                <a href="https://www.linkedin.com/in/arvind-rajpurohit-4a332523/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+                  <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Right Sidebar (30%) -->
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <!-- Email Signup -->
+          <div class="sidebar-card">
+            <h3>Receive blog and product updates</h3>
+            <form class="signup-form">
+              <input type="email" placeholder="Email*" required />
+              <button type="submit">SIGN UP</button>
+            </form>
+          </div>
+
+          <!-- Related Content -->
+          
+          <div class="sidebar-card">
+            <h3 class="related-content-title">RELATED CONTENT</h3>
+            <ul class="related-posts-list">
+              
+                <li>
+                  <a href="/blog/5-ways-aiops-transforming-infrastructure" class="related-post-link">5 Ways AIOps is Transforming Infrastructure Management</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/oomkilled-in-kubernetes" class="related-post-link">How to Fix OOMKilled Errors in Kubernetes</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/graceful-shutdown-kubernetes" class="related-post-link">Graceful Shutdown in Kubernetes: Ensuring Safe Pod Termination</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/load-balancing-long-lived-connections-kubernetes" class="related-post-link">Load Balancing and Scaling Long-Lived Connections in Kubernetes</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/rollback-deployments-kubernetes" class="related-post-link">How to Roll Back Deployments in Kubernetes</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/5-common-kubernetes-challenges" class="related-post-link">5 Common Kubernetes Challenges: Scaling, Networking, GitOps & More</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/troubleshooting-networking-errors-kubernetes" class="related-post-link">Troubleshooting Networking Errors in Kubernetes</a>
+                </li>
+              
+                <li>
+                  <a href="/blog/debugging-kubernetes-admission-webhooks" class="related-post-link">Debugging Kubernetes Admission Webhooks: A Complete Guide</a>
+                </li>
+              
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View All Posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+          
+
+          <!-- Additional Internal Links -->
+          <div class="sidebar-card">
+            <h3 class="related-content-title">EXPLORE ALERTMEND</h3>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/kubernetes-cost-optimization" class="related-post-link">Cost Optimization</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
