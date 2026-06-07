@@ -9,6 +9,10 @@
       "destination": "/blog/index.html"
     },
     {
+      "source": "/blog/monitor-docling-using-alertmend",
+      "destination": "/blog/monitor-docling-using-alertmend/index.html"
+    },
+    {
       "source": "/blog/:slug",
       "destination": "/index.html"
     },

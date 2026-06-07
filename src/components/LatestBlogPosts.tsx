@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { Calendar, ArrowRight } from 'lucide-react'
 import { blogPosts, formatDate } from '../utils/blogUtils'
+import { getBlogPostPath, isStaticBlog } from '../utils/staticBlogRegistry'
 
 /**
  * Latest blog posts strip.
@@ -39,7 +40,13 @@ export default function LatestBlogPosts() {
             return (
               <article
                 key={post.slug}
-                onClick={() => navigate(`/blog/${post.slug}`)}
+                onClick={() => {
+                  if (isStaticBlog(post.slug)) {
+                    window.location.assign(getBlogPostPath(post.slug))
+                  } else {
+                    navigate(getBlogPostPath(post.slug))
+                  }
+                }}
                 className="group bg-white rounded-lg p-6 border border-zinc-200 hover:border-zinc-300 hover:shadow-[0_1px_2px_rgba(9,9,11,0.04),0_12px_24px_-16px_rgba(9,9,11,0.16)] transition-all duration-200 cursor-pointer flex flex-col h-full hover:-translate-y-0.5"
               >
                 <div className="flex items-center gap-2 flex-wrap mb-3">

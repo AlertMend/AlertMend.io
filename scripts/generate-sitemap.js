@@ -231,7 +231,7 @@ ${blogPosts.map(post => {
   
   const isLegacyNewBlog = legacyNewBlogsOnly.includes(post.slug)
   const isNewBlogFinal = isNewBlog || isLegacyNewBlog
-  
+
   if (isNewBlogFinal) {
     // New blogs: only /blog/{slug} entry
     return `  <!-- Blog Post: ${post.slug} -->

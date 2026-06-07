@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { execSync } from 'child_process'
+import { staticBlogPlugin } from './scripts/vite-static-blog-plugin.mjs'
 
 // Plugin to generate blog HTML files after build
 // Note: Blog HTML is now generated before build via npm script
@@ -22,7 +23,7 @@ const generateBlogHtmlPlugin = () => {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), generateBlogHtmlPlugin()],
+  plugins: [staticBlogPlugin(), react(), generateBlogHtmlPlugin()],
   publicDir: 'public',
   build: {
     manifest: true,

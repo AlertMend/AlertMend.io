@@ -4,6 +4,7 @@ import { Calendar, ArrowRight } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useMemo } from 'react'
 import { blogPosts, formatDate } from '../utils/blogUtils'
+import { getBlogPostPath, isStaticBlog } from '../utils/staticBlogRegistry'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
 
 /**
@@ -119,7 +120,13 @@ export default function BlogPage() {
               return (
                 <article
                   key={post.slug}
-                  onClick={() => navigate(`/blog/${post.slug}`)}
+                  onClick={() => {
+                    if (isStaticBlog(post.slug)) {
+                      window.location.assign(getBlogPostPath(post.slug))
+                    } else {
+                      navigate(getBlogPostPath(post.slug))
+                    }
+                  }}
                   className="group relative flex h-full cursor-pointer flex-col rounded-lg border border-zinc-200 bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:shadow-[0_1px_2px_rgba(9,9,11,0.04),0_12px_24px_-16px_rgba(9,9,11,0.16)]"
                 >
                   <div className="mb-4 flex flex-wrap items-center gap-1.5">
