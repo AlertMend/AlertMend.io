@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { STATIC_BLOG_SLUGS } from './static-blog-slugs.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -126,8 +127,9 @@ function validateMarkdownFile(filePath, filename) {
     }
   }
   
-  // Check if content has at least one H1
-  if (!markdownContent.match(/^#\s+.+$/m)) {
+  // Static blogs ship as standalone HTML; the markdown file is metadata only
+  const slug = filename.replace('.md', '')
+  if (!STATIC_BLOG_SLUGS.includes(slug) && !markdownContent.match(/^#\s+.+$/m)) {
     warnings.push(`⚠️  ${filename}: Content should start with H1 heading`)
   }
   
@@ -290,11 +292,20 @@ function validateAllBlogs() {
   
   let htmlFilesFound = 0
   for (const slug of slugs) {
-    // Check in dist/blogs/ directory
     const htmlFiles = []
-    
-    // Try to find HTML file - it might have different casing
-    if (fs.existsSync(distBlogsDir)) {
+
+    // Static blogs are built to dist/blog/{slug}/index.html (not dist/blogs/*.html)
+    if (STATIC_BLOG_SLUGS.includes(slug)) {
+      const staticHtmlPath = path.join(distBlogDir, slug, 'index.html')
+      if (fs.existsSync(staticHtmlPath)) {
+        htmlFiles.push(staticHtmlPath)
+      } else if (fs.existsSync(distBlogDir)) {
+        errors.push(`❌ ${slug}: Static HTML not found at dist/blog/${slug}/index.html (run build:static-blogs first)`)
+      } else {
+        warnings.push(`⚠️  ${slug}: dist/blog/ directory not found (run build:static-blogs first)`)
+      }
+    } else if (fs.existsSync(distBlogsDir)) {
+      // Try to find HTML file - it might have different casing
       const files = fs.readdirSync(distBlogsDir)
       // Normalize slug for comparison (handle case-insensitive matching)
       const normalizedSlug = slug.toLowerCase().replace(/-/g, '-')
@@ -332,10 +343,11 @@ function validateAllBlogs() {
         htmlFiles.push(path.join(distBlogsDir, matchingFile))
       }
     }
-    
+
     if (htmlFiles.length === 0) {
-      // Only error if dist directory exists (might not exist on first run)
-      if (fs.existsSync(distBlogsDir)) {
+      if (STATIC_BLOG_SLUGS.includes(slug)) {
+        // Static blog errors/warnings are recorded in the branch above
+      } else if (fs.existsSync(distBlogsDir)) {
         errors.push(`❌ ${slug}: No HTML file found in dist/blogs/`)
       } else {
         warnings.push(`⚠️  ${slug}: dist/blogs/ directory not found (run build:blog first)`)

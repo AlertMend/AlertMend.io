@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none" role="img" aria-label="Docling monitoring with AlertMend">
+  <rect width="1200" height="630" fill="#09090b"/>
+  <rect x="60" y="60" width="1080" height="510" rx="16" fill="#18181b" stroke="rgba(244,244,245,0.1)" stroke-width="2"/>
+  <!-- Grid -->
+  <g opacity="0.08" stroke="#fafafa" stroke-width="1">
+    <line x1="60" y1="140" x2="1140" y2="140"/>
+    <line x1="60" y1="240" x2="1140" y2="240"/>
+    <line x1="60" y1="340" x2="1140" y2="340"/>
+    <line x1="260" y1="60" x2="260" y2="570"/>
+    <line x1="460" y1="60" x2="460" y2="570"/>
+    <line x1="660" y1="60" x2="660" y2="570"/>
+    <line x1="860" y1="60" x2="860" y2="570"/>
+  </g>
+  <!-- Pipeline nodes -->
+  <rect x="120" y="260" width="160" height="90" rx="10" fill="#27272a" stroke="rgba(124,58,237,0.4)" stroke-width="2"/>
+  <text x="200" y="300" text-anchor="middle" fill="#fafafa" font-family="system-ui,sans-serif" font-size="18" font-weight="600">PDF</text>
+  <text x="200" y="325" text-anchor="middle" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="14">Upload</text>
+  <path d="M290 305h60" stroke="#7c3aed" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="350,305 340,300 340,310" fill="#7c3aed"/>
+  <rect x="360" y="260" width="180" height="90" rx="10" fill="#3b0764" stroke="#7c3aed" stroke-width="2"/>
+  <text x="450" y="300" text-anchor="middle" fill="#fafafa" font-family="system-ui,sans-serif" font-size="18" font-weight="600">Docling</text>
+  <text x="450" y="325" text-anchor="middle" fill="#ddd6fe" font-family="system-ui,sans-serif" font-size="14">Parse API</text>
+  <path d="M550 305h60" stroke="#7c3aed" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="610,305 600,300 600,310" fill="#7c3aed"/>
+  <rect x="620" y="260" width="180" height="90" rx="10" fill="#27272a" stroke="rgba(124,58,237,0.4)" stroke-width="2"/>
+  <text x="710" y="300" text-anchor="middle" fill="#fafafa" font-family="system-ui,sans-serif" font-size="18" font-weight="600">JSON</text>
+  <text x="710" y="325" text-anchor="middle" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="14">RAG pipeline</text>
+  <!-- AlertMend monitor ring -->
+  <rect x="860" y="230" width="220" height="150" rx="12" fill="rgba(124,58,237,0.12)" stroke="#7c3aed" stroke-width="2"/>
+  <circle cx="970" cy="280" r="8" fill="#059669"/>
+  <text x="990" y="285" fill="#34d399" font-family="system-ui,sans-serif" font-size="16" font-weight="600">200 OK</text>
+  <text x="880" y="330" fill="#fafafa" font-family="system-ui,sans-serif" font-size="15" font-weight="600">AlertMend Monitor</text>
+  <text x="880" y="355" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="13">Latency ù OOM ù Auto-fix</text>
+  <!-- Title -->
+  <text x="120" y="130" fill="#fafafa" font-family="system-ui,sans-serif" font-size="42" font-weight="700">Keep Docling Running with AlertMend</text>
+  <text x="120" y="175" fill="#a1a1aa" font-family="system-ui,sans-serif" font-size="22">Health checks, uptime alerts, auto-recovery</text>
+  <!-- Logo area -->
+  <text x="120" y="520" fill="#71717a" font-family="system-ui,sans-serif" font-size="16">alertmend.io</text>
+</svg>

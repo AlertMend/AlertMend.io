@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { marked } from 'marked'
+import { STATIC_BLOG_SLUGS as STATIC_BLOG_SLUG_LIST } from './static-blog-slugs.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -49,7 +50,20 @@ const outputDir = path.join(__dirname, '../dist/blog') // For directory versions
 const blogsHtmlDir = path.join(__dirname, '../dist/blogs') // For HTML files
 
 /** Slugs with hand-built static HTML in public/blog/{slug}/index.html (skip MD conversion). */
-const STATIC_BLOG_SLUGS = new Set(['monitor-docling-using-alertmend'])
+const STATIC_BLOG_SLUGS = new Set(STATIC_BLOG_SLUG_LIST)
+
+function removeStaleDistBlogsHtml(slug) {
+  if (!fs.existsSync(blogsHtmlDir)) return
+  const normalizedSlug = slug.toLowerCase().replace(/[^a-z0-9-]/g, '')
+  for (const file of fs.readdirSync(blogsHtmlDir)) {
+    if (!file.endsWith('.html')) continue
+    const fileStem = file.slice(0, -5).toLowerCase().replace(/[^a-z0-9-]/g, '')
+    if (fileStem === normalizedSlug) {
+      fs.unlinkSync(path.join(blogsHtmlDir, file))
+      console.log(`🗑 Removed stale dist/blogs/${file} (static HTML blog)`)
+    }
+  }
+}
 
 function blogPostHref(slug) {
   return `/blog/${slug}`
@@ -167,6 +181,7 @@ markdownFiles.forEach(file => {
   const markdownPath = path.join(blogDir, file)
   const slug = file.replace('.md', '')
   if (STATIC_BLOG_SLUGS.has(slug)) {
+    removeStaleDistBlogsHtml(slug)
     console.log(`⏭ Skipping ${file} (static HTML blog)`)
     return
   }

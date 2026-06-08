@@ -1,5 +1,5 @@
 ---
-title: "Docling Observability: Monitor docling-serve, Fix OOMKilled, Keep It Running"
+title: "Docling Observability: Monitor & Recover"
 excerpt: "Connect Docling to AlertMend, the next-generation AI observability platform: out-of-the-box monitoring, Slack alerts, and auto-recovery in a few clicks."
 date: "2026-06-06"
 category: "AIOps"
