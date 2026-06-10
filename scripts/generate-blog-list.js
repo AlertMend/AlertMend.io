@@ -31,6 +31,13 @@ markdownFiles.forEach(file => {
       const trimmed = line.trim()
       if (!trimmed) return
       
+      // Handle keywords which may contain commas and quotes
+      const keywordsMatch = trimmed.match(/^keywords:\s*["'](.+)["']$/)
+      if (keywordsMatch) {
+        metadata.keywords = keywordsMatch[1]
+        return
+      }
+      
       // Match double-quoted strings (allows single quotes inside)
       const doubleQuotedMatch = trimmed.match(/^(\w+):\s*"([^"]*)"$/)
       // Match single-quoted strings (allows double quotes inside)
@@ -65,7 +72,8 @@ markdownFiles.forEach(file => {
       date: metadata.date || new Date().toISOString().split('T')[0],
       category: metadata.category || 'Blog',
       author: metadata.author || 'AlertMend Team',
-      tags: tags.length > 0 ? tags : []
+      tags: tags.length > 0 ? tags : [],
+      ...(metadata.keywords ? { keywords: metadata.keywords } : {}),
     })
   } catch (error) {
     console.warn(`Warning: Could not read metadata from ${file}:`, error.message)

@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { marked } from 'marked'
+import { STATIC_BLOG_SLUGS as STATIC_BLOG_SLUG_LIST } from './static-blog-slugs.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -47,6 +48,26 @@ marked.setOptions({
 const blogDir = path.join(__dirname, '../public/blog')
 const outputDir = path.join(__dirname, '../dist/blog') // For directory versions (non-HTML)
 const blogsHtmlDir = path.join(__dirname, '../dist/blogs') // For HTML files
+
+/** Slugs with hand-built static HTML in public/blog/{slug}/index.html (skip MD conversion). */
+const STATIC_BLOG_SLUGS = new Set(STATIC_BLOG_SLUG_LIST)
+
+function removeStaleDistBlogsHtml(slug) {
+  if (!fs.existsSync(blogsHtmlDir)) return
+  const normalizedSlug = slug.toLowerCase().replace(/[^a-z0-9-]/g, '')
+  for (const file of fs.readdirSync(blogsHtmlDir)) {
+    if (!file.endsWith('.html')) continue
+    const fileStem = file.slice(0, -5).toLowerCase().replace(/[^a-z0-9-]/g, '')
+    if (fileStem === normalizedSlug) {
+      fs.unlinkSync(path.join(blogsHtmlDir, file))
+      console.log(`🗑 Removed stale dist/blogs/${file} (static HTML blog)`)
+    }
+  }
+}
+
+function blogPostHref(slug) {
+  return `/blog/${slug}`
+}
 
 // Ensure output directories exist
 if (!fs.existsSync(outputDir)) {
@@ -159,6 +180,11 @@ console.log(`Found ${markdownFiles.length} markdown files to convert...`)
 markdownFiles.forEach(file => {
   const markdownPath = path.join(blogDir, file)
   const slug = file.replace('.md', '')
+  if (STATIC_BLOG_SLUGS.has(slug)) {
+    removeStaleDistBlogsHtml(slug)
+    console.log(`⏭ Skipping ${file} (static HTML blog)`)
+    return
+  }
   const defaultFilename = `${convertSlugToHtmlFilename(slug)}.html`
   const htmlFilename = canonicalFilenameOverrides[slug] || defaultFilename
   // HTML version goes to /blogs/ directory
@@ -1661,7 +1687,7 @@ markdownFiles.forEach(file => {
             <ul class="related-posts-list">
               ${relatedPosts.map(post => `
                 <li>
-                  <a href="/blog/${post.slug}" class="related-post-link">${post.title}</a>
+                  <a href="${blogPostHref(post.slug)}" class="related-post-link">${post.title}</a>
                 </li>
               `).join('')}
             </ul>
@@ -1777,7 +1803,7 @@ const blogCardsHTML = allBlogPosts.map(post => {
     : ''
   
   return `
-    <article class="group bg-white rounded-xl p-8 border border-zinc-200 hover:border-zinc-300 hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col h-full" onclick="window.location.href='/blog/${post.slug}'">
+    <article class="group bg-white rounded-xl p-8 border border-zinc-200 hover:border-zinc-300 hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col h-full" onclick="window.location.href='${blogPostHref(post.slug)}'">
       <div class="flex items-center gap-2 flex-wrap mb-4">
         <div class="inline-block px-3 py-1.5 bg-zinc-50 text-violet-600 rounded-md text-xs font-semibold">
           ${post.category}

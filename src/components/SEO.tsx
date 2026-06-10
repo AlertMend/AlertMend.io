@@ -14,6 +14,7 @@ interface SEOProps {
   breadcrumbData?: {
     items: Array<{ label: string; path?: string }>
   }
+  extraStructuredData?: object[]
 }
 
 export default function SEO({
@@ -26,6 +27,7 @@ export default function SEO({
   noindex = false,
   structuredData,
   breadcrumbData,
+  extraStructuredData,
 }: SEOProps) {
   const location = useLocation()
   const siteUrl = 'https://www.alertmend.io'
@@ -109,6 +111,12 @@ export default function SEO({
           {JSON.stringify(breadcrumbStructuredData)}
         </script>
       )}
+
+      {extraStructuredData?.map((data, index) => (
+        <script key={index} type="application/ld+json">
+          {JSON.stringify(data)}
+        </script>
+      ))}
     </Helmet>
   )
 }
