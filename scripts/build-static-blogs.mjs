@@ -36,6 +36,17 @@ const category = meta.category || 'AIOps'
 const author = meta.author || 'AlertMend Team'
 const keywords = meta.keywords || 'Docling observability, AlertMend'
 
+const blogList = JSON.parse(
+  fs.readFileSync(path.join(root, 'src/utils/blogList.json'), 'utf8')
+)
+const sameCategoryPosts = blogList
+  .filter((p) => p.category === category && p.slug !== slug)
+  .slice(0, 3)
+const otherPosts = blogList
+  .filter((p) => p.category !== category && p.slug !== slug)
+  .slice(0, 7)
+const relatedPosts = [...sameCategoryPosts, ...otherPosts].slice(0, 10)
+
 const signupUrl =
   'https://app.alertmend.io/signup?service=remediation&source=blog-docling&blog_slug=' + slug
 const calendlyUrl =
@@ -169,7 +180,33 @@ const html = `<!DOCTYPE html>
     .navbar-button { padding: 8px 16px; font-size: 0.875rem; font-weight: 600; border-radius: 999px; text-decoration: none; }
     .navbar-button-primary { background: #09090b; color: #fff; }
     .navbar-button-secondary { color: #3f3f46; }
-    .page-wrap { max-width: 820px; margin: 0 auto; padding: 96px 24px 64px; }
+    .main-container { max-width: 1280px; margin: 0 auto; padding: 96px 24px 64px; }
+    .content-wrapper { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media (min-width: 1024px) {
+      .content-wrapper { grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
+    }
+    .main-col { min-width: 0; max-width: 820px; }
+    @media (min-width: 1024px) { .main-col { max-width: none; } }
+    .sidebar { display: none; }
+    @media (min-width: 1024px) { .sidebar { display: block; } }
+    .sidebar-content { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card { background: #fafafa; border-radius: 8px; padding: 24px; border: 1px solid #e4e4e7; }
+    .sidebar-card h3 { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
+    .signup-form { display: flex; flex-direction: column; gap: 12px; }
+    .signup-form input { width: 100%; padding: 10px 16px; border-radius: 6px; border: 1px solid #d4d4d8; font-size: 1rem; background: #fff; color: #09090b; }
+    .signup-form input:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2); }
+    .signup-form button { width: 100%; padding: 10px 12px; background: #09090b; color: #fff; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; }
+    .signup-form button:hover { background: #27272a; }
+    .signup-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .signup-status { font-size: 0.875rem; font-weight: 500; margin: 0; }
+    .signup-status.success { color: #047857; }
+    .signup-status.error { color: #dc2626; }
+    .related-content-title { font-size: 11px; font-weight: 700; color: #71717a; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 16px; }
+    .related-posts-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .related-post-link { color: #3f3f46; text-decoration: none; font-size: 0.875rem; line-height: 1.5; display: block; transition: color 0.15s; }
+    .related-post-link:hover { color: #7c3aed; }
+    .view-more-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 16px; color: #7c3aed; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
+    .view-more-link:hover { color: #6d28d9; }
     .article-header { margin-bottom: 2rem; }
     .article-header h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; color: #09090b; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
     .author-info { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
@@ -203,7 +240,9 @@ const html = `<!DOCTYPE html>
     </div>
   </nav>
 
-  <div class="page-wrap">
+  <div class="main-container">
+    <div class="content-wrapper">
+      <div class="main-col">
     <header class="article-header">
       <h1>${esc(title)}</h1>
       <div class="author-info">
@@ -352,6 +391,47 @@ const html = `<!DOCTYPE html>
 
     <div class="promo">
       <p>Ready to eliminate manual firefighting? <a href="${calendlyUrl}" target="_blank" rel="noopener noreferrer">Book a demo</a> to see AlertMend on your Docling stack.</p>
+    </div>
+      </div>
+
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <div class="sidebar-card">
+            <h3>Receive blog and product updates</h3>
+            <form class="signup-form" id="blog-signup-form" novalidate>
+              <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
+              <button type="submit">Sign up</button>
+              <p class="signup-status" id="blog-signup-status" hidden></p>
+            </form>
+          </div>
+
+          ${relatedPosts.length > 0 ? `
+          <div class="sidebar-card">
+            <h3 class="related-content-title">Related content</h3>
+            <ul class="related-posts-list">
+              ${relatedPosts.map((post) => `<li><a href="/blog/${esc(post.slug)}" class="related-post-link">${esc(post.title)}</a></li>`).join('\n              ')}
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View all posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          ` : ''}
+
+          <div class="sidebar-card">
+            <h3 class="related-content-title">Explore AlertMend</h3>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
     </div>
   </div>
 

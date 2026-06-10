@@ -133,4 +133,67 @@
   });
 
   renderMode('kubernetes');
+
+  const signupForm = document.getElementById('blog-signup-form');
+  const signupStatus = document.getElementById('blog-signup-status');
+  if (signupForm) {
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = signupForm.querySelector('input[type="email"]');
+      const button = signupForm.querySelector('button[type="submit"]');
+      const email = input && input.value ? input.value.trim() : '';
+      if (!email || !button) return;
+
+      button.disabled = true;
+      button.textContent = 'Signing up…';
+      if (signupStatus) {
+        signupStatus.hidden = true;
+        signupStatus.textContent = '';
+        signupStatus.className = 'signup-status';
+      }
+
+      try {
+        const response = await fetch('https://api.alertmend.io/contact', {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            full_name: 'Blog subscriber',
+            company: '',
+            email,
+            message:
+              'Newsletter signup from the AlertMend blog. Please add this email to the blog and product updates list.',
+            source: 'blog_signup',
+          }),
+        });
+
+        if (response.ok) {
+          if (input) input.value = '';
+          if (signupStatus) {
+            signupStatus.hidden = false;
+            signupStatus.textContent = "Thanks! You're on the list.";
+            signupStatus.className = 'signup-status success';
+          }
+        } else {
+          const data = await response.json().catch(() => ({}));
+          if (signupStatus) {
+            signupStatus.hidden = false;
+            signupStatus.textContent = data.error || data.message || 'Something went wrong. Please try again.';
+            signupStatus.className = 'signup-status error';
+          }
+        }
+      } catch {
+        if (signupStatus) {
+          signupStatus.hidden = false;
+          signupStatus.textContent = 'Network error. Please check your connection and try again.';
+          signupStatus.className = 'signup-status error';
+        }
+      } finally {
+        button.disabled = false;
+        button.textContent = 'Sign up';
+      }
+    });
+  }
 })();

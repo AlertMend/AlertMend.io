@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Docling Observability: Monitor docling-serve, Fix OOMKilled, Keep It Running | AlertMend AI</title>
+  <title>Docling Observability: Monitor &amp; Recover | AlertMend AI</title>
   <meta name="description" content="Connect Docling to AlertMend, the next-generation AI observability platform: out-of-the-box monitoring, Slack alerts, and auto-recovery in a few clicks.">
   <meta name="keywords" content="Docling observability, monitor Docling, docling-serve health check, docling-serve /ready, docling-serve /health, Docling OOMKilled, Docling memory leak, keep Docling running, Docling Kubernetes monitoring, Docling RQ workers, docling-serve monitoring, AlertMend">
   <meta name="author" content="AlertMend Team">
@@ -12,14 +12,14 @@
   <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.alertmend.io/blog/monitor-docling-using-alertmend">
-  <meta property="og:title" content="Docling Observability: Monitor docling-serve, Fix OOMKilled, Keep It Running">
+  <meta property="og:title" content="Docling Observability: Monitor &amp; Recover">
   <meta property="og:description" content="Connect Docling to AlertMend, the next-generation AI observability platform: out-of-the-box monitoring, Slack alerts, and auto-recovery in a few clicks.">
   <meta property="og:image" content="https://www.alertmend.io/assets/monitor-docling-using-alertmend/docling-hero.svg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Docling Observability: Monitor docling-serve, Fix OOMKilled, Keep It Running">
+  <meta name="twitter:title" content="Docling Observability: Monitor &amp; Recover">
   <meta name="twitter:description" content="Connect Docling to AlertMend, the next-generation AI observability platform: out-of-the-box monitoring, Slack alerts, and auto-recovery in a few clicks.">
   <meta name="twitter:image" content="https://www.alertmend.io/assets/monitor-docling-using-alertmend/docling-hero.svg">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Docling Observability: Monitor docling-serve, Fix OOMKilled, Keep It Running","description":"Connect Docling to AlertMend, the next-generation AI observability platform: out-of-the-box monitoring, Slack alerts, and auto-recovery in a few clicks.","image":"https://www.alertmend.io/assets/monitor-docling-using-alertmend/docling-hero.svg","datePublished":"2026-06-06","dateModified":"2026-06-06","author":{"@type":"Person","name":"AlertMend Team"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/monitor-docling-using-alertmend"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Docling Observability: Monitor & Recover","description":"Connect Docling to AlertMend, the next-generation AI observability platform: out-of-the-box monitoring, Slack alerts, and auto-recovery in a few clicks.","image":"https://www.alertmend.io/assets/monitor-docling-using-alertmend/docling-hero.svg","datePublished":"2026-06-06","dateModified":"2026-06-06","author":{"@type":"Person","name":"AlertMend Team"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/monitor-docling-using-alertmend"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I monitor Docling in production?","acceptedAnswer":{"@type":"Answer","text":"Connect your cluster in AlertMend, add a health check on your Docling endpoint, and route alerts to Slack. AlertMend watches for crashes, failed jobs, and conversion errors depending on how you run Docling."}},{"@type":"Question","name":"How do I monitor docling-serve health checks?","acceptedAnswer":{"@type":"Answer","text":"In AlertMend, add a URL check on the ready endpoint (not just the basic health endpoint). That confirms Docling can actually parse documents. AlertMend notifies your team after repeated failures."}},{"@type":"Question","name":"Why does Docling keep running out of memory?","acceptedAnswer":{"@type":"Answer","text":"Large PDFs and long-running jobs can exhaust memory. AlertMend alerts your team when it happens and can restart the service automatically. If it keeps recurring, increase the memory allocated to Docling."}},{"@type":"Question","name":"What is the difference between docling-serve /health and /ready?","acceptedAnswer":{"@type":"Answer","text":"The health endpoint means the process is running. The ready endpoint means Docling is loaded and can accept work. AlertMend should check ready. During deploys, AlertMend can wait before alerting so boot-up does not cause false alarms."}},{"@type":"Question","name":"How do I fix a Docling memory leak?","acceptedAnswer":{"@type":"Answer","text":"Use AlertMend to alert when memory gets high and schedule restarts between large batches. That keeps the pipeline moving while you adjust sizing or split workloads."}},{"@type":"Question","name":"How do I monitor Docling background workers?","acceptedAnswer":{"@type":"Answer","text":"AlertMend can watch worker crashes and growing job backlogs even when the main API looks fine. Enable a restart runbook when jobs stop completing."}},{"@type":"Question","name":"How do I know if Docling is down?","acceptedAnswer":{"@type":"Answer","text":"AlertMend treats Docling as down when health checks fail, jobs error out, or the service crashes, not when a superficial \"up\" check passes but parsing still fails."}},{"@type":"Question","name":"Should I auto-restart Docling on every OOMKilled?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enable AlertMend's out-of-memory runbook: your team gets a Slack alert with what happened, and Docling comes back online automatically. If it keeps happening, give Docling more memory."}}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Connect Docling to AlertMend for production observability","description":"Connect Docling to AlertMend, the next-generation AI observability platform: out-of-the-box monitoring, Slack alerts, and auto-recovery in a few clicks.","step":[{"@type":"HowToStep","position":1,"name":"Connect","text":"Connect your cluster in AlertMend. Docling health and restart events show up without building a separate monitoring stack."},{"@type":"HowToStep","position":2,"name":"Add a health check","text":"Add a URL check for your Docling endpoint. AlertMend verifies the service is actually ready to parse documents, not just running."},{"@type":"HowToStep","position":3,"name":"Alert your team","text":"When something breaks, AlertMend opens a Slack incident with a plain-language summary and links to the details your on-call needs."},{"@type":"HowToStep","position":4,"name":"Auto-recover","text":"Turn on the out-of-memory runbook. AlertMend brings Docling back online automatically instead of waiting for someone to restart it manually."}]}</script>
   <link rel="stylesheet" href="/assets/monitor-docling-using-alertmend/styles.css">
@@ -41,7 +41,33 @@
     .navbar-button { padding: 8px 16px; font-size: 0.875rem; font-weight: 600; border-radius: 999px; text-decoration: none; }
     .navbar-button-primary { background: #09090b; color: #fff; }
     .navbar-button-secondary { color: #3f3f46; }
-    .page-wrap { max-width: 820px; margin: 0 auto; padding: 96px 24px 64px; }
+    .main-container { max-width: 1280px; margin: 0 auto; padding: 96px 24px 64px; }
+    .content-wrapper { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media (min-width: 1024px) {
+      .content-wrapper { grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
+    }
+    .main-col { min-width: 0; max-width: 820px; }
+    @media (min-width: 1024px) { .main-col { max-width: none; } }
+    .sidebar { display: none; }
+    @media (min-width: 1024px) { .sidebar { display: block; } }
+    .sidebar-content { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card { background: #fafafa; border-radius: 8px; padding: 24px; border: 1px solid #e4e4e7; }
+    .sidebar-card h3 { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
+    .signup-form { display: flex; flex-direction: column; gap: 12px; }
+    .signup-form input { width: 100%; padding: 10px 16px; border-radius: 6px; border: 1px solid #d4d4d8; font-size: 1rem; background: #fff; color: #09090b; }
+    .signup-form input:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2); }
+    .signup-form button { width: 100%; padding: 10px 12px; background: #09090b; color: #fff; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; }
+    .signup-form button:hover { background: #27272a; }
+    .signup-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .signup-status { font-size: 0.875rem; font-weight: 500; margin: 0; }
+    .signup-status.success { color: #047857; }
+    .signup-status.error { color: #dc2626; }
+    .related-content-title { font-size: 11px; font-weight: 700; color: #71717a; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 16px; }
+    .related-posts-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .related-post-link { color: #3f3f46; text-decoration: none; font-size: 0.875rem; line-height: 1.5; display: block; transition: color 0.15s; }
+    .related-post-link:hover { color: #7c3aed; }
+    .view-more-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 16px; color: #7c3aed; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
+    .view-more-link:hover { color: #6d28d9; }
     .article-header { margin-bottom: 2rem; }
     .article-header h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; color: #09090b; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
     .author-info { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
@@ -75,9 +101,11 @@
     </div>
   </nav>
 
-  <div class="page-wrap">
+  <div class="main-container">
+    <div class="content-wrapper">
+      <div class="main-col">
     <header class="article-header">
-      <h1>Docling Observability: Monitor docling-serve, Fix OOMKilled, Keep It Running</h1>
+      <h1>Docling Observability: Monitor &amp; Recover</h1>
       <div class="author-info">
         <div class="author-avatar">A</div>
         <div>
@@ -247,6 +275,56 @@
 
     <div class="promo">
       <p>Ready to eliminate manual firefighting? <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=monitor-docling-using-alertmend" target="_blank" rel="noopener noreferrer">Book a demo</a> to see AlertMend on your Docling stack.</p>
+    </div>
+      </div>
+
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <div class="sidebar-card">
+            <h3>Receive blog and product updates</h3>
+            <form class="signup-form" id="blog-signup-form" novalidate>
+              <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
+              <button type="submit">Sign up</button>
+              <p class="signup-status" id="blog-signup-status" hidden></p>
+            </form>
+          </div>
+
+          
+          <div class="sidebar-card">
+            <h3 class="related-content-title">Related content</h3>
+            <ul class="related-posts-list">
+              <li><a href="/blog/aiops-2025-automating-it-operations-with-ai-driven-efficiency" class="related-post-link">AIOps 2025: Automating IT Operations Guide</a></li>
+              <li><a href="/blog/aiops-implementation-guide" class="related-post-link">Aiops Implementation Guide Guide</a></li>
+              <li><a href="/blog/aiops-trends-in-cloud-native-application-management" class="related-post-link">Aiops Trends In Cloud-Native Application</a></li>
+              <li><a href="/blog/24x7-network-monitoring" class="related-post-link">24x7 network monitoring Guide Guide</a></li>
+              <li><a href="/blog/503-no-healthy-upstream" class="related-post-link">503 No Healthy Upstream Error Guide</a></li>
+              <li><a href="/blog/achieving-enterprise-readiness-with-kubernetes-in-2025" class="related-post-link">Achieving Enterprise Readiness With</a></li>
+              <li><a href="/blog/addressing-kubernetes-overhead-is-it-still-the-right-choice-for-your-infrastructure" class="related-post-link">Addressing Kubernetes Overhead</a></li>
+              <li><a href="/blog/advanced-kubernetes-health-checks-ai" class="related-post-link">Advanced Kubernetes Health Checks AI</a></li>
+              <li><a href="/blog/ai-based-kubernetes-scaling" class="related-post-link">Ai-Based Kubernetes Scaling Guide</a></li>
+              <li><a href="/blog/ai-driven-anomaly-detection-in-kubernetes" class="related-post-link">Ai-Driven Anomaly Detection In Kubernetes</a></li>
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View all posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          
+
+          <div class="sidebar-card">
+            <h3 class="related-content-title">Explore AlertMend</h3>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
     </div>
   </div>
 
