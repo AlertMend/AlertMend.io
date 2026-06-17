@@ -1,0 +1,202 @@
+/* Rich blog article styles — extend per post */
+:root {
+  --accent: #7c3aed;
+  --text: #09090b;
+  --muted: #71717a;
+  --border: rgba(24, 24, 27, 0.08);
+  --radius: 8px;
+  --radius-lg: 10px;
+}
+
+.rich-blog { color: var(--text); }
+
+.heroBand {
+  margin: 0 0 2.5rem;
+  padding: 1.75rem 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: #fafafa;
+}
+
+.heroAudienceTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+}
+
+.heroAudienceList {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+  color: #3f3f46;
+}
+
+.heroAudienceNote {
+  font-size: 0.9375rem;
+  color: #52525b;
+  margin: 0;
+}
+
+.seoTldr {
+  margin: 1.25rem 0 0;
+  padding: 1rem 1.25rem;
+  background: #ede9fe;
+  border-radius: var(--radius);
+  font-size: 0.9375rem;
+  color: #3f3f46;
+}
+
+.sectionHead {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 2.5rem 0 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.sectionSub,
+.bodyText {
+  color: #52525b;
+  margin: 0 0 1.25rem;
+  font-size: 1.0625rem;
+}
+
+.flowDiagram {
+  margin: 1.5rem 0 2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.flowDiagram img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.flowDiagramCaption {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+  background: #fafafa;
+  border-top: 1px solid var(--border);
+}
+
+.amFlow {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .amFlow { grid-template-columns: repeat(2, 1fr); }
+}
+
+.amStep {
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.amStepNum {
+  display: inline-flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #09090b;
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.amStepTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.amStepBody {
+  font-size: 0.9375rem;
+  color: #52525b;
+  margin: 0;
+}
+
+.faqList { margin: 1rem 0 2rem; }
+
+.faqItem {
+  border-bottom: 1px solid var(--border);
+}
+
+.faqQuestion {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.faqAnswer {
+  padding-bottom: 1rem;
+  color: #52525b;
+  font-size: 0.9375rem;
+}
+
+.faqAnswer.hidden { display: none; }
+
+.faqChevron { flex-shrink: 0; transition: transform 0.2s; }
+.faqChevronOpen { transform: rotate(180deg); }
+
+.ctaBand {
+  margin: 2.5rem 0 0;
+  padding: 2rem 1.5rem;
+  border-radius: var(--radius-lg);
+  background: #09090b;
+  color: #fafafa;
+}
+
+.ctaBandTitle {
+  font-size: 1.375rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.ctaBandSub {
+  margin: 0 0 1.25rem;
+  color: rgba(244, 244, 245, 0.72);
+  font-size: 0.9375rem;
+}
+
+.ctaBtnRow { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+.ctaBtn,
+.ctaBtnSecondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.625rem 1.25rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.ctaBtn {
+  background: #fff;
+  color: #09090b !important;
+}
+
+.ctaBtnSecondary {
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: #fafafa !important;
+}
+
+.hidden { display: none !important; }
