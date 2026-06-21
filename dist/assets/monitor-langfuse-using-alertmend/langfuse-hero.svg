@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#fafafa"/>
+  <text x="600" y="280" text-anchor="middle" font-family="system-ui,sans-serif" font-size="34" font-weight="700" fill="#09090b">How to Monitor Langfuse in Production</text>
+  <text x="600" y="340" text-anchor="middle" font-family="system-ui,sans-serif" font-size="20" fill="#71717a">Self-hosted LLM observability, ready checks, auto-recovery</text>
+  <rect x="120" y="400" width="160" height="56" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+  <text x="200" y="432" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#5b21b6">Ready check</text>
+  <rect x="340" y="400" width="160" height="56" rx="8" fill="#f4f4f5" stroke="#d4d4d8"/>
+  <text x="420" y="432" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#3f3f46">Worker</text>
+  <rect x="560" y="400" width="160" height="56" rx="8" fill="#f4f4f5" stroke="#d4d4d8"/>
+  <text x="640" y="432" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#3f3f46">Database</text>
+  <rect x="760" y="400" width="160" height="56" rx="8" fill="#f4f4f5" stroke="#d4d4d8"/>
+  <text x="840" y="432" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#3f3f46">Slack + fix</text>
+</svg>
