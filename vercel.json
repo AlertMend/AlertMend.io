@@ -13,6 +13,10 @@
       "destination": "/blog/monitor-docling-using-alertmend/index.html"
     },
     {
+      "source": "/blog/monitor-langfuse-using-alertmend",
+      "destination": "/blog/monitor-langfuse-using-alertmend/index.html"
+    },
+    {
       "source": "/blog/monitor-milvus-using-alertmend",
       "destination": "/blog/monitor-milvus-using-alertmend/index.html"
     },

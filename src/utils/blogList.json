@@ -1,5 +1,18 @@
 [
   {
+    "slug": "monitor-langfuse-using-alertmend",
+    "title": "Langfuse Observability: Monitor & Recover",
+    "excerpt": "Replace with 50-160 character summary for meta description and blog cards.",
+    "date": "2026-06-20",
+    "category": "AIOps",
+    "author": "AlertMend Team",
+    "tags": [
+      "AIOps",
+      "Kubernetes"
+    ],
+    "keywords": "keyword one, keyword two, keyword three, AlertMend"
+  },
+  {
     "slug": "monitor-milvus-using-alertmend",
     "title": "Milvus Observability: Monitor & Recover",
     "excerpt": "Connect Milvus to AlertMend for vector search health checks, Slack alerts on query node crashes, and auto-restart when memory pressure kills pods.",
