@@ -1,43 +1,52 @@
 (function () {
   const MODES = {
-    systemd: {
-      title: 'systemd service',
+    local: {
+      title: 'Local development',
       summary:
-        'Most vibe-coded Python or Node APIs on Ubuntu or Debian end up here: a systemd unit, often behind nginx. Observability starts with knowing the service is active and reading its logs.',
+        'Error 127 on your laptop usually means gcc, go, or another recipe command is not installed or not on PATH in the non-interactive shell make uses.',
       steps: [
-        'Add a /health route to your app and curl it after deploy',
-        'Check status: systemctl status your-app',
-        'Tail logs: journalctl -u your-app -f',
-        'Watch disk: df -h and memory: free -h weekly',
-        'Set Restart=always in the unit file so crashes recover',
+        'Read the line above Error 127 in the terminal output',
+        'Run which gcc go g++ python3 to see what is missing',
+        'Install build-essential (Linux) or Xcode CLI tools (macOS)',
+        'Restart the terminal and run make clean && make',
       ],
-      tip: 'If SSH works but the site is down, the process probably exited. systemctl status tells you in one command.',
+      tip: 'Interactive shells load .bashrc; make uses /bin/sh without your profile. Export PATH before make if tools live in /usr/local/go/bin.',
     },
     docker: {
-      title: 'Docker / Compose',
+      title: 'Docker builds',
       summary:
-        'This is the most common pattern after an AI tool generates a Dockerfile. The container can be running while the app inside is broken, or while nginx returns 502 to users.',
+        'Error 127 in docker build means the image never had the tool your Makefile calls — minimal images often lack gcc, make, or language SDKs.',
       steps: [
-        'Expose a health check in the image and hit it from outside the container',
-        'docker ps shows running containers; docker logs -f shows app output',
-        'Add restart: unless-stopped in compose',
-        'Monitor host disk. Docker images and logs fill disks fast',
-        'Pin image tags; latest pulls can break prod silently',
+        'Find the failing RUN make line in the Dockerfile build log',
+        'Use a base image that includes your toolchain (golang:, node:, buildpack-deps)',
+        'Or RUN apt-get install -y build-essential before make',
+        'Re-build with --no-cache after changing base image',
       ],
-      tip: 'docker ps only proves the container started. An HTTP check on your public URL proves users can reach the app.',
+      tip: 'Alpine images need apk add make gcc musl-dev bash when makefiles assume GNU bash.',
     },
-    pm2: {
-      title: 'PM2 / Node process',
+    ci: {
+      title: 'CI / GitHub Actions',
       summary:
-        'Many AI-generated Node apps land here: PM2 on a bare Linux server. PM2 restarts crashes but does not tell you when memory grows, disk fills, or nginx cannot reach the process.',
+        'makefile error 127 in CI means the job image differs from your laptop: go or gcc exists locally but not on the runner.',
       steps: [
-        'pm2 start app.js --name myapp and pm2 save',
-        'pm2 logs myapp for stdout/stderr',
-        'pm2 monit for live CPU and memory per process',
-        'Add an external uptime ping: PM2 can show online while nginx serves 502',
-        'Enable pm2 startup so the app survives a server reboot',
+        'Open the CI log and note the Makefile line number in the error',
+        'Add setup-go, setup-node, or apt install build-essential to the job',
+        'Pin tool versions in the workflow YAML',
+        'Use the same base image across all build jobs',
       ],
-      tip: 'PM2 keeps the process alive. It does not replace an uptime monitor or disk alerts on the server itself.',
+      tip: 'Cache the toolchain in the Docker image layer, not only in a setup step that some jobs skip.',
+    },
+    wsl: {
+      title: 'WSL / Windows',
+      summary:
+        'Install gcc, make, and go inside WSL, not only on the Windows host. Native Windows error 127 is a different Win32 code.',
+      steps: [
+        'Confirm you are building inside WSL or MSYS2, not cmd.exe',
+        'sudo apt install build-essential golang-go (Debian-based WSL)',
+        'Verify with which gcc && gcc --version before make',
+        'Keep PATH exports in ~/.profile so non-interactive make sees them',
+      ],
+      tip: 'If the tool works in an interactive WSL shell but make still fails, PATH is not exported for sh -c recipes.',
     },
   };
 
@@ -55,7 +64,7 @@
       btn.classList.toggle('modeCardActive', active);
       btn.setAttribute('aria-selected', active ? 'true' : 'false');
     });
-    if (panelTitle) panelTitle.textContent = 'Day 1: ' + mode.title;
+    if (panelTitle) panelTitle.textContent = 'Fix: ' + mode.title;
     if (panelSummary) panelSummary.textContent = mode.summary;
     if (panelSteps) {
       panelSteps.innerHTML = mode.steps.map((s) => '<li>' + s + '</li>').join('');
@@ -79,7 +88,7 @@
     });
   });
 
-  renderMode('systemd');
+  renderMode('local');
 
   const signupForm = document.getElementById('blog-signup-form');
   const signupStatus = document.getElementById('blog-signup-status');

@@ -20,7 +20,7 @@ export async function build(slug) {
   const heroImage = `${assetsBase}/vm-observability-hero.svg`
 
   const meta = parseFrontmatter(slug)
-  const title = meta.title || 'Vibe-Coded App in Production: What About Observability?'
+  const title = meta.title || 'Vibe-Coded App: What About Observability?'
   const excerpt = meta.excerpt || ''
   const date = meta.date || '2026-06-20'
   const category = meta.category || 'DevOps'
