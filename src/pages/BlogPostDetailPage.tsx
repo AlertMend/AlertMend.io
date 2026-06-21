@@ -342,12 +342,14 @@ export default function BlogPostDetailPage() {
                             ol: ({ node, ...props }) => <ol className="list-decimal mb-6 space-y-3 text-zinc-700 ml-6 text-lg leading-7" {...props} />,
                             li: ({ node, ...props }) => <li className="text-zinc-700 leading-7" {...props} />,
                             blockquote: ({ node, ...props }) => <blockquote className="border-l-2 border-violet-500 bg-violet-50/40 pl-5 pr-4 py-2 italic text-zinc-700 my-8 text-lg leading-7 rounded-r-md" {...props} />,
-                            code: ({ node, inline, ...props }: any) => 
-                              inline ? (
-                                <code className="bg-violet-50 text-violet-700 border border-violet-100 px-1.5 py-0.5 rounded text-[0.92em] font-mono" {...props} />
+                            code: ({ node, className, children, ...props }: any) => {
+                              const isInline = !className
+                              return isInline ? (
+                                <code className="bg-violet-50 text-violet-700 border border-violet-100 px-1.5 py-0.5 rounded text-[0.92em] font-mono" {...props}>{children}</code>
                               ) : (
-                                <code className="block bg-zinc-950 text-zinc-100 p-5 rounded-lg overflow-x-auto my-6 text-sm leading-6" {...props} />
-                              ),
+                                <code className={className} {...props}>{children}</code>
+                              )
+                            },
                             pre: ({ node, ...props }) => <pre className="bg-zinc-950 text-zinc-100 p-5 rounded-lg overflow-x-auto my-6 text-sm leading-6" {...props} />,
                             a: ({ node, ...props }) => <a className="text-violet-600 hover:text-violet-700 underline underline-offset-2" {...props} />,
                             strong: ({ node, ...props }) => <strong className="font-bold text-zinc-950" {...props} />,
