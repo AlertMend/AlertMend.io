@@ -1,16 +1,18 @@
 [
   {
     "slug": "monitor-langfuse-using-alertmend",
-    "title": "Langfuse Observability: Monitor & Recover",
-    "excerpt": "Replace with 50-160 character summary for meta description and blog cards.",
+    "title": "How to Monitor Langfuse in Production",
+    "excerpt": "How to monitor self-hosted Langfuse in production: /api/public/ready checks, langfuse-worker health, Slack alerts, and auto-restart when trace ingestion stops.",
     "date": "2026-06-20",
     "category": "AIOps",
     "author": "AlertMend Team",
     "tags": [
       "AIOps",
-      "Kubernetes"
+      "LLM Observability",
+      "Langfuse",
+      "Self-Hosting"
     ],
-    "keywords": "keyword one, keyword two, keyword three, AlertMend"
+    "keywords": "how to monitor Langfuse in production, Langfuse health check, Langfuse self-hosted monitoring, /api/public/ready, /api/public/health, langfuse-worker, LLM observability uptime, Langfuse Kubernetes Helm, trace ingestion stopped, Langfuse downtime, AlertMend"
   },
   {
     "slug": "monitor-milvus-using-alertmend",
@@ -3326,13 +3328,13 @@
   },
   {
     "slug": "make-error-127",
-    "title": "make error 127 Guide Guide Complete Guide",
+    "title": "make error 127 Complete Guide",
     "excerpt": "Encountering the infamous make error 127 can be frustrating, especially when you're in the midst of compiling code",
     "date": "2026-01-10",
     "category": "Troubleshooting",
     "author": "AlertMend Team",
     "tags": [],
-    "keywords": "make, error, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"
+    "keywords": "makefile error 127, make error 127, error 127, exit code 127, exit status 127, gnu make error 127 command not found, make go no such file or directory, command not found makefile"
   },
   {
     "slug": "managed-kubeflow",

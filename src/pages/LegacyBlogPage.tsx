@@ -237,12 +237,14 @@ export default function LegacyBlogPage() {
                             ol: ({ node, ...props }) => <ol className="list-decimal mb-6 space-y-3 text-zinc-700 ml-6 text-lg leading-7" {...props} />,
                             li: ({ node, ...props }) => <li className="text-zinc-700 leading-7" {...props} />,
                             blockquote: ({ node, ...props }) => <blockquote className="border-l-4 border-violet-300 pl-6 italic text-zinc-700 my-8 text-lg leading-7" {...props} />,
-                            code: ({ node, inline, ...props }: any) => 
-                              inline ? (
-                                <code className="bg-zinc-100 text-violet-600 px-2 py-1 rounded text-base font-mono" {...props} />
+                            code: ({ node, className, children, ...props }: any) => {
+                              const isInline = !className
+                              return isInline ? (
+                                <code className="bg-zinc-100 text-violet-600 px-2 py-1 rounded text-base font-mono" {...props}>{children}</code>
                               ) : (
-                                <code className="block bg-zinc-950 text-gray-100 p-5 rounded-lg overflow-x-auto my-6 text-sm leading-6" {...props} />
-                              ),
+                                <code className={className} {...props}>{children}</code>
+                              )
+                            },
                             pre: ({ node, ...props }) => <pre className="bg-zinc-950 text-gray-100 p-5 rounded-lg overflow-x-auto my-6 text-sm leading-6" {...props} />,
                             a: ({ node, ...props }) => <a className="text-violet-600 hover:text-violet-700 underline" {...props} />,
                             strong: ({ node, ...props }) => <strong className="font-bold text-zinc-950" {...props} />,

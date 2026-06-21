@@ -9,6 +9,10 @@
       "destination": "/blog/index.html"
     },
     {
+      "source": "/blog/make-error-127",
+      "destination": "/blog/make-error-127/index.html"
+    },
+    {
       "source": "/blog/monitor-docling-using-alertmend",
       "destination": "/blog/monitor-docling-using-alertmend/index.html"
     },
