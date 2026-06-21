@@ -25,6 +25,10 @@
       "destination": "/blog/monitor-milvus-using-alertmend/index.html"
     },
     {
+      "source": "/blog/vibe-coded-app-vm-observability",
+      "destination": "/blog/vibe-coded-app-vm-observability/index.html"
+    },
+    {
       "source": "/blog/:slug",
       "destination": "/index.html"
     },

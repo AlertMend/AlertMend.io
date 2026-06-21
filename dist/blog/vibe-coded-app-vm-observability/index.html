@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibe-Coded App in Production: What About Observability? | AlertMend AI</title>
+  <meta name="description" content="You deployed your AI-built app and closed the laptop. Without uptime checks, logs, and alerts, you will not know it is down until users do. Minimum observability inside.">
+  <meta name="keywords" content="vibe coding deploy, monitor app in production, server observability, VPS monitoring, basic server monitoring, uptime check, AI coded app production, systemd monitoring, Docker logs, PM2 monitoring">
+  <meta name="author" content="AlertMend Team">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://www.alertmend.io/blog/vibe-coded-app-vm-observability">
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.alertmend.io/blog/vibe-coded-app-vm-observability">
+  <meta property="og:title" content="Vibe-Coded App in Production: What About Observability?">
+  <meta property="og:description" content="You deployed your AI-built app and closed the laptop. Without uptime checks, logs, and alerts, you will not know it is down until users do. Minimum observability inside.">
+  <meta property="og:image" content="https://www.alertmend.io/assets/vibe-coded-app-vm-observability/vm-observability-hero.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vibe-Coded App in Production: What About Observability?">
+  <meta name="twitter:description" content="You deployed your AI-built app and closed the laptop. Without uptime checks, logs, and alerts, you will not know it is down until users do. Minimum observability inside.">
+  <meta name="twitter:image" content="https://www.alertmend.io/assets/vibe-coded-app-vm-observability/vm-observability-hero.svg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Vibe-Coded App in Production: What About Observability?","description":"You deployed your AI-built app and closed the laptop. Without uptime checks, logs, and alerts, you will not know it is down until users do. Minimum observability inside.","image":"https://www.alertmend.io/assets/vibe-coded-app-vm-observability/vm-observability-hero.svg","datePublished":"2026-06-20","dateModified":"2026-06-20","author":{"@type":"Person","name":"AlertMend Team"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/vibe-coded-app-vm-observability"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Do I need Kubernetes for observability?","acceptedAnswer":{"@type":"Answer","text":"No. A single server with an HTTP uptime check, log access, disk monitoring, and one alert channel covers most indie and MVP apps."}},{"@type":"Question","name":"What is the minimum observability for a production app?","acceptedAnswer":{"@type":"Answer","text":"Four things: uptime check, host disk/memory awareness, readable logs, and alerts to Slack or email when something fails."}},{"@type":"Question","name":"I deployed with Cursor / Bolt / Replit. What did I skip?","acceptedAnswer":{"@type":"Answer","text":"AI coding tools generate the app and deploy steps. They rarely add health endpoints, log rotation, disk alerts, or on-call routing."}},{"@type":"Question","name":"Is SSH enough to know my app is healthy?","acceptedAnswer":{"@type":"Answer","text":"No. SSH only proves the server is on. Your app process can be dead, stuck, or returning 502 while SSH works fine."}},{"@type":"Question","name":"When should I use AlertMend instead of DIY scripts?","acceptedAnswer":{"@type":"Answer","text":"When you are tired of SSH at 2am, want Slack incidents with context, or need auto-restart on servers without running Kubernetes."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Add minimum observability to a production-deployed app","description":"You deployed your AI-built app and closed the laptop. Without uptime checks, logs, and alerts, you will not know it is down until users do. Minimum observability inside.","step":[{"@type":"HowToStep","position":1,"name":"Add a health endpoint","text":"Return 200 from GET /health with a cheap DB or cache ping if you have one."},{"@type":"HowToStep","position":2,"name":"Pick one log command","text":"journalctl -u app, docker logs -f, or pm2 logs, and save it in your runbook."},{"@type":"HowToStep","position":3,"name":"Schedule two checks","text":"External uptime ping plus a weekly df -h / free -h reminder on the server."},{"@type":"HowToStep","position":4,"name":"Wire one alert channel","text":"Slack webhook or email when the uptime check fails. That is enough for day one."}]}</script>
+  <link rel="stylesheet" href="/assets/vibe-coded-app-vm-observability/styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: #1f2937; background: #fff; -webkit-font-smoothing: antialiased; }
+    .navbar { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(229,231,235,.8); z-index: 50; }
+    .navbar-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .navbar-content { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    .navbar-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+    .navbar-logo-icon { height: 32px; width: auto; }
+    .navbar-links { display: none; align-items: center; gap: 4px; }
+    @media (min-width: 1024px) { .navbar-links { display: flex; } }
+    .navbar-link { padding: 6px 12px; font-size: 0.875rem; font-weight: 500; color: #3f3f46; text-decoration: none; border-radius: 6px; }
+    .navbar-link:hover { color: #09090b; background: #f4f4f5; }
+    .navbar-link.active { color: #09090b; background: #fafafa; }
+    .navbar-actions { display: none; align-items: center; gap: 10px; margin-left: 16px; padding-left: 16px; border-left: 1px solid #e5e7eb; }
+    @media (min-width: 1024px) { .navbar-actions { display: flex; } }
+    .navbar-button { padding: 8px 16px; font-size: 0.875rem; font-weight: 600; border-radius: 999px; text-decoration: none; }
+    .navbar-button-primary { background: #09090b; color: #fff; }
+    .navbar-button-secondary { color: #3f3f46; }
+    .main-container { max-width: 1280px; margin: 0 auto; padding: 96px 24px 64px; }
+    .content-wrapper { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media (min-width: 1024px) {
+      .content-wrapper { grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
+    }
+    .main-col { min-width: 0; max-width: 820px; }
+    @media (min-width: 1024px) { .main-col { max-width: none; } }
+    .sidebar { display: none; }
+    @media (min-width: 1024px) { .sidebar { display: block; } }
+    .sidebar-content { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card { background: #fafafa; border-radius: 8px; padding: 24px; border: 1px solid #e4e4e7; }
+    .sidebar-card h3 { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
+    .signup-form { display: flex; flex-direction: column; gap: 12px; }
+    .signup-form input { width: 100%; padding: 10px 16px; border-radius: 6px; border: 1px solid #d4d4d8; font-size: 1rem; background: #fff; color: #09090b; }
+    .signup-form input:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2); }
+    .signup-form button { width: 100%; padding: 10px 12px; background: #09090b; color: #fff; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; }
+    .signup-form button:hover { background: #27272a; }
+    .signup-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .signup-status { font-size: 0.875rem; font-weight: 500; margin: 0; }
+    .signup-status.success { color: #047857; }
+    .signup-status.error { color: #dc2626; }
+    .related-content-title { font-size: 11px; font-weight: 700; color: #71717a; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 16px; }
+    .related-posts-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .related-post-link { color: #3f3f46; text-decoration: none; font-size: 0.875rem; line-height: 1.5; display: block; transition: color 0.15s; }
+    .related-post-link:hover { color: #7c3aed; }
+    .view-more-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 16px; color: #7c3aed; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
+    .view-more-link:hover { color: #6d28d9; }
+    .article-header { margin-bottom: 2rem; }
+    .article-header h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; color: #09090b; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .author-info { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: #09090b; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+    .author-name { font-weight: 600; color: #111827; }
+    .author-meta { font-size: 0.875rem; color: #6b7280; }
+    .category-tag { display: inline-block; padding: 4px 10px; background: #ede9fe; color: #5b21b6; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .promo { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; font-size: 1.0625rem; color: #374151; }
+    .promo a { color: #7c3aed; font-weight: 600; }
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-content">
+        <a href="/" class="navbar-logo">
+          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon">
+        </a>
+        <div class="navbar-links">
+          <a href="/#how-it-works" class="navbar-link">How It Works</a>
+          <a href="/#solutions" class="navbar-link">Solutions</a>
+          <a href="/case-studies" class="navbar-link">Case Studies</a>
+          <a href="/blog" class="navbar-link active">Blog</a>
+          <a href="/pricing" class="navbar-link">Pricing</a>
+        </div>
+        <div class="navbar-actions">
+          <a href="https://app.alertmend.io/signup?source=blog-post&blog_slug=vibe-coded-app-vm-observability" class="navbar-button navbar-button-secondary">Register</a>
+          <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=vibe-coded-app-vm-observability" class="navbar-button navbar-button-primary" target="_blank" rel="noopener noreferrer">Book a Demo</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <div class="content-wrapper">
+      <div class="main-col">
+
+    <header class="article-header">
+      <h1>Vibe-Coded App in Production: What About Observability?</h1>
+      <div class="author-info">
+        <div class="author-avatar">A</div>
+        <div>
+          <div class="author-name">AlertMend Team</div>
+          <div class="author-meta">2026-06-20 · DevOps</div>
+        </div>
+      </div>
+      <span class="category-tag">DevOps</span>
+    </header>
+
+    <div class="dl-blog">
+      <section class="heroBand fearBand">
+        <p class="heroGuideLabel">Read this before you close the terminal</p>
+        <h2 class="fearHeadline">You deployed your app. You did not deploy observability.</h2>
+        <p class="fearLead">Cursor, Bolt, Replit, and Lovable optimize for <strong>shipping</strong>. They do not leave you with uptime checks, log access, disk alerts, or anyone to page when production breaks. The server looks fine. Your users may not.</p>
+        <div class="fearScenarioGrid">
+        <div class="fearScenario"><p class="fearScenarioWhen">Tonight, 3am</p><h3 class="fearScenarioTitle">Your app died hours ago. You do not know yet.</h3><p class="fearScenarioBody">The server still accepts SSH. The cloud console looks green. Nobody was paged. You find out from a user DM at breakfast.</p></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">Right before a demo</p><h3 class="fearScenarioTitle">The site shows 502. You cannot see why.</h3><p class="fearScenarioBody">nginx is running. Your app process is not. You tested localhost yesterday and assumed production was the same.</p></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">Week two on a $12 server</p><h3 class="fearScenarioTitle">Disk fills. The app starts failing writes.</h3><p class="fearScenarioBody">Logs and Docker layers grow quietly. No alert fired because nobody watched disk. A restart does not fix a full disk.</p></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">The silent hang</p><h3 class="fearScenarioTitle">The process exists. Requests stop working.</h3><p class="fearScenarioBody">PID is there. CPU looks idle. Users time out and leave. You only notice when signup emails stop.</p></div>
+        </div>
+        <p class="fearBridge"><strong>Deploy is not the finish line.</strong> Without observability, your first production incident is not a question of if. It is a question of whether you find out before or after your users do.</p>
+      </section>
+
+      <section class="heroBand heroBandCompact">
+        <p class="heroGuideLabel">The fix (minimum viable observability)</p>
+        <p class="seoTldr"><strong>Good news:</strong> You do not need Kubernetes or a metrics stack on day one. You need four things: an <strong>uptime check</strong>, <strong>disk and memory</strong> awareness, <strong>logs</strong> you can read in one command, and <strong>one alert channel</strong> when something fails twice.</p>
+      </section>
+
+      <h2 class="sectionHead">The lie you are living with right now</h2>
+      <p class="bodyText">Most vibe-coded deploys end with: URL loads in browser, screenshot for Twitter, close laptop. That proves the app worked <strong>once</strong>, at <strong>one moment</strong>, from <strong>your machine</strong>.</p>
+      <p class="bodyText">It does not prove the process will stay up, that disk will not fill, that nginx can reach the app tomorrow, or that anyone will tell you when signup stops working. <strong>Refreshing the URL is not observability.</strong></p>
+
+      <h2 class="sectionHead">Minimum observability stack (no Kubernetes required)</h2>
+      <div class="diyWrap">
+        <table class="compareTable">
+          <thead><tr><th>Question</th><th>What to do</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>Is it up?</td><td>HTTP check on / or /health every 1 to 5 minutes</td><td class="diyHighlight">UptimeRobot, Better Stack, or AlertMend URL check</td></tr>
+            <tr><td>Is the server healthy?</td><td>CPU, memory, and disk on the host, not just SSH</td><td class="diyHighlight">df -h, free -h, or a lightweight agent</td></tr>
+            <tr><td>What broke?</td><td>App logs you can read without guessing</td><td class="diyHighlight">journalctl, docker logs, or pm2 logs</td></tr>
+            <tr><td>Who gets pinged?</td><td>Slack or email when checks fail twice</td><td class="diyHighlight">Avoid finding out from users first</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="sectionHead">What vibe coding usually skips</h2>
+      <div class="searchIssueGrid">
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Process dies overnight</h3><p class="searchIssueDesc">The app exits after a deploy or memory spike. The server still accepts SSH.</p><p class="searchIssueAlert"><strong>Fix:</strong> Add a restart policy (systemd, Docker, PM2) plus an external uptime check.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Disk fills silently</h3><p class="searchIssueDesc">Logs and Docker layers grow until writes fail and the app crashes.</p><p class="searchIssueAlert"><strong>Fix:</strong> Alert when disk use crosses 85%. Rotate logs with logrotate.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Memory leak</h3><p class="searchIssueDesc">The app slows down over days. You only notice when users complain.</p><p class="searchIssueAlert"><strong>Fix:</strong> Watch process memory with pm2 monit or host-level metrics.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Bad deploy</h3><p class="searchIssueDesc">You pushed a broken build. No rollback signal, no alert.</p><p class="searchIssueAlert"><strong>Fix:</strong> Health check after deploy; keep the last working release one command away.</p></div>
+      </div>
+
+      <h2 class="sectionHead">Day 1 setup on your server</h2>
+      <p class="bodyText">Pick how your app runs. The observability basics are the same; only the commands change.</p>
+      <div class="modeGrid" role="tablist" aria-label="Deployment type">
+        <button type="button" role="tab" data-mode-id="systemd" class="modeCard modeCardActive" aria-selected="true"><span class="modeCardTitle">systemd</span><span class="modeCardSub">Linux service unit</span></button>
+        <button type="button" role="tab" data-mode-id="docker" class="modeCard" aria-selected="false"><span class="modeCardTitle">Docker</span><span class="modeCardSub">Container on a server</span></button>
+        <button type="button" role="tab" data-mode-id="pm2" class="modeCard" aria-selected="false"><span class="modeCardTitle">PM2 / Node</span><span class="modeCardSub">Process manager</span></button>
+      </div>
+      <div class="modePlaybook" role="tabpanel">
+        <div class="modePlaybookHead">
+          <h3 class="modePlaybookTitle" id="mode-playbook-title">Day 1: systemd service</h3>
+        </div>
+        <p class="modePlaybookSummary" id="mode-playbook-summary"></p>
+        <ul class="checkList" id="mode-playbook-steps"></ul>
+        <div class="stepTip"><span id="mode-playbook-tip"></span></div>
+      </div>
+
+      <h2 class="sectionHead">Four steps to add observability today</h2>
+      <div class="amFlow">
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">1</span></div><h3 class="amStepTitle">Add a health endpoint</h3><p class="amStepBody">Return 200 from GET /health with a cheap DB or cache ping if you have one.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">2</span></div><h3 class="amStepTitle">Pick one log command</h3><p class="amStepBody">journalctl -u app, docker logs -f, or pm2 logs, and save it in your runbook.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">3</span></div><h3 class="amStepTitle">Schedule two checks</h3><p class="amStepBody">External uptime ping plus a weekly df -h / free -h reminder on the server.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">4</span></div><h3 class="amStepTitle">Wire one alert channel</h3><p class="amStepBody">Slack webhook or email when the uptime check fails. That is enough for day one.</p></div>
+      </div>
+
+      <h2 class="sectionHead">What to alert on first</h2>
+      <div class="diyWrap">
+        <table class="compareTable">
+          <thead><tr><th>Signal</th><th>When</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td>Site down</td><td>HTTP check fails twice in a row</td><td class="diyHighlight">Page on-call or yourself in Slack</td></tr>
+            <tr><td>Disk above 85%</td><td>df on the server crosses threshold</td><td class="diyHighlight">Clean logs/images before the disk is full</td></tr>
+            <tr><td>Process not running</td><td>systemctl inactive or container exited</td><td class="diyHighlight">Auto-restart plus alert if it keeps failing</td></tr>
+            <tr><td>High memory</td><td>App or server memory sustained above 90%</td><td class="diyHighlight">Restart or resize before OOM kills the process</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="sectionHead">Example health check (copy-paste)</h2>
+      <pre class="codeBlock"><code># Express.js: add before app.listen()
+app.get('/health', (req, res) => res.status(200).json({ ok: true }));
+
+# Then verify from your laptop or an uptime monitor
+curl -sf https://your-domain.com/health</code></pre>
+
+      <h2 class="sectionHead">When DIY monitoring stops scaling</h2>
+      <p class="bodyText">Cron scripts and free uptime pings work until they do not: multiple servers, silent process hangs, or 2am SSH sessions to restart services. One AI startup on cloud servers saw core services freeze while the console stayed green. After wiring alerts and auto-restart, <strong>90%+ of recurring failures remediated themselves</strong>. <a href="/case-studies">Read the case study</a>.</p>
+
+      <h2 class="sectionHead">FAQ</h2>
+      <div class="faqList">
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="true">Do I need Kubernetes for observability?<svg class="faqChevron faqChevronOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer">No. A single server with an HTTP uptime check, log access, disk monitoring, and one alert channel covers most indie and MVP apps.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">What is the minimum observability for a production app?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Four things: uptime check, host disk/memory awareness, readable logs, and alerts to Slack or email when something fails.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">I deployed with Cursor / Bolt / Replit. What did I skip?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">AI coding tools generate the app and deploy steps. They rarely add health endpoints, log rotation, disk alerts, or on-call routing.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Is SSH enough to know my app is healthy?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">No. SSH only proves the server is on. Your app process can be dead, stuck, or returning 502 while SSH works fine.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">When should I use AlertMend instead of DIY scripts?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">When you are tired of SSH at 2am, want Slack incidents with context, or need auto-restart on servers without running Kubernetes.</div></div>
+      </div>
+
+      <div class="ctaBand">
+        <div class="ctaBandTitle">Do not wait for the 3am DM</div>
+        <p class="ctaBandSub">Talk to an AlertMend engineer about uptime checks, Slack alerts, and auto-restart for vibe-coded apps in production. No Kubernetes required.</p>
+        <div class="ctaBtnRow">
+          <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=vibe-coded-app-vm-observability" class="ctaBtn" target="_blank" rel="noopener noreferrer">Talk to an expert →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="promo">
+      <p><strong>Related:</strong> <a href="/blog/docker-container-monitoring-best-practices">Docker Container Monitoring</a> · <a href="/blog/make-error-127">make error 127 Complete Guide</a> · <a href="/case-studies">Server auto-remediation case study</a></p>
+    </div>
+      </div>
+
+
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <div class="sidebar-card">
+            <h3>Receive blog and product updates</h3>
+            <form class="signup-form" id="blog-signup-form" novalidate>
+              <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
+              <button type="submit">Sign up</button>
+              <p class="signup-status" id="blog-signup-status" hidden></p>
+            </form>
+          </div>
+
+          
+          <div class="sidebar-card">
+            <h3 class="related-content-title">Related content</h3>
+            <ul class="related-posts-list">
+              <li><a href="/blog/24x7-network-monitoring" class="related-post-link">24x7 network monitoring Guide Guide</a></li>
+              <li><a href="/blog/alarm-com-monitoring-cost" class="related-post-link">alarm com monitoring cost Guide</a></li>
+              <li><a href="/blog/appikon-back-in-stock" class="related-post-link">appikon back in stock Guide Guide</a></li>
+              <li><a href="/blog/monitor-langfuse-using-alertmend" class="related-post-link">How to Monitor Langfuse in Production</a></li>
+              <li><a href="/blog/monitor-milvus-using-alertmend" class="related-post-link">Milvus Observability: Monitor &amp; Recover</a></li>
+              <li><a href="/blog/monitor-docling-using-alertmend" class="related-post-link">Docling Observability: Monitor &amp; Recover</a></li>
+              <li><a href="/blog/503-no-healthy-upstream" class="related-post-link">503 No Healthy Upstream Error Guide</a></li>
+              <li><a href="/blog/achieving-enterprise-readiness-with-kubernetes-in-2025" class="related-post-link">Achieving Enterprise Readiness With</a></li>
+              <li><a href="/blog/addressing-kubernetes-overhead-is-it-still-the-right-choice-for-your-infrastructure" class="related-post-link">Addressing Kubernetes Overhead</a></li>
+              <li><a href="/blog/advanced-kubernetes-health-checks-ai" class="related-post-link">Advanced Kubernetes Health Checks AI</a></li>
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View all posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          
+
+          <div class="sidebar-card">
+            <h3 class="related-content-title">Explore AlertMend</h3>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="/assets/vibe-coded-app-vm-observability/script.js" defer></script>
+</body>
+</html>
