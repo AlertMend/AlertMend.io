@@ -20,7 +20,7 @@ export async function build(slug) {
   const heroImageUrl = `${SITE_URL}${heroImagePng}`
 
   const meta = parseFrontmatter(slug)
-  const title = meta.title || 'OpenClaw: Cloud Infra from Slack & Telegram'
+  const title = meta.title || 'OpenClaw: Infra from Slack & Telegram'
   const excerpt = meta.excerpt || ''
   const date = meta.date || '2026-06-21'
   const category = meta.category || 'DevOps'

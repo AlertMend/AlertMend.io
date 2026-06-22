@@ -1,7 +1,7 @@
 [
   {
     "slug": "openclaw-cloud-infra-slack-telegram",
-    "title": "OpenClaw: Cloud Infra from Slack & Telegram",
+    "title": "OpenClaw: Infra from Slack & Telegram",
     "excerpt": "Connect OpenClaw to AlertMend for infra ops from Slack or Telegram. The agent never touches your servers directly. Only approved AlertMend runbooks run.",
     "date": "2026-06-21",
     "category": "DevOps",
