@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaw: Infra from Slack &amp; Telegram | AlertMend AI</title>
+  <meta name="description" content="Connect OpenClaw to AlertMend for infra ops from Slack or Telegram. The agent never touches your servers directly. Only approved AlertMend runbooks run.">
+  <meta name="keywords" content="OpenClaw AlertMend, OpenClaw Slack, OpenClaw Telegram, OpenClaw cloud infrastructure, safe AI infra control, OpenClaw integration, control cloud from Slack, control cloud from Telegram, OpenClaw Kubernetes, monitor OpenClaw production, restart service from Slack, OpenClaw runbooks">
+  <meta name="author" content="AlertMend Team">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://www.alertmend.io/blog/openclaw-cloud-infra-slack-telegram">
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.alertmend.io/blog/openclaw-cloud-infra-slack-telegram">
+  <meta property="og:title" content="OpenClaw: Infra from Slack &amp; Telegram">
+  <meta property="og:description" content="Connect OpenClaw to AlertMend for infra ops from Slack or Telegram. The agent never touches your servers directly. Only approved AlertMend runbooks run.">
+  <meta property="og:image" content="https://www.alertmend.io/assets/openclaw-cloud-infra-slack-telegram/openclaw-hero.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OpenClaw: Infra from Slack &amp; Telegram">
+  <meta name="twitter:description" content="Connect OpenClaw to AlertMend for infra ops from Slack or Telegram. The agent never touches your servers directly. Only approved AlertMend runbooks run.">
+  <meta name="twitter:image" content="https://www.alertmend.io/assets/openclaw-cloud-infra-slack-telegram/openclaw-hero.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"OpenClaw: Infra from Slack & Telegram","description":"Connect OpenClaw to AlertMend for infra ops from Slack or Telegram. The agent never touches your servers directly. Only approved AlertMend runbooks run.","image":"https://www.alertmend.io/assets/openclaw-cloud-infra-slack-telegram/openclaw-hero.png","datePublished":"2026-06-21","dateModified":"2026-06-21","author":{"@type":"Person","name":"AlertMend Team"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/openclaw-cloud-infra-slack-telegram"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can I ask on Slack to restart my VM?","acceptedAnswer":{"@type":"Answer","text":"Yes, if you approved a restart runbook in AlertMend first. Message OpenClaw in Slack or Telegram: \"restart prod-api-01\" or \"bounce the worker VM.\" AlertMend runs the allowlisted runbook, logs who asked, and OpenClaw confirms in the same thread."}},{"@type":"Question","name":"Can I restart a pod from Telegram?","acceptedAnswer":{"@type":"Answer","text":"Yes, when OpenClaw is wired to AlertMend and your Kubernetes cluster is connected. Ask in plain language: \"restart the payment-worker pod\" or \"rollout restart staging-api.\" AlertMend validates against your runbooks. No kubeconfig on the OpenClaw gateway."}},{"@type":"Question","name":"Can I check prod health from my phone?","acceptedAnswer":{"@type":"Answer","text":"That is the main use case. Ask \"is prod healthy?\" or \"which services are down?\" from Slack or Telegram. OpenClaw asks AlertMend. You get disk, memory, and incident context in plain English. No SSH, no VPN, no laptop."}},{"@type":"Question","name":"What else can I ask from Slack or Telegram?","acceptedAnswer":{"@type":"Answer","text":"Fleet health, disk pressure, crashing pods, error summaries, what broke last night, and approved fixes. If AlertMend monitors it and you allowlisted the runbook, you can ask about it in natural language."}},{"@type":"Question","name":"Can I see disk usage or memory without SSH?","acceptedAnswer":{"@type":"Answer","text":"Yes. Ask \"which hosts are running hot?\" or \"disk usage on worker-02.\" AlertMend agents report real prod metrics. OpenClaw summarizes in chat. Nothing runs on the OpenClaw gateway box except the conversation."}},{"@type":"Question","name":"Can I get an incident summary in the same chat thread?","acceptedAnswer":{"@type":"Answer","text":"Yes. Ask \"what happened last night?\" or \"why did we page at 2am?\" AlertMend pulls the incident timeline and remediation log. OpenClaw explains it in the same Slack or Telegram thread where you asked."}},{"@type":"Question","name":"How do I connect OpenClaw to AlertMend?","acceptedAnswer":{"@type":"Answer","text":"Connect VMs, Docker hosts, or Kubernetes in AlertMend first. Define allowlisted runbooks: restarts, health checks, log summaries. Point OpenClaw at AlertMend as its infra backend. Keep prod credentials in AlertMend only."}},{"@type":"Question","name":"What is OpenClaw vs AlertMend?","acceptedAnswer":{"@type":"Answer","text":"OpenClaw is the chat gateway (Slack, Telegram, Discord). AlertMend is the control plane: health checks, runbooks, remediation, audit log. OpenClaw talks. AlertMend touches infra. Together: chat ops without root on your phone."}},{"@type":"Question","name":"Does OpenClaw work with VMs, Docker, and Kubernetes?","acceptedAnswer":{"@type":"Answer","text":"OpenClaw is channel-agnostic. AlertMend connects to bare-metal VMs, cloud servers, Docker hosts, and Kubernetes clusters. Same chat flow for all of them. Ask on Slack or Telegram, AlertMend executes on the target you approved."}},{"@type":"Question","name":"Does OpenClaw touch my infrastructure directly?","acceptedAnswer":{"@type":"Answer","text":"No. OpenClaw connects to AlertMend for every infra request. AlertMend runs health checks, runbooks, and remediation on your VMs and clusters. The gateway never holds SSH keys or kubeconfig."}},{"@type":"Question","name":"Why not wire OpenClaw directly to production?","acceptedAnswer":{"@type":"Answer","text":"Because shell on the gateway means one bad prompt can delete a namespace from chat. AlertMend in the middle gives you allowlists, logging, and control, without giving Telegram root access to prod."}},{"@type":"Question","name":"Is it safe to run fixes from chat?","acceptedAnswer":{"@type":"Answer","text":"Safe when AlertMend is in the middle. Chat triggers only pre-approved runbooks: restart VM yes, delete namespace no. Every action is logged with who asked. Direct OpenClaw-to-prod wiring is not safe for production."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Connect OpenClaw to AlertMend for safe infra control from chat","description":"Connect OpenClaw to AlertMend for infra ops from Slack or Telegram. The agent never touches your servers directly. Only approved AlertMend runbooks run.","step":[{"@type":"HowToStep","position":1,"name":"Connect infra in AlertMend","text":"VMs, Docker hosts, or Kubernetes. AlertMend is the only thing that touches prod."},{"@type":"HowToStep","position":2,"name":"Wire OpenClaw to AlertMend","text":"Chat gateway only. No prod credentials on that box."},{"@type":"HowToStep","position":3,"name":"Ask from Slack or Telegram","text":"Natural language in, controlled actions out."}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog","item":"https://www.alertmend.io/blog"},{"@type":"ListItem","position":2,"name":"OpenClaw: Infra from Slack & Telegram","item":"https://www.alertmend.io/blog/openclaw-cloud-infra-slack-telegram"}]}</script>
+  <link rel="stylesheet" href="/assets/openclaw-cloud-infra-slack-telegram/styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: #1f2937; background: #fff; -webkit-font-smoothing: antialiased; }
+    .navbar { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(229,231,235,.8); z-index: 50; }
+    .navbar-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .navbar-content { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    .navbar-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+    .navbar-logo-icon { height: 32px; width: auto; }
+    .navbar-links { display: none; align-items: center; gap: 4px; }
+    @media (min-width: 1024px) { .navbar-links { display: flex; } }
+    .navbar-link { padding: 6px 12px; font-size: 0.875rem; font-weight: 500; color: #3f3f46; text-decoration: none; border-radius: 6px; }
+    .navbar-link:hover { color: #09090b; background: #f4f4f5; }
+    .navbar-link.active { color: #09090b; background: #fafafa; }
+    .navbar-actions { display: none; align-items: center; gap: 10px; margin-left: 16px; padding-left: 16px; border-left: 1px solid #e5e7eb; }
+    @media (min-width: 1024px) { .navbar-actions { display: flex; } }
+    .navbar-button { padding: 8px 16px; font-size: 0.875rem; font-weight: 600; border-radius: 999px; text-decoration: none; }
+    .navbar-button-primary { background: #09090b; color: #fff; }
+    .navbar-button-secondary { color: #3f3f46; }
+    .main-container { max-width: 1280px; margin: 0 auto; padding: 96px 24px 64px; }
+    .content-wrapper { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media (min-width: 1024px) {
+      .content-wrapper { grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
+    }
+    .main-col { min-width: 0; max-width: 820px; }
+    @media (min-width: 1024px) { .main-col { max-width: none; } }
+    .sidebar { display: none; }
+    @media (min-width: 1024px) { .sidebar { display: block; } }
+    .sidebar-content { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card { background: #fafafa; border-radius: 8px; padding: 24px; border: 1px solid #e4e4e7; }
+    .sidebar-card h3 { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
+    .signup-form { display: flex; flex-direction: column; gap: 12px; }
+    .signup-form input { width: 100%; padding: 10px 16px; border-radius: 6px; border: 1px solid #d4d4d8; font-size: 1rem; background: #fff; color: #09090b; }
+    .signup-form input:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2); }
+    .signup-form button { width: 100%; padding: 10px 12px; background: #09090b; color: #fff; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; }
+    .signup-form button:hover { background: #27272a; }
+    .signup-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .signup-status { font-size: 0.875rem; font-weight: 500; margin: 0; }
+    .signup-status.success { color: #047857; }
+    .signup-status.error { color: #dc2626; }
+    .related-content-title { font-size: 11px; font-weight: 700; color: #71717a; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 16px; }
+    .related-posts-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .related-post-link { color: #3f3f46; text-decoration: none; font-size: 0.875rem; line-height: 1.5; display: block; transition: color 0.15s; }
+    .related-post-link:hover { color: #7c3aed; }
+    .view-more-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 16px; color: #7c3aed; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
+    .view-more-link:hover { color: #6d28d9; }
+    .article-header { margin-bottom: 2rem; }
+    .article-header h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; color: #09090b; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .author-info { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: #09090b; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+    .author-name { font-weight: 600; color: #111827; }
+    .author-meta { font-size: 0.875rem; color: #6b7280; }
+    .category-tag { display: inline-block; padding: 4px 10px; background: #ede9fe; color: #5b21b6; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .promo { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; font-size: 1.0625rem; color: #374151; }
+    .promo a { color: #7c3aed; font-weight: 600; }
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-content">
+        <a href="/" class="navbar-logo">
+          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon">
+        </a>
+        <div class="navbar-links">
+          <a href="/#how-it-works" class="navbar-link">How It Works</a>
+          <a href="/#solutions" class="navbar-link">Solutions</a>
+          <a href="/case-studies" class="navbar-link">Case Studies</a>
+          <a href="/blog" class="navbar-link active">Blog</a>
+          <a href="/pricing" class="navbar-link">Pricing</a>
+        </div>
+        <div class="navbar-actions">
+          <a href="https://app.alertmend.io/signup?source=blog-post&blog_slug=openclaw-cloud-infra-slack-telegram" class="navbar-button navbar-button-secondary">Register</a>
+          <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=openclaw-cloud-infra-slack-telegram" class="navbar-button navbar-button-primary" target="_blank" rel="noopener noreferrer">Book a Demo</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <div class="content-wrapper">
+      <div class="main-col">
+
+    <article class="blogArticle" itemscope itemtype="https://schema.org/BlogPosting">
+      <link itemprop="mainEntityOfPage" href="https://www.alertmend.io/blog/openclaw-cloud-infra-slack-telegram">
+      <meta itemprop="description" content="Connect OpenClaw to AlertMend for infra ops from Slack or Telegram. The agent never touches your servers directly. Only approved AlertMend runbooks run.">
+      <meta itemprop="image" content="https://www.alertmend.io/assets/openclaw-cloud-infra-slack-telegram/openclaw-hero.png">
+
+      <nav class="blogBreadcrumb" aria-label="Breadcrumb">
+        <ol class="blogBreadcrumbList">
+          <li class="blogBreadcrumbItem"><a href="/blog">Blog</a></li>
+          <li class="blogBreadcrumbItem" aria-current="page">OpenClaw: Infra from Slack &amp; Telegram</li>
+        </ol>
+      </nav>
+
+    <div class="dl-blog">
+      <section class="heroBand funBand">
+        <div class="heroBrandLockup">
+          <img src="/assets/openclaw-cloud-infra-slack-telegram/openclaw-logo-text-dark.svg" alt="OpenClaw" class="heroOpenClawLogo" width="148" height="30">
+          <span class="heroBrandSep" aria-hidden="true">×</span>
+          <a href="/" class="heroAmLink">
+            <img src="/logos/alertmend-logo.svg" alt="AlertMend" class="heroAmLogo" width="128" height="28">
+          </a>
+        </div>
+        <h1 class="funHeadline" itemprop="headline">OpenClaw: Infra from Slack &amp; Telegram</h1>
+        <p class="heroLead">Run your cloud from the chat app you already live in. OpenClaw on <strong>Slack or Telegram</strong>. AlertMend on your infra. You ask in plain language from your phone: health checks, incidents, approved fixes, without opening a terminal or VPN.</p>
+        <ul class="trustPills">
+          <li class="trustPill"><span class="trustPillIcon">◎</span> From your phone</li>
+          <li class="trustPill"><span class="trustPillIcon">◎</span> No SSH session</li>
+          <li class="trustPill"><span class="trustPillIcon">◎</span> Still in control</li>
+          <li class="trustPill"><span class="trustPillIcon">◎</span> AlertMend in the middle</li>
+        </ul>
+        <p class="pipelineCaption">How a message becomes an action</p>
+        <div class="pipeline" style="position:relative">
+          <div class="docPacket" aria-hidden="true"></div>
+          <div class="pipelineGroup">
+            <div class="pipelineNode">
+              <div class="pipelineIconRow" aria-hidden="true">
+                <img class="pipelineIcon" src="/logos/slack_logo.svg" alt="" width="32" height="32">
+                <img class="pipelineIcon" src="/assets/openclaw-cloud-infra-slack-telegram/pipeline-telegram.svg" alt="" width="32" height="32">
+              </div>
+              <div class="pipelineLabel">Slack</div>
+              <div class="pipelineSub">or Telegram</div>
+            </div>
+            <div class="pipelineArrow" aria-hidden="true">→</div>
+          </div>
+          <div class="pipelineGroup">
+            <div class="pipelineNode">
+              <img class="pipelineIcon pipelineIconLobster" src="/assets/openclaw-cloud-infra-slack-telegram/pixel-lobster.svg" alt="OpenClaw" width="32" height="32">
+              <div class="pipelineLabel">OpenClaw</div>
+              <div class="pipelineSub">chat only</div>
+            </div>
+            <div class="pipelineArrow" aria-hidden="true">→</div>
+          </div>
+          <div class="pipelineGroup">
+            <div class="pipelineNode pipelineNodeFocus">
+              <img class="pipelineIcon" src="/logos/alertmend-logo.svg" alt="" width="32" height="32">
+              <div class="pipelineLabel">AlertMend</div>
+              <div class="pipelineSub">control plane</div>
+            </div>
+            <div class="pipelineArrow" aria-hidden="true">→</div>
+          </div>
+          <div class="pipelineNode">
+            <img class="pipelineIcon" src="/assets/openclaw-cloud-infra-slack-telegram/pipeline-infra.svg" alt="" width="32" height="32">
+            <div class="pipelineLabel">Your infra</div>
+            <div class="pipelineSub">VMs · K8s · cloud</div>
+          </div>
+        </div>
+      </section>
+
+      <p class="articleMetaCompact">
+        <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">AlertMend Team</span></span>
+        · <time datetime="2026-06-21" itemprop="datePublished">2026-06-21</time>
+        · DevOps
+      </p>
+
+      <section class="capabilityShowcase" aria-label="Interactive demo of chat capabilities">
+        <h2 class="sectionHead capabilityShowcaseHead">What you can do from one message</h2>
+        <p class="sectionSub">Pick a scenario or watch them cycle. Every example runs through AlertMend, not shell on prod.</p>
+        <div class="capabilityLayout">
+          <div class="capabilityNav" role="tablist" aria-label="Chat scenarios">
+          <button type="button" class="capabilityPill capabilityPillActive" data-cap-id="health" role="tab" aria-selected="true"><span class="capabilityPillLabel">Fleet health</span><span class="capabilityPillHint">hey, is prod healthy?</span><span class="capabilityPillProgress" aria-hidden="true"></span></button>
+          <button type="button" class="capabilityPill" data-cap-id="disk" role="tab" aria-selected="false"><span class="capabilityPillLabel">Disk &amp; memory</span><span class="capabilityPillHint">which hosts are running hot?</span><span class="capabilityPillProgress" aria-hidden="true"></span></button>
+          <button type="button" class="capabilityPill" data-cap-id="k8s" role="tab" aria-selected="false"><span class="capabilityPillLabel">Kubernetes pods</span><span class="capabilityPillHint">any crashing pods in prod?</span><span class="capabilityPillProgress" aria-hidden="true"></span></button>
+          <button type="button" class="capabilityPill" data-cap-id="incident" role="tab" aria-selected="false"><span class="capabilityPillLabel">What broke?</span><span class="capabilityPillHint">what happened last night?</span><span class="capabilityPillProgress" aria-hidden="true"></span></button>
+          <button type="button" class="capabilityPill" data-cap-id="restart" role="tab" aria-selected="false"><span class="capabilityPillLabel">Restart service</span><span class="capabilityPillHint">restart staging-api, memory looks high</span><span class="capabilityPillProgress" aria-hidden="true"></span></button>
+          <button type="button" class="capabilityPill" data-cap-id="logs" role="tab" aria-selected="false"><span class="capabilityPillLabel">Error summary</span><span class="capabilityPillHint">summarize errors in the last hour</span><span class="capabilityPillProgress" aria-hidden="true"></span></button>
+          </div>
+          <div class="capabilityStage">
+            <div class="promptPreviewWrap" id="prompt-wrap">
+              <div class="promptPreviewRow">
+                <div class="promptPreviewCol">
+                  <span class="promptPreviewLabel">You type</span>
+                  <p class="promptPreview" id="prompt-preview" aria-live="polite"></p>
+                </div>
+                <button type="button" class="promptSendBtn" id="prompt-send" tabindex="-1" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="chatDemo chatDemoSlack" id="chat-demo" role="img" aria-label="Animated chat demo">
+              <div class="chatDemoChrome" id="chat-demo-chrome">
+                <div class="chromeDots"><span class="chromeDot"></span><span class="chromeDot"></span><span class="chromeDot"></span></div>
+                <div class="chatDemoAppWrap">
+                  <img class="chatSlackLogo" id="chat-slack-logo" src="/logos/slack_logo.svg" alt="" width="22" height="22">
+                  <span class="chatDemoChannel" id="chat-demo-channel"># infra-control</span>
+                  <span class="chatDemoApp hidden" id="chat-demo-app">Telegram</span>
+                </div>
+                <span class="liveBadge"><span class="liveDot"></span> Live</span>
+              </div>
+              <div class="chatDemoBody" id="chat-demo-body"></div>
+              <div class="slackComposer" id="chat-composer" aria-hidden="true">
+                <div class="slackComposerInner">
+                  <span class="slackComposerPlaceholder">Message #infra-control</span>
+                </div>
+              </div>
+            </div>
+            <div class="backstage" id="chat-backstage" aria-label="What happens behind the chat">
+              <p class="backstageTitle">Behind the chat</p>
+              <ol class="backstageSteps" id="backstage-steps"></ol>
+              <p class="backstageSuccess hidden" id="backstage-success">✓ Done, logged in AlertMend</p>
+            </div>
+          </div>
+        </div>
+        <p class="chatDemoCaption">Tap any scenario above. Same flow every time: you ask in plain language, AlertMend does the work, answer lands in chat.</p>
+
+        <section class="scenarioReference" aria-label="Chat scenario examples">
+          <h3 class="scenarioReferenceHead">Example prompts and replies</h3>
+          <div class="scenarioReferenceGrid">
+        <article class="scenarioRefItem">
+          <h3 class="scenarioRefTitle">Fleet health <span class="scenarioRefApp">(Slack)</span></h3>
+          <p class="scenarioRefPrompt"><strong>You ask:</strong> hey, is prod healthy?</p>
+          <p class="scenarioRefDialogue"><strong>Example thread:</strong> You: hey, is prod healthy? · OpenClaw: All 4 services green. Disk at 62%. No open incidents. · You: anything weird on api-01? · OpenClaw: Memory up 12% since yesterday, still within limits. Want me to flag it?</p>
+        </article>
+        <article class="scenarioRefItem">
+          <h3 class="scenarioRefTitle">Disk &amp; memory <span class="scenarioRefApp">(Telegram)</span></h3>
+          <p class="scenarioRefPrompt"><strong>You ask:</strong> which hosts are running hot?</p>
+          <p class="scenarioRefDialogue"><strong>Example thread:</strong> You: which hosts are running hot? · OpenClaw: worker-02: disk 89% (watch). api-01: memory 78%. Everything else normal. · You: should I worry about worker-02? · OpenClaw: Log rotation runbook ran at 2am last week. Trend is flat. I will alert if it crosses 92%.</p>
+        </article>
+        <article class="scenarioRefItem">
+          <h3 class="scenarioRefTitle">Kubernetes pods <span class="scenarioRefApp">(Slack)</span></h3>
+          <p class="scenarioRefPrompt"><strong>You ask:</strong> any crashing pods in prod?</p>
+          <p class="scenarioRefDialogue"><strong>Example thread:</strong> You: any crashing pods in prod? · OpenClaw: 2 restarts on payment-worker in the last hour. Main API stable. Ingress healthy. · You: show me the last error · OpenClaw: OOMKilled at 14:02, memory limit 512Mi. AlertMend already flagged it. Bump limit or scale?</p>
+        </article>
+        <article class="scenarioRefItem">
+          <h3 class="scenarioRefTitle">What broke? <span class="scenarioRefApp">(Telegram)</span></h3>
+          <p class="scenarioRefPrompt"><strong>You ask:</strong> what happened last night?</p>
+          <p class="scenarioRefDialogue"><strong>Example thread:</strong> You: what happened last night? · OpenClaw: One incident: disk pressure on worker-02 at 2:14am. Logs auto-rotated. Resolved in 4 min. · You: did I need to wake up? · OpenClaw: Nope. Runbook handled it. You slept. Prod did not.</p>
+        </article>
+        <article class="scenarioRefItem">
+          <h3 class="scenarioRefTitle">Restart service <span class="scenarioRefApp">(Slack)</span></h3>
+          <p class="scenarioRefPrompt"><strong>You ask:</strong> restart staging-api, memory looks high</p>
+          <p class="scenarioRefDialogue"><strong>Example thread:</strong> You: restart staging-api, memory looks high · OpenClaw: Runbook approved [Restart staging-api] · OpenClaw: Done. Back in 18s. Logged in AlertMend. Watching for 5 min. · You: perfect, thanks</p>
+        </article>
+        <article class="scenarioRefItem">
+          <h3 class="scenarioRefTitle">Error summary <span class="scenarioRefApp">(Telegram)</span></h3>
+          <p class="scenarioRefPrompt"><strong>You ask:</strong> summarize errors in the last hour</p>
+          <p class="scenarioRefDialogue"><strong>Example thread:</strong> You: summarize errors in the last hour · OpenClaw: 12 errors total. Top: connection timeout to Redis (8×), usually on checkout. One 503 spike at 13:40, already cleared. · You: is redis down? · OpenClaw: Nah, latency spike only. Redis healthy now. Want me to open an incident if it happens again?</p>
+        </article>
+          </div>
+        </section>
+
+        <noscript>
+          <section class="scenarioReferencePlain" aria-label="Chat scenarios without JavaScript">
+            <h3>Chat scenarios</h3>
+            <ul>
+          <li><strong>Fleet health</strong> (Slack): hey, is prod healthy?<ul><li>You: hey, is prod healthy?</li><li>OpenClaw: All 4 services green. Disk at 62%. No open incidents.</li><li>You: anything weird on api-01?</li><li>OpenClaw: Memory up 12% since yesterday, still within limits. Want me to flag it?</li></ul></li>
+          <li><strong>Disk &amp; memory</strong> (Telegram): which hosts are running hot?<ul><li>You: which hosts are running hot?</li><li>OpenClaw: worker-02: disk 89% (watch). api-01: memory 78%. Everything else normal.</li><li>You: should I worry about worker-02?</li><li>OpenClaw: Log rotation runbook ran at 2am last week. Trend is flat. I will alert if it crosses 92%.</li></ul></li>
+          <li><strong>Kubernetes pods</strong> (Slack): any crashing pods in prod?<ul><li>You: any crashing pods in prod?</li><li>OpenClaw: 2 restarts on payment-worker in the last hour. Main API stable. Ingress healthy.</li><li>You: show me the last error</li><li>OpenClaw: OOMKilled at 14:02, memory limit 512Mi. AlertMend already flagged it. Bump limit or scale?</li></ul></li>
+          <li><strong>What broke?</strong> (Telegram): what happened last night?<ul><li>You: what happened last night?</li><li>OpenClaw: One incident: disk pressure on worker-02 at 2:14am. Logs auto-rotated. Resolved in 4 min.</li><li>You: did I need to wake up?</li><li>OpenClaw: Nope. Runbook handled it. You slept. Prod did not.</li></ul></li>
+          <li><strong>Restart service</strong> (Slack): restart staging-api, memory looks high<ul><li>You: restart staging-api, memory looks high</li><li>OpenClaw: Runbook approved</li><li>OpenClaw: Done. Back in 18s. Logged in AlertMend. Watching for 5 min.</li><li>You: perfect, thanks</li></ul></li>
+          <li><strong>Error summary</strong> (Telegram): summarize errors in the last hour<ul><li>You: summarize errors in the last hour</li><li>OpenClaw: 12 errors total. Top: connection timeout to Redis (8×), usually on checkout. One 503 spike at 13:40, already cleared.</li><li>You: is redis down?</li><li>OpenClaw: Nah, latency spike only. Redis healthy now. Want me to open an incident if it happens again?</li></ul></li>
+            </ul>
+          </section>
+        </noscript>
+      </section>
+
+      <h2 class="sectionHead">Why teams actually love this</h2>
+      <div class="signalGrid reveal visible">
+        <div class="signalCard"><h3 class="signalCardTitle">From the couch</h3><p class="signalCardDesc">Check prod between episodes. Phone in hand. Laptop closed. Still know what is running.</p></div>
+        <div class="signalCard"><h3 class="signalCardTitle">Walk and triage</h3><p class="signalCardDesc">Slack thread on your morning walk. AlertMend already has context. OpenClaw explains it in plain English.</p></div>
+        <div class="signalCard"><h3 class="signalCardTitle">One thread for everything</h3><p class="signalCardDesc">Page, question, fix, confirmation in the same Telegram chat. No context switching.</p></div>
+        <div class="signalCard"><h3 class="signalCardTitle">Fix without a terminal</h3><p class="signalCardDesc">Approved restart from chat. Logged in AlertMend. You never typed ssh.</p></div>
+      </div>
+
+      <section class="archDiagram" aria-labelledby="arch-diagram-title">
+        <div class="archDiagramCard">
+          <h2 id="arch-diagram-title" class="archDiagramTitle">OpenClaw never touches your infra directly</h2>
+          <p class="archDiagramLead">You chat on Slack or Telegram. AlertMend runs the commands on VMs, Docker hosts, and Kubernetes. OpenClaw stays on the conversation layer.</p>
+          <div class="archFlow" role="img" aria-label="Flow from Slack and Telegram through OpenClaw and AlertMend to your infrastructure">
+            <div class="archNode">
+              <div class="archNodeIcons" aria-hidden="true">
+                <img src="/logos/slack_logo.svg" alt="" width="28" height="28">
+                <img src="/assets/openclaw-cloud-infra-slack-telegram/pipeline-telegram.svg" alt="" width="28" height="28">
+              </div>
+              <span class="archNodeLabel">Slack or Telegram</span>
+              <span class="archNodeMeta">where you ask</span>
+            </div>
+            <span class="archArrow" aria-hidden="true"></span>
+            <div class="archNode archNodeGateway">
+              <img class="archNodeIcon archNodeIconLobster" src="/assets/openclaw-cloud-infra-slack-telegram/pixel-lobster.svg" alt="" width="32" height="32">
+              <span class="archNodeLabel">OpenClaw</span>
+              <span class="archNodeMeta">chat only</span>
+            </div>
+            <span class="archArrow" aria-hidden="true"></span>
+            <div class="archNode archNodeAm">
+              <img class="archNodeIcon" src="/logos/alertmend-logo.svg" alt="" width="32" height="32">
+              <span class="archNodeLabel">AlertMend</span>
+              <span class="archNodeMeta">control plane</span>
+            </div>
+            <span class="archArrow" aria-hidden="true"></span>
+            <div class="archNode archNodeInfra">
+              <img class="archNodeIcon" src="/assets/openclaw-cloud-infra-slack-telegram/pipeline-infra.svg" alt="" width="32" height="32">
+              <span class="archNodeLabel">Your infra</span>
+              <span class="archNodeMeta">VMs · K8s · cloud</span>
+            </div>
+          </div>
+          <div class="archBlocked" aria-label="OpenClaw does not connect directly to your infrastructure">
+            <div class="archBlockedNodes">
+              <span class="archBlockedNode">OpenClaw</span>
+              <span class="archBlockedLine" aria-hidden="true"></span>
+              <span class="archBlockedBadge">no direct link</span>
+              <span class="archBlockedNode">Your infra</span>
+            </div>
+            <p class="archBlockedNote">No SSH, kubectl, or cloud credentials on the OpenClaw gateway. Only approved AlertMend runbooks touch prod.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="heroBand fearBand fearBandCompact">
+        <p class="heroGuideLabel">The part most tutorials skip</p>
+        <h2 class="fearHeadline">OpenClaw wired straight to prod is fast to set up. It is not fun when it goes wrong.</h2>
+        <p class="fearLead">Shell on the gateway means one bad prompt can delete a namespace from Telegram. <strong>That is not control.</strong> That is hope with a webhook.</p>
+        <div class="fearScenarioGrid">
+        <div class="fearScenario"><p class="fearScenarioWhen">If you wire OpenClaw to prod directly</p><h3 class="fearScenarioTitle">Shell, kubectl, or cloud CLI on the gateway.</h3><p class="fearScenarioBody">One typo in Telegram becomes rm -rf, a deleted namespace, or a public S3 bucket. No approval. No undo. Your chat app is now root.</p></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">You ask &quot;restart the API&quot;</p><h3 class="fearScenarioTitle">The model picks the command.</h3><p class="fearScenarioBody">Wrong service. Wrong environment. You find out from customers, not from an audit log.</p></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">Credentials live on the gateway</p><h3 class="fearScenarioTitle">kubeconfig and cloud keys next to a webhook.</h3><p class="fearScenarioBody">Compromise that small VM and the attacker owns your fleet. That is the cost of &quot;direct&quot; control.</p></div>
+        </div>
+        <p class="fearBridge"><strong>AlertMend in the middle</strong> keeps the fun (chat from anywhere) and drops the roulette (arbitrary commands on prod).</p>
+      </section>
+
+      <section class="heroBand heroBandCompact">
+        <p class="heroGuideLabel">The safe pattern</p>
+        <p class="seoTldr"><strong>TL;DR:</strong> OpenClaw for chat. AlertMend for infra. <strong>Never wire OpenClaw directly to prod.</strong> That turns your phone into a root shell.</p>
+      </section>
+
+      <h2 class="sectionHead">How it works (without the scary parts)</h2>
+      <p class="bodyText">You message OpenClaw on <strong>Slack or Telegram</strong>. OpenClaw asks <strong>AlertMend</strong>. AlertMend checks your VMs, containers, or clusters and runs only what you pre-approved. OpenClaw summarizes the answer back in chat.</p>
+      <p class="bodyText"><strong>That is the whole model.</strong> Chat on one side. Infra on the other. AlertMend in the middle. OpenClaw never SSHs to prod, never runs kubectl on your gateway, never holds cloud credentials.</p>
+
+      <h2 class="sectionHead">The fun way vs the risky way</h2>
+      <div class="diyWrap">
+        <table class="compareTable">
+          <thead><tr><th>Concern</th><th class="compareBad">Direct to prod 😬</th><th class="compareGood">Via AlertMend ✓</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Who touches prod</strong></td><td class="compareBadCell">OpenClaw runs commands on your servers</td><td class="diyHighlight compareGoodCell">Only AlertMend does. OpenClaw never connects</td></tr>
+            <tr><td><strong>Credentials</strong></td><td class="compareBadCell">SSH keys and kubeconfig on the chat gateway</td><td class="diyHighlight compareGoodCell">Credentials stay in AlertMend</td></tr>
+            <tr><td><strong>What chat can do</strong></td><td class="compareBadCell">Whatever the model invents</td><td class="diyHighlight compareGoodCell">Only what you allowlisted</td></tr>
+            <tr><td><strong>If the gateway is hacked</strong></td><td class="compareBadCell">Full fleet access</td><td class="diyHighlight compareGoodCell">Chat access only. No path to prod</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="bodyText">Most tutorials show OpenClaw with shell tools. That is fast to set up and painful to regret. <strong>AlertMend in the middle</strong> is the pattern for teams who want chat ops without betting the fleet on model behavior.</p>
+
+      <h2 class="sectionHead">Works for VMs, Docker, and Kubernetes</h2>
+      <div class="modeGrid" role="tablist" aria-label="Infra type">
+        <button type="button" role="tab" id="mode-tab-vps" data-mode-id="vps" class="modeCard modeCardActive" aria-selected="true" aria-controls="mode-panel-vps"><span class="modeCardTitle">VMs</span><span class="modeCardSub">Bare metal + cloud VMs</span></button>
+        <button type="button" role="tab" id="mode-tab-docker" data-mode-id="docker" class="modeCard" aria-selected="false" aria-controls="mode-panel-docker"><span class="modeCardTitle">Docker hosts</span><span class="modeCardSub">Container servers</span></button>
+        <button type="button" role="tab" id="mode-tab-k8s" data-mode-id="k8s" class="modeCard" aria-selected="false" aria-controls="mode-panel-k8s"><span class="modeCardTitle">Kubernetes</span><span class="modeCardSub">Clusters</span></button>
+      </div>
+      <div class="modePlaybook">
+        <div class="modePlaybookPanel" data-mode-panel="vps" role="tabpanel" id="mode-panel-vps" aria-labelledby="mode-tab-vps">
+        <div class="modePlaybookHead">
+          <h3 class="modePlaybookTitle">Setup: VMs and bare metal</h3>
+        </div>
+        <p class="modePlaybookSummary">AlertMend agents watch your servers. OpenClaw asks AlertMend in plain language. No SSH keys on the chat gateway.</p>
+        <ul class="checkList"><li>Connect your VMs in AlertMend</li><li>Define what chat is allowed to do: status, logs, approved restarts</li><li>Wire OpenClaw to AlertMend, not to prod</li><li>Ask from Slack or Telegram; AlertMend executes</li></ul>
+        <div class="stepTip"><span>If OpenClaw can SSH to prod, you skipped the safety layer.</span></div>
+      </div>
+        <div class="modePlaybookPanel hidden" data-mode-panel="docker" role="tabpanel" id="mode-panel-docker" aria-labelledby="mode-tab-docker">
+        <div class="modePlaybookHead">
+          <h3 class="modePlaybookTitle">Setup: Docker hosts</h3>
+        </div>
+        <p class="modePlaybookSummary">Container hosts monitored by AlertMend. OpenClaw never gets docker.sock or shell on the gateway box.</p>
+        <ul class="checkList"><li>Register Docker hosts in AlertMend</li><li>Allowlist runbooks: list containers, restart named service</li><li>Keep OpenClaw on a separate small server with no prod access</li><li>Every action from chat is logged in AlertMend</li></ul>
+        <div class="stepTip"><span>Mounting docker.sock into OpenClaw is direct infra access. Do not.</span></div>
+      </div>
+        <div class="modePlaybookPanel hidden" data-mode-panel="k8s" role="tabpanel" id="mode-panel-k8s" aria-labelledby="mode-tab-k8s">
+        <div class="modePlaybookHead">
+          <h3 class="modePlaybookTitle">Setup: Kubernetes</h3>
+        </div>
+        <p class="modePlaybookSummary">AlertMend connects to your cluster. OpenClaw handles the conversation; AlertMend enforces what can run.</p>
+        <ul class="checkList"><li>Connect your cluster in AlertMend</li><li>Approve runbooks before chat can trigger them</li><li>No kubeconfig on the OpenClaw gateway</li><li>Incidents page in Slack; OpenClaw explains in the same thread</li></ul>
+        <div class="stepTip"><span>kubectl on the OpenClaw host is the anti-pattern. AlertMend holds cluster access.</span></div>
+      </div>
+      </div>
+
+      <h2 class="sectionHead">Three steps</h2>
+      <div class="amFlow">
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">1</span></div><h3 class="amStepTitle">Connect infra in AlertMend</h3><p class="amStepBody">VMs, Docker hosts, or Kubernetes. AlertMend is the only thing that touches prod.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">2</span></div><h3 class="amStepTitle">Wire OpenClaw to AlertMend</h3><p class="amStepBody">Chat gateway only. No prod credentials on that box.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">3</span></div><h3 class="amStepTitle">Ask from Slack or Telegram</h3><p class="amStepBody">Natural language in, controlled actions out.</p></div>
+      </div>
+
+      <h2 class="sectionHead">Why this is safe (and direct connection is not)</h2>
+      <div class="searchIssueGrid">
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">No direct path</h3><p class="searchIssueDesc">OpenClaw talks to AlertMend, not your servers</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">You define the boundary</h3><p class="searchIssueDesc">Approve runbooks before chat can trigger them</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Full audit trail</h3><p class="searchIssueDesc">Every action tied to who asked in chat</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Same thread</h3><p class="searchIssueDesc">AlertMend pages; OpenClaw explains</p></div>
+      </div>
+
+      <h2 class="sectionHead">FAQ</h2>
+      <p class="sectionSub">What you can do from chat, plus how to keep it safe.</p>
+      <div class="faqList">
+        <details class="faqItem" open><summary class="faqQuestion">Can I ask on Slack to restart my VM?</summary><div class="faqAnswer">Yes, if you approved a restart runbook in AlertMend first. Message OpenClaw in Slack or Telegram: &quot;restart prod-api-01&quot; or &quot;bounce the worker VM.&quot; AlertMend runs the allowlisted runbook, logs who asked, and OpenClaw confirms in the same thread.</div></details>
+        <details class="faqItem"><summary class="faqQuestion">Can I restart a pod from Telegram?</summary><div class="faqAnswer">Yes, when OpenClaw is wired to AlertMend and your Kubernetes cluster is connected. Ask in plain language: &quot;restart the payment-worker pod&quot; or &quot;rollout restart staging-api.&quot; AlertMend validates against your runbooks. No kubeconfig on the OpenClaw gateway.</div></details>
+        <details class="faqItem"><summary class="faqQuestion">Can I check prod health from my phone?</summary><div class="faqAnswer">That is the main use case. Ask &quot;is prod healthy?&quot; or &quot;which services are down?&quot; from Slack or Telegram. OpenClaw asks AlertMend. You get disk, memory, and incident context in plain English. No SSH, no VPN, no laptop.</div></details>
+        <details class="faqItem"><summary class="faqQuestion">What else can I ask from Slack or Telegram?</summary><div class="faqAnswer">Fleet health, disk pressure, crashing pods, error summaries, what broke last night, and approved fixes. If AlertMend monitors it and you allowlisted the runbook, you can ask about it in natural language.</div></details>
+        <details class="faqItem"><summary class="faqQuestion">Can I see disk usage or memory without SSH?</summary><div class="faqAnswer">Yes. Ask &quot;which hosts are running hot?&quot; or &quot;disk usage on worker-02.&quot; AlertMend agents report real prod metrics. OpenClaw summarizes in chat. Nothing runs on the OpenClaw gateway box except the conversation.</div></details>
+        <details class="faqItem"><summary class="faqQuestion">Can I get an incident summary in the same chat thread?</summary><div class="faqAnswer">Yes. Ask &quot;what happened last night?&quot; or &quot;why did we page at 2am?&quot; AlertMend pulls the incident timeline and remediation log. OpenClaw explains it in the same Slack or Telegram thread where you asked.</div></details>
+        <details class="faqItem"><summary class="faqQuestion">How do I connect OpenClaw to AlertMend?</summary><div class="faqAnswer">Connect VMs, Docker hosts, or Kubernetes in AlertMend first. Define allowlisted runbooks: restarts, health checks, log summaries. Point OpenClaw at AlertMend as its infra backend. Keep prod credentials in AlertMend only.</div></details>
+        <details class="faqItem"><summary class="faqQuestion">What is OpenClaw vs AlertMend?</summary><div class="faqAnswer">OpenClaw is the chat gateway (Slack, Telegram, Discord). AlertMend is the control plane: health checks, runbooks, remediation, audit log. OpenClaw talks. AlertMend touches infra. Together: chat ops without root on your phone.</div></details>
+        <details class="faqItem"><summary class="faqQuestion">Does OpenClaw work with VMs, Docker, and Kubernetes?</summary><div class="faqAnswer">OpenClaw is channel-agnostic. AlertMend connects to bare-metal VMs, cloud servers, Docker hosts, and Kubernetes clusters. Same chat flow for all of them. Ask on Slack or Telegram, AlertMend executes on the target you approved.</div></details>
+        <details class="faqItem"><summary class="faqQuestion">Does OpenClaw touch my infrastructure directly?</summary><div class="faqAnswer">No. OpenClaw connects to AlertMend for every infra request. AlertMend runs health checks, runbooks, and remediation on your VMs and clusters. The gateway never holds SSH keys or kubeconfig.</div></details>
+        <details class="faqItem"><summary class="faqQuestion">Why not wire OpenClaw directly to production?</summary><div class="faqAnswer">Because shell on the gateway means one bad prompt can delete a namespace from chat. AlertMend in the middle gives you allowlists, logging, and control, without giving Telegram root access to prod.</div></details>
+        <details class="faqItem"><summary class="faqQuestion">Is it safe to run fixes from chat?</summary><div class="faqAnswer">Safe when AlertMend is in the middle. Chat triggers only pre-approved runbooks: restart VM yes, delete namespace no. Every action is logged with who asked. Direct OpenClaw-to-prod wiring is not safe for production.</div></details>
+      </div>
+
+      <div class="ctaBand">
+        <div class="ctaBandTitle">Prod in your pocket. From the couch. On Slack or Telegram.</div>
+        <p class="ctaBandSub">Talk to an engineer. We'll wire OpenClaw to AlertMend so you can ask, fix, and sleep. All the fun of chat ops. None of the "oops I deleted prod" energy.</p>
+        <div class="ctaBtnRow">
+          <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=openclaw-cloud-infra-slack-telegram" class="ctaBtn" target="_blank" rel="noopener noreferrer">Talk to an expert →</a>
+        </div>
+      </div>
+    </div>
+
+    </article>
+
+    <div class="promo">
+      <p><strong>Related:</strong> <a href="/blog/vibe-coded-app-vm-observability">Vibe-Coded App Observability</a> · <a href="/blog/monitor-langfuse-using-alertmend">Monitor Langfuse in Production</a> · <a href="/case-studies">VM auto-remediation case study</a></p>
+    </div>
+      </div>
+
+
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <div class="sidebar-card">
+            <h3>Receive blog and product updates</h3>
+            <form class="signup-form" id="blog-signup-form" novalidate>
+              <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
+              <button type="submit">Sign up</button>
+              <p class="signup-status" id="blog-signup-status" hidden></p>
+            </form>
+          </div>
+
+          
+          <div class="sidebar-card">
+            <h3 class="related-content-title">Related content</h3>
+            <ul class="related-posts-list">
+              <li><a href="/blog/vibe-coded-app-vm-observability" class="related-post-link">Vibe-Coded App: What About Observability?</a></li>
+              <li><a href="/blog/24x7-network-monitoring" class="related-post-link">24x7 network monitoring Guide Guide</a></li>
+              <li><a href="/blog/alarm-com-monitoring-cost" class="related-post-link">alarm com monitoring cost Guide</a></li>
+              <li><a href="/blog/monitor-langfuse-using-alertmend" class="related-post-link">How to Monitor Langfuse in Production</a></li>
+              <li><a href="/blog/monitor-milvus-using-alertmend" class="related-post-link">Milvus Observability: Monitor &amp; Recover</a></li>
+              <li><a href="/blog/monitor-docling-using-alertmend" class="related-post-link">Docling Observability: Monitor &amp; Recover</a></li>
+              <li><a href="/blog/503-no-healthy-upstream" class="related-post-link">503 No Healthy Upstream Error Guide</a></li>
+              <li><a href="/blog/achieving-enterprise-readiness-with-kubernetes-in-2025" class="related-post-link">Achieving Enterprise Readiness With</a></li>
+              <li><a href="/blog/addressing-kubernetes-overhead-is-it-still-the-right-choice-for-your-infrastructure" class="related-post-link">Addressing Kubernetes Overhead</a></li>
+              <li><a href="/blog/advanced-kubernetes-health-checks-ai" class="related-post-link">Advanced Kubernetes Health Checks AI</a></li>
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View all posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          
+
+          <div class="sidebar-card">
+            <h3 class="related-content-title">Explore AlertMend</h3>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>window.__CHAT_CAPABILITIES__ = [{"id":"health","label":"Fleet health","prompt":"hey, is prod healthy?","app":"Slack","backstage":["You message OpenClaw","AlertMend checks 4 services","Metrics + incidents pulled","Plain-English reply in chat"],"messages":[{"role":"user","text":"hey, is prod healthy?"},{"role":"bot","text":"All 4 services green. Disk at 62%. No open incidents."},{"role":"user","text":"anything weird on api-01?"},{"role":"bot","text":"Memory up 12% since yesterday, still within limits. Want me to flag it?"}]},{"id":"disk","label":"Disk & memory","prompt":"which hosts are running hot?","app":"Telegram","backstage":["Question from your phone","AlertMend host agents respond","Compare CPU, RAM, disk","Ranked summary in Telegram"],"messages":[{"role":"user","text":"which hosts are running hot?"},{"role":"bot","text":"worker-02: disk 89% (watch). api-01: memory 78%. Everything else normal."},{"role":"user","text":"should I worry about worker-02?"},{"role":"bot","text":"Log rotation runbook ran at 2am last week. Trend is flat. I will alert if it crosses 92%."}]},{"id":"k8s","label":"Kubernetes pods","prompt":"any crashing pods in prod?","app":"Slack","backstage":["Slack message received","AlertMend queries cluster","Pod events + restarts scanned","Summary in chat, no shell on gateway"],"messages":[{"role":"user","text":"any crashing pods in prod?"},{"role":"bot","text":"2 restarts on payment-worker in the last hour. Main API stable. Ingress healthy."},{"role":"user","text":"show me the last error"},{"role":"bot","text":"OOMKilled at 14:02, memory limit 512Mi. AlertMend already flagged it. Bump limit or scale?"}]},{"id":"incident","label":"What broke?","prompt":"what happened last night?","app":"Telegram","backstage":["You ask from bed","AlertMend incident timeline","Auto-remediation log included","You did not need to wake up"],"messages":[{"role":"user","text":"what happened last night?"},{"role":"bot","text":"One incident: disk pressure on worker-02 at 2:14am. Logs auto-rotated. Resolved in 4 min."},{"role":"user","text":"did I need to wake up?"},{"role":"bot","text":"Nope. Runbook handled it. You slept. Prod did not."}]},{"id":"restart","label":"Restart service","prompt":"restart staging-api, memory looks high","app":"Slack","backstage":["Restart requested in chat","AlertMend validates allowlist","Approved runbook executes","Logged with your name"],"messages":[{"role":"user","text":"restart staging-api, memory looks high"},{"role":"bot","text":"Runbook approved","action":"Restart staging-api"},{"role":"bot","text":"Done. Back in 18s. Logged in AlertMend. Watching for 5 min."},{"role":"user","text":"perfect, thanks"}]},{"id":"logs","label":"Error summary","prompt":"summarize errors in the last hour","app":"Telegram","backstage":["Natural-language ask","AlertMend log aggregation","Top errors clustered","Readable digest in chat"],"messages":[{"role":"user","text":"summarize errors in the last hour"},{"role":"bot","text":"12 errors total. Top: connection timeout to Redis (8×), usually on checkout. One 503 spike at 13:40, already cleared."},{"role":"user","text":"is redis down?"},{"role":"bot","text":"Nah, latency spike only. Redis healthy now. Want me to open an incident if it happens again?"}]}];</script>
+  <script>window.__OPENCLAW_ASSETS__ = "/assets/openclaw-cloud-infra-slack-telegram";</script>
+  <script src="/assets/openclaw-cloud-infra-slack-telegram/script.js" defer></script>
+</body>
+</html>

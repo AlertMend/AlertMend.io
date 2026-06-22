@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Infrastructure">
+  <rect width="32" height="32" rx="8" fill="#ECFDF5"/>
+  <rect x="6" y="8" width="20" height="5.5" rx="1.5" fill="#059669"/>
+  <rect x="6" y="15.5" width="20" height="5.5" rx="1.5" fill="#10B981"/>
+  <rect x="6" y="23" width="20" height="3.5" rx="1.2" fill="#34D399"/>
+  <circle cx="9.5" cy="10.75" r=".9" fill="#fff"/>
+  <circle cx="9.5" cy="18.25" r=".9" fill="#fff"/>
+  <rect x="12" y="10" width="10" height="1.5" rx=".75" fill="#A7F3D0"/>
+  <rect x="12" y="17.5" width="8" height="1.5" rx=".75" fill="#A7F3D0"/>
+</svg>

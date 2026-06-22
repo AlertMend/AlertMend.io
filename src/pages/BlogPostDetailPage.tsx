@@ -56,6 +56,11 @@ export default function BlogPostDetailPage() {
         cleanSlug = cleanSlug.toLowerCase().replace(/_/g, '-')
       }
       
+      if (isStaticBlog(cleanSlug)) {
+        window.location.replace(`/blog/${cleanSlug}`)
+        return
+      }
+
       getBlogPost(cleanSlug).then((data) => {
         setPost(data)
         setLoading(false)
