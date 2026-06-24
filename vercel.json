@@ -25,6 +25,10 @@
       "destination": "/blog/monitor-milvus-using-alertmend/index.html"
     },
     {
+      "source": "/blog/monitor-ollama-using-alertmend",
+      "destination": "/blog/monitor-ollama-using-alertmend/index.html"
+    },
+    {
       "source": "/blog/openclaw-cloud-infra-slack-telegram",
       "destination": "/blog/openclaw-cloud-infra-slack-telegram/index.html"
     },

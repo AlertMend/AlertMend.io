@@ -77,6 +77,13 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Blog Post: monitor-ollama-using-alertmend -->
+  <url>
+    <loc>https://www.alertmend.io/blog/monitor-ollama-using-alertmend</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- Blog Post: url-monitoring-automated-fixes -->
   <url>
     <loc>https://www.alertmend.io/blog/url-monitoring-automated-fixes</loc>
