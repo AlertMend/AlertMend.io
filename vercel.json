@@ -29,6 +29,10 @@
       "destination": "/blog/openclaw-cloud-infra-slack-telegram/index.html"
     },
     {
+      "source": "/blog/url-monitoring-automated-fixes",
+      "destination": "/blog/url-monitoring-automated-fixes/index.html"
+    },
+    {
       "source": "/blog/vibe-coded-app-vm-observability",
       "destination": "/blog/vibe-coded-app-vm-observability/index.html"
     },

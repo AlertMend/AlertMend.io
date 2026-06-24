@@ -1,5 +1,21 @@
 [
   {
+    "slug": "url-monitoring-automated-fixes",
+    "title": "URL Monitoring: Detect Problems and Automate Simple Fixes",
+    "excerpt": "URL monitoring playbook: six-layer checks, /livez vs /readyz architecture, threshold engineering, kubectl fixes for 5xx errors, and AlertMend auto-remediation with verification before paging.",
+    "date": "2026-06-23",
+    "category": "URL Monitoring",
+    "author": "AlertMend Team",
+    "tags": [
+      "URL Monitoring",
+      "Auto-Remediation",
+      "Uptime",
+      "Kubernetes",
+      "AIOps"
+    ],
+    "keywords": "url monitoring, url monitor, url health check, api health check, automated url monitoring, uptime monitoring, auto remediation, liveness probe, readiness probe, healthz, AlertMend AI, AIOps, DevOps, Kubernetes"
+  },
+  {
     "slug": "openclaw-cloud-infra-slack-telegram",
     "title": "OpenClaw: Infra from Slack & Telegram",
     "excerpt": "Connect OpenClaw to AlertMend for infra ops from Slack or Telegram. The agent never touches your servers directly. Only approved AlertMend runbooks run.",
