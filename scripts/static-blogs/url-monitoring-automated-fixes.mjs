@@ -20,10 +20,10 @@ export async function build(slug) {
   const heroImage = `${assetsBase}/url-monitor-hero.svg`
 
   const meta = parseFrontmatter(slug)
-  const title = meta.title || 'URL Monitoring: Detect Problems and Automate Simple Fixes'
+  const title = meta.title || 'URL Monitoring: Detect and Auto-Fix'
   const excerpt =
     meta.excerpt ||
-    'URL monitoring playbook: six-layer checks, /livez vs /readyz architecture, threshold engineering, kubectl fixes for 5xx errors, and AlertMend auto-remediation with verification before paging.'
+    'Six-layer URL monitoring, healthz probes, threshold engineering, 5xx kubectl fixes, and AlertMend auto-remediation with verify-before-page.'
   const date = meta.date || '2026-06-23'
   const category = meta.category || 'URL Monitoring'
   const author = meta.author || 'AlertMend Team'

@@ -1,8 +1,8 @@
 [
   {
     "slug": "url-monitoring-automated-fixes",
-    "title": "URL Monitoring: Detect Problems and Automate Simple Fixes",
-    "excerpt": "URL monitoring playbook: six-layer checks, /livez vs /readyz architecture, threshold engineering, kubectl fixes for 5xx errors, and AlertMend auto-remediation with verification before paging.",
+    "title": "URL Monitoring: Detect and Auto-Fix",
+    "excerpt": "Six-layer URL monitoring, healthz probes, threshold engineering, 5xx kubectl fixes, and AlertMend auto-remediation with verify-before-page.",
     "date": "2026-06-23",
     "category": "URL Monitoring",
     "author": "AlertMend Team",
