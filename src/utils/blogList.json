@@ -1,7 +1,7 @@
 [
   {
     "slug": "kubernetes-crashloopbackoff-fix",
-    "title": "CrashLoopBackOff in Kubernetes: Diagnose, Fix, and Prevent",
+    "title": "Kubernetes CrashLoopBackOff: Fix Guide",
     "excerpt": "CrashLoopBackOff fix: answer in the last terminated container, not the current one. Five-step workflow, annotated kubectl output, failure-mode playbooks.",
     "date": "2026-06-24",
     "category": "Kubernetes",
@@ -16,8 +16,8 @@
   },
   {
     "slug": "kubernetes-imagepullbackoff-fix",
-    "title": "ImagePullBackOff in Kubernetes: Diagnose, Fix, and Prevent",
-    "excerpt": "ImagePullBackOff fix for every registry: ECR, GCR, Docker Hub. Step-by-step diagnosis with kubectl describe, copy-paste fixes for auth errors, tag typos, rate limits, and the 90-day secret expiry most teams miss.",
+    "title": "Kubernetes ImagePullBackOff: Fix Guide",
+    "excerpt": "ImagePullBackOff fix for ECR, GCR, and Docker Hub: kubectl describe steps, copy-paste auth and tag fixes, rate limits, and the 90-day secret expiry trap.",
     "date": "2026-06-24",
     "category": "Kubernetes",
     "author": "Himanshu Bansal",
@@ -32,7 +32,7 @@
   {
     "slug": "monitor-litellm-using-alertmend",
     "title": "How to Monitor LiteLLM in Production",
-    "excerpt": "LiteLLM /health/liveliness passes while every request fails. Production runbook: 5 endpoints to probe, two-layer restart order, threshold formulas, and automation safety matrix for gateway + backend monitoring.",
+    "excerpt": "LiteLLM /health/liveliness passes while requests fail. Five endpoints to probe, two-layer restart order, threshold formulas, and automation safety matrix.",
     "date": "2026-06-24",
     "category": "AIOps",
     "author": "AlertMend Team",
@@ -48,7 +48,7 @@
   {
     "slug": "monitor-ollama-using-alertmend",
     "title": "How to Monitor Ollama in Production",
-    "excerpt": "Five Ollama health endpoints most teams miss, copy-paste Kubernetes probe YAML, the threshold formula that stops false pages during cold starts, and a safe-to-automate matrix for OOMKilled and CrashLoopBackOff.",
+    "excerpt": "Five Ollama health endpoints most teams miss, K8s probe YAML, threshold formula for cold starts, and safe-to-automate matrix for OOMKilled and CrashLoopBackOff.",
     "date": "2026-06-24",
     "category": "AIOps",
     "author": "AlertMend Team",
@@ -63,7 +63,7 @@
   },
   {
     "slug": "monitor-open-webui-using-alertmend",
-    "title": "How to Monitor Open WebUI + Ollama in Production",
+    "title": "Monitor Open WebUI + Ollama in Production",
     "excerpt": "Open WebUI /health returns 200 while Ollama is down — the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.",
     "date": "2026-06-24",
     "category": "AIOps",
@@ -80,7 +80,7 @@
   {
     "slug": "monitor-vllm-using-alertmend",
     "title": "How to Monitor vLLM in Production",
-    "excerpt": "vLLM /health returns 200 while your chat API returns 503. Four-layer probe strategy, copy-paste Kubernetes YAML, and the threshold formula that stops silent inference outages.",
+    "excerpt": "vLLM /health returns 200 while your chat API returns 503. Four-layer probes, copy-paste Kubernetes YAML, and the threshold formula that stops silent outages.",
     "date": "2026-06-24",
     "category": "AIOps",
     "author": "Arvind Rajpurohit",

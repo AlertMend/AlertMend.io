@@ -42,7 +42,7 @@ export async function build(slug) {
   const hookTitle = 'LiteLLM Passed Liveness. Every Request Still Failed.'
   const excerpt =
     meta.excerpt ||
-    'LiteLLM /health/liveliness passes while every request fails. Production runbook: 5 endpoints to probe, two-layer restart order, threshold formulas, and automation safety matrix for gateway + backend monitoring.'
+    'LiteLLM /health/liveliness passes while requests fail. Five endpoints to probe, two-layer restart order, threshold formulas, and automation safety matrix.'
   const ogDescription =
     'Production runbook: the 5 health endpoints to probe, the two-layer restart order, and the threshold formula that prevents false pages during model load.'
   const date = meta.date || '2026-06-24'

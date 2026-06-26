@@ -57,7 +57,7 @@ export async function build(slug) {
   const heroImage = `${assetsBase}/open-webui-hero.svg`
 
   const meta = parseFrontmatter(slug)
-  const title = meta.title || 'How to Monitor Open WebUI + Ollama in Production'
+  const title = meta.title || 'Monitor Open WebUI + Ollama in Production'
   const excerpt =
     meta.excerpt ||
     'Open WebUI /health returns 200 while Ollama is down — the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.'

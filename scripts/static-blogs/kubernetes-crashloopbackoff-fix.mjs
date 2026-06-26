@@ -73,7 +73,7 @@ export async function build(slug) {
   const heroImage = `${assetsBase}/crashloop-hero.svg`
 
   const meta = parseFrontmatter(slug)
-  const title = meta.title || 'CrashLoopBackOff in Kubernetes: Diagnose, Fix, and Prevent'
+  const title = meta.title || 'Kubernetes CrashLoopBackOff: Fix Guide'
   const excerpt = meta.excerpt || DEFAULT_EXCERPT
   const date = meta.date || '2026-06-24'
   const category = meta.category || 'Kubernetes'

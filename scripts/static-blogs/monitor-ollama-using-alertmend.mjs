@@ -38,7 +38,7 @@ export async function build(slug) {
   const title = meta.title || 'How to Monitor Ollama in Production'
   const excerpt =
     meta.excerpt ||
-    'Five Ollama health endpoints most teams miss, copy-paste Kubernetes probe YAML, the threshold formula that stops false pages during cold starts, and a safe-to-automate matrix for OOMKilled and CrashLoopBackOff.'
+    'Five Ollama health endpoints most teams miss, K8s probe YAML, threshold formula for cold starts, and safe-to-automate matrix for OOMKilled and CrashLoopBackOff.'
   const date = meta.date || '2026-06-24'
   const category = meta.category || 'AIOps'
   const author = meta.author || 'AlertMend Team'

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CrashLoopBackOff in Kubernetes: Diagnose, Fix, and Prevent | AlertMend AI</title>
+  <title>Kubernetes CrashLoopBackOff: Fix Guide | AlertMend AI</title>
   <meta name="description" content="CrashLoopBackOff fix: answer in the last terminated container, not the current one. Five-step workflow, annotated kubectl output, failure-mode playbooks.">
   <meta name="keywords" content="crashloopbackoff kubernetes fix, kubernetes crashloopbackoff, crash loop back off, kubectl crashloopbackoff, pod crashloopbackoff fix, kubernetes pod restarting">
   <meta name="author" content="Himanshu Bansal">
@@ -12,14 +12,14 @@
   <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.alertmend.io/blog/kubernetes-crashloopbackoff-fix">
-  <meta property="og:title" content="CrashLoopBackOff in Kubernetes: Diagnose, Fix, and Prevent">
+  <meta property="og:title" content="Kubernetes CrashLoopBackOff: Fix Guide">
   <meta property="og:description" content="CrashLoopBackOff fix: answer in the last terminated container, not the current one. Five-step workflow, annotated kubectl output, failure-mode playbooks.">
   <meta property="og:image" content="https://www.alertmend.io/assets/kubernetes-crashloopbackoff-fix/crashloop-hero.svg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CrashLoopBackOff in Kubernetes: Diagnose, Fix, and Prevent">
+  <meta name="twitter:title" content="Kubernetes CrashLoopBackOff: Fix Guide">
   <meta name="twitter:description" content="CrashLoopBackOff fix: answer in the last terminated container, not the current one. Five-step workflow, annotated kubectl output, failure-mode playbooks.">
   <meta name="twitter:image" content="https://www.alertmend.io/assets/kubernetes-crashloopbackoff-fix/crashloop-hero.svg">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"CrashLoopBackOff in Kubernetes: Diagnose, Fix, and Prevent","description":"CrashLoopBackOff fix: answer in the last terminated container, not the current one. Five-step workflow, annotated kubectl output, failure-mode playbooks.","image":"https://www.alertmend.io/assets/kubernetes-crashloopbackoff-fix/crashloop-hero.svg","datePublished":"2026-06-24","dateModified":"2026-06-24","author":{"@type":"Person","name":"Himanshu Bansal"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/kubernetes-crashloopbackoff-fix"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Kubernetes CrashLoopBackOff: Fix Guide","description":"CrashLoopBackOff fix: answer in the last terminated container, not the current one. Five-step workflow, annotated kubectl output, failure-mode playbooks.","image":"https://www.alertmend.io/assets/kubernetes-crashloopbackoff-fix/crashloop-hero.svg","datePublished":"2026-06-24","dateModified":"2026-06-24","author":{"@type":"Person","name":"Himanshu Bansal"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/kubernetes-crashloopbackoff-fix"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is CrashLoopBackOff in Kubernetes?","acceptedAnswer":{"@type":"Answer","text":"CrashLoopBackOff means a container keeps exiting and Kubernetes is waiting longer between restart attempts (exponential backoff: 10s, 20s, 40s, up to 5 minutes). Fix the root cause in logs --previous, not by deleting the pod repeatedly."}},{"@type":"Question","name":"How do I fix CrashLoopBackOff?","acceptedAnswer":{"@type":"Answer","text":"Run kubectl describe pod and kubectl logs <pod> --previous. Fix the error shown (probe, OOM, missing env, bad image). If it started after a deploy, try kubectl rollout undo."}},{"@type":"Question","name":"Why is kubectl logs empty during CrashLoopBackOff?","acceptedAnswer":{"@type":"Answer","text":"The current container may have died before writing logs. Use kubectl logs <pod> --previous to read the last crashed instance."}},{"@type":"Question","name":"CrashLoopBackOff vs ImagePullBackOff?","acceptedAnswer":{"@type":"Answer","text":"ImagePullBackOff means Kubernetes cannot pull the container image. CrashLoopBackOff means the image pulled but the container process exits repeatedly."}},{"@type":"Question","name":"Should I delete the pod to fix CrashLoopBackOff?","acceptedAnswer":{"@type":"Answer","text":"Deleting forces an immediate restart but does not fix config errors, OOM, or bad probes. Diagnose first. Delete only after fixing root cause or when wedged in long backoff."}},{"@type":"Question","name":"How do I know if a liveness probe caused the crash?","acceptedAnswer":{"@type":"Answer","text":"kubectl describe pod shows Liveness probe failed in Events. The container restarts even though the app might have recovered if given more startup time."}},{"@type":"Question","name":"How do I prevent CrashLoopBackOff on deploy?","acceptedAnswer":{"@type":"Answer","text":"Use startupProbe for slow-start apps, set realistic memory limits, validate Secrets in CI, and add deploy grace on probes so liveness does not kill pods during migrations."}},{"@type":"Question","name":"CrashLoopBackOff on GPU / LLM pods?","acceptedAnswer":{"@type":"Answer","text":"Model load can take 2–5 minutes. Without startupProbe grace, liveness kills the container during weight load. See our Ollama and vLLM monitoring runbooks for probe patterns on inference workloads."}}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to fix CrashLoopBackOff in Kubernetes","description":"CrashLoopBackOff fix: answer in the last terminated container, not the current one. Five-step workflow, annotated kubectl output, failure-mode playbooks.","totalTime":"PT10M","tool":[{"@type":"HowToTool","name":"kubectl"}],"step":[{"@type":"HowToStep","position":1,"name":"Find crashing pods","text":"kubectl get pods -o wide — confirm CrashLoopBackOff status and restart count"},{"@type":"HowToStep","position":2,"name":"Read pod Events","text":"kubectl describe pod — scroll to Events for probe, OOM, or config errors"},{"@type":"HowToStep","position":3,"name":"Get logs from the last crash","text":"kubectl logs <pod> --previous — read the last terminated container"},{"@type":"HowToStep","position":4,"name":"Check deploy timeline","text":"kubectl get events --sort-by=.lastTimestamp — correlate crash with rollout"},{"@type":"HowToStep","position":5,"name":"Fix root cause, then verify","text":"Restart count should stop climbing for 2+ minutes before closing the incident"}]}</script>
   <link rel="stylesheet" href="/assets/kubernetes-crashloopbackoff-fix/styles.css">
@@ -107,7 +107,7 @@
       <div class="main-col">
 
     <header class="article-header">
-      <h1>CrashLoopBackOff in Kubernetes: Diagnose, Fix, and Prevent</h1>
+      <h1>Kubernetes CrashLoopBackOff: Fix Guide</h1>
       <div class="author-info">
         <div class="author-avatar">H</div>
         <div>
@@ -643,12 +643,12 @@ kubectl rollout status deployment/&lt;name> -n &lt;namespace></code></pre>
           <div class="sidebar-card">
             <div class="related-content-title">Related content</div>
             <ul class="related-posts-list">
-              <li><a href="/blog/kubernetes-imagepullbackoff-fix" class="related-post-link">ImagePullBackOff in Kubernetes: Diagnose, Fix, and Prevent</a></li>
+              <li><a href="/blog/kubernetes-imagepullbackoff-fix" class="related-post-link">Kubernetes ImagePullBackOff: Fix Guide</a></li>
               <li><a href="/blog/503-no-healthy-upstream" class="related-post-link">503 No Healthy Upstream Error Guide</a></li>
               <li><a href="/blog/achieving-enterprise-readiness-with-kubernetes-in-2025" class="related-post-link">Achieving Enterprise Readiness With</a></li>
               <li><a href="/blog/monitor-litellm-using-alertmend" class="related-post-link">How to Monitor LiteLLM in Production</a></li>
               <li><a href="/blog/monitor-ollama-using-alertmend" class="related-post-link">How to Monitor Ollama in Production</a></li>
-              <li><a href="/blog/monitor-open-webui-using-alertmend" class="related-post-link">How to Monitor Open WebUI + Ollama in Production</a></li>
+              <li><a href="/blog/monitor-open-webui-using-alertmend" class="related-post-link">Monitor Open WebUI + Ollama in Production</a></li>
               <li><a href="/blog/monitor-vllm-using-alertmend" class="related-post-link">How to Monitor vLLM in Production</a></li>
               <li><a href="/blog/url-monitoring-automated-fixes" class="related-post-link">URL Monitoring: Detect and Auto-Fix</a></li>
               <li><a href="/blog/openclaw-cloud-infra-slack-telegram" class="related-post-link">OpenClaw: Infra from Slack &amp; Telegram</a></li>

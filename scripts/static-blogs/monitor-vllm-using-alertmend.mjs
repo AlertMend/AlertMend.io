@@ -85,7 +85,7 @@ export async function build(slug) {
   const title = meta.title || 'How to Monitor vLLM in Production'
   const excerpt =
     meta.excerpt ||
-    'vLLM /health returns 200 while your chat API returns 503. Four-layer probe strategy, copy-paste Kubernetes YAML, and the threshold formula that stops silent inference outages.'
+    'vLLM /health returns 200 while your chat API returns 503. Four-layer probes, copy-paste Kubernetes YAML, and the threshold formula that stops silent outages.'
   const ogDescription = excerpt
   const date = meta.date || '2026-06-24'
   const category = meta.category || 'AIOps'

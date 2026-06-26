@@ -36,10 +36,10 @@ export async function build(slug) {
   const flowImage = `${assetsBase}/imagepull-state-flow.svg`
 
   const meta = parseFrontmatter(slug)
-  const title = meta.title || 'ImagePullBackOff in Kubernetes: Diagnose, Fix, and Prevent'
+  const title = meta.title || 'Kubernetes ImagePullBackOff: Fix Guide'
   const excerpt =
     meta.excerpt ||
-    'ImagePullBackOff fix for every registry: ECR, GCR, Docker Hub. Step-by-step diagnosis with kubectl describe, copy-paste fixes for auth errors, tag typos, rate limits, and the 90-day secret expiry most teams miss.'
+    'ImagePullBackOff fix for ECR, GCR, and Docker Hub: kubectl describe steps, copy-paste auth and tag fixes, rate limits, and the 90-day secret expiry trap.'
   const date = meta.date || '2026-06-24'
   const category = meta.category || 'Kubernetes'
   const author = meta.author || 'Himanshu Bansal'
