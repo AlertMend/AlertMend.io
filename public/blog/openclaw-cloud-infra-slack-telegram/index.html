@@ -53,7 +53,7 @@
     @media (min-width: 1024px) { .sidebar { display: block; } }
     .sidebar-content { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
     .sidebar-card { background: #fafafa; border-radius: 8px; padding: 24px; border: 1px solid #e4e4e7; }
-    .sidebar-card h3 { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
+    .sidebar-card-title { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
     .signup-form { display: flex; flex-direction: column; gap: 12px; }
     .signup-form input { width: 100%; padding: 10px 16px; border-radius: 6px; border: 1px solid #d4d4d8; font-size: 1rem; background: #fff; color: #09090b; }
     .signup-form input:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2); }
@@ -453,7 +453,7 @@
       <aside class="sidebar">
         <div class="sidebar-content">
           <div class="sidebar-card">
-            <h3>Receive blog and product updates</h3>
+            <div class="sidebar-card-title">Receive blog and product updates</div>
             <form class="signup-form" id="blog-signup-form" novalidate>
               <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
               <button type="submit">Sign up</button>
@@ -463,18 +463,18 @@
 
           
           <div class="sidebar-card">
-            <h3 class="related-content-title">Related content</h3>
+            <div class="related-content-title">Related content</div>
             <ul class="related-posts-list">
               <li><a href="/blog/vibe-coded-app-vm-observability" class="related-post-link">Vibe-Coded App: What About Observability?</a></li>
-              <li><a href="/blog/24x7-network-monitoring" class="related-post-link">24x7 network monitoring Guide Guide</a></li>
+              <li><a href="/blog/24x7-network-monitoring" class="related-post-link">24x7 Network Monitoring Guide</a></li>
               <li><a href="/blog/alarm-com-monitoring-cost" class="related-post-link">alarm com monitoring cost Guide</a></li>
+              <li><a href="/blog/kubernetes-crashloopbackoff-fix" class="related-post-link">Kubernetes CrashLoopBackOff: Fix Guide</a></li>
+              <li><a href="/blog/kubernetes-imagepullbackoff-fix" class="related-post-link">Kubernetes ImagePullBackOff: Fix Guide</a></li>
+              <li><a href="/blog/monitor-litellm-using-alertmend" class="related-post-link">How to Monitor LiteLLM in Production</a></li>
               <li><a href="/blog/monitor-ollama-using-alertmend" class="related-post-link">How to Monitor Ollama in Production</a></li>
+              <li><a href="/blog/monitor-open-webui-using-alertmend" class="related-post-link">Monitor Open WebUI + Ollama in Production</a></li>
+              <li><a href="/blog/monitor-vllm-using-alertmend" class="related-post-link">How to Monitor vLLM in Production</a></li>
               <li><a href="/blog/url-monitoring-automated-fixes" class="related-post-link">URL Monitoring: Detect and Auto-Fix</a></li>
-              <li><a href="/blog/monitor-langfuse-using-alertmend" class="related-post-link">How to Monitor Langfuse in Production</a></li>
-              <li><a href="/blog/monitor-milvus-using-alertmend" class="related-post-link">Milvus Observability: Monitor &amp; Recover</a></li>
-              <li><a href="/blog/monitor-docling-using-alertmend" class="related-post-link">Docling Observability: Monitor &amp; Recover</a></li>
-              <li><a href="/blog/503-no-healthy-upstream" class="related-post-link">503 No Healthy Upstream Error Guide</a></li>
-              <li><a href="/blog/achieving-enterprise-readiness-with-kubernetes-in-2025" class="related-post-link">Achieving Enterprise Readiness With</a></li>
             </ul>
             <a href="/blog" class="view-more-link">
               View all posts
@@ -484,7 +484,7 @@
           
 
           <div class="sidebar-card">
-            <h3 class="related-content-title">Explore AlertMend</h3>
+            <div class="related-content-title">Explore AlertMend</div>
             <ul class="related-posts-list">
               <li><a href="/" class="related-post-link">Home</a></li>
               <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>

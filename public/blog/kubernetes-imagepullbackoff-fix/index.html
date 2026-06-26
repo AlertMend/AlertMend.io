@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kubernetes ImagePullBackOff: Fix Guide | AlertMend AI</title>
+  <meta name="description" content="ImagePullBackOff fix for ECR, GCR, and Docker Hub: kubectl describe steps, copy-paste auth and tag fixes, rate limits, and the 90-day secret expiry trap.">
+  <meta name="keywords" content="imagepullbackoff kubernetes fix, errimagepull, kubernetes imagepullbackoff, image pull secret kubernetes, failed to pull image, ecr imagepullbackoff, docker hub rate limit kubernetes">
+  <meta name="author" content="Himanshu Bansal">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://www.alertmend.io/blog/kubernetes-imagepullbackoff-fix">
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.alertmend.io/blog/kubernetes-imagepullbackoff-fix">
+  <meta property="og:title" content="Kubernetes ImagePullBackOff: Fix Guide">
+  <meta property="og:description" content="ImagePullBackOff fix for ECR, GCR, and Docker Hub: kubectl describe steps, copy-paste auth and tag fixes, rate limits, and the 90-day secret expiry trap.">
+  <meta property="og:image" content="https://www.alertmend.io/assets/kubernetes-imagepullbackoff-fix/imagepull-hero.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Kubernetes ImagePullBackOff: Fix Guide">
+  <meta name="twitter:description" content="ImagePullBackOff fix for ECR, GCR, and Docker Hub: kubectl describe steps, copy-paste auth and tag fixes, rate limits, and the 90-day secret expiry trap.">
+  <meta name="twitter:image" content="https://www.alertmend.io/assets/kubernetes-imagepullbackoff-fix/imagepull-hero.svg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Kubernetes ImagePullBackOff: Fix Guide","description":"ImagePullBackOff fix for ECR, GCR, and Docker Hub: kubectl describe steps, copy-paste auth and tag fixes, rate limits, and the 90-day secret expiry trap.","image":"https://www.alertmend.io/assets/kubernetes-imagepullbackoff-fix/imagepull-hero.svg","datePublished":"2026-06-24","dateModified":"2026-06-24","author":{"@type":"Person","name":"Himanshu Bansal"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/kubernetes-imagepullbackoff-fix"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is ImagePullBackOff in Kubernetes?","acceptedAnswer":{"@type":"Answer","text":"ImagePullBackOff means Kubernetes failed to pull your container image and is waiting between retries with exponential backoff (10s, 20s, 40s, up to 5 minutes). Run kubectl describe pod and read the Events section. The fix is always in the pull error message: unauthorized, manifest unknown, or rate limit exceeded."}},{"@type":"Question","name":"What is the difference between ErrImagePull and ImagePullBackOff?","acceptedAnswer":{"@type":"Answer","text":"ErrImagePull is the immediate pull failure event. ImagePullBackOff is the waiting state kubelet enters after repeated ErrImagePull events. It backs off before trying again. Fix the underlying pull error; do not just delete the pod hoping backoff will help."}},{"@type":"Question","name":"How do I fix ImagePullBackOff?","acceptedAnswer":{"@type":"Answer","text":"Run kubectl describe pod <name> -n <namespace> and read Events. For unauthorized: create or refresh imagePullSecrets. For manifest unknown: fix the image: tag in your Deployment. For rate limits: add an authenticated Docker Hub secret or mirror to a private registry. Then kubectl rollout restart deployment/<name> or wait for the next retry."}},{"@type":"Question","name":"How do I create an image pull secret for Kubernetes?","acceptedAnswer":{"@type":"Answer","text":"kubectl create secret docker-registry regcred --docker-server=<registry-host> --docker-username=<user> --docker-password=<password> -n <namespace>. Add imagePullSecrets: [{name: regcred}] to your pod spec or patch the default ServiceAccount so all pods in the namespace inherit it."}},{"@type":"Question","name":"Why does ImagePullBackOff happen after months of working?","acceptedAnswer":{"@type":"Answer","text":"Common causes: expired ECR/GCR token in a manually created pull secret, deleted image tag in the registry, rotated CI credentials that were not updated in the cluster, or Docker Hub rate limits after node scale-up. Check describe Events for the exact message."}},{"@type":"Question","name":"ImagePullBackOff vs CrashLoopBackOff?","acceptedAnswer":{"@type":"Answer","text":"ImagePullBackOff: the container image never started, kubelet cannot pull the image. CrashLoopBackOff: the image pulled successfully but the container process keeps exiting. Different root causes, different fixes."}},{"@type":"Question","name":"How do I fix ImagePullBackOff on AWS ECR?","acceptedAnswer":{"@type":"Answer","text":"Refresh the pull secret with aws ecr get-login-password, or prefer EKS IRSA: attach AmazonEC2ContainerRegistryReadOnly to the pod ServiceAccount so nodes pull without a long-lived secret. Image format: ACCOUNT.dkr.ecr.REGION.amazonaws.com/repo:tag."}},{"@type":"Question","name":"How do I prevent ImagePullBackOff?","acceptedAnswer":{"@type":"Answer","text":"Pin image digests or immutable tags in CI, use IRSA or Workload Identity instead of manual pull secrets, mirror Docker Hub images to a private registry, and validate image references in CI before kubectl apply."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Fix Kubernetes ImagePullBackOff","description":"ImagePullBackOff fix for ECR, GCR, and Docker Hub: kubectl describe steps, copy-paste auth and tag fixes, rate limits, and the 90-day secret expiry trap.","step":[{"@type":"HowToStep","position":1,"name":"kubectl get pods","text":"Find ImagePullBackOff or ErrImagePull. Note namespace and pod name."},{"@type":"HowToStep","position":2,"name":"kubectl describe pod <name>","text":"Read Events. Match the message to a failure mode below."},{"@type":"HowToStep","position":3,"name":"Verify image reference","text":"Compare manifest image: tag with what exists in the registry."},{"@type":"HowToStep","position":4,"name":"Check imagePullSecrets","text":"Secret must exist in the same namespace as the pod."},{"@type":"HowToStep","position":5,"name":"Fix and watch","text":"Pod should reach Running after a successful pull."}]}</script>
+  <link rel="stylesheet" href="/assets/kubernetes-imagepullbackoff-fix/styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: #1f2937; background: #fff; -webkit-font-smoothing: antialiased; }
+    .navbar { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(229,231,235,.8); z-index: 50; }
+    .navbar-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .navbar-content { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    .navbar-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+    .navbar-logo-icon { height: 32px; width: auto; }
+    .navbar-links { display: none; align-items: center; gap: 4px; }
+    @media (min-width: 1024px) { .navbar-links { display: flex; } }
+    .navbar-link { padding: 6px 12px; font-size: 0.875rem; font-weight: 500; color: #3f3f46; text-decoration: none; border-radius: 6px; }
+    .navbar-link:hover { color: #09090b; background: #f4f4f5; }
+    .navbar-link.active { color: #09090b; background: #fafafa; }
+    .navbar-actions { display: none; align-items: center; gap: 10px; margin-left: 16px; padding-left: 16px; border-left: 1px solid #e5e7eb; }
+    @media (min-width: 1024px) { .navbar-actions { display: flex; } }
+    .navbar-button { padding: 8px 16px; font-size: 0.875rem; font-weight: 600; border-radius: 999px; text-decoration: none; }
+    .navbar-button-primary { background: #09090b; color: #fff; }
+    .navbar-button-secondary { color: #3f3f46; }
+    .main-container { max-width: 1280px; margin: 0 auto; padding: 96px 24px 64px; }
+    .content-wrapper { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media (min-width: 1024px) {
+      .content-wrapper { grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
+    }
+    .main-col { min-width: 0; max-width: 820px; }
+    @media (min-width: 1024px) { .main-col { max-width: none; } }
+    .sidebar { display: none; }
+    @media (min-width: 1024px) { .sidebar { display: block; } }
+    .sidebar-content { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card { background: #fafafa; border-radius: 8px; padding: 24px; border: 1px solid #e4e4e7; }
+    .sidebar-card-title { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
+    .signup-form { display: flex; flex-direction: column; gap: 12px; }
+    .signup-form input { width: 100%; padding: 10px 16px; border-radius: 6px; border: 1px solid #d4d4d8; font-size: 1rem; background: #fff; color: #09090b; }
+    .signup-form input:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2); }
+    .signup-form button { width: 100%; padding: 10px 12px; background: #09090b; color: #fff; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; }
+    .signup-form button:hover { background: #27272a; }
+    .signup-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .signup-status { font-size: 0.875rem; font-weight: 500; margin: 0; }
+    .signup-status.success { color: #047857; }
+    .signup-status.error { color: #dc2626; }
+    .related-content-title { font-size: 11px; font-weight: 700; color: #71717a; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 16px; }
+    .related-posts-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .related-post-link { color: #3f3f46; text-decoration: none; font-size: 0.875rem; line-height: 1.5; display: block; transition: color 0.15s; }
+    .related-post-link:hover { color: #7c3aed; }
+    .view-more-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 16px; color: #7c3aed; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
+    .view-more-link:hover { color: #6d28d9; }
+    .article-header { margin-bottom: 2rem; }
+    .article-header h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; color: #09090b; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .author-info { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: #09090b; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+    .author-name { font-weight: 600; color: #111827; }
+    .author-meta { font-size: 0.875rem; color: #6b7280; }
+    .category-tag { display: inline-block; padding: 4px 10px; background: #ede9fe; color: #5b21b6; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .promo { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; font-size: 1.0625rem; color: #374151; }
+    .promo a { color: #7c3aed; font-weight: 600; }
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-content">
+        <a href="/" class="navbar-logo">
+          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon">
+        </a>
+        <div class="navbar-links">
+          <a href="/#how-it-works" class="navbar-link">How It Works</a>
+          <a href="/#solutions" class="navbar-link">Solutions</a>
+          <a href="/case-studies" class="navbar-link">Case Studies</a>
+          <a href="/blog" class="navbar-link active">Blog</a>
+          <a href="/pricing" class="navbar-link">Pricing</a>
+        </div>
+        <div class="navbar-actions">
+          <a href="https://app.alertmend.io/signup?source=blog-post&blog_slug=kubernetes-imagepullbackoff-fix" class="navbar-button navbar-button-secondary">Register</a>
+          <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=kubernetes-imagepullbackoff-fix" class="navbar-button navbar-button-primary" target="_blank" rel="noopener noreferrer">Book a Demo</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <div class="content-wrapper">
+      <div class="main-col">
+
+    <header class="article-header">
+      <h1>Kubernetes ImagePullBackOff: Fix Guide</h1>
+      <div class="author-info">
+        <div class="author-avatar">H</div>
+        <div>
+          <div class="author-name">Himanshu Bansal</div>
+          <div class="author-meta">2026-06-24 · 8 min read · Kubernetes</div>
+        </div>
+      </div>
+      <span class="category-tag">Kubernetes</span>
+    </header>
+
+    <div class="dl-blog">
+      <section class="heroBand fearBand">
+        <div class="heroBrands">
+          <span class="heroBrandText" style="font-size:1.5rem;font-weight:700;color:#09090b">ImagePullBackOff</span>
+          <span class="heroBrandSep" aria-hidden="true">×</span>
+          <a href="/" class="heroAmLink">
+            <img src="/logos/alertmend-logo.svg" alt="AlertMend" class="heroAmLogo" width="128" height="28">
+          </a>
+        </div>
+        <p class="heroGuideLabel">Kubernetes runbook · image pull failures</p>
+        <p class="fearHeadline">STATUS: ImagePullBackOff. The container never started.</p>
+        <p class="fearLead">You deleted the pod three times. The image still would not pull. During scale-up, every new node joined the outage. The backoff timer climbed to five minutes and the cluster looked dead while old cached pods kept serving traffic. Most teams fix the wrong thing first. The fix depends on which error message you see in Events, and one of them has a 90-day time bomb most teams do not know about.</p>
+        <div class="fearScenarioGrid">
+        <div class="fearScenario"><p class="fearScenarioWhen">New cluster, first deploy</p><h3 class="fearScenarioTitle">Every pod ImagePullBackOff.</h3><p class="fearScenarioBody">Greenfield EKS cluster, first Helm install. kubectl get pods showed 0/3 ready for 20 minutes. We assumed the registry was unreachable and started checking security groups and NAT gateways. describe Events on the third pod finally showed: Failed to pull image &quot;myregistry.io/api:v1.0.0&quot;: unauthorized. The Deployment had no imagePullSecrets and the default ServiceAccount was never patched. Deleting pods three times only reset the backoff timer. Fix took 45 minutes because we chased network first.</p></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">Typo in image tag</p><h3 class="fearScenarioTitle">Worked yesterday, broken today.</h3><p class="fearScenarioBody">CI promoted v2.3.1 but the manifest still referenced myapp:v2.3.0. kubectl describe showed: Failed to pull image: manifest unknown: 404 Not Found. We thought someone deleted the image in ECR until aws ecr list-images proved v2.3.0 was never pushed for this repo. The rollout had &quot;completed&quot; because old pods on cached images kept serving traffic. Every new ReplicaSet replica stuck in ImagePullBackOff while kubectl rollout status looked green.</p></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">Expired registry token</p><h3 class="fearScenarioTitle">Pulls failed after 90 days.</h3><p class="fearScenarioBody">ECR pull secret created manually in January with kubectl create secret docker-registry. Worked fine until a March scale-up. Every new node provisioned during an HPA event hit ImagePullBackOff simultaneously. Existing nodes had cached layers, so the deploy looked healthy until traffic spiked and the cluster autoscaler added eight nodes at once. describe Events: unauthorized: authentication required. We thought ECR was down. It was a stale secret from a token that expired months earlier.</p></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">Docker Hub rate limit</p><h3 class="fearScenarioTitle">Intermittent ErrImagePull on new nodes.</h3><p class="fearScenarioBody">Staging cluster on a small node pool. Deploy to existing nodes worked because the image was cached locally. Monday load test scaled from 3 to 12 nodes: nine fresh nodes all ErrImagePull within two minutes. Events: toomanyrequests: You have reached your pull rate limit. We wasted an hour blaming the CI pipeline until we correlated failures with node creation time. No docker-registry secret on the ServiceAccount. The deploy had &quot;worked&quot; right up until scale-up.</p></div>
+        </div>
+
+        <nav class="inThisGuide" aria-label="What you will learn">
+          <p class="inThisGuideTitle">In this guide</p>
+          <ul>
+            <li><a href="#why-delete-worse">Why deleting pods makes ImagePullBackOff worse</a></li>
+            <li><a href="#registry-playbook">Copy-paste fix for ECR, GCR, and Docker Hub</a></li>
+            <li><a href="#aws-ecr">The 90-day secret expiry time bomb</a></li>
+            <li><a href="#automation-framework">What is safe to automate (and what is not)</a></li>
+            <li><a href="#prevention">Prevention checklist to stop repeat incidents</a></li>
+          </ul>
+        </nav>
+
+        <div class="fearSeparator" aria-hidden="true"></div>
+        <p class="fearBridge"><strong>Deleting the pod does not fix a wrong image tag or missing pull secret.</strong> Read describe Events, fix auth or tag, refresh secrets, then verify the pod reaches Running.</p>
+      </section>
+
+      <section class="heroBand heroBandCompact">
+        <p class="seoTldr"><strong>TL;DR:</strong> ImagePullBackOff is never the real error. It is the timer. The real error is in <code>kubectl describe</code> Events. Below: the exact Events messages, what each means, and the copy-paste fix for each registry (ECR, GCR, Docker Hub, Harbor).</p>
+      </section>
+
+      <h2 class="sectionHead" id="what-is-imagepull">What is ImagePullBackOff?</h2>
+      <p class="bodyText">Kubernetes could not pull your container image. <strong>ErrImagePull</strong> is the immediate error; <strong>ImagePullBackOff</strong> is the wait between retries. The kubelet backs off exponentially: 10s, 20s, 40s, up to five minutes. The fix is always in the pull error message in Events: <strong>unauthorized</strong> (auth), <strong>manifest unknown</strong> (wrong tag), <strong>toomanyrequests</strong> (rate limit), init container failures, or network/DNS issues.</p>
+      <figure class="flowDiagram">
+        <img src="/assets/kubernetes-imagepullbackoff-fix/imagepull-state-flow.svg" alt="ImagePullBackOff state flow: ContainerCreating to ErrImagePull to ImagePullBackOff to Running" width="960" height="200" loading="lazy">
+        <figcaption class="flowDiagramCaption">ImagePullBackOff is the timer. ErrImagePull in Events is the cause.</figcaption>
+      </figure>
+      <div class="diyWrap">
+        <table class="compareTable">
+          <thead><tr><th>Status</th><th>Meaning</th><th>Next step</th></tr></thead>
+          <tbody>
+            <tr><td><code>ContainerCreating</code></td><td>Kubelet pulling image</td><td class="diyHighlight">Normal first phase</td></tr>
+            <tr><td><code>ErrImagePull</code></td><td>Pull failed</td><td class="diyHighlight">Read describe Events message</td></tr>
+            <tr><td><code>ImagePullBackOff</code></td><td>Backing off before retry</td><td class="diyHighlight">Fix auth/tag, not delete loop</td></tr>
+            <tr><td><code>Running</code></td><td>Pull succeeded</td><td class="diyHighlight">Verify digest if needed</td></tr>
+            <tr><td><code>CrashLoopBackOff</code></td><td>Image pulled then crashed</td><td class="diyHighlight">Different failure. See <a href="/blog/kubernetes-crashloopbackoff-fix">CrashLoopBackOff runbook</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="statusHook">Notice <code>CrashLoopBackOff</code> in the table? That is a different problem with a different fix, but teams confuse them constantly. See the <a href="/blog/kubernetes-crashloopbackoff-fix">CrashLoopBackOff runbook</a>.</p>
+
+      <div class="jumpNav" id="jump-to-fix">
+        <p class="jumpNavTitle">Found the error in Events? Jump to your fix:</p>
+        <div class="jumpNavGrid">
+          <button type="button" class="jumpNavBtn" data-jump-failure="auth" id="unauthorized"><span aria-hidden="true">🔒</span> Unauthorized</button>
+          <button type="button" class="jumpNavBtn" data-jump-failure="tag" id="wrong-tag"><span aria-hidden="true">🏷️</span> Manifest Unknown</button>
+          <button type="button" class="jumpNavBtn" data-jump-failure="rate" id="rate-limit"><span aria-hidden="true">⏱️</span> Rate Limit</button>
+          <button type="button" class="jumpNavBtn" data-jump-failure="init" id="init-container"><span aria-hidden="true">📦</span> Init Container</button>
+        </div>
+      </div>
+
+      <h2 class="sectionHead" id="five-step-workflow">ImagePullBackOff fix: five-step workflow</h2>
+      <p class="verifiedNote">Commands verified on Kubernetes 1.30.</p>
+      <div class="amFlow">
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">1</span></div><h3 class="amStepTitle">kubectl get pods</h3><p class="amStepBody">Find ImagePullBackOff or ErrImagePull. Note namespace and pod name.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">2</span></div><h3 class="amStepTitle">kubectl describe pod &lt;name></h3><p class="amStepBody">Read Events. Match the message to a failure mode below.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">3</span></div><h3 class="amStepTitle">Verify image reference</h3><p class="amStepBody">Compare manifest image: tag with what exists in the registry.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">4</span></div><h3 class="amStepTitle">Check imagePullSecrets</h3><p class="amStepBody">Secret must exist in the same namespace as the pod.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">5</span></div><h3 class="amStepTitle">Fix and watch</h3><p class="amStepBody">Pod should reach Running after a successful pull.</p></div>
+      </div>
+      <pre class="codeBlock"><code># 1. Find stuck pulls
+kubectl get pods -A | grep -iE 'imagepull|errimage'
+kubectl get pods -A -o wide | grep -i imagepull
+
+# 2. Read the actual error (most important)
+kubectl describe pod &lt;pod-name> -n &lt;namespace>
+kubectl get events -n &lt;namespace> --field-selector involvedObject.name=&lt;pod-name> --sort-by='.lastTimestamp'
+
+# Match the Events message to a failure mode, then jump to the fix:
+# Unauthorized     → registry playbook (auth tab) or AWS ECR section
+# manifest unknown → registry playbook (tag tab)
+# toomanyrequests  → registry playbook (rate tab) or Docker Hub section
+# Init container   → registry playbook (init tab)
+
+# Full fix commands live in the registry sections below:
+# AWS ECR (#aws-ecr) · GCR / AR (#gcr-ar) · Docker Hub (#docker-hub)</code></pre>
+
+      <h2 class="sectionHead" id="three-mistakes">Three mistakes that turn ImagePullBackOff into an outage</h2>
+      <div class="insightGrid">
+        <div class="insightCard">
+          <h3 class="insightCardTitle">1. Deleting pods in a loop</h3>
+          <p class="insightCardBody">kubectl delete pod forces an immediate retry but never fixes auth or tag errors. Worse: if you have a PodDisruptionBudget, the delete may not even reschedule. You reset the backoff timer, burn on-call attention, and the same Events message comes back on the next pull attempt.</p>
+        </div>
+        <div class="insightCard">
+          <h3 class="insightCardTitle">2. Using :latest in production</h3>
+          <p class="insightCardBody">When a pull fails with manifest unknown on a :latest tag, you cannot tell which digest you were trying to pull. Rollbacks become guesswork. Pin immutable tags or digests in CI so every failed pull points to an exact artifact you can verify in the registry.</p>
+        </div>
+        <div class="insightCard">
+          <h3 class="insightCardTitle">3. Manual pull secrets instead of IRSA</h3>
+          <p class="insightCardBody">kubectl create secret docker-registry embeds a token that goes stale. ECR tokens expire every 12 hours; manually created secrets can appear fine for months, then fail on the next scale-up when new nodes have no cached image. IRSA or Workload Identity removes the time bomb entirely.</p>
+        </div>
+      </div>
+
+      <hr class="sectionBreak" aria-hidden="true">
+
+      <section class="registryPlaybookZone" id="registry-playbook">
+        <h2 class="sectionHead registryPlaybookHead">Pick a failure mode: registry playbook</h2>
+        <p class="registryPlaybookIntro">Found your error? Click it for the exact fix:</p>
+        <div class="modeGrid modeGridProminent" role="tablist" aria-label="ImagePullBackOff failure modes">
+          <button type="button" role="tab" data-failure-id="auth" class="modeCard modeCardProminent modeCardActive" aria-selected="true"><span class="modeCardIcon" aria-hidden="true">🔒</span><span class="modeCardTitle">Unauthorized</span><span class="modeCardSub">Pull secret</span></button>
+        <button type="button" role="tab" data-failure-id="tag" class="modeCard modeCardProminent" aria-selected="false"><span class="modeCardIcon" aria-hidden="true">🏷️</span><span class="modeCardTitle">Wrong tag</span><span class="modeCardSub">manifest unknown</span></button>
+        <button type="button" role="tab" data-failure-id="init" class="modeCard modeCardProminent" aria-selected="false"><span class="modeCardIcon" aria-hidden="true">📦</span><span class="modeCardTitle">Init container</span><span class="modeCardSub">init pull</span></button>
+        <button type="button" role="tab" data-failure-id="rate" class="modeCard modeCardProminent" aria-selected="false"><span class="modeCardIcon" aria-hidden="true">⏱️</span><span class="modeCardTitle">Rate limit</span><span class="modeCardSub">Docker Hub</span></button>
+        </div>
+        <div class="modePlaybook" role="tabpanel">
+          <div class="modePlaybookHead">
+            <h3 class="modePlaybookTitle" id="failure-playbook-title">Unauthorized</h3>
+          </div>
+          <p class="modePlaybookSummary" id="failure-playbook-summary"></p>
+          <ul class="checkList" id="failure-playbook-steps"></ul>
+          <pre class="playbookCode" id="failure-playbook-code" aria-label="kubectl commands"></pre>
+          <p class="autofixBadge" id="failure-playbook-autofix"></p>
+          <div class="stepTip"><span id="failure-playbook-tip"></span></div>
+        </div>
+      </section>
+
+      <h2 class="sectionHead">Fix private registry: imagePullSecrets</h2>
+      <p class="bodyText">Private ECR, GCR, Artifact Registry, Harbor, and GitLab registries require credentials. The secret must live in the <strong>same namespace</strong> as the pod, or be attached to the ServiceAccount.</p>
+      <pre class="codeBlock"><code>apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  template:
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: api
+          image: myregistry.io/myapp:v2.3.1
+          imagePullPolicy: IfNotPresent</code></pre>
+
+      <h2 class="sectionHead" id="aws-ecr">AWS ECR: refresh token or use IRSA</h2>
+      <p class="bodyText">ECR tokens expire every 12 hours. Manually created pull secrets go stale. On EKS, prefer IRSA so pods pull without a long-lived secret.</p>
+      <div class="ecrTimeBomb">
+        <p><strong>12-hour to 90-day failure cascade:</strong> ECR tokens expire every 12 hours. If you created a pull secret manually in January, it worked until March, then every deploy and scale-up failed simultaneously. IRSA eliminates this entirely.</p>
+      </div>
+      <pre class="codeBlock"><code># AWS ECR, refresh pull secret (tokens expire every 12 hours)
+AWS_REGION=us-east-1
+ACCOUNT_ID=123456789012
+ECR_HOST=${ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+
+kubectl create secret docker-registry ecr-regcred \
+  --docker-server=${ECR_HOST} \
+  --docker-username=AWS \
+  --docker-password=&quot;$(aws ecr get-login-password --region ${AWS_REGION})&quot; \
+  -n my-namespace --dry-run=client -o yaml | kubectl apply -f -
+
+# Deployment image reference:
+# image: ${ECR_HOST}/myapp:v2.3.1
+
+# Preferred on EKS, IRSA (no long-lived pull secret):
+# 1. Create IAM role with AmazonEC2ContainerRegistryReadOnly
+# 2. Annotate ServiceAccount: eks.amazonaws.com/role-arn=arn:aws:iam::...
+# 3. Pods using that SA pull from ECR automatically</code></pre>
+
+      <h2 class="sectionHead" id="gcr-ar">GCR / Artifact Registry: key or Workload Identity</h2>
+      <p class="bodyText">On GKE, Workload Identity is the production pattern. You do not need a pull secret to rotate. For other clusters, use a service account JSON key in a docker-registry secret.</p>
+      <pre class="codeBlock"><code># Google Artifact Registry / GCR, service account key
+kubectl create secret docker-registry gcr-regcred \
+  --docker-server=https://us-docker.pkg.dev \
+  --docker-username=_json_key \
+  --docker-password=&quot;$(cat service-account-key.json)&quot; \
+  -n my-namespace
+
+# Deployment image reference:
+# image: us-docker.pkg.dev/PROJECT_ID/REPO_NAME/myapp:v2.3.1
+
+# Preferred on GKE, Workload Identity:
+# 1. Grant roles/artifactregistry.reader to the GSA linked to your KSA
+# 2. Annotate KSA: iam.gke.io/gcp-service-account=gsa@project.iam.gserviceaccount.com
+# 3. No pull secret needed for Artifact Registry</code></pre>
+
+      <h2 class="sectionHead" id="docker-hub">Docker Hub: beat rate limits</h2>
+      <p class="bodyText">Anonymous Docker Hub pulls are limited to 100 per 6 hours per IP. Node scale-ups and fresh clusters hit this fast. Authenticate with a pull secret or mirror images to your private registry.</p>
+      <pre class="codeBlock"><code># Docker Hub, authenticated pulls avoid rate limits
+# Anonymous: 100 pulls / 6h per IP. Authenticated: much higher limits.
+
+kubectl create secret docker-registry dockerhub \
+  --docker-server=https://index.docker.io/v1/ \
+  --docker-username=YOUR_DOCKERHUB_USER \
+  --docker-password=YOUR_ACCESS_TOKEN \
+  -n my-namespace
+
+kubectl patch serviceaccount default \
+  -p '{&quot;imagePullSecrets&quot;:[{&quot;name&quot;:&quot;dockerhub&quot;}]}' -n my-namespace
+
+# For Docker Hub org images:
+# image: docker.io/myorg/myapp:v2.3.1</code></pre>
+      <p class="citeRow">Reference: <a href="https://kubernetes.io/docs/concepts/containers/images/" target="_blank" rel="noopener noreferrer">Kubernetes container images</a> · <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html" target="_blank" rel="noopener noreferrer">AWS ECR docs</a></p>
+
+      <h2 class="sectionHead" id="common-causes">Common ImagePullBackOff causes</h2>
+      <div class="searchIssueGrid">
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Missing imagePullSecrets</h3><p class="searchIssueDesc">Private registry without credentials.</p><p class="searchIssueAlert"><strong>Fix:</strong> Create docker-registry secret; add to pod spec.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Wrong image tag</h3><p class="searchIssueDesc">Typo or deleted tag.</p><p class="searchIssueAlert"><strong>Fix:</strong> Fix image: in Deployment.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Expired credentials</h3><p class="searchIssueDesc">ECR/GCR token expired.</p><p class="searchIssueAlert"><strong>Fix:</strong> Refresh pull secret or use IRSA.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Docker Hub rate limit</h3><p class="searchIssueDesc">Anonymous pull limits.</p><p class="searchIssueAlert"><strong>Fix:</strong> Add account secret or mirror.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Network / firewall</h3><p class="searchIssueDesc">Node cannot reach registry.</p><p class="searchIssueAlert"><strong>Fix:</strong> Check egress and DNS.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Init container image</h3><p class="searchIssueDesc">init:imagepullbackoff blocks main app.</p><p class="searchIssueAlert"><strong>Fix:</strong> Fix init image first.</p></div>
+      </div>
+
+      <div class="insightCallout backoffTeaser" id="delete-pod-teaser">
+        <p>There is a reason deleting the pod makes it worse. (Hint: the backoff timer goes up to <strong>___</strong> minutes.)</p>
+      </div>
+
+      <h2 class="sectionHead" id="why-delete-worse">Why deleting the pod makes ImagePullBackOff worse</h2>
+      <p class="bodyText">ImagePullBackOff is a backoff state, not a bug in the pod object. When you kubectl delete pod, Kubernetes creates a replacement that hits the same pull error immediately. You have not changed the image reference, the pull secret, or the registry state. You have only interrupted the backoff clock.</p>
+      <p class="bodyText">Worse: deleting can mask the pattern. If three replicas fail pulls on a staggered schedule, deleting one at a time makes it look intermittent. The describe Events on the surviving pods still show the real error. Fix the pull message once, then rollout restart if needed.</p>
+      <pre class="codeBlock"><code># What delete actually does (same error, fresh pod name):
+kubectl delete pod api-7f9c2b8d4-xk2mn -n production
+# New pod: api-7f9c2b8d4-qm8zt → same Events: unauthorized
+
+# What fix + restart does:
+kubectl apply -f deployment-with-fixed-secret.yaml
+kubectl rollout restart deployment/api -n production
+kubectl rollout status deployment/api -n production</code></pre>
+      <div class="proofBand proofBandInline">
+        <p class="proofStat"><span class="proofStatNum">5 min</span> max backoff between retries</p>
+        <p class="proofBody">After repeated ErrImagePull events, kubelet waits up to five minutes before the next pull attempt. Deleting the pod resets that clock briefly, then you wait again. Fix the root cause once and the pod reaches Running on the next successful pull.</p>
+      </div>
+
+      <h2 class="sectionHead" id="automation-framework">What is safe to automate vs human required</h2>
+      <p class="bodyText">Not every ImagePullBackOff should wake someone up. Use this framework before wiring auto-remediation:</p>
+      <div class="searchIssueGrid">
+        <div class="searchIssueCard">
+          <h3 class="searchIssueTerm">Safe to automate</h3>
+          <p class="searchIssueDesc">Transient registry blip (short network failure): restart after backoff if pull succeeds on retry. Post-secret-rotation: rollout restart after a human refreshes the pull secret, then verify Running. Node-specific failure: cordon the node if only one host cannot pull.</p>
+        </div>
+        <div class="searchIssueCard">
+          <h3 class="searchIssueTerm">Human required</h3>
+          <p class="searchIssueDesc">Wrong image tag, expired credentials that need registry login, init container image typos, and Docker Hub rate limits that need auth or mirroring. Automation should surface describe Events and stop. It should not guess a new image tag.</p>
+        </div>
+      </div>
+      <div class="diyWrap" style="margin-top:1.25rem">
+        <table class="compareTable">
+          <thead><tr><th>Do not automate</th><th>Why</th><th>Instead</th></tr></thead>
+          <tbody>
+            <tr><td>Change image tag blindly</td><td>Wrong version ships to prod</td><td class="diyHighlight">Human verifies CI tag against registry</td></tr>
+            <tr><td>Delete registry creds</td><td>Breaks all pulls cluster-wide</td><td class="diyHighlight">Approved rotation only</td></tr>
+            <tr><td>Force :latest pulls</td><td>Rate limits and un-debuggable deploys</td><td class="diyHighlight">Pin digests or immutable tags</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="sectionHead" id="prevention">After you fix the pull: prevent the next outage</h2>
+      <p class="bodyText">These four practices work on any cluster, with or without third-party tooling:</p>
+      <h3 class="subsectionHead">1. Pin image digests in production</h3>
+      <p class="bodyText">Immutable digests make every deploy auditable and make manifest unknown errors debuggable.</p>
+      <pre class="codeBlock"><code># Pin by digest in production (immutable, debuggable)
+containers:
+  - name: api
+    image: myregistry.io/myapp@sha256:abc123def456...
+    imagePullPolicy: IfNotPresent</code></pre>
+      <h3 class="subsectionHead">2. Use IRSA or Workload Identity, not manual secrets</h3>
+      <p class="bodyText">On EKS and GKE, attach registry read permissions to the pod ServiceAccount. No 12-hour token cliff, no 90-day surprise. See the <a href="#aws-ecr">ECR</a> and <a href="#gcr-ar">GCR</a> sections above.</p>
+      <h3 class="subsectionHead">3. Mirror Docker Hub to a private registry</h3>
+      <p class="bodyText">Pull public images once into ECR, GCR, or Harbor. Point Deployments at your mirror. Node scale-ups never hit Docker Hub rate limits.</p>
+      <h3 class="subsectionHead">4. Verify image tags exist in CI before deploy</h3>
+      <p class="bodyText">Catch typos before kubectl apply. Three lines in your pipeline:</p>
+      <pre class="codeBlock"><code>#!/bin/bash
+# Fail CI if the image tag does not exist before deploy
+set -euo pipefail
+IMAGE=&quot;${1:?usage: verify-image.sh myregistry.io/myapp:v2.3.1}&quot;
+docker manifest inspect &quot;$IMAGE&quot; > /dev/null
+echo &quot;OK: $IMAGE exists&quot;</code></pre>
+      <p class="bodyText preventionNote">If you want to automate monitoring after these fixes, <a href="https://app.alertmend.io/signup?service=remediation&source=blog-imagepull&blog_slug=kubernetes-imagepullbackoff-fix">AlertMend</a> surfaces describe Events in Slack when pulls fail again and verifies pods reach Running after secret rotation.</p>
+
+      <h2 class="sectionHead">Related deep dives</h2>
+      <div class="hubLinks">
+        <a href="/blog/kubernetes-crashloopbackoff-fix" class="hubLinkCard"><p class="hubLinkTitle">CrashLoopBackOff fix</p><p class="hubLinkDesc">After image pulls succeed</p></a>
+        <a href="/blog/kubernetes-init-crashloopbackoff" class="hubLinkCard"><p class="hubLinkTitle">Init failures</p><p class="hubLinkDesc">Init container pull issues</p></a>
+        <a href="/blog/503-no-healthy-upstream" class="hubLinkCard"><p class="hubLinkTitle">503 upstream</p><p class="hubLinkDesc">Pods never become ready</p></a>
+        <a href="/blog/monitor-ollama-using-alertmend" class="hubLinkCard"><p class="hubLinkTitle">Monitor Ollama</p><p class="hubLinkDesc">Large GPU images and pull timeouts</p></a>
+        <a href="/blog/debugging-kubernetes-oomkilled-exit-code-137-causes-and-solutions" class="hubLinkCard"><p class="hubLinkTitle">OOMKilled</p><p class="hubLinkDesc">After pull succeeds</p></a>
+        <a href="/blog/make-error-127" class="hubLinkCard"><p class="hubLinkTitle">make: error 127</p><p class="hubLinkDesc">CI image build failures</p></a>
+      </div>
+
+      <h2 class="sectionHead" id="faq">FAQ</h2>
+      <div class="faqList">
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="true">What is ImagePullBackOff in Kubernetes?<svg class="faqChevron faqChevronOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer">ImagePullBackOff means Kubernetes failed to pull your container image and is waiting between retries with exponential backoff (10s, 20s, 40s, up to 5 minutes). Run kubectl describe pod and read the Events section. The fix is always in the pull error message: unauthorized, manifest unknown, or rate limit exceeded.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">What is the difference between ErrImagePull and ImagePullBackOff?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">ErrImagePull is the immediate pull failure event. ImagePullBackOff is the waiting state kubelet enters after repeated ErrImagePull events. It backs off before trying again. Fix the underlying pull error; do not just delete the pod hoping backoff will help.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I fix ImagePullBackOff?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Run kubectl describe pod &lt;name> -n &lt;namespace> and read Events. For unauthorized: create or refresh imagePullSecrets. For manifest unknown: fix the image: tag in your Deployment. For rate limits: add an authenticated Docker Hub secret or mirror to a private registry. Then kubectl rollout restart deployment/&lt;name> or wait for the next retry.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I create an image pull secret for Kubernetes?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">kubectl create secret docker-registry regcred --docker-server=&lt;registry-host> --docker-username=&lt;user> --docker-password=&lt;password> -n &lt;namespace>. Add imagePullSecrets: [{name: regcred}] to your pod spec or patch the default ServiceAccount so all pods in the namespace inherit it.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Why does ImagePullBackOff happen after months of working?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Common causes: expired ECR/GCR token in a manually created pull secret, deleted image tag in the registry, rotated CI credentials that were not updated in the cluster, or Docker Hub rate limits after node scale-up. Check describe Events for the exact message.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">ImagePullBackOff vs CrashLoopBackOff?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">ImagePullBackOff: the container image never started, kubelet cannot pull the image. CrashLoopBackOff: the image pulled successfully but the container process keeps exiting. Different root causes, different fixes.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I fix ImagePullBackOff on AWS ECR?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Refresh the pull secret with aws ecr get-login-password, or prefer EKS IRSA: attach AmazonEC2ContainerRegistryReadOnly to the pod ServiceAccount so nodes pull without a long-lived secret. Image format: ACCOUNT.dkr.ecr.REGION.amazonaws.com/repo:tag.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I prevent ImagePullBackOff?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Pin image digests or immutable tags in CI, use IRSA or Workload Identity instead of manual pull secrets, mirror Docker Hub images to a private registry, and validate image references in CI before kubectl apply.</div></div>
+      </div>
+
+      <div class="ctaBand">
+        <div class="ctaBandTitle">You fixed the pull. The next incident will be different.</div>
+        <p class="ctaBandSub">You've refreshed the secret, fixed the tag, and verified the pod is Running. The next failure might be an expired token in 90 days, a Docker Hub rate limit during Black Friday scale-up, or an init container image nobody maintains. AlertMend surfaces describe Events in Slack when pulls fail again and verifies recovery after you fix secrets and tags.</p>
+        <div class="ctaBtnRow">
+          <a href="https://app.alertmend.io/signup?service=remediation&source=blog-imagepull&blog_slug=kubernetes-imagepullbackoff-fix" class="ctaBtn">Monitor pull failures free →</a>
+          <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=kubernetes-imagepullbackoff-fix" class="ctaBtnSecondary" target="_blank" rel="noopener noreferrer">Talk to an expert</a>
+        </div>
+      </div>
+    </div>
+      </div>
+
+
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <div class="sidebar-card">
+            <div class="sidebar-card-title">Receive blog and product updates</div>
+            <form class="signup-form" id="blog-signup-form" novalidate>
+              <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
+              <button type="submit">Sign up</button>
+              <p class="signup-status" id="blog-signup-status" hidden></p>
+            </form>
+          </div>
+
+          
+          <div class="sidebar-card">
+            <div class="related-content-title">Related content</div>
+            <ul class="related-posts-list">
+              <li><a href="/blog/kubernetes-crashloopbackoff-fix" class="related-post-link">Kubernetes CrashLoopBackOff: Fix Guide</a></li>
+              <li><a href="/blog/503-no-healthy-upstream" class="related-post-link">503 No Healthy Upstream Error Guide</a></li>
+              <li><a href="/blog/achieving-enterprise-readiness-with-kubernetes-in-2025" class="related-post-link">Achieving Enterprise Readiness With</a></li>
+              <li><a href="/blog/monitor-litellm-using-alertmend" class="related-post-link">How to Monitor LiteLLM in Production</a></li>
+              <li><a href="/blog/monitor-ollama-using-alertmend" class="related-post-link">How to Monitor Ollama in Production</a></li>
+              <li><a href="/blog/monitor-open-webui-using-alertmend" class="related-post-link">Monitor Open WebUI + Ollama in Production</a></li>
+              <li><a href="/blog/monitor-vllm-using-alertmend" class="related-post-link">How to Monitor vLLM in Production</a></li>
+              <li><a href="/blog/url-monitoring-automated-fixes" class="related-post-link">URL Monitoring: Detect and Auto-Fix</a></li>
+              <li><a href="/blog/openclaw-cloud-infra-slack-telegram" class="related-post-link">OpenClaw: Infra from Slack &amp; Telegram</a></li>
+              <li><a href="/blog/monitor-langfuse-using-alertmend" class="related-post-link">How to Monitor Langfuse in Production</a></li>
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View all posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          
+
+          <div class="sidebar-card">
+            <div class="related-content-title">Explore AlertMend</div>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="/assets/kubernetes-imagepullbackoff-fix/script.js" defer></script>
+</body>
+</html>

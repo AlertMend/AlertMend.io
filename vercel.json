@@ -2,11 +2,30 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": null,
-  "redirects": [],
+  "redirects": [
+    {
+      "source": "/blog/resolving-imagepullbackoff-and-errimagepull-in-kubernetes",
+      "destination": "/blog/kubernetes-imagepullbackoff-fix",
+      "permanent": true
+    },
+    {
+      "source": "/blog/understanding-kubernetes-crashloopbackoff",
+      "destination": "/blog/kubernetes-crashloopbackoff-fix",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/blog",
       "destination": "/blog/index.html"
+    },
+    {
+      "source": "/blog/kubernetes-crashloopbackoff-fix",
+      "destination": "/blog/kubernetes-crashloopbackoff-fix/index.html"
+    },
+    {
+      "source": "/blog/kubernetes-imagepullbackoff-fix",
+      "destination": "/blog/kubernetes-imagepullbackoff-fix/index.html"
     },
     {
       "source": "/blog/make-error-127",
@@ -21,12 +40,24 @@
       "destination": "/blog/monitor-langfuse-using-alertmend/index.html"
     },
     {
+      "source": "/blog/monitor-litellm-using-alertmend",
+      "destination": "/blog/monitor-litellm-using-alertmend/index.html"
+    },
+    {
       "source": "/blog/monitor-milvus-using-alertmend",
       "destination": "/blog/monitor-milvus-using-alertmend/index.html"
     },
     {
       "source": "/blog/monitor-ollama-using-alertmend",
       "destination": "/blog/monitor-ollama-using-alertmend/index.html"
+    },
+    {
+      "source": "/blog/monitor-open-webui-using-alertmend",
+      "destination": "/blog/monitor-open-webui-using-alertmend/index.html"
+    },
+    {
+      "source": "/blog/monitor-vllm-using-alertmend",
+      "destination": "/blog/monitor-vllm-using-alertmend/index.html"
     },
     {
       "source": "/blog/openclaw-cloud-infra-slack-telegram",

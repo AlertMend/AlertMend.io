@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>How to Monitor Ollama in Production | AlertMend AI</title>
-  <meta name="description" content="Monitor Ollama in production: /api/tags and /api/ps checks, OOMKilled auto-restart, verify-before-page Slack alerts. Phase 1 without Prometheus.">
+  <meta name="description" content="Five Ollama health endpoints most teams miss, K8s probe YAML, threshold formula for cold starts, and safe-to-automate matrix for OOMKilled and CrashLoopBackOff.">
   <meta name="keywords" content="how to monitor ollama in production, ollama kubernetes monitoring, ollama health check, ollama oomkilled, ollama auto restart kubernetes, monitor ollama production, ollama uptime, AlertMend">
   <meta name="author" content="AlertMend Team">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -13,15 +13,15 @@
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.alertmend.io/blog/monitor-ollama-using-alertmend">
   <meta property="og:title" content="How to Monitor Ollama in Production">
-  <meta property="og:description" content="Monitor Ollama in production: /api/tags and /api/ps checks, OOMKilled auto-restart, verify-before-page Slack alerts. Phase 1 without Prometheus.">
+  <meta property="og:description" content="Five Ollama health endpoints most teams miss, K8s probe YAML, threshold formula for cold starts, and safe-to-automate matrix for OOMKilled and CrashLoopBackOff.">
   <meta property="og:image" content="https://www.alertmend.io/assets/monitor-ollama-using-alertmend/ollama-hero.svg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="How to Monitor Ollama in Production">
-  <meta name="twitter:description" content="Monitor Ollama in production: /api/tags and /api/ps checks, OOMKilled auto-restart, verify-before-page Slack alerts. Phase 1 without Prometheus.">
+  <meta name="twitter:description" content="Five Ollama health endpoints most teams miss, K8s probe YAML, threshold formula for cold starts, and safe-to-automate matrix for OOMKilled and CrashLoopBackOff.">
   <meta name="twitter:image" content="https://www.alertmend.io/assets/monitor-ollama-using-alertmend/ollama-hero.svg">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How to Monitor Ollama in Production","description":"Monitor Ollama in production: /api/tags and /api/ps checks, OOMKilled auto-restart, verify-before-page Slack alerts. Phase 1 without Prometheus.","image":"https://www.alertmend.io/assets/monitor-ollama-using-alertmend/ollama-hero.svg","datePublished":"2026-06-24","dateModified":"2026-06-24","author":{"@type":"Person","name":"AlertMend Team"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/monitor-ollama-using-alertmend"}}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I monitor Ollama in production?","acceptedAnswer":{"@type":"Answer","text":"Connect your cluster or host in AlertMend, add URL checks on /api/tags and your public inference endpoint, and route alerts to Slack. AlertMend watches OOMKilled events, failed health checks, and pod crashes depending on how you deploy Ollama."}},{"@type":"Question","name":"What is the best Ollama health check endpoint?","acceptedAnswer":{"@type":"Answer","text":"Use GET /api/tags on port 11434 for liveness: it confirms the API is up and lists loaded models. For readiness after deploy, wait until your primary model appears in the response. Add a tiny POST /api/generate smoke test when tags alone are not enough."}},{"@type":"Question","name":"How do I monitor Ollama on Kubernetes?","acceptedAnswer":{"@type":"Answer","text":"Install the AlertMend agent, probe /api/tags through the same Ingress or Service your apps use, and enable auto-restart on the Ollama Deployment. Set initialDelaySeconds long enough for model load, often 60-120 seconds on a fresh PVC."}},{"@type":"Question","name":"Why does Ollama keep getting OOMKilled?","acceptedAnswer":{"@type":"Answer","text":"Model size plus concurrent requests can exceed pod memory or GPU VRAM limits. AlertMend alerts your team and can restart pods automatically. If it keeps recurring, reduce num_parallel, use a smaller quantization, or add GPU replicas."}},{"@type":"Question","name":"Do I need Prometheus to monitor Ollama?","acceptedAnswer":{"@type":"Answer","text":"Not to start. Ollama does not ship a native Prometheus /metrics endpoint. Teams add a sidecar exporter that polls /api/ps and /api/tags. AlertMend covers phase one: URL checks, OOMKilled alerts, and auto-restart. Add Prometheus and Grafana when you need VRAM dashboards and token-level telemetry at scale."}},{"@type":"Question","name":"How do I know if Ollama is down?","acceptedAnswer":{"@type":"Answer","text":"AlertMend treats Ollama as down when health checks fail, inference requests error, or pods crash repeatedly, not when /api/tags passes but /api/generate still times out."}},{"@type":"Question","name":"Should I auto-restart Ollama when it OOMs?","acceptedAnswer":{"@type":"Answer","text":"Yes for availability: enable AlertMend restart runbooks so the pod comes back after transient memory pressure. If OOM repeats within 15 minutes, fix sizing instead of only restarting."}},{"@type":"Question","name":"How do I monitor Ollama behind Open WebUI?","acceptedAnswer":{"@type":"Answer","text":"Add a URL check on Open WebUI /health for the UI and a separate check on the Ollama /api/tags endpoint your stack uses. Alert when the UI is up but Ollama checks fail."}}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Monitor Ollama in production with AlertMend","description":"Monitor Ollama in production: /api/tags and /api/ps checks, OOMKilled auto-restart, verify-before-page Slack alerts. Phase 1 without Prometheus.","step":[{"@type":"HowToStep","position":1,"name":"Connect cluster or host","text":"Install the AlertMend agent. Ollama pod events, OOMKilled, and restart history appear without Prometheus wiring."},{"@type":"HowToStep","position":2,"name":"Layer health checks","text":"/api/tags for liveness, optional /api/generate smoke, and the public URL your apps call through Ingress."},{"@type":"HowToStep","position":3,"name":"Set thresholds","text":"Model-load grace after deploy. Baseline-relative latency. Split Open WebUI vs Ollama backend checks."},{"@type":"HowToStep","position":4,"name":"Attach idempotent runbooks","text":"Restart Deployment or StatefulSet. Safe to run twice. Include deploy suppression window."},{"@type":"HowToStep","position":5,"name":"Verify then notify","text":"Re-probe /api/tags twice. Slack on success. Page only if verification fails after auto-fix."}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How to Monitor Ollama in Production","description":"Five Ollama health endpoints most teams miss, K8s probe YAML, threshold formula for cold starts, and safe-to-automate matrix for OOMKilled and CrashLoopBackOff.","image":"https://www.alertmend.io/assets/monitor-ollama-using-alertmend/ollama-hero.svg","datePublished":"2026-06-24","dateModified":"2026-06-24","author":{"@type":"Person","name":"AlertMend Team"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/monitor-ollama-using-alertmend"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What latency threshold should I set for Ollama /api/generate smoke checks?","acceptedAnswer":{"@type":"Answer","text":"A fixed number will page you on healthy large models. See the baseline-relative formula in the threshold engineering section above. Recompute weekly from off-peak traffic."}},{"@type":"Question","name":"Which Ollama failures should I never auto-restart?","acceptedAnswer":{"@type":"Answer","text":"Never auto-delete model PVCs, change quantization at runtime, purge multi-tenant models, or drain GPU nodes cluster-wide. See the safe-to-automate matrix for the full line between script and human."}},{"@type":"Question","name":"How do I prevent false pages during Ollama model cold starts?","acceptedAnswer":{"@type":"Answer","text":"Suppress alerts for initialDelaySeconds + 30s after pod Ready, and use baseline-relative latency instead of fixed timeouts. The full formula is in threshold engineering above."}},{"@type":"Question","name":"Can I monitor multiple Ollama instances behind a load balancer?","acceptedAnswer":{"@type":"Answer","text":"Yes, but check each backend independently. A load balancer can return 200 while one replica is OOMKilled. Per-replica /api/tags checks catch what a single VIP check misses."}},{"@type":"Question","name":"How do I monitor Ollama behind Open WebUI?","acceptedAnswer":{"@type":"Answer","text":"Split checks: Open WebUI /health for the UI, Ollama /api/tags for inference. Alert when the UI is up but backend checks fail. See the Open WebUI deployment tab above."}},{"@type":"Question","name":"Why does Ollama keep getting OOMKilled?","acceptedAnswer":{"@type":"Answer","text":"Model size plus concurrent requests exceed pod memory or GPU VRAM limits. Restart once for availability. If OOM repeats within 15 minutes, fix sizing instead of only restarting."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Monitor Ollama in production with AlertMend","description":"Five Ollama health endpoints most teams miss, K8s probe YAML, threshold formula for cold starts, and safe-to-automate matrix for OOMKilled and CrashLoopBackOff.","step":[{"@type":"HowToStep","position":1,"name":"Connect cluster or host","text":"Install the AlertMend agent. Ollama pod events, OOMKilled, and restart history appear without Prometheus wiring."},{"@type":"HowToStep","position":2,"name":"Layer health checks","text":"/api/tags for liveness, optional /api/generate smoke, and the public URL your apps call through Ingress."},{"@type":"HowToStep","position":3,"name":"Set thresholds","text":"Model-load grace after deploy. Baseline-relative latency. Split Open WebUI vs Ollama backend checks."},{"@type":"HowToStep","position":4,"name":"Attach idempotent runbooks","text":"Restart Deployment or StatefulSet. Safe to run twice. Include deploy suppression window."},{"@type":"HowToStep","position":5,"name":"Verify then notify","text":"Re-probe /api/tags twice. Slack on success. Page only if verification fails after auto-fix."}]}</script>
   <link rel="stylesheet" href="/assets/monitor-ollama-using-alertmend/styles.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -52,7 +52,7 @@
     @media (min-width: 1024px) { .sidebar { display: block; } }
     .sidebar-content { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
     .sidebar-card { background: #fafafa; border-radius: 8px; padding: 24px; border: 1px solid #e4e4e7; }
-    .sidebar-card h3 { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
+    .sidebar-card-title { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
     .signup-form { display: flex; flex-direction: column; gap: 12px; }
     .signup-form input { width: 100%; padding: 10px 16px; border-radius: 6px; border: 1px solid #d4d4d8; font-size: 1rem; background: #fff; color: #09090b; }
     .signup-form input:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2); }
@@ -112,7 +112,7 @@
         <div class="author-avatar">A</div>
         <div>
           <div class="author-name">AlertMend Team</div>
-          <div class="author-meta">2026-06-24 · AIOps</div>
+          <div class="author-meta">2026-06-24 · 12 min read · AIOps</div>
         </div>
       </div>
       <span class="category-tag">AIOps</span>
@@ -131,43 +131,72 @@
         </div>
         <p class="heroGuideLabel">Production runbook · Ollama uptime</p>
         <h2 class="fearHeadline">Ollama was down. Your RAG pipeline kept calling it anyway.</h2>
-        <p class="fearLead">Most teams <strong>install</strong> Ollama. Few teams <strong>monitor the URL their apps hit</strong>, verify inference end-to-end, or auto-restart after OOMKilled. The result: silent embedding failures, chat timeouts, and the same kubectl delete pod ritual every Friday.</p>
+        <p class="fearLead">Most teams <strong>install</strong> Ollama. Few teams <strong>monitor the URL their apps actually hit</strong>, or auto-restart after OOMKilled.</p>
+        <p class="fearLeadSecondary">Not every failure should be auto-fixed. Some automations cause data loss or cross-team outages.</p>
         <div class="fearScenarioGrid">
         <div class="fearScenario"><p class="fearScenarioWhen">Friday, 3:42pm</p><h3 class="fearScenarioTitle">Embeddings returned 500. The vector index aged out.</h3><p class="fearScenarioBody">Ollama /api/tags still returned 200 while /api/generate timed out on every batch. The RAG worker retried silently. Grafana pod metrics looked fine because the process never exited.</p></div>
         <div class="fearScenario"><p class="fearScenarioWhen">After a GPU node reboot</p><h3 class="fearScenarioTitle">Chat timed out for 18 minutes.</h3><p class="fearScenarioBody">A 40GB model reloaded from PVC. Readiness passed on process up, not model loaded. Users hit 504 on every prompt while Open WebUI looked fine.</p></div>
-        <div class="fearScenario"><p class="fearScenarioWhen">OOM loop, exit 137</p><h3 class="fearScenarioTitle">Three restarts before anyone opened Slack.</h3><p class="fearScenarioBody">VRAM pressure under concurrent load. Kubernetes killed the pod. Each cold start evicted the model again. Manual kubectl delete pod was the only playbook.</p></div>
-        <div class="fearScenario"><p class="fearScenarioWhen">Ingress said 502</p><h3 class="fearScenarioTitle">Apps called the proxy URL, not localhost:11434.</h3><p class="fearScenarioBody">In-cluster curl to the Service worked. External URL through nginx failed during pod rollout. No monitor hit the same hostname users use.</p></div>
         </div>
-        <p class="fearBridge"><strong>Checking /api/tags once is not production monitoring.</strong> Layer probes, grace periods for model load, and idempotent restart runbooks. Page only when auto-fix verification fails.</p>
+        <details class="fearScenarioMore">
+          <summary>See the failure that looked healthy in Grafana →</summary>
+          <div class="fearScenarioGrid">
+        <div class="fearScenario"><p class="fearScenarioWhen">OOM loop, exit 137</p><h3 class="fearScenarioTitle">Three restarts before anyone opened Slack.</h3><p class="fearScenarioBody">Friday evening load test. VRAM spiked under concurrent embeddings. kubectl describe showed OOMKilled, exit 137. We ran kubectl delete pod three times thinking the process was wedged. Each restart re-loaded the 40GB model, hit the same memory ceiling, and OOMed again within 90 seconds. Grafana showed the pod as Running the whole time.</p></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">Ingress said 502</p><h3 class="fearScenarioTitle">Apps called the proxy URL, not localhost:11434.</h3><p class="fearScenarioBody">Deploy looked green. In-cluster curl to the ClusterIP returned /api/tags 200. Users hit 502 on inference.example.com because nginx routed to a pod still in ContainerCreating. Our monitor checked localhost:11434 from inside the cluster. Nobody checked the hostname users typed in the browser.</p></div>
+          </div>
+        </details>
+        <p class="heroBridge">Every one of these was preventable. Below: the formula one team used to cut false pages during model cold starts, and why a fixed timeout will never work. Some auto-restarts cause worse outages than the failure itself. The matrix for which is which is further down.</p>
       </section>
 
       <section class="heroBand heroBandCompact">
-        <div class="heroAudience">
+        <div class="heroAudience heroAudienceCompact">
           <h2 class="heroAudienceTitle">You're in the right place if…</h2>
           <ul class="heroAudienceList">
             <li>You run Ollama on Kubernetes, a GPU VM, or Docker behind Open WebUI or an internal chat API</li>
             <li>Nobody pages you when inference stops, models get evicted, or exit 137 loops start</li>
-            <li>You want health checks, Slack alerts, and auto-restart without building Prometheus and Grafana first</li>
           </ul>
         </div>
-        <p class="seoTldr"><strong>TL;DR:</strong> Monitor <strong>/api/tags</strong> and your <strong>public inference URL</strong>. When checks fail twice, run an <strong>idempotent pod restart</strong>. <strong>Re-probe twice.</strong> Page on-call only if verification fails.</p>
+        <p class="seoTldr"><strong>TL;DR:</strong> Most teams monitor one endpoint and restart manually, but three of Ollama&apos;s five endpoints matter more than the one you&apos;re checking, and some auto-restarts cause worse outages than the failure itself. This guide covers which probes to layer, <a href="#threshold-engineering">the formula that stops false pages during normal deploys</a>, and <a href="#automation-safety">the line between safe automation and data loss</a>.</p>
+        <p class="fearBridge fearBridgeAfterTldr"><strong>Checking /api/tags once is not production monitoring.</strong> Layer probes, grace periods for model load, and idempotent restart runbooks.</p>
       </section>
 
-      <h2 class="sectionHead">Ollama health endpoints: what to probe</h2>
-      <p class="bodyText">The mistake: wire liveness, readiness, and your external monitor all to <code>/api/tags</code> with no grace period, then wonder why large models flap on every deploy. Split checks by purpose and hit the same hostname your apps use.</p>
-      <div class="diyWrap">
-        <table class="compareTable">
-          <thead><tr><th>Path</th><th>Used by</th><th>Checks</th><th>On failure</th></tr></thead>
-          <tbody>
-            <tr><td><code>/</code></td><td>Liveness probe</td><td>Process responding. No model load required.</td><td class="diyHighlight">Restart container if wedged. Keep this shallow.</td></tr>
-            <tr><td><code>/api/tags</code></td><td>Readiness + external monitor</td><td>Lists downloaded models. Fast, no inference cost.</td><td class="diyHighlight">Wait for primary model name before traffic. Alert if unreachable 2x.</td></tr>
-            <tr><td><code>/api/ps</code></td><td>VRAM diagnostics</td><td>Shows models loaded in memory now. Catches eviction under load.</td><td class="diyHighlight">Warn when expected model missing from ps but still in tags.</td></tr>
-            <tr><td><code>/api/generate</code></td><td>Inference smoke</td><td>Tiny prompt, num_predict=1. Catches hung GPU or queue stalls.</td><td class="diyHighlight">Alert when tags pass but generate times out.</td></tr>
-            <tr><td><code>Public inference URL</code></td><td>External monitor</td><td>Same hostname, TLS, and path your apps use.</td><td class="diyHighlight">Page when users cannot reach inference, not only in-cluster.</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <pre class="codeBlock"><code># Liveness: process up
+      <details class="jumpNavCollapsible">
+        <summary>Jump to a section</summary>
+        <nav class="inThisGuide inThisGuideTeasers" aria-label="Jump to section">
+          <ul>
+            <li><a href="#health-endpoints">The five endpoints most guides get wrong (and the one teams skip)</a></li>
+            <li><a href="#threshold-engineering">The formula that stops false pages during normal deploys</a></li>
+            <li><a href="#automation-safety">The line between safe automation and data loss</a></li>
+            <li><a href="#setup-steps">Five steps from zero to auto-remediation (~15 min)</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <section class="sectionChapter" id="health-endpoints">
+        <p class="sectionLabel">Chapter 1 · Diagnosis</p>
+        <h2 class="sectionHead">Ollama health endpoints: what to probe</h2>
+        <p class="cliffhanger">Every Ollama guide says &ldquo;check <code>/api/tags</code>.&rdquo; That is the equivalent of checking if nginx is running and calling it production monitoring. Here is what actually breaks, and the order you should check it in.</p>
+        <div class="warningCallout">
+          <p><span class="calloutIcon" aria-hidden="true">⚠️</span> <strong>The mistake:</strong> wire liveness, readiness, and your external monitor all to <code>/api/tags</code> with no grace period, then wonder why large models flap on every deploy.</p>
+        </div>
+        <div class="endpointMissCallout">
+          <p><strong>The endpoint most teams miss:</strong> <code>Public inference URL</code>. If your apps call inference.example.com but your monitor checks localhost:11434, you are monitoring a different system than your users see.</p>
+        </div>
+        <div class="diyWrap tableScrollWrap">
+          <table class="compareTable responsiveTable">
+            <thead><tr><th>Path</th><th>Used by</th><th>Checks</th><th>On failure</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Path"><code>/</code></td><td data-label="Used by">Liveness probe</td><td data-label="Checks">Process responding. No model load required.</td><td data-label="On failure" class="diyHighlight">Restart container if wedged. Keep this shallow.</td></tr>
+            <tr><td data-label="Path"><code>/api/tags</code></td><td data-label="Used by">Readiness + external monitor</td><td data-label="Checks">Lists downloaded models. Fast, no inference cost.</td><td data-label="On failure" class="diyHighlight">Wait for primary model name before traffic. Alert if unreachable 2x.</td></tr>
+            <tr><td data-label="Path"><code>/api/ps</code></td><td data-label="Used by">VRAM diagnostics</td><td data-label="Checks">Shows models loaded in memory now. Catches eviction under load.</td><td data-label="On failure" class="diyHighlight">Warn when expected model missing from ps but still in tags.</td></tr>
+            <tr><td data-label="Path"><code>/api/generate</code></td><td data-label="Used by">Inference smoke</td><td data-label="Checks">Tiny prompt, num_predict=1. Catches hung GPU or queue stalls.</td><td data-label="On failure" class="diyHighlight">Alert when tags pass but generate times out.</td></tr>
+            <tr><td data-label="Path"><code>Public inference URL</code></td><td data-label="Used by">External monitor</td><td data-label="Checks">Same hostname, TLS, and path your apps use.</td><td data-label="On failure" class="diyHighlight">Page when users cannot reach inference, not only in-cluster.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="scrollHook">
+          <p>These probes catch crashes. They do not prevent the 2am false page during a normal model cold start. That requires <a href="#threshold-engineering">threshold math</a>, and knowing <a href="#automation-safety">which failures are safe for a script to fix</a> vs. which need a human.</p>
+        </div>
+        <pre class="codeBlock"><code># Liveness: process up
 curl -sf http://ollama:11434/
 
 # Readiness: model listed
@@ -186,8 +215,8 @@ curl -sf http://ollama:11434/api/generate -d '{
 
 # Through the same URL users hit (TLS + ingress)
 curl -sf https://inference.example.com/api/tags</code></pre>
-      <p class="bodyText">Kubernetes probe wiring for Ollama (copy into your Deployment):</p>
-      <pre class="codeBlock"><code># Liveness: process only (never check model load here)
+        <p class="bodyText">Kubernetes probe wiring for Ollama (copy into your Deployment):</p>
+        <pre class="codeBlock"><code># Liveness: process only (never check model load here)
 livenessProbe:
   httpGet:
     path: /
@@ -219,24 +248,94 @@ resources:
   limits:
     memory: &quot;16Gi&quot;
     nvidia.com/gpu: &quot;1&quot;</code></pre>
-      <p class="citeRow">Reference: <a href="https://github.com/ollama/ollama/blob/main/docs/api.md" target="_blank" rel="noopener noreferrer">Ollama API docs</a> · <a href="https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/" target="_blank" rel="noopener noreferrer">Kubernetes probe docs</a></p>
+        <p class="citeRow">Reference: <a href="https://github.com/ollama/ollama/blob/main/docs/api.md" target="_blank" rel="noopener noreferrer">Ollama API docs</a> · <a href="https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/" target="_blank" rel="noopener noreferrer">Kubernetes probe docs</a></p>
+      </section>
 
-      <h2 class="sectionHead">Ollama-native signals: /api/ps and keep_alive</h2>
-      <p class="bodyText">Generic pod monitors miss the failure modes that only show up in Ollama's API. These three settings separate "process is up" from "inference is ready for production traffic."</p>
-      <div class="diyWrap">
-        <table class="compareTable">
-          <thead><tr><th>Signal</th><th>What goes wrong</th><th>In AlertMend</th></tr></thead>
-          <tbody>
-            <tr><td><code>OLLAMA_KEEP_ALIVE</code></td><td>Models unload after idle timeout. Next request pays cold-start latency that looks like an outage.</td><td class="diyHighlight">Set keep_alive to match traffic (e.g. -1 or 30m). AlertMend latency baseline alerts catch spikes before users complain.</td></tr>
-            <tr><td><code>/api/ps vs /api/tags</code></td><td>tags lists installed models on disk. ps lists what is loaded in VRAM right now.</td><td class="diyHighlight">In AlertMend: optional check script asserts your model appears in ps during business hours.</td></tr>
-            <tr><td><code>Model in tags JSON</code></td><td>Readiness should confirm llama3.2 (or your model) is present, not just HTTP 200.</td><td class="diyHighlight">In AlertMend: URL check body assertion or exec probe with jq before marking healthy.</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <section class="sectionChapter sectionChapterAlt" id="threshold-engineering">
+        <p class="sectionLabel">Chapter 2 · Thresholds</p>
+        <h2 class="sectionHead">The formula that stops false pages during cold starts</h2>
+        <p class="bodyText">Remember the Friday 3:42pm embedding failure? <code>/api/tags</code> passed while generate timed out. A fixed 30s probe interval would have paged you during normal GPU weight load.</p>
+        <div class="formulaCard">
+          <p class="formulaCardLabel">Key formula</p>
+          <div class="thresholdFormula">alert when sustained_p99(10m) &gt; max(baseline_p99 × 1.5, baseline_p95 + 2σ)
+  AND model_load_grace_elapsed &gt; initialDelaySeconds + 30s</div>
+        </div>
+        <div class="diyWrap tableScrollWrap">
+          <table class="compareTable responsiveTable">
+            <thead><tr><th>Rule</th><th>Threshold</th><th>Why</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Rule">API down paging</td><td data-label="Threshold" class="diyHighlight">2 consecutive /api/tags failures from the same check path within 60s</td><td data-label="Why">Single blip during model swap is not an outage</td></tr>
+            <tr><td data-label="Rule">Inference latency</td><td data-label="Threshold" class="diyHighlight">sustained p99 > max(baseline p99 x 1.5, baseline p99 + 2 sigma) for 10 min</td><td data-label="Why">Recompute baseline weekly from off-peak traffic</td></tr>
+            <tr><td data-label="Rule">Model cold start grace</td><td data-label="Threshold" class="diyHighlight">Suppress alerts for initialDelaySeconds + 30s after pod Ready</td><td data-label="Why">Large models on fresh PVC often need 60-120s before /api/tags is reliable</td></tr>
+            <tr><td data-label="Rule">OOM auto-fix</td><td data-label="Threshold" class="diyHighlight">Exit 137 or OOMKilled + URL check still failing after 1 restart attempt</td><td data-label="Why">Restart once idempotently. Escalate if OOM repeats within 15 min</td></tr>
+            <tr><td data-label="Rule">Open WebUI split</td><td data-label="Threshold" class="diyHighlight">WebUI /health 200 AND Ollama /api/tags fail for 2 checks</td><td data-label="Why">UI can load while backend inference is broken</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-      <h2 class="sectionHead">Phase 2: when to add Prometheus</h2>
-      <p class="bodyText">Start with URL checks and auto-restart in AlertMend. Add Prometheus when you need historical VRAM graphs, token throughput, and custom SLO dashboards. Ollama requires an exporter sidecar because the API returns JSON, not Prometheus text format.</p>
-      <pre class="codeBlock"><code># Phase 2: Ollama has no native /metrics. Add a sidecar exporter.
+      <section class="sectionChapter" id="automation-safety">
+        <p class="sectionLabel">Chapter 3 · Automation</p>
+        <h2 class="sectionHead">Safe to automate vs human required</h2>
+        <p class="bodyText">The difference between a production runbook and a dangerous script is knowing where to stop. Here is the line.</p>
+        <div class="automationMatrix">
+          <div class="automationColumn automationColumnSafe">
+            <h3 class="automationColumnTitle"><span aria-hidden="true">✓</span> Safe to automate</h3>
+            <ul class="automationList">
+            <li class="automationItem automationItemSafe"><span class="automationIcon" aria-hidden="true">✓</span><div><strong>OOMKilled (exit 137)</strong><p>VRAM or container memory limit exceeded. Rollout restart Deployment, re-probe /api/tags twice. Escalate if OOM repeats within 15 min.</p></div></li>
+            <li class="automationItem automationItemSafe"><span class="automationIcon" aria-hidden="true">✓</span><div><strong>CrashLoopBackOff</strong><p>Bad env, missing model, probe too aggressive. Restart with deploy grace. Rollback suggestion if crash started after rollout.</p></div></li>
+            <li class="automationItem automationItemSafe"><span class="automationIcon" aria-hidden="true">✓</span><div><strong>502 / 504 from proxy</strong><p>Pod restarting, upstream timeout. Restart on public URL failure. Suppress during known deploy window.</p></div></li>
+            <li class="automationItem automationItemSafe"><span class="automationIcon" aria-hidden="true">✓</span><div><strong>Model evicted under load</strong><p>Cold start on next request. Latency baseline alert before auto-restart. Optional /api/ps assertion.</p></div></li>
+            <li class="automationItem automationItemSafe"><span class="automationIcon" aria-hidden="true">✓</span><div><strong>GPU node NotReady</strong><p>Node drain or driver glitch. Restart pod after node recovers. Correlate node event with URL failure.</p></div></li>
+            </ul>
+          </div>
+          <div class="automationColumn automationColumnDanger">
+            <h3 class="automationColumnTitle"><span aria-hidden="true">⛔</span> Human required</h3>
+            <ul class="automationList">
+            <li class="automationItem automationItemDanger"><span class="automationIcon" aria-hidden="true">⛔</span><div><strong>Delete model PVC</strong><p>Data loss, hours to re-pull. Page on-call with disk and model inventory.</p></div></li>
+            <li class="automationItem automationItemDanger"><span class="automationIcon" aria-hidden="true">⛔</span><div><strong>Change quantization at runtime</strong><p>Wrong model behavior. Human approval + staged rollout.</p></div></li>
+            <li class="automationItem automationItemDanger"><span class="automationIcon" aria-hidden="true">⛔</span><div><strong>Multi-tenant model purge</strong><p>Cross-team impact. Coordinate manually.</p></div></li>
+            <li class="automationItem automationItemDanger"><span class="automationIcon" aria-hidden="true">⛔</span><div><strong>Cluster-wide GPU drain</strong><p>Blast radius across workloads. Runbook with maintenance window.</p></div></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="sectionChapter sectionChapterAlt">
+        <p class="sectionLabel">Chapter 4 · Ollama-specific</p>
+        <h2 class="sectionHead">Ollama-native signals: /api/ps and keep_alive</h2>
+        <p class="bodyText">Generic pod monitors miss failure modes that only show up in Ollama&apos;s API.</p>
+        <div class="diyWrap tableScrollWrap">
+          <table class="compareTable responsiveTable">
+            <thead><tr><th>Signal</th><th>What goes wrong</th><th>In AlertMend</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Signal"><code>OLLAMA_KEEP_ALIVE</code></td><td data-label="What goes wrong">Models unload after idle timeout. Next request pays cold-start latency that looks like an outage.</td><td data-label="In AlertMend" class="diyHighlight">Set keep_alive to match traffic (e.g. -1 or 30m). Latency baseline alerts catch spikes before users complain.</td></tr>
+            <tr><td data-label="Signal"><code>/api/ps vs /api/tags</code></td><td data-label="What goes wrong">tags lists installed models on disk. ps lists what is loaded in VRAM right now.</td><td data-label="In AlertMend" class="diyHighlight">Optional check script asserts your model appears in ps during business hours.</td></tr>
+            <tr><td data-label="Signal"><code>Model in tags JSON</code></td><td data-label="What goes wrong">Readiness should confirm llama3.2 (or your model) is present, not just HTTP 200.</td><td data-label="In AlertMend" class="diyHighlight">URL check body assertion or exec probe with jq before marking healthy.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="keyInsight">
+          <p><strong>Key insight:</strong> A model listed in <code>/api/tags</code> is not necessarily loaded in VRAM. After a cold start, <code>/api/tags</code> returns 200 while inference times out for 60-120 seconds. This is the #1 cause of false &ldquo;Ollama is healthy&rdquo; signals.</p>
+        </div>
+      </section>
+
+      <section class="sectionChapter" id="prometheus-phase">
+        <p class="sectionLabel">Chapter 5 · When to scale observability</p>
+        <h2 class="sectionHead">When to add Prometheus (and when it is overkill)</h2>
+        <p class="bodyText">Do not start here. Ollama has no native <code>/metrics</code> endpoint. You need a sidecar exporter, which means Prometheus is a second component to maintain.</p>
+        <div class="diyWrap tableScrollWrap">
+          <table class="compareTable responsiveTable">
+            <thead><tr><th>Question</th><th>If yes →</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Question">Need historical VRAM graphs?</td><td data-label="If yes" class="diyHighlight">Add Prometheus + sidecar exporter</td></tr>
+            <tr><td data-label="Question">Need token throughput dashboards?</td><td data-label="If yes" class="diyHighlight">Add Prometheus</td></tr>
+            <tr><td data-label="Question">Need SLO burn rate alerts?</td><td data-label="If yes" class="diyHighlight">Add Prometheus</td></tr>
+            <tr><td data-label="Question">Just need &quot;is it up?&quot; + auto-restart</td><td data-label="If yes" class="diyHighlight">AlertMend alone is enough for phase one</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <pre class="codeBlock"><code># Phase 2: Ollama has no native /metrics. Add a sidecar exporter.
 - name: ollama-exporter
   image: ghcr.io/maravexa/ollama-exporter:latest
   ports:
@@ -245,124 +344,36 @@ resources:
     - name: OLLAMA_BASE_URL
       value: &quot;http://localhost:11434&quot;
 # Prometheus scrapes :8000/metrics (ollama_up, model VRAM, load events)</code></pre>
-      <p class="bodyText">AlertMend stays your incident and auto-fix layer. Prometheus stays your capacity planning layer. Most teams run both once inference is business-critical.</p>
+      </section>
 
-      <div class="proofBand">
-        <p class="proofStat"><span class="proofStatNum">~52s</span> typical AlertMend recovery</p>
-        <p class="proofBody">From first failed <code>/api/tags</code> check to verified 200 with model loaded. One AI startup on cloud servers saw <strong>90%+ of recurring failures remediate themselves</strong> after wiring alerts and auto-restart. <a href="/case-studies">Read the case study</a>.</p>
-      </div>
-
-      <h2 class="sectionHead">What setup looks like in AlertMend</h2>
-      <p class="bodyText">Three clicks in the product mirror the five-step playbook below. Tab through the console mock.</p>
-      <div class="amConsole" aria-label="AlertMend console mock">
-        <div class="amConsoleTabs" role="tablist" aria-label="AlertMend setup steps">
-          <button type="button" role="tab" class="amConsoleTab amConsoleTabActive" data-am-screen="connect" aria-selected="true">1. Connect</button>
-          <button type="button" role="tab" class="amConsoleTab" data-am-screen="check" aria-selected="false">2. URL check</button>
-          <button type="button" role="tab" class="amConsoleTab" data-am-screen="runbook" aria-selected="false">3. Runbook</button>
+      <section class="sectionChapter sectionChapterAlt">
+        <p class="sectionLabel">Chapter 6 · Why scripts fail</p>
+        <h2 class="sectionHead">Why scripts break at 2am</h2>
+        <p class="bodyText">A bash restart script fixes one symptom. It does not correlate URL failure with OOMKilled, suppress during deploys, or verify recovery before paging. <span class="proofInline">Typical recovery with layered checks: ~52s (<a href="/case-studies">case study</a>).</span></p>
+        <div class="diyWrap tableScrollWrap">
+          <table class="compareTable responsiveTable">
+            <thead><tr><th>Scenario</th><th>Bash script</th><th>AlertMend</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Scenario">Deploy suppression</td><td data-label="Bash script">A cron restart during rollout makes outages worse.</td><td data-label="AlertMend" class="diyHighlight">Pauses runbooks during active rollouts and resumes checks after grace.</td></tr>
+            <tr><td data-label="Scenario">Correlated incidents</td><td data-label="Bash script">Uptime Robot sees 502. kubectl sees OOMKilled. Two tools, no story.</td><td data-label="AlertMend" class="diyHighlight">Opens one Slack thread with URL failure plus exit 137 context.</td></tr>
+            <tr><td data-label="Scenario">Verify before page</td><td data-label="Bash script">Scripts restart and assume success. On-call still wakes up.</td><td data-label="AlertMend" class="diyHighlight">Re-probes /api/tags twice. Pages only if verification fails.</td></tr>
+            <tr><td data-label="Scenario">AI incident summary</td><td data-label="Bash script">Raw pod events in Slack at 2am help nobody.</td><td data-label="AlertMend" class="diyHighlight">Posts plain-language root cause and what the runbook did.</td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="amConsoleChrome">
-          <div class="chromeDots"><span class="chromeDot"></span><span class="chromeDot"></span><span class="chromeDot"></span></div>
-          <span class="amConsoleTitle" id="am-console-title">AlertMend · Clusters</span>
-          <span class="liveBadge"><span class="liveDot"></span> Live</span>
-        </div>
-        <div class="amConsoleBody" id="am-screen-connect" role="tabpanel">
-          <div class="amConsoleRow amConsoleRowHead"><span>Cluster</span><span>Agent</span><span>Namespace</span><span>Status</span></div>
-          <div class="amConsoleRow"><span>prod-us-east</span><span>alertmend-agent</span><span>inference</span><span class="amStatusOk">Connected</span></div>
-          <div class="amConsoleRow"><span class="amConsoleMuted">ollama-prod</span><span>-</span><span>deployment/ollama</span><span class="amStatusWarn">1 restart (1h)</span></div>
-          <p class="amConsoleHint">Ollama pod events and OOMKilled history appear without Prometheus wiring.</p>
-        </div>
-        <div class="amConsoleBody hidden" id="am-screen-check" role="tabpanel">
-          <p class="amConsoleLabel">URL check · external</p>
-          <p class="amConsoleUrl">https://inference.example.com/api/tags</p>
-          <div class="amConsoleCheckRow"><span>Interval</span><span>60s</span></div>
-          <div class="amConsoleCheckRow"><span>Fail threshold</span><span>2 consecutive</span></div>
-          <div class="amConsoleCheckRow"><span>Body assert</span><span>contains "llama3.2"</span></div>
-          <div class="amConsoleCheckRow"><span>Deploy grace</span><span>120s after rollout</span></div>
-          <p class="amConsoleHint">Same hostname and TLS your chat and RAG apps use.</p>
-        </div>
-        <div class="amConsoleBody hidden" id="am-screen-runbook" role="tabpanel">
-          <p class="amConsoleLabel">Runbook · ollama-restart</p>
-          <div class="amRunbookStep"><span class="amRunbookNum">1</span><span>Rollout restart deployment/ollama</span></div>
-          <div class="amRunbookStep"><span class="amRunbookNum">2</span><span>Wait for rollout status (180s max)</span></div>
-          <div class="amRunbookStep"><span class="amRunbookNum">3</span><span>Re-probe URL check twice</span></div>
-          <div class="amRunbookStep amRunbookStepOk"><span class="amRunbookNum">✓</span><span>Slack #incidents if verified · page if not</span></div>
-          <p class="amConsoleHint">Idempotent: safe to run twice. Suppressed during active deploys.</p>
-        </div>
-      </div>
-
-      <h2 class="sectionHead">Why not kubectl plus a cron job?</h2>
-      <p class="bodyText">A bash restart script fixes one symptom. It does not correlate URL failure with OOMKilled, suppress during deploys, or verify recovery before paging.</p>
-      <div class="diffGrid">
-        <div class="diffCard"><h3 class="diffCardTitle">Deploy suppression</h3><p class="diffCardProblem">A cron restart during rollout makes outages worse.</p><p class="diffCardAm"><strong>In AlertMend:</strong> AlertMend pauses runbooks during active rollouts and resumes checks after grace.</p></div>
-        <div class="diffCard"><h3 class="diffCardTitle">Correlated incidents</h3><p class="diffCardProblem">Uptime Robot sees 502. kubectl sees OOMKilled. Two tools, no story.</p><p class="diffCardAm"><strong>In AlertMend:</strong> AlertMend opens one Slack thread with URL failure plus exit 137 context.</p></div>
-        <div class="diffCard"><h3 class="diffCardTitle">Verify before page</h3><p class="diffCardProblem">Scripts restart and assume success. On-call still wakes up.</p><p class="diffCardAm"><strong>In AlertMend:</strong> AlertMend re-probes /api/tags twice. Pages only if verification fails.</p></div>
-        <div class="diffCard"><h3 class="diffCardTitle">AI incident summary</h3><p class="diffCardProblem">Raw pod events in Slack at 2am help nobody.</p><p class="diffCardAm"><strong>In AlertMend:</strong> AlertMend posts plain-language root cause and what the runbook did.</p></div>
-      </div>
-
-      <h2 class="sectionHead">Live monitor mock</h2>
-      <p class="bodyText">Click a failure mode to see kubectl commands. Hit <strong>Simulate recovery</strong> after auto-fix succeeds.</p>
-      <div class="monitorMock" aria-label="Ollama URL monitor dashboard mock">
-        <div class="monitorMockHead">
-          <span class="monitorMockLabel">External check · same URL as your apps</span>
-        </div>
-        <div class="monitorMockUrl" id="mock-url">https://inference.example.com/api/tags</div>
-        <div class="monitorMockStatusRow">
-          <span class="mockStatusDot mockStatusDotError" id="mock-status-dot"></span>
-          <span class="mockStatusCode" id="mock-status-code">FAIL</span>
-          <span class="mockStatusLabel mockStatusLabelError" id="mock-status-label">Connection refused</span>
-        </div>
-        <div class="monitorMockBar"><div class="monitorMockBarFill" id="mock-bar-fill"></div></div>
-        <p class="monitorMockMeta" id="mock-meta">Last check: 891ms · 2 consecutive failures · auto-fix eligible</p>
-        <button type="button" class="mockRecoverBtn" id="mock-recover-btn">Simulate recovery</button>
-      </div>
-
-      <h2 class="sectionHead">Pick a failure mode: kubectl + auto-fix</h2>
-      <div class="modeGrid" role="tablist" aria-label="Ollama failure modes">
-        <button type="button" role="tab" data-failure-id="oom" class="modeCard modeCardActive" aria-selected="true"><span class="modeCardTitle">OOMKilled</span><span class="modeCardSub">Exit 137</span></button>
-        <button type="button" role="tab" data-failure-id="timeout" class="modeCard" aria-selected="false"><span class="modeCardTitle">Generate timeout</span><span class="modeCardSub">Tags OK, inference hung</span></button>
-        <button type="button" role="tab" data-failure-id="proxy502" class="modeCard" aria-selected="false"><span class="modeCardTitle">502 / 504</span><span class="modeCardSub">Proxy errors</span></button>
-        <button type="button" role="tab" data-failure-id="crashloop" class="modeCard" aria-selected="false"><span class="modeCardTitle">CrashLoopBackOff</span><span class="modeCardSub">Probe or config</span></button>
-      </div>
-      <div class="modePlaybook" role="tabpanel">
-        <div class="modePlaybookHead">
-          <h3 class="modePlaybookTitle" id="failure-playbook-title">OOMKilled (exit 137)</h3>
-        </div>
-        <p class="modePlaybookSummary" id="failure-playbook-summary"></p>
-        <ul class="checkList" id="failure-playbook-steps"></ul>
-        <pre class="playbookCode" id="failure-playbook-code" aria-label="kubectl and curl commands"></pre>
-        <p class="autofixBadge" id="failure-playbook-autofix"></p>
-        <div class="stepTip"><span id="failure-playbook-tip"></span></div>
-      </div>
-
-      <h2 class="sectionHead">Threshold engineering for model load</h2>
-      <p class="bodyText">A fixed 30s probe interval pages you during normal cold starts. A fixed 3s latency threshold pages you on large models that are healthy. Use baselines and deploy grace.</p>
-      <div class="thresholdFormula">alert when sustained_p99(10m) &gt; max(baseline_p99 × 1.5, baseline_p95 + 2σ)
-  AND model_load_grace_elapsed &gt; initialDelaySeconds + 30s</div>
-      <div class="diyWrap">
-        <table class="compareTable">
-          <thead><tr><th>Rule</th><th>Threshold</th><th>Why</th></tr></thead>
-          <tbody>
-            <tr><td>API down paging</td><td class="diyHighlight">2 consecutive /api/tags failures from the same check path within 60s</td><td>Single blip during model swap is not an outage</td></tr>
-            <tr><td>Inference latency</td><td class="diyHighlight">sustained p99 > max(baseline p99 x 1.5, baseline p99 + 2 sigma) for 10 min</td><td>Recompute baseline weekly from off-peak traffic</td></tr>
-            <tr><td>Model cold start grace</td><td class="diyHighlight">Suppress alerts for initialDelaySeconds + 30s after pod Ready</td><td>Large models on fresh PVC often need 60-120s before /api/tags is reliable</td></tr>
-            <tr><td>OOM auto-fix</td><td class="diyHighlight">Exit 137 or OOMKilled + URL check still failing after 1 restart attempt</td><td>Restart once idempotently. Escalate if OOM repeats within 15 min</td></tr>
-            <tr><td>Open WebUI split</td><td class="diyHighlight">WebUI /health 200 AND Ollama /api/tags fail for 2 checks</td><td>UI can load while backend inference is broken</td></tr>
-          </tbody>
-        </table>
-      </div>
+        <p class="inlineCta">AlertMend handles layered checks and verify-before-page out of the box. <a href="https://app.alertmend.io/signup?service=remediation&source=blog-ollama&blog_slug=monitor-ollama-using-alertmend">Free tier available</a>.</p>
+      </section>
 
       <h2 class="sectionHead">How does AlertMend recover Ollama automatically?</h2>
-      <p class="sectionSub">Sequence view: health check fails, Slack incident opens, restart runbook runs, inference resumes.</p>
       <figure class="flowDiagram">
-        <img src="/assets/monitor-ollama-using-alertmend/ollama-alertmend-recovery-flow.svg" alt="Sequence diagram: Ollama health check failure, AlertMend detects the failure, alerts Slack, runs auto-recovery runbook, and Ollama returns online" width="960" height="720" loading="lazy">
-        <figcaption class="flowDiagramCaption">Normal operation, OOM or API failure, Slack alert with AI summary, runbook restart, chat and RAG traffic restored.</figcaption>
+        <img src="/assets/monitor-ollama-using-alertmend/ollama-alertmend-recovery-flow.svg" alt="Sequence diagram: Ollama health check failure, AlertMend detects, alerts Slack, runs auto-recovery runbook" width="960" height="720" loading="lazy">
+        <figcaption class="flowDiagramCaption">Health check fails, restart runbook runs, inference resumes. Typical duration: 52s.</figcaption>
       </figure>
 
-      <h2 class="sectionHead">AlertMend flow: detect, fix, verify, notify</h2>
-      <p class="bodyText">This is what a complete Ollama monitoring loop looks like in production. No page if verification passes.</p>
+      <h2 class="sectionHead" id="detect-fix-flow">Detect, fix, verify, notify</h2>
       <div class="remediationFlow">
         <div class="flowStep"><span class="flowStepNum">·</span><p class="flowStepTitle">/api/tags fails</p><p class="flowStepBody">External check: connection refused x2</p></div>
-        <div class="flowStep flowStepAction"><span class="flowStepNum">⚡</span><p class="flowStepTitle">Correlate</p><p class="flowStepBody">AlertMend: OOMKilled exit 137, pod NotReady</p></div>
+        <div class="flowStep flowStepAction"><span class="flowStepNum">⚡</span><p class="flowStepTitle">Correlate</p><p class="flowStepBody">Match URL failure with OOMKilled exit 137 or pod NotReady</p></div>
         <div class="flowStep flowStepAction"><span class="flowStepNum">⚡</span><p class="flowStepTitle">Auto-fix</p><p class="flowStepBody">Rollout restart deployment/ollama</p></div>
         <div class="flowStep flowStepDone"><span class="flowStepNum">✓</span><p class="flowStepTitle">Verify</p><p class="flowStepBody">Re-probe /api/tags: 200, model listed</p></div>
         <div class="flowStep flowStepDone"><span class="flowStepNum">✓</span><p class="flowStepTitle">Notify</p><p class="flowStepBody">Slack: auto-resolved. No page.</p></div>
@@ -375,15 +386,14 @@ resources:
       </div>
 
       <h2 class="sectionHead">How to monitor Ollama by deployment mode</h2>
-      <p class="bodyText">Pick how you run Ollama. Each tab shows AlertMend setup steps for that layout.</p>
       <div class="modeGrid modeGridSecondary" role="tablist" aria-label="Ollama deployment modes">
-        <button type="button" role="tab" data-mode-id="docker" class="modeCard" aria-selected="false"><span class="modeCardTitle">Docker / Compose</span><span class="modeCardSub">Single host</span></button>
-        <button type="button" role="tab" data-mode-id="kubernetes" class="modeCard modeCardActive" aria-selected="true"><span class="modeCardTitle">Kubernetes</span><span class="modeCardSub">Production K8s</span></button>
-        <button type="button" role="tab" data-mode-id="systemd" class="modeCard" aria-selected="false"><span class="modeCardTitle">systemd on VM</span><span class="modeCardSub">Bare metal or VPS</span></button>
-        <button type="button" role="tab" data-mode-id="gpu" class="modeCard" aria-selected="false"><span class="modeCardTitle">GPU scheduling</span><span class="modeCardSub">NVIDIA on K8s</span></button>
-        <button type="button" role="tab" data-mode-id="openwebui" class="modeCard" aria-selected="false"><span class="modeCardTitle">Open WebUI stack</span><span class="modeCardSub">Chat + Ollama</span></button>
+        <button type="button" role="tab" data-mode-id="docker" class="modeCard" aria-selected="false" aria-controls="mode-playbook-panel" id="mode-tab-docker"><span class="modeCardTitle">Docker / Compose</span><span class="modeCardSub">Single host</span></button>
+        <button type="button" role="tab" data-mode-id="kubernetes" class="modeCard modeCardActive" aria-selected="true" aria-controls="mode-playbook-panel" id="mode-tab-kubernetes"><span class="modeCardTitle">Kubernetes</span><span class="modeCardSub">Production K8s</span></button>
+        <button type="button" role="tab" data-mode-id="systemd" class="modeCard" aria-selected="false" aria-controls="mode-playbook-panel" id="mode-tab-systemd"><span class="modeCardTitle">systemd on VM</span><span class="modeCardSub">Bare metal or VPS</span></button>
+        <button type="button" role="tab" data-mode-id="gpu" class="modeCard" aria-selected="false" aria-controls="mode-playbook-panel" id="mode-tab-gpu"><span class="modeCardTitle">GPU scheduling</span><span class="modeCardSub">NVIDIA on K8s</span></button>
+        <button type="button" role="tab" data-mode-id="openwebui" class="modeCard" aria-selected="false" aria-controls="mode-playbook-panel" id="mode-tab-openwebui"><span class="modeCardTitle">Open WebUI stack</span><span class="modeCardSub">Chat + Ollama</span></button>
       </div>
-      <div class="modePlaybook modePlaybookSecondary" role="tabpanel">
+      <div class="modePlaybook modePlaybookSecondary" id="mode-playbook-panel" role="tabpanel" aria-labelledby="mode-tab-kubernetes">
         <div class="modePlaybookHead">
           <h3 class="modePlaybookTitle" id="mode-playbook-title">Runbook: Kubernetes</h3>
           <span class="modePlaybookBadge">Production</span>
@@ -394,39 +404,56 @@ resources:
         <div class="stepTip"><span id="mode-playbook-tip"></span></div>
       </div>
 
-      <h2 class="sectionHead">Safe to automate vs human required</h2>
-      <div class="searchIssueGrid">
-        <div class="searchIssueCard"><h3 class="searchIssueTerm">OOMKilled (exit 137)</h3><p class="searchIssueDesc">VRAM or container memory limit exceeded</p><p class="searchIssueAlert">In AlertMend: OOM runbook restarts the Deployment, re-probes /api/tags twice, posts model and node context to Slack.</p></div>
-        <div class="searchIssueCard"><h3 class="searchIssueTerm">CrashLoopBackOff</h3><p class="searchIssueDesc">Bad env, missing model, probe too aggressive</p><p class="searchIssueAlert">In AlertMend: attach restart runbook with deploy grace; rollback suggestion in Slack if crash started after rollout.</p></div>
-        <div class="searchIssueCard"><h3 class="searchIssueTerm">502 / 504 from proxy</h3><p class="searchIssueDesc">Pod restarting, upstream timeout</p><p class="searchIssueAlert">In AlertMend: URL check on public hostname triggers restart; suppress alerts during known deploy window.</p></div>
-        <div class="searchIssueCard"><h3 class="searchIssueTerm">Model evicted under load</h3><p class="searchIssueDesc">Cold start on next request</p><p class="searchIssueAlert">In AlertMend: latency baseline alert plus optional /api/ps assertion before auto-restart.</p></div>
-        <div class="searchIssueCard"><h3 class="searchIssueTerm">GPU node NotReady</h3><p class="searchIssueDesc">Node drain or driver glitch</p><p class="searchIssueAlert">In AlertMend: correlate node event with failed inference URL check, restart pod after node recovers.</p></div>
-      </div>
-      <div class="diyWrap" style="margin-top:1.25rem">
-        <table class="compareTable">
-          <thead><tr><th>Do not automate</th><th>Why</th><th>Instead</th></tr></thead>
-          <tbody>
-            <tr><td>Delete model PVC</td><td>Data loss, hours to re-pull</td><td class="diyHighlight">Page on-call with disk and model inventory</td></tr>
-            <tr><td>Change quantization at runtime</td><td>Wrong model behavior</td><td class="diyHighlight">Human approval + staged rollout</td></tr>
-            <tr><td>Multi-tenant model purge</td><td>Cross-team impact</td><td class="diyHighlight">Coordinate manually</td></tr>
-            <tr><td>Cluster-wide GPU drain</td><td>Blast radius across workloads</td><td class="diyHighlight">Runbook with maintenance window</td></tr>
-          </tbody>
-        </table>
+      <h2 class="sectionHead" id="setup-steps">Five steps with AlertMend</h2>
+      <p class="setupTimeEstimate">Setup time: ~15 minutes for basic monitoring. ~30 minutes with custom thresholds and runbooks.</p>
+      <div class="amFlow">
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">1</span><span class="amStepTime">2 min</span></div><h3 class="amStepTitle">Connect cluster or host</h3><p class="amStepBody">Install the AlertMend agent. Ollama pod events, OOMKilled, and restart history appear without Prometheus wiring.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">2</span><span class="amStepTime">5 min</span></div><h3 class="amStepTitle">Layer health checks</h3><p class="amStepBody">/api/tags for liveness, optional /api/generate smoke, and the public URL your apps call through Ingress.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">3</span><span class="amStepTime">8 min</span></div><h3 class="amStepTitle">Set thresholds</h3><p class="amStepBody">Model-load grace after deploy. Baseline-relative latency. Split Open WebUI vs Ollama backend checks.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">4</span><span class="amStepTime">5 min</span></div><h3 class="amStepTitle">Attach idempotent runbooks</h3><p class="amStepBody">Restart Deployment or StatefulSet. Safe to run twice. Include deploy suppression window.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">5</span><span class="amStepTime">2 min</span></div><h3 class="amStepTitle">Verify then notify</h3><p class="amStepBody">Re-probe /api/tags twice. Slack on success. Page only if verification fails after auto-fix.</p></div>
       </div>
 
-      <h2 class="sectionHead">Five steps with AlertMend</h2>
-      <div class="amFlow">
-        <div class="amStep"><div class="amStepHead"><span class="amStepNum">1</span></div><h3 class="amStepTitle">Connect cluster or host</h3><p class="amStepBody">Install the AlertMend agent. Ollama pod events, OOMKilled, and restart history appear without Prometheus wiring.</p></div>
-        <div class="amStep"><div class="amStepHead"><span class="amStepNum">2</span></div><h3 class="amStepTitle">Layer health checks</h3><p class="amStepBody">/api/tags for liveness, optional /api/generate smoke, and the public URL your apps call through Ingress.</p></div>
-        <div class="amStep"><div class="amStepHead"><span class="amStepNum">3</span></div><h3 class="amStepTitle">Set thresholds</h3><p class="amStepBody">Model-load grace after deploy. Baseline-relative latency. Split Open WebUI vs Ollama backend checks.</p></div>
-        <div class="amStep"><div class="amStepHead"><span class="amStepNum">4</span></div><h3 class="amStepTitle">Attach idempotent runbooks</h3><p class="amStepBody">Restart Deployment or StatefulSet. Safe to run twice. Include deploy suppression window.</p></div>
-        <div class="amStep"><div class="amStepHead"><span class="amStepNum">5</span></div><h3 class="amStepTitle">Verify then notify</h3><p class="amStepBody">Re-probe /api/tags twice. Slack on success. Page only if verification fails after auto-fix.</p></div>
+      <h2 class="sectionHead">Try it: live monitor mock</h2>
+      <p class="bodyText">Click a failure mode. Hit <strong>Simulate recovery</strong> after auto-fix succeeds.</p>
+      <div class="monitorMock monitorMockProminent" aria-label="Ollama URL monitor dashboard mock">
+        <div class="monitorMockHead">
+          <span class="monitorMockLabel">External check · same URL as your apps</span>
+        </div>
+        <div class="monitorMockUrl" id="mock-url">https://inference.example.com/api/tags</div>
+        <div class="monitorMockStatusRow">
+          <span class="mockStatusDot mockStatusDotError" id="mock-status-dot"></span>
+          <span class="mockStatusCode" id="mock-status-code">FAIL</span>
+          <span class="mockStatusLabel mockStatusLabelError" id="mock-status-label">Connection refused</span>
+        </div>
+        <div class="monitorMockBar"><div class="monitorMockBarFill" id="mock-bar-fill"></div></div>
+        <p class="monitorMockMeta" id="mock-meta">Last check: 891ms · 2 consecutive failures · auto-fix eligible</p>
+        <button type="button" class="mockRecoverBtn" id="mock-recover-btn" aria-label="Simulate Ollama recovery after OOMKilled failure">Simulate recovery</button>
+      </div>
+
+      <h2 class="sectionHead">Pick a failure mode: kubectl commands</h2>
+      <div class="modeGrid" role="tablist" aria-label="Ollama failure modes">
+        <button type="button" role="tab" data-failure-id="oom" class="modeCard modeCardActive" aria-selected="true" aria-controls="failure-playbook-panel" id="failure-tab-oom"><span class="modeCardTitle">OOMKilled</span><span class="modeCardSub">Exit 137</span></button>
+        <button type="button" role="tab" data-failure-id="timeout" class="modeCard" aria-selected="false" aria-controls="failure-playbook-panel" id="failure-tab-timeout"><span class="modeCardTitle">Generate timeout</span><span class="modeCardSub">Tags OK, inference hung</span></button>
+        <button type="button" role="tab" data-failure-id="proxy502" class="modeCard" aria-selected="false" aria-controls="failure-playbook-panel" id="failure-tab-proxy502"><span class="modeCardTitle">502 / 504</span><span class="modeCardSub">Proxy errors</span></button>
+        <button type="button" role="tab" data-failure-id="crashloop" class="modeCard" aria-selected="false" aria-controls="failure-playbook-panel" id="failure-tab-crashloop"><span class="modeCardTitle">CrashLoopBackOff</span><span class="modeCardSub">Probe or config</span></button>
+      </div>
+      <div class="modePlaybook" id="failure-playbook-panel" role="tabpanel" aria-labelledby="failure-tab-oom">
+        <div class="modePlaybookHead">
+          <h3 class="modePlaybookTitle" id="failure-playbook-title">Runbook: OOMKilled</h3>
+        </div>
+        <p class="modePlaybookSummary" id="failure-playbook-summary"></p>
+        <ul class="checkList" id="failure-playbook-steps"></ul>
+        <pre class="playbookCode" id="failure-playbook-code" aria-label="kubectl and curl commands"></pre>
+        <div class="playbookFooter">
+          <p class="playbookTip" id="failure-playbook-tip"></p>
+        </div>
       </div>
 
       <h2 class="sectionHead">Related deep dives</h2>
-      <p class="bodyText">This post is the Ollama monitoring playbook. These guides go deeper on adjacent failures:</p>
       <div class="hubLinks">
-        <a href="/blog/vibe-coded-app-vm-observability" class="hubLinkCard"><p class="hubLinkTitle">Vibe-coded app VM observability</p><p class="hubLinkDesc">Self-hosted LLM stacks on a single GPU VM</p></a>
+        <a href="/blog/monitor-litellm-using-alertmend" class="hubLinkCard"><p class="hubLinkTitle">Monitor LiteLLM</p><p class="hubLinkDesc">OpenAI gateway in front of Ollama</p></a>
+        <a href="/blog/kubernetes-crashloopbackoff-fix" class="hubLinkCard"><p class="hubLinkTitle">CrashLoopBackOff fix</p><p class="hubLinkDesc">Probe misconfig and post-deploy crash loops</p></a>
         <a href="/blog/debugging-kubernetes-oomkilled-exit-code-137-causes-and-solutions" class="hubLinkCard"><p class="hubLinkTitle">OOMKilled exit 137</p><p class="hubLinkDesc">Memory limits, eviction, and restart playbooks</p></a>
         <a href="/blog/kubernetes-502-bad-gateway-error-fix" class="hubLinkCard"><p class="hubLinkTitle">Kubernetes 502 Bad Gateway</p><p class="hubLinkDesc">Ingress upstream errors during Ollama rollouts</p></a>
         <a href="/blog/monitor-langfuse-using-alertmend" class="hubLinkCard"><p class="hubLinkTitle">Monitor Langfuse</p><p class="hubLinkDesc">LLM tracing uptime alongside inference</p></a>
@@ -434,21 +461,30 @@ resources:
         <a href="/blog/docker-container-monitoring-best-practices" class="hubLinkCard"><p class="hubLinkTitle">Docker container monitoring</p><p class="hubLinkDesc">Single-host Ollama and Compose layouts</p></a>
       </div>
 
-      <h2 class="sectionHead">FAQ</h2>
+      <h2 class="sectionHead" id="faq">FAQ</h2>
       <div class="faqList">
-        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="true">How do I monitor Ollama in production?<svg class="faqChevron faqChevronOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer">Connect your cluster or host in AlertMend, add URL checks on /api/tags and your public inference endpoint, and route alerts to Slack. AlertMend watches OOMKilled events, failed health checks, and pod crashes depending on how you deploy Ollama.</div></div>
-        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">What is the best Ollama health check endpoint?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Use GET /api/tags on port 11434 for liveness: it confirms the API is up and lists loaded models. For readiness after deploy, wait until your primary model appears in the response. Add a tiny POST /api/generate smoke test when tags alone are not enough.</div></div>
-        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I monitor Ollama on Kubernetes?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Install the AlertMend agent, probe /api/tags through the same Ingress or Service your apps use, and enable auto-restart on the Ollama Deployment. Set initialDelaySeconds long enough for model load, often 60-120 seconds on a fresh PVC.</div></div>
-        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Why does Ollama keep getting OOMKilled?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Model size plus concurrent requests can exceed pod memory or GPU VRAM limits. AlertMend alerts your team and can restart pods automatically. If it keeps recurring, reduce num_parallel, use a smaller quantization, or add GPU replicas.</div></div>
-        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Do I need Prometheus to monitor Ollama?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Not to start. Ollama does not ship a native Prometheus /metrics endpoint. Teams add a sidecar exporter that polls /api/ps and /api/tags. AlertMend covers phase one: URL checks, OOMKilled alerts, and auto-restart. Add Prometheus and Grafana when you need VRAM dashboards and token-level telemetry at scale.</div></div>
-        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I know if Ollama is down?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">AlertMend treats Ollama as down when health checks fail, inference requests error, or pods crash repeatedly, not when /api/tags passes but /api/generate still times out.</div></div>
-        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Should I auto-restart Ollama when it OOMs?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Yes for availability: enable AlertMend restart runbooks so the pod comes back after transient memory pressure. If OOM repeats within 15 minutes, fix sizing instead of only restarting.</div></div>
-        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I monitor Ollama behind Open WebUI?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Add a URL check on Open WebUI /health for the UI and a separate check on the Ollama /api/tags endpoint your stack uses. Alert when the UI is up but Ollama checks fail.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="true">What latency threshold should I set for Ollama /api/generate smoke checks?<svg class="faqChevron faqChevronOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer">A fixed number will page you on healthy large models. See the baseline-relative formula in the threshold engineering section above. Recompute weekly from off-peak traffic.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Which Ollama failures should I never auto-restart?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Never auto-delete model PVCs, change quantization at runtime, purge multi-tenant models, or drain GPU nodes cluster-wide. See the safe-to-automate matrix for the full line between script and human.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I prevent false pages during Ollama model cold starts?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Suppress alerts for initialDelaySeconds + 30s after pod Ready, and use baseline-relative latency instead of fixed timeouts. The full formula is in threshold engineering above.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Can I monitor multiple Ollama instances behind a load balancer?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Yes, but check each backend independently. A load balancer can return 200 while one replica is OOMKilled. Per-replica /api/tags checks catch what a single VIP check misses.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I monitor Ollama behind Open WebUI?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Split checks: Open WebUI /health for the UI, Ollama /api/tags for inference. Alert when the UI is up but backend checks fail. See the Open WebUI deployment tab above.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Why does Ollama keep getting OOMKilled?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Model size plus concurrent requests exceed pod memory or GPU VRAM limits. Restart once for availability. If OOM repeats within 15 minutes, fix sizing instead of only restarting.</div></div>
+      </div>
+
+      <div class="receiptBox">
+        <p class="receiptTitle">What you now have</p>
+        <ul class="receiptList">
+          <li>Five-layer probe strategy that catches failures <code>/api/tags</code> misses</li>
+          <li>Production Kubernetes YAML with model-aware readiness</li>
+          <li>The threshold formula that stops false pages during cold starts</li>
+          <li>A safe-to-automate matrix for every common Ollama failure</li>
+          <li>Copy-paste runbooks for OOMKilled, CrashLoopBackOff, and proxy errors</li>
+        </ul>
       </div>
 
       <div class="ctaBand">
-        <div class="ctaBandTitle">Monitor Ollama in production without a DIY observability stack</div>
-        <p class="ctaBandSub">Typical recovery in under a minute: layered checks, OOMKilled auto-restart, verify-before-page. Start free or talk to an engineer.</p>
+        <div class="ctaBandTitle">Your tags check passed. Your users still got 500s.</div>
+        <p class="ctaBandSub">The next outage might be model eviction under load or a proxy URL nobody monitors. Wire the checks above, or let AlertMend run them for you.</p>
         <div class="ctaBtnRow">
           <a href="https://app.alertmend.io/signup?service=remediation&source=blog-ollama&blog_slug=monitor-ollama-using-alertmend" class="ctaBtn">Start with auto-remediation →</a>
           <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=monitor-ollama-using-alertmend" class="ctaBtnSecondary" target="_blank" rel="noopener noreferrer">Talk to an expert</a>
@@ -461,7 +497,7 @@ resources:
       <aside class="sidebar">
         <div class="sidebar-content">
           <div class="sidebar-card">
-            <h3>Receive blog and product updates</h3>
+            <div class="sidebar-card-title">Receive blog and product updates</div>
             <form class="signup-form" id="blog-signup-form" novalidate>
               <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
               <button type="submit">Sign up</button>
@@ -471,18 +507,18 @@ resources:
 
           
           <div class="sidebar-card">
-            <h3 class="related-content-title">Related content</h3>
+            <div class="related-content-title">Related content</div>
             <ul class="related-posts-list">
-              <li><a href="/blog/monitor-langfuse-using-alertmend" class="related-post-link">How to Monitor Langfuse in Production</a></li>
-              <li><a href="/blog/monitor-milvus-using-alertmend" class="related-post-link">Milvus Observability: Monitor &amp; Recover</a></li>
-              <li><a href="/blog/monitor-docling-using-alertmend" class="related-post-link">Docling Observability: Monitor &amp; Recover</a></li>
+              <li><a href="/blog/monitor-litellm-using-alertmend" class="related-post-link">How to Monitor LiteLLM in Production</a></li>
+              <li><a href="/blog/monitor-open-webui-using-alertmend" class="related-post-link">Monitor Open WebUI + Ollama in Production</a></li>
+              <li><a href="/blog/monitor-vllm-using-alertmend" class="related-post-link">How to Monitor vLLM in Production</a></li>
+              <li><a href="/blog/kubernetes-crashloopbackoff-fix" class="related-post-link">Kubernetes CrashLoopBackOff: Fix Guide</a></li>
+              <li><a href="/blog/kubernetes-imagepullbackoff-fix" class="related-post-link">Kubernetes ImagePullBackOff: Fix Guide</a></li>
               <li><a href="/blog/url-monitoring-automated-fixes" class="related-post-link">URL Monitoring: Detect and Auto-Fix</a></li>
               <li><a href="/blog/openclaw-cloud-infra-slack-telegram" class="related-post-link">OpenClaw: Infra from Slack &amp; Telegram</a></li>
               <li><a href="/blog/vibe-coded-app-vm-observability" class="related-post-link">Vibe-Coded App: What About Observability?</a></li>
-              <li><a href="/blog/24x7-network-monitoring" class="related-post-link">24x7 network monitoring Guide Guide</a></li>
+              <li><a href="/blog/24x7-network-monitoring" class="related-post-link">24x7 Network Monitoring Guide</a></li>
               <li><a href="/blog/503-no-healthy-upstream" class="related-post-link">503 No Healthy Upstream Error Guide</a></li>
-              <li><a href="/blog/achieving-enterprise-readiness-with-kubernetes-in-2025" class="related-post-link">Achieving Enterprise Readiness With</a></li>
-              <li><a href="/blog/addressing-kubernetes-overhead-is-it-still-the-right-choice-for-your-infrastructure" class="related-post-link">Addressing Kubernetes Overhead</a></li>
             </ul>
             <a href="/blog" class="view-more-link">
               View all posts
@@ -492,7 +528,7 @@ resources:
           
 
           <div class="sidebar-card">
-            <h3 class="related-content-title">Explore AlertMend</h3>
+            <div class="related-content-title">Explore AlertMend</div>
             <ul class="related-posts-list">
               <li><a href="/" class="related-post-link">Home</a></li>
               <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>

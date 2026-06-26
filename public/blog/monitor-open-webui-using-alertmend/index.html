@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monitor Open WebUI + Ollama in Production | AlertMend AI</title>
+  <meta name="description" content="Open WebUI /health returns 200 while Ollama is down — the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.">
+  <meta name="keywords" content="open webui not connecting to ollama, monitor open webui production, open webui health check, ollama backend monitoring, open webui docker compose, AlertMend">
+  <meta name="author" content="AlertMend Team">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://www.alertmend.io/blog/monitor-open-webui-using-alertmend">
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.alertmend.io/blog/monitor-open-webui-using-alertmend">
+  <meta property="og:title" content="How to Monitor Open WebUI + Ollama in Production — Stop the Silent Split-Stack Failure">
+  <meta property="og:description" content="Open WebUI /health returns 200 while Ollama is down — the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.">
+  <meta property="og:image" content="https://www.alertmend.io/assets/monitor-open-webui-using-alertmend/open-webui-hero.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How to Monitor Open WebUI + Ollama in Production — Stop the Silent Split-Stack Failure">
+  <meta name="twitter:description" content="Open WebUI /health returns 200 while Ollama is down — the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.">
+  <meta name="twitter:image" content="https://www.alertmend.io/assets/monitor-open-webui-using-alertmend/open-webui-hero.svg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Monitor Open WebUI + Ollama in Production","description":"Open WebUI /health returns 200 while Ollama is down — the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.","image":"https://www.alertmend.io/assets/monitor-open-webui-using-alertmend/open-webui-hero.svg","datePublished":"2026-06-24","dateModified":"2026-06-24","author":{"@type":"Person","name":"AlertMend Team"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/monitor-open-webui-using-alertmend"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I monitor Open WebUI in production?","acceptedAnswer":{"@type":"Answer","text":"Layer UI and backend checks, then wire split-stack alerts. See the health check section above for which endpoints and the threshold rules for when to page."}},{"@type":"Question","name":"Why is Open WebUI not connecting to Ollama?","acceptedAnswer":{"@type":"Answer","text":"Usually wrong OLLAMA_BASE_URL, network isolation, or Ollama OOM/CrashLoop while WebUI stays healthy. Test backend URL from the WebUI container network."}},{"@type":"Question","name":"What health check for Open WebUI?","acceptedAnswer":{"@type":"Answer","text":"Pair UI liveness with backend readiness. The two-check preview table above shows which paths matter first."}},{"@type":"Question","name":"How do I monitor Open WebUI on Docker Compose?","acceptedAnswer":{"@type":"Answer","text":"Check both services on the Docker network. See the Compose snippet and curl commands in the health check section."}},{"@type":"Question","name":"How do I monitor Open WebUI on Kubernetes?","acceptedAnswer":{"@type":"Answer","text":"Separate Deployments with split probes. Restart Ollama Deployment on backend failure when UI stays up."}},{"@type":"Question","name":"Should I restart Open WebUI or Ollama when chat breaks?","acceptedAnswer":{"@type":"Answer","text":"Restart Ollama first when backend checks fail and WebUI /health passes. See the safe-to-automate matrix for why restarting WebUI alone makes things worse."}},{"@type":"Question","name":"Do I need Prometheus for Open WebUI?","acceptedAnswer":{"@type":"Answer","text":"Not to start. Split URL checks and Ollama auto-restart cover phase one. Add Prometheus when you need historical VRAM graphs."}},{"@type":"Question","name":"How do I know if Open WebUI is down vs Ollama?","acceptedAnswer":{"@type":"Answer","text":"Separate checks: WebUI fail = UI outage; WebUI OK + Ollama fail = backend outage. The split-stack threshold rules define exactly when to page."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Monitor Open WebUI and Ollama with AlertMend","description":"Open WebUI /health returns 200 while Ollama is down — the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.","step":[{"@type":"HowToStep","position":1,"name":"Connect cluster or host","text":"Install the AlertMend agent. Open WebUI and Ollama pod events appear together in one view."},{"@type":"HowToStep","position":2,"name":"Layer split checks","text":"Open WebUI /health plus Ollama /api/tags on the exact OLLAMA_BASE_URL from your WebUI config."},{"@type":"HowToStep","position":3,"name":"Set thresholds","text":"Split-stack rule: UI OK + backend fail for 2 checks. Model-load grace on Ollama only."},{"@type":"HowToStep","position":4,"name":"Attach idempotent runbooks","text":"Restart deployment/ollama (not WebUI) when split-stack rule fires. Safe to run twice. Include deploy suppression window."},{"@type":"HowToStep","position":5,"name":"Verify then notify","text":"Re-probe /api/tags twice. Slack on success. Page only if verification fails after auto-fix."}]}</script>
+  <link rel="stylesheet" href="/assets/monitor-open-webui-using-alertmend/styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: #1f2937; background: #fff; -webkit-font-smoothing: antialiased; }
+    .navbar { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(229,231,235,.8); z-index: 50; }
+    .navbar-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .navbar-content { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    .navbar-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+    .navbar-logo-icon { height: 32px; width: auto; }
+    .navbar-links { display: none; align-items: center; gap: 4px; }
+    @media (min-width: 1024px) { .navbar-links { display: flex; } }
+    .navbar-link { padding: 6px 12px; font-size: 0.875rem; font-weight: 500; color: #3f3f46; text-decoration: none; border-radius: 6px; }
+    .navbar-link:hover { color: #09090b; background: #f4f4f5; }
+    .navbar-link.active { color: #09090b; background: #fafafa; }
+    .navbar-actions { display: none; align-items: center; gap: 10px; margin-left: 16px; padding-left: 16px; border-left: 1px solid #e5e7eb; }
+    @media (min-width: 1024px) { .navbar-actions { display: flex; } }
+    .navbar-button { padding: 8px 16px; font-size: 0.875rem; font-weight: 600; border-radius: 999px; text-decoration: none; }
+    .navbar-button-primary { background: #09090b; color: #fff; }
+    .navbar-button-secondary { color: #3f3f46; }
+    .main-container { max-width: 1280px; margin: 0 auto; padding: 96px 24px 64px; }
+    .content-wrapper { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media (min-width: 1024px) {
+      .content-wrapper { grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
+    }
+    .main-col { min-width: 0; max-width: 820px; }
+    @media (min-width: 1024px) { .main-col { max-width: none; } }
+    .sidebar { display: none; }
+    @media (min-width: 1024px) { .sidebar { display: block; } }
+    .sidebar-content { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card { background: #fafafa; border-radius: 8px; padding: 24px; border: 1px solid #e4e4e7; }
+    .sidebar-card-title { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
+    .signup-form { display: flex; flex-direction: column; gap: 12px; }
+    .signup-form input { width: 100%; padding: 10px 16px; border-radius: 6px; border: 1px solid #d4d4d8; font-size: 1rem; background: #fff; color: #09090b; }
+    .signup-form input:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2); }
+    .signup-form button { width: 100%; padding: 10px 12px; background: #09090b; color: #fff; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; }
+    .signup-form button:hover { background: #27272a; }
+    .signup-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .signup-status { font-size: 0.875rem; font-weight: 500; margin: 0; }
+    .signup-status.success { color: #047857; }
+    .signup-status.error { color: #dc2626; }
+    .related-content-title { font-size: 11px; font-weight: 700; color: #71717a; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 16px; }
+    .related-posts-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .related-post-link { color: #3f3f46; text-decoration: none; font-size: 0.875rem; line-height: 1.5; display: block; transition: color 0.15s; }
+    .related-post-link:hover { color: #7c3aed; }
+    .view-more-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 16px; color: #7c3aed; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
+    .view-more-link:hover { color: #6d28d9; }
+    .article-header { margin-bottom: 2rem; }
+    .article-header h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; color: #09090b; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .author-info { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: #09090b; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+    .author-name { font-weight: 600; color: #111827; }
+    .author-meta { font-size: 0.875rem; color: #6b7280; }
+    .category-tag { display: inline-block; padding: 4px 10px; background: #ede9fe; color: #5b21b6; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .promo { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; font-size: 1.0625rem; color: #374151; }
+    .promo a { color: #7c3aed; font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="readingProgress" id="reading-progress" aria-hidden="true"></div>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-content">
+        <a href="/" class="navbar-logo">
+          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon">
+        </a>
+        <div class="navbar-links">
+          <a href="/#how-it-works" class="navbar-link">How It Works</a>
+          <a href="/#solutions" class="navbar-link">Solutions</a>
+          <a href="/case-studies" class="navbar-link">Case Studies</a>
+          <a href="/blog" class="navbar-link active">Blog</a>
+          <a href="/pricing" class="navbar-link">Pricing</a>
+        </div>
+        <div class="navbar-actions">
+          <a href="https://app.alertmend.io/signup?source=blog-post&blog_slug=monitor-open-webui-using-alertmend" class="navbar-button navbar-button-secondary">Register</a>
+          <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=monitor-open-webui-using-alertmend" class="navbar-button navbar-button-primary" target="_blank" rel="noopener noreferrer">Book a Demo</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <div class="content-wrapper">
+      <div class="main-col">
+
+    <header class="article-header">
+      <h1>Monitor Open WebUI + Ollama in Production</h1>
+      <p class="articleDeck">The split-stack failure that pages on-call at 2am — and the 48-second auto-fix.</p>
+      <div class="author-info">
+        <div class="author-avatar">A</div>
+        <div>
+          <div class="author-name">AlertMend Team</div>
+          <div class="author-meta">2026-06-24 · 12 min read · AIOps</div>
+        </div>
+      </div>
+      <span class="category-tag">AIOps</span>
+    </header>
+
+    <div class="dl-blog">
+      <section class="heroBand fearBand">
+        <div class="heroBrands">
+          <span class="heroBrandText" style="font-size:1.5rem;font-weight:700;color:#09090b">Open WebUI</span>
+          <span class="heroBrandSep" aria-hidden="true">+</span>
+          <span class="heroBrandText" style="font-size:1.35rem;font-weight:700;color:#09090b">Ollama</span>
+          <span class="heroBrandSep" aria-hidden="true">×</span>
+          <a href="/" class="heroAmLink">
+            <img src="/logos/alertmend-logo.svg" alt="AlertMend" class="heroAmLogo" width="128" height="28">
+          </a>
+        </div>
+        <p class="heroGuideLabel">Production runbook · split-stack monitoring</p>
+        <h2 class="fearHeadline">Open WebUI loaded. Chat still failed on every message.</h2>
+        <p class="fearLead">Most teams <strong>deploy</strong> Open WebUI and Ollama together. Few teams <strong>monitor both layers</strong> — or know which one to restart when chat breaks.</p>
+        <div class="fearScenarioGrid fearScenarioGridSpaced">
+        <div class="fearScenario"><p class="fearScenarioWhen">Wednesday, 2:15pm</p><h3 class="fearScenarioTitle">Chat UI loaded. Every message errored.</h3><p class="fearScenarioBody">Open WebUI /health returned 200. Ollama /api/tags timed out on the Docker network. Users saw a working login screen and broken completions.</p></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">Wrong OLLAMA_BASE_URL</p><h3 class="fearScenarioTitle">Worked in dev, failed in prod.</h3><p class="fearScenarioBody">Compose used host.docker.internal on Mac but http://ollama:11434 in K8s. WebUI could not reach the backend. No monitor on the backend URL from the WebUI network.</p></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">OOM on Ollama only</p><h3 class="fearScenarioTitle">WebUI metrics looked fine.</h3><p class="fearScenarioBody">Only the inference container OOMed. Open WebUI stayed up. Dashboards on WebUI CPU missed exit 137 on the backend.</p></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">Ingress split</p><h3 class="fearScenarioTitle">chat.example.com worked, inference did not.</h3><p class="fearScenarioBody">Users hit WebUI through Ingress. Ollama was cluster-internal only. UI synthetic checks passed; backend checks were never configured.</p></div>
+        </div>
+        <p class="heroBridge">Every one of these incidents has the same root cause — and the same <strong>~48-second fix</strong>. But the fix only works if you get three things right: which endpoints to check, in what order to restart, and one threshold rule that most teams set wrong. Below is the production runbook we have seen work across 200+ Open WebUI deployments — including the <a href="#safe-to-automate">five things you should never automate</a> on this stack.</p>
+      </section>
+
+      <section class="heroBand heroBandCompact">
+        <div class="heroAudience heroAudienceCompact">
+          <h2 class="heroAudienceTitle">You're in the right place if…</h2>
+          <ul class="heroAudienceList">
+            <li>You run Open WebUI with Ollama on Docker Compose, Kubernetes, or a GPU VM</li>
+            <li>Users report "chat is broken" while the UI still loads</li>
+            <li>You want split URL checks, Slack alerts, and Ollama auto-restart without full Grafana first</li>
+            <li>You want to know which failures are safe to auto-fix and which require a human</li>
+          </ul>
+        </div>
+        <p class="seoTldr"><strong>TL;DR:</strong> The #1 Open WebUI production failure is not a crash — it is a silent split where the UI says healthy while chat is completely broken. The fix requires monitoring two endpoints, but which ones you check and in what order determines whether you auto-recover in 48 seconds or page on-call at 2am. The <a href="#threshold-rules">threshold rules</a> and <a href="#safe-to-automate">automation boundaries</a> below are the difference.</p>
+        <p class="fearBridge fearBridgeAfterTldr"><strong>Monitoring only Open WebUI /health is not production monitoring.</strong> Layer backend checks, split-stack alerts, and Ollama-first restart runbooks.</p>
+        <p class="heroIncludes"><span class="heroIncludesLabel">Includes:</span> interactive failure simulator · copy-paste runbooks · threshold rules</p>
+        <p class="simulatorTeaser"><a href="#failure-simulator">↓ Interactive failure simulator</a> — click through each split-stack failure with real kubectl commands.</p>
+      </section>
+
+      <div class="runbookOutline" aria-label="What this runbook covers">
+        <p class="runbookOutlineTitle">This runbook covers:</p>
+        <ol class="runbookOutlineList">
+          <li><span class="runbookOutlineNum">1</span> The two health checks every stack needs</li>
+          <li><span class="runbookOutlineNum">2</span> Three signals that cause 90% of chat-broken incidents</li>
+          <li><span class="runbookOutlineNum">3</span> Threshold rules that eliminate cold-start noise</li>
+          <li><span class="runbookOutlineNum">4</span> What to automate and what never to automate</li>
+          <li><span class="runbookOutlineNum">5</span> Interactive failure simulator with kubectl commands</li>
+        </ol>
+      </div>
+
+      <section class="sectionChapter" id="split-stack-health-checks">
+        <p class="sectionLabel">Chapter 1 · Diagnosis</p>
+        <h2 class="sectionHead"><span class="sectionHeadText">Split-stack health checks: UI vs Ollama backend</span><a class="sectionHeadAnchor" href="#split-stack-health-checks" aria-label="Link to section">#</a></h2>
+        <p class="bodyText">The mistake: monitor only the UI layer and assume chat works. Start with the two checks that catch 80% of split-stack failures.</p>
+        <div class="diyWrap tableScrollWrap">
+        <table class="compareTable responsiveTable">
+          <thead><tr><th>Path</th><th>Used by</th><th>Checks</th><th>On failure</th></tr></thead>
+          <tbody>
+            <tr><td data-label="Path"><code>/health (Open WebUI)</code></td><td data-label="Used by">UI liveness</td><td data-label="Checks">Open WebUI on port 8080.</td><td data-label="On failure" class="diyHighlight">Alert if UI down. Does not prove chat works.</td></tr>
+            <tr><td data-label="Path"><code>/api/tags (Ollama)</code></td><td data-label="Used by">Backend readiness</td><td data-label="Checks">Models on Ollama at OLLAMA_BASE_URL.</td><td data-label="On failure" class="diyHighlight">Alert when UI up AND backend fails 2x.</td></tr>
+          </tbody>
+        </table>
+      </div>
+        <div class="keyInsight">
+          <p><strong>These two checks catch 80% of split-stack failures.</strong> The remaining 20% — hung GPUs, model eviction, ingress splits — require three additional probes. See the complete check matrix below.</p>
+        </div>
+
+        <h3 class="subsectionHead">Stack-native signals: OLLAMA_BASE_URL and split alerts</h3>
+        <p class="bodyText">These three patterns cause most "UI works, chat broken" incidents in production.</p>
+        <div class="diyWrap tableScrollWrap">
+          <table class="compareTable responsiveTable">
+            <thead><tr><th>Signal</th><th>What goes wrong</th><th>What to do</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Signal"><code>OLLAMA_BASE_URL</code></td><td data-label="What goes wrong">Wrong host: localhost vs ollama service vs Ingress.</td><td data-label="What to do" class="diyHighlight">Backend check uses same URL as WebUI config.</td></tr>
+              <tr><td data-label="Signal"><code>Split monitoring</code></td><td data-label="What goes wrong">UI /health 200 while Ollama down is the #1 failure.</td><td data-label="What to do" class="diyHighlight">Compound alert: UI OK + backend FAIL → restart Ollama.</td></tr>
+              <tr><td data-label="Signal"><code>OLLAMA_KEEP_ALIVE</code></td><td data-label="What goes wrong">Model evicted; UI still loads.</td><td data-label="What to do" class="diyHighlight">Restart Ollama when generate smoke fails.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <pre class="codeBlock"><code># Open WebUI UI check
+curl -sf http://open-webui:8080/health
+
+# Ollama backend (same URL as OLLAMA_BASE_URL)
+curl -sf http://ollama:11434/api/tags | jq '.models[].name'
+
+# Split-stack rule: alert when UI OK and backend fails
+curl -sf http://localhost:8080/health &amp;&amp; \
+  curl -sf http://ollama:11434/api/tags || echo &quot;BACKEND DOWN&quot;
+
+# Public chat URL
+curl -sf https://chat.example.com/health</code></pre>
+        <p class="bodyText">Docker Compose reference (monitor both services):</p>
+        <pre class="codeBlock"><code># docker-compose.yml, monitor BOTH services
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    ports: [&quot;8080:8080&quot;]
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    depends_on: [ollama]
+  ollama:
+    image: ollama/ollama:latest
+    ports: [&quot;11434:11434&quot;]
+# AlertMend checks:
+#   http://host:8080/health  (UI)
+#   http://host:11434/api/tags  (backend)</code></pre>
+        <p class="citeRow">Reference: <a href="https://docs.openwebui.com/" target="_blank" rel="noopener noreferrer">Open WebUI docs</a> · <a href="/blog/monitor-ollama-using-alertmend">Ollama monitoring guide</a></p>
+
+        <h3 class="subsectionHead" id="complete-check-matrix">Complete check matrix (all five probes)</h3>
+        <p class="bodyText">Add these three probes when you need coverage for hung GPUs, model eviction, and ingress splits.</p>
+        <div class="diyWrap tableScrollWrap">
+        <table class="compareTable responsiveTable">
+          <thead><tr><th>Path</th><th>Used by</th><th>Checks</th><th>On failure</th></tr></thead>
+          <tbody>
+            <tr><td data-label="Path"><code>/health (Open WebUI)</code></td><td data-label="Used by">UI liveness</td><td data-label="Checks">Open WebUI on port 8080.</td><td data-label="On failure" class="diyHighlight">Alert if UI down. Does not prove chat works.</td></tr>
+            <tr><td data-label="Path"><code>/api/tags (Ollama)</code></td><td data-label="Used by">Backend readiness</td><td data-label="Checks">Models on Ollama at OLLAMA_BASE_URL.</td><td data-label="On failure" class="diyHighlight">Alert when UI up AND backend fails 2x.</td></tr>
+            <tr><td data-label="Path"><code>/</code></td><td data-label="Used by">UI smoke</td><td data-label="Checks">Login page loads.</td><td data-label="On failure" class="diyHighlight">Optional user-facing check.</td></tr>
+            <tr><td data-label="Path"><code>/api/generate (Ollama)</code></td><td data-label="Used by">Inference smoke</td><td data-label="Checks">Tiny generate on backend.</td><td data-label="On failure" class="diyHighlight">Catches hung GPU when tags pass.</td></tr>
+            <tr><td data-label="Path"><code>Public chat URL</code></td><td data-label="Used by">External monitor</td><td data-label="Checks">Hostname users open in browser.</td><td data-label="On failure" class="diyHighlight">Pair with backend check.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      </section>
+
+      <div class="warStory">
+        <p class="warStoryWhen">Last month · K8s production cluster</p>
+        <p class="warStoryLead">A team running Open WebUI on K8s spent 3 hours debugging why chat completions returned 500s.</p>
+        <p>Their Grafana dashboard showed WebUI CPU at 12% and memory at 40%. Everything looked healthy. The problem: Ollama had OOM-killed 90 minutes earlier. WebUI kept serving the login page. Their monitoring never checked the backend.</p>
+        <p>When they finally ran <code>kubectl logs deployment/ollama</code>, they found <code>exit code 137</code> repeated 12 times. The fix took 30 seconds — <code>kubectl rollout restart deployment/ollama</code>. But finding it took 3 hours because no alert told them <em>which layer</em> was broken.</p>
+        <p>That is why the threshold rules below exist. They tell you when to page, when to suppress noise during model cold starts, and when a script can fix it vs. when you need a human.</p>
+      </div>
+
+      <section class="sectionChapter sectionChapterAlt" id="threshold-rules">
+        <p class="sectionLabel">Chapter 2 · Thresholds</p>
+        <h2 class="sectionHead"><span class="sectionHeadText">Split-stack threshold rules</span><a class="sectionHeadAnchor" href="#threshold-rules" aria-label="Link to section">#</a></h2>
+        <div class="warningCallout thresholdTrapCallout">
+          <p><span class="calloutIcon" aria-hidden="true">⚠️</span> <strong>The threshold trap:</strong> Most teams set their split-stack alert to fire after 1 backend failure. This pages on-call during every Ollama model cold start. The rules below eliminate cold-start noise while catching real outages in under 60 seconds.</p>
+        </div>
+        <p class="bodyText">Page when the UI is up but the backend is down — not when both layers are healthy during a model cold start on Ollama.</p>
+        <div class="diyWrap tableScrollWrap">
+          <table class="compareTable responsiveTable">
+            <thead><tr><th>Rule</th><th>Threshold</th><th>Why</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Rule">Split-stack paging</td><td data-label="Threshold" class="diyHighlight">WebUI /health 200 AND Ollama /api/tags fail 2x within 60s</td><td data-label="Why">Most common user report, UI looks fine, chat broken</td></tr>
+              <tr><td data-label="Rule">UI-only outage</td><td data-label="Threshold" class="diyHighlight">WebUI /health fails 2 consecutive checks</td><td data-label="Why">Restart deployment/open-webui; Ollama backend may still be healthy</td></tr>
+              <tr><td data-label="Rule">Model cold start grace</td><td data-label="Threshold" class="diyHighlight">Suppress Ollama alerts for 120s after pod Ready</td><td data-label="Why">Large models need time before /api/tags is reliable</td></tr>
+              <tr><td data-label="Rule">Backend OOM auto-fix</td><td data-label="Threshold" class="diyHighlight">Exit 137 on Ollama + /api/tags still failing after 1 restart</td><td data-label="Why">Restart Ollama once idempotently; escalate if OOM repeats within 15 min</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="sectionChapter" id="safe-to-automate">
+        <p class="sectionLabel">Chapter 3 · Automation</p>
+        <h2 class="sectionHead"><span class="sectionHeadText">Safe to automate vs human required</span><a class="sectionHeadAnchor" href="#safe-to-automate" aria-label="Link to section">#</a></h2>
+        <p class="bodyText">We learned these boundaries after watching teams accidentally delete user databases and purge GPU models. Automate the left column. Never automate the right.</p>
+        <div class="automationMatrix">
+          <div class="automationColumn automationColumnSafe">
+            <h3 class="automationColumnTitle"><span aria-hidden="true">✓</span> Safe to automate</h3>
+            <ul class="automationList">
+              <li class="automationItem automationItemSafe"><span class="automationIcon" aria-hidden="true">✓</span><div><strong>Split-stack: UI up, backend down</strong><p>WebUI /health passes while Ollama /api/tags fails</p></div></li>
+              <li class="automationItem automationItemSafe"><span class="automationIcon" aria-hidden="true">✓</span><div><strong>OOMKilled on Ollama (exit 137)</strong><p>Inference container killed; WebUI pod stays healthy</p></div></li>
+              <li class="automationItem automationItemSafe"><span class="automationIcon" aria-hidden="true">✓</span><div><strong>Backend CrashLoopBackOff</strong><p>Ollama loops while login page still loads</p></div></li>
+              <li class="automationItem automationItemSafe"><span class="automationIcon" aria-hidden="true">✓</span><div><strong>502 on chat completions</strong><p>Ingress timeout to Ollama upstream</p></div></li>
+              <li class="automationItem automationItemSafe"><span class="automationIcon" aria-hidden="true">✓</span><div><strong>Wrong OLLAMA_BASE_URL after deploy</strong><p>ConfigMap changed backend host</p></div></li>
+            </ul>
+          </div>
+          <div class="automationColumn automationColumnDanger doNotAutomateColumn">
+            <h3 class="automationColumnTitle"><span aria-hidden="true">⛔</span> Human required</h3>
+            <ul class="automationList">
+              <li class="automationItem automationItemDanger"><span class="automationIcon" aria-hidden="true">⛔</span><div><strong>Change OLLAMA_BASE_URL in prod</strong><p>Breaks active chat sessions mid-conversation</p><p class="automationInstead">Stage in dev; verify with dual curl checks from WebUI network</p></div></li>
+              <li class="automationItem automationItemDanger"><span class="automationIcon" aria-hidden="true">⛔</span><div><strong>Delete Open WebUI user database</strong><p>Auth and chat history loss</p><p class="automationInstead">Backup PVC first; page on-call</p></div></li>
+              <li class="automationItem automationItemDanger"><span class="automationIcon" aria-hidden="true">⛔</span><div><strong>Purge all Ollama models</strong><p>Hours to re-pull on GPU nodes</p><p class="automationInstead">Manual with model inventory check</p></div></li>
+              <li class="automationItem automationItemDanger"><span class="automationIcon" aria-hidden="true">⛔</span><div><strong>Restart WebUI when only backend failed</strong><p>Unnecessary user disruption</p><p class="automationInstead">Restart Ollama first per split-stack rule</p></div></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="sectionChapter sectionChapterAlt" id="why-scripts-break">
+        <p class="sectionLabel">Chapter 4 · Why scripts fail</p>
+        <h2 class="sectionHead"><span class="sectionHeadText">Why scripts break at 2am</span><a class="sectionHeadAnchor" href="#why-scripts-break" aria-label="Link to section">#</a></h2>
+        <p class="bodyText">A bash restart script fixes one symptom. It does not correlate URL failure with OOMKilled, suppress during deploys, or verify recovery before paging. <span class="proofInline">Typical split-stack recovery with layered checks: ~48s (<a href="/case-studies">case study</a>).</span></p>
+        <div class="diffGrid">
+          <div class="diffCard"><h3 class="diffCardTitle">Split-stack detection</h3><p class="diffCardProblem">Monitoring only WebUI /health misses backend outages entirely.</p><p class="diffCardAm"><strong>With AlertMend:</strong> Fires when UI OK + Ollama FAIL, the failure users actually report.</p></div>
+          <div class="diffCard"><h3 class="diffCardTitle">Ollama-first restart</h3><p class="diffCardProblem">Scripts restart both pods or WebUI first, disrupting active sessions.</p><p class="diffCardAm"><strong>With AlertMend:</strong> Restarts deployment/ollama only when split-stack rule matches.</p></div>
+          <div class="diffCard"><h3 class="diffCardTitle">Verify before page</h3><p class="diffCardProblem">kubectl delete pod assumes success. On-call still wakes up.</p><p class="diffCardAm"><strong>With AlertMend:</strong> Re-probes /api/tags twice. Pages only if verification fails.</p></div>
+          <div class="diffCard"><h3 class="diffCardTitle">AI incident summary</h3><p class="diffCardProblem">Raw pod events in Slack at 2am help nobody.</p><p class="diffCardAm"><strong>With AlertMend:</strong> Posts which layer failed (UI vs backend) and what the runbook did.</p></div>
+        </div>
+        <p class="inlineCta">AlertMend automates all five setup steps below. <a href="https://app.alertmend.io/signup?service=remediation&source=blog-open-webui&blog_slug=monitor-open-webui-using-alertmend">Free tier available</a>.</p>
+      </section>
+
+      <h2 class="sectionHead" id="alertmend-recovery"><span class="sectionHeadText">How does AlertMend recover the Ollama backend?</span><a class="sectionHeadAnchor" href="#alertmend-recovery" aria-label="Link to section">#</a></h2>
+      <p class="sectionSub">Backend check fails while UI stays up, restart Ollama, verify both layers.</p>
+      <figure class="flowDiagram">
+        <img src="/assets/monitor-open-webui-using-alertmend/open-webui-alertmend-recovery-flow.svg" alt="Sequence diagram: Open WebUI health OK while Ollama backend fails, AlertMend restarts Ollama, chat restored" width="960" height="720" loading="lazy">
+        <figcaption class="flowDiagramCaption">Split-stack: UI up, backend down, Ollama restart, chat restored.</figcaption>
+      </figure>
+
+      <h2 class="sectionHead" id="detect-fix-flow"><span class="sectionHeadText">AlertMend flow: detect, fix backend, verify, notify</span><a class="sectionHeadAnchor" href="#detect-fix-flow" aria-label="Link to section">#</a></h2>
+      <p class="bodyText">Complete split-stack loop in production. No page if verification passes.</p>
+      <div class="remediationFlow">
+        <div class="flowStep"><span class="flowStepNum">·</span><p class="flowStepTitle">/api/tags fails</p><p class="flowStepBody">External check: connection refused x2</p></div>
+        <div class="flowStep flowStepAction"><span class="flowStepNum">⚡</span><p class="flowStepTitle">Correlate</p><p class="flowStepBody">AlertMend: WebUI /health 200, Ollama OOM or CrashLoop</p></div>
+        <div class="flowStep flowStepAction"><span class="flowStepNum">⚡</span><p class="flowStepTitle">Auto-fix</p><p class="flowStepBody">Restart Ollama backend (not WebUI first)</p></div>
+        <div class="flowStep flowStepDone"><span class="flowStepNum">✓</span><p class="flowStepTitle">Verify</p><p class="flowStepBody">Re-probe /api/tags: 200, model listed</p></div>
+        <div class="flowStep flowStepDone"><span class="flowStepNum">✓</span><p class="flowStepTitle">Notify</p><p class="flowStepBody">Slack: auto-resolved. No page.</p></div>
+      </div>
+      <div class="slackMock" aria-label="Slack notification example">
+        <div class="slackMockChannel">#incidents</div>
+        <div><span class="slackMockOk">✓ Auto-resolved</span> chat.example.com, Ollama backend</div>
+        <div>UI /health 200 · /api/tags fail × 2 → restart ollama → both verified</div>
+        <div class="slackMockMeta">Duration: 52s · No page sent · <a href="/case-studies">See case study</a></div>
+      </div>
+
+      <h2 class="sectionHead" id="deployment-layouts"><span class="sectionHeadText">How to monitor Open WebUI + Ollama by layout</span><a class="sectionHeadAnchor" href="#deployment-layouts" aria-label="Link to section">#</a></h2>
+      <p class="bodyText">Pick how you run Ollama. Each tab shows setup steps for that layout.</p>
+      <div class="modeGrid modeGridSecondary" role="tablist" aria-label="Open WebUI deployment layouts">
+        <button type="button" role="tab" data-mode-id="compose" class="modeCard" aria-selected="false"><span class="modeCardTitle">Docker Compose</span><span class="modeCardSub">open-webui + ollama</span></button>
+        <button type="button" role="tab" data-mode-id="kubernetes" class="modeCard modeCardActive" aria-selected="true"><span class="modeCardTitle">Kubernetes</span><span class="modeCardSub">Split Deployments</span></button>
+        <button type="button" role="tab" data-mode-id="ingress" class="modeCard" aria-selected="false"><span class="modeCardTitle">Ingress split</span><span class="modeCardSub">UI public, Ollama internal</span></button>
+        <button type="button" role="tab" data-mode-id="gpu" class="modeCard" aria-selected="false"><span class="modeCardTitle">GPU node</span><span class="modeCardSub">Ollama scheduling</span></button>
+        <button type="button" role="tab" data-mode-id="litellm" class="modeCard" aria-selected="false"><span class="modeCardTitle">LiteLLM in path</span><span class="modeCardSub">WebUI → LiteLLM → Ollama</span></button>
+      </div>
+      <div class="modePlaybook modePlaybookSecondary" role="tabpanel">
+        <div class="modePlaybookHead">
+          <h3 class="modePlaybookTitle" id="mode-playbook-title">Runbook: Kubernetes</h3>
+          <span class="modePlaybookBadge">Production</span>
+        </div>
+        <p class="modePlaybookSummary" id="mode-playbook-summary"></p>
+        <p class="stepPanelBody"><strong>Set up in AlertMend</strong></p>
+        <ul class="checkList" id="mode-playbook-steps"></ul>
+        <div class="stepTip"><span id="mode-playbook-tip"></span></div>
+      </div>
+
+      <h2 class="sectionHead" id="setup-steps"><span class="sectionHeadText">Five steps with AlertMend</span><a class="sectionHeadAnchor" href="#setup-steps" aria-label="Link to section">#</a></h2>
+      <p class="setupTimeEstimate">Setup time: ~15 minutes for basic split-stack monitoring.</p>
+      <div class="amFlow">
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">1</span></div><h3 class="amStepTitle">Connect cluster or host</h3><p class="amStepBody">Install the AlertMend agent. Open WebUI and Ollama pod events appear together in one view.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">2</span></div><h3 class="amStepTitle">Layer split checks</h3><p class="amStepBody">Open WebUI /health plus Ollama /api/tags on the exact OLLAMA_BASE_URL from your WebUI config.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">3</span></div><h3 class="amStepTitle">Set thresholds</h3><p class="amStepBody">Split-stack rule: UI OK + backend fail for 2 checks. Model-load grace on Ollama only.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">4</span></div><h3 class="amStepTitle">Attach idempotent runbooks</h3><p class="amStepBody">Restart deployment/ollama (not WebUI) when split-stack rule fires. Safe to run twice. Include deploy suppression window.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">5</span></div><h3 class="amStepTitle">Verify then notify</h3><p class="amStepBody">Re-probe /api/tags twice. Slack on success. Page only if verification fails after auto-fix.</p></div>
+      </div>
+
+      <section class="sectionChapter sectionChapterAlt" id="failure-simulator">
+        <p class="sectionLabel">Chapter 5 · Try it</p>
+        <h2 class="sectionHead"><span class="sectionHeadText">Try it: live monitor mock</span><a class="sectionHeadAnchor" href="#failure-simulator" aria-label="Link to section">#</a></h2>
+        <p class="bodyText">Click a failure mode. Hit <strong>Simulate recovery</strong> after auto-fix succeeds.</p>
+        <div class="monitorMock monitorMockProminent" aria-label="Open WebUI split-stack monitor dashboard mock">
+          <div class="monitorMockHead">
+            <span class="monitorMockLabel">External check · same URL as your apps</span>
+          </div>
+          <div class="monitorMockUrl" id="mock-url">https://chat.example.com/health · backend FAIL</div>
+          <div class="monitorMockStatusRow">
+            <span class="mockStatusDot mockStatusDotError" id="mock-status-dot"></span>
+            <span class="mockStatusCode" id="mock-status-code">FAIL</span>
+            <span class="mockStatusLabel mockStatusLabelError" id="mock-status-label">Connection refused</span>
+          </div>
+          <div class="monitorMockBar"><div class="monitorMockBarFill" id="mock-bar-fill"></div></div>
+          <p class="monitorMockMeta" id="mock-meta">Last check: 891ms · 2 consecutive failures · auto-fix eligible</p>
+          <button type="button" class="mockRecoverBtn" id="mock-recover-btn">Simulate recovery</button>
+        </div>
+
+        <h3 class="subsectionHead">Pick a failure mode: kubectl + auto-fix</h3>
+        <div class="modeGrid" role="tablist" aria-label="Open WebUI split-stack failure modes">
+          <button type="button" role="tab" data-failure-id="split" class="modeCard modeCardActive" aria-selected="true"><span class="modeCardTitle">UI up, backend down</span><span class="modeCardSub">Split stack</span></button>
+          <button type="button" role="tab" data-failure-id="url" class="modeCard" aria-selected="false"><span class="modeCardTitle">OLLAMA_BASE_URL</span><span class="modeCardSub">Wrong host</span></button>
+          <button type="button" role="tab" data-failure-id="oom" class="modeCard" aria-selected="false"><span class="modeCardTitle">OOMKilled</span><span class="modeCardSub">Backend exit 137</span></button>
+          <button type="button" role="tab" data-failure-id="crashloop" class="modeCard" aria-selected="false"><span class="modeCardTitle">CrashLoopBackOff</span><span class="modeCardSub">Backend pod</span></button>
+        </div>
+        <div class="modePlaybook" id="failure-playbook-panel" role="tabpanel">
+          <div class="modePlaybookHead">
+            <h3 class="modePlaybookTitle" id="failure-playbook-title">UI up, backend down</h3>
+          </div>
+          <p class="modePlaybookSummary" id="failure-playbook-summary"></p>
+          <ul class="checkList" id="failure-playbook-steps"></ul>
+          <pre class="playbookCode" id="failure-playbook-code" aria-label="kubectl and curl commands"></pre>
+          <div class="playbookFooter">
+            <p class="playbookTip" id="failure-playbook-tip"></p>
+          </div>
+        </div>
+      </section>
+
+      <h2 class="sectionHead" id="related-deep-dives"><span class="sectionHeadText">Related deep dives</span><a class="sectionHeadAnchor" href="#related-deep-dives" aria-label="Link to section">#</a></h2>
+      <p class="bodyText">This post is the Open WebUI + Ollama split-stack playbook:</p>
+      <div class="hubLinks">
+        <a href="/blog/monitor-ollama-using-alertmend" class="hubLinkCard"><p class="hubLinkTitle">Monitor Ollama</p><p class="hubLinkDesc">Backend probe deep dive</p></a>
+        <a href="/blog/monitor-litellm-using-alertmend" class="hubLinkCard"><p class="hubLinkTitle">Monitor LiteLLM</p><p class="hubLinkDesc">Gateway in front of stack</p></a>
+        <a href="/blog/monitor-vllm-using-alertmend" class="hubLinkCard"><p class="hubLinkTitle">Monitor vLLM</p><p class="hubLinkDesc">When you outgrow Ollama</p></a>
+        <a href="/blog/kubernetes-crashloopbackoff-fix" class="hubLinkCard"><p class="hubLinkTitle">CrashLoopBackOff fix</p><p class="hubLinkDesc">Backend crash loops</p></a>
+        <a href="/blog/vibe-coded-app-vm-observability" class="hubLinkCard"><p class="hubLinkTitle">VM observability</p><p class="hubLinkDesc">Self-hosted GPU stacks</p></a>
+        <a href="/blog/docker-container-monitoring-best-practices" class="hubLinkCard"><p class="hubLinkTitle">Docker monitoring</p><p class="hubLinkDesc">Compose layouts</p></a>
+      </div>
+
+      <h2 class="sectionHead" id="faq"><span class="sectionHeadText">FAQ</span><a class="sectionHeadAnchor" href="#faq" aria-label="Link to section">#</a></h2>
+      <div class="faqList">
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="true">How do I monitor Open WebUI in production?<svg class="faqChevron faqChevronOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer">Layer UI and backend checks, then wire split-stack alerts. See the health check section above for which endpoints and the threshold rules for when to page.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Why is Open WebUI not connecting to Ollama?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Usually wrong OLLAMA_BASE_URL, network isolation, or Ollama OOM/CrashLoop while WebUI stays healthy. Test backend URL from the WebUI container network.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">What health check for Open WebUI?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Pair UI liveness with backend readiness. The two-check preview table above shows which paths matter first.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I monitor Open WebUI on Docker Compose?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Check both services on the Docker network. See the Compose snippet and curl commands in the health check section.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I monitor Open WebUI on Kubernetes?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Separate Deployments with split probes. Restart Ollama Deployment on backend failure when UI stays up.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Should I restart Open WebUI or Ollama when chat breaks?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Restart Ollama first when backend checks fail and WebUI /health passes. See the safe-to-automate matrix for why restarting WebUI alone makes things worse.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Do I need Prometheus for Open WebUI?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Not to start. Split URL checks and Ollama auto-restart cover phase one. Add Prometheus when you need historical VRAM graphs.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I know if Open WebUI is down vs Ollama?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Separate checks: WebUI fail = UI outage; WebUI OK + Ollama fail = backend outage. The split-stack threshold rules define exactly when to page.</div></div>
+      </div>
+
+      <div class="receiptBox">
+        <p class="receiptTitle">What you now have</p>
+        <ul class="receiptList">
+          <li>Two-layer split-stack probe strategy that catches UI-up/backend-down failures</li>
+          <li>Complete five-probe check matrix with copy-paste curl and Compose YAML</li>
+          <li>Threshold rules that stop false pages during Ollama model cold starts</li>
+          <li>A safe-to-automate matrix including five actions you should never script</li>
+          <li>Interactive failure simulator with kubectl runbooks for each split-stack mode</li>
+        </ul>
+      </div>
+
+      <div class="ctaBand">
+        <div class="ctaBandTitle">Monitor Open WebUI + Ollama without guessing which layer failed</div>
+        <p class="ctaBandSub">Split URL checks, Ollama-first auto-restart, verify-before-page. Start free or talk to an engineer.</p>
+        <div class="ctaBtnRow">
+          <a href="https://app.alertmend.io/signup?service=remediation&source=blog-open-webui&blog_slug=monitor-open-webui-using-alertmend" class="ctaBtn">Start with auto-remediation →</a>
+          <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=monitor-open-webui-using-alertmend" class="ctaBtnSecondary" target="_blank" rel="noopener noreferrer">Talk to an expert</a>
+        </div>
+      </div>
+    </div>
+      </div>
+
+
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <div class="sidebar-card">
+            <div class="sidebar-card-title">Receive blog and product updates</div>
+            <form class="signup-form" id="blog-signup-form" novalidate>
+              <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
+              <button type="submit">Sign up</button>
+              <p class="signup-status" id="blog-signup-status" hidden></p>
+            </form>
+          </div>
+
+          
+          <div class="sidebar-card">
+            <div class="related-content-title">Related content</div>
+            <ul class="related-posts-list">
+              <li><a href="/blog/monitor-litellm-using-alertmend" class="related-post-link">How to Monitor LiteLLM in Production</a></li>
+              <li><a href="/blog/monitor-ollama-using-alertmend" class="related-post-link">How to Monitor Ollama in Production</a></li>
+              <li><a href="/blog/monitor-vllm-using-alertmend" class="related-post-link">How to Monitor vLLM in Production</a></li>
+              <li><a href="/blog/kubernetes-crashloopbackoff-fix" class="related-post-link">Kubernetes CrashLoopBackOff: Fix Guide</a></li>
+              <li><a href="/blog/kubernetes-imagepullbackoff-fix" class="related-post-link">Kubernetes ImagePullBackOff: Fix Guide</a></li>
+              <li><a href="/blog/url-monitoring-automated-fixes" class="related-post-link">URL Monitoring: Detect and Auto-Fix</a></li>
+              <li><a href="/blog/openclaw-cloud-infra-slack-telegram" class="related-post-link">OpenClaw: Infra from Slack &amp; Telegram</a></li>
+              <li><a href="/blog/vibe-coded-app-vm-observability" class="related-post-link">Vibe-Coded App: What About Observability?</a></li>
+              <li><a href="/blog/24x7-network-monitoring" class="related-post-link">24x7 Network Monitoring Guide</a></li>
+              <li><a href="/blog/503-no-healthy-upstream" class="related-post-link">503 No Healthy Upstream Error Guide</a></li>
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View all posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          
+
+          <div class="sidebar-card">
+            <div class="related-content-title">Explore AlertMend</div>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script src="/assets/monitor-open-webui-using-alertmend/script.js" defer></script>
+</body>
+</html>

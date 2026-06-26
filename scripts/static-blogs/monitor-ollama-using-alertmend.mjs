@@ -11,9 +11,23 @@ import {
   CHROME_INLINE_CSS,
   buildNavHtml,
   buildSidebarHtml,
-  buildArticleHeader,
   writeStaticBlogOutputs,
 } from '../static-blog-shared.mjs'
+
+function buildOllamaHeader(title, author, date, category) {
+  return `
+    <header class="article-header">
+      <h1>${esc(title)}</h1>
+      <div class="author-info">
+        <div class="author-avatar">${author.charAt(0)}</div>
+        <div>
+          <div class="author-name">${esc(author)}</div>
+          <div class="author-meta">${esc(date)} · 12 min read · ${category}</div>
+        </div>
+      </div>
+      <span class="category-tag">${esc(category)}</span>
+    </header>`
+}
 
 export async function build(slug) {
   const assetsBase = `/assets/${slug}`
@@ -24,7 +38,7 @@ export async function build(slug) {
   const title = meta.title || 'How to Monitor Ollama in Production'
   const excerpt =
     meta.excerpt ||
-    'Monitor Ollama in production: /api/tags and /api/ps checks, OOMKilled auto-restart, verify-before-page Slack alerts. Phase 1 without Prometheus.'
+    'Five Ollama health endpoints most teams miss, K8s probe YAML, threshold formula for cold starts, and safe-to-automate matrix for OOMKilled and CrashLoopBackOff.'
   const date = meta.date || '2026-06-24'
   const category = meta.category || 'AIOps'
   const author = meta.author || 'AlertMend Team'
@@ -50,12 +64,12 @@ export async function build(slug) {
     [
       'OOM loop, exit 137',
       'Three restarts before anyone opened Slack.',
-      'VRAM pressure under concurrent load. Kubernetes killed the pod. Each cold start evicted the model again. Manual kubectl delete pod was the only playbook.',
+      'Friday evening load test. VRAM spiked under concurrent embeddings. kubectl describe showed OOMKilled, exit 137. We ran kubectl delete pod three times thinking the process was wedged. Each restart re-loaded the 40GB model, hit the same memory ceiling, and OOMed again within 90 seconds. Grafana showed the pod as Running the whole time.',
     ],
     [
       'Ingress said 502',
       'Apps called the proxy URL, not localhost:11434.',
-      'In-cluster curl to the Service worked. External URL through nginx failed during pod rollout. No monitor hit the same hostname users use.',
+      'Deploy looked green. In-cluster curl to the ClusterIP returned /api/tags 200. Users hit 502 on inference.example.com because nginx routed to a pod still in ContainerCreating. Our monitor checked localhost:11434 from inside the cluster. Nobody checked the hostname users typed in the browser.',
     ],
   ]
 
@@ -68,9 +82,16 @@ export async function build(slug) {
   ]
 
   const OLLAMA_NATIVE = [
-    ['OLLAMA_KEEP_ALIVE', 'Models unload after idle timeout. Next request pays cold-start latency that looks like an outage.', 'Set keep_alive to match traffic (e.g. -1 or 30m). AlertMend latency baseline alerts catch spikes before users complain.'],
-    ['/api/ps vs /api/tags', 'tags lists installed models on disk. ps lists what is loaded in VRAM right now.', 'In AlertMend: optional check script asserts your model appears in ps during business hours.'],
-    ['Model in tags JSON', 'Readiness should confirm llama3.2 (or your model) is present, not just HTTP 200.', 'In AlertMend: URL check body assertion or exec probe with jq before marking healthy.'],
+    ['OLLAMA_KEEP_ALIVE', 'Models unload after idle timeout. Next request pays cold-start latency that looks like an outage.', 'Set keep_alive to match traffic (e.g. -1 or 30m). Latency baseline alerts catch spikes before users complain.'],
+    ['/api/ps vs /api/tags', 'tags lists installed models on disk. ps lists what is loaded in VRAM right now.', 'Optional check script asserts your model appears in ps during business hours.'],
+    ['Model in tags JSON', 'Readiness should confirm llama3.2 (or your model) is present, not just HTTP 200.', 'URL check body assertion or exec probe with jq before marking healthy.'],
+  ]
+
+  const PROMETHEUS_DECISION = [
+    ['Need historical VRAM graphs?', 'Add Prometheus + sidecar exporter'],
+    ['Need token throughput dashboards?', 'Add Prometheus'],
+    ['Need SLO burn rate alerts?', 'Add Prometheus'],
+    ['Just need "is it up?" + auto-restart', 'AlertMend alone is enough for phase one'],
   ]
 
   const THRESHOLDS = [
@@ -83,25 +104,18 @@ export async function build(slug) {
 
   const REMEDIATION_FLOW = [
     ['/api/tags fails', 'External check: connection refused x2', false, false],
-    ['Correlate', 'AlertMend: OOMKilled exit 137, pod NotReady', false, true],
+    ['Correlate', 'Match URL failure with OOMKilled exit 137 or pod NotReady', false, true],
     ['Auto-fix', 'Rollout restart deployment/ollama', false, true],
     ['Verify', 'Re-probe /api/tags: 200, model listed', true, false],
     ['Notify', 'Slack: auto-resolved. No page.', true, false],
   ]
 
   const SAFE_AUTOMATE = [
-    ['OOMKilled (exit 137)', 'VRAM or container memory limit exceeded', 'In AlertMend: OOM runbook restarts the Deployment, re-probes /api/tags twice, posts model and node context to Slack.'],
-    ['CrashLoopBackOff', 'Bad env, missing model, probe too aggressive', 'In AlertMend: attach restart runbook with deploy grace; rollback suggestion in Slack if crash started after rollout.'],
-    ['502 / 504 from proxy', 'Pod restarting, upstream timeout', 'In AlertMend: URL check on public hostname triggers restart; suppress alerts during known deploy window.'],
-    ['Model evicted under load', 'Cold start on next request', 'In AlertMend: latency baseline alert plus optional /api/ps assertion before auto-restart.'],
-    ['GPU node NotReady', 'Node drain or driver glitch', 'In AlertMend: correlate node event with failed inference URL check, restart pod after node recovers.'],
-  ]
-
-  const DIFFERENTIATION = [
-    ['Deploy suppression', 'A cron restart during rollout makes outages worse.', 'AlertMend pauses runbooks during active rollouts and resumes checks after grace.'],
-    ['Correlated incidents', 'Uptime Robot sees 502. kubectl sees OOMKilled. Two tools, no story.', 'AlertMend opens one Slack thread with URL failure plus exit 137 context.'],
-    ['Verify before page', 'Scripts restart and assume success. On-call still wakes up.', 'AlertMend re-probes /api/tags twice. Pages only if verification fails.'],
-    ['AI incident summary', 'Raw pod events in Slack at 2am help nobody.', 'AlertMend posts plain-language root cause and what the runbook did.'],
+    ['OOMKilled (exit 137)', 'VRAM or container memory limit exceeded', 'Rollout restart Deployment, re-probe /api/tags twice. Escalate if OOM repeats within 15 min.'],
+    ['CrashLoopBackOff', 'Bad env, missing model, probe too aggressive', 'Restart with deploy grace. Rollback suggestion if crash started after rollout.'],
+    ['502 / 504 from proxy', 'Pod restarting, upstream timeout', 'Restart on public URL failure. Suppress during known deploy window.'],
+    ['Model evicted under load', 'Cold start on next request', 'Latency baseline alert before auto-restart. Optional /api/ps assertion.'],
+    ['GPU node NotReady', 'Node drain or driver glitch', 'Restart pod after node recovers. Correlate node event with URL failure.'],
   ]
 
   const DO_NOT_AUTOMATE = [
@@ -111,16 +125,24 @@ export async function build(slug) {
     ['Cluster-wide GPU drain', 'Blast radius across workloads', 'Runbook with maintenance window'],
   ]
 
+  const DIFFERENTIATION = [
+    ['Deploy suppression', 'A cron restart during rollout makes outages worse.', 'Pauses runbooks during active rollouts and resumes checks after grace.'],
+    ['Correlated incidents', 'Uptime Robot sees 502. kubectl sees OOMKilled. Two tools, no story.', 'Opens one Slack thread with URL failure plus exit 137 context.'],
+    ['Verify before page', 'Scripts restart and assume success. On-call still wakes up.', 'Re-probes /api/tags twice. Pages only if verification fails.'],
+    ['AI incident summary', 'Raw pod events in Slack at 2am help nobody.', 'Posts plain-language root cause and what the runbook did.'],
+  ]
+
   const SETUP_STEPS = [
-    ['Connect cluster or host', 'Install the AlertMend agent. Ollama pod events, OOMKilled, and restart history appear without Prometheus wiring.'],
-    ['Layer health checks', '/api/tags for liveness, optional /api/generate smoke, and the public URL your apps call through Ingress.'],
-    ['Set thresholds', 'Model-load grace after deploy. Baseline-relative latency. Split Open WebUI vs Ollama backend checks.'],
-    ['Attach idempotent runbooks', 'Restart Deployment or StatefulSet. Safe to run twice. Include deploy suppression window.'],
-    ['Verify then notify', 'Re-probe /api/tags twice. Slack on success. Page only if verification fails after auto-fix.'],
+    ['Connect cluster or host', '2 min', 'Install the AlertMend agent. Ollama pod events, OOMKilled, and restart history appear without Prometheus wiring.'],
+    ['Layer health checks', '5 min', '/api/tags for liveness, optional /api/generate smoke, and the public URL your apps call through Ingress.'],
+    ['Set thresholds', '8 min', 'Model-load grace after deploy. Baseline-relative latency. Split Open WebUI vs Ollama backend checks.'],
+    ['Attach idempotent runbooks', '5 min', 'Restart Deployment or StatefulSet. Safe to run twice. Include deploy suppression window.'],
+    ['Verify then notify', '2 min', 'Re-probe /api/tags twice. Slack on success. Page only if verification fails after auto-fix.'],
   ]
 
   const HUB_LINKS = [
-    ['/blog/vibe-coded-app-vm-observability', 'Vibe-coded app VM observability', 'Self-hosted LLM stacks on a single GPU VM'],
+    ['/blog/monitor-litellm-using-alertmend', 'Monitor LiteLLM', 'OpenAI gateway in front of Ollama'],
+    ['/blog/kubernetes-crashloopbackoff-fix', 'CrashLoopBackOff fix', 'Probe misconfig and post-deploy crash loops'],
     ['/blog/debugging-kubernetes-oomkilled-exit-code-137-causes-and-solutions', 'OOMKilled exit 137', 'Memory limits, eviction, and restart playbooks'],
     ['/blog/kubernetes-502-bad-gateway-error-fix', 'Kubernetes 502 Bad Gateway', 'Ingress upstream errors during Ollama rollouts'],
     ['/blog/monitor-langfuse-using-alertmend', 'Monitor Langfuse', 'LLM tracing uptime alongside inference'],
@@ -138,36 +160,28 @@ export async function build(slug) {
 
   const FAQ = [
     [
-      'How do I monitor Ollama in production?',
-      'Connect your cluster or host in AlertMend, add URL checks on /api/tags and your public inference endpoint, and route alerts to Slack. AlertMend watches OOMKilled events, failed health checks, and pod crashes depending on how you deploy Ollama.',
+      'What latency threshold should I set for Ollama /api/generate smoke checks?',
+      'A fixed number will page you on healthy large models. See the baseline-relative formula in the threshold engineering section above. Recompute weekly from off-peak traffic.',
     ],
     [
-      'What is the best Ollama health check endpoint?',
-      'Use GET /api/tags on port 11434 for liveness: it confirms the API is up and lists loaded models. For readiness after deploy, wait until your primary model appears in the response. Add a tiny POST /api/generate smoke test when tags alone are not enough.',
+      'Which Ollama failures should I never auto-restart?',
+      'Never auto-delete model PVCs, change quantization at runtime, purge multi-tenant models, or drain GPU nodes cluster-wide. See the safe-to-automate matrix for the full line between script and human.',
     ],
     [
-      'How do I monitor Ollama on Kubernetes?',
-      'Install the AlertMend agent, probe /api/tags through the same Ingress or Service your apps use, and enable auto-restart on the Ollama Deployment. Set initialDelaySeconds long enough for model load, often 60-120 seconds on a fresh PVC.',
+      'How do I prevent false pages during Ollama model cold starts?',
+      'Suppress alerts for initialDelaySeconds + 30s after pod Ready, and use baseline-relative latency instead of fixed timeouts. The full formula is in threshold engineering above.',
     ],
     [
-      'Why does Ollama keep getting OOMKilled?',
-      'Model size plus concurrent requests can exceed pod memory or GPU VRAM limits. AlertMend alerts your team and can restart pods automatically. If it keeps recurring, reduce num_parallel, use a smaller quantization, or add GPU replicas.',
-    ],
-    [
-      'Do I need Prometheus to monitor Ollama?',
-      'Not to start. Ollama does not ship a native Prometheus /metrics endpoint. Teams add a sidecar exporter that polls /api/ps and /api/tags. AlertMend covers phase one: URL checks, OOMKilled alerts, and auto-restart. Add Prometheus and Grafana when you need VRAM dashboards and token-level telemetry at scale.',
-    ],
-    [
-      'How do I know if Ollama is down?',
-      'AlertMend treats Ollama as down when health checks fail, inference requests error, or pods crash repeatedly, not when /api/tags passes but /api/generate still times out.',
-    ],
-    [
-      'Should I auto-restart Ollama when it OOMs?',
-      'Yes for availability: enable AlertMend restart runbooks so the pod comes back after transient memory pressure. If OOM repeats within 15 minutes, fix sizing instead of only restarting.',
+      'Can I monitor multiple Ollama instances behind a load balancer?',
+      'Yes, but check each backend independently. A load balancer can return 200 while one replica is OOMKilled. Per-replica /api/tags checks catch what a single VIP check misses.',
     ],
     [
       'How do I monitor Ollama behind Open WebUI?',
-      'Add a URL check on Open WebUI /health for the UI and a separate check on the Ollama /api/tags endpoint your stack uses. Alert when the UI is up but Ollama checks fail.',
+      'Split checks: Open WebUI /health for the UI, Ollama /api/tags for inference. Alert when the UI is up but backend checks fail. See the Open WebUI deployment tab above.',
+    ],
+    [
+      'Why does Ollama keep getting OOMKilled?',
+      'Model size plus concurrent requests exceed pod memory or GPU VRAM limits. Restart once for availability. If OOM repeats within 15 minutes, fix sizing instead of only restarting.',
     ],
   ]
 
@@ -241,15 +255,26 @@ curl -sf https://inference.example.com/api/tags`
     ['crashloop', 'CrashLoopBackOff', 'Probe or config'],
   ]
 
-  const renderPainScenarios = PAIN_SCENARIOS.map(
-    ([when, t, body]) =>
-      `<div class="fearScenario"><p class="fearScenarioWhen">${esc(when)}</p><h3 class="fearScenarioTitle">${esc(t)}</h3><p class="fearScenarioBody">${esc(body)}</p></div>`
-  ).join('\n        ')
+  const renderScenario = ([when, t, body]) =>
+    `<div class="fearScenario"><p class="fearScenarioWhen">${esc(when)}</p><h3 class="fearScenarioTitle">${esc(t)}</h3><p class="fearScenarioBody">${esc(body)}</p></div>`
+
+  const visibleScenarios = PAIN_SCENARIOS.slice(0, 2).map(renderScenario).join('\n        ')
+  const moreScenarios = PAIN_SCENARIOS.slice(2).map(renderScenario).join('\n        ')
 
   const renderFlow = REMEDIATION_FLOW.map(([t, b, done, action]) => {
     const cls = done ? 'flowStep flowStepDone' : action ? 'flowStep flowStepAction' : 'flowStep'
     return `<div class="${cls}"><span class="flowStepNum">${done ? '✓' : action ? '⚡' : '·'}</span><p class="flowStepTitle">${esc(t)}</p><p class="flowStepBody">${esc(b)}</p></div>`
   }).join('\n        ')
+
+  const renderSafeItems = SAFE_AUTOMATE.map(
+    ([sym, cause, fix]) =>
+      `<li class="automationItem automationItemSafe"><span class="automationIcon" aria-hidden="true">✓</span><div><strong>${esc(sym)}</strong><p>${esc(cause)}. ${esc(fix)}</p></div></li>`
+  ).join('\n            ')
+
+  const renderDangerItems = DO_NOT_AUTOMATE.map(
+    ([sym, why, instead]) =>
+      `<li class="automationItem automationItemDanger"><span class="automationIcon" aria-hidden="true">⛔</span><div><strong>${esc(sym)}</strong><p>${esc(why)}. ${esc(instead)}.</p></div></li>`
+  ).join('\n            ')
 
   const faqLd = JSON.stringify({
     '@context': 'https://schema.org',
@@ -266,7 +291,7 @@ curl -sf https://inference.example.com/api/tags`
     '@type': 'HowTo',
     name: 'Monitor Ollama in production with AlertMend',
     description: excerpt,
-    step: SETUP_STEPS.map(([name, text], i) => ({
+    step: SETUP_STEPS.map(([name, , text], i) => ({
       '@type': 'HowToStep',
       position: i + 1,
       name,
@@ -324,7 +349,7 @@ ${buildNavHtml(slug, postCalendlyUrl)}
   <div class="main-container">
     <div class="content-wrapper">
       <div class="main-col">
-${buildArticleHeader(title, author, date, category)}
+${buildOllamaHeader(title, author, date, category)}
 
     <div class="dl-blog">
       <section class="heroBand fearBand">
@@ -339,159 +364,164 @@ ${buildArticleHeader(title, author, date, category)}
         </div>
         <p class="heroGuideLabel">Production runbook · Ollama uptime</p>
         <h2 class="fearHeadline">Ollama was down. Your RAG pipeline kept calling it anyway.</h2>
-        <p class="fearLead">Most teams <strong>install</strong> Ollama. Few teams <strong>monitor the URL their apps hit</strong>, verify inference end-to-end, or auto-restart after OOMKilled. The result: silent embedding failures, chat timeouts, and the same kubectl delete pod ritual every Friday.</p>
+        <p class="fearLead">Most teams <strong>install</strong> Ollama. Few teams <strong>monitor the URL their apps actually hit</strong>, or auto-restart after OOMKilled.</p>
+        <p class="fearLeadSecondary">Not every failure should be auto-fixed. Some automations cause data loss or cross-team outages.</p>
         <div class="fearScenarioGrid">
-        ${renderPainScenarios}
+        ${visibleScenarios}
         </div>
-        <p class="fearBridge"><strong>Checking /api/tags once is not production monitoring.</strong> Layer probes, grace periods for model load, and idempotent restart runbooks. Page only when auto-fix verification fails.</p>
+        <details class="fearScenarioMore">
+          <summary>See the failure that looked healthy in Grafana →</summary>
+          <div class="fearScenarioGrid">
+        ${moreScenarios}
+          </div>
+        </details>
+        <p class="heroBridge">Every one of these was preventable. Below: the formula one team used to cut false pages during model cold starts, and why a fixed timeout will never work. Some auto-restarts cause worse outages than the failure itself. The matrix for which is which is further down.</p>
       </section>
 
       <section class="heroBand heroBandCompact">
-        <div class="heroAudience">
+        <div class="heroAudience heroAudienceCompact">
           <h2 class="heroAudienceTitle">You're in the right place if…</h2>
           <ul class="heroAudienceList">
             <li>You run Ollama on Kubernetes, a GPU VM, or Docker behind Open WebUI or an internal chat API</li>
             <li>Nobody pages you when inference stops, models get evicted, or exit 137 loops start</li>
-            <li>You want health checks, Slack alerts, and auto-restart without building Prometheus and Grafana first</li>
           </ul>
         </div>
-        <p class="seoTldr"><strong>TL;DR:</strong> Monitor <strong>/api/tags</strong> and your <strong>public inference URL</strong>. When checks fail twice, run an <strong>idempotent pod restart</strong>. <strong>Re-probe twice.</strong> Page on-call only if verification fails.</p>
+        <p class="seoTldr"><strong>TL;DR:</strong> Most teams monitor one endpoint and restart manually, but three of Ollama&apos;s five endpoints matter more than the one you&apos;re checking, and some auto-restarts cause worse outages than the failure itself. This guide covers which probes to layer, <a href="#threshold-engineering">the formula that stops false pages during normal deploys</a>, and <a href="#automation-safety">the line between safe automation and data loss</a>.</p>
+        <p class="fearBridge fearBridgeAfterTldr"><strong>Checking /api/tags once is not production monitoring.</strong> Layer probes, grace periods for model load, and idempotent restart runbooks.</p>
       </section>
 
-      <h2 class="sectionHead">Ollama health endpoints: what to probe</h2>
-      <p class="bodyText">The mistake: wire liveness, readiness, and your external monitor all to <code>/api/tags</code> with no grace period, then wonder why large models flap on every deploy. Split checks by purpose and hit the same hostname your apps use.</p>
-      <div class="diyWrap">
-        <table class="compareTable">
-          <thead><tr><th>Path</th><th>Used by</th><th>Checks</th><th>On failure</th></tr></thead>
-          <tbody>
-            ${HEALTH_ENDPOINTS.map(([p, u, c, f]) => `<tr><td><code>${esc(p)}</code></td><td>${esc(u)}</td><td>${esc(c)}</td><td class="diyHighlight">${esc(f)}</td></tr>`).join('\n            ')}
-          </tbody>
-        </table>
-      </div>
-      <pre class="codeBlock"><code>${esc(CURL_CHECKS)}</code></pre>
-      <p class="bodyText">Kubernetes probe wiring for Ollama (copy into your Deployment):</p>
-      <pre class="codeBlock"><code>${esc(OLLAMA_PROBE_YAML)}</code></pre>
-      <p class="citeRow">Reference: <a href="https://github.com/ollama/ollama/blob/main/docs/api.md" target="_blank" rel="noopener noreferrer">Ollama API docs</a> · <a href="https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/" target="_blank" rel="noopener noreferrer">Kubernetes probe docs</a></p>
+      <details class="jumpNavCollapsible">
+        <summary>Jump to a section</summary>
+        <nav class="inThisGuide inThisGuideTeasers" aria-label="Jump to section">
+          <ul>
+            <li><a href="#health-endpoints">The five endpoints most guides get wrong (and the one teams skip)</a></li>
+            <li><a href="#threshold-engineering">The formula that stops false pages during normal deploys</a></li>
+            <li><a href="#automation-safety">The line between safe automation and data loss</a></li>
+            <li><a href="#setup-steps">Five steps from zero to auto-remediation (~15 min)</a></li>
+          </ul>
+        </nav>
+      </details>
 
-      <h2 class="sectionHead">Ollama-native signals: /api/ps and keep_alive</h2>
-      <p class="bodyText">Generic pod monitors miss the failure modes that only show up in Ollama's API. These three settings separate "process is up" from "inference is ready for production traffic."</p>
-      <div class="diyWrap">
-        <table class="compareTable">
-          <thead><tr><th>Signal</th><th>What goes wrong</th><th>In AlertMend</th></tr></thead>
-          <tbody>
-            ${OLLAMA_NATIVE.map(([s, w, am]) => `<tr><td><code>${esc(s)}</code></td><td>${esc(w)}</td><td class="diyHighlight">${esc(am)}</td></tr>`).join('\n            ')}
-          </tbody>
-        </table>
-      </div>
+      <section class="sectionChapter" id="health-endpoints">
+        <p class="sectionLabel">Chapter 1 · Diagnosis</p>
+        <h2 class="sectionHead">Ollama health endpoints: what to probe</h2>
+        <p class="cliffhanger">Every Ollama guide says &ldquo;check <code>/api/tags</code>.&rdquo; That is the equivalent of checking if nginx is running and calling it production monitoring. Here is what actually breaks, and the order you should check it in.</p>
+        <div class="warningCallout">
+          <p><span class="calloutIcon" aria-hidden="true">⚠️</span> <strong>The mistake:</strong> wire liveness, readiness, and your external monitor all to <code>/api/tags</code> with no grace period, then wonder why large models flap on every deploy.</p>
+        </div>
+        <div class="endpointMissCallout">
+          <p><strong>The endpoint most teams miss:</strong> <code>Public inference URL</code>. If your apps call inference.example.com but your monitor checks localhost:11434, you are monitoring a different system than your users see.</p>
+        </div>
+        <div class="diyWrap tableScrollWrap">
+          <table class="compareTable responsiveTable">
+            <thead><tr><th>Path</th><th>Used by</th><th>Checks</th><th>On failure</th></tr></thead>
+            <tbody>
+              ${HEALTH_ENDPOINTS.map(([p, u, c, f]) => `<tr><td data-label="Path"><code>${esc(p)}</code></td><td data-label="Used by">${esc(u)}</td><td data-label="Checks">${esc(c)}</td><td data-label="On failure" class="diyHighlight">${esc(f)}</td></tr>`).join('\n            ')}
+            </tbody>
+          </table>
+        </div>
+        <div class="scrollHook">
+          <p>These probes catch crashes. They do not prevent the 2am false page during a normal model cold start. That requires <a href="#threshold-engineering">threshold math</a>, and knowing <a href="#automation-safety">which failures are safe for a script to fix</a> vs. which need a human.</p>
+        </div>
+        <pre class="codeBlock"><code>${esc(CURL_CHECKS)}</code></pre>
+        <p class="bodyText">Kubernetes probe wiring for Ollama (copy into your Deployment):</p>
+        <pre class="codeBlock"><code>${esc(OLLAMA_PROBE_YAML)}</code></pre>
+        <p class="citeRow">Reference: <a href="https://github.com/ollama/ollama/blob/main/docs/api.md" target="_blank" rel="noopener noreferrer">Ollama API docs</a> · <a href="https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/" target="_blank" rel="noopener noreferrer">Kubernetes probe docs</a></p>
+      </section>
 
-      <h2 class="sectionHead">Phase 2: when to add Prometheus</h2>
-      <p class="bodyText">Start with URL checks and auto-restart in AlertMend. Add Prometheus when you need historical VRAM graphs, token throughput, and custom SLO dashboards. Ollama requires an exporter sidecar because the API returns JSON, not Prometheus text format.</p>
-      <pre class="codeBlock"><code>${esc(EXPORTER_SNIPPET)}</code></pre>
-      <p class="bodyText">AlertMend stays your incident and auto-fix layer. Prometheus stays your capacity planning layer. Most teams run both once inference is business-critical.</p>
-
-      <div class="proofBand">
-        <p class="proofStat"><span class="proofStatNum">~52s</span> typical AlertMend recovery</p>
-        <p class="proofBody">From first failed <code>/api/tags</code> check to verified 200 with model loaded. One AI startup on cloud servers saw <strong>90%+ of recurring failures remediate themselves</strong> after wiring alerts and auto-restart. <a href="/case-studies">Read the case study</a>.</p>
-      </div>
-
-      <h2 class="sectionHead">What setup looks like in AlertMend</h2>
-      <p class="bodyText">Three clicks in the product mirror the five-step playbook below. Tab through the console mock.</p>
-      <div class="amConsole" aria-label="AlertMend console mock">
-        <div class="amConsoleTabs" role="tablist" aria-label="AlertMend setup steps">
-          <button type="button" role="tab" class="amConsoleTab amConsoleTabActive" data-am-screen="connect" aria-selected="true">1. Connect</button>
-          <button type="button" role="tab" class="amConsoleTab" data-am-screen="check" aria-selected="false">2. URL check</button>
-          <button type="button" role="tab" class="amConsoleTab" data-am-screen="runbook" aria-selected="false">3. Runbook</button>
-        </div>
-        <div class="amConsoleChrome">
-          <div class="chromeDots"><span class="chromeDot"></span><span class="chromeDot"></span><span class="chromeDot"></span></div>
-          <span class="amConsoleTitle" id="am-console-title">AlertMend · Clusters</span>
-          <span class="liveBadge"><span class="liveDot"></span> Live</span>
-        </div>
-        <div class="amConsoleBody" id="am-screen-connect" role="tabpanel">
-          <div class="amConsoleRow amConsoleRowHead"><span>Cluster</span><span>Agent</span><span>Namespace</span><span>Status</span></div>
-          <div class="amConsoleRow"><span>prod-us-east</span><span>alertmend-agent</span><span>inference</span><span class="amStatusOk">Connected</span></div>
-          <div class="amConsoleRow"><span class="amConsoleMuted">ollama-prod</span><span>-</span><span>deployment/ollama</span><span class="amStatusWarn">1 restart (1h)</span></div>
-          <p class="amConsoleHint">Ollama pod events and OOMKilled history appear without Prometheus wiring.</p>
-        </div>
-        <div class="amConsoleBody hidden" id="am-screen-check" role="tabpanel">
-          <p class="amConsoleLabel">URL check · external</p>
-          <p class="amConsoleUrl">https://inference.example.com/api/tags</p>
-          <div class="amConsoleCheckRow"><span>Interval</span><span>60s</span></div>
-          <div class="amConsoleCheckRow"><span>Fail threshold</span><span>2 consecutive</span></div>
-          <div class="amConsoleCheckRow"><span>Body assert</span><span>contains "llama3.2"</span></div>
-          <div class="amConsoleCheckRow"><span>Deploy grace</span><span>120s after rollout</span></div>
-          <p class="amConsoleHint">Same hostname and TLS your chat and RAG apps use.</p>
-        </div>
-        <div class="amConsoleBody hidden" id="am-screen-runbook" role="tabpanel">
-          <p class="amConsoleLabel">Runbook · ollama-restart</p>
-          <div class="amRunbookStep"><span class="amRunbookNum">1</span><span>Rollout restart deployment/ollama</span></div>
-          <div class="amRunbookStep"><span class="amRunbookNum">2</span><span>Wait for rollout status (180s max)</span></div>
-          <div class="amRunbookStep"><span class="amRunbookNum">3</span><span>Re-probe URL check twice</span></div>
-          <div class="amRunbookStep amRunbookStepOk"><span class="amRunbookNum">✓</span><span>Slack #incidents if verified · page if not</span></div>
-          <p class="amConsoleHint">Idempotent: safe to run twice. Suppressed during active deploys.</p>
-        </div>
-      </div>
-
-      <h2 class="sectionHead">Why not kubectl plus a cron job?</h2>
-      <p class="bodyText">A bash restart script fixes one symptom. It does not correlate URL failure with OOMKilled, suppress during deploys, or verify recovery before paging.</p>
-      <div class="diffGrid">
-        ${DIFFERENTIATION.map(([t, problem, am]) => `<div class="diffCard"><h3 class="diffCardTitle">${esc(t)}</h3><p class="diffCardProblem">${esc(problem)}</p><p class="diffCardAm"><strong>In AlertMend:</strong> ${esc(am)}</p></div>`).join('\n        ')}
-      </div>
-
-      <h2 class="sectionHead">Live monitor mock</h2>
-      <p class="bodyText">Click a failure mode to see kubectl commands. Hit <strong>Simulate recovery</strong> after auto-fix succeeds.</p>
-      <div class="monitorMock" aria-label="Ollama URL monitor dashboard mock">
-        <div class="monitorMockHead">
-          <span class="monitorMockLabel">External check · same URL as your apps</span>
-        </div>
-        <div class="monitorMockUrl" id="mock-url">https://inference.example.com/api/tags</div>
-        <div class="monitorMockStatusRow">
-          <span class="mockStatusDot mockStatusDotError" id="mock-status-dot"></span>
-          <span class="mockStatusCode" id="mock-status-code">FAIL</span>
-          <span class="mockStatusLabel mockStatusLabelError" id="mock-status-label">Connection refused</span>
-        </div>
-        <div class="monitorMockBar"><div class="monitorMockBarFill" id="mock-bar-fill"></div></div>
-        <p class="monitorMockMeta" id="mock-meta">Last check: 891ms · 2 consecutive failures · auto-fix eligible</p>
-        <button type="button" class="mockRecoverBtn" id="mock-recover-btn">Simulate recovery</button>
-      </div>
-
-      <h2 class="sectionHead">Pick a failure mode: kubectl + auto-fix</h2>
-      <div class="modeGrid" role="tablist" aria-label="Ollama failure modes">
-        ${FAILURE_TABS.map(([id, t, sub], i) => `<button type="button" role="tab" data-failure-id="${id}" class="modeCard${i === 0 ? ' modeCardActive' : ''}" aria-selected="${i === 0 ? 'true' : 'false'}"><span class="modeCardTitle">${esc(t)}</span><span class="modeCardSub">${esc(sub)}</span></button>`).join('\n        ')}
-      </div>
-      <div class="modePlaybook" role="tabpanel">
-        <div class="modePlaybookHead">
-          <h3 class="modePlaybookTitle" id="failure-playbook-title">OOMKilled (exit 137)</h3>
-        </div>
-        <p class="modePlaybookSummary" id="failure-playbook-summary"></p>
-        <ul class="checkList" id="failure-playbook-steps"></ul>
-        <pre class="playbookCode" id="failure-playbook-code" aria-label="kubectl and curl commands"></pre>
-        <p class="autofixBadge" id="failure-playbook-autofix"></p>
-        <div class="stepTip"><span id="failure-playbook-tip"></span></div>
-      </div>
-
-      <h2 class="sectionHead">Threshold engineering for model load</h2>
-      <p class="bodyText">A fixed 30s probe interval pages you during normal cold starts. A fixed 3s latency threshold pages you on large models that are healthy. Use baselines and deploy grace.</p>
-      <div class="thresholdFormula">alert when sustained_p99(10m) &gt; max(baseline_p99 × 1.5, baseline_p95 + 2σ)
+      <section class="sectionChapter sectionChapterAlt" id="threshold-engineering">
+        <p class="sectionLabel">Chapter 2 · Thresholds</p>
+        <h2 class="sectionHead">The formula that stops false pages during cold starts</h2>
+        <p class="bodyText">Remember the Friday 3:42pm embedding failure? <code>/api/tags</code> passed while generate timed out. A fixed 30s probe interval would have paged you during normal GPU weight load.</p>
+        <div class="formulaCard">
+          <p class="formulaCardLabel">Key formula</p>
+          <div class="thresholdFormula">alert when sustained_p99(10m) &gt; max(baseline_p99 × 1.5, baseline_p95 + 2σ)
   AND model_load_grace_elapsed &gt; initialDelaySeconds + 30s</div>
-      <div class="diyWrap">
-        <table class="compareTable">
-          <thead><tr><th>Rule</th><th>Threshold</th><th>Why</th></tr></thead>
-          <tbody>
-            ${THRESHOLDS.map(([r, t, w]) => `<tr><td>${esc(r)}</td><td class="diyHighlight">${esc(t)}</td><td>${esc(w)}</td></tr>`).join('\n            ')}
-          </tbody>
-        </table>
-      </div>
+        </div>
+        <div class="diyWrap tableScrollWrap">
+          <table class="compareTable responsiveTable">
+            <thead><tr><th>Rule</th><th>Threshold</th><th>Why</th></tr></thead>
+            <tbody>
+              ${THRESHOLDS.map(([r, t, w]) => `<tr><td data-label="Rule">${esc(r)}</td><td data-label="Threshold" class="diyHighlight">${esc(t)}</td><td data-label="Why">${esc(w)}</td></tr>`).join('\n            ')}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="sectionChapter" id="automation-safety">
+        <p class="sectionLabel">Chapter 3 · Automation</p>
+        <h2 class="sectionHead">Safe to automate vs human required</h2>
+        <p class="bodyText">The difference between a production runbook and a dangerous script is knowing where to stop. Here is the line.</p>
+        <div class="automationMatrix">
+          <div class="automationColumn automationColumnSafe">
+            <h3 class="automationColumnTitle"><span aria-hidden="true">✓</span> Safe to automate</h3>
+            <ul class="automationList">
+            ${renderSafeItems}
+            </ul>
+          </div>
+          <div class="automationColumn automationColumnDanger">
+            <h3 class="automationColumnTitle"><span aria-hidden="true">⛔</span> Human required</h3>
+            <ul class="automationList">
+            ${renderDangerItems}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="sectionChapter sectionChapterAlt">
+        <p class="sectionLabel">Chapter 4 · Ollama-specific</p>
+        <h2 class="sectionHead">Ollama-native signals: /api/ps and keep_alive</h2>
+        <p class="bodyText">Generic pod monitors miss failure modes that only show up in Ollama&apos;s API.</p>
+        <div class="diyWrap tableScrollWrap">
+          <table class="compareTable responsiveTable">
+            <thead><tr><th>Signal</th><th>What goes wrong</th><th>In AlertMend</th></tr></thead>
+            <tbody>
+              ${OLLAMA_NATIVE.map(([s, w, am]) => `<tr><td data-label="Signal"><code>${esc(s)}</code></td><td data-label="What goes wrong">${esc(w)}</td><td data-label="In AlertMend" class="diyHighlight">${esc(am)}</td></tr>`).join('\n            ')}
+            </tbody>
+          </table>
+        </div>
+        <div class="keyInsight">
+          <p><strong>Key insight:</strong> A model listed in <code>/api/tags</code> is not necessarily loaded in VRAM. After a cold start, <code>/api/tags</code> returns 200 while inference times out for 60-120 seconds. This is the #1 cause of false &ldquo;Ollama is healthy&rdquo; signals.</p>
+        </div>
+      </section>
+
+      <section class="sectionChapter" id="prometheus-phase">
+        <p class="sectionLabel">Chapter 5 · When to scale observability</p>
+        <h2 class="sectionHead">When to add Prometheus (and when it is overkill)</h2>
+        <p class="bodyText">Do not start here. Ollama has no native <code>/metrics</code> endpoint. You need a sidecar exporter, which means Prometheus is a second component to maintain.</p>
+        <div class="diyWrap tableScrollWrap">
+          <table class="compareTable responsiveTable">
+            <thead><tr><th>Question</th><th>If yes →</th></tr></thead>
+            <tbody>
+              ${PROMETHEUS_DECISION.map(([q, a]) => `<tr><td data-label="Question">${esc(q)}</td><td data-label="If yes" class="diyHighlight">${esc(a)}</td></tr>`).join('\n            ')}
+            </tbody>
+          </table>
+        </div>
+        <pre class="codeBlock"><code>${esc(EXPORTER_SNIPPET)}</code></pre>
+      </section>
+
+      <section class="sectionChapter sectionChapterAlt">
+        <p class="sectionLabel">Chapter 6 · Why scripts fail</p>
+        <h2 class="sectionHead">Why scripts break at 2am</h2>
+        <p class="bodyText">A bash restart script fixes one symptom. It does not correlate URL failure with OOMKilled, suppress during deploys, or verify recovery before paging. <span class="proofInline">Typical recovery with layered checks: ~52s (<a href="/case-studies">case study</a>).</span></p>
+        <div class="diyWrap tableScrollWrap">
+          <table class="compareTable responsiveTable">
+            <thead><tr><th>Scenario</th><th>Bash script</th><th>AlertMend</th></tr></thead>
+            <tbody>
+              ${DIFFERENTIATION.map(([s, bash, am]) => `<tr><td data-label="Scenario">${esc(s)}</td><td data-label="Bash script">${esc(bash)}</td><td data-label="AlertMend" class="diyHighlight">${esc(am)}</td></tr>`).join('\n            ')}
+            </tbody>
+          </table>
+        </div>
+        <p class="inlineCta">AlertMend handles layered checks and verify-before-page out of the box. <a href="${postSignupUrl}">Free tier available</a>.</p>
+      </section>
 
       <h2 class="sectionHead">How does AlertMend recover Ollama automatically?</h2>
-      <p class="sectionSub">Sequence view: health check fails, Slack incident opens, restart runbook runs, inference resumes.</p>
       <figure class="flowDiagram">
-        <img src="${assetsBase}/ollama-alertmend-recovery-flow.svg" alt="Sequence diagram: Ollama health check failure, AlertMend detects the failure, alerts Slack, runs auto-recovery runbook, and Ollama returns online" width="960" height="720" loading="lazy">
-        <figcaption class="flowDiagramCaption">Normal operation, OOM or API failure, Slack alert with AI summary, runbook restart, chat and RAG traffic restored.</figcaption>
+        <img src="${assetsBase}/ollama-alertmend-recovery-flow.svg" alt="Sequence diagram: Ollama health check failure, AlertMend detects, alerts Slack, runs auto-recovery runbook" width="960" height="720" loading="lazy">
+        <figcaption class="flowDiagramCaption">Health check fails, restart runbook runs, inference resumes. Typical duration: 52s.</figcaption>
       </figure>
 
-      <h2 class="sectionHead">AlertMend flow: detect, fix, verify, notify</h2>
-      <p class="bodyText">This is what a complete Ollama monitoring loop looks like in production. No page if verification passes.</p>
+      <h2 class="sectionHead" id="detect-fix-flow">Detect, fix, verify, notify</h2>
       <div class="remediationFlow">
         ${renderFlow}
       </div>
@@ -503,11 +533,10 @@ ${buildArticleHeader(title, author, date, category)}
       </div>
 
       <h2 class="sectionHead">How to monitor Ollama by deployment mode</h2>
-      <p class="bodyText">Pick how you run Ollama. Each tab shows AlertMend setup steps for that layout.</p>
       <div class="modeGrid modeGridSecondary" role="tablist" aria-label="Ollama deployment modes">
-        ${DEPLOY_MODES.map(([id, t, sub], i) => `<button type="button" role="tab" data-mode-id="${id}" class="modeCard${i === 1 ? ' modeCardActive' : ''}" aria-selected="${i === 1 ? 'true' : 'false'}"><span class="modeCardTitle">${esc(t)}</span><span class="modeCardSub">${esc(sub)}</span></button>`).join('\n        ')}
+        ${DEPLOY_MODES.map(([id, t, sub], i) => `<button type="button" role="tab" data-mode-id="${id}" class="modeCard${i === 1 ? ' modeCardActive' : ''}" aria-selected="${i === 1 ? 'true' : 'false'}" aria-controls="mode-playbook-panel" id="mode-tab-${id}"><span class="modeCardTitle">${esc(t)}</span><span class="modeCardSub">${esc(sub)}</span></button>`).join('\n        ')}
       </div>
-      <div class="modePlaybook modePlaybookSecondary" role="tabpanel">
+      <div class="modePlaybook modePlaybookSecondary" id="mode-playbook-panel" role="tabpanel" aria-labelledby="mode-tab-kubernetes">
         <div class="modePlaybookHead">
           <h3 class="modePlaybookTitle" id="mode-playbook-title">Runbook: Kubernetes</h3>
           <span class="modePlaybookBadge">Production</span>
@@ -518,38 +547,69 @@ ${buildArticleHeader(title, author, date, category)}
         <div class="stepTip"><span id="mode-playbook-tip"></span></div>
       </div>
 
-      <h2 class="sectionHead">Safe to automate vs human required</h2>
-      <div class="searchIssueGrid">
-        ${SAFE_AUTOMATE.map(([sym, cause, am]) => `<div class="searchIssueCard"><h3 class="searchIssueTerm">${esc(sym)}</h3><p class="searchIssueDesc">${esc(cause)}</p><p class="searchIssueAlert">${esc(am)}</p></div>`).join('\n        ')}
-      </div>
-      <div class="diyWrap" style="margin-top:1.25rem">
-        <table class="compareTable">
-          <thead><tr><th>Do not automate</th><th>Why</th><th>Instead</th></tr></thead>
-          <tbody>
-            ${DO_NOT_AUTOMATE.map(([s, w, a]) => `<tr><td>${esc(s)}</td><td>${esc(w)}</td><td class="diyHighlight">${esc(a)}</td></tr>`).join('\n            ')}
-          </tbody>
-        </table>
+      <h2 class="sectionHead" id="setup-steps">Five steps with AlertMend</h2>
+      <p class="setupTimeEstimate">Setup time: ~15 minutes for basic monitoring. ~30 minutes with custom thresholds and runbooks.</p>
+      <div class="amFlow">
+        ${SETUP_STEPS.map(([t, time, b], i) => `<div class="amStep"><div class="amStepHead"><span class="amStepNum">${i + 1}</span><span class="amStepTime">${esc(time)}</span></div><h3 class="amStepTitle">${esc(t)}</h3><p class="amStepBody">${esc(b)}</p></div>`).join('\n        ')}
       </div>
 
-      <h2 class="sectionHead">Five steps with AlertMend</h2>
-      <div class="amFlow">
-        ${SETUP_STEPS.map(([t, b], i) => `<div class="amStep"><div class="amStepHead"><span class="amStepNum">${i + 1}</span></div><h3 class="amStepTitle">${esc(t)}</h3><p class="amStepBody">${esc(b)}</p></div>`).join('\n        ')}
+      <h2 class="sectionHead">Try it: live monitor mock</h2>
+      <p class="bodyText">Click a failure mode. Hit <strong>Simulate recovery</strong> after auto-fix succeeds.</p>
+      <div class="monitorMock monitorMockProminent" aria-label="Ollama URL monitor dashboard mock">
+        <div class="monitorMockHead">
+          <span class="monitorMockLabel">External check · same URL as your apps</span>
+        </div>
+        <div class="monitorMockUrl" id="mock-url">https://inference.example.com/api/tags</div>
+        <div class="monitorMockStatusRow">
+          <span class="mockStatusDot mockStatusDotError" id="mock-status-dot"></span>
+          <span class="mockStatusCode" id="mock-status-code">FAIL</span>
+          <span class="mockStatusLabel mockStatusLabelError" id="mock-status-label">Connection refused</span>
+        </div>
+        <div class="monitorMockBar"><div class="monitorMockBarFill" id="mock-bar-fill"></div></div>
+        <p class="monitorMockMeta" id="mock-meta">Last check: 891ms · 2 consecutive failures · auto-fix eligible</p>
+        <button type="button" class="mockRecoverBtn" id="mock-recover-btn" aria-label="Simulate Ollama recovery after OOMKilled failure">Simulate recovery</button>
+      </div>
+
+      <h2 class="sectionHead">Pick a failure mode: kubectl commands</h2>
+      <div class="modeGrid" role="tablist" aria-label="Ollama failure modes">
+        ${FAILURE_TABS.map(([id, t, sub], i) => `<button type="button" role="tab" data-failure-id="${id}" class="modeCard${i === 0 ? ' modeCardActive' : ''}" aria-selected="${i === 0 ? 'true' : 'false'}" aria-controls="failure-playbook-panel" id="failure-tab-${id}"><span class="modeCardTitle">${esc(t)}</span><span class="modeCardSub">${esc(sub)}</span></button>`).join('\n        ')}
+      </div>
+      <div class="modePlaybook" id="failure-playbook-panel" role="tabpanel" aria-labelledby="failure-tab-oom">
+        <div class="modePlaybookHead">
+          <h3 class="modePlaybookTitle" id="failure-playbook-title">Runbook: OOMKilled</h3>
+        </div>
+        <p class="modePlaybookSummary" id="failure-playbook-summary"></p>
+        <ul class="checkList" id="failure-playbook-steps"></ul>
+        <pre class="playbookCode" id="failure-playbook-code" aria-label="kubectl and curl commands"></pre>
+        <div class="playbookFooter">
+          <p class="playbookTip" id="failure-playbook-tip"></p>
+        </div>
       </div>
 
       <h2 class="sectionHead">Related deep dives</h2>
-      <p class="bodyText">This post is the Ollama monitoring playbook. These guides go deeper on adjacent failures:</p>
       <div class="hubLinks">
         ${HUB_LINKS.map(([href, t, d]) => `<a href="${href}" class="hubLinkCard"><p class="hubLinkTitle">${esc(t)}</p><p class="hubLinkDesc">${esc(d)}</p></a>`).join('\n        ')}
       </div>
 
-      <h2 class="sectionHead">FAQ</h2>
+      <h2 class="sectionHead" id="faq">FAQ</h2>
       <div class="faqList">
         ${FAQ.map(([q, a], i) => `<div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="${i === 0 ? 'true' : 'false'}">${esc(q)}<svg class="faqChevron${i === 0 ? ' faqChevronOpen' : ''}" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer${i === 0 ? '' : ' hidden'}">${esc(a)}</div></div>`).join('\n        ')}
       </div>
 
+      <div class="receiptBox">
+        <p class="receiptTitle">What you now have</p>
+        <ul class="receiptList">
+          <li>Five-layer probe strategy that catches failures <code>/api/tags</code> misses</li>
+          <li>Production Kubernetes YAML with model-aware readiness</li>
+          <li>The threshold formula that stops false pages during cold starts</li>
+          <li>A safe-to-automate matrix for every common Ollama failure</li>
+          <li>Copy-paste runbooks for OOMKilled, CrashLoopBackOff, and proxy errors</li>
+        </ul>
+      </div>
+
       <div class="ctaBand">
-        <div class="ctaBandTitle">Monitor Ollama in production without a DIY observability stack</div>
-        <p class="ctaBandSub">Typical recovery in under a minute: layered checks, OOMKilled auto-restart, verify-before-page. Start free or talk to an engineer.</p>
+        <div class="ctaBandTitle">Your tags check passed. Your users still got 500s.</div>
+        <p class="ctaBandSub">The next outage might be model eviction under load or a proxy URL nobody monitors. Wire the checks above, or let AlertMend run them for you.</p>
         <div class="ctaBtnRow">
           <a href="${postSignupUrl}" class="ctaBtn">Start with auto-remediation →</a>
           <a href="${postCalendlyUrl}" class="ctaBtnSecondary" target="_blank" rel="noopener noreferrer">Talk to an expert</a>
