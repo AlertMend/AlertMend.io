@@ -75,7 +75,7 @@ export const CHROME_INLINE_CSS = `
     @media (min-width: 1024px) { .sidebar { display: block; } }
     .sidebar-content { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
     .sidebar-card { background: #fafafa; border-radius: 8px; padding: 24px; border: 1px solid #e4e4e7; }
-    .sidebar-card h3 { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
+    .sidebar-card-title { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
     .signup-form { display: flex; flex-direction: column; gap: 12px; }
     .signup-form input { width: 100%; padding: 10px 16px; border-radius: 6px; border: 1px solid #d4d4d8; font-size: 1rem; background: #fff; color: #09090b; }
     .signup-form input:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2); }
@@ -131,7 +131,7 @@ export function buildSidebarHtml(relatedPosts) {
       <aside class="sidebar">
         <div class="sidebar-content">
           <div class="sidebar-card">
-            <h3>Receive blog and product updates</h3>
+            <div class="sidebar-card-title">Receive blog and product updates</div>
             <form class="signup-form" id="blog-signup-form" novalidate>
               <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
               <button type="submit">Sign up</button>
@@ -141,7 +141,7 @@ export function buildSidebarHtml(relatedPosts) {
 
           ${relatedPosts.length > 0 ? `
           <div class="sidebar-card">
-            <h3 class="related-content-title">Related content</h3>
+            <div class="related-content-title">Related content</div>
             <ul class="related-posts-list">
               ${relatedPosts.map((post) => `<li><a href="/blog/${esc(post.slug)}" class="related-post-link">${esc(post.title)}</a></li>`).join('\n              ')}
             </ul>
@@ -153,7 +153,7 @@ export function buildSidebarHtml(relatedPosts) {
           ` : ''}
 
           <div class="sidebar-card">
-            <h3 class="related-content-title">Explore AlertMend</h3>
+            <div class="related-content-title">Explore AlertMend</div>
             <ul class="related-posts-list">
               <li><a href="/" class="related-post-link">Home</a></li>
               <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>

@@ -1,7 +1,7 @@
 (function () {
   const FAILURE_MODES = {
     oom: {
-      title: 'OOMKilled (exit 137)',
+      title: 'Runbook: OOMKilled',
       summary:
         'Kubernetes killed the Ollama container when memory or GPU VRAM limits were exceeded. Models get evicted. The next request pays a cold-start penalty unless you restart cleanly.',
       steps: [
@@ -21,14 +21,14 @@ kubectl rollout status deployment/ollama -n inference --timeout=180s
 
 # Verify model loaded
 curl -sf http://ollama.inference.svc:11434/api/tags | jq '.models[].name'`,
-      tip: 'Deep dive: /blog/debugging-kubernetes-oomkilled-exit-code-137-causes-and-solutions',
+      tip: { href: '/blog/debugging-kubernetes-oomkilled-exit-code-137-causes-and-solutions', label: 'OOMKilled exit 137 runbook' },
       autoFix: 'Rollout restart · Scale replicas · Lower num_parallel',
       mockCode: 'FAIL',
       mockLabel: 'Connection refused',
       mockMeta: 'Exit 137 on ollama-7d4f8b · 2 consecutive failures · auto-fix eligible',
     },
     timeout: {
-      title: 'Generate timeout (tags OK)',
+      title: 'Runbook: Generate timeout',
       summary:
         '/api/tags returns 200 but POST /api/generate hangs or times out. Common when GPU is wedged, the model was evicted, or queue depth spikes under load.',
       steps: [
@@ -49,14 +49,14 @@ kubectl exec -it ollama-0 -n inference -- nvidia-smi
 
 # Auto-fix wedged replica
 kubectl delete pod ollama-0 -n inference`,
-      tip: 'Tags-only monitors miss this failure mode. Add a lightweight generate smoke check.',
+      tip: 'Tags-only monitors miss this. Add a lightweight /api/generate smoke check.',
       autoFix: 'Delete wedged pod · Rollout restart · Scale out',
       mockCode: 'TIMEOUT',
       mockLabel: 'Generate > 30s',
       mockMeta: '/api/tags 200 OK · generate smoke failed · auto-fix eligible',
     },
     proxy502: {
-      title: '502 / 504 from proxy',
+      title: 'Runbook: 502 / 504 from proxy',
       summary:
         'Nginx, Ingress, or Caddy returns 502/504 while Ollama restarts or while upstream timeouts are shorter than model load time.',
       steps: [
@@ -75,14 +75,14 @@ kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --tail=40
 
 # Auto-fix
 kubectl rollout restart deployment/ollama -n inference`,
-      tip: 'See /blog/kubernetes-502-bad-gateway-error-fix for ingress rollout races.',
+      tip: { href: '/blog/kubernetes-502-bad-gateway-error-fix', label: '502 Bad Gateway runbook' },
       autoFix: 'Rollout restart · preStop sleep · Fix upstream timeouts last',
       mockCode: '502',
       mockLabel: 'Bad Gateway',
       mockMeta: 'Public URL 502 · in-cluster 200 · proxy path failure',
     },
     crashloop: {
-      title: 'CrashLoopBackOff',
+      title: 'Runbook: CrashLoopBackOff',
       summary:
         'Pod never stays Ready. Often probe too aggressive before model load, missing model pull, bad OLLAMA_MODELS env, or insufficient startupProbe failureThreshold.',
       steps: [
@@ -176,7 +176,6 @@ kubectl rollout status deployment/ollama -n inference --timeout=180s`,
   const failureSteps = document.getElementById('failure-playbook-steps');
   const failureCode = document.getElementById('failure-playbook-code');
   const failureTip = document.getElementById('failure-playbook-tip');
-  const failureAutoFix = document.getElementById('failure-playbook-autofix');
   const mockCode = document.getElementById('mock-status-code');
   const mockLabel = document.getElementById('mock-status-label');
   const mockDot = document.getElementById('mock-status-dot');
@@ -196,14 +195,28 @@ kubectl rollout status deployment/ollama -n inference --timeout=180s`,
       btn.setAttribute('aria-selected', active ? 'true' : 'false');
     });
 
+    const panel = document.getElementById('failure-playbook-panel');
+    const activeTab = document.getElementById('failure-tab-' + id);
+    if (panel && activeTab) panel.setAttribute('aria-labelledby', activeTab.id);
+
     if (failureTitle) failureTitle.textContent = mode.title;
     if (failureSummary) failureSummary.textContent = mode.summary;
     if (failureSteps) {
       failureSteps.innerHTML = mode.steps.map((s) => '<li>' + s + '</li>').join('');
     }
     if (failureCode) failureCode.textContent = mode.code;
-    if (failureTip) failureTip.textContent = mode.tip;
-    if (failureAutoFix) failureAutoFix.textContent = 'Safe auto-fix: ' + mode.autoFix;
+    if (failureTip) {
+      if (mode.tip && typeof mode.tip === 'object' && mode.tip.href) {
+        failureTip.innerHTML =
+          'Related: <a href="' + mode.tip.href + '">' + mode.tip.label + '</a>';
+      } else if (typeof mode.tip === 'string' && mode.tip) {
+        failureTip.textContent = mode.tip;
+      } else {
+        failureTip.textContent = '';
+      }
+    }
+    const footer = failureTip && failureTip.closest('.playbookFooter');
+    if (footer) footer.hidden = !(failureTip && failureTip.innerHTML.trim());
 
     if (!recovered) {
       if (mockCode) mockCode.textContent = mode.mockCode;
@@ -262,6 +275,9 @@ kubectl rollout status deployment/ollama -n inference --timeout=180s`,
       btn.classList.toggle('modeCardActive', active);
       btn.setAttribute('aria-selected', active ? 'true' : 'false');
     });
+    const panel = document.getElementById('mode-playbook-panel');
+    const activeTab = document.getElementById('mode-tab-' + id);
+    if (panel && activeTab) panel.setAttribute('aria-labelledby', activeTab.id);
     if (panelTitle) panelTitle.textContent = 'Runbook: ' + mode.title;
     if (panelSummary) panelSummary.textContent = mode.summary;
     if (panelSteps) {

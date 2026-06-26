@@ -1,6 +1,6 @@
 ---
 title: "How to Monitor Ollama in Production"
-excerpt: "Monitor Ollama in production: /api/tags and /api/ps checks, OOMKilled auto-restart, verify-before-page Slack alerts. Phase 1 without Prometheus."
+excerpt: "Five Ollama health endpoints most teams miss, copy-paste Kubernetes probe YAML, the threshold formula that stops false pages during cold starts, and a safe-to-automate matrix for OOMKilled and CrashLoopBackOff."
 date: "2026-06-24"
 category: "AIOps"
 author: "AlertMend Team"
