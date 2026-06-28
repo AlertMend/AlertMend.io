@@ -189,12 +189,16 @@
   {
     "slug": "503-no-healthy-upstream",
     "title": "503 No Healthy Upstream Error Guide",
-    "excerpt": "Complete troubleshooting guide for 503 no healthy upstream errors in Kubernetes and Nginx. Learn diagnostic techniques, common causes, and proven solutions.",
+    "excerpt": "503 no healthy upstream: empty endpoints, failing readiness probes, rollout drains, mesh ejection. kubectl workflow plus nginx and AlertMend fixes.",
     "date": "2026-01-10",
     "category": "Kubernetes",
     "author": "AlertMend Team",
-    "tags": [],
-    "keywords": "503 no healthy upstream, upstream error, nginx 503 error, kubernetes service unavailable, load balancer troubleshooting, reverse proxy errors, service health checks, AlertMend AI, AIOps, DevOps"
+    "tags": [
+      "Kubernetes",
+      "Troubleshooting",
+      "Ingress"
+    ],
+    "keywords": "503 no healthy upstream, nginx 503 error, kubernetes service unavailable, envoy no healthy upstream, istio 503, readiness probe failed, empty endpoints, AlertMend"
   },
   {
     "slug": "achieving-enterprise-readiness-with-kubernetes-in-2025",

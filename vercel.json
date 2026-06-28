@@ -20,6 +20,10 @@
       "destination": "/blog/index.html"
     },
     {
+      "source": "/blog/503-no-healthy-upstream",
+      "destination": "/blog/503-no-healthy-upstream/index.html"
+    },
+    {
       "source": "/blog/kubernetes-crashloopbackoff-fix",
       "destination": "/blog/kubernetes-crashloopbackoff-fix/index.html"
     },
