@@ -188,13 +188,19 @@
   },
   {
     "slug": "503-no-healthy-upstream",
-    "title": "503 No Healthy Upstream Error Guide",
-    "excerpt": "Complete troubleshooting guide for 503 no healthy upstream errors in Kubernetes and Nginx. Learn diagnostic techniques, common causes, and proven solutions.",
+    "title": "503 No Healthy Upstream: Fix Guide",
+    "excerpt": "No healthy upstream means zero backends passed health checks. Use our decision tree and playbooks for nginx, Envoy, Istio, HAProxy, and ALB to fix it fast.",
     "date": "2026-01-10",
     "category": "Kubernetes",
     "author": "AlertMend Team",
-    "tags": [],
-    "keywords": "503 no healthy upstream, upstream error, nginx 503 error, kubernetes service unavailable, load balancer troubleshooting, reverse proxy errors, service health checks, AlertMend AI, AIOps, DevOps"
+    "tags": [
+      "Kubernetes",
+      "Troubleshooting",
+      "Ingress",
+      "Nginx",
+      "Envoy"
+    ],
+    "keywords": "503 no healthy upstream, no healthy upstream, no healthy backends, upstream error, nginx 503 error, nginx no healthy upstream, kubernetes no healthy upstream, kubernetes service unavailable, envoy no healthy upstream, istio no healthy upstream, load balancer troubleshooting, reverse proxy errors, HAProxy, unhealthy upstream, service health checks"
   },
   {
     "slug": "achieving-enterprise-readiness-with-kubernetes-in-2025",
