@@ -44,7 +44,7 @@ function prefersReducedMotion(): boolean {
  *
  * Reduced-motion + offscreen behavior is still respected:
  *   * `prefers-reduced-motion: reduce` → video is paused, the poster
- *     (still of the RCA-resolved modal) carries the same message.
+ *     (still of the cluster-overview start frame) is shown instead.
  *   * Section scrolled out of view → video pauses so we don't waste
  *     decode budget compositing offscreen pixels.
  *   * Tab hidden → video pauses (browsers usually do this automatically
@@ -66,8 +66,8 @@ export default function Hero() {
     const target = mockupRef.current;
     if (!video || !target) return;
 
-    /* Reduced-motion users see only the poster (a still of the fully
-     * resolved RCA modal). They still get the same end-state message. */
+    /* Reduced-motion users see only the poster (the cluster-overview
+     * start frame); we never start the walkthrough animation. */
     if (prefersReducedMotion()) {
       video.pause();
       video.removeAttribute('autoplay');
@@ -77,9 +77,16 @@ export default function Hero() {
     let sectionVisible = true; /* hero is above-the-fold by default */
     let tabVisible =
       typeof document === 'undefined' ? true : !document.hidden;
+    /* Don't begin playback until the browser is confident it can play
+     * through without re-buffering (readyState 4 / HAVE_ENOUGH_DATA).
+     * Autoplay starts at a lower readiness threshold, so on slower
+     * connections the first cycle stutters: play → run out of buffered
+     * frames → `waiting` (freeze) → resume, repeatedly. The poster covers
+     * the short wait instead. */
+    let canPlay = video.readyState >= 4;
 
     const updatePlayback = () => {
-      if (sectionVisible && tabVisible) {
+      if (sectionVisible && tabVisible && canPlay) {
         /* video.play() returns a promise that rejects when autoplay
          * is blocked by user settings even on muted videos. Swallow
          * the rejection — the poster covers the gap. */
@@ -88,6 +95,16 @@ export default function Hero() {
         video.pause();
       }
     };
+
+    const onCanPlayThrough = () => {
+      canPlay = true;
+      updatePlayback();
+    };
+    video.addEventListener('canplaythrough', onCanPlayThrough);
+    /* Fallback: a fully-cached response can satisfy playback without ever
+     * firing `canplaythrough`, so start anyway after a short grace period
+     * to avoid getting stuck on the poster. */
+    const startFallback = window.setTimeout(onCanPlayThrough, 4000);
 
     const onVisibility = () => {
       tabVisible = !document.hidden;
@@ -112,6 +129,8 @@ export default function Hero() {
 
     return () => {
       io?.disconnect();
+      window.clearTimeout(startFallback);
+      video.removeEventListener('canplaythrough', onCanPlayThrough);
       document.removeEventListener('visibilitychange', onVisibility);
     };
   }, []);
@@ -222,7 +241,6 @@ export default function Hero() {
               ref={videoRef}
               className={styles.video}
               poster="/media/hero-poster.jpg"
-              autoPlay
               muted
               loop
               playsInline
