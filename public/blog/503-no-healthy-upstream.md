@@ -1,5 +1,5 @@
 ---
-title: "503 No Healthy Upstream: Meaning, Causes & Fix Guide | AlertMend"
+title: "503 No Healthy Upstream: Fix Guide"
 excerpt: "No healthy upstream means zero backends passed health checks. Use our decision tree and playbooks for nginx, Envoy, Istio, HAProxy, and ALB to fix it fast."
 date: "2026-01-10"
 dateModified: "2026-06-27"

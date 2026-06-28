@@ -59,7 +59,7 @@ export async function build(slug) {
   const flowImage = `${assetsBase}/upstream-flow.svg`
 
   const meta = parseFrontmatter(slug)
-  const pageTitle = meta.title || '503 No Healthy Upstream: Meaning, Causes & Fix Guide | AlertMend'
+  const pageTitle = meta.title || '503 No Healthy Upstream: Fix Guide'
   const h1Title = '503 No Healthy Upstream: What It Means & How to Fix It'
   const excerpt =
     meta.excerpt ||
@@ -462,7 +462,7 @@ spec:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${esc(pageTitle)}</title>
+  <title>${esc(pageTitle)} | AlertMend AI</title>
   <meta name="description" content="${esc(excerpt)}">
   <meta name="keywords" content="${esc(keywords)}">
   <meta name="author" content="${esc(author)}">
@@ -471,11 +471,11 @@ spec:
   <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${canonical}">
-  <meta property="og:title" content="${esc(pageTitle)}">
+  <meta property="og:title" content="${esc(pageTitle)} | AlertMend AI">
   <meta property="og:description" content="${esc(excerpt)}">
   <meta property="og:image" content="https://www.alertmend.io${heroImage}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="${esc(pageTitle)}">
+  <meta name="twitter:title" content="${esc(pageTitle)} | AlertMend AI">
   <meta name="twitter:description" content="${esc(excerpt)}">
   <meta name="twitter:image" content="https://www.alertmend.io${heroImage}">
   <script type="application/ld+json">${blogLd}</script>
