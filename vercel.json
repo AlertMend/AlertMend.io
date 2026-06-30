@@ -68,6 +68,10 @@
       "destination": "/blog/openclaw-cloud-infra-slack-telegram/index.html"
     },
     {
+      "source": "/blog/top-kubernetes-cost-management-solutions",
+      "destination": "/blog/top-kubernetes-cost-management-solutions/index.html"
+    },
+    {
       "source": "/blog/url-monitoring-automated-fixes",
       "destination": "/blog/url-monitoring-automated-fixes/index.html"
     },
