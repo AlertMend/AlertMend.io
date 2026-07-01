@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0b14"/>
+      <stop offset="1" stop-color="#241b4d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#hg)"/>
+
+  <g transform="translate(80,88)">
+    <rect x="0" y="0" width="48" height="48" rx="12" fill="#7c3aed"/>
+    <circle cx="17" cy="22" r="4" fill="#fff"/><circle cx="31" cy="22" r="4" fill="#fff"/>
+    <rect x="14" y="32" width="20" height="4" rx="2" fill="#fff"/>
+    <text x="64" y="32" font-size="26" font-weight="700" fill="#fff">AI Agents</text>
+    <text x="238" y="32" font-size="26" font-weight="400" fill="#a78bfa">×</text>
+    <circle cx="288" cy="24" r="22" fill="#7c3aed"/>
+    <text x="288" y="33" font-size="24" font-weight="800" fill="#fff" text-anchor="middle">A</text>
+    <text x="322" y="32" font-size="26" font-weight="700" fill="#fff">AlertMend</text>
+  </g>
+
+  <text x="80" y="248" font-size="60" font-weight="800" fill="#fff">AI Agent Observability</text>
+  <text x="80" y="320" font-size="60" font-weight="800" fill="#fff">in Production</text>
+
+  <text x="80" y="392" font-size="27" fill="#c4b5fd">Agents fail silently. Detect, diagnose, and auto-recover.</text>
+
+  <g font-size="22" font-weight="600">
+    <rect x="80" y="446" width="250" height="52" rx="26" fill="#1e1b3a" stroke="#4c3f8a"/>
+    <text x="205" y="479" fill="#e9e3ff" text-anchor="middle">Silent failures</text>
+    <rect x="350" y="446" width="270" height="52" rx="26" fill="#1e1b3a" stroke="#4c3f8a"/>
+    <text x="485" y="479" fill="#e9e3ff" text-anchor="middle">AI root-cause analysis</text>
+    <rect x="640" y="446" width="300" height="52" rx="26" fill="#1e1b3a" stroke="#4c3f8a"/>
+    <text x="790" y="479" fill="#e9e3ff" text-anchor="middle">Auto-recovery in a few clicks</text>
+  </g>
+
+  <text x="80" y="572" font-size="22" fill="#8b82b8">alertmend.io · Keep AI agents and LLM apps alive in production</text>
+</svg>
