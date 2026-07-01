@@ -1,5 +1,20 @@
 [
   {
+    "slug": "ai-agent-observability-in-production",
+    "title": "AI Agent Observability in Production",
+    "excerpt": "Keep AI agents alive in production: detect silent failures like loops and tool timeouts, get AI root-cause analysis, and auto-recover with AlertMend.",
+    "date": "2026-07-01",
+    "category": "AIOps",
+    "author": "AlertMend Team",
+    "tags": [
+      "AIOps",
+      "AI Agents",
+      "LLM",
+      "Observability"
+    ],
+    "keywords": "AI agent observability, monitor AI agents, LLM observability, agent monitoring, autonomous agent failures, multi-agent monitoring, MCP server monitoring, agent auto-recovery, agent infinite loop, token cost monitoring, AlertMend"
+  },
+  {
     "slug": "kubernetes-crashloopbackoff-fix",
     "title": "Kubernetes CrashLoopBackOff: Fix Guide",
     "excerpt": "CrashLoopBackOff fix: answer in the last terminated container, not the current one. Five-step workflow, annotated kubectl output, failure-mode playbooks.",

@@ -24,6 +24,10 @@
       "destination": "/blog/503-no-healthy-upstream/index.html"
     },
     {
+      "source": "/blog/ai-agent-observability-in-production",
+      "destination": "/blog/ai-agent-observability-in-production/index.html"
+    },
+    {
       "source": "/blog/kubernetes-crashloopbackoff-fix",
       "destination": "/blog/kubernetes-crashloopbackoff-fix/index.html"
     },
