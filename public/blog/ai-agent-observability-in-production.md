@@ -1,6 +1,6 @@
 ---
 title: "AI Agent Observability in Production"
-excerpt: "Keep AI agents alive in production: detect silent failures like loops and tool timeouts, get AI root-cause analysis, and auto-recover with AlertMend."
+excerpt: "Keep AI agents alive in production: catch crashes, out-of-memory, and hangs, with AI root-cause analysis and auto-recovery from AlertMend."
 date: "2026-07-01"
 category: "AIOps"
 author: "AlertMend Team"
