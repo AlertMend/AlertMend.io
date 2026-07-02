@@ -28,6 +28,22 @@
       "destination": "/blog/ai-agent-observability-in-production/index.html"
     },
     {
+      "source": "/blog/best-ai-agent-observability-tools",
+      "destination": "/blog/best-ai-agent-observability-tools/index.html"
+    },
+    {
+      "source": "/blog/enterprise-ai-agent-observability",
+      "destination": "/blog/enterprise-ai-agent-observability/index.html"
+    },
+    {
+      "source": "/blog/gpu-reliability-for-llm-workloads",
+      "destination": "/blog/gpu-reliability-for-llm-workloads/index.html"
+    },
+    {
+      "source": "/blog/keep-ai-agents-online",
+      "destination": "/blog/keep-ai-agents-online/index.html"
+    },
+    {
       "source": "/blog/kubernetes-crashloopbackoff-fix",
       "destination": "/blog/kubernetes-crashloopbackoff-fix/index.html"
     },
@@ -46,6 +62,10 @@
     {
       "source": "/blog/monitor-langfuse-using-alertmend",
       "destination": "/blog/monitor-langfuse-using-alertmend/index.html"
+    },
+    {
+      "source": "/blog/monitor-langgraph-agents-in-production",
+      "destination": "/blog/monitor-langgraph-agents-in-production/index.html"
     },
     {
       "source": "/blog/monitor-litellm-using-alertmend",
@@ -68,8 +88,24 @@
       "destination": "/blog/monitor-vllm-using-alertmend/index.html"
     },
     {
+      "source": "/blog/monitoring-mcp-servers-in-production",
+      "destination": "/blog/monitoring-mcp-servers-in-production/index.html"
+    },
+    {
+      "source": "/blog/multi-agent-system-reliability",
+      "destination": "/blog/multi-agent-system-reliability/index.html"
+    },
+    {
       "source": "/blog/openclaw-cloud-infra-slack-telegram",
       "destination": "/blog/openclaw-cloud-infra-slack-telegram/index.html"
+    },
+    {
+      "source": "/blog/reduce-mttr-for-ai-agents",
+      "destination": "/blog/reduce-mttr-for-ai-agents/index.html"
+    },
+    {
+      "source": "/blog/self-healing-ai-agents",
+      "destination": "/blog/self-healing-ai-agents/index.html"
     },
     {
       "source": "/blog/top-kubernetes-cost-management-solutions",

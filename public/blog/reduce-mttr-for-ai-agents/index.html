@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reduce MTTR for AI Agents | AlertMend AI</title>
+  <meta name="description" content="Reduce MTTR for AI agents: AlertMend detects service failures fast, explains the root cause with AI, and auto-recovers, cutting mean time to resolution.">
+  <meta name="keywords" content="reduce mttr ai agents, mean time to resolution, ai incident response, aiops, auto-remediation, agent downtime, AlertMend">
+  <meta name="author" content="AlertMend Team">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://www.alertmend.io/blog/reduce-mttr-for-ai-agents">
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.alertmend.io/blog/reduce-mttr-for-ai-agents">
+  <meta property="og:title" content="Reduce MTTR for AI Agents">
+  <meta property="og:description" content="Reduce MTTR for AI agents: AlertMend detects service failures fast, explains the root cause with AI, and auto-recovers, cutting mean time to resolution.">
+  <meta property="og:image" content="https://www.alertmend.io/assets/reduce-mttr-for-ai-agents/hero.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Reduce MTTR for AI Agents">
+  <meta name="twitter:description" content="Reduce MTTR for AI agents: AlertMend detects service failures fast, explains the root cause with AI, and auto-recovers, cutting mean time to resolution.">
+  <meta name="twitter:image" content="https://www.alertmend.io/assets/reduce-mttr-for-ai-agents/hero.svg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Reduce MTTR for AI Agents","description":"Reduce MTTR for AI agents: AlertMend detects service failures fast, explains the root cause with AI, and auto-recovers, cutting mean time to resolution.","image":"https://www.alertmend.io/assets/reduce-mttr-for-ai-agents/hero.svg","datePublished":"2026-07-01","dateModified":"2026-07-01","author":{"@type":"Person","name":"AlertMend Team"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/reduce-mttr-for-ai-agents"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I reduce MTTR for AI agents?","acceptedAnswer":{"@type":"Answer","text":"Cut all three parts of MTTR: detect failures immediately with real health checks, diagnose with AI root-cause analysis, and recover with runbooks. AlertMend automates the whole flow so incidents resolve in seconds."}},{"@type":"Question","name":"What is a good MTTR for AI services?","acceptedAnswer":{"@type":"Answer","text":"It depends on the workload, but the goal is seconds to low minutes for common failures. Auto-recovery of crashes, OOM, and hangs is what moves MTTR from a manual scramble to near-instant."}},{"@type":"Question","name":"How does AI root-cause analysis lower MTTR?","acceptedAnswer":{"@type":"Answer","text":"Most incident time is diagnosis. AlertMend correlates signals and names the failing service and likely cause, so on-call skips the dashboard hunt and goes straight to resolution."}},{"@type":"Question","name":"Does auto-remediation reduce MTTR safely?","acceptedAnswer":{"@type":"Answer","text":"For known, transient failures like OOM or a hung dependency, yes. AlertMend restarts and records the cause, and escalates when a restart does not hold, so safety is preserved."}},{"@type":"Question","name":"How do I stop the same incident recurring?","acceptedAnswer":{"@type":"Answer","text":"Use the root-cause summary AlertMend ships with each recovery. Recurring incidents point at a real fix, such as more memory or a smaller context, rather than repeated restarts."}},{"@type":"Question","name":"What is MTTR for an AI agent?","acceptedAnswer":{"@type":"Answer","text":"Mean time to resolution: how long from a failure starting to the agent serving correctly again. It is the sum of detection, diagnosis, and fix time, each of which you can shorten independently."}},{"@type":"Question","name":"What is the biggest MTTR lever?","acceptedAnswer":{"@type":"Answer","text":"Usually diagnosis. Most incident time is spent working out what broke. AI root-cause analysis that names the failing service removes the largest chunk of that time."}},{"@type":"Question","name":"Does automation hurt reliability?","acceptedAnswer":{"@type":"Answer","text":"Not if it is scoped. Automating known, transient fixes with a retry cap and escalation improves both MTTR and reliability, because the routine failures never become incidents."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Reduce MTTR for AI agents with AlertMend","description":"Reduce MTTR for AI agents: AlertMend detects service failures fast, explains the root cause with AI, and auto-recovers, cutting mean time to resolution.","step":[{"@type":"HowToStep","position":1,"name":"Connect","text":"Connect the services your agents run on so AlertMend can detect failures the moment they happen."},{"@type":"HowToStep","position":2,"name":"Add a real check","text":"Add response, latency, and memory checks so degraded and hung states are caught early, not late."},{"@type":"HowToStep","position":3,"name":"Alert your team","text":"AlertMend opens a Slack incident with AI root-cause analysis, so triage is done before anyone logs in."},{"@type":"HowToStep","position":4,"name":"Auto-recover","text":"Turn on recovery runbooks so the known fix runs automatically and resolution starts immediately."}]}</script>
+  <link rel="stylesheet" href="/assets/reduce-mttr-for-ai-agents/styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: #1f2937; background: #fff; -webkit-font-smoothing: antialiased; }
+    .navbar { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(229,231,235,.8); z-index: 50; }
+    .navbar-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .navbar-content { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    .navbar-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+    .navbar-logo-icon { height: 32px; width: auto; }
+    .navbar-links { display: none; align-items: center; gap: 4px; }
+    @media (min-width: 1024px) { .navbar-links { display: flex; } }
+    .navbar-link { padding: 6px 12px; font-size: 0.875rem; font-weight: 500; color: #3f3f46; text-decoration: none; border-radius: 6px; }
+    .navbar-link:hover { color: #09090b; background: #f4f4f5; }
+    .navbar-link.active { color: #09090b; background: #fafafa; }
+    .navbar-actions { display: none; align-items: center; gap: 10px; margin-left: 16px; padding-left: 16px; border-left: 1px solid #e5e7eb; }
+    @media (min-width: 1024px) { .navbar-actions { display: flex; } }
+    .navbar-button { padding: 8px 16px; font-size: 0.875rem; font-weight: 600; border-radius: 999px; text-decoration: none; }
+    .navbar-button-primary { background: #09090b; color: #fff; }
+    .navbar-button-secondary { color: #3f3f46; }
+    .main-container { max-width: 1280px; margin: 0 auto; padding: 96px 24px 64px; }
+    .content-wrapper { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media (min-width: 1024px) {
+      .content-wrapper { grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
+    }
+    .main-col { min-width: 0; max-width: 820px; }
+    @media (min-width: 1024px) { .main-col { max-width: none; } }
+    .sidebar { display: none; }
+    @media (min-width: 1024px) { .sidebar { display: block; } }
+    .sidebar-content { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card { background: #fafafa; border-radius: 8px; padding: 24px; border: 1px solid #e4e4e7; }
+    .sidebar-card-title { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
+    .signup-form { display: flex; flex-direction: column; gap: 12px; }
+    .signup-form input { width: 100%; padding: 10px 16px; border-radius: 6px; border: 1px solid #d4d4d8; font-size: 1rem; background: #fff; color: #09090b; }
+    .signup-form input:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2); }
+    .signup-form button { width: 100%; padding: 10px 12px; background: #09090b; color: #fff; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; }
+    .signup-form button:hover { background: #27272a; }
+    .signup-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .signup-status { font-size: 0.875rem; font-weight: 500; margin: 0; }
+    .signup-status.success { color: #047857; }
+    .signup-status.error { color: #dc2626; }
+    .related-content-title { font-size: 11px; font-weight: 700; color: #71717a; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 16px; }
+    .related-posts-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .related-post-link { color: #3f3f46; text-decoration: none; font-size: 0.875rem; line-height: 1.5; display: block; transition: color 0.15s; }
+    .related-post-link:hover { color: #7c3aed; }
+    .view-more-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 16px; color: #7c3aed; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
+    .view-more-link:hover { color: #6d28d9; }
+    .article-header { margin-bottom: 2rem; }
+    .article-header h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; color: #09090b; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .author-info { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: #09090b; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+    .author-name { font-weight: 600; color: #111827; }
+    .author-meta { font-size: 0.875rem; color: #6b7280; }
+    .category-tag { display: inline-block; padding: 4px 10px; background: #ede9fe; color: #5b21b6; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .promo { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; font-size: 1.0625rem; color: #374151; }
+    .promo a { color: #7c3aed; font-weight: 600; }
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-content">
+        <a href="/" class="navbar-logo">
+          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon">
+        </a>
+        <div class="navbar-links">
+          <a href="/#how-it-works" class="navbar-link">How It Works</a>
+          <a href="/#solutions" class="navbar-link">Solutions</a>
+          <a href="/case-studies" class="navbar-link">Case Studies</a>
+          <a href="/blog" class="navbar-link active">Blog</a>
+          <a href="/pricing" class="navbar-link">Pricing</a>
+        </div>
+        <div class="navbar-actions">
+          <a href="https://app.alertmend.io/signup?source=blog-post&blog_slug=reduce-mttr-for-ai-agents" class="navbar-button navbar-button-secondary">Register</a>
+          <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=reduce-mttr-for-ai-agents" class="navbar-button navbar-button-primary" target="_blank" rel="noopener noreferrer">Book a Demo</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="main-container">
+    <div class="content-wrapper">
+      <div class="main-col">
+
+    <header class="article-header">
+      <h1>Reduce MTTR for AI Agents</h1>
+      <div class="author-info">
+        <div class="author-avatar">A</div>
+        <div>
+          <div class="author-name">AlertMend Team</div>
+          <div class="author-meta">2026-07-01 · AIOps</div>
+        </div>
+      </div>
+      <span class="category-tag">AIOps</span>
+    </header>
+    <div class="dl-blog">
+      <section class="heroBand">
+        <p class="heroGuideLabel">Runbook · Cutting MTTR for AI agents</p>
+        <div class="heroAudience">
+          <h2 class="heroAudienceTitle">You're in the right place if…</h2>
+          <ul class="heroAudienceList">
+            <li>Agent incidents take too long to detect, diagnose, and resolve</li>
+            <li>On-call spends the outage hunting through dashboards for the cause</li>
+            <li>You want to cut mean time to resolution, not just collect more metrics</li>
+          </ul>
+          <p class="heroAudienceNote">This shows how <a href="/">AlertMend</a> cuts MTTR for AI agents by compressing detection, diagnosis, and recovery into one automated flow.</p>
+        </div>
+        <p class="seoTldr"><strong>TL;DR:</strong> MTTR is detect plus diagnose plus recover. AlertMend shrinks all three: it catches service failures immediately, explains the root cause with AI, and auto-recovers, so incidents resolve in seconds instead of an on-call scramble.</p>
+        <div class="heroContext">
+          <div class="heroContextBlock"><h2 class="heroContextTitle">Where the minutes go</h2><p class="heroContextBody">MTTR is rarely lost in the fix itself. It is lost in noticing the failure, then working out what actually broke across services and dependencies.</p><p class="heroContextBody">Alert noise and manual triage stretch a two-minute restart into a thirty-minute incident.</p></div>
+          <div class="heroContextBlock"><h2 class="heroContextTitle">Why AlertMend</h2><p class="heroContextBody">AlertMend collapses detection and diagnosis: it catches crashes, hangs, OOM, and latency the moment they happen and runs AI root-cause analysis that names the failure.</p><p class="heroContextBody">Then it auto-recovers with a restart runbook, so resolution starts before a human even opens the laptop.</p></div>
+        </div>
+      </section>
+
+      <p class="bodyText">MTTR is a math problem: total resolution time is detection plus diagnosis plus fix, and each is separately fixable. Cut all three and a thirty-minute incident becomes thirty seconds. This guide breaks down where the time goes and how AlertMend compresses each part.</p>
+
+      <h2 class="sectionHead">What slows resolution down</h2>
+      <p class="sectionSub">The parts of an incident that inflate MTTR, and how AlertMend compresses each.</p>
+      <div class="searchIssueGrid">
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Slow detection</h3><p class="searchIssueDesc">A basic up check misses a hung or degraded agent, so the clock starts late.</p><p class="searchIssueAlert"><strong>In AlertMend:</strong> A real response check catches the failure the moment it starts.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Alert fatigue</h3><p class="searchIssueDesc">Too many low-value alerts bury the one that matters.</p><p class="searchIssueAlert"><strong>In AlertMend:</strong> Correlated alerts with a clear root cause, not a wall of noise.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Manual triage</h3><p class="searchIssueDesc">On-call clicks through dashboards to work out which service broke.</p><p class="searchIssueAlert"><strong>In AlertMend:</strong> AI root-cause analysis names the failing service up front.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">No runbook</h3><p class="searchIssueDesc">The fix is known but nobody has automated it, so every incident is hand-run.</p><p class="searchIssueAlert"><strong>In AlertMend:</strong> Recovery runbooks apply the known fix automatically.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Handoff delays</h3><p class="searchIssueDesc">The incident bounces between people before the right person sees it.</p><p class="searchIssueAlert"><strong>In AlertMend:</strong> A Slack incident with context routes it right the first time.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Repeat incidents</h3><p class="searchIssueDesc">The same failure recurs because nothing captured the cause.</p><p class="searchIssueAlert"><strong>In AlertMend:</strong> Every recovery ships a root-cause summary to prevent repeats.</p></div>
+      </div>
+
+      <h2 class="sectionHead">The recovery loop</h2>
+      <p class="sectionSub">Whatever the trigger, the flow is the same: AlertMend detects the failure on the service, runs AI root-cause analysis, and recovers it.</p>
+      <figure class="flowDiagram">
+        <svg class="fl-anim" viewBox="0 0 970 220" width="970" height="220" role="img" aria-label="Recovery flow: Agent service hits Failure detected, AlertMend detects it, runs AI root-cause analysis, and recovers the service, and the result is Resolved in seconds." font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" style="display:block;width:100%;height:auto;border-radius:12px;border:1px solid #e4e4e7;background:linear-gradient(180deg,#faf9ff,#f3f1fb);">
+          <defs>
+            <marker id="fl-ar" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L7,3 L0,6 Z" fill="#7c3aed"/></marker>
+            <style>
+              @media (prefers-reduced-motion: no-preference) {
+                .fl-anim .fl-arrow { stroke-dasharray: 8 6; animation: fl-flow .8s linear infinite; }
+                @keyframes fl-flow { to { stroke-dashoffset: -14; } }
+                .fl-anim .fl-halo { transform-box: fill-box; transform-origin: center; animation: fl-halo 2.4s ease-out infinite; }
+                @keyframes fl-halo { 0% { transform: scale(.5); opacity: .5; } 100% { transform: scale(2.6); opacity: 0; } }
+                .fl-anim .fl-am { transform-box: fill-box; transform-origin: center; animation: fl-bob 2.4s ease-in-out infinite; }
+                @keyframes fl-bob { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+              }
+            </style>
+          </defs>
+          <rect x="10" y="56" width="200" height="108" rx="14" fill="#fff" stroke="#e4e4e7"/>
+          <rect x="30" y="82" width="36" height="36" rx="9" fill="#7c3aed"/><circle cx="42" cy="98" r="3" fill="#fff"/><circle cx="54" cy="98" r="3" fill="#fff"/><rect x="40" y="107" width="16" height="3.5" rx="2" fill="#fff"/>
+          <text x="80" y="96" font-size="16" font-weight="700" fill="#09090b">Agent service</text>
+          <text x="80" y="117" font-size="12.5" fill="#52525b">in production</text>
+          <line class="fl-arrow" x1="212" y1="112" x2="380" y2="112" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#fl-ar)"/>
+          <rect x="220" y="80" width="154" height="24" rx="12" fill="#fff" stroke="#fecaca"/><text x="297" y="96" font-size="12.5" font-weight="600" fill="#b91c1c" text-anchor="middle">Failure detected</text>
+          <circle class="fl-halo" cx="425" cy="80" r="20" fill="#7c3aed" opacity="0.35"/>
+          <rect x="388" y="44" width="200" height="132" rx="16" fill="#faf5ff" stroke="#ddd6fe"/>
+          <image class="fl-am" href="/logos/alertmend-logo.svg" x="405" y="60" width="40" height="40" preserveAspectRatio="xMidYMid meet"/>
+          <text x="455" y="78" font-size="16" font-weight="700" fill="#09090b">AlertMend</text>
+          <text x="408" y="126" font-size="12" fill="#6d28d9">Detects the failure,</text>
+          <text x="408" y="144" font-size="12" fill="#6d28d9">runs AI root-cause analysis,</text>
+          <text x="408" y="162" font-size="12" fill="#6d28d9">and recovers the service.</text>
+          <line class="fl-arrow" x1="590" y1="112" x2="756" y2="112" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#fl-ar)"/>
+          <rect x="598" y="80" width="154" height="24" rx="12" fill="#fff" stroke="#e4e4e7"/><text x="675" y="96" font-size="12.5" font-weight="600" fill="#3f3f46" text-anchor="middle">Auto-recover</text>
+          <rect x="758" y="56" width="200" height="108" rx="14" fill="#ecfdf5" stroke="#a7f3d0"/>
+          <circle cx="790" cy="100" r="16" fill="#16a34a"/><path d="M783 100 l5 5 l9 -10" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="815" y="96" font-size="16" font-weight="700" fill="#047857">Recovered</text>
+          <text x="815" y="117" font-size="12.5" fill="#059669">Resolved in seconds</text>
+        </svg>
+        <figcaption class="flowDiagramCaption">Agent service hits failure detected, AlertMend detects and recovers it, and it is resolved in seconds.</figcaption>
+      </figure>
+
+      <h2 class="sectionHead">How AlertMend detects and recovers it</h2>
+      <p class="bodyText">Detection shrinks when you check a real response instead of a port, so a hung or degraded agent starts the clock immediately. Diagnosis shrinks when AI root-cause analysis correlates the signals and names the failing service, so on-call skips the dashboard hunt.</p>
+      <p class="bodyText">The fix shrinks when a recovery runbook applies the known action automatically. AlertMend chains all three, detect, diagnose, recover, then verify, and only pulls in a human when the automatic fix does not hold. What is left for the team is the rare novel incident, not the routine ones.</p>
+
+      <h2 class="sectionHead">The MTTR levers</h2>
+      <div class="diyWrap"><table class="compareTable"><thead><tr><th>Signal</th><th>What it catches</th><th>In AlertMend</th></tr></thead><tbody>
+            <tr><td>Real response check</td><td class="diyHighlight">Detection lag</td><td>Catches the failure immediately, starting the clock on time.</td></tr>
+            <tr><td>AI root-cause analysis</td><td class="diyHighlight">Diagnosis time</td><td>Names the failing service instead of a symptom.</td></tr>
+            <tr><td>Recovery runbooks</td><td class="diyHighlight">Fix time</td><td>Applies the known fix automatically.</td></tr>
+            <tr><td>Incident summary</td><td class="diyHighlight">Repeat incidents</td><td>Captures the cause so it does not recur.</td></tr>
+          </tbody></table></div>
+
+      <h2 class="sectionHead">Set it up in four steps</h2>
+      <div class="amFlow">
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">1</span></div><h3 class="amStepTitle">Connect</h3><p class="amStepBody">Connect the services your agents run on so AlertMend can detect failures the moment they happen.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">2</span></div><h3 class="amStepTitle">Add a real check</h3><p class="amStepBody">Add response, latency, and memory checks so degraded and hung states are caught early, not late.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">3</span></div><h3 class="amStepTitle">Alert your team</h3><p class="amStepBody">AlertMend opens a Slack incident with AI root-cause analysis, so triage is done before anyone logs in.</p></div>
+        <div class="amStep"><div class="amStepHead"><span class="amStepNum">4</span></div><h3 class="amStepTitle">Auto-recover</h3><p class="amStepBody">Turn on recovery runbooks so the known fix runs automatically and resolution starts immediately.</p></div>
+      </div>
+
+      <h2 class="sectionHead">What it looks like in AlertMend</h2>
+      <p class="sectionSub">A mock of the AlertMend view for this workload: live signals, and the incident with auto-recovery already under way.</p>
+      <div class="dashboardWrap">
+        <div class="dashboard" role="img" aria-label="AlertMend dashboard mock showing Crash detected: AI root cause + auto-recovery">
+          <div class="dashboardChrome">
+            <div class="chromeDots"><span class="chromeDot"></span><span class="chromeDot"></span><span class="chromeDot"></span></div>
+            <span class="dashboardTitle">AlertMend · agent-prod</span>
+            <span class="liveBadge"><span class="liveDot"></span> Live</span>
+          </div>
+          <div class="dashboardBody">
+            <div class="metricCard"><div class="metricLabel">MTTR (today)</div><div class="metricValue metricValueOk">12s</div></div>
+            <div class="metricCard"><div class="metricLabel">Detection</div><div class="metricValue metricValueOk">2s</div></div>
+            <div class="metricCard"><div class="metricLabel">Open incidents</div><div class="metricValue metricValueWarn">1</div><div class="metricBar"><div class="metricBarFill"></div></div></div>
+          </div>
+          <div class="alertToast"><div class="alertText"><div class="alertTitle">Crash detected: AI root cause + auto-recovery</div><div class="alertMeta">agent-prod · Slack #incidents · 3s ago</div></div></div>
+        </div>
+      </div>
+
+      <h2 class="sectionHead">Best practices</h2>
+      <p class="sectionSub">Lower MTTR by attacking each part of the incident separately.</p>
+      <div class="searchIssueGrid">
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Measure the three parts</h3><p class="searchIssueDesc">Track detection, diagnosis, and fix time separately. You cannot improve what you lump into one number.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Kill alert noise</h3><p class="searchIssueDesc">Correlated, root-caused alerts beat a wall of low-value ones. Noise is where diagnosis time goes to die.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Automate known fixes</h3><p class="searchIssueDesc">If the runbook is known, script it. Every manually run known fix is MTTR you chose to keep.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Capture every cause</h3><p class="searchIssueDesc">A root-cause summary on each incident stops the same failure from becoming a recurring MTTR tax.</p></div>
+      </div>
+
+      <p class="bodyText"><strong>One honest note:</strong> faster recovery lowers MTTR, it does not remove the need for real fixes. If the same incident keeps recurring, the root-cause summary is your signal to fix the underlying problem, not just keep restarting.</p>
+
+      <h2 class="sectionHead">FAQ</h2>
+      <div class="faqList">
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="true">How do I reduce MTTR for AI agents?<svg class="faqChevron faqChevronOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer">Cut all three parts of MTTR: detect failures immediately with real health checks, diagnose with AI root-cause analysis, and recover with runbooks. AlertMend automates the whole flow so incidents resolve in seconds.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">What is a good MTTR for AI services?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">It depends on the workload, but the goal is seconds to low minutes for common failures. Auto-recovery of crashes, OOM, and hangs is what moves MTTR from a manual scramble to near-instant.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How does AI root-cause analysis lower MTTR?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Most incident time is diagnosis. AlertMend correlates signals and names the failing service and likely cause, so on-call skips the dashboard hunt and goes straight to resolution.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Does auto-remediation reduce MTTR safely?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">For known, transient failures like OOM or a hung dependency, yes. AlertMend restarts and records the cause, and escalates when a restart does not hold, so safety is preserved.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I stop the same incident recurring?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Use the root-cause summary AlertMend ships with each recovery. Recurring incidents point at a real fix, such as more memory or a smaller context, rather than repeated restarts.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">What is MTTR for an AI agent?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Mean time to resolution: how long from a failure starting to the agent serving correctly again. It is the sum of detection, diagnosis, and fix time, each of which you can shorten independently.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">What is the biggest MTTR lever?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Usually diagnosis. Most incident time is spent working out what broke. AI root-cause analysis that names the failing service removes the largest chunk of that time.</div></div>
+        <div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Does automation hurt reliability?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Not if it is scoped. Automating known, transient fixes with a retry cap and escalation improves both MTTR and reliability, because the routine failures never become incidents.</div></div>
+      </div>
+
+      <div class="ctaBand">
+        <div class="ctaBandTitle">Cut MTTR on your AI agents</div>
+        <p class="ctaBandSub">AlertMend detects fast, diagnoses with AI, and recovers automatically. Turn thirty-minute incidents into thirty seconds.</p>
+        <div class="ctaBtnRow">
+          <a href="https://app.alertmend.io/signup?service=remediation&source=blog-agents&blog_slug=reduce-mttr-for-ai-agents" class="ctaBtn">Start with auto-remediation →</a>
+          <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=reduce-mttr-for-ai-agents" class="ctaBtnSecondary" target="_blank" rel="noopener noreferrer">Book a demo</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="promo"><p>Incidents dragging on? <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=reduce-mttr-for-ai-agents" target="_blank" rel="noopener noreferrer">Book a demo</a> to see AlertMend on your stack.</p></div>
+      </div>
+
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <div class="sidebar-card">
+            <div class="sidebar-card-title">Receive blog and product updates</div>
+            <form class="signup-form" id="blog-signup-form" novalidate>
+              <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
+              <button type="submit">Sign up</button>
+              <p class="signup-status" id="blog-signup-status" hidden></p>
+            </form>
+          </div>
+
+          
+          <div class="sidebar-card">
+            <div class="related-content-title">Related content</div>
+            <ul class="related-posts-list">
+              <li><a href="/blog/ai-agent-observability-in-production" class="related-post-link">AI Agent Observability in Production</a></li>
+              <li><a href="/blog/best-ai-agent-observability-tools" class="related-post-link">Best AI Agent Observability Tools</a></li>
+              <li><a href="/blog/self-healing-ai-agents" class="related-post-link">Self-Healing AI Agents</a></li>
+              <li><a href="/blog/keep-ai-agents-online" class="related-post-link">Keep AI Agents Online in Production</a></li>
+              <li><a href="/blog/multi-agent-system-reliability" class="related-post-link">Multi-Agent System Reliability</a></li>
+              <li><a href="/blog/monitoring-mcp-servers-in-production" class="related-post-link">Monitoring MCP Servers in Production</a></li>
+              <li><a href="/blog/gpu-reliability-for-llm-workloads" class="related-post-link">GPU Reliability for LLM Workloads</a></li>
+              <li><a href="/blog/enterprise-ai-agent-observability" class="related-post-link">Enterprise AI Agent Observability</a></li>
+              <li><a href="/blog/monitor-langgraph-agents-in-production" class="related-post-link">Monitor LangGraph Agents in Production</a></li>
+              <li><a href="/blog/monitor-vllm-using-alertmend" class="related-post-link">How to Monitor vLLM in Production</a></li>
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View all posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          
+
+          <div class="sidebar-card">
+            <div class="related-content-title">Explore AlertMend</div>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <script src="/assets/reduce-mttr-for-ai-agents/script.js" defer></script>
+</body>
+</html>
