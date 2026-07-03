@@ -50,6 +50,97 @@
     },
   };
 
+  const COMMAND_SCENARIOS = {
+    uv: {
+      command: 'uv',
+      error: '/bin/sh: uv: command not found',
+      diagnosis: 'Missing command: uv',
+      body: 'The Makefile calls uv, but that executable is absent from the environment or outside PATH.',
+      check: `command -v uv
+printf '%s\\n' "$PATH"`,
+      fix: 'Install uv in the same CI image or shell that runs make, then verify with command -v uv.',
+    },
+    go: {
+      command: 'go',
+      error: 'make: go: No such file or directory',
+      diagnosis: 'Missing command: go',
+      body: 'Go exists on another machine or shell profile, but not in the current make, container, or CI environment.',
+      check: `command -v go
+go version
+printf '%s\\n' "$PATH"`,
+      fix: 'Install Go in that environment and export its bin directory before make starts.',
+    },
+    compiler: {
+      command: 'gcc',
+      error: '/bin/sh: gcc: command not found',
+      diagnosis: 'Missing compiler toolchain',
+      body: 'The compiler is missing—common in fresh VMs, minimal containers, and runtime-only images.',
+      check: `command -v gcc g++
+gcc --version
+g++ --version`,
+      fix: 'Install the platform build toolchain, then verify both compiler commands in the failing environment.',
+    },
+    node: {
+      command: 'npm',
+      error: '/bin/sh: vite: command not found',
+      diagnosis: 'Missing Node or project-local binary',
+      body: 'Node dependencies or binaries are missing. Local npm scripts resolve node_modules/.bin, while a direct Makefile recipe may not.',
+      check: `command -v node npm
+test -x node_modules/.bin/vite
+npm exec vite -- --version`,
+      fix: 'Install Node and dependencies; invoke local tools with npm exec, npx, or an npm script.',
+    },
+    path: {
+      command: './script',
+      error: '/bin/sh: ./build.sh: not found',
+      diagnosis: 'Missing path or interpreter',
+      body: 'The file may be absent, the working directory may differ, CRLF may corrupt the shebang, or the shebang interpreter may not exist.',
+      check: `pwd
+ls -l ./build.sh
+file ./build.sh
+head -1 ./build.sh`,
+      fix: 'Correct the path or shebang/interpreter first. Use chmod only when the file exists and the error is permission denied (126).',
+    },
+  };
+
+  const commandButtons = [...document.querySelectorAll('[data-command-id]')];
+  const commandError = document.getElementById('command-error-line');
+  const commandTitle = document.getElementById('command-diagnosis-title');
+  const commandBody = document.getElementById('command-diagnosis-body');
+  const commandCheck = document.getElementById('command-check');
+  const commandFix = document.getElementById('command-fix');
+
+  function renderCommand(id, focusButton = false) {
+    const scenario = COMMAND_SCENARIOS[id];
+    if (!scenario) return;
+    commandButtons.forEach((button) => {
+      const active = button.getAttribute('data-command-id') === id;
+      button.classList.toggle('commandTabActive', active);
+      button.setAttribute('aria-selected', active ? 'true' : 'false');
+      button.tabIndex = active ? 0 : -1;
+      if (active && focusButton) button.focus();
+    });
+    if (commandError) commandError.textContent = scenario.error;
+    if (commandTitle) commandTitle.textContent = scenario.diagnosis;
+    if (commandBody) commandBody.textContent = scenario.body;
+    if (commandCheck) commandCheck.textContent = scenario.check;
+    if (commandFix) commandFix.textContent = scenario.fix;
+  }
+
+  commandButtons.forEach((button, index) => {
+    button.addEventListener('click', () => renderCommand(button.getAttribute('data-command-id')));
+    button.addEventListener('keydown', (event) => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      let next = index;
+      if (event.key === 'ArrowLeft') next = (index - 1 + commandButtons.length) % commandButtons.length;
+      if (event.key === 'ArrowRight') next = (index + 1) % commandButtons.length;
+      if (event.key === 'Home') next = 0;
+      if (event.key === 'End') next = commandButtons.length - 1;
+      renderCommand(commandButtons[next].getAttribute('data-command-id'), true);
+    });
+  });
+
   const modeButtons = document.querySelectorAll('[data-mode-id]');
   const panelTitle = document.getElementById('mode-playbook-title');
   const panelSummary = document.getElementById('mode-playbook-summary');
@@ -89,6 +180,7 @@
   });
 
   renderMode('local');
+  renderCommand('uv');
 
   const signupForm = document.getElementById('blog-signup-form');
   const signupStatus = document.getElementById('blog-signup-status');

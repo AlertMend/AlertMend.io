@@ -1,10 +1,11 @@
 ---
-title: "make error 127 Complete Guide"
-excerpt: "Encountering the infamous make error 127 can be frustrating, especially when you're in the midst of compiling code"
+title: "Make Error 127: Command Not Found Fix"
+excerpt: "Make Error 127 means a recipe command was not found. Identify the missing binary, compare PATH inside make, and fix local, Docker, CI, WSL, or uv builds."
 date: "2026-01-10"
+dateModified: "2026-07-03"
 category: "Troubleshooting"
 author: "AlertMend Team"
-keywords: "makefile error 127, make error 127, error 127, exit code 127, exit status 127, gnu make error 127 command not found, make go no such file or directory, command not found makefile"
+keywords: "make error 127, makefile error 127, error 127 makefile, gnu make error 127 command not found manual, exit code 127, exit status 127, make go no such file or directory, uv no such file or directory, npm error code 127, command not found makefile"
 ---
 
 This post is published as a standalone page at [/blog/make-error-127](/blog/make-error-127).

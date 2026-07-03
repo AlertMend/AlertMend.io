@@ -3629,8 +3629,8 @@
   },
   {
     "slug": "make-error-127",
-    "title": "make error 127 Complete Guide",
-    "excerpt": "Encountering the infamous make error 127 can be frustrating, especially when you're in the midst of compiling code",
+    "title": "Make Error 127: Command Not Found Fix",
+    "excerpt": "Make Error 127 means a recipe command was not found. Identify the missing binary, compare PATH inside make, and fix local, Docker, CI, WSL, or uv builds.",
     "date": "2026-01-10",
     "category": "Troubleshooting",
     "author": "AlertMend Team",
