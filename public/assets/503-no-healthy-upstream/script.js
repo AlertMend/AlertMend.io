@@ -207,6 +207,128 @@ spec:
     mesh: 'playbook-mesh',
   };
 
+  const LIFECYCLE_STATES = {
+    healthy: {
+      endpointCount: '2 ready endpoints',
+      podA: 'Running · Ready',
+      podB: 'Running · Ready',
+      status: 'HTTP 200',
+      title: 'Traffic reaches two healthy pods',
+      text: 'Both readiness probes pass, so Kubernetes publishes both Pod IPs as ready Service endpoints.',
+      expert: 'Edge check is healthy, two ready endpoints exist, and both readiness probes are passing.',
+      action: 'Action: establish the healthy baseline and watch for state changes.',
+    },
+    readiness: {
+      endpointCount: '1 ready endpoint',
+      podA: 'Running · Ready',
+      podB: 'Running · NotReady',
+      status: 'HTTP 200',
+      title: 'The probe fails before the outage',
+      text: 'pod-b is still Running, but its failed readiness probe removes it from normal Service traffic. One endpoint remains.',
+      expert: 'Probe Events identify pod-b, the failing path, status code, and first-failure time while traffic still succeeds.',
+      action: 'Action: diagnose before the last healthy endpoint disappears.',
+    },
+    empty: {
+      endpointCount: '0 ready endpoints',
+      podA: 'Running · NotReady',
+      podB: 'Running · NotReady',
+      status: 'HTTP 503',
+      title: 'No healthy upstream',
+      text: 'Both containers run, but neither is Ready. The Service has no ready backend and the proxy has nowhere to send the request.',
+      expert: 'The external 503, zero ready endpoints, and failed probes form one causal chain. Restarting ingress would not change it.',
+      action: 'Action: fix readiness or roll back the change, then verify endpoints and URL health.',
+    },
+    blocked: {
+      endpointCount: '2 endpoints · unreachable',
+      podA: 'Running · Ready',
+      podB: 'Running · Ready',
+      status: 'HTTP 503',
+      title: 'Endpoints exist, but the network path fails',
+      text: 'Kubernetes publishes both pods, yet NetworkPolicy or a port mismatch blocks ingress-to-backend traffic. Test from the ingress pod.',
+      expert: 'Ready endpoints rule out an empty pool at the Kubernetes layer; failed ingress-to-pod connectivity moves the fault to network or port configuration.',
+      action: 'Action: attach the policy diff, require approval for changes, and verify reachability.',
+    },
+    recovered: {
+      endpointCount: '2 ready endpoints',
+      podA: 'Running · Ready',
+      podB: 'Running · Ready',
+      status: 'HTTP 200',
+      title: 'Endpoints repopulate and traffic recovers',
+      text: 'The repaired readiness path passes, both Pod IPs return to the Service, and the same request succeeds.',
+      expert: 'The causal signals reverse in order: probes pass, endpoints repopulate, and consecutive edge checks return 200.',
+      action: 'Action: close only after recovery holds and preserve the evidence in the incident timeline.',
+    },
+  };
+
+  const ALERTMEND_MODE_INSIGHTS = {
+    endpoints: {
+      sees: 'Endpoint count fell to zero while workload objects still exist. The decisive split is selector mismatch versus failed readiness.',
+      automates: 'Collect Service selectors, Pod labels, readiness Events, and the last deployment change. Remediation stays gated until the mismatch is proven.',
+    },
+    probes: {
+      sees: 'Containers are Running, Pod Ready is false, and probe Events name the failing path, port, status code, and first-failure time.',
+      automates: 'Correlate the probe failure with the rollout diff. Restart only after a known-good configuration exists; otherwise recommend rollback or require approval.',
+    },
+    rollout: {
+      sees: 'Endpoint count reached zero immediately after a ReplicaSet change, while the previous revision had healthy endpoints.',
+      automates: 'A guarded rollout undo is eligible when the deploy-to-drain sequence is unambiguous and recovery verification is configured.',
+    },
+    network: {
+      sees: 'Ready endpoints exist, but a request from the ingress network path cannot reach Pod IP:port. Restarting pods would not change the evidence.',
+      automates: 'Attach the relevant NetworkPolicy and namespace-label diff. Policy changes require approval; AlertMend verifies reachability after the change.',
+    },
+    mesh: {
+      sees: 'Kubernetes endpoints remain Ready while Envoy reports no healthy hosts or UH. That isolates the failure to the mesh health model.',
+      automates: 'Surface DestinationRule, recent 5xx history, and ejected hosts. Threshold changes remain approval-gated; recovery is verified at both mesh and URL layers.',
+    },
+  };
+
+  const lifecycleStage = document.querySelector('.lifecycleStage');
+  const lifecycleButtons = [...document.querySelectorAll('[data-lifecycle-state]')];
+  const endpointCount = lifecycleStage && lifecycleStage.querySelector('.endpointCount');
+  const podAStatus = lifecycleStage && lifecycleStage.querySelector('.lifecyclePodOne small');
+  const podBStatus = lifecycleStage && lifecycleStage.querySelector('.lifecyclePodTwo small');
+  const lifecycleStatus = lifecycleStage && lifecycleStage.querySelector('.lifecycleStatusCode');
+  const lifecycleTitle = lifecycleStage && lifecycleStage.querySelector('.lifecycleResultTitle');
+  const lifecycleText = lifecycleStage && lifecycleStage.querySelector('.lifecycleResultText');
+  const lifecycleExpertText = lifecycleStage && lifecycleStage.querySelector('.lifecycleExpertText');
+  const lifecycleExpertAction = lifecycleStage && lifecycleStage.querySelector('.lifecycleExpertAction');
+
+  function renderLifecycle(id, focusButton = false) {
+    const state = LIFECYCLE_STATES[id];
+    if (!state || !lifecycleStage) return;
+    lifecycleStage.setAttribute('data-lifecycle-current', id);
+    lifecycleButtons.forEach((button) => {
+      const active = button.getAttribute('data-lifecycle-state') === id;
+      button.classList.toggle('lifecycleTabActive', active);
+      button.setAttribute('aria-selected', active ? 'true' : 'false');
+      button.tabIndex = active ? 0 : -1;
+      if (active && focusButton) button.focus();
+    });
+    if (endpointCount) endpointCount.textContent = state.endpointCount;
+    if (podAStatus) podAStatus.textContent = state.podA;
+    if (podBStatus) podBStatus.textContent = state.podB;
+    if (lifecycleStatus) lifecycleStatus.textContent = state.status;
+    if (lifecycleTitle) lifecycleTitle.textContent = state.title;
+    if (lifecycleText) lifecycleText.textContent = state.text;
+    if (lifecycleExpertText) lifecycleExpertText.textContent = state.expert;
+    if (lifecycleExpertAction) lifecycleExpertAction.textContent = state.action;
+  }
+
+  lifecycleButtons.forEach((button, index) => {
+    button.addEventListener('click', () => renderLifecycle(button.getAttribute('data-lifecycle-state')));
+    button.addEventListener('keydown', (event) => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      let next = index;
+      if (event.key === 'ArrowLeft') next = (index - 1 + lifecycleButtons.length) % lifecycleButtons.length;
+      if (event.key === 'ArrowRight') next = (index + 1) % lifecycleButtons.length;
+      if (event.key === 'Home') next = 0;
+      if (event.key === 'End') next = lifecycleButtons.length - 1;
+      renderLifecycle(lifecycleButtons[next].getAttribute('data-lifecycle-state'), true);
+    });
+  });
+
   const failureButtons = document.querySelectorAll('.modeGrid [data-failure-id]');
   const failureTitle = document.getElementById('failure-playbook-title');
   const failureSummary = document.getElementById('failure-playbook-summary');
@@ -216,6 +338,8 @@ spec:
   const failureFootnote = document.getElementById('failure-playbook-footnote');
   const failureTip = document.getElementById('failure-playbook-tip');
   const failureAutoFix = document.getElementById('failure-playbook-autofix');
+  const failureAlertMendSees = document.getElementById('failure-playbook-alertmend-sees');
+  const failureAlertMendAutomates = document.getElementById('failure-playbook-alertmend-automates');
 
   function renderFailure(id) {
     const mode = FAILURE_MODES[id];
@@ -249,6 +373,9 @@ spec:
     }
     if (failureTip) failureTip.textContent = mode.tip;
     if (failureAutoFix) failureAutoFix.textContent = 'Typical fix: ' + mode.autoFix;
+    const insight = ALERTMEND_MODE_INSIGHTS[id];
+    if (failureAlertMendSees && insight) failureAlertMendSees.textContent = insight.sees;
+    if (failureAlertMendAutomates && insight) failureAlertMendAutomates.textContent = insight.automates;
   }
 
   function jumpToFailure(id) {
