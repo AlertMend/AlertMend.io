@@ -40,6 +40,10 @@
       "destination": "/blog/enterprise-ai-agent-observability/index.html"
     },
     {
+      "source": "/blog/exit-code-5",
+      "destination": "/blog/exit-code-5/index.html"
+    },
+    {
       "source": "/blog/gpu-reliability-for-llm-workloads",
       "destination": "/blog/gpu-reliability-for-llm-workloads/index.html"
     },
