@@ -1,0 +1,72 @@
+
+.copyableCode { position: relative; padding-top: 3.25rem; }
+.codeCopyButton {
+  position: absolute; top: .75rem; right: .75rem; z-index: 2;
+  border: 1px solid #3f3f46; border-radius: 6px; padding: .35rem .65rem;
+  background: #27272a; color: #f4f4f5; font: 700 .72rem/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  cursor: pointer;
+}
+.codeCopyButton:hover { background: #3f3f46; }
+.instantFixCommands code, .diagnosisSteps p, .amStepBody { overflow-wrap: anywhere; }
+.flowDiagram svg { overflow: visible; }
+.flowDiagramCaption { max-width: 68ch; }
+.credibilityRow { display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center; margin:-.75rem 0 1.75rem; font-size:.85rem; color:#52525b; }
+.credibilityVerified { display:inline-flex; align-items:center; gap:6px; font-weight:700; color:#047857; }
+.credibilityDot { color:#d4d4d8; }
+.incidentTrace {
+  position: relative; overflow: hidden; margin: 1rem 0 1.5rem; padding: 1.1rem;
+  border: 1px solid #ddd6fe; border-radius: 10px;
+  background: radial-gradient(circle at 8% 0%, rgba(124,58,237,.1), transparent 34%), #faf9ff;
+}
+.incidentTrace::after {
+  content:""; position:absolute; inset:0 auto 0 -42%; width:36%;
+  background:linear-gradient(90deg,transparent,rgba(124,58,237,.07),transparent);
+  transform:skewX(-12deg); pointer-events:none;
+}
+.incidentTraceHead { display:flex; justify-content:space-between; gap:1rem; align-items:flex-start; margin-bottom:.8rem; }
+.incidentTraceEyebrow { display:block; color:#6d28d9; font-size:.66rem; font-weight:850; letter-spacing:.1em; }
+.incidentTraceHead strong { display:block; margin-top:.18rem; color:#18181b; font-size:1rem; }
+.incidentTraceHead small { max-width:24rem; color:#71717a; font-size:.72rem; line-height:1.45; text-align:right; }
+.incidentTraceRows { display:grid; gap:.5rem; }
+.incidentTraceRow {
+  display:grid; grid-template-columns:6.2rem minmax(0,1fr); gap:.8rem; align-items:start;
+  padding:.72rem .8rem; border:1px solid #e4e4e7; border-radius:8px; background:rgba(255,255,255,.92);
+}
+.incidentTraceRow span { color:#6d28d9; font-size:.7rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+.incidentTraceRow p { margin:0; color:#3f3f46; font-size:.84rem; line-height:1.55; }
+.incidentTraceGuardrail { margin:.75rem 0 0; color:#52525b; font-size:.76rem; }
+.incidentTraceGuardrail strong { color:#18181b; }
+@media (prefers-reduced-motion:no-preference) {
+  .incidentTrace::after { animation: incident-scan 7s ease-in-out infinite; }
+  .incidentTraceRow { animation: incident-row 7s ease-in-out infinite; }
+  .incidentTraceRow:nth-child(2) { animation-delay:.55s; }
+  .incidentTraceRow:nth-child(3) { animation-delay:1.1s; }
+  .incidentTraceRow:nth-child(4) { animation-delay:1.65s; }
+  @keyframes incident-scan { 0%,18%{left:-42%} 70%,100%{left:118%} }
+  @keyframes incident-row { 0%,15%,100%{border-color:#e4e4e7;box-shadow:none} 24%,38%{border-color:#a78bfa;box-shadow:0 0 0 3px rgba(124,58,237,.08)} 52%{border-color:#bbf7d0} }
+}
+@media (max-width:760px) {
+  .incidentTraceHead { flex-direction:column; }
+  .incidentTraceHead small { text-align:left; }
+  .incidentTraceRow { grid-template-columns:1fr; gap:.15rem; }
+  .credibilityRow { flex-direction:column; align-items:flex-start; gap:.35rem; }
+  .credibilityDot { display:none; }
+}
+@media (max-width:1100px) {
+  .immediateDiagnosis .diagnosisSteps { grid-template-columns:1fr; }
+  .immediateDiagnosis .diagnosisSteps li { padding:.875rem 0; }
+  .immediateDiagnosis .diagnosisSteps li + li { padding-left:0; border-left:0; border-top:1px solid #e4e4e7; }
+}
+@media (max-width:520px) {
+  .flowDiagram {
+    overflow-x:auto; max-width:100%; padding:.55rem 0 .25rem;
+    -webkit-overflow-scrolling:touch; scrollbar-width:thin;
+  }
+  .flowDiagram::before {
+    content:"Swipe to explore →"; position:sticky; left:0; z-index:2; display:block;
+    width:max-content; margin:0 0 .45rem; padding:.22rem .48rem; border-radius:999px;
+    background:#ede9fe; color:#5b21b6; font-size:.65rem; font-weight:800; letter-spacing:.03em;
+  }
+  .flowDiagram svg { width:680px !important; min-width:680px; max-width:none; }
+  .flowDiagramCaption { position:sticky; left:0; width:calc(100vw - 48px); padding-right:.5rem; }
+}
