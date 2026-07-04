@@ -2489,13 +2489,13 @@
   },
   {
     "slug": "exit-code-5",
-    "title": "Exit Code 5: Complete Guide to Access",
-    "excerpt": "Complete guide to exit code 5 (access denied) errors in Windows, Linux, and Kubernetes. Learn diagnostic techniques and proven solutions for permission issues.",
+    "title": "Exit Code 5: Meaning and Fixes by Program",
+    "excerpt": "Exit code 5 has no universal meaning. Diagnose pytest no-tests-collected, curl proxy errors, Windows access denied, Linux commands, and CI failures correctly.",
     "date": "2026-01-10",
     "category": "Troubleshooting",
     "author": "AlertMend Team",
     "tags": [],
-    "keywords": "exit code 5, access denied error, permission denied, Windows exit codes, Linux exit codes, Kubernetes troubleshooting, system errors, DevOps, error resolution, AlertMend AI, AIOps"
+    "keywords": "exit code 5, pytest exit code 5 no tests collected, exit code 5 linux, curl exit code 5, Windows system error 5 access denied, process completed with exit code 5, exit status 5, return code 5"
   },
   {
     "slug": "exploring-the-latest-aiops-trends-for-2025-a-comprehensive-guide",
