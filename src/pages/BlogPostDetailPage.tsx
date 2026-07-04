@@ -1,4 +1,4 @@
-import { useParams, useNavigate, useLocation } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -17,21 +17,15 @@ import { attachScrollReveal } from '../hooks/useScrollReveal'
 export default function BlogPostDetailPage() {
   const { slug } = useParams<{ slug: string }>()
   const navigate = useNavigate()
-  const location = useLocation()
   const [post, setPost] = useState<BlogPost | null>(null)
   const [loading, setLoading] = useState(true)
   const [navigating, setNavigating] = useState(false)
 
-  // Determine if this is HTML version and normalize slug for canonical URL
-  const isHtmlVersion = location.pathname.startsWith('/blogs/') && location.pathname.endsWith('.html')
   let loadingCanonicalUrl = ''
   if (slug) {
-    // Normalize slug for canonical URL
     let cleanSlug = slug.replace(/\.html$/, '')
     cleanSlug = cleanSlug.toLowerCase().replace(/_/g, '-')
-    loadingCanonicalUrl = isHtmlVersion 
-      ? `/blogs/${cleanSlug}.html`
-      : `/blog/${cleanSlug}`
+    loadingCanonicalUrl = `/blog/${cleanSlug}`
   }
 
   useEffect(() => {
@@ -69,7 +63,7 @@ export default function BlogPostDetailPage() {
         setLoading(false)
       })
     }
-  }, [slug, location.pathname, isHtmlVersion])
+  }, [slug])
 
   // Blog content loads async (fetch markdown). useScrollReveal runs on route change
   // before the article mounts, so `.reveal` sections stay at opacity:0 unless we
@@ -144,80 +138,11 @@ export default function BlogPostDetailPage() {
   const relatedPosts = [...sameCategoryPosts, ...otherPosts].slice(0, 10)
 
   const readTime = post.content ? calculateReadTime(post.content) : '5 min read'
-  // Canonical URL should match the current URL format
-  // If accessed via /blogs/slug.html, canonical should be /blogs/slug.html
-  // If accessed via /blog/slug, canonical should be /blog/slug
-  // Always use normalized slug (lowercase, hyphens) for canonical URL
-  const blogPostUrl = isHtmlVersion 
-    ? `/blogs/${post.slug}.html`  // HTML version: /blogs/normalized-slug.html
-    : `/blog/${post.slug}`         // Non-HTML version: /blog/normalized-slug
-  
-  // Modify content tone for /blog routes to make it unique (keep /blogs routes unchanged)
-  const getModifiedContent = (content: string): string => {
-    if (isHtmlVersion) {
-      // Keep original content for /blogs routes
-      return content
-    }
-    
-    // Modify content tone slightly for /blog routes to avoid duplication
-    // Replace common phrases with variations (subtle changes that maintain meaning)
-    let modifiedContent = content
-    
-    // Replace common phrases with variations - more subtle changes
-    const replacements: [RegExp, string][] = [
-      [/In this article/gi, 'In this comprehensive guide'],
-      [/In this guide/gi, 'In this detailed article'],
-      [/This article/gi, 'This comprehensive guide'],
-      [/This guide/gi, 'This detailed article'],
-      [/we'll explore/gi, 'we will dive deep into'],
-      [/we'll discuss/gi, 'we will examine'],
-      [/we'll cover/gi, 'we will analyze'],
-      [/Let's explore/gi, 'Let us dive into'],
-      [/Let's discuss/gi, 'Let us examine'],
-      [/understanding/gi, 'comprehending'],
-      [/learn how to/gi, 'discover the process of'],
-      [/learn about/gi, 'gain insights into'],
-      [/common causes/gi, 'primary factors'],
-      [/common issues/gi, 'frequent challenges'],
-      [/best practices/gi, 'proven strategies'],
-      [/troubleshooting/gi, 'diagnosing and resolving'],
-      [/solutions/gi, 'effective approaches'],
-      [/important to/gi, 'crucial to'],
-      [/essential to/gi, 'vital to'],
-      [/ensure that/gi, 'guarantee that'],
-      [/make sure/gi, 'verify'],
-      [/can help/gi, 'can assist'],
-      [/can be/gi, 'may be'],
-      [/should be/gi, 'ought to be'],
-      [/will help/gi, 'will assist'],
-      [/provides/gi, 'delivers'],
-      [/offers/gi, 'furnishes'],
-      [/allows/gi, 'enables'],
-      [/ensures/gi, 'guarantees'],
-      [/explore/gi, 'examine'],
-      [/discuss/gi, 'analyze'],
-      [/cover/gi, 'address'],
-      [/delve into/gi, 'investigate'],
-      [/examine/gi, 'explore'],
-      [/analyze/gi, 'review'],
-      [/review/gi, 'examine'],
-    ]
-    
-    // Apply replacements (simple approach - patterns already match whole phrases)
-    replacements.forEach(([pattern, replacement]) => {
-      modifiedContent = modifiedContent.replace(pattern, replacement)
-    })
-    
-    return modifiedContent
-  }
+  const blogPostUrl = `/blog/${post.slug}`
   
   // Use original title for display (no modifications)
   const displayTitle = post.title
-  // Repair structural markdown issues introduced by the upstream content
-  // pipeline (empty headings, split-across-lines headings, orphan list
-  // markers, inline code-fence opens) before tone-modifying the prose.
-  const normalizedContent = normalizeBlogMarkdown(post.content || '')
-  const displayContent = getModifiedContent(normalizedContent)
+  const displayContent = normalizeBlogMarkdown(post.content || '')
   
   // Truncate title to 30-60 characters for SEO (use original title)
   const seoTitle = truncateBlogTitle(post.title)
@@ -226,7 +151,7 @@ export default function BlogPostDetailPage() {
   const metaDescription = generateUniqueMetaDescription(
     post.title,
     post.excerpt,
-    isHtmlVersion ? post.content : displayContent,
+    displayContent,
     post.category
   )
 
@@ -549,4 +474,3 @@ export default function BlogPostDetailPage() {
     </div>
   )
 }
-

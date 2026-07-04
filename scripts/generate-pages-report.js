@@ -73,64 +73,8 @@ function extractMetadata(htmlContent, filePath) {
   return metadata
 }
 
-// Scan blog pages
-console.log('📊 Scanning blog pages...')
-const blogsHtmlDir = path.join(__dirname, '../dist/blogs')
-const blogHtmlFiles = fs.existsSync(blogsHtmlDir)
-  ? fs.readdirSync(blogsHtmlDir).filter(file => file.endsWith('.html'))
-  : []
-
-blogHtmlFiles.forEach(file => {
-  const filePath = path.join(blogsHtmlDir, file)
-  const slug = file.replace('.html', '')
-  const htmlContent = fs.readFileSync(filePath, 'utf-8')
-  const metadata = extractMetadata(htmlContent, filePath)
-  
-  const pageInfo = {
-    type: 'blog-html',
-    path: `/blogs/${file}`,
-    slug: slug,
-    file: `blogs/${file}`,
-    ...metadata,
-    issues: []
-  }
-  
-  // Check for issues
-  if (!metadata.hasTitle) pageInfo.issues.push('Missing title tag')
-  if (!metadata.hasDescription) pageInfo.issues.push('Missing meta description')
-  if (!metadata.hasCanonical) pageInfo.issues.push('Missing canonical URL')
-  if (!metadata.hasOgUrl) pageInfo.issues.push('Missing Open Graph URL')
-  if (!metadata.hasTwitterUrl) pageInfo.issues.push('Missing Twitter URL')
-  
-  // Check canonical URL format (should be /blogs/{slug}.html)
-  if (metadata.hasCanonical && !metadata.canonical.includes('/blogs/')) {
-    pageInfo.issues.push(`Canonical URL should be in /blogs/ directory (found: ${metadata.canonical})`)
-  }
-  if (metadata.hasCanonical && !metadata.canonical.endsWith('.html')) {
-    pageInfo.issues.push(`Canonical URL should end with .html (found: ${metadata.canonical})`)
-  }
-  
-  // Check if OG and Twitter URLs match canonical
-  if (metadata.hasCanonical && metadata.hasOgUrl && metadata.canonical !== metadata.ogUrl) {
-    pageInfo.issues.push(`Open Graph URL doesn't match canonical (OG: ${metadata.ogUrl}, Canonical: ${metadata.canonical})`)
-  }
-  
-  if (metadata.hasCanonical && metadata.hasTwitterUrl && metadata.canonical !== metadata.twitterUrl) {
-    pageInfo.issues.push(`Twitter URL doesn't match canonical (Twitter: ${metadata.twitterUrl}, Canonical: ${metadata.canonical})`)
-  }
-  
-  report.pages.push(pageInfo)
-  report.summary.blogPages++
-  
-  if (pageInfo.issues.length > 0) {
-    report.summary.issues.push({
-      page: pageInfo.path,
-      issues: pageInfo.issues
-    })
-  }
-})
-
 // Scan blog directory/index.html files
+console.log('📊 Scanning blog pages...')
 const blogDirs = fs.readdirSync(blogDir, { withFileTypes: true })
   .filter(dirent => dirent.isDirectory())
   .map(dirent => dirent.name)
@@ -366,4 +310,3 @@ console.log(`   Total Pages: ${report.summary.totalPages}`)
 console.log(`   Blog Pages: ${report.summary.blogPages}`)
 console.log(`   Other Pages: ${report.summary.otherPages}`)
 console.log(`   Pages with Issues: ${report.summary.issues.length}`)
-

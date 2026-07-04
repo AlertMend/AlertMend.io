@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * One-shot Tailwind-class palette normalizer for the legacy blog pages.
+ * One-shot Tailwind-class palette normalizer for generated blog pages.
  *
  * Re-skins `purple-*`, `fuchsia-*`, `blue-*` (link), and `gray-*`
  * (legacy body) Tailwind utilities to the new design-system palette:
@@ -20,10 +20,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 
 const TARGETS = [
-  'src/pages/LegacyBlogPage.tsx',
-  // The static HTML generator. Has its own inline <style> block plus an
-  // injected Tailwind theme; we rewire both so blog HTML matches the
-  // marketing palette.
   'scripts/build-blog-html.js',
 ];
 

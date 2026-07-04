@@ -1,13 +1,9 @@
 /**
- * Maps old blog URL formats to new slug formats
- * This handles legacy URLs from /blogs/*.html to /blog/:slug
+ * Maps historical blog slug formats to the canonical slug.
  */
 export function mapOldBlogUrlToSlug(oldUrl: string): string | null {
   // Remove .html extension if present
   let slug = oldUrl.replace(/\.html$/, '')
-  
-  // Remove /blogs/ prefix if present
-  slug = slug.replace(/^\/?blogs\//, '')
   
   // Decode URL-encoded characters (handles Chinese characters)
   try {
@@ -60,34 +56,5 @@ export function mapOldBlogUrlToSlug(oldUrl: string): string | null {
     .toLowerCase()
   
   return normalized
-}
-
-/**
- * Extracts slug from old blog URL path
- * Handles formats like:
- * - /blogs/Kubernetes-Evicted-Pods.html
- * - /blogs/kubernetes_502_bad_gateway_error_fix.html
- * - blogs/Debugging-Kubernetes-Admission-Webhooks.html
- * - Privileged-Containers-in-Kubernetes.html (from React Router params)
- */
-export function extractSlugFromOldUrl(path: string): string | null {
-  if (!path) {
-    return null
-  }
-  
-  // Remove leading slash if present
-  let cleanPath = path.replace(/^\/+/, '')
-  
-  // Remove /blogs/ prefix if present
-  cleanPath = cleanPath.replace(/^blogs\//, '')
-  
-  // Extract the filename (remove .html extension)
-  const filename = cleanPath.replace(/\.html?$/, '')
-  
-  if (!filename) {
-    return null
-  }
-  
-  return mapOldBlogUrlToSlug(filename)
 }
 

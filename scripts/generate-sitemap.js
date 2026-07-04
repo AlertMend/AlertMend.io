@@ -203,60 +203,15 @@ ${caseStudiesData.map(study => {
     <priority>0.8</priority>
   </url>
 ${blogPosts.map(post => {
-  const defaultFilename = `${convertSlugToHtmlFilename(post.slug)}.html`
-  const htmlFilename = canonicalFilenameOverrides[post.slug] || defaultFilename
   const normalizedDate = normalizeDate(post.date)
-  
-  // Automatically detect new blogs: blogs dated after Dec 18, 2025 are "new blogs"
-  // New blogs only have /blog/{slug} entries (no /blogs/ entries)
-  const newBlogCutoffDate = new Date('2025-12-18')
-  const postDate = new Date(post.date || normalizedDate)
-  const isNewBlog = postDate > newBlogCutoffDate
-  
-  // Also check hardcoded list for any legacy new blogs that might have earlier dates
-  const legacyNewBlogsOnly = [
-    'alertmend-kubernetes',
-    'exit-status-127',
-    'oomkilled',
-    'fatal-not-a-git-repository',
-    'openocd-exited-with-code-1',
-    'kubectl-rollout',
-    '5xx-errors',
-    '5xx-error',
-    '5xx-server-error',
-    'crashloopbackoff-kubernetes',
-    'fatal-refusing-to-merge-unrelated-histories',
-    'error-failed-to-push-some-refs-to'
-  ]
-  
-  const isLegacyNewBlog = legacyNewBlogsOnly.includes(post.slug)
-  const isNewBlogFinal = isNewBlog || isLegacyNewBlog
 
-  if (isNewBlogFinal) {
-    // New blogs: only /blog/{slug} entry
-    return `  <!-- Blog Post: ${post.slug} -->
+  return `  <!-- Blog Post: ${post.slug} -->
   <url>
     <loc>${siteUrl}/blog/${post.slug}</loc>
     <lastmod>${normalizedDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>`
-  } else {
-    // Existing blogs: both /blog/{slug} and /blogs/{slug}.html entries
-    return `  <!-- Blog Post: ${post.slug} -->
-  <url>
-    <loc>${siteUrl}/blog/${post.slug}</loc>
-    <lastmod>${normalizedDate}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>${siteUrl}/blogs/${htmlFilename}</loc>
-    <lastmod>${normalizedDate}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>`
-  }
 }).join('\n')}
   
   <!-- Main Pages -->
@@ -402,30 +357,5 @@ ${blogPosts.map(post => {
 const sitemapPath = path.join(__dirname, '../public/sitemap.xml')
 fs.writeFileSync(sitemapPath, sitemap, 'utf-8')
 
-// Count new blogs (automatically detected by date > Dec 18, 2025, plus legacy list)
-const newBlogCutoffDate = new Date('2025-12-18')
-const legacyNewBlogsOnly = [
-  'alertmend-kubernetes',
-  'exit-status-127',
-  'oomkilled',
-  'fatal-not-a-git-repository',
-  'openocd-exited-with-code-1',
-  'kubectl-rollout',
-  '5xx-errors',
-  '5xx-error',
-  '5xx-server-error',
-  'crashloopbackoff-kubernetes',
-  'fatal-refusing-to-merge-unrelated-histories',
-  'error-failed-to-push-some-refs-to'
-]
-const newBlogsCount = blogPosts.filter(post => {
-  const postDate = new Date(post.date || normalizeDate(post.date))
-  const isNewBlogByDate = postDate > newBlogCutoffDate
-  const isLegacyNewBlog = legacyNewBlogsOnly.includes(post.slug)
-  return isNewBlogByDate || isLegacyNewBlog
-}).length
-
 console.log(`✅ Generated sitemap.xml with ${blogPosts.length} blog posts`)
-console.log(`   ${newBlogsCount} new blogs use /blog/{slug} only`)
-console.log(`   ${blogPosts.length - newBlogsCount} existing blogs include both /blog/{slug} and /blogs/{slug}.html`)
-
+console.log('   Canonical blog format: /blog/{slug}')

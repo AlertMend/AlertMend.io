@@ -7,7 +7,6 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const blogDir = path.join(__dirname, '../public/blog')
-const distBlogsDir = path.join(__dirname, '../dist/blogs')
 const distBlogDir = path.join(__dirname, '../dist/blog')
 const sitemapPath = path.join(__dirname, '../public/sitemap.xml')
 
@@ -257,11 +256,9 @@ function validateHTMLFile(htmlFilePath, slug) {
 
 // Check if blog is in sitemap
 function checkSitemap(slug, sitemapContent) {
-  // Check for both /blog/{slug} and /blogs/{slug}.html formats
   const blogPattern = new RegExp(`/blog/${slug.replace(/-/g, '-')}(?!-)`, 'i')
-  const blogsPattern = new RegExp(`/blogs/[^<]*${slug.replace(/-/g, '-')}[^<]*\\.html`, 'i')
   
-  if (!blogPattern.test(sitemapContent) && !blogsPattern.test(sitemapContent)) {
+  if (!blogPattern.test(sitemapContent)) {
     errors.push(`❌ ${slug}: Not found in sitemap`)
     return false
   }
@@ -292,71 +289,13 @@ function validateAllBlogs() {
   
   let htmlFilesFound = 0
   for (const slug of slugs) {
-    const htmlFiles = []
-
-    // Static blogs are built to dist/blog/{slug}/index.html (not dist/blogs/*.html)
-    if (STATIC_BLOG_SLUGS.includes(slug)) {
-      const staticHtmlPath = path.join(distBlogDir, slug, 'index.html')
-      if (fs.existsSync(staticHtmlPath)) {
-        htmlFiles.push(staticHtmlPath)
-      } else if (fs.existsSync(distBlogDir)) {
-        errors.push(`❌ ${slug}: Static HTML not found at dist/blog/${slug}/index.html (run build:static-blogs first)`)
-      } else {
-        warnings.push(`⚠️  ${slug}: dist/blog/ directory not found (run build:static-blogs first)`)
-      }
-    } else if (fs.existsSync(distBlogsDir)) {
-      // Try to find HTML file - it might have different casing
-      const files = fs.readdirSync(distBlogsDir)
-      // Normalize slug for comparison (handle case-insensitive matching)
-      const normalizedSlug = slug.toLowerCase().replace(/-/g, '-')
-      
-      // Try exact match first
-      let matchingFile = files.find(f => {
-        const fileName = f.toLowerCase().replace('.html', '').replace(/-/g, '-')
-        return fileName === normalizedSlug
-      })
-      
-      // If no exact match, try fuzzy match (ignoring case and special characters)
-      if (!matchingFile) {
-        matchingFile = files.find(f => {
-          const fileName = f.toLowerCase().replace('.html', '').replace(/[^a-z0-9-]/g, '')
-          const normalizedSlugClean = normalizedSlug.replace(/[^a-z0-9-]/g, '')
-          // Check if slug is contained in filename or filename is contained in slug
-          return fileName.includes(normalizedSlugClean) || normalizedSlugClean.includes(fileName) || 
-                 fileName.replace(/_/g, '-').includes(normalizedSlugClean) ||
-                 normalizedSlugClean.includes(fileName.replace(/_/g, '-'))
-        })
-      }
-      
-      // Also check canonical filename overrides from build-blog-html.js
-      const canonicalOverrides = {
-        'understanding-kubernetes-pending-pod': 'Understanding_Kubernetes_Pending-pod.html',
-        'understanding-kubernetes-terminating-state': 'Understanding_Kubernetes_Terminating_State.html',
-        'kubernetes-persistentvolumeclaim-guide': 'Kubernetes_PersistentVolumeClaim_Guide.html',
-        'mastering-kubernetes-resource-quotas-requests-and-limits-for-optimized-cluster-performance': 'Mastering_Kubernetes_Resource_Quotas_Requests_and_Limits_for_Optimized_Cluster_Performance.html'
-      }
-      if (!matchingFile && canonicalOverrides[slug]) {
-        matchingFile = files.find(f => f === canonicalOverrides[slug])
-      }
-      
-      if (matchingFile) {
-        htmlFiles.push(path.join(distBlogsDir, matchingFile))
-      }
-    }
-
-    if (htmlFiles.length === 0) {
-      if (STATIC_BLOG_SLUGS.includes(slug)) {
-        // Static blog errors/warnings are recorded in the branch above
-      } else if (fs.existsSync(distBlogsDir)) {
-        errors.push(`❌ ${slug}: No HTML file found in dist/blogs/`)
-      } else {
-        warnings.push(`⚠️  ${slug}: dist/blogs/ directory not found (run build:blog first)`)
-      }
+    const htmlFile = path.join(distBlogDir, slug, 'index.html')
+    if (!fs.existsSync(htmlFile)) {
+      const buildCommand = STATIC_BLOG_SLUGS.includes(slug) ? 'build:static-blogs' : 'build:blog'
+      errors.push(`❌ ${slug}: HTML not found at dist/blog/${slug}/index.html (run ${buildCommand} first)`)
     } else {
       htmlFilesFound++
-      for (const htmlFile of htmlFiles) {
-        validateHTMLFile(htmlFile, slug)
-      }
+      validateHTMLFile(htmlFile, slug)
     }
   }
   
@@ -404,4 +343,3 @@ function validateAllBlogs() {
 
 // Run validation
 validateAllBlogs()
-

@@ -21,24 +21,16 @@ export function normalizePathname(pathname: string): string {
   }
   
   // Normalize blog post URLs: convert underscores to hyphens and lowercase
-  // Handle /blogs/slug.html and /blog/slug patterns
-  if (normalized.startsWith('/blogs/') || normalized.startsWith('/blog/')) {
+  if (normalized.startsWith('/blog/')) {
     const parts = normalized.split('/')
     if (parts.length >= 3) {
       let slug = parts[2]
-      // Check if slug has .html extension
-      const hasHtmlExtension = slug.endsWith('.html')
-      if (hasHtmlExtension) {
+      if (slug.endsWith('.html')) {
         slug = slug.replace('.html', '')
       }
       // Normalize slug: lowercase and convert underscores to hyphens
       const normalizedSlug = slug.toLowerCase().replace(/_/g, '-')
-      // Reconstruct path with normalized slug
-      if (normalized.startsWith('/blogs/')) {
-        normalized = `/blogs/${normalizedSlug}${hasHtmlExtension ? '.html' : ''}`
-      } else {
-        normalized = `/blog/${normalizedSlug}`
-      }
+      normalized = `/blog/${normalizedSlug}`
     }
   }
   
@@ -116,4 +108,3 @@ export function setupCanonicalObserver(): void {
     verifyCanonicalUrl()
   }, 1000)
 }
-
