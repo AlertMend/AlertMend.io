@@ -1652,6 +1652,27 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- Blog Post: elasticsearch-caching-issues -->
+  <url>
+    <loc>https://www.alertmend.io/blog/elasticsearch-caching-issues</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: elasticsearch-disk-out-of-space-incident -->
+  <url>
+    <loc>https://www.alertmend.io/blog/elasticsearch-disk-out-of-space-incident</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: elasticsearch-shard-relocation-incidents-on-kubernetes -->
+  <url>
+    <loc>https://www.alertmend.io/blog/elasticsearch-shard-relocation-incidents-on-kubernetes</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- Blog Post: elektro-dns -->
   <url>
     <loc>https://www.alertmend.io/blog/elektro-dns</loc>
@@ -2873,6 +2894,13 @@
   <!-- Blog Post: optimizing-coredns-plugin-performance-in-2025 -->
   <url>
     <loc>https://www.alertmend.io/blog/optimizing-coredns-plugin-performance-in-2025</loc>
+    <lastmod>2026-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: optimizing-high-jvm-heap-usage-in-elasticsearch -->
+  <url>
+    <loc>https://www.alertmend.io/blog/optimizing-high-jvm-heap-usage-in-elasticsearch</loc>
     <lastmod>2026-01-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -4487,13 +4515,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Blog Post: elasticsearch-shard-relocation-incidents-on-kubernetes -->
-  <url>
-    <loc>https://www.alertmend.io/blog/elasticsearch-shard-relocation-incidents-on-kubernetes</loc>
-    <lastmod>2025-04-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
   <!-- Blog Post: dns-resolution-failures-in-kubernetes -->
   <url>
     <loc>https://www.alertmend.io/blog/dns-resolution-failures-in-kubernetes</loc>
@@ -4519,20 +4540,6 @@
   <url>
     <loc>https://www.alertmend.io/blog/managing-high-number-of-queued-threads-in-elasticsearch-thread-pool-for-optimal-performance</loc>
     <lastmod>2025-04-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: optimizing-high-jvm-heap-usage-in-elasticsearch -->
-  <url>
-    <loc>https://www.alertmend.io/blog/optimizing-high-jvm-heap-usage-in-elasticsearch</loc>
-    <lastmod>2025-03-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: elasticsearch-disk-out-of-space-incident -->
-  <url>
-    <loc>https://www.alertmend.io/blog/elasticsearch-disk-out-of-space-incident</loc>
-    <lastmod>2025-03-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -4624,13 +4631,6 @@
   <url>
     <loc>https://www.alertmend.io/blog/kubernetes-api-rate-limiting-troubleshooting</loc>
     <lastmod>2025-02-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: elasticsearch-caching-issues -->
-  <url>
-    <loc>https://www.alertmend.io/blog/elasticsearch-caching-issues</loc>
-    <lastmod>2025-02-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

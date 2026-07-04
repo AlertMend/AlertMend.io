@@ -36,6 +36,18 @@
       "destination": "/blog/best-ai-agent-observability-tools/index.html"
     },
     {
+      "source": "/blog/elasticsearch-caching-issues",
+      "destination": "/blog/elasticsearch-caching-issues/index.html"
+    },
+    {
+      "source": "/blog/elasticsearch-disk-out-of-space-incident",
+      "destination": "/blog/elasticsearch-disk-out-of-space-incident/index.html"
+    },
+    {
+      "source": "/blog/elasticsearch-shard-relocation-incidents-on-kubernetes",
+      "destination": "/blog/elasticsearch-shard-relocation-incidents-on-kubernetes/index.html"
+    },
+    {
       "source": "/blog/enterprise-ai-agent-observability",
       "destination": "/blog/enterprise-ai-agent-observability/index.html"
     },
@@ -106,6 +118,10 @@
     {
       "source": "/blog/openclaw-cloud-infra-slack-telegram",
       "destination": "/blog/openclaw-cloud-infra-slack-telegram/index.html"
+    },
+    {
+      "source": "/blog/optimizing-high-jvm-heap-usage-in-elasticsearch",
+      "destination": "/blog/optimizing-high-jvm-heap-usage-in-elasticsearch/index.html"
     },
     {
       "source": "/blog/reduce-mttr-for-ai-agents",

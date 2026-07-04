@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elasticsearch Disk Out of Space: Fix | AlertMend AI</title>
+  <meta name="description" content="Fix Elasticsearch disk out of space: understand the low, high, and flood-stage watermarks, clear the read-only block, free space, and prevent it recurring.">
+  <meta name="keywords" content="elasticsearch disk out of space, elasticsearch flood stage, elasticsearch read only allow delete, disk watermark, elasticsearch low disk watermark, index read-only, elasticsearch out of disk kubernetes, cluster.routing.allocation.disk.watermark">
+  <meta name="author" content="Himanshu Bansal">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://www.alertmend.io/blog/elasticsearch-disk-out-of-space-incident">
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.alertmend.io/blog/elasticsearch-disk-out-of-space-incident">
+  <meta property="og:title" content="Elasticsearch Disk Out of Space: Fix">
+  <meta property="og:description" content="Fix Elasticsearch disk out of space: understand the low, high, and flood-stage watermarks, clear the read-only block, free space, and prevent it recurring.">
+  <meta property="og:image" content="https://www.alertmend.io/assets/elasticsearch-disk-out-of-space-incident/hero.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Elasticsearch Disk Out of Space: Fix">
+  <meta name="twitter:description" content="Fix Elasticsearch disk out of space: understand the low, high, and flood-stage watermarks, clear the read-only block, free space, and prevent it recurring.">
+  <meta name="twitter:image" content="https://www.alertmend.io/assets/elasticsearch-disk-out-of-space-incident/hero.svg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Elasticsearch Disk Out of Space: Fix","description":"Fix Elasticsearch disk out of space: understand the low, high, and flood-stage watermarks, clear the read-only block, free space, and prevent it recurring.","image":"https://www.alertmend.io/assets/elasticsearch-disk-out-of-space-incident/hero.svg","datePublished":"2026-01-10","dateModified":"2026-07-04","author":{"@type":"Person","name":"Himanshu Bansal"},"reviewedBy":{"@type":"Organization","name":"AlertMend Engineering"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/elasticsearch-disk-out-of-space-incident"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I fix \"index read-only / allow delete\"?","acceptedAnswer":{"@type":"Answer","text":"Free disk on the affected node first and confirm usage is below the high watermark with GET _cat/allocation?v. Current Elasticsearch versions normally remove the block automatically. If it remains, set index.blocks.read_only_allow_delete to null on the affected indices."}},{"@type":"Question","name":"What are the Elasticsearch disk watermarks?","acceptedAnswer":{"@type":"Answer","text":"Low (default 85%) stops new shard allocation to the node; high (90%) relocates shards away; flood-stage (95%) makes indices read-only. They are set with cluster.routing.allocation.disk.watermark.low, .high, and .flood_stage."}},{"@type":"Question","name":"Why did only some indices go read-only?","acceptedAnswer":{"@type":"Answer","text":"The flood-stage block is applied to indices that have a shard on the node that crossed 95%, not to the whole cluster. Indices whose shards live only on healthy nodes keep accepting writes."}},{"@type":"Question","name":"Should I raise the flood-stage watermark permanently?","acceptedAnswer":{"@type":"Answer","text":"No. Raising it is a temporary way to buy time to delete data or add capacity. Running data nodes near 95% removes the headroom that merges and translog need and risks a 100% disk. Restore the defaults after recovery."}},{"@type":"Question","name":"How do I stop this happening again?","acceptedAnswer":{"@type":"Answer","text":"Use ILM to roll over and delete indices on a schedule, size volumes so nodes stay under the low watermark, and alert at 80% disk so you act well before the flood stage."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Diagnose an Elasticsearch disk out of space incident","description":"Fix Elasticsearch disk out of space: understand the low, high, and flood-stage watermarks, clear the read-only block, free space, and prevent it recurring.","step":[{"@type":"HowToStep","position":1,"name":"Find the full node","text":"Run <code>GET _cat/allocation?v</code> to see <code>disk.percent</code>, <code>disk.used</code>, and <code>disk.avail</code> for every node. The one above 95% owns the incident."},{"@type":"HowToStep","position":2,"name":"Confirm the block","text":"Run <code>GET _all/_settings/index.blocks.read_only_allow_delete</code>. A value of <code>true</code> confirms the flood-stage block was applied."},{"@type":"HowToStep","position":3,"name":"See what is using space","text":"Run <code>GET _cat/indices?v&s=store.size:desc</code> to find the largest indices, and check for old or duplicate indices safe to delete."},{"@type":"HowToStep","position":4,"name":"Check for custom watermarks","text":"Run <code>GET _cluster/settings?include_defaults=true&flat_settings=true</code> and inspect the <code>cluster.routing.allocation.disk.watermark.*</code> values in case they were changed."}]}</script>
+  <link rel="stylesheet" href="/assets/make-error-127/styles.css">
+  <link rel="stylesheet" href="/assets/elasticsearch-disk-out-of-space-incident/styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: #1f2937; background: #fff; -webkit-font-smoothing: antialiased; }
+    .navbar { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(229,231,235,.8); z-index: 50; }
+    .navbar-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .navbar-content { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    .navbar-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+    .navbar-logo-icon { height: 32px; width: auto; }
+    .navbar-links { display: none; align-items: center; gap: 4px; }
+    @media (min-width: 1024px) { .navbar-links { display: flex; } }
+    .navbar-link { padding: 6px 12px; font-size: 0.875rem; font-weight: 500; color: #3f3f46; text-decoration: none; border-radius: 6px; }
+    .navbar-link:hover { color: #09090b; background: #f4f4f5; }
+    .navbar-link.active { color: #09090b; background: #fafafa; }
+    .navbar-actions { display: none; align-items: center; gap: 10px; margin-left: 16px; padding-left: 16px; border-left: 1px solid #e5e7eb; }
+    @media (min-width: 1024px) { .navbar-actions { display: flex; } }
+    .navbar-button { padding: 8px 16px; font-size: 0.875rem; font-weight: 600; border-radius: 999px; text-decoration: none; }
+    .navbar-button-primary { background: #09090b; color: #fff; }
+    .navbar-button-secondary { color: #3f3f46; }
+    .main-container { max-width: 1280px; margin: 0 auto; padding: 96px 24px 64px; }
+    .content-wrapper { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media (min-width: 1024px) {
+      .content-wrapper { grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
+    }
+    .main-col { min-width: 0; max-width: 820px; }
+    @media (min-width: 1024px) { .main-col { max-width: none; } }
+    .sidebar { display: none; }
+    @media (min-width: 1024px) { .sidebar { display: block; } }
+    .sidebar-content { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card { background: #fafafa; border-radius: 8px; padding: 24px; border: 1px solid #e4e4e7; }
+    .sidebar-card-title { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
+    .signup-form { display: flex; flex-direction: column; gap: 12px; }
+    .signup-form input { width: 100%; padding: 10px 16px; border-radius: 6px; border: 1px solid #d4d4d8; font-size: 1rem; background: #fff; color: #09090b; }
+    .signup-form input:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2); }
+    .signup-form button { width: 100%; padding: 10px 12px; background: #09090b; color: #fff; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; }
+    .signup-form button:hover { background: #27272a; }
+    .signup-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .signup-status { font-size: 0.875rem; font-weight: 500; margin: 0; }
+    .signup-status.success { color: #047857; }
+    .signup-status.error { color: #dc2626; }
+    .related-content-title { font-size: 11px; font-weight: 700; color: #71717a; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 16px; }
+    .related-posts-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .related-post-link { color: #3f3f46; text-decoration: none; font-size: 0.875rem; line-height: 1.5; display: block; transition: color 0.15s; }
+    .related-post-link:hover { color: #7c3aed; }
+    .view-more-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 16px; color: #7c3aed; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
+    .view-more-link:hover { color: #6d28d9; }
+    .article-header { margin-bottom: 2rem; }
+    .article-header h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; color: #09090b; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .author-info { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: #09090b; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+    .author-name { font-weight: 600; color: #111827; }
+    .author-meta { font-size: 0.875rem; color: #6b7280; }
+    .category-tag { display: inline-block; padding: 4px 10px; background: #ede9fe; color: #5b21b6; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .promo { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; font-size: 1.0625rem; color: #374151; }
+    .promo a { color: #7c3aed; font-weight: 600; }
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-content">
+        <a href="/" class="navbar-logo">
+          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon">
+        </a>
+        <div class="navbar-links">
+          <a href="/#how-it-works" class="navbar-link">How It Works</a>
+          <a href="/#solutions" class="navbar-link">Solutions</a>
+          <a href="/case-studies" class="navbar-link">Case Studies</a>
+          <a href="/blog" class="navbar-link active">Blog</a>
+          <a href="/pricing" class="navbar-link">Pricing</a>
+        </div>
+        <div class="navbar-actions">
+          <a href="https://app.alertmend.io/signup?source=blog-post&blog_slug=elasticsearch-disk-out-of-space-incident" class="navbar-button navbar-button-secondary">Register</a>
+          <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=elasticsearch-disk-out-of-space-incident" class="navbar-button navbar-button-primary" target="_blank" rel="noopener noreferrer">Book a Demo</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="main-container">
+    <div class="content-wrapper">
+      <div class="main-col">
+
+    <header class="article-header">
+      <h1>Elasticsearch Disk Out of Space: Diagnose and Fix</h1>
+      <div class="author-info">
+        <div class="author-avatar">H</div>
+        <div>
+          <div class="author-name">Himanshu Bansal</div>
+          <div class="author-meta">2026-01-10 · Elasticsearch</div>
+        </div>
+      </div>
+      <span class="category-tag">Elasticsearch</span>
+    </header>
+      <div class="credibilityRow">
+        <span class="credibilityVerified"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Verified against official Elasticsearch documentation</span>
+        <span class="credibilityDot">•</span><span>Technical review: AlertMend Engineering</span>
+        <span class="credibilityDot">•</span><span>Last reviewed 2026-07-04</span>
+        <span class="credibilityDot">•</span><span>3 primary sources cited</span>
+      </div>
+    <div class="dl-blog">
+      <section class="heroBand heroBandCompact">
+        <p class="heroGuideLabel">Elasticsearch on Kubernetes · primary sources checked 2026-07-04</p>
+        <div class="instantFix">
+          <div class="instantFixTop"><span>THE 10-SECOND ANSWER</span><strong>A disk crossed the flood-stage watermark, so Elasticsearch made indices read-only.</strong></div>
+          <p>At the default 95% flood-stage watermark, Elasticsearch sets <code>index.blocks.read_only_allow_delete</code> on indices with a shard on that node. This permits deleting an entire index—not deleting documents—while blocking writes. Free disk first; current versions normally remove the block after usage falls below the high watermark.</p>
+          <div class="instantFixCommands">
+            <code>GET _cat/allocation?v</code><span>see disk.percent per node</span>
+            <code>GET */_settings/index.blocks.read_only_allow_delete</code><span>confirm affected indices</span>
+            <code>GET _cluster/settings?include_defaults=true</code><span>check watermark overrides</span>
+          </div>
+          <div class="manualProof">
+            <a href="https://www.elastic.co/docs/troubleshoot/elasticsearch/fix-watermark-errors" target="_blank" rel="noopener noreferrer">Elastic: fix watermark errors ↗</a>
+            <a href="https://www.elastic.co/docs/troubleshoot/elasticsearch/fix-data-node-out-of-disk" target="_blank" rel="noopener noreferrer">Elastic: fix a data node out of disk ↗</a>
+          </div>
+        </div>
+        <aside class="immediateDiagnosis">
+          <div class="diagnosisHeading"><span class="diagnosisEyebrow">Immediate diagnosis</span><strong>Free space, then verify writes</strong></div>
+          <ol class="diagnosisSteps"><li><span>1</span><p>Run <code>GET _cat/allocation?v</code> and find the node over its flood-stage threshold.</p></li><li><span>2</span><p>Free disk on that node: delete or roll an old index, expand the volume, or add capacity.</p></li><li><span>3</span><p>Wait until usage is below the high watermark. If the block remains, clear <code>index.blocks.read_only_allow_delete</code> explicitly.</p></li></ol>
+          <p class="diagnosisCaution"><strong>Avoid the false fix:</strong> clearing the read-only block <em>before</em> freeing space can let the disk fill completely. Create headroom first.</p>
+        </aside>
+      </section>
+
+      <nav class="articleToc" aria-label="On this page"><strong>On this page</strong><a href="#meaning">What triggers it</a><a href="#diagnose">Diagnose the full disk</a><a href="#causes">Common causes</a><a href="#fix">Fix it step by step</a><a href="#prevent">Prevent recurrence</a><a href="#sources">Primary sources</a></nav>
+
+      <h2 class="sectionHead" id="meaning">What triggers the read-only block</h2>
+      <p class="bodyText">Elasticsearch uses three disk watermarks. At the <strong>low</strong> watermark (default 85%) it stops allocating most new shards to the node. At the <strong>high</strong> watermark (90%) it tries to relocate shards away. At the <strong>flood-stage</strong> watermark (95%) it applies a read-only-allow-delete block to every index with a shard on the affected node. The block permits deleting an entire index to recover space; document writes and deletes remain blocked.</p>
+      <p class="bodyText">This is a safety mechanism, not a bug. The durable recovery sequence is: create headroom, monitor relocation, and verify the block is removed. In current releases Elasticsearch normally removes the block automatically after disk usage falls below the high watermark; clear it manually only if it remains.</p>
+      <pre class="codeBlock copyableCode"><code>PUT /my-index/_doc/1
+{&quot;field&quot;:&quot;value&quot;}
+
+# HTTP 429 cluster_block_exception:
+# &quot;disk usage exceeded flood-stage watermark,
+# index has read-only-allow-delete block&quot;</code></pre>
+
+      <figure class="flowDiagram">
+      <svg class="es-disk" viewBox="0 0 960 270" width="960" height="270" role="img" aria-label="Disk usage on the hot node" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" style="display:block;width:100%;height:auto;border-radius:12px;border:1px solid #e4e4e7;background:linear-gradient(180deg,#faf9ff,#f3f1fb);">
+        <defs><style>
+          @media (prefers-reduced-motion: no-preference) {
+            .es-disk .g-fill { animation: es-disk-fill 7s ease-in-out infinite; }
+            @keyframes es-disk-fill { 0%,100% { width:655.2px; fill:#f59e0b } 34% { width:806.4px; fill:#dc2626 } 52% { width:806.4px; fill:#dc2626 } 78% { width:571.2px; fill:#16a34a } }
+            .es-disk .g-badge { animation: es-disk-badge 7s ease-in-out infinite; }
+            @keyframes es-disk-badge { 0%,24% { opacity:0 } 38%,52% { opacity:1 } 66%,100% { opacity:0 } }
+          }
+        </style></defs>
+        <text x="60" y="72" font-size="15" font-weight="700" fill="#09090b">Disk usage on the hot node</text>
+        <rect x="60" y="96" width="840" height="46" rx="10" fill="#eef0f4" stroke="#e4e4e7"/>
+        <rect class="g-fill" x="60" y="96" width="655.2" height="46" rx="10" fill="#f59e0b"/>
+        <line x1="774" y1="88" x2="774" y2="150" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3 3"/><line x1="816" y1="88" x2="816" y2="150" stroke="#ea580c" stroke-width="2" stroke-dasharray="3 3"/><line x1="858" y1="88" x2="858" y2="150" stroke="#dc2626" stroke-width="2" stroke-dasharray="3 3"/>
+        <g class="g-badge"><rect x="732" y="56" width="168" height="30" rx="15" fill="#7f1d1d"/><text x="816" y="76" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">INDEX READ-ONLY</text></g>
+        <g><circle cx="82" cy="195" r="5" fill="#f59e0b"/><text x="94" y="200" font-size="13" font-weight="700" fill="#3f3f46">low 85%</text><circle cx="362" cy="195" r="5" fill="#ea580c"/><text x="374" y="200" font-size="13" font-weight="700" fill="#3f3f46">high 90%</text><circle cx="642" cy="195" r="5" fill="#dc2626"/><text x="654" y="200" font-size="13" font-weight="700" fill="#3f3f46">flood 95%</text></g>
+      </svg>
+      <figcaption class="flowDiagramCaption">Usage crosses the flood-stage watermark and affected indices become read-only. After disk falls below the high watermark, current Elasticsearch releases the block automatically; verify and clear it only if it remains.</figcaption>
+    </figure>
+
+      <h2 class="sectionHead" id="diagnose">How to diagnose it</h2>
+      <div class="amFlow"><div class="amStep"><div class="amStepHead"><span class="amStepNum">1</span></div><h3 class="amStepTitle">Find the full node</h3><p class="amStepBody">Run <code>GET _cat/allocation?v</code> to see <code>disk.percent</code>, <code>disk.used</code>, and <code>disk.avail</code> for every node. The one above 95% owns the incident.</p></div><div class="amStep"><div class="amStepHead"><span class="amStepNum">2</span></div><h3 class="amStepTitle">Confirm the block</h3><p class="amStepBody">Run <code>GET _all/_settings/index.blocks.read_only_allow_delete</code>. A value of <code>true</code> confirms the flood-stage block was applied.</p></div><div class="amStep"><div class="amStepHead"><span class="amStepNum">3</span></div><h3 class="amStepTitle">See what is using space</h3><p class="amStepBody">Run <code>GET _cat/indices?v&s=store.size:desc</code> to find the largest indices, and check for old or duplicate indices safe to delete.</p></div><div class="amStep"><div class="amStepHead"><span class="amStepNum">4</span></div><h3 class="amStepTitle">Check for custom watermarks</h3><p class="amStepBody">Run <code>GET _cluster/settings?include_defaults=true&flat_settings=true</code> and inspect the <code>cluster.routing.allocation.disk.watermark.*</code> values in case they were changed.</p></div></div>
+
+      <h2 class="sectionHead" id="causes">Common causes and fixes</h2>
+      <div class="searchIssueGrid"><div class="searchIssueCard"><h3 class="searchIssueTerm">Unbounded index growth</h3><p class="searchIssueDesc">Logs or metrics indices grow forever with no rollover or retention.</p><p class="searchIssueAlert"><strong>Fix:</strong> Adopt an ILM policy that rolls over by size or age and deletes old indices.</p></div><div class="searchIssueCard"><h3 class="searchIssueTerm">Undersized data volume</h3><p class="searchIssueDesc">The PersistentVolume is simply too small for the workload.</p><p class="searchIssueAlert"><strong>Fix:</strong> Expand the PVC (if the StorageClass allows) or add data nodes to spread shards.</p></div><div class="searchIssueCard"><h3 class="searchIssueTerm">Oversized shards or too many replicas</h3><p class="searchIssueDesc">Large shards and extra replicas multiply on-disk footprint.</p><p class="searchIssueAlert"><strong>Fix:</strong> Right-size shards (tens of GB each) and review replica count for the index.</p></div><div class="searchIssueCard"><h3 class="searchIssueTerm">Merge and translog overhead</h3><p class="searchIssueDesc">Segment merges and translog need free headroom to operate.</p><p class="searchIssueAlert"><strong>Fix:</strong> Keep 15 to 25% free; do not run data nodes near the watermarks by design.</p></div><div class="searchIssueCard"><h3 class="searchIssueTerm">One hot node</h3><p class="searchIssueDesc">Uneven allocation fills a single node while others have room.</p><p class="searchIssueAlert"><strong>Fix:</strong> Check allocation balance; the high watermark should relocate shards, so investigate why it did not.</p></div></div>
+
+      <h2 class="sectionHead" id="fix">Fix it step by step</h2>
+      <p class="bodyText">Recover in order: create headroom, verify you are under the watermark, then clear the block. Never clear the block first.</p>
+      <pre class="codeBlock copyableCode"><code># 1. Free space: delete a confirmed-retired index (or expand capacity)
+DELETE /logs-2026.05
+
+# 2. Confirm the node falls below the high watermark
+GET _cat/allocation?v
+GET _cluster/health
+
+# 3. Current versions normally remove the block automatically.
+# If it remains after disk is healthy, clear it explicitly:
+PUT */_settings?expand_wildcards=all
+{ &quot;index.blocks.read_only_allow_delete&quot;: null }
+
+# 4. Confirm writes and relocation recover
+GET _cat/recovery?v&amp;active_only=true
+GET _cluster/health?wait_for_status=yellow&amp;timeout=120s</code></pre>
+      <p class="bodyText">Do not permanently raise watermarks to hide a capacity problem. Elastic recommends the defaults for most clusters; add capacity, reduce retained data, or correct shard sizing instead.</p>
+
+      <h2 class="sectionHead" id="prevent">Prevent it from recurring</h2>
+      <p class="bodyText">The durable fix is retention plus headroom. Use Index Lifecycle Management to roll over indices by size or age and delete them on schedule, so no index grows without bound.</p>
+      <pre class="codeBlock copyableCode"><code>PUT _ilm/policy/logs-policy
+{
+  &quot;policy&quot;: {
+    &quot;phases&quot;: {
+      &quot;hot&quot;:    { &quot;actions&quot;: { &quot;rollover&quot;: { &quot;max_primary_shard_size&quot;: &quot;50gb&quot;, &quot;max_age&quot;: &quot;7d&quot; } } },
+      &quot;delete&quot;: { &quot;min_age&quot;: &quot;30d&quot;, &quot;actions&quot;: { &quot;delete&quot;: {} } }
+    }
+  }
+}</code></pre>
+      <p class="bodyText">Then size data volumes so nodes sit comfortably under the low watermark during normal operation, and alert on <code>disk.percent</code> crossing 80% so you act before the flood stage ever triggers.</p>
+
+      <h2 class="sectionHead" id="automate">Detect and recover automatically with AlertMend</h2>
+      <p class="bodyText">A full disk on one data node becomes a cluster-wide write outage in minutes. AlertMend watches disk usage and the read-only block across your Elasticsearch pods and connects them to the underlying volume and recent index growth.</p>
+      <div class="incidentTrace" aria-label="Illustrative AlertMend incident workflow">
+        <div class="incidentTraceHead">
+          <div><span class="incidentTraceEyebrow">ILLUSTRATIVE INCIDENT TRACE</span><strong>Disk watermark → affected indices → guarded recovery</strong></div>
+          <small>Example workflow using telemetry from your connected Elasticsearch and Kubernetes environment—not a customer result.</small>
+        </div>
+        <div class="incidentTraceRows"><div class="incidentTraceRow"><span>Signal</span><p><code>disk.percent</code> crosses the high watermark on <code>es-data-2</code>; ingest latency rises.</p></div><div class="incidentTraceRow"><span>Correlation</span><p>The fastest-growing index and its PersistentVolume are attached to the same node; the last ingest change is included.</p></div><div class="incidentTraceRow"><span>Decision</span><p>AlertMend recommends capacity or an ILM-safe deletion and explains why clearing the block first is unsafe.</p></div><div class="incidentTraceRow"><span>Verification</span><p>After the approved action, disk falls below the high watermark, writes succeed, and relocation trends back to zero.</p></div></div>
+        <p class="incidentTraceGuardrail"><strong>Enterprise guardrail:</strong> Index deletion and volume changes require explicit approval. Read-only diagnosis and post-action verification can run automatically in managed or self-hosted deployments.</p>
+      </div>
+      <div class="alertmendMethod"><div><span>1</span><strong>Detect</strong><p>Catch a node crossing the high or flood-stage watermark and the read-only block being applied, before writes fail cluster-wide.</p></div><div><span>2</span><strong>Correlate</strong><p>Tie the full node to its PersistentVolume, the fastest-growing indices, and recent ingest changes.</p></div><div><span>3</span><strong>Explain</strong><p>Report which node, which watermark, and which indices are driving the fill, with the exact remediation.</p></div><div><span>4</span><strong>Recover safely</strong><p>Run an approved runbook, roll or delete per ILM, expand the volume, then clear the read-only block and verify writes resume.</p></div></div>
+      <p class="bodyText productDisclosure"><strong>Deployment control:</strong> AlertMend runs as a managed service or self-hosted, so cluster telemetry and remediation stay inside your environment. Every command in this guide works without AlertMend.</p>
+
+      <h2 class="sectionHead" id="sources">Primary sources and scope</h2>
+      <ul class="sourceList"><li><a href="https://www.elastic.co/docs/troubleshoot/elasticsearch/fix-watermark-errors" target="_blank" rel="noopener noreferrer">Elasticsearch: fix watermark errors</a> — defines default thresholds, automatic block removal, monitoring, temporary relief, and durable recovery.</li><li><a href="https://www.elastic.co/docs/troubleshoot/elasticsearch/fix-data-node-out-of-disk" target="_blank" rel="noopener noreferrer">Elasticsearch: fix a data node out of disk</a> — the two durable paths: increase capacity or reduce retained data.</li><li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index-lifecycle-management.html" target="_blank" rel="noopener noreferrer">Elasticsearch: Index Lifecycle Management</a> — rollover and delete phases that prevent unbounded index growth.</li></ul>
+      <div class="reviewPolicy"><strong>Method and disclosure:</strong> Every setting and threshold above is tied to the official Elasticsearch documentation and linked in Primary sources. Defaults and APIs change between versions, so confirm against the version you run. AlertMend publishes this guide and may benefit if readers evaluate its product.</div>
+
+      <h2 class="sectionHead" id="faq">FAQ</h2>
+      <div class="faqList"><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="true">How do I fix &quot;index read-only / allow delete&quot;?<svg class="faqChevron faqChevronOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer">Free disk on the affected node first and confirm usage is below the high watermark with GET _cat/allocation?v. Current Elasticsearch versions normally remove the block automatically. If it remains, set index.blocks.read_only_allow_delete to null on the affected indices.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">What are the Elasticsearch disk watermarks?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Low (default 85%) stops new shard allocation to the node; high (90%) relocates shards away; flood-stage (95%) makes indices read-only. They are set with cluster.routing.allocation.disk.watermark.low, .high, and .flood_stage.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Why did only some indices go read-only?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">The flood-stage block is applied to indices that have a shard on the node that crossed 95%, not to the whole cluster. Indices whose shards live only on healthy nodes keep accepting writes.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Should I raise the flood-stage watermark permanently?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">No. Raising it is a temporary way to buy time to delete data or add capacity. Running data nodes near 95% removes the headroom that merges and translog need and risks a 100% disk. Restore the defaults after recovery.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I stop this happening again?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Use ILM to roll over and delete indices on a schedule, size volumes so nodes stay under the low watermark, and alert at 80% disk so you act well before the flood stage.</div></div></div>
+
+      <div class="ctaBand">
+        <div class="ctaBandTitle">Catch the watermark before writes stop.</div>
+        <p class="ctaBandSub">See AlertMend tie a filling Elasticsearch volume to the index driving it and run the approved cleanup before the read-only block ever triggers.</p>
+        <div class="ctaBtnRow"><a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=elasticsearch-disk-out-of-space-incident" class="ctaBtn" target="_blank" rel="noopener noreferrer">See the disk incident runbook →</a></div>
+      </div>
+    </div>
+    <div class="promo"><p><strong>Related:</strong> <a href="/blog/optimizing-high-jvm-heap-usage-in-elasticsearch">High JVM Heap Usage</a> · <a href="/blog/elasticsearch-shard-relocation-incidents-on-kubernetes">Shard Relocation on Kubernetes</a></p></div>
+      </div>
+
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <div class="sidebar-card">
+            <div class="sidebar-card-title">Receive blog and product updates</div>
+            <form class="signup-form" id="blog-signup-form" novalidate>
+              <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
+              <button type="submit">Sign up</button>
+              <p class="signup-status" id="blog-signup-status" hidden></p>
+            </form>
+          </div>
+
+          
+          <div class="sidebar-card">
+            <div class="related-content-title">Related content</div>
+            <ul class="related-posts-list">
+              <li><a href="/blog/troubleshooting-elasticsearch-unassigned-shards-kubernetes" class="related-post-link">Elasticsearch Unassigned Shards on Kubernetes</a></li>
+              <li><a href="/blog/elasticsearch-cluster-yellow-incident-kubernetes" class="related-post-link">Elasticsearch Cluster Yellow on Kubernetes</a></li>
+              <li><a href="/blog/troubleshooting-unhealthy-elasticsearch-nodes-on-kubernetes" class="related-post-link">Unhealthy Elasticsearch Nodes on Kubernetes</a></li>
+              <li><a href="/blog/frequent-garbage-collection-issues-in-elasticsearch-for-better-performance" class="related-post-link">Frequent Garbage Collection in Elasticsearch</a></li>
+              <li><a href="/blog/debugging-kubernetes-oomkilled-exit-code-137-causes-and-solutions" class="related-post-link">Kubernetes OOMKilled: Exit Code 137</a></li>
+              <li><a href="/blog/503-no-healthy-upstream" class="related-post-link">503 No Healthy Upstream: Fix Guide</a></li>
+              <li><a href="/blog/make-error-127" class="related-post-link">Make Error 127: Command Not Found Fix</a></li>
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View all posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          
+
+          <div class="sidebar-card">
+            <div class="related-content-title">Explore AlertMend</div>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <script src="/assets/elasticsearch-disk-out-of-space-incident/script.js" defer></script>
+</body>
+</html>

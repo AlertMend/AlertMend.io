@@ -2368,6 +2368,36 @@
     "keywords": "costs, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
   },
   {
+    "slug": "elasticsearch-caching-issues",
+    "title": "Elasticsearch Caching Issues: Fix Guide",
+    "excerpt": "Fix Elasticsearch caching issues: the node query, shard request, and fielddata caches, why hit rates drop, and how to size them for fast search.",
+    "date": "2026-01-10",
+    "category": "Elasticsearch",
+    "author": "Arvind Rajpurohit",
+    "tags": [],
+    "keywords": "elasticsearch caching issues, elasticsearch query cache, shard request cache, fielddata cache, elasticsearch cache hit rate, indices.queries.cache.size, request_cache, clear cache elasticsearch, elasticsearch slow queries cache"
+  },
+  {
+    "slug": "elasticsearch-disk-out-of-space-incident",
+    "title": "Elasticsearch Disk Out of Space: Fix",
+    "excerpt": "Fix Elasticsearch disk out of space: understand the low, high, and flood-stage watermarks, clear the read-only block, free space, and prevent it recurring.",
+    "date": "2026-01-10",
+    "category": "Elasticsearch",
+    "author": "Himanshu Bansal",
+    "tags": [],
+    "keywords": "elasticsearch disk out of space, elasticsearch flood stage, elasticsearch read only allow delete, disk watermark, elasticsearch low disk watermark, index read-only, elasticsearch out of disk kubernetes, cluster.routing.allocation.disk.watermark"
+  },
+  {
+    "slug": "elasticsearch-shard-relocation-incidents-on-kubernetes",
+    "title": "Elasticsearch Shard Relocation on Kubernetes",
+    "excerpt": "Diagnose Elasticsearch shard relocation on Kubernetes: pod evictions, delayed allocation, and how to keep the cluster green through node drains and rollouts.",
+    "date": "2026-01-10",
+    "category": "Elasticsearch",
+    "author": "Himanshu Bansal",
+    "tags": [],
+    "keywords": "elasticsearch shard relocation, elasticsearch relocating shards kubernetes, unassigned shards, delayed allocation, elasticsearch pod eviction, cluster.routing.allocation.enable, elasticsearch statefulset, elasticsearch rolling restart shards"
+  },
+  {
     "slug": "elektro-dns",
     "title": "Elektro Dns Configuration And Management",
     "excerpt": "elektro dns Navigating Elektro DNS: A Comprehensive Guide for DevOps and System Monitoring In today's rapidly evolving technological landscape,...",
@@ -3635,7 +3665,7 @@
     "category": "Troubleshooting",
     "author": "AlertMend Team",
     "tags": [],
-    "keywords": "makefile error 127, make error 127, error 127, exit code 127, exit status 127, gnu make error 127 command not found, make go no such file or directory, command not found makefile"
+    "keywords": "make error 127, makefile error 127, error 127 makefile, gnu make error 127 command not found manual, exit code 127, exit status 127, make go no such file or directory, uv no such file or directory, npm error code 127, command not found makefile"
   },
   {
     "slug": "managed-kubeflow",
@@ -4116,6 +4146,16 @@
     "author": "AlertMend Team",
     "tags": [],
     "keywords": "AlertMend AI, AIOps, DevOps, Optimizing, Coredns, Plugin, Performance, 2025"
+  },
+  {
+    "slug": "optimizing-high-jvm-heap-usage-in-elasticsearch",
+    "title": "Fix High JVM Heap Usage in Elasticsearch",
+    "excerpt": "Fix high JVM heap usage in Elasticsearch: size heap correctly, cut fielddata and shard overhead, read circuit breakers, and stop the GC pressure.",
+    "date": "2026-01-10",
+    "category": "Elasticsearch",
+    "author": "Himanshu Bansal",
+    "tags": [],
+    "keywords": "elasticsearch high jvm heap, elasticsearch heap usage, jvm heap size elasticsearch, elasticsearch circuit breaker, fielddata memory, elasticsearch garbage collection, heap.percent, elasticsearch 31gb heap, reduce shard count"
   },
   {
     "slug": "optimizing-kubernetes-for-ai-driven-workloads",
@@ -6423,16 +6463,6 @@
     "keywords": "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kubernetes monitoring, Kubernetes troubleshooting, Kubernetes automation"
   },
   {
-    "slug": "elasticsearch-shard-relocation-incidents-on-kubernetes",
-    "title": "Troubleshooting Elasticsearch Shard",
-    "excerpt": "When nodes in an Elasticsearch cluster run different versions, it can lead to data inconsistency, reduced performance, and even potential downtime.",
-    "date": "2025-04-24",
-    "category": "Elasticsearch",
-    "author": "Himanshu Bansal",
-    "tags": [],
-    "keywords": "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization, Troubleshooting"
-  },
-  {
     "slug": "dns-resolution-failures-in-kubernetes",
     "title": "DNS Resolution Failures in Kubernetes",
     "excerpt": "In Kubernetes, DNS resolution is vital for enabling services and pods to communicate with each other within the cluster. **DNS resolution failures** can lead...",
@@ -6467,26 +6497,6 @@
     "title": "Managing High Number of Queued Threads",
     "excerpt": "Monitor queued threads in the Elasticsearch search thread pool: curl -s -XGET 'http://${ELASTICSEARCH_HOST}:9200/_cat/thread_pool?v' | grep -E '^search' | aw...",
     "date": "2025-04-1",
-    "category": "Elasticsearch",
-    "author": "Himanshu Bansal",
-    "tags": [],
-    "keywords": "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization"
-  },
-  {
-    "slug": "optimizing-high-jvm-heap-usage-in-elasticsearch",
-    "title": "Optimizing High JVM Heap Usage",
-    "excerpt": "High **JVM heap usage** in Elasticsearch can degrade performance, slow down indexing, and even lead to crashes if the heap memory becomes excessively full. T...",
-    "date": "2025-03-30",
-    "category": "Elasticsearch",
-    "author": "Himanshu Bansal",
-    "tags": [],
-    "keywords": "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization"
-  },
-  {
-    "slug": "elasticsearch-disk-out-of-space-incident",
-    "title": "Elasticsearch Disk Out of Space Incident",
-    "excerpt": "Learn how to troubleshoot and optimize high JVM heap usage in Elasticsearch with practical steps and commands.",
-    "date": "2025-03-28",
     "category": "Elasticsearch",
     "author": "Himanshu Bansal",
     "tags": [],
@@ -6621,16 +6631,6 @@
     "author": "Arvind Rajpurohit",
     "tags": [],
     "keywords": "Kubernetes, AlertMend AI, AIOps, DevOps, container orchestration, Kubernetes monitoring, Kubernetes troubleshooting, Kubernetes automation, Api"
-  },
-  {
-    "slug": "elasticsearch-caching-issues",
-    "title": "🚨 Elasticsearch Caching Issues",
-    "excerpt": "Elasticsearch caching issues can significantly degrade search performance and slow down response times for end-users.",
-    "date": "2025-02-14",
-    "category": "Elasticsearch",
-    "author": "Arvind Rajpurohit",
-    "tags": [],
-    "keywords": "Elasticsearch, AlertMend AI, Kubernetes, search engine, log management, data analytics, cluster management, performance optimization"
   },
   {
     "slug": "kubernetes-persistentvolumeclaim-guide",
