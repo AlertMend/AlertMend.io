@@ -5,7 +5,6 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const blogsHtmlDir = path.join(__dirname, '../dist/blogs')
 const blogDir = path.join(__dirname, '../dist/blog')
 
 // Function to fix HTML description
@@ -73,20 +72,6 @@ function fixHtmlDescription(filePath, fileName) {
 }
 
 let fixedCount = 0
-
-// Fix files in dist/blogs/
-if (fs.existsSync(blogsHtmlDir)) {
-  const htmlFiles = fs.readdirSync(blogsHtmlDir).filter(file => file.endsWith('.html'))
-  
-  htmlFiles.forEach(file => {
-    const filePath = path.join(blogsHtmlDir, file)
-    const result = fixHtmlDescription(filePath, file)
-    if (result && result.fixed) {
-      fixedCount++
-      console.log(`Fixed ${file}: ${result.oldLength} → ${result.newLength} chars`)
-    }
-  })
-}
 
 // Fix files in dist/blog/*/index.html
 if (fs.existsSync(blogDir)) {

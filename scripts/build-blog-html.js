@@ -47,23 +47,9 @@ marked.setOptions({
 // Read blog markdown files
 const blogDir = path.join(__dirname, '../public/blog')
 const outputDir = path.join(__dirname, '../dist/blog') // For directory versions (non-HTML)
-const blogsHtmlDir = path.join(__dirname, '../dist/blogs') // For HTML files
 
 /** Slugs with hand-built static HTML in public/blog/{slug}/index.html (skip MD conversion). */
 const STATIC_BLOG_SLUGS = new Set(STATIC_BLOG_SLUG_LIST)
-
-function removeStaleDistBlogsHtml(slug) {
-  if (!fs.existsSync(blogsHtmlDir)) return
-  const normalizedSlug = slug.toLowerCase().replace(/[^a-z0-9-]/g, '')
-  for (const file of fs.readdirSync(blogsHtmlDir)) {
-    if (!file.endsWith('.html')) continue
-    const fileStem = file.slice(0, -5).toLowerCase().replace(/[^a-z0-9-]/g, '')
-    if (fileStem === normalizedSlug) {
-      fs.unlinkSync(path.join(blogsHtmlDir, file))
-      console.log(`🗑 Removed stale dist/blogs/${file} (static HTML blog)`)
-    }
-  }
-}
 
 function blogPostHref(slug) {
   return `/blog/${slug}`
@@ -72,9 +58,6 @@ function blogPostHref(slug) {
 // Ensure output directories exist
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true })
-}
-if (!fs.existsSync(blogsHtmlDir)) {
-  fs.mkdirSync(blogsHtmlDir, { recursive: true })
 }
 
 // Helper function to calculate read time
@@ -181,14 +164,9 @@ markdownFiles.forEach(file => {
   const markdownPath = path.join(blogDir, file)
   const slug = file.replace('.md', '')
   if (STATIC_BLOG_SLUGS.has(slug)) {
-    removeStaleDistBlogsHtml(slug)
     console.log(`⏭ Skipping ${file} (static HTML blog)`)
     return
   }
-  const defaultFilename = `${convertSlugToHtmlFilename(slug)}.html`
-  const htmlFilename = canonicalFilenameOverrides[slug] || defaultFilename
-  // HTML version goes to /blogs/ directory
-  const htmlPath = path.join(blogsHtmlDir, htmlFilename)
   // Directory version (non-HTML) goes to /blog/ directory (keep lowercase/hyphens for React routing)
   const dirPath = path.join(outputDir, slug, 'index.html')
   
@@ -1723,13 +1701,7 @@ markdownFiles.forEach(file => {
     
         // Body markup is already included in createHTMLHead output
     
-    // Write both versions: HTML version and non-HTML version
-    // Version 1: HTML version - /blogs/htmlFilename (uses mapped filename if exists)
-    const fullHTMLHtml = createHTMLHead(`https://www.alertmend.io/blogs/${htmlFilename}`)
-    fs.writeFileSync(htmlPath, fullHTMLHtml, 'utf-8')
-    console.log(`✓ Converted ${file} → blogs/${htmlFilename}`)
-    
-    // Version 2: Non-HTML version - /blog/slug/
+    // Canonical version: /blog/slug/
     const fullHTMLClean = createHTMLHead(`https://www.alertmend.io/blog/${slug}`)
     if (!fs.existsSync(path.dirname(dirPath))) {
       fs.mkdirSync(path.dirname(dirPath), { recursive: true })
@@ -1919,4 +1891,3 @@ const blogListingHTML = `<!DOCTYPE html>
 const blogListingPath = path.join(outputDir, 'index.html')
 fs.writeFileSync(blogListingPath, blogListingHTML, 'utf-8')
 console.log(`✓ Generated blog listing page: blog/index.html`)
-

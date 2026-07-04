@@ -14,7 +14,7 @@ const generateBlogHtmlPlugin = () => {
       // This ensures HTML files are in the dist folder
       try {
         console.log('Ensuring blog HTML files are in dist...')
-        execSync('node scripts/build-blog-html.js', { stdio: 'inherit' })
+        execSync('node scripts/build-blog-html.js && node scripts/fix-html-descriptions.js', { stdio: 'inherit' })
       } catch (error) {
         console.error('Error generating blog HTML files:', error)
       }
@@ -37,4 +37,3 @@ export default defineConfig({
     manifest: true,
   },
 })
-

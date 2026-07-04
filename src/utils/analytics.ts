@@ -193,7 +193,7 @@ function getPageName(path: string): string | null {
 
   // Check if it's a blog post (remove .html extension if present)
   const cleanPath = path.replace(/\.html$/, '')
-  if (cleanPath.startsWith('/blog/') || cleanPath.startsWith('/blogs/')) {
+  if (cleanPath.startsWith('/blog/')) {
     return 'Blog Post'
   }
 

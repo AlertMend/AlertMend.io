@@ -23,7 +23,6 @@ import AlertMendVMActionsPage from './pages/docs/AlertMendVMActionsPage'
 import AboutPage from './pages/AboutPage'
 import BlogPage from './pages/BlogPage'
 import BlogPostDetailPage from './pages/BlogPostDetailPage'
-import LegacyBlogPage from './pages/LegacyBlogPage'
 import CareersPage from './pages/CareersPage'
 import ContactPage from './pages/ContactPage'
 import PartnersPage from './pages/PartnersPage'
@@ -89,8 +88,6 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPostDetailPage />} />
-          <Route path="/blogs/:slug.html" element={<BlogPostDetailPage />} />
-          <Route path="/blogs/*" element={<LegacyBlogPage />} />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/partners" element={<PartnersPage />} />
