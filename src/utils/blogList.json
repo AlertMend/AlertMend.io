@@ -1,5 +1,15 @@
 [
   {
+    "slug": "autoscaling-v2-horizontalpodautoscaler",
+    "title": "Kubernetes HPA v2: Configuration & Fixes",
+    "excerpt": "Configure Kubernetes HPA v2 correctly, understand its replica formula, and diagnose unknown metrics, maxReplicas, pending pods, and stuck scale-downs.",
+    "date": "2026-07-04",
+    "category": "Kubernetes",
+    "author": "AlertMend Team",
+    "tags": [],
+    "keywords": "Kubernetes HPA v2, HorizontalPodAutoscaler, HPA not scaling, HPA unknown metrics, HPA formula, autoscaling v2 example, Kubernetes autoscaling troubleshooting, custom metrics HPA"
+  },
+  {
     "slug": "ai-agent-observability-in-production",
     "title": "AI Agent Observability in Production",
     "excerpt": "Keep AI agents alive in production: catch crashes, out-of-memory, and hangs, with AI root-cause analysis and auto-recovery from AlertMend.",
@@ -1566,16 +1576,6 @@
     "author": "AlertMend Team",
     "tags": [],
     "keywords": "automating, kubernetes, AlertMend AI, AIOps, DevOps"
-  },
-  {
-    "slug": "autoscaling-v2-horizontalpodautoscaler",
-    "title": "Kubernetes HPA V2: Complete HPA Guide",
-    "excerpt": "Complete guide to Kubernetes HorizontalPodAutoscaler (HPA) v2 with configuration examples, custom metrics, scaling strategies, and production best practices.",
-    "date": "2026-01-10",
-    "category": "Kubernetes",
-    "author": "AlertMend Team",
-    "tags": [],
-    "keywords": "horizontalpodautoscaler, HPA v2, kubernetes autoscaling, pod autoscaling, custom metrics autoscaling, kubernetes scaling, resource-based scaling, AlertMend AI, AIOps, DevOps, cloud native"
   },
   {
     "slug": "avoiding-kubernetes-dns-vulnerabilities-best-practices-for-internal-network-security",

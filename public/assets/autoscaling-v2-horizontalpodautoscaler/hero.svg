@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Kubernetes HPA v2 control loop</title>
+  <desc id="desc">Metric observation flows through replica calculation and scaling to ready pods.</desc>
+  <rect width="1200" height="630" fill="#fafafa"/>
+  <circle cx="106" cy="88" r="180" fill="#7c3aed" opacity=".08"/>
+  <text x="76" y="95" fill="#7c3aed" font-family="Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="3">KUBERNETES HPA V2</text>
+  <text x="76" y="160" fill="#09090b" font-family="Arial,sans-serif" font-size="48" font-weight="750">Metric → decision → replicas</text>
+  <text x="76" y="202" fill="#52525b" font-family="Arial,sans-serif" font-size="23">Configuration, formula, and production troubleshooting</text>
+  <g transform="translate(76 282)">
+    <rect width="235" height="154" rx="10" fill="#fff" stroke="#d4d4d8"/>
+    <text x="24" y="37" fill="#7c3aed" font-family="Arial,sans-serif" font-size="14" font-weight="700">01 · OBSERVE</text>
+    <text x="24" y="86" fill="#09090b" font-family="Arial,sans-serif" font-size="34" font-weight="700">CPU 140%</text>
+    <text x="24" y="119" fill="#71717a" font-family="Arial,sans-serif" font-size="17">target 70%</text>
+  </g>
+  <path d="M329 359h55" stroke="#a78bfa" stroke-width="3"/><path d="m377 350 12 9-12 9" fill="none" stroke="#a78bfa" stroke-width="3"/>
+  <g transform="translate(405 282)">
+    <rect width="310" height="154" rx="10" fill="#18181b"/>
+    <text x="24" y="37" fill="#c4b5fd" font-family="Arial,sans-serif" font-size="14" font-weight="700">02 · CALCULATE</text>
+    <text x="24" y="85" fill="#fff" font-family="monospace" font-size="25">ceil(3 × 140 ÷ 70)</text>
+    <text x="24" y="123" fill="#a1a1aa" font-family="Arial,sans-serif" font-size="17">desired replicas = 6</text>
+  </g>
+  <path d="M733 359h55" stroke="#a78bfa" stroke-width="3"/><path d="m781 350 12 9-12 9" fill="none" stroke="#a78bfa" stroke-width="3"/>
+  <g transform="translate(809 282)">
+    <rect width="315" height="154" rx="10" fill="#f5f3ff" stroke="#8b5cf6"/>
+    <text x="24" y="37" fill="#6d28d9" font-family="Arial,sans-serif" font-size="14" font-weight="700">03 · REALIZE</text>
+    <g transform="translate(24 66)">
+      <rect width="48" height="48" rx="7" fill="#7c3aed"/><rect x="60" width="48" height="48" rx="7" fill="#7c3aed"/><rect x="120" width="48" height="48" rx="7" fill="#7c3aed"/>
+      <rect x="180" width="48" height="48" rx="7" fill="#7c3aed"/><rect x="240" width="48" height="48" rx="7" fill="#7c3aed"/>
+    </g>
+    <text x="24" y="137" fill="#52525b" font-family="Arial,sans-serif" font-size="16">6 replicas · verify Ready</text>
+  </g>
+  <rect x="76" y="493" width="1048" height="69" rx="9" fill="#fff" stroke="#e4e4e7"/>
+  <circle cx="108" cy="528" r="8" fill="#7c3aed"/>
+  <text x="132" y="536" fill="#27272a" font-family="Arial,sans-serif" font-size="20">Find the broken boundary: metric · recommendation · workload · scheduler · capacity</text>
+</svg>
