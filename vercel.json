@@ -28,6 +28,10 @@
       "destination": "/blog/ai-agent-observability-in-production/index.html"
     },
     {
+      "source": "/blog/autoscaling-v2-horizontalpodautoscaler",
+      "destination": "/blog/autoscaling-v2-horizontalpodautoscaler/index.html"
+    },
+    {
       "source": "/blog/best-1-click-logging-and-metrics-tools",
       "destination": "/blog/best-1-click-logging-and-metrics-tools/index.html"
     },

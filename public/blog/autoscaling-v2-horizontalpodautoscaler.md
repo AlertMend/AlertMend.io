@@ -1,10 +1,10 @@
 ---
-title: "Kubernetes HPA V2: Complete HPA Guide"
-excerpt: "Complete guide to Kubernetes HorizontalPodAutoscaler (HPA) v2 with configuration examples, custom metrics, scaling strategies, and production best practices."
-date: "2026-01-10"
+title: "Kubernetes HPA v2: Configuration & Fixes"
+excerpt: "Configure Kubernetes HPA v2 correctly, understand its replica formula, and diagnose unknown metrics, maxReplicas, pending pods, and stuck scale-downs."
+date: "2026-07-04"
 category: "Kubernetes"
 author: "AlertMend Team"
-keywords: "horizontalpodautoscaler, HPA v2, kubernetes autoscaling, pod autoscaling, custom metrics autoscaling, kubernetes scaling, resource-based scaling, AlertMend AI, AIOps, DevOps, cloud native"
+keywords: "Kubernetes HPA v2, HorizontalPodAutoscaler, HPA not scaling, HPA unknown metrics, HPA formula, autoscaling v2 example, Kubernetes autoscaling troubleshooting, custom metrics HPA"
 ---
 
 # Kubernetes HPA V2: Complete HorizontalPodAutoscaler Guide
