@@ -84,6 +84,13 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- Blog Post: incident-io-alternatives -->
+  <url>
+    <loc>https://www.alertmend.io/blog/incident-io-alternatives</loc>
+    <lastmod>2026-07-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- Blog Post: pagerduty-alternatives -->
   <url>
     <loc>https://www.alertmend.io/blog/pagerduty-alternatives</loc>

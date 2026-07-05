@@ -68,6 +68,10 @@
       "destination": "/blog/gpu-reliability-for-llm-workloads/index.html"
     },
     {
+      "source": "/blog/incident-io-alternatives",
+      "destination": "/blog/incident-io-alternatives/index.html"
+    },
+    {
       "source": "/blog/keep-ai-agents-online",
       "destination": "/blog/keep-ai-agents-online/index.html"
     },

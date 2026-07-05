@@ -135,6 +135,17 @@
     .decisionPath { display: flex; gap: 9px; align-items: flex-start; margin-top: 13px; padding: 13px 14px 0; border-top: 1px solid #e4e4e7; color: #52525b; font-size: .86rem; line-height: 1.55; }
     .decisionPath strong { flex: 0 0 auto; color: #18181b; }
     @media (max-width: 560px) { .quickDecision { padding: 16px; } .quickDecisionHead, .decisionPath { display: block; } .quickDecisionHead p { margin-top: 5px; } .decisionPath strong { display: block; margin-bottom: 3px; } }
+    .proofGrid { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 1.25rem 0 2rem; }
+    @media (min-width: 760px) { .proofGrid { grid-template-columns: repeat(3,1fr); } }
+    .proofCard { display: flex; flex-direction: column; min-height: 100%; padding: 20px; border: 1px solid #e4e4e7; border-radius: 10px; background: #fff; box-shadow: 0 8px 24px rgba(9,9,11,.045); }
+    .proofCompany { color: #18181b; font-size: .82rem; font-weight: 800; }
+    .proofStack { margin-top: 3px; color: #71717a; font-size: .72rem; line-height: 1.45; }
+    .proofMetric { margin: 18px 0 4px; color: #6d28d9; font-size: 1.55rem; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
+    .proofMetricLabel { color: #52525b; font-size: .78rem; font-weight: 700; }
+    .proofCard p { margin: 15px 0; color: #52525b; font-size: .85rem; line-height: 1.65; }
+    .proofLink { display: inline-flex; margin-top: auto; color: #18181b; font-size: .78rem; font-weight: 800; text-decoration: none; }
+    .proofLink:hover { color: #6d28d9; }
+    .proofNote { margin-top: -1rem; color: #71717a; font-size: .78rem; line-height: 1.55; }
     .codeCopyButton { position:absolute; }
 </style>
 </head>
@@ -251,6 +262,8 @@
         <p>Choose PagerDuty when mature mobile paging, integration breadth, and complex enterprise incident operations dominate the requirement. Shortlist AlertMend when the business outcome is to prevent repeatable infrastructure failures from reaching on-call: diagnose first, recover under policy, verify health, then escalate with context when automation should not—or cannot—act.</p>
         <p class="recommendationNext"><strong>Practical next step</strong><span>Run AlertMend against the three alerts that wake your team most often. Measure pages avoided, time to a useful root cause, successful recoveries, and escalation reliability before considering a wider migration.</span></p>
       </aside>
+
+      
 
       
 
