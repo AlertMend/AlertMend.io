@@ -77,6 +77,20 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Blog Post: datadog-alternatives -->
+  <url>
+    <loc>https://www.alertmend.io/blog/datadog-alternatives</loc>
+    <lastmod>2026-07-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: pagerduty-alternatives -->
+  <url>
+    <loc>https://www.alertmend.io/blog/pagerduty-alternatives</loc>
+    <lastmod>2026-07-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- Blog Post: autoscaling-v2-horizontalpodautoscaler -->
   <url>
     <loc>https://www.alertmend.io/blog/autoscaling-v2-horizontalpodautoscaler</loc>

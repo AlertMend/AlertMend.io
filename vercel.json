@@ -40,6 +40,10 @@
       "destination": "/blog/best-ai-agent-observability-tools/index.html"
     },
     {
+      "source": "/blog/datadog-alternatives",
+      "destination": "/blog/datadog-alternatives/index.html"
+    },
+    {
       "source": "/blog/elasticsearch-caching-issues",
       "destination": "/blog/elasticsearch-caching-issues/index.html"
     },
@@ -126,6 +130,10 @@
     {
       "source": "/blog/optimizing-high-jvm-heap-usage-in-elasticsearch",
       "destination": "/blog/optimizing-high-jvm-heap-usage-in-elasticsearch/index.html"
+    },
+    {
+      "source": "/blog/pagerduty-alternatives",
+      "destination": "/blog/pagerduty-alternatives/index.html"
     },
     {
       "source": "/blog/reduce-mttr-for-ai-agents",

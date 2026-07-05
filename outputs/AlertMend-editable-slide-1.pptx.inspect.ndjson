@@ -1,0 +1,7 @@
+{"kind":"deck","id":"pr/kuwbxi","name":"Deck"}
+{"kind":"layout","layoutId":"bf3d637b-64ef-415e-9db6-40e2eea35c19","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"b5056d8a-60f1-42f3-b53f-41717c229887","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/0n21zr","slide":1,"title":"AI-Powered Observability and","textShapes":1}
+{"kind":"textbox","id":"sh/0rqd4vmt","slide":1,"name":"unified-headline","text":"AI-Powered Observability and\nAutomation","textPreview":"AI-Powered Observability and | Automation","textChars":39,"textLines":2,"bbox":[160,345,1120,220]}
+{"kind":"image","id":"im/il0rqd4v","slide":1,"name":"","alt":"AlertMend logo","bbox":[500,145,440,148]}
+{"kind":"notes","id":"nt/0n21zr","slide":1,"text":""}

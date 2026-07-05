@@ -1,5 +1,33 @@
 [
   {
+    "slug": "datadog-alternatives",
+    "title": "Best Datadog Alternatives (2026)",
+    "excerpt": "Compare Datadog alternatives for APM, OpenTelemetry, self-hosting, pricing, and remediation: Grafana, New Relic, SigNoz, Elastic, Better Stack, and AlertMend.",
+    "date": "2026-07-05",
+    "category": "AIOps",
+    "author": "AlertMend Team",
+    "tags": [
+      "AIOps",
+      "Observability",
+      "Comparison"
+    ],
+    "keywords": "datadog alternatives, datadog alternative, cheaper than datadog, datadog too expensive, datadog vs grafana, open source datadog alternative, datadog competitors, self hosted observability, auto remediation, AlertMend"
+  },
+  {
+    "slug": "pagerduty-alternatives",
+    "title": "Best PagerDuty Alternatives (2026)",
+    "excerpt": "Compare PagerDuty alternatives for on-call, automation, and pricing: incident.io, Rootly, FireHydrant, Grafana IRM, Squadcast, Better Stack, and AlertMend.",
+    "date": "2026-07-05",
+    "category": "AIOps",
+    "author": "AlertMend Team",
+    "tags": [
+      "AIOps",
+      "Observability",
+      "Comparison"
+    ],
+    "keywords": "pagerduty alternatives, pagerduty alternative, cheaper than pagerduty, pagerduty competitors, opsgenie alternative, incident.io, grafana oncall, reduce alert fatigue, auto remediation, on call tool, AlertMend"
+  },
+  {
     "slug": "autoscaling-v2-horizontalpodautoscaler",
     "title": "Kubernetes HPA v2: Configuration & Fixes",
     "excerpt": "Configure Kubernetes HPA v2 correctly, understand its replica formula, and diagnose unknown metrics, maxReplicas, pending pods, and stuck scale-downs.",
