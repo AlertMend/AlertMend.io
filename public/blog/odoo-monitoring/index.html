@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odoo Monitoring and Auto-Recovery | AlertMend AI</title>
+  <meta name="description" content="Monitor Odoo, PostgreSQL, workers, cron jobs, storage, and proxies, then safely auto-recover common failures with checks, runbooks, and verification.">
+  <meta name="keywords" content="Odoo monitoring, Odoo health check, Odoo uptime monitoring, Odoo auto recovery, Odoo PostgreSQL monitoring, Odoo workers, Odoo cron monitoring">
+  <meta name="author" content="Dinesh Agrawal">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://www.alertmend.io/blog/odoo-monitoring">
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.alertmend.io/blog/odoo-monitoring">
+  <meta property="og:title" content="Odoo Monitoring and Auto-Recovery">
+  <meta property="og:description" content="Monitor Odoo, PostgreSQL, workers, cron jobs, storage, and proxies, then safely auto-recover common failures with checks, runbooks, and verification.">
+  <meta property="og:image" content="https://www.alertmend.io/assets/odoo-monitoring/hero.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Odoo Monitoring and Auto-Recovery">
+  <meta name="twitter:description" content="Monitor Odoo, PostgreSQL, workers, cron jobs, storage, and proxies, then safely auto-recover common failures with checks, runbooks, and verification.">
+  <meta name="twitter:image" content="https://www.alertmend.io/assets/odoo-monitoring/hero.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Odoo Monitoring and Auto-Recovery","description":"Monitor Odoo, PostgreSQL, workers, cron jobs, storage, and proxies, then safely auto-recover common failures with checks, runbooks, and verification.","image":"https://www.alertmend.io/assets/odoo-monitoring/hero.png","datePublished":"2026-07-06","dateModified":"2026-07-06","author":{"@type":"Person","name":"Dinesh Agrawal","jobTitle":"Co-Founder at AlertMend.io","url":"https://www.linkedin.com/in/dineshagrawal85/","sameAs":["https://www.linkedin.com/in/dineshagrawal85/"]},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/odoo-monitoring"},"proficiencyLevel":"Intermediate","dependencies":"Odoo 17–19 self-hosted, PostgreSQL, and a reverse proxy or container platform"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the best Odoo monitoring tool?","acceptedAnswer":{"@type":"Answer","text":"The best choice depends on the failure you need to catch. An Odoo module can expose cron and application context, an external uptime monitor can detect a complete outage, and infrastructure monitoring can explain host or PostgreSQL failures. For self-hosted Odoo, the strongest design combines outside-in checks with runtime evidence and governed recovery instead of relying on one green dashboard."}},{"@type":"Question","name":"What should I monitor in Odoo?","acceptedAnswer":{"@type":"Answer","text":"Monitor the customer journey, reverse proxy, Odoo process and workers, PostgreSQL readiness and saturation, CPU and memory, disk and inode capacity, filestore access, cron freshness, certificate expiry, error rates, and backup restorability. A green process alone does not prove that users can log in or complete business operations."}},{"@type":"Question","name":"Why is my Odoo instance slow?","acceptedAnswer":{"@type":"Answer","text":"Odoo slowness usually traces to the database or the workers: slow PostgreSQL queries and missing indexes, autovacuum falling behind, too few workers for the traffic, or workers being recycled under memory pressure. Start by checking PostgreSQL pg_stat_activity for long-running queries, your worker count against concurrent users, and host CPU and memory. A slow page with healthy workers almost always points at the database."}},{"@type":"Question","name":"How many workers should I configure in Odoo?","acceptedAnswer":{"@type":"Answer","text":"A common starting point is (CPU cores x 2) + 1 HTTP workers, with cron workers set separately via max_cron_threads. Each worker serves one request at a time, so too few workers make requests queue under load, while too many exhaust RAM and PostgreSQL connections. Tune limit_memory_hard, limit_time_cpu, and limit_request alongside the worker count."}},{"@type":"Question","name":"How do I fix \"FATAL: sorry, too many clients already\" in Odoo?","acceptedAnswer":{"@type":"Answer","text":"That PostgreSQL error means Odoo opened more connections than max_connections allows, usually because HTTP workers, cron, and longpolling together exceed the limit. Reduce the Odoo worker count or raise PostgreSQL max_connections, and for high worker counts put a pooler such as PgBouncer in front of the database. Size max_connections with headroom, since each worker can hold more than one connection."}},{"@type":"Question","name":"Why is Odoo returning a 502 or 503 error?","acceptedAnswer":{"@type":"Answer","text":"A 502 or 503 in front of Odoo almost always means the reverse proxy has no healthy backend: the Odoo service is down, workers are crash-looping on the memory limit, or the instance is overloaded. Confirm the Odoo service is running, check the log for workers killed at limit_memory_hard, and verify nginx is proxying to the correct ports (8069 for web, 8072 for longpolling)."}},{"@type":"Question","name":"Where are Odoo log files located?","acceptedAnswer":{"@type":"Answer","text":"Odoo logs to stdout by default, or to the file set by logfile in odoo.conf, commonly /var/log/odoo/odoo-server.log on a package install. In Docker, read them with docker logs on the Odoo container. Raise log_level to info or debug in odoo.conf when you need more detail while diagnosing an issue."}},{"@type":"Question","name":"Why is Odoo live chat or longpolling not working?","acceptedAnswer":{"@type":"Answer","text":"Discuss, notifications, and live chat depend on the longpolling and websocket port, 8072 by default. When they break, the reverse proxy is usually not forwarding /longpolling and /websocket to port 8072, or the longpolling worker is not running. Check the nginx location blocks and confirm Odoo is in multiprocessing mode with workers enabled, since longpolling needs it."}},{"@type":"Question","name":"Why does Odoo memory usage keep growing?","acceptedAnswer":{"@type":"Answer","text":"Odoo workers accumulate memory as they serve requests, which is why limit_memory_soft and limit_memory_hard exist to recycle a worker before it grows too large. A steady climb usually points at a heavy report, a large import, or a leaking custom module. If workers are being killed at limit_memory_hard under normal load, raise the limits or add workers and RAM."}},{"@type":"Question","name":"How do I restart the Odoo service?","acceptedAnswer":{"@type":"Answer","text":"On a systemd install use sudo systemctl restart odoo, matching the service name you configured, and in Docker use docker restart or docker compose restart on the Odoo service. After a restart, wait for workers to become ready and check the login page rather than assuming an up process means users can work. AlertMend can run this as an approved runbook and verify the user-facing endpoint before closing the incident."}},{"@type":"Question","name":"How do I monitor Odoo POS?","acceptedAnswer":{"@type":"Answer","text":"Odoo POS runs partly in the browser and syncs orders back to the server, so monitor the POS and web workers, the longpolling endpoint, and the payment terminal integration, and alert on failed or delayed order sync. In-store sales can stop when the POS backend or its sync is degraded even while the main website looks healthy."}},{"@type":"Question","name":"How do I monitor Odoo e-commerce and website?","acceptedAnswer":{"@type":"Answer","text":"Check the storefront and checkout URLs from outside, the product and stock sync between website and inventory, the longpolling updates, and payment gateway callbacks. A working homepage does not prove customers can add to cart, pay, and have stock decrement correctly, so test the full purchase path, not just uptime."}},{"@type":"Question","name":"Does Odoo have a built-in health-check endpoint?","acceptedAnswer":{"@type":"Answer","text":"Do not assume every supported Odoo deployment exposes a database-aware health endpoint. A reliable design uses a lightweight HTTP check, a PostgreSQL readiness check, and, when practical, a small custom authenticated or application-specific probe that verifies the business path you actually depend on."}},{"@type":"Question","name":"Can AlertMend restart Odoo automatically?","acceptedAnswer":{"@type":"Answer","text":"Yes, on connected VMs or containers where you configure an approved runbook. The safe pattern is to confirm the failure, check PostgreSQL and disk state, restart only the affected Odoo service, wait for readiness, and verify the user-facing endpoint before closing the incident."}},{"@type":"Question","name":"Can every Odoo failure be auto-fixed?","acceptedAnswer":{"@type":"Answer","text":"No. Process crashes, some worker hangs, dependency startup races, and controlled disk housekeeping are often good automation candidates. Database corruption, failed migrations, unknown custom-module errors, and destructive storage operations should stop for human review."}},{"@type":"Question","name":"How do I monitor Odoo in Docker?","acceptedAnswer":{"@type":"Answer","text":"Add health checks for PostgreSQL and Odoo, persist both PostgreSQL data and the Odoo data directory, use service_healthy dependency conditions, set a bounded restart policy, and monitor the public URL independently of container state."}},{"@type":"Question","name":"How do I monitor Odoo cron jobs?","acceptedAnswer":{"@type":"Answer","text":"Track the expected completion time of critical scheduled actions, alert on missed or repeatedly failing runs, and inspect Odoo logs. Odoo 19 documents that repeated cron errors can cause executions to be skipped and eventually the scheduled action to be deactivated."}},{"@type":"Question","name":"Is the guide limited to Odoo 19?","acceptedAnswer":{"@type":"Answer","text":"The architecture and monitoring model also apply to many self-hosted Odoo 17 and 18 deployments, but command-line defaults and behavior can differ. Verify every limit and option against the documentation for your deployed major version."}},{"@type":"Question","name":"Does this cover Odoo Online and Odoo.sh?","acceptedAnswer":{"@type":"Answer","text":"The deepest host, process, PostgreSQL, and runbook controls apply to self-hosted Odoo on VMs, Docker, or Kubernetes. Odoo Online and Odoo.sh abstract more of the infrastructure, so external journey checks, application signals, and escalation remain useful while host-level remediation may not be available."}}]}</script>
+  <link rel="stylesheet" href="/assets/make-error-127/styles.css">
+  <link rel="stylesheet" href="/assets/odoo-monitoring/styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: #1f2937; background: #fff; -webkit-font-smoothing: antialiased; }
+    .navbar { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(229,231,235,.8); z-index: 50; }
+    .navbar-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .navbar-content { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    .navbar-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+    .navbar-logo-icon { height: 32px; width: auto; }
+    .navbar-links { display: none; align-items: center; gap: 4px; }
+    @media (min-width: 1024px) { .navbar-links { display: flex; } }
+    .navbar-link { padding: 6px 12px; font-size: 0.875rem; font-weight: 500; color: #3f3f46; text-decoration: none; border-radius: 6px; }
+    .navbar-link:hover { color: #09090b; background: #f4f4f5; }
+    .navbar-link.active { color: #09090b; background: #fafafa; }
+    .navbar-actions { display: none; align-items: center; gap: 10px; margin-left: 16px; padding-left: 16px; border-left: 1px solid #e5e7eb; }
+    @media (min-width: 1024px) { .navbar-actions { display: flex; } }
+    .navbar-button { padding: 8px 16px; font-size: 0.875rem; font-weight: 600; border-radius: 999px; text-decoration: none; }
+    .navbar-button-primary { background: #09090b; color: #fff; }
+    .navbar-button-secondary { color: #3f3f46; }
+    .main-container { max-width: 1280px; margin: 0 auto; padding: 96px 24px 64px; }
+    .content-wrapper { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media (min-width: 1024px) {
+      .content-wrapper { grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
+    }
+    .main-col { min-width: 0; max-width: 820px; }
+    @media (min-width: 1024px) { .main-col { max-width: none; } }
+    .sidebar { display: none; }
+    @media (min-width: 1024px) { .sidebar { display: block; } }
+    .sidebar-content { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card { background: #fafafa; border-radius: 8px; padding: 24px; border: 1px solid #e4e4e7; }
+    .sidebar-card-title { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
+    .signup-form { display: flex; flex-direction: column; gap: 12px; }
+    .signup-form input { width: 100%; padding: 10px 16px; border-radius: 6px; border: 1px solid #d4d4d8; font-size: 1rem; background: #fff; color: #09090b; }
+    .signup-form input:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2); }
+    .signup-form button { width: 100%; padding: 10px 12px; background: #09090b; color: #fff; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; }
+    .signup-form button:hover { background: #27272a; }
+    .signup-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .signup-status { font-size: 0.875rem; font-weight: 500; margin: 0; }
+    .signup-status.success { color: #047857; }
+    .signup-status.error { color: #dc2626; }
+    .related-content-title { font-size: 11px; font-weight: 700; color: #71717a; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 16px; }
+    .related-posts-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .related-post-link { color: #3f3f46; text-decoration: none; font-size: 0.875rem; line-height: 1.5; display: block; transition: color 0.15s; }
+    .related-post-link:hover { color: #7c3aed; }
+    .view-more-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 16px; color: #7c3aed; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
+    .view-more-link:hover { color: #6d28d9; }
+    .article-header { margin-bottom: 2rem; }
+    .article-header h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; color: #09090b; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .author-info { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: #09090b; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+    .author-name { font-weight: 600; color: #111827; }
+    .author-meta { font-size: 0.875rem; color: #6b7280; }
+    .category-tag { display: inline-block; padding: 4px 10px; background: #ede9fe; color: #5b21b6; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .promo { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; font-size: 1.0625rem; color: #374151; }
+    .promo a { color: #7c3aed; font-weight: 600; }
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-content">
+        <a href="/" class="navbar-logo">
+          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon">
+        </a>
+        <div class="navbar-links">
+          <a href="/#how-it-works" class="navbar-link">How It Works</a>
+          <a href="/#solutions" class="navbar-link">Solutions</a>
+          <a href="/case-studies" class="navbar-link">Case Studies</a>
+          <a href="/blog" class="navbar-link active">Blog</a>
+          <a href="/pricing" class="navbar-link">Pricing</a>
+        </div>
+        <div class="navbar-actions">
+          <a href="https://app.alertmend.io/signup?source=blog-post&blog_slug=odoo-monitoring" class="navbar-button navbar-button-secondary">Register</a>
+          <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=odoo-monitoring" class="navbar-button navbar-button-primary" target="_blank" rel="noopener noreferrer">Book a Demo</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="main-container">
+    <div class="content-wrapper">
+      <main class="main-col">
+
+    <header class="article-header">
+      <h1>Odoo Monitoring: Keep Odoo Running with Health Checks and Auto-Recovery</h1>
+      <div class="author-info">
+        <div class="author-avatar">D</div>
+        <div>
+          <div class="author-name">Dinesh Agrawal</div>
+          <div class="author-meta">2026-07-06 · Monitoring</div>
+        </div>
+      </div>
+      <span class="category-tag">Monitoring</span>
+    </header>
+        <div class="proofBar">
+          <span class="checked"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>Checked against Odoo 19 documentation</span>
+          <span class="dot">•</span><span>Self-hosted VM, Docker, and Kubernetes</span>
+          <span class="dot">•</span><span>10 primary sources</span>
+        </div>
+
+        <article class="dl-blog odooBlog">
+          <section class="answerCard" aria-labelledby="short-answer">
+            <span class="answerEyebrow">The 60-second answer</span>
+            <h2 id="short-answer">Monitor the transaction path, not only the Odoo process.</h2>
+            <p>A production Odoo check should prove that <strong>the public URL answers, Odoo can reach PostgreSQL, workers are responsive, the filestore is writable, and critical scheduled actions are still advancing</strong>. Safe automation can recover a stopped or wedged service, handle a dependency startup race, or run approved disk housekeeping. It must verify the business path afterward and stop when the evidence points to corruption, a failed migration, or an unknown custom-module error.</p>
+          </section>
+
+          <nav class="articleToc" aria-label="On this page">
+            <strong>On this page</strong>
+            <a href="#architecture">What keeps Odoo available</a>
+            <a href="#monitor">What to monitor</a>
+            <a href="#tools">Which monitoring approach to use</a>
+            <a href="#checks">Copy-paste health checks</a>
+            <a href="#failures">Common failures and safe fixes</a>
+            <a href="#runbook">Auto-recovery runbook</a>
+            <a href="#alertmend">Odoo monitoring with AlertMend</a>
+            <a href="#by-industry">By industry</a>
+            <a href="#faq">FAQ</a>
+          </nav>
+
+          <div class="coverageNote">
+            <strong>About the “95% of failures” goal:</strong> no honest guide can guarantee a universal percentage without your incident history. Use the matrix below as a starting hypothesis, then calculate coverage from your own production incidents.
+            <span class="coverageFormula">automation coverage = safely auto-resolved recurring incidents ÷ all actionable Odoo incidents × 100</span>
+          </div>
+
+          <h2 class="sectionHead" id="architecture">What actually keeps Odoo available</h2>
+          <p class="bodyText">Odoo is not one process with one green light. A user request commonly crosses TLS and a reverse proxy, reaches an Odoo HTTP worker, queries PostgreSQL, and may read an attachment from the filestore. Background work depends on cron workers. Live Chat and websocket traffic need their own proxy path in multi-process deployments. <a href="https://www.odoo.com/documentation/19.0/administration/on_premise/deploy.html" target="_blank" rel="noopener noreferrer">Odoo’s deployment documentation</a> explicitly recommends a reverse proxy, HTTPS, multi-process mode with appropriate limits, and correct websocket routing.</p>
+          <figure class="stackFigure">
+        <svg class="odooFlow" viewBox="0 0 960 330" role="img" aria-label="AlertMend monitors the Odoo request path, diagnoses a failure, runs an approved recovery, and verifies service health.">
+          <defs>
+            <marker id="odooArrow" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#7c3aed"/></marker>
+            <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#18181b" flood-opacity=".08"/></filter>
+          </defs>
+          <text x="42" y="36" fill="#71717a" font-size="12" font-weight="800" letter-spacing="1.3">THE ODOO REQUEST PATH</text>
+          <g filter="url(#softShadow)">
+            <rect x="42" y="62" width="150" height="76" rx="10" fill="#fff" stroke="#e4e4e7"/>
+            <text x="117" y="92" text-anchor="middle" fill="#18181b" font-size="15" font-weight="800">Nginx / TLS</text>
+            <text x="117" y="114" text-anchor="middle" fill="#71717a" font-size="11">proxy + websocket</text>
+            <rect x="222" y="62" width="150" height="76" rx="10" fill="#fff" stroke="#d8b4fe"/>
+            <text x="297" y="92" text-anchor="middle" fill="#714b67" font-size="17" font-weight="850">Odoo</text>
+            <text x="297" y="114" text-anchor="middle" fill="#71717a" font-size="11">HTTP + cron workers</text>
+            <rect x="402" y="62" width="150" height="76" rx="10" fill="#fff" stroke="#e4e4e7"/>
+            <text x="477" y="92" text-anchor="middle" fill="#18181b" font-size="15" font-weight="800">PostgreSQL</text>
+            <text x="477" y="114" text-anchor="middle" fill="#71717a" font-size="11">queries + connections</text>
+            <rect x="582" y="62" width="150" height="76" rx="10" fill="#fff" stroke="#e4e4e7"/>
+            <text x="657" y="92" text-anchor="middle" fill="#18181b" font-size="15" font-weight="800">Filestore</text>
+            <text x="657" y="114" text-anchor="middle" fill="#71717a" font-size="11">attachments + reports</text>
+          </g>
+          <line class="flowLine" x1="194" y1="100" x2="218" y2="100" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#odooArrow)"/>
+          <line class="flowLine" x1="374" y1="100" x2="398" y2="100" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#odooArrow)"/>
+          <line class="flowLine" x1="554" y1="100" x2="578" y2="100" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#odooArrow)"/>
+          <g class="heartbeat" filter="url(#softShadow)">
+            <rect x="760" y="54" width="160" height="92" rx="12" fill="#faf5ff" stroke="#c4b5fd"/>
+            <circle cx="790" cy="82" r="17" fill="#fff"/>
+            <image href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgd2lkdGg9IjM2NCIKICAgaGVpZ2h0PSI0MDAiCiAgIHZpZXdCb3g9IjAgMCAzNjQgNDAwIgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmcxNSIKICAgeG1sbnM6aW5rc2NhcGU9Imh0dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiCiAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIKICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIgogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8c29kaXBvZGk6bmFtZWR2aWV3CiAgICAgaWQ9Im5hbWVkdmlldzE1IgogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzAwMDAwMCIKICAgICBib3JkZXJvcGFjaXR5PSIwLjI1IgogICAgIGlua3NjYXBlOnNob3dwYWdlc2hhZG93PSIyIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwLjAiCiAgICAgaW5rc2NhcGU6cGFnZWNoZWNrZXJib2FyZD0iMCIKICAgICBpbmtzY2FwZTpkZXNrY29sb3I9IiNkMWQxZDEiIC8+CiAgPGRlZnMKICAgICBpZD0iZGVmczEiIC8+CiAgPHN0eWxlCiAgICAgaWQ9InN0eWxlMSIgLz4KICA8IS0tIExvZ28gY29udGVudCAtIHdoaXRlIHBhZGRpbmcgcmVtb3ZlZCAtLT4KICA8ZwogICAgIGZpbGw9IiM1ODFjODciCiAgICAgaWQ9ImcxNCI+CiAgICA8ZwogICAgICAgaWQ9ImcxMyI+CiAgICAgIDxnCiAgICAgICAgIGlkPSJnMTIiPgogICAgICAgICAgICA8ZwogICAgICAgICAgICAgICBpZD0iZzIiPgogICAgICAgICAgICAgIDxwYXRoCiAgICAgICAgICAgICAgICAgc3R5bGU9InN0cm9rZTogbm9uZTsgc3Ryb2tlLXdpZHRoOiAxOyBzdHJva2UtZGFzaGFycmF5OiBub25lOyBzdHJva2UtbGluZWNhcDogYnV0dDsgc3Ryb2tlLWRhc2hvZmZzZXQ6IDA7IHN0cm9rZS1saW5lam9pbjogbWl0ZXI7IHN0cm9rZS1taXRlcmxpbWl0OiA0OyAgZmlsbC1ydWxlOiBub256ZXJvOyBvcGFjaXR5OiAxIgogICAgICAgICAgICAgICAgIGQ9Ik0gMzUyLjQxMjE1MTc2OTg4NTgsMTQ4LjQ5NzI0ODI5MzU1MDI5IEMgMzQ4Ljc5MDk4MTA1OTAyMzY0LDE0MC41NzM4MzAwNzE0NTg4NyAzNDMuODg4NTc2NzYzMzEyNiwxMzMuMjM3MDgxOTY0NTM1IDMzOS41OTk4MTU5MjEzOTc1LDEyNS42MzA2MDA0NzEzMjcyMyBMIDMzOC43MjMxODI0MTU5NzQ3LDEyNi4xMDI2MzM4OTczMjQxNSBDIDMzOC45NTI0NTU3OTQzMTYsMTI4LjMyMTE5MDk5OTUwOTc1IDMzOS4zNTcwNTU4NzM3NDE5NiwxMzAuNTM5NzQ4MTAxNjk1MzggMzM5LjM5NzUxNTg4MTY4NDUsMTMyLjc1ODMwNTIwMzg4MDk4IEMgMzM5LjYzMzUzMjU5NDY4MzA2LDE1My44NTgxOTkzNDU5NDQxIDM0MC4wMTc5MDI2NzAxMzc3LDE3NC45NTgwOTM0ODgwMDcyIDMzOS45MjM0OTU5ODQ5MzgyNiwxOTYuMDU3OTg3NjMwMDcwMzMgQyAzMzkuODQ5MzE5MzAzNzEwMTYsMjExLjYzNTA5MDY4Nzk2OTI3IDMzNi4xMDAwMjUyMzQzNjMsMjI2LjUxMDg4Njk0MTUyOTkgMzI5LjYzOTkxMDYzMjg2MjEsMjQwLjY3MTg4OTcyMTQzODAyIEMgMzI4LjI0NDA0MDM1ODg0MjYsMjQzLjc0Njg1MDMyNTA3NTI2IDMyNi40NzA1NDMzNDQwMjU1NCwyNDYuNjUzMjI3NTYyMjg1IDMyNC44NzIzNzMwMzAyOTMsMjQ5LjY0MDUyNDgxNTM3OTg1IEMgMzIzLjY2NTMxNjEyNjY3MjMsMjM3LjUwMjUyMjQzMjYwMTQ3IDMyMC4wOTgwOTIwOTMwNjY5LDIyNi40Mjk5NjY5MjU2NDQ2NiAzMTUuMDEzNjE3NzYxNjE0MSwyMTUuNzI4Mjk0ODI0ODI4NDIgQyAzMTQuNDUzOTIwOTg1MDc0OTQsMjE0LjU0ODIxMTI1OTgzNjA1IDMxNC44MTgwNjEwNTY1NTgyNCwyMTIuNDc4MDA3NTIwMTA2NjQgMzE1LjUwNTg4MTE5MTU4MjQsMjExLjIzMDQ5MDYwODU0MzMgQyAzNDAuMjUzOTE5MzgzMTM2MSwxNjYuMjE4NzMxNzcyNDA2NzggMzQxLjIxMTQ3MjkwNDQ0NDIsMTIxLjEzMjc5NjI1NTA0MjEyIDMxNS4yNTYzNzc4MDkyNjk3LDc2LjM2Mzc5NzQ2NjU2MTE1IEMgMjgzLjUzMjcyOTY5NjYzMTIsMjEuMjY1MzIyODU3NDMyNjk3IDIyMC45MzcxOTcxMzY1Njk1NSwtOC4zNDk4MjU2MjAxODQ5MDcgMTU4LjIxNzYwMDMxNDc0NTU0LDIuMDY1NzM2MjE0NjQzMTg1MiBDIDExOS4yNDc4NjkzMzEzNjk5Nyw4LjQ5MjEzNDE0Mjg1ODYxNyA4Ni40MDEwODYyMTY2NDAyLDI2LjI2NzU2NDI5ODk3MTg2NiA2MS4zNjMwODQ2MzQ4MzEyMSw1Ny4zMDAzOTAzOTA5NDE5NiBDIDQ0Ljk4MzUyNDc1MjczNzQ1LDc3LjU5MTA4NDM3NDE1MzE4IDMzLjk2NDkxNTkyMzAzNzUyLDEwMC40MDM3ODU1MTkxMTk0NyAzMC43MjgxMTUyODc2Mjk5NSwxMjYuNTYxMTgwNjU0MDA2OSBDIDI3LjAwNTc5NDU1NjkxMTI0NCwxNTYuNzEwNjI5OTA1ODk3MDQgMzMuMjUwMTIyNDQ5Mzg1MDIsMTg0LjgxMDEwNTQyMjAyOSA0OC4zODg5MDg3NTQ1NzI1MjYsMjExLjAyMTQ0NzIzNDE3MzI1IEMgNDkuMzE5NDg4OTM3MjUyMiwyMTIuNjE5NjE3NTQ3OTA1NzYgNDkuMzM5NzE4OTQxMjIzNDk1LDIxMy43MTg3ODEwOTcwMTI5IDQ4LjU5MTIwODc5NDI4NTQ5LDIxNS41NDYyMjQ3ODkwODY3MiBDIDQ1Ljg0NzU3NDg4OTgzMjQ5LDIyMi4wMjcyOTgxMjUzNzgwOCA0My40NTAzMTA1NjIwMDE4NDYsMjI4LjY0OTYwMDE0NjQ4NDEgNDEuNDA5NTU3Mzg0NDc0OTUsMjM1LjM4NTExNTM1MDI3MjUgQyA0MC4xMDgwOTM3OTU2NTQ4MSwyMzkuODgyOTE5NTY2NTU3NDMgMzkuODkyMzA3MDg2NjI3NjQsMjQ0LjY5NzY2MDUxMTcyNjIgMzkuMTE2ODIzNjAxMDYxMjQsMjQ5Ljg5MDAyODE5NzY5MjUgQyAzOC41NTcxMjY4MjQ1MjIwMTUsMjQ5LjA2MDU5ODAzNDg2OTIzIDM4LjMwNzYyMzQ0MjIwOTMzNCwyNDguNzIzNDMxMzAyMDE0MzIgMzguMDk4NTgwMDY3ODM5MjgsMjQ4LjM2NjAzNDU2NTE4ODA3IEMgMjkuMzc5NDQ4MzU2MjEwMTMsMjMzLjQ2MzI2NDk3Mjk5OTA3IDI0LjIwMDU2NzMzOTU1ODAxLDIxNy4yOTI3NDg0NjUyNzU0MiAyMy41NDY0NjM4Nzc4MTk0MDIsMjAwLjE3MTQyMTc3MDkwMDc0IEMgMjIuNzg0NDY3MDYxNTY3MjAyLDE4MC4yMjQ2Mzc4NTUyMDE2IDIzLjQxMTU5NzE4NDY3NzQyMiwxNjAuMjIzOTA3MjYyMjQ1NiAyMy41ODY5MjM4ODU3NjIsMTQwLjI0MzQwNjY3MzI2MDk4IEMgMjMuNjI3MzgzODkzNzA0NTkzLDEzNS43MTg2MjkxMTgzNDc0NSAyNC4yNjEyNTczNTE0NzE5MTUsMTMxLjE5Mzg1MTU2MzQzMzk4IDI0Ljc0MDAzNDExMjEyNTk0NCwxMjUuNjc3ODAzODEzOTI2OTEgQyAyMy4yNTY1MDA0ODc1NjQxNDMsMTI3LjY0Njg1NzUzMzc5OTgyIDIyLjI5ODk0Njk2NjI1NjA3LDEyOC44NDA0Mjc3NjgxMDY0IDIxLjQyOTA1Njc5NTQ5MDI4LDEzMC4wODc5NDQ2Nzk2Njk3MyBDIDkuNDkzMzU0NDUyNDI0ODY0LDE0Ny4xMjE2MDgwMjM1MDIwMyAyLjkyNTM0NjQ5NjQxMDMzMSwxNjYuMTkxNzU4NDMzNzc4MzIgMC43NTM5OTI3MzY4MjQ0MTg2LDE4Ni43MzE5NTU3OTkzMDIyMyBDIC0yLjAyNDI2MTE0MTkwMDQxNCwyMTMuMDMwOTYwOTYxOTg4NzcgMi41NTQ0NjMwOTAyNjk4ODA2LDIzNy40ODkwMzU3NjMyODcxOCAxOS44NjQ2MDMxNTUwNDMyODcsMjU4LjU0ODQ2OTg5NzQwNzcgQyAyNy42NDY0MTEzNDkzMzU2NiwyNjguMDI5NTk4NDI1Mjg5MSAzNy4zMDk2MDk5MTI5NTg2OCwyNzUuMDQ5NDA5ODAzMzI5MjQgNDguMjg3NzU4NzM0NzE2MDM2LDI4MC45NjMzMTQyOTc2MDUxNyBDIDUwLjY4ODM4NTg3MjY0MzMxLDI2NC4yNTMzMzEwMTczMTM1NCA1OS4yNTI0MjA4ODcxNTkxOSwyNTEuOTY2OTc1MjcyMDc4OTcgNzMuMDE1NTY2OTIyMjk4NDYsMjQzLjM0MjI1MDI0NTY0OTIgTCAxMDEuODIzMDkyNTc3NDI1ODUsMjY3LjkyODQ0ODQwNTQzMjYgQyA4OS41MTY1MDY4MjgyMTk5NywyNjkuNDg2MTU4NzExMjIyNSA3Ny4xOTY0MzQ0MDk2OTk5LDI2OC43OTE1OTUyNDE1NDEyNCA3My4yNDQ4NDAzMDA2Mzk4NCwyNjYuMjQ5MzU4MDc1ODE0OSBDIDY4Ljc4MDc1Mjc1NzY0MDIyLDI3MS43OTkxMjI0OTg2MDc1IDY2Ljk2MDA1MjQwMDIyMzQ2LDI3OC4yMTg3NzcwOTIxNjU4NSA2Ni40Njc3ODg5NzAyNTUyMSwyODUuMTc3ODk4NDU4MjkyMSBDIDY2LjMxOTQzNTYwNzc5OTA0LDI4Ny4yMDA4OTg4NTU0MjE4IDY2Ljg0NTQxNTcxMTA1Mjc4LDI4OC4zNDcyNjU3NDcxMjg2MyA2OS4wNjM5NzI4MTMyMzgzNywyODguNTQ5NTY1Nzg2ODQxNyBDIDc3LjEwMjAyNzcyNDUwMDUyLDI4OS4xOTAxODI1NzkyNjYxIDg1LjE0NjgyNTk3MDQxOTc0LDI5MC42MjY1MTI4NjEyMjgxNSA5My4xNTc5MDc1NDMwNTM0NywyOTAuNDY0NjcyODI5NDU3OCBDIDEyMy45NjgyMDM1OTEzMzkzMiwyODkuODU3NzcyNzEwMzE4OSAxNTEuODY1Mzc5MDY3NzU4MywyNzguNzkxOTYwNTM4MDE5MiAxNzkuMDAwNTU3NzI3OTI1MTMsMjY1LjM5Mjk1NDU3NDM2MzMzIEMgMTgwLjgyODAwMTQxOTk5OSwyNjQuNDg5MzQ3NzMwMzEyIDE4Mi4wMjgzMTQ5ODg5NjI2NSwyNjQuNDQ4ODg3NzIyMzY5NCAxODMuODQyMjcyMDExNzIyMzIsMjY1LjM0NTc1MTIzMTc2MzY0IEMgMjA2Ljc2OTYwOTg0NTg1OTI2LDI3Ni42ODgwNDAxMjUwMDQzIDIzMC41MTk2MzQ1MDgxNjIzLDI4NS43NTEwODE5MDQxNDU1NiAyNTYuMDM2NDEyODUwNjI1MzcsMjg5LjM3MjI1MjYxNTAwNzcgQyAyNjguOTA5NDM4NzExMDI3NSwyOTEuMTk5Njk2MzA3MDgxNjQgMjgxLjc3NTcyMTIzNjc3MjcsMjkxLjE1MjQ5Mjk2NDQ4MTkgMjk0LjUzNDExMDQwODAwNDIsMjg4LjM2MDc1MjQxNjQ0Mjg0IEMgMjk1LjQ1Nzk0NzI1NjAyNjgsMjg4LjE1ODQ1MjM3NjcyOTkgMjk2LjkwNzc2NDIwNzMwMzA1LDI4Ny4wNTI1NDU0OTI5NjU2MyAyOTYuODk0Mjc3NTM3OTg4ODQsMjg2LjM5MTY5ODY5NjU2OTkgQyAyOTYuNzEyMjA3NTAyMjQ3MSwyNzguOTc0MDMwNTczNzYwODQgMjk0Ljc0OTg5NzExNzAzMTMsMjcyLjA4OTA4NTg4ODg2MjcgMjkwLjUwMTU5NjI4MzA1ODg2LDI2Ni4zOTc3MTE0MzgyNzExIEMgMjgwLjY0OTU4NDM0OTAzNzEsMjY5LjYwNzUzODczNTA1MDMgMjcxLjE2ODQ1NTgyMTE1NTcsMjY5LjA5NTA0NTMwMTExMDcgMjYxLjc4ODQ3NzMxMzEzMDg0LDI2OC4xNjQ0NjUxMTg0MzExIEMgMjcwLjk1MjY2OTExMjEyODU1LDI2MC4yMTQwNzM1NTc3MTEyIDI3OS44ODc1ODc1MzI3ODQ5LDI1Mi40MDUyOTIwMjQ3OTA0NyAyODguOTE2OTEyNjM4NjQwNiwyNDQuNzExMTQ3MTgxMDQwMyBDIDI4OS43NzA0OTYzMjQ2Nzg5LDI0NC4yMTU5MTIwNTI2NzE1NyAyOTAuODExMzA2OTc1NDU0NjcsMjQ0LjE2NTYzMTM0NDkwNDYzIDI5MS43MDg2NTMxODY2Nzk2LDI0NC41NzYyODA0ODc4OTgzMiBDIDMwMS40OTMyMzE3NzQxMzA0NCwyNTAuNjA0ODIxNjcxMzQ0OTIgMzA4LjY0NzkwOTg0NTMxMjYsMjU4Ljg2NTQwNjYyNjI5MTM2IDMxMi40MTA2OTA1ODM5NzM4NiwyNjkuODE2NTgyMTA5NDIwNCBDIDMxMy42MzEyMzQxNTY5MDg4LDI3My4zNjM1NzYxMzkwNTQ0MyAzMTQuNDMzNjkwOTgxMTAzNiwyNzcuMDU4OTIzNTMxMTQ0NyAzMTUuNDI0OTYxMTc1Njk3MiwyODAuNzU0MjcwOTIzMjM1MSBDIDMxNS43NzUwMTI1Nzc5NjYyLDI4MC42NTI0NTQ4MzkxMzY4NSAzMTYuMTE3NTExMTc1NTgxMDYsMjgwLjUyNjI3MTE0NTI3ODggMzE2LjQ0OTk0ODA0MzU3NjMsMjgwLjM3NjY0NDE4MjQzNzYgQyAzMTguMjM2OTMxNzI3NzA3NTQsMjc5LjQzMjU3NzMzMDQ0MzcgMzIwLjA1NzYzMjA4NTEyNDMsMjc4LjU0MjQ1NzE1NTcwNjYgMzIxLjc4MzkyNTc1NzM0MTY1LDI3Ny40OTcyNDAyODM4NTYyMyBDIDM0OS4yMjkyOTc4MTE3MzUsMjYwLjg3NDkyMDM1NDEwNjkgMzYxLjU2OTYwMDIzNDIyNjQ3LDIzNS41NDY5NTUzODIwNDI2OCAzNjMuNTI1MTY3Mjg0Nzg1MTQsMjA0LjQyNjQ2NTkzOTUzMDMgQyAzNjQuNzU5MTk3NTI3MDM0MjUsMTg0LjgxMDEwNTQyMjAyOSAzNjAuNTA0MTUzMzU4NDA0NywxNjYuMTg1MDE1MDk5MTIxMjQgMzUyLjQxMjE1MTc2OTg4NTgsMTQ4LjQ5NzI0ODI5MzU1MDI5IE0gOTguODQ5MjgxOTkzNjQ1MTQsNjMuOTAyMTE1MDIwMjQxOTkgQyAxMTYuNjU4NDI4ODIzMDQzODksNDguNTk0NzQ1MzQ4NjI3MDE1IDEzNy4xMTc3MDYxNzI2ODI2LDQ1LjE1NTY0NDY3MzUwNjQ3IDE1OS4yNjk1NjA1MjEyNTMxNyw1My41Mzc2MDk2NTIyODA2NiBDIDE2Mi4zMTA4MDQ0NTE2MDQ4NCw1NC42ODM5NzY1NDM5ODc1MSAxNjUuMjMwNjY4MzU4MTI4NzgsNTYuMTQ3MjgwMTY0NTc4MDIgMTY4LjE2NDAxODkzMzk2Njg3LDU3LjU4MzYxMDQ0NjU0MDEzIEMgMTc3LjQ5Njc5NDA5OTM5MjAyLDYyLjEwMTY0NDY2Njc5NjUzIDE4Ni42NDA3NTU4OTQ0MTg0Miw2MS42Mjk2MTEyNDA3OTk1OCAxOTYuMDg4MTY3NzQ5MDE0MjcsNTcuNDk1OTQ3MDk1OTk3ODM1IEMgMjAzLjE0MTY5NTgwMDMzOTksNTQuNDM0NDczMTYxNjc0ODQgMjEwLjQ0NDcyNzIzMzk3ODI4LDUwLjk5NTM3MjQ4NjU1NDI5NSAyMTcuOTI5ODI4NzAzMzU4MjUsNTAuMDc4Mjc4OTczMTg4ODIgQyAyNDMuOTM4ODcwNDc1Nzg5NTQsNDYuODI3OTkxNjY4NDY3MDQgMjY0LjEwMTQ0MTEwMDUxNTksNTcuMTc5MDEwMzY3MTE0MTc0IDI3OC40NTEyNTcyNTA4MjI3LDc4Ljg3OTA2MTI5MzY1OTEgQyAyOTcuNDgwOTQ3NjUzMTU2NSwxMDcuNjQ2MTI2OTQwODQzOSAyOTIuNjkzMTgwMDQ2NjE2MSwxNTkuMDMwMzM3MDI3OTM5MSAyNTIuMTUyMjUyMDg4MTM2MiwxODAuNTg4Nzc3OTI2Njg0OTcgQyAyNDQuMjE4NTk3MzA1MzA0NjMsMTg0Ljg4NDA1NTAzNzAxNzUgMjM1LjM1OTg0MjU2NDEyMDEsMTg3LjE4NjY4MzI5MzkzNDU1IDIyNi4zMzg3NjcwMjA3NjA4OCwxODcuMjk4Mzk1OTEwNDk4NTYgQyAyMTEuNjMxNTU0MTMzNjI3NjcsMTg3LjQ0Njc0OTI3Mjk1NDc1IDE5Ni45MjQzNDEyNDY0OTQ1OCwxODcuMzM4ODU1OTE4NDQxMTcgMTgyLjIxNzEyODM1OTM2MTQyLDE4Ny4zMzg4NTU5MTg0NDExNyBMIDE4Mi4yMTcxMjgzNTkzNjE0MiwxODcuNDEzMDMyNTk5NjY5MjYgQyAxNjguMDU2MTI1NTc5NDUzMjcsMTg3LjQxMzAzMjU5OTY2OTI2IDE1My44OTUxMjI3OTk1NDUxNiwxODcuNzA5NzM5MzI0NTgxNjIgMTM5Ljc4ODA2NjY5Njg5MzgsMTg3LjM1MjM0MjU4Nzc1NTM3IEMgMTExLjY0ODEzMTE3MjgxOTIzLDE4Ni42MzA4MDU3Nzk0NDU3OCA4Ny42Njg4MzMxMzIxNzQ4LDE2OC43NDc0ODIyNjg4MTg5NCA3OC41MDQ2NDEzMzMxNzcxLDE0Mi4wOTEwODAzNjkzMDYxOCBDIDY4LjY3OTYwMjczNzc4MzcyLDExMy40OTkzNDE0MjMyMDU5MiA3Ni4wNTY4MTA4NTI2NTAxNiw4My41Mzg3MDU1NDE3MTQ1OSA5OC44NDkyODE5OTM2NDUxNCw2My45MDIxMTUwMjAyNDE5OSBNIDEzMy44MDY3Mjg4NTYwNDY5MywyNTkuOTEwNjIzNDk4MTQxOCBDIDEzMy4wNjA3MzI5MzAyNjk4LDI2MC4wNDIwNTM1NjI0MjU0NSAxMzIuMjkyOTY5NzU5MjA2MjcsMjU5Ljg3NDkzNzkxOTUxMjU1IDEzMS42NjkwOTE3Njk3NDY1MywyNTkuNDQ1MzMzNDA2ODAxOSBDIDEwMS4xNDg3NTkxMTE3MTU5NSwyMzguODcxNDE5MzY3OTkyNTYgNzQuMzg0NDYzODU3Njg5NTgsMjE0LjU4MTkyNzkzMzEyMTYgNTcuMTA4MDQwNDY2MjAxNjcsMTgxLjQzODQzODA5MzQ3OTQ1IEMgNDMuMDgxOTA0Mzc5NDM1NTE0LDE1NC41MTkwNDYxNDIzMzk4IDQwLjc0ODcxMDU4ODA3OTIzNCwxMjYuNTEzOTc3MzExNDA3MjIgNTAuOTg1MDkyNTk3NTU1NjgsOTcuNzEzMTk0OTkwOTM2OTEgQyA1MS4yODg1NDI2NTcxMjUxMzQsOTYuODU2NzkxNDg5NDg1MzIgNTEuNjU5NDI2MDYzMjY1NTg1LDk2LjAyNzM2MTMyNjY2MjE1IDUyLjAwMzMzNjEzMDc3NzY0LDk1LjE5MTE4NzgyOTE4MTg0IEMgNTIuMDAzMzM2MTMwNzc3NjQsMTAyLjAzNTY3MjUwNjEzNzQ0IDUxLjc4NzU0OTQyMTc1MDQ3LDEwOC44ODY5MDA1MTc3NTAxNCA1Mi4wNDM3OTYxMzg3MjAyNCwxMTUuNzE3ODk4NTI1MzkxNTIgQyA1Mi44ODY3MTI5NzA4NTc2MywxMzcuODAyMzE5NTI3MzkxMTIgNjAuOTkyMjAxMjI4NjkwNzQ2LDE1Ny41MjY1NzMzOTk0MDYgNzIuNzE4ODYwMTk3Mzg2MSwxNzUuODA3NzUzNjU0ODAxNjcgQyA5MS42MDAxOTcyMzcyNjM2MSwyMDUuMjQ5MTUyNzY3Njk2MzYgMTE2LjAwNDMyNTM2MTMwNTI5LDIyOS4yNDg2ODA4MTIzMTIxMyAxNDUuMTYyNTA0NDE4NjAxODMsMjQ4LjQ4MDY3MTI1NDM1ODczIEMgMTQ3LjU2MzEzMTU1NjUyOTEzLDI1MC4wNjUzNTQ4OTg3NzcwNiAxNDkuOTM2Nzg1MzU1ODI4LDI1MS43MTA3Mjg1NTUxMDkyOCAxNTIuNjg4MDY1ODk1OTI0NDQsMjUzLjU4NTM3NTU4OTc4MjczIEMgMTQ2LjA1OTM2NzkyNzk5NiwyNTUuODE3NDE5MzYxMjgyNiAxMzkuOTQ5OTA2NzI4NjY0MjIsMjU3LjkyMTMzOTc3NDI5NzU2IDEzMy44MDY3Mjg4NTYwNDY5MywyNTkuOTEwNjIzNDk4MTQxOCBNIDE4MC4zMzU3Mzc5OTAwMzA3NiwyNDIuMDU0MjczMzI2MTQzMzIgQyAxNTguMDkyNTA4MjM4ODAyMjgsMjMwLjM2MjA3MTQ5NDY4MDcyIDEzNy4yOTU4ODMwOTQ1MTQ1NSwyMTYuMTAzODU2NDEwNDQ4MzQgMTE4LjM3MTIzNTgyNTk0Njk3LDE5OS41NzEyNjQ5ODY0MTg5NSBDIDExOC4xMDM1NTIxODYwNTI1OCwxOTkuMTQ0NDczMzk5NzcyMSAxMTcuODc3NzI1NDQ1NjE3OTUsMTk4LjY5MjgxOTkxODkwMjggMTE3LjY5NjkwMjM2MDIzNzE3LDE5OC4yMjI1OTgwNTQ5OTkxIEMgMTM0LjYyOTQxNTY4NDIxMzAzLDIwNC4yMjQxNjU4OTk4MTczIDE1MC45ODg3NDU1NjIzMzU0OCwyMDkuODYxNTkzNjczMTUyMiAxNjcuMjEzMjA4NzQ3MzE1OTIsMjE1Ljg5MDEzNDg1NjU5ODggQyAxNzEuNjg0MDM5NjI0OTcyNjMsMjE3LjU1NTczODUxNjkwMjI3IDE3NS42NzYwOTM3NDE5NzUzLDIyMC40NzU2MDI0MjM0MjYxOCAxNzkuOTg1MDg0NTg3ODYxNjUsMjIyLjYzMzQ2OTUxMzY5NzkgQyAxODAuOTgzMDk4MTE3MTEyMzIsMjIzLjEzOTIxOTYxMjk4MDMgMTgyLjY4MjQxODQ1MDcwMTI4LDIyMy40MDIyMDk2NjQ2MDcxNCAxODMuNTE4NTkxOTQ4MTgxNTgsMjIyLjg5NjQ1OTU2NTMyNDcgQyAxOTkuMjc3NzY1MDQxODIyMTYsMjEzLjQ1NTc5MTA0NTM4NTk4IDIxNi40NDYyOTUwNzg3OTY0OCwyMDcuNzAzNzI2NTgyODgwNDIgMjM0LjA0NjM5ODUzMzgyNTIzLDIwMi45OTY4Nzg5OTIyMjUyOCBDIDIzNy40ODU0OTkyMDg5NDU3OCwyMDIuMDczMDQyMTQ0MjAyNyAyNDAuODMwMTkzMTk4ODY2ODgsMjAwLjgxMjAzODU2MzMyNTE2IDI0NC4yMjIwOTA1MzEzODc3MiwxOTkuNzEyODc1MDE0MjE4IEwgMjQ0Ljg5NjQyMzk5NzA5NzY2LDIwMC4zODcyMDg0Nzk5Mjc5MiBDIDIzNi4wMTU0NTIyNTM2OTgxLDIwNy4yMTgyMDY0ODc1NjkzMiAyMjcuNDU4MTYwNTczODM5MzYsMjE0LjQ4MDc3NzkxMzI2NTExIDIxOC4yMTMwNDg3NTg5NTY1LDIyMC43MzE4NDkxNDAzOTU5NSBDIDIwNy4xODA5NTMyNTk5NDIzLDIyOC4xOTY3MjA2MDU4MDQ2MSAxOTUuNTk1OTA0MzE5MDQ2MDQsMjM0Ljg0NTY0ODU3NzcwNDM3IDE4NC4xNzk0Mzg3NDQ1NzcyNSwyNDEuNzIzODQ5OTI3OTQ1NDUgQyAxODMuMTYxMTk1MjExMzU1MywyNDIuMzMwNzUwMDQ3MDg0NDIgMTgxLjMwMDAzNDg0NTk5NTk1LDI0Mi41NzM1MTAwOTQ3Mzk5MyAxODAuMzI4OTk0NjU1MzczNywyNDIuMDU0MjczMzI2MTQzMzIgTCAxODAuMzM1NzM3OTkwMDMwNzYsMjQyLjA1NDI3MzMyNjE0MzMyIE0gMzAxLjExNTYwNTAzMzMzMjk0LDE5MS40Mzg4MDMzODk5NTc0MyBDIDI4Ny43ODQwMzI0MTYyNDc5NSwyMTIuNzU0NDg0MjQxMDQ3NzUgMjcwLjQxOTk0NTY3NDIxNzgsMjMwLjI0NjY5NDM0MTU2MjggMjUwLjcwMjQzNTEzNjg1OTk1LDI0NS41NTQwNjQwMTMxNzc3NiBDIDI0NC44NjI3MDczMjM4MTIxMiwyNTAuMDkyMzI4MjM3NDA1NDQgMjM4Ljc5MzcwNjEzMjQyMjk4LDI1NC4zMjAzOTkwNjc0MDY1NiAyMzIuNjk3NzMxNjAyNDA1MzYsMjU4LjUyODIzOTg5MzQzNjUgQyAyMzEuNDQ0NjQ4NTU2NzQ3ODQsMjU5LjMwMTEyMjg3OTkzODQgMjI5LjkzNTU2ODE5Njg5MjcyLDI1OS41NDM3NDAzMDExMzcgMjI4LjUwMzM3NzQ0NTY4OTc1LDI1OS4yMDI1NzMzNTkxNDY0IEMgMjIyLjg1OTIwNjMzNzY5NzgsMjU3LjQ1NjA0OTY4Mjk1NzcgMjE3LjMwOTQ0MTkxNDkwNTE2LDI1NS4zOTkzMzI2MTI1NDI0OCAyMTEuMTM5MjkwNzAzNjU5NTMsMjUzLjI1NDk1MjE5MTU4NDk1IEMgMjE2LjMxODE3MTcyMDMxMTYyLDI0OS42NzQyNDE0ODg2NjUyNyAyMjAuOTkxMzAyNjM3NjgxMywyNDYuNDcxMTU3NTI2NTQzMyAyMjUuNjQ0MjAzNTUxMDc5NzMsMjQzLjIyNzYxMzU1NjQ3ODUzIEMgMjUxLjg4OTI2MjAzNjUwOTM2LDIyNC45Mzk2ODk5NjY0MjU3NiAyNzQuMzE3NTkzMTA2MDIxMDQsMjAyLjg5NTcyODk3MjM2ODggMjkxLjM5MTcxNjQ1Nzc5NiwxNzUuNzA2NjAzNjM0OTQ1MiBDIDMwNS4yNTYwMTI1MTI3OTE3NiwxNTMuNjI4OTI1OTY3NjAyNzMgMzEzLjI0MDEyMDc0Njc5NzEsMTI5Ljg1MTkyNzk2NjY3MTI3IDMxMS42MjE3MjA0MjkwOTMzLDEwMy4zODQzMzk0Mzc1NTcyNiBDIDMxMS41MDcwODM3Mzk5MjI2LDEwMS41OTA2MTI0MTg3Njg5IDMxMS4zNzg5NjAzODE0Mzc3Niw5OS44MDM2Mjg3MzQ2Mzc2NCAzMTEuMTgzNDAzNjc2MzgxOSw5Ny45ODk2NzE3MTE4Nzc5NyBDIDMxMS4wMDgwNzY5NzUyOTczNCw5Ni4zMzc1NTQ3MjA4ODg3IDMxMC43MzgzNDM1ODkwMTMzNyw5NC42OTIxODEwNjQ1NTY1MiAzMTAuNTA5MDcwMjEwNjcxOTUsOTMuMDQ2ODA3NDA4MjI0MzIgTCAzMTEuMzI1MDEzNzA0MTgwOTUsOTIuODEwNzkwNjk1MjI1ODYgQyAzMTMuMDM3ODIwNzA3MDg0MSw5OC41MjkxMzg0ODQ0NDU5MSAzMTUuMTc1NDU3NzkzMzg0NTcsMTA0LjE1MzA3OTU4ODQ2NjU1IDMxNi40MDI3NDQ3MDA5NzY1NCwxMDkuOTcyNTc3Mzk3NTQzMDggQyAzMjIuNTUyNjY1OTA4MjUwOTYsMTM5LjIwNDkzMzEzNjA2NzcyIDMxNi44NjgwMzQ3OTIzMTY0LDE2Ni4yMzg5NjE3NzYzNzgwNiAzMDEuMTA4ODYxNjk4Njc1NzUsMTkxLjQzODgwMzM4OTk1NzQzIEwgMzAxLjExNTYwNTAzMzMzMjk0LDE5MS40Mzg4MDMzODk5NTc0MyIKICAgICAgICAgICAgICAgICBjbGFzcz0iYzEiCiAgICAgICAgICAgICAgICAgaWQ9ImkxIiAvPgogICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDxnCiAgICAgICAgICAgICAgIGlkPSJnMyI+CiAgICAgICAgICAgICAgPHBhdGgKICAgICAgICAgICAgICAgICBzdHlsZT0ic3Ryb2tlOiBub25lOyBzdHJva2Utd2lkdGg6IDE7IHN0cm9rZS1kYXNoYXJyYXk6IG5vbmU7IHN0cm9rZS1saW5lY2FwOiBidXR0OyBzdHJva2UtZGFzaG9mZnNldDogMDsgc3Ryb2tlLWxpbmVqb2luOiBtaXRlcjsgc3Ryb2tlLW1pdGVybGltaXQ6IDQ7ICBmaWxsLXJ1bGU6IG5vbnplcm87IG9wYWNpdHk6IDEiCiAgICAgICAgICAgICAgICAgZD0iTSAzMTkuMDY2MzYxODkwNTMwOCwyOTguNDQyMDM3NzI4ODA2MSBDIDMxNS41NzMzMTQ1MzgxNTM0LDI5OS44NjQ4ODEzNDE0NTQgMzE0LjQ0MDQzNDMxNTc2MDc0LDMwMS44NTQxNjUwNjUyOTgzIDMxMy42NzE2OTQxNjQ4NTE1LDMwNS4zNDA0NjkwODMwMTg1IEMgMzA5LjMxNTQ5OTk3NjM2NTUsMzI0LjYxMjkxOTUzMzAwNzcgMjk4LjAyNzE1Nzc2MDM4MTUsMzM4LjM4MjgwODkwMjgwNDEzIDI3OS42MTc4NTQxNDY1MDEsMzQ1LjgwMDQ3NzAyNTYxMzEzIEMgMjY4LjYwNTk4ODY1MTQ1ODEsMzUwLjI1MTA3Nzg5OTI5ODYgMjU3LjA1NDY1NjM4Mzg0NzQsMzUwLjA5NTk4MTIwMjE4NTI3IDI0NS40MzU4OTA3Njk2NjU2LDM0OC43MDAxMTA5MjgxNjU3IEMgMjQzLjc2MzI3NjU0NzEwOTExLDM0OC41NjAwNDIwMzYxMzU3IDI0Mi4wOTc1NzE3OTgyNjYzNiwzNDkuMDQwMDcyMjIzMTIyMSAyNDAuNzU2MDE2NTE3NjM4NzgsMzUwLjA0ODc3Nzg1OTU4NTUgQyAyMzMuNjM1MDU1MTE5NzQyMTMsMzU1Ljk2OTQyNTY4ODUxODUgMjI2LjA2OTAzMzYzNDQ3NjksMzYxLjEzNDgyMDAzNTg1NjU0IDIxNy40NTEwNTE5NDI3MDQyOCwzNjQuNjE0MzgwNzE4OTE5NiBDIDIwMi44Nzg3MDU3NDg3MTMwNiwzNzAuNDg3ODI1MjA1MjUzIDE4Ny42OTk0NTk0MzU1ODMwNCwzNzEuODk3MTgyMTQ4NTg2NjQgMTcyLjE3NjMwMzA1NDk0MDksMzcwLjU4MjIzMTg5MDQ1MjM2IEMgMTUzLjYzMjEzMjc0NzkxODMyLDM2OS4wMTEwMzQ5MTUzNDgyIDEzNy4wNDM1Mjk0OTE0NTQ1NCwzNjIuNjE4MzUzNjYwNDE4MzQgMTIyLjk0OTk2MDA1ODExNzM3LDM1MC4yNjQ1NjQ1Njg2MTI3NCBDIDEyMC45MjY5NTk2NjA5ODc2NSwzNDguNDkxMDY3NTUzNzk1NyAxMTkuMTM5OTc1OTc2ODU2MzksMzQ4LjE5NDM2MDgyODg4MzMgMTE2LjU5NzczODgxMTEzMDAzLDM0OC41NDUwMTQyMzEwNTI1IEMgMTA2LjA1MTE2MzQwNzQyNzAxLDM1MC4wMTUwNjExODYzMDAxIDk1LjQ4NDM1Nzk5OTc1MjczLDM1MC4wMjE4MDQ1MjA5NTczIDg1LjM0MjM4MjY3NTQ3NTY4LDM0Ni4zMjY0NTcxMjg4NjY5MyBDIDY0Ljg5NjU5MTk5NTE1MTE4LDMzOC45MDg3ODkwMDYwNTc5MyA1My4yNTc1OTYzNzY5OTgxMiwzMjMuNzkwMjMyNzA0ODQxNyA0OC43NDYzMDU0OTEzOTg4LDMwMi44NjU2NjUyNjM4NjMyIEMgNDguMjgxMDE1NDAwMDU4OTYsMzAwLjcxNDU0MTUwODI0ODU0IDQ3LjMwMzIzMTg3NDc3OTYsMjk5LjczMDAxNDY0ODMxMjE0IDQ1LjM3NDYzODE2Mjg0OTI1LDI5OC45NTQ1MzExNjI3NDU3IEMgMzAuMTgxOTA1MTgwNDA0OTU3LDI5Mi44ODU1Mjk5NzEzNTY1IDE4LjAxMDE4NjEyNDM0MTA2NSwyODIuODcxNjc4MDA1NTY0MyA3Ljg5NTE4NDEzODY5MjQwNCwyNzAuMTczOTc4ODQ2MjQ2NyBDIDcuNDE2NDA3Mzc4MDM4MzY1LDI2OS41NjcwNzg3MjcxMDc3NCA2Ljg0OTk2NzI2Njg0MjA0MywyNjkuMDIwODY4NjE5ODgyOCA1LjkxOTM4NzA4NDE2MjM2NiwyNjguMDE2MTExNzU1OTc1IEMgMzIuNDg4MTI1NjMzMTMyODEsMzUzLjk3MzM5ODYzMDAxNzMgMTA4LjQ1MTc5MDU0NTM1NDMsNDAzLjk2MTczODQ0MzA5Mjk0IDE5Mi4xMjk4MzAzMDUyOTcxLDM5OS43NTM4OTc2MTcwNjMxIEMgMjgzLjU0MjQ3NDkxNjkzMjYzLDM5NS4xOTU0MDMzODg4NjQxIDMzOS44NjI4MDU5NzMwMjQzNiwzMzAuMDM0NTYwNTk3MzE1NCAzNTcuMDcxNzk2MDE3OTQxMjcsMjY3Ljg2Nzc1ODM5MzUxODcgQyAzNDYuNjA2MTQwNjMwMTIzNSwyODEuODI2NDYxMTMzNzEzODUgMzM0LjM5Mzk2MTU2NjExNjk2LDI5Mi4xOTc3MDk4MzYzMzIzNiAzMTkuMDY2MzYxODkwNTMwOCwyOTguNDQyMDM3NzI4ODA2MSIKICAgICAgICAgICAgICAgICBjbGFzcz0iYzIiCiAgICAgICAgICAgICAgICAgaWQ9ImkyIiAvPgogICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDxnCiAgICAgICAgICAgICAgIGlkPSJnNCI+CiAgICAgICAgICAgICAgPHBhdGgKICAgICAgICAgICAgICAgICBzdHlsZT0ic3Ryb2tlOiBub25lOyBzdHJva2Utd2lkdGg6IDE7IHN0cm9rZS1kYXNoYXJyYXk6IG5vbmU7IHN0cm9rZS1saW5lY2FwOiBidXR0OyBzdHJva2UtZGFzaG9mZnNldDogMDsgc3Ryb2tlLWxpbmVqb2luOiBtaXRlcjsgc3Ryb2tlLW1pdGVybGltaXQ6IDQ7ICBmaWxsLXJ1bGU6IG5vbnplcm87IG9wYWNpdHk6IDEiCiAgICAgICAgICAgICAgICAgZD0iTSAyOTEuMTYyNDQzMDc5NDU0NTMsMzE0LjQxNjk5NzUzMTQ3MzggQyAyOTIuNzYwNjEzMzkzMTg3MSwzMTEuOTY5MTY3MDUwOTQ2ODUgMjkzLjc4NTYwMDI2MTA2NjEsMzA5LjE0MzcwOTgyOTYyMjM3IDI5NS4zMzY1NjcyMzIxOTg5NSwzMDUuOTU0MTEyNTM2ODE0NCBDIDI5My45NTQxODM2Mjc0OTM2LDMwNi4wNjIwMDU4OTEzMjgwNiAyOTMuNDE0NzE2ODU0OTI1NywzMDYuMDQ4NTE5MjIyMDEzOCAyOTIuODg4NzM2NzUxNjcxOTYsMzA2LjE0OTY2OTI0MTg3MDM2IEMgMjc4LjgyMjE0MDY1Njk2MzIsMzA4Ljg5NDIwNjQ0NzMwOTY3IDI2NC43MjE4Mjc4ODg5NjksMzA4LjI0MDEwMjk4NTU3MTA3IDI1MC42NzU0NjE3OTgyMzE0OCwzMDYuMTkwMTI5MjQ5ODEyOSBDIDIyNy4wMTk4NDM4MjExMjc4NCwzMDIuNzQ0Mjg1MjQwMDM1MjUgMjA0LjgyMDc4NjEyOTk1NzU1LDI5NC43MjY0NjAzMzI3NDQ0NyAxODMuNTcyNTM4NjI1NDM4MjgsMjgzLjk5MTA3MTU1ODY0MjYgQyAxODIuMjMyODkzMjk4NjM4MiwyODMuNDI3NDYyMTY5NyAxODAuNzI2ODA4MDg4NzA3OTQsMjgzLjQwNTcwNDkxOTQ3NjI1IDE3OS4zNzE0NDExMzQwNjU1OCwyODMuOTMwMzgxNTQ2NzI4NzcgQyAxNzUuMDQyMjIwMjg0MjA3OTMsMjg1Ljc1NzgyNTIzODgwMjYgMTcwLjkwMTgxMjgwNDc0OTEsMjg4LjA0MzgxNTY4NzU1OTIzIDE2Ni42MDYzMDg2MjgxNzY5NSwyODkuOTUyMTc5Mzk1NTE4MjcgQyAxMzUuNDM4NjE1ODQzMDY0OSwzMDMuNzk2MjQ1NDQ2NTQyOCAxMDMuMjY2MTY2MTk0MDQ1MDQsMzExLjcyNjQwNzAwMzI5MTM0IDY4LjA0NTcyOTI4MDAxNjM5LDMwNS45Njc1OTkyMDYxMjg3IEMgNzMuNTY4NTIwMzY0MTgwNTYsMzE4Ljk0ODUxODQyMTA0NDQgODIuMDExMTc1MzU0ODY4NjYsMzI3LjU0NjI3MDEwODg0NTggOTUuMTgwOTA3OTQwMTgzMjIsMzMwLjkxNzkzNzQzNzM5NTQgQyAxMDIuMTYwMjU5MzEwMjgwNzgsMzMyLjcyNTE1MTEyNTQ5NzkgMTA5LjE5MzU1NzM1NzYzNTE0LDMzMi40MDgyMTQzOTY2MTQyNiAxMTYuMjEzMzY4NzM1Njc1MzUsMzMxLjA4NjUyMDgwMzgyMjg1IEMgMTM1LjQ1ODg0NTg0NzAzNjE3LDMyNy40NTE4NjM0MjM2NDY0NCAxNTMuNDE2MzQ2MDM4ODkxMSwzMjAuMjU2NzI1MzQ0NTIxNjcgMTcwLjc1MzQ1OTQ0MjI5MjksMzExLjM1NTUyMzU5NzE1MDg2IEMgMTc0LjUyOTcyNjg1MDI2ODQyLDMwOS40MTM0NDMyMTU5MDYzNCAxNzguMjMxODE3NTc3MDE1ODIsMzA1LjcxODA5NTgyMzgxNiAxODEuOTU0MTM4MzA3NzM0NTIsMzA1LjczODMyNTgyNzc4NzMgQyAxODUuNjc2NDU5MDM4NDUzMiwzMDUuNzU4NTU1ODMxNzU4NiAxODkuMzcxODA2NDMwNTQzNTYsMzA5LjUyMTMzNjU3MDQxOTkgMTkzLjE0MTMzMDUwMzg2MTkyLDMxMS40MzY0NDM2MTMwMzYwMyBDIDIxMS40MjkyNTQwOTM5MTQ3LDMyMC42NjEzMjU0MjM5NDc2MyAyMzAuMDM0MTE0NDEyODUxMTIsMzI5LjA5NzIzNzA3OTk3ODY0IDI1MC42MjE1MTUxMjA5NzQ3MiwzMzEuNzA2OTA3NTkyMjc1OTcgQyAyNjcuMzc4NzAxNzQzODY2MDMsMzMzLjgzMTA1ODAwOTI2MjIgMjgxLjUxOTQ3NDUxOTgwMjksMzI5LjE4NDkwMDQzMDUyMDkgMjkxLjE2MjQ0MzA3OTQ1NDUzLDMxNC40MTY5OTc1MzE0NzM4IgogICAgICAgICAgICAgICAgIGNsYXNzPSJjMiIKICAgICAgICAgICAgICAgICBpZD0iaTMiIC8+CiAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgPGcKICAgICAgICAgICAgICAgaWQ9Imc1Ij4KICAgICAgICAgICAgICA8cGF0aAogICAgICAgICAgICAgICAgIHN0eWxlPSJzdHJva2U6IG5vbmU7IHN0cm9rZS13aWR0aDogMTsgc3Ryb2tlLWRhc2hhcnJheTogbm9uZTsgc3Ryb2tlLWxpbmVjYXA6IGJ1dHQ7IHN0cm9rZS1kYXNob2Zmc2V0OiAwOyBzdHJva2UtbGluZWpvaW46IG1pdGVyOyBzdHJva2UtbWl0ZXJsaW1pdDogNDsgIGZpbGwtcnVsZTogbm9uemVybzsgb3BhY2l0eTogMSIKICAgICAgICAgICAgICAgICBkPSJNIDE3My4xOTQ1NDY1ODgxNjI4LDMyOS4wNTAwMzM3MzczNzg5IEMgMTYzLjg2MTc3MTQyMjczNzYzLDMzNC4zOTA3NTQ3ODU4MDE0IDE1My41NzgxODYwNzA2NjE1LDMzOC4wNzkzNTg4NDMyMzQ1NiAxNDMuNzg2ODY0MTQ4NTUzNTgsMzQyLjQyODgwOTY5NzA2MzUgQyAxNTYuMjYyMDMzMjY0MTg2OTMsMzU3LjM3MjAzOTI5NzE5NTE2IDIwNS41MDg2MDYyNjQ5ODE3MiwzNTcuNjM1MDI5MzQ4ODIyIDIyMC43ODkwMDI1OTc5NjgyOCwzNDIuNDI4ODA5Njk3MDYzNSBDIDIxOS41ODE5NDU2OTQzNDc1MiwzNDEuOTc3MDA2Mjc1MDM3ODcgMjE4LjQ0MjMyMjEzNzI5NzgyLDM0MS41OTI2MzYxOTk1ODMyIDIxNy4zMzY0MTUyNTM1MzM1NCwzNDEuMTIwNjAyNzczNTg2MjYgQyAyMDguMjkzNjAzNDc4MzYzNjIsMzM3LjIyMjk1NTM0MTc4MyAxOTguODczMTY0OTYyMzk2MiwzMzMuOTc5NDExMzcxNzE4MyAxOTAuMzYzMDc2NjI1MTM3MSwzMjkuMTY0NjcwNDI2NTQ5NTUgQyAxODQuMDk4NTE4NzI4NjkyMDYsMzI1LjY1MTM5MzA3MDIwMSAxNzkuNTgwNDg0NTA4NDM1NywzMjUuMzk1MTQ2MzUzMjMxMiAxNzMuMTk0NTQ2NTg4MTYyOCwzMjkuMDUwMDMzNzM3Mzc4OSIKICAgICAgICAgICAgICAgICBjbGFzcz0iYzMiCiAgICAgICAgICAgICAgICAgaWQ9Imk0IiAvPgogICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDxnCiAgICAgICAgICAgICAgIGlkPSJnNiI+CiAgICAgICAgICAgICAgPHBhdGgKICAgICAgICAgICAgICAgICBzdHlsZT0ic3Ryb2tlOiBub25lOyBzdHJva2Utd2lkdGg6IDE7IHN0cm9rZS1kYXNoYXJyYXk6IG5vbmU7IHN0cm9rZS1saW5lY2FwOiBidXR0OyBzdHJva2UtZGFzaG9mZnNldDogMDsgc3Ryb2tlLWxpbmVqb2luOiBtaXRlcjsgc3Ryb2tlLW1pdGVybGltaXQ6IDQ7ICBmaWxsLXJ1bGU6IG5vbnplcm87IG9wYWNpdHk6IDEiCiAgICAgICAgICAgICAgICAgZD0iTSAxNDMuMzM1MDYwNzI2NTI3OTYsMTczLjA0Mjk4NjQ0NTM5MTA4IEMgMTU2LjE0NzM5NjU3NTAxNjI0LDE3Mi42MjQ4OTk2OTY2NTA5IDE2OC45NTk3MzI0MjM1MDQ1MywxNzIuOTc1NTUzMDk4ODIwMDYgMTgxLjczMTYwODI2NDA1MDI3LDE3Mi45NzU1NTMwOTg4MjAwNiBMIDE4MS43MzE2MDgyNjQwNTAyNywxNzIuOTA4MTE5NzUyMjQ5MDQgQyAxOTUuNDI3MzIwOTUyNjE4NTIsMTcyLjkwODExOTc1MjI0OTA0IDIwOS4xMjMwMzM2NDExODY4MiwxNzIuOTQxODM2NDI1NTM0NTUgMjIyLjgyNTQ4OTY2NDQxMjIzLDE3Mi45MDgxMTk3NTIyNDkwNCBDIDIzMy4zNjcyMDY2NzQ5MjkzNSwxNzMuMDAyMjc5ODU0ODcyMDkgMjQzLjYzNTI3MjE5OTg0OTgsMTY5LjU1NDI2MTU1MTg2OTIgMjUxLjk4MzY2ODcyMTcwODc0LDE2My4xMTY3OTc4MzAxNDExNCBDIDI3MS4zNzY5NjY2MTM1MTczLDE0OC4wMDcyMDczMTQ4MDQzMyAyNzkuMTIxNTczMjY0ODMxNSwxMjIuMzAyNjgyMTMyNDg0NDIgMjcxLjMwMzMyMjUxNDI5Nzc1LDk4Ljk5NDQyODU3NTc4NTcgQyAyNjUuMTQ2NjU3OTcyMzY2Miw4MC45ODI5ODE3MDY2NzM5OCAyNTMuMDQ5MTE1NTk3NTMwNDMsNjkuMTM0OTQyNzE0MTUwODUgMjM0LjE1NDI5MTg4ODMzODc1LDY1LjAyODI1MTkwNzk3NzQ5IEMgMjIzLjI1MDMxOTc0NzgwOTQ3LDYyLjY2MTM0MTQ0MzMzNTcxIDIxMi45MTk1MzEwNTMxMzM2NSw2NC44MjU5NTE4NjgyNjQ1MyAyMDMuMzQzOTk1ODQwMDUyOTQsNzAuMzM1MjU2MjgzMTE0NSBDIDE5NS45NTUyMzM2NDA2MDE4OCw3NC42OTkxODU1MTQ4NjM0MiAxODcuNDIxNjQyMDMwNTYwMzgsNzYuNzMyMTEyMTg1OTQxODcgMTc4Ljg1ODk0NzcwMDEyNjA3LDc2LjE2ODI0MDc2MTUwNTI1IEMgMTcxLjgxMjE2Mjk4MzQ1NzQ4LDc1Ljc0MzQxMDY3ODEwNzk5IDE2NS42NDg3NTUxMDY4Njg5LDczLjAzMjU5MDE0NTk1NDE1IDE1OS41MTkwNjM5MDM1NjU4LDY5Ljg2MzIyMjg1NzExNzU4IEMgMTQxLjQ2MDQxMzY5MTg1NDM3LDYwLjUzNzE5MTAyNjM0OTUxIDEyMi4zMTYwODY2MDAzNTAwMiw2Mi44NTAxNTQ4MTM3MzQ1IDEwNy4yOTg2ODAzMTg5OTAzMSw3Ni4xOTUyMTQxMDAxMzM2NCBDIDk2Ljg0NjUxMTYwMDQ4NjcsODUuNDg3NTI5MjU3NjE2MiA5MS41NTI5OTM4OTQ2NjM5MSw5Ny4zNzYwMjgyNTgwODE5NCA4OS42ODUwOTAxOTQ2NDc0NCwxMTEuMTU5NDA0Mjk3MTkyNTIgQyA4NS40NTAyNzYwMjk5ODkxOCwxNDIuNDA4MDE3MDk4MTg5ODIgMTExLjEyMjE1MTA2OTU2NTQ5LDE3NC4xMDE2ODk5ODY1NTU2IDE0My4zMzUwNjA3MjY1Mjc5NiwxNzMuMDQyOTg2NDQ1MzkxMDggTSAxMTQuNjgyNjMxNzY4NTEzODMsODcuOTQyMTAzMDcyODAwMzIgQyAxMjQuODU4MzIzNzY2MDc2MzgsNzYuOTAzMjY0MjM5MTI5MDcgMTM5LjI2ODgyOTkyODI5NzE4LDc0LjUzNjM1Mzc3NDQ4NzMgMTUyLjg1NjY0OTI2MjM1MTg4LDgwLjk0OTI2NTAzMzM4ODU0IEMgMTU2LjkwMjY1MDA1NjYxMTM1LDgyLjg1MDg4NTQwNjY5MDQ4IDE2MC44MTM3ODQxNTc3Mjg4Myw4NS4xOTc1NjU4NjczNjA5OCAxNjQuOTk0NjUxNjQ1MTMwMjYsODYuNzAxMzI5NDk1ODk0MDkgQyAxNzguNDQ3NjA0Mjg2MDQzLDkxLjUyMjgxMzc3NTcxOTk0IDE5MS42NjQ1NDAyMTM5NTcyNSw5MC41NTg1MTY5MTk3NTQ3NyAyMDQuNTE3MzM2MDcwMzg4MTUsODQuMzQxMTYyMzY1OTA5NCBDIDIwOC4yNDY0MDAxMzU3NjM5Niw4Mi41NDA2OTIwMTI0NjM5NCAyMTEuODg3ODAwODUwNTk3NDcsODAuNDMwMDI4MjY0NzkxOTEgMjE1Ljc4NTQ0ODI4MjQwMDc4LDc5LjEwMTU5MTMzNzM0MzQgQyAyMjkuODc5MDE3NzE1NzM3OSw3NC4yODY4NTAzOTIxNzQ2MyAyNDQuNDI0MzkwNTcxMTAwNjcsNzkuOTk4NDU0ODQ2NzM3NTcgMjUzLjYxNTU1NTcwODcyNjgsOTMuNjUzNzA3NTI3MzYzMjcgQyAyNjcuOTU4NjI4NTI0Mzc2NTQsMTE0Ljk2OTM4ODM3ODQ1MzU0IDI1OC43NDA0OTAwNDgxMjIxLDE0Ny44NzAxMTgxNzA0NDAxIDIzNS40MDg1NTIxMzQ1NTkyLDE1Ny4zNzE0NzY3MDIyOTI3NCBDIDIzMC40NzI0MzExNjU1NjI2NSwxNTkuMzk0NDc3MDk5NDIyNDYgMjI0LjczMzg1MzM3MjM3MTI3LDE1OS45NzQ0MDM4Nzk5MzMgMjE5LjMzMjQ0MjMxMjAzNDksMTYwLjE0OTczMDU4MTAxNzU2IEMgMjA2Ljk5ODg4MzIyNDIwMDYzLDE2MC41NDA4NDM5OTExMjkzMiAxOTQuNjM4MzUwNzk3NzM3OTgsMTYwLjI3MTExMDYwNDg0NTM1IDE4Mi4yOTgwNDgzNzUyNDY2MiwxNjAuMjcxMTEwNjA0ODQ1MzUgTCAxODIuMjk4MDQ4Mzc1MjQ2NjIsMTYwLjIzNzM5MzkzMTU1OTg2IEMgMTY5LjYxMzgzNTg4NTI0MzE2LDE2MC4yMzczOTM5MzE1NTk4NiAxNTYuOTI5NjIzMzk1MjM5NzYsMTYwLjMzODU0Mzk1MTQxNjM0IDE0NC4yNTIxNTQyMzk4OTM0MywxNjAuMjM3MzkzOTMxNTU5ODYgQyAxMjYuMzIxNjI3Mzg2NjY2OSwxNjAuMDY4ODEwNTY1MTMyMzcgMTEzLjQzNTExNDg1Njk1MDUyLDE1MS41NTE5Nzg4OTMyMTYyMiAxMDYuNjMxMDkwMTg3OTM3NTIsMTM1LjIxOTYyMjM1MzcyMjE3IEMgOTkuNTEwMTI4NzkwMDQwODQsMTE4LjA3ODA2NTY1NTM3NjI0IDEwMS45MTc0OTkyNjI2MjUyMSwxMDEuNzk5NjU1NzkzMTM4OTggMTE0LjY4MjYzMTc2ODUxMzgzLDg3Ljk0MjEwMzA3MjgwMDMyIgogICAgICAgICAgICAgICAgIGNsYXNzPSJjNCIKICAgICAgICAgICAgICAgICBpZD0iaTUiIC8+CiAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgPGcKICAgICAgICAgICAgICAgaWQ9Imc3Ij4KICAgICAgICAgICAgICA8cGF0aAogICAgICAgICAgICAgICAgIHN0eWxlPSJzdHJva2U6IG5vbmU7IHN0cm9rZS13aWR0aDogMTsgc3Ryb2tlLWRhc2hhcnJheTogbm9uZTsgc3Ryb2tlLWxpbmVjYXA6IGJ1dHQ7IHN0cm9rZS1kYXNob2Zmc2V0OiAwOyBzdHJva2UtbGluZWpvaW46IG1pdGVyOyBzdHJva2UtbWl0ZXJsaW1pdDogNDsgIGZpbGwtcnVsZTogbm9uemVybzsgb3BhY2l0eTogMSIKICAgICAgICAgICAgICAgICBkPSJNIDEzOS4yODIzMTY1OTc2MTEzOCwxMjMuMDI3NjczMjkzNjg2OTcgQyAxNDcuNzExNDg0OTE4OTg1MjYsMTIzLjAyNzY3MzI5MzY4Njk3IDE1NS45MTgxMjMxOTY2NzQ4OCwxMTUuMjUyNjA4NDM0MDUxNyAxNTYuMDU5NzMzMjI0NDczOTQsMTA3LjE5NDMyMzUxODgxODI3IEMgMTU2LjEzNzQ3NDc2NDY3OTg3LDEwMi43MDU5MzA0NjMxNTExNSAxNTQuNDA5NjQ2NzcwMzAzODIsOTguMzc0MzAyMDM0MDE2NTIgMTUxLjI2NDA1MjkxMTM1OTY0LDk1LjE3MTY1Mzg3MjkxNDk3IEMgMTQ4LjExODQ1OTA1MjQxNTQ2LDkxLjk2OTAwNTcxMTgxMzQxIDE0My44MTg1ODUyNDQ5NDY1Miw5MC4xNjM2MDI4MDIxODkyNiAxMzkuMzI5NTE5OTQwMjExMDcsOTAuMTYwNjYwMTc0OTg1OTQgQyAxMzAuMDIzNzE4MTEzNDE0Myw5MC4xMDY3MTM0OTc3MjkxMiAxMjIuNzU0NDAzMzUzMDYxNDYsOTcuMzgyNzcxNTkyNzM5MDggMTIyLjY4MDIyNjY3MTgzMzM3LDEwNi44MzAxODM0NDczMzQ5MiBDIDEyMi42MDYwNDk5OTA2MDUyNywxMTUuMjcyODM4NDM4MDIzIDEzMC41OTY5MDE1NTkyNjc3LDEyMy4wNjgxMzMzMDE2Mjk1NiAxMzkuMjgyMzE2NTk3NjExMzgsMTIzLjAyNzY3MzI5MzY4Njk3IgogICAgICAgICAgICAgICAgIGNsYXNzPSJjNSIKICAgICAgICAgICAgICAgICBpZD0iaTYiIC8+CiAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgPGcKICAgICAgICAgICAgICAgaWQ9Imc4Ij4KICAgICAgICAgICAgICA8cGF0aAogICAgICAgICAgICAgICAgIHN0eWxlPSJzdHJva2U6IG5vbmU7IHN0cm9rZS13aWR0aDogMTsgc3Ryb2tlLWRhc2hhcnJheTogbm9uZTsgc3Ryb2tlLWxpbmVjYXA6IGJ1dHQ7IHN0cm9rZS1kYXNob2Zmc2V0OiAwOyBzdHJva2UtbGluZWpvaW46IG1pdGVyOyBzdHJva2UtbWl0ZXJsaW1pdDogNDsgIGZpbGwtcnVsZTogbm9uemVybzsgb3BhY2l0eTogMSIKICAgICAgICAgICAgICAgICBkPSJNIDIyMy44MjM1MDMxOTM2NjI5LDEyMi45NzM3MjY2MTY0MzAxOCBDIDIzMi40MjEyNTQ4ODE0NjQyOCwxMjIuOTczNzI2NjE2NDMwMTggMjQwLjM5ODYxOTc4MDgxMjUsMTE1LjQxNDQ0ODQ2NTgyMjA4IDI0MC40NzI3OTY0NjIwNDA2LDEwNy4xNzQwOTM1MTQ4NDY5NiBDIDI0MC41NDY5NzMxNDMyNjg3LDk3LjczMzQyNDk5NDkwODIyIDIzMy4zNjUzMjE3MzM0NTgxNiw5MC4yNDE1ODAxOTA4NzExIDIyNC4xNDA0Mzk5MjI1NDY1Myw5MC4xOTQzNzY4NDgyNzE0MiBDIDIxOS44MjIxMTM5MzIxOTkwMiw5MC4wOTg2MzczNjk3NTQ0MSAyMTUuNjQzNTk2Mzg0ODUxNTgsOTEuNzI3MzY3NTAxMzU5OTggMjEyLjUyOTE4ODMwMDY3NTMyLDk0LjcyMDI4NzA5NDY0NiBDIDIwOS40MTQ3ODAyMTY0OTkxLDk3LjcxMzIwNjY4NzkzMTk3IDIwNy42MjExNjQwNzg5MDQ4LDEwMS44MjM2NDYwNjY2NDIyIDIwNy41NDUwOTMzMzE0MjU2NSwxMDYuMTQyMzYzMzEyMzEwNzkgQyAyMDcuMzU2Mjc5OTYxMDI2OSwxMTUuMDM2ODIxNzI1MDI0NTIgMjE1LjAwOTk2NDc5NjgzNDM3LDEyMi45NjAyMzk5NDcxMTU5OCAyMjMuODIzNTAzMTkzNjYyOSwxMjIuOTczNzI2NjE2NDMwMTgiCiAgICAgICAgICAgICAgICAgY2xhc3M9ImMxIgogICAgICAgICAgICAgICAgIGlkPSJpNyIgLz4KICAgICAgICAgICAgPC9nPgogICAgICAgICAgICA8ZwogICAgICAgICAgICAgICBpZD0iZzkiPgogICAgICAgICAgICAgIDxwYXRoCiAgICAgICAgICAgICAgICAgc3R5bGU9InN0cm9rZTogbm9uZTsgc3Ryb2tlLXdpZHRoOiAxOyBzdHJva2UtZGFzaGFycmF5OiBub25lOyBzdHJva2UtbGluZWNhcDogYnV0dDsgc3Ryb2tlLWRhc2hvZmZzZXQ6IDA7IHN0cm9rZS1saW5lam9pbjogbWl0ZXI7IHN0cm9rZS1taXRlcmxpbWl0OiA0OyAgZmlsbC1ydWxlOiBub256ZXJvOyBvcGFjaXR5OiAxIgogICAgICAgICAgICAgICAgIGQ9Ik0gMTUxLjgyNDkxOTA1OTgxNTczLDEzNC45NDMxNDU2MzI3ODExIEMgMTQ1LjIyOTkzNzc2NTE3MjgsMTM0Ljc5NDc5MjI3MDMyNDkzIDEzOC42MDc5ODMxMzE5MDE0OCwxMzQuODgyNDU1NjIwODY3MiAxMzIuMDE5NzQ1MTcxOTE1NjQsMTM1LjI5Mzc5OTAzNDk1MDI3IEMgMTI4LjIzNjczNDQyOTI4MzA1LDEzNS41MjMwNzI0MTMyOTE2MyAxMjYuMjMzOTY0MDM2MTI0NiwxMzkuMDI5NjA2NDM0OTgzMTUgMTI3LjM2Njg0NDI1ODUxNzI2LDE0Mi42NTA3NzcxNDU4NDUzOCBDIDEyOC40MTg4MDQ0NjUwMjQ3LDE0Ni4wMjI0NDQ0NzQzOTQ5NCAxMzAuODg2ODY0OTQ5NTIzLDE0Ny44MTYxNzE0OTMxODMyOCAxMzQuMzM5NDUyMjkzOTU3NzIsMTQ4LjA0NTQ0NDg3MTUyNDY3IEMgMTM3LjEzMTE5Mjg0MTk5Njc1LDE0OC4yMTQwMjgyMzc5NTIxNiAxMzkuOTM2NDIwMDU5MzQ5OTgsMTQ4LjA3OTE2MTU0NDgxMDE4IDE0Mi43MzQ5MDM5NDIwNDYxMiwxNDguMDc5MTYxNTQ0ODEwMTggTCAxNDIuNzM0OTAzOTQyMDQ2MTIsMTQ4LjE0NjU5NDg5MTM4MTE3IEMgMTQ1LjY0ODAyNDUxMzkxMjkzLDE0OC4xNDY1OTQ4OTEzODExNyAxNDguNTY3ODg4NDIwNDM2ODQsMTQ4LjI4MTQ2MTU4NDUyMzEzIDE1MS41MDEyMzg5OTYyNzQ5NCwxNDguMTA2MTM0ODgzNDM4NTYgQyAxNTUuMDIxMjU5Njg3MjgwNywxNDcuODk3MDkxNTA5MDY4NSAxNTcuOTc0ODQwMjY3MDkwMSwxNDQuODU1ODQ3NTc4NzE2OCAxNTguMTAyOTYzNjI1NTc0OTcsMTQxLjYxOTA0Njk0MzMwOTIzIEMgMTU4LjE5Mzk5MDI4OTMwNzEsMTM4LjA0OTA3NTQyMDYzNjc3IDE1NS4zOTM3NDc5OTUyMzg5NSwxMzUuMDcxMzc0MTYyNzEyNTIgMTUxLjgyNDkxOTA1OTgxNTczLDEzNC45NDMxNDU2MzI3ODExIgogICAgICAgICAgICAgICAgIGNsYXNzPSJjNCIKICAgICAgICAgICAgICAgICBpZD0iaTgiIC8+CiAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgPGcKICAgICAgICAgICAgICAgaWQ9ImcxMCI+CiAgICAgICAgICAgICAgPHBhdGgKICAgICAgICAgICAgICAgICBzdHlsZT0ic3Ryb2tlOiBub25lOyBzdHJva2Utd2lkdGg6IDE7IHN0cm9rZS1kYXNoYXJyYXk6IG5vbmU7IHN0cm9rZS1saW5lY2FwOiBidXR0OyBzdHJva2UtZGFzaG9mZnNldDogMDsgc3Ryb2tlLWxpbmVqb2luOiBtaXRlcjsgc3Ryb2tlLW1pdGVybGltaXQ6IDQ7ICBmaWxsLXJ1bGU6IG5vbnplcm87IG9wYWNpdHk6IDEiCiAgICAgICAgICAgICAgICAgZD0iTSAyMTEuNjkyMjQ0MTQ1NTQxNjIsMTQ3Ljk5ODI0MTUyODkyNDk4IEMgMjE3LjgzODA0NTk3MTQ1NzgsMTQ4LjI2ODAxMzI4ODEwMjQ4IDIyMy45OTM1NDU3NTcyMzgzLDE0OC4yMjc1MDE3NzIxNDQ4NSAyMzAuMTM1MjY0NDMyNzA3NjMsMTQ3Ljg3Njg2MTUwNTA5NzIgQyAyMzMuODAzNjM4NDg2MTY5NjMsMTQ3LjY2MTA3NDc5NjA3IDIzNi43MDMyNzIzODg3MjIyNywxNDQuMDE5Njc0MDgxMjM2NSAyMzYuNTc1MTQ5MDMwMjM3MzgsMTQwLjgzMDA3Njc4ODQyODYgQyAyMzYuNDQ3MDI1NjcxNzUyNDcsMTM3LjY0MDQ3OTQ5NTYyMDc1IDIzMy4zMTgxMTgzOTA4NTg1MywxMzQuOTI5NjU4OTYzNDY2OTIgMjI5LjI5MjM0NzYwMDU3MDM0LDEzNC44MDE1MzU2MDQ5ODIwNCBDIDIyNi41OTUwMTM3Mzc3MzA2OCwxMzQuNzEzODcyMjU0NDM5NzQgMjIzLjg5NzY3OTg3NDg5MTA4LDEzNC44MDE1MzU2MDQ5ODIwNCAyMjEuMjQwODA2MDE5OTkzOTgsMTM0LjgwMTUzNTYwNDk4MjA0IEwgMjIxLjI0MDgwNjAxOTk5Mzk4LDEzNC44NjIyMjU2MTY4OTU5MyBDIDIxOC4yMTMwNDg3NTg5NTY1LDEzNC44NjIyMjU2MTY4OTU5MyAyMTUuMTcxODA0ODI4NjA0ODIsMTM0LjczNDEwMjI1ODQxMTA0IDIxMi4xNzc3NjQyNDA4NTI4LDEzNC44NjIyMjU2MTY4OTU5MyBDIDIwOC40NDE5NTY4NDA4MTk4NywxMzUuMDY0NTI1NjU2NjA4OSAyMDUuOTEzMjA2MzQ0NDA3NzQsMTM3LjYyMDI0OTQ5MTY0OTQ3IDIwNS44MTg3OTk2NTkyMDgzNywxNDAuOTY0OTQzNDgxNTcwNjMgQyAyMDUuNzI0MzkyOTc0MDA4OTQsMTQ0LjUyNTQyNDE4MDUxODk0IDIwOC4xNTg3MzY3ODUyMjE3MiwxNDcuODQ5ODg4MTY2NDY4ODIgMjExLjY5MjI0NDE0NTU0MTYyLDE0Ny45OTgyNDE1Mjg5MjQ5OCIKICAgICAgICAgICAgICAgICBjbGFzcz0iYzEiCiAgICAgICAgICAgICAgICAgaWQ9Imk5IiAvPgogICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDxnCiAgICAgICAgICAgICAgIGlkPSJnMTEiPgogICAgICAgICAgICAgIDxwYXRoCiAgICAgICAgICAgICAgICAgc3R5bGU9InN0cm9rZTogbm9uZTsgc3Ryb2tlLXdpZHRoOiAxOyBzdHJva2UtZGFzaGFycmF5OiBub25lOyBzdHJva2UtbGluZWNhcDogYnV0dDsgc3Ryb2tlLWRhc2hvZmZzZXQ6IDA7IHN0cm9rZS1saW5lam9pbjogbWl0ZXI7IHN0cm9rZS1taXRlcmxpbWl0OiA0OyAgZmlsbC1ydWxlOiBub256ZXJvOyBvcGFjaXR5OiAxIgogICAgICAgICAgICAgICAgIGQ9Ik0gMTc0Ljk5NTAxNjk0MTYwODIsMTQwLjUwNjM5NjcyNDg4Nzg4IEMgMTc5LjM1MjE0NTQ0MjY1ODcsMTQwLjgxNDMzNTc3MzAwMzEgMTgzLjcyNTE3MjM0ODcxOTI0LDE0MC44MjU2MDA2NTQyNjU1IDE4OC4wODM4Mjk1MTEwMzc2NiwxNDAuNTQwMTEzMzk4MTczMzYgQyAxOTEuNDg1Nzg3NTQ3ODEyNSwxNDAuMjA0OTg3OTA4NjIzOTYgMTk0LjA0ODQ3Mjc1NTQ4MjcyLDEzNy4yOTQ3MjAxMDk1Njg2MyAxOTMuOTUwNTMwNjYyNzEzOCwxMzMuODc3Njk4NzU2OTU5NDYgQyAxOTMuNzk1NDMzOTY1NjAwNTIsMTMwLjM0NDE5MTM5NjYzOTUgMTkxLjE0NTMwMzQ0NTM2MDU4LDEyNy44NjI2NDQyNDI4MjcwNiAxODcuMjk0ODU5MzU2MTU3LDEyNy43MjEwMzQyMTUwMjc5NyBDIDE4NS41MDExMzIzMzczNjg2MywxMjcuNjYwMzQ0MjAzMTE0MDggMTgzLjcwNzQwNTMxODU4MDI3LDEyNy43MjEwMzQyMTUwMjc5NyAxODEuOTAwMTkxNjMwNDc3NzQsMTI3LjcyMTAzNDIxNTAyNzk3IEwgMTgxLjkwMDE5MTYzMDQ3Nzc0LDEyNy44MDE5NTQyMzA5MTMxNyBDIDE3OS43NzYwNDEyMTM0OTE1LDEyNy44MDE5NTQyMzA5MTMxNyAxNzcuNjM4NDA0MTI3MTkxMDgsMTI3LjY5NDA2MDg3NjM5OTU5IDE3NS41MjA5OTcwNDQ4NjE5OSwxMjcuODAxOTU0MjMwOTEzMTcgQyAxNzIuMjEwMDE5NzI4MjI2MywxMjguMDEwOTk3NjA1MjgzMjUgMTY5Ljk5ODIwNTk2MDY5NzgyLDEzMC4zNTA5MzQ3MzEyOTY2MyAxNjkuNzQ4NzAyNTc4Mzg1MTUsMTMzLjY3NTM5ODcxNzI0NjQ4IEMgMTY5LjUyNjE3MjUzNDcwMDg2LDEzNi44MzEyNzkzMzY3Njg4NiAxNzEuODkzMDgyOTk5MzQyNjIsMTQwLjI5NzM1MzM1MDUxNzggMTc0Ljk5NTAxNjk0MTYwODIsMTQwLjUwNjM5NjcyNDg4Nzg4IgogICAgICAgICAgICAgICAgIGNsYXNzPSJjNCIKICAgICAgICAgICAgICAgICBpZD0iaTEwIiAvPgogICAgICAgICAgICA8L2c+CiAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogIDwvZz4KPC9zdmc+Cg==" x="779" y="69" width="22" height="26" preserveAspectRatio="xMidYMid meet"/>
+            <text x="816" y="87" fill="#5b21b6" font-size="15" font-weight="800">AlertMend</text>
+            <text x="840" y="116" text-anchor="middle" fill="#6d28d9" font-size="11">signals + dependency context</text>
+          </g>
+          <path class="flowLine" d="M840 150 C840 188 710 180 620 207" fill="none" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#odooArrow)"/>
+          <g filter="url(#softShadow)">
+            <rect x="68" y="210" width="170" height="72" rx="10" fill="#fff" stroke="#e4e4e7"/>
+            <text x="153" y="238" text-anchor="middle" fill="#18181b" font-size="14" font-weight="800">1 · Confirm</text>
+            <text x="153" y="260" text-anchor="middle" fill="#71717a" font-size="11">repeat the failing check</text>
+            <rect x="250" y="210" width="170" height="72" rx="10" fill="#fff" stroke="#e4e4e7"/>
+            <text x="335" y="238" text-anchor="middle" fill="#18181b" font-size="14" font-weight="800">2 · Diagnose</text>
+            <text x="335" y="260" text-anchor="middle" fill="#71717a" font-size="11">DB, disk, memory, logs</text>
+            <rect x="432" y="210" width="170" height="72" rx="10" fill="#fff" stroke="#e4e4e7"/>
+            <text x="517" y="238" text-anchor="middle" fill="#18181b" font-size="14" font-weight="800">3 · Recover</text>
+            <text x="517" y="260" text-anchor="middle" fill="#71717a" font-size="11">approved narrow action</text>
+            <rect class="recovered" x="614" y="210" width="278" height="72" rx="10" fill="#ecfdf5" stroke="#86efac"/>
+            <text x="753" y="238" text-anchor="middle" fill="#047857" font-size="14" font-weight="800">4 · Verify before closing</text>
+            <text x="753" y="260" text-anchor="middle" fill="#047857" font-size="11">HTTP + database + business path healthy</text>
+          </g>
+          <line class="flowLine" x1="240" y1="246" x2="246" y2="246" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#odooArrow)"/>
+          <line class="flowLine" x1="422" y1="246" x2="428" y2="246" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#odooArrow)"/>
+          <line class="flowLine" x1="604" y1="246" x2="610" y2="246" stroke="#16a34a" stroke-width="2.5" marker-end="url(#odooArrow)"/>
+          <text x="42" y="315" fill="#71717a" font-size="11">A restart is not a diagnosis. Recovery is complete only after the customer-facing path works again.</text>
+        </svg>
+        <figcaption>AlertMend can collect the infrastructure and endpoint evidence, execute a policy-approved runbook, and test the service again. The exact actions depend on your deployment and permissions.</figcaption>
+      </figure>
+
+          <p class="bodyText">That architecture creates two traps. First, <code>systemctl is-active odoo</code> can be green while every worker is saturated or the database is unreachable. Second, a successful HTTP request to a generic page may not prove that the intended database or a business workflow works. The monitoring design must therefore move from shallow to deep checks.</p>
+
+          <h2 class="sectionHead" id="monitor">The Odoo monitoring checklist</h2>
+          <p class="sectionSub">Use four layers: user journey, application, dependencies, and recoverability.</p>
+          <div class="monitorGrid">
+            <section class="monitorCard"><div class="monitorTop"><h3>1. Customer journey</h3><span class="signalBadge">Outside-in</span></div><p>Check the public HTTPS URL, expected status and page content, latency, TLS expiry, login availability, and one read-only business action where possible.</p></section>
+            <section class="monitorCard"><div class="monitorTop"><h3>2. Odoo runtime</h3><span class="signalBadge">Application</span></div><p>Watch process state, worker count, restarts, request latency, 5xx rate, Python tracebacks, memory, CPU, open files, and Odoo’s worker-recycling events.</p></section>
+            <section class="monitorCard"><div class="monitorTop"><h3>3. PostgreSQL</h3><span class="signalBadge">Database</span></div><p>Check <code>pg_isready</code>active and waiting sessions, connection utilization, long transactions, lock waits, query latency, dead tuples, replication lag where used, and storage headroom.</p></section>
+            <section class="monitorCard"><div class="monitorTop"><h3>4. Proxy and websocket</h3><span class="signalBadge">Edge</span></div><p>Track Nginx or load-balancer 499/502/503/504 rates, upstream connect time, read timeouts, certificate expiry, and the <code>/websocket/</code> route.</p></section>
+            <section class="monitorCard"><div class="monitorTop"><h3>5. Storage and filestore</h3><span class="signalBadge">Durability</span></div><p>Alert on disk bytes and inodes, PostgreSQL/WAL growth, log growth, filestore mount availability, write errors, and backup age. Never “clean” the Odoo filestore as routine disk remediation.</p></section>
+            <section class="monitorCard"><div class="monitorTop"><h3>6. Scheduled actions</h3><span class="signalBadge">Freshness</span></div><p>Measure the last successful run and duration of critical cron jobs. <a href="https://www.odoo.com/documentation/19.0/developer/reference/backend/actions.html" target="_blank" rel="noopener noreferrer">Odoo 19 documents</a> skip and deactivation behavior after repeated failures, so silence can be a failure signal.</p></section>
+            <section class="monitorCard"><div class="monitorTop"><h3>7. Deployment health</h3><span class="signalBadge">Change</span></div><p>Correlate failures with image, package, custom-addon, configuration, and database changes. Track module import errors and keep a tested rollback path for the current major version.</p></section>
+            <section class="monitorCard"><div class="monitorTop"><h3>8. Recovery proof</h3><span class="signalBadge">Resilience</span></div><p>Test restore procedures, not just backup completion. <a href="https://www.odoo.com/documentation/19.0/administration/odoo_sh/getting_started/create.html" target="_blank" rel="noopener noreferrer">Odoo’s backup workflow</a> offers a ZIP format that includes the filestore; a database-only restore can leave attachments missing.</p></section>
+          </div>
+
+          <h2 class="sectionHead" id="tools">Odoo module, uptime monitor, or infrastructure monitoring?</h2>
+          <p class="bodyText">This is the gap many Odoo monitoring pages miss: an in-database module can provide excellent application context, but it cannot reliably report that Odoo or PostgreSQL is completely unreachable. Conversely, a generic uptime service can prove the URL is down but usually cannot tell whether the cause is a worker, database connection, disk, proxy, or failed deployment.</p>
+          <div class="diyWrap">
+            <table class="compareTable">
+              <thead><tr><th>Approach</th><th>What it sees well</th><th>Blind spot</th><th>Best use</th></tr></thead>
+              <tbody>
+                <tr><td>Odoo monitoring module</td><td>Cron history, application records, internal configuration</td><td>Cannot report reliably when the whole runtime or database is down</td><td>Deep application context</td></tr>
+                <tr><td>External uptime monitor</td><td>Public availability, latency, TLS, response content</td><td>Limited root-cause evidence and no host-level action</td><td>Independent outage detection</td></tr>
+                <tr><td>Metrics and log stack</td><td>Detailed trends, dashboards, queries, capacity</td><td>Recovery still depends on a human or separate automation</td><td>Investigation and long-term analysis</td></tr>
+                <tr><td>AlertMend operations loop</td><td>Endpoint, VM or Kubernetes evidence, incidents, runbooks, verification</td><td>Requires scoped access and policy design for safe actions</td><td>Detection through governed recovery</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="bodyText"><strong>The practical answer is layered:</strong> keep useful Odoo-native telemetry, test the service from outside, observe its infrastructure and PostgreSQL dependency, and automate only the repeatable responses whose preconditions you can prove.</p>
+
+          <h2 class="sectionHead" id="checks">Copy-paste checks for VM, Docker, and Kubernetes</h2>
+          <p class="bodyText">Choose the deployment model closest to production. Replace service names, database names, namespaces, and URLs. These checks are diagnostic building blocks, not permission to restart a database blindly.</p>
+
+          <section class="deployChooser" aria-label="Odoo deployment checks">
+            <div class="deployTabs" role="tablist" aria-label="Deployment type">
+              <button class="deployTab" type="button" role="tab" aria-selected="true" data-deploy-tab="vm">Linux VM</button>
+              <button class="deployTab" type="button" role="tab" aria-selected="false" data-deploy-tab="docker">Docker Compose</button>
+              <button class="deployTab" type="button" role="tab" aria-selected="false" data-deploy-tab="kubernetes">Kubernetes</button>
+            </div>
+            <div class="deployPanel" role="tabpanel" data-deploy-panel="vm">
+              <h3>Linux VM: confirm every dependency before touching the service</h3>
+              <p>The service name varies by package and version. The URL check includes the intended database so a healthy database selector does not create a false positive.</p>
+              <div class="command"><button class="copyCode" type="button">Copy</button><code>systemctl is-active --quiet odoo &amp;&amp; echo "odoo service: active"
+curl -fsS --max-time 10 "https://odoo.example.com/web/login?db=production" &gt;/dev/null
+pg_isready -h 127.0.0.1 -p 5432 -d production -U odoo
+df -P /var/lib/odoo /var/lib/postgresql
+journalctl -u odoo --since "15 minutes ago" --no-pager | tail -n 200</code></div>
+            </div>
+            <div class="deployPanel" role="tabpanel" data-deploy-panel="docker" hidden>
+              <h3>Docker Compose: running is not the same as ready</h3>
+              <p><a href="https://docs.docker.com/compose/how-tos/startup-order/" target="_blank" rel="noopener noreferrer">Docker documents</a> that Compose starts dependencies in order but does not wait for readiness unless you use a health check with <code>service_healthy</code>.</p>
+              <div class="command"><button class="copyCode" type="button">Copy</button><code>services:
+  db:
+    image: postgres:16
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  web:
+    image: odoo:19.0
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    restart: unless-stopped
+    volumes:
+      - odoo-data:/var/lib/odoo</code></div>
+            </div>
+            <div class="deployPanel" role="tabpanel" data-deploy-panel="kubernetes" hidden>
+              <h3>Kubernetes: separate startup, readiness, and liveness</h3>
+              <p>Use a database-aware startup gate, a readiness check that removes unhealthy pods from service, and a conservative liveness check. A custom Odoo health controller is preferable when you need to prove database and filestore access.</p>
+              <div class="command"><button class="copyCode" type="button">Copy</button><code>kubectl -n odoo get deploy,pods,svc
+kubectl -n odoo logs deploy/odoo --since=15m --all-containers
+kubectl -n odoo exec deploy/odoo --   pg_isready -h postgres -p 5432 -d production -U odoo
+kubectl -n odoo top pods
+kubectl -n odoo get events --sort-by=.lastTimestamp | tail -n 40</code></div>
+            </div>
+          </section>
+
+          <h3 class="subsectionHead">A useful PostgreSQL saturation query</h3>
+          <p class="bodyText">PostgreSQL’s <a href="https://www.postgresql.org/docs/current/monitoring-stats.html#MONITORING-PG-STAT-ACTIVITY-VIEW" target="_blank" rel="noopener noreferrer"><code>pg_stat_activity</code></a> exposes one row per server process. Run a read-only summary to see whether Odoo is failing because the database is unavailable, saturated, blocked, or simply slow.</p>
+          <div class="command"><button class="copyCode" type="button">Copy</button><code>SELECT state, wait_event_type, wait_event, count(*) AS sessions
+FROM pg_stat_activity
+WHERE datname = 'production'
+GROUP BY state, wait_event_type, wait_event
+ORDER BY sessions DESC;</code></div>
+
+          <h2 class="sectionHead" id="failures">Common Odoo failures: what can safely auto-fix?</h2>
+          <p class="sectionSub">The right automation is narrow, evidence-driven, bounded, and reversible.</p>
+          <div class="diyWrap">
+            <table class="compareTable recoveryTable">
+              <thead><tr><th>Failure pattern</th><th>Evidence to confirm</th><th>Automation level</th><th>Safe first response</th></tr></thead>
+              <tbody>
+                <tr><td>Odoo process stopped</td><td>Service inactive; DB ready; disk healthy</td><td><span class="autoSafe">Auto-fix</span></td><td>Start Odoo, wait, then verify HTTPS and database path.</td></tr>
+                <tr><td>Workers wedged / repeated 502 or 504</td><td>Public check fails; process exists; worker or timeout evidence in logs</td><td><span class="autoSafe">Auto-fix</span></td><td>One controlled service restart with cooldown and post-check.</td></tr>
+                <tr><td>Odoo started before PostgreSQL was ready</td><td><code>pg_isready</code> transitions to healthy; Odoo retains connection errors</td><td><span class="autoSafe">Auto-fix</span></td><td>Wait for DB readiness, then restart only Odoo.</td></tr>
+                <tr><td>Container or pod repeatedly crashes</td><td>Exit code, OOM status, events, recent image/config change</td><td><span class="autoGate">Conditional</span></td><td>Restart once if configuration is unchanged; otherwise roll back with approval.</td></tr>
+                <tr><td>Memory pressure / OOM</td><td>Kernel or pod OOM evidence; worker RSS; request correlation</td><td><span class="autoGate">Conditional</span></td><td>Recycle affected runtime and page the owner; tune workers and limits after evidence review.</td></tr>
+                <tr><td>Log volume fills disk</td><td>Filesystem and inode pressure; logs are the proven growth source</td><td><span class="autoGate">Conditional</span></td><td>Rotate or archive approved log paths. Never delete PostgreSQL or filestore data.</td></tr>
+                <tr><td>PostgreSQL connection saturation</td><td>Session counts, wait states, long transactions, max-connection headroom</td><td><span class="autoGate">Approval required</span></td><td>Identify the owner and query first. Terminating sessions can interrupt business transactions.</td></tr>
+                <tr><td>Critical cron action missed</td><td>Expected completion absent; repeated exception or timeout</td><td><span class="autoGate">Approval required</span></td><td>Fix the cause before rerunning; only rerun jobs known to be idempotent.</td></tr>
+                <tr><td>TLS certificate near expiry</td><td>Expiry window and renewal status</td><td><span class="autoSafe">Auto-fix</span></td><td>Run the approved renewal path, reload the proxy, and verify the certificate served.</td></tr>
+                <tr><td>Failed custom module or database migration</td><td>Import/registry traceback immediately after a change</td><td><span class="autoHuman">Human review</span></td><td>Stop restart loops, preserve evidence, and execute the tested release rollback.</td></tr>
+                <tr><td>Database corruption or missing filestore</td><td>PostgreSQL/storage errors or attachment mismatch</td><td><span class="autoHuman">Human review</span></td><td>Isolate writes and follow the tested restore or database recovery procedure.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="bodyText">Notice what is missing: “restart everything.” Restarting PostgreSQL together with Odoo can turn a recoverable application failure into interrupted transactions or a longer database recovery. Deleting the oldest directory under <code>/var/lib/odoo</code> can destroy attachments. A credible runbook encodes the checks that prevent those mistakes.</p>
+          <aside class="answerCard">
+            <span class="answerEyebrow">The automation opportunity</span>
+            <h2>These are not eleven unrelated incidents. They are a decision tree.</h2>
+            <p>Once your recurring signatures, preconditions, actions, and verification checks are explicit, they can become a governed AlertMend runbook instead of a document an engineer must rediscover during every outage. Unknown or data-risk conditions still stop and page a human.</p>
+          </aside>
+
+          <h2 class="sectionHead" id="runbook">The production-safe Odoo auto-recovery runbook</h2>
+          <section class="runbook">
+            <span class="answerEyebrow">Recommended control loop</span>
+            <ol class="runbookSteps">
+              <li><span class="runbookNum">01</span><strong>Detect</strong><span>Require repeated failure or corroborating signals.</span></li>
+              <li><span class="runbookNum">02</span><strong>Diagnose</strong><span>Collect URL, DB, disk, memory, logs, and recent changes.</span></li>
+              <li><span class="runbookNum">03</span><strong>Decide</strong><span>Match a known signature and check guardrails.</span></li>
+              <li><span class="runbookNum">04</span><strong>Recover</strong><span>Run one narrow, approved action with a timeout.</span></li>
+              <li><span class="runbookNum">05</span><strong>Verify</strong><span>Prove the customer path works; otherwise escalate.</span></li>
+            </ol>
+          </section>
+
+          <h3 class="subsectionHead">Guardrails that turn a shell script into reliable automation</h3>
+          <div class="guardrails">
+            <div class="guardrail"><strong>Bound the blast radius</strong><p>Target one service, pod, or host. Never fan out a restart across every Odoo node unless the policy explicitly requires it.</p></div>
+            <div class="guardrail"><strong>Use a cooldown</strong><p>Allow one attempt, then suppress repeats for a defined window. Restart loops erase evidence and increase downtime.</p></div>
+            <div class="guardrail"><strong>Require preconditions</strong><p>For an Odoo restart, prove PostgreSQL is ready and storage has headroom before acting.</p></div>
+            <div class="guardrail"><strong>Protect data paths</strong><p>Explicitly deny deletion under PostgreSQL data, WAL, Odoo filestore, custom addons, and backup locations.</p></div>
+            <div class="guardrail"><strong>Verify deeply</strong><p>A green PID is insufficient. Re-run the external URL and database-aware check after recovery.</p></div>
+            <div class="guardrail"><strong>Leave an audit trail</strong><p>Record evidence, command, approver, output, elapsed time, and verification result on the incident.</p></div>
+          </div>
+
+          <h2 class="sectionHead" id="alertmend">How to monitor and auto-recover Odoo with AlertMend</h2>
+          <p class="bodyText">For self-hosted Odoo, AlertMend can combine an external API monitor with VM or Kubernetes signals and an approved runbook. The important sales claim is not “AI fixes everything.” It is that the evidence, decision, action, verification, escalation, and audit trail can live in one operational loop.</p>
+          <div class="monitorGrid">
+            <section class="monitorCard"><div class="monitorTop"><h3>Connect the runtime</h3><span class="signalBadge">Day 1</span></div><p>Register the Odoo VM through SSH-based monitoring or an agent-managed path, or connect the Kubernetes cluster. Collect CPU, memory, disk, service, container, events, logs, and deployment context.</p></section>
+            <section class="monitorCard"><div class="monitorTop"><h3>Add the user-facing check</h3><span class="signalBadge">Outside-in</span></div><p>Create an HTTPS monitor for the intended Odoo database and expected response. Configure frequency, timeout, success codes or body conditions, severity, and escalation.</p></section>
+            <section class="monitorCard"><div class="monitorTop"><h3>Encode the diagnostic tree</h3><span class="signalBadge">Evidence</span></div><p>Query service state, PostgreSQL readiness, disk and inodes, memory pressure, recent Odoo and proxy logs, and recent deployment changes before selecting an action.</p></section>
+            <section class="monitorCard"><div class="monitorTop"><h3>Run governed recovery</h3><span class="signalBadge">Action</span></div><p>Execute commands on a connected VM or pod, branch on results, require Slack or Teams approval for risky paths, and post a closing summary after verification.</p></section>
+            <section class="monitorCard"><div class="monitorTop"><h3>Escalate the unknowns</h3><span class="signalBadge">On-call</span></div><p>Route failed recovery, unknown signatures, or data-risk conditions into incidents and on-call. WhatsApp escalation is available where configured alongside team channels.</p></section>
+            <section class="monitorCard"><div class="monitorTop"><h3>Keep enterprise control</h3><span class="signalBadge">Deployment</span></div><p>Use managed or self-hosted AlertMend, RBAC, approvals, and audit trails. Confirm the deployment model and integrations included in your workspace and contract.</p></section>
+          </div>
+
+          <h3 class="subsectionHead">An example AlertMend decision tree</h3>
+          <div class="command"><button class="copyCode" type="button">Copy</button><code>IF public_check fails twice
+  collect: Odoo service, pg_isready, disk, memory, recent logs, last deploy
+
+IF PostgreSQL is ready AND disk is healthy AND Odoo is inactive
+  start Odoo
+  wait up to 60 seconds
+  verify public URL + database-aware check
+
+ELSE IF Odoo is active AND known worker-hang signature matches
+  restart Odoo once
+  verify; enforce 30-minute cooldown
+
+ELSE IF disk pressure is caused only by approved log paths
+  request approval → archive/rotate logs → verify free space → restart if needed
+
+ELSE
+  declare incident → attach evidence → page the Odoo owner
+</code></div>
+
+          <h2 class="sectionHead">Thresholds worth starting with</h2>
+          <p class="bodyText">Treat these as starting points, then tune them against workload and error-budget data. Static universal thresholds produce noise.</p>
+          <div class="diyWrap">
+            <table class="compareTable">
+              <thead><tr><th>Signal</th><th>Starting alert</th><th>Why it matters</th></tr></thead>
+              <tbody>
+                <tr><td>Public HTTPS check</td><td>2–3 consecutive failures</td><td>Avoids acting on one transient probe failure.</td></tr>
+                <tr><td>p95 request latency</td><td>Above your SLO for 5–10 minutes</td><td>Detects saturation before a full outage.</td></tr>
+                <tr><td>5xx / 502 / 504 rate</td><td>Burn-rate or sustained percentage</td><td>Separates customer impact from raw CPU usage.</td></tr>
+                <tr><td>Filesystem capacity</td><td>Warning at 75–80%; critical at 90%</td><td>Leaves time to understand whether logs, WAL, or filestore is growing.</td></tr>
+                <tr><td>Inodes</td><td>Same staged headroom as bytes</td><td>A filesystem can be “full” with free bytes remaining.</td></tr>
+                <tr><td>PostgreSQL connections</td><td>Sustained utilization above 70–80%</td><td>Preserves headroom for admin and recovery connections.</td></tr>
+                <tr><td>Critical cron freshness</td><td>Expected finish + normal maximum duration</td><td>Detects silent billing, email, inventory, or integration lag.</td></tr>
+                <tr><td>Certificate expiry</td><td>30, 14, and 7 days</td><td>Creates multiple opportunities to repair renewal before outage.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h2 class="sectionHead">What this architecture will not hide</h2>
+          <p class="bodyText">Custom modules change the failure surface. A module can introduce expensive computed fields, slow SQL, unsafe cron behavior, memory growth, or registry failures after deployment. Odoo’s own sizing examples assume fields and SQL are well designed. Monitor custom code as a first-class dependency, correlate incidents with releases, and keep the current rollback artifact available.</p>
+          <p class="bodyText">Also separate an <a href="https://www.odoo.com/documentation/19.0/administration/on_premise/update.html" target="_blank" rel="noopener noreferrer"><em>update</em> within the current Odoo major version</a> from a database <em>upgrade</em> to a new major version. Odoo documents these as different operations; a major-version database upgrade is not a safe automatic incident response.</p>
+
+          <h2 class="sectionHead" id="by-industry">Odoo monitoring priorities by industry</h2>
+          <p class="sectionSub">Odoo runs very different workloads depending on the business, so the failure that hurts first shifts by industry. The underlying checks are the same; the priority order changes.</p>
+          <div class="diyWrap"><table class="compareTable"><thead><tr><th>Industry / workload</th><th>Watch most closely</th><th>What downtime costs</th></tr></thead><tbody>
+            <tr><td>Retail and POS</td><td>POS session workers, web and longpolling endpoints, payment terminal link, offline order sync</td><td class="diyHighlight">Lost in-store sales, checkout queues</td></tr>
+            <tr><td>E-commerce and website</td><td>Storefront and checkout URLs, product and stock sync, longpolling, payment gateway callbacks</td><td class="diyHighlight">Abandoned carts, lost online orders</td></tr>
+            <tr><td>Manufacturing and MRP</td><td>Scheduled actions for MRP runs, PostgreSQL performance for BoM explosions, work-order throughput</td><td class="diyHighlight">Stalled production planning, late builds</td></tr>
+            <tr><td>Wholesale and distribution</td><td>Stock moves, barcode and scanner endpoints, reordering cron, EDI and API integrations</td><td class="diyHighlight">Delayed shipping and fulfillment</td></tr>
+            <tr><td>Services and accounting</td><td>Invoicing, recurring cron for subscriptions and reminders, email and longpolling</td><td class="diyHighlight">Billing delays, cash-flow impact</td></tr>
+          </tbody></table></div>
+          <p class="bodyText">Whatever the industry, the monitoring model is the same: outside-in journey checks plus workers, PostgreSQL, cron, and longpolling. What changes is which failure hurts first, so alert thresholds and recovery runbooks should lead with the module that business depends on.</p>
+
+          <h2 class="sectionHead" id="faq">Odoo monitoring FAQ</h2>
+          <div class="faqList">
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="true">What is the best Odoo monitoring tool?<svg class="faqChevron faqChevronOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer">The best choice depends on the failure you need to catch. An Odoo module can expose cron and application context, an external uptime monitor can detect a complete outage, and infrastructure monitoring can explain host or PostgreSQL failures. For self-hosted Odoo, the strongest design combines outside-in checks with runtime evidence and governed recovery instead of relying on one green dashboard.</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">What should I monitor in Odoo?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">Monitor the customer journey, reverse proxy, Odoo process and workers, PostgreSQL readiness and saturation, CPU and memory, disk and inode capacity, filestore access, cron freshness, certificate expiry, error rates, and backup restorability. A green process alone does not prove that users can log in or complete business operations.</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Why is my Odoo instance slow?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">Odoo slowness usually traces to the database or the workers: slow PostgreSQL queries and missing indexes, autovacuum falling behind, too few workers for the traffic, or workers being recycled under memory pressure. Start by checking PostgreSQL pg_stat_activity for long-running queries, your worker count against concurrent users, and host CPU and memory. A slow page with healthy workers almost always points at the database.</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How many workers should I configure in Odoo?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">A common starting point is (CPU cores x 2) + 1 HTTP workers, with cron workers set separately via max_cron_threads. Each worker serves one request at a time, so too few workers make requests queue under load, while too many exhaust RAM and PostgreSQL connections. Tune limit_memory_hard, limit_time_cpu, and limit_request alongside the worker count.</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I fix &quot;FATAL: sorry, too many clients already&quot; in Odoo?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">That PostgreSQL error means Odoo opened more connections than max_connections allows, usually because HTTP workers, cron, and longpolling together exceed the limit. Reduce the Odoo worker count or raise PostgreSQL max_connections, and for high worker counts put a pooler such as PgBouncer in front of the database. Size max_connections with headroom, since each worker can hold more than one connection.</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Why is Odoo returning a 502 or 503 error?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">A 502 or 503 in front of Odoo almost always means the reverse proxy has no healthy backend: the Odoo service is down, workers are crash-looping on the memory limit, or the instance is overloaded. Confirm the Odoo service is running, check the log for workers killed at limit_memory_hard, and verify nginx is proxying to the correct ports (8069 for web, 8072 for longpolling).</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Where are Odoo log files located?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">Odoo logs to stdout by default, or to the file set by logfile in odoo.conf, commonly /var/log/odoo/odoo-server.log on a package install. In Docker, read them with docker logs on the Odoo container. Raise log_level to info or debug in odoo.conf when you need more detail while diagnosing an issue.</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Why is Odoo live chat or longpolling not working?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">Discuss, notifications, and live chat depend on the longpolling and websocket port, 8072 by default. When they break, the reverse proxy is usually not forwarding /longpolling and /websocket to port 8072, or the longpolling worker is not running. Check the nginx location blocks and confirm Odoo is in multiprocessing mode with workers enabled, since longpolling needs it.</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Why does Odoo memory usage keep growing?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">Odoo workers accumulate memory as they serve requests, which is why limit_memory_soft and limit_memory_hard exist to recycle a worker before it grows too large. A steady climb usually points at a heavy report, a large import, or a leaking custom module. If workers are being killed at limit_memory_hard under normal load, raise the limits or add workers and RAM.</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I restart the Odoo service?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">On a systemd install use sudo systemctl restart odoo, matching the service name you configured, and in Docker use docker restart or docker compose restart on the Odoo service. After a restart, wait for workers to become ready and check the login page rather than assuming an up process means users can work. AlertMend can run this as an approved runbook and verify the user-facing endpoint before closing the incident.</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I monitor Odoo POS?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">Odoo POS runs partly in the browser and syncs orders back to the server, so monitor the POS and web workers, the longpolling endpoint, and the payment terminal integration, and alert on failed or delayed order sync. In-store sales can stop when the POS backend or its sync is degraded even while the main website looks healthy.</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I monitor Odoo e-commerce and website?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">Check the storefront and checkout URLs from outside, the product and stock sync between website and inventory, the longpolling updates, and payment gateway callbacks. A working homepage does not prove customers can add to cart, pay, and have stock decrement correctly, so test the full purchase path, not just uptime.</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Does Odoo have a built-in health-check endpoint?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">Do not assume every supported Odoo deployment exposes a database-aware health endpoint. A reliable design uses a lightweight HTTP check, a PostgreSQL readiness check, and, when practical, a small custom authenticated or application-specific probe that verifies the business path you actually depend on.</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Can AlertMend restart Odoo automatically?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">Yes, on connected VMs or containers where you configure an approved runbook. The safe pattern is to confirm the failure, check PostgreSQL and disk state, restart only the affected Odoo service, wait for readiness, and verify the user-facing endpoint before closing the incident.</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Can every Odoo failure be auto-fixed?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">No. Process crashes, some worker hangs, dependency startup races, and controlled disk housekeeping are often good automation candidates. Database corruption, failed migrations, unknown custom-module errors, and destructive storage operations should stop for human review.</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I monitor Odoo in Docker?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">Add health checks for PostgreSQL and Odoo, persist both PostgreSQL data and the Odoo data directory, use service_healthy dependency conditions, set a bounded restart policy, and monitor the public URL independently of container state.</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I monitor Odoo cron jobs?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">Track the expected completion time of critical scheduled actions, alert on missed or repeatedly failing runs, and inspect Odoo logs. Odoo 19 documents that repeated cron errors can cause executions to be skipped and eventually the scheduled action to be deactivated.</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Is the guide limited to Odoo 19?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">The architecture and monitoring model also apply to many self-hosted Odoo 17 and 18 deployments, but command-line defaults and behavior can differ. Verify every limit and option against the documentation for your deployed major version.</div>
+        </div>
+        <div class="faqItem">
+          <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Does this cover Odoo Online and Odoo.sh?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="faqAnswer hidden">The deepest host, process, PostgreSQL, and runbook controls apply to self-hosted Odoo on VMs, Docker, or Kubernetes. Odoo Online and Odoo.sh abstract more of the infrastructure, so external journey checks, application signals, and escalation remain useful while host-level remediation may not be available.</div>
+        </div>
+      </div>
+
+          <section class="finalCta">
+            <h2>See Odoo fail, and recover, before your users open a ticket.</h2>
+            <p>Bring one recurring Odoo incident. We’ll map its evidence, guardrails, recovery command, verification check, and escalation path into an AlertMend proof of value.</p>
+            <div class="ctaActions">
+              <a class="ctaPrimary" href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=odoo-monitoring" target="_blank" rel="noopener noreferrer">Book an Odoo reliability review</a>
+              <a class="ctaSecondary" href="https://app.alertmend.io/signup?service=remediation&source=blog&blog_slug=odoo-monitoring">Start with AlertMend</a>
+            </div>
+          </section>
+
+          <h2 class="sectionHead">Primary sources</h2>
+          <p class="sourceIntro">Product behavior and defaults can change. These sources were reviewed on 2026-07-06; verify options against your deployed Odoo and PostgreSQL versions.</p>
+          <ol class="sourceList">
+            <li><a href="https://www.odoo.com/documentation/19.0/administration/on_premise/deploy.html" target="_blank" rel="noopener noreferrer">Odoo 19 system configuration</a></li>
+            <li><a href="https://www.odoo.com/documentation/19.0/developer/reference/cli.html" target="_blank" rel="noopener noreferrer">Odoo 19 command-line reference</a></li>
+            <li><a href="https://www.odoo.com/documentation/19.0/administration/on_premise/source.html" target="_blank" rel="noopener noreferrer">Odoo 19 source installation</a></li>
+            <li><a href="https://www.odoo.com/documentation/19.0/administration/on_premise/update.html" target="_blank" rel="noopener noreferrer">Odoo 19 bugfix updates</a></li>
+            <li><a href="https://www.odoo.com/documentation/19.0/developer/reference/backend/actions.html" target="_blank" rel="noopener noreferrer">Odoo 19 scheduled actions</a></li>
+            <li><a href="https://www.odoo.com/documentation/19.0/administration/odoo_sh/getting_started/create.html" target="_blank" rel="noopener noreferrer">Odoo 19 backup workflow</a></li>
+            <li><a href="https://hub.docker.com/_/odoo/" target="_blank" rel="noopener noreferrer">Official Odoo Docker image</a></li>
+            <li><a href="https://www.postgresql.org/docs/current/monitoring.html" target="_blank" rel="noopener noreferrer">PostgreSQL monitoring activity</a></li>
+            <li><a href="https://www.postgresql.org/docs/current/app-pg-isready.html" target="_blank" rel="noopener noreferrer">PostgreSQL pg_isready</a></li>
+            <li><a href="https://docs.docker.com/compose/how-tos/startup-order/" target="_blank" rel="noopener noreferrer">Docker Compose startup order and health checks</a></li>
+          </ol>
+
+          <hr style="margin:2.5rem 0 1.75rem;border:none;border-top:1px solid #e4e4e7;">
+          <div class="authorBioCard" style="display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;padding-bottom:1rem;">
+            <img src="/logos/dinesh.jpeg" alt="Dinesh Agrawal" width="128" height="128" loading="lazy" style="width:128px;height:128px;border-radius:12px;object-fit:cover;border:1px solid #e4e4e7;flex-shrink:0;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div style="display:none;width:128px;height:128px;border-radius:12px;border:1px solid #e4e4e7;background:#f4f4f5;align-items:center;justify-content:center;font-weight:800;font-size:2.25rem;color:#3f3f46;flex-shrink:0;">DA</div>
+            <div style="flex:1;min-width:240px;">
+              <h3 style="font-size:1.5rem;font-weight:800;color:#09090b;margin:0 0 4px;">Dinesh Agrawal</h3>
+              <p style="color:#7c3aed;font-weight:600;margin:0 0 14px;">Co-Founder at AlertMend.io</p>
+              <div style="color:#3f3f46;line-height:1.75;">
+                <p style="margin:0 0 10px;">Dinesh Agrawal brings 12+ years of deep experience across cloud and AI-driven automation, building systems that detect, diagnose, and fix production incidents without waiting for a human.</p>
+                <p style="margin:0;">At AlertMend.io he focuses on autonomous, self-healing operations, turning manual cloud firefighting into workflows that predict, remediate, and learn.</p>
+              </div>
+              <a href="https://www.linkedin.com/in/dineshagrawal85/" target="_blank" rel="noopener noreferrer" aria-label="Dinesh Agrawal on LinkedIn" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:#71717a;text-decoration:none;font-weight:600;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18V9.94H5.67V18h2.67zM7 8.76a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zM18.34 18v-4.42c0-2.37-1.27-3.47-2.96-3.47-1.36 0-1.97.75-2.31 1.28V9.94h-2.67V18h2.67v-4.5c0-.24.02-.48.09-.65.19-.48.63-.98 1.36-.98.96 0 1.35.73 1.35 1.8V18h2.82z"/></svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <p class="promo">Want AlertMend to monitor the entire Odoo path and run governed recovery? <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=odoo-monitoring" target="_blank" rel="noopener noreferrer">Book a practical reliability review →</a></p>
+      </main>
+
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <div class="sidebar-card">
+            <div class="sidebar-card-title">Receive blog and product updates</div>
+            <form class="signup-form" id="blog-signup-form" novalidate>
+              <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
+              <button type="submit">Sign up</button>
+              <p class="signup-status" id="blog-signup-status" hidden></p>
+            </form>
+          </div>
+
+          
+          <div class="sidebar-card">
+            <div class="related-content-title">Related content</div>
+            <ul class="related-posts-list">
+              <li><a href="/blog/url-monitoring-automated-fixes" class="related-post-link">URL Monitoring with Automated Fixes</a></li>
+              <li><a href="/blog/503-no-healthy-upstream" class="related-post-link">503 No Healthy Upstream: Fix Guide</a></li>
+              <li><a href="/blog/make-error-127" class="related-post-link">Make Error 127: Command Not Found</a></li>
+              <li><a href="/blog/best-1-click-logging-and-metrics-tools" class="related-post-link">Best Logging and Metrics Tools</a></li>
+              <li><a href="/blog/datadog-alternatives" class="related-post-link">Best Datadog Alternatives</a></li>
+              <li><a href="/blog/pagerduty-alternatives" class="related-post-link">Best PagerDuty Alternatives</a></li>
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View all posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          
+
+          <div class="sidebar-card">
+            <div class="related-content-title">Explore AlertMend</div>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <script src="/assets/make-error-127/script.js"></script>
+  <script src="/assets/odoo-monitoring/script.js"></script>
+</body>
+</html>

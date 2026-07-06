@@ -199,7 +199,7 @@ lifecycle:
   const APP_HEALTH_JS = `// Public monitor target (shallow, fast)
 app.get('/healthz', (req, res) => res.status(200).json({ status: 'ok' }));
 
-// Liveness: process only — never check DB here
+// Liveness: process only, never check DB here
 app.get('/healthz/live', (req, res) => res.sendStatus(200));
 
 // Readiness: dependencies OK
@@ -393,7 +393,7 @@ ${buildArticleHeader(title, author, date, category)}
       </div>
 
       <h2 class="sectionHead">The automation ladder</h2>
-      <p class="bodyText">Every auto-remediation runbook must be <strong>idempotent</strong> (safe to run twice), include <strong>verification</strong>, and <strong>escalate</strong> if verification fails.</p>
+      <p class="bodyText">Every auto-remediation runbook must be <strong>idempotent</strong> (safe to run twice), include <strong>verification</strong>and <strong>escalate</strong> if verification fails.</p>
       <div class="ladderSteps">
         <div class="ladderStep"><span class="ladderStepNum">1</span><p class="ladderStepTitle">Single failure</p><p class="ladderStepBody">Wait and re-check. One region failing alone is not an outage.</p></div>
         <div class="ladderStep"><span class="ladderStepNum">2</span><p class="ladderStepTitle">Multi-region confirm</p><p class="ladderStepBody">2+ regions fail 2 to 3 times. Run idempotent fix.</p></div>

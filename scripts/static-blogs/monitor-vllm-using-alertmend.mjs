@@ -156,11 +156,11 @@ export async function build(slug) {
   ]
 
   const AUTOMATION_MATRIX = [
-    ['OOMKilled (exit 137)', 'Rollout restart deployment/vllm; re-probe /v1/models twice', true, 'OOM repeats within 15 min — fix memory limits and max-model-len'],
-    ['CrashLoopBackOff after deploy', 'kubectl rollout undo if crash started within 10 min of rollout', true, 'Crash persists after rollback — bad image, missing env, GPU driver issue'],
+    ['OOMKilled (exit 137)', 'Rollout restart deployment/vllm; re-probe /v1/models twice', true, 'OOM repeats within 15 min, fix memory limits and max-model-len'],
+    ['CrashLoopBackOff after deploy', 'kubectl rollout undo if crash started within 10 min of rollout', true, 'Crash persists after rollback, bad image, missing env, GPU driver issue'],
     ['502 / 503 from Ingress', 'Rollout restart if pod in restart loop; extend ingress proxy-read-timeout to ≥300s', true, '503 persists after pod Ready and in-cluster /v1/models returns 200'],
-    ['Hung scheduler', 'Restart pod when chat smoke fails 2× while /health passes', true, 'Smoke fails after 2 restarts — inspect Ray workers or GPU deadlock'],
-    ['GPU node NotReady', 'Restart vLLM after node recovers to Ready', true, 'Node stays NotReady >30 min — escalate to infra team'],
+    ['Hung scheduler', 'Restart pod when chat smoke fails 2× while /health passes', true, 'Smoke fails after 2 restarts, inspect Ray workers or GPU deadlock'],
+    ['GPU node NotReady', 'Restart vLLM after node recovers to Ready', true, 'Node stays NotReady >30 min, escalate to infra team'],
     ['Change --max-model-len in prod', 'Human approval + staged rollout', false, 'Silent quality and memory behavior change'],
     ['Delete model weights PVC', 'Page on-call with disk inventory', false, 'Hours to re-download weights'],
     ['Scale GPU node pool blindly', 'Capacity review with finance', false, 'Cost and quota risk'],
@@ -192,7 +192,7 @@ kubectl rollout status deployment/vllm -n inference --timeout=300s
 curl -sf http://vllm.inference.svc:8000/v1/models | jq '.data[].id'`,
       autoFix: 'Rollout restart deployment/vllm; re-probe /v1/models twice',
       escalation:
-        'Escalate if OOM repeats within 15 min — fix memory limits and --max-model-len instead of only restarting.',
+        'Escalate if OOM repeats within 15 min, fix memory limits and --max-model-len instead of only restarting.',
       relatedLink: {
         href: '/blog/debugging-kubernetes-oomkilled-exit-code-137-causes-and-solutions',
         title: 'OOMKilled exit 137: causes and fixes',
@@ -219,7 +219,7 @@ curl -sf http://vllm:8000/health
 curl -sf http://vllm:8000/v1/models | jq '.data[].id'`,
       autoFix: 'Increase startupProbe.failureThreshold to 60; ensure readiness uses /v1/models not /health',
       escalation:
-        'Escalate if model never appears in /v1/models after 15 min — check --max-model-len and GPU memory.',
+        'Escalate if model never appears in /v1/models after 15 min, check --max-model-len and GPU memory.',
       tip: '70B models on cold PVC often need 5–10 minutes before /v1/models is reliable.',
     },
     proxy502: {
@@ -244,7 +244,7 @@ curl -v https://inference.example.com/v1/models
 kubectl rollout restart deployment/vllm -n inference`,
       autoFix: 'Rollout restart if pod is in restart loop; extend ingress proxy-read-timeout annotation to ≥300s',
       escalation:
-        'Escalate if 503 persists after pod shows Ready and /v1/models returns 200 in-cluster — investigate ingress config or TLS termination.',
+        'Escalate if 503 persists after pod shows Ready and /v1/models returns 200 in-cluster, investigate ingress config or TLS termination.',
       relatedLink: {
         href: '/blog/kubernetes-502-bad-gateway-error-fix',
         title: 'Kubernetes 502 Bad Gateway fix',
@@ -270,7 +270,7 @@ kubectl rollout undo deployment/vllm -n inference
       autoFix:
         'If crash started within 10 min of rollout: kubectl rollout undo. Otherwise increase startupProbe.failureThreshold.',
       escalation:
-        'Escalate if crash persists after rollback — bad image, missing env var, or GPU driver issue.',
+        'Escalate if crash persists after rollback, bad image, missing env var, or GPU driver issue.',
       tip: 'Use startupProbe with failureThreshold 60 when models load from PVC on first boot.',
     },
   }
@@ -500,15 +500,15 @@ ${buildVllmHeader(title, author, authorBio, authorPhoto, authorLinkedIn, date, c
         </div>
         <p class="heroGuideLabel">Production runbook · vLLM uptime</p>
         <p class="fearHeadline">vLLM passed /health. Your chat API still returned 503.</p>
-        <p class="fearLead">Most teams <strong>deploy</strong> vLLM with a Helm chart. Few teams <strong>probe /v1/models on the public OpenAI path</strong>, grant startup grace for GPU weight load, or auto-restart after OOMKilled. The result: CrashLoopBackOff on deploy, silent queue stalls, and the same kubectl delete pod ritual every Monday.</p>
+        <p class="fearLead">Most teams <strong>deploy</strong> vLLM with a Helm chart. Few teams <strong>probe /v1/models on the public OpenAI path</strong>grant startup grace for GPU weight load, or auto-restart after OOMKilled. The result: CrashLoopBackOff on deploy, silent queue stalls, and the same kubectl delete pod ritual every Monday.</p>
         <div class="fearScenarioGrid">
         ${renderPainScenarios}
         </div>
-        <p class="fearBridge">All four share a root cause: <code>/health</code> lies about inference readiness. The fix is a four-layer probe strategy with startup-aware grace — but the threshold formula that prevents recurrence is the part most teams never build.</p>
+        <p class="fearBridge">All four share a root cause: <code>/health</code> lies about inference readiness. The fix is a four-layer probe strategy with startup-aware grace, but the threshold formula that prevents recurrence is the part most teams never build.</p>
       </section>
 
       <section class="heroBand heroBandCompact">
-        <p class="seoTldr"><strong>TL;DR:</strong> Four probe layers, not one. Copy-paste YAML and the threshold formula are below — along with what&rsquo;s safe to auto-restart and what requires a human.</p>
+        <p class="seoTldr"><strong>TL;DR:</strong> Four probe layers, not one. Copy-paste YAML and the threshold formula are below, along with what&rsquo;s safe to auto-restart and what requires a human.</p>
       </section>
 
       <h2 class="sectionHead" id="health-endpoints">vLLM health endpoints: what to probe</h2>
@@ -562,7 +562,7 @@ ${buildVllmHeader(title, author, authorBio, authorPhoto, authorLinkedIn, date, c
           </tbody>
         </table>
       </div>
-      <p class="automationMatrixFootnote">AlertMend automates the ✅ rows and pages you for the ❌ rows — no configuration needed beyond connecting your cluster.</p>
+      <p class="automationMatrixFootnote">AlertMend automates the ✅ rows and pages you for the ❌ rows, no configuration needed beyond connecting your cluster.</p>
 
       <h2 class="sectionHead" id="prometheus-phase">Phase 2: Prometheus /metrics</h2>
       <p class="bodyText">Unlike many inference servers, vLLM exposes native Prometheus metrics at <code>/metrics</code>. Start with URL checks and auto-restart in AlertMend. Add Prometheus when you need queue depth history, GPU cache utilization graphs, and custom SLO dashboards.</p>
@@ -572,7 +572,7 @@ ${buildVllmHeader(title, author, authorBio, authorPhoto, authorLinkedIn, date, c
       <hr class="teachingDivider">
       <div class="teachingTransition" role="note">
         <p class="teachingTransitionLabel">From DIY to AlertMend</p>
-        <p>You can wire all of this yourself with Prometheus, AlertManager, and scripts. Here&rsquo;s how AlertMend handles it — and where it adds value over DIY.</p>
+        <p>You can wire all of this yourself with Prometheus, AlertManager, and scripts. Here&rsquo;s how AlertMend handles it, and where it adds value over DIY.</p>
       </div>
 
       <section class="productBand">
@@ -589,7 +589,7 @@ ${buildVllmHeader(title, author, authorBio, authorPhoto, authorLinkedIn, date, c
       </div>
 
       <h3 class="subsectionHead">What DIY monitoring misses</h3>
-      <p class="bodyText">Teams can build this with Prometheus + AlertManager + a restart script. It works — AlertMend saves the integration work of correlating metrics, events, and URL checks into one verified incident loop.</p>
+      <p class="bodyText">Teams can build this with Prometheus + AlertManager + a restart script. It works, AlertMend saves the integration work of correlating metrics, events, and URL checks into one verified incident loop.</p>
       <div class="diyWrap tableScrollWrap">
         <table class="compareTable responsiveTable">
           <thead><tr><th>Gap</th><th>Prometheus + AlertManager + scripts</th><th>AlertMend</th></tr></thead>
@@ -616,7 +616,7 @@ ${buildVllmHeader(title, author, authorBio, authorPhoto, authorLinkedIn, date, c
       </div>
       <div class="getStartedCta">
         <div class="ctaBandTitle">Monitor vLLM with startup-aware grace</div>
-        <p class="ctaBandSub">URL checks on <code>/v1/models</code>, OOM auto-restart, and deploy suppression — wired in minutes.</p>
+        <p class="ctaBandSub">URL checks on <code>/v1/models</code>OOM auto-restart, and deploy suppression, wired in minutes.</p>
         <div class="ctaBtnRow">
           <a href="${postSignupUrl}" class="ctaBtn">Try AlertMend free →</a>
           <a href="${postCalendlyUrl}" class="ctaBtnSecondary" target="_blank" rel="noopener noreferrer">Talk to an engineer</a>

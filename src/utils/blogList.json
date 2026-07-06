@@ -1,5 +1,20 @@
 [
   {
+    "slug": "odoo-monitoring",
+    "title": "Odoo Monitoring and Auto-Recovery",
+    "excerpt": "Monitor Odoo, PostgreSQL, workers, cron jobs, storage, and proxies, then safely auto-recover common failures with checks, runbooks, and verification.",
+    "date": "2026-07-06",
+    "category": "Monitoring",
+    "author": "Dinesh Agrawal",
+    "tags": [
+      "Odoo",
+      "Monitoring",
+      "Auto-remediation",
+      "PostgreSQL"
+    ],
+    "keywords": "Odoo monitoring, Odoo health check, Odoo uptime monitoring, Odoo auto recovery, Odoo PostgreSQL monitoring"
+  },
+  {
     "slug": "datadog-alternatives",
     "title": "Best Datadog Alternatives (2026)",
     "excerpt": "Compare Datadog alternatives for APM, OpenTelemetry, self-hosting, pricing, and remediation: Grafana, New Relic, SigNoz, Elastic, Better Stack, and AlertMend.",
@@ -281,7 +296,7 @@
   {
     "slug": "monitor-open-webui-using-alertmend",
     "title": "Monitor Open WebUI + Ollama in Production",
-    "excerpt": "Open WebUI /health returns 200 while Ollama is down — the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.",
+    "excerpt": "Open WebUI /health returns 200 while Ollama is down, the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.",
     "date": "2026-06-24",
     "category": "AIOps",
     "author": "AlertMend Team",
@@ -2708,6 +2723,16 @@
     "author": "AlertMend Team",
     "tags": [],
     "keywords": "gitlab, unable, local, issuer, certificate, DevOps, AlertMend AI, AIOps"
+  },
+  {
+    "slug": "gpu-monitoring",
+    "title": "GPU Monitoring: Detect Idle and Recover",
+    "excerpt": "GPU monitoring that acts: catch idle GPUs burning money, workloads that stopped using the GPU, and crashes at 3am, then alert and auto-recover.",
+    "date": "2026-01-10",
+    "category": "GPU",
+    "author": "AlertMend Team",
+    "tags": [],
+    "keywords": "gpu monitoring, gpu monitoring kubernetes, idle gpu, gpu utilization, monitor gpu usage, dcgm exporter, nvidia gpu operator, gpu cost, cuda out of memory, gpu observability, gpu auto recovery, AlertMend"
   },
   {
     "slug": "heartbeat-pricing",

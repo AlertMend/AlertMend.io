@@ -160,7 +160,7 @@
       </nav>
 
       <h2 class="sectionHead" id="meaning">What does Make Error 127 mean?</h2>
-      <p class="bodyText">GNU make runs recipe lines through a shell—normally <code>/bin/sh</code> unless the Makefile sets <code>SHELL</code>. When that shell cannot locate a command, it returns status <strong>127</strong>. GNU make then prints the recipe failure as <code>Error 127</code> and stops the affected target.</p>
+      <p class="bodyText">GNU make runs recipe lines through a shell, normally <code>/bin/sh</code> unless the Makefile sets <code>SHELL</code>. When that shell cannot locate a command, it returns status <strong>127</strong>. GNU make then prints the recipe failure as <code>Error 127</code> and stops the affected target.</p>
       <pre class="codeBlock"><code>/bin/sh: gcc: command not found
 make: *** [Makefile:42: obj/main.o] Error 127</code></pre>
       <p class="bodyText">When the binary name appears in the make line itself:</p>
@@ -257,7 +257,7 @@ printf '%s
       <h2 class="sectionHead" id="prevent">Makefile patterns that prevent Error 127</h2>
       <pre class="codeBlock"><code>GO := $(shell command -v go 2>/dev/null)
 ifndef GO
-$(error go not found in PATH — install Go or export PATH)
+$(error go not found in PATH, install Go or export PATH)
 endif</code></pre>
       <p class="bodyText">Document dependencies at the top of the Makefile: <code># Requires: gcc g++ make python3</code>.</p>
 
@@ -273,11 +273,11 @@ endif</code></pre>
 
       <h2 class="sectionHead" id="sources">Primary sources and technical notes</h2>
       <ul class="sourceList">
-        <li><a href="https://www.gnu.org/software/bash/manual/html_node/Exit-Status.html" target="_blank" rel="noopener noreferrer">Bash Reference Manual: Exit Status</a> — command not found returns 127; found but not executable returns 126.</li>
-        <li><a href="https://www.gnu.org/software/bash/manual/html_node/Command-Search-and-Execution.html" target="_blank" rel="noopener noreferrer">Bash: Command Search and Execution</a> — how functions, builtins, and PATH are searched.</li>
-        <li><a href="https://www.gnu.org/software/make/manual/html_node/Errors.html" target="_blank" rel="noopener noreferrer">GNU make: Errors in Recipes</a> — make reports the status returned by a program invoked in a recipe.</li>
-        <li><a href="https://www.gnu.org/software/make/manual/html_node/Choosing-the-Shell.html" target="_blank" rel="noopener noreferrer">GNU make: Choosing the Shell</a> — recipes use <code>/bin/sh</code> by default when the Makefile does not set <code>SHELL</code>.</li>
-        <li><a href="https://docs.docker.com/engine/containers/run/#exit-status" target="_blank" rel="noopener noreferrer">Docker: container exit status</a> — Docker also reserves 127 for a container command that cannot be found.</li>
+        <li><a href="https://www.gnu.org/software/bash/manual/html_node/Exit-Status.html" target="_blank" rel="noopener noreferrer">Bash Reference Manual: Exit Status</a>command not found returns 127; found but not executable returns 126.</li>
+        <li><a href="https://www.gnu.org/software/bash/manual/html_node/Command-Search-and-Execution.html" target="_blank" rel="noopener noreferrer">Bash: Command Search and Execution</a>how functions, builtins, and PATH are searched.</li>
+        <li><a href="https://www.gnu.org/software/make/manual/html_node/Errors.html" target="_blank" rel="noopener noreferrer">GNU make: Errors in Recipes</a>make reports the status returned by a program invoked in a recipe.</li>
+        <li><a href="https://www.gnu.org/software/make/manual/html_node/Choosing-the-Shell.html" target="_blank" rel="noopener noreferrer">GNU make: Choosing the Shell</a>recipes use <code>/bin/sh</code> by default when the Makefile does not set <code>SHELL</code>.</li>
+        <li><a href="https://docs.docker.com/engine/containers/run/#exit-status" target="_blank" rel="noopener noreferrer">Docker: container exit status</a>Docker also reserves 127 for a container command that cannot be found.</li>
       </ul>
       <div class="reviewPolicy"><strong>Scope:</strong> This guide covers GNU make and POSIX-style shell status 127. Native Windows, game, installer, telephone, and unrelated application “error 127” codes can mean something else. AlertMend publishes this guide and may benefit if readers evaluate its product; every command-level explanation above works without AlertMend.</div>
 
@@ -294,7 +294,7 @@ endif</code></pre>
 
       <div class="ctaBand">
         <div class="ctaBandTitle">Bring one failing automation run.</div>
-        <p class="ctaBandSub">See AlertMend connect exit 127 to the missing command, PATH, runtime image, and recent change—then route or execute the approved recovery and verify the next run.</p>
+        <p class="ctaBandSub">See AlertMend connect exit 127 to the missing command, PATH, runtime image, and recent change, then route or execute the approved recovery and verify the next run.</p>
         <div class="ctaBtnRow">
           <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=make-error-127" class="ctaBtn" target="_blank" rel="noopener noreferrer">Walk through the failure →</a>
         </div>
@@ -325,13 +325,13 @@ endif</code></pre>
               <li><a href="/blog/deny-access-to-this-computer-from-the-network" class="related-post-link">Deny Access To Computer From Network</a></li>
               <li><a href="/blog/error-runtime-exited-with-error-signal-killed-runtime.exiterror" class="related-post-link">Error: Runtime Exited With Error: Signal</a></li>
               <li><a href="/blog/exit-code-126" class="related-post-link">exit code 126 Guide Guide Complete Guide</a></li>
+              <li><a href="/blog/odoo-monitoring" class="related-post-link">Odoo Monitoring and Auto-Recovery</a></li>
               <li><a href="/blog/datadog-alternatives" class="related-post-link">Best Datadog Alternatives (2026)</a></li>
               <li><a href="/blog/incident-io-alternatives" class="related-post-link">incident.io Alternatives for AI SRE (2026)</a></li>
               <li><a href="/blog/pagerduty-alternatives" class="related-post-link">Best PagerDuty Alternatives (2026)</a></li>
               <li><a href="/blog/autoscaling-v2-horizontalpodautoscaler" class="related-post-link">Kubernetes HPA v2: Configuration &amp; Fixes</a></li>
               <li><a href="/blog/ai-agent-observability-in-production" class="related-post-link">AI Agent Observability in Production</a></li>
               <li><a href="/blog/best-1-click-logging-and-metrics-tools" class="related-post-link">9 Best Logging &amp; Metrics Tools (2026)</a></li>
-              <li><a href="/blog/best-ai-agent-observability-tools" class="related-post-link">Best AI Agent Observability Tools</a></li>
             </ul>
             <a href="/blog" class="view-more-link">
               View all posts

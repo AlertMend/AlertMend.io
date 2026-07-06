@@ -123,7 +123,7 @@ ${buildArticleHeader(h1Title, author, date, category)}
         <p class="heroGuideLabel">Program-specific troubleshooting · primary sources checked ${esc(dateModified)}</p>
         <div class="instantFix">
           <div class="instantFixTop"><span>THE 10-SECOND ANSWER</span><strong>Exit code 5 does not have one universal meaning.</strong></div>
-          <p>Find the program that returned it. For <strong>pytest</strong>, 5 means no tests were collected. For <strong>curl</strong>, it means the proxy hostname could not be resolved. Windows <strong>system error 5</strong> means access denied. On Linux, another program may define 5 differently.</p>
+          <p>Find the program that returned it. For <strong>pytest</strong>5 means no tests were collected. For <strong>curl</strong>it means the proxy hostname could not be resolved. Windows <strong>system error 5</strong> means access denied. On Linux, another program may define 5 differently.</p>
           <div class="instantFixCommands">
             <code>command; printf 'exit=%s\\n' "$?"</code><span>preserve the producer</span>
             <code>command 2&gt;&amp;1 | tee failure.log</code><span>capture the message</span>
@@ -142,7 +142,7 @@ ${buildArticleHeader(h1Title, author, date, category)}
           </div>
           <ol class="diagnosisSteps">
             <li><span>1</span><p>Read the command immediately before the exit-code message.</p></li>
-            <li><span>2</span><p>Keep its stderr—the text usually contains more information than the number.</p></li>
+            <li><span>2</span><p>Keep its stderr, the text usually contains more information than the number.</p></li>
             <li><span>3</span><p>Apply that program’s documented meaning, then rerun it in the same environment.</p></li>
           </ol>
           <p class="diagnosisCaution"><strong>Do not start with permissions.</strong> That is correct for Windows system error 5, but wrong for pytest and curl.</p>
@@ -238,10 +238,10 @@ exit=0</code></div>
 pytest -vv path/to/tests
 pytest --trace-config</code></pre>
       <div class="searchIssueGrid">
-        <div class="searchIssueCard"><h3 class="searchIssueTerm">Wrong discovery path</h3><p class="searchIssueDesc">CI starts in a different working directory, or the test path no longer exists.</p><p class="searchIssueAlert"><strong>Check:</strong> print <code>pwd</code>, list the test directory, and pass the intended path explicitly.</p></div>
-        <div class="searchIssueCard"><h3 class="searchIssueTerm">Names do not match</h3><p class="searchIssueDesc">Files, classes, or functions no longer match configured collection patterns.</p><p class="searchIssueAlert"><strong>Check:</strong> compare names with <code>python_files</code>, <code>python_classes</code>, and <code>python_functions</code>.</p></div>
-        <div class="searchIssueCard"><h3 class="searchIssueTerm">Markers or selection removed everything</h3><p class="searchIssueDesc"><code>-m</code>, <code>-k</code>, ignore rules, or changed configuration selects an empty set.</p><p class="searchIssueAlert"><strong>Check:</strong> rerun collection without filters and inspect deselected counts.</p></div>
-        <div class="searchIssueCard"><h3 class="searchIssueTerm">Empty is intentional</h3><p class="searchIssueDesc">A matrix shard or optional package legitimately has no tests.</p><p class="searchIssueAlert"><strong>Policy:</strong> handle that case explicitly. Do not append <code>|| true</code>, which also hides real failures.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Wrong discovery path</h3><p class="searchIssueDesc">CI starts in a different working directory, or the test path no longer exists.</p><p class="searchIssueAlert"><strong>Check:</strong> print <code>pwd</code>list the test directory, and pass the intended path explicitly.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Names do not match</h3><p class="searchIssueDesc">Files, classes, or functions no longer match configured collection patterns.</p><p class="searchIssueAlert"><strong>Check:</strong> compare names with <code>python_files</code><code>python_classes</code>and <code>python_functions</code>.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Markers or selection removed everything</h3><p class="searchIssueDesc"><code>-m</code><code>-k</code>ignore rules, or changed configuration selects an empty set.</p><p class="searchIssueAlert"><strong>Check:</strong> rerun collection without filters and inspect deselected counts.</p></div>
+        <div class="searchIssueCard"><h3 class="searchIssueTerm">Empty is intentional</h3><p class="searchIssueDesc">A matrix shard or optional package legitimately has no tests.</p><p class="searchIssueAlert"><strong>Policy:</strong> handle that case explicitly. Do not append <code>|| true</code>which also hides real failures.</p></div>
       </div>
       <aside class="expertNote">
         <span>THE DETAIL MOST GUIDES MISS</span>
@@ -250,7 +250,7 @@ pytest --trace-config</code></pre>
       </aside>
 
       <h3 class="subHead">When an empty test shard is intentionally valid</h3>
-      <p class="bodyText">Keep pytest’s other failure codes intact. This shell pattern converts only status 5—and only after your team has decided that zero tests is valid for this job:</p>
+      <p class="bodyText">Keep pytest’s other failure codes intact. This shell pattern converts only status 5, and only after your team has decided that zero tests is valid for this job:</p>
       <pre class="codeBlock copyableCode"><code>set +e
 pytest
 status=$?
@@ -273,7 +273,7 @@ curl --noproxy '*' https://example.com/   # diagnostic only</code></pre>
       <p class="bodyText">Check misspelled proxy variables, DNS visibility inside the container or runner, and whether uppercase and lowercase proxy variables differ. Do not permanently bypass a required enterprise proxy just to make the command green.</p>
 
       <h2 class="sectionHead" id="windows">Windows system error 5: access is denied</h2>
-      <p class="bodyText">Microsoft defines Win32 system error 5 (<code>ERROR_ACCESS_DENIED</code>, hexadecimal <code>0x5</code>) as “Access is denied.” Diagnose the denied resource and the effective identity before elevating privileges.</p>
+      <p class="bodyText">Microsoft defines Win32 system error 5 (<code>ERROR_ACCESS_DENIED</code>hexadecimal <code>0x5</code>) as “Access is denied.” Diagnose the denied resource and the effective identity before elevating privileges.</p>
       <pre class="codeBlock copyableCode"><code>whoami
 whoami /groups
 icacls "C:\\path\\to\\resource"
@@ -288,12 +288,12 @@ status=\${PIPESTATUS[0]}
 printf 'producer=%s status=%s\\n' "your-command" "$status"
 exit "$status"</code></pre>
       <p class="bodyText">In Docker or Kubernetes, inspect the container command, application logs, termination message, and image version. Do not assume a security-context problem unless the application also reports a denied operation.</p>
-      <p class="bodyText"><strong>systemd services:</strong> when <code>systemctl status</code> shows <code>code=exited, status=5</code>, that is the status your <code>ExecStart</code> process returned—systemd does not define it. Run <code>journalctl -u &lt;service&gt;</code> to read what the program itself reported, and confirm the <code>ExecStart</code> path exists and the service user has access. In legacy LSB init scripts, exit 5 conventionally meant the program is not installed.</p>
+      <p class="bodyText"><strong>systemd services:</strong> when <code>systemctl status</code> shows <code>code=exited, status=5</code>that is the status your <code>ExecStart</code> process returned, systemd does not define it. Run <code>journalctl -u &lt;service&gt;</code> to read what the program itself reported, and confirm the <code>ExecStart</code> path exists and the service user has access. In legacy LSB init scripts, exit 5 conventionally meant the program is not installed.</p>
 
       <h2 class="sectionHead">How to diagnose and recover from exit code 5 automatically</h2>
       <p class="bodyText">A reliable automated diagnosis must preserve context the number cannot provide. AlertMend’s incident model correlates the executable, stderr, runtime identity, environment variables, image or runner, and recent changes before recommending a response.</p>
       <div class="alertmendMethod">
-        <div><span>1</span><strong>Identify</strong><p>Record the process that returned 5—not only the wrapper message.</p></div>
+        <div><span>1</span><strong>Identify</strong><p>Record the process that returned 5, not only the wrapper message.</p></div>
         <div><span>2</span><strong>Correlate</strong><p>Attach stderr, identity, proxy state, test selection, runtime, and recent changes.</p></div>
         <div><span>3</span><strong>Explain</strong><p>Map the evidence to that program’s documented meaning and show the reasoning.</p></div>
         <div><span>4</span><strong>Verify</strong><p>Run an approved recovery or route the evidence, then confirm the next execution.</p></div>
@@ -302,10 +302,10 @@ exit "$status"</code></pre>
 
       <h2 class="sectionHead" id="sources">Primary sources and scope</h2>
       <ul class="sourceList">
-        <li><a href="https://docs.pytest.org/en/stable/reference/exit-codes.html" target="_blank" rel="noopener noreferrer">pytest documentation: Exit codes</a> — pytest defines 5 as no tests collected.</li>
-        <li><a href="https://curl.se/docs/manpage.html#EXIT-CODES" target="_blank" rel="noopener noreferrer">curl man page: Exit codes</a> — curl defines 5 as could not resolve proxy.</li>
-        <li><a href="https://learn.microsoft.com/en-us/windows/win32/debug/system-error-codes--0-499-" target="_blank" rel="noopener noreferrer">Microsoft: System Error Codes 0–499</a> — Win32 error 5 is <code>ERROR_ACCESS_DENIED</code>.</li>
-        <li><a href="https://pubs.opengroup.org/onlinepubs/9699919799/utilities/exit.html" target="_blank" rel="noopener noreferrer">POSIX: exit utility</a> — a process supplies an exit status to its shell.</li>
+        <li><a href="https://docs.pytest.org/en/stable/reference/exit-codes.html" target="_blank" rel="noopener noreferrer">pytest documentation: Exit codes</a>pytest defines 5 as no tests collected.</li>
+        <li><a href="https://curl.se/docs/manpage.html#EXIT-CODES" target="_blank" rel="noopener noreferrer">curl man page: Exit codes</a>curl defines 5 as could not resolve proxy.</li>
+        <li><a href="https://learn.microsoft.com/en-us/windows/win32/debug/system-error-codes--0-499-" target="_blank" rel="noopener noreferrer">Microsoft: System Error Codes 0–499</a>Win32 error 5 is <code>ERROR_ACCESS_DENIED</code>.</li>
+        <li><a href="https://pubs.opengroup.org/onlinepubs/9699919799/utilities/exit.html" target="_blank" rel="noopener noreferrer">POSIX: exit utility</a>a process supplies an exit status to its shell.</li>
       </ul>
       <div class="reviewPolicy"><strong>Review methodology:</strong> Meanings are tied to the named program and checked against primary documentation. The pytest reproduction was executed in a disposable environment using Python 3.12.13 and pytest 9.1.1 on July 4, 2026; output is reproduced above. Product behavior can change, so check the version running in your environment.</div>
       <div class="reviewPolicy disclosureNote"><strong>Disclosure:</strong> AlertMend publishes this guide and may benefit if readers evaluate its product. Every diagnostic command and manual fix in this article works without AlertMend.</div>
@@ -326,7 +326,7 @@ exit "$status"</code></pre>
 
       <div class="ctaBand">
         <div class="ctaBandTitle">Bring one unexplained exit-code incident.</div>
-        <p class="ctaBandSub">See AlertMend identify the producer, correlate the surrounding runtime evidence, and propose or execute an approved recovery—without treating every 5 as the same failure.</p>
+        <p class="ctaBandSub">See AlertMend identify the producer, correlate the surrounding runtime evidence, and propose or execute an approved recovery, without treating every 5 as the same failure.</p>
         <div class="ctaBtnRow"><a href="${postCalendlyUrl}" class="ctaBtn" target="_blank" rel="noopener noreferrer">Walk through the failure →</a></div>
       </div>
     </div>

@@ -165,7 +165,7 @@
       <pre class="codeBlock"><code>// Public monitor target (shallow, fast)
 app.get('/healthz', (req, res) => res.status(200).json({ status: 'ok' }));
 
-// Liveness: process only — never check DB here
+// Liveness: process only, never check DB here
 app.get('/healthz/live', (req, res) => res.sendStatus(200));
 
 // Readiness: dependencies OK
@@ -267,7 +267,7 @@ lifecycle:
       </div>
 
       <h2 class="sectionHead">The automation ladder</h2>
-      <p class="bodyText">Every auto-remediation runbook must be <strong>idempotent</strong> (safe to run twice), include <strong>verification</strong>, and <strong>escalate</strong> if verification fails.</p>
+      <p class="bodyText">Every auto-remediation runbook must be <strong>idempotent</strong> (safe to run twice), include <strong>verification</strong>and <strong>escalate</strong> if verification fails.</p>
       <div class="ladderSteps">
         <div class="ladderStep"><span class="ladderStepNum">1</span><p class="ladderStepTitle">Single failure</p><p class="ladderStepBody">Wait and re-check. One region failing alone is not an outage.</p></div>
         <div class="ladderStep"><span class="ladderStepNum">2</span><p class="ladderStepTitle">Multi-region confirm</p><p class="ladderStepBody">2+ regions fail 2 to 3 times. Run idempotent fix.</p></div>
@@ -376,13 +376,13 @@ lifecycle:
               <li><a href="/blog/automated-url-status-checks" class="related-post-link">Automated Url Status Checks Guide</a></li>
               <li><a href="/blog/cloud-based-url-monitoring-solutions" class="related-post-link">Cloud-Based URL Monitoring Solutions</a></li>
               <li><a href="/blog/devops-url-monitoring-practices" class="related-post-link">Devops URL Monitoring Practices</a></li>
+              <li><a href="/blog/odoo-monitoring" class="related-post-link">Odoo Monitoring and Auto-Recovery</a></li>
               <li><a href="/blog/datadog-alternatives" class="related-post-link">Best Datadog Alternatives (2026)</a></li>
               <li><a href="/blog/incident-io-alternatives" class="related-post-link">incident.io Alternatives for AI SRE (2026)</a></li>
               <li><a href="/blog/pagerduty-alternatives" class="related-post-link">Best PagerDuty Alternatives (2026)</a></li>
               <li><a href="/blog/autoscaling-v2-horizontalpodautoscaler" class="related-post-link">Kubernetes HPA v2: Configuration &amp; Fixes</a></li>
               <li><a href="/blog/ai-agent-observability-in-production" class="related-post-link">AI Agent Observability in Production</a></li>
               <li><a href="/blog/best-1-click-logging-and-metrics-tools" class="related-post-link">9 Best Logging &amp; Metrics Tools (2026)</a></li>
-              <li><a href="/blog/best-ai-agent-observability-tools" class="related-post-link">Best AI Agent Observability Tools</a></li>
             </ul>
             <a href="/blog" class="view-more-link">
               View all posts

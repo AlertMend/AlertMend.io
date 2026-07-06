@@ -96,7 +96,7 @@ export async function build(slug) {
     {
       when: 'After helm upgrade, 11:03am',
       title: 'Every pod in CrashLoopBackOff.',
-      body: 'The backoff timer climbed to 5 minutes. The container was healthy — Kubernetes disagreed.',
+      body: 'The backoff timer climbed to 5 minutes. The container was healthy, Kubernetes disagreed.',
       anchor: '#failure-probe',
     },
     {
@@ -108,7 +108,7 @@ export async function build(slug) {
     {
       when: 'Grafana pod restart graph spiked',
       title: 'Nobody knew which deploy caused it.',
-      body: 'CrashLoopBackOff started 4 minutes after a rollout. Nobody could tell which deploy caused it — until they checked one command.',
+      body: 'CrashLoopBackOff started 4 minutes after a rollout. Nobody could tell which deploy caused it, until they checked one command.',
       anchor: '#failure-deploy',
     },
   ]
@@ -130,10 +130,10 @@ export async function build(slug) {
   ]
 
   const HOWTO_STEPS = [
-    ['Find crashing pods', 'kubectl get pods -o wide — confirm CrashLoopBackOff status and restart count'],
-    ['Read pod Events', 'kubectl describe pod — scroll to Events for probe, OOM, or config errors'],
-    ['Get logs from the last crash', 'kubectl logs <pod> --previous — read the last terminated container'],
-    ['Check deploy timeline', 'kubectl get events --sort-by=.lastTimestamp — correlate crash with rollout'],
+    ['Find crashing pods', 'kubectl get pods -o wide, confirm CrashLoopBackOff status and restart count'],
+    ['Read pod Events', 'kubectl describe pod, scroll to Events for probe, OOM, or config errors'],
+    ['Get logs from the last crash', 'kubectl logs <pod> --previous, read the last terminated container'],
+    ['Check deploy timeline', 'kubectl get events --sort-by=.lastTimestamp, correlate crash with rollout'],
     ['Fix root cause, then verify', 'Restart count should stop climbing for 2+ minutes before closing the incident'],
   ]
 
@@ -213,7 +213,7 @@ kubectl rollout status deployment/<name> -n <namespace>`,
       title: 'OOMKilled (exit 137)',
       badge: 'Memory limit',
       summary:
-        'Container exceeded memory limits. The kernel kills the process instantly — often before logs flush.',
+        'Container exceeded memory limits. The kernel kills the process instantly, often before logs flush.',
       events: `Warning  BackOff    2m   Back-off restarting failed container
 Warning  Failed     3m   Error: OOMKilled
 Normal   Pulled     3m   Container image already present on machine`,
@@ -290,7 +290,7 @@ kubectl rollout restart deployment/<name> -n <namespace>`,
 Warning  BackOff            3m   Back-off restarting failed container
 Warning  Unhealthy          3m   Readiness probe failed: HTTP 503`,
       logs:
-        'May show app errors from the bad revision — stack trace, config mismatch, or probe failure introduced by the deploy.',
+        'May show app errors from the bad revision, stack trace, config mismatch, or probe failure introduced by the deploy.',
       steps: [
         'kubectl rollout history deployment/<name>',
         'Note revision number before the bad deploy',
@@ -325,7 +325,7 @@ Warning  Failed     3m   Error: container api exited with code 127`,
 exec: "/usr/local/bin/myapp": stat /usr/local/bin/myapp: no such file or directory
 standard_init_linux.go: exec user process caused: no such file or directory`,
       steps: [
-        'kubectl logs <pod> --previous — look for exit 127 or "not found"',
+        'kubectl logs <pod> --previous, look for exit 127 or "not found"',
         'Verify CMD/ENTRYPOINT in Dockerfile matches image contents',
         'kubectl run --rm -it debug --image=<same-image> -- /bin/sh to inspect paths',
         'Fix Dockerfile or deployment command/args',
@@ -344,7 +344,7 @@ kubectl patch deployment <name> -n <namespace> --type='json' \\
   -p='[{"op":"replace","path":"/spec/template/spec/containers/0/command","value":["/app/server"]}]'`,
       verify:
         'logs --previous shows app startup logs, not shell errors. Container stays Running with stable restart count.',
-      tip: 'Exit 127 almost always means wrong path or missing binary — not application logic.',
+      tip: 'Exit 127 almost always means wrong path or missing binary, not application logic.',
       autoFix: 'Fix CMD/ENTRYPOINT · Rebuild image · Redeploy',
     },
     {
@@ -361,8 +361,8 @@ Warning  BackOff    1m   Back-off restarting failed container`,
       logs: `connection refused: postgres://db:5432
 waiting for database: dial tcp 10.96.0.5:5432: connect: connection refused`,
       steps: [
-        'kubectl logs <pod> -c <init-container> — what did init actually check?',
-        'kubectl logs <pod> --previous — main container error',
+        'kubectl logs <pod> -c <init-container>what did init actually check?',
+        'kubectl logs <pod> --previous, main container error',
         'Init should wait for TCP open or HTTP 200, not just file mount',
         'Add proper wait-for-it or init probe pattern',
         'Fix init container script, redeploy',
@@ -466,7 +466,7 @@ Events:
   const RESOLVED_POD = `NAME                    READY   STATUS    RESTARTS   AGE
 api-7f9c2b8d4-xk2mn     1/1     Running   14         47m
                         ↑                  ↑
-                   healthy            stable — not climbing`
+                   healthy            stable, not climbing`
 
   const renderScenario = ({ when, title, body, anchor }) =>
     `<div class="fearScenario"><p class="fearScenarioWhen">${esc(when)}</p><p class="fearScenarioTitle">${esc(title)}</p><p class="fearScenarioBody">${esc(body)}</p><a href="${anchor}" class="fearScenarioLink">→ See what we found</a></div>`
@@ -616,7 +616,7 @@ ${buildCrashloopHeader(title, author, date, category, readMins)}
         </div>
         <p class="heroGuideLabel">Kubernetes runbook · pod crash loops</p>
         <p class="fearHeadline">RESTARTS: 14. STATUS: CrashLoopBackOff. LOGS: empty.</p>
-        <p class="fearLead">You ran <code>kubectl logs</code> and got nothing. The answer was in <code>--previous</code> the whole time — but only after you knew where to look. Meanwhile the backoff timer climbed, and your deploy looked "successful" because the ReplicaSet rolled out.</p>
+        <p class="fearLead">You ran <code>kubectl logs</code> and got nothing. The answer was in <code>--previous</code> the whole time, but only after you knew where to look. Meanwhile the backoff timer climbed, and your deploy looked "successful" because the ReplicaSet rolled out.</p>
         <div class="fearScenarioMobile">
         ${mobileLeadScenario}
         </div>
@@ -633,7 +633,7 @@ ${buildCrashloopHeader(title, author, date, category, readMins)}
       </section>
 
       <section class="heroBand heroBandCompact">
-        <p class="seoTldr"><strong>TL;DR:</strong> The fix is always in the <em>last terminated container</em>, not the current one. Below: the <a href="#five-step-workflow">five-step workflow</a> that finds it, <a href="#describe-output">annotated describe output</a> that teaches you to read it, and <a href="#failure-modes">failure-mode playbooks</a> for every common root cause. Don't delete the pod — the backoff timer resets but the root cause doesn't.</p>
+        <p class="seoTldr"><strong>TL;DR:</strong> The fix is always in the <em>last terminated container</em>not the current one. Below: the <a href="#five-step-workflow">five-step workflow</a> that finds it, <a href="#describe-output">annotated describe output</a> that teaches you to read it, and <a href="#failure-modes">failure-mode playbooks</a> for every common root cause. Don't delete the pod, the backoff timer resets but the root cause doesn't.</p>
       </section>
 
       <nav class="articleToc" aria-label="On this page">
@@ -653,7 +653,7 @@ ${buildCrashloopHeader(title, author, date, category, readMins)}
       <p class="bodyText">Kubernetes restarted your container, it exited again, and the kubelet is waiting longer before the next try. The status <strong>CrashLoopBackOff</strong> is the backoff timer, not the root cause. The cause is in the last terminated container's logs and the pod Events.</p>
 
       <h3 class="subsectionHead">Exponential backoff timer</h3>
-      <p class="bodyText">Between restart attempts, kubelet waits longer each time — capped at five minutes. Most engineers know "it backs off" but not the exact schedule:</p>
+      <p class="bodyText">Between restart attempts, kubelet waits longer each time, capped at five minutes. Most engineers know "it backs off" but not the exact schedule:</p>
       <div class="diyWrap">
         <table class="compareTable backoffTable">
           <thead><tr><th>Restart attempt</th><th>Wait before next try</th></tr></thead>
@@ -667,9 +667,9 @@ ${buildCrashloopHeader(title, author, date, category, readMins)}
           </tbody>
         </table>
       </div>
-      <p class="thresholdFormula">Formula: <code>min(10 × 2<sup>n−1</sup>, 300)</code> seconds · Reset: timer returns to 10s after the container runs successfully for 10 minutes.</p>
+      <p class="thresholdFormula">Formula: <code>min(10 × 2<sup>n−1</sup>300)</code> seconds · Reset: timer returns to 10s after the container runs successfully for 10 minutes.</p>
       <div class="operationalCallout">
-        <p><strong>Operational impact:</strong> By restart 6, you're waiting 5 minutes per attempt — that's 5 minutes of zero traffic to that pod replica. After restart 14 (where our hero scenario starts), the pod has been failing for over an hour.</p>
+        <p><strong>Operational impact:</strong> By restart 6, you're waiting 5 minutes per attempt, that's 5 minutes of zero traffic to that pod replica. After restart 14 (where our hero scenario starts), the pod has been failing for over an hour.</p>
       </div>
 
       <div class="diyWrap">
@@ -682,7 +682,7 @@ ${buildCrashloopHeader(title, author, date, category, readMins)}
       </div>
 
       <h2 class="sectionHead" id="diagnostic-tree">Diagnostic decision tree</h2>
-      <p class="bodyText">Start at describe Events, branch to your failure mode, confirm with <code>logs --previous</code>, verify restart count stops climbing.</p>
+      <p class="bodyText">Start at describe Events, branch to your failure mode, confirm with <code>logs --previous</code>verify restart count stops climbing.</p>
       <figure class="flowDiagram">
         ${decisionFlowHtml}
         <figcaption class="flowDiagramCaption">Bookmark this flow: describe → Events → branch → logs --previous → verify.</figcaption>
@@ -700,7 +700,7 @@ ${buildCrashloopHeader(title, author, date, category, readMins)}
 
       <div class="resolvedCallout" id="resolved-state">
         <h3 class="subsectionHead">What a resolved pod looks like</h3>
-        <p class="bodyText">After the fix, confirm the pod is actually healthy — not just temporarily between crashes.</p>
+        <p class="bodyText">After the fix, confirm the pod is actually healthy, not just temporarily between crashes.</p>
         ${codeBlock(RESOLVED_POD)}
         <ul class="checkList resolvedChecklist">
           <li>Watch for 2+ minutes. If restart count doesn't increase, the fix is holding.</li>
@@ -747,7 +747,7 @@ ${buildCrashloopHeader(title, author, date, category, readMins)}
 
       <div class="ctaBand">
         <div class="ctaBandTitle">You just ran the five-step workflow. Automate the next one.</div>
-        <p class="ctaBandSub">You ran <code>kubectl describe</code>, read Events, checked <code>logs --previous</code>, and correlated with deploy timing — five steps, maybe 10 minutes if you knew where to look. AlertMend runs this workflow automatically: it captures <code>logs --previous</code> before the container restarts, correlates with the last rollout, and triggers safe rollback or restart. It pages you only when the automated fix fails. <strong>Manual:</strong> ~15 minutes per pod × N pods. <strong>Automated:</strong> 30 seconds, verified.</p>
+        <p class="ctaBandSub">You ran <code>kubectl describe</code>read Events, checked <code>logs --previous</code>and correlated with deploy timing, five steps, maybe 10 minutes if you knew where to look. AlertMend runs this workflow automatically: it captures <code>logs --previous</code> before the container restarts, correlates with the last rollout, and triggers safe rollback or restart. It pages you only when the automated fix fails. <strong>Manual:</strong> ~15 minutes per pod × N pods. <strong>Automated:</strong> 30 seconds, verified.</p>
         <div class="ctaBtnRow">
           <a href="${postSignupUrl}" class="ctaBtn">Start with auto-remediation →</a>
           <a href="${postCalendlyUrl}" class="ctaBtnSecondary" target="_blank" rel="noopener noreferrer">Talk to an expert</a>

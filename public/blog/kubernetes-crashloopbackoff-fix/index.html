@@ -21,7 +21,7 @@
   <meta name="twitter:image" content="https://www.alertmend.io/assets/kubernetes-crashloopbackoff-fix/crashloop-hero.svg">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Kubernetes CrashLoopBackOff: Fix Guide","description":"CrashLoopBackOff fix: answer in the last terminated container, not the current one. Five-step workflow, annotated kubectl output, failure-mode playbooks.","image":"https://www.alertmend.io/assets/kubernetes-crashloopbackoff-fix/crashloop-hero.svg","datePublished":"2026-06-24","dateModified":"2026-06-24","author":{"@type":"Person","name":"Himanshu Bansal"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/kubernetes-crashloopbackoff-fix"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is CrashLoopBackOff in Kubernetes?","acceptedAnswer":{"@type":"Answer","text":"CrashLoopBackOff means a container keeps exiting and Kubernetes is waiting longer between restart attempts (exponential backoff: 10s, 20s, 40s, up to 5 minutes). Fix the root cause in logs --previous, not by deleting the pod repeatedly."}},{"@type":"Question","name":"How do I fix CrashLoopBackOff?","acceptedAnswer":{"@type":"Answer","text":"Run kubectl describe pod and kubectl logs <pod> --previous. Fix the error shown (probe, OOM, missing env, bad image). If it started after a deploy, try kubectl rollout undo."}},{"@type":"Question","name":"Why is kubectl logs empty during CrashLoopBackOff?","acceptedAnswer":{"@type":"Answer","text":"The current container may have died before writing logs. Use kubectl logs <pod> --previous to read the last crashed instance."}},{"@type":"Question","name":"CrashLoopBackOff vs ImagePullBackOff?","acceptedAnswer":{"@type":"Answer","text":"ImagePullBackOff means Kubernetes cannot pull the container image. CrashLoopBackOff means the image pulled but the container process exits repeatedly."}},{"@type":"Question","name":"Should I delete the pod to fix CrashLoopBackOff?","acceptedAnswer":{"@type":"Answer","text":"Deleting forces an immediate restart but does not fix config errors, OOM, or bad probes. Diagnose first. Delete only after fixing root cause or when wedged in long backoff."}},{"@type":"Question","name":"How do I know if a liveness probe caused the crash?","acceptedAnswer":{"@type":"Answer","text":"kubectl describe pod shows Liveness probe failed in Events. The container restarts even though the app might have recovered if given more startup time."}},{"@type":"Question","name":"How do I prevent CrashLoopBackOff on deploy?","acceptedAnswer":{"@type":"Answer","text":"Use startupProbe for slow-start apps, set realistic memory limits, validate Secrets in CI, and add deploy grace on probes so liveness does not kill pods during migrations."}},{"@type":"Question","name":"CrashLoopBackOff on GPU / LLM pods?","acceptedAnswer":{"@type":"Answer","text":"Model load can take 2–5 minutes. Without startupProbe grace, liveness kills the container during weight load. See our Ollama and vLLM monitoring runbooks for probe patterns on inference workloads."}}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to fix CrashLoopBackOff in Kubernetes","description":"CrashLoopBackOff fix: answer in the last terminated container, not the current one. Five-step workflow, annotated kubectl output, failure-mode playbooks.","totalTime":"PT10M","tool":[{"@type":"HowToTool","name":"kubectl"}],"step":[{"@type":"HowToStep","position":1,"name":"Find crashing pods","text":"kubectl get pods -o wide — confirm CrashLoopBackOff status and restart count"},{"@type":"HowToStep","position":2,"name":"Read pod Events","text":"kubectl describe pod — scroll to Events for probe, OOM, or config errors"},{"@type":"HowToStep","position":3,"name":"Get logs from the last crash","text":"kubectl logs <pod> --previous — read the last terminated container"},{"@type":"HowToStep","position":4,"name":"Check deploy timeline","text":"kubectl get events --sort-by=.lastTimestamp — correlate crash with rollout"},{"@type":"HowToStep","position":5,"name":"Fix root cause, then verify","text":"Restart count should stop climbing for 2+ minutes before closing the incident"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to fix CrashLoopBackOff in Kubernetes","description":"CrashLoopBackOff fix: answer in the last terminated container, not the current one. Five-step workflow, annotated kubectl output, failure-mode playbooks.","totalTime":"PT10M","tool":[{"@type":"HowToTool","name":"kubectl"}],"step":[{"@type":"HowToStep","position":1,"name":"Find crashing pods","text":"kubectl get pods -o wide, confirm CrashLoopBackOff status and restart count"},{"@type":"HowToStep","position":2,"name":"Read pod Events","text":"kubectl describe pod, scroll to Events for probe, OOM, or config errors"},{"@type":"HowToStep","position":3,"name":"Get logs from the last crash","text":"kubectl logs <pod> --previous, read the last terminated container"},{"@type":"HowToStep","position":4,"name":"Check deploy timeline","text":"kubectl get events --sort-by=.lastTimestamp, correlate crash with rollout"},{"@type":"HowToStep","position":5,"name":"Fix root cause, then verify","text":"Restart count should stop climbing for 2+ minutes before closing the incident"}]}</script>
   <link rel="stylesheet" href="/assets/kubernetes-crashloopbackoff-fix/styles.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -129,29 +129,29 @@
         </div>
         <p class="heroGuideLabel">Kubernetes runbook · pod crash loops</p>
         <p class="fearHeadline">RESTARTS: 14. STATUS: CrashLoopBackOff. LOGS: empty.</p>
-        <p class="fearLead">You ran <code>kubectl logs</code> and got nothing. The answer was in <code>--previous</code> the whole time — but only after you knew where to look. Meanwhile the backoff timer climbed, and your deploy looked "successful" because the ReplicaSet rolled out.</p>
+        <p class="fearLead">You ran <code>kubectl logs</code> and got nothing. The answer was in <code>--previous</code> the whole time, but only after you knew where to look. Meanwhile the backoff timer climbed, and your deploy looked "successful" because the ReplicaSet rolled out.</p>
         <div class="fearScenarioMobile">
         <div class="fearScenario"><p class="fearScenarioWhen">OOM looks like a bug</p><p class="fearScenarioTitle">Exit 137, restart count 47.</p><p class="fearScenarioBody">logs --previous were empty. On-call spent an hour debugging &quot;application code.&quot; The actual cause was somewhere they never looked.</p><a href="#failure-oom" class="fearScenarioLink">→ See what we found</a></div>
         </div>
         <details class="fearScenarioMore">
           <summary>3 more production scenarios →</summary>
           <div class="fearScenarioGrid">
-        <div class="fearScenario"><p class="fearScenarioWhen">After helm upgrade, 11:03am</p><p class="fearScenarioTitle">Every pod in CrashLoopBackOff.</p><p class="fearScenarioBody">The backoff timer climbed to 5 minutes. The container was healthy — Kubernetes disagreed.</p><a href="#failure-probe" class="fearScenarioLink">→ See what we found</a></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">After helm upgrade, 11:03am</p><p class="fearScenarioTitle">Every pod in CrashLoopBackOff.</p><p class="fearScenarioBody">The backoff timer climbed to 5 minutes. The container was healthy, Kubernetes disagreed.</p><a href="#failure-probe" class="fearScenarioLink">→ See what we found</a></div>
         <div class="fearScenario"><p class="fearScenarioWhen">Init container succeeded</p><p class="fearScenarioTitle">Main container still loops.</p><p class="fearScenarioBody">kubectl logs showed &quot;connection refused.&quot; One renamed key hid in plain sight.</p><a href="#failure-config" class="fearScenarioLink">→ See what we found</a></div>
-        <div class="fearScenario"><p class="fearScenarioWhen">Grafana pod restart graph spiked</p><p class="fearScenarioTitle">Nobody knew which deploy caused it.</p><p class="fearScenarioBody">CrashLoopBackOff started 4 minutes after a rollout. Nobody could tell which deploy caused it — until they checked one command.</p><a href="#failure-deploy" class="fearScenarioLink">→ See what we found</a></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">Grafana pod restart graph spiked</p><p class="fearScenarioTitle">Nobody knew which deploy caused it.</p><p class="fearScenarioBody">CrashLoopBackOff started 4 minutes after a rollout. Nobody could tell which deploy caused it, until they checked one command.</p><a href="#failure-deploy" class="fearScenarioLink">→ See what we found</a></div>
           </div>
         </details>
         <div class="fearScenarioGrid fearScenarioGridDesktop">
         <div class="fearScenario"><p class="fearScenarioWhen">OOM looks like a bug</p><p class="fearScenarioTitle">Exit 137, restart count 47.</p><p class="fearScenarioBody">logs --previous were empty. On-call spent an hour debugging &quot;application code.&quot; The actual cause was somewhere they never looked.</p><a href="#failure-oom" class="fearScenarioLink">→ See what we found</a></div>
-        <div class="fearScenario"><p class="fearScenarioWhen">After helm upgrade, 11:03am</p><p class="fearScenarioTitle">Every pod in CrashLoopBackOff.</p><p class="fearScenarioBody">The backoff timer climbed to 5 minutes. The container was healthy — Kubernetes disagreed.</p><a href="#failure-probe" class="fearScenarioLink">→ See what we found</a></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">After helm upgrade, 11:03am</p><p class="fearScenarioTitle">Every pod in CrashLoopBackOff.</p><p class="fearScenarioBody">The backoff timer climbed to 5 minutes. The container was healthy, Kubernetes disagreed.</p><a href="#failure-probe" class="fearScenarioLink">→ See what we found</a></div>
         <div class="fearScenario"><p class="fearScenarioWhen">Init container succeeded</p><p class="fearScenarioTitle">Main container still loops.</p><p class="fearScenarioBody">kubectl logs showed &quot;connection refused.&quot; One renamed key hid in plain sight.</p><a href="#failure-config" class="fearScenarioLink">→ See what we found</a></div>
-        <div class="fearScenario"><p class="fearScenarioWhen">Grafana pod restart graph spiked</p><p class="fearScenarioTitle">Nobody knew which deploy caused it.</p><p class="fearScenarioBody">CrashLoopBackOff started 4 minutes after a rollout. Nobody could tell which deploy caused it — until they checked one command.</p><a href="#failure-deploy" class="fearScenarioLink">→ See what we found</a></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">Grafana pod restart graph spiked</p><p class="fearScenarioTitle">Nobody knew which deploy caused it.</p><p class="fearScenarioBody">CrashLoopBackOff started 4 minutes after a rollout. Nobody could tell which deploy caused it, until they checked one command.</p><a href="#failure-deploy" class="fearScenarioLink">→ See what we found</a></div>
         </div>
         <p class="fearBridge">If any of that sounds familiar, start here. This is the workflow we use on real incidents, from <code>kubectl describe</code> to the fix that actually sticks. <strong>Deleting the pod is not a fix.</strong> The backoff timer resets; the root cause does not.</p>
       </section>
 
       <section class="heroBand heroBandCompact">
-        <p class="seoTldr"><strong>TL;DR:</strong> The fix is always in the <em>last terminated container</em>, not the current one. Below: the <a href="#five-step-workflow">five-step workflow</a> that finds it, <a href="#describe-output">annotated describe output</a> that teaches you to read it, and <a href="#failure-modes">failure-mode playbooks</a> for every common root cause. Don't delete the pod — the backoff timer resets but the root cause doesn't.</p>
+        <p class="seoTldr"><strong>TL;DR:</strong> The fix is always in the <em>last terminated container</em>not the current one. Below: the <a href="#five-step-workflow">five-step workflow</a> that finds it, <a href="#describe-output">annotated describe output</a> that teaches you to read it, and <a href="#failure-modes">failure-mode playbooks</a> for every common root cause. Don't delete the pod, the backoff timer resets but the root cause doesn't.</p>
       </section>
 
       <nav class="articleToc" aria-label="On this page">
@@ -171,7 +171,7 @@
       <p class="bodyText">Kubernetes restarted your container, it exited again, and the kubelet is waiting longer before the next try. The status <strong>CrashLoopBackOff</strong> is the backoff timer, not the root cause. The cause is in the last terminated container's logs and the pod Events.</p>
 
       <h3 class="subsectionHead">Exponential backoff timer</h3>
-      <p class="bodyText">Between restart attempts, kubelet waits longer each time — capped at five minutes. Most engineers know "it backs off" but not the exact schedule:</p>
+      <p class="bodyText">Between restart attempts, kubelet waits longer each time, capped at five minutes. Most engineers know "it backs off" but not the exact schedule:</p>
       <div class="diyWrap">
         <table class="compareTable backoffTable">
           <thead><tr><th>Restart attempt</th><th>Wait before next try</th></tr></thead>
@@ -185,9 +185,9 @@
           </tbody>
         </table>
       </div>
-      <p class="thresholdFormula">Formula: <code>min(10 × 2<sup>n−1</sup>, 300)</code> seconds · Reset: timer returns to 10s after the container runs successfully for 10 minutes.</p>
+      <p class="thresholdFormula">Formula: <code>min(10 × 2<sup>n−1</sup>300)</code> seconds · Reset: timer returns to 10s after the container runs successfully for 10 minutes.</p>
       <div class="operationalCallout">
-        <p><strong>Operational impact:</strong> By restart 6, you're waiting 5 minutes per attempt — that's 5 minutes of zero traffic to that pod replica. After restart 14 (where our hero scenario starts), the pod has been failing for over an hour.</p>
+        <p><strong>Operational impact:</strong> By restart 6, you're waiting 5 minutes per attempt, that's 5 minutes of zero traffic to that pod replica. After restart 14 (where our hero scenario starts), the pod has been failing for over an hour.</p>
       </div>
 
       <div class="diyWrap">
@@ -204,7 +204,7 @@
       </div>
 
       <h2 class="sectionHead" id="diagnostic-tree">Diagnostic decision tree</h2>
-      <p class="bodyText">Start at describe Events, branch to your failure mode, confirm with <code>logs --previous</code>, verify restart count stops climbing.</p>
+      <p class="bodyText">Start at describe Events, branch to your failure mode, confirm with <code>logs --previous</code>verify restart count stops climbing.</p>
       <figure class="flowDiagram">
         
       <nav class="decisionFlow" aria-label="CrashLoopBackOff diagnostic decision tree: start with kubectl describe pod, read Events, then branch to five paths">
@@ -282,14 +282,14 @@ kubectl rollout status deployment/&lt;name> -n &lt;namespace></code></pre>
 
       <div class="resolvedCallout" id="resolved-state">
         <h3 class="subsectionHead">What a resolved pod looks like</h3>
-        <p class="bodyText">After the fix, confirm the pod is actually healthy — not just temporarily between crashes.</p>
+        <p class="bodyText">After the fix, confirm the pod is actually healthy, not just temporarily between crashes.</p>
         <div class="codeBlockWrap">
   <button type="button" class="codeCopyBtn" aria-label="Copy code to clipboard"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg><span class="codeCopyLabel">Copy</span></button>
   <span class="codeCopyToast" aria-live="polite"></span>
   <pre class="codeBlock"><code>NAME                    READY   STATUS    RESTARTS   AGE
 api-7f9c2b8d4-xk2mn     1/1     Running   14         47m
                         ↑                  ↑
-                   healthy            stable — not climbing</code></pre>
+                   healthy            stable, not climbing</code></pre>
 </div>
         <ul class="checkList resolvedChecklist">
           <li>Watch for 2+ minutes. If restart count doesn't increase, the fix is holding.</li>
@@ -393,7 +393,7 @@ kubectl rollout status deployment/&lt;name> -n &lt;namespace></code></pre>
       </section>
       <section class="failurePlaybook" id="failure-oom">
         <h3 class="failurePlaybookTitle">OOMKilled (exit 137) <span class="failurePlaybookBadge">Memory limit</span></h3>
-        <p class="failurePlaybookSummary">Container exceeded memory limits. The kernel kills the process instantly — often before logs flush.</p>
+        <p class="failurePlaybookSummary">Container exceeded memory limits. The kernel kills the process instantly, often before logs flush.</p>
         <h4 class="failurePlaybookSubhead">What you see in Events</h4>
         <pre class="eventsExample"><code>Warning  BackOff    2m   Back-off restarting failed container
 Warning  Failed     3m   Error: OOMKilled
@@ -476,7 +476,7 @@ kubectl rollout restart deployment/&lt;name> -n &lt;namespace></code></pre>
 Warning  BackOff            3m   Back-off restarting failed container
 Warning  Unhealthy          3m   Readiness probe failed: HTTP 503</code></pre>
         <h4 class="failurePlaybookSubhead">What you see in logs --previous</h4>
-        <p class="failurePlaybookLogs">May show app errors from the bad revision — stack trace, config mismatch, or probe failure introduced by the deploy.</p>
+        <p class="failurePlaybookLogs">May show app errors from the bad revision, stack trace, config mismatch, or probe failure introduced by the deploy.</p>
         <h4 class="failurePlaybookSubhead">Diagnostic steps</h4>
         <ul class="checkList"><li>kubectl rollout history deployment/&lt;name></li>
           <li>Note revision number before the bad deploy</li>
@@ -514,7 +514,7 @@ Warning  Failed     3m   Error: container api exited with code 127</code></pre>
 exec: "/usr/local/bin/myapp": stat /usr/local/bin/myapp: no such file or directory
 standard_init_linux.go: exec user process caused: no such file or directory</p>
         <h4 class="failurePlaybookSubhead">Diagnostic steps</h4>
-        <ul class="checkList"><li>kubectl logs &lt;pod> --previous — look for exit 127 or &quot;not found&quot;</li>
+        <ul class="checkList"><li>kubectl logs &lt;pod> --previous, look for exit 127 or &quot;not found&quot;</li>
           <li>Verify CMD/ENTRYPOINT in Dockerfile matches image contents</li>
           <li>kubectl run --rm -it debug --image=&lt;same-image> -- /bin/sh to inspect paths</li>
           <li>Fix Dockerfile or deployment command/args</li>
@@ -537,7 +537,7 @@ kubectl patch deployment &lt;name> -n &lt;namespace> --type='json' \
 </div>
         <h4 class="failurePlaybookSubhead">Verify</h4>
         <p class="failurePlaybookVerify">logs --previous shows app startup logs, not shell errors. Container stays Running with stable restart count.</p>
-        <div class="stepTip"><span>Exit 127 almost always means wrong path or missing binary — not application logic.</span></div>
+        <div class="stepTip"><span>Exit 127 almost always means wrong path or missing binary, not application logic.</span></div>
         <p class="autofixBadge">Typical fix: Fix CMD/ENTRYPOINT · Rebuild image · Redeploy</p>
       </section>
       <section class="failurePlaybook" id="failure-init">
@@ -553,8 +553,8 @@ Warning  BackOff    1m   Back-off restarting failed container</code></pre>
         <p class="failurePlaybookLogs">connection refused: postgres://db:5432
 waiting for database: dial tcp 10.96.0.5:5432: connect: connection refused</p>
         <h4 class="failurePlaybookSubhead">Diagnostic steps</h4>
-        <ul class="checkList"><li>kubectl logs &lt;pod> -c &lt;init-container> — what did init actually check?</li>
-          <li>kubectl logs &lt;pod> --previous — main container error</li>
+        <ul class="checkList"><li>kubectl logs &lt;pod> -c &lt;init-container>what did init actually check?</li>
+          <li>kubectl logs &lt;pod> --previous, main container error</li>
           <li>Init should wait for TCP open or HTTP 200, not just file mount</li>
           <li>Add proper wait-for-it or init probe pattern</li>
           <li>Fix init container script, redeploy</li></ul>
@@ -618,7 +618,7 @@ kubectl rollout status deployment/&lt;name> -n &lt;namespace></code></pre>
 
       <div class="ctaBand">
         <div class="ctaBandTitle">You just ran the five-step workflow. Automate the next one.</div>
-        <p class="ctaBandSub">You ran <code>kubectl describe</code>, read Events, checked <code>logs --previous</code>, and correlated with deploy timing — five steps, maybe 10 minutes if you knew where to look. AlertMend runs this workflow automatically: it captures <code>logs --previous</code> before the container restarts, correlates with the last rollout, and triggers safe rollback or restart. It pages you only when the automated fix fails. <strong>Manual:</strong> ~15 minutes per pod × N pods. <strong>Automated:</strong> 30 seconds, verified.</p>
+        <p class="ctaBandSub">You ran <code>kubectl describe</code>read Events, checked <code>logs --previous</code>and correlated with deploy timing, five steps, maybe 10 minutes if you knew where to look. AlertMend runs this workflow automatically: it captures <code>logs --previous</code> before the container restarts, correlates with the last rollout, and triggers safe rollback or restart. It pages you only when the automated fix fails. <strong>Manual:</strong> ~15 minutes per pod × N pods. <strong>Automated:</strong> 30 seconds, verified.</p>
         <div class="ctaBtnRow">
           <a href="https://app.alertmend.io/signup?service=remediation&source=blog-crashloop&blog_slug=kubernetes-crashloopbackoff-fix" class="ctaBtn">Start with auto-remediation →</a>
           <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=kubernetes-crashloopbackoff-fix" class="ctaBtnSecondary" target="_blank" rel="noopener noreferrer">Talk to an expert</a>
@@ -646,13 +646,13 @@ kubectl rollout status deployment/&lt;name> -n &lt;namespace></code></pre>
               <li><a href="/blog/autoscaling-v2-horizontalpodautoscaler" class="related-post-link">Kubernetes HPA v2: Configuration &amp; Fixes</a></li>
               <li><a href="/blog/kubernetes-imagepullbackoff-fix" class="related-post-link">Kubernetes ImagePullBackOff: Fix Guide</a></li>
               <li><a href="/blog/503-no-healthy-upstream" class="related-post-link">No Healthy Upstream: Meaning &amp; 503 Fixes</a></li>
+              <li><a href="/blog/odoo-monitoring" class="related-post-link">Odoo Monitoring and Auto-Recovery</a></li>
               <li><a href="/blog/datadog-alternatives" class="related-post-link">Best Datadog Alternatives (2026)</a></li>
               <li><a href="/blog/incident-io-alternatives" class="related-post-link">incident.io Alternatives for AI SRE (2026)</a></li>
               <li><a href="/blog/pagerduty-alternatives" class="related-post-link">Best PagerDuty Alternatives (2026)</a></li>
               <li><a href="/blog/ai-agent-observability-in-production" class="related-post-link">AI Agent Observability in Production</a></li>
               <li><a href="/blog/best-1-click-logging-and-metrics-tools" class="related-post-link">9 Best Logging &amp; Metrics Tools (2026)</a></li>
               <li><a href="/blog/best-ai-agent-observability-tools" class="related-post-link">Best AI Agent Observability Tools</a></li>
-              <li><a href="/blog/enterprise-ai-agent-observability" class="related-post-link">Enterprise AI Agent Observability</a></li>
             </ul>
             <a href="/blog" class="view-more-link">
               View all posts

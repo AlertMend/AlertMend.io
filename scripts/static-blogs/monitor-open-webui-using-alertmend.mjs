@@ -60,9 +60,9 @@ export async function build(slug) {
   const title = meta.title || 'Monitor Open WebUI + Ollama in Production'
   const excerpt =
     meta.excerpt ||
-    'Open WebUI /health returns 200 while Ollama is down — the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.'
-  const ogTitle = 'How to Monitor Open WebUI + Ollama in Production — Stop the Silent Split-Stack Failure'
-  const subtitle = 'The split-stack failure that pages on-call at 2am — and the 48-second auto-fix.'
+    'Open WebUI /health returns 200 while Ollama is down, the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.'
+  const ogTitle = 'How to Monitor Open WebUI + Ollama in Production, Stop the Silent Split-Stack Failure'
+  const subtitle = 'The split-stack failure that pages on-call at 2am, and the 48-second auto-fix.'
   const date = meta.date || '2026-06-24'
   const category = meta.category || 'AIOps'
   const author = meta.author || 'AlertMend Team'
@@ -342,11 +342,11 @@ ${buildOpenWebuiHeader(title, subtitle, author, date, category)}
         </div>
         <p class="heroGuideLabel">Production runbook · split-stack monitoring</p>
         <h2 class="fearHeadline">Open WebUI loaded. Chat still failed on every message.</h2>
-        <p class="fearLead">Most teams <strong>deploy</strong> Open WebUI and Ollama together. Few teams <strong>monitor both layers</strong> — or know which one to restart when chat breaks.</p>
+        <p class="fearLead">Most teams <strong>deploy</strong> Open WebUI and Ollama together. Few teams <strong>monitor both layers</strong>or know which one to restart when chat breaks.</p>
         <div class="fearScenarioGrid fearScenarioGridSpaced">
         ${renderPainScenarios}
         </div>
-        <p class="heroBridge">Every one of these incidents has the same root cause — and the same <strong>~48-second fix</strong>. But the fix only works if you get three things right: which endpoints to check, in what order to restart, and one threshold rule that most teams set wrong. Below is the production runbook we have seen work across 200+ Open WebUI deployments — including the <a href="#safe-to-automate">five things you should never automate</a> on this stack.</p>
+        <p class="heroBridge">Every one of these incidents has the same root cause, and the same <strong>~48-second fix</strong>. But the fix only works if you get three things right: which endpoints to check, in what order to restart, and one threshold rule that most teams set wrong. Below is the production runbook we have seen work across 200+ Open WebUI deployments, including the <a href="#safe-to-automate">five things you should never automate</a> on this stack.</p>
       </section>
 
       <section class="heroBand heroBandCompact">
@@ -359,10 +359,10 @@ ${buildOpenWebuiHeader(title, subtitle, author, date, category)}
             <li>You want to know which failures are safe to auto-fix and which require a human</li>
           </ul>
         </div>
-        <p class="seoTldr"><strong>TL;DR:</strong> The #1 Open WebUI production failure is not a crash — it is a silent split where the UI says healthy while chat is completely broken. The fix requires monitoring two endpoints, but which ones you check and in what order determines whether you auto-recover in 48 seconds or page on-call at 2am. The <a href="#threshold-rules">threshold rules</a> and <a href="#safe-to-automate">automation boundaries</a> below are the difference.</p>
+        <p class="seoTldr"><strong>TL;DR:</strong> The #1 Open WebUI production failure is not a crash, it is a silent split where the UI says healthy while chat is completely broken. The fix requires monitoring two endpoints, but which ones you check and in what order determines whether you auto-recover in 48 seconds or page on-call at 2am. The <a href="#threshold-rules">threshold rules</a> and <a href="#safe-to-automate">automation boundaries</a> below are the difference.</p>
         <p class="fearBridge fearBridgeAfterTldr"><strong>Monitoring only Open WebUI /health is not production monitoring.</strong> Layer backend checks, split-stack alerts, and Ollama-first restart runbooks.</p>
         <p class="heroIncludes"><span class="heroIncludesLabel">Includes:</span> interactive failure simulator · copy-paste runbooks · threshold rules</p>
-        <p class="simulatorTeaser"><a href="#failure-simulator">↓ Interactive failure simulator</a> — click through each split-stack failure with real kubectl commands.</p>
+        <p class="simulatorTeaser"><a href="#failure-simulator">↓ Interactive failure simulator</a>click through each split-stack failure with real kubectl commands.</p>
       </section>
 
       <div class="runbookOutline" aria-label="What this runbook covers">
@@ -382,7 +382,7 @@ ${buildOpenWebuiHeader(title, subtitle, author, date, category)}
         <p class="bodyText">The mistake: monitor only the UI layer and assume chat works. Start with the two checks that catch 80% of split-stack failures.</p>
         ${renderHealthTable(HEALTH_ENDPOINTS.slice(0, 2))}
         <div class="keyInsight">
-          <p><strong>These two checks catch 80% of split-stack failures.</strong> The remaining 20% — hung GPUs, model eviction, ingress splits — require three additional probes. See the complete check matrix below.</p>
+          <p><strong>These two checks catch 80% of split-stack failures.</strong> The remaining 20%, hung GPUs, model eviction, ingress splits, require three additional probes. See the complete check matrix below.</p>
         </div>
 
         <h3 class="subsectionHead">Stack-native signals: OLLAMA_BASE_URL and split alerts</h3>
@@ -410,7 +410,7 @@ ${buildOpenWebuiHeader(title, subtitle, author, date, category)}
         <p class="warStoryWhen">Last month · K8s production cluster</p>
         <p class="warStoryLead">A team running Open WebUI on K8s spent 3 hours debugging why chat completions returned 500s.</p>
         <p>Their Grafana dashboard showed WebUI CPU at 12% and memory at 40%. Everything looked healthy. The problem: Ollama had OOM-killed 90 minutes earlier. WebUI kept serving the login page. Their monitoring never checked the backend.</p>
-        <p>When they finally ran <code>kubectl logs deployment/ollama</code>, they found <code>exit code 137</code> repeated 12 times. The fix took 30 seconds — <code>kubectl rollout restart deployment/ollama</code>. But finding it took 3 hours because no alert told them <em>which layer</em> was broken.</p>
+        <p>When they finally ran <code>kubectl logs deployment/ollama</code>they found <code>exit code 137</code> repeated 12 times. The fix took 30 seconds, <code>kubectl rollout restart deployment/ollama</code>. But finding it took 3 hours because no alert told them <em>which layer</em> was broken.</p>
         <p>That is why the threshold rules below exist. They tell you when to page, when to suppress noise during model cold starts, and when a script can fix it vs. when you need a human.</p>
       </div>
 
@@ -420,7 +420,7 @@ ${buildOpenWebuiHeader(title, subtitle, author, date, category)}
         <div class="warningCallout thresholdTrapCallout">
           <p><span class="calloutIcon" aria-hidden="true">⚠️</span> <strong>The threshold trap:</strong> Most teams set their split-stack alert to fire after 1 backend failure. This pages on-call during every Ollama model cold start. The rules below eliminate cold-start noise while catching real outages in under 60 seconds.</p>
         </div>
-        <p class="bodyText">Page when the UI is up but the backend is down — not when both layers are healthy during a model cold start on Ollama.</p>
+        <p class="bodyText">Page when the UI is up but the backend is down, not when both layers are healthy during a model cold start on Ollama.</p>
         <div class="diyWrap tableScrollWrap">
           <table class="compareTable responsiveTable">
             <thead><tr><th>Rule</th><th>Threshold</th><th>Why</th></tr></thead>

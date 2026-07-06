@@ -121,7 +121,7 @@ export async function build(slug) {
   const DIAGNOSIS_SCENARIOS = [
     ['uv', 'uv: not found', 'uv', 'The Makefile calls uv, but that executable is absent from the environment or outside PATH.', 'Install uv in the same CI image or shell that runs make, then verify with command -v uv.'],
     ['go', 'go: No such file', 'go', 'Go exists on another machine or shell profile, but not in the current make, container, or CI environment.', 'Install Go in that environment and export its bin directory before make starts.'],
-    ['compiler', 'gcc / g++ not found', 'gcc', 'The compiler toolchain is missing—common in minimal VMs and runtime-only container images.', 'Install the platform build toolchain, then verify gcc --version and g++ --version.'],
+    ['compiler', 'gcc / g++ not found', 'gcc', 'The compiler toolchain is missing, common in minimal VMs and runtime-only container images.', 'Install the platform build toolchain, then verify gcc --version and g++ --version.'],
     ['node', 'npm / vite not found', 'npm', 'Node dependencies or binaries are missing. Local npm scripts may resolve node_modules/.bin while direct Makefile recipes do not.', 'Install Node and dependencies; invoke local tools with npm exec, npx, or an npm script.'],
     ['path', './script: not found', './script', 'The path is wrong, the file is absent, line endings broke the shebang, or the shebang interpreter does not exist.', 'Check ls -l, file, head -1, and the interpreter path before changing permissions.'],
   ]
@@ -242,7 +242,7 @@ ${buildArticleHeader(h1Title, author, date, category)}
       </nav>
 
       <h2 class="sectionHead" id="meaning">What does Make Error 127 mean?</h2>
-      <p class="bodyText">GNU make runs recipe lines through a shell—normally <code>/bin/sh</code> unless the Makefile sets <code>SHELL</code>. When that shell cannot locate a command, it returns status <strong>127</strong>. GNU make then prints the recipe failure as <code>Error 127</code> and stops the affected target.</p>
+      <p class="bodyText">GNU make runs recipe lines through a shell, normally <code>/bin/sh</code> unless the Makefile sets <code>SHELL</code>. When that shell cannot locate a command, it returns status <strong>127</strong>. GNU make then prints the recipe failure as <code>Error 127</code> and stops the affected target.</p>
       <pre class="codeBlock"><code>/bin/sh: gcc: command not found
 make: *** [Makefile:42: obj/main.o] Error 127</code></pre>
       <p class="bodyText">When the binary name appears in the make line itself:</p>
@@ -320,7 +320,7 @@ printf '%s\n' "$PATH"</code></pre>
       <h2 class="sectionHead" id="prevent">Makefile patterns that prevent Error 127</h2>
       <pre class="codeBlock"><code>GO := $(shell command -v go 2>/dev/null)
 ifndef GO
-$(error go not found in PATH — install Go or export PATH)
+$(error go not found in PATH, install Go or export PATH)
 endif</code></pre>
       <p class="bodyText">Document dependencies at the top of the Makefile: <code># Requires: gcc g++ make python3</code>.</p>
 
@@ -336,11 +336,11 @@ endif</code></pre>
 
       <h2 class="sectionHead" id="sources">Primary sources and technical notes</h2>
       <ul class="sourceList">
-        <li><a href="https://www.gnu.org/software/bash/manual/html_node/Exit-Status.html" target="_blank" rel="noopener noreferrer">Bash Reference Manual: Exit Status</a> — command not found returns 127; found but not executable returns 126.</li>
-        <li><a href="https://www.gnu.org/software/bash/manual/html_node/Command-Search-and-Execution.html" target="_blank" rel="noopener noreferrer">Bash: Command Search and Execution</a> — how functions, builtins, and PATH are searched.</li>
-        <li><a href="https://www.gnu.org/software/make/manual/html_node/Errors.html" target="_blank" rel="noopener noreferrer">GNU make: Errors in Recipes</a> — make reports the status returned by a program invoked in a recipe.</li>
-        <li><a href="https://www.gnu.org/software/make/manual/html_node/Choosing-the-Shell.html" target="_blank" rel="noopener noreferrer">GNU make: Choosing the Shell</a> — recipes use <code>/bin/sh</code> by default when the Makefile does not set <code>SHELL</code>.</li>
-        <li><a href="https://docs.docker.com/engine/containers/run/#exit-status" target="_blank" rel="noopener noreferrer">Docker: container exit status</a> — Docker also reserves 127 for a container command that cannot be found.</li>
+        <li><a href="https://www.gnu.org/software/bash/manual/html_node/Exit-Status.html" target="_blank" rel="noopener noreferrer">Bash Reference Manual: Exit Status</a>command not found returns 127; found but not executable returns 126.</li>
+        <li><a href="https://www.gnu.org/software/bash/manual/html_node/Command-Search-and-Execution.html" target="_blank" rel="noopener noreferrer">Bash: Command Search and Execution</a>how functions, builtins, and PATH are searched.</li>
+        <li><a href="https://www.gnu.org/software/make/manual/html_node/Errors.html" target="_blank" rel="noopener noreferrer">GNU make: Errors in Recipes</a>make reports the status returned by a program invoked in a recipe.</li>
+        <li><a href="https://www.gnu.org/software/make/manual/html_node/Choosing-the-Shell.html" target="_blank" rel="noopener noreferrer">GNU make: Choosing the Shell</a>recipes use <code>/bin/sh</code> by default when the Makefile does not set <code>SHELL</code>.</li>
+        <li><a href="https://docs.docker.com/engine/containers/run/#exit-status" target="_blank" rel="noopener noreferrer">Docker: container exit status</a>Docker also reserves 127 for a container command that cannot be found.</li>
       </ul>
       <div class="reviewPolicy"><strong>Scope:</strong> This guide covers GNU make and POSIX-style shell status 127. Native Windows, game, installer, telephone, and unrelated application “error 127” codes can mean something else. AlertMend publishes this guide and may benefit if readers evaluate its product; every command-level explanation above works without AlertMend.</div>
 
@@ -351,7 +351,7 @@ endif</code></pre>
 
       <div class="ctaBand">
         <div class="ctaBandTitle">Bring one failing automation run.</div>
-        <p class="ctaBandSub">See AlertMend connect exit 127 to the missing command, PATH, runtime image, and recent change—then route or execute the approved recovery and verify the next run.</p>
+        <p class="ctaBandSub">See AlertMend connect exit 127 to the missing command, PATH, runtime image, and recent change, then route or execute the approved recovery and verify the next run.</p>
         <div class="ctaBtnRow">
           <a href="${postCalendlyUrl}" class="ctaBtn" target="_blank" rel="noopener noreferrer">Walk through the failure →</a>
         </div>
