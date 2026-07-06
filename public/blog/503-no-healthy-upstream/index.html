@@ -167,20 +167,20 @@
         <p class="fearHeadline">HTTP 503. MESSAGE: no healthy upstream. ENDPOINTS: &lt;none&gt;.</p>
         <p class="fearLead">Five distinct failures produce the same 503: empty endpoints, failed readiness, a drained rollout, blocked network traffic, or service-mesh ejection. Match the evidence before restarting anything.</p>
         <div class="fearScenarioMobile">
-        <div class="fearScenario"><p class="fearScenarioWhen">Helm upgrade, 2:14pm</p><p class="fearScenarioTitle">503 for every user. Pods looked Running.</p><p class="fearScenarioBody">Rollout completed green in CI. kubectl get pods showed 3/3 Running. curl returned 503 no healthy upstream. Endpoints were empty — but every pod was Running.</p><a href="#playbook-readiness" class="fearScenarioLink" data-jump-failure="probes">→ See what was wrong</a></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">Helm upgrade, 2:14pm</p><p class="fearScenarioTitle">503 for every user. Pods looked Running.</p><p class="fearScenarioBody">Rollout completed green in CI. kubectl get pods showed 3/3 Running. curl returned 503 no healthy upstream. Endpoints were empty, but every pod was Running.</p><a href="#playbook-readiness" class="fearScenarioLink" data-jump-failure="probes">→ See what was wrong</a></div>
         </div>
         <details class="fearScenarioMore">
           <summary>3 more production scenarios →</summary>
           <div class="fearScenarioGrid">
         <div class="fearScenario"><p class="fearScenarioWhen">Black Friday scale-up</p><p class="fearScenarioTitle">Intermittent 503, then total outage.</p><p class="fearScenarioBody">HPA added six nodes. New pods passed liveness. Error flipped between no healthy upstream and upstream connect error. Then total outage.</p><a href="#playbook-rollout" class="fearScenarioLink" data-jump-failure="rollout">→ See what was wrong</a></div>
-        <div class="fearScenario"><p class="fearScenarioWhen">NetworkPolicy added Friday</p><p class="fearScenarioTitle">Worked in staging, 503 in prod.</p><p class="fearScenarioBody">Policy applied Friday in staging — worked fine. Monday morning: 503 in prod. Pods were Ready; the proxy could not reach them.</p><a href="#playbook-networkpolicy" class="fearScenarioLink" data-jump-failure="network">→ See what was wrong</a></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">NetworkPolicy added Friday</p><p class="fearScenarioTitle">Worked in staging, 503 in prod.</p><p class="fearScenarioBody">Policy applied Friday in staging, worked fine. Monday morning: 503 in prod. Pods were Ready; the proxy could not reach them.</p><a href="#playbook-networkpolicy" class="fearScenarioLink" data-jump-failure="network">→ See what was wrong</a></div>
         <div class="fearScenario"><p class="fearScenarioWhen">Istio canary at 10%</p><p class="fearScenarioTitle">100% traffic, 0% healthy upstream.</p><p class="fearScenarioBody">kubectl get endpoints still listed three IPs. But Envoy showed healthy_hosts: 0.</p><a href="#playbook-mesh" class="fearScenarioLink" data-jump-failure="mesh">→ See what was wrong</a></div>
           </div>
         </details>
         <div class="fearScenarioGrid fearScenarioGridDesktop">
-        <div class="fearScenario"><p class="fearScenarioWhen">Helm upgrade, 2:14pm</p><p class="fearScenarioTitle">503 for every user. Pods looked Running.</p><p class="fearScenarioBody">Rollout completed green in CI. kubectl get pods showed 3/3 Running. curl returned 503 no healthy upstream. Endpoints were empty — but every pod was Running.</p><a href="#playbook-readiness" class="fearScenarioLink" data-jump-failure="probes">→ See what was wrong</a></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">Helm upgrade, 2:14pm</p><p class="fearScenarioTitle">503 for every user. Pods looked Running.</p><p class="fearScenarioBody">Rollout completed green in CI. kubectl get pods showed 3/3 Running. curl returned 503 no healthy upstream. Endpoints were empty, but every pod was Running.</p><a href="#playbook-readiness" class="fearScenarioLink" data-jump-failure="probes">→ See what was wrong</a></div>
         <div class="fearScenario"><p class="fearScenarioWhen">Black Friday scale-up</p><p class="fearScenarioTitle">Intermittent 503, then total outage.</p><p class="fearScenarioBody">HPA added six nodes. New pods passed liveness. Error flipped between no healthy upstream and upstream connect error. Then total outage.</p><a href="#playbook-rollout" class="fearScenarioLink" data-jump-failure="rollout">→ See what was wrong</a></div>
-        <div class="fearScenario"><p class="fearScenarioWhen">NetworkPolicy added Friday</p><p class="fearScenarioTitle">Worked in staging, 503 in prod.</p><p class="fearScenarioBody">Policy applied Friday in staging — worked fine. Monday morning: 503 in prod. Pods were Ready; the proxy could not reach them.</p><a href="#playbook-networkpolicy" class="fearScenarioLink" data-jump-failure="network">→ See what was wrong</a></div>
+        <div class="fearScenario"><p class="fearScenarioWhen">NetworkPolicy added Friday</p><p class="fearScenarioTitle">Worked in staging, 503 in prod.</p><p class="fearScenarioBody">Policy applied Friday in staging, worked fine. Monday morning: 503 in prod. Pods were Ready; the proxy could not reach them.</p><a href="#playbook-networkpolicy" class="fearScenarioLink" data-jump-failure="network">→ See what was wrong</a></div>
         <div class="fearScenario"><p class="fearScenarioWhen">Istio canary at 10%</p><p class="fearScenarioTitle">100% traffic, 0% healthy upstream.</p><p class="fearScenarioBody">kubectl get endpoints still listed three IPs. But Envoy showed healthy_hosts: 0.</p><a href="#playbook-mesh" class="fearScenarioLink" data-jump-failure="mesh">→ See what was wrong</a></div>
         </div>
 
@@ -219,8 +219,8 @@
       </nav>
 
       <h2 class="sectionHead" id="meaning">What does no healthy upstream mean?</h2>
-      <p class="bodyText"><strong>No healthy upstream</strong> means the reverse proxy or load balancer received your request but has zero backend servers passing health checks. The proxy itself is running — every upstream host is down, failing probes, or ejected by the service mesh. Envoy documents this state as <code>no_healthy_upstream</code>: the router rejected the request because it found no healthy upstream. <a href="https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/response_code_details" target="_blank" rel="noopener noreferrer">Envoy reference ↗</a></p>
-      <p class="bodyText">You typically see <strong>HTTP 503 Service Unavailable</strong> with a plain-text body such as <code>no healthy upstream</code>, <code>no healthy backends</code>, or <code>upstream server responded with a 503 error</code>. <strong>Upstream servers</strong> are the application instances behind the proxy. When every upstream fails health checks, users get a total outage at the edge even if container processes are still running.</p>
+      <p class="bodyText"><strong>No healthy upstream</strong> means the reverse proxy or load balancer received your request but has zero backend servers passing health checks. The proxy itself is running, every upstream host is down, failing probes, or ejected by the service mesh. Envoy documents this state as <code>no_healthy_upstream</code>: the router rejected the request because it found no healthy upstream. <a href="https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/response_code_details" target="_blank" rel="noopener noreferrer">Envoy reference ↗</a></p>
+      <p class="bodyText">You typically see <strong>HTTP 503 Service Unavailable</strong> with a plain-text body such as <code>no healthy upstream</code><code>no healthy backends</code>or <code>upstream server responded with a 503 error</code>. <strong>Upstream servers</strong> are the application instances behind the proxy. When every upstream fails health checks, users get a total outage at the edge even if container processes are still running.</p>
 
       <span id="what-is-503-upstream" class="anchor-alias" aria-hidden="true"></span>
       <span id="what-is-the-503-no-healthy-upstream-error" class="anchor-alias" aria-hidden="true"></span>
@@ -307,7 +307,7 @@
       </div>
 
       <h3 class="subsectionHead">HTTP 503 Service Unavailable explained</h3>
-      <p class="bodyText">HTTP 503 is a 5xx server error indicating the server is temporarily unable to handle the request. With <code>no healthy upstream</code>, the condition is usually fixable once backends recover or probes pass. Unlike misconfiguration errors that need code changes, 503 often clears when health checks succeed again.</p>
+      <p class="bodyText">HTTP 503 is a 5xx server error indicating the server is temporarily unable to handle the request. With <code>no healthy upstream</code>the condition is usually fixable once backends recover or probes pass. Unlike misconfiguration errors that need code changes, 503 often clears when health checks succeed again.</p>
       <aside class="fieldNote"><span>ALERTMEND FIELD NOTE 01</span><strong>“Running” is process state; “Ready” is traffic eligibility.</strong><p>During this incident, the Ready condition and EndpointSlice are more useful than restart count. A pod can run perfectly while Kubernetes correctly refuses to send it traffic.</p></aside>
 
       <h2 class="sectionHead" id="reproduce">Reproduce empty upstreams safely</h2>
@@ -446,7 +446,7 @@ kubectl delete namespace upstream-lab</code></pre>
       </figure>
 
       <h3 class="subsectionHead">Representative incident timeline: from deploy to verified recovery</h3>
-      <p class="bodyText">This is a representative reconstruction—not a customer claim—showing the evidence sequence AlertMend uses to avoid a reflex restart.</p>
+      <p class="bodyText">This is a representative reconstruction, not a customer claim, showing the evidence sequence AlertMend uses to avoid a reflex restart.</p>
       <ol class="incidentTimeline">
         <li><time>14:02:11</time><div><strong>Deployment revision changes</strong><p>New ReplicaSet starts; old endpoints still serve traffic.</p></div></li>
         <li><time>14:02:37</time><div><strong>Readiness begins failing</strong><p>New pods are Running, but <code>/ready</code> returns 503.</p></div></li>
@@ -457,15 +457,15 @@ kubectl delete namespace upstream-lab</code></pre>
       </ol>
 
       <h2 class="sectionHead" id="no-healthy-backends">Error 503 no healthy backends</h2>
-      <p class="bodyText"><strong>Error 503 no healthy backends</strong> is interchangeable with <strong>no healthy upstream</strong> on many proxies. Envoy, Istio ingressgateway, Fastly/Varnish VCL, and several cloud load balancers use "backends" in the message. The diagnosis is identical for all: find why every backend failed health checks — check backend health, not the proxy config.</p>
+      <p class="bodyText"><strong>Error 503 no healthy backends</strong> is interchangeable with <strong>no healthy upstream</strong> on many proxies. Envoy, Istio ingressgateway, Fastly/Varnish VCL, and several cloud load balancers use "backends" in the message. The diagnosis is identical for all: find why every backend failed health checks, check backend health, not the proxy config.</p>
       <p class="bodyText">Message variants by platform (same root cause, different wording):</p>
       <ul class="checkList">
-        <li><code>503 backend is unhealthy</code> — CDNs and some PaaS edge layers</li>
-        <li><code>health checks failed with these codes: [503]</code> — AWS target group health checks</li>
-        <li><code>no healthy targets</code> — Application Load Balancer (ALB)</li>
-        <li><code>503 backend fetch failed</code> — Varnish cache miss / backend fetch</li>
-        <li><code>no live upstreams</code> — nginx when every server in <code>upstream {}</code> is marked down</li>
-        <li><code>unhealthy upstream</code> — generic reverse-proxy wording</li>
+        <li><code>503 backend is unhealthy</code>CDNs and some PaaS edge layers</li>
+        <li><code>health checks failed with these codes: [503]</code>AWS target group health checks</li>
+        <li><code>no healthy targets</code>Application Load Balancer (ALB)</li>
+        <li><code>503 backend fetch failed</code>Varnish cache miss / backend fetch</li>
+        <li><code>no live upstreams</code>nginx when every server in <code>upstream {}</code> is marked down</li>
+        <li><code>unhealthy upstream</code>generic reverse-proxy wording</li>
       </ul>
 
       <h2 class="sectionHead" id="proxy-variants">nginx, Envoy, HAProxy, ALB, and Kong: message variants</h2>
@@ -533,11 +533,11 @@ kubectl logs -n istio-system deploy/istio-ingressgateway | grep -iE 'no healthy 
       <p class="bodyText">This Envoy error means the proxy could not establish a TCP connection to any upstream host. <strong>UH</strong> (no healthy upstream) and <strong>UF</strong> (upstream connection failure) often co-occur: the cluster may list hosts, but every connection attempt fails before HTTP headers arrive.</p>
       <p class="bodyText">Common reset reason variants in access logs and debug output:</p>
       <ul class="checkList">
-        <li><strong>connection timeout</strong> — upstream did not accept TCP within the connect timeout</li>
-        <li><strong>connection failure</strong> — TCP refused, no route, or immediate RST from the host</li>
-        <li><strong>connection termination</strong> — peer closed the socket during handshake or before headers</li>
-        <li><strong>overflow</strong> — circuit breaker or pending-request limit blocked new connections</li>
-        <li><strong>remote connection failure</strong> — network path failure between Envoy and pod IP</li>
+        <li><strong>connection timeout</strong>upstream did not accept TCP within the connect timeout</li>
+        <li><strong>connection failure</strong>TCP refused, no route, or immediate RST from the host</li>
+        <li><strong>connection termination</strong>peer closed the socket during handshake or before headers</li>
+        <li><strong>overflow</strong>circuit breaker or pending-request limit blocked new connections</li>
+        <li><strong>remote connection failure</strong>network path failure between Envoy and pod IP</li>
       </ul>
       <p class="bodyText">Parse ingressgateway access logs for response flags:</p>
       <div class="codeBlockWrap codeBlockWrap--bad">
@@ -564,7 +564,7 @@ kubectl logs -n istio-system deploy/istio-ingressgateway | grep -E ' 503 |&quot;
     <div class="codeBlockToolbarRight"><span class="codeBlockState codeBlockStateBad" aria-hidden="true">✗ Problem</span><button type="button" class="codeCopyBtn" aria-label="Copy code"><span class="codeCopyLabel">Copy</span></button></div>
   </div>
   <span class="codeCopyToast" aria-live="polite"></span>
-  <pre class="codeBlock"><code># HAProxy socket — all backends DOWN
+  <pre class="codeBlock"><code># HAProxy socket, all backends DOWN
 echo &quot;show stat&quot; | socat stdio /var/run/haproxy.sock | grep BACKEND
 # backend,BACKEND,0,0,0,0,0,0,0,0,0,0,DOWN,...</code></pre>
 </div>
@@ -574,14 +574,14 @@ echo &quot;show stat&quot; | socat stdio /var/run/haproxy.sock | grep BACKEND
     <div class="codeBlockToolbarRight"><span class="codeBlockState codeBlockStateBad" aria-hidden="true">✗ Problem</span><button type="button" class="codeCopyBtn" aria-label="Copy code"><span class="codeCopyLabel">Copy</span></button></div>
   </div>
   <span class="codeCopyToast" aria-live="polite"></span>
-  <pre class="codeBlock"><code># HAProxy error log — every backend DOWN
+  <pre class="codeBlock"><code># HAProxy error log, every backend DOWN
 grep -i &quot;no server available\|503 no healthy IP&quot; /var/log/haproxy.log
 # Jun 27 14:03:11 haproxy[1234]: Server backend/api1 is DOWN.
 # Jun 27 14:03:11 haproxy[1234]: backend backend has no server available!</code></pre>
 </div>
 
       <h3 class="subsectionHead" id="kong-ring-balancer">Kong: failure to get a peer from the ring-balancer</h3>
-      <p class="bodyText">Kong returns this when the ring-balancer has no upstream node to route to — every target is unhealthy, DNS resolution failed, or the upstream has zero registered targets. Check target health via the Kong admin API before editing routes or plugins.</p>
+      <p class="bodyText">Kong returns this when the ring-balancer has no upstream node to route to, every target is unhealthy, DNS resolution failed, or the upstream has zero registered targets. Check target health via the Kong admin API before editing routes or plugins.</p>
       <div class="codeBlockWrap">
   <div class="codeBlockToolbar">
     <span class="codeBlockLang">shell</span>
@@ -605,7 +605,7 @@ curl -s http://localhost:8001/targets | jq '.data[] | {target, health}'
     <div class="codeBlockToolbarRight"><span class="codeBlockState codeBlockStateGood" aria-hidden="true">✓ Healthy</span><button type="button" class="codeCopyBtn" aria-label="Copy code"><span class="codeCopyLabel">Copy</span></button></div>
   </div>
   <span class="codeCopyToast" aria-live="polite"></span>
-  <pre class="codeBlock"><code># Kong admin API — healthy target ring
+  <pre class="codeBlock"><code># Kong admin API, healthy target ring
 curl -s http://localhost:8001/upstreams/api-upstream/health | jq .
 # {
 #   &quot;data&quot;: [{
@@ -652,7 +652,7 @@ no healthy upstream</code></pre>
   <span class="codeCopyToast" aria-live="polite"></span>
   <pre class="codeBlock"><code>NAME   ENDPOINTS   AGE
 api    &lt;none>      47m
-# ↑ zero backends — ingress returns 503 no healthy upstream</code></pre>
+# ↑ zero backends, ingress returns 503 no healthy upstream</code></pre>
 </div>
           <div class="codeBlockWrap codeBlockWrap--good">
   <div class="codeBlockToolbar">
@@ -662,7 +662,7 @@ api    &lt;none>      47m
   <span class="codeCopyToast" aria-live="polite"></span>
   <pre class="codeBlock"><code>NAME   ENDPOINTS                               AGE
 api    10.244.1.42:8080,10.244.2.18:8080       2d
-# ↑ at least one IP:port — proxy can forward traffic</code></pre>
+# ↑ at least one IP:port, proxy can forward traffic</code></pre>
 </div>
         </div>
         <div class="amStep">
@@ -732,16 +732,16 @@ kubectl rollout undo deployment/&lt;name> -n &lt;namespace></code></pre>
 </div>
 
       <h2 class="sectionHead" id="three-mistakes">Three mistakes that make 503 worse</h2>
-      <p class="bodyText">These are the reflex moves that feel productive but extend outages. Each fails for a mechanical reason — and has a better first step.</p>
+      <p class="bodyText">These are the reflex moves that feel productive but extend outages. Each fails for a mechanical reason, and has a better first step.</p>
 
       <h3 class="subsectionHead">1. Restarting the ingress controller or nginx</h3>
-      <p class="bodyText">Kubernetes populates Service endpoints from Ready pods via kube-proxy — not from the ingress controller process. Restarting nginx or ingress-nginx clears connection pools but does not change which pod IPs are in the endpoints list. If every pod fails readiness, you get the same 503 on a fresh controller. <strong>Instead:</strong> fix Ready pods first, confirm <code>kubectl get endpoints</code> shows IPs, then restart ingress only if endpoints are populated but the proxy still returns 503 (stale config cache).</p>
+      <p class="bodyText">Kubernetes populates Service endpoints from Ready pods via kube-proxy, not from the ingress controller process. Restarting nginx or ingress-nginx clears connection pools but does not change which pod IPs are in the endpoints list. If every pod fails readiness, you get the same 503 on a fresh controller. <strong>Instead:</strong> fix Ready pods first, confirm <code>kubectl get endpoints</code> shows IPs, then restart ingress only if endpoints are populated but the proxy still returns 503 (stale config cache).</p>
 
       <h3 class="subsectionHead">2. Deleting pods to "force refresh"</h3>
-      <p class="bodyText">Deleting pods during a broken rollout triggers the Deployment to create replacements that hit the same failing readiness probe. You go from "pods Running but not Ready" to "zero pods while new ones start." During scale events this can cascade across nodes. <strong>Instead:</strong> read probe Events with <code>kubectl describe pod</code>, fix the probe path or startup timing, then rollout restart once the probe config is corrected.</p>
+      <p class="bodyText">Deleting pods during a broken rollout triggers the Deployment to create replacements that hit the same failing readiness probe. You go from "pods Running but not Ready" to "zero pods while new ones start." During scale events this can cascade across nodes. <strong>Instead:</strong> read probe Events with <code>kubectl describe pod</code>fix the probe path or startup timing, then rollout restart once the probe config is corrected.</p>
 
       <h3 class="subsectionHead">3. Editing proxy upstream config when endpoints are empty</h3>
-      <p class="bodyText">When <code>ENDPOINTS</code> is <code>&lt;none&gt;</code>, the proxy is already pointing at a Service with no backends. Changing <code>upstream {}</code> blocks, <code>proxy_pass</code>, or VirtualService routes does not create Ready pods — it only changes where an empty pool points. <strong>Instead:</strong> restore at least one healthy backend, verify endpoints repopulate, then tune proxy timeouts or health checks if needed.</p>
+      <p class="bodyText">When <code>ENDPOINTS</code> is <code>&lt;none&gt;</code>the proxy is already pointing at a Service with no backends. Changing <code>upstream {}</code> blocks, <code>proxy_pass</code>or VirtualService routes does not create Ready pods, it only changes where an empty pool points. <strong>Instead:</strong> restore at least one healthy backend, verify endpoints repopulate, then tune proxy timeouts or health checks if needed.</p>
 
       <section class="registryPlaybookZone" id="failure-playbook">
         <span id="playbook-readiness" class="anchor-alias" aria-hidden="true"></span>
@@ -763,7 +763,7 @@ kubectl rollout undo deployment/&lt;name> -n &lt;namespace></code></pre>
             <h3 class="modePlaybookTitle" id="failure-playbook-title">Empty endpoints</h3>
           </div>
           <p class="modePlaybookSummary" id="failure-playbook-summary">kubectl get endpoints shows &lt;none&gt;. The Service selector does not match any Ready pods, or every pod failed readiness.</p>
-          <ul class="checkList" id="failure-playbook-steps"><li>kubectl get endpoints &lt;service&gt; -n &lt;ns&gt; — confirm ENDPOINTS column is empty</li><li>kubectl get pods -l &lt;selector&gt; — check Ready column (0/N means readiness failing)</li><li>kubectl describe svc &lt;service&gt; — verify selector labels match pod labels</li><li>Fix label mismatch or readiness probe so at least one pod becomes Ready</li><li>Watch endpoints repopulate: kubectl get endpoints -w</li></ul>
+          <ul class="checkList" id="failure-playbook-steps"><li>kubectl get endpoints &lt;service&gt; -n &lt;ns&gt; confirm ENDPOINTS column is empty</li><li>kubectl get pods -l &lt;selector&gt; check Ready column (0/N means readiness failing)</li><li>kubectl describe svc &lt;service&gt; verify selector labels match pod labels</li><li>Fix label mismatch or readiness probe so at least one pod becomes Ready</li><li>Watch endpoints repopulate: kubectl get endpoints -w</li></ul>
           <pre class="playbookCode" id="failure-playbook-code" aria-label="kubectl commands"># Diagnose empty endpoints
 kubectl get endpoints &lt;service-name&gt; -n &lt;namespace&gt;
 kubectl get svc &lt;service-name&gt; -n &lt;namespace&gt; -o yaml | grep -A5 selector</pre>
@@ -796,17 +796,17 @@ kubectl get svc &lt;service-name&gt; -n &lt;namespace&gt; -o yaml | grep -A5 sel
       <h2 class="sectionHead" id="website-error">Seeing no healthy upstream on a website you visit</h2>
       <p class="bodyText">If a third-party site (a bank, game launcher, SaaS app, or API) shows <strong>no healthy upstream</strong> in the browser or app, that is a <em>server-side outage at that company</em>. It is not caused by your phone, browser, or home network. Refreshing or clearing cache rarely fixes it.</p>
       <p class="bodyText">Examples of error text users search for: <code>could not contact entitlement service status code 503 no healthy upstream</code> (game clients), <code>unexpected status 503 service unavailable: no healthy upstream</code> (API gateways), <code>upstream server responded with a 503 error</code> (mobile apps), or payment and travel portals that show a generic <strong>no healthy upstream</strong> message.</p>
-      <p class="bodyText"><strong>Platform-specific context</strong> — in every case, the problem is on the service operator's side. You cannot fix it from your device.</p>
+      <p class="bodyText"><strong>Platform-specific context</strong>in every case, the problem is on the service operator's side. You cannot fix it from your device.</p>
       <ul class="checkList">
-        <li><strong>FiveM</strong> — <code>could not contact entitlement service, status code: 503, no healthy upstream</code> during Rockstar auth server outages</li>
-        <li><strong>Unity</strong> — Unity services or Asset Store backend overload returning 503 at the edge</li>
-        <li><strong>Railway / Render</strong> — your deployed app's platform health check failing; backends never marked healthy</li>
-        <li><strong>ChatGPT / Claude</strong> — AI API backend capacity exhaustion; edge proxy has no healthy upstream pool</li>
-        <li><strong>SumUp</strong> — payment terminal backend unavailable at the load balancer</li>
-        <li><strong>Snowflake</strong> — query execution service temporarily down behind the proxy</li>
-        <li><strong>vCenter / ESXi</strong> — VMware management plane service overloaded</li>
-        <li><strong>Global Entry</strong> — CBP kiosk backend outage at airport edge proxies</li>
-        <li><strong>Padlet, Udemy, Discord, Spotify</strong> — SaaS service-side outage; same symptom, operator must restore healthy backends</li>
+        <li><strong>FiveM</strong><code>could not contact entitlement service, status code: 503, no healthy upstream</code> during Rockstar auth server outages</li>
+        <li><strong>Unity</strong>Unity services or Asset Store backend overload returning 503 at the edge</li>
+        <li><strong>Railway / Render</strong>your deployed app's platform health check failing; backends never marked healthy</li>
+        <li><strong>ChatGPT / Claude</strong>AI API backend capacity exhaustion; edge proxy has no healthy upstream pool</li>
+        <li><strong>SumUp</strong>payment terminal backend unavailable at the load balancer</li>
+        <li><strong>Snowflake</strong>query execution service temporarily down behind the proxy</li>
+        <li><strong>vCenter / ESXi</strong>VMware management plane service overloaded</li>
+        <li><strong>Global Entry</strong>CBP kiosk backend outage at airport edge proxies</li>
+        <li><strong>Padlet, Udemy, Discord, Spotify</strong>SaaS service-side outage; same symptom, operator must restore healthy backends</li>
       </ul>
       <p class="bodyText">If you run infrastructure for that service, use the kubectl and proxy workflows above. If you are an end user, wait for the operator's status page or retry later.</p>
 
@@ -816,19 +816,19 @@ kubectl get svc &lt;service-name&gt; -n &lt;namespace&gt; -o yaml | grep -A5 sel
         <a href="/blog/kubernetes-imagepullbackoff-fix" class="hubLinkCard"><p class="hubLinkTitle">ImagePullBackOff fix</p><p class="hubLinkDesc">Pods never start, endpoints stay empty</p></a>
         <a href="/blog/url-monitoring-automated-fixes" class="hubLinkCard"><p class="hubLinkTitle">URL monitoring</p><p class="hubLinkDesc">External checks that catch 503 before users</p></a>
         <a href="/blog/kubernetes-502-bad-gateway-error-fix" class="hubLinkCard"><p class="hubLinkTitle">502 Bad Gateway</p><p class="hubLinkDesc">Proxy reached backend but got invalid response</p></a>
-        <a href="/blog/readiness-probe-failed-http-probe-failed-with-statuscode-503" class="hubLinkCard"><p class="hubLinkTitle">Readiness probe 503</p><p class="hubLinkDesc">HTTP probe failed with statuscode 503 — endpoints drain</p></a>
+        <a href="/blog/readiness-probe-failed-http-probe-failed-with-statuscode-503" class="hubLinkCard"><p class="hubLinkTitle">Readiness probe 503</p><p class="hubLinkDesc">HTTP probe failed with statuscode 503, endpoints drain</p></a>
         <a href="/blog/debugging-kubernetes-oomkilled-exit-code-137-causes-and-solutions" class="hubLinkCard"><p class="hubLinkTitle">OOMKilled exit 137</p><p class="hubLinkDesc">Pods killed under load during scale events</p></a>
       </div>
 
       <h2 class="sectionHead" id="sources">Technical sources and review policy</h2>
       <p class="bodyText">This guide favors primary vendor documentation over secondary tutorials. Technical claims and examples were reviewed against the sources below on 2026-06-27.</p>
       <ul class="sourceList">
-        <li><a href="https://kubernetes.io/docs/concepts/services-networking/service/" target="_blank" rel="noopener noreferrer">Kubernetes Services</a> — selectors, backends, and EndpointSlices.</li>
-        <li><a href="https://kubernetes.io/docs/concepts/workloads/pods/probes/" target="_blank" rel="noopener noreferrer">Kubernetes probes</a> — failed readiness removes Pod IPs from matching EndpointSlices.</li>
-        <li><a href="https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/response_code_details" target="_blank" rel="noopener noreferrer">Envoy response-code details</a> — definition of <code>no_healthy_upstream</code>.</li>
-        <li><a href="https://istio.io/latest/docs/reference/config/networking/destination-rule/" target="_blank" rel="noopener noreferrer">Istio DestinationRule</a> — outlier detection and unhealthy-host eviction.</li>
-        <li><a href="https://nginx.org/en/docs/http/ngx_http_upstream_module.html" target="_blank" rel="noopener noreferrer">nginx upstream module</a> — <code>max_fails</code>, <code>fail_timeout</code>, and unavailable servers.</li>
-        <li><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html" target="_blank" rel="noopener noreferrer">AWS ALB target health</a> — target-group health-check behavior.</li>
+        <li><a href="https://kubernetes.io/docs/concepts/services-networking/service/" target="_blank" rel="noopener noreferrer">Kubernetes Services</a>selectors, backends, and EndpointSlices.</li>
+        <li><a href="https://kubernetes.io/docs/concepts/workloads/pods/probes/" target="_blank" rel="noopener noreferrer">Kubernetes probes</a>failed readiness removes Pod IPs from matching EndpointSlices.</li>
+        <li><a href="https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_conn_man/response_code_details" target="_blank" rel="noopener noreferrer">Envoy response-code details</a>definition of <code>no_healthy_upstream</code>.</li>
+        <li><a href="https://istio.io/latest/docs/reference/config/networking/destination-rule/" target="_blank" rel="noopener noreferrer">Istio DestinationRule</a>outlier detection and unhealthy-host eviction.</li>
+        <li><a href="https://nginx.org/en/docs/http/ngx_http_upstream_module.html" target="_blank" rel="noopener noreferrer">nginx upstream module</a><code>max_fails</code><code>fail_timeout</code>and unavailable servers.</li>
+        <li><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html" target="_blank" rel="noopener noreferrer">AWS ALB target health</a>target-group health-check behavior.</li>
       </ul>
       <div class="reviewPolicy"><strong>Transparency:</strong> AlertMend publishes this article and may benefit if readers evaluate its product. The diagnostic steps above do not require AlertMend. Product behavior and upstream projects change; report a questionable command or outdated claim through the contact link, and the team will review it against current primary documentation.</div>
 
@@ -856,7 +856,7 @@ kubectl get svc &lt;service-name&gt; -n &lt;namespace&gt; -o yaml | grep -A5 sel
 
       <div class="ctaBand">
         <div class="ctaBandTitle">Bring us one real 503. We’ll show the evidence chain.</div>
-        <p class="ctaBandSub">See AlertMend reconstruct the incident from edge failure to endpoint state, probe evidence, recent change, guarded remediation, and verified recovery—using your environment and your automation policy.</p>
+        <p class="ctaBandSub">See AlertMend reconstruct the incident from edge failure to endpoint state, probe evidence, recent change, guarded remediation, and verified recovery, using your environment and your automation policy.</p>
         <div class="ctaBtnRow">
           <a href="https://app.alertmend.io/signup?service=remediation&source=blog-503-upstream&blog_slug=503-no-healthy-upstream" class="ctaBtn">Monitor upstream health →</a>
           <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=503-no-healthy-upstream" class="ctaBtnSecondary" target="_blank" rel="noopener noreferrer">Talk to an expert</a>
@@ -884,13 +884,13 @@ kubectl get svc &lt;service-name&gt; -n &lt;namespace&gt; -o yaml | grep -A5 sel
               <li><a href="/blog/autoscaling-v2-horizontalpodautoscaler" class="related-post-link">Kubernetes HPA v2: Configuration &amp; Fixes</a></li>
               <li><a href="/blog/kubernetes-crashloopbackoff-fix" class="related-post-link">Kubernetes CrashLoopBackOff: Fix Guide</a></li>
               <li><a href="/blog/kubernetes-imagepullbackoff-fix" class="related-post-link">Kubernetes ImagePullBackOff: Fix Guide</a></li>
+              <li><a href="/blog/odoo-monitoring" class="related-post-link">Odoo Monitoring and Auto-Recovery</a></li>
               <li><a href="/blog/datadog-alternatives" class="related-post-link">Best Datadog Alternatives (2026)</a></li>
               <li><a href="/blog/incident-io-alternatives" class="related-post-link">incident.io Alternatives for AI SRE (2026)</a></li>
               <li><a href="/blog/pagerduty-alternatives" class="related-post-link">Best PagerDuty Alternatives (2026)</a></li>
               <li><a href="/blog/ai-agent-observability-in-production" class="related-post-link">AI Agent Observability in Production</a></li>
               <li><a href="/blog/best-1-click-logging-and-metrics-tools" class="related-post-link">9 Best Logging &amp; Metrics Tools (2026)</a></li>
               <li><a href="/blog/best-ai-agent-observability-tools" class="related-post-link">Best AI Agent Observability Tools</a></li>
-              <li><a href="/blog/enterprise-ai-agent-observability" class="related-post-link">Enterprise AI Agent Observability</a></li>
             </ul>
             <a href="/blog" class="view-more-link">
               View all posts

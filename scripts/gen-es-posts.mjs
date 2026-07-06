@@ -10,6 +10,7 @@ import { fileURLToPath } from 'url'
 import { SITE_URL, esc, CHROME_INLINE_CSS, buildNavHtml, buildSidebarHtml, buildArticleHeader, calendlyUrl } from './static-blog-shared.mjs'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
+const ALERTMEND_LOGO_DATA_URI = `data:image/svg+xml;base64,${fs.readFileSync(path.join(root, 'public/alertmend-logo.svg')).toString('base64')}`
 const DATE = '2026-01-10', MODIFIED = '2026-07-04', CAT = 'Elasticsearch'
 
 const SCRIPT_JS = `(function () {
@@ -185,7 +186,7 @@ function incidentTrace(cfg) {
   return `<div class="incidentTrace" aria-label="Illustrative AlertMend incident workflow">
         <div class="incidentTraceHead">
           <div><span class="incidentTraceEyebrow">ILLUSTRATIVE INCIDENT TRACE</span><strong>${esc(cfg.proof.title)}</strong></div>
-          <small>Example workflow using telemetry from your connected Elasticsearch and Kubernetes environment—not a customer result.</small>
+          <small>Example workflow using telemetry from your connected Elasticsearch and Kubernetes environment, not a customer result.</small>
         </div>
         <div class="incidentTraceRows">${cfg.proof.rows.map(([label, text]) => `<div class="incidentTraceRow"><span>${esc(label)}</span><p>${text}</p></div>`).join('')}</div>
         <p class="incidentTraceGuardrail"><strong>Enterprise guardrail:</strong> ${cfg.proof.guardrail}</p>
@@ -292,7 +293,7 @@ ${buildArticleHeader(cfg.h1, cfg.author, DATE, CAT)}
       <p class="bodyText productDisclosure"><strong>Deployment control:</strong> AlertMend runs as a managed service or self-hosted, so cluster telemetry and remediation stay inside your environment. Every command in this guide works without AlertMend.</p>
 
       <h2 class="sectionHead" id="sources">Primary sources and scope</h2>
-      <ul class="sourceList">${cfg.sources.map(([u, l, n]) => `<li><a href="${u}" target="_blank" rel="noopener noreferrer">${esc(l)}</a> — ${n}</li>`).join('')}</ul>
+      <ul class="sourceList">${cfg.sources.map(([u, l, n]) => `<li><a href="${u}" target="_blank" rel="noopener noreferrer">${esc(l)}</a>${n}</li>`).join('')}</ul>
       <div class="reviewPolicy"><strong>Method and disclosure:</strong> Every setting and threshold above is tied to the official Elasticsearch documentation and linked in Primary sources. Defaults and APIs change between versions, so confirm against the version you run. AlertMend publishes this guide and may benefit if readers evaluate its product.</div>
 
       <h2 class="sectionHead" id="faq">FAQ</h2>
@@ -317,7 +318,7 @@ ${buildSidebarHtml(cfg.relatedSidebar)}
 
 function heroSvg(line1, line2, sub, chips) {
   const c = chips.map((t, i) => { const x = 80 + i * 300, w = t.length * 11 + 36; return `<rect x="${x}" y="470" width="${w}" height="48" rx="24" fill="#12111f" stroke="#312b57"/><text x="${x + w / 2}" y="500" fill="#e9e3ff" text-anchor="middle" font-size="20" font-weight="600">${t}</text>` }).join('')
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b0b14"/><stop offset="1" stop-color="#241b4d"/></linearGradient></defs><rect width="1200" height="630" fill="url(#hg)"/><g transform="translate(80,80)"><circle cx="22" cy="22" r="22" fill="#7c3aed"/><text x="22" y="30" font-size="22" font-weight="800" fill="#fff" text-anchor="middle">A</text><text x="56" y="30" font-size="24" font-weight="700" fill="#fff">AlertMend</text><text x="228" y="30" font-size="18" fill="#8b82b8">· Elasticsearch on Kubernetes</text></g><text x="80" y="238" font-size="64" font-weight="800" fill="#fff">${esc(line1)}</text><text x="80" y="308" font-size="64" font-weight="800" fill="#fff">${esc(line2)}</text><text x="80" y="372" font-size="27" fill="#c4b5fd">${esc(sub)}</text><g>${c}</g><text x="80" y="576" font-size="20" fill="#8b82b8">alertmend.io · Detect, explain, and recover Elasticsearch incidents</text></svg>\n`
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b0b14"/><stop offset="1" stop-color="#241b4d"/></linearGradient></defs><rect width="1200" height="630" fill="url(#hg)"/><g transform="translate(80,76)"><circle cx="25" cy="25" r="25" fill="#fff"/><image href="${ALERTMEND_LOGO_DATA_URI}" x="8" y="6" width="34" height="38" preserveAspectRatio="xMidYMid meet"/><text x="64" y="33" font-size="24" font-weight="700" fill="#fff">AlertMend</text><text x="236" y="33" font-size="18" fill="#8b82b8">· Elasticsearch on Kubernetes</text></g><text x="80" y="238" font-size="64" font-weight="800" fill="#fff">${esc(line1)}</text><text x="80" y="308" font-size="64" font-weight="800" fill="#fff">${esc(line2)}</text><text x="80" y="372" font-size="27" fill="#c4b5fd">${esc(sub)}</text><g>${c}</g><text x="80" y="576" font-size="20" fill="#8b82b8">alertmend.io · Detect, explain, and recover Elasticsearch incidents</text></svg>\n`
 }
 
 // ============================ POSTS ============================
@@ -345,7 +346,7 @@ const POSTS = [
     heroChips: ['Flood stage 95%', 'Read-only lock', 'Free & recover'],
     instant: {
       headline: 'A disk crossed the flood-stage watermark, so Elasticsearch made indices read-only.',
-      para: 'At the default 95% flood-stage watermark, Elasticsearch sets <code>index.blocks.read_only_allow_delete</code> on indices with a shard on that node. This permits deleting an entire index—not deleting documents—while blocking writes. Free disk first; current versions normally remove the block after usage falls below the high watermark.',
+      para: 'At the default 95% flood-stage watermark, Elasticsearch sets <code>index.blocks.read_only_allow_delete</code> on indices with a shard on that node. This permits deleting an entire index, not deleting documents, while blocking writes. Free disk first; current versions normally remove the block after usage falls below the high watermark.',
       cmds: [['GET _cat/allocation?v', 'see disk.percent per node'], ["GET */_settings/index.blocks.read_only_allow_delete", 'confirm affected indices'], ['GET _cluster/settings?include_defaults=true', 'check watermark overrides']],
       sources: [['https://www.elastic.co/docs/troubleshoot/elasticsearch/fix-watermark-errors', 'Elastic: fix watermark errors'], ['https://www.elastic.co/docs/troubleshoot/elasticsearch/fix-data-node-out-of-disk', 'Elastic: fix a data node out of disk']],
     },
@@ -359,7 +360,7 @@ const POSTS = [
     symptomCode: 'PUT /my-index/_doc/1\n{"field":"value"}\n\n# HTTP 429 cluster_block_exception:\n# "disk usage exceeded flood-stage watermark,\n# index has read-only-allow-delete block"',
     animation: gaugeSvg('es-disk', { label: 'Disk usage on the hot node', marks: [{ at: 85, label: 'low 85%', color: '#f59e0b' }, { at: 90, label: 'high 90%', color: '#ea580c' }, { at: 95, label: 'flood 95%', color: '#dc2626' }], fillFrom: 78, fillPeak: 96, fillRecover: 68, peakColor: '#dc2626', badge: 'INDEX READ-ONLY', caption: 'Usage crosses the flood-stage watermark and affected indices become read-only. After disk falls below the high watermark, current Elasticsearch releases the block automatically; verify and clear it only if it remains.' }),
     diagnose: [
-      ['Find the full node', 'Run <code>GET _cat/allocation?v</code> to see <code>disk.percent</code>, <code>disk.used</code>, and <code>disk.avail</code> for every node. The one above 95% owns the incident.'],
+      ['Find the full node', 'Run <code>GET _cat/allocation?v</code> to see <code>disk.percent</code><code>disk.used</code>and <code>disk.avail</code> for every node. The one above 95% owns the incident.'],
       ['Confirm the block', 'Run <code>GET _all/_settings/index.blocks.read_only_allow_delete</code>. A value of <code>true</code> confirms the flood-stage block was applied.'],
       ['See what is using space', 'Run <code>GET _cat/indices?v&s=store.size:desc</code> to find the largest indices, and check for old or duplicate indices safe to delete.'],
       ['Check for custom watermarks', 'Run <code>GET _cluster/settings?include_defaults=true&flat_settings=true</code> and inspect the <code>cluster.routing.allocation.disk.watermark.*</code> values in case they were changed.'],
@@ -442,7 +443,7 @@ const POSTS = [
     symptomCode: '# GET _cluster/health\n{\n  "status": "yellow",\n  "relocating_shards": 6,\n  "initializing_shards": 2,\n  "unassigned_shards": 8\n}',
     animation: shardFlowSvg(),
     diagnose: [
-      ['Check cluster health', 'Run <code>GET _cluster/health</code>. Note <code>status</code>, <code>relocating_shards</code>, <code>initializing_shards</code>, and <code>unassigned_shards</code>. A steadily falling unassigned count means healthy recovery.'],
+      ['Check cluster health', 'Run <code>GET _cluster/health</code>. Note <code>status</code><code>relocating_shards</code><code>initializing_shards</code>and <code>unassigned_shards</code>. A steadily falling unassigned count means healthy recovery.'],
       ['Watch the shards move', 'Run <code>GET _cat/shards?v</code> and <code>GET _cat/recovery?v&active_only=true</code> to see which shards are RELOCATING or INITIALIZING and how far along each is.'],
       ['Explain any stuck shard', 'Run <code>GET _cluster/allocation/explain</code> (optionally for a specific shard). It names the exact blocker: disk watermark, allocation disabled, awareness rules, or no valid node.'],
       ['Correlate with Kubernetes', 'Check <code>kubectl get pods -o wide</code> and recent events for evictions, OOMKills, or a node drain that removed the Elasticsearch pod behind the relocation.'],
@@ -526,7 +527,7 @@ const POSTS = [
     animation: gaugeSvg('es-heap', { label: 'Old-generation JVM memory pressure', marks: [{ at: 75, label: 'investigate trend', color: '#f59e0b' }, { at: 85, label: 'sustained pressure', color: '#dc2626' }], fillFrom: 66, fillPeak: 93, fillRecover: 58, peakColor: '#dc2626', badge: 'REQUESTS REJECTED', caption: 'A healthy sawtooth rises and falls after collection. Sustained old-generation pressure above 85% calls for reducing workload or increasing capacity; breaker limits vary by breaker and configuration.' }),
     diagnose: [
       ['Calculate old-gen pressure', 'Run <code>GET _nodes/stats?filter_path=nodes.*.jvm.mem.pools.old</code> and calculate <code>used_in_bytes / max_in_bytes</code>. Sustained pressure above 85% needs action; a brief sawtooth spike may be normal.'],
-      ['Check circuit breakers', 'Run <code>GET _nodes/stats/breaker</code>. The <code>parent</code>, <code>fielddata</code>, and <code>request</code> breakers show what is tripping and how close each is to its limit.'],
+      ['Check circuit breakers', 'Run <code>GET _nodes/stats/breaker</code>. The <code>parent</code><code>fielddata</code>and <code>request</code> breakers show what is tripping and how close each is to its limit.'],
       ['Find fielddata hogs', 'Run <code>GET _cat/fielddata?v&s=size:desc</code>. Large fielddata usually means aggregating or sorting on a text field, which loads the whole field into heap.'],
       ['Count your shards', 'Run <code>GET _cat/shards?v | wc -l</code> style checks or <code>GET _cluster/health</code>. Thousands of tiny shards carry fixed heap overhead; Elastic recommends keeping shards in the tens of GB, not hundreds of MB.'],
     ],
@@ -603,7 +604,7 @@ const POSTS = [
     meaningTitle: 'The three Elasticsearch caches',
     meaning: [
       'The <strong>node query cache</strong> stores eligible filter results per node. The <strong>shard request cache</strong> stores a shard’s response and, by default, caches requests with <code>size: 0</code>; setting <code>request_cache=true</code> can opt other requests in when they are otherwise cacheable. <strong>Fielddata</strong> is different: it loads values for text sorting and aggregation on the JVM heap.',
-      'A low hit rate is usually not a broken cache. The query may be ineligible, may contain unrounded <code>now</code>, may change its JSON body between requests, or the cache may be evicting before reuse. The fix is to prove eligibility and reuse first, then size a cache only if the working set justifies the memory.',
+      'A low hit rate is usually not a broken cache. The query may be ineligible, may contain unrounded <code>now</code>may change its JSON body between requests, or the cache may be evicting before reuse. The fix is to prove eligibility and reuse first, then size a cache only if the working set justifies the memory.',
     ],
     symptomCode: '# GET _nodes/stats/indices/request_cache\n# "request_cache": {\n#   "memory_size_in_bytes": 104857600,\n#   "evictions": 24193,   <- investigate working-set churn\n#   "hit_count": 1201,\n#   "miss_count": 88342   <- check eligibility and exact reuse\n# }',
     animation: cacheFlowSvg(),

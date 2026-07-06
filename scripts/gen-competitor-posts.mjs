@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url'
 import { SITE_URL, esc, CHROME_INLINE_CSS, buildNavHtml, buildSidebarHtml, buildArticleHeader, calendlyUrl, signupUrl } from './static-blog-shared.mjs'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
+const ALERTMEND_LOGO_DATA_URI = `data:image/svg+xml;base64,${fs.readFileSync(path.join(root, 'public/alertmend-logo.svg')).toString('base64')}`
 const DATE = '2026-07-05', CAT = 'AIOps'
 
 const EXTRA_CSS = `
@@ -135,7 +136,7 @@ function watchFixSvg(labels) {
 
 function heroSvg(line1, line2, sub, chips) {
   const c = chips.map((t, i) => { const x = 80 + i * 300, w = t.length * 11 + 36; return `<rect x="${x}" y="470" width="${w}" height="48" rx="24" fill="#12111f" stroke="#312b57"/><text x="${x + w / 2}" y="500" fill="#e9e3ff" text-anchor="middle" font-size="20" font-weight="600">${t}</text>` }).join('')
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b0b14"/><stop offset="1" stop-color="#241b4d"/></linearGradient></defs><rect width="1200" height="630" fill="url(#hg)"/><g transform="translate(80,80)"><circle cx="22" cy="22" r="22" fill="#7c3aed"/><text x="22" y="30" font-size="22" font-weight="800" fill="#fff" text-anchor="middle">A</text><text x="56" y="30" font-size="24" font-weight="700" fill="#fff">AlertMend</text><text x="228" y="30" font-size="18" fill="#8b82b8">· Buyer's guide</text></g><text x="80" y="238" font-size="66" font-weight="800" fill="#fff">${esc(line1)}</text><text x="80" y="308" font-size="66" font-weight="800" fill="#fff">${esc(line2)}</text><text x="80" y="372" font-size="26" fill="#c4b5fd">${esc(sub)}</text><g>${c}</g><text x="80" y="576" font-size="20" fill="#8b82b8">alertmend.io · Detect, explain, and auto-recover incidents</text></svg>\n`
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b0b14"/><stop offset="1" stop-color="#241b4d"/></linearGradient></defs><rect width="1200" height="630" fill="url(#hg)"/><g transform="translate(80,76)"><circle cx="25" cy="25" r="25" fill="#fff"/><image href="${ALERTMEND_LOGO_DATA_URI}" x="8" y="6" width="34" height="38" preserveAspectRatio="xMidYMid meet"/><text x="64" y="33" font-size="24" font-weight="700" fill="#fff">AlertMend</text><text x="236" y="33" font-size="18" fill="#8b82b8">· Buyer's guide</text></g><text x="80" y="238" font-size="66" font-weight="800" fill="#fff">${esc(line1)}</text><text x="80" y="308" font-size="66" font-weight="800" fill="#fff">${esc(line2)}</text><text x="80" y="372" font-size="26" fill="#c4b5fd">${esc(sub)}</text><g>${c}</g><text x="80" y="576" font-size="20" fill="#8b82b8">alertmend.io · Detect, explain, and auto-recover incidents</text></svg>\n`
 }
 
 function jsonLd(cfg) {
@@ -195,7 +196,7 @@ ${buildArticleHeader(cfg.h1, 'AlertMend Team', DATE, CAT)}
           <p class="heroAudienceNote">${cfg.note}</p>
         </div>
         <section class="quickDecision" aria-labelledby="quick-decision-title">
-          <div class="quickDecisionHead"><span class="quickDecisionEyebrow" id="quick-decision-title">Quick decision</span><p>Start with the operating outcome you need—not the longest feature list.</p></div>
+          <div class="quickDecisionHead"><span class="quickDecisionEyebrow" id="quick-decision-title">Quick decision</span><p>Start with the operating outcome you need, not the longest feature list.</p></div>
           <div class="decisionGrid">
             <div class="decisionOption"><div class="decisionLabel">Choose ${esc(cfg.competitor)} when</div><h3>${esc(cfg.decisionCompTitle)}</h3><ul>${cfg.decisionCompPoints.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>
             <div class="decisionOption am"><div class="decisionLabel">Choose AlertMend when</div><h3>${esc(cfg.decisionAmTitle)}</h3><ul>${cfg.decisionAmPoints.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>
@@ -288,8 +289,8 @@ ${buildArticleHeader(cfg.h1, 'AlertMend Team', DATE, CAT)}
       </div>
 
       <h2 class="sectionHead" id="sources">Sources</h2>
-      <ul class="sourceList">${cfg.sources.map(([u, l, n]) => `<li><a href="${u}" target="_blank" rel="noopener noreferrer">${esc(l)}</a> — ${n}</li>`).join('')}</ul>
-      <div class="reviewPolicy"><strong>Method and disclosure:</strong> Capabilities and pricing models are drawn from primary vendor pages and were checked on ${DATE}. Prices and packaging change; verify the linked page before purchasing. “Best” means best for a stated use case—not one universal winner. AlertMend publishes this guide and may benefit if readers evaluate it.</div>
+      <ul class="sourceList">${cfg.sources.map(([u, l, n]) => `<li><a href="${u}" target="_blank" rel="noopener noreferrer">${esc(l)}</a>${n}</li>`).join('')}</ul>
+      <div class="reviewPolicy"><strong>Method and disclosure:</strong> Capabilities and pricing models are drawn from primary vendor pages and were checked on ${DATE}. Prices and packaging change; verify the linked page before purchasing. “Best” means best for a stated use case, not one universal winner. AlertMend publishes this guide and may benefit if readers evaluate it.</div>
 
       <h2 class="sectionHead" id="faq">FAQ</h2>
       <div class="faqList">${cfg.faq.map(([q, a], i) => `<div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="${i === 0 ? 'true' : 'false'}">${esc(q)}<svg class="faqChevron${i === 0 ? ' faqChevronOpen' : ''}" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer${i === 0 ? '' : ' hidden'}">${a}</div></div>`).join('')}</div>
@@ -400,7 +401,7 @@ const POSTS = [
     recommendation: 'Choose Datadog when deep APM, RUM, security, dashboards, and a large integration catalog are the priority. Shortlist AlertMend when your monitoring already detects failures but responders still spend time correlating signals, applying known fixes, and confirming that recovery held. That is the narrower problem AlertMend is designed to solve, with governed execution, native WhatsApp escalation, and managed or self-hosted deployment for enterprise environments.',
     recommendationNext: 'Connect one existing signal source and automate two or three repetitive, low-risk incidents. Compare manual pages, time to diagnosis, and verified recoveries for 30 days before deciding whether to consolidate any Datadog components.',
     differenceTitle: 'Where AlertMend is meaningfully different',
-    differenceIntro: 'These are product-design differences—not claims that Datadog cannot monitor infrastructure or automate work. Datadog does both. The practical question is which operating model fits your team.',
+    differenceIntro: 'These are product-design differences, not claims that Datadog cannot monitor infrastructure or automate work. Datadog does both. The practical question is which operating model fits your team.',
     differences: [
       ['VM operations', 'Monitors hosts and VMs through the Datadog Agent, cloud integrations, or OpenTelemetry.', 'Add VMs over SSH for metric collection without a resident agent, then use the same connected inventory as command and runbook targets.'],
       ['On-call delivery', 'Provides schedules, routing, escalation, and documented push, email, SMS, and phone contact methods.', 'Chain email → WhatsApp → phone with wait timers. WhatsApp is not listed as a native Datadog On-Call contact method in the documentation reviewed.'],
@@ -436,7 +437,7 @@ const POSTS = [
       ['How is AlertMend different from Datadog?', 'Datadog is a broad observability, security, and service-management platform. AlertMend is narrower: it correlates infrastructure incidents, produces AI-assisted root-cause analysis, and runs governed recovery workflows, with a self-hosted option. It can complement Datadog rather than replacing every Datadog product.'],
     ],
     ctaTitle: 'Keep the signals. Improve the recovery path.',
-    ctaSub: 'See how AlertMend correlates infrastructure signals, explains the likely root cause, and runs an approved recovery workflow—managed or self-hosted.',
+    ctaSub: 'See how AlertMend correlates infrastructure signals, explains the likely root cause, and runs an approved recovery workflow, managed or self-hosted.',
     promo: 'Evaluating how AlertMend fits alongside or instead of selected Datadog workflows?',
     related: [['best-1-click-logging-and-metrics-tools', '9 Best Logging & Metrics Tools'], ['pagerduty-alternatives', 'Best PagerDuty Alternatives']],
   },
@@ -449,7 +450,7 @@ const POSTS = [
     excerpt: 'Compare PagerDuty alternatives for on-call, automation, and pricing: incident.io, Rootly, FireHydrant, Grafana IRM, Squadcast, Better Stack, and AlertMend.',
     keywords: 'pagerduty alternatives, pagerduty alternative, cheaper than pagerduty, pagerduty competitors, opsgenie alternative, incident.io, grafana oncall, reduce alert fatigue, auto remediation, on call tool, AlertMend',
     guideLabel: "Buyer's guide · PagerDuty alternatives in 2026",
-    heroSub: 'Page reliably—or prevent the page?',
+    heroSub: 'Page reliably, or prevent the page?',
     heroChips: ['Fair comparison', 'Fewer pages', 'Self-hosted'],
     intro: 'PagerDuty remains the mature reference point for on-call and incident operations, and its Automation Actions can run diagnostics and remediation. Teams still compare alternatives for pricing, workflow UX, Slack or Teams integration, self-hosting, or a tighter connection between diagnosis and recovery. This guide separates active like-for-like paging products from reliability automation, so you can compare the right category.',
     methodology: 'We compared current on-call scheduling, routing, incident coordination, remediation options, deployment model, and public pricing. Retired products are identified rather than recommended.',
@@ -494,7 +495,7 @@ const POSTS = [
     decisionPath: 'Run AlertMend against the alerts that wake your team most often, compare avoided pages and successful recoveries, and migrate only where the measured result justifies it.',
     whyTitle: 'Why teams evaluate PagerDuty alternatives',
     why: [
-      ['Alert fatigue', 'Poor grouping, ownership, and automation can wake responders for repeatable failures. Compare noise reduction and event orchestration—not only notification channels.'],
+      ['Alert fatigue', 'Poor grouping, ownership, and automation can wake responders for repeatable failures. Compare noise reduction and event orchestration, not only notification channels.'],
       ['Pricing and packaging', 'Responder seats are only one part of cost. Automation, incident response, status pages, phone/SMS, support, and analytics can change the total.'],
       ['Workflow experience', 'Some teams prioritize Slack or Teams-native incident response; others need mature mobile paging, service ownership, or enterprise orchestration.'],
       ['Remediation model', 'PagerDuty can run automated diagnostics and remediation through Automation Actions. The real comparison is how actions are authored, approved, executed, and verified.'],
@@ -515,7 +516,7 @@ const POSTS = [
     ],
     tableNote: 'The products overlap, but they are not identical. Validate schedule edge cases, notification delivery, escalation semantics, service ownership, mobile workflows, audit history, and migration tooling. For remediation, also test private-network execution, secrets, approval gates, rollback, and recovery verification.',
     recommendationTitle: 'Choose PagerDuty for paging depth; choose AlertMend to reduce the need to page.',
-    recommendation: 'Choose PagerDuty when mature mobile paging, integration breadth, and complex enterprise incident operations dominate the requirement. Shortlist AlertMend when the business outcome is to prevent repeatable infrastructure failures from reaching on-call: diagnose first, recover under policy, verify health, then escalate with context when automation should not—or cannot—act.',
+    recommendation: 'Choose PagerDuty when mature mobile paging, integration breadth, and complex enterprise incident operations dominate the requirement. Shortlist AlertMend when the business outcome is to prevent repeatable infrastructure failures from reaching on-call: diagnose first, recover under policy, verify health, then escalate with context when automation should not, or cannot, act.',
     recommendationNext: 'Run AlertMend against the three alerts that wake your team most often. Measure pages avoided, time to a useful root cause, successful recoveries, and escalation reliability before considering a wider migration.',
     featuredTag: 'Core on-call + reliability automation',
     featuredDesc: 'AlertMend provides schedules, rotations, escalation, and multi-channel routing, then correlates infrastructure signals with AI-assisted root-cause analysis and approved recovery runbooks. Managed and self-hosted deployment are available. PagerDuty remains deeper in integration breadth and mature enterprise incident operations, so replacement scope should be validated against your actual schedules and escalation policies.',
@@ -541,7 +542,7 @@ const POSTS = [
       ['Can PagerDuty remediate incidents automatically?', 'Yes. PagerDuty Automation Actions can invoke diagnostics and remediation manually or through Event Orchestration, backed by Runbook Automation or a self-hosted runner. It is inaccurate to describe PagerDuty as routing only.'],
       ['Does AlertMend replace PagerDuty?', 'It can replace core on-call for teams whose scheduling, escalation, integration, notification, and failover requirements fit. PagerDuty has a broader and more mature incident-operations ecosystem. Run a proof of concept before describing AlertMend as a full replacement.'],
     ],
-    ctaTitle: 'Route the page—and improve the recovery path.',
+    ctaTitle: 'Route the page, and improve the recovery path.',
     ctaSub: 'See AlertMend correlate infrastructure signals, attach the likely root cause, and run an approved recovery workflow before escalating when policy allows.',
     promo: 'Evaluating AlertMend for core on-call and infrastructure remediation?',
     related: [['reduce-mttr-for-ai-agents', 'Reduce MTTR for AI Agents'], ['datadog-alternatives', 'Best Datadog Alternatives']],
@@ -555,7 +556,7 @@ const POSTS = [
     excerpt: 'Compare incident.io alternatives for on-call, AI SRE, self-hosting, WhatsApp escalation, and infrastructure remediation, including AlertMend and PagerDuty.',
     keywords: 'incident.io alternatives, incident io alternatives, incident.io competitors, incident.io pricing, incident.io vs AlertMend, AI incident response, AI SRE tools, on-call software, self hosted incident management, auto remediation, AlertMend',
     guideLabel: "Buyer's guide · Beyond incident coordination",
-    heroSub: 'Coordinate the incident—or recover the system?',
+    heroSub: 'Coordinate the incident, or recover the system?',
     heroChips: ['On-call', 'AI RCA', 'Auto-recovery'],
     intro: 'incident.io is one of the strongest collaboration-first incident platforms: polished Slack and Microsoft Teams response, human-friendly on-call, status pages, Catalog, Workflows, and AI Investigations. That makes the useful comparison more specific than “who manages incidents?” Teams should ask where the product begins, where it stops, and whether their priority is coordinating responders or operating the infrastructure that caused the page.',
     methodology: 'We compared current public documentation across on-call, incident coordination, AI investigation, direct infrastructure execution, deployment control, notification channels, pricing, and the operational work still left to responders.',
@@ -650,7 +651,7 @@ const POSTS = [
     customerStoriesNote: 'Industry labels summarize published AlertMend customer stories. Outcomes are not guarantees; results depend on workload, incident mix, implementation scope, and the policies each team enables.',
     featuredTag: 'Infrastructure diagnosis + governed recovery',
     featuredDesc: 'AlertMend monitors Kubernetes, VMs, ECS, APIs, GPU fleets, and ML workloads; correlates evidence into structured AI RCAs; and runs approved recovery workflows across pods or VM fleets. It also includes core on-call, WhatsApp escalation, managed or self-hosted deployment, local-model support, and Kubernetes/AWS/GPU FinOps. It is less mature than incident.io for company-wide incident command UX and status-page depth.',
-    featuredBest: 'Platform, SRE, and infrastructure teams that want fewer incidents to reach humans and need deployment control or direct remediation—not only a smoother response after the page.',
+    featuredBest: 'Platform, SRE, and infrastructure teams that want fewer incidents to reach humans and need deployment control or direct remediation, not only a smoother response after the page.',
     alternatives: [
       ['PagerDuty', 'A mature digital-operations platform with deep schedules, escalation, mobile paging, Event Orchestration, Incident Workflows, Automation Actions, and Runbook Automation.', 'Large enterprises that prioritize paging reliability, integration breadth, and established operating practices.', 'https://www.pagerduty.com/pricing/'],
       ['Rootly', 'Combines Incident Response, On-Call, and AI SRE as separate or bundled products, with Slack workflows and AI investigation or remediation suggestions.', 'Teams seeking a modern incident.io-like experience with a growing AI SRE layer.', 'https://rootly.com/pricing'],

@@ -64,6 +64,10 @@
       "destination": "/blog/exit-code-5/index.html"
     },
     {
+      "source": "/blog/gpu-monitoring",
+      "destination": "/blog/gpu-monitoring/index.html"
+    },
+    {
       "source": "/blog/gpu-reliability-for-llm-workloads",
       "destination": "/blog/gpu-reliability-for-llm-workloads/index.html"
     },
@@ -126,6 +130,10 @@
     {
       "source": "/blog/multi-agent-system-reliability",
       "destination": "/blog/multi-agent-system-reliability/index.html"
+    },
+    {
+      "source": "/blog/odoo-monitoring",
+      "destination": "/blog/odoo-monitoring/index.html"
     },
     {
       "source": "/blog/openclaw-cloud-infra-slack-telegram",

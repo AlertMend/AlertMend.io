@@ -150,7 +150,7 @@
 
       <h2 class="sectionHead" id="meaning">The three Elasticsearch caches</h2>
       <p class="bodyText">The <strong>node query cache</strong> stores eligible filter results per node. The <strong>shard request cache</strong> stores a shard’s response and, by default, caches requests with <code>size: 0</code>; setting <code>request_cache=true</code> can opt other requests in when they are otherwise cacheable. <strong>Fielddata</strong> is different: it loads values for text sorting and aggregation on the JVM heap.</p>
-      <p class="bodyText">A low hit rate is usually not a broken cache. The query may be ineligible, may contain unrounded <code>now</code>, may change its JSON body between requests, or the cache may be evicting before reuse. The fix is to prove eligibility and reuse first, then size a cache only if the working set justifies the memory.</p>
+      <p class="bodyText">A low hit rate is usually not a broken cache. The query may be ineligible, may contain unrounded <code>now</code>may change its JSON body between requests, or the cache may be evicting before reuse. The fix is to prove eligibility and reuse first, then size a cache only if the working set justifies the memory.</p>
       <pre class="codeBlock copyableCode"><code># GET _nodes/stats/indices/request_cache
 # &quot;request_cache&quot;: {
 #   &quot;memory_size_in_bytes&quot;: 104857600,
@@ -191,7 +191,7 @@ GET /metrics-*/_search?request_cache=true
 {
   &quot;size&quot;: 0,
   &quot;query&quot;: { &quot;range&quot;: { &quot;@timestamp&quot;: { &quot;gte&quot;: &quot;now-24h/h&quot; } } },
-  &quot;aggs&quot;: { &quot;per_hour&quot;: { &quot;date_histogram&quot;: { &quot;field&quot;: &quot;@timestamp&quot;, &quot;calendar_interval&quot;: &quot;hour&quot; } } }
+  &quot;aggs&quot;: { &quot;per_hour&quot;: { &quot;date_histogram&quot;: { &quot;field&quot;: &quot;@timestamp&quot; &quot;calendar_interval&quot;: &quot;hour&quot; } } }
 }
 
 # 2. Give read-heavy indices a longer refresh so caches are not wiped each second
@@ -208,8 +208,7 @@ indices.requests.cache.size: 2%</code></pre>
       <pre class="codeBlock copyableCode"><code># mapping: keep a keyword sub-field for aggregations and sorting
 &quot;properties&quot;: {
   &quot;status&quot;: {
-    &quot;type&quot;: &quot;text&quot;,
-    &quot;fields&quot;: { &quot;keyword&quot;: { &quot;type&quot;: &quot;keyword&quot; } }
+    &quot;type&quot;: &quot;text&quot; &quot;fields&quot;: { &quot;keyword&quot;: { &quot;type&quot;: &quot;keyword&quot; } }
   }
 }</code></pre>
       <p class="bodyText">On high-ingest indices, relax index.refresh_interval so cached results are not invalidated every second, and monitor cache hit rate and evictions so you tune sizing before users feel the slowdown.</p>
@@ -219,7 +218,7 @@ indices.requests.cache.size: 2%</code></pre>
       <div class="incidentTrace" aria-label="Illustrative AlertMend incident workflow">
         <div class="incidentTraceHead">
           <div><span class="incidentTraceEyebrow">ILLUSTRATIVE INCIDENT TRACE</span><strong>Latency regression → cache eligibility → measured recovery</strong></div>
-          <small>Example workflow using telemetry from your connected Elasticsearch and Kubernetes environment—not a customer result.</small>
+          <small>Example workflow using telemetry from your connected Elasticsearch and Kubernetes environment, not a customer result.</small>
         </div>
         <div class="incidentTraceRows"><div class="incidentTraceRow"><span>Signal</span><p>Dashboard p95 latency rises while request-cache misses and evictions increase on a subset of indices.</p></div><div class="incidentTraceRow"><span>Correlation</span><p>The query body starts using unrounded <code>now</code> after a dashboard release, creating a new cache key on every request.</p></div><div class="incidentTraceRow"><span>Decision</span><p>AlertMend recommends rounded date math and shows why a larger cache or blanket clear would not fix eligibility.</p></div><div class="incidentTraceRow"><span>Verification</span><p>Identical requests begin hitting the cache, p95 latency falls, and heap remains stable after the approved query change.</p></div></div>
         <p class="incidentTraceGuardrail"><strong>Enterprise guardrail:</strong> Cache clears and static setting changes require policy approval. AlertMend records the before/after hit rate, latency, and heap impact in managed or self-hosted deployments.</p>
@@ -228,7 +227,7 @@ indices.requests.cache.size: 2%</code></pre>
       <p class="bodyText productDisclosure"><strong>Deployment control:</strong> AlertMend runs as a managed service or self-hosted, so cluster telemetry and remediation stay inside your environment. Every command in this guide works without AlertMend.</p>
 
       <h2 class="sectionHead" id="sources">Primary sources and scope</h2>
-      <ul class="sourceList"><li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/shard-request-cache.html" target="_blank" rel="noopener noreferrer">Elasticsearch: shard request cache</a> — caches size:0 responses; skips non-cacheable queries; sized with indices.requests.cache.size.</li><li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-cache.html" target="_blank" rel="noopener noreferrer">Elasticsearch: node query cache</a> — caches cacheable filter results per node.</li><li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-fielddata.html" target="_blank" rel="noopener noreferrer">Elasticsearch: fielddata</a> — why text aggregations load fielddata on heap and how to avoid it.</li></ul>
+      <ul class="sourceList"><li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/shard-request-cache.html" target="_blank" rel="noopener noreferrer">Elasticsearch: shard request cache</a>caches size:0 responses; skips non-cacheable queries; sized with indices.requests.cache.size.</li><li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-cache.html" target="_blank" rel="noopener noreferrer">Elasticsearch: node query cache</a>caches cacheable filter results per node.</li><li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-fielddata.html" target="_blank" rel="noopener noreferrer">Elasticsearch: fielddata</a>why text aggregations load fielddata on heap and how to avoid it.</li></ul>
       <div class="reviewPolicy"><strong>Method and disclosure:</strong> Every setting and threshold above is tied to the official Elasticsearch documentation and linked in Primary sources. Defaults and APIs change between versions, so confirm against the version you run. AlertMend publishes this guide and may benefit if readers evaluate its product.</div>
 
       <h2 class="sectionHead" id="faq">FAQ</h2>

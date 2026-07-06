@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Monitor Open WebUI + Ollama in Production | AlertMend AI</title>
-  <meta name="description" content="Open WebUI /health returns 200 while Ollama is down — the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.">
+  <meta name="description" content="Open WebUI /health returns 200 while Ollama is down, the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.">
   <meta name="keywords" content="open webui not connecting to ollama, monitor open webui production, open webui health check, ollama backend monitoring, open webui docker compose, AlertMend">
   <meta name="author" content="AlertMend Team">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -12,16 +12,16 @@
   <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://www.alertmend.io/blog/monitor-open-webui-using-alertmend">
-  <meta property="og:title" content="How to Monitor Open WebUI + Ollama in Production — Stop the Silent Split-Stack Failure">
-  <meta property="og:description" content="Open WebUI /health returns 200 while Ollama is down — the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.">
+  <meta property="og:title" content="How to Monitor Open WebUI + Ollama in Production, Stop the Silent Split-Stack Failure">
+  <meta property="og:description" content="Open WebUI /health returns 200 while Ollama is down, the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.">
   <meta property="og:image" content="https://www.alertmend.io/assets/monitor-open-webui-using-alertmend/open-webui-hero.svg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="How to Monitor Open WebUI + Ollama in Production — Stop the Silent Split-Stack Failure">
-  <meta name="twitter:description" content="Open WebUI /health returns 200 while Ollama is down — the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.">
+  <meta name="twitter:title" content="How to Monitor Open WebUI + Ollama in Production, Stop the Silent Split-Stack Failure">
+  <meta name="twitter:description" content="Open WebUI /health returns 200 while Ollama is down, the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.">
   <meta name="twitter:image" content="https://www.alertmend.io/assets/monitor-open-webui-using-alertmend/open-webui-hero.svg">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Monitor Open WebUI + Ollama in Production","description":"Open WebUI /health returns 200 while Ollama is down — the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.","image":"https://www.alertmend.io/assets/monitor-open-webui-using-alertmend/open-webui-hero.svg","datePublished":"2026-06-24","dateModified":"2026-06-24","author":{"@type":"Person","name":"AlertMend Team"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/monitor-open-webui-using-alertmend"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Monitor Open WebUI + Ollama in Production","description":"Open WebUI /health returns 200 while Ollama is down, the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.","image":"https://www.alertmend.io/assets/monitor-open-webui-using-alertmend/open-webui-hero.svg","datePublished":"2026-06-24","dateModified":"2026-06-24","author":{"@type":"Person","name":"AlertMend Team"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/monitor-open-webui-using-alertmend"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I monitor Open WebUI in production?","acceptedAnswer":{"@type":"Answer","text":"Layer UI and backend checks, then wire split-stack alerts. See the health check section above for which endpoints and the threshold rules for when to page."}},{"@type":"Question","name":"Why is Open WebUI not connecting to Ollama?","acceptedAnswer":{"@type":"Answer","text":"Usually wrong OLLAMA_BASE_URL, network isolation, or Ollama OOM/CrashLoop while WebUI stays healthy. Test backend URL from the WebUI container network."}},{"@type":"Question","name":"What health check for Open WebUI?","acceptedAnswer":{"@type":"Answer","text":"Pair UI liveness with backend readiness. The two-check preview table above shows which paths matter first."}},{"@type":"Question","name":"How do I monitor Open WebUI on Docker Compose?","acceptedAnswer":{"@type":"Answer","text":"Check both services on the Docker network. See the Compose snippet and curl commands in the health check section."}},{"@type":"Question","name":"How do I monitor Open WebUI on Kubernetes?","acceptedAnswer":{"@type":"Answer","text":"Separate Deployments with split probes. Restart Ollama Deployment on backend failure when UI stays up."}},{"@type":"Question","name":"Should I restart Open WebUI or Ollama when chat breaks?","acceptedAnswer":{"@type":"Answer","text":"Restart Ollama first when backend checks fail and WebUI /health passes. See the safe-to-automate matrix for why restarting WebUI alone makes things worse."}},{"@type":"Question","name":"Do I need Prometheus for Open WebUI?","acceptedAnswer":{"@type":"Answer","text":"Not to start. Split URL checks and Ollama auto-restart cover phase one. Add Prometheus when you need historical VRAM graphs."}},{"@type":"Question","name":"How do I know if Open WebUI is down vs Ollama?","acceptedAnswer":{"@type":"Answer","text":"Separate checks: WebUI fail = UI outage; WebUI OK + Ollama fail = backend outage. The split-stack threshold rules define exactly when to page."}}]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Monitor Open WebUI and Ollama with AlertMend","description":"Open WebUI /health returns 200 while Ollama is down — the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.","step":[{"@type":"HowToStep","position":1,"name":"Connect cluster or host","text":"Install the AlertMend agent. Open WebUI and Ollama pod events appear together in one view."},{"@type":"HowToStep","position":2,"name":"Layer split checks","text":"Open WebUI /health plus Ollama /api/tags on the exact OLLAMA_BASE_URL from your WebUI config."},{"@type":"HowToStep","position":3,"name":"Set thresholds","text":"Split-stack rule: UI OK + backend fail for 2 checks. Model-load grace on Ollama only."},{"@type":"HowToStep","position":4,"name":"Attach idempotent runbooks","text":"Restart deployment/ollama (not WebUI) when split-stack rule fires. Safe to run twice. Include deploy suppression window."},{"@type":"HowToStep","position":5,"name":"Verify then notify","text":"Re-probe /api/tags twice. Slack on success. Page only if verification fails after auto-fix."}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Monitor Open WebUI and Ollama with AlertMend","description":"Open WebUI /health returns 200 while Ollama is down, the #1 production failure. Split-stack monitoring with auto-restart recovers chat in 48 seconds.","step":[{"@type":"HowToStep","position":1,"name":"Connect cluster or host","text":"Install the AlertMend agent. Open WebUI and Ollama pod events appear together in one view."},{"@type":"HowToStep","position":2,"name":"Layer split checks","text":"Open WebUI /health plus Ollama /api/tags on the exact OLLAMA_BASE_URL from your WebUI config."},{"@type":"HowToStep","position":3,"name":"Set thresholds","text":"Split-stack rule: UI OK + backend fail for 2 checks. Model-load grace on Ollama only."},{"@type":"HowToStep","position":4,"name":"Attach idempotent runbooks","text":"Restart deployment/ollama (not WebUI) when split-stack rule fires. Safe to run twice. Include deploy suppression window."},{"@type":"HowToStep","position":5,"name":"Verify then notify","text":"Re-probe /api/tags twice. Slack on success. Page only if verification fails after auto-fix."}]}</script>
   <link rel="stylesheet" href="/assets/monitor-open-webui-using-alertmend/styles.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -109,7 +109,7 @@
 
     <header class="article-header">
       <h1>Monitor Open WebUI + Ollama in Production</h1>
-      <p class="articleDeck">The split-stack failure that pages on-call at 2am — and the 48-second auto-fix.</p>
+      <p class="articleDeck">The split-stack failure that pages on-call at 2am, and the 48-second auto-fix.</p>
       <div class="author-info">
         <div class="author-avatar">A</div>
         <div>
@@ -133,14 +133,14 @@
         </div>
         <p class="heroGuideLabel">Production runbook · split-stack monitoring</p>
         <h2 class="fearHeadline">Open WebUI loaded. Chat still failed on every message.</h2>
-        <p class="fearLead">Most teams <strong>deploy</strong> Open WebUI and Ollama together. Few teams <strong>monitor both layers</strong> — or know which one to restart when chat breaks.</p>
+        <p class="fearLead">Most teams <strong>deploy</strong> Open WebUI and Ollama together. Few teams <strong>monitor both layers</strong>or know which one to restart when chat breaks.</p>
         <div class="fearScenarioGrid fearScenarioGridSpaced">
         <div class="fearScenario"><p class="fearScenarioWhen">Wednesday, 2:15pm</p><h3 class="fearScenarioTitle">Chat UI loaded. Every message errored.</h3><p class="fearScenarioBody">Open WebUI /health returned 200. Ollama /api/tags timed out on the Docker network. Users saw a working login screen and broken completions.</p></div>
         <div class="fearScenario"><p class="fearScenarioWhen">Wrong OLLAMA_BASE_URL</p><h3 class="fearScenarioTitle">Worked in dev, failed in prod.</h3><p class="fearScenarioBody">Compose used host.docker.internal on Mac but http://ollama:11434 in K8s. WebUI could not reach the backend. No monitor on the backend URL from the WebUI network.</p></div>
         <div class="fearScenario"><p class="fearScenarioWhen">OOM on Ollama only</p><h3 class="fearScenarioTitle">WebUI metrics looked fine.</h3><p class="fearScenarioBody">Only the inference container OOMed. Open WebUI stayed up. Dashboards on WebUI CPU missed exit 137 on the backend.</p></div>
         <div class="fearScenario"><p class="fearScenarioWhen">Ingress split</p><h3 class="fearScenarioTitle">chat.example.com worked, inference did not.</h3><p class="fearScenarioBody">Users hit WebUI through Ingress. Ollama was cluster-internal only. UI synthetic checks passed; backend checks were never configured.</p></div>
         </div>
-        <p class="heroBridge">Every one of these incidents has the same root cause — and the same <strong>~48-second fix</strong>. But the fix only works if you get three things right: which endpoints to check, in what order to restart, and one threshold rule that most teams set wrong. Below is the production runbook we have seen work across 200+ Open WebUI deployments — including the <a href="#safe-to-automate">five things you should never automate</a> on this stack.</p>
+        <p class="heroBridge">Every one of these incidents has the same root cause, and the same <strong>~48-second fix</strong>. But the fix only works if you get three things right: which endpoints to check, in what order to restart, and one threshold rule that most teams set wrong. Below is the production runbook we have seen work across 200+ Open WebUI deployments, including the <a href="#safe-to-automate">five things you should never automate</a> on this stack.</p>
       </section>
 
       <section class="heroBand heroBandCompact">
@@ -153,10 +153,10 @@
             <li>You want to know which failures are safe to auto-fix and which require a human</li>
           </ul>
         </div>
-        <p class="seoTldr"><strong>TL;DR:</strong> The #1 Open WebUI production failure is not a crash — it is a silent split where the UI says healthy while chat is completely broken. The fix requires monitoring two endpoints, but which ones you check and in what order determines whether you auto-recover in 48 seconds or page on-call at 2am. The <a href="#threshold-rules">threshold rules</a> and <a href="#safe-to-automate">automation boundaries</a> below are the difference.</p>
+        <p class="seoTldr"><strong>TL;DR:</strong> The #1 Open WebUI production failure is not a crash, it is a silent split where the UI says healthy while chat is completely broken. The fix requires monitoring two endpoints, but which ones you check and in what order determines whether you auto-recover in 48 seconds or page on-call at 2am. The <a href="#threshold-rules">threshold rules</a> and <a href="#safe-to-automate">automation boundaries</a> below are the difference.</p>
         <p class="fearBridge fearBridgeAfterTldr"><strong>Monitoring only Open WebUI /health is not production monitoring.</strong> Layer backend checks, split-stack alerts, and Ollama-first restart runbooks.</p>
         <p class="heroIncludes"><span class="heroIncludesLabel">Includes:</span> interactive failure simulator · copy-paste runbooks · threshold rules</p>
-        <p class="simulatorTeaser"><a href="#failure-simulator">↓ Interactive failure simulator</a> — click through each split-stack failure with real kubectl commands.</p>
+        <p class="simulatorTeaser"><a href="#failure-simulator">↓ Interactive failure simulator</a>click through each split-stack failure with real kubectl commands.</p>
       </section>
 
       <div class="runbookOutline" aria-label="What this runbook covers">
@@ -184,7 +184,7 @@
         </table>
       </div>
         <div class="keyInsight">
-          <p><strong>These two checks catch 80% of split-stack failures.</strong> The remaining 20% — hung GPUs, model eviction, ingress splits — require three additional probes. See the complete check matrix below.</p>
+          <p><strong>These two checks catch 80% of split-stack failures.</strong> The remaining 20%, hung GPUs, model eviction, ingress splits, require three additional probes. See the complete check matrix below.</p>
         </div>
 
         <h3 class="subsectionHead">Stack-native signals: OLLAMA_BASE_URL and split alerts</h3>
@@ -249,7 +249,7 @@ services:
         <p class="warStoryWhen">Last month · K8s production cluster</p>
         <p class="warStoryLead">A team running Open WebUI on K8s spent 3 hours debugging why chat completions returned 500s.</p>
         <p>Their Grafana dashboard showed WebUI CPU at 12% and memory at 40%. Everything looked healthy. The problem: Ollama had OOM-killed 90 minutes earlier. WebUI kept serving the login page. Their monitoring never checked the backend.</p>
-        <p>When they finally ran <code>kubectl logs deployment/ollama</code>, they found <code>exit code 137</code> repeated 12 times. The fix took 30 seconds — <code>kubectl rollout restart deployment/ollama</code>. But finding it took 3 hours because no alert told them <em>which layer</em> was broken.</p>
+        <p>When they finally ran <code>kubectl logs deployment/ollama</code>they found <code>exit code 137</code> repeated 12 times. The fix took 30 seconds, <code>kubectl rollout restart deployment/ollama</code>. But finding it took 3 hours because no alert told them <em>which layer</em> was broken.</p>
         <p>That is why the threshold rules below exist. They tell you when to page, when to suppress noise during model cold starts, and when a script can fix it vs. when you need a human.</p>
       </div>
 
@@ -259,7 +259,7 @@ services:
         <div class="warningCallout thresholdTrapCallout">
           <p><span class="calloutIcon" aria-hidden="true">⚠️</span> <strong>The threshold trap:</strong> Most teams set their split-stack alert to fire after 1 backend failure. This pages on-call during every Ollama model cold start. The rules below eliminate cold-start noise while catching real outages in under 60 seconds.</p>
         </div>
-        <p class="bodyText">Page when the UI is up but the backend is down — not when both layers are healthy during a model cold start on Ollama.</p>
+        <p class="bodyText">Page when the UI is up but the backend is down, not when both layers are healthy during a model cold start on Ollama.</p>
         <div class="diyWrap tableScrollWrap">
           <table class="compareTable responsiveTable">
             <thead><tr><th>Rule</th><th>Threshold</th><th>Why</th></tr></thead>
@@ -469,13 +469,13 @@ services:
               <li><a href="/blog/datadog-alternatives" class="related-post-link">Best Datadog Alternatives (2026)</a></li>
               <li><a href="/blog/incident-io-alternatives" class="related-post-link">incident.io Alternatives for AI SRE (2026)</a></li>
               <li><a href="/blog/pagerduty-alternatives" class="related-post-link">Best PagerDuty Alternatives (2026)</a></li>
+              <li><a href="/blog/odoo-monitoring" class="related-post-link">Odoo Monitoring and Auto-Recovery</a></li>
               <li><a href="/blog/autoscaling-v2-horizontalpodautoscaler" class="related-post-link">Kubernetes HPA v2: Configuration &amp; Fixes</a></li>
               <li><a href="/blog/kubernetes-crashloopbackoff-fix" class="related-post-link">Kubernetes CrashLoopBackOff: Fix Guide</a></li>
               <li><a href="/blog/kubernetes-imagepullbackoff-fix" class="related-post-link">Kubernetes ImagePullBackOff: Fix Guide</a></li>
               <li><a href="/blog/url-monitoring-automated-fixes" class="related-post-link">URL Monitoring: Detect and Auto-Fix</a></li>
               <li><a href="/blog/openclaw-cloud-infra-slack-telegram" class="related-post-link">OpenClaw: Infra from Slack &amp; Telegram</a></li>
               <li><a href="/blog/vibe-coded-app-vm-observability" class="related-post-link">Vibe-Coded App: What About Observability?</a></li>
-              <li><a href="/blog/24x7-network-monitoring" class="related-post-link">24x7 Network Monitoring Guide</a></li>
             </ul>
             <a href="/blog" class="view-more-link">
               View all posts

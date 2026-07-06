@@ -15,6 +15,7 @@ import {
 } from './static-blog-shared.mjs'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
+const ALERTMEND_LOGO_DATA_URI = `data:image/svg+xml;base64,${fs.readFileSync(path.join(root, 'public/alertmend-logo.svg')).toString('base64')}`
 const DATE = '2026-07-01'
 const CAT = 'AIOps'
 
@@ -26,7 +27,7 @@ function heroSvg(title2, subtitle, pills) {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
   <defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b0b14"/><stop offset="1" stop-color="#241b4d"/></linearGradient></defs>
   <rect width="1200" height="630" fill="url(#hg)"/>
-  <g transform="translate(80,88)"><circle cx="24" cy="24" r="22" fill="#7c3aed"/><text x="24" y="33" font-size="24" font-weight="800" fill="#fff" text-anchor="middle">A</text><text x="60" y="32" font-size="26" font-weight="700" fill="#fff">AlertMend</text></g>
+  <g transform="translate(80,88)"><circle cx="24" cy="24" r="24" fill="#fff"/><image href="${ALERTMEND_LOGO_DATA_URI}" x="8" y="5" width="32" height="38" preserveAspectRatio="xMidYMid meet"/><text x="64" y="32" font-size="26" font-weight="700" fill="#fff">AlertMend</text></g>
   <text x="80" y="252" font-size="60" font-weight="800" fill="#fff">${esc(title2[0])}</text>
   <text x="80" y="324" font-size="60" font-weight="800" fill="#fff">${esc(title2[1])}</text>
   <text x="80" y="392" font-size="26" fill="#c4b5fd">${esc(subtitle)}</text>

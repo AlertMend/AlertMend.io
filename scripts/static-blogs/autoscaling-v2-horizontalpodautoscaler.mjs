@@ -106,7 +106,7 @@ spec:
 
 # Example calculation:
 # CPU recommends 6 replicas; requests/sec recommends 9.
-# HPA chooses 9 — metrics are not weighted or averaged.`
+# HPA chooses 9, metrics are not weighted or averaged.`
 
   const commands = `# 1. Watch current and desired replicas
 kubectl get hpa checkout-api -w
@@ -137,7 +137,7 @@ kubectl get --raw '<custom-or-external-metric-path>' | jq .`
 
   const faq = [
     ['What is the HPA v2 replica formula?', 'For a single metric, desired replicas are approximately ceil(current replicas × current metric value ÷ desired metric value). Kubernetes also applies tolerance, readiness handling, missing-metric logic, stabilization, and scaling policies before changing the target.'],
-    ['Why does HPA show <unknown> for TARGETS?', 'The controller could not obtain a usable metric. Check the relevant aggregated API, the metrics adapter, selector labels, and—for CPU or memory utilization—resource requests on every container in the selected pods.'],
+    ['Why does HPA show <unknown> for TARGETS?', 'The controller could not obtain a usable metric. Check the relevant aggregated API, the metrics adapter, selector labels, and, for CPU or memory utilization, resource requests on every container in the selected pods.'],
     ['Why is desiredReplicas higher but new pods stay Pending?', 'HPA has done its job by updating the workload replica count. Pending pods usually indicate scheduler or cluster-capacity constraints such as insufficient CPU, memory, GPU, affinity, taints, quotas, or unavailable nodes.'],
     ['Why will my HPA not scale down?', 'Common reasons are the scale-down stabilization window, a second metric still recommending more replicas, missing metrics, minReplicas, or a scaleDown policy. Describe the HPA and inspect its conditions and recent recommendations before changing thresholds.'],
     ['Does HPA v2 average multiple metrics?', 'No. It calculates a desired replica count for each metric and chooses the largest recommendation. If one metric cannot be converted into a recommendation, that error can prevent a scale-down, while a valid metric that recommends scale-up can still allow scaling up.'],
@@ -224,7 +224,7 @@ ${buildNavHtml(slug, demoUrl)}
       <article class="hpaArticle">
         <section class="answerCard">
           <div class="answerEyebrow">THE 10-SECOND ANSWER</div>
-          <p><strong>HPA is a control loop, not a traffic detector.</strong> It reads a metric, calculates <code>ceil(current replicas × current ÷ target)</code>, then applies readiness rules, stabilization, and scaling policies. When it “does nothing,” first identify which layer stopped the loop: <strong>metric → recommendation → workload → scheduler → capacity.</strong></p>
+          <p><strong>HPA is a control loop, not a traffic detector.</strong> It reads a metric, calculates <code>ceil(current replicas × current ÷ target)</code>then applies readiness rules, stabilization, and scaling policies. When it “does nothing,” first identify which layer stopped the loop: <strong>metric → recommendation → workload → scheduler → capacity.</strong></p>
           <div class="answerLinks">
             <a href="#debug">Jump to the diagnostic runbook</a>
             <a href="#config">Use the production YAML</a>
@@ -328,19 +328,19 @@ ${buildNavHtml(slug, demoUrl)}
           ${codeBlock(commands, 'Six-minute first response')}
 
           <div class="conditionCards">
-            <div><code>AbleToScale</code><h3>Can HPA fetch/update scale?</h3><p>False points to the target reference, backoff, or scale subresource—not the metric itself.</p></div>
+            <div><code>AbleToScale</code><h3>Can HPA fetch/update scale?</h3><p>False points to the target reference, backoff, or scale subresource, not the metric itself.</p></div>
             <div><code>ScalingActive</code><h3>Can it calculate replicas?</h3><p>False commonly points to missing or invalid metrics, selectors, or resource requests.</p></div>
             <div><code>ScalingLimited</code><h3>Was the answer capped?</h3><p>True means minReplicas, maxReplicas, or behavior limits constrained the recommendation.</p></div>
           </div>
 
           <h3 class="subhead">1. TARGETS shows &lt;unknown&gt;</h3>
-          <p>Do not restart the Deployment. Prove whether the requested metrics API can answer. For CPU or memory <code>Utilization</code>, also verify resource requests exist on every container selected by the HPA. A sidecar without a request can invalidate the pod’s utilization contribution.</p>
+          <p>Do not restart the Deployment. Prove whether the requested metrics API can answer. For CPU or memory <code>Utilization</code>also verify resource requests exist on every container selected by the HPA. A sidecar without a request can invalidate the pod’s utilization contribution.</p>
 
           <h3 class="subhead">2. Desired replicas rose, but capacity did not</h3>
           <p>HPA’s work ends when it updates the scale target. If pods are Pending, inspect the scheduler’s message: insufficient CPU or memory, untolerated taint, affinity conflict, PVC topology, quota, GPU scarcity, or a node autoscaler that has reached its own limit.</p>
 
           <h3 class="subhead">3. The workload will not scale down</h3>
-          <p>Scale-down is intentionally conservative. Check the stabilization window, every configured metric, <code>minReplicas</code>, and missing-metric events. HPA keeps the highest recommendation from the scale-down stabilization window; a second metric can also continue to recommend a larger replica count.</p>
+          <p>Scale-down is intentionally conservative. Check the stabilization window, every configured metric, <code>minReplicas</code>and missing-metric events. HPA keeps the highest recommendation from the scale-down stabilization window; a second metric can also continue to recommend a larger replica count.</p>
 
           <h3 class="subhead">4. New pods create another spike</h3>
           <p>Startup CPU can distort the average before a pod is genuinely ready. Use meaningful readiness or startup probes. The controller deliberately handles unready and recently ready pods conservatively, but probes must still describe application readiness accurately.</p>
@@ -371,9 +371,9 @@ ${buildNavHtml(slug, demoUrl)}
             <li><span>02</span><div><b>Is the target tied to a request?</b><p>CPU utilization is a percentage of requested CPU. Changing requests changes scaling behavior.</p></div></li>
             <li><span>03</span><div><b>Can the cluster place maxReplicas?</b><p>Test quotas, topology, node pools, and downstream connection limits.</p></div></li>
             <li><span>04</span><div><b>How quickly can one pod become Ready?</b><p>Scale-up policy cannot outrun image pulls, initialization, or model loading.</p></div></li>
-            <li><span>05</span><div><b>What prevents flapping?</b><p>Choose stabilization and policies from observed workload behavior—not copied defaults.</p></div></li>
+            <li><span>05</span><div><b>What prevents flapping?</b><p>Choose stabilization and policies from observed workload behavior, not copied defaults.</p></div></li>
             <li><span>06</span><div><b>Who owns replicas?</b><p>Remove fixed replica reconciliation from deployment automation once HPA owns scaling.</p></div></li>
-            <li><span>07</span><div><b>How will you prove recovery?</b><p>Verify latency, metric value, Ready pods, and a clean scale-down—not just an HPA event.</p></div></li>
+            <li><span>07</span><div><b>How will you prove recovery?</b><p>Verify latency, metric value, Ready pods, and a clean scale-down, not just an HPA event.</p></div></li>
           </ol>
         </section>
 
@@ -385,11 +385,11 @@ ${buildNavHtml(slug, demoUrl)}
             </div>
             <div class="enterpriseBadge">ENTERPRISE · SELF-HOSTED OPTION</div>
           </div>
-          <p class="amLead">A dashboard can show high CPU, <code>ScalingLimited=True</code>, and Pending pods as three separate alerts. AlertMend is designed to correlate them into one incident, attach the likely root cause, and route an approved recovery with evidence.</p>
+          <p class="amLead">A dashboard can show high CPU, <code>ScalingLimited=True</code>and Pending pods as three separate alerts. AlertMend is designed to correlate them into one incident, attach the likely root cause, and route an approved recovery with evidence.</p>
           <div class="incidentTrace">
             <div><span>12:04:08</span><b>Detect</b><p>Checkout latency breaches SLO; HPA reaches 30/30.</p></div>
             <div><span>12:04:12</span><b>Correlate</b><p>New replicas are Pending; node pool has no schedulable CPU.</p></div>
-            <div><span>12:04:16</span><b>Diagnose</b><p>HPA is healthy. Cluster capacity—not the target—is the bottleneck.</p></div>
+            <div><span>12:04:16</span><b>Diagnose</b><p>HPA is healthy. Cluster capacity, not the target, is the bottleneck.</p></div>
             <div><span>12:04:20</span><b>Act safely</b><p>Open an approved capacity workflow, verify pods Ready, then confirm latency recovery.</p></div>
           </div>
           <p class="illustrative">Illustrative incident trace. Available actions depend on your integrations and approval policy.</p>
@@ -409,8 +409,8 @@ ${buildNavHtml(slug, demoUrl)}
           <div class="sectionKicker">PRIMARY SOURCES</div>
           <h2>Verify the behavior against Kubernetes</h2>
           <ul>
-            <li><a href="https://kubernetes.io/docs/concepts/workloads/autoscaling/horizontal-pod-autoscale/" target="_blank" rel="noopener noreferrer">Horizontal Pod Autoscaling — concepts and algorithm</a></li>
-            <li><a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/" target="_blank" rel="noopener noreferrer">HorizontalPodAutoscaler walkthrough — resource, custom, and multiple metrics</a></li>
+            <li><a href="https://kubernetes.io/docs/concepts/workloads/autoscaling/horizontal-pod-autoscale/" target="_blank" rel="noopener noreferrer">Horizontal Pod Autoscaling, concepts and algorithm</a></li>
+            <li><a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/" target="_blank" rel="noopener noreferrer">HorizontalPodAutoscaler walkthrough, resource, custom, and multiple metrics</a></li>
             <li><a href="https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/horizontal-pod-autoscaler-v2/" target="_blank" rel="noopener noreferrer">autoscaling/v2 API reference</a></li>
           </ul>
           <p>Commands and field behavior were reviewed against the upstream Kubernetes documentation on July 4, 2026. Adapter-specific behavior should also be verified against the adapter version running in your cluster.</p>
@@ -432,7 +432,7 @@ ${buildNavHtml(slug, demoUrl)}
         <section class="finalCta">
           <div>
             <div class="sectionKicker">NEXT INCIDENT</div>
-            <h2>Know whether HPA, metrics, or capacity failed—before the page escalates.</h2>
+            <h2>Know whether HPA, metrics, or capacity failed, before the page escalates.</h2>
           </div>
           <a href="${demoUrl}" target="_blank" rel="noopener noreferrer">Book a technical walkthrough →</a>
         </section>
