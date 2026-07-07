@@ -11,6 +11,9 @@ import {
   CHROME_INLINE_CSS,
   buildNavHtml,
   buildSidebarHtml,
+  buildCredArticleHeader,
+  DINESH_AUTHOR,
+  AUTHOR_CRED_CSS,
   writeStaticBlogOutputs,
 } from '../static-blog-shared.mjs'
 
@@ -25,17 +28,7 @@ function codeBlock(code, label = '') {
 }
 
 function header(title, author, date, category, readMinutes) {
-  return `<header class="article-header">
-    <h1>${esc(title)}</h1>
-    <div class="author-info">
-      <div class="author-avatar">A</div>
-      <div>
-        <div class="author-name">${esc(author)}</div>
-        <div class="author-meta">${esc(date)} · ${readMinutes} min read · Technical guide</div>
-      </div>
-    </div>
-    <span class="category-tag">${esc(category)}</span>
-  </header>`
+  return buildCredArticleHeader(title, date, category, author || DINESH_AUTHOR, `${esc(date)} · ${readMinutes} min read · Technical guide`)
 }
 
 export async function build(slug) {
@@ -213,7 +206,7 @@ kubectl get --raw '<custom-or-external-metric-path>' | jq .`
   <script type="application/ld+json">${faqLd}</script>
   <script type="application/ld+json">${howToLd}</script>
   <link rel="stylesheet" href="${assets}/styles.css">
-  <style>${CHROME_INLINE_CSS}</style>
+  <style>${CHROME_INLINE_CSS}${AUTHOR_CRED_CSS}</style>
 </head>
 <body>
 ${buildNavHtml(slug, demoUrl)}

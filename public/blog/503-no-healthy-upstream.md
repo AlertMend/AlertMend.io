@@ -1,7 +1,7 @@
 ---
 title: "No Healthy Upstream: Meaning & 503 Fixes"
 excerpt: "No healthy upstream means every backend failed health checks. Diagnose empty endpoints, readiness, Envoy, Istio, nginx, and HAProxy with this decision tree."
-date: "2026-01-10"
+date: "2026-06-27"
 dateModified: "2026-06-27"
 category: "Kubernetes"
 author: "AlertMend Team"

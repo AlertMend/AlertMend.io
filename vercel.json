@@ -64,6 +64,10 @@
       "destination": "/blog/exit-code-5/index.html"
     },
     {
+      "source": "/blog/gitlab-monitoring",
+      "destination": "/blog/gitlab-monitoring/index.html"
+    },
+    {
       "source": "/blog/gpu-monitoring",
       "destination": "/blog/gpu-monitoring/index.html"
     },
@@ -74,6 +78,10 @@
     {
       "source": "/blog/incident-io-alternatives",
       "destination": "/blog/incident-io-alternatives/index.html"
+    },
+    {
+      "source": "/blog/jira-confluence-monitoring",
+      "destination": "/blog/jira-confluence-monitoring/index.html"
     },
     {
       "source": "/blog/keep-ai-agents-online",
@@ -90,6 +98,14 @@
     {
       "source": "/blog/make-error-127",
       "destination": "/blog/make-error-127/index.html"
+    },
+    {
+      "source": "/blog/mattermost-rocketchat-monitoring",
+      "destination": "/blog/mattermost-rocketchat-monitoring/index.html"
+    },
+    {
+      "source": "/blog/metabase-monitoring",
+      "destination": "/blog/metabase-monitoring/index.html"
     },
     {
       "source": "/blog/monitor-docling-using-alertmend",
@@ -132,6 +148,14 @@
       "destination": "/blog/multi-agent-system-reliability/index.html"
     },
     {
+      "source": "/blog/n8n-monitoring",
+      "destination": "/blog/n8n-monitoring/index.html"
+    },
+    {
+      "source": "/blog/nextcloud-monitoring",
+      "destination": "/blog/nextcloud-monitoring/index.html"
+    },
+    {
       "source": "/blog/odoo-monitoring",
       "destination": "/blog/odoo-monitoring/index.html"
     },
@@ -166,6 +190,10 @@
     {
       "source": "/blog/vibe-coded-app-vm-observability",
       "destination": "/blog/vibe-coded-app-vm-observability/index.html"
+    },
+    {
+      "source": "/blog/wordpress-monitoring",
+      "destination": "/blog/wordpress-monitoring/index.html"
     },
     {
       "source": "/blog/:slug",

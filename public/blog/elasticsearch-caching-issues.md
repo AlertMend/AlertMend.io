@@ -1,7 +1,7 @@
 ---
 title: "Elasticsearch Caching Issues: Fix Guide"
 excerpt: "Fix Elasticsearch caching issues: the node query, shard request, and fielddata caches, why hit rates drop, and how to size them for fast search."
-date: "2026-01-10"
+date: "2026-07-04"
 dateModified: "2026-07-04"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"

@@ -183,6 +183,82 @@ export function buildArticleHeader(title, author, date, category) {
     </header>`
 }
 
+export const DINESH_AUTHOR = {
+  name: 'Dinesh Agrawal',
+  role: 'Co-Founder at AlertMend.io',
+  credLine: '12+ years in cloud infrastructure and AI-driven incident automation',
+  linkedin: 'https://www.linkedin.com/in/dineshagrawal85/',
+}
+
+export function dineshJsonLdAuthor() {
+  return {
+    '@type': 'Person',
+    name: DINESH_AUTHOR.name,
+    jobTitle: DINESH_AUTHOR.role,
+    url: DINESH_AUTHOR.linkedin,
+    sameAs: [DINESH_AUTHOR.linkedin],
+  }
+}
+
+export const ALERTMEND_TEAM = {
+  name: 'AlertMend Team',
+  role: 'Infrastructure reliability engineering',
+  credLine: 'Guides checked against primary vendor documentation',
+  linkedin: 'https://www.linkedin.com/company/alertmend/',
+}
+
+export const ARVIND_AUTHOR = {
+  name: 'Arvind Rajpurohit',
+  role: 'AlertMend Engineering',
+  credLine: 'Elasticsearch caching and search performance',
+  linkedin: null,
+}
+
+export const HIMANSHU_AUTHOR = {
+  name: 'Himanshu Bansal',
+  role: 'AlertMend Engineering',
+  credLine: 'Elasticsearch on Kubernetes and JVM operations',
+  linkedin: null,
+}
+
+export function resolveAuthorProfile(authorName) {
+  switch (authorName) {
+    case DINESH_AUTHOR.name: return DINESH_AUTHOR
+    case ARVIND_AUTHOR.name: return ARVIND_AUTHOR
+    case HIMANSHU_AUTHOR.name: return HIMANSHU_AUTHOR
+    default: return ALERTMEND_TEAM
+  }
+}
+
+export const AUTHOR_CRED_CSS = `.article-header--cred{margin-bottom:1.5rem;}
+.article-header--cred .authorCredLine--top{margin:0 0 .45rem;}
+.article-header--cred .article-meta{font-size:.875rem;color:#6b7280;margin:0;}
+.authorCredLine{font-size:.875rem;line-height:1.55;color:#71717a;}
+.authorCredLine a,.authorCredLine .authorCredName{color:#3f3f46;font-weight:600;text-decoration:none;}
+.authorCredLine a:hover{color:#7c3aed;}
+`
+
+/** One-line author credibility for posts with a full bio card at the bottom. */
+export function buildAuthorCredLine(author = DINESH_AUTHOR, extraClass = '') {
+  const cls = extraClass ? `authorCredLine ${extraClass}` : 'authorCredLine'
+  const nameHtml = author.linkedin
+    ? `<a href="${author.linkedin}" target="_blank" rel="noopener noreferrer">${esc(author.name)}</a>`
+    : `<span class="authorCredName">${esc(author.name)}</span>`
+  return `<p class="${cls}">${nameHtml}, ${esc(author.role)} · ${esc(author.credLine)}</p>`
+}
+
+/** Article header: title + cred line + date (or custom meta line). */
+export function buildCredArticleHeader(title, date, category, authorOrName = DINESH_AUTHOR, metaLine) {
+  const author = typeof authorOrName === 'string' ? resolveAuthorProfile(authorOrName) : authorOrName
+  const meta = metaLine ?? `${esc(date)} · ${esc(category)}`
+  return `
+    <header class="article-header article-header--cred">
+      <h1>${esc(title)}</h1>
+      ${buildAuthorCredLine(author, 'authorCredLine--top')}
+      <p class="article-meta">${meta}</p>
+    </header>`
+}
+
 export function writeStaticBlogOutputs(slug, html) {
   const outDir = path.join(root, 'public/blog', slug)
   const outHtml = path.join(outDir, 'index.html')

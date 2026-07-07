@@ -3,7 +3,7 @@ title: "Kubernetes HPA v2: Configuration & Fixes"
 excerpt: "Configure Kubernetes HPA v2 correctly, understand its replica formula, and diagnose unknown metrics, maxReplicas, pending pods, and stuck scale-downs."
 date: "2026-07-04"
 category: "Kubernetes"
-author: "AlertMend Team"
+author: "Dinesh Agrawal"
 keywords: "Kubernetes HPA v2, HorizontalPodAutoscaler, HPA not scaling, HPA unknown metrics, HPA formula, autoscaling v2 example, Kubernetes autoscaling troubleshooting, custom metrics HPA"
 ---
 

@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Elasticsearch Caching Issues: Fix Guide">
   <meta name="twitter:description" content="Fix Elasticsearch caching issues: the node query, shard request, and fielddata caches, why hit rates drop, and how to size them for fast search.">
   <meta name="twitter:image" content="https://www.alertmend.io/assets/elasticsearch-caching-issues/hero.svg">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Elasticsearch Caching Issues: Fix Guide","description":"Fix Elasticsearch caching issues: the node query, shard request, and fielddata caches, why hit rates drop, and how to size them for fast search.","image":"https://www.alertmend.io/assets/elasticsearch-caching-issues/hero.svg","datePublished":"2026-01-10","dateModified":"2026-07-04","author":{"@type":"Person","name":"Arvind Rajpurohit"},"reviewedBy":{"@type":"Organization","name":"AlertMend Engineering"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/elasticsearch-caching-issues"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Elasticsearch Caching Issues: Fix Guide","description":"Fix Elasticsearch caching issues: the node query, shard request, and fielddata caches, why hit rates drop, and how to size them for fast search.","image":"https://www.alertmend.io/assets/elasticsearch-caching-issues/hero.svg","datePublished":"2026-07-04","dateModified":"2026-07-04","author":{"@type":"Person","name":"Arvind Rajpurohit"},"reviewedBy":{"@type":"Organization","name":"AlertMend Engineering"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/elasticsearch-caching-issues"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is my Elasticsearch cache hit rate low?","acceptedAnswer":{"@type":"Answer","text":"Usually the query is ineligible or not repeated exactly. By default, the shard request cache caches size: 0 requests; request_cache=true can opt in other eligible requests. Unrounded now, changing JSON, refreshes, and evictions can still prevent reuse."}},{"@type":"Question","name":"What is the difference between the query cache and the request cache?","acceptedAnswer":{"@type":"Answer","text":"The node query cache stores the results of cacheable filter clauses per node. The shard request cache stores the entire response of size: 0 requests, which is what accelerates repeated aggregation dashboards. They solve different problems."}},{"@type":"Question","name":"Should I clear the Elasticsearch cache to fix slow search?","acceptedAnswer":{"@type":"Answer","text":"No. Clearing caches makes the next queries slower while they rewarm and hides the real issue. Diagnose which cache should apply, then fix the query shape, mapping, or cache size instead."}},{"@type":"Question","name":"How do I make aggregation dashboards faster?","acceptedAnswer":{"@type":"Answer","text":"Send them as size: 0 requests with rounded date math (now-24h/h), which makes the shard request cache reusable across loads in the same window, and give read-heavy indices a longer refresh interval so cached results are not invalidated every second."}},{"@type":"Question","name":"Is fielddata a cache I should rely on?","acceptedAnswer":{"@type":"Answer","text":"No. Fielddata loads text-field values onto the JVM heap for sorting and aggregation and is a common cause of pressure. Aggregate and sort on keyword sub-fields with disk-backed doc values instead of enabling fielddata on text."}}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Diagnose Elasticsearch caching issues","description":"Fix Elasticsearch caching issues: the node query, shard request, and fielddata caches, why hit rates drop, and how to size them for fast search.","step":[{"@type":"HowToStep","position":1,"name":"Read cache stats","text":"Run <code>GET _nodes/stats/indices/query_cache,request_cache,fielddata</code>. For each cache compare <code>hit_count</code> to <code>miss_count</code> and watch <code>evictions</code>; high evictions mean the cache is too small or churning."},{"@type":"HowToStep","position":2,"name":"Check whether the query is cacheable","text":"By default, the shard request cache caches <code>size: 0</code> requests. <code>request_cache=true</code> can opt in other eligible requests, but non-deterministic queries such as unrounded <code>now</code> still miss."},{"@type":"HowToStep","position":3,"name":"Look at fielddata memory","text":"Run <code>GET _cat/fielddata?v&s=size:desc</code>. Large fielddata is text sorting or aggregation loading into heap; that is a mapping problem, not a caching benefit."},{"@type":"HowToStep","position":4,"name":"Compare per node","text":"Run <code>GET _cat/nodes?v&h=name,qcm,rcm,fm</code> to see query-cache, request-cache, and fielddata memory per node and spot an imbalanced or saturated node."}]}</script>
   <link rel="stylesheet" href="/assets/make-error-127/styles.css">
@@ -106,16 +106,10 @@
     <div class="content-wrapper">
       <div class="main-col">
 
-    <header class="article-header">
+    <header class="article-header article-header--cred">
       <h1>Elasticsearch Caching Issues: Diagnose and Fix</h1>
-      <div class="author-info">
-        <div class="author-avatar">A</div>
-        <div>
-          <div class="author-name">Arvind Rajpurohit</div>
-          <div class="author-meta">2026-01-10 · Elasticsearch</div>
-        </div>
-      </div>
-      <span class="category-tag">Elasticsearch</span>
+      <p class="authorCredLine authorCredLine--top"><span class="authorCredName">Arvind Rajpurohit</span>, AlertMend Engineering · Elasticsearch caching and search performance</p>
+      <p class="article-meta">2026-07-04 · Elasticsearch</p>
     </header>
       <div class="credibilityRow">
         <span class="credibilityVerified"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Verified against official Elasticsearch documentation</span>
@@ -191,7 +185,7 @@ GET /metrics-*/_search?request_cache=true
 {
   &quot;size&quot;: 0,
   &quot;query&quot;: { &quot;range&quot;: { &quot;@timestamp&quot;: { &quot;gte&quot;: &quot;now-24h/h&quot; } } },
-  &quot;aggs&quot;: { &quot;per_hour&quot;: { &quot;date_histogram&quot;: { &quot;field&quot;: &quot;@timestamp&quot; &quot;calendar_interval&quot;: &quot;hour&quot; } } }
+  &quot;aggs&quot;: { &quot;per_hour&quot;: { &quot;date_histogram&quot;: { &quot;field&quot;: &quot;@timestamp&quot;, &quot;calendar_interval&quot;: &quot;hour&quot; } } }
 }
 
 # 2. Give read-heavy indices a longer refresh so caches are not wiped each second
@@ -208,7 +202,8 @@ indices.requests.cache.size: 2%</code></pre>
       <pre class="codeBlock copyableCode"><code># mapping: keep a keyword sub-field for aggregations and sorting
 &quot;properties&quot;: {
   &quot;status&quot;: {
-    &quot;type&quot;: &quot;text&quot; &quot;fields&quot;: { &quot;keyword&quot;: { &quot;type&quot;: &quot;keyword&quot; } }
+    &quot;type&quot;: &quot;text&quot;,
+    &quot;fields&quot;: { &quot;keyword&quot;: { &quot;type&quot;: &quot;keyword&quot; } }
   }
 }</code></pre>
       <p class="bodyText">On high-ingest indices, relax index.refresh_interval so cached results are not invalidated every second, and monitor cache hit rate and evictions so you tune sizing before users feel the slowdown.</p>

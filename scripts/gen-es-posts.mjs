@@ -7,11 +7,11 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { SITE_URL, esc, CHROME_INLINE_CSS, buildNavHtml, buildSidebarHtml, buildArticleHeader, calendlyUrl } from './static-blog-shared.mjs'
+import { SITE_URL, esc, CHROME_INLINE_CSS, AUTHOR_CRED_CSS, buildNavHtml, buildSidebarHtml, buildCredArticleHeader, calendlyUrl } from './static-blog-shared.mjs'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const ALERTMEND_LOGO_DATA_URI = `data:image/svg+xml;base64,${fs.readFileSync(path.join(root, 'public/alertmend-logo.svg')).toString('base64')}`
-const DATE = '2026-01-10', MODIFIED = '2026-07-04', CAT = 'Elasticsearch'
+const DATE = '2026-07-04', MODIFIED = '2026-07-04', CAT = 'Elasticsearch'
 
 const SCRIPT_JS = `(function () {
   document.querySelectorAll('[data-faq-toggle]').forEach((b) => {
@@ -38,7 +38,7 @@ const SCRIPT_JS = `(function () {
 })();
 `
 
-const ES_POST_CSS = `
+const ES_POST_CSS = `${AUTHOR_CRED_CSS}
 .copyableCode { position: relative; padding-top: 3.25rem; }
 .codeCopyButton {
   position: absolute; top: .75rem; right: .75rem; z-index: 2;
@@ -237,7 +237,7 @@ ${buildNavHtml(cfg.slug, cal)}
   <div class="main-container">
     <div class="content-wrapper">
       <div class="main-col">
-${buildArticleHeader(cfg.h1, cfg.author, DATE, CAT)}
+${buildCredArticleHeader(cfg.h1, DATE, CAT, cfg.author)}
       <div class="credibilityRow">
         <span class="credibilityVerified"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Verified against official Elasticsearch documentation</span>
         <span class="credibilityDot">•</span><span>Technical review: AlertMend Engineering</span>

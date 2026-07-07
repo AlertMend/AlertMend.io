@@ -6,7 +6,7 @@
   <title>Make Error 127: Command Not Found Fix | AlertMend AI</title>
   <meta name="description" content="Make Error 127 means a recipe command was not found. Identify the missing binary, compare PATH inside make, and fix local, Docker, CI, WSL, or uv builds.">
   <meta name="keywords" content="make error 127, makefile error 127, error 127 makefile, gnu make error 127 command not found manual, exit code 127, exit status 127, make go no such file or directory, uv no such file or directory, npm error code 127, command not found makefile">
-  <meta name="author" content="AlertMend Team">
+  <meta name="author" content="Dinesh Agrawal">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.alertmend.io/blog/make-error-127">
   <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Make Error 127: Command Not Found Fix">
   <meta name="twitter:description" content="Make Error 127 means a recipe command was not found. Identify the missing binary, compare PATH inside make, and fix local, Docker, CI, WSL, or uv builds.">
   <meta name="twitter:image" content="https://www.alertmend.io/assets/make-error-127/make-error-127-hero.svg">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Make Error 127: Command Not Found Fix","description":"Make Error 127 means a recipe command was not found. Identify the missing binary, compare PATH inside make, and fix local, Docker, CI, WSL, or uv builds.","image":"https://www.alertmend.io/assets/make-error-127/make-error-127-hero.svg","datePublished":"2026-01-10","dateModified":"2026-07-03","author":{"@type":"Organization","name":"AlertMend Team"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/make-error-127"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Make Error 127: Command Not Found Fix","description":"Make Error 127 means a recipe command was not found. Identify the missing binary, compare PATH inside make, and fix local, Docker, CI, WSL, or uv builds.","image":"https://www.alertmend.io/assets/make-error-127/make-error-127-hero.svg","datePublished":"2026-07-03","dateModified":"2026-07-03","author":{"@type":"Organization","name":"Dinesh Agrawal"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/make-error-127"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is makefile error 127?","acceptedAnswer":{"@type":"Answer","text":"GNU make ran a recipe and the shell returned exit status 127 because a command in that recipe was not found. Fix the missing binary or PATH, not make itself."}},{"@type":"Question","name":"What is the difference between make error 127 and exit code 127?","acceptedAnswer":{"@type":"Answer","text":"Error 127 in the make output is the recipe shell status: command not found. GNU make itself normally exits with status 2 after encountering an error. The printed recipe status and the final make-process status are related but not identical."}},{"@type":"Question","name":"Why does GNU make say \"command not found\" but the tool works in my terminal?","acceptedAnswer":{"@type":"Answer","text":"Your interactive shell loads .bashrc or .zprofile and adjusts PATH. Non-interactive shells used by make, CI, and cron may not. Export PATH in the Makefile, CI config, or job wrapper."}},{"@type":"Question","name":"How do I fix make: go: No such file or directory?","acceptedAnswer":{"@type":"Answer","text":"Install Go and ensure go is on PATH for the same user and environment that runs make. In CI, use an official setup action or a golang container image."}},{"@type":"Question","name":"What does gnu make error 127 command not found mean?","acceptedAnswer":{"@type":"Answer","text":"The shell could not execute a program named in the makefile recipe. Read the line above Error 127, install that tool, then run make again."}},{"@type":"Question","name":"Why does uv sync fail with make Error 127?","acceptedAnswer":{"@type":"Answer","text":"The recipe calls uv, but uv is not installed or is outside PATH in the environment running make. Run command -v uv and make -n for the target, then install uv in the same CI image, container, or user environment."}},{"@type":"Question","name":"Is Windows error 127 the same as shell exit status 127?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. Native Windows error codes, installer errors, and game errors can reuse the number 127 with unrelated meanings. This guide covers GNU make and POSIX-style shells where 127 means command not found."}}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Find which command triggered makefile error 127","description":"Make Error 127 means a recipe command was not found. Identify the missing binary, compare PATH inside make, and fix local, Docker, CI, WSL, or uv builds.","step":[{"@type":"HowToStep","position":1,"name":"Read the full make output","text":"Find the line above Error 127. It names the missing binary (go, gcc, g++) and often the Makefile line number."},{"@type":"HowToStep","position":2,"name":"Open the makefile at that line","text":"Run make -n target for a dry run, or sed -n to print the recipe block."},{"@type":"HowToStep","position":3,"name":"Confirm the binary exists","text":"Run which go gcc g++ python3 and echo $PATH in the same shell environment make uses."},{"@type":"HowToStep","position":4,"name":"Re-run with verbose make","text":"make V=1 or make --debug=v helps when nested scripts hide the failing command."}]}</script>
   <link rel="stylesheet" href="/assets/make-error-127/styles.css">
@@ -77,6 +77,12 @@
     .category-tag { display: inline-block; padding: 4px 10px; background: #ede9fe; color: #5b21b6; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
     .promo { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; font-size: 1.0625rem; color: #374151; }
     .promo a { color: #7c3aed; font-weight: 600; }
+.article-header--cred{margin-bottom:1.5rem;}
+.article-header--cred .authorCredLine--top{margin:0 0 .45rem;}
+.article-header--cred .article-meta{font-size:.875rem;color:#6b7280;margin:0;}
+.authorCredLine{font-size:.875rem;line-height:1.55;color:#71717a;}
+.authorCredLine a,.authorCredLine .authorCredName{color:#3f3f46;font-weight:600;text-decoration:none;}
+.authorCredLine a:hover{color:#7c3aed;}
 </style>
 </head>
 <body>
@@ -106,22 +112,16 @@
     <div class="content-wrapper">
       <div class="main-col">
 
-    <header class="article-header">
+    <header class="article-header article-header--cred">
       <h1>Make Error 127: Meaning, Diagnosis &amp; Fixes</h1>
-      <div class="author-info">
-        <div class="author-avatar">A</div>
-        <div>
-          <div class="author-name">AlertMend Team</div>
-          <div class="author-meta">2026-01-10 · Troubleshooting</div>
-        </div>
-      </div>
-      <span class="category-tag">Troubleshooting</span>
+      <p class="authorCredLine authorCredLine--top"><a href="https://www.linkedin.com/in/dineshagrawal85/" target="_blank" rel="noopener noreferrer">Dinesh Agrawal</a>, Co-Founder at AlertMend.io · 12+ years in cloud infrastructure and AI-driven incident automation</p>
+      <p class="article-meta">2026-07-03 · Troubleshooting</p>
     </header>
 
     <div class="dl-blog">
       <section class="heroBand heroBandCompact">
         <p class="heroGuideLabel">GNU make + shell troubleshooting · primary sources checked 2026-07-03</p>
-        <div class="instantFix">
+        <div class="instantFix mkErr127">
           <div class="instantFixTop"><span>THE 10-SECOND ANSWER</span><strong>Make worked. A recipe command did not.</strong></div>
           <p><strong>Make Error 127</strong> means the shell could not find a command used by a Makefile recipe. The missing name is usually on the line immediately above <code>Error 127</code>.</p>
           <div class="instantFixCommands">
@@ -322,16 +322,16 @@ endif</code></pre>
           <div class="sidebar-card">
             <div class="related-content-title">Related content</div>
             <ul class="related-posts-list">
+              <li><a href="/blog/exit-code-5" class="related-post-link">Exit Code 5: Meaning and Fixes by Program</a></li>
               <li><a href="/blog/deny-access-to-this-computer-from-the-network" class="related-post-link">Deny Access To Computer From Network</a></li>
               <li><a href="/blog/error-runtime-exited-with-error-signal-killed-runtime.exiterror" class="related-post-link">Error: Runtime Exited With Error: Signal</a></li>
-              <li><a href="/blog/exit-code-126" class="related-post-link">exit code 126 Guide Guide Complete Guide</a></li>
+              <li><a href="/blog/gitlab-monitoring" class="related-post-link">GitLab Self-Hosted Monitoring Guide</a></li>
+              <li><a href="/blog/jira-confluence-monitoring" class="related-post-link">Jira and Confluence DC Monitoring</a></li>
+              <li><a href="/blog/mattermost-rocketchat-monitoring" class="related-post-link">Mattermost and Rocket.Chat Monitoring</a></li>
+              <li><a href="/blog/metabase-monitoring" class="related-post-link">Metabase Monitoring and Auto-Recovery</a></li>
+              <li><a href="/blog/n8n-monitoring" class="related-post-link">n8n Monitoring and Auto-Recovery</a></li>
+              <li><a href="/blog/nextcloud-monitoring" class="related-post-link">Nextcloud Monitoring and Auto-Recovery</a></li>
               <li><a href="/blog/odoo-monitoring" class="related-post-link">Odoo Monitoring and Auto-Recovery</a></li>
-              <li><a href="/blog/datadog-alternatives" class="related-post-link">Best Datadog Alternatives (2026)</a></li>
-              <li><a href="/blog/incident-io-alternatives" class="related-post-link">incident.io Alternatives for AI SRE (2026)</a></li>
-              <li><a href="/blog/pagerduty-alternatives" class="related-post-link">Best PagerDuty Alternatives (2026)</a></li>
-              <li><a href="/blog/autoscaling-v2-horizontalpodautoscaler" class="related-post-link">Kubernetes HPA v2: Configuration &amp; Fixes</a></li>
-              <li><a href="/blog/ai-agent-observability-in-production" class="related-post-link">AI Agent Observability in Production</a></li>
-              <li><a href="/blog/best-1-click-logging-and-metrics-tools" class="related-post-link">9 Best Logging &amp; Metrics Tools (2026)</a></li>
             </ul>
             <a href="/blog" class="view-more-link">
               View all posts

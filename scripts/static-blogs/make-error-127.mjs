@@ -11,6 +11,9 @@ import {
   buildNavHtml,
   buildSidebarHtml,
   buildArticleHeader,
+  buildCredArticleHeader,
+  DINESH_AUTHOR,
+  AUTHOR_CRED_CSS,
   writeStaticBlogOutputs,
 } from '../static-blog-shared.mjs'
 
@@ -22,8 +25,8 @@ export async function build(slug) {
   const title = meta.title || 'Make Error 127: Command Not Found Fix'
   const h1Title = 'Make Error 127: Meaning, Diagnosis & Fixes'
   const excerpt = meta.excerpt || ''
-  const date = meta.date || '2026-01-10'
-  const dateModified = meta.dateModified || date
+  const dateModified = meta.dateModified || meta.date || '2026-01-10'
+  const date = meta.date && meta.date !== '2026-01-10' ? meta.date : dateModified
   const category = meta.category || 'Troubleshooting'
   const author = meta.author || 'AlertMend Team'
   const keywords =
@@ -191,7 +194,7 @@ export async function build(slug) {
   <script type="application/ld+json">${faqLd}</script>
   <script type="application/ld+json">${howToLd}</script>
   <link rel="stylesheet" href="${assetsBase}/styles.css">
-  <style>${CHROME_INLINE_CSS}</style>
+  <style>${CHROME_INLINE_CSS}${AUTHOR_CRED_CSS}</style>
 </head>
 <body>
 ${buildNavHtml(slug, postCalendlyUrl)}
@@ -199,12 +202,12 @@ ${buildNavHtml(slug, postCalendlyUrl)}
   <div class="main-container">
     <div class="content-wrapper">
       <div class="main-col">
-${buildArticleHeader(h1Title, author, date, category)}
+${buildCredArticleHeader(h1Title, date, category, author || DINESH_AUTHOR)}
 
     <div class="dl-blog">
       <section class="heroBand heroBandCompact">
         <p class="heroGuideLabel">GNU make + shell troubleshooting · primary sources checked ${esc(dateModified)}</p>
-        <div class="instantFix">
+        <div class="instantFix mkErr127">
           <div class="instantFixTop"><span>THE 10-SECOND ANSWER</span><strong>Make worked. A recipe command did not.</strong></div>
           <p><strong>Make Error 127</strong> means the shell could not find a command used by a Makefile recipe. The missing name is usually on the line immediately above <code>Error 127</code>.</p>
           <div class="instantFixCommands">

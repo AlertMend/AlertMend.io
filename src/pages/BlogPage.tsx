@@ -17,6 +17,31 @@ import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
  * indigo mix to the new single-hue palette so the blog feels like part
  * of the same site as the homepage rather than a separate product.
  */
+/**
+ * Curated "most viewed / featured" ordering for the blog index. Higher number
+ * is pinned nearer the top. Until real Google Analytics pageview data is wired
+ * in (via the GA Data API at build time), this acts as the popularity signal;
+ * any post not listed here falls back to date, newest first.
+ */
+const FEATURED_PRIORITY: Record<string, number> = {
+  'datadog-alternatives': 100,
+  'pagerduty-alternatives': 98,
+  'incident-io-alternatives': 96,
+  'gpu-monitoring': 94,
+  'best-ai-agent-observability-tools': 92,
+  'top-kubernetes-cost-management-solutions': 90,
+  'best-1-click-logging-and-metrics-tools': 88,
+  'ai-agent-observability-in-production': 86,
+  'odoo-monitoring': 84,
+  'wordpress-monitoring': 82,
+  'gitlab-monitoring': 80,
+  'n8n-monitoring': 78,
+  'nextcloud-monitoring': 76,
+  'jira-confluence-monitoring': 74,
+  'metabase-monitoring': 72,
+  'mattermost-rocketchat-monitoring': 70,
+}
+
 export default function BlogPage() {
   const navigate = useNavigate()
 
@@ -42,6 +67,9 @@ export default function BlogPage() {
           }
         })
         .sort((a, b) => {
+          const pa = FEATURED_PRIORITY[a.slug] || 0
+          const pb = FEATURED_PRIORITY[b.slug] || 0
+          if (pa !== pb) return pb - pa
           try {
             const dateA = new Date(a.date || 0).getTime()
             const dateB = new Date(b.date || 0).getTime()

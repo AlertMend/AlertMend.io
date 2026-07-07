@@ -1,5 +1,65 @@
 [
   {
+    "slug": "gitlab-monitoring",
+    "title": "GitLab Self-Hosted Monitoring Guide",
+    "excerpt": "Monitor self-hosted GitLab end to end: Puma, Sidekiq, PostgreSQL, Redis, and Gitaly, then safely auto-recover 502s, Sidekiq backlogs, and disk pressure.",
+    "date": "2026-07-06",
+    "category": "Monitoring",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "gitlab monitoring, gitlab self-hosted, gitlab 502, gitlab sidekiq queue, gitaly, gitlab slow, gitlab prometheus, gitlab-ctl, gitlab disk full, gitlab auto recovery"
+  },
+  {
+    "slug": "jira-confluence-monitoring",
+    "title": "Jira and Confluence DC Monitoring",
+    "excerpt": "Monitor Jira and Confluence Data Center: JVM heap and GC, database, shared home, cluster nodes, and the index, then recover the common failures safely.",
+    "date": "2026-07-06",
+    "category": "Monitoring",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "jira monitoring, confluence monitoring, jira data center, jira outofmemoryerror, jira heap, confluence synchrony, jira cluster node, shared home, jira slow, atlassian monitoring"
+  },
+  {
+    "slug": "mattermost-rocketchat-monitoring",
+    "title": "Mattermost and Rocket.Chat Monitoring",
+    "excerpt": "Monitor self-hosted Mattermost and Rocket.Chat: websockets, the app process, PostgreSQL or MongoDB, and file storage, then safely recover common failures.",
+    "date": "2026-07-06",
+    "category": "Monitoring",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "mattermost monitoring, rocket.chat monitoring, mattermost websocket, rocket.chat mongodb oplog, mattermost health check, rocket.chat slow, self-hosted chat monitoring, mattermost auto recovery"
+  },
+  {
+    "slug": "metabase-monitoring",
+    "title": "Metabase Monitoring and Auto-Recovery",
+    "excerpt": "Monitor self-hosted Metabase: JVM heap, the application database, data-source connections, and scheduled reports, then recover the common failures safely.",
+    "date": "2026-07-06",
+    "category": "Monitoring",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "metabase monitoring, metabase slow, metabase out of memory, metabase h2 database, metabase application database, metabase postgres, metabase scheduled reports, metabase auto recovery"
+  },
+  {
+    "slug": "n8n-monitoring",
+    "title": "n8n Monitoring and Auto-Recovery",
+    "excerpt": "Monitor self-hosted n8n: the main process, queue-mode workers, PostgreSQL, Redis, webhooks, and executions, then safely recover the common failures.",
+    "date": "2026-07-06",
+    "category": "Monitoring",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "n8n monitoring, n8n self-hosted, n8n queue mode, n8n executions failing, n8n webhook not working, n8n database, n8n workers, n8n scaling, n8n auto recovery"
+  },
+  {
+    "slug": "nextcloud-monitoring",
+    "title": "Nextcloud Monitoring and Auto-Recovery",
+    "excerpt": "Monitor self-hosted Nextcloud end to end: PHP-FPM, database, Redis locking, background jobs, and storage, then safely recover the common failures.",
+    "date": "2026-07-06",
+    "category": "Monitoring",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "nextcloud monitoring, nextcloud slow, nextcloud background jobs not running, nextcloud maintenance mode, nextcloud file locking, nextcloud occ, nextcloud php-fpm, nextcloud auto recovery"
+  },
+  {
     "slug": "odoo-monitoring",
     "title": "Odoo Monitoring and Auto-Recovery",
     "excerpt": "Monitor Odoo, PostgreSQL, workers, cron jobs, storage, and proxies, then safely auto-recover common failures with checks, runbooks, and verification.",
@@ -15,12 +75,22 @@
     "keywords": "Odoo monitoring, Odoo health check, Odoo uptime monitoring, Odoo auto recovery, Odoo PostgreSQL monitoring"
   },
   {
+    "slug": "wordpress-monitoring",
+    "title": "WordPress and WooCommerce Monitoring",
+    "excerpt": "Monitor WordPress and WooCommerce end to end: PHP-FPM, MySQL, object cache, wp-cron, and checkout, then safely auto-recover the common failures.",
+    "date": "2026-07-06",
+    "category": "Monitoring",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "wordpress monitoring, woocommerce monitoring, wordpress uptime, wordpress slow, wordpress white screen of death, php-fpm, wp-cron, wordpress 502, wordpress auto recovery"
+  },
+  {
     "slug": "datadog-alternatives",
     "title": "Best Datadog Alternatives (2026)",
     "excerpt": "Compare Datadog alternatives for APM, OpenTelemetry, self-hosting, pricing, and remediation: Grafana, New Relic, SigNoz, Elastic, Better Stack, and AlertMend.",
     "date": "2026-07-05",
     "category": "AIOps",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [
       "AIOps",
       "Observability",
@@ -29,12 +99,22 @@
     "keywords": "datadog alternatives, datadog alternative, cheaper than datadog, datadog too expensive, datadog vs grafana, open source datadog alternative, datadog competitors, self hosted observability, auto remediation, AlertMend"
   },
   {
+    "slug": "gpu-monitoring",
+    "title": "GPU Monitoring: Detect Idle and Recover",
+    "excerpt": "GPU monitoring that acts: catch idle GPUs burning money, workloads that stopped using the GPU, and crashes at 3am, then alert and auto-recover.",
+    "date": "2026-07-05",
+    "category": "GPU",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "gpu monitoring, gpu monitoring kubernetes, idle gpu, gpu utilization, monitor gpu usage, dcgm exporter, nvidia gpu operator, gpu cost, cuda out of memory, gpu observability, gpu auto recovery, AlertMend"
+  },
+  {
     "slug": "incident-io-alternatives",
     "title": "incident.io Alternatives for AI SRE (2026)",
     "excerpt": "Compare incident.io alternatives for on-call, AI SRE, self-hosting, WhatsApp escalation, and infrastructure remediation, including AlertMend and PagerDuty.",
     "date": "2026-07-05",
     "category": "AIOps",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [
       "AIOps",
       "Observability",
@@ -48,7 +128,7 @@
     "excerpt": "Compare PagerDuty alternatives for on-call, automation, and pricing: incident.io, Rootly, FireHydrant, Grafana IRM, Squadcast, Better Stack, and AlertMend.",
     "date": "2026-07-05",
     "category": "AIOps",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [
       "AIOps",
       "Observability",
@@ -62,9 +142,69 @@
     "excerpt": "Configure Kubernetes HPA v2 correctly, understand its replica formula, and diagnose unknown metrics, maxReplicas, pending pods, and stuck scale-downs.",
     "date": "2026-07-04",
     "category": "Kubernetes",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [],
     "keywords": "Kubernetes HPA v2, HorizontalPodAutoscaler, HPA not scaling, HPA unknown metrics, HPA formula, autoscaling v2 example, Kubernetes autoscaling troubleshooting, custom metrics HPA"
+  },
+  {
+    "slug": "elasticsearch-caching-issues",
+    "title": "Elasticsearch Caching Issues: Fix Guide",
+    "excerpt": "Fix Elasticsearch caching issues: the node query, shard request, and fielddata caches, why hit rates drop, and how to size them for fast search.",
+    "date": "2026-07-04",
+    "category": "Elasticsearch",
+    "author": "Arvind Rajpurohit",
+    "tags": [],
+    "keywords": "elasticsearch caching issues, elasticsearch query cache, shard request cache, fielddata cache, elasticsearch cache hit rate, indices.queries.cache.size, request_cache, clear cache elasticsearch, elasticsearch slow queries cache"
+  },
+  {
+    "slug": "elasticsearch-disk-out-of-space-incident",
+    "title": "Elasticsearch Disk Out of Space: Fix",
+    "excerpt": "Fix Elasticsearch disk out of space: understand the low, high, and flood-stage watermarks, clear the read-only block, free space, and prevent it recurring.",
+    "date": "2026-07-04",
+    "category": "Elasticsearch",
+    "author": "Himanshu Bansal",
+    "tags": [],
+    "keywords": "elasticsearch disk out of space, elasticsearch flood stage, elasticsearch read only allow delete, disk watermark, elasticsearch low disk watermark, index read-only, elasticsearch out of disk kubernetes, cluster.routing.allocation.disk.watermark"
+  },
+  {
+    "slug": "elasticsearch-shard-relocation-incidents-on-kubernetes",
+    "title": "Elasticsearch Shard Relocation on Kubernetes",
+    "excerpt": "Diagnose Elasticsearch shard relocation on Kubernetes: pod evictions, delayed allocation, and how to keep the cluster green through node drains and rollouts.",
+    "date": "2026-07-04",
+    "category": "Elasticsearch",
+    "author": "Himanshu Bansal",
+    "tags": [],
+    "keywords": "elasticsearch shard relocation, elasticsearch relocating shards kubernetes, unassigned shards, delayed allocation, elasticsearch pod eviction, cluster.routing.allocation.enable, elasticsearch statefulset, elasticsearch rolling restart shards"
+  },
+  {
+    "slug": "exit-code-5",
+    "title": "Exit Code 5: Meaning and Fixes by Program",
+    "excerpt": "Exit code 5 has no universal meaning. Diagnose pytest no-tests-collected, curl proxy errors, Windows access denied, Linux commands, and CI failures correctly.",
+    "date": "2026-07-04",
+    "category": "Troubleshooting",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "exit code 5, pytest exit code 5 no tests collected, exit code 5 linux, curl exit code 5, Windows system error 5 access denied, process completed with exit code 5, exit status 5, return code 5"
+  },
+  {
+    "slug": "optimizing-high-jvm-heap-usage-in-elasticsearch",
+    "title": "Fix High JVM Heap Usage in Elasticsearch",
+    "excerpt": "Fix high JVM heap usage in Elasticsearch: size heap correctly, cut fielddata and shard overhead, read circuit breakers, and stop the GC pressure.",
+    "date": "2026-07-04",
+    "category": "Elasticsearch",
+    "author": "Himanshu Bansal",
+    "tags": [],
+    "keywords": "elasticsearch high jvm heap, elasticsearch heap usage, jvm heap size elasticsearch, elasticsearch circuit breaker, fielddata memory, elasticsearch garbage collection, heap.percent, elasticsearch 31gb heap, reduce shard count"
+  },
+  {
+    "slug": "make-error-127",
+    "title": "Make Error 127: Command Not Found Fix",
+    "excerpt": "Make Error 127 means a recipe command was not found. Identify the missing binary, compare PATH inside make, and fix local, Docker, CI, WSL, or uv builds.",
+    "date": "2026-07-03",
+    "category": "Troubleshooting",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "make error 127, makefile error 127, error 127 makefile, gnu make error 127 command not found manual, exit code 127, exit status 127, make go no such file or directory, uv no such file or directory, npm error code 127, command not found makefile"
   },
   {
     "slug": "ai-agent-observability-in-production",
@@ -72,7 +212,7 @@
     "excerpt": "Keep AI agents alive in production: catch crashes, out-of-memory, and hangs, with AI root-cause analysis and auto-recovery from AlertMend.",
     "date": "2026-07-01",
     "category": "AIOps",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [
       "AIOps",
       "AI Agents",
@@ -230,6 +370,37 @@
       "Observability"
     ],
     "keywords": "self-healing ai agents, agent auto-recovery, auto-remediation, restart ai agent, agent uptime, AIOps, AlertMend"
+  },
+  {
+    "slug": "top-kubernetes-cost-management-solutions",
+    "title": "Top Kubernetes Cost Management Solutions",
+    "excerpt": "Compare the top Kubernetes cost management solutions: Kubecost, OpenCost, CAST AI, Karpenter and more, with pros, cons, and how to choose.",
+    "date": "2026-06-30",
+    "category": "Kubernetes",
+    "author": "AlertMend Team",
+    "tags": [
+      "Kubernetes",
+      "Cost",
+      "FinOps",
+      "AIOps"
+    ],
+    "keywords": "kubernetes cost management, kubernetes cost optimization, kubecost, opencost, cast ai, karpenter, goldilocks, cluster autoscaler, spot instances, finops, rightsizing, AlertMend"
+  },
+  {
+    "slug": "503-no-healthy-upstream",
+    "title": "No Healthy Upstream: Meaning & 503 Fixes",
+    "excerpt": "No healthy upstream means every backend failed health checks. Diagnose empty endpoints, readiness, Envoy, Istio, nginx, and HAProxy with this decision tree.",
+    "date": "2026-06-27",
+    "category": "Kubernetes",
+    "author": "AlertMend Team",
+    "tags": [
+      "Kubernetes",
+      "Troubleshooting",
+      "Ingress",
+      "Nginx",
+      "Envoy"
+    ],
+    "keywords": "503 no healthy upstream, no healthy upstream, no healthy backends, upstream error, nginx 503 error, nginx no healthy upstream, kubernetes no healthy upstream, kubernetes service unavailable, envoy no healthy upstream, istio no healthy upstream, load balancer troubleshooting, reverse proxy errors, HAProxy, unhealthy upstream, service health checks"
   },
   {
     "slug": "kubernetes-crashloopbackoff-fix",
@@ -417,22 +588,6 @@
     "author": "AlertMend Team",
     "tags": [],
     "keywords": "AlertMend AI, AIOps, DevOps, 24x7, network, monitoring"
-  },
-  {
-    "slug": "503-no-healthy-upstream",
-    "title": "No Healthy Upstream: Meaning & 503 Fixes",
-    "excerpt": "No healthy upstream means every backend failed health checks. Diagnose empty endpoints, readiness, Envoy, Istio, nginx, and HAProxy with this decision tree.",
-    "date": "2026-01-10",
-    "category": "Kubernetes",
-    "author": "AlertMend Team",
-    "tags": [
-      "Kubernetes",
-      "Troubleshooting",
-      "Ingress",
-      "Nginx",
-      "Envoy"
-    ],
-    "keywords": "503 no healthy upstream, no healthy upstream, no healthy backends, upstream error, nginx 503 error, nginx no healthy upstream, kubernetes no healthy upstream, kubernetes service unavailable, envoy no healthy upstream, istio no healthy upstream, load balancer troubleshooting, reverse proxy errors, HAProxy, unhealthy upstream, service health checks"
   },
   {
     "slug": "achieving-enterprise-readiness-with-kubernetes-in-2025",
@@ -2425,36 +2580,6 @@
     "keywords": "costs, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
   },
   {
-    "slug": "elasticsearch-caching-issues",
-    "title": "Elasticsearch Caching Issues: Fix Guide",
-    "excerpt": "Fix Elasticsearch caching issues: the node query, shard request, and fielddata caches, why hit rates drop, and how to size them for fast search.",
-    "date": "2026-01-10",
-    "category": "Elasticsearch",
-    "author": "Arvind Rajpurohit",
-    "tags": [],
-    "keywords": "elasticsearch caching issues, elasticsearch query cache, shard request cache, fielddata cache, elasticsearch cache hit rate, indices.queries.cache.size, request_cache, clear cache elasticsearch, elasticsearch slow queries cache"
-  },
-  {
-    "slug": "elasticsearch-disk-out-of-space-incident",
-    "title": "Elasticsearch Disk Out of Space: Fix",
-    "excerpt": "Fix Elasticsearch disk out of space: understand the low, high, and flood-stage watermarks, clear the read-only block, free space, and prevent it recurring.",
-    "date": "2026-01-10",
-    "category": "Elasticsearch",
-    "author": "Himanshu Bansal",
-    "tags": [],
-    "keywords": "elasticsearch disk out of space, elasticsearch flood stage, elasticsearch read only allow delete, disk watermark, elasticsearch low disk watermark, index read-only, elasticsearch out of disk kubernetes, cluster.routing.allocation.disk.watermark"
-  },
-  {
-    "slug": "elasticsearch-shard-relocation-incidents-on-kubernetes",
-    "title": "Elasticsearch Shard Relocation on Kubernetes",
-    "excerpt": "Diagnose Elasticsearch shard relocation on Kubernetes: pod evictions, delayed allocation, and how to keep the cluster green through node drains and rollouts.",
-    "date": "2026-01-10",
-    "category": "Elasticsearch",
-    "author": "Himanshu Bansal",
-    "tags": [],
-    "keywords": "elasticsearch shard relocation, elasticsearch relocating shards kubernetes, unassigned shards, delayed allocation, elasticsearch pod eviction, cluster.routing.allocation.enable, elasticsearch statefulset, elasticsearch rolling restart shards"
-  },
-  {
     "slug": "elektro-dns",
     "title": "Elektro Dns Configuration And Management",
     "excerpt": "elektro dns Navigating Elektro DNS: A Comprehensive Guide for DevOps and System Monitoring In today's rapidly evolving technological landscape,...",
@@ -2573,16 +2698,6 @@
     "author": "AlertMend Team",
     "tags": [],
     "keywords": "exit, code, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"
-  },
-  {
-    "slug": "exit-code-5",
-    "title": "Exit Code 5: Meaning and Fixes by Program",
-    "excerpt": "Exit code 5 has no universal meaning. Diagnose pytest no-tests-collected, curl proxy errors, Windows access denied, Linux commands, and CI failures correctly.",
-    "date": "2026-01-10",
-    "category": "Troubleshooting",
-    "author": "AlertMend Team",
-    "tags": [],
-    "keywords": "exit code 5, pytest exit code 5 no tests collected, exit code 5 linux, curl exit code 5, Windows system error 5 access denied, process completed with exit code 5, exit status 5, return code 5"
   },
   {
     "slug": "exploring-the-latest-aiops-trends-for-2025-a-comprehensive-guide",
@@ -2723,16 +2838,6 @@
     "author": "AlertMend Team",
     "tags": [],
     "keywords": "gitlab, unable, local, issuer, certificate, DevOps, AlertMend AI, AIOps"
-  },
-  {
-    "slug": "gpu-monitoring",
-    "title": "GPU Monitoring: Detect Idle and Recover",
-    "excerpt": "GPU monitoring that acts: catch idle GPUs burning money, workloads that stopped using the GPU, and crashes at 3am, then alert and auto-recover.",
-    "date": "2026-01-10",
-    "category": "GPU",
-    "author": "AlertMend Team",
-    "tags": [],
-    "keywords": "gpu monitoring, gpu monitoring kubernetes, idle gpu, gpu utilization, monitor gpu usage, dcgm exporter, nvidia gpu operator, gpu cost, cuda out of memory, gpu observability, gpu auto recovery, AlertMend"
   },
   {
     "slug": "heartbeat-pricing",
@@ -3725,16 +3830,6 @@
     "keywords": "AlertMend AI, AIOps, DevOps, mailgun, statuspage"
   },
   {
-    "slug": "make-error-127",
-    "title": "Make Error 127: Command Not Found Fix",
-    "excerpt": "Make Error 127 means a recipe command was not found. Identify the missing binary, compare PATH inside make, and fix local, Docker, CI, WSL, or uv builds.",
-    "date": "2026-01-10",
-    "category": "Troubleshooting",
-    "author": "AlertMend Team",
-    "tags": [],
-    "keywords": "make error 127, makefile error 127, error 127 makefile, gnu make error 127 command not found manual, exit code 127, exit status 127, make go no such file or directory, uv no such file or directory, npm error code 127, command not found makefile"
-  },
-  {
     "slug": "managed-kubeflow",
     "title": "managed kubeflow Guide Guide Complete Guide",
     "excerpt": "In the realm of machine learning and artificial intelligence, managed Kubeflow has emerged as a pivotal technology for organizations aiming to streamline the...",
@@ -4213,16 +4308,6 @@
     "author": "AlertMend Team",
     "tags": [],
     "keywords": "AlertMend AI, AIOps, DevOps, Optimizing, Coredns, Plugin, Performance, 2025"
-  },
-  {
-    "slug": "optimizing-high-jvm-heap-usage-in-elasticsearch",
-    "title": "Fix High JVM Heap Usage in Elasticsearch",
-    "excerpt": "Fix high JVM heap usage in Elasticsearch: size heap correctly, cut fielddata and shard overhead, read circuit breakers, and stop the GC pressure.",
-    "date": "2026-01-10",
-    "category": "Elasticsearch",
-    "author": "Himanshu Bansal",
-    "tags": [],
-    "keywords": "elasticsearch high jvm heap, elasticsearch heap usage, jvm heap size elasticsearch, elasticsearch circuit breaker, fielddata memory, elasticsearch garbage collection, heap.percent, elasticsearch 31gb heap, reduce shard count"
   },
   {
     "slug": "optimizing-kubernetes-for-ai-driven-workloads",
@@ -5083,21 +5168,6 @@
     "author": "AlertMend Team",
     "tags": [],
     "keywords": "tools, automatically, rightsizing, kubernets, pods, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
-  },
-  {
-    "slug": "top-kubernetes-cost-management-solutions",
-    "title": "Top Kubernetes Cost Management Solutions",
-    "excerpt": "Compare the top Kubernetes cost management solutions: Kubecost, OpenCost, CAST AI, Karpenter and more, with pros, cons, and how to choose.",
-    "date": "2026-01-10",
-    "category": "Kubernetes",
-    "author": "AlertMend Team",
-    "tags": [
-      "Kubernetes",
-      "Cost",
-      "FinOps",
-      "AIOps"
-    ],
-    "keywords": "kubernetes cost management, kubernetes cost optimization, kubecost, opencost, cast ai, karpenter, goldilocks, cluster autoscaler, spot instances, finops, rightsizing, AlertMend"
   },
   {
     "slug": "top-kubernetes-tools-for-enhanced-security-and-cost-efficiency-in-2025",

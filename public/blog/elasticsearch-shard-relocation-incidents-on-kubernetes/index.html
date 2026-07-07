@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Elasticsearch Shard Relocation on Kubernetes">
   <meta name="twitter:description" content="Diagnose Elasticsearch shard relocation on Kubernetes: pod evictions, delayed allocation, and how to keep the cluster green through node drains and rollouts.">
   <meta name="twitter:image" content="https://www.alertmend.io/assets/elasticsearch-shard-relocation-incidents-on-kubernetes/hero.svg">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Elasticsearch Shard Relocation on Kubernetes","description":"Diagnose Elasticsearch shard relocation on Kubernetes: pod evictions, delayed allocation, and how to keep the cluster green through node drains and rollouts.","image":"https://www.alertmend.io/assets/elasticsearch-shard-relocation-incidents-on-kubernetes/hero.svg","datePublished":"2026-01-10","dateModified":"2026-07-04","author":{"@type":"Person","name":"Himanshu Bansal"},"reviewedBy":{"@type":"Organization","name":"AlertMend Engineering"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/elasticsearch-shard-relocation-incidents-on-kubernetes"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Elasticsearch Shard Relocation on Kubernetes","description":"Diagnose Elasticsearch shard relocation on Kubernetes: pod evictions, delayed allocation, and how to keep the cluster green through node drains and rollouts.","image":"https://www.alertmend.io/assets/elasticsearch-shard-relocation-incidents-on-kubernetes/hero.svg","datePublished":"2026-07-04","dateModified":"2026-07-04","author":{"@type":"Person","name":"Himanshu Bansal"},"reviewedBy":{"@type":"Organization","name":"AlertMend Engineering"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/elasticsearch-shard-relocation-incidents-on-kubernetes"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is shard relocation on Kubernetes a problem?","acceptedAnswer":{"@type":"Answer","text":"Not by itself. A yellow cluster while shards relocate after a pod restart is normal and safe. It becomes a problem when it is slow, frequent, or leaves the cluster red. Delayed allocation and a PodDisruptionBudget keep routine rollouts smooth."}},{"@type":"Question","name":"How do I stop shards relocating during a rolling restart?","acceptedAnswer":{"@type":"Answer","text":"Raise index.unassigned.node_left.delayed_timeout and set cluster.routing.allocation.enable to primaries before the restart, restart one pod at a time, then set allocation back to all. A pod that returns within the timeout reuses its own shards."}},{"@type":"Question","name":"Why are my shards stuck unassigned?","acceptedAnswer":{"@type":"Answer","text":"Run GET _cluster/allocation/explain. Common blockers are a disk watermark on the target nodes, allocation left disabled from prior maintenance, allocation-awareness rules, or no node that satisfies the shard’s constraints."}},{"@type":"Question","name":"What causes constant relocation on Kubernetes?","acceptedAnswer":{"@type":"Answer","text":"Repeated pod evictions from memory or disk pressure, hard pod kills without graceful shutdown, or rollouts without delayed allocation. Fix requests and limits, add a PDB, and use stable PersistentVolumes."}},{"@type":"Question","name":"Should I use the ECK operator?","acceptedAnswer":{"@type":"Answer","text":"For production Elasticsearch on Kubernetes it helps: ECK manages graceful shutdown, stable storage, and safe rolling changes, which removes many of the manual steps that otherwise trigger relocation."}}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Diagnose Elasticsearch shard relocation on Kubernetes","description":"Diagnose Elasticsearch shard relocation on Kubernetes: pod evictions, delayed allocation, and how to keep the cluster green through node drains and rollouts.","step":[{"@type":"HowToStep","position":1,"name":"Check cluster health","text":"Run <code>GET _cluster/health</code>. Note <code>status</code><code>relocating_shards</code><code>initializing_shards</code>and <code>unassigned_shards</code>. A steadily falling unassigned count means healthy recovery."},{"@type":"HowToStep","position":2,"name":"Watch the shards move","text":"Run <code>GET _cat/shards?v</code> and <code>GET _cat/recovery?v&active_only=true</code> to see which shards are RELOCATING or INITIALIZING and how far along each is."},{"@type":"HowToStep","position":3,"name":"Explain any stuck shard","text":"Run <code>GET _cluster/allocation/explain</code> (optionally for a specific shard). It names the exact blocker: disk watermark, allocation disabled, awareness rules, or no valid node."},{"@type":"HowToStep","position":4,"name":"Correlate with Kubernetes","text":"Check <code>kubectl get pods -o wide</code> and recent events for evictions, OOMKills, or a node drain that removed the Elasticsearch pod behind the relocation."}]}</script>
   <link rel="stylesheet" href="/assets/make-error-127/styles.css">
@@ -106,16 +106,10 @@
     <div class="content-wrapper">
       <div class="main-col">
 
-    <header class="article-header">
+    <header class="article-header article-header--cred">
       <h1>Elasticsearch Shard Relocation Incidents on Kubernetes</h1>
-      <div class="author-info">
-        <div class="author-avatar">H</div>
-        <div>
-          <div class="author-name">Himanshu Bansal</div>
-          <div class="author-meta">2026-01-10 · Elasticsearch</div>
-        </div>
-      </div>
-      <span class="category-tag">Elasticsearch</span>
+      <p class="authorCredLine authorCredLine--top"><span class="authorCredName">Himanshu Bansal</span>, AlertMend Engineering · Elasticsearch on Kubernetes and JVM operations</p>
+      <p class="article-meta">2026-07-04 · Elasticsearch</p>
     </header>
       <div class="credibilityRow">
         <span class="credibilityVerified"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Verified against official Elasticsearch documentation</span>
@@ -153,7 +147,8 @@
       <p class="bodyText">The cluster going yellow during this is normal and safe, red is not. The real goal is not to stop relocation but to make it fast, bounded, and avoidable during routine operations, so a rolling restart does not turn into an hour of shard shuffling and heavy I/O.</p>
       <pre class="codeBlock copyableCode"><code># GET _cluster/health
 {
-  &quot;status&quot;: &quot;yellow&quot; &quot;relocating_shards&quot;: 6,
+  &quot;status&quot;: &quot;yellow&quot;,
+  &quot;relocating_shards&quot;: 6,
   &quot;initializing_shards&quot;: 2,
   &quot;unassigned_shards&quot;: 8
 }</code></pre>

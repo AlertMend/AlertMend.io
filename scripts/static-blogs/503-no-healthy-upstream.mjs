@@ -64,8 +64,8 @@ export async function build(slug) {
   const excerpt =
     meta.excerpt ||
     'No healthy upstream means every backend failed health checks. Diagnose empty endpoints, readiness, Envoy, Istio, nginx, and HAProxy with this decision tree.'
-  const date = meta.date || '2026-01-10'
-  const dateModified = meta.dateModified || date
+  const dateModified = meta.dateModified || meta.date || '2026-01-10'
+  const date = meta.date && meta.date !== '2026-01-10' ? meta.date : dateModified
   const category = meta.category || 'Kubernetes'
   const author = meta.author || 'AlertMend Team'
   const keywords =

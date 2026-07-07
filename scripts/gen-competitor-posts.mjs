@@ -6,7 +6,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { SITE_URL, esc, CHROME_INLINE_CSS, buildNavHtml, buildSidebarHtml, buildArticleHeader, calendlyUrl, signupUrl } from './static-blog-shared.mjs'
+import { SITE_URL, esc, CHROME_INLINE_CSS, AUTHOR_CRED_CSS, buildNavHtml, buildSidebarHtml, buildCredArticleHeader, DINESH_AUTHOR, dineshJsonLdAuthor, calendlyUrl, signupUrl } from './static-blog-shared.mjs'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const ALERTMEND_LOGO_DATA_URI = `data:image/svg+xml;base64,${fs.readFileSync(path.join(root, 'public/alertmend-logo.svg')).toString('base64')}`
@@ -141,7 +141,7 @@ function heroSvg(line1, line2, sub, chips) {
 
 function jsonLd(cfg) {
   const url = `${SITE_URL}/blog/${cfg.slug}`, img = `${SITE_URL}/assets/${cfg.slug}/hero.png`
-  const blog = { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: cfg.title, description: cfg.excerpt, image: img, datePublished: DATE, dateModified: DATE, author: { '@type': 'Organization', name: 'AlertMend Team' }, publisher: { '@type': 'Organization', name: 'AlertMend AI', logo: { '@type': 'ImageObject', url: `${SITE_URL}/logos/alertmend-logo.svg` } }, mainEntityOfPage: { '@type': 'WebPage', '@id': url } }
+  const blog = { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: cfg.title, description: cfg.excerpt, image: img, datePublished: DATE, dateModified: DATE, author: dineshJsonLdAuthor(), publisher: { '@type': 'Organization', name: 'AlertMend AI', logo: { '@type': 'ImageObject', url: `${SITE_URL}/logos/alertmend-logo.svg` } }, mainEntityOfPage: { '@type': 'WebPage', '@id': url } }
   const faq = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: cfg.faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }
   return [blog, faq].map((o) => `  <script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n')
 }
@@ -158,7 +158,7 @@ function render(cfg) {
   <title>${esc(cfg.title)} | AlertMend AI</title>
   <meta name="description" content="${esc(cfg.excerpt)}">
   <meta name="keywords" content="${esc(cfg.keywords)}">
-  <meta name="author" content="AlertMend Team">
+  <meta name="author" content="${DINESH_AUTHOR.name}">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="${url}">
   <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
@@ -174,14 +174,14 @@ function render(cfg) {
 ${jsonLd(cfg)}
   <link rel="stylesheet" href="/assets/make-error-127/styles.css">
   <link rel="stylesheet" href="/assets/${cfg.slug}/styles.css">
-  <style>${CHROME_INLINE_CSS}${EXTRA_CSS}</style>
+  <style>${CHROME_INLINE_CSS}${AUTHOR_CRED_CSS}${EXTRA_CSS}</style>
 </head>
 <body>
 ${buildNavHtml(cfg.slug, cal)}
   <div class="main-container">
     <div class="content-wrapper">
       <div class="main-col">
-${buildArticleHeader(cfg.h1, 'AlertMend Team', DATE, CAT)}
+${buildCredArticleHeader(cfg.h1, DATE, CAT, DINESH_AUTHOR)}
       <div style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:-0.75rem 0 1.5rem;font-size:0.85rem;color:#52525b;">
         <span style="display:inline-flex;align-items:center;gap:6px;font-weight:600;color:#047857;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Facts checked against vendor documentation</span>
         <span style="color:#d4d4d8;">•</span><span>Last reviewed ${DATE}</span>
@@ -694,7 +694,7 @@ title: "${cfg.title}"
 excerpt: "${cfg.excerpt}"
 date: "${DATE}"
 category: "${CAT}"
-author: "AlertMend Team"
+author: "${DINESH_AUTHOR.name}"
 tags: ["AIOps", "Observability", "Comparison"]
 keywords: "${cfg.keywords}"
 ---
