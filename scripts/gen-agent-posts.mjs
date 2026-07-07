@@ -10,7 +10,8 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import {
-  CHROME_INLINE_CSS, buildNavHtml, buildSidebarHtml, buildArticleHeader,
+  CHROME_INLINE_CSS, AUTHOR_CRED_CSS, buildNavHtml, buildSidebarHtml, buildCredArticleHeader,
+  DINESH_AUTHOR, dineshJsonLdAuthor,
   calendlyUrl, signupUrl, esc, SITE_URL,
 } from './static-blog-shared.mjs'
 
@@ -128,7 +129,7 @@ ${d.metrics.map((m) => `            <div class="metricCard"><div class="metricLa
 function jsonLd(cfg) {
   const url = `${SITE_URL}/blog/${cfg.slug}`
   const img = `${SITE_URL}/assets/${cfg.slug}/hero.svg`
-  const blog = { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: cfg.title, description: cfg.description, image: img, datePublished: DATE, dateModified: DATE, author: { '@type': 'Person', name: 'AlertMend Team' }, publisher: { '@type': 'Organization', name: 'AlertMend AI', logo: { '@type': 'ImageObject', url: `${SITE_URL}/logos/alertmend-logo.svg` } }, mainEntityOfPage: { '@type': 'WebPage', '@id': url } }
+  const blog = { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: cfg.title, description: cfg.description, image: img, datePublished: DATE, dateModified: DATE, author: dineshJsonLdAuthor(), publisher: { '@type': 'Organization', name: 'AlertMend AI', logo: { '@type': 'ImageObject', url: `${SITE_URL}/logos/alertmend-logo.svg` } }, mainEntityOfPage: { '@type': 'WebPage', '@id': url } }
   const faq = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: cfg.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }
   const howto = { '@context': 'https://schema.org', '@type': 'HowTo', name: cfg.howtoName, description: cfg.description, step: cfg.steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.t, text: s.b })) }
   return [blog, faq, howto].map((o) => `  <script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n')
@@ -140,7 +141,7 @@ function renderPost(cfg) {
   const head = `  <title>${esc(cfg.title)} | AlertMend AI</title>
   <meta name="description" content="${esc(cfg.description)}">
   <meta name="keywords" content="${esc(cfg.keywords)}">
-  <meta name="author" content="AlertMend Team">
+  <meta name="author" content="${DINESH_AUTHOR.name}">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="${url}">
   <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
@@ -225,14 +226,14 @@ ${hero}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 ${head}
-  <style>${CHROME_INLINE_CSS}</style>
+  <style>${CHROME_INLINE_CSS}${AUTHOR_CRED_CSS}</style>
 </head>
 <body>
 ${buildNavHtml(cfg.slug, calendlyUrl(cfg.slug))}
   <div class="main-container">
     <div class="content-wrapper">
       <div class="main-col">
-${buildArticleHeader(cfg.title, 'AlertMend Team', DATE, CAT)}
+${buildCredArticleHeader(cfg.title, DATE, CAT, DINESH_AUTHOR)}
 ${body}
       </div>
 ${buildSidebarHtml(cfg.related)}
@@ -250,7 +251,7 @@ title: "${cfg.title}"
 excerpt: "${cfg.description}"
 date: "${DATE}"
 category: "${CAT}"
-author: "AlertMend Team"
+author: "${DINESH_AUTHOR.name}"
 tags: ["AIOps", "AI Agents", "LLM", "Observability"]
 keywords: "${cfg.keywords}"
 ---

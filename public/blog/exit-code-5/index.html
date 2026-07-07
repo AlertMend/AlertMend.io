@@ -6,7 +6,7 @@
   <title>Exit Code 5: Meaning and Fixes by Program | AlertMend AI</title>
   <meta name="description" content="Exit code 5 has no universal meaning. Diagnose pytest no-tests-collected, curl proxy errors, Windows access denied, Linux commands, and CI failures correctly.">
   <meta name="keywords" content="exit code 5, pytest exit code 5 no tests collected, exit code 5 linux, curl exit code 5, Windows system error 5 access denied, process completed with exit code 5, exit status 5, return code 5">
-  <meta name="author" content="AlertMend Team">
+  <meta name="author" content="Dinesh Agrawal">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <link rel="canonical" href="https://www.alertmend.io/blog/exit-code-5">
   <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Exit Code 5: Meaning and Fixes by Program">
   <meta name="twitter:description" content="Exit code 5 has no universal meaning. Diagnose pytest no-tests-collected, curl proxy errors, Windows access denied, Linux commands, and CI failures correctly.">
   <meta name="twitter:image" content="https://www.alertmend.io/assets/exit-code-5/exit-code-5-hero.svg">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Exit Code 5: Meaning and Fixes by Program","description":"Exit code 5 has no universal meaning. Diagnose pytest no-tests-collected, curl proxy errors, Windows access denied, Linux commands, and CI failures correctly.","image":"https://www.alertmend.io/assets/exit-code-5/exit-code-5-hero.svg","datePublished":"2026-01-10","dateModified":"2026-07-04","author":{"@type":"Organization","name":"AlertMend Team"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/exit-code-5"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Exit Code 5: Meaning and Fixes by Program","description":"Exit code 5 has no universal meaning. Diagnose pytest no-tests-collected, curl proxy errors, Windows access denied, Linux commands, and CI failures correctly.","image":"https://www.alertmend.io/assets/exit-code-5/exit-code-5-hero.svg","datePublished":"2026-07-04","dateModified":"2026-07-04","author":{"@type":"Organization","name":"Dinesh Agrawal"},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/exit-code-5"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does exit code 5 mean?","acceptedAnswer":{"@type":"Answer","text":"It depends on the program that returned it. pytest uses 5 for no tests collected, curl uses 5 for an unresolved proxy, and Windows system error 5 means access denied. Identify the executable before choosing a fix."}},{"@type":"Question","name":"How do I fix pytest exit code 5?","acceptedAnswer":{"@type":"Answer","text":"First confirm whether zero collected tests is expected. If not, inspect pytest collection, file names, test paths, markers, and configuration. If an empty suite is intentionally successful, handle that policy explicitly instead of hiding genuine collection mistakes."}},{"@type":"Question","name":"What does exit code 5 mean on Linux?","acceptedAnswer":{"@type":"Answer","text":"Linux does not assign one universal meaning to process exit status 5. The program or script defines it. Read that program’s stderr and official exit-code documentation."}},{"@type":"Question","name":"What is curl exit code 5?","acceptedAnswer":{"@type":"Answer","text":"curl exit code 5 means it could not resolve the proxy. Check proxy environment variables, the proxy hostname, DNS, and whether the job should bypass that proxy."}},{"@type":"Question","name":"Is Windows error 5 always access denied?","acceptedAnswer":{"@type":"Answer","text":"Windows system error 5, ERROR_ACCESS_DENIED, means access is denied. A Windows application that merely exits with process status 5 may define that status differently, so preserve the program name and message."}},{"@type":"Question","name":"Why did GitHub Actions say process completed with exit code 5?","acceptedAnswer":{"@type":"Answer","text":"GitHub Actions is reporting the child process status, not defining it. Find the command immediately above the message, then use that command’s documentation. pytest is a common source of status 5 in CI."}}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"Diagnose exit code 5","description":"Exit code 5 has no universal meaning. Diagnose pytest no-tests-collected, curl proxy errors, Windows access denied, Linux commands, and CI failures correctly.","step":[{"@type":"HowToStep","position":1,"name":"Identify the executable","text":"Find the command immediately before the exit-code message."},{"@type":"HowToStep","position":2,"name":"Preserve stderr","text":"Capture the program output instead of relying on the number alone."},{"@type":"HowToStep","position":3,"name":"Use program-specific documentation","text":"Interpret status 5 using the executable’s official exit-code reference."},{"@type":"HowToStep","position":4,"name":"Fix and verify","text":"Correct the identified cause and rerun the same command in the same environment."}]}</script>
   <link rel="stylesheet" href="/assets/make-error-127/styles.css">
@@ -78,6 +78,12 @@
     .category-tag { display: inline-block; padding: 4px 10px; background: #ede9fe; color: #5b21b6; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
     .promo { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; font-size: 1.0625rem; color: #374151; }
     .promo a { color: #7c3aed; font-weight: 600; }
+.article-header--cred{margin-bottom:1.5rem;}
+.article-header--cred .authorCredLine--top{margin:0 0 .45rem;}
+.article-header--cred .article-meta{font-size:.875rem;color:#6b7280;margin:0;}
+.authorCredLine{font-size:.875rem;line-height:1.55;color:#71717a;}
+.authorCredLine a,.authorCredLine .authorCredName{color:#3f3f46;font-weight:600;text-decoration:none;}
+.authorCredLine a:hover{color:#7c3aed;}
 </style>
 </head>
 <body>
@@ -106,16 +112,10 @@
     <div class="content-wrapper">
       <div class="main-col">
 
-    <header class="article-header">
+    <header class="article-header article-header--cred">
       <h1>Exit Code 5: What It Means and How to Fix It</h1>
-      <div class="author-info">
-        <div class="author-avatar">A</div>
-        <div>
-          <div class="author-name">AlertMend Team</div>
-          <div class="author-meta">2026-01-10 · Troubleshooting</div>
-        </div>
-      </div>
-      <span class="category-tag">Troubleshooting</span>
+      <p class="authorCredLine authorCredLine--top"><a href="https://www.linkedin.com/in/dineshagrawal85/" target="_blank" rel="noopener noreferrer">Dinesh Agrawal</a>, Co-Founder at AlertMend.io · 12+ years in cloud infrastructure and AI-driven incident automation</p>
+      <p class="article-meta">2026-07-04 · Troubleshooting</p>
     </header>
       <div style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:-0.75rem 0 1.75rem;font-size:0.85rem;color:#52525b;">
         <span style="display:inline-flex;align-items:center;gap:6px;font-weight:600;color:#047857;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Verified against official pytest, curl &amp; Microsoft docs</span>
@@ -354,16 +354,16 @@ exit "$status"</code></pre>
           <div class="sidebar-card">
             <div class="related-content-title">Related content</div>
             <ul class="related-posts-list">
+              <li><a href="/blog/make-error-127" class="related-post-link">Make Error 127: Command Not Found Fix</a></li>
               <li><a href="/blog/deny-access-to-this-computer-from-the-network" class="related-post-link">Deny Access To Computer From Network</a></li>
               <li><a href="/blog/error-runtime-exited-with-error-signal-killed-runtime.exiterror" class="related-post-link">Error: Runtime Exited With Error: Signal</a></li>
-              <li><a href="/blog/exit-code-126" class="related-post-link">exit code 126 Guide Guide Complete Guide</a></li>
+              <li><a href="/blog/gitlab-monitoring" class="related-post-link">GitLab Self-Hosted Monitoring Guide</a></li>
+              <li><a href="/blog/jira-confluence-monitoring" class="related-post-link">Jira and Confluence DC Monitoring</a></li>
+              <li><a href="/blog/mattermost-rocketchat-monitoring" class="related-post-link">Mattermost and Rocket.Chat Monitoring</a></li>
+              <li><a href="/blog/metabase-monitoring" class="related-post-link">Metabase Monitoring and Auto-Recovery</a></li>
+              <li><a href="/blog/n8n-monitoring" class="related-post-link">n8n Monitoring and Auto-Recovery</a></li>
+              <li><a href="/blog/nextcloud-monitoring" class="related-post-link">Nextcloud Monitoring and Auto-Recovery</a></li>
               <li><a href="/blog/odoo-monitoring" class="related-post-link">Odoo Monitoring and Auto-Recovery</a></li>
-              <li><a href="/blog/datadog-alternatives" class="related-post-link">Best Datadog Alternatives (2026)</a></li>
-              <li><a href="/blog/incident-io-alternatives" class="related-post-link">incident.io Alternatives for AI SRE (2026)</a></li>
-              <li><a href="/blog/pagerduty-alternatives" class="related-post-link">Best PagerDuty Alternatives (2026)</a></li>
-              <li><a href="/blog/autoscaling-v2-horizontalpodautoscaler" class="related-post-link">Kubernetes HPA v2: Configuration &amp; Fixes</a></li>
-              <li><a href="/blog/ai-agent-observability-in-production" class="related-post-link">AI Agent Observability in Production</a></li>
-              <li><a href="/blog/best-1-click-logging-and-metrics-tools" class="related-post-link">9 Best Logging &amp; Metrics Tools (2026)</a></li>
             </ul>
             <a href="/blog" class="view-more-link">
               View all posts

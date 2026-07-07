@@ -54,6 +54,7 @@
   margin-bottom: 0;
 }
 
+.heroBrands {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -1535,7 +1536,7 @@
   box-shadow: var(--shadow-card);
 }
 
-.instantFix::after {
+.instantFix.mkErr127::after {
   content: '127';
   position: absolute;
   top: -28px;
@@ -1557,9 +1558,9 @@
 
 .instantFixTop {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
   margin-bottom: 0.6rem;
 }
 
@@ -1568,11 +1569,14 @@
   font-size: 0.65rem;
   font-weight: 800;
   letter-spacing: 0.09em;
+  flex-shrink: 0;
 }
 
 .instantFixTop strong {
   color: #18181b;
-  font-size: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  max-width: 100%;
 }
 
 .instantFix > p {
@@ -1965,12 +1969,6 @@
 }
 
 @media (max-width: 520px) {
-  .instantFixTop {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
   .instantFixCommands {
     grid-template-columns: 1fr;
   }

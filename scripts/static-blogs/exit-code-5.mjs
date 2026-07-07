@@ -11,6 +11,9 @@ import {
   buildNavHtml,
   buildSidebarHtml,
   buildArticleHeader,
+  buildCredArticleHeader,
+  DINESH_AUTHOR,
+  AUTHOR_CRED_CSS,
   writeStaticBlogOutputs,
 } from '../static-blog-shared.mjs'
 
@@ -20,8 +23,8 @@ export async function build(slug) {
   const title = meta.title || 'Exit Code 5: Meaning and Fixes by Program'
   const h1Title = 'Exit Code 5: What It Means and How to Fix It'
   const excerpt = meta.excerpt || ''
-  const date = meta.date || '2026-01-10'
-  const dateModified = meta.dateModified || date
+  const dateModified = meta.dateModified || meta.date || '2026-01-10'
+  const date = meta.date && meta.date !== '2026-01-10' ? meta.date : dateModified
   const category = meta.category || 'Troubleshooting'
   const author = meta.author || 'AlertMend Team'
   const keywords = meta.keywords || 'exit code 5, pytest exit code 5, curl exit code 5, Windows error 5'
@@ -103,14 +106,14 @@ export async function build(slug) {
   <script type="application/ld+json">${howToLd}</script>
   <link rel="stylesheet" href="/assets/make-error-127/styles.css">
   <link rel="stylesheet" href="/assets/exit-code-5/styles.css">
-  <style>${CHROME_INLINE_CSS}</style>
+  <style>${CHROME_INLINE_CSS}${AUTHOR_CRED_CSS}</style>
 </head>
 <body>
 ${buildNavHtml(slug, postCalendlyUrl)}
   <div class="main-container">
     <div class="content-wrapper">
       <div class="main-col">
-${buildArticleHeader(h1Title, author, date, category)}
+${buildCredArticleHeader(h1Title, date, category, author || DINESH_AUTHOR)}
       <div style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:-0.75rem 0 1.75rem;font-size:0.85rem;color:#52525b;">
         <span style="display:inline-flex;align-items:center;gap:6px;font-weight:600;color:#047857;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Verified against official pytest, curl &amp; Microsoft docs</span>
         <span style="color:#d4d4d8;">•</span>

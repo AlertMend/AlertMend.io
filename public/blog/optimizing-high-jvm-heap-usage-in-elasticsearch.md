@@ -1,7 +1,7 @@
 ---
 title: "Fix High JVM Heap Usage in Elasticsearch"
 excerpt: "Fix high JVM heap usage in Elasticsearch: size heap correctly, cut fielddata and shard overhead, read circuit breakers, and stop the GC pressure."
-date: "2026-01-10"
+date: "2026-07-04"
 dateModified: "2026-07-04"
 category: "Elasticsearch"
 author: "Himanshu Bansal"

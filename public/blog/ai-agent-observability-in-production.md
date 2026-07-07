@@ -3,7 +3,7 @@ title: "AI Agent Observability in Production"
 excerpt: "Keep AI agents alive in production: catch crashes, out-of-memory, and hangs, with AI root-cause analysis and auto-recovery from AlertMend."
 date: "2026-07-01"
 category: "AIOps"
-author: "AlertMend Team"
+author: "Dinesh Agrawal"
 tags: ["AIOps", "AI Agents", "LLM", "Observability"]
 keywords: "AI agent observability, monitor AI agents, LLM observability, agent monitoring, autonomous agent failures, multi-agent monitoring, MCP server monitoring, agent auto-recovery, agent infinite loop, token cost monitoring, AlertMend"
 ---

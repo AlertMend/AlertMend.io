@@ -8,10 +8,11 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import {
   SITE_URL, esc, CHROME_INLINE_CSS, buildNavHtml, buildSidebarHtml,
-  buildArticleHeader, calendlyUrl, signupUrl,
+  buildCredArticleHeader, buildAuthorCredLine, calendlyUrl, signupUrl, AUTHOR_CRED_CSS,
 } from './static-blog-shared.mjs'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
+const ODOO_LOGO = (() => { try { return (fs.readFileSync(path.join(root, 'public/logos/brand/odoo.svg'), 'utf8').match(/d="([^"]+)"/) || [null, ''])[1] } catch { return '' } })()
 const slug = 'odoo-monitoring'
 const date = '2026-07-06'
 const title = 'Odoo Monitoring and Auto-Recovery'
@@ -69,6 +70,15 @@ const sources = [
 
 const customCss = `
   .odooBlog { --odoo: #714b67; --odoo-soft: #f7f3f6; }
+  .brandChip { display:inline-flex; align-items:center; gap:9px; margin:0 0 1.1rem; padding:6px 15px 6px 11px; border:1px solid #e4e4e7; border-radius:999px; background:#fff; }
+  .brandChip svg { display:block; flex:0 0 auto; }
+  .brandChip span { font-size:.82rem; font-weight:600; color:#52525b; }
+  .article-header--cred { margin-bottom:1.5rem; }
+  .article-header--cred .authorCredLine--top { margin:0 0 .45rem; }
+  .article-header--cred .article-meta { font-size:.875rem; color:#6b7280; margin:0; }
+  .authorCredLine { font-size:.875rem; line-height:1.55; color:#71717a; }
+  .authorCredLine a, .authorCredLine .authorCredName { color:#3f3f46; font-weight:600; text-decoration:none; }
+  .authorCredLine a:hover { color:#6d28d9; }
   .proofBar { display:flex; flex-wrap:wrap; gap:8px 16px; align-items:center; margin:-.75rem 0 1.5rem; color:#52525b; font-size:.82rem; }
   .proofBar .checked { display:inline-flex; align-items:center; gap:6px; color:#047857; font-weight:700; }
   .proofBar .dot { color:#d4d4d8; }
@@ -326,7 +336,8 @@ ${buildNavHtml(slug, calendly)}
   <div class="main-container">
     <div class="content-wrapper">
       <main class="main-col">
-${buildArticleHeader(h1, 'Dinesh Agrawal', date, 'Monitoring')}
+${buildCredArticleHeader(h1, date, 'Monitoring')}
+        <div class="brandChip"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="${ODOO_LOGO}" fill="#714b67"/></svg><span>Monitoring guide for Odoo</span></div>
         <div class="proofBar">
           <span class="checked"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>Checked against Odoo 19 documentation</span>
           <span class="dot">•</span><span>Self-hosted VM, Docker, and Kubernetes</span>

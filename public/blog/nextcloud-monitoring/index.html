@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nextcloud Monitoring and Auto-Recovery | AlertMend AI</title>
+  <meta name="description" content="Monitor self-hosted Nextcloud end to end: PHP-FPM, database, Redis locking, background jobs, and storage, then safely recover the common failures.">
+  <meta name="keywords" content="nextcloud monitoring, nextcloud slow, nextcloud background jobs not running, nextcloud maintenance mode, nextcloud file locking, nextcloud occ, nextcloud php-fpm, nextcloud auto recovery">
+  <meta name="author" content="Dinesh Agrawal">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://www.alertmend.io/blog/nextcloud-monitoring">
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.alertmend.io/blog/nextcloud-monitoring">
+  <meta property="og:title" content="Nextcloud Monitoring and Auto-Recovery">
+  <meta property="og:description" content="Monitor self-hosted Nextcloud end to end: PHP-FPM, database, Redis locking, background jobs, and storage, then safely recover the common failures.">
+  <meta property="og:image" content="https://www.alertmend.io/assets/nextcloud-monitoring/hero.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nextcloud Monitoring and Auto-Recovery">
+  <meta name="twitter:description" content="Monitor self-hosted Nextcloud end to end: PHP-FPM, database, Redis locking, background jobs, and storage, then safely recover the common failures.">
+  <meta name="twitter:image" content="https://www.alertmend.io/assets/nextcloud-monitoring/hero.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Nextcloud Monitoring and Auto-Recovery","description":"Monitor self-hosted Nextcloud end to end: PHP-FPM, database, Redis locking, background jobs, and storage, then safely recover the common failures.","image":"https://www.alertmend.io/assets/nextcloud-monitoring/hero.png","datePublished":"2026-07-06","dateModified":"2026-07-06","author":{"@type":"Person","name":"Dinesh Agrawal","jobTitle":"Co-Founder at AlertMend.io","url":"https://www.linkedin.com/in/dineshagrawal85/","sameAs":["https://www.linkedin.com/in/dineshagrawal85/"]},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/nextcloud-monitoring"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why are Nextcloud background jobs not running?","acceptedAnswer":{"@type":"Answer","text":"The admin overview warns when cron has not run recently, and scheduled tasks such as previews, cleanup, and notifications stop. Use the system cron method and schedule the background job runner every 5 minutes, then alert when the last run falls behind."}},{"@type":"Question","name":"Why is Nextcloud slow?","acceptedAnswer":{"@type":"Answer","text":"Slow sync and page loads usually mean a missing memory cache, no Redis, an overloaded database, or too few PHP workers. Configure APCu plus Redis, add PHP-FPM workers within your memory budget, and fix slow database queries."}},{"@type":"Question","name":"How do I get Nextcloud out of maintenance mode?","acceptedAnswer":{"@type":"Answer","text":"Confirm no upgrade is running, then run occ maintenance:mode --off, and verify the login and a sync path afterward. A stuck maintenance mode usually follows a failed upgrade or occ command."}},{"@type":"Question","name":"How do I monitor Nextcloud?","acceptedAnswer":{"@type":"Answer","text":"Poll the login or WebDAV endpoint from outside, and watch PHP-FPM, the database, Redis file locking, background job freshness, and data-disk space. The occ status command shows real instance state."}},{"@type":"Question","name":"What causes Nextcloud file locking errors?","acceptedAnswer":{"@type":"Answer","text":"Transactional file locking runs on Redis, so a down or misconfigured Redis breaks locking and blocks uploads and edits. Restore Redis, verify the locking configuration, and clear stale locks only if it is safe."}},{"@type":"Question","name":"How do I check Nextcloud status from the command line?","acceptedAnswer":{"@type":"Answer","text":"Run sudo -u www-data php occ status to see version, install state, and maintenance mode. The occ tool is the admin command line for most Nextcloud operations."}},{"@type":"Question","name":"Why is Nextcloud sync failing?","acceptedAnswer":{"@type":"Answer","text":"Sync breaks when background jobs stall, Redis file locking fails, or the data disk is full. Check job freshness, Redis, and free space, then verify a test upload and sync."}},{"@type":"Question","name":"How often should Nextcloud cron run?","acceptedAnswer":{"@type":"Answer","text":"Every 5 minutes using the system cron method is the recommended setup. The admin overview flags the instance when the last background run is too old."}},{"@type":"Question","name":"How do I fix slow Nextcloud uploads?","acceptedAnswer":{"@type":"Answer","text":"Check the PHP upload and memory limits, Redis file locking, chunking, and data-disk speed. Large files also need adequate PHP timeouts and memory to complete."}},{"@type":"Question","name":"How do I monitor Nextcloud with Prometheus and Grafana?","acceptedAnswer":{"@type":"Answer","text":"Use the nextcloud-exporter, which reads the serverinfo app and exposes metrics for Prometheus, then graph them in Grafana. It surfaces active users, shares, storage, database size, and app-update status, and pairs well with node and database exporters for host and DB health."}},{"@type":"Question","name":"What is status.php in Nextcloud?","acceptedAnswer":{"@type":"Answer","text":"status.php is a lightweight endpoint in the Nextcloud root that reports whether the instance is installed and not in maintenance mode, which makes it ideal for an external uptime check. For richer data, the serverinfo app returns a full JSON or XML report of users, storage, and health."}}]}</script>
+  <link rel="stylesheet" href="/assets/make-error-127/styles.css">
+  <link rel="stylesheet" href="/assets/nextcloud-monitoring/styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: #1f2937; background: #fff; -webkit-font-smoothing: antialiased; }
+    .navbar { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(229,231,235,.8); z-index: 50; }
+    .navbar-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .navbar-content { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    .navbar-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+    .navbar-logo-icon { height: 32px; width: auto; }
+    .navbar-links { display: none; align-items: center; gap: 4px; }
+    @media (min-width: 1024px) { .navbar-links { display: flex; } }
+    .navbar-link { padding: 6px 12px; font-size: 0.875rem; font-weight: 500; color: #3f3f46; text-decoration: none; border-radius: 6px; }
+    .navbar-link:hover { color: #09090b; background: #f4f4f5; }
+    .navbar-link.active { color: #09090b; background: #fafafa; }
+    .navbar-actions { display: none; align-items: center; gap: 10px; margin-left: 16px; padding-left: 16px; border-left: 1px solid #e5e7eb; }
+    @media (min-width: 1024px) { .navbar-actions { display: flex; } }
+    .navbar-button { padding: 8px 16px; font-size: 0.875rem; font-weight: 600; border-radius: 999px; text-decoration: none; }
+    .navbar-button-primary { background: #09090b; color: #fff; }
+    .navbar-button-secondary { color: #3f3f46; }
+    .main-container { max-width: 1280px; margin: 0 auto; padding: 96px 24px 64px; }
+    .content-wrapper { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media (min-width: 1024px) {
+      .content-wrapper { grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
+    }
+    .main-col { min-width: 0; max-width: 820px; }
+    @media (min-width: 1024px) { .main-col { max-width: none; } }
+    .sidebar { display: none; }
+    @media (min-width: 1024px) { .sidebar { display: block; } }
+    .sidebar-content { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card { background: #fafafa; border-radius: 8px; padding: 24px; border: 1px solid #e4e4e7; }
+    .sidebar-card-title { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
+    .signup-form { display: flex; flex-direction: column; gap: 12px; }
+    .signup-form input { width: 100%; padding: 10px 16px; border-radius: 6px; border: 1px solid #d4d4d8; font-size: 1rem; background: #fff; color: #09090b; }
+    .signup-form input:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2); }
+    .signup-form button { width: 100%; padding: 10px 12px; background: #09090b; color: #fff; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; }
+    .signup-form button:hover { background: #27272a; }
+    .signup-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .signup-status { font-size: 0.875rem; font-weight: 500; margin: 0; }
+    .signup-status.success { color: #047857; }
+    .signup-status.error { color: #dc2626; }
+    .related-content-title { font-size: 11px; font-weight: 700; color: #71717a; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 16px; }
+    .related-posts-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .related-post-link { color: #3f3f46; text-decoration: none; font-size: 0.875rem; line-height: 1.5; display: block; transition: color 0.15s; }
+    .related-post-link:hover { color: #7c3aed; }
+    .view-more-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 16px; color: #7c3aed; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
+    .view-more-link:hover { color: #6d28d9; }
+    .article-header { margin-bottom: 2rem; }
+    .article-header h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; color: #09090b; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .author-info { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: #09090b; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+    .author-name { font-weight: 600; color: #111827; }
+    .author-meta { font-size: 0.875rem; color: #6b7280; }
+    .category-tag { display: inline-block; padding: 4px 10px; background: #ede9fe; color: #5b21b6; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .promo { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; font-size: 1.0625rem; color: #374151; }
+    .promo a { color: #7c3aed; font-weight: 600; }
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-content">
+        <a href="/" class="navbar-logo">
+          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon">
+        </a>
+        <div class="navbar-links">
+          <a href="/#how-it-works" class="navbar-link">How It Works</a>
+          <a href="/#solutions" class="navbar-link">Solutions</a>
+          <a href="/case-studies" class="navbar-link">Case Studies</a>
+          <a href="/blog" class="navbar-link active">Blog</a>
+          <a href="/pricing" class="navbar-link">Pricing</a>
+        </div>
+        <div class="navbar-actions">
+          <a href="https://app.alertmend.io/signup?source=blog-post&blog_slug=nextcloud-monitoring" class="navbar-button navbar-button-secondary">Register</a>
+          <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=nextcloud-monitoring" class="navbar-button navbar-button-primary" target="_blank" rel="noopener noreferrer">Book a Demo</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="main-container">
+    <div class="content-wrapper">
+      <div class="main-col">
+
+    <header class="article-header article-header--cred">
+      <h1>Nextcloud Monitoring and Auto-Recovery</h1>
+      <p class="authorCredLine authorCredLine--top"><a href="https://www.linkedin.com/in/dineshagrawal85/" target="_blank" rel="noopener noreferrer">Dinesh Agrawal</a>, Co-Founder at AlertMend.io · 12+ years in cloud infrastructure and AI-driven incident automation</p>
+      <p class="article-meta">2026-07-06 · Monitoring</p>
+    </header>
+      <div class="brandChip"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12.018 6.537c-2.5 0-4.6 1.712-5.241 4.015-.56-1.232-1.793-2.105-3.225-2.105A3.569 3.569 0 0 0 0 12a3.569 3.569 0 0 0 3.552 3.553c1.432 0 2.664-.874 3.224-2.106.641 2.304 2.742 4.016 5.242 4.016 2.487 0 4.576-1.693 5.231-3.977.569 1.21 1.783 2.067 3.198 2.067A3.568 3.568 0 0 0 24 12a3.569 3.569 0 0 0-3.553-3.553c-1.416 0-2.63.858-3.199 2.067-.654-2.284-2.743-3.978-5.23-3.977zm0 2.085c1.878 0 3.378 1.5 3.378 3.378 0 1.878-1.5 3.378-3.378 3.378A3.362 3.362 0 0 1 8.641 12c0-1.878 1.5-3.378 3.377-3.378zm-8.466 1.91c.822 0 1.467.645 1.467 1.468s-.644 1.467-1.467 1.468A1.452 1.452 0 0 1 2.085 12c0-.823.644-1.467 1.467-1.467zm16.895 0c.823 0 1.468.645 1.468 1.468s-.645 1.468-1.468 1.468A1.452 1.452 0 0 1 18.98 12c0-.823.644-1.467 1.467-1.467z" fill="var(--am-accent)"/></svg><span>Monitoring guide for Nextcloud</span></div>
+      <div class="proofBar">
+        <span class="checked"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Verified against official Nextcloud documentation</span>
+        <span class="dot">&bull;</span><span>Last reviewed 2026-07-06</span>
+        <span class="dot">&bull;</span><span>5 primary sources cited</span>
+      </div>
+    <div class="dl-blog">
+      <section class="heroBand heroBandCompact">
+        <p class="heroGuideLabel">Self-hosted Nextcloud reliability · sources checked 2026-07-06</p>
+        <div class="instantFix">
+          <div class="instantFixTop"><span>THE 60-SECOND ANSWER</span><strong>Watch background jobs and Redis locking, not just that the login page loads.</strong></div>
+          <p>A real Nextcloud check should prove the URL answers, PHP-FPM has free workers, the database is responsive, Redis transactional file locking is healthy, background jobs are running (ideally via system cron), and the data directory has space. The web login can work while sync and background jobs are quietly broken.</p>
+          <div class="instantFixCommands">
+            <code>sudo -u www-data php occ status</code><span>app + maintenance state</span>
+            <code>systemctl status php8.2-fpm</code><span>workers alive?</span>
+            <code>redis-cli ping</code><span>file locking store</span>
+          </div>
+        </div>
+        <aside class="immediateDiagnosis">
+          <div class="diagnosisHeading"><span class="diagnosisEyebrow">Immediate triage</span><strong>Up, degraded, or down?</strong></div>
+          <ol class="diagnosisSteps">
+            <li><span>1</span><p>Run occ status to see version, maintenance mode, and whether the instance is installed and healthy.</p></li>
+            <li><span>2</span><p>Check when background jobs last ran: the admin overview warns if cron has not executed recently.</p></li>
+            <li><span>3</span><p>Check Redis (used for transactional file locking) and PHP memory: locking errors and slow sync usually trace here.</p></li>
+          </ol>
+          <p class="diagnosisCaution"><strong>Avoid the false read:</strong> the login page can load while background jobs have not run for hours, so sync, notifications, and previews silently fall behind.</p>
+        </aside>
+      </section>
+
+      <nav class="articleToc" aria-label="On this page"><strong>On this page</strong>
+        <a href="#stack">What keeps Nextcloud up</a>
+        <a href="#by-industry">By industry</a>
+        <a href="#monitor">What to monitor</a>
+        <a href="#checks">Health checks</a>
+        <a href="#prometheus">Prometheus &amp; Grafana</a>
+        <a href="#alerts">What to alert on</a>
+        <a href="#failures">Common failures</a>
+        <a href="#by-use-case">By use case</a>
+        <a href="#alertmend">Monitor with AlertMend</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <h2 class="sectionHead" id="stack">What keeps Nextcloud up</h2>
+      <p class="bodyText">Nextcloud is a self-hosted file and collaboration platform built on PHP-FPM, a database, Redis for file locking and caching, and background jobs that must run on a schedule. It feels healthy at the login screen and fails quietly in the background, where sync, previews, and cleanup live.</p>
+      <p class="bodyText">Monitoring Nextcloud well means watching those background jobs, Redis locking, the database, and data-directory storage, not just that the web login loads. The occ command line exposes real state that a browser check cannot see.</p>
+      <figure style="margin:1.5rem 0 2rem;">
+      <svg class="stackFlow" viewBox="0 0 960 150" width="960" height="150" role="img" aria-label="Request path for Nextcloud: user to proxy to application workers to database and cache, the layers monitoring must cover." font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+        <defs>
+          <marker id="sf-ar" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L7,3 L0,6 Z" fill="#00a2e9"/></marker>
+          <style>@media (prefers-reduced-motion: no-preference){.stackFlow .sf-l{stroke-dasharray:7 6;animation:sf-d .8s linear infinite}@keyframes sf-d{to{stroke-dashoffset:-13}}}</style>
+        </defs>
+        <rect x="20" y="45" width="200" height="60" rx="11" fill="#fff" stroke="#ddd6fe"/><text x="120" y="80" font-size="14" font-weight="700" fill="#3f3f46" text-anchor="middle">User / client</text><line class="sf-l" x1="220" y1="75" x2="270" y2="75" stroke="#00a2e9" stroke-width="2.5" marker-end="url(#sf-ar)"/><rect x="270" y="45" width="200" height="60" rx="11" fill="#fff" stroke="#ddd6fe"/><text x="370" y="80" font-size="14" font-weight="700" fill="#3f3f46" text-anchor="middle">Nginx or Apache</text><line class="sf-l" x1="470" y1="75" x2="520" y2="75" stroke="#00a2e9" stroke-width="2.5" marker-end="url(#sf-ar)"/><rect x="520" y="45" width="200" height="60" rx="11" fill="#fff" stroke="#ddd6fe"/><g transform="translate(528,50) scale(0.78)"><path d="M12.018 6.537c-2.5 0-4.6 1.712-5.241 4.015-.56-1.232-1.793-2.105-3.225-2.105A3.569 3.569 0 0 0 0 12a3.569 3.569 0 0 0 3.552 3.553c1.432 0 2.664-.874 3.224-2.106.641 2.304 2.742 4.016 5.242 4.016 2.487 0 4.576-1.693 5.231-3.977.569 1.21 1.783 2.067 3.198 2.067A3.568 3.568 0 0 0 24 12a3.569 3.569 0 0 0-3.553-3.553c-1.416 0-2.63.858-3.199 2.067-.654-2.284-2.743-3.978-5.23-3.977zm0 2.085c1.878 0 3.378 1.5 3.378 3.378 0 1.878-1.5 3.378-3.378 3.378A3.362 3.362 0 0 1 8.641 12c0-1.878 1.5-3.378 3.377-3.378zm-8.466 1.91c.822 0 1.467.645 1.467 1.468s-.644 1.467-1.467 1.468A1.452 1.452 0 0 1 2.085 12c0-.823.644-1.467 1.467-1.467zm16.895 0c.823 0 1.468.645 1.468 1.468s-.645 1.468-1.468 1.468A1.452 1.452 0 0 1 18.98 12c0-.823.644-1.467 1.467-1.467z" fill="#00a2e9"/></g><text x="620" y="80" font-size="14" font-weight="700" fill="#3f3f46" text-anchor="middle">PHP-FPM + Nextcloud</text>
+        <line class="sf-l" x1="820" y1="75" x2="870" y2="75" stroke="#16a34a" stroke-width="2.5" marker-end="url(#sf-ar)"/>
+        <rect x="770" y="20" width="180" height="110" rx="11" fill="#ecfdf5" stroke="#a7f3d0"/>
+        <text x="860" y="70" font-size="13" font-weight="700" fill="#047857" text-anchor="middle">PHP-FPM + Nextcloud</text>
+        <text x="860" y="94" font-size="12" fill="#059669" text-anchor="middle">MySQL/Postgres + Redis</text>
+      </svg>
+      <figcaption style="margin-top:9px;color:#71717a;font-size:.78rem;">Nextcloud is only healthy when every layer is: a green process is not proof that users can complete the job.</figcaption>
+    </figure>
+
+      <h2 class="sectionHead" id="by-industry">Who runs Nextcloud, and what they watch</h2>
+      <p class="sectionSub">Different industries run Nextcloud for different reasons, so the failure that hits hardest changes by sector. Find the row that sounds like you.</p>
+      <div class="diyWrap"><table class="compareTable"><thead><tr><th>Industry</th><th>What matters most for Nextcloud</th></tr></thead><tbody>
+        <tr><td>Healthcare</td><td class="diyHighlight">Encryption, audit, data residency, and uptime, where file access is patient-data compliance</td></tr>
+        <tr><td>Legal and professional services</td><td class="diyHighlight">File locking, versioning, and backups, so document integrity is never in doubt</td></tr>
+        <tr><td>Government and public sector</td><td class="diyHighlight">Self-hosted sovereignty, SSO, and scale, replacing consumer cloud with a controlled one</td></tr>
+        <tr><td>Education</td><td class="diyHighlight">Large user counts, storage, and sync at term start, when everyone logs in at once</td></tr>
+        <tr><td>Enterprises with data sovereignty needs</td><td class="diyHighlight">Backups, HA, and secure external access, to retire SaaS drives without losing reliability</td></tr>
+      </tbody></table></div>
+
+      <h2 class="sectionHead" id="monitor">What to monitor in Nextcloud</h2>
+      <p class="sectionSub">Nextcloud feels fine at login and fails in the background. Watch jobs, locking, and storage, not just the front page.</p>
+      <div class="monitorGrid">
+        <div class="monitorCard"><div class="monitorTop"><h3>URL and login</h3><span class="signalBadge">journey</span></div><p>Poll the login and a WebDAV or sync endpoint from outside; alert on non-200 or slow responses.</p></div>
+        <div class="monitorCard"><div class="monitorTop"><h3>PHP-FPM workers</h3><span class="signalBadge">process</span></div><p>Busy vs max_children and request queueing; exhausted workers cause slow sync and 502 errors.</p></div>
+        <div class="monitorCard"><div class="monitorTop"><h3>Database</h3><span class="signalBadge">database</span></div><p>MySQL, MariaDB, or PostgreSQL health: connections, slow queries, and locks that stall file operations.</p></div>
+        <div class="monitorCard"><div class="monitorTop"><h3>Redis locking and cache</h3><span class="signalBadge">cache</span></div><p>Transactional file locking and memory caching run on Redis; a down Redis breaks locking and slows everything.</p></div>
+        <div class="monitorCard"><div class="monitorTop"><h3>Background jobs (cron)</h3><span class="signalBadge">jobs</span></div><p>Confirm system cron runs the background job runner every 5 minutes; stalled jobs break previews, sync, and cleanup.</p></div>
+        <div class="monitorCard"><div class="monitorTop"><h3>Data directory storage</h3><span class="signalBadge">capacity</span></div><p>The data directory and its disk or object store; a full data volume stops uploads and can wedge the instance.</p></div>
+      </div>
+
+      <h2 class="sectionHead" id="checks">Copy-paste health checks</h2>
+      <p class="bodyText">The occ command-line tool is the fastest way to see real Nextcloud state from the host.</p>
+      <pre class="codeBlock copyableCode"><code># App state, version, and maintenance mode
+sudo -u www-data php occ status
+
+# Is the instance in maintenance mode? (turn off after checks)
+sudo -u www-data php occ maintenance:mode
+
+# Run the background job runner manually to confirm it works
+sudo -u www-data php occ background:cron
+
+# Redis reachable (file locking + cache)
+redis-cli ping
+
+# Data directory free space
+df -h /var/www/nextcloud/data</code></pre>
+
+      <h2 class="sectionHead" id="prometheus">Monitor Nextcloud with Prometheus and Grafana</h2>
+      <p class="bodyText">Nextcloud exposes health two ways out of the box: status.php for a simple up-or-down check, and the serverinfo app, which returns a full instance report in JSON or XML. The common Prometheus path is the nextcloud-exporter, which scrapes serverinfo into Prometheus and Grafana, and Netdata and Datadog integrations do the same.</p>
+      <pre class="codeBlock copyableCode"><code># Simple up check (installed and not in maintenance mode)
+curl -s https://your-nextcloud/status.php
+
+# Full instance report via the serverinfo app (needs an app password or NC-Token)
+curl -s -u monitor:APP_TOKEN &quot;https://your-nextcloud/ocs/v2.php/apps/serverinfo/api/v1/info?format=json&quot;</code></pre>
+      <p class="bodyText">Key metrics to scrape and graph in Grafana:</p>
+      <ul class="sourceList"><li>active users over 5 minutes, 1 hour, and 24 hours</li><li>shares, files, and storage used</li><li>database size and type</li><li>available app updates and PHP memory</li></ul>
+
+      <h2 class="sectionHead" id="alerts">What to alert on</h2>
+      <p class="sectionSub">Concrete conditions worth paging on. Start here and tune the thresholds to your own baseline.</p>
+      <div class="diyWrap"><table class="compareTable"><thead><tr><th>Alert</th><th>Condition and threshold</th></tr></thead><tbody>
+        <tr><td>Instance down</td><td class="diyHighlight">status.php not returning installed true</td></tr><tr><td>Background jobs stale</td><td class="diyHighlight">last cron run older than about 15 minutes</td></tr><tr><td>Data disk pressure</td><td class="diyHighlight">data volume above 80%</td></tr><tr><td>Redis locking down</td><td class="diyHighlight">Redis unreachable, which breaks transactional file locking</td></tr><tr><td>Database</td><td class="diyHighlight">connections or slow queries rising</td></tr><tr><td>Maintenance mode stuck</td><td class="diyHighlight">maintenance mode on outside a planned window</td></tr>
+      </tbody></table></div>
+
+      <div class="ctaInline">That is a lot of signals, alerts, and runbooks to wire up and keep working for Nextcloud. <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=nextcloud-monitoring" target="_blank" rel="noopener noreferrer">Book a free consultation &rarr;</a> and we will walk through what is already at risk in your Nextcloud setup.</div>
+
+      <h2 class="sectionHead" id="failures">Common failures and safe fixes</h2>
+      <div class="searchIssueGrid"><div class="searchIssueCard"><h3 class="searchIssueTerm">Background jobs not running</h3><p class="searchIssueDesc">The admin overview warns that cron has not run; scheduled tasks (previews, cleanup, notifications, sync housekeeping) stop.</p><p class="searchIssueAlert"><strong>Fix:</strong> Switch to the system cron method, schedule the background runner every 5 minutes, and alert when the last run falls behind.</p></div><div class="searchIssueCard"><h3 class="searchIssueTerm">Nextcloud is slow</h3><p class="searchIssueDesc">Slow sync and page loads usually mean a missing memory cache, no Redis, an overloaded database, or too few PHP workers.</p><p class="searchIssueAlert"><strong>Fix:</strong> Configure APCu plus Redis, add PHP-FPM workers within memory budget, and index or fix slow database queries.</p></div><div class="searchIssueCard"><h3 class="searchIssueTerm">Stuck in maintenance mode</h3><p class="searchIssueDesc">After an upgrade or failed occ command the instance stays in maintenance mode and refuses normal access.</p><p class="searchIssueAlert"><strong>Fix:</strong> Confirm no upgrade is running, then clear maintenance mode with occ, and verify the login and a sync path afterward.</p></div><div class="searchIssueCard"><h3 class="searchIssueTerm">File locking errors</h3><p class="searchIssueDesc">Transactional file locking errors appear when Redis is down or misconfigured, blocking uploads and edits.</p><p class="searchIssueAlert"><strong>Fix:</strong> Restore Redis, verify the locking configuration, and, only if safe, clear stale locks, then confirm uploads work.</p></div><div class="searchIssueCard"><h3 class="searchIssueTerm">Data disk full</h3><p class="searchIssueDesc">A full data volume stops all uploads and can leave operations half-completed.</p><p class="searchIssueAlert"><strong>Fix:</strong> Alert well before full, expand or clean the data volume and trash, and verify uploads after freeing space.</p></div></div>
+
+      <h2 class="sectionHead" id="by-use-case">Nextcloud monitoring priorities by use case</h2>
+      <p class="sectionSub">The stack is the same; which failure hurts first changes with how you run Nextcloud. Lead your alerts and runbooks with the row that matches you.</p>
+      <div class="diyWrap"><table class="compareTable"><thead><tr><th>Use case</th><th>Watch most closely</th><th>What downtime costs</th></tr></thead><tbody>
+        <tr><td>Team file sync</td><td>Background jobs, Redis locking, WebDAV latency</td><td class="diyHighlight">Sync stalls, stale files</td></tr>
+        <tr><td>Large media libraries</td><td>Data disk and object storage, preview generation jobs</td><td class="diyHighlight">Failed uploads, missing previews</td></tr>
+        <tr><td>Collabora / OnlyOffice editing</td><td>Document server health, websockets, memory</td><td class="diyHighlight">Live editing breaks</td></tr>
+        <tr><td>Regulated / private cloud</td><td>Encryption, audit, backups, self-hosted control</td><td class="diyHighlight">Compliance and recovery risk</td></tr>
+        <tr><td>Remote workforce</td><td>External URL and login uptime, TLS expiry</td><td class="diyHighlight">Everyone locked out at once</td></tr>
+      </tbody></table></div>
+
+      <h2 class="sectionHead" id="alertmend">Monitor and recover Nextcloud with AlertMend</h2>
+      <p class="bodyText">Nextcloud looks healthy at the login screen and fails quietly in the background. AlertMend watches background jobs, Redis locking, the database, and data storage alongside the URL, then explains and recovers the failure with an approved runbook.</p>
+      <div class="alertmendMethod"><div><span>1</span><strong>Detect</strong><p>Watch the Nextcloud URL and user journey from outside, plus the PHP-FPM workers, the database, and host resources, so a stall or crash is caught before users report it.</p></div><div><span>2</span><strong>Correlate</strong><p>Tie the failure to the workload, recent deploy or config change, and the database state, so the alert names what broke, not just that a check went red.</p></div><div><span>3</span><strong>Explain</strong><p>Run AI root-cause analysis in the language of Nextcloud and its stack, with the evidence gathered and the most likely fix.</p></div><div><span>4</span><strong>Recover safely</strong><p>Run an approved runbook: restart a wedged PHP-FPM pool, clear maintenance mode after a check, or trigger the background job runner, then verify the user-facing endpoint before closing the incident.</p></div></div>
+      <p class="bodyText productDisclosure"><strong>Deployment control:</strong> AlertMend runs as a managed service or self-hosted, so telemetry and remediation stay inside your environment. Every command in this guide works without AlertMend.</p>
+
+      <h2 class="sectionHead" id="sources">Primary sources</h2>
+      <ul class="sourceList"><li><a href="https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/background_jobs_configuration.html" target="_blank" rel="noopener noreferrer">Nextcloud: Background jobs configuration</a></li><li><a href="https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/caching_configuration.html" target="_blank" rel="noopener noreferrer">Nextcloud: Memory caching and Redis</a></li><li><a href="https://docs.nextcloud.com/server/latest/admin_manual/configuration_files/files_locking_transactional.html" target="_blank" rel="noopener noreferrer">Nextcloud: Transactional file locking</a></li><li><a href="https://docs.nextcloud.com/server/latest/admin_manual/occ_command.html" target="_blank" rel="noopener noreferrer">Nextcloud: Using the occ command</a></li><li><a href="https://docs.nextcloud.com/server/latest/admin_manual/installation/server_tuning.html" target="_blank" rel="noopener noreferrer">Nextcloud: Server tuning</a></li></ul>
+      <div class="reviewPolicy"><strong>Method and disclosure:</strong> commands and behavior above are drawn from the official Nextcloud and component documentation linked in Primary sources, and can change by version, so verify against what you run. AlertMend publishes this guide and may benefit if readers evaluate its product.</div>
+
+      <h2 class="sectionHead" id="faq">Nextcloud monitoring FAQ</h2>
+      <div class="faqList"><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="true">Why are Nextcloud background jobs not running?<svg class="faqChevron faqChevronOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer">The admin overview warns when cron has not run recently, and scheduled tasks such as previews, cleanup, and notifications stop. Use the system cron method and schedule the background job runner every 5 minutes, then alert when the last run falls behind.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Why is Nextcloud slow?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Slow sync and page loads usually mean a missing memory cache, no Redis, an overloaded database, or too few PHP workers. Configure APCu plus Redis, add PHP-FPM workers within your memory budget, and fix slow database queries.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I get Nextcloud out of maintenance mode?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Confirm no upgrade is running, then run occ maintenance:mode --off, and verify the login and a sync path afterward. A stuck maintenance mode usually follows a failed upgrade or occ command.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I monitor Nextcloud?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Poll the login or WebDAV endpoint from outside, and watch PHP-FPM, the database, Redis file locking, background job freshness, and data-disk space. The occ status command shows real instance state.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">What causes Nextcloud file locking errors?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Transactional file locking runs on Redis, so a down or misconfigured Redis breaks locking and blocks uploads and edits. Restore Redis, verify the locking configuration, and clear stale locks only if it is safe.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I check Nextcloud status from the command line?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Run sudo -u www-data php occ status to see version, install state, and maintenance mode. The occ tool is the admin command line for most Nextcloud operations.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Why is Nextcloud sync failing?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Sync breaks when background jobs stall, Redis file locking fails, or the data disk is full. Check job freshness, Redis, and free space, then verify a test upload and sync.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How often should Nextcloud cron run?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Every 5 minutes using the system cron method is the recommended setup. The admin overview flags the instance when the last background run is too old.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I fix slow Nextcloud uploads?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Check the PHP upload and memory limits, Redis file locking, chunking, and data-disk speed. Large files also need adequate PHP timeouts and memory to complete.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I monitor Nextcloud with Prometheus and Grafana?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Use the nextcloud-exporter, which reads the serverinfo app and exposes metrics for Prometheus, then graph them in Grafana. It surfaces active users, shares, storage, database size, and app-update status, and pairs well with node and database exporters for host and DB health.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">What is status.php in Nextcloud?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">status.php is a lightweight endpoint in the Nextcloud root that reports whether the instance is installed and not in maintenance mode, which makes it ideal for an external uptime check. For richer data, the serverinfo app returns a full JSON or XML report of users, storage, and health.</div></div></div>
+
+          <hr style="margin:2.5rem 0 1.75rem;border:none;border-top:1px solid #e4e4e7;">
+          <div class="authorBioCard">
+            <img src="/logos/dinesh.jpeg" alt="Dinesh Agrawal" width="128" height="128" loading="lazy" style="width:128px;height:128px;border-radius:12px;object-fit:cover;border:1px solid #e4e4e7;flex-shrink:0;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div style="display:none;width:128px;height:128px;border-radius:12px;border:1px solid #e4e4e7;background:#f4f4f5;align-items:center;justify-content:center;font-weight:800;font-size:2.25rem;color:#3f3f46;flex-shrink:0;">DA</div>
+            <div style="flex:1;min-width:240px;">
+              <h3>Dinesh Agrawal</h3>
+              <p class="authorBioRole">Co-Founder at AlertMend.io</p>
+              <div class="authorBioText">
+                <p style="margin:0 0 10px;">Dinesh Agrawal brings 12+ years of deep experience across cloud and AI-driven automation, building systems that detect, diagnose, and fix production incidents without waiting for a human.</p>
+                <p style="margin:0;">At AlertMend.io he focuses on autonomous, self-healing operations, turning manual cloud firefighting into workflows that predict, remediate, and learn.</p>
+              </div>
+              <a class="authorBioLink" href="https://www.linkedin.com/in/dineshagrawal85/" target="_blank" rel="noopener noreferrer" aria-label="Dinesh Agrawal on LinkedIn">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18V9.94H5.67V18h2.67zM7 8.76a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zM18.34 18v-4.42c0-2.37-1.27-3.47-2.96-3.47-1.36 0-1.97.75-2.31 1.28V9.94h-2.67V18h2.67v-4.5c0-.24.02-.48.09-.65.19-.48.63-.98 1.36-.98.96 0 1.35.73 1.35 1.8V18h2.82z"/></svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
+      <div class="ctaBand">
+        <div class="ctaBandTitle">Catch the Nextcloud job that quietly stopped running.</div>
+        <p class="ctaBandSub">AlertMend watches background jobs, Redis locking, and data storage behind the login page, explains the failure, and recovers it before sync falls apart. The consultation is free and with no obligation, and you leave with a prioritized fix list.</p>
+        <div class="ctaBtnRow"><a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=nextcloud-monitoring" class="ctaBtn" target="_blank" rel="noopener noreferrer">Book a free consultation &rarr;</a></div>
+      </div>
+    </div>
+    <div class="promo"><p><strong>Related:</strong> <a href="/blog/odoo-monitoring">Odoo Monitoring</a> &middot; <a href="/blog/wordpress-monitoring">WordPress Monitoring</a> &middot; <a href="/blog/top-kubernetes-cost-management-solutions">Kubernetes Cost</a></p></div>
+      </div>
+
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <div class="sidebar-card">
+            <div class="sidebar-card-title">Receive blog and product updates</div>
+            <form class="signup-form" id="blog-signup-form" novalidate>
+              <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
+              <button type="submit">Sign up</button>
+              <p class="signup-status" id="blog-signup-status" hidden></p>
+            </form>
+          </div>
+
+          
+          <div class="sidebar-card">
+            <div class="related-content-title">Related content</div>
+            <ul class="related-posts-list">
+              <li><a href="/blog/odoo-monitoring" class="related-post-link">Odoo Monitoring</a></li>
+              <li><a href="/blog/wordpress-monitoring" class="related-post-link">WordPress Monitoring</a></li>
+              <li><a href="/blog/top-kubernetes-cost-management-solutions" class="related-post-link">Kubernetes Cost</a></li>
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View all posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          
+
+          <div class="sidebar-card">
+            <div class="related-content-title">Explore AlertMend</div>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <script src="/assets/nextcloud-monitoring/script.js" defer></script>
+</body>
+</html>

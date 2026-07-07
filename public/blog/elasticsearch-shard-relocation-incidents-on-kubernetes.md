@@ -1,7 +1,7 @@
 ---
 title: "Elasticsearch Shard Relocation on Kubernetes"
 excerpt: "Diagnose Elasticsearch shard relocation on Kubernetes: pod evictions, delayed allocation, and how to keep the cluster green through node drains and rollouts."
-date: "2026-01-10"
+date: "2026-07-04"
 dateModified: "2026-07-04"
 category: "Elasticsearch"
 author: "Himanshu Bansal"

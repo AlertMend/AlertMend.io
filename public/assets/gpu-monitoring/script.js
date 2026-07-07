@@ -31,7 +31,7 @@
       oG.textContent = g; oR.textContent = '$' + r.toFixed(2); oI.textContent = i + '%';
       var m = g * r * 730 * (i / 100), y = m * 12;
       countUp(moEl, m, prev.mo); countUp(yrEl, y, prev.yr); prev.mo = m; prev.yr = y;
-      rcEl.innerHTML = 'Recover even half with idle detection and reclaim: <b>' + fmt(m * 0.5) + '/mo</b> back — <b>' + fmt(y * 0.5) + '/yr</b>.';
+      rcEl.innerHTML = 'Recover even half with idle detection and reclaim: <b>' + fmt(m * 0.5) + '/mo</b> back, <b>' + fmt(y * 0.5) + '/yr</b>.';
     }
     [G, R, I].forEach(function (el) { el.addEventListener('input', calc); });
     calc();

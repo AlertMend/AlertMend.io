@@ -77,6 +77,12 @@
     .category-tag { display: inline-block; padding: 4px 10px; background: #ede9fe; color: #5b21b6; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
     .promo { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; font-size: 1.0625rem; color: #374151; }
     .promo a { color: #7c3aed; font-weight: 600; }
+.article-header--cred{margin-bottom:1.5rem;}
+.article-header--cred .authorCredLine--top{margin:0 0 .45rem;}
+.article-header--cred .article-meta{font-size:.875rem;color:#6b7280;margin:0;}
+.authorCredLine{font-size:.875rem;line-height:1.55;color:#71717a;}
+.authorCredLine a,.authorCredLine .authorCredName{color:#3f3f46;font-weight:600;text-decoration:none;}
+.authorCredLine a:hover{color:#7c3aed;}
 </style>
 </head>
 <body>
@@ -105,16 +111,10 @@
     <div class="content-wrapper">
       <div class="main-col">
 
-    <header class="article-header">
+    <header class="article-header article-header--cred">
       <h1>Monitoring MCP Servers in Production</h1>
-      <div class="author-info">
-        <div class="author-avatar">A</div>
-        <div>
-          <div class="author-name">AlertMend Team</div>
-          <div class="author-meta">2026-07-01 · AIOps</div>
-        </div>
-      </div>
-      <span class="category-tag">AIOps</span>
+      <p class="authorCredLine authorCredLine--top"><a href="https://www.linkedin.com/company/alertmend/" target="_blank" rel="noopener noreferrer">AlertMend Team</a>, Infrastructure reliability engineering · Guides checked against primary vendor documentation</p>
+      <p class="article-meta">2026-07-01 · AIOps</p>
     </header>
     <div class="dl-blog">
       <section class="heroBand">
