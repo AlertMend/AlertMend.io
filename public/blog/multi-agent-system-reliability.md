@@ -3,7 +3,7 @@ title: "Multi-Agent System Reliability"
 excerpt: "Keep multi-agent systems reliable: AlertMend watches each agent service for crashes, hangs, and OOM, points at the one that broke, and auto-restarts it."
 date: "2026-07-01"
 category: "AIOps"
-author: "AlertMend Team"
+author: "Dinesh Agrawal"
 tags: ["AIOps", "AI Agents", "LLM", "Observability"]
 keywords: "multi-agent system reliability, multi-agent monitoring, agent orchestration uptime, agent chain failure, AIOps, AlertMend"
 ---

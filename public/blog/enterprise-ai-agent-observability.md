@@ -3,7 +3,7 @@ title: "Enterprise AI Agent Observability"
 excerpt: "Enterprise AI agent observability: keep agent services reliable across many clusters, with bring-your-own-model support and automatic recovery."
 date: "2026-07-01"
 category: "AIOps"
-author: "AlertMend Team"
+author: "Dinesh Agrawal"
 tags: ["AIOps", "AI Agents", "LLM", "Observability"]
 keywords: "enterprise ai agent observability, ai reliability at scale, regulated ai workloads, bring your own model, multi-cluster monitoring, AIOps, AlertMend"
 ---

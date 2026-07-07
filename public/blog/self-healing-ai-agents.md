@@ -3,7 +3,7 @@ title: "Self-Healing AI Agents"
 excerpt: "Make AI agents self-healing: AlertMend detects crashes, out-of-memory, and hangs on the services they run on, then auto-recovers with AI root-cause analysis."
 date: "2026-07-01"
 category: "AIOps"
-author: "AlertMend Team"
+author: "Dinesh Agrawal"
 tags: ["AIOps", "AI Agents", "LLM", "Observability"]
 keywords: "self-healing ai agents, agent auto-recovery, auto-remediation, restart ai agent, agent uptime, AIOps, AlertMend"
 ---

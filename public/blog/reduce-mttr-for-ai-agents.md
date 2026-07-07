@@ -3,7 +3,7 @@ title: "Reduce MTTR for AI Agents"
 excerpt: "Reduce MTTR for AI agents: AlertMend detects service failures fast, explains the root cause with AI, and auto-recovers, cutting mean time to resolution."
 date: "2026-07-01"
 category: "AIOps"
-author: "AlertMend Team"
+author: "Dinesh Agrawal"
 tags: ["AIOps", "AI Agents", "LLM", "Observability"]
 keywords: "reduce mttr ai agents, mean time to resolution, ai incident response, aiops, auto-remediation, agent downtime, AlertMend"
 ---
