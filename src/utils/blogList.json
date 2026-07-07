@@ -257,7 +257,7 @@
     "excerpt": "Enterprise AI agent observability: keep agent services reliable across many clusters, with bring-your-own-model support and automatic recovery.",
     "date": "2026-07-01",
     "category": "AIOps",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [
       "AIOps",
       "AI Agents",
@@ -272,7 +272,7 @@
     "excerpt": "GPU reliability for LLM workloads: AlertMend watches GPU memory, worker crashes, and throughput on self-hosted models, then auto-recovers so inference stays up.",
     "date": "2026-07-01",
     "category": "AIOps",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [
       "AIOps",
       "AI Agents",
@@ -287,7 +287,7 @@
     "excerpt": "Keep AI agents online: monitor the services they run on for crashes, out-of-memory, and latency, with AI root-cause analysis and auto-recovery.",
     "date": "2026-07-01",
     "category": "AIOps",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [
       "AIOps",
       "AI Agents",
@@ -302,7 +302,7 @@
     "excerpt": "Monitor LangGraph agents in production: AlertMend keeps the service behind your LangGraph app reliable, catching crashes, OOM, and hangs, and auto-recovering.",
     "date": "2026-07-01",
     "category": "AIOps",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [
       "AIOps",
       "AI Agents",
@@ -317,7 +317,7 @@
     "excerpt": "Monitor MCP servers in production: watch the endpoint and backend for downtime, errors, and hangs, and auto-recover so agent tool calls keep working.",
     "date": "2026-07-01",
     "category": "AIOps",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [
       "AIOps",
       "AI Agents",
@@ -332,7 +332,7 @@
     "excerpt": "Keep multi-agent systems reliable: AlertMend watches each agent service for crashes, hangs, and OOM, points at the one that broke, and auto-restarts it.",
     "date": "2026-07-01",
     "category": "AIOps",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [
       "AIOps",
       "AI Agents",
@@ -347,7 +347,7 @@
     "excerpt": "Reduce MTTR for AI agents: AlertMend detects service failures fast, explains the root cause with AI, and auto-recovers, cutting mean time to resolution.",
     "date": "2026-07-01",
     "category": "AIOps",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [
       "AIOps",
       "AI Agents",
@@ -362,7 +362,7 @@
     "excerpt": "Make AI agents self-healing: AlertMend detects crashes, out-of-memory, and hangs on the services they run on, then auto-recovers with AI root-cause analysis.",
     "date": "2026-07-01",
     "category": "AIOps",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [
       "AIOps",
       "AI Agents",

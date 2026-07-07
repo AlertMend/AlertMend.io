@@ -3,7 +3,7 @@ title: "Keep AI Agents Online in Production"
 excerpt: "Keep AI agents online: monitor the services they run on for crashes, out-of-memory, and latency, with AI root-cause analysis and auto-recovery."
 date: "2026-07-01"
 category: "AIOps"
-author: "AlertMend Team"
+author: "Dinesh Agrawal"
 tags: ["AIOps", "AI Agents", "LLM", "Observability"]
 keywords: "keep ai agents online, ai agent uptime, agent reliability, sre for ai, agent downtime, health checks, AIOps, AlertMend"
 ---

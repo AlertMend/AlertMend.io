@@ -3,7 +3,7 @@ title: "Monitor LangGraph Agents in Production"
 excerpt: "Monitor LangGraph agents in production: AlertMend keeps the service behind your LangGraph app reliable, catching crashes, OOM, and hangs, and auto-recovering."
 date: "2026-07-01"
 category: "AIOps"
-author: "AlertMend Team"
+author: "Dinesh Agrawal"
 tags: ["AIOps", "AI Agents", "LLM", "Observability"]
 keywords: "monitor langgraph agents, langgraph production, langchain agent monitoring, langgraph reliability, agent service uptime, AIOps, AlertMend"
 ---
