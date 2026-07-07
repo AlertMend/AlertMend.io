@@ -77,6 +77,29 @@
     .category-tag { display: inline-block; padding: 4px 10px; background: #ede9fe; color: #5b21b6; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
     .promo { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; font-size: 1.0625rem; color: #374151; }
     .promo a { color: #7c3aed; font-weight: 600; }
+
+.instantFix{position:relative;margin-bottom:1rem;padding:1.15rem;overflow:hidden;border:1px solid #ddd6fe;border-radius:14px;background:#fff;box-shadow:0 8px 28px rgba(9,9,11,.05);}
+.instantFixTop{display:flex;flex-direction:column;align-items:flex-start;gap:.35rem;margin-bottom:.6rem;}
+.instantFixTop span{color:var(--am-accent,#6d28d9);font-size:.65rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;}
+.instantFixTop strong{color:#18181b;font-size:.95rem;line-height:1.45;}
+.instantFix>p{margin:0 0 .9rem;max-width:680px;color:#3f3f46;font-size:1rem;line-height:1.6;}
+.instantFixCommands{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:.4rem .8rem;align-items:center;padding:.75rem;border-radius:8px;background:#18181b;}
+.instantFixCommands code{color:#ddd6fe;font-size:.75rem;}
+.instantFixCommands span{color:#a1a1aa;font-size:.72rem;}
+.manualProof{display:flex;flex-wrap:wrap;gap:.4rem 1rem;margin-top:.7rem;}
+.manualProof a{color:var(--am-accent,#6d28d9);font-size:.72rem;font-weight:700;text-decoration:none;}
+.immediateDiagnosis{margin:1rem 0 1.25rem;padding:1.125rem;border-radius:8px;border:1px solid #e4e4e7;background:#fff;position:relative;z-index:1;}
+.diagnosisHeading{display:flex;align-items:baseline;flex-wrap:wrap;gap:.375rem .75rem;padding-bottom:.875rem;border-bottom:1px solid #e4e4e7;}
+.diagnosisEyebrow{color:var(--am-accent,#6d28d9);font-size:.6875rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;}
+.diagnosisHeading strong{color:#18181b;font-size:1rem;}
+.diagnosisSteps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:0;padding:0;list-style:none;}
+.diagnosisSteps li{display:grid;grid-template-columns:1.5rem 1fr;gap:.625rem;align-content:start;padding:1rem 1rem 1rem 0;}
+.diagnosisSteps li+li{padding-left:1rem;border-left:1px solid #e4e4e7;}
+.diagnosisSteps li>span{display:grid;place-items:center;width:1.5rem;height:1.5rem;border-radius:50%;background:#ede9fe;color:var(--am-accent,#6d28d9);font-size:.75rem;font-weight:800;}
+.diagnosisSteps p{margin:0;color:#52525b;font-size:.875rem;line-height:1.55;}
+.diagnosisCaution{margin:0;padding:.75rem .875rem;border-left:2px solid #a1a1aa;background:#f4f4f5;color:#52525b;font-size:.8125rem;line-height:1.55;}
+.diagnosisCaution strong{color:#3f3f46;}
+@media (max-width:640px){.diagnosisSteps{grid-template-columns:1fr;}.diagnosisSteps li+li{border-left:0;border-top:1px solid #e4e4e7;padding-left:0;padding-top:.75rem;}}
 </style>
 </head>
 <body>
