@@ -7,7 +7,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { SITE_URL, esc, CHROME_INLINE_CSS, AUTHOR_CRED_CSS, buildNavHtml, buildSidebarHtml, buildCredArticleHeader, buildAuthorCredLine, calendlyUrl } from './static-blog-shared.mjs'
+import { SITE_URL, esc, CHROME_INLINE_CSS, AUTHOR_CRED_CSS, buildNavHtml, buildSidebarHtml, buildCredArticleHeader, buildAuthorCredLine, calendlyUrl, appendBlogSignupHandler } from './static-blog-shared.mjs'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DATE = '2026-07-06', MODIFIED = '2026-07-06'
@@ -319,7 +319,7 @@ ${authorCard()}
     </div>
     <div class="promo"><p><strong>Related:</strong> ${cfg.related.map(([s, l]) => `<a href="/blog/${s}">${esc(l)}</a>`).join(' &middot; ')}</p></div>
       </div>
-${buildSidebarHtml(cfg.relatedSidebar || cfg.related.map(([slug, title]) => ({ slug, title })))}
+${buildSidebarHtml(cfg.relatedSidebar || cfg.related.map(([slug, title]) => ({ slug, title })), cfg.h1 || cfg.title)}
     </div>
   </div>
   <script src="/assets/${cfg.slug}/script.js" defer></script>
@@ -1012,7 +1012,7 @@ for (const cfg of POSTS) {
   const assets = path.join(root, 'public/assets', cfg.slug)
   fs.mkdirSync(dir, { recursive: true }); fs.mkdirSync(assets, { recursive: true })
   fs.writeFileSync(path.join(dir, 'index.html'), render(cfg))
-  fs.writeFileSync(path.join(assets, 'script.js'), SCRIPT_JS)
+  fs.writeFileSync(path.join(assets, 'script.js'), appendBlogSignupHandler(SCRIPT_JS))
   fs.writeFileSync(path.join(assets, 'styles.css'), ':root{--am-accent:' + accentOf(cfg.slug)[0] + ';}\n' + EXTRA_CSS)
   fs.writeFileSync(path.join(assets, 'hero.svg'), heroSvg(cfg))
   fs.writeFileSync(path.join(root, 'public/blog', `${cfg.slug}.md`), `---

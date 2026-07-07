@@ -7,7 +7,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { SITE_URL, esc, CHROME_INLINE_CSS, AUTHOR_CRED_CSS, buildNavHtml, buildSidebarHtml, buildCredArticleHeader, calendlyUrl } from './static-blog-shared.mjs'
+import { SITE_URL, esc, CHROME_INLINE_CSS, AUTHOR_CRED_CSS, buildNavHtml, buildSidebarHtml, buildCredArticleHeader, calendlyUrl, appendBlogSignupHandler } from './static-blog-shared.mjs'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const ALERTMEND_LOGO_DATA_URI = `data:image/svg+xml;base64,${fs.readFileSync(path.join(root, 'public/alertmend-logo.svg')).toString('base64')}`
@@ -307,7 +307,7 @@ ${buildCredArticleHeader(cfg.h1, DATE, CAT, cfg.author)}
     </div>
     <div class="promo"><p><strong>Related:</strong> ${cfg.related.map(([s, l]) => `<a href="/blog/${s}">${esc(l)}</a>`).join(' · ')}</p></div>
       </div>
-${buildSidebarHtml(cfg.relatedSidebar)}
+${buildSidebarHtml(cfg.relatedSidebar, cfg.h1 || cfg.title)}
     </div>
   </div>
   <script src="/assets/${cfg.slug}/script.js" defer></script>
@@ -675,7 +675,7 @@ for (const cfg of POSTS) {
   fs.mkdirSync(dir, { recursive: true })
   fs.mkdirSync(assets, { recursive: true })
   fs.writeFileSync(path.join(dir, 'index.html'), renderPost(cfg))
-  fs.writeFileSync(path.join(assets, 'script.js'), SCRIPT_JS)
+  fs.writeFileSync(path.join(assets, 'script.js'), appendBlogSignupHandler(SCRIPT_JS))
   fs.writeFileSync(path.join(assets, 'styles.css'), ES_POST_CSS)
   fs.writeFileSync(path.join(assets, 'hero.svg'), heroSvg(cfg.hero[0], cfg.hero[1], cfg.heroSub, cfg.heroChips))
   fs.writeFileSync(path.join(root, 'public/blog', `${cfg.slug}.md`), `---

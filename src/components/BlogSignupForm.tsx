@@ -1,8 +1,13 @@
 import { useState } from 'react'
+import { buildBlogSignupMessage } from '../utils/blogSignupMessage'
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
-export default function BlogSignupForm() {
+type BlogSignupFormProps = {
+  blogTitle?: string
+}
+
+export default function BlogSignupForm({ blogTitle = '' }: BlogSignupFormProps) {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<Status>('idle')
   const [message, setMessage] = useState('')
@@ -25,8 +30,7 @@ export default function BlogSignupForm() {
           full_name: 'Blog subscriber',
           company: '',
           email,
-          message:
-            'Newsletter signup from the AlertMend blog. Please add this email to the blog and product updates list.',
+          message: buildBlogSignupMessage(blogTitle),
           source: 'blog_signup',
         }),
       })

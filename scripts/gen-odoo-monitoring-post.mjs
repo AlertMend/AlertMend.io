@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url'
 import {
   SITE_URL, esc, CHROME_INLINE_CSS, buildNavHtml, buildSidebarHtml,
   buildCredArticleHeader, buildAuthorCredLine, calendlyUrl, signupUrl, AUTHOR_CRED_CSS,
+  appendBlogSignupHandler,
 } from './static-blog-shared.mjs'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -615,11 +616,10 @@ ELSE
 
         <p class="promo">Want AlertMend to monitor the entire Odoo path and run governed recovery? <a href="${calendly}" target="_blank" rel="noopener noreferrer">Book a practical reliability review →</a></p>
       </main>
-${buildSidebarHtml(related)}
+${buildSidebarHtml(related, h1)}
     </div>
   </div>
-  <script src="/assets/make-error-127/script.js"></script>
-  <script src="/assets/${slug}/script.js"></script>
+  <script src="/assets/${slug}/script.js" defer></script>
 </body>
 </html>
 `
@@ -629,7 +629,7 @@ const blogDir = path.join(root, 'public/blog', slug)
 fs.mkdirSync(assetsDir, { recursive: true })
 fs.mkdirSync(blogDir, { recursive: true })
 fs.writeFileSync(path.join(assetsDir, 'styles.css'), customCss)
-fs.writeFileSync(path.join(assetsDir, 'script.js'), scriptJs)
+fs.writeFileSync(path.join(assetsDir, 'script.js'), appendBlogSignupHandler(scriptJs))
 fs.writeFileSync(path.join(assetsDir, 'hero.svg'), heroSvg())
 fs.writeFileSync(path.join(blogDir, 'index.html'), html)
 fs.writeFileSync(path.join(root, 'public/blog', `${slug}.md`), `---

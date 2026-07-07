@@ -7,7 +7,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { SITE_URL, esc, CHROME_INLINE_CSS, AUTHOR_CRED_CSS, buildNavHtml, buildSidebarHtml, buildCredArticleHeader, DINESH_AUTHOR, dineshJsonLdAuthor, calendlyUrl } from './static-blog-shared.mjs'
+import { SITE_URL, esc, CHROME_INLINE_CSS, AUTHOR_CRED_CSS, buildNavHtml, buildSidebarHtml, buildCredArticleHeader, DINESH_AUTHOR, dineshJsonLdAuthor, calendlyUrl, appendBlogSignupHandler } from './static-blog-shared.mjs'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const ALERTMEND_LOGO_DATA_URI = `data:image/svg+xml;base64,${fs.readFileSync(path.join(root, 'public/alertmend-logo.svg')).toString('base64')}`
@@ -272,7 +272,7 @@ ${buildCredArticleHeader(cfg.h1, DATE, CAT, DINESH_AUTHOR)}
     </div>
     <div class="promo"><p><strong>Related:</strong> ${cfg.related.map(([s, l]) => `<a href="/blog/${s}">${esc(l)}</a>`).join(' · ')}</p></div>
       </div>
-${buildSidebarHtml(cfg.relatedSidebar)}
+${buildSidebarHtml(cfg.relatedSidebar, cfg.h1 || cfg.title)}
     </div>
   </div>
   <script src="/assets/${cfg.slug}/script.js" defer></script>
@@ -362,7 +362,7 @@ const dir = path.join(root, 'public/blog', cfg.slug)
 const assets = path.join(root, 'public/assets', cfg.slug)
 fs.mkdirSync(dir, { recursive: true }); fs.mkdirSync(assets, { recursive: true })
 fs.writeFileSync(path.join(dir, 'index.html'), render(cfg))
-fs.writeFileSync(path.join(assets, 'script.js'), SCRIPT_JS)
+fs.writeFileSync(path.join(assets, 'script.js'), appendBlogSignupHandler(SCRIPT_JS))
 fs.writeFileSync(path.join(assets, 'styles.css'), '/* base styles come from make-error-127 */\n' + EXTRA_CSS)
 fs.writeFileSync(path.join(assets, 'hero.svg'), heroSvg())
 fs.writeFileSync(path.join(root, 'public/blog', `${cfg.slug}.md`), `---

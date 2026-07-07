@@ -141,6 +141,7 @@ kubectl describe pod <pod> -n <ns> | grep -i toomanyrequests
   const modeFromHash = HASH_TO_MODE[hash];
   renderFailure(modeFromHash || 'auth');
 
+
   const signupForm = document.getElementById('blog-signup-form');
   const signupStatus = document.getElementById('blog-signup-status');
   if (signupForm) {
@@ -149,21 +150,54 @@ kubectl describe pod <pod> -n <ns> | grep -i toomanyrequests
       const input = signupForm.querySelector('input[type="email"]');
       const button = signupForm.querySelector('button[type="submit"]');
       const email = input && input.value ? input.value.trim() : '';
-      if (!email || !button) return;
+      if (!email || !button || button.disabled) return;
+      const blogTitleEl = document.querySelector('.article-header h1, header.article-header--cred h1, h1');
+      const blogTitle = (signupForm.getAttribute('data-blog-title') || (blogTitleEl && blogTitleEl.textContent) || document.title || 'this blog post').trim().replace(/\s*\|\s*AlertMend.*$/i, '');
+      const buttonLabel = button.textContent;
       button.disabled = true;
+      button.textContent = 'Signing up…';
+      if (signupStatus) {
+        signupStatus.hidden = true;
+        signupStatus.textContent = '';
+        signupStatus.className = 'signup-status';
+      }
       try {
         const response = await fetch('https://api.alertmend.io/contact', {
           method: 'POST',
-          headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify({ full_name: 'Blog subscriber', email, message: 'Blog signup', source: 'blog_signup' }),
+          headers: { Accept: 'application/json, text/plain, */*', 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            full_name: 'Blog subscriber',
+            company: '',
+            email,
+            message: 'Newsletter signup from the AlertMend blog post "' + blogTitle + '". Please add this email to the blog and product updates list.',
+            source: 'blog_signup',
+          }),
         });
-        if (response.ok && signupStatus) {
-          signupStatus.hidden = false;
-          signupStatus.textContent = "Thanks! You're on the list.";
-          signupStatus.className = 'signup-status success';
+        if (response.ok) {
+          if (input) input.value = '';
+          if (signupStatus) {
+            signupStatus.hidden = false;
+            signupStatus.textContent = "Thanks! You're on the list.";
+            signupStatus.className = 'signup-status success';
+          }
+        } else {
+          const data = await response.json().catch(() => ({}));
+          if (signupStatus) {
+            signupStatus.hidden = false;
+            signupStatus.textContent = data.error || data.message || 'Something went wrong. Please try again.';
+            signupStatus.className = 'signup-status error';
+          }
         }
-      } catch { /* ignore */ }
-      finally { button.disabled = false; button.textContent = 'Sign up'; }
+      } catch {
+        if (signupStatus) {
+          signupStatus.hidden = false;
+          signupStatus.textContent = 'Network error. Please check your connection and try again.';
+          signupStatus.className = 'signup-status error';
+        }
+      } finally {
+        button.disabled = false;
+        button.textContent = buttonLabel || 'Sign up';
+      }
     });
   }
 })();

@@ -385,7 +385,7 @@ export default function BlogPostDetailPage() {
                   {/* Email Signup */}
                   <div className="bg-zinc-50 rounded-lg p-6 border border-zinc-200">
                     <h3 className="text-lg font-bold text-zinc-950 mb-4">Receive blog and product updates</h3>
-                    <BlogSignupForm />
+                    <BlogSignupForm blogTitle={post.title} />
                   </div>
 
                   {/* Related Content */}

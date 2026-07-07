@@ -126,13 +126,79 @@ export function buildNavHtml(slug, calendly) {
   </nav>`
 }
 
-export function buildSidebarHtml(relatedPosts) {
+/** Injected into each blog page script.js (single listener — no inline duplicate). */
+export const BLOG_SIGNUP_HANDLER_JS = `
+  const signupForm = document.getElementById('blog-signup-form');
+  const signupStatus = document.getElementById('blog-signup-status');
+  if (signupForm) {
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = signupForm.querySelector('input[type="email"]');
+      const button = signupForm.querySelector('button[type="submit"]');
+      const email = input && input.value ? input.value.trim() : '';
+      if (!email || !button || button.disabled) return;
+      const blogTitleEl = document.querySelector('.article-header h1, header.article-header--cred h1, h1');
+      const blogTitle = (signupForm.getAttribute('data-blog-title') || (blogTitleEl && blogTitleEl.textContent) || document.title || 'this blog post').trim().replace(/\\s*\\|\\s*AlertMend.*$/i, '');
+      const buttonLabel = button.textContent;
+      button.disabled = true;
+      button.textContent = 'Signing up…';
+      if (signupStatus) {
+        signupStatus.hidden = true;
+        signupStatus.textContent = '';
+        signupStatus.className = 'signup-status';
+      }
+      try {
+        const response = await fetch('https://api.alertmend.io/contact', {
+          method: 'POST',
+          headers: { Accept: 'application/json, text/plain, */*', 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            full_name: 'Blog subscriber',
+            company: '',
+            email,
+            message: 'Newsletter signup from the AlertMend blog post "' + blogTitle + '". Please add this email to the blog and product updates list.',
+            source: 'blog_signup',
+          }),
+        });
+        if (response.ok) {
+          if (input) input.value = '';
+          if (signupStatus) {
+            signupStatus.hidden = false;
+            signupStatus.textContent = "Thanks! You're on the list.";
+            signupStatus.className = 'signup-status success';
+          }
+        } else {
+          const data = await response.json().catch(() => ({}));
+          if (signupStatus) {
+            signupStatus.hidden = false;
+            signupStatus.textContent = data.error || data.message || 'Something went wrong. Please try again.';
+            signupStatus.className = 'signup-status error';
+          }
+        }
+      } catch {
+        if (signupStatus) {
+          signupStatus.hidden = false;
+          signupStatus.textContent = 'Network error. Please check your connection and try again.';
+          signupStatus.className = 'signup-status error';
+        }
+      } finally {
+        button.disabled = false;
+        button.textContent = buttonLabel || 'Sign up';
+      }
+    });
+  }`
+
+export function appendBlogSignupHandler(scriptSource) {
+  const stripped = scriptSource.replace(/\n\s*const signupForm = document\.getElementById\('blog-signup-form'\);[\s\S]*?\n\s*\}\s*(?=\n\}\)\(\);?\s*$)/, '\n')
+  return stripped.replace(/\}\)\(\);?\s*$/, `${BLOG_SIGNUP_HANDLER_JS}\n})();`)
+}
+
+export function buildSidebarHtml(relatedPosts, blogTitle = '') {
   return `
       <aside class="sidebar">
         <div class="sidebar-content">
           <div class="sidebar-card">
             <div class="sidebar-card-title">Receive blog and product updates</div>
-            <form class="signup-form" id="blog-signup-form" novalidate>
+            <form class="signup-form" id="blog-signup-form"${blogTitle ? ` data-blog-title="${esc(blogTitle)}"` : ''} novalidate>
               <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
               <button type="submit">Sign up</button>
               <p class="signup-status" id="blog-signup-status" hidden></p>

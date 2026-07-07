@@ -6,7 +6,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { SITE_URL, esc, CHROME_INLINE_CSS, AUTHOR_CRED_CSS, buildNavHtml, buildSidebarHtml, buildCredArticleHeader, DINESH_AUTHOR, dineshJsonLdAuthor, calendlyUrl, signupUrl } from './static-blog-shared.mjs'
+import { SITE_URL, esc, CHROME_INLINE_CSS, AUTHOR_CRED_CSS, buildNavHtml, buildSidebarHtml, buildCredArticleHeader, DINESH_AUTHOR, dineshJsonLdAuthor, calendlyUrl, signupUrl, appendBlogSignupHandler } from './static-blog-shared.mjs'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const ALERTMEND_LOGO_DATA_URI = `data:image/svg+xml;base64,${fs.readFileSync(path.join(root, 'public/alertmend-logo.svg')).toString('base64')}`
@@ -303,7 +303,7 @@ ${buildCredArticleHeader(cfg.h1, DATE, CAT, DINESH_AUTHOR)}
     </div>
     <div class="promo"><p>${cfg.promo} <a href="${cal}" target="_blank" rel="noopener noreferrer">Book a demo</a> to see AlertMend on your stack.</p></div>
       </div>
-${buildSidebarHtml(cfg.related)}
+${buildSidebarHtml(cfg.related, cfg.h1 || cfg.title)}
     </div>
   </div>
   <script src="/assets/${cfg.slug}/script.js" defer></script>
@@ -688,7 +688,7 @@ for (const cfg of POSTS) {
   const assets = path.join(root, 'public/assets', cfg.slug)
   fs.mkdirSync(dir, { recursive: true }); fs.mkdirSync(assets, { recursive: true })
   fs.writeFileSync(path.join(dir, 'index.html'), render(cfg))
-  fs.writeFileSync(path.join(assets, 'script.js'), SCRIPT_JS)
+  fs.writeFileSync(path.join(assets, 'script.js'), appendBlogSignupHandler(SCRIPT_JS))
   fs.writeFileSync(path.join(dir, '..', `${cfg.slug}.md`), `---
 title: "${cfg.title}"
 excerpt: "${cfg.excerpt}"
