@@ -1,5 +1,25 @@
 [
   {
+    "slug": "automate-ops-toil",
+    "title": "Eliminate Toil with Runbook Automation",
+    "excerpt": "Toil is the repetitive ops work that never ends: disk cleanup, cert checks, idle-resource sweeps, fleet patching. Scheduled runbooks automate it, safely.",
+    "date": "2026-07-07",
+    "category": "Automation",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "reduce toil, sre toil automation, automate operational tasks, runbook automation, kubernetes hygiene automation, cron automation, disk cleanup automation, idle resource cleanup, scheduled reports, AlertMend"
+  },
+  {
+    "slug": "cross-stack-incident-automation",
+    "title": "Automate Complex Incidents with Runbooks",
+    "excerpt": "One runbook can take an alert, query metrics, run an AWS action, restart the exact affected pods, and get a Slack or WhatsApp approval, end to end.",
+    "date": "2026-07-07",
+    "category": "Automation",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "runbook automation, automated incident remediation, incident response automation, self-healing infrastructure, kubectl automation, aws automation, slack approval workflow, cross-stack automation, whatsapp incident approval, AlertMend"
+  },
+  {
     "slug": "gitlab-monitoring",
     "title": "GitLab Self-Hosted Monitoring Guide",
     "excerpt": "Monitor self-hosted GitLab end to end: Puma, Sidekiq, PostgreSQL, Redis, and Gitaly, then safely auto-recover 502s, Sidekiq backlogs, and disk pressure.",

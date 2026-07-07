@@ -28,6 +28,10 @@
       "destination": "/blog/ai-agent-observability-in-production/index.html"
     },
     {
+      "source": "/blog/automate-ops-toil",
+      "destination": "/blog/automate-ops-toil/index.html"
+    },
+    {
       "source": "/blog/autoscaling-v2-horizontalpodautoscaler",
       "destination": "/blog/autoscaling-v2-horizontalpodautoscaler/index.html"
     },
@@ -38,6 +42,10 @@
     {
       "source": "/blog/best-ai-agent-observability-tools",
       "destination": "/blog/best-ai-agent-observability-tools/index.html"
+    },
+    {
+      "source": "/blog/cross-stack-incident-automation",
+      "destination": "/blog/cross-stack-incident-automation/index.html"
     },
     {
       "source": "/blog/datadog-alternatives",
