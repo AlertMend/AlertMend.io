@@ -236,7 +236,7 @@ ${buildNavHtml(cfg.slug, calendlyUrl(cfg.slug))}
 ${buildCredArticleHeader(cfg.title, DATE, CAT, DINESH_AUTHOR)}
 ${body}
       </div>
-${buildSidebarHtml(cfg.related)}
+${buildSidebarHtml(cfg.related, cfg.title)}
     </div>
   </div>
   <script src="/assets/${cfg.slug}/script.js" defer></script>

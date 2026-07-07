@@ -21,6 +21,9 @@
       const email = input && input.value ? input.value.trim() : '';
       if (!email || !button) return;
 
+      const blogTitleEl = document.querySelector('.article-header h1, header.article-header--cred h1, h1');
+      const blogTitle = (signupForm.getAttribute('data-blog-title') || (blogTitleEl && blogTitleEl.textContent) || document.title || 'this blog post').trim().replace(/\s*\|\s*AlertMend.*$/i, '');
+
       button.disabled = true;
       button.textContent = 'Signing up…';
       if (signupStatus) {
@@ -41,7 +44,7 @@
             company: '',
             email,
             message:
-              'Newsletter signup from the AlertMend blog. Please add this email to the blog and product updates list.',
+              'Newsletter signup from the AlertMend blog post "' + blogTitle + '". Please add this email to the blog and product updates list.',
             source: 'blog_signup',
           }),
         });

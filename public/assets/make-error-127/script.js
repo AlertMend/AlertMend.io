@@ -182,6 +182,7 @@ head -1 ./build.sh`,
   renderMode('local');
   renderCommand('uv');
 
+
   const signupForm = document.getElementById('blog-signup-form');
   const signupStatus = document.getElementById('blog-signup-status');
   if (signupForm) {
@@ -190,8 +191,10 @@ head -1 ./build.sh`,
       const input = signupForm.querySelector('input[type="email"]');
       const button = signupForm.querySelector('button[type="submit"]');
       const email = input && input.value ? input.value.trim() : '';
-      if (!email || !button) return;
-
+      if (!email || !button || button.disabled) return;
+      const blogTitleEl = document.querySelector('.article-header h1, header.article-header--cred h1, h1');
+      const blogTitle = (signupForm.getAttribute('data-blog-title') || (blogTitleEl && blogTitleEl.textContent) || document.title || 'this blog post').trim().replace(/\s*\|\s*AlertMend.*$/i, '');
+      const buttonLabel = button.textContent;
       button.disabled = true;
       button.textContent = 'Signing up…';
       if (signupStatus) {
@@ -199,24 +202,18 @@ head -1 ./build.sh`,
         signupStatus.textContent = '';
         signupStatus.className = 'signup-status';
       }
-
       try {
         const response = await fetch('https://api.alertmend.io/contact', {
           method: 'POST',
-          headers: {
-            Accept: 'application/json, text/plain, */*',
-            'Content-Type': 'application/json',
-          },
+          headers: { Accept: 'application/json, text/plain, */*', 'Content-Type': 'application/json' },
           body: JSON.stringify({
             full_name: 'Blog subscriber',
             company: '',
             email,
-            message:
-              'Newsletter signup from the AlertMend blog. Please add this email to the blog and product updates list.',
+            message: 'Newsletter signup from the AlertMend blog post "' + blogTitle + '". Please add this email to the blog and product updates list.',
             source: 'blog_signup',
           }),
         });
-
         if (response.ok) {
           if (input) input.value = '';
           if (signupStatus) {
@@ -240,7 +237,7 @@ head -1 ./build.sh`,
         }
       } finally {
         button.disabled = false;
-        button.textContent = 'Sign up';
+        button.textContent = buttonLabel || 'Sign up';
       }
     });
   }
