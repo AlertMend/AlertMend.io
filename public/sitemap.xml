@@ -77,6 +77,20 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Blog Post: automate-ops-toil -->
+  <url>
+    <loc>https://www.alertmend.io/blog/automate-ops-toil</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: cross-stack-incident-automation -->
+  <url>
+    <loc>https://www.alertmend.io/blog/cross-stack-incident-automation</loc>
+    <lastmod>2026-07-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- Blog Post: gitlab-monitoring -->
   <url>
     <loc>https://www.alertmend.io/blog/gitlab-monitoring</loc>
