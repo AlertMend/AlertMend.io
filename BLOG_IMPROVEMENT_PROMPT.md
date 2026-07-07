@@ -3,7 +3,7 @@
 This document serves as a comprehensive guide for improving blog content to ensure consistency, quality, and SEO optimization.
 
 ## Core Principles
-
+ 
 When improving or creating blog content, follow these principles:
 
 1. **Comprehensive Coverage**: Expand from basic content (100-150 lines) to detailed guides (400-550 lines)
