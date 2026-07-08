@@ -96,6 +96,10 @@
       "destination": "/blog/keep-ai-agents-online/index.html"
     },
     {
+      "source": "/blog/kubectl-get-svc",
+      "destination": "/blog/kubectl-get-svc/index.html"
+    },
+    {
       "source": "/blog/kubernetes-crashloopbackoff-fix",
       "destination": "/blog/kubernetes-crashloopbackoff-fix/index.html"
     },
@@ -198,6 +202,10 @@
     {
       "source": "/blog/vibe-coded-app-vm-observability",
       "destination": "/blog/vibe-coded-app-vm-observability/index.html"
+    },
+    {
+      "source": "/blog/vm-monitoring-and-automation",
+      "destination": "/blog/vm-monitoring-and-automation/index.html"
     },
     {
       "source": "/blog/wordpress-monitoring",

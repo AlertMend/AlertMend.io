@@ -1,5 +1,15 @@
 [
   {
+    "slug": "vm-monitoring-and-automation",
+    "title": "VM Monitoring and Auto-Remediation",
+    "excerpt": "Monitor Linux VMs (disk, memory, CPU, services, logs) with Grafana or agentless SSH, then auto-remediate the classic 3am failures with governed runbooks.",
+    "date": "2026-07-08",
+    "category": "Monitoring",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "vm monitoring, linux vm monitoring, linux server monitoring, grafana vm monitoring, monitor vm with prometheus, node exporter, vm auto remediation, agentless server monitoring, ssh monitoring, server automation, monitor fleet of vms, AlertMend"
+  },
+  {
     "slug": "automate-ops-toil",
     "title": "Eliminate Toil with Runbook Automation",
     "excerpt": "Toil is the repetitive ops work that never ends: disk cleanup, cert checks, idle-resource sweeps, fleet patching. Scheduled runbooks automate it, safely.",
@@ -6101,13 +6111,13 @@
   },
   {
     "slug": "kubectl-get-svc",
-    "title": "Kubectl Get Svc: Complete Guide",
-    "excerpt": "Master kubectl get svc command for listing and managing Kubernetes services. Learn service discovery, troubleshooting techniques, and integration with...",
+    "title": "kubectl get svc: List and Read Services",
+    "excerpt": "kubectl get svc lists Kubernetes Services. Learn what svc means, how to read the output, list all namespaces, and fix a pending EXTERNAL-IP.",
     "date": "2025-12-15",
     "category": "Kubernetes",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [],
-    "keywords": "kubectl get svc, Kubernetes services, service discovery, service management, kubectl commands, Kubernetes networking, service troubleshooting"
+    "keywords": "kubectl get svc, kubectl get services, kubectl get svc all namespaces, what is svc in kubernetes, svc meaning, kubectl get svc output, kubectl describe svc, oc get svc, kubernetes service, kubectl list services, get svc"
   },
   {
     "slug": "kubernetes-observability",
