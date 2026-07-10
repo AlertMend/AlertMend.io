@@ -1,5 +1,22 @@
 [
   {
+    "slug": "small-fleet-observability-few-clicks",
+    "title": "VM & Container Observability Setup",
+    "excerpt": "Monitor 3 to 4 VMs and Docker containers with logs, metrics, and traces in one place. Add alerts and on-call escalation without a DIY stack.",
+    "date": "2026-07-10",
+    "category": "Observability",
+    "author": "AlertMend Team",
+    "tags": [
+      "Observability",
+      "VMs",
+      "Containers",
+      "On-Call",
+      "OpenTelemetry",
+      "Docker"
+    ],
+    "keywords": "vm monitoring, docker monitoring, container monitoring, linux server monitoring, logs metrics and traces, unified observability, docker compose monitoring, VPS monitoring, server monitoring, on-call management, on-call escalation, incident escalation, OpenTelemetry monitoring, monitor docker containers on VMs, observability platform, AlertMend"
+  },
+  {
     "slug": "vm-monitoring-and-automation",
     "title": "VM Monitoring and Auto-Remediation",
     "excerpt": "Monitor Linux VMs (disk, memory, CPU, services, logs) with Grafana or agentless SSH, then auto-remediate the classic 3am failures with governed runbooks.",
