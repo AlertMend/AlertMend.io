@@ -192,6 +192,10 @@
       "destination": "/blog/self-healing-ai-agents/index.html"
     },
     {
+      "source": "/blog/small-fleet-observability-few-clicks",
+      "destination": "/blog/small-fleet-observability-few-clicks/index.html"
+    },
+    {
       "source": "/blog/top-kubernetes-cost-management-solutions",
       "destination": "/blog/top-kubernetes-cost-management-solutions/index.html"
     },
