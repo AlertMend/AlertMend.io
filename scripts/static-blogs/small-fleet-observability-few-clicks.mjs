@@ -11,7 +11,10 @@ import {
   CHROME_INLINE_CSS,
   buildNavHtml,
   buildSidebarHtml,
-  buildArticleHeader,
+  buildCredArticleHeader,
+  DINESH_AUTHOR,
+  dineshJsonLdAuthor,
+  AUTHOR_CRED_CSS,
   writeStaticBlogOutputs,
 } from '../static-blog-shared.mjs'
 
@@ -25,7 +28,7 @@ export async function build(slug) {
   const excerpt = meta.excerpt || ''
   const date = meta.date || '2026-07-10'
   const category = meta.category || 'Observability'
-  const author = meta.author || 'AlertMend Team'
+  const author = meta.author || DINESH_AUTHOR.name
   const keywords =
     meta.keywords ||
     'vm monitoring, docker monitoring, container monitoring, logs metrics and traces, on-call escalation, AlertMend'
@@ -204,7 +207,7 @@ export async function build(slug) {
     image: `https://www.alertmend.io${heroImage}`,
     datePublished: date,
     dateModified: date,
-    author: { '@type': 'Person', name: author },
+    author: dineshJsonLdAuthor(),
     publisher: {
       '@type': 'Organization',
       name: 'AlertMend AI',
@@ -238,7 +241,7 @@ export async function build(slug) {
   <script type="application/ld+json">${faqLd}</script>
   <script type="application/ld+json">${howToLd}</script>
   <link rel="stylesheet" href="${assetsBase}/styles.css">
-  <style>${CHROME_INLINE_CSS}</style>
+  <style>${CHROME_INLINE_CSS}${AUTHOR_CRED_CSS}</style>
 </head>
 <body>
 ${buildNavHtml(slug, postCalendlyUrl)}
@@ -246,7 +249,7 @@ ${buildNavHtml(slug, postCalendlyUrl)}
   <div class="main-container">
     <div class="content-wrapper">
       <div class="main-col">
-${buildArticleHeader(title, author, date, category)}
+${buildCredArticleHeader(title, date, category, author || DINESH_AUTHOR)}
 
     <div class="dl-blog">
       <section class="heroBand">

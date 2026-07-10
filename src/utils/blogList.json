@@ -5,7 +5,7 @@
     "excerpt": "Monitor 3 to 4 VMs and Docker containers with logs, metrics, and traces in one place. Add alerts and on-call escalation without a DIY stack.",
     "date": "2026-07-10",
     "category": "Observability",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [
       "Observability",
       "VMs",
