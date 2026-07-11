@@ -2738,13 +2738,13 @@
   },
   {
     "slug": "exit-code-126",
-    "title": "exit code 126 Guide Guide Complete Guide",
-    "excerpt": "In the world of DevOps and system monitoring, encountering an exit code 126 can be a stumbling block for smooth operations",
+    "title": "Exit Code 126: Meaning and Fixes",
+    "excerpt": "Exit code 126 means a command was found but could not run. Fix permissions, shebangs, noexec mounts, Docker, npm, CI, and Kubernetes issues.",
     "date": "2026-01-10",
     "category": "Troubleshooting",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [],
-    "keywords": "exit, code, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"
+    "keywords": "exit code 126, exit status 126, bash exit code 126, command terminated with exit code 126, command invoked cannot execute, linux exit code 126, docker exit code 126, npm error code 126, process completed with exit code 126"
   },
   {
     "slug": "exploring-the-latest-aiops-trends-for-2025-a-comprehensive-guide",
@@ -5338,13 +5338,13 @@
   },
   {
     "slug": "unable-to-get-local-issuer-certificate-npm",
-    "title": "Unable to Get Local Issuer Certificate Npm",
-    "excerpt": "Encountering the unable to get local issuer certificate npm error can disrupt your development workflow when working with Node.",
+    "title": "npm Local Issuer Certificate Fix",
+    "excerpt": "Fix npm unable to get local issuer certificate safely: diagnose corporate proxies, private registries, cafile, NODE_EXTRA_CA_CERTS, and strict-ssl.",
     "date": "2026-01-10",
     "category": "Security",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [],
-    "keywords": "unable, local, issuer, certificate, Security, AlertMend AI, AIOps"
+    "keywords": "unable to get local issuer certificate npm, npm unable to get local issuer certificate, npm unable to get issuer cert locally, npm install unable to get local issuer certificate, NODE_EXTRA_CA_CERTS npm, npm cafile, npm strict-ssl"
   },
   {
     "slug": "unable-to-merge-unrelated-histories-in-this-repository",

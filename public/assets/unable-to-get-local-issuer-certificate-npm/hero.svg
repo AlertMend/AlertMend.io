@@ -1,0 +1,57 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#09090B"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1010" cy="120" r="220" fill="#7C3AED" opacity=".18"/>
+  <circle cx="270" cy="540" r="240" fill="#7C3AED" opacity=".12"/>
+  <g filter="url(#shadow)">
+    <rect x="80" y="82" width="1040" height="466" rx="28" fill="#111113" stroke="#2A2438"/>
+  </g>
+  <g>
+    <image href="/logos/alertmend-logo.svg" x="112" y="112" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+    <text x="176" y="145" fill="white" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="30" font-weight="800">AlertMend</text>
+    <text x="360" y="145" fill="#A78BFA" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="20" font-weight="700">Troubleshooting guide</text>
+  </g>
+  <text x="112" y="245" fill="white" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="62" font-weight="900" letter-spacing="-2">
+    npm certificate error
+  </text>
+  <text x="112" y="318" fill="white" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="54" font-weight="850" letter-spacing="-1.5">
+    fix it without disabling SSL
+  </text>
+  <g transform="translate(112 382)">
+    <rect width="420" height="88" rx="16" fill="#18181B" stroke="#35313F"/>
+    <text x="24" y="36" fill="#A1A1AA" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="18">$ npm install</text>
+    <text x="24" y="65" fill="#FCA5A5" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="18">unable to get local issuer certificate</text>
+  </g>
+  <g transform="translate(610 384)">
+    <rect width="124" height="64" rx="14" fill="#18181B" stroke="#3F3F46"/>
+    <text x="36" y="39" fill="white" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="18" font-weight="800">npm</text>
+    <path d="M744 416H798" stroke="#A78BFA" stroke-width="4" stroke-linecap="round"/>
+    <path d="M789 406L801 416L789 426" stroke="#A78BFA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="812" width="132" height="64" rx="14" fill="#18181B" stroke="#3F3F46"/>
+    <text x="843" y="39" fill="white" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="18" font-weight="800">TLS</text>
+    <path d="M956 416H1010" stroke="#A78BFA" stroke-width="4" stroke-linecap="round"/>
+    <path d="M1001 406L1013 416L1001 426" stroke="#A78BFA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="1024" width="136" height="64" rx="14" fill="#2A1416" stroke="#FCA5A5" stroke-opacity=".45"/>
+    <text x="1051" y="39" fill="#FCA5A5" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="18" font-weight="800">CA?</text>
+  </g>
+  <text x="112" y="515" fill="#D4D4D8" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="24" font-weight="600">
+    Diagnose proxy, private registry, cafile, NODE_EXTRA_CA_CERTS, Docker, and CI safely.
+  </text>
+  <defs>
+    <radialGradient id="bg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1012 116) rotate(145) scale(914 739)">
+      <stop stop-color="#2E1065"/>
+      <stop offset=".62" stop-color="#09090B"/>
+      <stop offset="1" stop-color="#09090B"/>
+    </radialGradient>
+    <filter id="shadow" x="40" y="42" width="1120" height="546" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="12"/>
+      <feGaussianBlur stdDeviation="20"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.32 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_2"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_2" result="shape"/>
+    </filter>
+  </defs>
+</svg>

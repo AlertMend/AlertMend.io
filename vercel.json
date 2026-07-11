@@ -68,6 +68,10 @@
       "destination": "/blog/enterprise-ai-agent-observability/index.html"
     },
     {
+      "source": "/blog/exit-code-126",
+      "destination": "/blog/exit-code-126/index.html"
+    },
+    {
       "source": "/blog/exit-code-5",
       "destination": "/blog/exit-code-5/index.html"
     },
@@ -198,6 +202,10 @@
     {
       "source": "/blog/top-kubernetes-cost-management-solutions",
       "destination": "/blog/top-kubernetes-cost-management-solutions/index.html"
+    },
+    {
+      "source": "/blog/unable-to-get-local-issuer-certificate-npm",
+      "destination": "/blog/unable-to-get-local-issuer-certificate-npm/index.html"
     },
     {
       "source": "/blog/url-monitoring-automated-fixes",
