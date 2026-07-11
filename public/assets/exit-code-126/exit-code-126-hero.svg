@@ -1,0 +1,20 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#09090B"/>
+  <circle cx="1020" cy="94" r="250" fill="#7C3AED" fill-opacity="0.16"/>
+  <circle cx="178" cy="534" r="220" fill="#7C3AED" fill-opacity="0.12"/>
+  <rect x="86" y="74" width="1028" height="482" rx="30" fill="#18181B" stroke="#3F3F46"/>
+  <text x="128" y="144" fill="#A78BFA" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="28" font-weight="800" letter-spacing="4">ALERTMEND TROUBLESHOOTING</text>
+  <text x="128" y="238" fill="#FAFAFA" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="64" font-weight="850">Exit Code 126</text>
+  <text x="128" y="306" fill="#D4D4D8" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="34" font-weight="600">Command found, but cannot execute</text>
+  <rect x="128" y="368" width="244" height="86" rx="16" fill="#27272A" stroke="#52525B"/>
+  <text x="154" y="420" fill="#FAFAFA" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="26">found</text>
+  <path d="M391 411H501" stroke="#A78BFA" stroke-width="7" stroke-linecap="round" stroke-dasharray="14 14"/>
+  <path d="M501 411L476 392V430L501 411Z" fill="#A78BFA"/>
+  <rect x="522" y="368" width="264" height="86" rx="16" fill="#27272A" stroke="#7C3AED"/>
+  <text x="548" y="420" fill="#FAFAFA" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="26">not executable</text>
+  <path d="M805 411H915" stroke="#A78BFA" stroke-width="7" stroke-linecap="round" stroke-dasharray="14 14"/>
+  <path d="M915 411L890 392V430L915 411Z" fill="#A78BFA"/>
+  <rect x="936" y="368" width="136" height="86" rx="16" fill="#7C3AED"/>
+  <text x="973" y="420" fill="#FFFFFF" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="28" font-weight="800">126</text>
+  <text x="128" y="512" fill="#A1A1AA" font-family="Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="24">Fix permissions, shebangs, noexec mounts, Docker CMD/ENTRYPOINT, and CI executable bits.</text>
+</svg>
