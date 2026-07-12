@@ -1,5 +1,20 @@
 [
   {
+    "slug": "ai-sre-tooling",
+    "title": "AI SRE Tooling: What Really Automates Ops",
+    "excerpt": "The four tiers of AI SRE tooling, what to evaluate, and where agentic remediation actually closes the loop instead of just summarizing alerts.",
+    "date": "2026-07-12",
+    "category": "AIOps",
+    "author": "Dinesh Agrawal",
+    "tags": [
+      "AIOps",
+      "SRE",
+      "Incident Response",
+      "Automation"
+    ],
+    "keywords": "ai sre tooling, ai site reliability engineering, agentic sre, ai incident response, closed loop remediation, auto remediation tools, aiops platform"
+  },
+  {
     "slug": "small-fleet-observability-few-clicks",
     "title": "VM & Container Observability Setup",
     "excerpt": "Monitor 3 to 4 VMs and Docker containers with logs, metrics, and traces in one place. Add alerts and on-call escalation without a DIY stack.",
@@ -2878,13 +2893,13 @@
   },
   {
     "slug": "gitlab-unable-to-get-local-issuer-certificate",
-    "title": "Gitlab Unable to Get Local Issuer Certificate",
-    "excerpt": "When dealing with GitLab, encountering the error gitlab unable to get local issuer certificate can be particularly perplexing for developers and DevOps teams",
+    "title": "GitLab Local Issuer Certificate Fix",
+    "excerpt": "Fix GitLab unable to get local issuer certificate safely: diagnose Git clone, Runner, CI, custom CA chains, sslCAInfo, and trusted-certs.",
     "date": "2026-01-10",
     "category": "DevOps",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [],
-    "keywords": "gitlab, unable, local, issuer, certificate, DevOps, AlertMend AI, AIOps"
+    "keywords": "gitlab unable to get local issuer certificate, gitlab ssl certificate problem unable to get local issuer certificate, unable to get local issuer certificate gitlab, GitLab Runner custom CA, git http.sslCAInfo, GitLab trusted-certs, GIT_SSL_NO_VERIFY"
   },
   {
     "slug": "heartbeat-pricing",

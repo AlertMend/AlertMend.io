@@ -28,6 +28,10 @@
       "destination": "/blog/ai-agent-observability-in-production/index.html"
     },
     {
+      "source": "/blog/ai-sre-tooling",
+      "destination": "/blog/ai-sre-tooling/index.html"
+    },
+    {
       "source": "/blog/automate-ops-toil",
       "destination": "/blog/automate-ops-toil/index.html"
     },
@@ -78,6 +82,10 @@
     {
       "source": "/blog/gitlab-monitoring",
       "destination": "/blog/gitlab-monitoring/index.html"
+    },
+    {
+      "source": "/blog/gitlab-unable-to-get-local-issuer-certificate",
+      "destination": "/blog/gitlab-unable-to-get-local-issuer-certificate/index.html"
     },
     {
       "source": "/blog/gpu-monitoring",
