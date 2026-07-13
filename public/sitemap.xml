@@ -77,6 +77,13 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Blog Post: whatsapp-call-escalation-monitoring-alerts -->
+  <url>
+    <loc>https://www.alertmend.io/blog/whatsapp-call-escalation-monitoring-alerts</loc>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- Blog Post: ai-sre-tooling -->
   <url>
     <loc>https://www.alertmend.io/blog/ai-sre-tooling</loc>

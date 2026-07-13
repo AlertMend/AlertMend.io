@@ -236,6 +236,10 @@
       "destination": "/blog/vm-monitoring-and-automation/index.html"
     },
     {
+      "source": "/blog/whatsapp-call-escalation-monitoring-alerts",
+      "destination": "/blog/whatsapp-call-escalation-monitoring-alerts/index.html"
+    },
+    {
       "source": "/blog/wordpress-monitoring",
       "destination": "/blog/wordpress-monitoring/index.html"
     },

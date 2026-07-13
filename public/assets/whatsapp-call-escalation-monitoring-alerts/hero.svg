@@ -1,0 +1,55 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#09090B"/>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1000" cy="118" r="226" fill="#7C3AED" opacity=".18"/>
+  <circle cx="270" cy="548" r="250" fill="#047857" opacity=".15"/>
+  <g filter="url(#shadow)">
+    <rect x="80" y="82" width="1040" height="466" rx="28" fill="#111113" stroke="#2A2438"/>
+  </g>
+  <g>
+    <image href="/logos/alertmend-logo.svg" x="112" y="112" width="48" height="48" preserveAspectRatio="xMidYMid meet"/>
+    <text x="176" y="145" fill="white" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="30" font-weight="800">AlertMend</text>
+    <text x="360" y="145" fill="#A78BFA" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="20" font-weight="700">Escalation guide</text>
+  </g>
+  <text x="112" y="245" fill="white" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="58" font-weight="900" letter-spacing="-2">
+    WhatsApp + Call
+  </text>
+  <text x="112" y="318" fill="white" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="52" font-weight="850" letter-spacing="-1.5">
+    escalation for your alerts
+  </text>
+  <g transform="translate(112 382)">
+    <rect width="250" height="84" rx="16" fill="#18181B" stroke="#35313F"/>
+    <text x="24" y="34" fill="#A1A1AA" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="17">Grafana / Datadog</text>
+    <text x="24" y="62" fill="#D8B4FE" font-family="ui-monospace,SFMono-Regular,Menlo,monospace" font-size="17">alert fires</text>
+    <path d="M382 424H446" stroke="#A78BFA" stroke-width="4" stroke-linecap="round"/>
+    <path d="M437 414L449 424L437 434" stroke="#A78BFA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="462" width="220" height="84" rx="16" fill="#052E2B" stroke="#34D399" stroke-opacity=".45"/>
+    <text x="494" y="34" fill="white" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="19" font-weight="800">WhatsApp</text>
+    <text x="494" y="61" fill="#A7F3D0" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="16">ack + context</text>
+    <path d="M704 424H768" stroke="#A78BFA" stroke-width="4" stroke-linecap="round"/>
+    <path d="M759 414L771 424L759 434" stroke="#A78BFA" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="784" width="210" height="84" rx="16" fill="#20113A" stroke="#A78BFA" stroke-opacity=".48"/>
+    <text x="824" y="34" fill="white" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="19" font-weight="800">Phone call</text>
+    <text x="824" y="61" fill="#D8B4FE" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="16">if no ack</text>
+  </g>
+  <text x="112" y="515" fill="#D4D4D8" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="24" font-weight="600">
+    Keep your monitoring stack. Add owner routing, WhatsApp alerts, phone calls, and audit.
+  </text>
+  <defs>
+    <radialGradient id="bg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(992 112) rotate(145) scale(920 742)">
+      <stop stop-color="#2E1065"/>
+      <stop offset=".58" stop-color="#09090B"/>
+      <stop offset="1" stop-color="#09090B"/>
+    </radialGradient>
+    <filter id="shadow" x="40" y="42" width="1120" height="546" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="12"/>
+      <feGaussianBlur stdDeviation="20"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.32 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_2"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_2" result="shape"/>
+    </filter>
+  </defs>
+</svg>
