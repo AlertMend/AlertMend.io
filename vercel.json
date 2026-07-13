@@ -80,6 +80,10 @@
       "destination": "/blog/exit-code-5/index.html"
     },
     {
+      "source": "/blog/git-config-global-http-sslbackend-schannel",
+      "destination": "/blog/git-config-global-http-sslbackend-schannel/index.html"
+    },
+    {
       "source": "/blog/gitlab-monitoring",
       "destination": "/blog/gitlab-monitoring/index.html"
     },
@@ -194,6 +198,10 @@
     {
       "source": "/blog/pagerduty-alternatives",
       "destination": "/blog/pagerduty-alternatives/index.html"
+    },
+    {
+      "source": "/blog/qemu-exited-with-code-1",
+      "destination": "/blog/qemu-exited-with-code-1/index.html"
     },
     {
       "source": "/blog/reduce-mttr-for-ai-agents",

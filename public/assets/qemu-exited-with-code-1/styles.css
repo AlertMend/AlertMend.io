@@ -1,0 +1,82 @@
+@import url('/assets/unable-to-get-local-issuer-certificate-npm/styles.css');
+
+.qemuCode1 {
+  color: var(--text-dim);
+}
+
+.qemuCode1 .vmNode {
+  border-color: rgba(5, 150, 105, 0.38);
+  background: rgba(5, 150, 105, 0.12);
+}
+
+.qemuCode1 .dangerNode {
+  border-color: rgba(252, 165, 165, 0.48);
+  background: rgba(185, 28, 28, 0.18);
+}
+
+.qemuCode1 .logLine {
+  margin: 1rem 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  border-radius: var(--radius);
+  background: #fafafa;
+  color: #27272a;
+  font: 0.86rem/1.65 ui-monospace, SFMono-Regular, Menlo, monospace;
+  overflow-wrap: anywhere;
+}
+
+.qemuCode1 .decisionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.qemuCode1 .decisionCard {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid #e4e4e7;
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.qemuCode1 .decisionCard h3 {
+  margin: 0 0 0.45rem;
+  color: #18181b;
+  font-size: 1.05rem;
+}
+
+.qemuCode1 .decisionCard p {
+  margin: 0;
+  color: #52525b;
+  line-height: 1.65;
+}
+
+.qemuCode1 .decisionCard strong {
+  color: var(--accent);
+}
+
+.qemuCode1 .miniChecklist {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1rem 0 1.3rem;
+}
+
+.qemuCode1 .miniChecklist li {
+  list-style: none;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid #e4e4e7;
+  border-radius: var(--radius);
+  background: #fff;
+  color: #3f3f46;
+}
+
+.qemuCode1 .miniChecklist strong {
+  color: #18181b;
+}
+
+@media (max-width: 860px) {
+  .qemuCode1 .decisionGrid {
+    grid-template-columns: 1fr;
+  }
+}
