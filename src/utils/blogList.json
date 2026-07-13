@@ -2883,13 +2883,13 @@
   },
   {
     "slug": "git-config-global-http-sslbackend-schannel",
-    "title": "Git Config Global Http Sslbackend Schannel",
-    "excerpt": "git config global http sslbackend schannel Setting Up Git with SChannel for Secure Connections Integrating Git seamlessly with Windows' security systems is...",
+    "title": "git http.sslBackend schannel Fix",
+    "excerpt": "Learn what git config --global http.sslBackend schannel does, when to use it on Windows, and how to fix unsupported ssl backend schannel safely.",
     "date": "2026-01-10",
     "category": "DevOps",
-    "author": "AlertMend Team",
+    "author": "Dinesh Agrawal",
     "tags": [],
-    "keywords": "config, global, http, sslbackend, schannel, DevOps, AlertMend AI, AIOps"
+    "keywords": "git config --global http.sslbackend schannel, git config schannel, git schannel, http.sslbackend schannel, git http.sslbackend, unsupported ssl backend schannel, supported ssl backends gnutls, supported ssl backends openssl, http.sslcainfo"
   },
   {
     "slug": "gitlab-unable-to-get-local-issuer-certificate",
@@ -4633,13 +4633,13 @@
   },
   {
     "slug": "qemu-exited-with-code-1",
-    "title": "qemu exited with code 1 Guide Guide",
-    "excerpt": "Encountering the QEMU exited with code 1 error can be challenging for system administrators working within virtualized environments. Learn fixes.",
+    "title": "QEMU Exited Code 1 Fix",
+    "excerpt": "Fix Proxmox task error: start failed: QEMU exited with code 1. Diagnose image locks, storage, CPU, passthrough, permissions, and safe recovery.",
     "date": "2026-01-10",
-    "category": "Kubernetes",
-    "author": "AlertMend Team",
+    "category": "Virtualization",
+    "author": "Arvind Rajpurohit",
     "tags": [],
-    "keywords": "qemu, exited, with, code, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
+    "keywords": "qemu exited with code 1, task error start failed qemu exited with code 1, proxmox qemu exited with code 1, start failed qemu exited with code 1, qemu exited from an error, is another process using the image, qemu process terminated unexpectedly exit status 1"
   },
   {
     "slug": "rancher-alternative",
