@@ -1,5 +1,25 @@
 [
   {
+    "slug": "keycloak-monitoring",
+    "title": "Keycloak Monitoring Guide for Self-Hosted SSO",
+    "excerpt": "A practical Keycloak monitoring guide for self-hosted SSO: health checks, metrics, login probes, Prometheus alerts, Kubernetes probes, and safe recovery.",
+    "date": "2026-07-14",
+    "category": "Observability",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "Keycloak monitoring, self hosted Keycloak monitoring, Keycloak health check, Keycloak health endpoint, Keycloak metrics, Keycloak Prometheus metrics, Keycloak login failures, Keycloak OIDC monitoring, Keycloak Kubernetes monitoring, Keycloak database connection pool, Keycloak cache monitoring, Keycloak cluster monitoring, Keycloak 503, Keycloak login latency, Keycloak auto recovery, AlertMend Keycloak monitoring"
+  },
+  {
+    "slug": "opentelemetry-collector-monitoring",
+    "title": "OpenTelemetry Collector Monitoring",
+    "excerpt": "Monitor the OpenTelemetry Collector itself: health checks, internal metrics, exporter failures, queue buildup, dropped spans, and safe recovery workflows.",
+    "date": "2026-07-14",
+    "category": "Observability",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "OpenTelemetry Collector monitoring, OTel Collector monitoring, monitor OpenTelemetry Collector, OpenTelemetry Collector metrics, otelcol internal metrics, OTel Collector health check, OpenTelemetry Collector health_check, OTel Collector exporter failed, OpenTelemetry Collector queue size, OpenTelemetry Collector dropped spans, otelcol exporter send failed spans, otelcol receiver refused spans, OpenTelemetry Collector Kubernetes monitoring, OTel Collector zPages, OTel Collector pprof, telemetry pipeline monitoring, observability pipeline monitoring, AlertMend OpenTelemetry Collector"
+  },
+  {
     "slug": "whatsapp-call-escalation-monitoring-alerts",
     "title": "WhatsApp + Call Escalation for Alerts",
     "excerpt": "Add WhatsApp and phone call escalation to Datadog log monitors, Prometheus, Grafana, CloudWatch, and existing monitoring alerts without replacing your stack.",
