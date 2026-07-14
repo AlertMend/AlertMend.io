@@ -112,6 +112,10 @@
       "destination": "/blog/keep-ai-agents-online/index.html"
     },
     {
+      "source": "/blog/keycloak-monitoring",
+      "destination": "/blog/keycloak-monitoring/index.html"
+    },
+    {
       "source": "/blog/kubectl-get-svc",
       "destination": "/blog/kubectl-get-svc/index.html"
     },
@@ -190,6 +194,10 @@
     {
       "source": "/blog/openclaw-cloud-infra-slack-telegram",
       "destination": "/blog/openclaw-cloud-infra-slack-telegram/index.html"
+    },
+    {
+      "source": "/blog/opentelemetry-collector-monitoring",
+      "destination": "/blog/opentelemetry-collector-monitoring/index.html"
     },
     {
       "source": "/blog/optimizing-high-jvm-heap-usage-in-elasticsearch",
