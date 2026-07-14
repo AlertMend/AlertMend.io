@@ -290,7 +290,7 @@ function symptomPanelsHtml() {
 
 const content = `
 <header class="article-header article-header--cred">
-  <div class="brandChip"><img src="/logos/alertmend-logo.svg" alt="" width="30" height="30">AlertMend field guide</div>
+  <div class="brandChip"><img src="/logos/alertmend-logo.svg" alt="" width="30" height="30">AlertMend</div>
   <h1>${esc(h1)}</h1>
   <p class="articleSubtitle">${esc(description)}</p>
   <div class="writerByline" aria-label="Article author">
