@@ -173,8 +173,9 @@ function jsonLd() {
 
 function render() {
   const canonical = `${SITE_URL}/blog/${CFG.slug}`, cal = calendlyUrl(CFG.slug), img = `${SITE_URL}/assets/${CFG.slug}/hero.png`
-  const related = [['cross-stack-incident-automation', 'Cross-Stack Incident Automation'], ['top-kubernetes-cost-management-solutions', 'Kubernetes Cost Management'], ['gpu-monitoring', 'GPU Monitoring']]
+  const related = [['ops-tasks-to-automate', '12 Ops Tasks You Can Automate'], ['cross-stack-incident-automation', 'Cross-Stack Incident Automation'], ['top-kubernetes-cost-management-solutions', 'Kubernetes Cost Management'], ['gpu-monitoring', 'GPU Monitoring']]
   const relatedSidebar = [
+    { slug: 'ops-tasks-to-automate', title: '12 Daily Ops Tasks You Can Automate' },
     { slug: 'cross-stack-incident-automation', title: 'Automate Complex Incidents with Runbooks' },
     { slug: 'top-kubernetes-cost-management-solutions', title: 'Top Kubernetes Cost Management Solutions' },
     { slug: 'gpu-monitoring', title: 'GPU Monitoring: Detect Idle and Recover' },
@@ -297,6 +298,7 @@ ${buildCredArticleHeader(CFG.h1, DATE, CFG.category)}
       <h2 class="sectionHead" id="tasks">Toil that becomes a scheduled runbook</h2>
       <p class="sectionSub">If it is manual, repetitive, and safe to script, it belongs on a schedule, not on your calendar. These are the common ones.</p>
       <div class="rbGrid">${toil.map((c) => `<div class="rbCard"><h3>${esc(c[0])}</h3><p>${esc(c[1])}</p></div>`).join('')}</div>
+      <p class="bodyText" style="margin-top:1rem;">Want each of these written out as a runbook you can copy, with the exact trigger and the time it gives back? The <a href="/blog/ops-tasks-to-automate">ops automation cookbook</a> has all twelve.</p>
 
       <h2 class="sectionHead" id="fleet">Why fleet fan-out is the whole point</h2>
       <p class="bodyText">Toil is expensive because it is repetition times scale. Checking disk on one VM is a minute. Doing it on two hundred is a morning, every time. A runbook step runs across every connected VM, or every pod that matches a label, in a single execution, so the cost of a routine task stops scaling with the size of your fleet. That is the difference between automation that saves an hour and automation that gives a team its week back.</p>

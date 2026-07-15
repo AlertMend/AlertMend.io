@@ -225,6 +225,7 @@ steps:
       <h2 class="sectionHead" id="tasks">Toil that becomes a scheduled runbook</h2>
       <p class="sectionSub">If it is manual, repetitive, and safe to script, it belongs on a schedule, not on your calendar. These are the common ones.</p>
       <div class="rbGrid"><div class="rbCard"><h3>Disk and log hygiene</h3><p>Measure logs versus disk, archive to S3, rotate, and clean before a volume fills, across every host on a schedule.</p></div><div class="rbCard"><h3>Certificate expiry</h3><p>Check every endpoint on a timer and alert or renew before a certificate lapses and takes a service down.</p></div><div class="rbCard"><h3>Idle and orphaned resources</h3><p>Find idle GPUs, unattached volumes, and old snapshots on a schedule and reclaim the spend, turning a cost review into a sweep.</p></div><div class="rbCard"><h3>Kubernetes hygiene</h3><p>Clear completed jobs, evicted pods, and stale images that pile up in every cluster and quietly consume capacity.</p></div><div class="rbCard"><h3>Fleet patching and validation</h3><p>Run the same package check or update across every connected VM in one pass instead of SSHing host by host.</p></div><div class="rbCard"><h3>Scheduled scale-down</h3><p>Scale dev and staging down at night and back up in the morning, so non-production stops billing while nobody is using it.</p></div><div class="rbCard"><h3>Backup verification</h3><p>Confirm backups actually ran and can restore, not just that the job exited zero, on a recurring schedule.</p></div><div class="rbCard"><h3>Scheduled reports</h3><p>Push a recurring executive summary or cost-optimization pack to stakeholders by email, without anyone assembling it by hand.</p></div></div>
+      <p class="bodyText" style="margin-top:1rem;">Want each of these written out as a runbook you can copy, with the exact trigger and the time it gives back? The <a href="/blog/ops-tasks-to-automate">ops automation cookbook</a> has all twelve.</p>
 
       <h2 class="sectionHead" id="fleet">Why fleet fan-out is the whole point</h2>
       <p class="bodyText">Toil is expensive because it is repetition times scale. Checking disk on one VM is a minute. Doing it on two hundred is a morning, every time. A runbook step runs across every connected VM, or every pod that matches a label, in a single execution, so the cost of a routine task stops scaling with the size of your fleet. That is the difference between automation that saves an hour and automation that gives a team its week back.</p>
@@ -268,7 +269,7 @@ steps:
         <div class="ctaBtnRow"><a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=automate-ops-toil" class="ctaBtn" target="_blank" rel="noopener noreferrer">Book a free consultation &rarr;</a></div>
       </div>
     </div>
-    <div class="promo"><p><strong>Related:</strong> <a href="/blog/cross-stack-incident-automation">Cross-Stack Incident Automation</a> &middot; <a href="/blog/top-kubernetes-cost-management-solutions">Kubernetes Cost Management</a> &middot; <a href="/blog/gpu-monitoring">GPU Monitoring</a></p></div>
+    <div class="promo"><p><strong>Related:</strong> <a href="/blog/ops-tasks-to-automate">12 Ops Tasks You Can Automate</a> &middot; <a href="/blog/cross-stack-incident-automation">Cross-Stack Incident Automation</a> &middot; <a href="/blog/top-kubernetes-cost-management-solutions">Kubernetes Cost Management</a> &middot; <a href="/blog/gpu-monitoring">GPU Monitoring</a></p></div>
       </div>
 
       <aside class="sidebar">
@@ -286,6 +287,7 @@ steps:
           <div class="sidebar-card">
             <div class="related-content-title">Related content</div>
             <ul class="related-posts-list">
+              <li><a href="/blog/ops-tasks-to-automate" class="related-post-link">12 Daily Ops Tasks You Can Automate</a></li>
               <li><a href="/blog/cross-stack-incident-automation" class="related-post-link">Automate Complex Incidents with Runbooks</a></li>
               <li><a href="/blog/top-kubernetes-cost-management-solutions" class="related-post-link">Top Kubernetes Cost Management Solutions</a></li>
               <li><a href="/blog/gpu-monitoring" class="related-post-link">GPU Monitoring: Detect Idle and Recover</a></li>
