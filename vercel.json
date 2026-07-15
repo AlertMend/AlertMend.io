@@ -200,6 +200,10 @@
       "destination": "/blog/opentelemetry-collector-monitoring/index.html"
     },
     {
+      "source": "/blog/ops-tasks-to-automate",
+      "destination": "/blog/ops-tasks-to-automate/index.html"
+    },
+    {
       "source": "/blog/optimizing-high-jvm-heap-usage-in-elasticsearch",
       "destination": "/blog/optimizing-high-jvm-heap-usage-in-elasticsearch/index.html"
     },
@@ -218,6 +222,10 @@
     {
       "source": "/blog/self-healing-ai-agents",
       "destination": "/blog/self-healing-ai-agents/index.html"
+    },
+    {
+      "source": "/blog/sigsegv-error",
+      "destination": "/blog/sigsegv-error/index.html"
     },
     {
       "source": "/blog/small-fleet-observability-few-clicks",

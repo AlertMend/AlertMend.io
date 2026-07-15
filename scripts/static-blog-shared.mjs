@@ -310,7 +310,7 @@ export function buildAuthorCredLine(author = DINESH_AUTHOR, extraClass = '') {
   const nameHtml = author.linkedin
     ? `<a href="${author.linkedin}" target="_blank" rel="noopener noreferrer">${esc(author.name)}</a>`
     : `<span class="authorCredName">${esc(author.name)}</span>`
-  return `<p class="${cls}">${nameHtml}, ${esc(author.role)} · ${esc(author.credLine)}</p>`
+  return `<p class="${cls}">${nameHtml} · ${esc(author.credLine)}</p>`
 }
 
 /** Article header: title + cred line + date (or custom meta line). */

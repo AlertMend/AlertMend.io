@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>12 Daily Ops Tasks You Can Automate | AlertMend AI</title>
+  <meta name="description" content="A practical cookbook of 12 repetitive ops tasks worth automating, each with a copy-paste runbook, the trigger to use, and the time it gives back.">
+  <meta name="keywords" content="tasks to automate, devops automation examples, what to automate, repetitive ops tasks, automation ideas, sysadmin automation, runbook examples, automate repetitive tasks, ops automation, disk cleanup automation, cert renewal automation, AlertMend">
+  <meta name="author" content="Dinesh Agrawal">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://www.alertmend.io/blog/ops-tasks-to-automate">
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.alertmend.io/blog/ops-tasks-to-automate">
+  <meta property="og:title" content="12 Daily Ops Tasks You Can Automate">
+  <meta property="og:description" content="A practical cookbook of 12 repetitive ops tasks worth automating, each with a copy-paste runbook, the trigger to use, and the time it gives back.">
+  <meta property="og:image" content="https://www.alertmend.io/assets/ops-tasks-to-automate/hero.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="12 Daily Ops Tasks You Can Automate">
+  <meta name="twitter:description" content="A practical cookbook of 12 repetitive ops tasks worth automating, each with a copy-paste runbook, the trigger to use, and the time it gives back.">
+  <meta name="twitter:image" content="https://www.alertmend.io/assets/ops-tasks-to-automate/hero.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"12 Daily Ops Tasks You Can Automate","description":"A practical cookbook of 12 repetitive ops tasks worth automating, each with a copy-paste runbook, the trigger to use, and the time it gives back.","image":"https://www.alertmend.io/assets/ops-tasks-to-automate/hero.png","datePublished":"2026-07-15","dateModified":"2026-07-15","author":{"@type":"Person","name":"Dinesh Agrawal","jobTitle":"Co-Founder at AlertMend.io","url":"https://www.linkedin.com/in/dineshagrawal85/","sameAs":["https://www.linkedin.com/in/dineshagrawal85/"]},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/ops-tasks-to-automate"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which ops tasks should I automate first?","acceptedAnswer":{"@type":"Answer","text":"Start with the work that is frequent, mechanical, and low-judgment: freeing a full disk, restarting a stuck service, renewing certificates, pruning Docker on CI runners, and sweeping idle cloud spend. These run the same way every time, so a runbook covers them cleanly and you feel the time saved immediately. Leave the rare, high-judgment tasks for later."}},{"@type":"Question","name":"How do I know a task is worth automating?","acceptedAnswer":{"@type":"Answer","text":"Score it on three things: how often you do it, how long each run takes, and how much judgment it needs. Anything you do weekly or more, that takes real time, and that follows the same steps every time is a strong candidate. A task you touch once a quarter that needs careful thought each time usually is not, unless it is risky enough that a scripted, audited version is safer than doing it by hand."}},{"@type":"Question","name":"Is it safe to auto-remediate production?","acceptedAnswer":{"@type":"Answer","text":"Yes, when the automation is governed. Low-risk, reversible steps like a restart or a log rotation can run unattended. Anything destructive or customer-impacting pauses for a Slack, Microsoft Teams, or Email approval before it runs, permissions are scoped with RBAC, and every host touched and command run is recorded. That combination is usually safer than a human doing the same thing by hand at 2am."}},{"@type":"Question","name":"What is the difference between this and a cron job with a bash script?","acceptedAnswer":{"@type":"Answer","text":"A cron script runs one command on one host with no branching, no fleet fan-out, no approval gate, and no record of what happened. A runbook checks a condition first, fans the same action out across every matching host or pod in one run, pauses for a human only where the risk is real, and logs every step, without you maintaining the glue code and keeping the on-call knowledge in one person head."}},{"@type":"Question","name":"Can I start with just one runbook?","acceptedAnswer":{"@type":"Answer","text":"Yes, and you should. Pick the single task that wakes you up or eats the most of your week, automate that one end to end, and prove it. Once it is running and audited, the same engine covers the next task, then the next. There is no need to automate all twelve at once."}},{"@type":"Question","name":"How long does it take to set up a runbook?","acceptedAnswer":{"@type":"Answer","text":"Most take from a few minutes to about an hour. Runbooks are built visually on a canvas from reusable steps, so a disk-cleanup or cert-renewal flow is quick to assemble, test on one host, and then roll out across the fleet. The time goes into deciding the guardrails, not writing glue code."}},{"@type":"Question","name":"Do these need an agent installed on every server?","acceptedAnswer":{"@type":"Answer","text":"No. AlertMend runs the host-level recipes agentlessly over SSH, and reaches Kubernetes, cloud APIs, databases, and messaging through connectors. There is no per-server agent to install, update, or secure, which is one less thing to maintain on the fleet you are trying to simplify."}},{"@type":"Question","name":"Should a runbook be triggered by a schedule or an alert?","acceptedAnswer":{"@type":"Answer","text":"Both, depending on the task. Hygiene work like cert checks, log rotation, and idle-resource sweeps runs on a schedule so it happens before anything breaks. Reactive work like recovering a crashlooping pod or absorbing a queue backlog is triggered by the alert you already have. The same runbook engine handles either trigger."}},{"@type":"Question","name":"How do approvals work for the destructive tasks?","acceptedAnswer":{"@type":"Answer","text":"A step marked as requiring approval pauses the run and posts to Slack, Microsoft Teams, or Email with the context and the exact action it wants to take. It proceeds only after an authorized person signs off, and the approval is recorded with the rest of the audit trail. Deleting volumes, dropping data, or cleaning at fleet scale are the usual places to gate."}},{"@type":"Question","name":"Does automating these tasks replace my monitoring?","acceptedAnswer":{"@type":"Answer","text":"No, it complements it. Monitoring and dashboards tell you something is wrong or drifting. These runbooks are the layer that acts on that signal: they take the alert or the schedule and do the fix, the cleanup, or the report. You keep Grafana, Prometheus, or whatever you use today, and add the hands that respond to it."}},{"@type":"Question","name":"Can it send the morning health digest to Slack or WhatsApp?","acceptedAnswer":{"@type":"Answer","text":"Yes. A scheduled report can gather host, pod, certificate, backup, and cost status into one card and push it to Slack, Microsoft Teams, or Email on a calendar, and route a copy to WhatsApp for the on-call lead. The team sees the state of production without opening three dashboards every morning."}},{"@type":"Question","name":"How much time can I realistically save?","acceptedAnswer":{"@type":"Answer","text":"It depends on how many of these you still do by hand and how often, but teams commonly reclaim on the order of a day a week once the recurring recipes are automated. Use the calculator above with your own numbers: even a handful of tasks, done a few times a week, adds up to weeks of engineering time over a year."}}]}</script>
+  <link rel="stylesheet" href="/assets/make-error-127/styles.css">
+  <link rel="stylesheet" href="/assets/ops-tasks-to-automate/styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: #1f2937; background: #fff; -webkit-font-smoothing: antialiased; }
+    .navbar { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(229,231,235,.8); z-index: 50; }
+    .navbar-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .navbar-content { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    .navbar-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+    .navbar-logo-icon { height: 32px; width: auto; }
+    .navbar-links { display: none; align-items: center; gap: 4px; }
+    @media (min-width: 1024px) { .navbar-links { display: flex; } }
+    .navbar-link { padding: 6px 12px; font-size: 0.875rem; font-weight: 500; color: #3f3f46; text-decoration: none; border-radius: 6px; }
+    .navbar-link:hover { color: #09090b; background: #f4f4f5; }
+    .navbar-link.active { color: #09090b; background: #fafafa; }
+    .navbar-actions { display: none; align-items: center; gap: 10px; margin-left: 16px; padding-left: 16px; border-left: 1px solid #e5e7eb; }
+    @media (min-width: 1024px) { .navbar-actions { display: flex; } }
+    .navbar-button { padding: 8px 16px; font-size: 0.875rem; font-weight: 600; border-radius: 999px; text-decoration: none; }
+    .navbar-button-primary { background: #09090b; color: #fff; }
+    .navbar-button-secondary { color: #3f3f46; }
+    .main-container { max-width: 1280px; margin: 0 auto; padding: 96px 24px 64px; }
+    .content-wrapper { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media (min-width: 1024px) {
+      .content-wrapper { grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
+    }
+    .main-col { min-width: 0; max-width: 820px; }
+    @media (min-width: 1024px) { .main-col { max-width: none; } }
+    .sidebar { display: none; }
+    @media (min-width: 1024px) { .sidebar { display: block; } }
+    .sidebar-content { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card { background: #fafafa; border-radius: 8px; padding: 24px; border: 1px solid #e4e4e7; }
+    .sidebar-card-title { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
+    .signup-form { display: flex; flex-direction: column; gap: 12px; }
+    .signup-form input { width: 100%; padding: 10px 16px; border-radius: 6px; border: 1px solid #d4d4d8; font-size: 1rem; background: #fff; color: #09090b; }
+    .signup-form input:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2); }
+    .signup-form button { width: 100%; padding: 10px 12px; background: #09090b; color: #fff; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; }
+    .signup-form button:hover { background: #27272a; }
+    .signup-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .signup-status { font-size: 0.875rem; font-weight: 500; margin: 0; }
+    .signup-status.success { color: #047857; }
+    .signup-status.error { color: #dc2626; }
+    .related-content-title { font-size: 11px; font-weight: 700; color: #71717a; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 16px; }
+    .related-posts-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .related-post-link { color: #3f3f46; text-decoration: none; font-size: 0.875rem; line-height: 1.5; display: block; transition: color 0.15s; }
+    .related-post-link:hover { color: #7c3aed; }
+    .view-more-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 16px; color: #7c3aed; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
+    .view-more-link:hover { color: #6d28d9; }
+    .article-header { margin-bottom: 2rem; }
+    .article-header h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; color: #09090b; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .author-info { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: #09090b; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+    .author-name { font-weight: 600; color: #111827; }
+    .author-meta { font-size: 0.875rem; color: #6b7280; }
+    .category-tag { display: inline-block; padding: 4px 10px; background: #ede9fe; color: #5b21b6; border-radius: 6px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .promo { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; font-size: 1.0625rem; color: #374151; }
+    .promo a { color: #7c3aed; font-weight: 600; }
+.article-header--cred{margin-bottom:1.5rem;}
+.article-header--cred .authorCredLine--top{margin:0 0 .45rem;}
+.article-header--cred .article-meta{font-size:.875rem;color:#6b7280;margin:0;}
+.authorCredLine{font-size:.875rem;line-height:1.55;color:#71717a;}
+.authorCredLine a,.authorCredLine .authorCredName{color:#3f3f46;font-weight:600;text-decoration:none;}
+.authorCredLine a:hover{color:#7c3aed;}
+
+:root{--am-accent:#2563eb;}
+.instantFix{position:relative;margin-bottom:1rem;padding:1.15rem;overflow:hidden;border:1px solid #bfdbfe;border-radius:14px;background:#fff;box-shadow:0 8px 28px rgba(9,9,11,.05);}
+.instantFixTop{display:flex;flex-direction:column;align-items:flex-start;gap:.35rem;margin-bottom:.6rem;}
+.instantFixTop span{color:var(--am-accent);font-size:.65rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;}
+.instantFixTop strong{color:#18181b;font-size:.95rem;line-height:1.45;}
+.instantFix>p{margin:0 0 .9rem;max-width:680px;color:#3f3f46;font-size:1rem;line-height:1.6;}
+.instantFixCommands{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:.4rem .8rem;align-items:center;padding:.75rem;border-radius:8px;background:#18181b;}
+.instantFixCommands code{color:#93c5fd;font-size:.75rem;}
+.instantFixCommands span{color:#a1a1aa;font-size:.72rem;}
+.sectionHead{border-left:4px solid var(--am-accent);padding-left:14px;}
+.heroGuideLabel{color:var(--am-accent);}
+.bodyText a,.sourceList a,.faqAnswer a{color:var(--am-accent);}
+.brandChip{display:inline-flex;align-items:center;gap:9px;margin:0 0 1.25rem;padding:6px 15px 6px 11px;border:1px solid #e4e4e7;border-radius:999px;background:#fff;}
+.brandChip span{font-size:.82rem;font-weight:600;color:#52525b;}
+.calloutBox{margin:1.5rem 0;padding:18px 20px;border-left:3px solid var(--am-accent);border-radius:0 10px 10px 0;background:#eff6ff;color:#3f3f46;line-height:1.7;}
+.calloutBox strong{color:#18181b;}
+.ctaInline{margin:1.6rem 0;padding:15px 18px;border-left:3px solid var(--am-accent);border-radius:0 10px 10px 0;background:#f5f9ff;font-weight:600;color:#27272a;}
+.ctaInline a{color:var(--am-accent);}
+.pillarLink{display:flex;gap:12px;align-items:flex-start;margin:1.25rem 0 1.75rem;padding:14px 16px;border:1px solid #bfdbfe;border-radius:12px;background:#eff6ff;}
+.pillarLink svg{flex-shrink:0;margin-top:2px;}
+.pillarLink p{margin:0;color:#3f3f46;font-size:.92rem;line-height:1.6;}
+.pillarLink a{color:var(--am-accent);font-weight:700;}
+.recipeLegend{display:flex;flex-wrap:wrap;gap:8px 18px;margin:.5rem 0 1.5rem;font-size:.82rem;color:#71717a;}
+.recipeLegend b{color:#3f3f46;}
+.rgroup{margin:2.25rem 0 0;}
+.rgroupHead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 .25rem;}
+.rgroupHead h3{margin:0;font-size:1.22rem;color:#09090b;font-weight:800;}
+.rgroupHead span{font-size:.85rem;color:#71717a;}
+.recipe{margin:14px 0;padding:18px;border:1px solid #e4e4e7;border-radius:12px;background:#fff;border-left:4px solid var(--am-accent);transition:transform .18s ease,box-shadow .18s ease;}
+.recipe:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(37,99,235,.10);}
+.recipeTop{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:.55rem;}
+.recipeNum{display:grid;place-items:center;width:1.9rem;height:1.9rem;border-radius:8px;background:#dbeafe;color:var(--am-accent);font-weight:800;font-size:.9rem;flex-shrink:0;}
+.recipe h4{margin:0;font-size:1.08rem;color:#18181b;flex:1;min-width:180px;font-weight:800;}
+.recipeTrigger{font-size:.66rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;white-space:nowrap;}
+.recipeTrigger.sched{background:#eff6ff;color:#2563eb;}
+.recipeTrigger.alert{background:#fef2f2;color:#dc2626;}
+.recipeManual{margin:0 0 .7rem;color:#52525b;font-size:.92rem;line-height:1.62;}
+.recipeManual b{color:#3f3f46;}
+.recipeFoot{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-top:.75rem;}
+.recipeSaved{display:inline-flex;align-items:center;gap:6px;font-size:.83rem;font-weight:700;color:#047857;}
+.recipeGuard{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;color:#71717a;}
+.calc{margin:1.75rem 0;padding:20px;border:1px solid #e4e4e7;border-radius:14px;background:linear-gradient(180deg,#f8fbff,#eef4ff);}
+.calcHead{font-weight:800;color:#18181b;margin-bottom:.9rem;font-size:1.05rem;}
+.calcRow{display:grid;grid-template-columns:1fr;gap:5px;margin:.75rem 0;}
+.calcRow label{font-size:.86rem;color:#3f3f46;font-weight:600;display:flex;justify-content:space-between;gap:10px;}
+.calcRow output{color:var(--am-accent);font-weight:800;}
+.calcRow input[type=range]{width:100%;accent-color:var(--am-accent);}
+.calcOut{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:1.1rem;}
+.calcStat{text-align:center;padding:14px 8px;background:#fff;border:1px solid #e4e4e7;border-radius:10px;}
+.calcStat span{display:block;font-size:1.85rem;font-weight:800;color:var(--am-accent);line-height:1;}
+.calcStat label{font-size:.7rem;color:#71717a;text-transform:uppercase;letter-spacing:.05em;font-weight:700;margin-top:6px;display:block;}
+.calcNote{margin:.9rem 0 0;font-size:.78rem;color:#a1a1aa;}
+.authorBioCard{display:flex;gap:24px;align-items:flex-start;flex-wrap:wrap;padding-bottom:1rem;}
+.authorBioCard h3{font-size:1.5rem;font-weight:800;color:#09090b;margin:0 0 4px;}
+.authorBioRole{color:var(--am-accent);font-weight:600;margin:0 0 14px;}
+.authorBioText{color:#3f3f46;line-height:1.75;}
+.authorBioLink{display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:#71717a;text-decoration:none;font-weight:600;}
+@media (prefers-reduced-motion: no-preference){
+  .js-anim .revealUp{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease;}
+  .js-anim .revealUp.in{opacity:1;transform:none;}
+}
+.storyGrid{display:grid;grid-template-columns:1fr;gap:16px;margin:1.25rem 0 .5rem;}
+@media(min-width:820px){.storyGrid{grid-template-columns:repeat(2,1fr);}}
+.storyCard{padding:20px;border:1px solid #e4e4e7;border-radius:14px;background:#fff;box-shadow:0 8px 28px rgba(9,9,11,.05);}
+.storyTag{display:inline-block;font-size:.66rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--am-accent);background:#eff6ff;padding:3px 9px;border-radius:999px;margin-bottom:.6rem;}
+.storyCard h4{margin:0 0 .55rem;font-size:1.12rem;color:#18181b;font-weight:800;}
+.storyScene{margin:0 0 1rem;color:#3f3f46;font-size:.94rem;line-height:1.65;}
+.storyScene b{color:#18181b;}
+.storyCompare{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:.9rem;}
+@media(min-width:520px){.storyCompare{grid-template-columns:1fr 1fr;}}
+.storyCol{padding:12px 14px;border-radius:10px;}
+.storyCol span{display:block;font-size:.66rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;margin-bottom:5px;}
+.storyCol p{margin:0;font-size:.86rem;line-height:1.6;}
+.storyCol.bad{background:#fef2f2;}.storyCol.bad span{color:#dc2626;}.storyCol.bad p{color:#7f1d1d;}
+.storyCol.good{background:#eff6ff;}.storyCol.good span{color:#2563eb;}.storyCol.good p{color:#1e3a8a;}
+.storyPayoff{display:inline-flex;align-items:center;gap:7px;font-size:.86rem;font-weight:700;color:#047857;}
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-content">
+        <a href="/" class="navbar-logo">
+          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon">
+        </a>
+        <div class="navbar-links">
+          <a href="/#how-it-works" class="navbar-link">How It Works</a>
+          <a href="/#solutions" class="navbar-link">Solutions</a>
+          <a href="/case-studies" class="navbar-link">Case Studies</a>
+          <a href="/blog" class="navbar-link active">Blog</a>
+          <a href="/pricing" class="navbar-link">Pricing</a>
+        </div>
+        <div class="navbar-actions">
+          <a href="https://app.alertmend.io/signup?source=blog-post&blog_slug=ops-tasks-to-automate" class="navbar-button navbar-button-secondary">Register</a>
+          <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=ops-tasks-to-automate" class="navbar-button navbar-button-primary" target="_blank" rel="noopener noreferrer">Book a Demo</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="main-container">
+    <div class="content-wrapper">
+      <div class="main-col">
+
+    <header class="article-header article-header--cred">
+      <h1>The Ops Automation Cookbook: 12 Daily Tasks You Can Stop Doing by Hand</h1>
+      <p class="authorCredLine authorCredLine--top"><a href="https://www.linkedin.com/in/dineshagrawal85/" target="_blank" rel="noopener noreferrer">Dinesh Agrawal</a> · 12+ years in cloud infrastructure and AI-driven incident automation</p>
+      <p class="article-meta">2026-07-15 · Automation</p>
+    </header>
+      <div class="proofBar" style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:0 0 1.5rem;color:#52525b;font-size:.82rem;">
+        <span style="display:inline-flex;align-items:center;gap:6px;font-weight:700;color:#047857;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>12 runbooks you can copy, each agentless, governed, and audited</span>
+        <span style="color:#d4d4d8;">&bull;</span><span>Last reviewed 2026-07-15</span>
+      </div>
+    <div class="dl-blog">
+      <section class="heroBand heroBandCompact">
+        <p class="heroGuideLabel">AlertMend automation · daily tasks, done for you</p>
+        <div class="instantFix">
+          <div class="instantFixTop"><span>THE 60-SECOND ANSWER</span><strong>Automate the tasks that are frequent, mechanical, and low-judgment first.</strong></div>
+          <p>You do not need to automate everything. Start with the recurring work that is the same every time: freeing a full disk, renewing a certificate, restarting a stuck worker, sweeping idle cloud spend. Below are 12 of them, each written as a runbook you can copy, with the trigger to use and the time it gives back.</p>
+          <div class="instantFixCommands">
+            <code>frequent + mechanical</code><span>automate first</span>
+            <code>rare + risky</code><span>automate for safety</span>
+            <code>rare + quick</code><span>leave it manual</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="pillarLink">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <p>This is the recipe book. For the strategy behind it, why toil scales with your fleet, how fan-out works, and how to govern automated cleanup, read the pillar: <a href="/blog/automate-ops-toil">Runbook Automation for Toil</a>.</p>
+      </div>
+
+      <nav class="articleToc" aria-label="On this page"><strong>On this page</strong>
+        <a href="#pick">Where to start</a>
+        <a href="#recipes">The 12 recipes</a>
+        <a href="#stories">In the real world</a>
+        <a href="#industry">By industry</a>
+        <a href="#calc">Your time back</a>
+        <a href="#how">How AlertMend runs them</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <h2 class="sectionHead" id="pick">Not what to automate. What to automate first.</h2>
+      <p class="bodyText">The mistake is trying to automate everything at once, or automating the interesting thing instead of the frequent thing. The tasks that pay back first are the ones that are both routine and time-consuming: you do them constantly, they follow the same steps every time, and they need almost no judgment. Plot your work on two axes, how often you do it and how long each run takes, and the priority order falls out on its own.</p>
+      <figure class="flowDiagram" style="overflow-x:auto;">
+      <svg class="cb-anim" viewBox="0 0 720 300" width="720" height="300" role="img" aria-label="A two by two grid for deciding what to automate first. Horizontal axis: how often you do a task, rarely to daily. Vertical axis: how long each run takes, quick to slow. Top right, frequent and slow, is automate first. Bottom right, frequent and quick, is worth automating because it adds up. Top left, rare but risky, automate for safety. Bottom left, rare and quick, can stay manual." font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" style="display:block;min-width:660px;border-radius:12px;border:1px solid #e4e4e7;background:#fff;">
+        <defs><style>@media (prefers-reduced-motion: no-preference){.cb-anim .cb-hot{animation:cb-p 2.6s ease-in-out infinite}@keyframes cb-p{0%,100%{opacity:.16}50%{opacity:.30}}}</style></defs>
+        <text x="110" y="22" font-size="12.5" font-weight="800" fill="#09090b">Where to start: automate the top-right first</text>
+        <rect class="cb-hot" x="410" y="34" width="290" height="118" rx="10" fill="#2563eb"/>
+        <rect x="410" y="34" width="290" height="118" rx="10" fill="none" stroke="#2563eb" stroke-width="1.5"/>
+        <rect x="110" y="34" width="290" height="118" rx="10" fill="#f4f4f5"/>
+        <rect x="110" y="162" width="290" height="118" rx="10" fill="#fafafa"/>
+        <rect x="410" y="162" width="290" height="118" rx="10" fill="#eff6ff"/>
+        <text x="555" y="82" text-anchor="middle" font-size="14.5" font-weight="800" fill="#1d4ed8">Automate first</text>
+        <text x="555" y="105" text-anchor="middle" font-size="11.5" fill="#3f3f46">frequent + mechanical</text>
+        <text x="555" y="123" text-anchor="middle" font-size="11" fill="#71717a">the biggest time back</text>
+        <text x="255" y="84" text-anchor="middle" font-size="13.5" font-weight="700" fill="#52525b">Automate for safety</text>
+        <text x="255" y="106" text-anchor="middle" font-size="11" fill="#71717a">rare, but risky or error-prone</text>
+        <text x="555" y="214" text-anchor="middle" font-size="13.5" font-weight="700" fill="#2563eb">Automate, it adds up</text>
+        <text x="555" y="236" text-anchor="middle" font-size="11" fill="#52525b">quick, but done constantly</text>
+        <text x="255" y="214" text-anchor="middle" font-size="13.5" font-weight="700" fill="#a1a1aa">Leave it manual</text>
+        <text x="255" y="236" text-anchor="middle" font-size="11" fill="#a1a1aa">rare and quick</text>
+        <text x="100" y="46" text-anchor="end" font-size="10.5" fill="#a1a1aa">Slow</text>
+        <text x="100" y="278" text-anchor="end" font-size="10.5" fill="#a1a1aa">Quick</text>
+        <text x="255" y="296" text-anchor="middle" font-size="10.5" fill="#a1a1aa">Rarely</text>
+        <text x="555" y="296" text-anchor="middle" font-size="10.5" fill="#a1a1aa">Daily</text>
+        <text x="22" y="158" text-anchor="middle" font-size="11.5" font-weight="700" fill="#71717a" transform="rotate(-90 22 158)">Time per run</text>
+      </svg>
+      <figcaption class="flowDiagramCaption">You do not have to automate everything. Start in the top-right, where a task is both frequent and time-consuming, and work down.</figcaption>
+    </figure>
+      <div class="recipeLegend"><span><b>How to read each recipe:</b></span><span><b>By hand today</b> = the manual version</span><span><b>ON ALERT</b> or <b>SCHEDULED</b> = the trigger</span><span><b>runbook</b> = copy it</span><span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> = the time it gives back</span></div>
+
+      <h2 class="sectionHead" id="recipes">The 12 recipes</h2>
+      <p class="sectionSub">Each one is a real piece of daily ops work, written as a runbook you can lift. The config is illustrative; the real runbook is visual, versioned, and fanned out across your fleet.</p>
+      <figure class="flowDiagram" style="overflow-x:auto;">
+      <svg class="cbflow" viewBox="0 0 1032 200" width="1032" height="200" role="img" aria-label="Every recipe follows the same five steps: a trigger from a schedule or an alert, a check of the real state, the action fanned out across the fleet, an approval only when the step is destructive, and a recorded audit trail plus a notification." font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" style="display:block;min-width:1000px;border-radius:12px;border:1px solid #e4e4e7;background:linear-gradient(180deg,#f8fbff,#eef4ff);">
+        <defs>
+          <marker id="cbf-ar" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L7,3 L0,6 Z" fill="#2563eb"/></marker>
+          <style>@media (prefers-reduced-motion: no-preference){.cbflow .cbf-l{stroke-dasharray:7 6;animation:cbf-f .8s linear infinite}@keyframes cbf-f{to{stroke-dashoffset:-13}}}</style>
+        </defs>
+        <text x="18" y="34" font-size="15" font-weight="800" fill="#09090b">Every recipe is the same five steps</text>
+        <text x="18" y="54" font-size="12.5" fill="#71717a">Learn the shape once and all twelve read the same. A human signs off only on the destructive step.</text>
+        <rect x="18" y="70" width="190" height="92" rx="12" fill="#fff" stroke="#e4e4e7" stroke-width="1"/><circle cx="42" cy="96" r="13" fill="#3f3f46" opacity="0.12"/><path d="M13 3v7h6l-8 11v-7H5l8-11z" transform="translate(33,85) scale(0.8)" fill="#3f3f46"/><text x="62" y="101" font-size="13.5" font-weight="800" fill="#18181b">Trigger</text><text x="32" y="130" font-size="11.5" fill="#52525b">a schedule or an alert</text><line class="cbf-l" x1="208" y1="116" x2="222" y2="116" stroke="#2563eb" stroke-width="2.5" marker-end="url(#cbf-ar)"/><rect x="222" y="70" width="190" height="92" rx="12" fill="#fff" stroke="#e4e4e7" stroke-width="1"/><circle cx="246" cy="96" r="13" fill="#3f3f46" opacity="0.12"/><path d="M13 3v7h6l-8 11v-7H5l8-11z" transform="translate(237,85) scale(0.8)" fill="#3f3f46"/><text x="266" y="101" font-size="13.5" font-weight="800" fill="#18181b">Check</text><text x="236" y="130" font-size="11.5" fill="#52525b">measure the real state</text><line class="cbf-l" x1="412" y1="116" x2="426" y2="116" stroke="#2563eb" stroke-width="2.5" marker-end="url(#cbf-ar)"/><rect x="426" y="70" width="190" height="92" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/><circle cx="450" cy="96" r="13" fill="#2563eb" opacity="0.12"/><path d="M13 3v7h6l-8 11v-7H5l8-11z" transform="translate(441,85) scale(0.8)" fill="#2563eb"/><text x="470" y="101" font-size="13.5" font-weight="800" fill="#18181b">Act</text><text x="440" y="130" font-size="11.5" fill="#52525b">run the fix, fanned out</text><text x="440" y="150" font-size="10" font-weight="800" fill="#2563eb">FLEET FAN-OUT</text><line class="cbf-l" x1="616" y1="116" x2="630" y2="116" stroke="#2563eb" stroke-width="2.5" marker-end="url(#cbf-ar)"/><rect x="630" y="70" width="190" height="92" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/><circle cx="654" cy="96" r="13" fill="#2563eb" opacity="0.12"/><path d="M13 3v7h6l-8 11v-7H5l8-11z" transform="translate(645,85) scale(0.8)" fill="#2563eb"/><text x="674" y="101" font-size="13.5" font-weight="800" fill="#18181b">Approve</text><text x="644" y="130" font-size="11.5" fill="#52525b">only if destructive</text><text x="644" y="150" font-size="10" font-weight="800" fill="#2563eb">HUMAN GATE</text><line class="cbf-l" x1="820" y1="116" x2="834" y2="116" stroke="#2563eb" stroke-width="2.5" marker-end="url(#cbf-ar)"/><rect x="834" y="70" width="190" height="92" rx="12" fill="#fff" stroke="#e4e4e7" stroke-width="1"/><circle cx="858" cy="96" r="13" fill="#16a34a" opacity="0.12"/><path d="M13 3v7h6l-8 11v-7H5l8-11z" transform="translate(849,85) scale(0.8)" fill="#16a34a"/><text x="878" y="101" font-size="13.5" font-weight="800" fill="#18181b">Record</text><text x="848" y="130" font-size="11.5" fill="#52525b">audit trail + notify</text>
+      </svg>
+      <figcaption class="flowDiagramCaption">Trigger, check, act, approve if destructive, record. The twelve recipes below are all variations on these five steps.</figcaption>
+    </figure>
+      <div class="rgroup" id="keep">
+        <div class="rgroupHead"><h3>Keep it running</h3><span>Alert-triggered fixes for the things that break during the day.</span></div>
+        <div class="recipe">
+        <div class="recipeTop"><span class="recipeNum">1</span><h4>Free up a disk before it pages you</h4><span class="recipeTrigger alert">ON ALERT</span></div>
+        <p class="recipeManual"><b>By hand today:</b> You get paged for a full volume, SSH in, hunt for the biggest files, delete, and restart whatever fell over.</p>
+        <pre class="codeBlock copyableCode"><code>trigger: disk_used(/) > 85%            # or a nightly cron
+steps:
+  - run     du -sh /var/log/* | sort -h | tail
+  - s3      archive /var/log/*.gz  ->  s3://logs-archive/$host/
+  - approve channel=slack                # the next step deletes
+  - run     truncate -s 0 /var/log/*.log ; docker system prune -f
+  - notify  slack: &quot;$host reclaimed &lt;gb>G, back to &lt;used>%&quot;</code></pre>
+        <div class="recipeFoot"><span class="recipeSaved"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ~25 min per incident, and no 2am page</span><span class="recipeGuard"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg> Approval before it deletes at scale</span></div>
+      </div>
+        <div class="recipe">
+        <div class="recipeTop"><span class="recipeNum">2</span><h4>Restart a stuck service or worker</h4><span class="recipeTrigger alert">ON ALERT</span></div>
+        <p class="recipeManual"><b>By hand today:</b> You notice a health check gone red or a queue backing up, SSH in, restart the process, and watch it recover.</p>
+        <pre class="codeBlock copyableCode"><code>trigger: healthcheck(app) fails x3      # ~90s window
+steps:
+  - run     journalctl -u app -n 50       # capture the why first
+  - run     systemctl restart app
+  - check   healthcheck(app) == ok
+  - branch  if still failing:
+      - notify slack @oncall &quot;$host: restart did not recover app&quot;</code></pre>
+        <div class="recipeFoot"><span class="recipeSaved"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ~15 min per occurrence</span><span class="recipeGuard"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg> Escalates to on-call if the restart does not recover it</span></div>
+      </div>
+        <div class="recipe">
+        <div class="recipeTop"><span class="recipeNum">3</span><h4>Recover a CrashLoopBackOff pod</h4><span class="recipeTrigger alert">ON ALERT</span></div>
+        <p class="recipeManual"><b>By hand today:</b> You see restart counts climbing, run describe and logs, then delete the pod or roll back the deploy by hand.</p>
+        <pre class="codeBlock copyableCode"><code>trigger: pod.restarts > 5 in 10m
+steps:
+  - run     kubectl describe pod $pod ; kubectl logs $pod --previous --tail=80
+  - branch  if it looks like a bad deploy:
+      - run    kubectl rollout undo deploy/$deploy
+    else:
+      - run    kubectl delete pod $pod           # reschedule clean
+  - notify  slack: pod, node, action taken</code></pre>
+        <div class="recipeFoot"><span class="recipeSaved"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ~20 min per incident</span><span class="recipeGuard"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg> Rolls back only the affected deployment</span></div>
+      </div>
+        <div class="recipe">
+        <div class="recipeTop"><span class="recipeNum">4</span><h4>Absorb a queue backlog</h4><span class="recipeTrigger alert">ON ALERT</span></div>
+        <p class="recipeManual"><b>By hand today:</b> Traffic spikes, the queue grows, and you manually scale workers up, then remember to scale them back down later.</p>
+        <pre class="codeBlock copyableCode"><code>trigger: queue_depth(orders) > 5000 for 5m
+steps:
+  - run     kubectl scale deploy/worker --replicas=12
+  - wait    until queue_depth &lt; 500          # max 20m
+  - run     kubectl scale deploy/worker --replicas=3
+  - notify  slack: peak depth, drain time, replicas used</code></pre>
+        <div class="recipeFoot"><span class="recipeSaved"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ~30 min, and a missed SLA avoided</span><span class="recipeGuard"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg> Scales back to baseline automatically</span></div>
+      </div>
+      </div>
+      <div class="rgroup" id="prevent">
+        <div class="rgroupHead"><h3>Prevent the 3am page</h3><span>Scheduled hygiene that stops the incident before it happens.</span></div>
+        <div class="recipe">
+        <div class="recipeTop"><span class="recipeNum">5</span><h4>Renew TLS certificates before they expire</h4><span class="recipeTrigger sched">SCHEDULED</span></div>
+        <p class="recipeManual"><b>By hand today:</b> You track expiry dates in a spreadsheet, renew by hand, reload the web server, and hope you did not miss one.</p>
+        <pre class="codeBlock copyableCode"><code>trigger: cron 0 6 * * *                 # daily
+steps:
+  - check   for host in endpoints: days_to_expiry(host)
+  - branch  if days_to_expiry &lt; 14:
+      - run    certbot renew            # or re-issue via ACM
+      - run    nginx -t &amp;&amp; systemctl reload nginx
+      - check  new cert served, expiry > 60d
+  - notify  slack: renewed hosts + next-to-expire watchlist</code></pre>
+        <div class="recipeFoot"><span class="recipeSaved"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ~1 hour a month, and the outage a lapsed cert causes</span></div>
+      </div>
+        <div class="recipe">
+        <div class="recipeTop"><span class="recipeNum">6</span><h4>Verify backups actually restore</h4><span class="recipeTrigger sched">SCHEDULED</span></div>
+        <p class="recipeManual"><b>By hand today:</b> You trust the backup job exited zero, and find out it was broken only when you actually need to restore.</p>
+        <pre class="codeBlock copyableCode"><code>trigger: cron 0 3 * * 0                 # weekly
+steps:
+  - run     restore latest dump  ->  scratch database
+  - check   row counts and checksums within tolerance
+  - run     drop scratch database
+  - branch  if check failed: page @oncall   # silent backup = real risk
+  - notify  slack: PASS/FAIL, restore time, rows verified</code></pre>
+        <div class="recipeFoot"><span class="recipeSaved"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> a silent backup failure, caught before you need it</span><span class="recipeGuard"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg> Pages on-call if the test restore fails</span></div>
+      </div>
+        <div class="recipe">
+        <div class="recipeTop"><span class="recipeNum">7</span><h4>Run nightly database maintenance</h4><span class="recipeTrigger sched">SCHEDULED</span></div>
+        <p class="recipeManual"><b>By hand today:</b> You occasionally kill a long query and run VACUUM by hand, usually after the database has already slowed down.</p>
+        <pre class="codeBlock copyableCode"><code>trigger: cron 0 2 * * *                 # nightly, low traffic
+steps:
+  - run     terminate queries where state=active and runtime > 30m
+  - run     VACUUM (ANALYZE)
+  - run     REINDEX INDEX CONCURRENTLY &lt;bloated_index>
+  - notify  slack: dead tuples reclaimed, longest query killed</code></pre>
+        <div class="recipeFoot"><span class="recipeSaved"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ~20 min a day, and the slow-query incident it prevents</span></div>
+      </div>
+        <div class="recipe">
+        <div class="recipeTop"><span class="recipeNum">8</span><h4>Rotate and ship logs off the box</h4><span class="recipeTrigger sched">SCHEDULED</span></div>
+        <p class="recipeManual"><b>By hand today:</b> Logs fill the disk, you rotate and gzip by hand, then copy them somewhere before the volume fills again.</p>
+        <pre class="codeBlock copyableCode"><code>trigger: cron 30 1 * * *
+steps:
+  - run     gzip $(find /var/log -name '*.log' -mtime +1)
+  - s3      sync /var/log/*.gz  ->  s3://logs/$host/   # then remove shipped
+  - run     find /var/log -name '*.gz' -mtime +7 -delete
+  - check   disk_used(/) after, report reclaimed</code></pre>
+        <div class="recipeFoot"><span class="recipeSaved"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> a recurring disk-full page, gone</span></div>
+      </div>
+      </div>
+      <div class="rgroup" id="idle">
+        <div class="rgroupHead"><h3>Stop paying for idle</h3><span>Scheduled sweeps that hand money back to FinOps.</span></div>
+        <div class="recipe">
+        <div class="recipeTop"><span class="recipeNum">9</span><h4>Power down idle dev and staging overnight</h4><span class="recipeTrigger sched">SCHEDULED</span></div>
+        <p class="recipeManual"><b>By hand today:</b> Non-production runs all night because nobody remembers to stop it, and the monthly bill shows it.</p>
+        <pre class="codeBlock copyableCode"><code>trigger: cron 0 20 * * 1-5  (stop)  /  0 8 * * 1-5  (start)
+steps:
+  - check   instances tag:env=nonprod, state=running
+  - run     stop them              # the morning job starts them back
+  - notify  slack: stopped N instances, saved ~&lt;X> per night</code></pre>
+        <div class="recipeFoot"><span class="recipeSaved"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ~65% of non-prod compute cost</span></div>
+      </div>
+        <div class="recipe">
+        <div class="recipeTop"><span class="recipeNum">10</span><h4>Delete orphaned volumes and old snapshots</h4><span class="recipeTrigger sched">SCHEDULED</span></div>
+        <p class="recipeManual"><b>By hand today:</b> Unattached volumes and stale snapshots pile up until a quarterly cost review that rarely actually happens.</p>
+        <pre class="codeBlock copyableCode"><code>trigger: cron 0 4 * * 1                 # weekly
+steps:
+  - check   volumes status=available + snapshots older than 30d
+  - approve channel=slack                # deletion needs a human
+  - run     delete approved volumes and snapshots
+  - notify  slack: reclaimed ~&lt;X>/mo, deleted IDs (audited)</code></pre>
+        <div class="recipeFoot"><span class="recipeSaved"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> real monthly spend, and hours of cleanup</span><span class="recipeGuard"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg> Approval before anything is deleted</span></div>
+      </div>
+        <div class="recipe">
+        <div class="recipeTop"><span class="recipeNum">11</span><h4>Prune Docker on CI runners and hosts</h4><span class="recipeTrigger sched">SCHEDULED</span></div>
+        <p class="recipeManual"><b>By hand today:</b> A runner disk fills with dead images and build cache, builds fail with no space left, and someone SSHes in.</p>
+        <pre class="codeBlock copyableCode"><code>trigger: disk_used(/) > 80% on ci-runners   # or nightly
+steps:
+  - run     docker system prune -af --volumes --filter &quot;until=168h&quot;
+  - run     docker builder prune -af
+  - notify  slack: &quot;$host reclaimed &lt;gb>G of image and build cache&quot;</code></pre>
+        <div class="recipeFoot"><span class="recipeSaved"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> broken builds from a full runner, prevented</span></div>
+      </div>
+      </div>
+      <div class="rgroup" id="see">
+        <div class="rgroupHead"><h3>See it without logging in</h3><span>Scheduled visibility, pushed to where the team already is.</span></div>
+        <div class="recipe">
+        <div class="recipeTop"><span class="recipeNum">12</span><h4>Send a morning fleet-health digest</h4><span class="recipeTrigger sched">SCHEDULED</span></div>
+        <p class="recipeManual"><b>By hand today:</b> You open three dashboards every morning to piece together whether anything actually needs your attention today.</p>
+        <pre class="codeBlock copyableCode"><code>trigger: cron 0 8 * * 1-5
+steps:
+  - gather  hosts up/down, pods crashlooping, certs &lt; 30d,
+            last backup status, idle-resource spend
+  - format  one card, red items first
+  - notify  slack #ops   (+ WhatsApp to the on-call lead, optional)</code></pre>
+        <div class="recipeFoot"><span class="recipeSaved"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ~15 min a day per person, and earlier awareness</span></div>
+      </div>
+      </div>
+
+      <div class="ctaInline">Which of these does your team still do by hand? <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=ops-tasks-to-automate" target="_blank" rel="noopener noreferrer">Book a free consultation &rarr;</a> and we will turn your worst one into a runbook.</div>
+
+      <h2 class="sectionHead" id="stories">Two of these, on the day they mattered</h2>
+      <p class="sectionSub">The recipes look small on paper. Here is what they are worth when it counts.</p>
+      <div class="storyGrid">
+        <div class="storyCard revealUp">
+          <span class="storyTag">E-commerce · peak traffic · recipe 1</span>
+          <h4>The 2am disk that almost took down checkout</h4>
+          <p class="storyScene">It is 2:11am on the busiest sales night of the year. A noisy deploy triples log volume and <b>/var on the checkout tier hits 98%</b>. Orders start failing with 500s at the worst possible moment.</p>
+          <div class="storyCompare">
+            <div class="storyCol bad"><span>Without automation</span><p>The page fires, on-call wakes up, connects to the right host, finds the runaway log, and truncates it. Fifteen minutes, most of it just getting to a terminal, and every minute is lost orders at peak.</p></div>
+            <div class="storyCol good"><span>With the runbook</span><p>At 85% the runbook had already archived the logs to S3, truncated, pruned Docker, and posted &quot;checkout-3 reclaimed 22G, back to 41%&quot; to Slack. The 500s never started and nobody woke up.</p></div>
+          </div>
+          <div class="storyPayoff"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> MTTR from ~15 minutes to ~40 seconds, and zero lost checkout minutes</div>
+        </div>
+        <div class="storyCard revealUp">
+          <span class="storyTag">SaaS · reliability · recipe 5</span>
+          <h4>The certificate nobody was watching</h4>
+          <p class="storyScene">A wildcard cert on the API gateway is set to expire Sunday at 03:00. It lives in three places and one spreadsheet, and the one that matters is not on the spreadsheet. <b>No one is looking.</b></p>
+          <div class="storyCompare">
+            <div class="storyCol bad"><span>Without automation</span><p>Monday morning every mobile client fails TLS, support lights up, and the team burns the first hour of the week finding which cert lapsed instead of shipping.</p></div>
+            <div class="storyCol good"><span>With the runbook</span><p>Every morning a scheduled runbook checked days-to-expiry across all endpoints. It saw 12 days left, re-issued, reloaded nginx, verified the new cert was being served, and posted the next-to-expire watchlist. The Monday outage simply never happened.</p></div>
+          </div>
+          <div class="storyPayoff"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> A full TLS outage avoided, and about an hour a month of manual tracking gone</div>
+        </div>
+      </div>
+
+      <h2 class="sectionHead" id="industry">Which recipes matter most, by industry</h2>
+      <p class="sectionSub">All twelve are universal, but the ones that pay back first depend on what you run.</p>
+      <div class="diyWrap"><table class="compareTable"><thead><tr><th>Industry</th><th>Start with these</th><th>Why</th></tr></thead><tbody>
+        <tr><td>E-commerce and retail</td><td class="diyHighlight">Disk-before-peak, queue backlog, overnight non-prod, morning digest</td><td>Uptime during a traffic spike is revenue, and non-production idles all weekend on the bill.</td></tr>
+        <tr><td>SaaS and B2B platforms</td><td class="diyHighlight">Cert renewal, CrashLoopBackOff recovery, DB maintenance, backup verify</td><td>Reliability is the product, so the quiet failures are the ones that churn customers.</td></tr>
+        <tr><td>Fintech and regulated</td><td class="diyHighlight">Backup-restore verification, approval-gated cleanup, certificate checks</td><td>Auditors want proof a restore actually works and a record of who approved what.</td></tr>
+        <tr><td>Agencies and MSPs</td><td class="diyHighlight">All twelve, fanned out across every client environment</td><td>One runbook maintained once and run against dozens of tenants is the whole margin.</td></tr>
+        <tr><td>AI and ML platforms</td><td class="diyHighlight">Idle-GPU sweep, disk and log hygiene on training boxes, queue scaling</td><td>Idle accelerators are the budget, and training logs fill a disk fast.</td></tr>
+      </tbody></table></div>
+
+      <h2 class="sectionHead" id="calc">Add up your week</h2>
+      <p class="bodyText">Any single recipe looks small. The point is that they repeat, every day, across every host. Put in how many of these your team still does by hand, how often, and how long each takes, and see the time an automated version gives back.</p>
+      <div class="calc">
+        <div class="calcHead">Time saved with AlertMend automation</div>
+        <div class="calcRow"><label>Tasks you still do by hand <output id="c-tasks">8</output></label><input type="range" id="i-tasks" min="1" max="12" value="8" aria-label="Number of tasks you still do by hand"></div>
+        <div class="calcRow"><label>Times each is done per week <output id="c-runs">5</output></label><input type="range" id="i-runs" min="1" max="40" value="5" aria-label="Times each task is done per week"></div>
+        <div class="calcRow"><label>Minutes a single run takes <output id="c-mins">12</output></label><input type="range" id="i-mins" min="2" max="45" value="12" aria-label="Minutes a single run takes"></div>
+        <div class="calcOut">
+          <div class="calcStat"><span id="o-week">0</span><label>hours / week</label></div>
+          <div class="calcStat"><span id="o-month">0</span><label>hours / month</label></div>
+          <div class="calcStat"><span id="o-year">0</span><label>work-days / year</label></div>
+        </div>
+        <p class="calcNote">Assumes automation removes about 85% of the hands-on time. The sliders are yours to adjust.</p>
+      </div>
+
+      <h2 class="sectionHead" id="how">How AlertMend runs all twelve</h2>
+      <p class="bodyText">Every recipe above follows the same shape: a trigger, a check, an action, an optional approval on the destructive step, and a recorded result. AlertMend runs the host-level ones agentlessly over SSH, and reaches Kubernetes, cloud APIs, databases, and messaging through connectors, so there is no per-server agent to install or maintain. A step can fan out across every host or pod that matches, so one runbook covers three servers today and three hundred next year without a rewrite.</p>
+      <p class="bodyText">The parts that make it safe to run against production are built in. Destructive steps pause for a Slack, Microsoft Teams, or Email approval, permissions are scoped with RBAC, and every host touched, command run, and file removed is recorded, so a scheduled sweep is auditable rather than a black box. That is the difference between a cron script you are afraid to trust and automation you are happy to leave running. For the reactive side of the same engine, recovering a crashlooping service or a stuck deploy the moment an alert fires, see <a href="/blog/cross-stack-incident-automation">cross-stack incident automation</a>, and for the host layer specifically, <a href="/blog/vm-monitoring-and-automation">VM monitoring and auto-remediation</a>.</p>
+      <div class="calloutBox"><strong>The payoff:</strong> a single "clean the disk over 85%" recipe covers your whole backend fleet in one scheduled pass, with nobody watching and a human signing off only before it deletes. Multiply that by the eleven others and you are handing your team back a meaningful slice of every week.</div>
+
+      <h2 class="sectionHead" id="faq">Ops automation FAQ</h2>
+      <div class="faqList"><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="true">Which ops tasks should I automate first?<svg class="faqChevron faqChevronOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer">Start with the work that is frequent, mechanical, and low-judgment: freeing a full disk, restarting a stuck service, renewing certificates, pruning Docker on CI runners, and sweeping idle cloud spend. These run the same way every time, so a runbook covers them cleanly and you feel the time saved immediately. Leave the rare, high-judgment tasks for later.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do I know a task is worth automating?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Score it on three things: how often you do it, how long each run takes, and how much judgment it needs. Anything you do weekly or more, that takes real time, and that follows the same steps every time is a strong candidate. A task you touch once a quarter that needs careful thought each time usually is not, unless it is risky enough that a scripted, audited version is safer than doing it by hand.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Is it safe to auto-remediate production?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Yes, when the automation is governed. Low-risk, reversible steps like a restart or a log rotation can run unattended. Anything destructive or customer-impacting pauses for a Slack, Microsoft Teams, or Email approval before it runs, permissions are scoped with RBAC, and every host touched and command run is recorded. That combination is usually safer than a human doing the same thing by hand at 2am.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">What is the difference between this and a cron job with a bash script?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">A cron script runs one command on one host with no branching, no fleet fan-out, no approval gate, and no record of what happened. A runbook checks a condition first, fans the same action out across every matching host or pod in one run, pauses for a human only where the risk is real, and logs every step, without you maintaining the glue code and keeping the on-call knowledge in one person head.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Can I start with just one runbook?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Yes, and you should. Pick the single task that wakes you up or eats the most of your week, automate that one end to end, and prove it. Once it is running and audited, the same engine covers the next task, then the next. There is no need to automate all twelve at once.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How long does it take to set up a runbook?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Most take from a few minutes to about an hour. Runbooks are built visually on a canvas from reusable steps, so a disk-cleanup or cert-renewal flow is quick to assemble, test on one host, and then roll out across the fleet. The time goes into deciding the guardrails, not writing glue code.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Do these need an agent installed on every server?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">No. AlertMend runs the host-level recipes agentlessly over SSH, and reaches Kubernetes, cloud APIs, databases, and messaging through connectors. There is no per-server agent to install, update, or secure, which is one less thing to maintain on the fleet you are trying to simplify.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Should a runbook be triggered by a schedule or an alert?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Both, depending on the task. Hygiene work like cert checks, log rotation, and idle-resource sweeps runs on a schedule so it happens before anything breaks. Reactive work like recovering a crashlooping pod or absorbing a queue backlog is triggered by the alert you already have. The same runbook engine handles either trigger.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How do approvals work for the destructive tasks?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">A step marked as requiring approval pauses the run and posts to Slack, Microsoft Teams, or Email with the context and the exact action it wants to take. It proceeds only after an authorized person signs off, and the approval is recorded with the rest of the audit trail. Deleting volumes, dropping data, or cleaning at fleet scale are the usual places to gate.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Does automating these tasks replace my monitoring?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">No, it complements it. Monitoring and dashboards tell you something is wrong or drifting. These runbooks are the layer that acts on that signal: they take the alert or the schedule and do the fix, the cleanup, or the report. You keep Grafana, Prometheus, or whatever you use today, and add the hands that respond to it.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">Can it send the morning health digest to Slack or WhatsApp?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">Yes. A scheduled report can gather host, pod, certificate, backup, and cost status into one card and push it to Slack, Microsoft Teams, or Email on a calendar, and route a copy to WhatsApp for the on-call lead. The team sees the state of production without opening three dashboards every morning.</div></div><div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">How much time can I realistically save?<svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer hidden">It depends on how many of these you still do by hand and how often, but teams commonly reclaim on the order of a day a week once the recurring recipes are automated. Use the calculator above with your own numbers: even a handful of tasks, done a few times a week, adds up to weeks of engineering time over a year.</div></div></div>
+
+          <hr style="margin:2.5rem 0 1.75rem;border:none;border-top:1px solid #e4e4e7;">
+          <div class="authorBioCard">
+            <img src="/logos/dinesh.jpeg" alt="Dinesh Agrawal" width="128" height="128" loading="lazy" style="width:128px;height:128px;border-radius:12px;object-fit:cover;border:1px solid #e4e4e7;flex-shrink:0;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div style="display:none;width:128px;height:128px;border-radius:12px;border:1px solid #e4e4e7;background:#f4f4f5;align-items:center;justify-content:center;font-weight:800;font-size:2.25rem;color:#3f3f46;flex-shrink:0;">DA</div>
+            <div style="flex:1;min-width:240px;">
+              <h3>Dinesh Agrawal</h3>
+              <p class="authorBioRole">12+ years in cloud infrastructure and AI-driven incident automation</p>
+              <div class="authorBioText">
+                <p style="margin:0 0 10px;">Dinesh Agrawal brings 12+ years of deep experience across cloud and AI-driven automation, building systems that detect, diagnose, and fix production incidents without waiting for a human.</p>
+                <p style="margin:0;">At AlertMend.io he focuses on autonomous, self-healing operations, turning manual cloud firefighting into workflows that predict, remediate, and learn.</p>
+              </div>
+              <a class="authorBioLink" href="https://www.linkedin.com/in/dineshagrawal85/" target="_blank" rel="noopener noreferrer" aria-label="Dinesh Agrawal on LinkedIn">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18V9.94H5.67V18h2.67zM7 8.76a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zM18.34 18v-4.42c0-2.37-1.27-3.47-2.96-3.47-1.36 0-1.97.75-2.31 1.28V9.94h-2.67V18h2.67v-4.5c0-.24.02-.48.09-.65.19-.48.63-.98 1.36-.98.96 0 1.35.73 1.35 1.8V18h2.82z"/></svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
+      <div class="ctaBand">
+        <div class="ctaBandTitle">Pick one task. We will turn it into a runbook.</div>
+        <p class="ctaBandSub">Bring the recurring task your team does by hand every week, the disk sweep, the cert renewal, the idle-resource cleanup, the morning health check. We will turn it into an AlertMend runbook, fanned out across your fleet, with an approval gate on the destructive steps and a full audit trail. The consultation is free and with no obligation.</p>
+        <div class="ctaBtnRow"><a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=ops-tasks-to-automate" class="ctaBtn" target="_blank" rel="noopener noreferrer">Book a free consultation &rarr;</a></div>
+      </div>
+    </div>
+    <div class="promo"><p><strong>Related:</strong> <a href="/blog/automate-ops-toil">Runbook Automation for Toil</a> &middot; <a href="/blog/cross-stack-incident-automation">Cross-Stack Incident Automation</a> &middot; <a href="/blog/vm-monitoring-and-automation">VM Monitoring and Auto-Remediation</a></p></div>
+      </div>
+
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <div class="sidebar-card">
+            <div class="sidebar-card-title">Receive blog and product updates</div>
+            <form class="signup-form" id="blog-signup-form" data-blog-title="The Ops Automation Cookbook: 12 Daily Tasks You Can Stop Doing by Hand" novalidate>
+              <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
+              <button type="submit">Sign up</button>
+              <p class="signup-status" id="blog-signup-status" hidden></p>
+            </form>
+          </div>
+
+          
+          <div class="sidebar-card">
+            <div class="related-content-title">Related content</div>
+            <ul class="related-posts-list">
+              <li><a href="/blog/automate-ops-toil" class="related-post-link">Runbook Automation for Toil (the strategy)</a></li>
+              <li><a href="/blog/cross-stack-incident-automation" class="related-post-link">Automate Complex Incidents with Runbooks</a></li>
+              <li><a href="/blog/vm-monitoring-and-automation" class="related-post-link">Linux VM Monitoring and Auto-Remediation</a></li>
+              <li><a href="/blog/top-kubernetes-cost-management-solutions" class="related-post-link">Top Kubernetes Cost Management Solutions</a></li>
+              <li><a href="/blog/gpu-monitoring" class="related-post-link">GPU Monitoring: Detect Idle and Recover</a></li>
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View all posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          
+
+          <div class="sidebar-card">
+            <div class="related-content-title">Explore AlertMend</div>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <script src="/assets/ops-tasks-to-automate/script.js" defer></script>
+</body>
+</html>

@@ -1,5 +1,15 @@
 [
   {
+    "slug": "ops-tasks-to-automate",
+    "title": "12 Daily Ops Tasks You Can Automate",
+    "excerpt": "A practical cookbook of 12 repetitive ops tasks worth automating, each with a copy-paste runbook, the trigger to use, and the time it gives back.",
+    "date": "2026-07-15",
+    "category": "Automation",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "tasks to automate, devops automation examples, what to automate, repetitive ops tasks, automation ideas, sysadmin automation, runbook examples, automate repetitive tasks, ops automation, disk cleanup automation, cert renewal automation, AlertMend"
+  },
+  {
     "slug": "keycloak-monitoring",
     "title": "Keycloak Monitoring Guide for Self-Hosted SSO",
     "excerpt": "A practical Keycloak monitoring guide for self-hosted SSO: health checks, metrics, login probes, Prometheus alerts, Kubernetes probes, and safe recovery.",
@@ -6203,13 +6213,13 @@
   },
   {
     "slug": "sigsegv-error",
-    "title": "SIGSEGV Error: Segmentation Violation",
-    "excerpt": "Learn how to diagnose and fix SIGSEGV segmentation violation errors caused by null pointer dereferencing, out-of-bounds access, and memory management issues.",
+    "title": "SIGSEGV Error (Signal 11): Causes and Fixes",
+    "excerpt": "SIGSEGV (signal 11) is a segmentation fault. Debug it with gdb, AddressSanitizer, and core dumps, and fix exit code 139 in Docker and Kubernetes.",
     "date": "2025-12-15",
-    "category": "DevOps",
-    "author": "AlertMend Team",
+    "category": "Troubleshooting",
+    "author": "Arvind Rajpurohit",
     "tags": [],
-    "keywords": "SIGSEGV, segmentation violation, segmentation fault, null pointer, memory access errors, debugging, AddressSanitizer, core dumps"
+    "keywords": "sigsegv, signal 11, segmentation fault, segfault, exit code 139, sigsegv error, segmentation fault core dumped, sigsegv docker, sigsegv kubernetes, exit code 139 kubernetes, gdb segfault, addresssanitizer, null pointer dereference, use after free"
   },
   {
     "slug": "what-is-a-kubernetes-tolerations-and-tains",
