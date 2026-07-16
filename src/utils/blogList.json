@@ -2233,13 +2233,13 @@
   },
   {
     "slug": "code-exited-status-1-failure",
-    "title": "code exited status 1/failure Guide",
-    "excerpt": "Encountering the code exited status 1/failure error can be challenging in system monitoring.",
+    "title": "Fix code=exited, status=1/failure (systemd)",
+    "excerpt": "A systemd service failed with code=exited, status=1/failure. Read journalctl to find the real error and fix docker, nginx, apache, or mysql start failures.",
     "date": "2026-01-10",
-    "category": "Kubernetes",
-    "author": "AlertMend Team",
+    "category": "Troubleshooting",
+    "author": "Arvind Rajpurohit",
     "tags": [],
-    "keywords": "code, exited, status, failure, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
+    "keywords": "code=exited status=1/failure, code exited status 1 failure, status=1/failure, main process exited code=exited status=1/failure, control process exited code=exited, active: failed (result: exit-code), failed with result exit-code, systemd service failed, journalctl -xeu, docker.service failed, nginx service failed, exit code 1, exit status 1, what is exit code 1, kubernetes exit code 1, github actions exit code 1"
   },
   {
     "slug": "codoor",
@@ -6187,7 +6187,7 @@
     "excerpt": "kubectl get svc lists Kubernetes Services. Learn what svc means, how to read the output, list all namespaces, and fix a pending EXTERNAL-IP.",
     "date": "2025-12-15",
     "category": "Kubernetes",
-    "author": "Dinesh Agrawal",
+    "author": "Arvind Rajpurohit",
     "tags": [],
     "keywords": "kubectl get svc, kubectl get services, kubectl get svc all namespaces, what is svc in kubernetes, svc meaning, kubectl get svc output, kubectl describe svc, oc get svc, kubernetes service, kubectl list services, get svc"
   },

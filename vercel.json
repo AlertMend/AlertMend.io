@@ -48,6 +48,10 @@
       "destination": "/blog/best-ai-agent-observability-tools/index.html"
     },
     {
+      "source": "/blog/code-exited-status-1-failure",
+      "destination": "/blog/code-exited-status-1-failure/index.html"
+    },
+    {
       "source": "/blog/cross-stack-incident-automation",
       "destination": "/blog/cross-stack-incident-automation/index.html"
     },
