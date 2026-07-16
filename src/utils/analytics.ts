@@ -179,6 +179,7 @@ function getPageName(path: string): string | null {
     '/kubernetes-management': 'Kubernetes Management',
     '/on-call-management': 'On-Call Management',
     '/kubernetes-cost-optimization': 'Cost Optimization',
+    '/log-management': 'Log Management',
     '/about': 'About',
     '/contact': 'Contact',
     '/partners': 'Partners',

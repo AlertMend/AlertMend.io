@@ -1,4 +1,4 @@
-import { Shield, TrendingUp, DollarSign, Zap, Activity, Bell, Clock, CheckCircle2, Users } from 'lucide-react'
+import { Shield, TrendingUp, DollarSign, Zap, Activity, Bell, Clock, CheckCircle2, Users, FileText, Search, Database } from 'lucide-react'
 
 interface BenefitsProps {
   solutionId?: string
@@ -219,6 +219,45 @@ export default function Benefits({ solutionId = 'default' }: BenefitsProps) {
           gradientFrom: 'from-purple-50/0',
           gradientVia: 'via-purple-100/0',
           gradientTo: 'to-purple-200/0',
+        },
+      ],
+    },
+    'log-management': {
+      title: 'Collect Every Log. Search in Seconds. Own Your Data.',
+      description: 'A lightweight agent collects logs from every container, in Kubernetes or on VMs, enriches them with metadata, and keeps them in your own bucket with fast full-text search across live and historical data.',
+      benefits: [
+        {
+          icon: FileText,
+          value: 'K8s + VMs',
+          title: 'Automatic Collection',
+          description: 'Agents tail every container in Kubernetes and on VMs, with no sidecars or code changes',
+          color: 'text-blue-600',
+          bgColor: 'bg-blue-50',
+          gradientFrom: 'from-blue-50/0',
+          gradientVia: 'via-blue-100/0',
+          gradientTo: 'to-blue-200/0',
+        },
+        {
+          icon: Search,
+          value: 'Full-Text',
+          title: 'Instant Search',
+          description: 'Query live and historical logs in seconds with a built-in full-text index',
+          color: 'text-purple-600',
+          bgColor: 'bg-purple-50',
+          gradientFrom: 'from-purple-50/0',
+          gradientVia: 'via-purple-100/0',
+          gradientTo: 'to-purple-200/0',
+        },
+        {
+          icon: Database,
+          value: 'Your Cloud',
+          title: 'No Storage Headaches',
+          description: 'Self-host on-prem or in your VPC and keep logs in your own S3 bucket, no Elasticsearch to run',
+          color: 'text-green-600',
+          bgColor: 'bg-green-50',
+          gradientFrom: 'from-green-50/0',
+          gradientVia: 'via-green-100/0',
+          gradientTo: 'to-green-200/0',
         },
       ],
     },

@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage'
 import CaseStudiesPage from './pages/CaseStudiesPage'
 import CaseStudyDetailPage from './pages/CaseStudyDetailPage'
 import SolutionDetailPage from './pages/SolutionDetailPage'
+import LogManagementPage from './pages/LogManagementPage'
 import IntegrationDetailPage from './pages/IntegrationDetailPage'
 import PricingPage from './pages/PricingPage'
 import DocumentationPage from './pages/DocumentationPage'
@@ -75,6 +76,7 @@ function App() {
           <Route path="/kubernetes-management" element={<SolutionDetailPage />} />
           <Route path="/on-call-management" element={<SolutionDetailPage />} />
           <Route path="/kubernetes-cost-optimization" element={<SolutionDetailPage />} />
+          <Route path="/log-management" element={<LogManagementPage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/documentation" element={<DocumentationPage />} />
           <Route path="/documentation/slack-app-approval" element={<SlackAppApprovalPage />} />

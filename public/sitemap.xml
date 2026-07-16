@@ -77,6 +77,13 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Blog Post: centralized-logging-kubernetes-vms -->
+  <url>
+    <loc>https://www.alertmend.io/blog/centralized-logging-kubernetes-vms</loc>
+    <lastmod>2026-07-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- Blog Post: ops-tasks-to-automate -->
   <url>
     <loc>https://www.alertmend.io/blog/ops-tasks-to-automate</loc>

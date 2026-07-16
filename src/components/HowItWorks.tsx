@@ -1,4 +1,4 @@
-import { AlertCircle, Zap, CheckCircle2, ArrowRight, Activity, Clock, Database, AlertTriangle, Bell, MessageSquare, Webhook, Target, Shield, Gauge, TrendingUp, Users, BarChart3, DollarSign, Mail, Box, Phone } from 'lucide-react'
+import { AlertCircle, Zap, CheckCircle2, ArrowRight, Activity, Clock, Database, AlertTriangle, Bell, MessageSquare, Webhook, Target, Shield, Gauge, TrendingUp, Users, BarChart3, DollarSign, Mail, Box, Phone, FileText, Search, Filter } from 'lucide-react'
 import CloudProviders from './CloudProviders'
 import ToolLogos from './ToolLogos'
 
@@ -290,6 +290,75 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
           'Real-time Kubernetes cost tracking and savings reports',
           'Per-namespace and per-workload cost analysis',
           'Budget alerts and cost forecasting for K8s',
+        ],
+      },
+    ],
+    'log-management': [
+      {
+        number: '01',
+        title: 'Collect Logs',
+        description: 'A lightweight agent tails every container, in Kubernetes or on VMs, with no app changes.',
+        icon: FileText,
+        bgColor: 'bg-blue-50',
+        textColor: 'text-blue-600',
+        details: [
+          'A per-node DaemonSet reads pod logs in Kubernetes',
+          'A lightweight agent tails container logs on VMs',
+          'Supports CRI and Docker JSON formats, no sidecars or code changes',
+        ],
+        tools: [
+          { name: 'Kubernetes', logo: '/logos/kubernetes-logo.png', icon: Activity, color: 'text-blue-600', bg: 'bg-blue-50' },
+          { name: 'Docker', logo: null, icon: Box, color: 'text-blue-500', bg: 'bg-blue-50' },
+        ],
+      },
+      {
+        number: '02',
+        title: 'Enrich with Metadata',
+        description: 'Every log line is tagged with context for precise filtering.',
+        icon: Filter,
+        bgColor: 'bg-blue-50',
+        textColor: 'text-blue-600',
+        details: [
+          'Attach host or node name, container image, and container IDs',
+          'Add Kubernetes pod labels as searchable fields where available',
+          'Assemble multiline stack traces into single events',
+        ],
+        tools: [
+          { name: 'Kubernetes', logo: '/logos/kubernetes-logo.png', icon: Activity, color: 'text-blue-600', bg: 'bg-blue-50' },
+          { name: 'Docker', logo: null, icon: Box, color: 'text-blue-500', bg: 'bg-blue-50' },
+        ],
+      },
+      {
+        number: '03',
+        title: 'Store in Your Own Bucket',
+        description: 'Logs are buffered durably and flushed to object storage as compressed Parquet.',
+        icon: Database,
+        bgColor: 'bg-green-50',
+        textColor: 'text-green-600',
+        details: [
+          'Bring your own S3-compatible bucket (AWS S3 or MinIO), on-prem or in your VPC',
+          'Columnar Parquet with Zstd compression, no Elasticsearch cluster to run',
+          'Write-ahead log and checkpoints survive pod restarts',
+        ],
+        tools: [
+          { name: 'Amazon S3', logo: null, icon: Database, color: 'text-orange-600', bg: 'bg-orange-50' },
+        ],
+      },
+      {
+        number: '04',
+        title: 'Search and Investigate',
+        description: 'Query live and historical logs in seconds and jump straight from an alert to its logs.',
+        icon: Search,
+        bgColor: 'bg-green-50',
+        textColor: 'text-green-600',
+        details: [
+          'Sub-second full-text search over the inverted index',
+          'Filter by namespace, pod, container, or any label',
+          'Jump from an alert straight to the relevant log lines',
+        ],
+        tools: [
+          { name: 'Kubernetes', logo: '/logos/kubernetes-logo.png', icon: Activity, color: 'text-blue-600', bg: 'bg-blue-50' },
+          { name: 'Grafana', logo: '/logos/Grafana_Logo.png', icon: null, color: 'text-orange-600', bg: 'bg-orange-50' },
         ],
       },
     ],
@@ -653,6 +722,54 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
                     'Tracked response times across all incidents',
                     'Identified bottlenecks in on-call workflow',
                     'Provided recommendations for improvement',
+                  ],
+                },
+              ],
+            },
+            'log-management': {
+              title: 'Log Search in Action',
+              description: 'See how AlertMend AI turns hours of manual log hunting into seconds of full-text search across your clusters',
+              examples: [
+                {
+                  platform: 'Kubernetes',
+                  platformColor: 'from-blue-700 to-blue-600',
+                  title: 'CrashLoop Investigation',
+                  issue: 'Find why a pod started crash-looping three hours ago',
+                  issueIcon: AlertTriangle,
+                  alertmendTime: '3s',
+                  manualTime: '25+ min',
+                  steps: [
+                    'Searched full-text logs filtered by pod label',
+                    'Surfaced the enriched stack trace with node context',
+                    'Linked the error directly to the firing alert',
+                  ],
+                },
+                {
+                  platform: 'Virtual Machines',
+                  platformColor: 'from-blue-700 to-blue-600',
+                  title: 'VM Container Error Hunt',
+                  issue: 'Trace a spike of 5xx errors across containers on your VMs',
+                  issueIcon: AlertCircle,
+                  alertmendTime: '4s',
+                  manualTime: '40+ min',
+                  steps: [
+                    'Queried every VM and cluster from a single search box',
+                    'Grouped matches by host and container',
+                    'Isolated the failing service in seconds',
+                  ],
+                },
+                {
+                  platform: 'Historical Logs',
+                  platformColor: 'from-blue-700 to-blue-600',
+                  title: 'Audit Trail Lookup',
+                  issue: 'Retrieve last week of logs for a deleted pod',
+                  issueIcon: Search,
+                  alertmendTime: '5s',
+                  manualTime: '1+ hour',
+                  steps: [
+                    'Pulled compressed Parquet history from your bucket',
+                    'Filtered by container ID and time range',
+                    'Exported the matching lines for the audit',
                   ],
                 },
               ],
