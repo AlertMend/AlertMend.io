@@ -1,5 +1,19 @@
 [
   {
+    "slug": "centralized-logging-kubernetes-vms",
+    "title": "Centralized Logging for Kubernetes and VMs",
+    "excerpt": "Use AlertMend as a logging tool for Kubernetes and VMs: 1-click agents, instant search, your S3 or MinIO bucket, and no Elasticsearch to manage.",
+    "date": "2026-07-16",
+    "category": "Logging",
+    "author": "Dinesh Agrawal",
+    "tags": [
+      "Logging",
+      "Kubernetes",
+      "Observability"
+    ],
+    "keywords": "AlertMend logging tool, best logging tool, centralized logging, Kubernetes logging tool, VM logs, container logs, log management, log search, self-hosted logging, S3 logging, MinIO logging, Elasticsearch alternative, Datadog logs alternative, cost efficient logging, 1-click logging setup"
+  },
+  {
     "slug": "ops-tasks-to-automate",
     "title": "12 Daily Ops Tasks You Can Automate",
     "excerpt": "A practical cookbook of 12 repetitive ops tasks worth automating, each with a copy-paste runbook, the trigger to use, and the time it gives back.",

@@ -43,6 +43,7 @@ export default function Footer() {
               <li><a href="/#mlops">GPU &amp; MLOps</a></li>
               <li><a href="/#features">On-call &amp; incidents</a></li>
               <li><a href="/#runbooks">Runbooks</a></li>
+              <li><Link to="/log-management">Log management</Link></li>
               <li><a href="/#features">FinOps</a></li>
             </ul>
           </div>

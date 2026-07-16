@@ -1,4 +1,4 @@
-import { ArrowRight, Search, Zap, Activity, Bell, DollarSign } from 'lucide-react'
+import { ArrowRight, Search, Zap, Activity, Bell, DollarSign, FileText, CheckCircle2 } from 'lucide-react'
 
 interface HeroProps {
   solutionId?: string
@@ -16,6 +16,7 @@ export default function Hero({ solutionId = 'default' }: HeroProps) {
     'kubernetes-management': 'https://app.alertmend.io/signup?service=monitoring',
     'on-call-management': 'https://app.alertmend.io/signup?service=on-call',
     'kubernetes-cost-optimization': 'https://app.alertmend.io/signup?service=cost-optimization',
+    'log-management': 'https://app.alertmend.io/signup?service=log-management',
   }
 
   // Get signup URL for current solution or default
@@ -73,9 +74,26 @@ export default function Hero({ solutionId = 'default' }: HeroProps) {
         { value: '0%', label: 'Performance Impact', color: 'text-blue-600' },
       ],
     },
+    'log-management': {
+      badge: { icon: FileText, text: 'Kubernetes & VM Log Management', color: 'blue' },
+      title: 'Centralized Logs, Instant Search',
+      description: 'Collect logs from every container, whether it runs in Kubernetes pods or on your VMs. A lightweight agent enriches each line with metadata and keeps logs in your own bucket. Search live and historical logs in seconds with full-text queries.',
+      highlights: [
+        '1-click agent setup',
+        'No storage cluster to babysit',
+        'Runs on-prem or in your VPC',
+        'Bring your own S3 bucket',
+      ],
+      metrics: [
+        { value: 'K8s+VMs', label: 'Any Container', color: 'text-blue-600' },
+        { value: 'Instant', label: 'Log Search', color: 'text-blue-600' },
+        { value: 'S3', label: 'Your Bucket', color: 'text-green-600' },
+      ],
+    },
   }
 
   const content = solutionContent[solutionId as keyof typeof solutionContent] || solutionContent.default
+  const highlights = (content as { highlights?: string[] }).highlights
   const BadgeIcon = content.badge.icon
   const badgeColorClass = content.badge.color === 'orange' ? 'bg-orange-50 border-orange-200/50 text-orange-700' :
                           content.badge.color === 'blue' ? 'bg-blue-50 border-blue-200/50 text-blue-700' :
@@ -107,7 +125,18 @@ export default function Hero({ solutionId = 'default' }: HeroProps) {
             <p className="text-lg md:text-xl lg:text-2xl text-purple-700 mb-8 leading-relaxed max-w-3xl mx-auto">
               {content.description}
             </p>
-            
+
+            {highlights && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 mb-10 max-w-xl mx-auto text-left">
+                {highlights.map((highlight, index) => (
+                  <div key={index} className="flex items-center space-x-2">
+                    <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0" />
+                    <span className="text-sm md:text-base font-semibold text-purple-800">{highlight}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <button 
                 onClick={handleBookDemo}
@@ -129,7 +158,7 @@ export default function Hero({ solutionId = 'default' }: HeroProps) {
             <div className="grid grid-cols-3 gap-6 lg:gap-8 pt-8 border-t border-purple-200/50 max-w-2xl mx-auto">
               {content.metrics.map((metric, index) => (
                 <div key={index} className="text-center">
-                  <div className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-2 ${metric.color}`}>{metric.value}</div>
+                  <div className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-2 whitespace-nowrap ${metric.color}`}>{metric.value}</div>
                   <div className="text-sm md:text-base text-purple-700 font-medium">{metric.label}</div>
               </div>
               ))}

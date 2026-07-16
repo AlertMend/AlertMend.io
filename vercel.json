@@ -48,6 +48,10 @@
       "destination": "/blog/best-ai-agent-observability-tools/index.html"
     },
     {
+      "source": "/blog/centralized-logging-kubernetes-vms",
+      "destination": "/blog/centralized-logging-kubernetes-vms/index.html"
+    },
+    {
       "source": "/blog/code-exited-status-1-failure",
       "destination": "/blog/code-exited-status-1-failure/index.html"
     },

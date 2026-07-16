@@ -1,6 +1,6 @@
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { Bell, Activity, Zap, DollarSign, Phone, MessageSquare, TrendingUp, CheckCircle2, BarChart3, AlertTriangle, Gauge, Shield, Target, Users } from 'lucide-react'
+import { Bell, Activity, Zap, DollarSign, Phone, MessageSquare, TrendingUp, CheckCircle2, BarChart3, AlertTriangle, Gauge, Shield, Target, Users, FileText, Search, Database, Filter } from 'lucide-react'
 import Hero from '../components/Hero'
 import ROIMetrics from '../components/ROIMetrics'
 import HowItWorks from '../components/HowItWorks'
@@ -34,7 +34,7 @@ export default function SolutionDetailPage() {
     if (pathSegments.length > 0) {
       const solutionId = pathSegments[0]
       // Map valid solution IDs
-      const validIds = ['auto-remediation', 'kubernetes-management', 'on-call-management', 'kubernetes-cost-optimization']
+      const validIds = ['auto-remediation', 'kubernetes-management', 'on-call-management', 'kubernetes-cost-optimization', 'log-management']
       if (validIds.includes(solutionId)) {
         return solutionId
       }
@@ -330,6 +330,72 @@ export default function SolutionDetailPage() {
         },
       ],
     },
+    'log-management': {
+      icon: FileText,
+      title: 'Log Management for Kubernetes and VMs',
+      subtitle: 'Centralized Logs, Instant Search',
+      description: 'Collect logs from every container in a single place, whether it runs in Kubernetes pods or on your VMs. A lightweight agent enriches every line with metadata and keeps logs in your own S3 bucket, on-prem or in your VPC, with fast full-text search across live and historical data.',
+      color: 'text-blue-600',
+      bgColor: 'bg-blue-50',
+      borderColor: 'border-blue-200',
+      stat: 'Turn hours of log grepping into seconds of full-text search across every cluster and VM.',
+      features: [
+        { icon: FileText, text: '1-click, zero-touch collection from Kubernetes pods and VM containers' },
+        { icon: Filter, text: 'Automatic enrichment: host, node, container, image, labels' },
+        { icon: Shield, text: 'Self-hosted on-prem or in your VPC, bring your own S3 bucket' },
+        { icon: Search, text: 'Fast full-text search over low-cost Parquet, no Elasticsearch to run' },
+      ],
+      metrics: [
+        { value: 'K8s + VMs', label: 'Any Container' },
+        { value: 'Full-Text', label: 'Log Search' },
+      ],
+      steps: [
+        {
+          number: '01',
+          title: 'Collect Logs',
+          description: 'A lightweight agent tails every container, in Kubernetes or on VMs, with no app changes.',
+          icon: FileText,
+          details: [
+            'A per-node DaemonSet reads pod logs in Kubernetes',
+            'A lightweight agent tails container logs on VMs',
+            'Supports CRI and Docker JSON formats, no sidecars or code changes',
+          ],
+        },
+        {
+          number: '02',
+          title: 'Enrich with Metadata',
+          description: 'Every log line is tagged with context for precise filtering.',
+          icon: Filter,
+          details: [
+            'Attach host or node name, container image, and container IDs',
+            'Add Kubernetes pod labels as searchable fields where available',
+            'Assemble multiline stack traces into single events',
+          ],
+        },
+        {
+          number: '03',
+          title: 'Store in Your Own Bucket',
+          description: 'Logs are buffered durably and flushed to object storage as compressed Parquet.',
+          icon: Database,
+          details: [
+            'Bring your own S3-compatible bucket (AWS S3 or MinIO), on-prem or in your VPC',
+            'Columnar Parquet with Zstd compression, no Elasticsearch cluster to run',
+            'Write-ahead log and checkpoints survive pod restarts',
+          ],
+        },
+        {
+          number: '04',
+          title: 'Search and Investigate',
+          description: 'Query across live and historical logs and jump straight from an alert to its logs.',
+          icon: Search,
+          details: [
+            'Sub-second full-text search over the inverted index',
+            'Filter by namespace, pod, container, or any label',
+            'Jump from an alert straight to the relevant log lines',
+          ],
+        },
+      ],
+    },
   }
 
   const solution = solutions[selectedSolutionId as keyof typeof solutions]
@@ -370,6 +436,7 @@ export default function SolutionDetailPage() {
       'kubernetes-management': 'Kubernetes Management with AI',
       'on-call-management': 'On-Call Management & Incident Alerts',
       'kubernetes-cost-optimization': 'Kubernetes Cost Optimization',
+      'log-management': 'Log Management for Kubernetes & VMs',
     }
     
     const shortTitle = shortTitles[solutionId] || title
@@ -386,32 +453,33 @@ export default function SolutionDetailPage() {
   }
 
   const seoTitle = getSolutionTitle(selectedSolutionId, solution.title, solution.subtitle)
+  const isLogManagement = selectedSolutionId === 'log-management'
 
   return (
     <div className="min-h-screen bg-white">
       <SEO
         title={seoTitle}
         description={uniqueDescription}
-        keywords={`${solution.title}, ${solution.subtitle}, AlertMend AI, AIOps, Kubernetes, infrastructure automation, ${selectedSolutionId === 'auto-remediation' ? 'auto-remediation, incident management' : selectedSolutionId === 'kubernetes-management' ? 'Kubernetes management, cluster monitoring' : selectedSolutionId === 'on-call-management' ? 'on-call management, incident alerts' : 'cost optimization, Kubernetes cost management'}`}
+        keywords={`${solution.title}, ${solution.subtitle}, AlertMend AI, AIOps, Kubernetes, infrastructure automation, ${selectedSolutionId === 'auto-remediation' ? 'auto-remediation, incident management' : selectedSolutionId === 'kubernetes-management' ? 'Kubernetes management, cluster monitoring' : selectedSolutionId === 'on-call-management' ? 'on-call management, incident alerts' : selectedSolutionId === 'log-management' ? 'log management, Kubernetes logs, VM logs, container logs, log search, log aggregation' : 'cost optimization, Kubernetes cost management'}`}
         canonical={`/${selectedSolutionId}`}
       />
       
       <Hero solutionId={selectedSolutionId} />
-      
-      <ROIMetrics />
-      
+
+      {!isLogManagement && <ROIMetrics />}
+
       <HowItWorks solutionId={selectedSolutionId} />
-      
-      <Integrations />
-      
+
       <Benefits solutionId={selectedSolutionId} />
-      
-      <CaseStudies />
-      
+
+      <Integrations />
+
+      {!isLogManagement && <CaseStudies />}
+
       <CTA solutionId={selectedSolutionId} />
-      
-      <LanguageSupport />
-      
+
+      {!isLogManagement && <LanguageSupport />}
+
       <FAQ />
 
     </div>

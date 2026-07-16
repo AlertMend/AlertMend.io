@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom'
-import { ChevronRight, Home, Zap, Activity, Bell, DollarSign } from 'lucide-react'
+import { ChevronRight, Home, Zap, Activity, Bell, DollarSign, FileText } from 'lucide-react'
 import { Helmet } from '../lib/helmet'
 
 interface BreadcrumbItem {
@@ -23,6 +23,7 @@ export default function Breadcrumb({ items, showSolutions = false }: BreadcrumbP
     { id: 'kubernetes-management', label: 'Kubernetes Management', icon: Activity, path: '/kubernetes-management' },
     { id: 'on-call-management', label: 'On-Call', icon: Bell, path: '/on-call-management' },
     { id: 'kubernetes-cost-optimization', label: 'Cost Optimization', icon: DollarSign, path: '/kubernetes-cost-optimization' },
+    { id: 'log-management', label: 'Log Management', icon: FileText, path: '/log-management' },
   ]
 
   // Check if current page is a solution page

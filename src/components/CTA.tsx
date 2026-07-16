@@ -12,6 +12,7 @@ export default function CTA({ solutionId = 'default' }: CTAProps) {
     'kubernetes-management': 'https://app.alertmend.io/signup?service=monitoring',
     'on-call-management': 'https://app.alertmend.io/signup?service=on-call',
     'kubernetes-cost-optimization': 'https://app.alertmend.io/signup?service=cost-optimization',
+    'log-management': 'https://app.alertmend.io/signup?service=log-management',
   }
 
   // Get signup URL for current solution or default
