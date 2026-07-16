@@ -8,12 +8,19 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { SITE_URL, esc, CHROME_INLINE_CSS, AUTHOR_CRED_CSS, buildNavHtml, buildSidebarHtml, buildCredArticleHeader, calendlyUrl, appendBlogSignupHandler } from './static-blog-shared.mjs'
+import { SITE_URL, esc, CHROME_INLINE_CSS, AUTHOR_CRED_CSS, ARVIND_AUTHOR, buildNavHtml, buildSidebarHtml, buildCredArticleHeader, calendlyUrl, appendBlogSignupHandler } from './static-blog-shared.mjs'
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const DATE = '2025-12-15', MODIFIED = '2026-07-07'
-const AUTHOR = 'Dinesh Agrawal'
-const LINKEDIN = 'https://www.linkedin.com/in/dineshagrawal85/'
+// Old article (revive): keep the original author, Arvind. See dont-reassign-author-on-old-rewrites.
+const author = {
+  ...ARVIND_AUTHOR,
+  role: 'Co-Founder & CEO',
+  credLine: 'Kubestronaut and Kubernetes expert with 15+ years in infrastructure automation',
+  linkedin: 'https://www.linkedin.com/in/arvind-rajpurohit-4a332523/',
+}
+const AUTHOR = author.name
+const LINKEDIN = author.linkedin
 const ACCENT = '#326ce5', ACCENT_DARK = '#0b2447'
 const K8S_LOGO = (() => { try { return (fs.readFileSync(path.join(root, 'public/logos/brand/kubernetes.svg'), 'utf8').match(/d="([^"]+)"/) || [null, ''])[1] } catch { return '' } })()
 
@@ -72,14 +79,14 @@ function authorCard() {
   return `
           <hr style="margin:2.5rem 0 1.75rem;border:none;border-top:1px solid #e4e4e7;">
           <div class="authorBioCard">
-            <img src="/logos/dinesh.jpeg" alt="${AUTHOR}" width="128" height="128" loading="lazy" style="width:128px;height:128px;border-radius:12px;object-fit:cover;border:1px solid #e4e4e7;flex-shrink:0;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-            <div style="display:none;width:128px;height:128px;border-radius:12px;border:1px solid #e4e4e7;background:#f4f4f5;align-items:center;justify-content:center;font-weight:800;font-size:2.25rem;color:#3f3f46;flex-shrink:0;">DA</div>
+            <img src="/logos/arvind.jpeg" alt="${AUTHOR}" width="128" height="128" loading="lazy" style="width:128px;height:128px;border-radius:12px;object-fit:cover;border:1px solid #e4e4e7;flex-shrink:0;" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div style="display:none;width:128px;height:128px;border-radius:12px;border:1px solid #e4e4e7;background:#f4f4f5;align-items:center;justify-content:center;font-weight:800;font-size:2.25rem;color:#3f3f46;flex-shrink:0;">AR</div>
             <div style="flex:1;min-width:240px;">
               <h3>${AUTHOR}</h3>
-              <p class="authorBioRole">Co-Founder at AlertMend.io</p>
+              <p class="authorBioRole">Co-Founder &amp; CEO</p>
               <div class="authorBioText">
-                <p style="margin:0 0 10px;">${AUTHOR} brings 12+ years of deep experience across cloud and AI-driven automation, building systems that detect, diagnose, and fix production incidents without waiting for a human.</p>
-                <p style="margin:0;">At AlertMend.io he focuses on autonomous, self-healing operations, turning manual cloud firefighting into workflows that predict, remediate, and learn.</p>
+                <p style="margin:0 0 10px;">Arvind is a Kubestronaut and Kubernetes expert with 15+ years of experience in infrastructure automation.</p>
+                <p style="margin:0;">Previously DevOps Team Lead at Roambee and Customer Success Engineer at Shoreline.io (acquired by NVIDIA), he has helped teams improve uptime, reduce cloud cost, and eliminate manual operations work. At AlertMend, Arvind focuses on safe autonomous remediation for Kubernetes, VMs, and production reliability incidents.</p>
               </div>
               <a class="authorBioLink" href="${LINKEDIN}" target="_blank" rel="noopener noreferrer" aria-label="${AUTHOR} on LinkedIn">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18V9.94H5.67V18h2.67zM7 8.76a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zM18.34 18v-4.42c0-2.37-1.27-3.47-2.96-3.47-1.36 0-1.97.75-2.31 1.28V9.94h-2.67V18h2.67v-4.5c0-.24.02-.48.09-.65.19-.48.63-.98 1.36-.98.96 0 1.35.73 1.35 1.8V18h2.82z"/></svg>
@@ -208,7 +215,7 @@ const CFG = {
 
 function jsonLd() {
   const canonical = `${SITE_URL}/blog/${CFG.slug}`, img = `${SITE_URL}/assets/${CFG.slug}/hero.png`
-  const article = { '@context': 'https://schema.org', '@type': 'TechArticle', headline: CFG.title, description: CFG.excerpt, image: img, datePublished: DATE, dateModified: MODIFIED, author: { '@type': 'Person', name: AUTHOR, jobTitle: 'Co-Founder at AlertMend.io', url: LINKEDIN, sameAs: [LINKEDIN] }, publisher: { '@type': 'Organization', name: 'AlertMend AI', logo: { '@type': 'ImageObject', url: `${SITE_URL}/logos/alertmend-logo.svg` } }, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical } }
+  const article = { '@context': 'https://schema.org', '@type': 'TechArticle', headline: CFG.title, description: CFG.excerpt, image: img, datePublished: DATE, dateModified: MODIFIED, author: { '@type': 'Person', name: AUTHOR, jobTitle: author.role, url: LINKEDIN, sameAs: [LINKEDIN] }, publisher: { '@type': 'Organization', name: 'AlertMend AI', logo: { '@type': 'ImageObject', url: `${SITE_URL}/logos/alertmend-logo.svg` } }, mainEntityOfPage: { '@type': 'WebPage', '@id': canonical } }
   const faq = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: CFG.faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }
   return [article, faq].map((o) => `  <script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n')
 }
@@ -254,7 +261,7 @@ ${buildNavHtml(CFG.slug, cal)}
   <div class="main-container">
     <div class="content-wrapper">
       <div class="main-col">
-${buildCredArticleHeader(CFG.h1, DATE, CFG.category)}
+${buildCredArticleHeader(CFG.h1, DATE, CFG.category, author)}
       <div class="brandChip"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="${K8S_LOGO}" fill="${ACCENT}"/></svg><span>Kubernetes command reference</span></div>
       <div class="proofBar" style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin:-.75rem 0 1.5rem;color:#52525b;font-size:.82rem;">
         <span style="display:inline-flex;align-items:center;gap:6px;font-weight:700;color:#047857;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Verified against the official kubectl and Kubernetes docs</span>
