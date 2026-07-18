@@ -852,24 +852,22 @@ markdownFiles.forEach(file => {
     .main-container {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 96px 16px 32px;
-      margin-top: 64px;
+      padding: 40px 16px 32px;
     }
     @media (min-width: 640px) {
       .main-container {
-        padding: 96px 24px 32px;
+        padding: 44px 24px 32px;
       }
     }
     @media (min-width: 1024px) {
       .main-container {
-        padding: 96px 32px 48px;
+        padding: 48px 32px 48px;
       }
     }
     .content-wrapper {
       display: grid;
       grid-template-columns: 1fr;
       gap: 32px;
-      margin-top: 32px;
     }
     @media (min-width: 1024px) {
       .content-wrapper {

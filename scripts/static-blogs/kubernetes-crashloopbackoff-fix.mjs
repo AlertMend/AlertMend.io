@@ -77,7 +77,7 @@ export async function build(slug) {
   const excerpt = meta.excerpt || DEFAULT_EXCERPT
   const date = meta.date || '2026-06-24'
   const category = meta.category || 'Kubernetes'
-  const author = meta.author || 'Himanshu Bansal'
+  const author = meta.author || 'Arvind Rajpurohit'
   const keywords =
     meta.keywords ||
     'crashloopbackoff kubernetes fix, kubernetes crashloopbackoff, crash loop back off, kubectl crashloopbackoff, pod crashloopbackoff fix, kubernetes pod restarting'

@@ -3,7 +3,7 @@ title: "How to Troubleshoot and Fix ImagePullBackOf"
 excerpt: "In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors occur during this process."
 date: "2025-05-21"
 category: "Kubernetes"
-author: "Himanshu Bansal"
+author: "Arvind Rajpurohit"
 keywords: "Kubernetes, ImagePullBackOff, ErrImagePull, container image pull errors, Kubernetes troubleshooting, automated incident remediation, deployment delays, AlertMend AI"
 ---
 # How to Troubleshoot and Fix ImagePullBackOf

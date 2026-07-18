@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import {
   FileText, Search, Database, Filter, Zap, Shield, Boxes, Server,
-  ArrowRight, CheckCircle2, Cloud, Coins, Activity, Cpu, Lock,
+  ArrowRight, CheckCircle2, XCircle, Cloud, Coins, Activity, Cpu, Lock,
 } from 'lucide-react'
 import SEO from '../components/SEO'
 
@@ -233,20 +233,42 @@ export default function LogManagementPage() {
             </p>
           </div>
 
-          <div className="relative mt-10 grid gap-5 md:grid-cols-3">
-            {[
-              { icon: Coins, title: 'Object-storage pricing', body: 'Pay S3 or MinIO rates for your own bucket, not SaaS per-GB ingestion.' },
-              { icon: Database, title: 'Compressed & columnar', body: 'Parquet + Zstd packs far more logs into every gigabyte you store.' },
-              { icon: Server, title: 'No search cluster', body: 'No always-on Elasticsearch to keep running, scaling, and paying for.' },
-            ].map((c) => (
-              <div key={c.title} className="rounded-2xl bg-white/10 ring-1 ring-white/15 p-6 backdrop-blur">
-                <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/15 text-white">
-                  <c.icon className="h-6 w-6" />
-                </div>
-                <h3 className="mt-4 text-lg font-bold text-white">{c.title}</h3>
-                <p className="mt-1.5 text-purple-100 leading-relaxed">{c.body}</p>
-              </div>
-            ))}
+          <div className="relative mt-10 grid gap-5 md:grid-cols-2 max-w-4xl mx-auto">
+            {/* Ordinary setup */}
+            <div className="rounded-2xl bg-white/5 ring-1 ring-white/10 p-6 md:p-7">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-purple-200/70">Typical hosted logging</h3>
+              <ul className="mt-5 space-y-3.5">
+                {[
+                  'Per-GB ingestion fees on every log line',
+                  'Separate charges to retain history',
+                  'Always-on search cluster to run and scale',
+                  'Data leaves your cloud, plus egress',
+                ].map((t) => (
+                  <li key={t} className="flex items-start gap-3">
+                    <XCircle className="mt-0.5 h-5 w-5 shrink-0 text-rose-300/80" />
+                    <span className="text-purple-100/70 leading-relaxed">{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* AlertMend */}
+            <div className="rounded-2xl bg-white/15 ring-2 ring-white/30 p-6 md:p-7 shadow-xl backdrop-blur">
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white">AlertMend</h3>
+              <ul className="mt-5 space-y-3.5">
+                {[
+                  'Object-storage rates for your own bucket',
+                  'Compressed Parquet keeps history cheap',
+                  'No cluster to run, scale, or pay for',
+                  'Data never leaves your cloud',
+                ].map((t) => (
+                  <li key={t} className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-300" />
+                    <span className="font-medium text-white leading-relaxed">{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>

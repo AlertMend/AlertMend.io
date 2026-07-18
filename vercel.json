@@ -2,18 +2,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": null,
-  "redirects": [
-    {
-      "source": "/blog/resolving-imagepullbackoff-and-errimagepull-in-kubernetes",
-      "destination": "/blog/kubernetes-imagepullbackoff-fix",
-      "permanent": true
-    },
-    {
-      "source": "/blog/understanding-kubernetes-crashloopbackoff",
-      "destination": "/blog/kubernetes-crashloopbackoff-fix",
-      "permanent": true
-    }
-  ],
+  "redirects": [],
   "rewrites": [
     {
       "source": "/blog",

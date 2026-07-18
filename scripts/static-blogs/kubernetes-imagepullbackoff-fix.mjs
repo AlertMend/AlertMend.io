@@ -42,7 +42,7 @@ export async function build(slug) {
     'ImagePullBackOff fix for ECR, GCR, and Docker Hub: kubectl describe steps, copy-paste auth and tag fixes, rate limits, and the 90-day secret expiry trap.'
   const date = meta.date || '2026-06-24'
   const category = meta.category || 'Kubernetes'
-  const author = meta.author || 'Himanshu Bansal'
+  const author = meta.author || 'Arvind Rajpurohit'
   const keywords =
     meta.keywords ||
     'imagepullbackoff kubernetes fix, errimagepull, kubernetes imagepullbackoff, image pull secret kubernetes, failed to pull image, ecr imagepullbackoff, docker hub rate limit kubernetes'
