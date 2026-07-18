@@ -524,7 +524,7 @@
     "excerpt": "CrashLoopBackOff fix: answer in the last terminated container, not the current one. Five-step workflow, annotated kubectl output, failure-mode playbooks.",
     "date": "2026-06-24",
     "category": "Kubernetes",
-    "author": "Himanshu Bansal",
+    "author": "Arvind Rajpurohit",
     "tags": [
       "Kubernetes",
       "CrashLoopBackOff",
@@ -539,7 +539,7 @@
     "excerpt": "ImagePullBackOff fix for ECR, GCR, and Docker Hub: kubectl describe steps, copy-paste auth and tag fixes, rate limits, and the 90-day secret expiry trap.",
     "date": "2026-06-24",
     "category": "Kubernetes",
-    "author": "Himanshu Bansal",
+    "author": "Arvind Rajpurohit",
     "tags": [
       "Kubernetes",
       "ImagePullBackOff",
@@ -6621,7 +6621,7 @@
     "excerpt": "In Kubernetes, container images are pulled from repositories when you deploy a pod. Occasionally, errors occur during this process.",
     "date": "2025-05-21",
     "category": "Kubernetes",
-    "author": "Himanshu Bansal",
+    "author": "Arvind Rajpurohit",
     "tags": [],
     "keywords": "Kubernetes, ImagePullBackOff, ErrImagePull, container image pull errors, Kubernetes troubleshooting, automated incident remediation, deployment delays, AlertMend AI"
   },
@@ -6647,13 +6647,13 @@
   },
   {
     "slug": "resolving-imagepullbackoff-and-errimagepull-in-kubernetes",
-    "title": "ImagePullBackOff Errors: Fix Guide",
-    "excerpt": "Troubleshooting guide for Kubernetes ImagePullBackOff and ErrImagePull errors. Diagnose and fix image pull failures caused by authentication and network issues.",
+    "title": "Resolve ImagePullBackOff and ErrImagePull",
+    "excerpt": "Fix Kubernetes ImagePullBackOff and ErrImagePull with pod events, image tags, pull secrets, registry auth, rate limits, DNS, TLS, and node disk.",
     "date": "2025-05-21",
     "category": "Kubernetes",
-    "author": "Himanshu Bansal",
+    "author": "Arvind Rajpurohit",
     "tags": [],
-    "keywords": "ImagePullBackOff, ErrImagePull, Kubernetes image pull errors, container registry, authentication, rate limits, image pull troubleshooting, AlertMend AI"
+    "keywords": "resolving imagepullbackoff and errimagepull in kubernetes, ImagePullBackOff fix, ErrImagePull fix, Kubernetes image pull errors, failed to pull image, image pull secret kubernetes, registry authentication Kubernetes, Docker Hub rate limit Kubernetes, ECR ImagePullBackOff, GCR ImagePullBackOff, containerd pull image"
   },
   {
     "slug": "privileged-containers-in-kubernetes",
@@ -6837,13 +6837,13 @@
   },
   {
     "slug": "understanding-kubernetes-crashloopbackoff",
-    "title": "Kubernetes CrashLoopBackOff Guide",
-    "excerpt": "Guide to troubleshooting Kubernetes CrashLoopBackOff errors. Diagnose and fix pod crashes caused by resource issues and configuration errors.",
+    "title": "Understanding Kubernetes CrashLoopBackOff",
+    "excerpt": "Understand Kubernetes CrashLoopBackOff, find the real cause with previous logs, exit codes, pod events, probes, resource limits, and safe fixes.",
     "date": "2025-02-28",
     "category": "Kubernetes",
     "author": "Arvind Rajpurohit",
     "tags": [],
-    "keywords": "CrashLoopBackOff, Kubernetes troubleshooting, pod crashes, container errors, Kubernetes debugging, pod restart policy, resource limits, AlertMend AI"
+    "keywords": "understanding kubernetes crashloopbackoff, CrashLoopBackOff Kubernetes, Kubernetes CrashLoopBackOff fix, kubectl logs previous, OOMKilled Kubernetes, liveness probe CrashLoopBackOff, pod restart loop, Kubernetes pod crashing, exit code 137 Kubernetes, exit code 1 CrashLoopBackOff"
   },
   {
     "slug": "kubernetes-evicted-pods",

@@ -198,14 +198,14 @@ export default function BlogPostDetailPage() {
         }}
         extraStructuredData={undefined}
       />
-      <main className="pt-24">
-        <article className="pt-8 pb-8 md:pb-12 container-padding">
+      <main className="pt-10 md:pt-12">
+        <article className="pb-8 md:pb-12 container-padding">
           <div className="max-w-7xl mx-auto">
             <Breadcrumb items={[
               { label: 'Blog', path: '/blog' },
               { label: post.title }
             ]} />
-            <div className="mt-8">
+            <div className="mt-5 md:mt-6">
 
             <div className="grid lg:grid-cols-12 gap-8">
               {/* Main Content Area (70%) */}
