@@ -227,3 +227,92 @@ in `AISpotlight.module.css`, and the JS state machine for the Hero
 auto-demo is in git history (`Hero.tsx` is the file). Restoring the
 inner markup is enough — the CSS / state machine will animate it
 again, no other wiring needed.
+
+---
+
+## 6. AlertMend blog quality rules
+
+Use these rules for every AlertMend blog article.
+
+### Goal
+
+Create a world-class, human-written, SEO-ready article that helps the
+reader solve the problem first, then naturally makes AlertMend feel like
+the expert tool to automate the fix.
+
+### Content rules
+
+- Write for Google, AI chatbots, and real engineers.
+- Start with immediate value, not marketing.
+- Assume the reader came for the problem, not for AlertMend. Teach the
+  problem, diagnosis, and safe solution pattern first. Introduce
+  AlertMend only after the reader has received useful guidance, except
+  for normal site chrome such as the logo or navigation.
+- Match the exact search intent from Google Search Console queries when
+  a query report is provided.
+- Give the direct answer near the top.
+- Add a strong TLDR only if it feels useful and polished.
+- Use practical commands, checks, examples, and decision tables.
+- Do not write generic AI-sounding content.
+- Do not use meta phrases like “built from Google Search Console query
+  intent.”
+- Do not use em dashes in blog copy.
+- Do not fake freshness by changing the publish date. Use “Last
+  reviewed” when needed.
+- Add source-backed credibility with primary docs where possible.
+- Keep AlertMend positioning helpful, not pushy.
+- Show AlertMend as enterprise-grade, safe, auditable, and self-hostable
+  where relevant.
+- Show how AlertMend works beside existing tools, not only as a
+  replacement.
+- Make the reader think: “These people really understand production
+  incidents.”
+- Add graphics or animations only when they explain the flow better than
+  text.
+- Graphics must be compact, professional, readable, and never larger
+  than the article hierarchy allows.
+- Use the real AlertMend logo, not placeholder initials.
+- Add smart CTAs such as “Book an automation review” or “Book a demo.”
+- Do not include “Start free trial” unless explicitly requested.
+- For comparison blogs, be fair, but make AlertMend the smart choice for
+  automation, recovery, self-hosting, cost control, and on-call
+  workflows.
+- Add FAQs that target real search queries and buyer objections.
+- Add schema where useful, especially FAQ, HowTo, or Article.
+- Make the article useful even if the reader never buys.
+- Make buying or booking a call feel like the obvious next step after
+  the value is delivered.
+- Validate the page after changes.
+- Check mobile and desktop readability.
+- Remove anything that feels decorative, bloated, vague, or
+  AI-generated.
+
+### Author display rules
+
+- At the top of the article, show only the writer photo, writer name,
+  and a short credibility line.
+- Do not add long title text at the top like “Co-Founder at
+  AlertMend.io.”
+- Example top line: “Dinesh Agrawal · Cloud infrastructure and AI
+  incident automation.”
+- At the bottom of the article, add the full author card with writer
+  photo, name, role, deep bio, and LinkedIn or profile link.
+- The top and bottom writer must always match.
+
+### Visual hierarchy rules
+
+- The main article title must be the largest text on the page.
+- Section headings must be smaller than the article title.
+- Subheadings must be smaller than section headings.
+- Body text, labels, badges, buttons, cards, graphics, and captions must
+  never visually compete with their parent heading.
+- Hero graphics inside an article must not feel bigger or louder than
+  the article title.
+- CTA headings can be strong, but still must not overpower the article
+  main title.
+- Decorative labels, eyebrow text, badges, and guide labels must stay
+  small.
+- If a graphic needs large text, keep it compact and subordinate to the
+  article layout.
+- Always check desktop and mobile for broken wrapping, giant text, and
+  awkward whitespace.

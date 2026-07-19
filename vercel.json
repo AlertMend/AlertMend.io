@@ -53,6 +53,10 @@
       "destination": "/blog/datadog-alternatives/index.html"
     },
     {
+      "source": "/blog/disk-full-auto-remediation",
+      "destination": "/blog/disk-full-auto-remediation/index.html"
+    },
+    {
       "source": "/blog/elasticsearch-caching-issues",
       "destination": "/blog/elasticsearch-caching-issues/index.html"
     },
