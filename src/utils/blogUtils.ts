@@ -7,6 +7,9 @@ export interface BlogPost {
   date: string
   category: string
   author?: string
+  authorImage?: string
+  authorCredLine?: string
+  authorLinkedin?: string
   content?: string
   tags?: string[]
   keywords?: string
@@ -68,6 +71,9 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
         if (key === 'date') post.date = value
         if (key === 'category') post.category = value
         if (key === 'author') post.author = value
+        if (key === 'authorImage') post.authorImage = value
+        if (key === 'authorCredLine') post.authorCredLine = value
+        if (key === 'authorLinkedin') post.authorLinkedin = value
       } else if (singleQuotedMatch) {
         const key = singleQuotedMatch[1]
         const value = singleQuotedMatch[2]
@@ -76,6 +82,9 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
         if (key === 'date') post.date = value
         if (key === 'category') post.category = value
         if (key === 'author') post.author = value
+        if (key === 'authorImage') post.authorImage = value
+        if (key === 'authorCredLine') post.authorCredLine = value
+        if (key === 'authorLinkedin') post.authorLinkedin = value
       } else if (unquotedMatch) {
         const key = unquotedMatch[1]
         const value = unquotedMatch[2].trim()
@@ -84,6 +93,9 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
         if (key === 'date') post.date = value
         if (key === 'category') post.category = value
         if (key === 'author') post.author = value
+        if (key === 'authorImage') post.authorImage = value
+        if (key === 'authorCredLine') post.authorCredLine = value
+        if (key === 'authorLinkedin') post.authorLinkedin = value
       }
     })
     
@@ -102,4 +114,3 @@ export function formatDate(dateString: string): string {
     day: 'numeric',
   })
 }
-

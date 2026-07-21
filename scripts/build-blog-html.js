@@ -78,6 +78,32 @@ const formatDate = (dateString) => {
   })
 }
 
+const escapeHtml = (value = '') => String(value)
+  .replace(/&/g, '&amp;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;')
+  .replace(/'/g, '&#39;')
+
+const getAuthorInitials = (author = 'A') => {
+  const initials = String(author)
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map(part => part.charAt(0))
+    .join('')
+    .toUpperCase()
+  return initials || 'A'
+}
+
+const renderAuthorAvatar = (metadata) => {
+  const author = metadata.author || 'AlertMend Team'
+  if (metadata.authorImage) {
+    return `<img src="${escapeHtml(metadata.authorImage)}" alt="${escapeHtml(author)}" class="author-photo" loading="lazy" onerror="this.style.display='none'; const fallback = this.nextElementSibling; if (fallback) fallback.classList.add('show');" /><div class="author-avatar author-avatar-fallback">${escapeHtml(getAuthorInitials(author))}</div>`
+  }
+  return `<div class="author-avatar">${escapeHtml(getAuthorInitials(author))}</div>`
+}
+
 // Function to convert slug (lowercase-hyphens) to HTML filename format (Title-Case-With-Hyphens)
 // Small words (in, of, the, a, an, etc.) remain lowercase except at the start
 const convertSlugToHtmlFilename = (slug) => {
@@ -814,7 +840,9 @@ markdownFiles.forEach(file => {
     "dateModified": "${metadata.date || ''}",
     "author": {
       "@type": "Person",
-      "name": "${metadata.author || 'AlertMend Team'}"
+      "name": ${JSON.stringify(metadata.author || 'AlertMend Team')}${metadata.authorLinkedin ? `,
+      "url": ${JSON.stringify(metadata.authorLinkedin)},
+      "sameAs": [${JSON.stringify(metadata.authorLinkedin)}]` : ''}
     },
     "publisher": {
       "@type": "Organization",
@@ -969,10 +997,14 @@ markdownFiles.forEach(file => {
       gap: 16px;
       margin-bottom: 16px;
     }
-    .author-avatar {
-      width: 40px;
-      height: 40px;
+    .author-avatar,
+    .author-photo {
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
+      flex: 0 0 auto;
+    }
+    .author-avatar {
       background: #ddd6fe;
       display: flex;
       align-items: center;
@@ -980,6 +1012,18 @@ markdownFiles.forEach(file => {
       color: #7c3aed;
       font-weight: 600;
       font-size: 1rem;
+    }
+    .author-photo {
+      object-fit: cover;
+      border: 1px solid #e5e7eb;
+      background: #f8fafc;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+    }
+    .author-avatar-fallback {
+      display: none;
+    }
+    .author-avatar-fallback.show {
+      display: flex;
     }
     .author-details {
       display: flex;
@@ -993,16 +1037,13 @@ markdownFiles.forEach(file => {
     .author-meta {
       font-size: 0.875rem;
       color: #6b7280;
+      margin-top: 2px;
     }
-    .category-tag {
-      display: inline-block;
-      padding: 4px 12px;
-      background: #dbeafe;
-      color: #1e40af;
-      border-radius: 6px;
+    .author-summary {
       font-size: 0.875rem;
-      font-weight: 600;
-      margin-top: 16px;
+      line-height: 1.4;
+      color: #4b5563;
+      margin-top: 2px;
     }
     code {
       background: #f3f4f6;
@@ -1597,17 +1638,14 @@ markdownFiles.forEach(file => {
               
               <!-- Author Info -->
               <div class="author-info">
-                <div class="author-avatar">
-                  ${(metadata.author || 'AlertMend Team').charAt(0)}
-                </div>
+                ${renderAuthorAvatar(metadata)}
                 <div class="author-details">
-                  <div class="author-name">${metadata.author || 'AlertMend Team'}</div>
+                  <div class="author-name">${escapeHtml(metadata.author || 'AlertMend Team')}</div>
+                  ${metadata.authorCredLine ? `<div class="author-summary">${escapeHtml(metadata.authorCredLine)}</div>` : ''}
                   <div class="author-meta">${calculateReadTime(content)} • ${formatDate(metadata.date || '')}</div>
                 </div>
               </div>
 
-              <!-- Category Tag -->
-              <div class="category-tag">${metadata.category || 'Blog'}</div>
             </header>
 
             <!-- Content -->

@@ -22,7 +22,7 @@ function estimateReadMinutes(...textBlocks) {
   return Math.max(10, Math.round(words / 250))
 }
 
-function buildCrashloopHeader(title, author, date, category, readMins) {
+function buildCrashloopHeader(title, author, date, readMins) {
   return `
     <header class="article-header">
       <h1>${esc(title)}</h1>
@@ -30,10 +30,9 @@ function buildCrashloopHeader(title, author, date, category, readMins) {
         <div class="author-avatar">${author.charAt(0)}</div>
         <div>
           <div class="author-name">${esc(author)}</div>
-          <div class="author-meta">${esc(date)} · ${readMins} min read · ${category}</div>
+          <div class="author-meta">${esc(date)} · ${readMins} min read</div>
         </div>
       </div>
-      <span class="category-tag">${esc(category)}</span>
     </header>`
 }
 
@@ -603,7 +602,7 @@ ${buildNavHtml(slug, postCalendlyUrl)}
   <div class="main-container">
     <div class="content-wrapper">
       <div class="main-col">
-${buildCrashloopHeader(title, author, date, category, readMins)}
+${buildCrashloopHeader(title, author, date, readMins)}
 
     <div class="dl-blog">
       <section class="heroBand fearBand">

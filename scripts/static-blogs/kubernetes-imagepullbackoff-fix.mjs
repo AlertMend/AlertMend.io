@@ -14,7 +14,7 @@ import {
   writeStaticBlogOutputs,
 } from '../static-blog-shared.mjs'
 
-function buildImagePullHeader(title, author, date, category) {
+function buildImagePullHeader(title, author, date) {
   return `
     <header class="article-header">
       <h1>${esc(title)}</h1>
@@ -22,10 +22,9 @@ function buildImagePullHeader(title, author, date, category) {
         <div class="author-avatar">${author.charAt(0)}</div>
         <div>
           <div class="author-name">${esc(author)}</div>
-          <div class="author-meta">${esc(date)} · 8 min read · ${category}</div>
+          <div class="author-meta">${esc(date)} · 8 min read</div>
         </div>
       </div>
-      <span class="category-tag">${esc(category)}</span>
     </header>`
 }
 
@@ -326,7 +325,7 @@ ${buildNavHtml(slug, postCalendlyUrl)}
   <div class="main-container">
     <div class="content-wrapper">
       <div class="main-col">
-${buildImagePullHeader(title, author, date, category)}
+${buildImagePullHeader(title, author, date)}
 
     <div class="dl-blog">
       <section class="heroBand fearBand">
