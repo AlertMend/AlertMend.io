@@ -14,7 +14,7 @@ import {
   writeStaticBlogOutputs,
 } from '../static-blog-shared.mjs'
 
-function buildLiteLLMHeader(seoTitle, hookTitle, author, date, category) {
+function buildLiteLLMHeader(seoTitle, hookTitle, author, date) {
   return `
     <header class="article-header">
       <p class="articleSeoLabel">${esc(seoTitle)}</p>
@@ -24,10 +24,9 @@ function buildLiteLLMHeader(seoTitle, hookTitle, author, date, category) {
         <div class="author-avatar">${author.charAt(0)}</div>
         <div>
           <div class="author-name">${esc(author)}</div>
-          <div class="author-meta">${esc(date)} · ${category}</div>
+          <div class="author-meta">${esc(date)}</div>
         </div>
       </div>
-      <span class="category-tag">${esc(category)}</span>
     </header>`
 }
 
@@ -342,7 +341,7 @@ ${buildNavHtml(slug, postCalendlyUrl)}
   <div class="main-container">
     <div class="content-wrapper">
       <div class="main-col">
-${buildLiteLLMHeader(seoTitle, hookTitle, author, date, category)}
+${buildLiteLLMHeader(seoTitle, hookTitle, author, date)}
 
     <div class="dl-blog">
       <section class="heroBand fearBand">

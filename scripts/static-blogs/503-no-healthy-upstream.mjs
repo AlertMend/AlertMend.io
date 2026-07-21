@@ -32,19 +32,33 @@ function codeBlock(code, lang = 'shell', variant = '') {
 </div>`
 }
 
-function buildHeader(title, author, date, category, readMins) {
+function buildHeader(title, author, date, readMins) {
   return `
     <header class="article-header">
       <h1>${esc(title)}</h1>
       <div class="author-info">
-        <div class="author-avatar">${author.charAt(0)}</div>
+        <img src="/logos/arvind.jpeg" alt="${esc(author)}" class="author-photo" width="56" height="56" loading="lazy">
         <div>
           <div class="author-name">${esc(author)}</div>
-          <div class="author-meta">${esc(date)} · ${readMins} min read · ${category}</div>
+          <div class="author-summary">Kubestronaut and Kubernetes infrastructure automation expert</div>
+          <div class="author-meta">${esc(date)} · ${readMins} min read</div>
         </div>
       </div>
-      <span class="category-tag">${esc(category)}</span>
     </header>`
+}
+
+function buildAuthorCard(author) {
+  return `
+      <section class="authorBioCard" aria-label="About the author">
+        <img src="/logos/arvind.jpeg" alt="${esc(author)}" width="96" height="96" loading="lazy">
+        <div>
+          <p class="authorBioEyebrow">About the author</p>
+          <h2>${esc(author)}</h2>
+          <p class="authorBioRole">Co-Founder and CEO, AlertMend</p>
+          <p class="authorBioText">Arvind is a Kubestronaut and Kubernetes infrastructure automation expert with 15+ years of experience across production operations, cloud reliability, incident response, and automated remediation. Before AlertMend, he worked as DevOps Team Lead at Roambee and Customer Success Engineer at Shoreline.io, helping teams reduce manual firefighting and build safer recovery workflows.</p>
+          <a class="authorBioLink" href="https://www.linkedin.com/in/arvind-rajpurohit-4a332523/" target="_blank" rel="noopener noreferrer">View LinkedIn profile</a>
+        </div>
+      </section>`
 }
 
 function estimateReadMinutes(...textBlocks) {
@@ -67,7 +81,7 @@ export async function build(slug) {
   const dateModified = meta.dateModified || meta.date || '2026-01-10'
   const date = meta.date && meta.date !== '2026-01-10' ? meta.date : dateModified
   const category = meta.category || 'Kubernetes'
-  const author = meta.author || 'AlertMend Team'
+  const author = meta.author || 'Arvind Rajpurohit'
   const keywords =
     meta.keywords ||
     '503 no healthy upstream, no healthy upstream, no healthy backends, upstream error, nginx 503 error, nginx no healthy upstream, kubernetes no healthy upstream, kubernetes service unavailable, envoy no healthy upstream, istio no healthy upstream, load balancer troubleshooting, reverse proxy errors, HAProxy, unhealthy upstream, service health checks'
@@ -538,7 +552,7 @@ kubectl delete namespace upstream-lab`
     image: `https://www.alertmend.io${heroImage}`,
     datePublished: date,
     dateModified: dateModified,
-    author: { '@type': 'Person', name: author },
+    author: { '@type': 'Person', name: author, url: 'https://www.linkedin.com/in/arvind-rajpurohit-4a332523/' },
     publisher: {
       '@type': 'Organization',
       name: 'AlertMend AI',
@@ -573,6 +587,26 @@ kubectl delete namespace upstream-lab`
   <script type="application/ld+json">${howToLd}</script>
   <link rel="stylesheet" href="${assetsBase}/styles.css">
   <style>${CHROME_INLINE_CSS}</style>
+  <style>
+    .article-header .author-info{display:flex;align-items:center;gap:14px;margin:1.5rem 0 .9rem;}
+    .article-header .author-photo{width:56px;height:56px;border-radius:999px;object-fit:cover;border:1px solid #e5e7eb;box-shadow:0 6px 18px rgba(15,23,42,.08);background:#f8fafc;}
+    .article-header .author-name{font-weight:800;color:#111827;font-size:1.02rem;line-height:1.2;margin-bottom:3px;}
+    .article-header .author-summary{font-size:.94rem;line-height:1.35;color:#4b5563;margin-bottom:3px;}
+    .article-header .author-meta{font-size:.88rem;line-height:1.35;color:#6b7280;}
+    .authorBioCard{display:grid;grid-template-columns:96px minmax(0,1fr);gap:22px;align-items:start;border:1px solid #e5e7eb;border-radius:24px;background:#fff;padding:24px;margin:48px 0 28px;box-shadow:0 14px 40px rgba(15,23,42,.06);}
+    .authorBioCard img{width:96px;height:96px;object-fit:cover;border-radius:999px;margin:0;box-shadow:none;}
+    .authorBioCard h2{font-size:1.45rem;line-height:1.2;color:#111827;margin:0 0 4px;}
+    .authorBioEyebrow{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#7c3aed;font-weight:850;margin:0 0 8px;}
+    .authorBioRole{color:#7c3aed;font-weight:850;margin:0 0 12px;font-size:1rem;}
+    .authorBioText{font-size:.98rem;line-height:1.72;color:#4b5563;margin:0;}
+    .authorBioLink{display:inline-flex;margin-top:12px;color:#7c3aed;font-weight:850;text-decoration:none;}
+    @media (max-width:640px){
+      .article-header .author-info{align-items:flex-start;}
+      .article-header .author-photo{width:48px;height:48px;}
+      .authorBioCard{grid-template-columns:1fr;padding:20px;}
+      .authorBioCard img{width:82px;height:82px;}
+    }
+  </style>
 </head>
 <body>
 ${buildNavHtml(slug, postCalendlyUrl)}
@@ -580,7 +614,7 @@ ${buildNavHtml(slug, postCalendlyUrl)}
   <div class="main-container">
     <div class="content-wrapper">
       <div class="main-col">
-${buildHeader(h1Title, author, date, category, readMins)}
+${buildHeader(h1Title, author, date, readMins)}
 
     <div class="dl-blog">
       <section class="heroBand fearBand">
@@ -1003,6 +1037,7 @@ kubectl get svc &lt;service-name&gt; -n &lt;namespace&gt; -o yaml | grep -A5 sel
       <div class="faqList">
         ${FAQ.map(([q, a], i) => `<div class="faqItem"><button type="button" class="faqQuestion" data-faq-toggle aria-expanded="${i === 0 ? 'true' : 'false'}">${esc(q)}<svg class="faqChevron${i === 0 ? ' faqChevronOpen' : ''}" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg></button><div class="faqAnswer${i === 0 ? '' : ' hidden'}">${esc(a)}</div></div>`).join('\n        ')}
       </div>
+${buildAuthorCard(author)}
 
       <div class="ctaBand">
         <div class="ctaBandTitle">Bring us one real 503. We’ll show the evidence chain.</div>

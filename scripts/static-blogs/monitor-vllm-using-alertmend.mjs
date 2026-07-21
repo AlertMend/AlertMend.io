@@ -14,7 +14,7 @@ import {
   writeStaticBlogOutputs,
 } from '../static-blog-shared.mjs'
 
-function buildVllmHeader(title, author, authorBio, authorPhoto, authorLinkedIn, date, category) {
+function buildVllmHeader(title, author, authorBio, authorPhoto, authorLinkedIn, date) {
   return `
     <header class="article-header">
       <h1>${esc(title)}</h1>
@@ -23,10 +23,9 @@ function buildVllmHeader(title, author, authorBio, authorPhoto, authorLinkedIn, 
         <div>
           <div class="author-name"><a href="${authorLinkedIn}" target="_blank" rel="noopener noreferrer">${esc(author)}</a></div>
           <p class="author-bio">${esc(authorBio)}</p>
-          <div class="author-meta">${esc(date)} · ${category}</div>
+          <div class="author-meta">${esc(date)}</div>
         </div>
       </div>
-      <span class="category-tag">${esc(category)}</span>
     </header>`
 }
 
@@ -487,7 +486,7 @@ ${buildNavHtml(slug, postCalendlyUrl)}
   <div class="main-container">
     <div class="content-wrapper">
       <div class="main-col">
-${buildVllmHeader(title, author, authorBio, authorPhoto, authorLinkedIn, date, category)}
+${buildVllmHeader(title, author, authorBio, authorPhoto, authorLinkedIn, date)}
 
     <div class="dl-blog">
       <section class="heroBand fearBand">

@@ -297,7 +297,7 @@ ${buildNavHtml(slug, postCalendlyUrl)}
   <div class="main-container">
     <div class="content-wrapper">
       <div class="main-col">
-${buildArticleHeader(title, author, date, category)}
+${buildArticleHeader(title, author, date)}
 
     <div class="dl-blog">
       <section class="heroBand fearBand">

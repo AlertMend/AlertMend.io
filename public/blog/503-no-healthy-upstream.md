@@ -4,7 +4,7 @@ excerpt: "No healthy upstream means every backend failed health checks. Diagnose
 date: "2026-06-27"
 dateModified: "2026-06-27"
 category: "Kubernetes"
-author: "AlertMend Team"
+author: "Arvind Rajpurohit"
 tags: ["Kubernetes", "Troubleshooting", "Ingress", "Nginx", "Envoy"]
 keywords: "503 no healthy upstream, no healthy upstream, no healthy backends, upstream error, nginx 503 error, nginx no healthy upstream, kubernetes no healthy upstream, kubernetes service unavailable, envoy no healthy upstream, istio no healthy upstream, load balancer troubleshooting, reverse proxy errors, HAProxy, unhealthy upstream, service health checks"
 ---

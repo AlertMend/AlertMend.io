@@ -14,7 +14,7 @@ import {
   writeStaticBlogOutputs,
 } from '../static-blog-shared.mjs'
 
-function buildOllamaHeader(title, author, date, category) {
+function buildOllamaHeader(title, author, date) {
   return `
     <header class="article-header">
       <h1>${esc(title)}</h1>
@@ -22,10 +22,9 @@ function buildOllamaHeader(title, author, date, category) {
         <div class="author-avatar">${author.charAt(0)}</div>
         <div>
           <div class="author-name">${esc(author)}</div>
-          <div class="author-meta">${esc(date)} · 12 min read · ${category}</div>
+          <div class="author-meta">${esc(date)} · 12 min read</div>
         </div>
       </div>
-      <span class="category-tag">${esc(category)}</span>
     </header>`
 }
 
@@ -349,7 +348,7 @@ ${buildNavHtml(slug, postCalendlyUrl)}
   <div class="main-container">
     <div class="content-wrapper">
       <div class="main-col">
-${buildOllamaHeader(title, author, date, category)}
+${buildOllamaHeader(title, author, date)}
 
     <div class="dl-blog">
       <section class="heroBand fearBand">

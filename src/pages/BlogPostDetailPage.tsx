@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import SEO from '../components/SEO'
-import Breadcrumb from '../components/Breadcrumb'
 import BlogSignupForm from '../components/BlogSignupForm'
 import { Linkedin, ArrowRight } from 'lucide-react'
 import { getBlogPost, formatDate, BlogPost, blogPosts } from '../utils/blogUtils'
@@ -143,6 +142,25 @@ export default function BlogPostDetailPage() {
   // Use original title for display (no modifications)
   const displayTitle = post.title
   const displayContent = normalizeBlogMarkdown(post.content || '')
+  const authorName = post.author || 'AlertMend Team'
+  const authorInitial = authorName
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map(part => part.charAt(0))
+    .join('')
+    .toUpperCase() || 'A'
+  const structuredAuthor = post.authorLinkedin
+    ? {
+        "@type": "Person",
+        "name": authorName,
+        "url": post.authorLinkedin,
+        "sameAs": [post.authorLinkedin]
+      }
+    : {
+        "@type": "Person",
+        "name": authorName
+      }
   
   // Truncate title to 30-60 characters for SEO (use original title)
   const seoTitle = truncateBlogTitle(post.title)
@@ -172,10 +190,7 @@ export default function BlogPostDetailPage() {
           "image": "https://alertmend.io/og-image.jpg",
           "datePublished": post.date,
           "dateModified": post.date,
-          "author": {
-            "@type": "Person",
-            "name": post.author || "AlertMend Team"
-          },
+          "author": structuredAuthor,
           "publisher": {
             "@type": "Organization",
             "name": "AlertMend AI",
@@ -201,11 +216,7 @@ export default function BlogPostDetailPage() {
       <main className="pt-10 md:pt-12">
         <article className="pb-8 md:pb-12 container-padding">
           <div className="max-w-7xl mx-auto">
-            <Breadcrumb items={[
-              { label: 'Blog', path: '/blog' },
-              { label: post.title }
-            ]} />
-            <div className="mt-5 md:mt-6">
+            <div>
 
             <div className="grid lg:grid-cols-12 gap-8">
               {/* Main Content Area (70%) */}
@@ -221,19 +232,40 @@ export default function BlogPostDetailPage() {
                       
                       {/* Author Info */}
                       <div className="flex items-center gap-4 mb-4">
-                        <div className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-white font-semibold">
-                          {post.author?.charAt(0) || 'A'}
-                        </div>
+                        {post.authorImage ? (
+                          <div className="relative w-12 h-12 flex-shrink-0">
+                            <img
+                              src={post.authorImage}
+                              alt={authorName}
+                              className="w-12 h-12 rounded-full object-cover border border-zinc-200 shadow-sm bg-zinc-50"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement
+                                target.style.display = 'none'
+                                const fallback = target.parentElement?.querySelector('.author-initial-fallback') as HTMLElement
+                                if (fallback) fallback.style.display = 'flex'
+                              }}
+                            />
+                            <div
+                              className="author-initial-fallback absolute inset-0 rounded-full bg-zinc-900 items-center justify-center text-white font-semibold"
+                              style={{ display: 'none' }}
+                            >
+                              {authorInitial}
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="w-12 h-12 rounded-full bg-zinc-900 flex items-center justify-center text-white font-semibold flex-shrink-0">
+                            {authorInitial}
+                          </div>
+                        )}
                         <div>
-                          <div className="font-semibold text-zinc-900">{post.author || 'AlertMend Team'}</div>
-                          <div className="text-sm text-zinc-500">{readTime} • {formatDate(post.date)}</div>
+                          <div className="font-semibold text-zinc-900">{authorName}</div>
+                          {post.authorCredLine && (
+                            <div className="text-sm text-zinc-600 leading-snug">{post.authorCredLine}</div>
+                          )}
+                          <div className="text-sm text-zinc-500 mt-0.5">{readTime} • {formatDate(post.date)}</div>
                         </div>
                       </div>
 
-                      {/* Category tag */}
-                      <div className="inline-block px-2.5 py-0.5 bg-violet-50 text-violet-700 border border-violet-200 rounded-md text-xs font-semibold uppercase tracking-wider">
-                        {post.category}
-                      </div>
                     </header>
 
                     {/* Content */}

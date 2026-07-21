@@ -524,7 +524,7 @@
     "excerpt": "No healthy upstream means every backend failed health checks. Diagnose empty endpoints, readiness, Envoy, Istio, nginx, and HAProxy with this decision tree.",
     "date": "2026-06-27",
     "category": "Kubernetes",
-    "author": "AlertMend Team",
+    "author": "Arvind Rajpurohit",
     "tags": [
       "Kubernetes",
       "Troubleshooting",
@@ -5393,13 +5393,13 @@
   },
   {
     "slug": "turtle-wow-error-132",
-    "title": "turtle wow error 132 Guide Guide",
-    "excerpt": "Encountering Turtle WOW Error 132 can be a frustrating experience for both newcomers and seasoned players alike",
+    "title": "Turtle WoW Error 132: Fix Access Violation",
+    "excerpt": "Fix Turtle WoW Error 132 with a safe order: save the crash log, isolate addons, clear cache, remove client mods, repair MPQ files, then reinstall.",
     "date": "2026-01-10",
     "category": "Troubleshooting",
-    "author": "AlertMend Team",
+    "author": "Arvind Rajpurohit",
     "tags": [],
-    "keywords": "turtle, error, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"
+    "keywords": "turtle wow error 132, turtle wow access violation, turtle wow fatal exception, turtle wow crash fix, turtle wow addons crash, turtle wow mpq error"
   },
   {
     "slug": "ubuntu-没有-ping",
