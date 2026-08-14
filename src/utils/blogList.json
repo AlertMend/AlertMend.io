@@ -1,5 +1,25 @@
 [
   {
+    "slug": "observability-vs-monitoring",
+    "title": "Observability vs Monitoring: Key Differences",
+    "excerpt": "Observability vs monitoring explained: monitoring catches known failures, observability investigates the unknown. See the differences and when you need each.",
+    "date": "2026-08-14",
+    "category": "Observability",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "observability vs monitoring, monitoring vs observability, difference between observability and monitoring, is observability the same as monitoring, monitoring and observability, observability or monitoring, does observability replace monitoring, observability vs monitoring vs apm"
+  },
+  {
+    "slug": "what-is-observability",
+    "title": "What Is Observability? A Complete Guide",
+    "excerpt": "Observability means understanding a system from its telemetry. Learn the three pillars, logs, metrics, and traces, and how it differs from monitoring.",
+    "date": "2026-08-14",
+    "category": "Observability",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "what is observability, observability, observability vs monitoring, three pillars of observability, logs metrics traces, observability tools, opentelemetry, observability meaning, observability explained, distributed tracing, telemetry, observability engineering"
+  },
+  {
     "slug": "disk-full-auto-remediation",
     "title": "Disk Full Auto-Remediation Playbook",
     "excerpt": "A production playbook for turning disk space alerts into safe, audited fixes across Linux, Docker, Kubernetes, and cloud volumes.",
