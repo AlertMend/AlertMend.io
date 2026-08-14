@@ -189,6 +189,10 @@
       "destination": "/blog/nextcloud-monitoring/index.html"
     },
     {
+      "source": "/blog/observability-vs-monitoring",
+      "destination": "/blog/observability-vs-monitoring/index.html"
+    },
+    {
       "source": "/blog/odoo-monitoring",
       "destination": "/blog/odoo-monitoring/index.html"
     },
@@ -251,6 +255,10 @@
     {
       "source": "/blog/vm-monitoring-and-automation",
       "destination": "/blog/vm-monitoring-and-automation/index.html"
+    },
+    {
+      "source": "/blog/what-is-observability",
+      "destination": "/blog/what-is-observability/index.html"
     },
     {
       "source": "/blog/whatsapp-call-escalation-monitoring-alerts",
