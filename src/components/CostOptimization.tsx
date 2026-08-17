@@ -31,7 +31,7 @@ export default function CostOptimization() {
   const costBreakdown = [
     { category: 'Compute', current: 45000, optimized: 28000, color: 'bg-blue-500' },
     { category: 'Storage', current: 12000, optimized: 8500, color: 'bg-green-500' },
-    { category: 'Network', current: 8000, optimized: 6500, color: 'bg-purple-500' },
+    { category: 'Network', current: 8000, optimized: 6500, color: 'bg-brand-500' },
     { category: 'Other', current: 5000, optimized: 3000, color: 'bg-yellow-500' },
   ]
 
@@ -41,10 +41,10 @@ export default function CostOptimization() {
   const savingsPercent = ((totalSavings / totalCurrent) * 100).toFixed(1)
 
   return (
-    <section id="cost-optimization" className="section-padding container-padding bg-gradient-to-br from-purple-50 to-blue-50">
+    <section id="cost-optimization" className="section-padding container-padding bg-gradient-to-br from-brand-50 to-blue-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <div className="badge bg-purple-100 text-purple-700 mb-4">
+          <div className="badge bg-brand-100 text-brand-700 mb-4">
             Optimize
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold heading-gradient mb-6 text-balance">
@@ -58,18 +58,18 @@ export default function CostOptimization() {
 
         <div className="grid lg:grid-cols-2 gap-12 mb-16">
           <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
-            <h3 className="text-2xl font-bold text-purple-950 mb-6">Optimization Strategies</h3>
+            <h3 className="text-2xl font-bold text-brand-900 mb-6">Optimization Strategies</h3>
             <div className="space-y-6">
               {optimizations.map((opt, index) => {
                 const Icon = opt.icon
                 return (
                   <div key={index} className="flex items-start space-x-4">
-                    <div className="bg-purple-50 rounded-lg p-3">
-                      <Icon className="h-6 w-6 text-purple-600" />
+                    <div className="bg-brand-50 rounded-lg p-3">
+                      <Icon className="h-6 w-6 text-brand-600" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <h4 className="font-semibold text-purple-950">{opt.title}</h4>
+                        <h4 className="font-semibold text-brand-900">{opt.title}</h4>
                         <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
                           Save {opt.savings}
                         </span>
@@ -83,7 +83,7 @@ export default function CostOptimization() {
           </div>
 
           <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-200">
-            <h3 className="text-2xl font-bold text-purple-950 mb-6">Cost Analysis</h3>
+            <h3 className="text-2xl font-bold text-brand-900 mb-6">Cost Analysis</h3>
             <div className="mb-8">
               <div className="flex items-center justify-between mb-4">
                 <div>
@@ -132,18 +132,18 @@ export default function CostOptimization() {
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-8 md:p-12 text-white text-center">
+        <div className="bg-gradient-to-r from-brand-600 to-blue-600 rounded-2xl p-8 md:p-12 text-white text-center">
           <DollarSign className="h-12 w-12 mx-auto mb-4 opacity-80" />
           <h3 className="text-2xl md:text-3xl font-bold mb-4">
             Start Saving Today
           </h3>
-          <p className="text-lg text-purple-100 mb-6 max-w-2xl mx-auto">
+          <p className="text-lg text-brand-100 mb-6 max-w-2xl mx-auto">
             Get a free cost analysis of your Kubernetes infrastructure and see 
             how much you could save with intelligent optimization.
           </p>
           <button 
             onClick={() => window.open('https://calendly.com/hello-alertmend', '_blank')}
-            className="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-purple-50 transition-colors shadow-lg"
+            className="bg-white text-brand-600 px-8 py-3 rounded-lg font-semibold hover:bg-brand-50 transition-colors shadow-lg"
           >
             Book a Demo
           </button>

@@ -80,19 +80,19 @@ export default function PricingPage() {
           items: [{ label: 'Pricing' }]
         }}
       />
-      <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-purple-50/30 via-white to-blue-50/30">
+      <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden hero-dark">
           <div className="max-w-7xl mx-auto">
             <div className="mb-8">
               <Breadcrumb items={[{ label: 'Pricing' }]} />
             </div>
             <div className="text-center mb-12 md:mb-16">
-              <div className="inline-block px-5 py-2 bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 rounded-full text-sm font-bold mb-8 shadow-md border border-purple-200/50">
+              <div className="inline-block px-5 py-2 bg-gradient-to-r from-brand-50 to-brand-100 text-brand-700 rounded-full text-sm font-bold mb-8 shadow-md border border-brand-200/50">
                 Pricing Model
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-purple-950 mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-900 mb-6 leading-tight">
                 Pricing Model
               </h1>
-              <p className="text-xl md:text-2xl text-purple-700 max-w-3xl mx-auto leading-relaxed mb-12">
+              <p className="text-xl md:text-2xl text-brand-700 max-w-3xl mx-auto leading-relaxed mb-12">
                 45 Days Free Trial
               </p>
             </div>
@@ -103,13 +103,13 @@ export default function PricingPage() {
                   key={index}
                   className={`relative flex flex-col h-full bg-white rounded-xl p-8 border-2 transition-all duration-300 hover:shadow-xl ${
                     plan.popular
-                      ? 'border-purple-400 shadow-xl lg:scale-105'
-                      : 'border-gray-200 shadow-lg hover:border-purple-200'
+                      ? 'border-brand-400 shadow-xl lg:scale-105'
+                      : 'border-gray-200 shadow-lg hover:border-brand-200'
                   }`}
                 >
                   {plan.popular && (
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                      <div className="bg-gradient-to-r from-purple-600 to-purple-500 text-white px-4 py-1 rounded-full text-xs font-bold shadow-lg">
+                      <div className="bg-gradient-to-r from-brand-600 to-brand-500 text-white px-4 py-1 rounded-full text-xs font-bold shadow-lg">
                         Recommended
                       </div>
                     </div>
@@ -124,7 +124,7 @@ export default function PricingPage() {
                   <div className="text-center mb-6">
                     <div className="h-7 mb-3 flex items-center justify-center">
                       {plan.label && (
-                        <span className="inline-block px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-bold border border-purple-200">
+                        <span className="inline-block px-3 py-1 bg-brand-50 text-brand-700 rounded-full text-xs font-bold border border-brand-200">
                           {plan.label}
                         </span>
                       )}
@@ -137,7 +137,7 @@ export default function PricingPage() {
                   <ul className="space-y-3 mb-8 flex-1">
                     {plan.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-3">
-                        <Check className="h-5 w-5 text-purple-600 flex-shrink-0 mt-0.5" />
+                        <Check className="h-5 w-5 text-brand-600 flex-shrink-0 mt-0.5" />
                         <span className="text-gray-700 text-sm font-medium">{feature}</span>
                       </li>
                     ))}
@@ -149,8 +149,8 @@ export default function PricingPage() {
                     }}
                     className={`w-full mt-auto py-3 rounded-xl font-bold text-sm transition-all ${
                       plan.popular
-                        ? 'bg-gradient-to-r from-purple-800 to-purple-900 !text-white hover:from-purple-900 hover:to-purple-950 shadow-lg hover:shadow-xl'
-                        : 'bg-gray-100 text-purple-900 hover:bg-gray-200 border border-gray-200'
+                        ? 'bg-gradient-to-r from-brand-800 to-brand-900 !text-white hover:from-brand-900 hover:to-brand-900 shadow-lg hover:shadow-xl'
+                        : 'bg-gray-100 text-brand-900 hover:bg-gray-200 border border-gray-200'
                     }`}
                   >
                     {plan.buttonText}

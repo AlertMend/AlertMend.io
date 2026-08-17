@@ -8,7 +8,7 @@ interface HowItWorksProps {
 
 export default function HowItWorks({ solutionId }: HowItWorksProps) {
   const monitoringTools = [
-    { name: 'Datadog', logo: '/logos/datadog-logo.svg', icon: null, color: 'text-purple-600', bg: 'bg-purple-50' }, // ✓ Logo exists
+    { name: 'Datadog', logo: '/logos/datadog-logo.svg', icon: null, color: 'text-brand-600', bg: 'bg-brand-50' }, // ✓ Logo exists
     { name: 'Grafana', logo: '/logos/Grafana_Logo.png', icon: null, color: 'text-orange-600', bg: 'bg-orange-50' }, // ✓ Logo exists
     { name: 'Alertmanager', logo: null, icon: Bell, color: 'text-orange-600', bg: 'bg-orange-50' }, // Uses icon fallback (logo file doesn't exist)
     { name: 'Prometheus', logo: '/logos/prometheus.png', icon: null, color: 'text-red-600', bg: 'bg-red-50' }, // ✓ Logo exists
@@ -16,7 +16,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
   ]
 
   const notificationTools = [
-    { name: 'Slack', logo: '/logos/Slack_logo.png', icon: MessageSquare, color: 'text-purple-600', bg: 'bg-purple-50' }, // ✓ Logo exists
+    { name: 'Slack', logo: '/logos/Slack_logo.png', icon: MessageSquare, color: 'text-brand-600', bg: 'bg-brand-50' }, // ✓ Logo exists
     { name: 'MS Teams', logo: '/logos/MS_Team_Logo.png', icon: MessageSquare, color: 'text-blue-600', bg: 'bg-blue-50' }, // ✓ Logo exists
     { name: 'Webhooks', logo: '/logos/webhook-logo.png', icon: Webhook, color: 'text-green-600', bg: 'bg-green-50' }, // ✓ Logo exists
   ]
@@ -38,7 +38,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
         ],
         tools: [
           { name: 'Alertmanager', logo: null, icon: Bell, color: 'text-orange-600', bg: 'bg-orange-50' },
-          { name: 'Datadog', logo: '/logos/datadog-logo.svg', icon: null, color: 'text-purple-600', bg: 'bg-purple-50' },
+          { name: 'Datadog', logo: '/logos/datadog-logo.svg', icon: null, color: 'text-brand-600', bg: 'bg-brand-50' },
           { name: 'PagerDuty', logo: '/logos/pagerduty-logo.png', icon: Bell, color: 'text-red-600', bg: 'bg-red-50' },
           { name: 'CloudWatch', logo: '/logos/cloudwatch.png', icon: null, color: 'text-orange-600', bg: 'bg-orange-50' },
           { name: 'New Relic', logo: '/logos/NewRelic_Logo.png', icon: null, color: 'text-blue-600', bg: 'bg-blue-50' },
@@ -63,7 +63,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
           { name: 'Prometheus', logo: '/logos/prometheus.png', icon: null, color: 'text-red-600', bg: 'bg-red-50' },
           { name: 'Grafana', logo: '/logos/Grafana_Logo.png', icon: null, color: 'text-orange-600', bg: 'bg-orange-50' },
           { name: 'Splunk', logo: '/logos/splunk-logo.png', icon: null, color: 'text-green-600', bg: 'bg-green-50' },
-          { name: 'Datadog', logo: '/logos/datadog-logo.svg', icon: null, color: 'text-purple-600', bg: 'bg-purple-50' },
+          { name: 'Datadog', logo: '/logos/datadog-logo.svg', icon: null, color: 'text-brand-600', bg: 'bg-brand-50' },
           { name: 'Jaeger', logo: '/logos/jaeger-logo.png', icon: Activity, color: 'text-blue-600', bg: 'bg-blue-50' },
         ],
       },
@@ -85,7 +85,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
           { name: 'Docker', logo: null, icon: Box, color: 'text-blue-500', bg: 'bg-blue-50' },
           { name: 'GCP', logo: '/logos/gcp-logo.png', icon: null, color: 'text-blue-500', bg: 'bg-blue-50' },
           { name: 'Azure', logo: '/logos/azure-logo.png', icon: null, color: 'text-blue-600', bg: 'bg-blue-50' },
-          { name: 'ECS', logo: '/logos/ecs-logo.png', icon: null, color: 'text-purple-600', bg: 'bg-purple-50' },
+          { name: 'ECS', logo: '/logos/ecs-logo.png', icon: null, color: 'text-brand-600', bg: 'bg-brand-50' },
         ],
       },
       {
@@ -102,7 +102,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
           'Learn from outcomes to improve future remediation',
         ],
         tools: [
-          { name: 'Slack', logo: '/logos/Slack_logo.png', icon: MessageSquare, color: 'text-purple-600', bg: 'bg-purple-50' },
+          { name: 'Slack', logo: '/logos/Slack_logo.png', icon: MessageSquare, color: 'text-brand-600', bg: 'bg-brand-50' },
           { name: 'MS Teams', logo: '/logos/MS_Team_Logo.png', icon: MessageSquare, color: 'text-blue-600', bg: 'bg-blue-50' },
           { name: 'Jira', logo: '/logos/Jira_Logo.png', icon: null, color: 'text-blue-600', bg: 'bg-blue-50' },
           { name: 'Opsgenie', logo: '/logos/opsgenie-logo.png', icon: Bell, color: 'text-orange-600', bg: 'bg-orange-50' },
@@ -178,8 +178,8 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
         title: 'Connect Alert Sources',
         description: 'Integrate with your existing monitoring tools and alerting systems.',
         icon: MessageSquare,
-        bgColor: 'bg-purple-50',
-        textColor: 'text-purple-600',
+        bgColor: 'bg-brand-50',
+        textColor: 'text-brand-600',
         details: [
           'Connect or Use in house monitoring tools (Datadog, Prometheus, Grafana, or any webhook-based alerting)',
           'Configure alert routing rules and severity levels',
@@ -191,8 +191,8 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
         title: 'Configure On-Call Schedules',
         description: 'Set up intelligent on-call rotations and escalation policies.',
         icon: Users,
-        bgColor: 'bg-purple-50',
-        textColor: 'text-purple-600',
+        bgColor: 'bg-brand-50',
+        textColor: 'text-brand-600',
         details: [
           'Create on-call schedules with automatic rotation',
           'Define escalation policies for different alert types',
@@ -204,20 +204,20 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
         title: 'Receive Instant Alerts',
         description: 'Get notified through your preferred channels when incidents occur.',
         icon: Bell,
-        bgColor: 'bg-purple-50',
-        textColor: 'text-purple-600',
+        bgColor: 'bg-brand-50',
+        textColor: 'text-brand-600',
         details: [
           'Multi-channel alerts: Slack, Teams, Email, SMS, Phone, Phone Call, WhatsApp',
           'Smart alert grouping and deduplication',
           'Context-rich notifications with incident details',
         ],
         tools: [
-          { name: 'Slack', logo: '/logos/Slack_logo.png', icon: MessageSquare, color: 'text-purple-600', bg: 'bg-purple-50' },
+          { name: 'Slack', logo: '/logos/Slack_logo.png', icon: MessageSquare, color: 'text-brand-600', bg: 'bg-brand-50' },
           { name: 'MS Teams', logo: '/logos/MS_Team_Logo.png', icon: MessageSquare, color: 'text-blue-600', bg: 'bg-blue-50' },
           { name: 'Email', logo: null, icon: Mail, color: 'text-gray-600', bg: 'bg-gray-50' },
           { name: 'SMS', logo: null, icon: MessageSquare, color: 'text-green-600', bg: 'bg-green-50' },
           { name: 'Phone', logo: null, icon: Phone, color: 'text-blue-600', bg: 'bg-blue-50' },
-          { name: 'Phone Call', logo: null, icon: Bell, color: 'text-purple-600', bg: 'bg-purple-50' },
+          { name: 'Phone Call', logo: null, icon: Bell, color: 'text-brand-600', bg: 'bg-brand-50' },
           { name: 'WhatsApp', logo: null, icon: MessageSquare, color: 'text-green-600', bg: 'bg-green-50' },
         ],
       },
@@ -241,8 +241,8 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
         title: 'Kubernetes Cost Analysis',
         description: 'Analyze your Kubernetes infrastructure costs and identify optimization opportunities.',
         icon: BarChart3,
-        bgColor: 'bg-purple-100',
-        iconBgColor: 'bg-purple-600',
+        bgColor: 'bg-brand-100',
+        iconBgColor: 'bg-brand-600',
         textColor: 'text-green-600',
         details: [
           'Connect to Kubernetes clusters and cloud billing APIs',
@@ -255,8 +255,8 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
         title: 'Right-Sizing Recommendations',
         description: 'Get AI-powered recommendations for optimal Kubernetes resource allocation.',
         icon: Target,
-        bgColor: 'bg-purple-100',
-        iconBgColor: 'bg-purple-600',
+        bgColor: 'bg-brand-100',
+        iconBgColor: 'bg-brand-600',
         textColor: 'text-green-600',
         details: [
           'Analyze CPU, memory requests and limits across pods',
@@ -269,8 +269,8 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
         title: 'Automated Kubernetes Optimization',
         description: 'Automatically optimize Kubernetes resources with zero performance impact.',
         icon: TrendingUp,
-        bgColor: 'bg-purple-100',
-        iconBgColor: 'bg-purple-600',
+        bgColor: 'bg-brand-100',
+        iconBgColor: 'bg-brand-600',
         textColor: 'text-green-600',
         details: [
           'Automated right-sizing of pod requests and limits',
@@ -283,8 +283,8 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
         title: 'Track Kubernetes Savings',
         description: 'Monitor Kubernetes cost reductions and ROI with detailed analytics.',
         icon: DollarSign,
-        bgColor: 'bg-purple-100',
-        iconBgColor: 'bg-purple-600',
+        bgColor: 'bg-brand-100',
+        iconBgColor: 'bg-brand-600',
         textColor: 'text-green-600',
         details: [
           'Real-time Kubernetes cost tracking and savings reports',
@@ -415,13 +415,13 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
     <section id="how-it-works" className="py-16 md:py-20 container-padding relative overflow-hidden gradient-bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <div className="inline-block px-5 py-2 bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 rounded-full text-sm font-bold mb-5 shadow-lg">
+          <div className="inline-block px-5 py-2 bg-gradient-to-r from-brand-50 to-brand-100 text-brand-700 rounded-full text-sm font-bold mb-5 shadow-lg">
             Process
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-purple-950 mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-900 mb-4">
             How It Works
           </h2>
-          <p className="text-lg md:text-xl text-purple-700 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-brand-700 max-w-2xl mx-auto leading-relaxed">
             A simple, intelligent process that automates infrastructure operations end-to-end
           </p>
         </div>
@@ -439,22 +439,22 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
                   {/* Arrow connector for desktop */}
                   {index < steps.length - 1 && (
                     <div className="hidden lg:block absolute top-20 right-0 transform translate-x-1/2 z-20">
-                      <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-purple-200 group-hover:border-purple-400 group-hover:scale-110 transition-all duration-300">
-                        <ArrowRight className="h-5 w-5 text-purple-600" />
+                      <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-brand-200 group-hover:border-brand-400 group-hover:scale-110 transition-all duration-300">
+                        <ArrowRight className="h-5 w-5 text-brand-600" />
                       </div>
                     </div>
                   )}
                   
                   {/* Step Card */}
-                  <div className="bg-white rounded-2xl p-6 lg:p-8 border-2 border-gray-200 hover:border-purple-300 hover:shadow-xl transition-all duration-300 h-full relative overflow-hidden text-left">
+                  <div className="bg-white rounded-2xl p-6 lg:p-8 border-2 border-gray-200 hover:border-brand-300 hover:shadow-xl transition-all duration-300 h-full relative overflow-hidden text-left">
                     {/* Gradient overlay on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-50/0 to-purple-100/0 group-hover:from-purple-50/50 group-hover:to-purple-100/30 transition-all duration-500 rounded-2xl"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-brand-50/0 to-brand-100/0 group-hover:from-brand-50/50 group-hover:to-brand-100/30 transition-all duration-500 rounded-2xl"></div>
                     
                     <div className="relative z-10">
                       {/* Step number badge - hide for cost optimization */}
                       {solutionId !== 'kubernetes-cost-optimization' && (
                       <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                        <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-full flex items-center justify-center text-xs font-bold shadow-lg">
+                        <div className="w-8 h-8 bg-gradient-to-r from-brand-600 to-brand-700 text-white rounded-full flex items-center justify-center text-xs font-bold shadow-lg">
                           {index + 1}
                         </div>
                       </div>
@@ -472,7 +472,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
                       )}
                       
                       {/* Title */}
-                      <h3 className="text-lg lg:text-xl font-bold text-purple-950 mb-3 group-hover:text-purple-900 transition-colors text-left">
+                      <h3 className="text-lg lg:text-xl font-bold text-brand-900 mb-3 group-hover:text-brand-900 transition-colors text-left">
                         {step.title}
                       </h3>
                       
@@ -510,7 +510,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
                       {/* Monitoring Tools in Step 2 (default only) */}
                       {!solutionId && index === 1 && step.tools && (
                         <div className="mt-6 pt-5 border-t border-gray-200">
-                          <div className="text-xs font-semibold text-purple-600 mb-3 uppercase tracking-wide text-center">Integrates with</div>
+                          <div className="text-xs font-semibold text-brand-600 mb-3 uppercase tracking-wide text-center">Integrates with</div>
                           <ToolLogos tools={step.tools} />
                         </div>
                       )}
@@ -518,7 +518,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
                       {/* Notification Tools in Step 3 (default only) */}
                       {!solutionId && index === 2 && step.tools && (
                         <div className="mt-6 pt-5 border-t border-gray-200">
-                          <div className="text-xs font-semibold text-purple-600 mb-3 uppercase tracking-wide text-center">Notifies via</div>
+                          <div className="text-xs font-semibold text-brand-600 mb-3 uppercase tracking-wide text-center">Notifies via</div>
                           <ToolLogos tools={step.tools} />
                         </div>
                       )}
@@ -540,7 +540,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
               examples: [
                 {
                   platform: 'Kubernetes',
-                  platformColor: 'from-purple-700 to-purple-600',
+                  platformColor: 'from-brand-700 to-brand-600',
                   title: 'Pod Crash Recovery',
                   issue: 'Crash-looping pod due to memory limit exceeded',
                   issueIcon: AlertTriangle,
@@ -554,7 +554,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
                 },
                 {
                   platform: 'Virtual Machines',
-                  platformColor: 'from-purple-700 to-purple-600',
+                  platformColor: 'from-brand-700 to-brand-600',
                   title: 'Auto-Scaling',
                   issue: 'Sustained high CPU usage (95%+) for 5+ minutes',
                   issueIcon: Activity,
@@ -568,7 +568,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
                 },
                 {
                   platform: 'AWS ECS',
-                  platformColor: 'from-purple-700 to-purple-600',
+                  platformColor: 'from-brand-700 to-brand-600',
                   title: 'Memory Optimization',
                   issue: 'Task failures due to memory constraints (OOM errors)',
                   issueIcon: Database,
@@ -684,7 +684,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
               examples: [
                 {
                   platform: 'Alerting',
-                  platformColor: 'from-purple-700 to-purple-600',
+                  platformColor: 'from-brand-700 to-brand-600',
                   title: 'Smart Alert Routing',
                   issue: 'Critical production alert requires immediate attention',
                   issueIcon: Bell,
@@ -698,7 +698,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
                 },
                 {
                   platform: 'Incident Response',
-                  platformColor: 'from-purple-700 to-purple-600',
+                  platformColor: 'from-brand-700 to-brand-600',
                   title: 'Automated Escalation',
                   issue: 'Alert not acknowledged within SLA timeframe',
                   issueIcon: AlertCircle,
@@ -712,7 +712,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
                 },
                 {
                   platform: 'Response Analytics',
-                  platformColor: 'from-purple-700 to-purple-600',
+                  platformColor: 'from-brand-700 to-brand-600',
                   title: 'Response Time Optimization',
                   issue: 'Need to improve team response time metrics',
                   issueIcon: Clock,
@@ -783,7 +783,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
             examples: [
               {
                 platform: 'Kubernetes',
-                platformColor: 'from-purple-700 to-purple-600',
+                platformColor: 'from-brand-700 to-brand-600',
                 title: 'Pod Crash Recovery',
                 issue: 'Crash-looping pod due to memory limit exceeded',
                 issueIcon: AlertTriangle,
@@ -797,7 +797,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
               },
               {
                 platform: 'Virtual Machines',
-                platformColor: 'from-purple-700 to-purple-600',
+                platformColor: 'from-brand-700 to-brand-600',
                 title: 'Auto-Scaling',
                 issue: 'Sustained high CPU usage (95%+) for 5+ minutes',
                 issueIcon: Activity,
@@ -811,7 +811,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
               },
               {
                 platform: 'AWS ECS',
-                platformColor: 'from-purple-700 to-purple-600',
+                platformColor: 'from-brand-700 to-brand-600',
                 title: 'Memory Optimization',
                 issue: 'Task failures due to memory constraints (OOM errors)',
                 issueIcon: Database,
@@ -833,13 +833,13 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
           return (
             <div className="mt-12">
               <div className="text-center mb-10">
-                <div className="inline-block px-5 py-2 bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 rounded-full text-sm font-bold mb-5 shadow-lg">
+                <div className="inline-block px-5 py-2 bg-gradient-to-r from-brand-50 to-brand-100 text-brand-700 rounded-full text-sm font-bold mb-5 shadow-lg">
               Real Examples
             </div>
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-purple-950 mb-4">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-900 mb-4">
                   {examplesData.title}
             </h3>
-            <p className="text-lg md:text-xl text-purple-700 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl text-brand-700 max-w-3xl mx-auto leading-relaxed">
                   {examplesData.description}
             </p>
           </div>
@@ -848,8 +848,8 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
                 {examplesData.examples.map((example, idx) => {
                   const IssueIcon = example.issueIcon
                   return (
-                    <div key={idx} className="group bg-white rounded-2xl p-6 lg:p-8 border-2 border-gray-200 hover:border-purple-300 hover:shadow-2xl transition-all duration-300 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-50/0 to-purple-100/0 group-hover:from-purple-50/40 group-hover:to-purple-100/20 transition-all duration-500"></div>
+                    <div key={idx} className="group bg-white rounded-2xl p-6 lg:p-8 border-2 border-gray-200 hover:border-brand-300 hover:shadow-2xl transition-all duration-300 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-50/0 to-brand-100/0 group-hover:from-brand-50/40 group-hover:to-brand-100/20 transition-all duration-500"></div>
               
               <div className="relative z-10">
                 {/* Platform Badge */}
@@ -860,7 +860,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
                 </div>
 
                 {/* Title */}
-                        <h4 className="text-lg lg:text-xl font-bold text-purple-950 mb-3">{example.title}</h4>
+                        <h4 className="text-lg lg:text-xl font-bold text-brand-900 mb-3">{example.title}</h4>
 
                 {/* Problem */}
                         <div className="mb-4 p-3 bg-orange-50 rounded-xl border border-orange-200">
@@ -901,7 +901,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
                 {/* Solution Steps */}
                         <div className="space-y-2">
                           {example.steps.map((step: string, stepIdx: number) => (
-                            <div key={stepIdx} className="flex items-start gap-2 text-sm text-purple-700">
+                            <div key={stepIdx} className="flex items-start gap-2 text-sm text-brand-700">
                     <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
                               <span>{step}</span>
                   </div>

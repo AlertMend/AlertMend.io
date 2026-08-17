@@ -67,44 +67,44 @@ export default function ContactPage() {
           items: [{ label: 'Contact' }]
         }}
       />
-      <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-purple-50/30 via-white to-blue-50/30">
+      <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden hero-dark">
           <div className="max-w-7xl mx-auto">
             <div className="mb-8">
               <Breadcrumb items={[{ label: 'Contact' }]} />
             </div>
             <div className="text-center mb-12 md:mb-16">
-              <div className="inline-block px-5 py-2 bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 rounded-full text-sm font-bold mb-8 shadow-md border border-purple-200/50">
+              <div className="inline-block px-5 py-2 bg-gradient-to-r from-brand-50 to-brand-100 text-brand-700 rounded-full text-sm font-bold mb-8 shadow-md border border-brand-200/50">
                 Contact Us
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-purple-950 mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-900 mb-6 leading-tight">
                 Get in Touch
               </h1>
-              <p className="text-xl md:text-2xl text-purple-700 max-w-3xl mx-auto leading-relaxed mb-12">
+              <p className="text-xl md:text-2xl text-brand-700 max-w-3xl mx-auto leading-relaxed mb-12">
                 Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-12">
               <div>
-                <h2 className="text-3xl font-bold text-purple-950 mb-8">Contact Information</h2>
+                <h2 className="text-3xl font-bold text-brand-900 mb-8">Contact Information</h2>
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-purple-50 text-purple-600">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-50 text-brand-600">
                       <Mail className="h-6 w-6" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-purple-950 mb-1">Email</h3>
-                      <a href="mailto:hello@alertmend.io" className="text-purple-600 hover:text-purple-700 font-medium">
+                      <h3 className="font-bold text-brand-900 mb-1">Email</h3>
+                      <a href="mailto:hello@alertmend.io" className="text-brand-600 hover:text-brand-700 font-medium">
                         hello@alertmend.io
                       </a>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-purple-50 text-purple-600">
+                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-50 text-brand-600">
                       <MapPin className="h-6 w-6" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-purple-950 mb-1">Address</h3>
+                      <h3 className="font-bold text-brand-900 mb-1">Address</h3>
                       <p className="text-gray-600 font-medium">
                         32 Pekin Street, #05-01<br />
                         Singapore 048762
@@ -124,7 +124,7 @@ export default function ContactPage() {
                   id="contactId"
                 >
                   <div>
-                    <label htmlFor="full_name" className="block text-sm font-bold text-purple-950 mb-2">
+                    <label htmlFor="full_name" className="block text-sm font-bold text-brand-900 mb-2">
                       Full Name:
                     </label>
                     <span className="wpcf7-form-control-wrap">
@@ -134,13 +134,13 @@ export default function ContactPage() {
                         name="full_name"
                         value={formData.full_name}
                         onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-400 focus:outline-none wpcf7-form-control"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-brand-400 focus:outline-none wpcf7-form-control"
                         required
                       />
                     </span>
                   </div>
                   <div>
-                    <label htmlFor="company" className="block text-sm font-bold text-purple-950 mb-2">
+                    <label htmlFor="company" className="block text-sm font-bold text-brand-900 mb-2">
                       Company:
                     </label>
                     <span className="wpcf7-form-control-wrap">
@@ -150,13 +150,13 @@ export default function ContactPage() {
                         name="company"
                         value={formData.company}
                         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-400 focus:outline-none wpcf7-form-control"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-brand-400 focus:outline-none wpcf7-form-control"
                         required
                       />
                     </span>
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-bold text-purple-950 mb-2">
+                    <label htmlFor="email" className="block text-sm font-bold text-brand-900 mb-2">
                       Your email:
                     </label>
                     <span className="wpcf7-form-control-wrap">
@@ -167,13 +167,13 @@ export default function ContactPage() {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-400 focus:outline-none wpcf7-form-control"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-brand-400 focus:outline-none wpcf7-form-control"
                         required
                       />
                     </span>
                   </div>
                   <div>
-                    <label htmlFor="message" className="block text-sm font-bold text-purple-950 mb-2">
+                    <label htmlFor="message" className="block text-sm font-bold text-brand-900 mb-2">
                       Your message:
                     </label>
                     <span className="wpcf7-form-control-wrap">
@@ -183,7 +183,7 @@ export default function ContactPage() {
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         rows={6}
-                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-400 focus:outline-none wpcf7-form-control wpcf7-textarea"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-brand-400 focus:outline-none wpcf7-form-control wpcf7-textarea"
                         required
                       />
                     </span>
@@ -204,7 +204,7 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={formStatus === 'submitting'}
-                    className="wpcf7-form-control wpcf7-submit has-spinner w-full bg-gradient-to-r from-purple-800 to-purple-900 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-purple-900 hover:to-purple-950 transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="wpcf7-form-control wpcf7-submit has-spinner w-full bg-gradient-to-r from-brand-800 to-brand-900 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-brand-900 hover:to-brand-900 transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {formStatus === 'submitting' ? 'Sending...' : 'Send'}
                     {formStatus !== 'submitting' && <Send className="h-5 w-5" />}

@@ -1,4 +1,5 @@
 import SEO from '../../components/SEO'
+import LegacyDocShell from './LegacyDocShell'
 import { ensureUniqueMetaDescription } from '../../utils/descriptionUtils'
 
 export default function SlackRCAChannelPage() {
@@ -6,21 +7,17 @@ export default function SlackRCAChannelPage() {
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'documentation', 'slack-rca-channel')
 
   return (
-    <div className="min-h-screen bg-white">
+    <LegacyDocShell title="Slack RCA channel">
       <SEO
         title="Set Up AlertMend AI's Slack Channel for RCA Reports in 2025"
         description={uniqueDescription}
         keywords="Slack RCA, root cause analysis, Slack notifications, AlertMend RCA setup"
         canonical="/documentation/slack-rca-channel"
       />
-      <main className="pt-24">
-        <section className="py-12 md:py-16 container-padding">
+<section className="py-12 md:py-16 container-padding">
           <div className="max-w-4xl mx-auto">
             <div className="mb-8">
-              <a href="/documentation" className="text-purple-600 hover:text-purple-800 text-sm font-medium mb-4 inline-block">
-                ← Back to Documentation
-              </a>
-              <h1 className="text-4xl md:text-5xl font-black text-purple-950 mb-4">
+<h1 className="text-4xl md:text-5xl font-black text-brand-900 mb-4">
                 How to Setup Slack Channel for RCA
               </h1>
               <p className="text-xl text-gray-600">
@@ -29,15 +26,15 @@ export default function SlackRCAChannelPage() {
             </div>
 
             <div className="prose prose-lg max-w-none">
-              <div className="bg-purple-50 border-l-4 border-purple-600 p-6 mb-8 rounded-r-lg">
-                <h3 className="text-purple-950 font-bold mb-2">What is RCA?</h3>
+              <div className="bg-brand-50 border-l-4 border-brand-600 p-6 mb-8 rounded-r-lg">
+                <h3 className="text-brand-900 font-bold mb-2">What is RCA?</h3>
                 <p className="text-gray-700">
                   Root Cause Analysis (RCA) is AlertMend AI's automated analysis that identifies the underlying cause of incidents. 
                   RCA reports are sent to Slack channels for team visibility and follow-up actions.
                 </p>
               </div>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 1: Create a Dedicated Slack Channel</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 1: Create a Dedicated Slack Channel</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Open Slack and click the "+" icon next to "Channels"</li>
                 <li>Name your channel (e.g., <code className="bg-gray-100 px-2 py-1 rounded">#alertmend-rca</code> or <code className="bg-gray-100 px-2 py-1 rounded">#incident-analysis</code>)</li>
@@ -46,14 +43,14 @@ export default function SlackRCAChannelPage() {
                 <li>Click "Create"</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 2: Invite AlertMend Bot</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 2: Invite AlertMend Bot</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>In the channel, type <code className="bg-gray-100 px-2 py-1 rounded">/invite @AlertMend</code></li>
                 <li>Or click the channel name → "Integrations" → "Add apps" → Search for "AlertMend"</li>
                 <li>Ensure the bot has permission to post messages in the channel</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 3: Get Channel ID</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 3: Get Channel ID</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Click on the channel name at the top</li>
                 <li>Scroll to "About" section</li>
@@ -61,7 +58,7 @@ export default function SlackRCAChannelPage() {
                 <li>Alternatively, check the URL: <code className="bg-gray-100 px-2 py-1 rounded">https://workspace.slack.com/archives/C0123456789</code></li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 4: Configure in AlertMend AI</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 4: Configure in AlertMend AI</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Log in to AlertMend AI dashboard</li>
                 <li>Navigate to Settings → Notifications → Slack</li>
@@ -79,7 +76,7 @@ export default function SlackRCAChannelPage() {
                 <li>Click "Save" to apply changes</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 5: Test RCA Notifications</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 5: Test RCA Notifications</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Create a test incident in AlertMend AI</li>
                 <li>Wait for the RCA analysis to complete</li>
@@ -95,7 +92,7 @@ export default function SlackRCAChannelPage() {
                 </li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">RCA Report Format</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">RCA Report Format</h2>
               <p className="text-gray-700 mb-4">
                 RCA reports in Slack include the following information:
               </p>
@@ -122,8 +119,6 @@ export default function SlackRCAChannelPage() {
             </div>
           </div>
         </section>
-      </main>
-    </div>
+    </LegacyDocShell>
   )
 }
-

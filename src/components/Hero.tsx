@@ -59,9 +59,9 @@ export default function Hero({ solutionId = 'default' }: HeroProps) {
       title: 'Never Miss a Critical Alert',
       description: 'Receive instant alerts through Slack, Microsoft Teams, email, or phone calls when issues occur. Manage on-call schedules easily and reduce response delays. Improve on-call efficiency by up to 3x.',
       metrics: [
-        { value: '3x', label: 'Efficiency', color: 'text-purple-600' },
+        { value: '3x', label: 'Efficiency', color: 'text-brand-600' },
         { value: '0', label: 'Missed Alerts', color: 'text-green-600' },
-        { value: '<30s', label: 'Alert Time', color: 'text-purple-600' },
+        { value: '<30s', label: 'Alert Time', color: 'text-brand-600' },
       ],
     },
     'kubernetes-cost-optimization': {
@@ -98,16 +98,16 @@ export default function Hero({ solutionId = 'default' }: HeroProps) {
   const badgeColorClass = content.badge.color === 'orange' ? 'bg-orange-50 border-orange-200/50 text-orange-700' :
                           content.badge.color === 'blue' ? 'bg-blue-50 border-blue-200/50 text-blue-700' :
                           content.badge.color === 'green' ? 'bg-green-50 border-green-200/50 text-green-700' :
-                          'bg-purple-50 border-purple-200/50 text-purple-700'
+                          'bg-brand-50 border-brand-200/50 text-brand-700'
   const badgeIconColorClass = content.badge.color === 'orange' ? 'text-orange-600' :
                               content.badge.color === 'blue' ? 'text-blue-600' :
                               content.badge.color === 'green' ? 'text-green-600' :
-                              'text-purple-600'
+                              'text-brand-600'
 
   return (
-    <header className="pt-24 pb-16 md:pt-32 md:pb-24 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
+    <header className="pt-24 pb-16 md:pt-32 md:pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden hero-dark">
       {/* Subtle background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-50/30 via-white to-blue-50/30 pointer-events-none"></div>
+      <div className="absolute inset-0 pointer-events-none"></div>
       
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="max-w-4xl mx-auto text-center">
@@ -118,11 +118,11 @@ export default function Hero({ solutionId = 'default' }: HeroProps) {
               <span className="text-sm font-semibold">{content.badge.text}</span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-purple-950">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight !text-white">
               {content.title}
             </h1>
             
-            <p className="text-lg md:text-xl lg:text-2xl text-purple-700 mb-8 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl lg:text-2xl !text-white/75 mb-8 leading-relaxed max-w-3xl mx-auto">
               {content.description}
             </p>
 
@@ -131,7 +131,7 @@ export default function Hero({ solutionId = 'default' }: HeroProps) {
                 {highlights.map((highlight, index) => (
                   <div key={index} className="flex items-center space-x-2">
                     <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0" />
-                    <span className="text-sm md:text-base font-semibold text-purple-800">{highlight}</span>
+                    <span className="text-sm md:text-base font-semibold !text-white/85">{highlight}</span>
                   </div>
                 ))}
               </div>
@@ -140,14 +140,14 @@ export default function Hero({ solutionId = 'default' }: HeroProps) {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <button 
                 onClick={handleBookDemo}
-                className="group bg-gradient-to-r from-purple-800 to-purple-900 text-white px-8 py-3.5 rounded-xl font-semibold hover:from-purple-900 hover:to-purple-950 transition-all shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center space-x-2"
+                className="group bg-gradient-to-r from-brand-800 to-brand-900 text-white px-8 py-3.5 rounded-xl font-semibold hover:from-brand-900 hover:to-brand-900 transition-all shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center space-x-2"
               >
                 <span>Book a Demo</span>
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </button>
               <button 
                 onClick={() => window.open(signupUrl, '_blank')}
-                className="border-2 border-purple-800 text-purple-900 px-8 py-3.5 rounded-xl font-semibold hover:bg-purple-50 transition-all flex items-center justify-center space-x-2"
+                className="border-2 border-brand-800 text-brand-900 px-8 py-3.5 rounded-xl font-semibold hover:bg-brand-50 transition-all flex items-center justify-center space-x-2"
               >
                 <span>Start Free Trial</span>
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -155,11 +155,11 @@ export default function Hero({ solutionId = 'default' }: HeroProps) {
             </div>
 
             {/* Key Metrics */}
-            <div className="grid grid-cols-3 gap-6 lg:gap-8 pt-8 border-t border-purple-200/50 max-w-2xl mx-auto">
+            <div className="grid grid-cols-3 gap-6 lg:gap-8 pt-8 border-t border-brand-200/50 max-w-2xl mx-auto">
               {content.metrics.map((metric, index) => (
                 <div key={index} className="text-center">
                   <div className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-2 whitespace-nowrap ${metric.color}`}>{metric.value}</div>
-                  <div className="text-sm md:text-base text-purple-700 font-medium">{metric.label}</div>
+                  <div className="text-sm md:text-base text-brand-700 font-medium">{metric.label}</div>
               </div>
               ))}
             </div>

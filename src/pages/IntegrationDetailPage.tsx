@@ -8,6 +8,7 @@ import {
   integrationCategories,
   type IntegrationCategory,
 } from '../data/integrations';
+import { truncateDescription } from '../utils/descriptionUtils';
 import styles from './IntegrationDetailPage.module.css';
 
 const CALENDLY_URL = 'https://calendly.com/hello-alertmend/30min';
@@ -29,7 +30,7 @@ export default function IntegrationDetailPage() {
         <h1>Integration not found</h1>
         <p>We don't have a page for <code>/{slug}</code> yet.</p>
         <div className={styles.notFoundCta}>
-          <Link to="/#integrations" className="btn btn-primary">
+          <Link to={{ pathname: '/', hash: '#integrations' }} className="btn btn-primary">
             See all integrations
           </Link>
           <button
@@ -57,7 +58,9 @@ export default function IntegrationDetailPage() {
     <>
       <SEO
         title={`${integration.name} integration | AlertMend AI`}
-        description={`${integration.tagline} ${integration.description.split('. ')[0]}.`}
+        description={truncateDescription(
+          `${integration.tagline} ${integration.description.split('. ')[0]}.`
+        )}
         canonical={`/integrations/${integration.slug}`}
         keywords={`${integration.name}, AlertMend integration, ${integration.category}, AIOps, observability, automation`}
       />

@@ -1,4 +1,5 @@
 import SEO from '../../components/SEO'
+import LegacyDocShell from './LegacyDocShell'
 import { ensureUniqueMetaDescription } from '../../utils/descriptionUtils'
 
 export default function SlackAppApprovalPage() {
@@ -6,21 +7,17 @@ export default function SlackAppApprovalPage() {
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'documentation', 'slack-app-approval')
 
   return (
-    <div className="min-h-screen bg-white">
+    <LegacyDocShell title="Slack app for approval">
       <SEO
         title="AlertMend AI: Configure Slack App for Approval Workflows"
         description={uniqueDescription}
         keywords="Slack integration, Slack app approval, AlertMend Slack setup, notification configuration"
         canonical="/documentation/slack-app-approval"
       />
-      <main className="pt-24">
-        <section className="py-12 md:py-16 container-padding">
+<section className="py-12 md:py-16 container-padding">
           <div className="max-w-4xl mx-auto">
             <div className="mb-8">
-              <a href="/documentation" className="text-purple-600 hover:text-purple-800 text-sm font-medium mb-4 inline-block">
-                ← Back to Documentation
-              </a>
-              <h1 className="text-4xl md:text-5xl font-black text-purple-950 mb-4">
+<h1 className="text-4xl md:text-5xl font-black text-brand-900 mb-4">
                 How to Configure a Slack App for Approval
               </h1>
               <p className="text-xl text-gray-600">
@@ -29,8 +26,8 @@ export default function SlackAppApprovalPage() {
             </div>
 
             <div className="prose prose-lg max-w-none">
-              <div className="bg-purple-50 border-l-4 border-purple-600 p-6 mb-8 rounded-r-lg">
-                <h3 className="text-purple-950 font-bold mb-2">Prerequisites</h3>
+              <div className="bg-brand-50 border-l-4 border-brand-600 p-6 mb-8 rounded-r-lg">
+                <h3 className="text-brand-900 font-bold mb-2">Prerequisites</h3>
                 <ul className="text-gray-700 space-y-1">
                   <li>Admin access to your Slack workspace</li>
                   <li>AlertMend AI account with appropriate permissions</li>
@@ -38,15 +35,15 @@ export default function SlackAppApprovalPage() {
                 </ul>
               </div>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 1: Create a Slack App</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 1: Create a Slack App</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
-                <li>Navigate to <a href="https://api.slack.com/apps" target="_blank" rel="noopener noreferrer" className="text-purple-600 hover:underline">api.slack.com/apps</a></li>
+                <li>Navigate to <a href="https://api.slack.com/apps" target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:underline">api.slack.com/apps</a></li>
                 <li>Click "Create New App" and select "From scratch"</li>
                 <li>Enter your app name (e.g., "AlertMend AI") and select your workspace</li>
                 <li>Click "Create App" to proceed</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 2: Configure App Permissions</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 2: Configure App Permissions</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>In the app settings, navigate to "OAuth & Permissions"</li>
                 <li>Scroll to "Scopes" section and add the following Bot Token Scopes:
@@ -60,14 +57,14 @@ export default function SlackAppApprovalPage() {
                 <li>Save the changes</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 3: Install App to Workspace</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 3: Install App to Workspace</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Click "Install to Workspace" at the top of the OAuth & Permissions page</li>
                 <li>Review the permissions and click "Allow"</li>
                 <li>Copy the "Bot User OAuth Token" (starts with <code className="bg-gray-100 px-2 py-1 rounded">xoxb-</code>)</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 4: Configure in AlertMend AI</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 4: Configure in AlertMend AI</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Log in to your AlertMend AI dashboard</li>
                 <li>Navigate to Settings → Integrations → Slack</li>
@@ -76,7 +73,7 @@ export default function SlackAppApprovalPage() {
                 <li>Click "Save" to complete the configuration</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 5: Test the Integration</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 5: Test the Integration</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Create a test approval workflow in AlertMend AI</li>
                 <li>Trigger the workflow and verify that approval requests appear in your Slack channel</li>
@@ -94,8 +91,6 @@ export default function SlackAppApprovalPage() {
             </div>
           </div>
         </section>
-      </main>
-    </div>
+    </LegacyDocShell>
   )
 }
-

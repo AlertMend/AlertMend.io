@@ -38,13 +38,13 @@ export default function Footer() {
           <div className={styles.col}>
             <h5>Platform</h5>
             <ul>
-              <li><a href="/#features">Kubernetes monitoring</a></li>
-              <li><a href="/#ai">AI RCAs</a></li>
-              <li><a href="/#mlops">GPU &amp; MLOps</a></li>
-              <li><a href="/#features">On-call &amp; incidents</a></li>
-              <li><a href="/#runbooks">Runbooks</a></li>
+              <li><Link to="/observability">Observability &amp; APM</Link></li>
+              <li><Link to="/kubernetes-management">Kubernetes monitoring</Link></li>
+              <li><Link to="/ai-rca">AI RCAs</Link></li>
+              <li><Link to="/on-call-management">On-call &amp; incidents</Link></li>
+              <li><Link to="/auto-remediation">Remediation &amp; runbooks</Link></li>
               <li><Link to="/log-management">Log management</Link></li>
-              <li><a href="/#features">FinOps</a></li>
+              <li><Link to="/kubernetes-cost-optimization">FinOps</Link></li>
             </ul>
           </div>
           <div className={styles.col}>
@@ -53,8 +53,8 @@ export default function Footer() {
               <li><Link to="/blog">Blog</Link></li>
               <li><Link to="/case-studies">Case studies</Link></li>
               <li><Link to="/documentation">Documentation</Link></li>
-              <li><a href="/#how">How it works</a></li>
-              <li><a href="/#integrations">Integrations</a></li>
+              <li><Link to="/security">Security</Link></li>
+              <li><Link to="/compliance">Compliance</Link></li>
             </ul>
           </div>
           <div className={styles.col}>
@@ -63,6 +63,7 @@ export default function Footer() {
               <li><Link to="/about">About</Link></li>
               <li><Link to="/careers">Careers</Link></li>
               <li><Link to="/contact">Contact</Link></li>
+              <li><Link to="/partners">Partners</Link></li>
               <li><Link to="/pricing">Pricing</Link></li>
               <li><Link to="/privacy">Privacy</Link></li>
               <li><Link to="/terms">Terms</Link></li>

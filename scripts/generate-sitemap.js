@@ -152,6 +152,26 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <priority>1.0</priority>
   </url>
   
+  <!-- Product -->
+  <url>
+    <loc>${siteUrl}/observability</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${siteUrl}/ai-rca</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${siteUrl}/log-management</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Solutions -->
   <url>
     <loc>${siteUrl}/auto-remediation</loc>
@@ -177,6 +197,18 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- Integrations (detail pages) -->
+${[
+  'kubernetes', 'aws', 'google-cloud', 'azure', 'prometheus', 'grafana', 'datadog',
+  'victoria-metrics', 'slack', 'ms-teams', 'pagerduty', 'jira', 'sendgrid',
+  'google-meet', 'jenkins', 'github-actions', 'gitlab', 'whatsapp',
+].map((slug) => `  <url>
+    <loc>${siteUrl}/integrations/${slug}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>`).join('\n')}
   
   <!-- Case Studies -->
   <url>
@@ -245,54 +277,53 @@ ${blogPosts.map(post => {
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>${siteUrl}/documentation/slack-app-approval</loc>
+${[
+  'what-is-alertmend',
+  'platform-overview',
+  'concepts',
+  'architecture',
+  'install-cluster-agent',
+  'install-logs-agent',
+  'auto-instrumentation',
+  'install-vm-collectors',
+  'observability',
+  'metrics',
+  'logs',
+  'logs-query',
+  'traces-apm',
+  'deep-visibility',
+  'atql',
+  'atql-fields',
+  'resource-aliases',
+  'runbook-as-code',
+  'alerts-incidents',
+  'health-policies',
+  'on-call',
+  'ai-rca',
+  'byom',
+  'remediation-flows',
+  'runbooks',
+  'approvals',
+  'commands-aliases',
+  'pr-fix',
+  'integrations',
+  'finops-kubernetes',
+  'finops-aws',
+  'rbac-audit',
+  'slack-app-approval',
+  'slack-token-channel',
+  'slack-rca-channel',
+  'ms-teams-approval',
+  'ms-teams-rf',
+  'ms-teams-webhook',
+  'datadog-webhook',
+  'alertmend-vm-actions',
+].map((slug) => `  <url>
+    <loc>${siteUrl}/documentation/${slug}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>${siteUrl}/documentation/slack-token-channel</loc>
-    <lastmod>${currentDate}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>${siteUrl}/documentation/slack-rca-channel</loc>
-    <lastmod>${currentDate}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>${siteUrl}/documentation/ms-teams-approval</loc>
-    <lastmod>${currentDate}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>${siteUrl}/documentation/ms-teams-rf</loc>
-    <lastmod>${currentDate}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>${siteUrl}/documentation/ms-teams-webhook</loc>
-    <lastmod>${currentDate}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>${siteUrl}/documentation/datadog-webhook</loc>
-    <lastmod>${currentDate}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>${siteUrl}/documentation/alertmend-vm-actions</loc>
-    <lastmod>${currentDate}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+  </url>`).join('\n')}
   <url>
     <loc>${siteUrl}/careers</loc>
     <lastmod>${currentDate}</lastmod>

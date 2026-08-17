@@ -22,8 +22,8 @@ export default function LatestBlogPosts() {
     <section id="latest-blog-posts" className="py-16 md:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-violet-50 border border-violet-200 text-violet-700 rounded-full text-[11px] font-bold uppercase tracking-[0.16em] mb-5">
-            <span className="h-1.5 w-1.5 rounded-full bg-violet-600 shadow-[0_0_0_3px_rgba(124,58,237,0.14)]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-50 border border-brand-200 text-brand-700 rounded-full text-[11px] font-bold uppercase tracking-[0.16em] mb-5">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand-600 shadow-[0_0_0_3px_rgba(124, 58, 237,0.14)]" />
             Latest insights
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-zinc-950 mb-4 tracking-tight">
@@ -50,11 +50,11 @@ export default function LatestBlogPosts() {
                 className="group bg-white rounded-lg p-6 border border-zinc-200 hover:border-zinc-300 hover:shadow-[0_1px_2px_rgba(9,9,11,0.04),0_12px_24px_-16px_rgba(9,9,11,0.16)] transition-all duration-200 cursor-pointer flex flex-col h-full hover:-translate-y-0.5"
               >
                 <div className="flex items-center gap-2 flex-wrap mb-3">
-                  <div className="inline-block px-2 py-0.5 bg-violet-50 border border-violet-200 text-violet-700 rounded-md text-[11px] font-semibold uppercase tracking-wider">
+                  <div className="inline-block px-2 py-0.5 bg-brand-50 border border-brand-200 text-brand-700 rounded-md text-[11px] font-semibold uppercase tracking-wider">
                     {post.category}
                   </div>
                 </div>
-                <h3 className="text-lg md:text-xl font-bold text-zinc-950 mb-3 leading-tight tracking-tight group-hover:text-violet-700 transition-colors">
+                <h3 className="text-lg md:text-xl font-bold text-zinc-950 mb-3 leading-tight tracking-tight group-hover:text-brand-700 transition-colors">
                   {displayTitle}
                 </h3>
                 <p className="text-zinc-600 mb-4 leading-relaxed line-clamp-2 flex-grow text-sm">
@@ -65,7 +65,7 @@ export default function LatestBlogPosts() {
                     <Calendar className="h-3 w-3" />
                     <span>{formatDate(post.date)}</span>
                   </div>
-                  <div className="text-violet-600 group-hover:text-violet-700 font-semibold text-xs flex items-center gap-1 transition-colors">
+                  <div className="text-brand-600 group-hover:text-brand-700 font-semibold text-xs flex items-center gap-1 transition-colors">
                     Read More
                     <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
                   </div>

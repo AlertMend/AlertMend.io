@@ -23,8 +23,8 @@ export default function TheProblem() {
       title: 'Cost Savings',
       description: 'Intelligent optimization. Right-sized resources. Maximum efficiency',
       stat: '50% saved',
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-50',
+      color: 'text-brand-600',
+      bgColor: 'bg-brand-50',
     },
     {
       icon: Users,

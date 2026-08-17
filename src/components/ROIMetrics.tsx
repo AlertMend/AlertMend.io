@@ -44,13 +44,13 @@ export default function ROIMetrics() {
     <section className="py-16 md:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden gradient-bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-purple-50 via-purple-100 to-purple-50 text-purple-700 rounded-full text-sm font-bold mb-5 shadow-md border border-purple-200/50">
+          <div className="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-brand-50 via-brand-100 to-brand-50 text-brand-700 rounded-full text-sm font-bold mb-5 shadow-md border border-brand-200/50">
             <span>Proven Results</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-purple-950 mb-4 leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-900 mb-4 leading-tight">
             Trusted by Teams Worldwide
           </h2>
-          <p className="text-lg md:text-xl text-purple-700 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-brand-700 max-w-3xl mx-auto leading-relaxed">
             Real impact from teams using AlertMend AI across industries
           </p>
         </div>
@@ -61,10 +61,10 @@ export default function ROIMetrics() {
             return (
               <div 
                 key={index} 
-                className="group relative bg-white/80 backdrop-blur-sm rounded-2xl p-6 border-2 border-gray-200/50 hover:border-purple-300 hover:shadow-xl transition-all duration-300 text-center"
+                className="group relative bg-white/80 backdrop-blur-sm rounded-2xl p-6 border-2 border-gray-200/50 hover:border-brand-300 hover:shadow-xl transition-all duration-300 text-center"
               >
                 {/* Gradient background on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-50/0 via-purple-50/0 to-purple-100/0 group-hover:from-purple-50/60 group-hover:via-purple-50/30 group-hover:to-purple-100/40 transition-all duration-500 rounded-2xl"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-50/0 via-brand-50/0 to-brand-100/0 group-hover:from-brand-50/60 group-hover:via-brand-50/30 group-hover:to-brand-100/40 transition-all duration-500 rounded-2xl"></div>
                 
                 <div className="relative z-10">
                   <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl ${metric.iconBg} ${metric.iconColor} mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-md`}>
@@ -73,10 +73,10 @@ export default function ROIMetrics() {
                   <div className={`text-2xl md:text-3xl font-bold ${metric.valueColor} mb-2`}>
                     {metric.value}
                   </div>
-                  <div className="text-base font-bold text-purple-900 mb-1.5">
+                  <div className="text-base font-bold text-brand-900 mb-1.5">
                     {metric.label}
                   </div>
-                  <div className="text-sm text-purple-600">
+                  <div className="text-sm text-brand-600">
                     {metric.description}
                   </div>
                 </div>

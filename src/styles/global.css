@@ -22,9 +22,9 @@
   --text-mute: #52525b;     /* zinc-600 */
   --muted: #71717a;         /* zinc-500 */
 
-  /* Accent — single restrained violet, used everywhere */
+  /* Accent — AlertMend brand violet (matches live alertmend.io) */
   --accent: #7c3aed;        /* violet-600 */
-  --accent-soft: #ede9fe;   /* violet-50 */
+  --accent-soft: #ede9fe;   /* violet-100 */
   --accent-strong: #6d28d9; /* violet-700 */
   /* Backwards-compatible aliases so existing components keep working but
      all resolve to the same violet hue (no more indigo/fuchsia drift). */
@@ -41,7 +41,7 @@
   --radius: 8px;
   --radius-lg: 10px;
 
-  /* Neutral shadows (no purple-tinted glow on raw cards) */
+  /* Neutral shadows (no brand-tinted glow on raw cards) */
   --shadow-card:
     0 1px 2px rgba(9, 9, 11, 0.04),
     0 6px 16px -10px rgba(9, 9, 11, 0.08);
@@ -51,7 +51,7 @@
   --shadow-glow:
     0 10px 28px -14px rgba(9, 9, 11, 0.18);
 
-  /* Gradients — single-hue violet so the system reads as one accent */
+  /* Gradients — single-hue AlertMend blue so the system reads as one accent */
   --grad-primary: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
   --grad-text: linear-gradient(180deg, #09090b 0%, #27272a 100%);
 
@@ -102,6 +102,21 @@ section.tight { padding: 48px 0; }
 /* First section after the nav gets a tighter top so the page doesn't start with a big empty band */
 main > section:first-of-type,
 .page-top { padding-top: 36px; }
+
+/* Tailwind product pages (/observability, SolutionPageTemplate, etc.)
+   manage spacing themselves. Reset the marketing-site editorial 72px
+   section padding so heroes aren't blown out. Product pages put vertical
+   rhythm on inner wrappers (or Tailwind utilities that win via !). */
+.product-page section {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Docs shell owns its own vertical rhythm (hub + articles). */
+.docs-main section {
+  padding-top: 0;
+  padding-bottom: 0;
+}
 
 /* ---------- Section zones (full-bleed bands) ----------
    Apply these classes directly on a <section>. Each zone establishes a

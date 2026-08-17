@@ -6,7 +6,26 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        // Brand font — same Inter stack global.css uses, so Tailwind pages
+        // can never drift to the default ui-sans stack.
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+      },
       colors: {
+        // AlertMend brand violet — matches the live alertmend.io accent.
+        brand: {
+          50: '#f5f3ff',
+          100: '#ede9fe',
+          200: '#ddd6fe',
+          300: '#c4b5fd',
+          400: '#a78bfa',
+          500: '#8b5cf6',
+          600: '#7c3aed',
+          700: '#6d28d9',
+          800: '#5b21b6',
+          900: '#4c1d95',
+        },
         primary: {
           50: '#eff6ff',
           100: '#dbeafe',

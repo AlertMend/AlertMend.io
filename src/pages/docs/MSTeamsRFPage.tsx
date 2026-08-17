@@ -1,4 +1,5 @@
 import SEO from '../../components/SEO'
+import LegacyDocShell from './LegacyDocShell'
 import { ensureUniqueMetaDescription } from '../../utils/descriptionUtils'
 
 export default function MSTeamsRFPage() {
@@ -6,21 +7,17 @@ export default function MSTeamsRFPage() {
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'documentation', 'ms-teams-rf')
 
   return (
-    <div className="min-h-screen bg-white">
+    <LegacyDocShell title="MS Teams in RF">
       <SEO
         title="Configure MS Teams in AlertMend AI RF: A Step-by-Step Guide"
         description={uniqueDescription}
         keywords="Microsoft Teams RF, remediation framework, MS Teams automation, AlertMend Teams RF"
         canonical="/documentation/ms-teams-rf"
       />
-      <main className="pt-24">
-        <section className="py-12 md:py-16 container-padding">
+<section className="py-12 md:py-16 container-padding">
           <div className="max-w-4xl mx-auto">
             <div className="mb-8">
-              <a href="/documentation" className="text-purple-600 hover:text-purple-800 text-sm font-medium mb-4 inline-block">
-                ← Back to Documentation
-              </a>
-              <h1 className="text-4xl md:text-5xl font-black text-purple-950 mb-4">
+<h1 className="text-4xl md:text-5xl font-black text-brand-900 mb-4">
                 How to Configure MS Teams In RF
               </h1>
               <p className="text-xl text-gray-600">
@@ -29,21 +26,21 @@ export default function MSTeamsRFPage() {
             </div>
 
             <div className="prose prose-lg max-w-none">
-              <div className="bg-purple-50 border-l-4 border-purple-600 p-6 mb-8 rounded-r-lg">
-                <h3 className="text-purple-950 font-bold mb-2">What is Remediation Framework (RF)?</h3>
+              <div className="bg-brand-50 border-l-4 border-brand-600 p-6 mb-8 rounded-r-lg">
+                <h3 className="text-brand-900 font-bold mb-2">What is Remediation Framework (RF)?</h3>
                 <p className="text-gray-700">
                   The Remediation Framework (RF) in AlertMend AI automates incident response and remediation actions. 
                   MS Teams integration allows you to receive notifications, approve actions, and track remediation progress.
                 </p>
               </div>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 1: Complete MS Teams Basic Setup</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 1: Complete MS Teams Basic Setup</h2>
               <p className="text-gray-700 mb-4">
                 First, ensure you have completed the basic MS Teams integration setup. If not, follow the 
-                <a href="/documentation/ms-teams-approval" className="text-purple-600 hover:underline"> MS Teams Approval guide</a> first.
+                <a href="/documentation/ms-teams-approval" className="text-brand-600 hover:underline"> MS Teams Approval guide</a> first.
               </p>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 2: Enable RF Notifications</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 2: Enable RF Notifications</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Log in to AlertMend AI dashboard</li>
                 <li>Navigate to Settings → Integrations → Microsoft Teams</li>
@@ -52,7 +49,7 @@ export default function MSTeamsRFPage() {
                 <li>Select the Teams channel for RF notifications</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 3: Configure RF Workflow Settings</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 3: Configure RF Workflow Settings</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>In the RF configuration, set notification preferences:
                   <ul className="list-disc list-inside ml-6 mt-2 space-y-1">
@@ -72,7 +69,7 @@ export default function MSTeamsRFPage() {
                 <li>Set notification format (summary or detailed)</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 4: Create RF Workflow Templates</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 4: Create RF Workflow Templates</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Go to Workflows → Remediation Framework</li>
                 <li>Click "Create New Workflow"</li>
@@ -82,7 +79,7 @@ export default function MSTeamsRFPage() {
                 <li>Save the workflow template</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 5: Test RF Integration</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 5: Test RF Integration</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Create a test incident that matches your RF workflow trigger</li>
                 <li>Verify that RF notification appears in Teams</li>
@@ -98,7 +95,7 @@ export default function MSTeamsRFPage() {
                 <li>Verify remediation execution and completion notifications</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">RF Notification Format</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">RF Notification Format</h2>
               <p className="text-gray-700 mb-4">
                 RF notifications in Teams include:
               </p>
@@ -125,8 +122,6 @@ export default function MSTeamsRFPage() {
             </div>
           </div>
         </section>
-      </main>
-    </div>
+    </LegacyDocShell>
   )
 }
-

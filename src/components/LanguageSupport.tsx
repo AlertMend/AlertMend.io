@@ -36,11 +36,11 @@ export default function LanguageSupport() {
   ]
 
   return (
-    <section className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-b from-purple-900 via-purple-800 to-purple-900 text-white">
+    <section className="py-24 md:py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-b from-brand-900 via-brand-800 to-brand-900 text-white">
       {/* Subtle background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-30">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-700/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-700/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-brand-700/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-700/20 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">

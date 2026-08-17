@@ -31,8 +31,8 @@ export default function AutoRemediation() {
       title: 'Custom Workflows',
       description: 'Pre-built templates. Custom rules. Instant action on alerts.',
       time: '< 3min',
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-50',
+      color: 'text-brand-600',
+      bgColor: 'bg-brand-50',
     },
   ]
 

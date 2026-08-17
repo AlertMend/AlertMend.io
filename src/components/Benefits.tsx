@@ -125,11 +125,11 @@ export default function Benefits({ solutionId = 'default' }: BenefitsProps) {
           value: '3x',
           title: 'Deployment Speed',
           description: 'Automate CI/CD pipelines and reduce deployment time from hours to minutes',
-          color: 'text-purple-600',
-          bgColor: 'bg-purple-50',
-          gradientFrom: 'from-purple-50/0',
-          gradientVia: 'via-purple-100/0',
-          gradientTo: 'to-purple-200/0',
+          color: 'text-brand-600',
+          bgColor: 'bg-brand-50',
+          gradientFrom: 'from-brand-50/0',
+          gradientVia: 'via-brand-100/0',
+          gradientTo: 'to-brand-200/0',
         },
         {
           icon: CheckCircle2,
@@ -153,11 +153,11 @@ export default function Benefits({ solutionId = 'default' }: BenefitsProps) {
           value: '0',
           title: 'Missed Alerts',
           description: 'Multi-channel notifications and intelligent routing ensure every critical alert is addressed',
-          color: 'text-purple-600',
-          bgColor: 'bg-purple-50',
-          gradientFrom: 'from-purple-50/0',
-          gradientVia: 'via-purple-100/0',
-          gradientTo: 'to-purple-200/0',
+          color: 'text-brand-600',
+          bgColor: 'bg-brand-50',
+          gradientFrom: 'from-brand-50/0',
+          gradientVia: 'via-brand-100/0',
+          gradientTo: 'to-brand-200/0',
         },
         {
           icon: Users,
@@ -214,11 +214,11 @@ export default function Benefits({ solutionId = 'default' }: BenefitsProps) {
           value: '0%',
           title: 'Performance Impact',
           description: 'Cost optimization without compromising application performance or user experience',
-          color: 'text-purple-600',
-          bgColor: 'bg-purple-50',
-          gradientFrom: 'from-purple-50/0',
-          gradientVia: 'via-purple-100/0',
-          gradientTo: 'to-purple-200/0',
+          color: 'text-brand-600',
+          bgColor: 'bg-brand-50',
+          gradientFrom: 'from-brand-50/0',
+          gradientVia: 'via-brand-100/0',
+          gradientTo: 'to-brand-200/0',
         },
       ],
     },
@@ -242,11 +242,11 @@ export default function Benefits({ solutionId = 'default' }: BenefitsProps) {
           value: 'Full-Text',
           title: 'Instant Search',
           description: 'Query live and historical logs in seconds with a built-in full-text index',
-          color: 'text-purple-600',
-          bgColor: 'bg-purple-50',
-          gradientFrom: 'from-purple-50/0',
-          gradientVia: 'via-purple-100/0',
-          gradientTo: 'to-purple-200/0',
+          color: 'text-brand-600',
+          bgColor: 'bg-brand-50',
+          gradientFrom: 'from-brand-50/0',
+          gradientVia: 'via-brand-100/0',
+          gradientTo: 'to-brand-200/0',
         },
         {
           icon: Database,
@@ -270,13 +270,13 @@ export default function Benefits({ solutionId = 'default' }: BenefitsProps) {
     <section id="benefits" className="py-16 md:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden gradient-bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-purple-50 via-purple-100 to-purple-50 text-purple-700 rounded-full text-sm font-bold mb-5 shadow-md border border-purple-200/50">
+          <div className="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-brand-50 via-brand-100 to-brand-50 text-brand-700 rounded-full text-sm font-bold mb-5 shadow-md border border-brand-200/50">
             <span>Benefits</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-purple-950 mb-4 leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-900 mb-4 leading-tight">
             {currentBenefits.title}
           </h2>
-          <p className="text-lg md:text-xl text-purple-700 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-brand-700 max-w-3xl mx-auto leading-relaxed">
             {currentBenefits.description}
           </p>
         </div>
@@ -298,7 +298,7 @@ export default function Benefits({ solutionId = 'default' }: BenefitsProps) {
             const hoverColors = colorMap[colorName] || colorMap.green
             
             return (
-              <div key={index} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border-2 border-gray-200/50 hover:border-purple-300 hover:shadow-xl transition-all duration-300 text-center relative overflow-hidden">
+              <div key={index} className="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 border-2 border-gray-200/50 hover:border-brand-300 hover:shadow-xl transition-all duration-300 text-center relative overflow-hidden">
                 <div 
                   className="absolute inset-0 bg-gradient-to-br transition-all duration-500 rounded-2xl opacity-0 group-hover:opacity-100"
                   style={{
@@ -310,8 +310,8 @@ export default function Benefits({ solutionId = 'default' }: BenefitsProps) {
                     <Icon className="h-7 w-7" />
               </div>
                   <div className={`text-3xl md:text-4xl font-bold ${benefit.color} mb-2`}>{benefit.value}</div>
-                  <h3 className="text-lg font-bold text-purple-950 mb-2 group-hover:text-purple-900 transition-colors">{benefit.title}</h3>
-              <p className="text-base text-purple-700 leading-relaxed">
+                  <h3 className="text-lg font-bold text-brand-900 mb-2 group-hover:text-brand-900 transition-colors">{benefit.title}</h3>
+              <p className="text-base text-brand-700 leading-relaxed">
                     {benefit.description}
               </p>
             </div>

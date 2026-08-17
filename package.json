@@ -10,6 +10,7 @@
     "build:inference-flow-svgs": "node scripts/build-inference-flow-svgs.mjs",
     "build:static-blogs": "node scripts/build-inference-flow-svgs.mjs && node scripts/build-static-blogs.mjs",
     "build:blog": "node scripts/build-static-blogs.mjs && node scripts/build-blog-html.js && node scripts/fix-html-descriptions.js",
+    "build:og-image": "node scripts/build-og-image.mjs",
     "build:sitemap": "node scripts/generate-sitemap.js",
     "validate:blogs": "node scripts/validate-blogs.js",
     "prerender": "tsx --tsconfig tsconfig.prerender.json --import ./scripts/css-loader-register.mjs scripts/prerender-routes.tsx",

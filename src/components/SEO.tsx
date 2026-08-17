@@ -22,7 +22,7 @@ export default function SEO({
   description = 'AlertMend AI empowers DevOps teams with an autonomous AI agent that troubleshoots Kubernetes alerts 10x faster, reduces MTTR, and optimizes cloud costs. Agentic AI for production diagnosis and infrastructure automation.',
   keywords = 'AIOps, Kubernetes, incident management, auto-remediation, SRE, DevOps, cloud-native, cost optimization, VM monitoring, ECS management, infrastructure automation, AI operations, Kubernetes monitoring, container orchestration, observability',
   canonical,
-  ogImage = 'https://alertmend.io/og-image.jpg',
+  ogImage = 'https://www.alertmend.io/og-image.jpg',
   ogType = 'website',
   noindex = false,
   structuredData,
@@ -77,7 +77,7 @@ export default function SEO({
       <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
       <meta name="language" content="English" />
       <meta name="revisit-after" content="7 days" />
-      <meta name="theme-color" content="#9333ea" />
+      <meta name="theme-color" content="#7c3aed" />
       
       {/* Canonical URL */}
       <link rel="canonical" href={canonicalUrl} />

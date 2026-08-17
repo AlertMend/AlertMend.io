@@ -61,7 +61,6 @@ export default function AlertMendLogo({
             padding: 0,
             margin: 0,
             maxWidth: '100%',
-            height: 'auto'
           }}
           onError={() => {
             console.error('Failed to load AlertMend full logo:', logoPath);
@@ -88,11 +87,11 @@ export default function AlertMendLogo({
             }}
           />
         ) : (
-          <Zap className={`${currentSize.icon} text-purple-600 relative z-10 ${iconClassName}`} />
+          <Zap className={`${currentSize.icon} text-brand-600 relative z-10 ${iconClassName}`} />
         )}
       </div>
       {showText && !useFullLogo && (
-        <span className={`font-bold bg-gradient-to-r from-purple-700 to-purple-600 bg-clip-text text-transparent ${currentSize.text} ml-3 ${textClassName}`}>
+        <span className={`font-bold bg-gradient-to-r from-brand-700 to-brand-600 bg-clip-text text-transparent ${currentSize.text} ml-3 ${textClassName}`}>
           AlertMend AI
         </span>
       )}

@@ -40,7 +40,7 @@ export default function CommunityPage() {
         }}
       />
       <main className="pt-24">
-        <section className="py-20 md:py-32 container-padding bg-gradient-to-b from-white via-primary-50/30 to-white">
+        <section className="py-20 md:py-32 container-padding hero-dark">
           <div className="max-w-7xl mx-auto">
             <div className="mb-8">
               <Breadcrumb items={[{ label: 'Community' }]} />

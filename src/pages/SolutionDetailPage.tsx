@@ -65,9 +65,9 @@ export default function SolutionDetailPage() {
       title: 'On-Call and Incident Alerts',
       subtitle: 'Never Miss a Critical Alert',
       description: 'Receive instant alerts through Slack, Microsoft Teams, email, or phone calls when issues occur. Manage on-call schedules easily and reduce response delays.',
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-50',
-      borderColor: 'border-purple-200',
+      color: 'text-brand-600',
+      bgColor: 'bg-brand-50',
+      borderColor: 'border-brand-200',
       stat: 'Improved on-call efficiency by 3x and reduced missed alerts to zero.',
       features: [
         { icon: MessageSquare, text: 'Multi-channel alerts: Slack, Teams, Email, Phone, WhatsApp' },
@@ -405,10 +405,10 @@ export default function SolutionDetailPage() {
       <div className="min-h-screen bg-white">
         <div className="flex items-center justify-center min-h-[60vh]">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-purple-900 mb-4">Solution Not Found</h1>
+            <h1 className="text-3xl font-bold text-brand-900 mb-4">Solution Not Found</h1>
             <button
               onClick={() => navigate('/')}
-              className="text-purple-600 hover:text-purple-800 underline"
+              className="text-brand-600 hover:text-brand-800 underline"
             >
               Return to Home
             </button>

@@ -6,6 +6,9 @@ import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom/server'
 import { HelmetProvider } from '../src/lib/helmet'
 import App from '../src/App'
+import { allDocsHrefs } from '../src/data/docsNav'
+import { integrations } from '../src/data/integrations'
+import { caseStudiesData, generateCaseStudySlug } from '../src/data/caseStudies'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -82,6 +85,9 @@ const preloadLinks = makeModulePreloadLinks(entryKey)
 
 const routesToPrerender = [
   '/',
+  '/observability',
+  '/ai-rca',
+  '/log-management',
   '/auto-remediation',
   '/kubernetes-management',
   '/on-call-management',
@@ -91,6 +97,11 @@ const routesToPrerender = [
   '/about',
   '/partners',
   '/documentation',
+  ...allDocsHrefs(),
+  // Detail routes advertised in sitemap.xml — without these they fall back to
+  // the SPA shell and crawlers read the homepage's title/canonical instead.
+  ...caseStudiesData.map((study) => `/case-studies/${generateCaseStudySlug(study.category, study.company)}`),
+  ...integrations.map((integration) => `/integrations/${integration.slug}`),
   '/contact',
   '/careers',
   '/security',
@@ -136,7 +147,6 @@ routesToPrerender.forEach((route) => {
   <meta charset="utf-8" />
   <!-- Favicon - uses SVG logo -->
   <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/logos/alertmend-logo.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Google tag (gtag.js) -->

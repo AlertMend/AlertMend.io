@@ -26,9 +26,12 @@ export default function Breadcrumb({ items, showSolutions = false }: BreadcrumbP
     { id: 'log-management', label: 'Log Management', icon: FileText, path: '/log-management' },
   ]
 
-  // Check if current page is a solution page
+  // Exact solution routes only — do not match case-study slugs that
+  // embed the same tokens (e.g. /case-studies/kubernetes-cost-optimization-…).
   const currentPath = location.pathname
-  const isSolutionPage = allSolutions.some(sol => currentPath.includes(sol.id))
+  const isSolutionPage = allSolutions.some(
+    (sol) => currentPath === sol.path || currentPath.startsWith(`${sol.path}/`),
+  )
 
   // Build breadcrumb list for structured data
   const breadcrumbList = [
@@ -65,7 +68,7 @@ export default function Breadcrumb({ items, showSolutions = false }: BreadcrumbP
       >
         <button
           onClick={() => navigate('/')}
-          className="flex items-center hover:text-violet-600 transition-colors font-medium"
+          className="flex items-center hover:text-brand-600 transition-colors font-medium"
           aria-label="Home"
         >
           <Home className="h-4 w-4 mr-1" />
@@ -81,7 +84,8 @@ export default function Breadcrumb({ items, showSolutions = false }: BreadcrumbP
             <div className="flex items-center flex-wrap gap-2">
               {allSolutions.map((solution, index) => {
                 const SolutionIcon = solution.icon
-                const isActive = currentPath.includes(solution.id)
+                const isActive =
+                  currentPath === solution.path || currentPath.startsWith(`${solution.path}/`)
                 return (
                   <div key={solution.id} className="flex items-center gap-2">
                     {index > 0 && <span className="text-zinc-300">•</span>}
@@ -89,8 +93,8 @@ export default function Breadcrumb({ items, showSolutions = false }: BreadcrumbP
                       onClick={() => navigate(solution.path)}
                       className={`flex items-center gap-1.5 px-2 py-1 rounded-md transition-all ${
                         isActive
-                          ? 'text-violet-700 bg-violet-50 border border-violet-200 font-semibold'
-                          : 'text-zinc-600 hover:text-violet-600 hover:bg-zinc-50'
+                          ? 'text-brand-700 bg-brand-50 border border-brand-200 font-semibold'
+                          : 'text-zinc-600 hover:text-brand-600 hover:bg-zinc-50'
                       }`}
                     >
                       <SolutionIcon className="h-3.5 w-3.5" />
@@ -110,7 +114,7 @@ export default function Breadcrumb({ items, showSolutions = false }: BreadcrumbP
             {item.path && index < items.length - 1 ? (
               <button
                 onClick={() => navigate(item.path!)}
-                className="hover:text-violet-600 transition-colors font-medium"
+                className="hover:text-brand-600 transition-colors font-medium"
               >
                 {item.label}
               </button>

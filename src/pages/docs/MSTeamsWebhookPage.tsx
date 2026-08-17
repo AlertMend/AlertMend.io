@@ -1,4 +1,5 @@
 import SEO from '../../components/SEO'
+import LegacyDocShell from './LegacyDocShell'
 import { ensureUniqueMetaDescription } from '../../utils/descriptionUtils'
 
 export default function MSTeamsWebhookPage() {
@@ -6,21 +7,17 @@ export default function MSTeamsWebhookPage() {
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'documentation', 'ms-teams-webhook')
 
   return (
-    <div className="min-h-screen bg-white">
+    <LegacyDocShell title="MS Teams incoming webhook">
       <SEO
         title="AlertMend AI: MS Teams Webhook Setup Guide (2025)"
         description={uniqueDescription}
         keywords="MS Teams webhook, Teams incoming webhook, webhook URL, AlertMend Teams webhook"
         canonical="/documentation/ms-teams-webhook"
       />
-      <main className="pt-24">
-        <section className="py-12 md:py-16 container-padding">
+<section className="py-12 md:py-16 container-padding">
           <div className="max-w-4xl mx-auto">
             <div className="mb-8">
-              <a href="/documentation" className="text-purple-600 hover:text-purple-800 text-sm font-medium mb-4 inline-block">
-                ← Back to Documentation
-              </a>
-              <h1 className="text-4xl md:text-5xl font-black text-purple-950 mb-4">
+<h1 className="text-4xl md:text-5xl font-black text-brand-900 mb-4">
                 How to Create an Incoming Webhook URL in MS Teams
               </h1>
               <p className="text-xl text-gray-600">
@@ -29,15 +26,15 @@ export default function MSTeamsWebhookPage() {
             </div>
 
             <div className="prose prose-lg max-w-none">
-              <div className="bg-purple-50 border-l-4 border-purple-600 p-6 mb-8 rounded-r-lg">
-                <h3 className="text-purple-950 font-bold mb-2">What is an Incoming Webhook?</h3>
+              <div className="bg-brand-50 border-l-4 border-brand-600 p-6 mb-8 rounded-r-lg">
+                <h3 className="text-brand-900 font-bold mb-2">What is an Incoming Webhook?</h3>
                 <p className="text-gray-700">
                   An incoming webhook is a simple way for external services (like AlertMend AI) to send messages 
                   to a Microsoft Teams channel. It's a URL that accepts HTTP POST requests with message content.
                 </p>
               </div>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 1: Open Teams Channel</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 1: Open Teams Channel</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Open Microsoft Teams</li>
                 <li>Navigate to the team and channel where you want to receive notifications</li>
@@ -45,21 +42,21 @@ export default function MSTeamsWebhookPage() {
                 <li>Select "Connectors" from the dropdown menu</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 2: Add Incoming Webhook Connector</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 2: Add Incoming Webhook Connector</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>In the Connectors dialog, search for "Incoming Webhook"</li>
                 <li>Click on "Incoming Webhook"</li>
                 <li>Click "Add" or "Configure"</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 3: Configure Webhook</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 3: Configure Webhook</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Enter a name for your webhook (e.g., "AlertMend AI Notifications")</li>
                 <li>Optionally, upload an image/icon for the webhook (recommended: AlertMend logo)</li>
                 <li>Click "Create"</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 4: Copy Webhook URL</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 4: Copy Webhook URL</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>After creating, a webhook URL will be displayed</li>
                 <li>The URL format: <code className="bg-gray-100 px-2 py-1 rounded">https://outlook.office.com/webhook/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx@xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/IncomingWebhook/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code></li>
@@ -67,7 +64,7 @@ export default function MSTeamsWebhookPage() {
                 <li>Click "Done" to close the dialog</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 5: Configure in AlertMend AI</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 5: Configure in AlertMend AI</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Log in to AlertMend AI dashboard</li>
                 <li>Navigate to Settings → Integrations → Microsoft Teams</li>
@@ -78,7 +75,7 @@ export default function MSTeamsWebhookPage() {
                 <li>Click "Save" to complete the configuration</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 6: Customize Message Format (Optional)</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 6: Customize Message Format (Optional)</h2>
               <p className="text-gray-700 mb-4">
                 In AlertMend AI, you can customize how messages appear in Teams:
               </p>
@@ -90,7 +87,7 @@ export default function MSTeamsWebhookPage() {
                 <li>Attachments and images</li>
               </ul>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Webhook Message Format</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Webhook Message Format</h2>
               <p className="text-gray-700 mb-4">
                 AlertMend AI sends messages in Microsoft Teams' Adaptive Card format. Example structure:
               </p>
@@ -149,8 +146,6 @@ export default function MSTeamsWebhookPage() {
             </div>
           </div>
         </section>
-      </main>
-    </div>
+    </LegacyDocShell>
   )
 }
-

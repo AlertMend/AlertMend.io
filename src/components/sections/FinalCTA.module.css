@@ -1,7 +1,7 @@
 /* ============================================================
    Final CTA card
 
-   The closer for the page — sits on a deep purple-tinted base so
+   The closer for the page — sits on a deep brand-tinted base so
    it visually closes the document the way a book back-cover does.
    Two radial corner glows (top-right, bottom-left) anchor the
    brand violet at the corners, and a tiny-dot texture mask gives
@@ -12,7 +12,7 @@
   position: relative;
   padding: 56px 56px;
   border-radius: 12px;
-  /* Deep purple-tinted base: violet-950 over near-black, so the
+  /* Deep brand-tinted base: brand-900 over near-black, so the
      accent reads as "evening sky" rather than a saturated marketing
      block. Two radial corner glows layer on top to anchor the
      brand color in the corners. */
