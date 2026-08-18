@@ -40,19 +40,19 @@ const pains: { ico: React.ReactNode; title: string; body: string }[] = [
     body: "Recovery steps live in someone's terminal scrollback. New engineers re-learn every fire drill.",
   },
   {
-    ico: <Icon name="cpu" size={ICON_SIZE} strokeWidth={ICON_STROKE} />,
-    title: 'GPU fleets are flying blind',
-    body: 'CUDA OOM, NCCL timeouts, MIG slices unaccounted for. Half the H100s are idle while the other half throttle, and nobody can prove it.',
+    ico: <Icon name="gitBranch" size={ICON_SIZE} strokeWidth={ICON_STROKE} />,
+    title: 'Traces stop at the pod boundary',
+    body: 'A request slows down and you can only guess where. No distributed trace, no span waterfall — just latency graphs that never point at the culprit.',
   },
   {
-    ico: <Icon name="workflow" size={ICON_SIZE} strokeWidth={ICON_STROKE} />,
-    title: 'ML pipelines stall silently',
-    body: 'A Kubeflow DAG hangs at step 7. A vLLM replica drifts on p99. Nobody pages until the data scientist files a ticket.',
+    ico: <Icon name="layers" size={ICON_SIZE} strokeWidth={ICON_STROKE} />,
+    title: 'Metrics, logs and traces live in silos',
+    body: 'Three tools, three tabs, three query languages. Correlating a spike to the log line and the failing span is a manual scavenger hunt.',
   },
   {
-    ico: <Icon name="trending" size={ICON_SIZE} strokeWidth={ICON_STROKE} />,
-    title: "Training runs you can't trust",
-    body: 'Loss diverges, gradients NaN, dataloader stalls. You burn $14k of GPU hours before someone checks Weights & Biases.',
+    ico: <Icon name="eye" size={ICON_SIZE} strokeWidth={ICON_STROKE} />,
+    title: 'Dashboards, but no answers',
+    body: 'Walls of graphs that show what changed but never why. At 3am you need a root cause, not another panel to stare at.',
   },
 ];
 

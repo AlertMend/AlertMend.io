@@ -27,8 +27,8 @@ export default function Features({ onFeatureClick }: FeaturesProps) {
       icon: DollarSign,
       title: 'Cost Optimization',
       description: 'Cut cloud costs by 50%. Predictive scaling. Smart resource management. Automatic.',
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-50',
+      color: 'text-brand-600',
+      bgColor: 'bg-brand-50',
     },
   ]
 
@@ -87,7 +87,7 @@ export default function Features({ onFeatureClick }: FeaturesProps) {
                 <div className={`${feature.bgColor} w-14 h-14 rounded-xl flex items-center justify-center mb-5 shadow-sm`}>
                   <Icon className={`h-7 w-7 ${feature.color}`} />
                 </div>
-                <h3 className="text-xl font-bold text-purple-950 mb-3">{feature.title}</h3>
+                <h3 className="text-xl font-bold text-brand-900 mb-3">{feature.title}</h3>
                 <p className="text-gray-600 leading-relaxed mb-5">{feature.description}</p>
                 <button 
                   onClick={() => handleClick(feature.id)}
@@ -111,7 +111,7 @@ export default function Features({ onFeatureClick }: FeaturesProps) {
                 className="bg-gray-50 p-5 rounded-xl border border-gray-200"
               >
                 <Icon className="h-6 w-6 text-primary-600 mb-3" />
-                <h4 className="text-lg font-semibold text-purple-950 mb-2">{feature.title}</h4>
+                <h4 className="text-lg font-semibold text-brand-900 mb-2">{feature.title}</h4>
                 <p className="text-gray-600 text-sm">{feature.description}</p>
               </div>
             )

@@ -1,0 +1,95 @@
+/* Datadog-style top announcement strip, translated to AlertMend blue.
+   A vivid blue→cyan gradient bar, centered headline + inline CTA, with a
+   quiet dismiss button on the right. */
+
+.bar {
+  position: relative;
+  z-index: 60;
+  width: 100%;
+  background: linear-gradient(90deg, #6d28d9 0%, #7c3aed 42%, #7c3aed 78%, #8b5cf6 100%);
+  color: #fff;
+  font-size: 13.5px;
+  line-height: 1.3;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 9px 48px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.text {
+  color: rgba(255, 255, 255, 0.94);
+}
+.text b {
+  font-weight: 700;
+  color: #fff;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+.cta :global(.arrow) {
+  transition: transform 0.18s ease;
+}
+.inner:hover .cta :global(.arrow) {
+  transform: translateX(3px);
+}
+
+.close {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.82);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.close:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding: 8px 40px;
+    gap: 8px;
+    font-size: 12.5px;
+  }
+  .cta {
+    display: none;
+  }
+}

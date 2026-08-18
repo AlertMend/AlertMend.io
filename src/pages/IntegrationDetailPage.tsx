@@ -8,10 +8,10 @@ import {
   integrationCategories,
   type IntegrationCategory,
 } from '../data/integrations';
+import { truncateDescription } from '../utils/descriptionUtils';
 import styles from './IntegrationDetailPage.module.css';
 
 const CALENDLY_URL = 'https://calendly.com/hello-alertmend/30min';
-const SIGNUP_URL = 'https://app.alertmend.io/signup?source=integration-detail';
 
 export default function IntegrationDetailPage() {
   const { slug = '' } = useParams<{ slug: string }>();
@@ -29,7 +29,7 @@ export default function IntegrationDetailPage() {
         <h1>Integration not found</h1>
         <p>We don't have a page for <code>/{slug}</code> yet.</p>
         <div className={styles.notFoundCta}>
-          <Link to="/#integrations" className="btn btn-primary">
+          <Link to={{ pathname: '/', hash: '#integrations' }} className="btn btn-primary">
             See all integrations
           </Link>
           <button
@@ -57,7 +57,9 @@ export default function IntegrationDetailPage() {
     <>
       <SEO
         title={`${integration.name} integration | AlertMend AI`}
-        description={`${integration.tagline} ${integration.description.split('. ')[0]}.`}
+        description={truncateDescription(
+          `${integration.tagline} ${integration.description.split('. ')[0]}.`
+        )}
         canonical={`/integrations/${integration.slug}`}
         keywords={`${integration.name}, AlertMend integration, ${integration.category}, AIOps, observability, automation`}
       />
@@ -128,22 +130,17 @@ export default function IntegrationDetailPage() {
               </div>
               <div className={styles.ctaBtns}>
                 <a
-                  href={SIGNUP_URL}
+                  href={CALENDLY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary btn-lg"
                 >
-                  Start free
+                  Book a demo
                   <Icon name="arrow" size={14} className="arrow" strokeWidth={2.5} />
                 </a>
-                <a
-                  href={CALENDLY_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-ghost btn-lg"
-                >
-                  Book a demo
-                </a>
+                <Link to="/contact" className="btn btn-ghost btn-lg">
+                  Talk with us
+                </Link>
                 {integration.docsHref && (
                   <Link
                     to={integration.docsHref}

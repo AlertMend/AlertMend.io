@@ -1,0 +1,58 @@
+.toc {
+  position: sticky;
+  top: 56px;
+  align-self: start;
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+  padding: 28px 0 40px;
+}
+
+.title {
+  margin: 0 0 8px;
+  padding: 0 10px;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #71717a;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid #e4e4e7;
+}
+
+.link {
+  display: block;
+  padding: 5px 10px;
+  margin-left: -1px;
+  border-left: 2px solid transparent;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #71717a;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #18181b;
+}
+
+.linkSub {
+  padding-left: 22px;
+}
+
+.linkActive {
+  border-left-color: #7c3aed;
+  color: #18181b;
+  font-weight: 600;
+}
+
+/* Must match the single-column breakpoint in DocArticle.module.css, otherwise
+   the rail reflows underneath the article. */
+@media (max-width: 1320px) {
+  .toc {
+    display: none;
+  }
+}

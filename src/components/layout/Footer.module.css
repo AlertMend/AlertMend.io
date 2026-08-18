@@ -1,14 +1,55 @@
+/* Datadog-style footer: deep near-black canvas topped by a vivid
+   blue→cyan gradient band, light text, translucent surfaces. Overrides
+   the light-theme tokens with explicit dark values within footer scope. */
+
 .footer {
-  padding: 60px 0 28px;
-  border-top: 1px solid var(--border);
-  margin-top: 64px;
+  position: relative;
+  padding: 64px 0 30px;
+  margin-top: 72px;
+  background:
+    radial-gradient(120% 100% at 0% 0%, rgba(124, 58, 237, 0.16), transparent 55%),
+    radial-gradient(120% 100% at 100% 0%, rgba(139, 92, 246, 0.12), transparent 55%),
+    linear-gradient(180deg, #0a0f1a 0%, #070b12 100%);
+  color: #e6e8ec;
+  overflow: hidden;
 }
+/* Vivid gradient band across the very top — the Datadog signature. */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #6d28d9 0%, #7c3aed 40%, #7c3aed 72%, #8b5cf6 100%);
+}
+
+/* Content-width link columns rather than equal fractions. Equal fractions
+   left the last column's short words ending ~170px shy of the container edge,
+   while the compliance row and bottom bar both run flush to it, so the middle
+   band looked shifted off-axis. Sizing to content and letting the brand
+   column absorb the slack puts the last link flush right. */
 .grid {
-  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) repeat(3, 180px);
+  gap: 40px 48px;
   margin-bottom: 36px;
 }
+/* The 7-item Platform column sets the row height, leaving ~70px of dead air
+   under the brand block. Flex column + auto margin on the compliance group
+   drops the trust marks into that gap instead of giving them their own
+   near-empty full-width band. */
+.brandCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+/* Cancels the 6px inline padding on the shared Brand anchor, which otherwise
+   indents the logo past the paragraph and Antler box below it. The padding
+   itself stays, so the hover target is unchanged. */
+.brandCol > a { margin-left: -6px; }
 .brandCol p {
-  font-size: 14px; color: var(--muted); margin-top: 14px; max-width: 320px; line-height: 1.6;
+  font-size: 14px; color: rgba(230, 232, 236, 0.68); margin-top: 14px; max-width: 320px; line-height: 1.6;
 }
 
 .backedBy {
@@ -17,9 +58,9 @@
   gap: 12px;
   margin-top: 18px;
   padding: 10px 14px;
-  border-radius: 6px;
-  background: var(--bg-2);
-  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.10);
   width: fit-content;
 }
 .backedByLabel {
@@ -27,7 +68,7 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: rgba(230, 232, 236, 0.5);
   white-space: nowrap;
 }
 .backedByLink {
@@ -35,6 +76,7 @@
   align-items: center;
   line-height: 0;
   transition: opacity 0.2s ease;
+  filter: brightness(0) invert(1);
 }
 .backedByLink:hover { opacity: 0.85; }
 .backedByLogo {
@@ -44,82 +86,76 @@
 }
 .col h5 {
   font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em;
-  color: var(--text); font-weight: 700; margin-bottom: 14px;
+  color: #fff; font-weight: 700; margin-bottom: 14px;
 }
-.col ul { list-style: none; display: grid; gap: 8px; }
+.col ul { list-style: none; display: grid; gap: 9px; }
 .col li a {
-  font-size: 14px; color: var(--muted); transition: color 0.2s;
+  font-size: 14px; color: rgba(230, 232, 236, 0.68); transition: color 0.2s;
 }
-.col li a:hover { color: var(--text); }
+.col li a:hover { color: #a78bfa; }
+
+/* `margin-top: auto` needs a floor: on one-column layouts there is no free
+   space to absorb, so the padding keeps the group off the Antler box. */
 .compliance {
-  padding: 20px 0 24px;
-  border-top: 1px solid var(--border);
+  margin-top: auto;
+  padding-top: 30px;
+}
+.complianceHead {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 11px;
 }
 .complianceLabel {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: rgba(230, 232, 236, 0.5);
 }
 .complianceList {
-  display: flex; gap: 10px; flex-wrap: wrap;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
 }
-.complianceBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 14px 8px 10px;
-  border-radius: 6px;
-  background: var(--bg-2);
-  border: 1px solid var(--border);
-  color: var(--text);
-}
-.complianceLogo { flex-shrink: 0; border-radius: 4px; display: block; }
-.complianceText {
-  display: flex; flex-direction: column; gap: 3px; align-items: flex-start; line-height: 1;
-}
-.complianceName {
-  white-space: nowrap;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text);
-}
-.complianceStatus {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 2px 7px;
+/* Text chips, not seals. The drawn SOC/ISO/GDPR marks were unreadable at
+   32px and read as sticker clutter on a dark footer, and three separate
+   amber "in progress" pills drew more attention than the certifications
+   deserve while none are awarded yet. One shared status carries it. */
+.complianceChip {
+  padding: 5px 11px;
   border-radius: 999px;
-  background: rgba(234, 179, 8, 0.12);
-  color: #92660b;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.82);
   white-space: nowrap;
 }
+.complianceNote {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: rgba(230, 232, 236, 0.55);
+  transition: color 0.2s ease;
+}
+.complianceNote:hover { color: rgba(230, 232, 236, 0.85); }
 .complianceDot {
   width: 5px; height: 5px; border-radius: 50%;
   background: #eab308;
   box-shadow: 0 0 0 2px rgba(234, 179, 8, 0.18);
-  animation: footerComplianceBlink 1.8s ease-in-out infinite;
-}
-@keyframes footerComplianceBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
 }
 
 .bottom {
-  padding-top: 22px; border-top: 1px solid var(--border);
+  padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: flex; justify-content: space-between; align-items: center;
-  font-size: 13px; color: var(--muted); flex-wrap: wrap; gap: 12px;
+  font-size: 13px; color: rgba(230, 232, 236, 0.55); flex-wrap: wrap; gap: 12px;
 }
+.legal { display: flex; gap: 20px; }
+.legal a {
+  color: rgba(230, 232, 236, 0.55);
+  transition: color 0.2s ease;
+}
+.legal a:hover { color: rgba(230, 232, 236, 0.85); }
 
 @media (max-width: 980px) {
   .grid { grid-template-columns: 1fr 1fr; gap: 28px; }

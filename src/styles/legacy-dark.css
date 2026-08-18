@@ -8,11 +8,17 @@
  * that lives at z-index: -1.
  */
 
-body.alertmend-dark > #root > header,
 body.alertmend-dark > #root > main,
 body.alertmend-dark > #root > footer {
   position: relative;
   z-index: 1;
+}
+
+/* The sticky header must sit above <main> so its dropdown/mega-menu (which
+   overflows down into the page) isn't covered by later-in-DOM content. */
+body.alertmend-dark > #root > header {
+  position: relative;
+  z-index: 40;
 }
 
 /*

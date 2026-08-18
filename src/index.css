@@ -49,7 +49,7 @@
 
 @layer components {
   .gradient-bg {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 40%, #5b21b6 70%, #7c3aed 100%);
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
     position: relative;
@@ -59,9 +59,9 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3), transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.3), transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(120, 219, 255, 0.3), transparent 50%);
+    background: radial-gradient(circle at 20% 50%, rgba(124, 58, 237, 0.28), transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.22), transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(167, 139, 250, 0.18), transparent 50%);
   }
   
   .glass {
@@ -93,8 +93,10 @@
     text-wrap: balance;
   }
   
+  /* Near-black primary — matches src/styles/global.css. Do not redefine a
+     blue/violet gradient here or Tailwind pages drift from the design system. */
   .btn-primary {
-    @apply bg-gradient-to-r from-primary-600 to-primary-500 text-white px-8 py-4 rounded-xl font-semibold hover:from-primary-700 hover:to-primary-600 transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95 transform;
+    @apply bg-zinc-950 text-white px-8 py-4 rounded-lg font-semibold hover:bg-zinc-800 transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95 transform;
   }
   
   .btn-secondary {
@@ -120,11 +122,11 @@
   }
   
   .glow {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(59, 130, 246, 0.2);
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.3), 0 0 40px rgba(124, 58, 237, 0.2);
   }
   
   .glow-hover:hover {
-    box-shadow: 0 0 30px rgba(59, 130, 246, 0.4), 0 0 60px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 30px rgba(124, 58, 237, 0.4), 0 0 60px rgba(124, 58, 237, 0.3);
   }
   
   .animate-scroll-left {
@@ -141,11 +143,11 @@
     width: 128px;
     height: 128px;
     border-radius: 8px;
-    background: #f3e8ff;
+    background: #ede9fe;
     border: 1px solid #e5e7eb;
     align-items: center;
     justify-content: center;
-    color: #9333ea;
+    color: #7c3aed;
     font-weight: 700;
     font-size: 2rem;
     flex-shrink: 0;
@@ -163,7 +165,7 @@
   }
   
   .gradient-bg-purple {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 15%, #f093fb 30%, #4facfe 45%, #00f2fe 60%, #4facfe 75%, #f093fb 90%, #667eea 100%);
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 25%, #5b21b6 50%, #6d28d9 75%, #7c3aed 100%);
     background-size: 400% 400%;
     animation: gradient 8s ease infinite;
   }
@@ -275,3 +277,101 @@
   }
 }
 
+
+/* ---------- Unified dark page-hero tone ----------
+   One treatment for every page's opening band (same navy→cyan gradient as
+   the homepage hero). Applied via `hero-dark` on the page's first section;
+   these overrides flip the inner text to the dark-hero palette regardless
+   of the page's own utility classes. */
+@layer components {
+  .hero-dark {
+    background:
+      radial-gradient(75% 65% at 50% -8%, rgba(139, 92, 246, 0.30), transparent 60%),
+      radial-gradient(90% 90% at 12% 0%, rgba(124, 58, 237, 0.42), transparent 55%),
+      radial-gradient(90% 90% at 100% 12%, rgba(167, 139, 250, 0.22), transparent 55%),
+      linear-gradient(180deg, #0a1526 0%, #0a1020 55%, #070b14 100%) !important;
+  }
+  .hero-dark h1, .hero-dark h2, .hero-dark h3 { color: #fff; }
+  .hero-dark p { color: rgba(255, 255, 255, 0.78); }
+  .hero-dark .heading-gradient,
+  .hero-dark h1 [class*="bg-clip-text"],
+  .hero-dark h2 [class*="bg-clip-text"],
+  .hero-dark span[class*="bg-clip-text"] {
+    background-image: linear-gradient(90deg, #a78bfa, #8b5cf6, #c4b5fd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  /* Muted utility text inside the dark hero stays readable */
+  .hero-dark [class*="text-zinc-6"], .hero-dark [class*="text-zinc-5"],
+  .hero-dark [class*="text-gray-6"], .hero-dark [class*="text-gray-5"],
+  .hero-dark [class*="text-slate-6"], .hero-dark [class*="text-slate-5"] {
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .hero-dark [class*="text-zinc-9"], .hero-dark [class*="text-gray-9"],
+  .hero-dark [class*="text-slate-9"], .hero-dark [class*="text-brand-9"] {
+    color: #fff;
+  }
+}
+
+/* Exception: light-filled surfaces nested inside a dark hero keep dark text.
+   The overrides above are (0,2,0) for the utility selectors and (0,1,1) for
+   `.hero-dark h1` / `.hero-dark p`, so they outrank a plain Tailwind utility
+   such as `.text-zinc-900` (0,1,0). That is what we want for copy sitting
+   directly on the hero gradient, but a white or tinted card nested inside the
+   same section gets repainted too and its labels render light-on-light.
+
+   Two things are generalised here versus matching only `bg-white` headings and
+   paragraphs. First, the surface list covers the tinted `-50` / `-100` cards
+   the pages actually use (`bg-brand-50` CTA panels on Careers / Compliance /
+   Partners, `bg-gray-100` and `bg-primary-*` badges on Webinars / Tutorials).
+   Second, the target list keys off the repainted *utility class* rather than a
+   fixed set of tags, so buttons, spans, list items, dt/dd, table cells,
+   labels and badges are covered as well, and unclassed descendants inherit the
+   restored colour from their nearest classed ancestor.
+
+   Specificity: `.hero-dark` (0,1,0) + the surface `:is()` (0,1,0) + a target
+   `:is()` of attribute selectors (0,1,0) = (0,3,0), which beats the (0,2,0)
+   utility overrides above; the tag-based selectors land at (0,2,1), which
+   beats the (0,1,1) `.hero-dark h1` / `.hero-dark p` rules. Colours match the
+   two tiers this block already used, so only text that was illegible changes
+   appearance — `text-brand-*` shades are deliberately not restored to violet,
+   which would repaint dozens of already-legible headings.
+
+   Tinted surfaces are matched on the whole class token (`~=`) rather than by
+   substring, so a translucent chip like `bg-brand-500/10` — which composites
+   *dark* over the hero and must keep its light text — is not mistaken for
+   `bg-brand-50`. `bg-white` stays a substring match because `bg-white/80`
+   still composites light. */
+@layer components {
+  .hero-dark :is([class*="bg-white"],
+      [class~="bg-zinc-50"], [class~="bg-zinc-100"],
+      [class~="bg-gray-50"], [class~="bg-gray-100"],
+      [class~="bg-slate-50"], [class~="bg-slate-100"],
+      [class~="bg-brand-50"], [class~="bg-brand-100"],
+      [class~="bg-primary-50"], [class~="bg-primary-100"],
+      [class~="bg-orange-50"], [class~="bg-orange-100"])
+    :is(h1, h2, h3, h4, h5, h6) { color: #09090b; }
+
+  .hero-dark :is([class*="bg-white"],
+      [class~="bg-zinc-50"], [class~="bg-zinc-100"],
+      [class~="bg-gray-50"], [class~="bg-gray-100"],
+      [class~="bg-slate-50"], [class~="bg-slate-100"],
+      [class~="bg-brand-50"], [class~="bg-brand-100"],
+      [class~="bg-primary-50"], [class~="bg-primary-100"],
+      [class~="bg-orange-50"], [class~="bg-orange-100"])
+    :is(p,
+      [class*="text-zinc-5"], [class*="text-zinc-6"],
+      [class*="text-gray-5"], [class*="text-gray-6"],
+      [class*="text-slate-5"], [class*="text-slate-6"]) { color: #52525b; }
+
+  .hero-dark :is([class*="bg-white"],
+      [class~="bg-zinc-50"], [class~="bg-zinc-100"],
+      [class~="bg-gray-50"], [class~="bg-gray-100"],
+      [class~="bg-slate-50"], [class~="bg-slate-100"],
+      [class~="bg-brand-50"], [class~="bg-brand-100"],
+      [class~="bg-primary-50"], [class~="bg-primary-100"],
+      [class~="bg-orange-50"], [class~="bg-orange-100"])
+    :is([class*="text-zinc-9"], [class*="text-gray-9"],
+      [class*="text-slate-9"], [class*="text-brand-9"]) { color: #09090b; }
+}

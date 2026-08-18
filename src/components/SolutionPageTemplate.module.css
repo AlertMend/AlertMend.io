@@ -1,0 +1,168 @@
+/* Product-page hero: copy left, isometric board right. */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  border-bottom: 1px solid #f4f4f5;
+}
+
+.wash {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(70% 80% at 92% 48%, rgba(124, 58, 237, 0.1), transparent 58%),
+    radial-gradient(40% 50% at 8% 0%, rgba(124, 58, 237, 0.04), transparent 50%);
+}
+
+.inner {
+  position: relative;
+  display: grid;
+  gap: 28px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 24px 48px;
+}
+
+.copy {
+  max-width: 480px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  border: 1px solid #ddd6fe;
+  background: #f5f3ff;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6d28d9;
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7c3aed;
+}
+
+.headline {
+  margin: 18px 0 0;
+  font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+  font-weight: 720;
+  line-height: 1.14;
+  letter-spacing: -0.032em;
+  color: #09090b;
+}
+
+.sub {
+  margin: 14px 0 0;
+  max-width: 440px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #71717a;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 650;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.primary {
+  background: #18181b;
+  color: #fff !important;
+}
+
+.primary:hover {
+  background: #27272a;
+  transform: translateY(-1px);
+}
+
+.secondary {
+  background: #fff;
+  border: 1px solid #e4e4e7;
+  color: #27272a !important;
+}
+
+.secondary:hover {
+  border-color: #d4d4d8;
+}
+
+.checks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #52525b;
+}
+
+.visual {
+  position: relative;
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .inner {
+    grid-template-columns: minmax(380px, 460px) minmax(0, 1fr);
+    align-items: center;
+    gap: 24px 32px;
+    padding: 44px 32px 56px;
+  }
+
+  .copy {
+    position: relative;
+    z-index: 2;
+    max-width: none;
+    padding-bottom: 8px;
+  }
+
+  .visual {
+    /* Board stays native-sized, sits in perspective, clips at the section edge. */
+    margin-right: -4%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .inner {
+    padding: 48px 32px 64px;
+  }
+
+  .visual {
+    margin-right: -8%;
+  }
+}
+
+@media (max-width: 1023px) {
+  .checks {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+  }
+}

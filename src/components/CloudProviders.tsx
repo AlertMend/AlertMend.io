@@ -13,7 +13,7 @@ function ProviderBadge({ provider }: { provider: any }) {
   
   return (
     <div
-      className={`flex items-center gap-2 px-4 py-2 ${provider.bg} rounded-lg border border-gray-200 hover:border-purple-300 transition-all group`}
+      className={`flex items-center gap-2 px-4 py-2 ${provider.bg} rounded-lg border border-gray-200 hover:border-brand-300 transition-all group`}
     >
       {provider.logo && !imageError ? (
         <img 
@@ -31,7 +31,7 @@ function ProviderBadge({ provider }: { provider: any }) {
           <span className="text-xs font-bold text-gray-600">{provider.name.charAt(0)}</span>
         </div>
       )}
-      <span className="text-sm font-semibold text-purple-800">{provider.name}</span>
+      <span className="text-sm font-semibold text-brand-800">{provider.name}</span>
     </div>
   )
 }
@@ -70,8 +70,8 @@ export default function CloudProviders() {
       name: 'ECS', 
       logo: getLogoPath('ecs'), // ✓ Logo exists
       icon: Container,
-      color: 'text-purple-600', 
-      bg: 'bg-purple-50' 
+      color: 'text-brand-600', 
+      bg: 'bg-brand-50' 
     },
     { 
       name: 'VMs', 

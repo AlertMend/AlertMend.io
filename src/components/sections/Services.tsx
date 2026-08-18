@@ -239,7 +239,7 @@ export default function Services() {
             <b>runbook templates</b>, and <b>RCA prompts</b> tuned to the way that service actually
             breaks in production.
           </div>
-          <a href="#pricing" className="btn btn-ghost">
+          <a href="#cta" className="btn btn-ghost">
             Don't see your service? Tell us
             <Icon name="arrow" size={14} className="arrow" strokeWidth={2.5} />
           </a>

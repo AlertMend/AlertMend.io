@@ -92,11 +92,11 @@ export default function FAQ() {
   }
 
   return (
-    <section className="py-20 md:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white">
+    <section className="py-20 md:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-gray-900 via-brand-900 to-gray-900 text-white">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-800/30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-700/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-800/30 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-700/20 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-4xl mx-auto relative z-10">
@@ -110,28 +110,28 @@ export default function FAQ() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-purple-800/30 backdrop-blur-sm border border-purple-700/50 rounded-xl overflow-hidden transition-all duration-300 hover:border-purple-600/70 hover:shadow-lg"
+              className="bg-brand-800/30 backdrop-blur-sm border border-brand-700/50 rounded-xl overflow-hidden transition-all duration-300 hover:border-brand-600/70 hover:shadow-lg"
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full px-6 py-4 text-left flex items-center justify-between group focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                className="w-full px-6 py-4 text-left flex items-center justify-between group focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-gray-900"
                 aria-expanded={openIndex === index}
               >
-                <span className="text-base md:text-lg font-semibold text-white pr-4 group-hover:text-purple-200 transition-colors">
+                <span className="text-base md:text-lg font-semibold text-white pr-4 group-hover:text-brand-200 transition-colors">
                   {faq.question}
                 </span>
                 <div className="flex-shrink-0">
                   {openIndex === index ? (
-                    <ChevronUp className="h-5 w-5 text-purple-300 group-hover:text-purple-200 transition-colors" />
+                    <ChevronUp className="h-5 w-5 text-brand-300 group-hover:text-brand-200 transition-colors" />
                   ) : (
-                    <ChevronDown className="h-5 w-5 text-purple-400 group-hover:text-purple-300 transition-colors" />
+                    <ChevronDown className="h-5 w-5 text-brand-400 group-hover:text-brand-300 transition-colors" />
                   )}
                 </div>
               </button>
               
               {openIndex === index && (
-                <div className="px-6 pb-5 border-t border-purple-700/50">
-                  <p className="pt-4 text-purple-200 leading-relaxed text-sm md:text-base">
+                <div className="px-6 pb-5 border-t border-brand-700/50">
+                  <p className="pt-4 text-brand-200 leading-relaxed text-sm md:text-base">
                     {faq.answer}
                   </p>
                 </div>

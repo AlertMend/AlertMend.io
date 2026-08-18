@@ -1,4 +1,5 @@
 import SEO from '../../components/SEO'
+import LegacyDocShell from './LegacyDocShell'
 import { ensureUniqueMetaDescription } from '../../utils/descriptionUtils'
 
 export default function DatadogWebhookPage() {
@@ -6,21 +7,17 @@ export default function DatadogWebhookPage() {
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'documentation', 'datadog-webhook')
 
   return (
-    <div className="min-h-screen bg-white">
+    <LegacyDocShell title="Datadog webhook setup">
       <SEO
         title="AlertMend AI: Datadog Webhook Setup for Incident Automation"
         description={uniqueDescription}
         keywords="Datadog webhook, Datadog integration, custom webhook, AlertMend Datadog setup"
         canonical="/documentation/datadog-webhook"
       />
-      <main className="pt-24">
-        <section className="py-12 md:py-16 container-padding">
+<section className="py-12 md:py-16 container-padding">
           <div className="max-w-4xl mx-auto">
             <div className="mb-8">
-              <a href="/documentation" className="text-purple-600 hover:text-purple-800 text-sm font-medium mb-4 inline-block">
-                ← Back to Documentation
-              </a>
-              <h1 className="text-4xl md:text-5xl font-black text-purple-950 mb-4">
+<h1 className="text-4xl md:text-5xl font-black text-brand-900 mb-4">
                 How to Setup Custom Webhook with Datadog Monitors
               </h1>
               <p className="text-xl text-gray-600">
@@ -29,8 +26,8 @@ export default function DatadogWebhookPage() {
             </div>
 
             <div className="prose prose-lg max-w-none">
-              <div className="bg-purple-50 border-l-4 border-purple-600 p-6 mb-8 rounded-r-lg">
-                <h3 className="text-purple-950 font-bold mb-2">Prerequisites</h3>
+              <div className="bg-brand-50 border-l-4 border-brand-600 p-6 mb-8 rounded-r-lg">
+                <h3 className="text-brand-900 font-bold mb-2">Prerequisites</h3>
                 <ul className="text-gray-700 space-y-1">
                   <li>Datadog account with admin or appropriate permissions</li>
                   <li>AlertMend AI account with webhook endpoint configured</li>
@@ -38,7 +35,7 @@ export default function DatadogWebhookPage() {
                 </ul>
               </div>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 1: Get AlertMend Webhook URL</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 1: Get AlertMend Webhook URL</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Log in to AlertMend AI dashboard</li>
                 <li>Navigate to Settings → Integrations → Webhooks</li>
@@ -47,7 +44,7 @@ export default function DatadogWebhookPage() {
                 <li>Note the webhook secret/token if provided</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 2: Configure Datadog Monitor Notification</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 2: Configure Datadog Monitor Notification</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Log in to your Datadog account</li>
                 <li>Navigate to Monitors → Manage Monitors</li>
@@ -56,7 +53,7 @@ export default function DatadogWebhookPage() {
                 <li>Scroll to the "Say what's happening" section</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 3: Add Webhook Notification</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 3: Add Webhook Notification</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>In the monitor notification settings, click "Add notification"</li>
                 <li>Select "@webhook" from the notification options</li>
@@ -65,7 +62,7 @@ export default function DatadogWebhookPage() {
                 <li>Click "Test" to verify the connection</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 4: Configure Webhook Payload (Optional)</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 4: Configure Webhook Payload (Optional)</h2>
               <p className="text-gray-700 mb-4">
                 You can customize the webhook payload to include specific information:
               </p>
@@ -90,7 +87,7 @@ export default function DatadogWebhookPage() {
                 <li>Save the webhook configuration</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 5: Set Notification Conditions</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 5: Set Notification Conditions</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>In your monitor settings, configure when to send notifications:
                   <ul className="list-disc list-inside ml-6 mt-2 space-y-1">
@@ -104,7 +101,7 @@ export default function DatadogWebhookPage() {
                 <li>Save the monitor configuration</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Step 6: Test the Integration</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 6: Test the Integration</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Trigger a test alert in Datadog (or wait for a real alert)</li>
                 <li>Verify that the alert appears in AlertMend AI dashboard</li>
@@ -120,7 +117,7 @@ export default function DatadogWebhookPage() {
                 <li>Verify that AlertMend AI can trigger remediation workflows based on the alert</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Webhook Payload Format</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Webhook Payload Format</h2>
               <p className="text-gray-700 mb-4">
                 AlertMend AI expects webhook payloads in the following format:
               </p>
@@ -139,8 +136,8 @@ export default function DatadogWebhookPage() {
 }`}
               </pre>
 
-              <div className="bg-blue-50 border-l-4 border-blue-600 p-6 mt-8 rounded-r-lg">
-                <h3 className="text-blue-950 font-bold mb-2">💡 Best Practices</h3>
+              <div className="bg-violet-50 border-l-4 border-violet-600 p-6 mt-8 rounded-r-lg">
+                <h3 className="text-violet-950 font-bold mb-2">💡 Best Practices</h3>
                 <ul className="text-gray-700 space-y-1">
                   <li>Use different webhooks for different environments (dev, staging, prod)</li>
                   <li>Include relevant tags in the payload for better filtering in AlertMend AI</li>
@@ -163,8 +160,6 @@ export default function DatadogWebhookPage() {
             </div>
           </div>
         </section>
-      </main>
-    </div>
+    </LegacyDocShell>
   )
 }
-

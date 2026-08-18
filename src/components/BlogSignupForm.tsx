@@ -66,7 +66,7 @@ export default function BlogSignupForm({ blogTitle = '' }: BlogSignupFormProps) 
         onChange={(e) => setEmail(e.target.value)}
         disabled={isSubmitting}
         aria-label="Email address"
-        className="w-full px-4 py-2.5 rounded-md border border-zinc-300 bg-white text-zinc-900 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-violet-500 disabled:opacity-60 transition-colors"
+        className="w-full px-4 py-2.5 rounded-md border border-zinc-300 bg-white text-zinc-900 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 disabled:opacity-60 transition-colors"
       />
       <button
         type="submit"

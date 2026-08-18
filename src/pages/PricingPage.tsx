@@ -8,8 +8,7 @@ const DEMO_URL = 'https://calendly.com/hello-alertmend/30min'
 
 export default function PricingPage() {
   
-  // Generate unique meta description for pricing page
-  const baseDescription = "AlertMend AI: AIOps pricing for Kubernetes, VMs, and ECS. Automate incident resolution, cut costs, and achieve zero downtime. Explore plans now!"
+  const baseDescription = "AlertMend pricing for Kubernetes, VMs, and cloud ops. Observe, run AI RCA, and approve remediations. Compare plans and book a demo."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'pricing', 'pricing')
 
   const plans = [
@@ -18,39 +17,39 @@ export default function PricingPage() {
       label: 'Free',
       description: 'For individuals trying out the product',
       features: [
-        'Unlimited Remediation Flows',
+        'Unlimited RF · Remediation',
         'Unlimited integrations',
-        'AI-Generated RCA',
+        'AI RCA',
         'Support: Immediate',
       ],
       popular: false,
-      buttonText: 'Get Started',
+      buttonText: 'Start free',
     },
     {
       name: 'Startups',
       label: '',
       description: '',
       features: [
-        'Unlimited Remediation Flows',
+        'Unlimited RF · Remediation',
         'Unlimited integrations',
-        'AI-Generated RCA',
+        'AI RCA',
         'Support: Immediate',
       ],
       popular: false,
-      buttonText: 'Get Started',
+      buttonText: 'Book a demo',
     },
     {
       name: 'Growth',
       label: '',
       description: 'For >10 VMs or Kubernetes <100 pods',
       features: [
-        'Unlimited Remediation Flows',
+        'Unlimited RF · Remediation',
         'Unlimited integrations',
-        'AI-Generated RCA',
+        'AI RCA',
         'Support: Immediate',
       ],
       popular: true,
-      buttonText: 'Get Started',
+      buttonText: 'Book a demo',
     },
     {
       name: 'Enterprise/Custom',
@@ -58,9 +57,9 @@ export default function PricingPage() {
       description: '',
       features: [
         'Unlimited VMs & Kubernetes',
-        'Unlimited Remediation Flows',
+        'Unlimited RF · Remediation',
         'Unlimited integrations',
-        'AI-Generated RCA',
+        'AI RCA',
         'On premise setup',
         'Support: Immediate',
       ],
@@ -72,28 +71,28 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="AlertMend AI Pricing: Infrastructure Automation Plans in 2025"
+        title="AlertMend Pricing: Plans for production ops"
         description={uniqueDescription}
-        keywords="AlertMend pricing, AIOps pricing, infrastructure automation pricing, Kubernetes monitoring pricing, cost-effective AIOps"
+        keywords="AlertMend pricing, AIOps pricing, infrastructure automation pricing, Kubernetes monitoring pricing"
         canonical="/pricing"
         breadcrumbData={{
           items: [{ label: 'Pricing' }]
         }}
       />
-      <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-purple-50/30 via-white to-blue-50/30">
+      <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden hero-dark">
           <div className="max-w-7xl mx-auto">
             <div className="mb-8">
               <Breadcrumb items={[{ label: 'Pricing' }]} />
             </div>
             <div className="text-center mb-12 md:mb-16">
-              <div className="inline-block px-5 py-2 bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 rounded-full text-sm font-bold mb-8 shadow-md border border-purple-200/50">
-                Pricing Model
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-brand-500/10 border border-brand-400/30 text-brand-300 text-[11px] font-bold uppercase tracking-[0.16em] mb-6">
+                Choose your plan
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-purple-950 mb-6 leading-tight">
-                Pricing Model
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-900 mb-6 leading-tight">
+                Pricing
               </h1>
-              <p className="text-xl md:text-2xl text-purple-700 max-w-3xl mx-auto leading-relaxed mb-12">
-                45 Days Free Trial
+              <p className="text-xl md:text-2xl text-brand-700 max-w-3xl mx-auto leading-relaxed">
+                Free playground to start. Paid plans when you are ready for production.
               </p>
             </div>
 
@@ -101,56 +100,73 @@ export default function PricingPage() {
               {plans.map((plan, index) => (
                 <div
                   key={index}
-                  className={`relative flex flex-col h-full bg-white rounded-xl p-8 border-2 transition-all duration-300 hover:shadow-xl ${
+                  className={`flex flex-col h-full bg-white rounded-lg p-8 border-2 transition-shadow duration-300 hover:shadow-xl ${
                     plan.popular
-                      ? 'border-purple-400 shadow-xl lg:scale-105'
-                      : 'border-gray-200 shadow-lg hover:border-purple-200'
+                      ? 'border-brand-500 shadow-xl'
+                      : 'border-zinc-200 shadow-lg'
                   }`}
                 >
-                  {plan.popular && (
-                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                      <div className="bg-gradient-to-r from-purple-600 to-purple-500 text-white px-4 py-1 rounded-full text-xs font-bold shadow-lg">
-                        Recommended
-                      </div>
-                    </div>
-                  )}
-                  {/* Header block reserves consistent vertical slots for the
-                      label badge and description so titles + features lists
-                      align across cards whether or not those fields are
-                      populated.  The description slot is a *fixed* height
-                      (not min) sized for a 2-line wrap so an empty
-                      description and a 2-line description take the same
-                      vertical space. */}
+                  {/* From `md` up the cards sit side by side, so the badge row,
+                      title and description get reserved vertical slots and
+                      every feature list starts on the same baseline regardless
+                      of which fields a tier populates or whether its title
+                      wraps. The description slot is a *fixed* height (not min)
+                      so an empty and a 2-line description occupy the same
+                      space. Below `md` the cards are stacked, where reserving
+                      those slots would only add dead space, so the header
+                      flows at its natural height instead. */}
                   <div className="text-center mb-6">
-                    <div className="h-7 mb-3 flex items-center justify-center">
-                      {plan.label && (
-                        <span className="inline-block px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-bold border border-purple-200">
+                    <div
+                      className={`items-center justify-center ${
+                        plan.popular || plan.label
+                          ? 'flex h-7 mb-3'
+                          : 'hidden md:flex md:h-7 md:mb-3'
+                      }`}
+                    >
+                      {plan.popular ? (
+                        <span className="inline-block px-3 py-1 bg-brand-600 text-white rounded-full text-[11px] font-bold uppercase tracking-wider">
+                          Recommended
+                        </span>
+                      ) : plan.label ? (
+                        <span className="inline-block px-3 py-1 bg-brand-50 text-brand-700 rounded-full text-xs font-bold border border-brand-200">
                           {plan.label}
                         </span>
-                      )}
+                      ) : null}
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight">{plan.name}</h3>
-                    <p className="text-gray-600 text-sm font-medium h-[48px] flex items-center justify-center leading-tight">
+                    <h3 className="text-xl font-bold text-zinc-900 mb-3 leading-tight md:flex md:items-center md:justify-center md:min-h-[50px]">
+                      {plan.name}
+                    </h3>
+                    <p
+                      aria-hidden={plan.description ? undefined : true}
+                      className={`text-zinc-500 text-sm font-medium leading-tight md:flex md:items-center md:justify-center md:h-[48px] ${
+                        plan.description ? '' : 'hidden'
+                      }`}
+                    >
                       {plan.description || '\u00A0'}
                     </p>
                   </div>
                   <ul className="space-y-3 mb-8 flex-1">
                     {plan.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start gap-3">
-                        <Check className="h-5 w-5 text-purple-600 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-700 text-sm font-medium">{feature}</span>
+                        <Check className="h-5 w-5 text-brand-600 flex-shrink-0 mt-0.5" />
+                        <span className="text-zinc-700 text-sm font-medium">{feature}</span>
                       </li>
                     ))}
                   </ul>
+                  {/* `src/index.css` has `.hero-dark [class*="text-zinc-9"] { color: #fff }`
+                      at specificity (0,2,0), which outranks any single-class
+                      Tailwind color utility (0,1,0). Inside these white cards
+                      that would paint the label white on a near-white fill, so
+                      the label color needs the `!` modifier to survive. */}
                   <button
                     onClick={() => {
                       const url = plan.buttonText === 'Book a demo' ? DEMO_URL : SIGNUP_URL
                       window.open(url, '_blank', 'noopener,noreferrer')
                     }}
-                    className={`w-full mt-auto py-3 rounded-xl font-bold text-sm transition-all ${
+                    className={`w-full mt-auto py-3 rounded-lg font-bold text-sm transition-colors border ${
                       plan.popular
-                        ? 'bg-gradient-to-r from-purple-800 to-purple-900 !text-white hover:from-purple-900 hover:to-purple-950 shadow-lg hover:shadow-xl'
-                        : 'bg-gray-100 text-purple-900 hover:bg-gray-200 border border-gray-200'
+                        ? 'bg-brand-600 !text-white border-brand-600 hover:bg-brand-700 hover:border-brand-700 shadow-md'
+                        : 'bg-zinc-100 !text-zinc-900 border-zinc-300 hover:bg-zinc-200'
                     }`}
                   >
                     {plan.buttonText}

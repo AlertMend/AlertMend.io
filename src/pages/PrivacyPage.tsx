@@ -30,19 +30,19 @@ export default function PrivacyPage() {
           items: [{ label: 'Privacy Policy' }]
         }}
       />
-      <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-purple-50/30 via-white to-blue-50/30">
+      <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden hero-dark">
           <div className="max-w-5xl mx-auto">
             <div className="mb-8">
               <Breadcrumb items={[{ label: 'Privacy Policy' }]} />
             </div>
             <div className="text-center mb-12 md:mb-16">
-              <div className="inline-block px-5 py-2 bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 rounded-full text-sm font-bold mb-8 shadow-md border border-purple-200/50">
+              <div className="inline-block px-5 py-2 bg-gradient-to-r from-brand-50 to-brand-100 text-brand-700 rounded-full text-sm font-bold mb-8 shadow-md border border-brand-200/50">
                 Privacy
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-purple-950 mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-900 mb-6 leading-tight">
                 Privacy Policy
               </h1>
-              <p className="text-xl md:text-2xl text-purple-700 max-w-3xl mx-auto leading-relaxed mb-12">Your privacy is important to us</p>
+              <p className="text-xl md:text-2xl text-brand-700 max-w-3xl mx-auto leading-relaxed mb-12">Your privacy is important to us</p>
             </div>
 
             {!ENABLE_EMBED ? (
@@ -50,11 +50,11 @@ export default function PrivacyPage() {
                  "Published to web" - in that state the /preview and /pub
                  URLs both render Google's "This content is blocked" panel,
                  which looks broken. */
-              <div className="bg-white rounded-3xl p-10 md:p-14 border-2 border-purple-100 shadow-lg mb-8 text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-purple-50 text-purple-600 mb-6">
+              <div className="bg-white rounded-3xl p-10 md:p-14 border-2 border-brand-100 shadow-lg mb-8 text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-brand-50 text-brand-600 mb-6">
                   <FileText className="h-8 w-8" />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-purple-950 mb-3">
+                <h2 className="text-2xl md:text-3xl font-bold text-brand-900 mb-3">
                   Our Privacy Policy
                 </h2>
                 <p className="text-base md:text-lg text-gray-600 max-w-xl mx-auto mb-8 leading-relaxed">
@@ -65,7 +65,7 @@ export default function PrivacyPage() {
                   href={privacyPolicyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-800 to-purple-900 !text-white px-7 py-3.5 rounded-xl font-semibold hover:from-purple-900 hover:to-purple-950 transition-all shadow-lg hover:shadow-xl"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-800 to-brand-900 !text-white px-7 py-3.5 rounded-xl font-semibold hover:from-brand-900 hover:to-brand-900 transition-all shadow-lg hover:shadow-xl"
                   style={{ color: '#ffffff' }}
                 >
                   <span className="text-white">Read the Privacy Policy</span>
@@ -76,14 +76,14 @@ export default function PrivacyPage() {
               /* Embed (only renders when the doc has been published to web) */
               <div className="bg-white rounded-3xl p-6 md:p-8 border-2 border-gray-200 shadow-lg mb-8">
                 <div className="mb-5 flex items-center justify-between flex-wrap gap-3">
-                  <h2 className="text-xl md:text-2xl font-bold text-purple-950">
+                  <h2 className="text-xl md:text-2xl font-bold text-brand-900">
                     Our Privacy Policy
                   </h2>
                   <a
                     href={privacyPolicyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-semibold transition-colors text-sm"
+                    className="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 font-semibold transition-colors text-sm"
                   >
                     <span>Open in Google Docs</span>
                     <ExternalLink className="h-4 w-4" />
@@ -102,15 +102,18 @@ export default function PrivacyPage() {
 
             {/* Contact Information */}
             <div className="mt-8 text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-purple-50 text-purple-600 mb-3">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-50 text-brand-600 mb-3">
                 <Mail className="h-6 w-6" />
               </div>
-              <p className="text-purple-900 font-semibold mb-2">
+              <p className="text-brand-900 font-semibold mb-2">
                 Questions about our Privacy Policy?
               </p>
+              {/* Sits directly on the hero gradient: `body.alertmend-dark a
+                  { color: inherit }` (0,1,2) discards a plain utility, and
+                  brand-600 would still fail at ~3.4:1, so pin violet-300. */}
               <a
                 href="mailto:privacy@alertmend.io"
-                className="text-purple-600 hover:text-purple-700 font-semibold"
+                className="!text-violet-300 hover:!text-violet-200 font-semibold"
               >
                 privacy@alertmend.io
               </a>

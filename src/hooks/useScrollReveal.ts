@@ -31,11 +31,26 @@ export function useScrollReveal() {
 
   useEffect(() => {
     let io: IntersectionObserver | undefined;
-    const raf = requestAnimationFrame(() => {
+    let cancelled = false;
+
+    const attach = () => {
+      if (cancelled) return;
+      io?.disconnect();
       io = attachScrollReveal();
-    });
+    };
+
+    /* First paint + two follow-ups: product pages mount heavy sections
+       after the initial rAF, so a single pass can miss `.reveal` nodes and
+       leave them at opacity: 0 forever. */
+    const raf = requestAnimationFrame(attach);
+    const t1 = window.setTimeout(attach, 50);
+    const t2 = window.setTimeout(attach, 300);
+
     return () => {
+      cancelled = true;
       cancelAnimationFrame(raf);
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
       io?.disconnect();
     };
   }, [pathname]);

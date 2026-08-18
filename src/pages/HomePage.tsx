@@ -1,52 +1,38 @@
 import Hero from '../components/sections/Hero'
 import CustomerLogoStrip from '../components/sections/CustomerLogoStrip'
-import Pains from '../components/sections/Pains'
-import Features from '../components/sections/Features'
-import AISpotlight from '../components/sections/AISpotlight'
-import Services from '../components/sections/Services'
-import MLOps from '../components/sections/MLOps'
-import Runbooks from '../components/sections/Runbooks'
-import HowItWorks from '../components/sections/HowItWorks'
-import Integrations from '../components/sections/Integrations'
+import ProductList from '../components/sections/ProductList'
 import Outcomes from '../components/sections/Outcomes'
 import FinalCTA from '../components/sections/FinalCTA'
 import SEO from '../components/SEO'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
 
+/**
+ * Homepage — lean:
+ * hero → logos → product list → outcomes → CTA.
+ */
 export default function HomePage() {
   const baseDescription =
-    "AlertMend is AI-Powered Observability and Automation. AI-generated RCAs in ~15 seconds, on-call automation, FinOps for Kubernetes & AWS, and runbooks that fan out across your fleet."
+    'AI-powered observability and automation: metrics, logs and traces on one timeline via OpenTelemetry and eBPF, evidence-backed AI RCA, and approved remediation.'
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'home', 'homepage')
 
   return (
     <>
       <SEO
-        title="AlertMend: AI-Powered Observability and Automation for Kubernetes & AWS"
+        title="AlertMend: AI Observability & Automation for Kubernetes & AWS"
         description={uniqueDescription}
-        keywords="AIOps, Kubernetes, incident management, auto-remediation, SRE, DevOps, cloud-native, cost optimization, VM monitoring, ECS management, infrastructure automation, AI operations, Kubernetes monitoring, container orchestration, observability, GPU MLOps, runbooks, FinOps"
+        keywords="AIOps, observability, APM, distributed tracing, OpenTelemetry, eBPF, AI RCA, auto-remediation, FinOps, on-call, log management, Prometheus, Datadog, Grafana, Alertmanager"
         canonical="/"
         structuredData={{
           '@context': 'https://schema.org',
           '@type': 'SoftwareApplication',
-          name: 'AlertMend AI',
+          name: 'AlertMend',
           applicationCategory: 'DevOpsApplication',
-          operatingSystem: 'Kubernetes, Cloud, AWS, GCP, Azure',
-          offers: {
-            '@type': 'Offer',
-            price: '99',
-            priceCurrency: 'USD',
-          },
-          aggregateRating: {
-            '@type': 'AggregateRating',
-            ratingValue: '4.8',
-            ratingCount: '150',
-          },
-          description:
-            'AIOps platform for Kubernetes, VMs, and ECS that auto-detects, analyzes, and fixes incidents. Eliminate on-call firefighting and reduce costs by 50%.',
+          operatingSystem: 'Kubernetes, Cloud, Linux',
+          description: baseDescription,
           url: 'https://alertmend.io',
           provider: {
             '@type': 'Organization',
-            name: 'AlertMend AI',
+            name: 'AlertMend',
             url: 'https://alertmend.io',
             logo: 'https://alertmend.io/logos/alertmend-logo.svg',
             email: 'hello@alertmend.io',
@@ -56,14 +42,7 @@ export default function HomePage() {
       />
       <Hero />
       <CustomerLogoStrip />
-      <Pains />
-      <Features />
-      <AISpotlight />
-      <Services />
-      <MLOps />
-      <Runbooks />
-      <HowItWorks />
-      <Integrations />
+      <ProductList />
       <Outcomes />
       <FinalCTA />
     </>

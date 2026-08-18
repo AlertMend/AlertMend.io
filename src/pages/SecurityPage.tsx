@@ -23,36 +23,35 @@ export default function SecurityPage() {
     {
       icon: CheckCircle2,
       title: 'Compliance',
-      description: 'We maintain SOC 2 Type II, ISO 27001, and GDPR compliance certifications.',
+      description: 'SOC 2 Type II, ISO 27001, and GDPR alignment is in progress. Ask us about the current control set.',
     },
   ]
   
-  // Generate unique meta description for security page
-  const baseDescription = "AlertMend AI: Secure your infrastructure with our AIOps platform. Benefit from compliance certifications and advanced security. Protect your data."
+  const baseDescription = "AlertMend security for production ops: encryption, RBAC, audit logs, and compliance programs in progress for SOC 2 Type II, ISO 27001, and GDPR."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'security', 'security')
 
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="AlertMend AI: Cloud Security & Compliance Solutions"
+        title="AlertMend: Security & Compliance"
         description={uniqueDescription}
-        keywords="AlertMend security, enterprise security, SOC 2, ISO 27001, GDPR compliance, data encryption, infrastructure security, AIOps security"
+        keywords="AlertMend security, enterprise security, SOC 2, ISO 27001, GDPR compliance, data encryption, infrastructure security"
         canonical="/security"
       />
-      <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-purple-50/30 via-white to-blue-50/30">
+      <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden hero-dark">
           <div className="max-w-7xl mx-auto">
             <div className="mb-8">
               <Breadcrumb items={[{ label: 'Security' }]} />
             </div>
             <div className="text-center mb-12 md:mb-16">
-              <div className="inline-block px-5 py-2 bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 rounded-full text-sm font-bold mb-8 shadow-md border border-purple-200/50">
+              <div className="inline-block px-5 py-2 bg-gradient-to-r from-brand-50 to-brand-100 text-brand-700 rounded-full text-sm font-bold mb-8 shadow-md border border-brand-200/50">
                 Security
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-purple-950 mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-900 mb-6 leading-tight">
                 Security & Compliance
               </h1>
-              <p className="text-xl md:text-2xl text-purple-700 max-w-3xl mx-auto leading-relaxed mb-12">
-                Your infrastructure data is protected with enterprise-grade security measures and compliance certifications.
+              <p className="text-xl md:text-2xl text-brand-700 max-w-3xl mx-auto leading-relaxed mb-12">
+                Enterprise-grade controls for production data, with compliance certifications in progress.
               </p>
             </div>
 
@@ -62,24 +61,24 @@ export default function SecurityPage() {
                 return (
                   <div
                     key={index}
-                    className="bg-white rounded-3xl p-8 border-2 border-gray-200 hover:border-purple-400 hover:shadow-2xl transition-all duration-300 text-center"
+                    className="bg-white rounded-3xl p-8 border-2 border-gray-200 hover:border-brand-400 hover:shadow-2xl transition-all duration-300 text-center"
                   >
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-purple-50 text-purple-600 mb-6">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-brand-50 text-brand-600 mb-6">
                       <Icon className="h-8 w-8" />
                     </div>
-                    <h3 className="text-xl font-bold text-purple-950 mb-4">{feature.title}</h3>
-                    <p className="text-purple-700 font-medium">{feature.description}</p>
+                    <h3 className="text-xl font-bold text-brand-900 mb-4">{feature.title}</h3>
+                    <p className="text-brand-700 font-medium">{feature.description}</p>
                   </div>
                 )
               })}
             </div>
 
             <div className="bg-white rounded-3xl p-12 border-2 border-gray-200">
-              <h2 className="text-3xl font-bold text-purple-950 mb-6">Security Practices</h2>
+              <h2 className="text-3xl font-bold text-brand-900 mb-6">Security Practices</h2>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
-                  <h3 className="text-xl font-bold text-purple-950 mb-4">Infrastructure Security</h3>
-                  <ul className="space-y-2 text-purple-700">
+                  <h3 className="text-xl font-bold text-brand-900 mb-4">Infrastructure Security</h3>
+                  <ul className="space-y-2 text-brand-700">
                     <li>• Multi-factor authentication (MFA) required</li>
                     <li>• Regular security audits and penetration testing</li>
                     <li>• Automated vulnerability scanning</li>
@@ -87,8 +86,8 @@ export default function SecurityPage() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-purple-950 mb-4">Data Protection</h3>
-                  <ul className="space-y-2 text-purple-700">
+                  <h3 className="text-xl font-bold text-brand-900 mb-4">Data Protection</h3>
+                  <ul className="space-y-2 text-brand-700">
                     <li>• Data encryption at rest and in transit</li>
                     <li>• Regular automated backups</li>
                     <li>• Data retention policies</li>

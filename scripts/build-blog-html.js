@@ -811,7 +811,6 @@ markdownFiles.forEach(file => {
   <link rel="canonical" href="${canonicalUrl}">
   <!-- Favicon - uses SVG logo -->
   <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/logos/alertmend-logo.svg" />
   
   <!-- Open Graph -->
@@ -819,14 +818,14 @@ markdownFiles.forEach(file => {
   <meta property="og:url" content="${canonicalUrl}">
   <meta property="og:title" content="${shortenedTitle}">
   <meta property="og:description" content="${finalMetaDescription.replace(/"/g, '&quot;')}">
-  <meta property="og:image" content="https://alertmend.io/og-image.jpg">
+  <meta property="og:image" content="https://www.alertmend.io/og-image.jpg">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="${canonicalUrl}">
   <meta name="twitter:title" content="${shortenedTitle}">
   <meta name="twitter:description" content="${finalMetaDescription.replace(/"/g, '&quot;')}">
-  <meta name="twitter:image" content="https://alertmend.io/og-image.jpg">
+  <meta name="twitter:image" content="https://www.alertmend.io/og-image.jpg">
   
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -835,7 +834,7 @@ markdownFiles.forEach(file => {
     "@type": "BlogPosting",
     "headline": "${shortenedTitle}",
     "description": "${finalMetaDescription.replace(/"/g, '\\"')}",
-    "image": "https://alertmend.io/og-image.jpg",
+    "image": "https://www.alertmend.io/og-image.jpg",
     "datePublished": "${metadata.date || ''}",
     "dateModified": "${metadata.date || ''}",
     "author": {
@@ -1848,9 +1847,18 @@ const blogListingHTML = `<!DOCTYPE html>
   <meta name="keywords" content="AIOps blog, Kubernetes best practices, infrastructure automation, DevOps insights, SRE articles, cloud-native operations">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.alertmend.io/blog">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.alertmend.io/blog">
+  <meta property="og:title" content="AIOps &amp; Kubernetes: AlertMend AI's Insights &amp; Best Practices">
+  <meta property="og:description" content="AlertMend AI blog: Get expert insights on AIOps and Kubernetes. Learn best practices for autonomous infrastructure management.">
+  <meta property="og:image" content="https://www.alertmend.io/og-image.jpg">
+  <meta property="og:site_name" content="AlertMend AI">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AIOps &amp; Kubernetes: AlertMend AI's Insights &amp; Best Practices">
+  <meta name="twitter:description" content="AlertMend AI blog: Get expert insights on AIOps and Kubernetes. Learn best practices for autonomous infrastructure management.">
+  <meta name="twitter:image" content="https://www.alertmend.io/og-image.jpg">
   <!-- Favicon - uses SVG logo -->
   <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
   <link rel="apple-touch-icon" href="/logos/alertmend-logo.svg" />
   
   <!-- Tailwind CSS - using CDN for static HTML -->

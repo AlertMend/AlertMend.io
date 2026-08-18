@@ -1,0 +1,384 @@
+.shell {
+  min-height: 100vh;
+  background: #fff;
+  color: #18181b;
+}
+
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 56px;
+  padding: 0 20px;
+  border-bottom: 1px solid #e4e4e7;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+}
+
+.topLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.menuBtn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e4e4e7;
+  border-radius: 6px;
+  background: #fff;
+  color: #18181b;
+  cursor: pointer;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+/* Light docs header, so the mark keeps the brand purple (10.9:1 on white).
+   Set explicitly rather than inherited, or it would pick up the near-black
+   text color from `.brand`. */
+.logo {
+  display: block;
+  height: 22px;
+  width: auto;
+  color: #7c3aed;
+}
+
+.brandName {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #18181b;
+}
+
+.brandSep {
+  color: #d4d4d8;
+  font-size: 14px;
+}
+
+.docsLabel {
+  font-size: 13px;
+  font-weight: 650;
+  color: #52525b;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.docsLabel:hover {
+  background: #f4f4f5;
+  color: #18181b;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 480px;
+  height: 36px;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+  background: #fafafa;
+  padding: 0 10px 0 34px;
+}
+
+.searchHubBar {
+  max-width: 360px;
+}
+
+.search:focus-within {
+  border-color: #a1a1aa;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+}
+
+.searchIcon {
+  position: absolute;
+  left: 11px;
+  color: #a1a1aa;
+}
+
+.search input {
+  width: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-size: 13px;
+  color: #18181b;
+}
+
+.search input::placeholder {
+  color: #a1a1aa;
+}
+
+.kbd {
+  flex-shrink: 0;
+  margin-left: 8px;
+  padding: 2px 6px;
+  border: 1px solid #e4e4e7;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: #71717a;
+}
+
+.topRight {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.topLink {
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #52525b;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.topLink:hover {
+  background: #f4f4f5;
+  color: #18181b;
+}
+
+.topCta {
+  margin-left: 4px;
+  padding: 7px 14px;
+  border-radius: 7px;
+  background: #18181b;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.topCta:hover {
+  background: #27272a;
+}
+
+.hubMain {
+  min-width: 0;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 248px minmax(0, 1fr);
+  min-height: calc(100vh - 56px);
+}
+
+.sidebar {
+  position: sticky;
+  top: 56px;
+  align-self: start;
+  height: calc(100vh - 56px);
+  overflow: auto;
+  padding: 14px 12px 40px;
+  border-right: 1px solid #e4e4e7;
+  background: #fafafa;
+}
+
+.mobileTitle {
+  display: none;
+}
+
+.section {
+  margin-top: 20px;
+}
+
+.sectionTitle {
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #71717a;
+  margin: 0 0 6px;
+  padding: 0 10px;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link {
+  display: block;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.35;
+  color: #3f3f46;
+  text-decoration: none;
+}
+
+.link:hover {
+  background: #f4f4f5;
+  color: #18181b;
+}
+
+.linkActive {
+  background: #fff;
+  color: #18181b;
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px #e4e4e7;
+}
+
+.empty {
+  margin: 16px 8px;
+  font-size: 13px;
+  color: #71717a;
+}
+
+.main {
+  min-width: 0;
+  width: 100%;
+  padding: 28px 40px 64px;
+  max-width: none;
+}
+
+.backdrop {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .top {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 56px;
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .search {
+    order: 3;
+    flex: 1 1 100%;
+    max-width: none;
+  }
+
+  .searchHubBar {
+    max-width: none;
+  }
+
+  .kbd {
+    display: none;
+  }
+
+  .menuBtn {
+    display: inline-flex;
+  }
+
+  .brandName {
+    display: none;
+  }
+
+  .topLink {
+    display: none;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 60;
+    width: min(300px, 88vw);
+    height: 100vh;
+    transform: translateX(-105%);
+    transition: transform 0.18s ease;
+    box-shadow: 8px 0 24px rgba(24, 24, 27, 0.08);
+  }
+
+  .sidebarOpen {
+    transform: translateX(0);
+  }
+
+  .mobileTitle {
+    display: block;
+    margin-bottom: 12px;
+    padding: 0 8px 12px;
+    border-bottom: 1px solid #e4e4e7;
+    font-size: 12px;
+    font-weight: 650;
+    color: #71717a;
+  }
+
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    border: 0;
+    background: rgba(24, 24, 27, 0.4);
+    cursor: pointer;
+  }
+
+  .main {
+    padding: 20px 16px 56px;
+  }
+}
+
+/* Product links at the foot of every docs page. Docs skip the marketing
+   <Footer>, so without this ~50 documentation URLs have no internal link back
+   into the product. Kept deliberately quiet — a single row of text links, not
+   a second full footer competing with the docs nav. */
+.productFooter {
+  border-top: 1px solid var(--docs-border, #e4e4e7);
+  background: var(--docs-subtle, #fafafa);
+}
+
+.productFooterInner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 18px 24px 22px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 18px;
+}
+
+.productFooterLabel {
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #71717a;
+}
+
+.productFooterLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+
+.productFooterLinks a {
+  font-size: 13px;
+  color: #52525b;
+  text-decoration: none;
+}
+
+.productFooterLinks a:hover {
+  color: #18181b;
+  text-decoration: underline;
+}

@@ -1,7 +1,36 @@
 import { Link } from 'react-router-dom';
 import Brand from '../ui/Brand';
-import ComplianceLogo from '../ui/ComplianceLogo';
+import { HOME_PRODUCTS } from '../../data/homeProducts';
 import styles from './Footer.module.css';
+
+/* Same source of truth as the Platform nav menu, so the footer cannot drift
+   from the actual product set.
+
+   Tutorials / Webinars / Help / Community are listed here because they are
+   routed, prerendered and in the sitemap, but had no inbound internal link
+   anywhere on the site — crawlers could only reach them from sitemap.xml,
+   which passes no link equity and reads as an orphaned page. */
+const RESOURCES = [
+  { to: '/documentation', label: 'Documentation' },
+  { to: '/blog', label: 'Blog' },
+  { to: '/case-studies', label: 'Case studies' },
+  { to: '/tutorials', label: 'Tutorials' },
+  { to: '/webinars', label: 'Webinars' },
+  { to: '/help', label: 'Help center' },
+  { to: '/community', label: 'Community' },
+  { to: '/security', label: 'Security' },
+  { to: '/compliance', label: 'Compliance' },
+];
+
+const COMPANY = [
+  { to: '/about', label: 'About' },
+  { to: '/pricing', label: 'Pricing' },
+  { to: '/careers', label: 'Careers' },
+  { to: '/partners', label: 'Partners' },
+  { to: '/contact', label: 'Contact' },
+];
+
+const STANDARDS = ['SOC 2 Type II', 'ISO 27001', 'GDPR'];
 
 export default function Footer() {
   return (
@@ -9,10 +38,10 @@ export default function Footer() {
       <div className="container">
         <div className={styles.grid}>
           <div className={styles.brandCol}>
-            <Brand />
+            <Brand tone="light" />
             <p>
-              Production operations across your entire cloud. Connect inventory, observe
-              everything, automate the toil. AI-native. Works with your stack.
+              Production operations across your entire cloud. Observe everything, find
+              root cause, automate the fix.
             </p>
             <div className={styles.backedBy}>
               <span className={styles.backedByLabel}>Backed by</span>
@@ -34,80 +63,65 @@ export default function Footer() {
                 />
               </a>
             </div>
+
+            <div className={styles.compliance}>
+              <div className={styles.complianceHead}>
+                <span className={styles.complianceLabel}>Security &amp; compliance</span>
+                <Link to="/compliance" className={styles.complianceNote}>
+                  <span className={styles.complianceDot} aria-hidden />
+                  In progress
+                </Link>
+              </div>
+              <div className={styles.complianceList}>
+                {STANDARDS.map((name) => (
+                  <span key={name} className={styles.complianceChip}>
+                    {name}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
+
           <div className={styles.col}>
             <h5>Platform</h5>
             <ul>
-              <li><a href="/#features">Kubernetes monitoring</a></li>
-              <li><a href="/#ai">AI RCAs</a></li>
-              <li><a href="/#mlops">GPU &amp; MLOps</a></li>
-              <li><a href="/#features">On-call &amp; incidents</a></li>
-              <li><a href="/#runbooks">Runbooks</a></li>
-              <li><Link to="/log-management">Log management</Link></li>
-              <li><a href="/#features">FinOps</a></li>
+              {HOME_PRODUCTS.map((p) => (
+                <li key={p.id}>
+                  <Link to={p.to}>{p.name}</Link>
+                </li>
+              ))}
             </ul>
           </div>
+
           <div className={styles.col}>
             <h5>Resources</h5>
             <ul>
-              <li><Link to="/blog">Blog</Link></li>
-              <li><Link to="/case-studies">Case studies</Link></li>
-              <li><Link to="/documentation">Documentation</Link></li>
-              <li><a href="/#how">How it works</a></li>
-              <li><a href="/#integrations">Integrations</a></li>
+              {RESOURCES.map((l) => (
+                <li key={l.to}>
+                  <Link to={l.to}>{l.label}</Link>
+                </li>
+              ))}
             </ul>
           </div>
+
           <div className={styles.col}>
             <h5>Company</h5>
             <ul>
-              <li><Link to="/about">About</Link></li>
-              <li><Link to="/careers">Careers</Link></li>
-              <li><Link to="/contact">Contact</Link></li>
-              <li><Link to="/pricing">Pricing</Link></li>
-              <li><Link to="/privacy">Privacy</Link></li>
-              <li><Link to="/terms">Terms</Link></li>
+              {COMPANY.map((l) => (
+                <li key={l.to}>
+                  <Link to={l.to}>{l.label}</Link>
+                </li>
+              ))}
             </ul>
-          </div>
-        </div>
-        <div className={styles.compliance}>
-          <span className={styles.complianceLabel}>Security &amp; compliance</span>
-          <div className={styles.complianceList}>
-            <div className={styles.complianceBadge}>
-              <ComplianceLogo standard="soc2" size={32} className={styles.complianceLogo} />
-              <div className={styles.complianceText}>
-                <span className={styles.complianceName}>SOC 2 Type II</span>
-                <span className={styles.complianceStatus}>
-                  <span className={styles.complianceDot} aria-hidden />
-                  In progress
-                </span>
-              </div>
-            </div>
-            <div className={styles.complianceBadge}>
-              <ComplianceLogo standard="iso27001" size={32} className={styles.complianceLogo} />
-              <div className={styles.complianceText}>
-                <span className={styles.complianceName}>ISO 27001</span>
-                <span className={styles.complianceStatus}>
-                  <span className={styles.complianceDot} aria-hidden />
-                  In progress
-                </span>
-              </div>
-            </div>
-            <div className={styles.complianceBadge}>
-              <ComplianceLogo standard="gdpr" size={32} className={styles.complianceLogo} />
-              <div className={styles.complianceText}>
-                <span className={styles.complianceName}>GDPR</span>
-                <span className={styles.complianceStatus}>
-                  <span className={styles.complianceDot} aria-hidden />
-                  In progress
-                </span>
-              </div>
-            </div>
           </div>
         </div>
 
         <div className={styles.bottom}>
           <div>© {new Date().getFullYear()} AlertMend AI. All rights reserved.</div>
-          <div>Built for engineers who'd rather ship than babysit dashboards.</div>
+          <div className={styles.legal}>
+            <Link to="/privacy">Privacy</Link>
+            <Link to="/terms">Terms</Link>
+          </div>
         </div>
       </div>
     </footer>

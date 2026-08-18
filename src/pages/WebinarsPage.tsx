@@ -43,13 +43,13 @@ export default function WebinarsPage() {
         }}
       />
       <main className="pt-24">
-        <section className="py-20 md:py-32 container-padding bg-gradient-to-b from-white via-primary-50/30 to-white">
+        <section className="py-20 md:py-32 container-padding hero-dark">
           <div className="max-w-7xl mx-auto">
             <div className="mb-8">
               <Breadcrumb items={[{ label: 'Webinars' }]} />
             </div>
             <div className="text-center mb-20">
-              <div className="inline-block px-5 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 rounded-full text-sm font-bold mb-6 shadow-lg">
+              <div className="inline-block px-5 py-2 bg-gradient-to-r from-brand-50 to-brand-100 text-brand-700 rounded-full text-sm font-bold mb-6 shadow-lg">
                 Webinars
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6 leading-tight">
@@ -64,12 +64,12 @@ export default function WebinarsPage() {
               {webinars.map((webinar, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-3xl p-8 border-2 border-gray-200 hover:border-primary-400 hover:shadow-2xl transition-all duration-300"
+                  className="bg-white rounded-3xl p-8 border-2 border-gray-200 hover:border-brand-400 hover:shadow-2xl transition-all duration-300"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <div className={`px-3 py-1 rounded-lg text-xs font-bold ${
                       webinar.status === 'Upcoming' 
-                        ? 'bg-primary-100 text-primary-700' 
+                        ? 'bg-brand-100 text-brand-700' 
                         : 'bg-gray-100 text-gray-700'
                     }`}>
                       {webinar.status}
@@ -80,7 +80,7 @@ export default function WebinarsPage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2 mb-4">
-                    <Video className="h-6 w-6 text-primary-600" />
+                    <Video className="h-6 w-6 text-brand-600" />
                     <h3 className="text-xl font-black text-gray-900">{webinar.title}</h3>
                   </div>
                   <div className="flex items-center gap-2 text-gray-600 text-sm mb-6">
@@ -89,7 +89,7 @@ export default function WebinarsPage() {
                   </div>
                   <a
                     href="#"
-                    className="text-primary-600 hover:text-primary-700 font-bold text-sm flex items-center gap-2"
+                    className="text-brand-600 hover:text-brand-700 font-bold text-sm flex items-center gap-2"
                   >
                     {webinar.status === 'Upcoming' ? 'Register' : 'Watch Recording'}
                     <ArrowRight className="h-4 w-4" />

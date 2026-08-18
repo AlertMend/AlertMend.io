@@ -56,7 +56,7 @@ export default function MLOps() {
           <div className={styles.board}>
             <div className={styles.boardHead}>
               <div className={styles.boardTitleWrap}>
-                <span className={styles.boardIco} style={{ background: 'rgba(124,58,237,0.18)', color: '#d8b4fe' }}>
+                <span className={styles.boardIco} style={{ background: 'rgba(124, 58, 237,0.18)', color: '#c4b5fd' }}>
                   <Icon name="cpu" size={16} strokeWidth={2.2} />
                 </span>
                 <div>
@@ -115,7 +115,7 @@ export default function MLOps() {
           <div className={styles.board}>
             <div className={styles.boardHead}>
               <div className={styles.boardTitleWrap}>
-                <span className={styles.boardIco} style={{ background: 'rgba(124,58,237,0.18)', color: '#a5b4fc' }}>
+                <span className={styles.boardIco} style={{ background: 'rgba(124, 58, 237,0.18)', color: '#a5b4fc' }}>
                   <Icon name="trending" size={16} strokeWidth={2.2} />
                 </span>
                 <div>

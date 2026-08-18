@@ -91,7 +91,7 @@ export default function BlogPostDetailPage() {
         )}
         <div className="pt-32 pb-20 flex items-center justify-center">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-violet-600 mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-brand-600 mx-auto mb-4"></div>
             <p className="text-zinc-600">Loading post...</p>
           </div>
         </div>
@@ -107,7 +107,7 @@ export default function BlogPostDetailPage() {
             <h1 className="text-3xl font-bold text-zinc-950 mb-4">Post Not Found</h1>
             <button
               onClick={() => navigate('/blog')}
-              className="text-violet-600 hover:text-violet-700 underline"
+              className="text-brand-600 hover:text-brand-700 underline"
             >
               Return to Blog
             </button>
@@ -180,14 +180,14 @@ export default function BlogPostDetailPage() {
         description={metaDescription}
         keywords={post.keywords || `${post.category}, AlertMend AI, AIOps, Kubernetes, DevOps`}
         canonical={blogPostUrl}
-        ogImage="https://alertmend.io/og-image.jpg"
+        ogImage="https://www.alertmend.io/og-image.jpg"
         ogType="article"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "BlogPosting",
           "headline": seoTitle,
           "description": metaDescription,
-          "image": "https://alertmend.io/og-image.jpg",
+          "image": "https://www.alertmend.io/og-image.jpg",
           "datePublished": post.date,
           "dateModified": post.date,
           "author": structuredAuthor,
@@ -303,17 +303,17 @@ export default function BlogPostDetailPage() {
                             ul: ({ node, ...props }) => <ul className="list-disc mb-6 space-y-3 text-zinc-700 ml-6 text-lg leading-7" {...props} />,
                             ol: ({ node, ...props }) => <ol className="list-decimal mb-6 space-y-3 text-zinc-700 ml-6 text-lg leading-7" {...props} />,
                             li: ({ node, ...props }) => <li className="text-zinc-700 leading-7" {...props} />,
-                            blockquote: ({ node, ...props }) => <blockquote className="border-l-2 border-violet-500 bg-violet-50/40 pl-5 pr-4 py-2 italic text-zinc-700 my-8 text-lg leading-7 rounded-r-md" {...props} />,
+                            blockquote: ({ node, ...props }) => <blockquote className="border-l-2 border-brand-500 bg-brand-50/40 pl-5 pr-4 py-2 italic text-zinc-700 my-8 text-lg leading-7 rounded-r-md" {...props} />,
                             code: ({ node, className, children, ...props }: any) => {
                               const isInline = !className
                               return isInline ? (
-                                <code className="bg-violet-50 text-violet-700 border border-violet-100 px-1.5 py-0.5 rounded text-[0.92em] font-mono" {...props}>{children}</code>
+                                <code className="bg-brand-50 text-brand-700 border border-brand-100 px-1.5 py-0.5 rounded text-[0.92em] font-mono" {...props}>{children}</code>
                               ) : (
                                 <code className={className} {...props}>{children}</code>
                               )
                             },
                             pre: ({ node, ...props }) => <pre className="bg-zinc-950 text-zinc-100 p-5 rounded-lg overflow-x-auto my-6 text-sm leading-6" {...props} />,
-                            a: ({ node, ...props }) => <a className="text-violet-600 hover:text-violet-700 underline underline-offset-2" {...props} />,
+                            a: ({ node, ...props }) => <a className="text-brand-600 hover:text-brand-700 underline underline-offset-2" {...props} />,
                             strong: ({ node, ...props }) => <strong className="font-bold text-zinc-950" {...props} />,
                             em: ({ node, ...props }) => <em className="italic text-zinc-700" {...props} />,
                             hr: ({ node, ...props }) => <hr className="my-8 border-zinc-200" {...props} />,
@@ -332,13 +332,13 @@ export default function BlogPostDetailPage() {
 
                     <div className="mt-12 pt-8 border-t border-zinc-200">
                       <p className="text-zinc-700 text-lg leading-7 mb-3">
-                        Ready to eliminate manual firefighting and achieve autonomous infrastructure operations?
+                        Ready to go from signal to root cause to an approved fix?
                       </p>
                       <p className="text-zinc-700 text-lg leading-7 mb-6">
-                        See how AlertMend AI can help you reduce costs by 50%, achieve zero downtime, and automate incident remediation across Kubernetes, VMs, and ECS.{' '}
+                        See how AlertMend unifies observability, runs evidence-backed AI RCA, and remediates only after approval — across Kubernetes, VMs, and cloud.{' '}
                         <button
                           onClick={() => window.open('https://calendly.com/hello-alertmend/30min', '_blank')}
-                          className="text-violet-600 hover:text-violet-700 font-semibold underline underline-offset-2 inline-flex items-center gap-1"
+                          className="text-brand-600 hover:text-brand-700 font-semibold underline underline-offset-2 inline-flex items-center gap-1"
                         >
                           Book a demo.
                           <ArrowRight className="h-4 w-4" />
@@ -387,13 +387,13 @@ export default function BlogPostDetailPage() {
                          <h3 className="text-2xl font-bold text-zinc-950 mb-2">
                            Arvind Rajpurohit
                          </h3>
-                         <p className="text-violet-600 font-semibold mb-4">Co-Founder &amp; CEO</p>
+                         <p className="text-brand-600 font-semibold mb-4">Co-Founder &amp; CEO</p>
                          <div className="text-zinc-700 leading-7 space-y-4 mb-4">
                            <p>
                              Arvind Rajpurohit - 15+ years in Kubernetes and infrastructure automation. Former DevOps Lead at Roambee and Customer Success Engineer at Shoreline.io (acquired by NVIDIA). Helped teams reach 99.97% uptime, reduce costs by 50%, and cut manual work by 90%.
                            </p>
                            <p>
-                             As CEO of AlertMend AI, building autonomous infrastructure where AI predicts, fixes, and learns.
+                             As CEO of AlertMend, building production ops where AI explains incidents and teams approve the fix.
                            </p>
                          </div>
                          {/* LinkedIn Icon */}
@@ -401,7 +401,7 @@ export default function BlogPostDetailPage() {
                            href="https://www.linkedin.com/in/arvind-rajpurohit-4a332523/"
                            target="_blank"
                            rel="noopener noreferrer"
-                           className="inline-flex items-center text-zinc-500 hover:text-violet-600 transition-colors"
+                           className="inline-flex items-center text-zinc-500 hover:text-brand-600 transition-colors"
                          >
                            <Linkedin className="h-5 w-5" />
                          </a>
@@ -441,7 +441,7 @@ export default function BlogPostDetailPage() {
                                   }
                                 }
                               }}
-                              className="text-left text-zinc-700 hover:text-violet-600 text-sm leading-relaxed cursor-pointer block transition-colors"
+                              className="text-left text-zinc-700 hover:text-brand-600 text-sm leading-relaxed cursor-pointer block transition-colors"
                             >
                               {relatedPost.title}
                             </a>
@@ -458,7 +458,7 @@ export default function BlogPostDetailPage() {
                             navigate('/blog')
                           }
                         }}
-                        className="mt-4 text-violet-600 hover:text-violet-700 text-sm font-semibold flex items-center gap-1 cursor-pointer"
+                        className="mt-4 text-brand-600 hover:text-brand-700 text-sm font-semibold flex items-center gap-1 cursor-pointer"
                       >
                         View all posts
                         <ArrowRight className="h-4 w-4" />
@@ -471,28 +471,28 @@ export default function BlogPostDetailPage() {
                     <h3 className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.12em] mb-4">Explore AlertMend</h3>
                     <ul className="space-y-2 text-sm">
                       <li>
-                        <a href="/" className="text-zinc-700 hover:text-violet-600 transition-colors">Home</a>
+                        <a href="/" className="text-zinc-700 hover:text-brand-600 transition-colors">Home</a>
                       </li>
                       <li>
-                        <a href="/auto-remediation" className="text-zinc-700 hover:text-violet-600 transition-colors">Automated Incident Remediation</a>
+                        <a href="/auto-remediation" className="text-zinc-700 hover:text-brand-600 transition-colors">Automated Incident Remediation</a>
                       </li>
                       <li>
-                        <a href="/kubernetes-management" className="text-zinc-700 hover:text-violet-600 transition-colors">Kubernetes Management</a>
+                        <a href="/kubernetes-management" className="text-zinc-700 hover:text-brand-600 transition-colors">Kubernetes Management</a>
                       </li>
                       <li>
-                        <a href="/on-call-management" className="text-zinc-700 hover:text-violet-600 transition-colors">On-Call Management</a>
+                        <a href="/on-call-management" className="text-zinc-700 hover:text-brand-600 transition-colors">On-Call Management</a>
                       </li>
                       <li>
-                        <a href="/kubernetes-cost-optimization" className="text-zinc-700 hover:text-violet-600 transition-colors">Cost Optimization</a>
+                        <a href="/kubernetes-cost-optimization" className="text-zinc-700 hover:text-brand-600 transition-colors">Cost Optimization</a>
                       </li>
                       <li>
-                        <a href="/case-studies" className="text-zinc-700 hover:text-violet-600 transition-colors">Case Studies</a>
+                        <a href="/case-studies" className="text-zinc-700 hover:text-brand-600 transition-colors">Case Studies</a>
                       </li>
                       <li>
-                        <a href="/pricing" className="text-zinc-700 hover:text-violet-600 transition-colors">Pricing</a>
+                        <a href="/pricing" className="text-zinc-700 hover:text-brand-600 transition-colors">Pricing</a>
                       </li>
                       <li>
-                        <a href="/blog" className="text-zinc-700 hover:text-violet-600 transition-colors">All Blog Posts</a>
+                        <a href="/blog" className="text-zinc-700 hover:text-brand-600 transition-colors">All Blog Posts</a>
                       </li>
                     </ul>
                   </div>

@@ -46,20 +46,20 @@ export default function CareersPage() {
           items: [{ label: 'Careers' }]
         }}
       />
-      <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-gradient-to-br from-purple-50/30 via-white to-blue-50/30">
+      <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden hero-dark">
           <div className="max-w-7xl mx-auto">
             <div className="mb-8">
               <Breadcrumb items={[{ label: 'Careers' }]} />
             </div>
             <div className="text-center mb-12 md:mb-16">
-              <div className="inline-block px-5 py-2 bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 rounded-full text-sm font-bold mb-8 shadow-md border border-purple-200/50">
+              <div className="inline-block px-5 py-2 bg-gradient-to-r from-brand-50 to-brand-100 text-brand-700 rounded-full text-sm font-bold mb-8 shadow-md border border-brand-200/50">
                 Careers
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-purple-950 mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-900 mb-6 leading-tight">
                 Join Our Team
               </h1>
-              <p className="text-xl md:text-2xl text-purple-700 max-w-3xl mx-auto leading-relaxed mb-12">
-                Help us build the future of autonomous infrastructure management. We're looking for talented individuals who share our passion for AIOps and reliability.
+              <p className="text-xl md:text-2xl text-brand-700 max-w-3xl mx-auto leading-relaxed mb-12">
+                Help us build production ops software: observe everything, find root cause, and approve the fix. We're looking for people who care about reliability and clear evidence.
               </p>
             </div>
 
@@ -67,11 +67,11 @@ export default function CareersPage() {
               {jobs.map((job, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-3xl p-8 border-2 border-gray-200 hover:border-primary-400 hover:shadow-2xl transition-all duration-300"
+                  className="bg-white rounded-3xl p-8 border-2 border-gray-200 hover:border-brand-400 hover:shadow-2xl transition-all duration-300"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div>
-                      <h3 className="text-2xl font-bold text-purple-950 mb-2">{job.title}</h3>
+                      <h3 className="text-2xl font-bold text-brand-900 mb-2">{job.title}</h3>
                       <div className="flex items-center gap-4 text-sm text-gray-600">
                         <div className="flex items-center gap-1">
                           <MapPin className="h-4 w-4" />
@@ -83,13 +83,13 @@ export default function CareersPage() {
                         </div>
                       </div>
                     </div>
-                    <div className="px-3 py-1 bg-primary-50 text-primary-700 rounded-lg text-xs font-bold">
+                    <div className="px-3 py-1 bg-brand-50 text-brand-700 rounded-lg text-xs font-bold">
                       {job.department}
                     </div>
                   </div>
                   <a
                     href="#"
-                    className="text-primary-600 hover:text-primary-700 font-bold text-sm flex items-center gap-2"
+                    className="text-brand-600 hover:text-brand-700 font-bold text-sm flex items-center gap-2"
                   >
                     View Details
                     <ArrowRight className="h-4 w-4" />
@@ -98,14 +98,14 @@ export default function CareersPage() {
               ))}
             </div>
 
-            <div className="text-center bg-purple-50 rounded-3xl p-12 border-2 border-purple-200">
-              <h2 className="text-3xl font-bold text-purple-950 mb-4">Don't see a role that fits?</h2>
-              <p className="text-purple-700 mb-6 font-medium">
+            <div className="text-center bg-brand-50 rounded-3xl p-12 border-2 border-brand-200">
+              <h2 className="text-3xl font-bold text-brand-900 mb-4">Don't see a role that fits?</h2>
+              <p className="text-brand-700 mb-6 font-medium">
                 We're always looking for talented people. Send us your resume and we'll keep you in mind for future opportunities.
               </p>
               <a
                 href="mailto:careers@alertmend.io"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-800 to-purple-900 !text-white px-8 py-4 rounded-xl font-semibold hover:from-purple-900 hover:to-purple-950 transition-all shadow-lg hover:shadow-xl"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-800 to-brand-900 !text-white px-8 py-4 rounded-xl font-semibold hover:from-brand-900 hover:to-brand-900 transition-all shadow-lg hover:shadow-xl"
               >
                 <span className="text-white">Send Resume</span>
                 <ArrowRight className="h-5 w-5 text-white" />

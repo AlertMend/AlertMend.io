@@ -1,4 +1,5 @@
 import SEO from '../../components/SEO'
+import LegacyDocShell from './LegacyDocShell'
 import { ensureUniqueMetaDescription } from '../../utils/descriptionUtils'
 
 export default function AlertMendVMActionsPage() {
@@ -6,21 +7,17 @@ export default function AlertMendVMActionsPage() {
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'documentation', 'alertmend-vm-actions')
 
   return (
-    <div className="min-h-screen bg-white">
+    <LegacyDocShell title="VM predefined actions">
       <SEO
         title="AlertMend AI: Automate VM Remediation Actions in 2025"
         description={uniqueDescription}
         keywords="AlertMend VM, VM actions, virtual machine remediation, VM automation, pre-defined actions"
         canonical="/documentation/alertmend-vm-actions"
       />
-      <main className="pt-24">
-        <section className="py-12 md:py-16 container-padding">
+<section className="py-12 md:py-16 container-padding">
           <div className="max-w-4xl mx-auto">
             <div className="mb-8">
-              <a href="/documentation" className="text-purple-600 hover:text-purple-800 text-sm font-medium mb-4 inline-block">
-                ← Back to Documentation
-              </a>
-              <h1 className="text-4xl md:text-5xl font-black text-purple-950 mb-4">
+<h1 className="text-4xl md:text-5xl font-black text-brand-900 mb-4">
                 Pre-Defined Actions Using AlertMend VM
               </h1>
               <p className="text-xl text-gray-600">
@@ -29,17 +26,17 @@ export default function AlertMendVMActionsPage() {
             </div>
 
             <div className="prose prose-lg max-w-none">
-              <div className="bg-purple-50 border-l-4 border-purple-600 p-6 mb-8 rounded-r-lg">
-                <h3 className="text-purple-950 font-bold mb-2">Overview</h3>
+              <div className="bg-brand-50 border-l-4 border-brand-600 p-6 mb-8 rounded-r-lg">
+                <h3 className="text-brand-900 font-bold mb-2">Overview</h3>
                 <p className="text-gray-700">
                   AlertMend VM provides a comprehensive set of pre-defined actions for automated virtual machine 
                   remediation. These actions can be triggered automatically based on alerts or manually through the dashboard.
                 </p>
               </div>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Resource Management Actions</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Resource Management Actions</h2>
               
-              <h3 className="text-xl font-bold text-purple-900 mt-6 mb-3">CPU Management</h3>
+              <h3 className="text-xl font-bold text-brand-900 mt-6 mb-3">CPU Management</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-700">
                 <li><strong>Scale Up CPU:</strong> Increase CPU allocation when usage exceeds threshold</li>
                 <li><strong>Scale Down CPU:</strong> Reduce CPU allocation during low usage periods</li>
@@ -47,7 +44,7 @@ export default function AlertMendVMActionsPage() {
                 <li><strong>Migrate to Higher CPU Instance:</strong> Move VM to instance with more CPU resources</li>
               </ul>
 
-              <h3 className="text-xl font-bold text-purple-900 mt-6 mb-3">Memory Management</h3>
+              <h3 className="text-xl font-bold text-brand-900 mt-6 mb-3">Memory Management</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-700">
                 <li><strong>Increase Memory:</strong> Add more RAM when memory usage is high</li>
                 <li><strong>Clear Memory Cache:</strong> Free up memory by clearing system caches</li>
@@ -55,7 +52,7 @@ export default function AlertMendVMActionsPage() {
                 <li><strong>Migrate to Higher Memory Instance:</strong> Move VM to instance with more RAM</li>
               </ul>
 
-              <h3 className="text-xl font-bold text-purple-900 mt-6 mb-3">Disk Management</h3>
+              <h3 className="text-xl font-bold text-brand-900 mt-6 mb-3">Disk Management</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-700">
                 <li><strong>Expand Disk:</strong> Increase disk size when storage is low</li>
                 <li><strong>Clean Up Disk Space:</strong> Remove temporary files and logs</li>
@@ -63,9 +60,9 @@ export default function AlertMendVMActionsPage() {
                 <li><strong>Add Additional Disk:</strong> Attach new disk volume to VM</li>
               </ul>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Service Management Actions</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Service Management Actions</h2>
               
-              <h3 className="text-xl font-bold text-purple-900 mt-6 mb-3">Service Operations</h3>
+              <h3 className="text-xl font-bold text-brand-900 mt-6 mb-3">Service Operations</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-700">
                 <li><strong>Restart Service:</strong> Restart a specific service that has failed</li>
                 <li><strong>Start Service:</strong> Start a stopped service</li>
@@ -73,7 +70,7 @@ export default function AlertMendVMActionsPage() {
                 <li><strong>Reload Service Configuration:</strong> Reload service config without full restart</li>
               </ul>
 
-              <h3 className="text-xl font-bold text-purple-900 mt-6 mb-3">Application Management</h3>
+              <h3 className="text-xl font-bold text-brand-900 mt-6 mb-3">Application Management</h3>
               <ul className="list-disc list-inside space-y-2 text-gray-700">
                 <li><strong>Restart Application:</strong> Restart application processes</li>
                 <li><strong>Clear Application Cache:</strong> Clear application-level caches</li>
@@ -81,7 +78,7 @@ export default function AlertMendVMActionsPage() {
                 <li><strong>Deploy Hotfix:</strong> Deploy emergency fixes automatically</li>
               </ul>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Network Management Actions</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Network Management Actions</h2>
               <ul className="list-disc list-inside space-y-2 text-gray-700">
                 <li><strong>Restart Network Interface:</strong> Restart network adapter</li>
                 <li><strong>Flush DNS Cache:</strong> Clear DNS resolver cache</li>
@@ -89,7 +86,7 @@ export default function AlertMendVMActionsPage() {
                 <li><strong>Change Network Route:</strong> Update routing tables</li>
               </ul>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">VM Lifecycle Actions</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">VM Lifecycle Actions</h2>
               <ul className="list-disc list-inside space-y-2 text-gray-700">
                 <li><strong>Reboot VM:</strong> Gracefully reboot the virtual machine</li>
                 <li><strong>Shutdown VM:</strong> Gracefully shutdown the VM</li>
@@ -98,7 +95,7 @@ export default function AlertMendVMActionsPage() {
                 <li><strong>Restore from Snapshot:</strong> Restore VM to previous state</li>
               </ul>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Security Actions</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Security Actions</h2>
               <ul className="list-disc list-inside space-y-2 text-gray-700">
                 <li><strong>Block IP Address:</strong> Block malicious IP addresses</li>
                 <li><strong>Update Firewall Rules:</strong> Modify firewall configurations</li>
@@ -106,9 +103,9 @@ export default function AlertMendVMActionsPage() {
                 <li><strong>Apply Security Patches:</strong> Install critical security updates</li>
               </ul>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Using Pre-Defined Actions</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Using Pre-Defined Actions</h2>
               
-              <h3 className="text-xl font-bold text-purple-900 mt-6 mb-3">Method 1: Automatic Remediation</h3>
+              <h3 className="text-xl font-bold text-brand-900 mt-6 mb-3">Method 1: Automatic Remediation</h3>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Create a remediation workflow in AlertMend AI</li>
                 <li>Define trigger conditions (e.g., CPU &gt; 90% for 5 minutes)</li>
@@ -118,7 +115,7 @@ export default function AlertMendVMActionsPage() {
                 <li>Save and activate the workflow</li>
               </ol>
 
-              <h3 className="text-xl font-bold text-purple-900 mt-6 mb-3">Method 2: Manual Execution</h3>
+              <h3 className="text-xl font-bold text-brand-900 mt-6 mb-3">Method 2: Manual Execution</h3>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Navigate to VMs → Select VM → Actions</li>
                 <li>Choose the desired pre-defined action</li>
@@ -127,7 +124,7 @@ export default function AlertMendVMActionsPage() {
                 <li>Monitor action progress and results</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-purple-950 mt-8 mb-4">Action Parameters</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Action Parameters</h2>
               <p className="text-gray-700 mb-4">
                 Most actions support configurable parameters:
               </p>
@@ -139,8 +136,8 @@ export default function AlertMendVMActionsPage() {
                 <li><strong>Dry Run:</strong> Test action without making actual changes</li>
               </ul>
 
-              <div className="bg-blue-50 border-l-4 border-blue-600 p-6 mt-8 rounded-r-lg">
-                <h3 className="text-blue-950 font-bold mb-2">💡 Best Practices</h3>
+              <div className="bg-violet-50 border-l-4 border-violet-600 p-6 mt-8 rounded-r-lg">
+                <h3 className="text-violet-950 font-bold mb-2">💡 Best Practices</h3>
                 <ul className="text-gray-700 space-y-1">
                   <li>Always test actions in a non-production environment first</li>
                   <li>Use dry-run mode to preview action effects</li>
@@ -153,8 +150,6 @@ export default function AlertMendVMActionsPage() {
             </div>
           </div>
         </section>
-      </main>
-    </div>
+    </LegacyDocShell>
   )
 }
-

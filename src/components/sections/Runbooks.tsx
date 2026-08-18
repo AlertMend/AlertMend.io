@@ -31,7 +31,7 @@ const nodes: Node[] = [
   {
     kind: undefined,
     position: { left: '28%', top: '130px' },
-    ico: { name: 'cmdline', bg: 'rgba(124,58,237,0.16)', fg: '#6366f1' },
+    ico: { name: 'cmdline', bg: 'rgba(124, 58, 237,0.16)', fg: '#6366f1' },
     label: 'Command',
     title: 'Run pod diagnostic',
     sub: 'kubectl describe + logs · last 5m',
@@ -48,7 +48,7 @@ const nodes: Node[] = [
   {
     kind: 'approval',
     position: { left: '76%', top: '40px' },
-    ico: { name: 'check-thick', bg: 'rgba(124,58,237,0.18)', fg: '#7c3aed' },
+    ico: { name: 'check-thick', bg: 'rgba(124, 58, 237,0.18)', fg: '#7c3aed' },
     label: 'Approval · Slack',
     title: 'Approve restart',
     sub: '@oncall · 5 min timeout',
@@ -66,7 +66,7 @@ const nodes: Node[] = [
   {
     kind: 'remediate',
     position: { left: '28%', top: '320px' },
-    ico: { name: 'rotate', bg: 'rgba(124,58,237,0.18)', fg: '#7c3aed' },
+    ico: { name: 'rotate', bg: 'rgba(124, 58, 237,0.18)', fg: '#7c3aed' },
     label: 'Remediation',
     title: 'Rollout restart',
     sub: 'Fan out · all pods · label tier=api',

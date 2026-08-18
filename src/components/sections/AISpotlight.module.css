@@ -583,7 +583,7 @@
 :global(.reveal.visible) .evBox .evLine3 { animation-delay: 3.0s; }
 :global(.reveal.visible) .evBox .evLine4 { animation-delay: 3.5s; }
 
-/* Source chips flip from pending purple-grey → done green in lockstep with
+/* Source chips flip from pending brand-grey → done green in lockstep with
    each evidence line landing. The dot blooms with a green halo on the way
    in for a moment of "ack received" feedback. */
 :global(.reveal.visible) .evChip1,
@@ -704,4 +704,86 @@
     animation: none !important;
   }
   .statusDot { animation: none; }
+}
+
+/* ---------- Static RCA report card (replaces the captured video) ---------- */
+.rcaCard {
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background:
+    radial-gradient(90% 70% at 85% 0%, rgba(124, 58, 237, 0.16), transparent 60%),
+    linear-gradient(180deg, #101a2e 0%, #0b1322 100%);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 30px 60px -35px rgba(0, 0, 0, 0.6);
+}
+.rcaTop { display: flex; align-items: center; justify-content: space-between; }
+.rcaBrand {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 12.5px; font-weight: 700; color: #c4b5fd;
+}
+.rcaSev {
+  font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+  color: #fca5a5; background: rgba(248, 113, 113, 0.12);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  padding: 3px 9px; border-radius: 999px;
+}
+.rcaIncident {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;
+}
+.rcaMono {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: rgba(230, 232, 236, 0.55);
+}
+.rcaConf {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; color: rgba(230, 232, 236, 0.6);
+}
+.rcaConf b { color: #34d399; font-weight: 700; }
+.rcaConfBar {
+  width: 74px; height: 5px; border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08); overflow: hidden; display: inline-block;
+}
+.rcaConfFill {
+  display: block; width: 94%; height: 100%;
+  background: linear-gradient(90deg, #059669, #34d399); border-radius: 3px;
+}
+.rcaBlock, .rcaConclusion { display: flex; flex-direction: column; gap: 8px; }
+.rcaLabel {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(230, 232, 236, 0.45);
+}
+.rcaBlock p, .rcaConclusion p {
+  font-size: 13px; line-height: 1.55; color: rgba(230, 232, 236, 0.78); margin: 0;
+}
+.rcaBlock p b, .rcaConclusion p b { color: #fff; font-weight: 600; }
+.rcaEvidence { display: flex; flex-direction: column; gap: 6px; }
+.rcaRow { display: flex; align-items: baseline; gap: 9px; }
+.rcaChip {
+  flex-shrink: 0; width: 52px; text-align: center;
+  font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600;
+  color: #c4b5fd; background: rgba(124, 58, 237, 0.14);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  padding: 2px 0; border-radius: 4px;
+}
+.rcaLine {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: rgba(230, 232, 236, 0.66); line-height: 1.5;
+}
+.rcaConclusion {
+  border-radius: 10px;
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  background: rgba(5, 150, 105, 0.08);
+  padding: 13px 14px;
+}
+.rcaActions { display: flex; gap: 8px; margin-top: 4px; }
+.rcaBtnPrimary, .rcaBtnGhost {
+  font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 8px;
+}
+.rcaBtnPrimary { background: #7c3aed; color: #fff; }
+.rcaBtnGhost {
+  color: rgba(230, 232, 236, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }

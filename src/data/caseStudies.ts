@@ -79,7 +79,7 @@ export const caseStudiesData = [
       { metric: '25h', label: 'Engineering hours saved', icon: Clock, color: 'text-blue-600' },
       { metric: '$2K', label: 'Engineer cost saving', icon: DollarSign, color: 'text-green-600' },
       { metric: '$3K', label: 'Revenue saved', icon: DollarSign, color: 'text-green-600' },
-      { metric: '99%', label: 'Application uptime', icon: CheckCircle2, color: 'text-purple-600' },
+      { metric: '99%', label: 'Application uptime', icon: CheckCircle2, color: 'text-brand-600' },
     ],
     testimonial: {
       quote: 'AlertMend streamlined our incident management. Faster resolutions, less manual work, and a more focused team. Peace of mind is invaluable.',
@@ -123,7 +123,7 @@ export const caseStudiesData = [
       { metric: '50%', label: 'Reduction in GKE costs', icon: DollarSign, color: 'text-green-600' },
       { metric: '41%', label: 'Compute cost savings', icon: DollarSign, color: 'text-green-600' },
       { metric: '94%', label: 'Storage cost savings', icon: DollarSign, color: 'text-green-600' },
-      { metric: '0%', label: 'Performance regression', icon: Activity, color: 'text-purple-600' },
+      { metric: '0%', label: 'Performance regression', icon: Activity, color: 'text-brand-600' },
     ],
     costBreakdown: {
       before: { compute: '$719.42/mo', storage: '$407.66/mo' },
@@ -135,7 +135,7 @@ export const caseStudiesData = [
       role: 'Founder and CEO of WareFlex',
     },
     category: 'Cost Optimization',
-    categoryColor: 'bg-purple-100 text-purple-700',
+    categoryColor: 'bg-brand-100 text-brand-700',
   },
   {
     company: 'Decklar',
@@ -172,7 +172,7 @@ export const caseStudiesData = [
     results: [
       { metric: '3,000+', label: 'Pods managed in one dashboard', icon: Activity, color: 'text-blue-600' },
       { metric: '70%', label: 'Reduction in investigation time', icon: Clock, color: 'text-green-600' },
-      { metric: '15-20h', label: 'Saved per week in manual debugging', icon: TrendingDown, color: 'text-purple-600' },
+      { metric: '15-20h', label: 'Saved per week in manual debugging', icon: TrendingDown, color: 'text-brand-600' },
     ],
     testimonial: {
       quote: 'AlertMend became our control tower for Kubernetes. It gave our team instant visibility, pinpointed root causes, and saved hours of manual debugging every week. Managing 3,000+ pods doesn\'t feel chaotic anymore - we finally have clarity and control.',
@@ -215,7 +215,7 @@ export const caseStudiesData = [
     results: [
       { metric: '90%+', label: 'Service failures auto-remediated', icon: Zap, color: 'text-green-600' },
       { metric: '100%', label: 'Recovery of previously stuck VMs', icon: CheckCircle2, color: 'text-blue-600' },
-      { metric: '0', label: 'Overnight alerts for known failures', icon: Activity, color: 'text-purple-600' },
+      { metric: '0', label: 'Overnight alerts for known failures', icon: Activity, color: 'text-brand-600' },
     ],
     testimonial: {
       quote: 'The automation we required was provided by AlertMend. 90% of our recurring service issues are now resolved by it, and it even automatically recovers stuck virtual machines (VMs) while communicating with our team through Slack. It\'s similar to having a backup SRE available at all times.',

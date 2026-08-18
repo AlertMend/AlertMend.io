@@ -1,0 +1,83 @@
+/* Neutralize old marketing brand-* / rounded callouts inside docs chrome. */
+.legacy :global(section) {
+  padding: 0 !important;
+}
+
+.legacy :global(.container-padding) {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.legacy :global(.max-w-4xl) {
+  max-width: none !important;
+}
+
+.legacy :global(h1) {
+  font-size: 1.65rem !important;
+  font-weight: 650 !important;
+  letter-spacing: -0.02em !important;
+  color: #18181b !important;
+  margin-bottom: 8px !important;
+}
+
+.legacy :global(h2) {
+  font-size: 1.05rem !important;
+  font-weight: 650 !important;
+  color: #18181b !important;
+  margin-top: 28px !important;
+  margin-bottom: 8px !important;
+}
+
+.legacy :global(h3) {
+  font-size: 0.95rem !important;
+  font-weight: 650 !important;
+  color: #18181b !important;
+}
+
+.legacy :global(p),
+.legacy :global(li) {
+  font-size: 14.5px !important;
+  line-height: 1.6 !important;
+  color: #3f3f46 !important;
+}
+
+.legacy :global(.text-xl) {
+  font-size: 14.5px !important;
+  color: #52525b !important;
+}
+
+.legacy :global([class*='rounded']),
+.legacy :global([class*='rounded-']) {
+  border-radius: 0 !important;
+}
+
+.legacy :global([class*='bg-brand']),
+.legacy :global([class*='bg-blue']),
+.legacy :global([class*='bg-yellow']),
+.legacy :global([class*='bg-green']) {
+  background: #fafafa !important;
+  border-color: #e4e4e7 !important;
+}
+
+.legacy :global([class*='border-brand']),
+.legacy :global([class*='border-blue']),
+.legacy :global([class*='border-yellow']),
+.legacy :global([class*='border-green']) {
+  border-left-color: #52525b !important;
+}
+
+.legacy :global([class*='text-brand']) {
+  color: #18181b !important;
+}
+
+.legacy :global(pre),
+.legacy :global(code) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+}
+
+.legacy :global(pre) {
+  background: #18181b !important;
+  color: #e4e4e7 !important;
+  border: 1px solid #27272a !important;
+  border-radius: 0 !important;
+}

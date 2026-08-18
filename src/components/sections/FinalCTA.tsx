@@ -6,7 +6,7 @@ const CALENDLY_URL = 'https://calendly.com/hello-alertmend/30min';
 
 export default function FinalCTA() {
   return (
-    <section id="pricing" className="tight">
+    <section id="cta" className="tight">
       <div className={`container reveal`}>
         <div className={styles.final}>
           <span className="sec-tag">Free infrastructure health check</span>
@@ -45,7 +45,7 @@ export default function FinalCTA() {
               <Icon name="check" size={14} strokeWidth={2.5} /> No tool replacement required
             </span>
             <span>
-              <Icon name="check" size={14} strokeWidth={2.5} /> SOC-style RBAC &amp; audit
+              <Icon name="check" size={14} strokeWidth={2.5} /> RBAC &amp; audit trail
             </span>
           </div>
         </div>
