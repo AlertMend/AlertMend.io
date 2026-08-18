@@ -568,6 +568,68 @@ function FinOpsMock() {
   )
 }
 
+function MlopsMock() {
+  const gpus = [
+    { node: 'h100-node-01', util: 96, mem: '78 GB' },
+    { node: 'h100-node-02', util: 91, mem: '74 GB' },
+    { node: 'a100-node-07', util: 62, mem: '38 GB' },
+    { node: 'a100-node-09', util: 12, mem: '6 GB' },
+  ]
+  const jobs = [
+    { name: 'llm-finetune-7b', sev: 'ok', note: 'step 8,420 · loss 1.83' },
+    { name: 'embeddings-batch', sev: 'ok', note: 'throughput 12k/s' },
+    { name: 'vision-train-v3', sev: 'warn', note: 'GPU stall · dataloader' },
+    { name: 'rlhf-reward', sev: 'bad', note: 'OOM · HBM exhausted' },
+  ] as const
+  return (
+    <Console title="GPU & MLOps" meta="h100-fleet · prod · last 15m">
+      <div className={styles.kpis}>
+        <div><span>GPU util</span><b>84%</b><small>24 GPUs</small></div>
+        <div><span>HBM used</span><b className={styles.warn}>71%</b><small>fleet avg</small></div>
+        <div><span>Training jobs</span><b>9</b><small>2 queued</small></div>
+        <div><span>Idle GPUs</span><b className={styles.ok}>3</b><small>reclaimable</small></div>
+      </div>
+
+      <div className={styles.finMain}>
+        <div className={styles.panel}>
+          <div className={styles.panelHead}>
+            <span>GPU utilization by node</span>
+            <em>util · HBM</em>
+          </div>
+          {gpus.map((g) => (
+            <div key={g.node} className={styles.tx}>
+              <div className={styles.txMain}>
+                <strong>{g.node}</strong>
+                <div className={styles.bar}><i style={{ width: `${g.util}%` }} /></div>
+              </div>
+              <span>{g.mem}</span>
+              <b className={g.util >= 90 ? styles.warn : g.util < 20 ? styles.muted : styles.ok}>{g.util}%</b>
+            </div>
+          ))}
+        </div>
+
+        <div className={styles.panel}>
+          <div className={styles.panelHead}>
+            <span>Pipeline health</span>
+            <em>training + inference</em>
+          </div>
+          {jobs.map((j) => (
+            <div key={j.name} className={styles.tx}>
+              <div className={styles.txMain}>
+                <strong>{j.name}</strong>
+                <span className={styles.muted}>{j.note}</span>
+              </div>
+              <b className={j.sev === 'bad' ? styles.bad : j.sev === 'warn' ? styles.warn : styles.ok}>
+                {j.sev === 'bad' ? 'failed' : j.sev === 'warn' ? 'degraded' : 'healthy'}
+              </b>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Console>
+  )
+}
+
 const MEDIA: Record<string, Media> = {
   k8s: { node: <K8sMock /> },
   obs: { node: <ObsMock /> },
@@ -576,6 +638,7 @@ const MEDIA: Record<string, Media> = {
   fix: { node: <RfMock /> },
   oncall: { node: <OnCallMock /> },
   finops: { node: <FinOpsMock /> },
+  mlops: { node: <MlopsMock /> },
 }
 
 export default function ProductList() {
@@ -595,7 +658,8 @@ export default function ProductList() {
   }, [paused])
 
   const product = HOME_PRODUCTS.find((p) => p.id === active) ?? HOME_PRODUCTS[0]
-  const media = MEDIA[product.id]
+  // Fall back to a real mock so a product without its own preview never crashes.
+  const media = MEDIA[product.id] ?? MEDIA.obs
   const idx = String(HOME_PRODUCTS.findIndex((p) => p.id === product.id) + 1).padStart(2, '0')
 
   return (
