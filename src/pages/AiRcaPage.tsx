@@ -2,80 +2,13 @@ import {
   Brain, GitPullRequest, ShieldCheck, Sparkles, Search, FileText,
   MessageSquare, Link2,
 } from 'lucide-react'
-import SolutionPageTemplate, {
-  Accent,
-  ConsoleFrame,
-} from '../components/SolutionPageTemplate'
+import SolutionPageTemplate, { Accent } from '../components/SolutionPageTemplate'
 
 /**
  * /ai-rca, evidence-backed root cause with citations, BYOM, PR fix.
  */
 
 const SIGNUP_URL = 'https://app.alertmend.io/signup?service=ai-rca'
-
-function RcaConsole() {
-  const evidence = [
-    { kind: 'trace', label: 'db.query', detail: '498ms · 5xx · pool wait' },
-    { kind: 'log', label: 'payments-api', detail: 'connection pool exhausted' },
-    { kind: 'change', label: 'deploy v2.31.4', detail: 'pool max unchanged' },
-    { kind: 'metric', label: 'checkout p99', detail: '812ms · ↑ 4.1×' },
-  ]
-  return (
-    <ConsoleFrame title="AI RCA · INC-08421 · payments">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <div className="text-[10px] font-semibold uppercase tracking-wide text-white/40">
-            Root cause
-          </div>
-          <div className="mt-1 text-[15px] font-semibold leading-snug text-white">
-            db.query saturated the pool after deploy v2.31.4
-          </div>
-        </div>
-        <div className="shrink-0 rounded-md border border-rose-400/30 bg-rose-500/10 px-2.5 py-1 text-center">
-          <div className="text-[10px] font-semibold uppercase tracking-wide text-rose-300/80">
-            Confidence
-          </div>
-          <div className="text-lg font-bold tabular-nums text-rose-200">94%</div>
-        </div>
-      </div>
-
-      <div className="mt-3 grid grid-cols-2 gap-2">
-        {evidence.map((e) => (
-          <div
-            key={e.kind}
-            className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-2.5 py-2"
-          >
-            <div className="text-[10px] font-semibold uppercase tracking-wide text-violet-300/80">
-              {e.kind}
-            </div>
-            <div className="mt-0.5 font-mono text-[11px] font-semibold text-white">{e.label}</div>
-            <div className="font-mono text-[10px] text-white/45">{e.detail}</div>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-3 rounded-lg border border-violet-400/25 bg-violet-500/10 px-3 py-2.5">
-        <div className="text-[11px] font-semibold text-violet-200">Suggested remediation</div>
-        <ol className="mt-1.5 space-y-1 text-[12px] text-zinc-200">
-          <li>1. Scale db pool 20 → 50</li>
-          <li>2. Restart payments-api (surge 25%)</li>
-          <li>3. Verify p99 &lt; 300ms · 5m</li>
-        </ol>
-        <div className="mt-2.5 flex flex-wrap gap-1.5">
-          <span className="rounded-md bg-white px-2.5 py-1 text-[10px] font-bold text-zinc-950">
-            Generate PR
-          </span>
-          <span className="rounded-md border border-white/20 px-2.5 py-1 text-[10px] font-bold text-white/85">
-            Run runbook
-          </span>
-          <span className="rounded-md border border-white/15 px-2.5 py-1 text-[10px] font-medium text-white/55">
-            Post to Slack
-          </span>
-        </div>
-      </div>
-    </ConsoleFrame>
-  )
-}
 
 function SpotlightPanel() {
   return (
@@ -126,7 +59,7 @@ export default function AiRcaPage() {
       sub="Typical incidents land near ~15 seconds. Complex ones take longer. Every report cites the traces, logs, metrics and events it used, then offers a PR or approved runbook."
       signupUrl={SIGNUP_URL}
       checks={['Evidence citations', 'BYOM for regulated stacks', 'Approval-gated fixes']}
-      console={<RcaConsole />}
+      highlightProduct="rca"
       stepsHeading="From alert to root cause, with receipts"
       stepsSub="Collect the signals, correlate them on one timeline, then write a narrative a human can trust."
       steps={[

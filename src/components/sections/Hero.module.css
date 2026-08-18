@@ -36,6 +36,7 @@
   gap: 10px;
   justify-content: center;
   margin-top: 22px;
+  margin-bottom: 8px;
   flex-wrap: wrap;
 }
 
@@ -75,6 +76,20 @@
 
 .ctaSecondary:hover {
   background: #faf5ff;
+  transform: translateY(-1px);
+}
+
+.stageHome {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 36px;
+}
+
+.tileFocus {
+  border-color: rgba(124, 58, 237, 0.42) !important;
+  box-shadow:
+    0 0 0 3px rgba(124, 58, 237, 0.1),
+    0 14px 32px -18px rgba(124, 58, 237, 0.38) !important;
   transform: translateY(-1px);
 }
 
@@ -147,12 +162,11 @@
 
 .railLogo {
   display: block;
-  width: 20px;
   height: 20px;
+  width: auto;
   margin-bottom: 4px;
-  object-fit: contain;
-  /* Keep mark readable on the dark rail */
-  filter: brightness(0) invert(1);
+  /* Violet-300 clears 9.7:1 on the dark rail and keeps the mark on-brand. */
+  color: #c4b5fd;
 }
 
 .railItem {
@@ -213,12 +227,13 @@
   border-right: 1px solid rgba(24, 24, 27, 0.08);
 }
 
+/* The mock's own chrome is a light bar, so the mark stays near-black here to
+   match the app UI it is imitating. */
 .topLogo {
   display: block;
-  width: 18px;
   height: 18px;
-  object-fit: contain;
-  filter: brightness(0);
+  width: auto;
+  color: #18181b;
 }
 
 .topBrandName {
@@ -313,6 +328,28 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
   padding: 10px;
+  align-items: stretch;
+}
+
+.boardOverview > .tile {
+  min-height: 152px;
+}
+
+.appCompact .workspace {
+  min-height: 0;
+}
+
+.boardCompact {
+  grid-template-rows: auto auto auto;
+}
+
+.boardCompact .kpi {
+  min-height: 48px;
+  padding: 8px 10px 7px;
+}
+
+.boardCompact .kpi strong {
+  font-size: 16px;
 }
 
 .kpiRow {
@@ -410,6 +447,32 @@
 .band > .tile {
   height: 100%;
   min-height: 0;
+}
+
+/* Homepage overview: stack Logs→On-call and RF→FinOps so tall tiles
+   don't leave empty stretch gaps beside shorter ones. */
+.bottomCols {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.bottomCol {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  min-height: 100%;
+}
+
+.bottomCol > .tile {
+  flex: none;
+}
+
+.bottomCol > .tile:last-child {
+  flex: 1 1 auto;
 }
 
 .tileRca {
@@ -1009,6 +1072,251 @@
 .finopsLegend i { background: #d4d4d8; }
 .finopsLegend b { background: #7c3aed; }
 
+/* Product-page focused boards — same chrome, denser product-specific layout */
+.tileSpan3 {
+  grid-column: span 3;
+}
+
+.hexMapLg {
+  gap: 3px;
+  padding: 8px 0 4px;
+}
+
+.hexLg {
+  width: 12px;
+  height: 13px;
+}
+
+.hexOffLg {
+  margin-left: 8px;
+}
+
+.incidentList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.incident {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 7px 8px;
+  border-radius: 7px;
+  border: 1px solid rgba(24, 24, 27, 0.07);
+  background: #fafafa;
+}
+
+.incidentBody {
+  min-width: 0;
+  flex: 1;
+}
+
+.incidentBody strong {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #18181b;
+  letter-spacing: -0.015em;
+}
+
+.incidentBody span {
+  display: block;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 9.5px;
+  color: #a1a1aa;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sev {
+  flex: none;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+.sevCrit {
+  color: #e11d48;
+  background: #fff1f2;
+}
+
+.sevWarn {
+  color: #b45309;
+  background: #fffbeb;
+}
+
+.rcaChip {
+  flex: none;
+  padding: 2px 6px;
+  border-radius: 5px;
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #7c3aed;
+  background: #f5f3ff;
+  border: 1px solid rgba(124, 58, 237, 0.16);
+  white-space: nowrap;
+}
+
+.nodeStrip {
+  display: flex;
+  gap: 3px;
+  height: 22px;
+}
+
+.nodeStrip i {
+  flex: 1;
+  min-width: 0;
+  border-radius: 3px;
+  background: #6ee7b7;
+}
+
+.nodeWarn {
+  background: #fbbf24 !important;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px;
+  color: #52525b;
+}
+
+.field i {
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: #a78bfa;
+}
+
+.evidence {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.evidence li {
+  font-size: 11px;
+  line-height: 1.4;
+  color: #3f3f46;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: #fafafa;
+  border: 1px solid rgba(24, 24, 27, 0.05);
+}
+
+.evidence li b {
+  font-weight: 700;
+  color: #18181b;
+}
+
+.clock {
+  display: inline-block;
+  width: 28px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 700;
+  color: #7c3aed;
+}
+
+.nsList {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.nsHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px;
+  color: #52525b;
+}
+
+.yamlBlock {
+  margin: 0;
+  padding: 9px 10px;
+  border-radius: 7px;
+  background: #fafafa;
+  border: 1px solid rgba(24, 24, 27, 0.06);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px;
+  line-height: 1.55;
+  color: #3f3f46;
+  overflow: hidden;
+}
+
+.yamlDel {
+  color: #e11d48;
+}
+
+.yamlAdd {
+  color: #059669;
+}
+
+.hotPaths {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hotPath {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hotPathHead {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px;
+}
+
+.hotPathHead span {
+  color: #52525b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hotPathHead em {
+  font-style: normal;
+  color: #a1a1aa;
+}
+
+.hotBar {
+  height: 5px;
+  border-radius: 999px;
+  background: #f4f4f5;
+  overflow: hidden;
+}
+
+.hotBar i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7c3aed, #a78bfa);
+}
+
 @media (max-width: 920px) {
   .topBrandName {
     display: none;
@@ -1020,7 +1328,13 @@
   .tileWide {
     grid-column: span 2;
   }
+  .tileSpan3 {
+    grid-column: span 2;
+  }
   .band {
+    grid-template-columns: 1fr;
+  }
+  .bottomCols {
     grid-template-columns: 1fr;
   }
   .logHead,
@@ -1057,6 +1371,12 @@
   }
   .tileWide {
     grid-column: span 1;
+  }
+  .tileSpan3 {
+    grid-column: span 1;
+  }
+  .bottomCols {
+    grid-template-columns: 1fr;
   }
   .costRow {
     grid-template-columns: 1fr 1fr;

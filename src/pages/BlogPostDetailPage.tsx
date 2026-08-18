@@ -332,10 +332,10 @@ export default function BlogPostDetailPage() {
 
                     <div className="mt-12 pt-8 border-t border-zinc-200">
                       <p className="text-zinc-700 text-lg leading-7 mb-3">
-                        Ready to eliminate manual firefighting and achieve autonomous infrastructure operations?
+                        Ready to go from signal to root cause to an approved fix?
                       </p>
                       <p className="text-zinc-700 text-lg leading-7 mb-6">
-                        See how AlertMend AI can help you reduce costs by 50%, achieve zero downtime, and automate incident remediation across Kubernetes, VMs, and ECS.{' '}
+                        See how AlertMend unifies observability, runs evidence-backed AI RCA, and remediates only after approval — across Kubernetes, VMs, and cloud.{' '}
                         <button
                           onClick={() => window.open('https://calendly.com/hello-alertmend/30min', '_blank')}
                           className="text-brand-600 hover:text-brand-700 font-semibold underline underline-offset-2 inline-flex items-center gap-1"
@@ -393,7 +393,7 @@ export default function BlogPostDetailPage() {
                              Arvind Rajpurohit - 15+ years in Kubernetes and infrastructure automation. Former DevOps Lead at Roambee and Customer Success Engineer at Shoreline.io (acquired by NVIDIA). Helped teams reach 99.97% uptime, reduce costs by 50%, and cut manual work by 90%.
                            </p>
                            <p>
-                             As CEO of AlertMend AI, building autonomous infrastructure where AI predicts, fixes, and learns.
+                             As CEO of AlertMend, building production ops where AI explains incidents and teams approve the fix.
                            </p>
                          </div>
                          {/* LinkedIn Icon */}

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate, useParams } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
 import AmbientBackground from './components/layout/AmbientBackground'
 import AnnounceBar from './components/layout/AnnounceBar'
@@ -9,11 +9,11 @@ import { useScrollReveal } from './hooks/useScrollReveal'
 import HomePage from './pages/HomePage'
 import CaseStudiesPage from './pages/CaseStudiesPage'
 import CaseStudyDetailPage from './pages/CaseStudyDetailPage'
-import SolutionDetailPage from './pages/SolutionDetailPage'
 import KubernetesManagementPage from './pages/KubernetesManagementPage'
 import OnCallManagementPage from './pages/OnCallManagementPage'
 import KubernetesCostOptimizationPage from './pages/KubernetesCostOptimizationPage'
 import LogManagementPage from './pages/LogManagementPage'
+import GpuMlopsPage from './pages/GpuMlopsPage'
 import ObservabilityPage from './pages/ObservabilityPage'
 import AiRcaPage from './pages/AiRcaPage'
 import AutoRemediationPage from './pages/AutoRemediationPage'
@@ -44,6 +44,7 @@ import CommunityPage from './pages/CommunityPage'
 import TutorialsPage from './pages/TutorialsPage'
 import WebinarsPage from './pages/WebinarsPage'
 import NotFoundPage from './pages/NotFoundPage'
+import LEGACY_SOLUTION_REDIRECTS from './data/legacySolutionRedirects.json'
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
@@ -82,6 +83,22 @@ function ScrollToTop() {
   return null
 }
 
+/** Old /solutions/:id marketing stack → current product routes.
+ *
+ *  Shared with vercel.json, which is regenerated from this same file by
+ *  scripts/sync-vercel-solution-redirects.mjs. Vercel resolves its redirects
+ *  before the SPA loads, so in production that layer wins; this route is the
+ *  client-side equivalent for in-app navigation and `npm run dev`. Keeping one
+ *  source of truth is what stops the two from drifting apart.
+ *
+ *  Unknown slugs deliberately fall through to NotFoundPage rather than
+ *  redirecting to `/` — a permanent redirect to the homepage is a soft 404. */
+function LegacySolutionRedirect() {
+  const { id = '' } = useParams<{ id: string }>()
+  const destination = (LEGACY_SOLUTION_REDIRECTS as Record<string, string>)[id]
+  return destination ? <Navigate to={destination} replace /> : <NotFoundPage />
+}
+
 function App() {
   const { pathname } = useLocation()
   const isDocs = pathname.startsWith('/documentation')
@@ -108,7 +125,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/case-studies" element={<CaseStudiesPage />} />
           <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
-          <Route path="/solutions/:id" element={<SolutionDetailPage />} />
+          <Route path="/solutions/:id" element={<LegacySolutionRedirect />} />
           <Route path="/integrations/:slug" element={<IntegrationDetailPage />} />
           <Route path="/auto-remediation" element={<AutoRemediationPage />} />
           <Route path="/kubernetes-management" element={<KubernetesManagementPage />} />
@@ -117,6 +134,7 @@ function App() {
           <Route path="/observability" element={<ObservabilityPage />} />
           <Route path="/ai-rca" element={<AiRcaPage />} />
           <Route path="/log-management" element={<LogManagementPage />} />
+          <Route path="/gpu-mlops" element={<GpuMlopsPage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/documentation" element={<DocumentationPage />} />
           {allGeneratedDocPaths().map((path) => {

@@ -1,0 +1,12 @@
+{
+  "ai-monitoring": "/kubernetes-management",
+  "ai-monitoring-and-observability": "/observability",
+  "ai-rca": "/ai-rca",
+  "auto-remediation": "/auto-remediation",
+  "cost-optimization": "/kubernetes-cost-optimization",
+  "kubernetes-cost-optimization": "/kubernetes-cost-optimization",
+  "kubernetes-management": "/kubernetes-management",
+  "log-management": "/log-management",
+  "observability": "/observability",
+  "on-call-management": "/on-call-management"
+}

@@ -4,7 +4,6 @@ import {
 } from 'lucide-react'
 import SolutionPageTemplate, {
   Accent,
-  ConsoleFrame,
 } from '../components/SolutionPageTemplate'
 
 /**
@@ -14,66 +13,6 @@ import SolutionPageTemplate, {
  */
 
 const SIGNUP_URL = 'https://app.alertmend.io/signup?service=cost-optimization'
-
-/* FinOps console: namespace spend bars (requested vs used) + recommendation */
-function CostConsole() {
-  const rows = [
-    { ns: 'payments', spend: '$1,842', req: 92, used: 34 },
-    { ns: 'observability', spend: '$1,210', req: 78, used: 51 },
-    { ns: 'checkout', spend: '$964', req: 64, used: 48 },
-    { ns: 'auth', spend: '$488', req: 38, used: 29 },
-  ]
-  return (
-    <ConsoleFrame title="finops · prod-us-west-2 · last 30d">
-      <div className="flex items-baseline justify-between">
-        <div>
-          <div className="text-[10px] uppercase tracking-wide text-white/45">Cluster spend / mo</div>
-          <div className="text-xl font-bold text-white">$4,504</div>
-        </div>
-        <div className="text-right">
-          <div className="text-[10px] uppercase tracking-wide text-white/45">Recoverable</div>
-          <div className="text-xl font-bold text-emerald-400">$1,378</div>
-        </div>
-      </div>
-
-      <div className="mt-3 space-y-2.5">
-        {rows.map((r) => (
-          <div key={r.ns}>
-            <div className="flex justify-between font-mono text-[10.5px] text-white/55">
-              <span>{r.ns}</span>
-              <span>{r.spend}</span>
-            </div>
-            <div className="relative mt-1 h-2.5 overflow-hidden rounded bg-white/[0.07]">
-              <span
-                className="absolute top-0 h-2.5 rounded bg-white/20"
-                style={{ width: `${r.req}%` }}
-              />
-              <span
-                className="absolute top-0 h-2.5 rounded bg-violet-500"
-                style={{ width: `${r.used}%` }}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="mt-2 flex gap-4 font-mono text-[9.5px] text-white/45">
-        <span className="inline-flex items-center gap-1.5"><span className="h-2 w-2 rounded-sm bg-violet-500" /> used</span>
-        <span className="inline-flex items-center gap-1.5"><span className="h-2 w-2 rounded-sm bg-white/20" /> requested</span>
-      </div>
-
-      <div className="mt-3 rounded-lg border border-emerald-400/25 bg-emerald-500/[0.07] px-3 py-2.5">
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-semibold text-white">payments-api · right-size CPU 2000m → 750m</span>
-          <span className="font-mono text-[10.5px] font-bold text-emerald-400">save $412/mo</span>
-        </div>
-        <div className="mt-2 flex gap-2">
-          <span className="rounded-md bg-white px-2.5 py-1 text-[10px] font-bold text-zinc-950">Preview YAML</span>
-          <span className="rounded-md border border-white/20 px-2.5 py-1 text-[10px] font-bold text-white/85">Apply to cluster</span>
-        </div>
-      </div>
-    </ConsoleFrame>
-  )
-}
 
 /* Spotlight panel: YAML diff preview */
 function SpotlightPanel() {
@@ -125,7 +64,7 @@ export default function KubernetesCostOptimizationPage() {
       sub="Spend by namespace, workload and controller, with requested-vs-used side by side. Apply right-sizing with a YAML preview, approvals and rollback, and see AWS line items in the same view."
       signupUrl={SIGNUP_URL}
       checks={['Requested vs used', 'YAML preview & apply', 'EC2 / RDS / ELB line items']}
-      console={<CostConsole />}
+      highlightProduct="finops"
       stepsHeading="Measure. Recommend. Apply."
       stepsSub="No spreadsheets and no blind edits, every recommendation carries its evidence and its escape hatch."
       steps={[

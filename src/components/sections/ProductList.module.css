@@ -517,10 +517,9 @@
 
 .rcaChromeLogo {
   display: block;
-  width: 14px;
   height: 14px;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
+  width: auto;
+  color: #c4b5fd;
   flex-shrink: 0;
 }
 
@@ -543,13 +542,10 @@
 }
 
 .rcaLogo {
+  display: block;
   height: 20px;
   width: auto;
-  max-width: 140px;
-  object-fit: contain;
-  object-position: left center;
-  display: block;
-  filter: brightness(0) invert(1);
+  color: #c4b5fd;
 }
 
 .rcaBrand > span {

@@ -46,7 +46,7 @@ export default function CommunityPage() {
               <Breadcrumb items={[{ label: 'Community' }]} />
             </div>
             <div className="text-center mb-20">
-              <div className="inline-block px-5 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 rounded-full text-sm font-bold mb-6 shadow-lg">
+              <div className="inline-block px-5 py-2 bg-gradient-to-r from-brand-50 to-brand-100 text-brand-700 rounded-full text-sm font-bold mb-6 shadow-lg">
                 Community
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6 leading-tight">
@@ -63,16 +63,16 @@ export default function CommunityPage() {
                 return (
                   <div
                     key={index}
-                    className="bg-white rounded-3xl p-10 border-2 border-gray-200 hover:border-primary-400 hover:shadow-2xl transition-all duration-300 text-center"
+                    className="bg-white rounded-3xl p-10 border-2 border-gray-200 hover:border-brand-400 hover:shadow-2xl transition-all duration-300 text-center"
                   >
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary-50 text-primary-600 mb-6">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-brand-50 text-brand-600 mb-6">
                       <Icon className="h-8 w-8" />
                     </div>
                     <h3 className="text-2xl font-black text-gray-900 mb-4">{platform.title}</h3>
                     <p className="text-gray-600 mb-6 font-medium">{platform.description}</p>
                     <a
                       href={platform.link}
-                      className="text-primary-600 hover:text-primary-700 font-bold text-sm"
+                      className="text-brand-600 hover:text-brand-700 font-bold text-sm"
                     >
                       Join Now →
                     </a>

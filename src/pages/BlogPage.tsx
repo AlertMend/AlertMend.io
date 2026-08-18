@@ -84,14 +84,14 @@ export default function BlogPage() {
     }
   }, [])
 
-  const baseDescription = "AlertMend AI blog: Get expert insights on AIOps and Kubernetes. Learn best practices for autonomous infrastructure management."
+  const baseDescription = "AlertMend blog: production ops, Kubernetes troubleshooting, AI RCA, and approved remediations."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'blog-list', 'blog')
 
   if (!sortedPosts || sortedPosts.length === 0) {
     return (
       <div className="min-h-screen bg-white">
         <SEO
-          title="AlertMend AI: AIOps & Kubernetes Best Practices in 2025"
+          title="AlertMend Blog: Production ops & Kubernetes"
           description={uniqueDescription}
           canonical="/blog"
           keywords="AIOps blog, Kubernetes best practices, infrastructure automation, DevOps insights, SRE articles, cloud-native operations"
@@ -108,7 +108,7 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="AlertMend AI: AIOps & Kubernetes Best Practices in 2025"
+        title="AlertMend Blog: Production ops & Kubernetes"
         description={uniqueDescription}
         canonical="/blog"
         keywords="AIOps blog, Kubernetes best practices, infrastructure automation, DevOps insights, SRE articles, cloud-native operations"

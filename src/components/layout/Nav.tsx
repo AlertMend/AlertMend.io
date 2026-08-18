@@ -3,17 +3,20 @@ import { Link, useLocation } from 'react-router-dom';
 import Brand from '../ui/Brand';
 import Icon from '../ui/Icon';
 import { useScrolled } from '../../hooks/useScrolled';
+import { HOME_PRODUCTS } from '../../data/homeProducts';
 import styles from './Nav.module.css';
 
 /* ============================================================
-   Navigation — industry-standard 5 primary links
+   Navigation — Platform mega-menu + two flat links
 
-   Most SaaS navs (Linear, Vercel, Datadog, Sentry) settle on
-   ~5 primary links so the eye can scan the bar in one glance.
-   We collapse the old 4-section + 3-route split into a clean
-   5-link primary group: Platform → AI RCAs → Integrations →
-   Pricing → Customers → Blog (Customers points at the case
-   studies index).
+   Every product surface lives in the Platform panel, so the bar
+   itself stays scannable in one glance: Platform → Pricing →
+   Customers (Customers points at the case studies index).
+   Observability and AI RCAs are deliberately NOT repeated here
+   as top-level links; they already appear in the Platform panel
+   as "Observability & APM" and "AI root cause" pointing at the
+   same routes, and duplicating them split the same destination
+   across two places in the bar.
 
    The right cluster is intentionally quiet: a small "Sign in"
    text link, a `● LIVE Playground` pill that signals the
@@ -23,56 +26,18 @@ import styles from './Nav.module.css';
    resolves "real product → live → click here", with the demo
    button still winning as the primary action.
    ============================================================ */
-const primaryLinks: Array<
-  | { kind: 'hash'; hash: string; label: string }
-  | { kind: 'route'; to: string; label: string }
-> = [
-  { kind: 'route', to: '/observability', label: 'Observability' },
-  { kind: 'route', to: '/ai-rca', label: 'AI RCAs' },
-  { kind: 'route', to: '/pricing', label: 'Pricing' },
-  { kind: 'route', to: '/case-studies', label: 'Customers' },
+
+const primaryLinks: Array<{ to: string; label: string }> = [
+  { to: '/pricing', label: 'Pricing' },
+  { to: '/case-studies', label: 'Customers' },
 ];
 
-/* "Platform" mega-menu — a Datadog-style multi-column product panel. Each
-   item points at a real route or homepage section. `hash` items deep-link
-   to a homepage anchor; everything else is a route. */
-type MegaItem = { label: string; to: string; hash?: boolean; desc: string };
-
-const megaLinkTo = (it: MegaItem) =>
-  it.hash
-    ? { pathname: '/', hash: it.to.startsWith('#') ? it.to : `#${it.to}` }
-    : it.to;
-
-const MEGA: { label: string; items: MegaItem[] }[] = [
-  {
-    label: 'Observability',
-    items: [
-      { label: 'Observability & APM', to: '/observability', desc: 'Metrics, logs & traces, unified' },
-      { label: 'Distributed tracing', to: '/observability', desc: 'OpenTelemetry + eBPF spans' },
-      { label: 'Service map', to: '/observability', desc: 'Live topology from real traffic' },
-      { label: 'Log management', to: '/log-management', desc: 'SQL logs for Kubernetes and VMs' },
-      { label: 'Metrics & dashboards', to: '/observability', desc: 'Prometheus / PromQL panels' },
-    ],
-  },
-  {
-    label: 'Automate & operate',
-    items: [
-      { label: 'Kubernetes monitoring', to: '/kubernetes-management', desc: 'Clusters, pods, nodes, health' },
-      { label: 'Auto-remediation', to: '/auto-remediation', desc: 'Approved workflows that act' },
-      { label: 'Runbooks', to: '/auto-remediation', desc: 'Visual remediation flows' },
-      { label: 'On-call & incidents', to: '/on-call-management', desc: 'Schedules & escalation' },
-      { label: 'AI root cause', to: '/ai-rca', desc: 'Evidence-backed RCA' },
-    ],
-  },
-  {
-    label: 'Optimize & govern',
-    items: [
-      { label: 'Kubernetes FinOps', to: '/kubernetes-cost-optimization', desc: 'Right-size spend' },
-      { label: 'Cloud FinOps (AWS)', to: '/kubernetes-cost-optimization', desc: 'EC2, RDS, ELB + K8s' },
-      { label: 'Security & compliance', to: '/security', desc: 'RBAC, audit (SOC 2 in progress)' },
-    ],
-  },
-];
+/* "Platform" mega-menu. Driven straight off HOME_PRODUCTS so the menu lists
+   exactly the seven shipping products the homepage console tabs through, and
+   the two cannot drift apart. The previous hand-written version had grown to
+   13 entries where six were extra labels pointing at a route already listed
+   (three separate items all resolved to /observability), which made the panel
+   look broader than the product actually is. */
 
 const SIGNUP_URL = 'https://app.alertmend.io/signup';
 const PLAYGROUND_URL = 'https://demo.alertmend.io';
@@ -84,15 +49,63 @@ export default function Nav() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [platformOpen, setPlatformOpen] = useState(false);
   const closeTimer = useRef<number | undefined>(undefined);
+  const megaWrapRef = useRef<HTMLDivElement>(null);
 
   const openMega = () => {
     if (closeTimer.current) window.clearTimeout(closeTimer.current);
     setPlatformOpen(true);
   };
+
   const closeMega = () => {
     if (closeTimer.current) window.clearTimeout(closeTimer.current);
     closeTimer.current = window.setTimeout(() => setPlatformOpen(false), 120);
   };
+
+  const closeMegaNow = () => {
+    if (closeTimer.current) window.clearTimeout(closeTimer.current);
+    setPlatformOpen(false);
+  };
+
+  useEffect(
+    () => () => {
+      if (closeTimer.current) window.clearTimeout(closeTimer.current);
+    },
+    [],
+  );
+
+  /* Dismissal for everyone who isn't holding a mouse. `onMouseLeave` never
+     fires on touch, so without this the panel stays open until the route
+     changes; and Escape bound to the trigger alone stops working the moment
+     focus moves into the panel. All three listeners are document-level and
+     only mounted while the panel is open. */
+  useEffect(() => {
+    if (!platformOpen) return;
+
+    const onPointerDown = (e: PointerEvent) => {
+      if (!megaWrapRef.current?.contains(e.target as Node)) closeMegaNow();
+    };
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      closeMegaNow();
+      // Send focus back to the trigger so keyboard users aren't stranded on a
+      // link that just became unreachable.
+      megaWrapRef.current?.querySelector('button')?.focus();
+    };
+
+    const onFocusIn = (e: FocusEvent) => {
+      if (!megaWrapRef.current?.contains(e.target as Node)) closeMegaNow();
+    };
+
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('focusin', onFocusIn);
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('focusin', onFocusIn);
+    };
+  }, [platformOpen]);
 
   useEffect(() => {
     setDrawerOpen(false);
@@ -125,26 +138,16 @@ export default function Nav() {
   const renderLink = (
     l: (typeof primaryLinks)[number],
     onClick?: () => void,
-  ) =>
-    l.kind === 'hash' ? (
-      <Link
-        key={l.hash}
-        to={{ pathname: '/', hash: l.hash }}
-        className={styles.link}
-        onClick={onClick}
-      >
-        {l.label}
-      </Link>
-    ) : (
-      <Link
-        key={l.to}
-        to={l.to}
-        className={`${styles.link} ${isRouteActive(l.to) ? styles.linkActive : ''}`}
-        onClick={onClick}
-      >
-        {l.label}
-      </Link>
-    );
+  ) => (
+    <Link
+      key={l.to}
+      to={l.to}
+      className={`${styles.link} ${isRouteActive(l.to) ? styles.linkActive : ''}`}
+      onClick={onClick}
+    >
+      {l.label}
+    </Link>
+  );
 
   return (
     <>
@@ -154,6 +157,7 @@ export default function Nav() {
 
           <nav className={styles.links} aria-label="Primary">
             <div
+              ref={megaWrapRef}
               className={styles.megaWrap}
               onMouseEnter={openMega}
               onMouseLeave={closeMega}
@@ -161,13 +165,9 @@ export default function Nav() {
               <button
                 type="button"
                 className={`${styles.link} ${styles.megaTrigger} ${platformOpen ? styles.megaTriggerOpen : ''}`}
-                aria-haspopup="true"
                 aria-expanded={platformOpen}
-                onClick={() => setPlatformOpen(true)}
-                onFocus={openMega}
-                onKeyDown={(e) => {
-                  if (e.key === 'Escape') setPlatformOpen(false);
-                }}
+                aria-controls="platform-menu"
+                onClick={() => (platformOpen ? closeMegaNow() : openMega())}
               >
                 Platform
                 <svg
@@ -180,31 +180,33 @@ export default function Nav() {
                   <path d="M2 3.5 5 6.5 8 3.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
+
+              {/* Deliberately not role="menu"/"menuitem": those roles promise
+                  arrow-key traversal and a roving tabindex that this panel
+                  does not implement. It is a labelled group of ordinary links,
+                  so plain nav semantics describe it accurately and Tab works
+                  the way users expect. */}
               <div
+                id="platform-menu"
                 className={`${styles.megaPanel} ${platformOpen ? styles.megaOpen : ''}`}
-                role="menu"
                 aria-label="Platform"
                 onMouseEnter={openMega}
                 onMouseLeave={closeMega}
               >
                 <div className={styles.megaGrid}>
-                  {MEGA.map((col) => (
-                    <div key={col.label} className={styles.megaCol}>
-                      <span className={styles.megaColLabel}>{col.label}</span>
-                      {col.items.map((it) => (
-                        <Link
-                          key={it.label}
-                          to={megaLinkTo(it)}
-                          className={styles.megaItem}
-                          role="menuitem"
-                          onClick={() => setPlatformOpen(false)}
-                        >
-                          <span className={styles.megaItemTitle}>{it.label}</span>
-                          <span className={styles.megaItemDesc}>{it.desc}</span>
-                        </Link>
-                      ))}
-                    </div>
-                  ))}
+                  <div className={styles.megaProducts}>
+                    {HOME_PRODUCTS.map((p) => (
+                      <Link
+                        key={p.id}
+                        to={p.to}
+                        className={styles.megaItem}
+                        onClick={() => setPlatformOpen(false)}
+                      >
+                        <span className={styles.megaItemTitle}>{p.name}</span>
+                        <span className={styles.megaItemDesc}>{p.blurb}</span>
+                      </Link>
+                    ))}
+                  </div>
                   <Link
                     to="/observability"
                     className={styles.megaFeatured}
@@ -302,21 +304,23 @@ export default function Nav() {
             <Icon name="x" size={20} strokeWidth={2.2} />
           </button>
         </div>
+
         <nav className={styles.drawerLinks} aria-label="Mobile">
           <span className={styles.drawerGroupLabel}>Platform</span>
-          {MEGA.flatMap((col) => col.items).map((it) => (
+          {HOME_PRODUCTS.map((p) => (
             <Link
-              key={it.label}
-              to={megaLinkTo(it)}
+              key={p.id}
+              to={p.to}
               className={styles.link}
               onClick={() => setDrawerOpen(false)}
             >
-              {it.label}
+              {p.name}
             </Link>
           ))}
           <span className={styles.drawerGroupLabel}>More</span>
           {primaryLinks.map((l) => renderLink(l, () => setDrawerOpen(false)))}
         </nav>
+
         <div className={styles.drawerCta}>
           <a
             href={PLAYGROUND_URL}

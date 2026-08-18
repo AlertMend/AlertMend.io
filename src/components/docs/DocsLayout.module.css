@@ -47,11 +47,14 @@
   flex-shrink: 0;
 }
 
+/* Light docs header, so the mark keeps the brand purple (10.9:1 on white).
+   Set explicitly rather than inherited, or it would pick up the near-black
+   text color from `.brand`. */
 .logo {
   display: block;
-  width: 22px;
   height: 22px;
-  object-fit: contain;
+  width: auto;
+  color: #7c3aed;
 }
 
 .brandName {
@@ -334,4 +337,48 @@
   .main {
     padding: 20px 16px 56px;
   }
+}
+
+/* Product links at the foot of every docs page. Docs skip the marketing
+   <Footer>, so without this ~50 documentation URLs have no internal link back
+   into the product. Kept deliberately quiet — a single row of text links, not
+   a second full footer competing with the docs nav. */
+.productFooter {
+  border-top: 1px solid var(--docs-border, #e4e4e7);
+  background: var(--docs-subtle, #fafafa);
+}
+
+.productFooterInner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 18px 24px 22px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 18px;
+}
+
+.productFooterLabel {
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #71717a;
+}
+
+.productFooterLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+
+.productFooterLinks a {
+  font-size: 13px;
+  color: #52525b;
+  text-decoration: none;
+}
+
+.productFooterLinks a:hover {
+  color: #18181b;
+  text-decoration: underline;
 }

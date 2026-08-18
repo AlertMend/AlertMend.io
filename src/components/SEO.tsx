@@ -1,6 +1,25 @@
 import { Helmet } from '../lib/helmet'
 import { useLocation } from 'react-router-dom'
 import { normalizePathname } from '../utils/urlUtils'
+import { LEGACY_KEYWORDS } from '../data/legacyKeywords'
+
+/**
+ * Unions a page's keywords with the ones production already serves for that
+ * route, so a copy rewrite can add terms but never silently drop one. Matching
+ * is case-insensitive; the page's own spelling wins, and its terms lead.
+ */
+function mergeLegacyKeywords(keywords: string, route: string): string {
+  const own = keywords.split(',').map((k) => k.trim()).filter(Boolean)
+  const seen = new Set(own.map((k) => k.toLowerCase()))
+  const merged = [...own]
+  for (const legacy of LEGACY_KEYWORDS[route] ?? []) {
+    if (!seen.has(legacy.toLowerCase())) {
+      seen.add(legacy.toLowerCase())
+      merged.push(legacy)
+    }
+  }
+  return merged.join(', ')
+}
 
 interface SEOProps {
   title?: string
@@ -18,9 +37,9 @@ interface SEOProps {
 }
 
 export default function SEO({
-  title = 'AlertMend: Autonomous AI SRE Platform',
-  description = 'AlertMend AI empowers DevOps teams with an autonomous AI agent that troubleshoots Kubernetes alerts 10x faster, reduces MTTR, and optimizes cloud costs. Agentic AI for production diagnosis and infrastructure automation.',
-  keywords = 'AIOps, Kubernetes, incident management, auto-remediation, SRE, DevOps, cloud-native, cost optimization, VM monitoring, ECS management, infrastructure automation, AI operations, Kubernetes monitoring, container orchestration, observability',
+  title = 'AlertMend: AI Observability & Automation for Kubernetes & AWS',
+  description = 'AlertMend unifies metrics, logs, and traces, runs evidence-backed AI RCA, and remediates only after Slack or Teams approval — with rollback and a full audit trail.',
+  keywords = 'AIOps, Kubernetes, incident management, RF remediation, SRE, DevOps, observability, AI RCA, cost optimization, VM monitoring, infrastructure automation, Kubernetes monitoring',
   canonical,
   ogImage = 'https://www.alertmend.io/og-image.jpg',
   ogType = 'website',
@@ -45,6 +64,11 @@ export default function SEO({
     const normalizedPath = normalizePathname(location.pathname)
     canonicalUrl = `${siteUrl}${normalizedPath}`
   }
+
+  // Route key for the legacy-keyword union, derived from the canonical so it
+  // matches what production serves rather than the in-app pathname.
+  const keywordRoute = canonicalUrl.replace(siteUrl, '').replace(/\/$/, '') || '/'
+  const mergedKeywords = mergeLegacyKeywords(keywords, keywordRoute)
 
   // Build breadcrumb structured data if provided
   const breadcrumbStructuredData = breadcrumbData ? {
@@ -72,7 +96,7 @@ export default function SEO({
       <title>{fullTitle}</title>
       <meta name="title" content={fullTitle} />
       <meta name="description" content={description} />
-      <meta name="keywords" content={keywords} />
+      <meta name="keywords" content={mergedKeywords} />
       <meta name="author" content="AlertMend AI" />
       <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
       <meta name="language" content="English" />

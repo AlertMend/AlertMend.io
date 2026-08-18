@@ -134,8 +134,8 @@ export default function MSTeamsWebhookPage() {
                 </ul>
               </div>
 
-              <div className="bg-blue-50 border-l-4 border-blue-600 p-6 mt-8 rounded-r-lg">
-                <h3 className="text-blue-950 font-bold mb-2">💡 Tips</h3>
+              <div className="bg-violet-50 border-l-4 border-violet-600 p-6 mt-8 rounded-r-lg">
+                <h3 className="text-violet-950 font-bold mb-2">💡 Tips</h3>
                 <ul className="text-gray-700 space-y-1">
                   <li>Create separate webhooks for different notification types (alerts, approvals, reports)</li>
                   <li>Use descriptive names for easy identification</li>

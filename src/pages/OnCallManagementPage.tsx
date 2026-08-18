@@ -4,7 +4,6 @@ import {
 } from 'lucide-react'
 import SolutionPageTemplate, {
   Accent,
-  ConsoleFrame,
 } from '../components/SolutionPageTemplate'
 
 /**
@@ -14,62 +13,6 @@ import SolutionPageTemplate, {
  */
 
 const SIGNUP_URL = 'https://app.alertmend.io/signup?service=on-call'
-
-/* On-call console: current rotation + escalation chain with wait timers */
-function OnCallConsole() {
-  const chain = [
-    { ch: 'Slack', who: '#oncall-payments', t: '0:00', state: 'sent', tone: 'text-emerald-400' },
-    { ch: 'WhatsApp', who: '@alex', t: '+2:00', state: 'sent', tone: 'text-emerald-400' },
-    { ch: 'Phone', who: '@alex', t: '+5:00', state: 'ringing', tone: 'text-amber-300' },
-    { ch: 'Phone', who: '@sam (backup)', t: '+10:00', state: 'queued', tone: 'text-white/40' },
-  ]
-  return (
-    <ConsoleFrame title="on-call · payments · follow-the-sun">
-      <div className="grid grid-cols-2 gap-2.5">
-        <div className="rounded-lg border border-violet-400/25 bg-violet-500/10 px-3 py-2.5">
-          <div className="text-[10px] uppercase tracking-wide text-violet-300">On call now</div>
-          <div className="mt-1 flex items-center gap-2">
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-violet-600 text-[10px] font-bold text-white">A</span>
-            <div>
-              <div className="text-xs font-semibold text-white">@alex</div>
-              <div className="font-mono text-[9.5px] text-white/45">until 08:00 IST</div>
-            </div>
-          </div>
-        </div>
-        <div className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-3 py-2.5">
-          <div className="text-[10px] uppercase tracking-wide text-white/45">Next up</div>
-          <div className="mt-1 flex items-center gap-2">
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/15 text-[10px] font-bold text-white">S</span>
-            <div>
-              <div className="text-xs font-semibold text-white">@sam</div>
-              <div className="font-mono text-[9.5px] text-white/45">08:00 → 20:00 IST</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-3 rounded-lg border border-rose-400/25 bg-rose-500/[0.07] px-3 py-2.5">
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-semibold text-white">P1 · checkout p99 breach</span>
-          <span className="font-mono text-[10px] text-rose-300">03:02 IST</span>
-        </div>
-        <div className="mt-0.5 font-mono text-[10px] text-white/45">RCA attached · confidence 94%</div>
-      </div>
-
-      <div className="mt-3 space-y-1.5">
-        <div className="text-[10px] uppercase tracking-wide text-white/45">Escalation path</div>
-        {chain.map((s) => (
-          <div key={s.ch + s.who} className="flex items-center gap-3 rounded-lg border border-white/[0.06] bg-white/[0.02] px-3 py-2">
-            <span className="w-16 font-mono text-[10px] text-white/60">{s.t}</span>
-            <span className="w-20 text-xs font-semibold text-white">{s.ch}</span>
-            <span className="flex-1 truncate font-mono text-[10.5px] text-white/50">{s.who}</span>
-            <span className={`font-mono text-[10px] font-bold uppercase ${s.tone}`}>{s.state}</span>
-          </div>
-        ))}
-      </div>
-    </ConsoleFrame>
-  )
-}
 
 /* Spotlight panel: the 3am page with RCA + approve-from-Slack */
 function SpotlightPanel() {
@@ -106,7 +49,7 @@ export default function OnCallManagementPage() {
   return (
     <SolutionPageTemplate
       seo={{
-        title: 'On-Call Management: Schedules, Escalations & AI Triage',
+        title: 'On-Call Management & Incident Alerts | AlertMend',
         description:
           'Timezone-aware schedules and rotations, escalation chains across Slack, Teams, WhatsApp, email and phone, and pages that arrive with the AI root cause attached.',
         keywords:
@@ -122,7 +65,7 @@ export default function OnCallManagementPage() {
       sub="Timezone-aware rotations, escalation chains that actually escalate, and every page delivered with the AI root cause and a ready runbook, so the person woken up can fix it, not investigate it."
       signupUrl={SIGNUP_URL}
       checks={['Timezone-aware rotations', 'Escalation with wait timers', 'Full audit trail']}
-      console={<OnCallConsole />}
+      highlightProduct="oncall"
       stepsHeading="Route. Page. Resolve."
       stepsSub="The same path every incident: correlate the noise, page through the chain, resolve with an approved fix."
       steps={[

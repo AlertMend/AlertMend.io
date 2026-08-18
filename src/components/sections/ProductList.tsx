@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react'
 import { HOME_PRODUCTS } from '../../data/homeProducts'
 import Icon from '../ui/Icon'
 import BrandLogo, { simpleIconsUrl, svgPornUrl } from '../ui/BrandLogo'
+import RcaReportMock, { GPU_RCA } from '../mocks/RcaReportMock'
 import styles from './ProductList.module.css'
 
 type Media = { node: ReactNode }
@@ -262,119 +263,7 @@ function LogsMock() {
 }
 
 function RcaMock() {
-  return (
-    <div className={styles.rcaCard}>
-      <div className={styles.rcaChrome} aria-hidden>
-        <span className={styles.dots}><i /><i /><i /></span>
-        <img
-          src="/logos/alertmend-logo.svg"
-          alt=""
-          width={14}
-          height={14}
-          className={styles.rcaChromeLogo}
-        />
-        <strong>AI RCA</strong>
-        <em>14.8s · 94% confidence</em>
-        <span className={styles.live}><i /> Live</span>
-      </div>
-
-      <div className={styles.rcaAgent}>
-        <div className={styles.rcaBrand}>
-          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" className={styles.rcaLogo} />
-          <span>v2.1</span>
-        </div>
-        <em><i /> RCA · 14.8s</em>
-      </div>
-
-      <div className={styles.rcaInc}>
-        <div className={styles.rcaIncTop}>
-          <span className={styles.crit}>
-            <i />
-            CRITICAL · TRAINING STALLED
-          </span>
-          <span className={styles.rcaWhere}>cluster: prod-gpu · ns: ml-training</span>
-        </div>
-        <div className={styles.rcaTarget}>
-          <b>&gt;</b>
-          <span>llama-ft-7b · step 42,184</span>
-        </div>
-      </div>
-
-      <div className={styles.rcaBody}>
-        <article className={styles.rcaSum}>
-          <header>
-            <span className={`${styles.rcaIco} ${styles.rcaIcoSum}`}>
-              <Icon name="activity" size={12} strokeWidth={2.4} />
-            </span>
-            Executive summary
-          </header>
-          <p>
-            Distributed training hung on NCCL all-reduce because GPU 3 on{' '}
-            <b>gpu-h100-04</b> is thermally throttling at 89°C — idle GPUs cost ~$98/hr while hung.
-          </p>
-        </article>
-
-        <article className={styles.rcaEv}>
-          <header>
-            <span className={`${styles.rcaIco} ${styles.rcaIcoEv}`}>
-              <Icon name="layers" size={12} strokeWidth={2.4} />
-            </span>
-            Evidence collected
-            <span className={styles.rcaCount}>4 sources</span>
-          </header>
-          <div className={styles.rcaTags}>
-            <span>Job</span>
-            <span>GPU telemetry</span>
-            <span>NCCL trace</span>
-            <span>Node</span>
-          </div>
-          <ul>
-            <li><b>&gt;</b> Job · step stall &gt; 12m on all-reduce</li>
-            <li><b>&gt;</b> GPU · SM clock 540 MHz · temp 89°C · fans 100%</li>
-            <li><b>&gt;</b> NCCL · collective wait on rank 3</li>
-            <li><b>&gt;</b> Node · throttle events on gpu-h100-04</li>
-          </ul>
-        </article>
-
-        <article className={styles.rcaCon}>
-          <header>
-            <span className={`${styles.rcaIco} ${styles.rcaIcoCon}`}>
-              <Icon name="check-thick" size={12} strokeWidth={2.6} />
-            </span>
-            Conclusion
-            <div className={styles.rcaConf}>
-              <span>Confidence</span>
-              <i><b style={{ width: '94%' }} /></i>
-              <em>94%</em>
-            </div>
-          </header>
-          <p>
-            Root cause is inadequate cooling on <b>gpu-h100-04</b>, not application code.
-          </p>
-        </article>
-
-        <article className={styles.rcaRem}>
-          <header>
-            <span className={`${styles.rcaIco} ${styles.rcaIcoRem}`}>
-              <Icon name="rotate" size={12} strokeWidth={2.4} />
-            </span>
-            Remediation
-          </header>
-          <ol>
-            <li><i>1</i><span>Cordon <b>gpu-h100-04</b></span></li>
-            <li><i>2</i><span>Checkpoint at step 42,000</span></li>
-            <li><i>3</i><span>Reschedule training onto healthy nodes</span></li>
-          </ol>
-        </article>
-      </div>
-
-      <div className={styles.rcaFoot}>
-        <span>GPU → Telemetry</span>
-        <span>NCCL → Trace</span>
-        <span>Node → Health</span>
-      </div>
-    </div>
-  )
+  return <RcaReportMock story={GPU_RCA} />
 }
 
 function RfMock() {

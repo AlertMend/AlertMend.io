@@ -23,7 +23,7 @@ import styles from './DocumentationPage.module.css'
 const POPULAR: { label: string; href: string }[] = [
   { label: 'Connect a cluster', href: '/documentation/install-cluster-agent' },
   { label: 'AI RCA', href: '/documentation/ai-rca' },
-  { label: 'Remediation Flows', href: '/documentation/remediation-flows' },
+  { label: 'RF · Remediation', href: '/documentation/remediation-flows' },
   { label: 'AT-QL queries', href: '/documentation/atql' },
   { label: 'Slack approvals', href: '/documentation/slack-app-approval' },
   { label: 'UI map', href: '/documentation/platform-overview' },
@@ -94,7 +94,7 @@ export default function DocumentationPage() {
       <SEO
         title="Documentation | AlertMend"
         description="Product documentation for AlertMend: install the Kubernetes agent, observe signals, run AI RCA, and approve remediation flows."
-        keywords="AlertMend documentation, Helm agent, AI RCA, remediation flows, AT-QL"
+        keywords="AlertMend documentation, Helm agent, AI RCA, remediation flows, AT-QL, auto-remediation, ECS, VM monitoring, GPU MLOps, Kubernetes monitoring guide"
         canonical="/documentation"
       />
 
@@ -204,7 +204,7 @@ export default function DocumentationPage() {
             <div>
               <p className={styles.appCtaTitle}>Already installed?</p>
               <p className={styles.appCtaBody}>
-                Open the UI for service map, RCA, and Remediation Flows.
+                Open the UI for service map, RCA, and RF · Remediation.
               </p>
             </div>
             <div className={styles.appCtaActions}>

@@ -108,9 +108,12 @@ export default function PrivacyPage() {
               <p className="text-brand-900 font-semibold mb-2">
                 Questions about our Privacy Policy?
               </p>
+              {/* Sits directly on the hero gradient: `body.alertmend-dark a
+                  { color: inherit }` (0,1,2) discards a plain utility, and
+                  brand-600 would still fail at ~3.4:1, so pin violet-300. */}
               <a
                 href="mailto:privacy@alertmend.io"
-                className="text-brand-600 hover:text-brand-700 font-semibold"
+                className="!text-violet-300 hover:!text-violet-200 font-semibold"
               >
                 privacy@alertmend.io
               </a>

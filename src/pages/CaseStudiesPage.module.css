@@ -13,9 +13,10 @@
   padding-bottom: 40px !important;
 }
 
-.heroInner {
-  max-width: 720px;
-}
+/* No max-width here: this element also carries the global `.container`, so
+   narrowing it would either be dropped on source order or, once scoped up,
+   re-centre the hero copy away from the card grid's left edge. Line length is
+   capped on `.h1` / `.lead` instead. */
 
 .heroInner :global(nav[aria-label='Breadcrumb']) {
   color: rgba(244, 244, 245, 0.55);
@@ -37,6 +38,7 @@
 
 .h1 {
   margin: 0 0 12px;
+  max-width: 24ch;
   font-size: clamp(1.75rem, 3.2vw, 2.4rem);
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -191,7 +193,7 @@
   border-top: 1px solid #f4f4f5;
 }
 
-.cta {
+.page .cta {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -235,7 +237,7 @@
     grid-template-columns: 1fr;
   }
 
-  .cta {
+  .page .cta {
     flex-direction: column;
     align-items: flex-start;
   }

@@ -4,73 +4,16 @@ import {
 } from 'lucide-react'
 import SolutionPageTemplate, {
   Accent,
-  ConsoleFrame,
 } from '../components/SolutionPageTemplate'
 
 /**
- * /kubernetes-management, redesigned product page (dark violet hero +
- * cluster-overview console mock), replacing the legacy SolutionDetailPage
- * template. Every claim maps to a real product surface: cluster overview,
- * incident cards, health rules, drill-down, AI chat, SQL logs.
+ * /kubernetes-management, product page built on SolutionPageTemplate (white
+ * split hero + cluster-overview board mock). Every claim maps to a real
+ * product surface: cluster overview, incident cards, health rules,
+ * drill-down, AI chat, SQL logs.
  */
 
 const SIGNUP_URL = 'https://app.alertmend.io/signup?service=monitoring'
-
-/* Cluster-overview console mock: KPI chips + incident rows + node strip */
-function ClusterConsole() {
-  const kpis = [
-    { label: 'Pods', value: '1,247', sub: '↑ 12' },
-    { label: 'Nodes', value: '24', sub: 'healthy' },
-    { label: 'Deploys', value: '89', sub: '3 rolling' },
-    { label: 'Namespaces', value: '17', sub: '' },
-  ]
-  const incidents = [
-    { sev: 'CRIT', tone: 'text-rose-300 bg-rose-500/10 border-rose-400/30', name: 'RESTART STORM', where: 'log-ingester-86b9968-cvklg · ns: observability' },
-    { sev: 'WARN', tone: 'text-amber-300 bg-amber-500/10 border-amber-400/30', name: 'OOMKilled', where: 'payments-svc-7c4d8f-q9p2m · ns: payments' },
-    { sev: 'WARN', tone: 'text-amber-300 bg-amber-500/10 border-amber-400/30', name: 'Rollout stuck', where: 'checkout-web v2.31.4 · 3/8 ready' },
-  ]
-  return (
-    <ConsoleFrame title="cluster-overview · prod-us-west-2">
-      <div className="grid grid-cols-4 gap-2.5">
-        {kpis.map((k) => (
-          <div key={k.label} className="rounded-lg border border-white/[0.07] bg-white/[0.03] px-3 py-2.5">
-            <div className="text-[10px] uppercase tracking-wide text-white/45">{k.label}</div>
-            <div className="mt-0.5 flex items-baseline gap-1.5">
-              <span className="text-lg font-bold text-white">{k.value}</span>
-              <span className="text-[10px] font-semibold text-emerald-400">{k.sub}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="mt-3 space-y-2">
-        {incidents.map((i) => (
-          <div key={i.name} className="flex items-center gap-3 rounded-lg border border-white/[0.07] bg-white/[0.02] px-3 py-2.5">
-            <span className={`rounded border px-1.5 py-0.5 font-mono text-[9px] font-bold ${i.tone}`}>{i.sev}</span>
-            <div className="min-w-0 flex-1">
-              <div className="text-xs font-semibold text-white">{i.name}</div>
-              <div className="truncate font-mono text-[10px] text-white/45">{i.where}</div>
-            </div>
-            <span className="rounded-md border border-violet-400/30 bg-violet-500/10 px-2.5 py-1 text-[10px] font-bold text-violet-300">
-              View RCA
-            </span>
-          </div>
-        ))}
-      </div>
-      <div className="mt-3 flex items-center gap-1.5">
-        {Array.from({ length: 24 }).map((_, i) => (
-          <span
-            key={i}
-            className={`h-5 flex-1 rounded-sm ${i === 7 ? 'bg-amber-500/70' : i === 15 ? 'bg-amber-500/50' : 'bg-emerald-500/45'}`}
-          />
-        ))}
-      </div>
-      <div className="mt-1.5 flex justify-between font-mono text-[9.5px] text-white/40">
-        <span>24 nodes</span>
-        <span>2 under memory pressure</span>
-      </div>
-    </ConsoleFrame>
-  )
-}
 
 /* Spotlight panel: incident → RCA → runbook */
 function SpotlightPanel() {
@@ -123,7 +66,7 @@ export default function KubernetesManagementPage() {
       sub="Every cluster on one overview: live incidents, health rules, pod and node drill-down, and AI root cause one click away, without leaving the page."
       signupUrl={SIGNUP_URL}
       checks={['Multi-cluster', 'Agent install in minutes', 'RBAC & audit built in']}
-      console={<ClusterConsole />}
+      highlightProduct="k8s"
       stepsHeading="From kubeconfig to covered in one afternoon"
       stepsSub="Connect a cluster, let the health rules watch it, and act on incidents with evidence attached."
       steps={[

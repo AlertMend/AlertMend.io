@@ -12,7 +12,6 @@ import { truncateDescription } from '../utils/descriptionUtils';
 import styles from './IntegrationDetailPage.module.css';
 
 const CALENDLY_URL = 'https://calendly.com/hello-alertmend/30min';
-const SIGNUP_URL = 'https://app.alertmend.io/signup?source=integration-detail';
 
 export default function IntegrationDetailPage() {
   const { slug = '' } = useParams<{ slug: string }>();
@@ -131,22 +130,17 @@ export default function IntegrationDetailPage() {
               </div>
               <div className={styles.ctaBtns}>
                 <a
-                  href={SIGNUP_URL}
+                  href={CALENDLY_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary btn-lg"
                 >
-                  Start free
+                  Book a demo
                   <Icon name="arrow" size={14} className="arrow" strokeWidth={2.5} />
                 </a>
-                <a
-                  href={CALENDLY_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-ghost btn-lg"
-                >
-                  Book a demo
-                </a>
+                <Link to="/contact" className="btn btn-ghost btn-lg">
+                  Talk with us
+                </Link>
                 {integration.docsHref && (
                   <Link
                     to={integration.docsHref}

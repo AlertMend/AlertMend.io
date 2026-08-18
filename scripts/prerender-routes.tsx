@@ -61,7 +61,7 @@ const getAllCssFiles = (entryName: string, seen = new Set<string>()): string[] =
     return []
   }
   seen.add(entryName)
-  let cssFiles: string[] = []
+  const cssFiles: string[] = []
   
   // Add CSS from this chunk
   if (chunk.css) {
@@ -88,6 +88,7 @@ const routesToPrerender = [
   '/observability',
   '/ai-rca',
   '/log-management',
+  '/gpu-mlops',
   '/auto-remediation',
   '/kubernetes-management',
   '/on-call-management',

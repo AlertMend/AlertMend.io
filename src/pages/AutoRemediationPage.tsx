@@ -4,7 +4,6 @@ import {
 } from 'lucide-react'
 import SolutionPageTemplate, {
   Accent,
-  ConsoleFrame,
 } from '../components/SolutionPageTemplate'
 
 /**
@@ -12,70 +11,6 @@ import SolutionPageTemplate, {
  */
 
 const SIGNUP_URL = 'https://app.alertmend.io/signup?service=auto-remediation'
-
-function RfConsole() {
-  const nodes = [
-    { id: '1', label: 'Alert', sub: 'Alertmanager · sev-2', state: 'done' },
-    { id: '2', label: 'AI RCA', sub: '94% · pool saturated', state: 'done' },
-    { id: '3', label: 'Slack approve', sub: '@alex · ✅', state: 'done' },
-    { id: '4', label: 'Scale pool', sub: '20 → 50', state: 'running' },
-    { id: '5', label: 'Verify p99', sub: '5m window', state: 'queued' },
-    { id: '6', label: 'Summary', sub: 'post to channel', state: 'queued' },
-  ]
-  const tone: Record<string, string> = {
-    done: 'border-emerald-400/30 bg-emerald-500/10 text-emerald-300',
-    running: 'border-violet-400/30 bg-violet-500/10 text-violet-200',
-    queued: 'border-white/10 bg-white/[0.03] text-white/45',
-  }
-
-  return (
-    <ConsoleFrame title="RF-1842 · fix-connection-pool · payments">
-      <div className="flex items-center justify-between gap-3">
-        <div>
-          <div className="text-[10px] font-semibold uppercase tracking-wide text-white/40">
-            Remediation flow
-          </div>
-          <div className="mt-0.5 text-sm font-semibold text-white">fix-connection-pool</div>
-        </div>
-        <span className="rounded-md border border-violet-400/30 bg-violet-500/10 px-2.5 py-1 text-[10px] font-bold uppercase text-violet-300">
-          2/6 running
-        </span>
-      </div>
-
-      <div className="mt-3 space-y-1.5">
-        {nodes.map((n, i) => (
-          <div
-            key={n.id}
-            className={`flex items-center gap-3 rounded-lg border px-3 py-2 ${tone[n.state]}`}
-          >
-            <span className="flex h-5 w-5 items-center justify-center rounded-md bg-black/20 font-mono text-[10px] font-bold">
-              {i + 1}
-            </span>
-            <div className="min-w-0 flex-1">
-              <div className="text-[12px] font-semibold text-white">{n.label}</div>
-              <div className="truncate font-mono text-[10px] text-white/45">{n.sub}</div>
-            </div>
-            <span className="font-mono text-[10px] font-bold uppercase tracking-wide">
-              {n.state}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-3 flex flex-wrap gap-1.5">
-        <span className="rounded-md border border-white/15 px-2 py-1 text-[10px] text-white/55">
-          Rollback armed
-        </span>
-        <span className="rounded-md border border-white/15 px-2 py-1 text-[10px] text-white/55">
-          Audit · @alex
-        </span>
-        <span className="rounded-md border border-white/15 px-2 py-1 text-[10px] text-white/55">
-          Slack · #oncall-payments
-        </span>
-      </div>
-    </ConsoleFrame>
-  )
-}
 
 function SpotlightPanel() {
   return (
@@ -103,14 +38,14 @@ export default function AutoRemediationPage() {
   return (
     <SolutionPageTemplate
       seo={{
-        title: 'Auto-Remediation & Runbooks',
+        title: 'Auto-Remediation & Approved Runbooks | AlertMend',
         description:
           'Approved remediation flows that act on incidents: visual runbooks, Slack and Teams approval gates, Kubernetes and cloud actions, rollback, and an audit trail.',
         keywords:
-          'auto-remediation, runbooks, remediation flows, Slack approval, Kubernetes automation, incident response, AlertMend AI',
+          'RF remediation, runbooks, remediation flows, Slack approval, Kubernetes automation, incident response, AlertMend',
         canonical: '/auto-remediation',
       }}
-      badge="Remediation & runbooks"
+      badge="RF · Remediation"
       headline={
         <>
           Approved workflows that <Accent>act</Accent>, with an audit trail
@@ -119,7 +54,7 @@ export default function AutoRemediationPage() {
       sub="Visual remediation flows from alert to fix: fan-out, Slack approval, Kubernetes actions, verify, and post the summary back. Suggest → approve → execute, not blind auto-heal."
       signupUrl={SIGNUP_URL}
       checks={['Slack / Teams approval', 'Rollback armed', 'Full audit trail']}
-      console={<RfConsole />}
+      highlightProduct="fix"
       stepsHeading="Suggest. Approve. Execute."
       stepsSub="The same path every time: evidence in, human gate, action out, proof written back."
       steps={[

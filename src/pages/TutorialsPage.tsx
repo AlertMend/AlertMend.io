@@ -64,7 +64,7 @@ export default function TutorialsPage() {
               <Breadcrumb items={[{ label: 'Tutorials' }]} />
             </div>
             <div className="text-center mb-20">
-              <div className="inline-block px-5 py-2 bg-gradient-to-r from-primary-50 to-primary-100 text-primary-700 rounded-full text-sm font-bold mb-6 shadow-lg">
+              <div className="inline-block px-5 py-2 bg-gradient-to-r from-brand-50 to-brand-100 text-brand-700 rounded-full text-sm font-bold mb-6 shadow-lg">
                 Tutorials
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6 leading-tight">
@@ -79,10 +79,10 @@ export default function TutorialsPage() {
               {tutorials.map((tutorial, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-3xl p-8 border-2 border-gray-200 hover:border-primary-400 hover:shadow-2xl transition-all duration-300"
+                  className="bg-white rounded-3xl p-8 border-2 border-gray-200 hover:border-brand-400 hover:shadow-2xl transition-all duration-300"
                 >
                   <div className="flex items-center justify-between mb-4">
-                    <div className="px-3 py-1 bg-primary-50 text-primary-700 rounded-lg text-xs font-bold">
+                    <div className="px-3 py-1 bg-brand-50 text-brand-700 rounded-lg text-xs font-bold">
                       {tutorial.platform}
                     </div>
                     <div className="flex items-center gap-1 text-gray-500 text-sm">
@@ -91,14 +91,14 @@ export default function TutorialsPage() {
                     </div>
                   </div>
                   <div className="flex items-center gap-2 mb-4">
-                    <PlayCircle className="h-6 w-6 text-primary-600" />
+                    <PlayCircle className="h-6 w-6 text-brand-600" />
                     <h3 className="text-xl font-black text-gray-900">{tutorial.title}</h3>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600 font-medium">{tutorial.level}</span>
                     <a
                       href="#"
-                      className="text-primary-600 hover:text-primary-700 font-bold text-sm flex items-center gap-2"
+                      className="text-brand-600 hover:text-brand-700 font-bold text-sm flex items-center gap-2"
                     >
                       Watch
                       <ArrowRight className="h-4 w-4" />

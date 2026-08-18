@@ -1,16 +1,17 @@
 import { useEffect, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, CheckCircle2, type LucideIcon } from 'lucide-react'
+import PlatformBoardMock from './mocks/PlatformBoardMock'
+import PlatformBoardStage from './mocks/PlatformBoardStage'
+import type { HomeProductId } from '../data/homeProducts'
 import SEO from './SEO'
+import styles from './SolutionPageTemplate.module.css'
 
 /**
- * SolutionPageTemplate — the shared skeleton for the redesigned product
- * pages (/kubernetes-management, /on-call-management,
- * /kubernetes-cost-optimization). Mirrors the structure that already ships
- * on /observability: dark violet hero with a product console, a 3-step
- * pipeline, a 6-tile feature bento, a dark scenario spotlight, and a CTA
- * band. All violet brand + Inter, all honest copy — the page-specific
- * content (and the console / spotlight mocks) come in as props.
+ * SolutionPageTemplate — the shared skeleton for the product pages.
+ * White split hero: copy left, isometric product board right (same chrome
+ * as the homepage, content focused on this product). Then a 3-step pipeline,
+ * feature bento, dark scenario spotlight, and a CTA band.
  */
 
 export type SolutionStep = {
@@ -44,9 +45,13 @@ export type SolutionPageProps = {
   /** Headline; wrap the accent words in <Accent> from this module. */
   headline: ReactNode
   sub: string
-  signupUrl: string
+  signupUrl?: string
   checks: string[]
-  console: ReactNode
+  /** HOME_PRODUCTS id — renders that product's isometric workspace in the hero. */
+  highlightProduct: HomeProductId
+  /** Optional prose band between hero and steps, for pages that need to define
+   *  a term before selling the feature set. */
+  explainer?: ReactNode
   stepsHeading: string
   stepsSub: string
   steps: SolutionStep[]
@@ -60,9 +65,9 @@ export type SolutionPageProps = {
 
 const DEMO_URL = 'https://calendly.com/hello-alertmend/30min'
 
-/** Gradient accent span for headline words. */
+/** Accent span for headline words. Violet-600 on the white hero. */
 export function Accent({ children }: { children: ReactNode }) {
-  return <span className="text-violet-300">{children}</span>
+  return <span className="text-violet-600">{children}</span>
 }
 
 export default function SolutionPageTemplate(p: SolutionPageProps) {
@@ -80,56 +85,51 @@ export default function SolutionPageTemplate(p: SolutionPageProps) {
       />
 
       {/* ============ Hero ============ */}
-      <section
-        className="relative overflow-hidden"
-        style={{
-          background:
-            'radial-gradient(70% 55% at 80% 10%, rgba(124, 58, 237, 0.18), transparent 55%), linear-gradient(180deg, #0a0a0b 0%, #0c0c0e 55%, #09090b 100%)',
-        }}
-      >
-        <div className="relative mx-auto max-w-6xl px-6 pt-14 pb-16 md:pt-20 md:pb-20">
-          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)] lg:gap-12">
-            <div className="lg:pt-2">
-              <span className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-violet-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-violet-400" />
-                {p.badge}
-              </span>
-              <h1 className="mt-5 text-[2rem] font-bold leading-[1.12] tracking-tight text-white md:text-[2.65rem] [text-wrap:balance]">
-                {p.headline}
-              </h1>
-              <p className="mt-4 max-w-md text-[15px] leading-relaxed text-zinc-400 md:text-base">
-                {p.sub}
-              </p>
-              <div className="mt-7 flex flex-wrap gap-2.5">
-                <a
-                  href={p.signupUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold !text-zinc-950 transition hover:bg-zinc-100"
-                >
-                  Start free <ArrowRight className="h-4 w-4" />
-                </a>
-                <a
-                  href={DEMO_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-transparent px-5 py-2.5 text-sm font-semibold !text-white transition hover:border-white/30 hover:bg-white/[0.04]"
-                >
-                  Book a demo
-                </a>
-              </div>
-              <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[13px] text-zinc-500">
-                {p.checks.map((t) => (
-                  <span key={t} className="inline-flex items-center gap-1.5">
-                    <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400/90" strokeWidth={2} /> {t}
-                  </span>
-                ))}
-              </div>
+      <section className={styles.hero}>
+        <div className={styles.wash} aria-hidden />
+        <div className={styles.inner}>
+          <div className={styles.copy}>
+            <span className={styles.badge}>
+              <span className={styles.badgeDot} />
+              {p.badge}
+            </span>
+            <h1 className={styles.headline}>{p.headline}</h1>
+            <p className={styles.sub}>{p.sub}</p>
+            <div className={styles.actions}>
+              <a
+                href={DEMO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.primary}
+              >
+                Book a demo <ArrowRight className="h-4 w-4" />
+              </a>
+              <Link to="/contact" className={styles.secondary}>
+                Talk with us
+              </Link>
             </div>
-            {p.console}
+            <div className={styles.checks}>
+              {p.checks.map((t) => (
+                <span key={t} className={styles.check}>
+                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" strokeWidth={2} /> {t}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className={styles.visual}>
+            <PlatformBoardStage split>
+              <PlatformBoardMock activeProduct={p.highlightProduct} />
+            </PlatformBoardStage>
           </div>
         </div>
       </section>
+
+      {/* ============ Explainer (optional) ============ */}
+      {p.explainer ? (
+        <section className="border-b border-zinc-100 bg-white">
+          <div className="mx-auto max-w-6xl px-6 py-14 md:py-16">{p.explainer}</div>
+        </section>
+      ) : null}
 
       {/* ============ Steps ============ */}
       <section className="border-b border-zinc-100 bg-zinc-50/70">
@@ -205,6 +205,66 @@ export default function SolutionPageTemplate(p: SolutionPageProps) {
         </div>
       </section>
 
+      {/* ============ Works with ============ */}
+      {/* Every product page states the same thing: which platforms it runs on
+          and which alerting sources it ingests. The live site carried this on
+          each solution page ("Integrate with Alertmanager, Datadog, Prometheus,
+          or webhooks" / "AWS ECS"); the redesign dropped it, which cost the
+          product pages both the platform vocabulary and their only inbound
+          links to the 18 /integrations/* pages. */}
+      <section className="border-t border-zinc-100 bg-white">
+        <div className="mx-auto max-w-6xl px-6 py-12 md:py-14">
+          <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] md:gap-12">
+            <div>
+              <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-violet-600">
+                Works with
+              </span>
+              <h2 className="mt-3 text-[1.35rem] font-bold tracking-tight text-zinc-950">
+                Runs on Kubernetes, AWS ECS, EC2 and plain VMs
+              </h2>
+              <p className="mt-3 text-[14px] leading-relaxed text-zinc-500">
+                Containers or virtual machines, self-hosted or managed. AlertMend ingests the
+                alerts you already have — Prometheus Alertmanager, Datadog, Grafana or a plain
+                webhook — so SRE and DevOps teams cut MTTR without swapping out the stack or
+                re-instrumenting anything.
+              </p>
+              <p className="mt-3 text-[14px] leading-relaxed text-zinc-500">
+                One set of AI operations across the fleet: pair this with{' '}
+                <Link to="/kubernetes-cost-optimization" className="font-medium text-violet-700 underline-offset-2 hover:underline">
+                  Kubernetes cost optimization
+                </Link>{' '}
+                and{' '}
+                <Link to="/gpu-mlops" className="font-medium text-violet-700 underline-offset-2 hover:underline">
+                  GPU &amp; MLOps monitoring
+                </Link>{' '}
+                to cover spend and accelerators too.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+              {[
+                { label: 'Kubernetes', to: '/integrations/kubernetes' },
+                { label: 'AWS ECS & EC2', to: '/integrations/aws' },
+                { label: 'Prometheus', to: '/integrations/prometheus' },
+                { label: 'Datadog', to: '/integrations/datadog' },
+                { label: 'Grafana', to: '/integrations/grafana' },
+                { label: 'Google Cloud', to: '/integrations/google-cloud' },
+                { label: 'Azure', to: '/integrations/azure' },
+                { label: 'Slack', to: '/integrations/slack' },
+                { label: 'Microsoft Teams', to: '/integrations/ms-teams' },
+              ].map((i) => (
+                <Link
+                  key={i.to}
+                  to={i.to}
+                  className="rounded-lg border border-zinc-200 bg-white px-3 py-2.5 text-[13px] font-medium text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-950"
+                >
+                  {i.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ============ Spotlight (dark scenario) ============ */}
       <section className="bg-zinc-950 text-white">
         <div className="mx-auto max-w-6xl px-6 py-14 md:py-16">
@@ -254,21 +314,19 @@ export default function SolutionPageTemplate(p: SolutionPageProps) {
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-2.5">
             <a
-              href={p.signupUrl}
+              href={DEMO_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-zinc-950 px-5 py-2.5 text-sm font-semibold !text-white transition hover:bg-zinc-800"
             >
-              Start free <ArrowRight className="h-4 w-4" />
+              Book a demo <ArrowRight className="h-4 w-4" />
             </a>
-            <a
-              href={DEMO_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/contact"
               className="inline-flex items-center gap-2 rounded-lg border border-zinc-200 bg-white px-5 py-2.5 text-sm font-semibold text-zinc-800 transition hover:border-zinc-300"
             >
-              Book a demo
-            </a>
+              Talk with us
+            </Link>
           </div>
         </div>
       </section>
@@ -288,7 +346,7 @@ export function ConsoleFrame({
 }) {
   return (
     <div
-      className="overflow-hidden rounded-[10px] border border-white/[0.08] shadow-[0_24px_80px_-24px_rgba(0,0,0,0.85)]"
+      className="overflow-hidden rounded-[10px] border border-zinc-200 shadow-[0_24px_60px_-28px_rgba(24,24,27,0.45)]"
       style={{
         background: 'linear-gradient(180deg, #121214 0%, #0c0c0e 100%)',
       }}

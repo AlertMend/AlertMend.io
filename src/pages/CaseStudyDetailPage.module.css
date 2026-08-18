@@ -9,7 +9,9 @@
   padding-bottom: 0;
 }
 
-.notFound {
+/* Scoped for the same reason as .heroGrid: the global `.container` also lands
+   on this element and would flatten the padding to `0 24px`. */
+.page .notFound {
   padding: 80px 24px;
   text-align: center;
   display: grid;
@@ -27,16 +29,17 @@
 /* ---- Hero ---- */
 
 .hero {
-  padding-top: 20px !important;
+  padding-top: 22px !important;
   padding-bottom: 0 !important;
 }
 
-.heroGrid {
+/* These elements also carry the global `.container` utility, which sets
+   max-width and padding at the same specificity and wins on source order.
+   Scoping under `.page` keeps the layout from being silently discarded. */
+.page .heroGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
-  gap: 24px 36px;
-  align-items: end;
-  padding-bottom: 28px;
+  gap: 22px;
+  padding-bottom: 32px;
   max-width: 960px;
 }
 
@@ -59,20 +62,30 @@
   font-weight: 600;
 }
 
+/* Company name, logo and category read as one kicker above the h1: three of the
+   four case study titles start with a verb and need the company as subject. */
 .heroBrand {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px 14px;
-  margin-bottom: 12px;
+  gap: 8px 10px;
+  margin-bottom: 14px;
+}
+
+.company {
+  font-size: 14px;
+  font-weight: 650;
+  letter-spacing: -0.005em;
+  color: #c4b5fd;
 }
 
 .cat {
   display: inline-flex;
-  padding: 4px 9px;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  margin-left: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: #d4d4d8;
   font-size: 11px;
   font-weight: 650;
@@ -81,57 +94,56 @@
 
 .logo {
   display: block;
-  height: 22px;
+  height: 20px;
   width: auto;
-  max-width: 120px;
+  max-width: 110px;
   object-fit: contain;
   filter: brightness(0) invert(1);
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 .logoFallback {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: #e4e4e7;
-  font-size: 13px;
-  font-weight: 650;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #d4d4d8;
 }
 
 .h1 {
-  margin: 0 0 8px;
-  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  margin: 0 0 18px;
+  font-size: clamp(1.75rem, 3.4vw, 2.5rem);
   font-weight: 700;
-  letter-spacing: -0.03em;
-  line-height: 1.18;
+  letter-spacing: -0.032em;
+  line-height: 1.12;
   color: #fafafa;
-  max-width: 28ch;
+  max-width: 30ch;
+  text-wrap: balance;
 }
 
-.companyLine {
-  margin: 0 0 6px;
-  font-size: 14px;
-  font-weight: 650;
-  color: #c4b5fd;
+.pinned {
+  white-space: nowrap;
 }
 
 .metaLine {
-  margin: 0 0 8px;
-  font-size: 13px;
-  line-height: 1.4;
-  color: rgba(244, 244, 245, 0.55);
+  margin: 0 0 12px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(244, 244, 245, 0.62);
 }
 
-.infra {
-  margin: 0;
-  font-size: 12.5px;
-  line-height: 1.45;
-  color: rgba(244, 244, 245, 0.5);
+.stack {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 10px;
 }
 
-.infra span {
-  display: inline-block;
-  margin-right: 8px;
+.stackLabel {
   font-size: 10.5px;
   font-weight: 650;
   letter-spacing: 0.05em;
@@ -140,20 +152,39 @@
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
+.stackChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  display: inline-flex;
+  padding: 2px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(244, 244, 245, 0.68);
+  font-size: 11.5px;
+  line-height: 1.55;
+}
+
+/* Auto-fit collapses the empty tracks, so 3 and 4 stats both fill the row. */
 .heroStats {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 8px;
 }
 
 .heroStat {
-  padding: 12px 14px;
+  padding: 11px 13px 12px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.04);
 }
 
 .heroStatValue {
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.1;
@@ -162,9 +193,9 @@
 }
 
 .heroStatLabel {
-  font-size: 12.5px;
+  font-size: 12px;
   line-height: 1.4;
-  color: rgba(244, 244, 245, 0.55);
+  color: rgba(244, 244, 245, 0.58);
 }
 
 /* ---- Body ---- */
@@ -174,11 +205,13 @@
   border-top: 1px solid #f4f4f5;
 }
 
-.content {
-  max-width: 860px;
+/* Same max-width as .heroGrid so the hero copy and the body cards share
+   one left edge. */
+.page .content {
+  max-width: 960px;
   margin: 0 auto;
-  padding-top: 24px;
-  padding-bottom: 48px;
+  padding-top: 30px;
+  padding-bottom: 56px;
 }
 
 .split {
@@ -212,6 +245,8 @@
   border-bottom: 0;
 }
 
+/* Tailwind preflight strips markers from every `ul`, which left these items
+   indented with nothing in the gutter. */
 .list {
   margin: 0;
   padding-left: 1.1rem;
@@ -220,6 +255,11 @@
   font-size: 14px;
   line-height: 1.5;
   color: #3f3f46;
+  list-style: disc outside;
+}
+
+.list li::marker {
+  color: #a1a1aa;
 }
 
 .features {
@@ -335,13 +375,17 @@
   color: #71717a;
 }
 
+/* Fills the content column like every other card on the page. It used to be
+   capped at 640px, which already sat short of the old 860px column and reads
+   as a ragged edge now that .content is 960px — .cta needed the same fix and
+   got it via `max-width: none`. The measure is capped on the paragraph
+   instead, so the card lines up while the quote itself stays readable. */
 .quote {
   margin: 0 0 18px;
   padding: 16px 18px;
   border-left: 3px solid #7c3aed;
   border-radius: 0 8px 8px 0;
   background: #fafafa;
-  max-width: 640px;
 }
 
 .quote p {
@@ -349,6 +393,7 @@
   font-size: 15px;
   line-height: 1.55;
   color: #18181b;
+  max-width: 60ch;
 }
 
 .quote footer {
@@ -419,8 +464,17 @@
   color: #18181b;
 }
 
-.ctaBtnPrimary:hover {
+/* `body.alertmend-dark a { color: inherit }` (0,1,2) outranks a bare
+   `.ctaBtnPrimary` (0,1,0), so this anchor inherited the CTA's near-white
+   text and rendered white-on-white. */
+.cta a.ctaBtnPrimary {
+  color: #18181b;
+}
+
+.ctaBtnPrimary:hover,
+.cta a.ctaBtnPrimary:hover {
   background: #f4f4f5;
+  color: #18181b;
 }
 
 .ctaBtnGhost {
@@ -435,18 +489,11 @@
 }
 
 @media (max-width: 900px) {
-  .heroGrid {
-    grid-template-columns: 1fr;
-    gap: 18px;
-    align-items: start;
-  }
-
-  .heroStats {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .h1 {
-    max-width: none;
+  /* Media queries add no specificity, so this has to match the `.page .heroGrid`
+     base selector or the base rule wins. */
+  .page .heroGrid {
+    gap: 20px;
+    padding-bottom: 28px;
   }
 
   .split {
@@ -455,11 +502,18 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 700px) {
   .heroStats {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  /* An odd stat count would otherwise leave a ragged hole in the last row. */
+  .heroStat:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
   .features {
     grid-template-columns: 1fr;
   }
@@ -476,7 +530,7 @@
   .logo {
     filter: none;
     padding: 4px 6px;
-    border-radius: 4px;
+    border-radius: 6px;
     background: #fff;
   }
 }

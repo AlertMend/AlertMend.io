@@ -23,20 +23,19 @@ export default function SecurityPage() {
     {
       icon: CheckCircle2,
       title: 'Compliance',
-      description: 'We maintain SOC 2 Type II, ISO 27001, and GDPR compliance certifications.',
+      description: 'SOC 2 Type II, ISO 27001, and GDPR alignment is in progress. Ask us about the current control set.',
     },
   ]
   
-  // Generate unique meta description for security page
-  const baseDescription = "AlertMend AI: Secure your infrastructure with our AIOps platform. Benefit from compliance certifications and advanced security. Protect your data."
+  const baseDescription = "AlertMend security for production ops: encryption, RBAC, audit logs, and compliance programs in progress for SOC 2 Type II, ISO 27001, and GDPR."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'security', 'security')
 
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="AlertMend AI: Cloud Security & Compliance Solutions"
+        title="AlertMend: Security & Compliance"
         description={uniqueDescription}
-        keywords="AlertMend security, enterprise security, SOC 2, ISO 27001, GDPR compliance, data encryption, infrastructure security, AIOps security"
+        keywords="AlertMend security, enterprise security, SOC 2, ISO 27001, GDPR compliance, data encryption, infrastructure security"
         canonical="/security"
       />
       <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden hero-dark">
@@ -52,7 +51,7 @@ export default function SecurityPage() {
                 Security & Compliance
               </h1>
               <p className="text-xl md:text-2xl text-brand-700 max-w-3xl mx-auto leading-relaxed mb-12">
-                Your infrastructure data is protected with enterprise-grade security measures and compliance certifications.
+                Enterprise-grade controls for production data, with compliance certifications in progress.
               </p>
             </div>
 

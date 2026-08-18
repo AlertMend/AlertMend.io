@@ -59,7 +59,7 @@ export default function CareersPage() {
                 Join Our Team
               </h1>
               <p className="text-xl md:text-2xl text-brand-700 max-w-3xl mx-auto leading-relaxed mb-12">
-                Help us build the future of autonomous infrastructure management. We're looking for talented individuals who share our passion for AIOps and reliability.
+                Help us build production ops software: observe everything, find root cause, and approve the fix. We're looking for people who care about reliability and clear evidence.
               </p>
             </div>
 
@@ -67,7 +67,7 @@ export default function CareersPage() {
               {jobs.map((job, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-3xl p-8 border-2 border-gray-200 hover:border-primary-400 hover:shadow-2xl transition-all duration-300"
+                  className="bg-white rounded-3xl p-8 border-2 border-gray-200 hover:border-brand-400 hover:shadow-2xl transition-all duration-300"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div>
@@ -83,13 +83,13 @@ export default function CareersPage() {
                         </div>
                       </div>
                     </div>
-                    <div className="px-3 py-1 bg-primary-50 text-primary-700 rounded-lg text-xs font-bold">
+                    <div className="px-3 py-1 bg-brand-50 text-brand-700 rounded-lg text-xs font-bold">
                       {job.department}
                     </div>
                   </div>
                   <a
                     href="#"
-                    className="text-primary-600 hover:text-primary-700 font-bold text-sm flex items-center gap-2"
+                    className="text-brand-600 hover:text-brand-700 font-bold text-sm flex items-center gap-2"
                   >
                     View Details
                     <ArrowRight className="h-4 w-4" />

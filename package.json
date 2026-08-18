@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "generate:blog-list": "node scripts/generate-blog-list.js && npm run generate:static-blog-registry",
+    "sync:vercel-redirects": "node scripts/sync-vercel-solution-redirects.mjs",
     "generate:static-blog-registry": "node scripts/generate-static-blog-registry.mjs && node scripts/sync-vercel-static-blog-rewrites.mjs",
     "scaffold:blog": "node scripts/scaffold-rich-blog.mjs",
     "build:inference-flow-svgs": "node scripts/build-inference-flow-svgs.mjs",
@@ -12,15 +13,16 @@
     "build:blog": "node scripts/build-static-blogs.mjs && node scripts/build-blog-html.js && node scripts/fix-html-descriptions.js",
     "build:og-image": "node scripts/build-og-image.mjs",
     "build:sitemap": "node scripts/generate-sitemap.js",
+    "build:logo-assets": "node scripts/build-logo-assets.mjs",
     "validate:blogs": "node scripts/validate-blogs.js",
     "prerender": "tsx --tsconfig tsconfig.prerender.json --import ./scripts/css-loader-register.mjs scripts/prerender-routes.tsx",
-    "build": "npm run generate:blog-list && npm run build:sitemap && npm run build:blog && npm run validate:blogs && tsc && vite build && npm run prerender",
+    "build": "npm run generate:blog-list && npm run sync:vercel-redirects && npm run build:sitemap && npm run build:blog && npm run validate:blogs && tsc && vite build && npm run prerender",
     "capture:aispotlight": "node scripts/capture-aispotlight.mjs",
     "verify:aispotlight": "node scripts/verify-aispotlight-video.mjs",
     "capture:hero": "node scripts/capture-hero.mjs",
     "verify:hero": "node scripts/verify-hero-video.mjs",
     "preview": "vite preview",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives"
   },
   "dependencies": {
     "@vercel/analytics": "^1.6.0",

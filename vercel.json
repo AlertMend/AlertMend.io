@@ -9,6 +9,21 @@
       "permanent": true
     },
     {
+      "source": "/solutions/ai-monitoring-and-observability",
+      "destination": "/observability",
+      "permanent": true
+    },
+    {
+      "source": "/solutions/ai-rca",
+      "destination": "/ai-rca",
+      "permanent": true
+    },
+    {
+      "source": "/solutions/auto-remediation",
+      "destination": "/auto-remediation",
+      "permanent": true
+    },
+    {
       "source": "/solutions/cost-optimization",
       "destination": "/kubernetes-cost-optimization",
       "permanent": true
@@ -19,23 +34,23 @@
       "permanent": true
     },
     {
-      "source": "/solutions/auto-remediation",
-      "destination": "/auto-remediation",
-      "permanent": true
-    },
-    {
       "source": "/solutions/kubernetes-management",
       "destination": "/kubernetes-management",
       "permanent": true
     },
     {
-      "source": "/solutions/on-call-management",
-      "destination": "/on-call-management",
+      "source": "/solutions/log-management",
+      "destination": "/log-management",
       "permanent": true
     },
     {
-      "source": "/solutions/log-management",
-      "destination": "/log-management",
+      "source": "/solutions/observability",
+      "destination": "/observability",
+      "permanent": true
+    },
+    {
+      "source": "/solutions/on-call-management",
+      "destination": "/on-call-management",
       "permanent": true
     }
   ],

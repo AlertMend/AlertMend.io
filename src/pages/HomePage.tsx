@@ -18,9 +18,9 @@ export default function HomePage() {
   return (
     <>
       <SEO
-        title="AlertMend: AI-Powered Observability and Automation"
+        title="AlertMend: AI Observability & Automation for Kubernetes & AWS"
         description={uniqueDescription}
-        keywords="AIOps, observability, APM, distributed tracing, OpenTelemetry, eBPF, AI RCA, auto-remediation, FinOps, on-call, log management"
+        keywords="AIOps, observability, APM, distributed tracing, OpenTelemetry, eBPF, AI RCA, auto-remediation, FinOps, on-call, log management, Prometheus, Datadog, Grafana, Alertmanager"
         canonical="/"
         structuredData={{
           '@context': 'https://schema.org',

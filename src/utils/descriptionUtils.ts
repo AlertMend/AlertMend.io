@@ -128,26 +128,26 @@ export function ensureUniqueMetaDescription(
   if (pageType === 'solution' && pageIdentifier) {
     // For solution pages, add solution-specific terms with more unique context
     const solutionTerms: Record<string, string> = {
-      'auto-remediation': 'automated incident remediation and self-healing infrastructure',
-      'kubernetes-management': 'AI-powered Kubernetes cluster management and operations',
-      'on-call-management': 'on-call management and multi-channel incident alerts',
-      'kubernetes-cost-optimization': 'Kubernetes cost optimization and resource management',
+      'auto-remediation': 'approved RF remediation with audit trails',
+      'kubernetes-management': 'Kubernetes management with incidents and RCA',
+      'on-call-management': 'on-call schedules, escalations, and AI triage',
+      'kubernetes-cost-optimization': 'FinOps right-sizing and recoverable spend',
     }
     const term = solutionTerms[pageIdentifier] || pageIdentifier
-    uniqueSuffix = ` Start using ${term} with AlertMend AI.`
+    uniqueSuffix = ` Start using ${term} with AlertMend.`
   } else if (pageType === 'blog' && pageIdentifier) {
     // For blog pages, the title already makes it unique, just ensure it's in description
     if (!description.toLowerCase().includes(pageIdentifier.toLowerCase().substring(0, 20))) {
       // Extract key terms from slug
       const keyTerms = pageIdentifier.split('-').slice(0, 2).join(' ')
-      uniqueSuffix = ` Learn about ${keyTerms} with AlertMend AI.`
+      uniqueSuffix = ` Learn about ${keyTerms} with AlertMend.`
     }
   } else if (pageType === 'case-study' && pageIdentifier) {
     uniqueSuffix = ` Read the full ${pageIdentifier} case study.`
   } else if (pageType === 'pricing') {
-    uniqueSuffix = ` Choose from flexible pricing plans. Start free or contact for enterprise pricing.`
+    uniqueSuffix = ` Free playground to start, then book a demo for production plans.`
   } else if (pageType === 'about') {
-    uniqueSuffix = ` Meet our founders, advisors, and the team building autonomous AIOps solutions.`
+    uniqueSuffix = ` Meet the founders and advisors building signal-to-fix production ops.`
   } else if (pageType === 'contact') {
     uniqueSuffix = ` Get in touch for demos, support, or partnership opportunities.`
   } else if (pageType === 'careers') {
@@ -155,11 +155,11 @@ export function ensureUniqueMetaDescription(
   } else if (pageType === 'partners') {
     uniqueSuffix = ` Join our partner program for technology partners, resellers, and integrators.`
   } else if (pageType === 'documentation') {
-    uniqueSuffix = ` Access setup guides, API docs, and tutorials for Kubernetes, VMs, and ECS.`
+    uniqueSuffix = ` Access setup guides, API docs, and tutorials for Kubernetes, VMs, and cloud.`
   } else if (pageType === 'security') {
-    uniqueSuffix = ` Enterprise-grade security with SOC 2, ISO 27001, and GDPR compliance.`
+    uniqueSuffix = ` Encryption, RBAC, audit logs, and compliance programs in progress.`
   } else if (pageType === 'compliance') {
-    uniqueSuffix = ` We follow industry best practices and maintain highest compliance standards.`
+    uniqueSuffix = ` SOC 2 Type II, ISO 27001, and GDPR alignment — certifications in progress.`
   } else if (pageType === 'privacy') {
     uniqueSuffix = ` Understand how we collect, use, and protect your data and information.`
   } else if (pageType === 'terms') {

@@ -26,9 +26,46 @@ function CompanyLogo({ company, logo }: { company: string; logo?: string }) {
   return (
     <div className={styles.logoFallback} aria-hidden>
       <Building2 size={16} strokeWidth={1.7} />
-      <span>{company}</span>
     </div>
   )
+}
+
+/* Browsers treat an existing hyphen as a soft wrap opportunity, which split
+   "Off-Hours" across two lines. Hyphenated words are pinned instead. */
+function renderTitle(title: string) {
+  return title.split(/(\s+)/).map((part, index) =>
+    part.includes('-') ? (
+      <span key={`${part}-${index}`} className={styles.pinned}>
+        {part}
+      </span>
+    ) : (
+      part
+    ),
+  )
+}
+
+/* `infrastructure` mixes list form ("ECS, SQS, Lambda") with prose that carries
+   commas inside parentheses ("Kubernetes (3,000+ Pods in Production)"), so the
+   split has to ignore any comma nested in brackets. */
+function splitStack(infrastructure?: string): string[] {
+  if (!infrastructure) return []
+  const parts: string[] = []
+  let depth = 0
+  let current = ''
+
+  for (const char of infrastructure) {
+    if (char === '(') depth += 1
+    if (char === ')') depth = Math.max(0, depth - 1)
+    if (char === ',' && depth === 0) {
+      parts.push(current)
+      current = ''
+      continue
+    }
+    current += char
+  }
+  parts.push(current)
+
+  return parts.map((part) => part.trim()).filter(Boolean)
 }
 
 function pctSaved(before: string, after: string): string {
@@ -78,6 +115,7 @@ export default function CaseStudyDetailPage() {
     study.companySize ? `${study.companySize} employees` : null,
     study.region,
   ].filter(Boolean) as string[]
+  const stackItems = splitStack(study.infrastructure)
 
   return (
     <div className={styles.page}>
@@ -125,18 +163,25 @@ export default function CaseStudyDetailPage() {
               ]}
             />
             <div className={styles.heroBrand}>
-              <span className={styles.cat}>{study.category}</span>
               <CompanyLogo company={study.company} logo={study.logo} />
+              <span className={styles.company}>{study.company}</span>
+              <span className={styles.cat}>{study.category}</span>
             </div>
-            <h1 className={styles.h1}>{study.title}</h1>
-            <p className={styles.companyLine}>{study.company}</p>
+            <h1 className={styles.h1}>{renderTitle(study.title)}</h1>
             {metaBits.length > 0 ? (
               <p className={styles.metaLine}>{metaBits.join(' · ')}</p>
             ) : null}
-            {study.infrastructure ? (
-              <p className={styles.infra}>
-                <span>Stack</span> {study.infrastructure}
-              </p>
+            {stackItems.length > 0 ? (
+              <div className={styles.stack}>
+                <span className={styles.stackLabel}>Stack</span>
+                <div className={styles.stackChips}>
+                  {stackItems.map((item) => (
+                    <span key={item} className={styles.chip}>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
             ) : null}
           </div>
 

@@ -25,13 +25,13 @@ export default function PartnersPage() {
   ]
   
   // Generate unique meta description for partners page
-  const baseDescription = "Partner with AlertMend AI to help organizations achieve autonomous infrastructure operations. Join our ecosystem of technology partners, resellers, and system integrators."
+  const baseDescription = "Partner with AlertMend to deliver observability, AI RCA, and approved remediations. Join our ecosystem of technology partners, resellers, and system integrators."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'partners', 'partners')
 
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="Partner with AlertMend AI: Improve Infrastructure Management"
+        title="Partner with AlertMend"
         description={uniqueDescription}
         canonical="/partners"
       />
@@ -48,7 +48,7 @@ export default function PartnersPage() {
                 Partner With Us
               </h1>
               <p className="text-xl md:text-2xl text-brand-700 max-w-3xl mx-auto leading-relaxed mb-12">
-                Join our partner ecosystem and help organizations achieve autonomous infrastructure operations.
+                Join our partner ecosystem and help teams ship observability, AI RCA, and approved remediations.
               </p>
             </div>
 

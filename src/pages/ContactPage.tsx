@@ -14,8 +14,7 @@ export default function ContactPage() {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
   
-  // Generate unique meta description for contact page
-  const baseDescription = "Contact AlertMend AI for AIOps. Automate infrastructure and achieve zero downtime with our platform. Get in touch today!"
+  const baseDescription = "Contact AlertMend about production ops, AI RCA, and approved remediations. Book a demo or send a message."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'contact', 'contact')
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -94,7 +93,11 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-bold text-brand-900 mb-1">Email</h3>
-                      <a href="mailto:hello@alertmend.io" className="text-brand-600 hover:text-brand-700 font-medium">
+                      {/* `body.alertmend-dark a { color: inherit }` (0,1,2) outranks a plain
+                          utility, and brand-600 only reaches ~3.4:1 on the hero gradient
+                          anyway, so pin violet-300 — the shade already used for violet
+                          accents on dark surfaces — with the `!` modifier. */}
+                      <a href="mailto:hello@alertmend.io" className="!text-violet-300 hover:!text-violet-200 font-medium">
                         hello@alertmend.io
                       </a>
                     </div>
@@ -116,7 +119,7 @@ export default function ContactPage() {
 
               <div>
                 <header className="mb-4">
-                  <strong>Fill in your details</strong>
+                  <strong className="!text-white">Fill in your details</strong>
                 </header>
                 <form 
                   onSubmit={handleSubmit}
@@ -204,7 +207,7 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={formStatus === 'submitting'}
-                    className="wpcf7-form-control wpcf7-submit has-spinner w-full bg-gradient-to-r from-brand-800 to-brand-900 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-brand-900 hover:to-brand-900 transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="wpcf7-form-control wpcf7-submit has-spinner w-full bg-white !text-zinc-950 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-zinc-100 transition-all shadow-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {formStatus === 'submitting' ? 'Sending...' : 'Send'}
                     {formStatus !== 'submitting' && <Send className="h-5 w-5" />}

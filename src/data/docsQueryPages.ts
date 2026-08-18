@@ -73,7 +73,7 @@ predicate := field operator operand`,
         type: 'ul',
         items: [
           '~ is regex match (legacy like)',
-          'Strings use "..." or \'...\' with \\\" and \\\\ escapes',
+          'Strings use "..." or \'...\' with \\" and \\\\ escapes',
           'Date >= accepts durations like 5d, 1h, -30m (within the last …)',
           'Optional trailing LIMIT <n>',
           'Dynamic labels: agent_labels[\'some-key\']',

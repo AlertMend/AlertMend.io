@@ -8,7 +8,7 @@ export default function AboutPage() {
     {
       icon: Target,
       title: 'Mission',
-      description: 'Empower teams to achieve zero-downtime operations through autonomous AI-driven infrastructure management.',
+      description: 'Help teams go from signal to root cause to an approved fix — with evidence, audit trails, and human gates.',
     },
     {
       icon: Users,
@@ -27,16 +27,15 @@ export default function AboutPage() {
     },
   ]
   
-  // Generate unique meta description for about page
-  const baseDescription = "Learn about AlertMend AI's mission to empower teams with autonomous AI-driven infrastructure management. Meet our founders and advisors who are revolutionizing AIOps."
+  const baseDescription = "AlertMend helps teams observe production, find root cause with AI RCA, and ship approved remediations. Meet the founders and advisors behind the platform."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'about', 'about')
 
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="AlertMend AI: AIOps for Infrastructure in 2025"
+        title="About AlertMend: Production ops from signal to approved fix"
         description={uniqueDescription}
-        keywords="About AlertMend, AlertMend team, AIOps founders, infrastructure automation team, SRE team, DevOps experts"
+        keywords="About AlertMend, AlertMend team, AIOps founders, infrastructure automation team, SRE team, DevOps experts, Kubernetes, AWS ECS, AI operations"
         canonical="/about"
         breadcrumbData={{
           items: [{ label: 'About' }]
@@ -52,10 +51,10 @@ export default function AboutPage() {
                 About Us
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-900 mb-6 leading-tight">
-                Building the Future of AIOps
+                From signal to root cause to an approved fix
               </h1>
               <p className="text-xl md:text-2xl text-brand-700 max-w-3xl mx-auto leading-relaxed mb-12">
-                We're on a mission to eliminate manual infrastructure management and make autonomous operations a reality for every team.
+                We build production operations software that observes your cloud, explains incidents with evidence, and remediates only after approval.
               </p>
             </div>
 
@@ -63,13 +62,13 @@ export default function AboutPage() {
               <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 md:p-10 lg:p-12 border border-brand-200/50 shadow-lg">
                 <div className="space-y-8">
                   <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                    AlertMend AI was born from the frustration of endless on-call rotations, 3 AM incident responses, and the constant firefighting that comes with managing complex infrastructure across Kubernetes, VMs, and ECS.
+                    AlertMend was born from endless on-call rotations, 3 AM incident responses, and the constant firefighting that comes with managing complex infrastructure across Kubernetes, VMs, and cloud.
                   </p>
                   <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                    Our team of experienced SREs and DevOps engineers set out to build an AI-powered platform that could not just monitor infrastructure, but truly understand it, predict issues, and automatically resolve them-all while learning and improving over time.
+                    Our team of SREs and DevOps engineers set out to build a platform that does more than monitor: it correlates metrics, logs, and traces, proposes a root cause with evidence, and runs remediation only when your team approves — with rollback and a full audit trail.
                   </p>
                   <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                    Today, AlertMend AI helps hundreds of teams achieve up to 99.97% uptime, reduce infrastructure costs by up to 50%, and eliminate up to 90% of manual operations work. We're just getting started.
+                    Today, AlertMend helps teams cut MTTR, recover spend, and replace manual ops toil with approved workflows. We are just getting started.
                   </p>
                 </div>
               </div>
@@ -184,7 +183,7 @@ export default function AboutPage() {
                   <p className="text-brand-600 font-semibold mb-6">Co-Founder & CTO</p>
                   
                   <p className="text-gray-700 leading-relaxed mb-8 text-left">
-                    Dinesh is a seasoned software engineer and entrepreneur with extensive experience building scalable systems. Previously Software Engineer at Polymer Search and Roambee, and Co-Founder of FutureApp e-schools, he combines technical expertise with entrepreneurial vision to drive AlertMend AI's mission of autonomous infrastructure management.
+                    Dinesh is a seasoned software engineer and entrepreneur with extensive experience building scalable systems. Previously Software Engineer at Polymer Search and Roambee, and Co-Founder of FutureApp e-schools, he combines technical depth with product focus to drive AlertMend's mission: signal to root cause to an approved fix.
                   </p>
                   
                   <a

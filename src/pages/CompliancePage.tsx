@@ -11,16 +11,15 @@ export default function CompliancePage() {
     { name: 'HIPAA', description: 'Following healthcare data protection best practices. Available on request.', comingSoon: false },
   ]
   
-  // Generate unique meta description for compliance page
-  const baseDescription = "AlertMend AI ensures compliance with SOC 2, ISO 27001, GDPR, and HIPAA. Contact our team for more information on our security practices."
+  const baseDescription = "AlertMend compliance programs for SOC 2 Type II, ISO 27001, GDPR, and HIPAA. Certifications in progress — contact us for the current control set."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'compliance', 'compliance')
 
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="AlertMend AI: Compliance & Security in 2025"
+        title="AlertMend: Compliance & Security"
         description={uniqueDescription}
-        keywords="AlertMend compliance, SOC 2 Type II, ISO 27001, GDPR, HIPAA, compliance certifications, infrastructure compliance, AIOps compliance"
+        keywords="AlertMend compliance, SOC 2 Type II, ISO 27001, GDPR, HIPAA, compliance certifications, infrastructure compliance"
         canonical="/compliance"
       />
       <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden hero-dark">
@@ -36,7 +35,7 @@ export default function CompliancePage() {
                 Compliance & Certifications
               </h1>
               <p className="text-xl md:text-2xl text-brand-700 max-w-3xl mx-auto leading-relaxed mb-12">
-                AlertMend follows industry best practices and maintains the highest standards of compliance and security to protect your infrastructure data.
+                AlertMend follows industry security practices. SOC 2 Type II, ISO 27001, and GDPR certifications are in progress.
               </p>
             </div>
 
@@ -70,9 +69,12 @@ export default function CompliancePage() {
               <p className="text-brand-700 mb-6 font-medium">
                 Need specific compliance information or have questions about our security practices? Our compliance team is here to help.
               </p>
+              {/* `body.alertmend-dark a { color: inherit }` (0,1,2) outranks a plain
+                  `.text-white` (0,1,0), so this anchor inherited the card's
+                  near-black text and rendered near-black on violet. */}
               <a
                 href="/contact"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-800 to-brand-900 text-white px-8 py-4 rounded-xl font-bold hover:from-brand-900 hover:to-brand-900 transition-all shadow-lg hover:shadow-xl"
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-800 to-brand-900 !text-white px-8 py-4 rounded-xl font-bold hover:from-brand-900 hover:to-brand-900 transition-all shadow-lg hover:shadow-xl"
               >
                 Contact Compliance Team
               </a>

@@ -50,7 +50,7 @@ export function mapOldBlogUrlToSlug(oldUrl: string): string | null {
   // - Replace underscores with hyphens
   // - Convert to lowercase
   // - Handle PascalCase/CamelCase by inserting hyphens before capitals
-  let normalized = slug
+  const normalized = slug
     .replace(/_/g, '-')
     .replace(/([a-z])([A-Z])/g, '$1-$2')
     .toLowerCase()

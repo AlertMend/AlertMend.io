@@ -2,6 +2,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Menu, Search, X } from 'lucide-react'
 import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react'
 import { DOCS_NAV } from '../../data/docsNav'
+import { HOME_PRODUCTS } from '../../data/homeProducts'
+import AlertMendIcon from '../ui/AlertMendIcon'
 import styles from './DocsLayout.module.css'
 
 type Props = {
@@ -81,13 +83,7 @@ export default function DocsLayout({ children, title, hub }: Props) {
             </button>
           ) : null}
           <Link to="/" className={styles.brand} aria-label="AlertMend home">
-            <img
-              src="/logos/alertmend-logo.svg"
-              alt=""
-              className={styles.logo}
-              width={22}
-              height={22}
-            />
+            <AlertMendIcon className={styles.logo} />
             <span className={styles.brandName}>AlertMend</span>
           </Link>
           <span className={styles.brandSep} aria-hidden="true">
@@ -184,7 +180,33 @@ export default function DocsLayout({ children, title, hub }: Props) {
           <div className={styles.main}>{children}</div>
         </div>
       )}
+
+      <DocsProductFooter />
     </div>
+  )
+}
+
+/**
+ * Docs pages render their own chrome and deliberately skip the marketing
+ * <Footer>, which left ~50 documentation URLs with no internal link back to
+ * any product page — no crawl path out, and none of the platform vocabulary
+ * the rest of the site carries. This is a compact stand-in: the same product
+ * catalog the nav and footer use, nothing else.
+ */
+function DocsProductFooter() {
+  return (
+    <footer className={styles.productFooter}>
+      <div className={styles.productFooterInner}>
+        <span className={styles.productFooterLabel}>AlertMend platform</span>
+        <nav className={styles.productFooterLinks} aria-label="Platform">
+          {HOME_PRODUCTS.map((p) => (
+            <Link key={p.id} to={p.to}>
+              {p.name}
+            </Link>
+          ))}
+        </nav>
+      </div>
+    </footer>
   )
 }
 
