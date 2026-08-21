@@ -169,10 +169,20 @@
 }
 .railHere { color: var(--accent); margin-left: 4px; font-weight: 600; }
 .railColList { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
-.railColList a {
-  font-size: 13.5px; color: var(--muted);
+.railLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  color: var(--muted);
 }
-.railColList a:hover { color: var(--text); }
+.railLink:hover { color: var(--text); }
+.railLogo {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  object-fit: contain;
+}
 
 /* "Not found" fallback when someone hits an unknown integration slug. */
 .notFound {

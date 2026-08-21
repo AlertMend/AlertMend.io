@@ -568,9 +568,46 @@ function FinOpsMock() {
   )
 }
 
+function DataObsMock() {
+  const anomalies = [
+    { sev: 'crit' as const, title: 'Freshness lag', target: 'analytics.orders · 47m late', rca: true },
+    { sev: 'crit' as const, title: 'Null spike', target: 'orders.amount · 12.4%', rca: true },
+    { sev: 'warn' as const, title: 'Schema drift', target: 'stg_orders · updated_at dropped', rca: false },
+  ]
+  return (
+    <Console title="Data Observability" meta="warehouse · 424 tables">
+      <div className={styles.kpis}>
+        <div><span>Tables</span><b>424</b><small>monitored</small></div>
+        <div><span>Anomalies</span><b className={styles.bad}>3</b><small>open</small></div>
+        <div><span>Freshness</span><b className={styles.warn}>47m</b><small>orders lag</small></div>
+        <div><span>Contracts</span><b>86</b><small>enforced</small></div>
+      </div>
+      <div className={styles.k8sSide}>
+        <div className={styles.panelHead}>
+          <span>Anomalies</span>
+          <em>2 with RCA</em>
+        </div>
+        {anomalies.map((inc) => (
+          <div key={inc.title + inc.target} className={styles.k8sInc}>
+            <b className={inc.sev === 'crit' ? styles.bad : styles.warn}>
+              {inc.sev === 'crit' ? 'CRIT' : 'WARN'}
+            </b>
+            <div>
+              <strong>{inc.title}</strong>
+              <span>{inc.target}</span>
+            </div>
+            {inc.rca ? <em>View RCA</em> : <em className={styles.muted}>Watching</em>}
+          </div>
+        ))}
+      </div>
+    </Console>
+  )
+}
+
 const MEDIA: Record<string, Media> = {
   k8s: { node: <K8sMock /> },
   obs: { node: <ObsMock /> },
+  dataobs: { node: <DataObsMock /> },
   logs: { node: <LogsMock /> },
   rca: { node: <RcaMock /> },
   fix: { node: <RfMock /> },

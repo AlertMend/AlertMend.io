@@ -8,6 +8,8 @@ type IconName =
   | 'cpu' | 'layers' | 'thermometer' | 'trending' | 'gauge' | 'brain'
   | 'x';
 
+export type { IconName };
+
 type Props = Omit<SVGProps<SVGSVGElement>, 'size'> & {
   name: IconName;
   size?: number | string;

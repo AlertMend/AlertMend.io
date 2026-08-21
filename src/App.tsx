@@ -15,6 +15,7 @@ import KubernetesCostOptimizationPage from './pages/KubernetesCostOptimizationPa
 import LogManagementPage from './pages/LogManagementPage'
 import GpuMlopsPage from './pages/GpuMlopsPage'
 import ObservabilityPage from './pages/ObservabilityPage'
+import DataObservabilityPage from './pages/DataObservabilityPage'
 import AiRcaPage from './pages/AiRcaPage'
 import AutoRemediationPage from './pages/AutoRemediationPage'
 import IntegrationDetailPage from './pages/IntegrationDetailPage'
@@ -132,6 +133,7 @@ function App() {
           <Route path="/on-call-management" element={<OnCallManagementPage />} />
           <Route path="/kubernetes-cost-optimization" element={<KubernetesCostOptimizationPage />} />
           <Route path="/observability" element={<ObservabilityPage />} />
+          <Route path="/data-observability" element={<DataObservabilityPage />} />
           <Route path="/ai-rca" element={<AiRcaPage />} />
           <Route path="/log-management" element={<LogManagementPage />} />
           <Route path="/gpu-mlops" element={<GpuMlopsPage />} />

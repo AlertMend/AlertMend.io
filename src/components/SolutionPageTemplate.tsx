@@ -4,6 +4,8 @@ import { ArrowRight, CheckCircle2, type LucideIcon } from 'lucide-react'
 import PlatformBoardMock from './mocks/PlatformBoardMock'
 import PlatformBoardStage from './mocks/PlatformBoardStage'
 import type { HomeProductId } from '../data/homeProducts'
+import { withBrandLogo } from '../data/brandLogos'
+import BrandLogo from './ui/BrandLogo'
 import SEO from './SEO'
 import styles from './SolutionPageTemplate.module.css'
 
@@ -39,6 +41,18 @@ export type SolutionSpotlight = {
   panel: ReactNode
 }
 
+export type SolutionWorksWithItem = {
+  label: string
+  /** Optional; omit when there is no /integrations/* page yet. */
+  to?: string
+}
+
+export type SolutionWorksWith = {
+  heading: string
+  body: ReactNode
+  items: SolutionWorksWithItem[]
+}
+
 export type SolutionPageProps = {
   seo: { title: string; description: string; keywords: string; canonical: string }
   badge: string
@@ -58,12 +72,55 @@ export type SolutionPageProps = {
   featuresHeading: string
   featuresSub: string
   features: SolutionFeature[]
+  /** Override the default infra “Works with” band (e.g. warehouse sources for Data). */
+  worksWith?: SolutionWorksWith
   spotlight: SolutionSpotlight
   ctaHeading: string
   ctaSub: string
 }
 
 const DEMO_URL = 'https://calendly.com/hello-alertmend/30min'
+
+const DEFAULT_WORKS_WITH: SolutionWorksWith = {
+  heading: 'Runs on Kubernetes, AWS ECS, EC2 and plain VMs',
+  body: (
+    <>
+      <p className="mt-3 text-[14px] leading-relaxed text-zinc-500">
+        Containers or virtual machines, self-hosted or managed. AlertMend ingests the alerts you
+        already have — Prometheus Alertmanager, Datadog, Grafana or a plain webhook — so SRE and
+        DevOps teams cut MTTR without swapping out the stack or re-instrumenting anything.
+      </p>
+      <p className="mt-3 text-[14px] leading-relaxed text-zinc-500">
+        One set of AI operations across the fleet: pair this with{' '}
+        <Link
+          to="/kubernetes-cost-optimization"
+          className="font-medium text-violet-700 underline-offset-2 hover:underline"
+        >
+          Kubernetes cost optimization
+        </Link>{' '}
+        and{' '}
+        <Link
+          to="/gpu-mlops"
+          className="font-medium text-violet-700 underline-offset-2 hover:underline"
+        >
+          GPU &amp; MLOps monitoring
+        </Link>{' '}
+        to cover spend and accelerators too.
+      </p>
+    </>
+  ),
+  items: [
+    { label: 'Kubernetes', to: '/integrations/kubernetes' },
+    { label: 'AWS ECS & EC2', to: '/integrations/aws' },
+    { label: 'Prometheus', to: '/integrations/prometheus' },
+    { label: 'Datadog', to: '/integrations/datadog' },
+    { label: 'Grafana', to: '/integrations/grafana' },
+    { label: 'Google Cloud', to: '/integrations/google-cloud' },
+    { label: 'Azure', to: '/integrations/azure' },
+    { label: 'Slack', to: '/integrations/slack' },
+    { label: 'Microsoft Teams', to: '/integrations/ms-teams' },
+  ],
+}
 
 /** Accent span for headline words. Violet-600 on the white hero. */
 export function Accent({ children }: { children: ReactNode }) {
@@ -74,6 +131,8 @@ export default function SolutionPageTemplate(p: SolutionPageProps) {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [])
+
+  const worksWith = p.worksWith ?? DEFAULT_WORKS_WITH
 
   return (
     <div className="product-page bg-white text-zinc-900 font-sans">
@@ -190,14 +249,28 @@ export default function SolutionPageTemplate(p: SolutionPageProps) {
                 </div>
                 <p className="mt-2.5 text-[13px] leading-relaxed text-zinc-500">{f.body}</p>
                 <div className="mt-3 flex flex-wrap gap-1.5">
-                  {f.chips.map((c) => (
-                    <span
-                      key={c}
-                      className="rounded-md border border-zinc-200 bg-zinc-50 px-2 py-0.5 text-[11px] text-zinc-500"
-                    >
-                      {c}
-                    </span>
-                  ))}
+                  {f.chips.map((c) => {
+                    const brand = withBrandLogo({ label: c })
+                    const hasLogo = Boolean(brand.logoSrc || brand.iconSlug)
+                    return (
+                      <span
+                        key={c}
+                        className="inline-flex items-center gap-1 rounded-md border border-zinc-200 bg-zinc-50 px-2 py-0.5 text-[11px] text-zinc-500"
+                      >
+                        {hasLogo && (
+                          <BrandLogo
+                            src={brand.logoSrc}
+                            slug={brand.iconSlug}
+                            tint={brand.logoTint}
+                            domain={brand.domain}
+                            alt=""
+                            className="h-3 w-3 object-contain"
+                          />
+                        )}
+                        {c}
+                      </span>
+                    )
+                  })}
                 </div>
               </div>
             ))}
@@ -206,12 +279,6 @@ export default function SolutionPageTemplate(p: SolutionPageProps) {
       </section>
 
       {/* ============ Works with ============ */}
-      {/* Every product page states the same thing: which platforms it runs on
-          and which alerting sources it ingests. The live site carried this on
-          each solution page ("Integrate with Alertmanager, Datadog, Prometheus,
-          or webhooks" / "AWS ECS"); the redesign dropped it, which cost the
-          product pages both the platform vocabulary and their only inbound
-          links to the 18 /integrations/* pages. */}
       <section className="border-t border-zinc-100 bg-white">
         <div className="mx-auto max-w-6xl px-6 py-12 md:py-14">
           <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] md:gap-12">
@@ -220,46 +287,37 @@ export default function SolutionPageTemplate(p: SolutionPageProps) {
                 Works with
               </span>
               <h2 className="mt-3 text-[1.35rem] font-bold tracking-tight text-zinc-950">
-                Runs on Kubernetes, AWS ECS, EC2 and plain VMs
+                {worksWith.heading}
               </h2>
-              <p className="mt-3 text-[14px] leading-relaxed text-zinc-500">
-                Containers or virtual machines, self-hosted or managed. AlertMend ingests the
-                alerts you already have — Prometheus Alertmanager, Datadog, Grafana or a plain
-                webhook — so SRE and DevOps teams cut MTTR without swapping out the stack or
-                re-instrumenting anything.
-              </p>
-              <p className="mt-3 text-[14px] leading-relaxed text-zinc-500">
-                One set of AI operations across the fleet: pair this with{' '}
-                <Link to="/kubernetes-cost-optimization" className="font-medium text-violet-700 underline-offset-2 hover:underline">
-                  Kubernetes cost optimization
-                </Link>{' '}
-                and{' '}
-                <Link to="/gpu-mlops" className="font-medium text-violet-700 underline-offset-2 hover:underline">
-                  GPU &amp; MLOps monitoring
-                </Link>{' '}
-                to cover spend and accelerators too.
-              </p>
+              {worksWith.body}
             </div>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-              {[
-                { label: 'Kubernetes', to: '/integrations/kubernetes' },
-                { label: 'AWS ECS & EC2', to: '/integrations/aws' },
-                { label: 'Prometheus', to: '/integrations/prometheus' },
-                { label: 'Datadog', to: '/integrations/datadog' },
-                { label: 'Grafana', to: '/integrations/grafana' },
-                { label: 'Google Cloud', to: '/integrations/google-cloud' },
-                { label: 'Azure', to: '/integrations/azure' },
-                { label: 'Slack', to: '/integrations/slack' },
-                { label: 'Microsoft Teams', to: '/integrations/ms-teams' },
-              ].map((i) => (
-                <Link
-                  key={i.to}
-                  to={i.to}
-                  className="rounded-lg border border-zinc-200 bg-white px-3 py-2.5 text-[13px] font-medium text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-950"
-                >
-                  {i.label}
-                </Link>
-              ))}
+              {worksWith.items.map((raw) => {
+                const i = withBrandLogo(raw)
+                const cellClass =
+                  'flex items-center gap-2.5 rounded-lg border border-zinc-200 bg-white px-3 py-2.5 text-[13px] font-medium text-zinc-700 transition hover:border-zinc-300 hover:text-zinc-950'
+                const logo = (
+                  <BrandLogo
+                    src={i.logoSrc}
+                    slug={i.iconSlug}
+                    tint={i.logoTint}
+                    domain={i.domain}
+                    alt=""
+                    className="h-5 w-5 flex-none object-contain"
+                  />
+                )
+                return i.to ? (
+                  <Link key={i.label} to={i.to} className={cellClass}>
+                    {logo}
+                    <span className="min-w-0 truncate">{i.label}</span>
+                  </Link>
+                ) : (
+                  <span key={i.label} className={cellClass}>
+                    {logo}
+                    <span className="min-w-0 truncate">{i.label}</span>
+                  </span>
+                )
+              })}
             </div>
           </div>
         </div>

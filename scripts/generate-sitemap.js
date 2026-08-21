@@ -177,6 +177,12 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+  <url>
+    <loc>${siteUrl}/data-observability</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
 
   <!-- Solutions -->
   <url>
@@ -209,6 +215,7 @@ ${[
   'kubernetes', 'aws', 'google-cloud', 'azure', 'prometheus', 'grafana', 'datadog',
   'victoria-metrics', 'slack', 'ms-teams', 'pagerduty', 'jira', 'sendgrid',
   'google-meet', 'jenkins', 'github-actions', 'gitlab', 'whatsapp',
+  'snowflake', 'bigquery', 'redshift', 'databricks', 'postgres', 'dbt', 'airflow',
 ].map((slug) => `  <url>
     <loc>${siteUrl}/integrations/${slug}</loc>
     <lastmod>${currentDate}</lastmod>

@@ -86,6 +86,7 @@ const preloadLinks = makeModulePreloadLinks(entryKey)
 const routesToPrerender = [
   '/',
   '/observability',
+  '/data-observability',
   '/ai-rca',
   '/log-management',
   '/gpu-mlops',
