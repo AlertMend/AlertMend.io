@@ -19,10 +19,9 @@
   color: #7c3aed;
 }
 
-/* Violet-300 on the near-black footer: 10.5:1, and unlike flat white it keeps
-   the mark recognisably violet. */
+/* White on the near-black footer so the lockup reads clearly against the canvas. */
 .fullLogoLight {
-  color: #c4b5fd;
+  color: #ffffff;
 }
 
 .tag {

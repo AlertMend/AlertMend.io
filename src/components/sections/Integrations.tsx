@@ -5,6 +5,7 @@ import styles from './Integrations.module.css'
 
 const CATEGORY_ORDER: IntegrationCategory[] = [
   'Observability',
+  'Data',
   'Cloud',
   'Incident & On-call',
   'Collaboration',

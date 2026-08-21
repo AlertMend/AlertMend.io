@@ -15,6 +15,7 @@
 
 export type IntegrationCategory =
   | 'Observability'
+  | 'Data'
   | 'Cloud'
   | 'Incident & On-call'
   | 'Collaboration'
@@ -342,10 +343,135 @@ export const integrations: Integration[] = [
     logoSrc: svgporn('whatsapp'),
     domain: 'whatsapp.com',
   },
+  {
+    slug: 'snowflake',
+    name: 'Snowflake',
+    category: 'Data',
+    tagline: 'Warehouse freshness, volume, and schema monitors with RCA.',
+    description:
+      'Connect AlertMend to Snowflake with a read-only role. We watch table freshness, row-count drift, schema changes, and null rates, then page a cited RCA when a pipeline breaks a contract.',
+    capabilities: [
+      'Freshness and volume monitors without a check farm',
+      'Schema-change detection on critical tables',
+      'Slack / Teams paging with evidence citations',
+      'Approval-gated quarantine or remediations',
+    ],
+    logoSrc: svgporn('snowflake'),
+    iconSlug: 'snowflake',
+    logoTint: '29B5E8',
+    domain: 'snowflake.com',
+  },
+  {
+    slug: 'bigquery',
+    name: 'BigQuery',
+    category: 'Data',
+    tagline: 'Dataset health and slot cost signals in one incident view.',
+    description:
+      'AlertMend reads BigQuery metadata and job history to catch stale tables, sudden volume drops, and schema breaks before dashboards go dark. Pair with GCP cloud signals when spend drifts too.',
+    capabilities: [
+      'Dataset and table freshness monitors',
+      'Volume and null-rate anomaly detection',
+      'Schema drift alerts with column-level evidence',
+      'Links into Observability when query latency spikes',
+    ],
+    logoSrc: svgporn('google-bigquery'),
+    iconSlug: 'googlebigquery',
+    logoTint: '669DF6',
+    domain: 'cloud.google.com',
+  },
+  {
+    slug: 'redshift',
+    name: 'Redshift',
+    category: 'Data',
+    tagline: 'Cluster table health for Redshift and Redshift Serverless.',
+    description:
+      'Watch Redshift tables for freshness, row-count anomalies, and schema changes. Evidence lands in the same RCA flow as the rest of your AWS estate.',
+    capabilities: [
+      'Table freshness and volume monitors',
+      'Schema change detection',
+      'Correlated with AWS CloudWatch when useful',
+      'Approval-gated runbooks for quarantine paths',
+    ],
+    logoSrc: svgporn('aws-redshift'),
+    iconSlug: 'amazonredshift',
+    logoTint: '8C4FFF',
+    domain: 'aws.amazon.com',
+  },
+  {
+    slug: 'databricks',
+    name: 'Databricks',
+    category: 'Data',
+    tagline: 'Lakehouse table contracts and pipeline anomaly paging.',
+    description:
+      'Connect Unity Catalog or workspace metadata so AlertMend can monitor Delta tables for freshness, volume, and schema contracts. Failed jobs and broken producers get the same cited RCA as infra incidents.',
+    capabilities: [
+      'Delta / Unity Catalog table monitors',
+      'Job and pipeline anomaly correlation',
+      'Contract checks for producers and consumers',
+      'Slack / Teams approvals for remediations',
+    ],
+    logoSrc: svgporn('databricks'),
+    iconSlug: 'databricks',
+    logoTint: 'FF3621',
+    domain: 'databricks.com',
+  },
+  {
+    slug: 'postgres',
+    name: 'Postgres',
+    category: 'Data',
+    tagline: 'OLTP and warehouse-adjacent Postgres table health.',
+    description:
+      'Use a read-only role to watch critical Postgres tables for freshness, row-count drift, and schema changes. Fits ETL landing tables and reporting schemas that sit next to the warehouse.',
+    capabilities: [
+      'Freshness and volume monitors on key tables',
+      'Schema drift detection',
+      'Null-rate and custom SQL metric checks',
+      'Same approval loop as warehouse sources',
+    ],
+    logoSrc: svgporn('postgresql'),
+    domain: 'postgresql.org',
+  },
+  {
+    slug: 'dbt',
+    name: 'dbt',
+    category: 'Data',
+    tagline: 'Model and test metadata as evidence in data RCAs.',
+    description:
+      'Ingest dbt run and test results so a failed model or broken test becomes evidence in the AlertMend RCA, not a separate silent failure in CI.',
+    capabilities: [
+      'dbt Cloud and Core run metadata',
+      'Failed test / model as RCA evidence',
+      'Lineage hints for impacted downstream tables',
+      'Pairs with warehouse freshness monitors',
+    ],
+    logoSrc: svgporn('dbt-icon'),
+    iconSlug: 'dbt',
+    logoTint: 'FF694B',
+    domain: 'getdbt.com',
+  },
+  {
+    slug: 'airflow',
+    name: 'Airflow',
+    category: 'Data',
+    tagline: 'DAG failures correlated with warehouse table health.',
+    description:
+      'Connect Airflow metadata so DAG and task failures land beside the tables they write. When freshness drops after a failed run, the RCA cites both signals.',
+    capabilities: [
+      'DAG / task failure ingestion',
+      'Correlation with warehouse freshness monitors',
+      'Owner and schedule context on the incident',
+      'Approval-gated retry or quarantine runbooks',
+    ],
+    logoSrc: svgporn('airflow-icon'),
+    iconSlug: 'apacheairflow',
+    logoTint: '017CEE',
+    domain: 'airflow.apache.org',
+  },
 ];
 
 export const integrationCategories: IntegrationCategory[] = [
   'Observability',
+  'Data',
   'Cloud',
   'Incident & On-call',
   'Collaboration',

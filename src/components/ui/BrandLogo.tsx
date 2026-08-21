@@ -32,9 +32,10 @@ function pickInitial({ src, slug, domain, tint }: Props): string {
 }
 
 export default function BrandLogo(props: Props) {
-  const { domain, alt, className } = props;
+  const { slug, tint, domain, alt, className } = props;
   const [src, setSrc] = useState(() => pickInitial(props));
-  const [errored, setErrored] = useState(false);
+  /** 0 = primary, 1 = simple-icons tried, 2 = favicon tried */
+  const [stage, setStage] = useState(0);
 
   return (
     <img
@@ -44,11 +45,20 @@ export default function BrandLogo(props: Props) {
       loading="lazy"
       decoding="async"
       onError={() => {
-        if (errored || !domain) return;
-        const fallback = faviconUrl(domain);
-        if (src !== fallback) {
-          setSrc(fallback);
-          setErrored(true);
+        if (stage === 0 && slug) {
+          const next = simpleIconsUrl(slug, tint);
+          if (next !== src) {
+            setSrc(next);
+            setStage(1);
+            return;
+          }
+        }
+        if (stage < 2 && domain) {
+          const next = faviconUrl(domain);
+          if (next !== src) {
+            setSrc(next);
+            setStage(2);
+          }
         }
       }}
     />

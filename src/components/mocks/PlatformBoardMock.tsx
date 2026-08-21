@@ -101,12 +101,10 @@ function Kpi({
   label,
   value,
   tone,
-  path,
 }: {
   label: string
   value: string
   tone: 'hot' | 'warn' | 'violet' | 'ok'
-  path: string
 }) {
   const cls = {
     hot: styles.kpiHot,
@@ -118,9 +116,6 @@ function Kpi({
     <div className={`${styles.kpi} ${cls}`}>
       <span>{label}</span>
       <strong>{value}</strong>
-      <svg className={styles.kpiWave} viewBox="0 0 120 28" preserveAspectRatio="none" aria-hidden>
-        <path d={path} fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth="1.6" />
-      </svg>
     </div>
   )
 }
@@ -282,10 +277,10 @@ function OverviewBoard() {
   return (
     <div className={`${styles.board} ${styles.boardOverview}`}>
       <div className={styles.kpiRow}>
-        <Kpi label="p99 latency" value="812ms" tone="hot" path="M0 18 C16 14 28 8 44 12 S72 22 88 12 S108 6 120 10" />
-        <Kpi label="error rate" value="0.42%" tone="warn" path="M0 16 C18 12 30 20 48 14 S78 8 96 14 S112 18 120 12" />
-        <Kpi label="throughput" value="48.2k" tone="violet" path="M0 20 C20 18 32 10 50 12 S82 22 98 10 S112 8 120 6" />
-        <Kpi label="saturation" value="63%" tone="ok" path="M0 14 C22 16 36 10 54 12 S86 18 102 12 S114 10 120 12" />
+        <Kpi label="p99 latency" value="812ms" tone="hot" />
+        <Kpi label="error rate" value="0.42%" tone="warn" />
+        <Kpi label="throughput" value="48.2k" tone="violet" />
+        <Kpi label="saturation" value="63%" tone="ok" />
       </div>
 
       <Tile title="Kubernetes" meta="1,247 pods" to={byId.k8s.to}>
@@ -424,6 +419,8 @@ function ProductBoard({ product }: { product: string }) {
       return <K8sBoard />
     case 'obs':
       return <ObsBoard />
+    case 'dataobs':
+      return <DataObsBoard />
     case 'logs':
       return <LogsBoard />
     case 'rca':
@@ -450,10 +447,10 @@ function K8sBoard() {
   return (
     <div className={`${styles.board} ${styles.boardCompact}`}>
       <div className={styles.kpiRow}>
-        <Kpi label="pods" value="1,247" tone="violet" path="M0 18 C16 14 28 8 44 12 S72 22 88 12 S108 6 120 10" />
-        <Kpi label="nodes" value="24" tone="ok" path="M0 14 C22 16 36 10 54 12 S86 18 102 12 S114 10 120 12" />
-        <Kpi label="deploys" value="89" tone="warn" path="M0 16 C18 12 30 20 48 14 S78 8 96 14 S112 18 120 12" />
-        <Kpi label="incidents" value="3" tone="hot" path="M0 20 C20 18 32 10 50 12 S82 22 98 10 S112 8 120 6" />
+        <Kpi label="pods" value="1,247" tone="violet" />
+        <Kpi label="nodes" value="24" tone="ok" />
+        <Kpi label="deploys" value="89" tone="warn" />
+        <Kpi label="incidents" value="3" tone="hot" />
       </div>
 
       <Tile title="Cluster health" meta="prod-us-west-2" className={styles.tileWide}>
@@ -504,10 +501,10 @@ function ObsBoard() {
   return (
     <div className={`${styles.board} ${styles.boardCompact}`}>
       <div className={styles.kpiRow}>
-        <Kpi label="p99 latency" value="812ms" tone="hot" path="M0 18 C16 14 28 8 44 12 S72 22 88 12 S108 6 120 10" />
-        <Kpi label="error rate" value="0.42%" tone="warn" path="M0 16 C18 12 30 20 48 14 S78 8 96 14 S112 18 120 12" />
-        <Kpi label="throughput" value="48.2k" tone="violet" path="M0 20 C20 18 32 10 50 12 S82 22 98 10 S112 8 120 6" />
-        <Kpi label="saturation" value="63%" tone="ok" path="M0 14 C22 16 36 10 54 12 S86 18 102 12 S114 10 120 12" />
+        <Kpi label="p99 latency" value="812ms" tone="hot" />
+        <Kpi label="error rate" value="0.42%" tone="warn" />
+        <Kpi label="throughput" value="48.2k" tone="violet" />
+        <Kpi label="saturation" value="63%" tone="ok" />
       </div>
 
       <Tile title="Service map" meta="checkout · live" className={styles.tileWide}>
@@ -560,10 +557,10 @@ function LogsBoard() {
   return (
     <div className={`${styles.board} ${styles.boardCompact}`}>
       <div className={styles.kpiRow}>
-        <Kpi label="lines scanned" value="1.2M" tone="violet" path="M0 20 C20 18 32 10 50 12 S82 22 98 10 S112 8 120 6" />
-        <Kpi label="query" value="38ms" tone="ok" path="M0 14 C22 16 36 10 54 12 S86 18 102 12 S114 10 120 12" />
-        <Kpi label="errors" value="3" tone="hot" path="M0 18 C16 14 28 8 44 12 S72 22 88 12 S108 6 120 10" />
-        <Kpi label="warnings" value="1" tone="warn" path="M0 16 C18 12 30 20 48 14 S78 8 96 14 S112 18 120 12" />
+        <Kpi label="lines scanned" value="1.2M" tone="violet" />
+        <Kpi label="query" value="38ms" tone="ok" />
+        <Kpi label="errors" value="3" tone="hot" />
+        <Kpi label="warnings" value="1" tone="warn" />
       </div>
 
       <Tile title="Log explorer" meta="last 15m" className={`${styles.tileWide} ${styles.tileLogs}`}>
@@ -616,10 +613,10 @@ function RcaBoard() {
   return (
     <div className={`${styles.board} ${styles.boardCompact}`}>
       <div className={styles.kpiRow}>
-        <Kpi label="confidence" value="94%" tone="ok" path="M0 14 C22 16 36 10 54 12 S86 18 102 12 S114 10 120 12" />
-        <Kpi label="typical" value="~15s" tone="violet" path="M0 20 C20 18 32 10 50 12 S82 22 98 10 S112 8 120 6" />
-        <Kpi label="citations" value="4" tone="warn" path="M0 16 C18 12 30 20 48 14 S78 8 96 14 S112 18 120 12" />
-        <Kpi label="severity" value="sev-2" tone="hot" path="M0 18 C16 14 28 8 44 12 S72 22 88 12 S108 6 120 10" />
+        <Kpi label="confidence" value="94%" tone="ok" />
+        <Kpi label="typical" value="~15s" tone="violet" />
+        <Kpi label="citations" value="4" tone="warn" />
+        <Kpi label="severity" value="sev-2" tone="hot" />
       </div>
 
       <Tile title="Root cause" meta={<em className={styles.conf}>94%</em>} className={`${styles.tileWide} ${styles.tileRca}`}>
@@ -682,10 +679,10 @@ function RfBoard() {
   return (
     <div className={`${styles.board} ${styles.boardCompact}`}>
       <div className={styles.kpiRow}>
-        <Kpi label="flow" value="RF-1842" tone="violet" path="M0 20 C20 18 32 10 50 12 S82 22 98 10 S112 8 120 6" />
-        <Kpi label="progress" value="2/3" tone="ok" path="M0 14 C22 16 36 10 54 12 S86 18 102 12 S114 10 120 12" />
-        <Kpi label="approver" value="@alex" tone="warn" path="M0 16 C18 12 30 20 48 14 S78 8 96 14 S112 18 120 12" />
-        <Kpi label="rollback" value="armed" tone="hot" path="M0 18 C16 14 28 8 44 12 S72 22 88 12 S108 6 120 10" />
+        <Kpi label="flow" value="RF-1842" tone="violet" />
+        <Kpi label="progress" value="2/3" tone="ok" />
+        <Kpi label="approver" value="@alex" tone="warn" />
+        <Kpi label="rollback" value="armed" tone="hot" />
       </div>
 
       <Tile
@@ -758,10 +755,10 @@ function OnCallBoard() {
   return (
     <div className={`${styles.board} ${styles.boardCompact}`}>
       <div className={styles.kpiRow}>
-        <Kpi label="on call" value="@alex" tone="violet" path="M0 20 C20 18 32 10 50 12 S82 22 98 10 S112 8 120 6" />
-        <Kpi label="severity" value="sev-2" tone="hot" path="M0 18 C16 14 28 8 44 12 S72 22 88 12 S108 6 120 10" />
-        <Kpi label="page" value="#4821" tone="warn" path="M0 16 C18 12 30 20 48 14 S78 8 96 14 S112 18 120 12" />
-        <Kpi label="until" value="08:00" tone="ok" path="M0 14 C22 16 36 10 54 12 S86 18 102 12 S114 10 120 12" />
+        <Kpi label="on call" value="@alex" tone="violet" />
+        <Kpi label="severity" value="sev-2" tone="hot" />
+        <Kpi label="page" value="#4821" tone="warn" />
+        <Kpi label="until" value="08:00" tone="ok" />
       </div>
 
       <Tile title="Rotation" meta="payments · follow-the-sun" className={styles.tileWide}>
@@ -838,10 +835,10 @@ function FinOpsBoard() {
   return (
     <div className={`${styles.board} ${styles.boardCompact}`}>
       <div className={styles.kpiRow}>
-        <Kpi label="spend · 30d" value="$4,504" tone="violet" path="M0 20 C20 18 32 10 50 12 S82 22 98 10 S112 8 120 6" />
-        <Kpi label="recoverable" value="$1,378" tone="ok" path="M0 14 C22 16 36 10 54 12 S86 18 102 12 S114 10 120 12" />
-        <Kpi label="right-size" value="$412" tone="warn" path="M0 16 C18 12 30 20 48 14 S78 8 96 14 S112 18 120 12" />
-        <Kpi label="idle GPU" value="$214" tone="hot" path="M0 18 C16 14 28 8 44 12 S72 22 88 12 S108 6 120 10" />
+        <Kpi label="spend · 30d" value="$4,504" tone="violet" />
+        <Kpi label="recoverable" value="$1,378" tone="ok" />
+        <Kpi label="right-size" value="$412" tone="warn" />
+        <Kpi label="idle GPU" value="$214" tone="hot" />
       </div>
 
       <Tile title="Spend by namespace" meta="requested vs used" className={styles.tileWide}>
@@ -917,10 +914,10 @@ function MlopsBoard() {
   return (
     <div className={`${styles.board} ${styles.boardCompact}`}>
       <div className={styles.kpiRow}>
-        <Kpi label="GPUs" value="48" tone="violet" path="M0 18 C16 14 28 8 44 12 S72 22 88 12 S108 6 120 10" />
-        <Kpi label="fleet util" value="72%" tone="ok" path="M0 14 C22 16 36 10 54 12 S86 18 102 12 S114 10 120 12" />
-        <Kpi label="p99 infer" value="284ms" tone="warn" path="M0 16 C18 12 30 20 48 14 S78 8 96 14 S112 18 120 12" />
-        <Kpi label="alerts" value="2" tone="hot" path="M0 20 C20 18 32 10 50 12 S82 22 98 10 S112 8 120 6" />
+        <Kpi label="GPUs" value="48" tone="violet" />
+        <Kpi label="fleet util" value="72%" tone="ok" />
+        <Kpi label="p99 infer" value="284ms" tone="warn" />
+        <Kpi label="alerts" value="2" tone="hot" />
       </div>
 
       <Tile title="GPU fleet" meta="live nvidia-smi" className={styles.tileWide}>
@@ -966,6 +963,78 @@ function MlopsBoard() {
           <span>queue</span>
         </div>
         <div className={styles.tileTag}>NCCL · Kubeflow · Airflow · vector index</div>
+      </Tile>
+    </div>
+  )
+}
+
+function DataObsBoard() {
+  const anomalies = [
+    { sev: 'CRIT', tone: styles.sevCrit, name: 'Freshness lag', where: 'analytics.orders · 47m late' },
+    { sev: 'CRIT', tone: styles.sevCrit, name: 'Null spike', where: 'orders.amount · 12.4%' },
+    { sev: 'WARN', tone: styles.sevWarn, name: 'Schema drift', where: 'stg_orders · updated_at dropped' },
+  ]
+  const monitors = [
+    { name: 'freshness', ok: 412, bad: 3 },
+    { name: 'volume', ok: 398, bad: 6 },
+    { name: 'schema', ok: 420, bad: 1 },
+    { name: 'null rate', ok: 381, bad: 8 },
+  ]
+  return (
+    <div className={`${styles.board} ${styles.boardCompact}`}>
+      <div className={styles.kpiRow}>
+        <Kpi label="tables" value="424" tone="violet" />
+        <Kpi label="anomalies" value="3" tone="hot" />
+        <Kpi label="freshness" value="47m" tone="warn" />
+        <Kpi label="contracts" value="86" tone="ok" />
+      </div>
+
+      <Tile title="Metric monitors" meta="warehouse · live" className={styles.tileWide}>
+        <div className={styles.nsList}>
+          {monitors.map((m) => (
+            <div key={m.name}>
+              <div className={styles.nsHead}>
+                <span>{m.name}</span>
+                <span>
+                  {m.ok} ok · {m.bad} open
+                </span>
+              </div>
+              <div className={styles.miniBars}>
+                <i style={{ width: '100%' }} />
+                <b style={{ width: `${Math.round((m.ok / (m.ok + m.bad)) * 100)}%` }} />
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className={styles.tileTag}>freshness · volume · schema · nulls</div>
+      </Tile>
+
+      <Tile title="Anomalies" meta="last 15m" className={styles.tileWide}>
+        <div className={styles.incidentList}>
+          {anomalies.map((a) => (
+            <div key={a.name} className={styles.incident}>
+              <span className={`${styles.sev} ${a.tone}`}>{a.sev}</span>
+              <div className={styles.incidentBody}>
+                <strong>{a.name}</strong>
+                <span>{a.where}</span>
+              </div>
+              <span className={styles.rcaChip}>View RCA</span>
+            </div>
+          ))}
+        </div>
+      </Tile>
+
+      <Tile title="AI RCA" meta={<em className={styles.conf}>91%</em>} className={`${styles.tileWide} ${styles.tileRca}`}>
+        <p className={styles.rcaText}>
+          <b>stg_orders</b> dropped <b>updated_at</b> after dbt deploy <b>v4.12.1</b>
+        </p>
+        <div className={styles.chips}>
+          <span>freshness</span>
+          <span>schema</span>
+          <span>change</span>
+          <span>contract</span>
+        </div>
+        <div className={styles.tileTag}>evidence-backed · approve in Slack</div>
       </Tile>
     </div>
   )

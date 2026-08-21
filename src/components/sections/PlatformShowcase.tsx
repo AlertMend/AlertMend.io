@@ -51,22 +51,6 @@ function SeePanel() {
               </div>
             ))}
           </div>
-          <div className={styles.sparkRow} aria-hidden>
-            <svg viewBox="0 0 280 48" preserveAspectRatio="none">
-              <path
-                d="M0 32 C20 30, 40 28, 60 26 S100 18, 120 22 S160 34, 180 28 S220 12, 240 10 S260 14, 280 8"
-                fill="none"
-                stroke="#a78bfa"
-                strokeWidth="2"
-              />
-              <path
-                d="M0 38 C30 36, 50 40, 80 36 S140 30, 170 34 S210 42, 240 40 S260 36, 280 34"
-                fill="none"
-                stroke="rgba(255,255,255,0.22)"
-                strokeWidth="1.5"
-              />
-            </svg>
-          </div>
         </div>
         <div className={styles.block}>
           <div className={styles.blockLabel}>Live signals</div>

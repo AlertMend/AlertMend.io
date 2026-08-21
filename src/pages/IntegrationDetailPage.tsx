@@ -207,7 +207,17 @@ function CategoryRail({ current }: { current: IntegrationCategory }) {
               <ul className={styles.railColList}>
                 {items.map((i) => (
                   <li key={i.slug}>
-                    <Link to={`/integrations/${i.slug}`}>{i.name}</Link>
+                    <Link to={`/integrations/${i.slug}`} className={styles.railLink}>
+                      <BrandLogo
+                        src={i.logoSrc}
+                        slug={i.iconSlug}
+                        tint={i.logoTint}
+                        domain={i.domain}
+                        alt=""
+                        className={styles.railLogo}
+                      />
+                      {i.name}
+                    </Link>
                   </li>
                 ))}
               </ul>

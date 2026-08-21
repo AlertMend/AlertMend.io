@@ -7,6 +7,7 @@
 export type HomeProductId =
   | 'k8s'
   | 'obs'
+  | 'dataobs'
   | 'logs'
   | 'rca'
   | 'fix'
@@ -41,6 +42,14 @@ export const HOME_PRODUCTS: readonly HomeProduct[] = [
     line: 'Metrics, logs, traces, and a live service map via OpenTelemetry + eBPF.',
     blurb: 'Metrics, logs and traces, unified',
     to: '/observability',
+  },
+  {
+    id: 'dataobs',
+    tab: 'Data',
+    name: 'Data Observability',
+    line: 'Freshness, volume, schema, and anomalies across every table, without a check per dataset.',
+    blurb: 'Freshness, volume, schema, anomalies',
+    to: '/data-observability',
   },
   {
     id: 'logs',

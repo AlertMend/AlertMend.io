@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import {
   Boxes, Activity, ShieldCheck, Search, MessageSquare, Database,
   PlugZap, Eye, Wrench,
@@ -67,6 +68,46 @@ export default function KubernetesManagementPage() {
       signupUrl={SIGNUP_URL}
       checks={['Multi-cluster', 'Agent install in minutes', 'RBAC & audit built in']}
       highlightProduct="k8s"
+      worksWith={{
+        heading: 'Runs on EKS, GKE, AKS and self-managed clusters',
+        body: (
+          <>
+            <p className="mt-3 text-[14px] leading-relaxed text-zinc-500">
+              Managed or self-hosted, one agent per cluster via Helm. AlertMend watches pod events,
+              CrashLoopBackOff, OOMKilled, scheduling stalls and node pressure, and ingests the
+              alerts you already have from Prometheus, Datadog or Grafana.
+            </p>
+            <p className="mt-3 text-[14px] leading-relaxed text-zinc-500">
+              Pair this with{' '}
+              <Link
+                to="/kubernetes-cost-optimization"
+                className="font-medium text-violet-700 underline-offset-2 hover:underline"
+              >
+                Kubernetes cost optimization
+              </Link>{' '}
+              and{' '}
+              <Link
+                to="/gpu-mlops"
+                className="font-medium text-violet-700 underline-offset-2 hover:underline"
+              >
+                GPU &amp; MLOps monitoring
+              </Link>{' '}
+              for spend and accelerators on the same clusters.
+            </p>
+          </>
+        ),
+        items: [
+          { label: 'EKS' },
+          { label: 'GKE' },
+          { label: 'AKS' },
+          { label: 'Kubernetes' },
+          { label: 'Helm' },
+          { label: 'Prometheus' },
+          { label: 'Datadog' },
+          { label: 'Grafana' },
+          { label: 'Slack' },
+        ],
+      }}
       stepsHeading="From kubeconfig to covered in one afternoon"
       stepsSub="Connect a cluster, let the health rules watch it, and act on incidents with evidence attached."
       steps={[

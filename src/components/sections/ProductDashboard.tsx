@@ -20,18 +20,8 @@ function buildArea(vals: number[], w: number, h: number, pad = 2) {
   return { line, area }
 }
 
-function Spark({ vals, color }: { vals: number[]; color: string }) {
-  const { line } = buildArea(vals, 120, 26)
-  return (
-    <svg className={styles.kpiSpark} viewBox="0 0 120 26" preserveAspectRatio="none" aria-hidden>
-      <path d={line} fill="none" stroke={color} strokeWidth="1.8" />
-    </svg>
-  )
-}
-
 const reqA = [0.35, 0.42, 0.38, 0.5, 0.62, 0.55, 0.68, 0.72, 0.66, 0.8, 0.88, 0.82, 0.9, 0.86, 0.95]
 const reqB = [0.2, 0.24, 0.22, 0.3, 0.34, 0.31, 0.4, 0.44, 0.41, 0.5, 0.55, 0.52, 0.58, 0.55, 0.62]
-const p99 = [0.4, 0.44, 0.42, 0.48, 0.46, 0.52, 0.5, 0.58, 0.62, 0.55, 0.6, 0.72, 0.68, 0.82, 0.78]
 
 const LOGS = [
   { t: '12:04:33', lvl: 'ERR', cls: styles.lvlErr, msg: 'payments-api OOMKilled: exceeded memory limit 512Mi' },
@@ -123,7 +113,6 @@ export default function ProductDashboard() {
                   <span className={styles.kpiValue}>48.2k</span>
                   <span className={`${styles.delta} ${styles.up}`}>▲ 6.4%</span>
                 </div>
-                <Spark vals={reqA} color="#8b5cf6" />
               </div>
               <div className={styles.kpi}>
                 <div className={styles.kpiLabel}>Error rate</div>
@@ -131,7 +120,6 @@ export default function ProductDashboard() {
                   <span className={styles.kpiValue}>0.24%</span>
                   <span className={`${styles.delta} ${styles.up}`}>▼ 0.1%</span>
                 </div>
-                <Spark vals={[0.6, 0.5, 0.55, 0.4, 0.45, 0.3, 0.35, 0.28, 0.3, 0.24, 0.22, 0.25, 0.2, 0.22, 0.18]} color="#34d399" />
               </div>
               <div className={styles.kpi}>
                 <div className={styles.kpiLabel}>p99 latency</div>
@@ -139,7 +127,6 @@ export default function ProductDashboard() {
                   <span className={styles.kpiValue}>812ms</span>
                   <span className={`${styles.delta} ${styles.amber}`}>▲ 18%</span>
                 </div>
-                <Spark vals={p99} color="#fbbf24" />
               </div>
               <div className={styles.kpi}>
                 <div className={styles.kpiLabel}>Saturation</div>
@@ -147,7 +134,6 @@ export default function ProductDashboard() {
                   <span className={styles.kpiValue}>63%</span>
                   <span className={`${styles.delta} ${styles.up}`}>▲ 3%</span>
                 </div>
-                <Spark vals={[0.5, 0.52, 0.48, 0.55, 0.58, 0.54, 0.6, 0.57, 0.62, 0.6, 0.63, 0.61, 0.64, 0.62, 0.63]} color="#8b5cf6" />
               </div>
             </div>
 

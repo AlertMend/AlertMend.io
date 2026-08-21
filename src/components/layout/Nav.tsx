@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Brand from '../ui/Brand';
 import Icon from '../ui/Icon';
+import type { IconName } from '../ui/Icon';
 import { useScrolled } from '../../hooks/useScrolled';
-import { HOME_PRODUCTS } from '../../data/homeProducts';
+import { HOME_PRODUCTS, type HomeProductId } from '../../data/homeProducts';
 import styles from './Nav.module.css';
 
 /* ============================================================
@@ -32,12 +33,35 @@ const primaryLinks: Array<{ to: string; label: string }> = [
   { to: '/case-studies', label: 'Customers' },
 ];
 
-/* "Platform" mega-menu. Driven straight off HOME_PRODUCTS so the menu lists
-   exactly the seven shipping products the homepage console tabs through, and
-   the two cannot drift apart. The previous hand-written version had grown to
-   13 entries where six were extra labels pointing at a route already listed
-   (three separate items all resolved to /observability), which made the panel
-   look broader than the product actually is. */
+/** Neutral line icons only — no third-party brand marks in the nav. */
+const PLATFORM_ICONS: Record<HomeProductId, IconName> = {
+  k8s: 'cube',
+  obs: 'activity',
+  dataobs: 'database',
+  logs: 'cmdline',
+  rca: 'brain',
+  fix: 'workflow',
+  oncall: 'phone',
+  finops: 'dollar',
+  mlops: 'cpu',
+};
+
+/** Shorter titles where the full product name is too long for a menu row. */
+const PLATFORM_TITLES: Partial<Record<HomeProductId, string>> = {
+  k8s: 'Kubernetes',
+  fix: 'Remediation & runbooks',
+};
+
+const PLATFORM_GROUPS: { label: string; ids: HomeProductId[] }[] = [
+  { label: 'Observe', ids: ['k8s', 'obs', 'dataobs'] },
+  { label: 'Respond', ids: ['logs', 'rca', 'fix'] },
+  { label: 'Operate', ids: ['oncall', 'finops', 'mlops'] },
+];
+
+const byId = Object.fromEntries(HOME_PRODUCTS.map((p) => [p.id, p])) as Record<
+  HomeProductId,
+  (typeof HOME_PRODUCTS)[number]
+>;
 
 const SIGNUP_URL = 'https://app.alertmend.io/signup';
 const PLAYGROUND_URL = 'https://demo.alertmend.io';
@@ -195,16 +219,35 @@ export default function Nav() {
               >
                 <div className={styles.megaGrid}>
                   <div className={styles.megaProducts}>
-                    {HOME_PRODUCTS.map((p) => (
-                      <Link
-                        key={p.id}
-                        to={p.to}
-                        className={styles.megaItem}
-                        onClick={() => setPlatformOpen(false)}
-                      >
-                        <span className={styles.megaItemTitle}>{p.name}</span>
-                        <span className={styles.megaItemDesc}>{p.blurb}</span>
-                      </Link>
+                    {PLATFORM_GROUPS.map((group) => (
+                      <div key={group.label} className={styles.megaCol}>
+                        <span className={styles.megaColLabel}>{group.label}</span>
+                        {group.ids.map((id) => {
+                          const p = byId[id]
+                          return (
+                            <Link
+                              key={id}
+                              to={p.to}
+                              className={styles.megaItem}
+                              onClick={() => setPlatformOpen(false)}
+                            >
+                              <span className={styles.megaItemIco} aria-hidden>
+                                <Icon
+                                  name={PLATFORM_ICONS[id]}
+                                  size={15}
+                                  strokeWidth={1.6}
+                                />
+                              </span>
+                              <span className={styles.megaItemText}>
+                                <span className={styles.megaItemTitle}>
+                                  {PLATFORM_TITLES[id] ?? p.name}
+                                </span>
+                                <span className={styles.megaItemDesc}>{p.blurb}</span>
+                              </span>
+                            </Link>
+                          )
+                        })}
+                      </div>
                     ))}
                   </div>
                   <Link
@@ -212,12 +255,12 @@ export default function Nav() {
                     className={styles.megaFeatured}
                     onClick={() => setPlatformOpen(false)}
                   >
-                    <span className={styles.megaFeaturedTag}>New</span>
+                    <span className={styles.megaFeaturedTag}>Featured</span>
                     <span className={styles.megaFeaturedTitle}>
                       One live observability console
                     </span>
                     <span className={styles.megaFeaturedDesc}>
-                      Metrics, logs, traces & a service map — correlated, with AI
+                      Metrics, logs, traces and a service map, correlated, with AI
                       root cause on top.
                     </span>
                     <span className={styles.megaFeaturedCta}>
