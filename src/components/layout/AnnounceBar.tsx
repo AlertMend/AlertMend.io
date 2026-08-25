@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import Icon from '../ui/Icon'
 import styles from './AnnounceBar.module.css'
 
 /**
- * Top announcement bar — a Datadog-signature element: a thin, full-width
- * vivid-gradient strip above the nav that promotes one headline item.
- * Datadog uses a purple→blue gradient; we translate the same treatment
- * into AlertMend's blue→cyan so it reads "Datadog-inspired" while staying
- * on-brand. Dismissible, and the choice is remembered for the session.
+ * Top announcement bar — event strip promoting AlertMend at LEAP (Riyadh).
+ * Dismissible; remembered for the session via STORAGE_KEY.
  */
 
-const STORAGE_KEY = 'am-announce-dismissed-v1'
+const STORAGE_KEY = 'am-announce-dismissed-leap-2026-v5'
+const CALENDLY_URL = 'https://calendly.com/hello-alertmend/30min'
 
 export default function AnnounceBar() {
   const [visible, setVisible] = useState(true)
@@ -41,18 +38,41 @@ export default function AnnounceBar() {
   }
 
   return (
-    <div className={styles.bar} role="region" aria-label="Announcement">
-      <Link to="/observability" className={styles.inner}>
-        <span className={styles.badge}>New</span>
-        <span className={styles.text}>
-          <b>eBPF auto-instrumentation</b> — zero-code distributed tracing across
-          your fleet
+    <div className={styles.bar} role="region" aria-label="LEAP announcement">
+      <a
+        href={CALENDLY_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.inner}
+      >
+        <img
+          src="/logos/leap-5.png"
+          alt="LEAP 5"
+          className={styles.logo}
+          width={120}
+          height={62}
+        />
+
+        <span className={styles.copy}>
+          <span className={styles.headline}>Meet us at LEAP 5</span>
+          <span className={styles.meta}>
+            <span className={styles.metaItem}>Riyadh</span>
+            <span className={styles.dot} aria-hidden="true" />
+            <span className={styles.metaItem}>Aug 31 – Sept 3</span>
+          </span>
         </span>
+
+        <span className={styles.booth}>
+          <span className={styles.boothLabel}>Booth</span>
+          <span className={styles.boothNum}>H1A.P178</span>
+        </span>
+
         <span className={styles.cta}>
-          Explore observability
+          Book a meeting
           <Icon name="arrow" size={13} className="arrow" strokeWidth={2.5} />
         </span>
-      </Link>
+      </a>
+
       <button
         type="button"
         className={styles.close}
