@@ -21,6 +21,7 @@
     "verify:aispotlight": "node scripts/verify-aispotlight-video.mjs",
     "capture:hero": "node scripts/capture-hero.mjs",
     "verify:hero": "node scripts/verify-hero-video.mjs",
+    "build:leap-booth-video": "node scripts/build-leap-booth-video.mjs",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives"
   },

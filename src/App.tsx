@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 import { Routes, Route, useLocation, Navigate, useParams } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
 import AmbientBackground from './components/layout/AmbientBackground'
-import AnnounceBar from './components/layout/AnnounceBar'
 import Nav from './components/layout/Nav'
 import Footer from './components/layout/Footer'
 import { useScrollReveal } from './hooks/useScrollReveal'
@@ -118,7 +117,6 @@ function App() {
   return (
     <>
       {!isDocs && <AmbientBackground />}
-      {!isDocs && <AnnounceBar />}
       {!isDocs && <Nav />}
       <ScrollToTop />
       <main className={isDocs ? 'docs-main' : undefined}>
