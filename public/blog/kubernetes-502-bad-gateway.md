@@ -5,6 +5,7 @@ date: "2025-02-01"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
 keywords: "kubernetes 502 bad gateway, troubleshoot kubernetes errors, fix 502 bad gateway, automated kubernetes management, kubernetes error resolution, service reliability kubernetes, kubernetes troubleshooting guide, alertmend ai solutions"
+hidden: true
 ---
 
 ## Understanding 502 Bad Gateway

@@ -1,7 +1,7 @@
 /* Beautiful compact platform board */
 
 .hero {
-  padding: 68px 0 48px;
+  padding: 68px 0 56px;
   text-align: center;
   background: #fff;
   color: #18181b;
@@ -13,8 +13,8 @@
   max-width: 880px;
   font-size: clamp(28px, 4.5vw, 48px);
   line-height: 1.12;
-  letter-spacing: -0.034em;
-  font-weight: 720;
+  letter-spacing: -0.03em;
+  font-weight: 650;
   color: #18181b;
 }
 
@@ -24,11 +24,32 @@
 
 .sub {
   margin: 14px auto 0;
-  max-width: 540px;
+  max-width: 580px;
   font-size: 15px;
   line-height: 1.45;
   color: #71717a;
   letter-spacing: -0.01em;
+}
+
+.doorsTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 auto 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7c3aed;
+}
+
+.doorsTag::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #7c3aed;
+  flex-shrink: 0;
 }
 
 .heroCta {
@@ -40,19 +61,39 @@
   flex-wrap: wrap;
 }
 
+.heroAlt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: #71717a;
+}
+
+.heroAlt a {
+  color: #52525b;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.heroAlt a:hover {
+  color: #7c3aed;
+}
+
 .ctaPrimary,
 .ctaSecondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 7px;
-  min-height: 42px;
-  padding: 0 20px;
-  border-radius: 7px;
-  font-size: 12.5px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+  min-height: 46px;
+  padding: 0 22px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
   transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -60,7 +101,7 @@
   background: #7c3aed;
   color: #fff !important;
   border: 1px solid #7c3aed;
-  box-shadow: 0 8px 20px -10px rgba(124, 58, 237, 0.55);
+  box-shadow: 0 1px 2px rgba(11, 18, 32, 0.12);
 }
 
 .ctaPrimary:hover {
@@ -70,12 +111,12 @@
 
 .ctaSecondary {
   background: #fff;
-  color: #7c3aed !important;
-  border: 1.5px solid #7c3aed;
+  color: #0b1220 !important;
+  border: 1px solid rgba(11, 18, 32, 0.18);
 }
 
 .ctaSecondary:hover {
-  background: #faf5ff;
+  background: #f8fafc;
   transform: translateY(-1px);
 }
 
@@ -290,7 +331,7 @@
   background: #fafafa;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 10px;
-  color: #a1a1aa;
+  color: #71717a;
 }
 
 @media (min-width: 900px) {
@@ -306,7 +347,7 @@
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: #059669;
+  color: #047857;
 }
 
 .live i {
@@ -501,14 +542,14 @@
   font-style: normal;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 10px;
-  color: #a1a1aa;
+  color: #71717a;
 }
 
 .tileTag {
   margin-top: auto;
   padding-top: 2px;
   font-size: 9.5px;
-  color: #a1a1aa;
+  color: #71717a;
   letter-spacing: -0.01em;
 }
 
@@ -519,12 +560,12 @@
   gap: 8px;
   padding-top: 2px;
   font-size: 9.5px;
-  color: #a1a1aa;
+  color: #71717a;
   letter-spacing: -0.01em;
 }
 
 .conf {
-  color: #059669 !important;
+  color: #047857 !important;
   font-weight: 800 !important;
   background: #ecfdf5;
   border: 1px solid #a7f3d0;
@@ -533,7 +574,7 @@
 }
 
 .approved {
-  color: #059669 !important;
+  color: #047857 !important;
   font-weight: 700 !important;
   background: #ecfdf5;
   border: 1px solid #a7f3d0;
@@ -544,7 +585,7 @@
   letter-spacing: 0.01em;
 }
 
-.ok { color: #059669 !important; }
+.ok { color: #047857 !important; }
 
 .hexMap {
   display: flex;
@@ -656,7 +697,7 @@
 }
 
 .str {
-  color: #059669;
+  color: #047857;
 }
 
 .logTable {
@@ -679,7 +720,7 @@
 
 .logHead {
   background: #f4f4f5;
-  color: #a1a1aa;
+  color: #52525b;
   font-size: 8.5px;
   font-weight: 700;
   text-transform: uppercase;
@@ -701,7 +742,7 @@
   text-overflow: ellipsis;
 }
 
-.logTime { color: #a1a1aa; }
+.logTime { color: #71717a; }
 
 .logSvc {
   color: #52525b;
@@ -721,7 +762,7 @@
 }
 
 .err {
-  color: #e11d48;
+  color: #be123c;
   background: #fff1f2;
 }
 
@@ -787,14 +828,14 @@
 
 .rfName span {
   font-size: 9.5px;
-  color: #a1a1aa;
+  color: #71717a;
 }
 
 .rfPct {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 10px;
   font-weight: 700;
-  color: #059669;
+  color: #047857;
 }
 
 .rfProgress {
@@ -956,7 +997,7 @@
   font-weight: 650;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #a78bfa;
+  color: #6d28d9;
 }
 
 .pageCard strong {
@@ -971,7 +1012,7 @@
   gap: 6px;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 9.5px;
-  color: #a1a1aa;
+  color: #71717a;
 }
 
 .escTrack i {
@@ -981,7 +1022,7 @@
 }
 
 .escOn {
-  color: #059669;
+  color: #047857;
   font-weight: 700;
 }
 
@@ -1002,7 +1043,7 @@
   font-weight: 650;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #a1a1aa;
+  color: #71717a;
 }
 
 .costRow strong {
@@ -1042,7 +1083,7 @@
   display: flex;
   gap: 12px;
   font-size: 9.5px;
-  color: #a1a1aa;
+  color: #71717a;
 }
 
 .finopsLegend span {
@@ -1115,7 +1156,7 @@
   display: block;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 9.5px;
-  color: #a1a1aa;
+  color: #71717a;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1132,7 +1173,7 @@
 }
 
 .sevCrit {
-  color: #e11d48;
+  color: #be123c;
   background: #fff1f2;
 }
 
@@ -1254,11 +1295,11 @@
 }
 
 .yamlDel {
-  color: #e11d48;
+  color: #be123c;
 }
 
 .yamlAdd {
-  color: #059669;
+  color: #047857;
 }
 
 .hotPaths {
@@ -1290,7 +1331,7 @@
 
 .hotPathHead em {
   font-style: normal;
-  color: #a1a1aa;
+  color: #71717a;
 }
 
 .hotBar {
@@ -1374,8 +1415,12 @@
   .costRow div:last-child {
     display: none;
   }
-  .tabs a:nth-child(n + 5) {
+  /* Phones: keep only the active surface tab so it never collides with LIVE. */
+  .tab {
     display: none;
+  }
+  .tabs {
+    overflow: hidden;
   }
   .stage { margin-top: 28px; }
   .oncallRow {
@@ -1392,3 +1437,133 @@
     animation: none;
   }
 }
+
+/* Audience toggle — segmented control under the headline */
+.toggle {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin: 22px auto 0;
+  padding: 4px;
+  border-radius: var(--radius, 8px);
+  background: #f4f4f5;
+  border: 1px solid rgba(24, 24, 27, 0.08);
+}
+
+.toggleBtn,
+.toggleOn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  min-width: 170px;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm, 6px);
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.toggleBtn strong,
+.toggleOn strong {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #52525b;
+}
+
+.toggleBtn span,
+.toggleOn span {
+  font-size: 11.5px;
+  color: #52525b;
+}
+
+.toggleBtn:hover strong {
+  color: #18181b;
+}
+
+.toggleOn {
+  background: #fff;
+  border-color: rgba(124, 58, 237, 0.28);
+  box-shadow: var(--shadow-card, 0 6px 16px -12px rgba(9, 9, 11, 0.25));
+}
+
+.toggleOn strong {
+  color: #7c3aed;
+}
+
+.toggleBtn:focus-visible,
+.toggleOn:focus-visible {
+  outline: 2px solid #7c3aed;
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .toggle {
+    display: grid;
+    width: 100%;
+  }
+  .toggleBtn,
+  .toggleOn {
+    min-width: 0;
+    padding: 8px 10px;
+  }
+}
+
+.stageWrap {
+  position: relative;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+/* Reassurance line under the hero CTAs */
+.proof {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 16px;
+  margin: 10px 0 6px;
+  padding: 0;
+  list-style: none;
+  font-size: 12.5px;
+  font-weight: 550;
+  color: #52525b;
+}
+
+.proof li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.proof li::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #059669;
+}
+
+/* ===== Enterprise polish (2026-09): calm KPI tiles in product mocks =====
+   Saturated gradient tiles read as a template. Use white tiles with a thin
+   coloured top rule and dark figures instead. */
+.kpi {
+  color: #0b1220;
+  background: #ffffff !important;
+  border: 1px solid rgba(11, 18, 32, 0.08);
+  box-shadow: none;
+  border-top-width: 3px;
+}
+.kpi span {
+  color: #64748b;
+  opacity: 1;
+}
+.kpi strong {
+  color: #0b1220;
+}
+.kpiHot { border-top-color: #e11d48; }
+.kpiWarn { border-top-color: #d97706; }
+.kpiViolet { border-top-color: #7c3aed; }
+.kpiOk { border-top-color: #059669; }

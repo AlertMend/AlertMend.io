@@ -42,13 +42,17 @@ const SPANS: [string, number, string][] = [
 type Props = {
   /** HOME_PRODUCTS id — opens that product's workspace instead of the overview. */
   activeProduct?: HomeProductId
+  /** Homepage hero: render the data workspace at the same size as the
+   *  infrastructure overview, so switching audiences doesn't resize it. */
+  dataOverview?: boolean
 }
 
-export default function PlatformBoardMock({ activeProduct }: Props) {
-  const activeTab = activeProduct ?? 'obs'
+export default function PlatformBoardMock({ activeProduct, dataOverview = false }: Props) {
+  const activeTab = dataOverview ? 'dataobs' : activeProduct ?? 'obs'
+  const compact = Boolean(activeProduct) && !dataOverview
 
   return (
-    <div className={`${styles.app} ${activeProduct ? styles.appCompact : ''}`} data-capture="hero-demo">
+    <div className={`${styles.app} ${compact ? styles.appCompact : ''}`} data-capture="hero-demo">
       <aside className={styles.rail} aria-hidden>
         <AlertMendIcon className={styles.railLogo} />
         {HOME_PRODUCTS.map((p) => (
@@ -91,7 +95,13 @@ export default function PlatformBoardMock({ activeProduct }: Props) {
           </div>
         </header>
 
-        {activeProduct ? <ProductBoard product={activeProduct} /> : <OverviewBoard />}
+        {dataOverview ? (
+          <DataOverviewBoard />
+        ) : activeProduct ? (
+          <ProductBoard product={activeProduct} />
+        ) : (
+          <OverviewBoard />
+        )}
       </div>
     </div>
   )
@@ -406,6 +416,177 @@ function OverviewBoard() {
               </div>
             </div>
             <div className={styles.tileTag}>YAML preview · rollback · per-namespace</div>
+          </Tile>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/** Homepage hero, data audience: same grid as OverviewBoard (KPI row, four
+ *  tiles, two stacked columns) so both audiences get an equal-sized board. */
+function DataOverviewBoard() {
+  const datasets = [
+    { name: 'customer_accounts', score: 91 },
+    { name: 'loans.daily_balance', score: 88 },
+    { name: 'kyc.address', score: 97 },
+    { name: 'payments_ledger', score: 99 },
+  ]
+  const types = [
+    { name: 'completeness', ok: 96, bad: 1 },
+    { name: 'uniqueness', ok: 58, bad: 1 },
+    { name: 'validity', ok: 74, bad: 0 },
+    { name: 'freshness', ok: 42, bad: 1 },
+  ]
+  const failing = [
+    { sev: 'CRIT', tone: styles.sevCrit, name: 'Uniqueness', where: 'customer_accounts.account_id · 98.7%', chip: 'Job linked' },
+    { sev: 'CRIT', tone: styles.sevCrit, name: 'Freshness', where: 'loans.daily_balance · 3h late', chip: 'Job linked' },
+    { sev: 'WARN', tone: styles.sevWarn, name: 'Completeness', where: 'kyc.address · 2.1% missing', chip: 'Watching' },
+  ]
+  const runs = [
+    { sev: 'FAIL', tone: styles.sevCrit, name: 'ODI nightly_load', where: '06:12 · ORA-01400' },
+    { sev: 'RETRY', tone: styles.sevWarn, name: 'Airflow load_loans', where: 'attempt 3 of 5 · 3h late' },
+    { sev: 'OK', tone: styles.conf, name: 'Airflow load_payments', where: '05:40 · 1.2M rows' },
+  ]
+  return (
+    <div className={`${styles.board} ${styles.boardOverview}`}>
+      <div className={styles.kpiRow}>
+        <Kpi label="datasets" value="42" tone="violet" />
+        <Kpi label="checks" value="318" tone="ok" />
+        <Kpi label="failing" value="3" tone="hot" />
+        <Kpi label="quality" value="96" tone="warn" />
+      </div>
+
+      <Tile title="Datasets" meta="quality score">
+        <div className={styles.nsList}>
+          {datasets.map((d) => (
+            <div key={d.name}>
+              <div className={styles.nsHead}>
+                <span>{d.name}</span>
+                <span>{d.score}</span>
+              </div>
+              <div className={styles.miniBars}>
+                <i style={{ width: '100%' }} />
+                <b style={{ width: `${d.score}%` }} />
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className={styles.tileTag}>Snowflake · Oracle</div>
+      </Tile>
+
+      <Tile title="Checks by type" meta="pass / fail">
+        <div className={styles.nsList}>
+          {types.map((m) => (
+            <div key={m.name}>
+              <div className={styles.nsHead}>
+                <span>{m.name}</span>
+                <span>
+                  {m.ok}/{m.bad}
+                </span>
+              </div>
+              <div className={styles.miniBars}>
+                <i style={{ width: '100%' }} />
+                <b style={{ width: `${Math.round((m.ok / Math.max(m.ok + m.bad, 1)) * 100)}%` }} />
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className={styles.tileTag}>87 ready-made checks</div>
+      </Tile>
+
+      <Tile title="Policy" meta="BCBS 239">
+        <p className={styles.rcaText}>
+          <b>318 checks</b> proposed from your policy, each citing its clause
+        </p>
+        <div className={styles.chips}>
+          <span>clause 3.1</span>
+          <span>clause 3.2</span>
+          <span>clause 6.1</span>
+        </div>
+        <div className={styles.tileTag}>every check approved</div>
+      </Tile>
+
+      <Tile title="Cause" meta={<em className={styles.conf}>linked</em>} className={styles.tileRca}>
+        <p className={styles.rcaText}>
+          <b>nightly_load</b> failed before the uniqueness check broke
+        </p>
+        <div className={styles.chips}>
+          <span>job</span>
+          <span>error</span>
+          <span>lineage</span>
+          <span>check</span>
+        </div>
+        <div className={styles.tileTag}>cause + impact in one alert</div>
+      </Tile>
+
+      <div className={styles.bottomCols}>
+        <div className={styles.bottomCol}>
+          <Tile title="Failing checks" meta="last 15m">
+            <div className={styles.incidentList}>
+              {failing.map((a) => (
+                <div key={a.name} className={styles.incident}>
+                  <span className={`${styles.sev} ${a.tone}`}>{a.sev}</span>
+                  <div className={styles.incidentBody}>
+                    <strong>{a.name}</strong>
+                    <span>{a.where}</span>
+                  </div>
+                  <span className={styles.rcaChip}>{a.chip}</span>
+                </div>
+              ))}
+            </div>
+          </Tile>
+
+          <Tile title="Pipeline runs" meta="Airflow · Oracle ODI">
+            <div className={styles.incidentList}>
+              {runs.map((r) => (
+                <div key={r.name} className={styles.incident}>
+                  <span className={`${styles.sev} ${r.tone}`}>{r.sev}</span>
+                  <div className={styles.incidentBody}>
+                    <strong>{r.name}</strong>
+                    <span>{r.where}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Tile>
+        </div>
+
+        <div className={styles.bottomCol}>
+          <Tile title="Alert · Microsoft Teams" meta="#data-quality" className={styles.tileRf}>
+            <p className={styles.rcaText}>
+              <b>Uniqueness failed</b> on BANKING.CUSTOMER_ACCOUNTS. Caused by ODI job{' '}
+              <b>nightly_load</b> (ORA-01400). 3 Power BI reports read this table.
+            </p>
+            <div className={styles.rfActions}>
+              <span className={styles.rfBtn}>Acknowledge</span>
+              <span className={styles.rfGhost}>Open check</span>
+              <span className={styles.rfGhost}>View lineage</span>
+            </div>
+            <div className={styles.tileTag}>policy clause 3.2 · owner @priya</div>
+          </Tile>
+
+          <Tile title="Power BI impact" meta={<em className={styles.ok}>flagged before 9am</em>}>
+            <div className={styles.costRow}>
+              <div>
+                <span>reports</span>
+                <strong>3</strong>
+              </div>
+              <div>
+                <span>tables</span>
+                <strong>1</strong>
+              </div>
+              <div>
+                <span>owners</span>
+                <strong>2</strong>
+              </div>
+            </div>
+            <div className={styles.chips}>
+              <span>Loan book summary</span>
+              <span>Daily liquidity</span>
+              <span>KYC exceptions</span>
+            </div>
+            <div className={styles.tileTag}>lineage · report owners notified</div>
           </Tile>
         </div>
       </div>
@@ -968,73 +1149,98 @@ function MlopsBoard() {
   )
 }
 
+const dqActionChip = styles.rcaChip
+const dqImpactTile = styles.tileRca
+const dqImpactText = styles.rcaText
+
 function DataObsBoard() {
-  const anomalies = [
-    { sev: 'CRIT', tone: styles.sevCrit, name: 'Freshness lag', where: 'analytics.orders · 47m late' },
-    { sev: 'CRIT', tone: styles.sevCrit, name: 'Null spike', where: 'orders.amount · 12.4%' },
-    { sev: 'WARN', tone: styles.sevWarn, name: 'Schema drift', where: 'stg_orders · updated_at dropped' },
+  const failing = [
+    {
+      sev: 'CRIT',
+      tone: styles.sevCrit,
+      name: 'Uniqueness',
+      where: 'customer_accounts.account_id · 98.7%',
+      chip: 'Job linked',
+    },
+    {
+      sev: 'CRIT',
+      tone: styles.sevCrit,
+      name: 'Freshness',
+      where: 'loans.daily_balance · 3h late',
+      chip: 'Job linked',
+    },
+    {
+      sev: 'WARN',
+      tone: styles.sevWarn,
+      name: 'Completeness',
+      where: 'kyc.address · 2.1% missing',
+      chip: 'Watching',
+    },
   ]
   const monitors = [
-    { name: 'freshness', ok: 412, bad: 3 },
-    { name: 'volume', ok: 398, bad: 6 },
-    { name: 'schema', ok: 420, bad: 1 },
-    { name: 'null rate', ok: 381, bad: 8 },
+    { name: 'completeness', ok: 96, bad: 1 },
+    { name: 'uniqueness', ok: 58, bad: 1 },
+    { name: 'validity', ok: 74, bad: 0 },
+    { name: 'freshness', ok: 42, bad: 1 },
   ]
   return (
     <div className={`${styles.board} ${styles.boardCompact}`}>
       <div className={styles.kpiRow}>
-        <Kpi label="tables" value="424" tone="violet" />
-        <Kpi label="anomalies" value="3" tone="hot" />
-        <Kpi label="freshness" value="47m" tone="warn" />
-        <Kpi label="contracts" value="86" tone="ok" />
+        <Kpi label="datasets" value="42" tone="violet" />
+        <Kpi label="checks" value="318" tone="ok" />
+        <Kpi label="failing" value="3" tone="hot" />
+        <Kpi label="quality" value="96" tone="warn" />
       </div>
 
-      <Tile title="Metric monitors" meta="warehouse · live" className={styles.tileWide}>
+      <Tile title="Checks by type" meta="Snowflake · live" className={styles.tileWide}>
         <div className={styles.nsList}>
           {monitors.map((m) => (
             <div key={m.name}>
               <div className={styles.nsHead}>
                 <span>{m.name}</span>
                 <span>
-                  {m.ok} ok · {m.bad} open
+                  {m.ok}/{m.bad}
                 </span>
               </div>
               <div className={styles.miniBars}>
                 <i style={{ width: '100%' }} />
-                <b style={{ width: `${Math.round((m.ok / (m.ok + m.bad)) * 100)}%` }} />
+                <b
+                  style={{
+                    width: `${Math.round((m.ok / Math.max(m.ok + m.bad, 1)) * 100)}%`,
+                  }}
+                />
               </div>
             </div>
           ))}
         </div>
-        <div className={styles.tileTag}>freshness · volume · schema · nulls</div>
+        <div className={styles.tileTag}>from policy · BCBS 239</div>
       </Tile>
 
-      <Tile title="Anomalies" meta="last 15m" className={styles.tileWide}>
+      <Tile title="Failing checks" meta="last 15m" className={styles.tileWide}>
         <div className={styles.incidentList}>
-          {anomalies.map((a) => (
+          {failing.map((a) => (
             <div key={a.name} className={styles.incident}>
               <span className={`${styles.sev} ${a.tone}`}>{a.sev}</span>
               <div className={styles.incidentBody}>
                 <strong>{a.name}</strong>
                 <span>{a.where}</span>
               </div>
-              <span className={styles.rcaChip}>View RCA</span>
+              <span className={dqActionChip}>{a.chip}</span>
             </div>
           ))}
         </div>
       </Tile>
 
-      <Tile title="AI RCA" meta={<em className={styles.conf}>91%</em>} className={`${styles.tileWide} ${styles.tileRca}`}>
-        <p className={styles.rcaText}>
-          <b>stg_orders</b> dropped <b>updated_at</b> after dbt deploy <b>v4.12.1</b>
+      <Tile title="Cause and impact" meta="ODI" className={`${styles.tileWide} ${dqImpactTile}`}>
+        <p className={dqImpactText}>
+          <b>nightly_load</b> failed (ORA-01400) · <b>3</b> Power BI reports affected
         </p>
         <div className={styles.chips}>
-          <span>freshness</span>
-          <span>schema</span>
-          <span>change</span>
-          <span>contract</span>
+          <span>Oracle ODI</span>
+          <span>Power BI</span>
+          <span>clause 3.2</span>
         </div>
-        <div className={styles.tileTag}>evidence-backed · approve in Slack</div>
+        <div className={styles.tileTag}>approve in Teams</div>
       </Tile>
     </div>
   )

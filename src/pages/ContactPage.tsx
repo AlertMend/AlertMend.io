@@ -1,8 +1,12 @@
-import SEO from '../components/SEO'
-import Breadcrumb from '../components/Breadcrumb'
-import { Mail, MapPin, Send } from 'lucide-react'
-import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Mail, MapPin, CalendarDays, ShieldCheck } from 'lucide-react'
+import SEO from '../components/SEO'
+import { PageHero, Section } from '../components/enterprise/PageKit'
+import styles from '../components/enterprise/Enterprise.module.css'
+import kit from '../components/enterprise/PageKit.module.css'
+import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
+import { calendlyUrl } from '../lib/calendly'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -13,8 +17,9 @@ export default function ContactPage() {
   })
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
-  
-  const baseDescription = "Contact AlertMend about production ops, AI RCA, and approved remediations. Book a demo or send a message."
+
+  const baseDescription =
+    'Contact AlertMend about data observability, infrastructure observability, AI root cause analysis and automated fixes. Book a demo or send the team a message.'
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'contact', 'contact')
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -26,7 +31,7 @@ export default function ContactPage() {
       const response = await fetch('https://api.alertmend.io/contact', {
         method: 'POST',
         headers: {
-          'Accept': 'application/json, text/plain, */*',
+          Accept: 'application/json, text/plain, */*',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -40,14 +45,13 @@ export default function ContactPage() {
       if (response.ok) {
         setFormStatus('success')
         setFormData({ full_name: '', company: '', email: '', message: '' })
-        // Reset success message after 5 seconds
         setTimeout(() => {
           setFormStatus('idle')
         }, 5000)
       } else {
         const data = await response.json().catch(() => ({}))
         setFormStatus('error')
-        setErrorMessage(data.error || data.message || 'There was an error submitting the form. Please try again.')
+        setErrorMessage(data.error || data.message || 'Your message could not be sent. Please try again.')
       }
     } catch (error) {
       setFormStatus('error')
@@ -55,169 +59,159 @@ export default function ContactPage() {
     }
   }
 
+  const update =
+    (key: keyof typeof formData) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setFormData({ ...formData, [key]: e.target.value })
+
   return (
-    <div className="min-h-screen bg-white">
+    <>
       <SEO
-        title="Contact AlertMend: Connect for Incident Management"
+        title="Contact AlertMend: Demos, Support and Partnerships"
         description={uniqueDescription}
-        keywords="Contact AlertMend, AlertMend support, book demo, AIOps consultation, infrastructure automation contact"
+        keywords="Contact AlertMend, AlertMend support, book a demo, data observability demo, infrastructure observability demo"
         canonical="/contact"
-        breadcrumbData={{
-          items: [{ label: 'Contact' }]
-        }}
+        breadcrumbData={{ items: [{ label: 'Contact' }] }}
       />
-      <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden hero-dark">
-          <div className="max-w-7xl mx-auto">
-            <div className="mb-8">
-              <Breadcrumb items={[{ label: 'Contact' }]} />
-            </div>
-            <div className="text-center mb-12 md:mb-16">
-              <div className="inline-block px-5 py-2 bg-gradient-to-r from-brand-50 to-brand-100 text-brand-700 rounded-full text-sm font-bold mb-8 shadow-md border border-brand-200/50">
-                Contact Us
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-900 mb-6 leading-tight">
-                Get in Touch
-              </h1>
-              <p className="text-xl md:text-2xl text-brand-700 max-w-3xl mx-auto leading-relaxed mb-12">
-                Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
-              </p>
-            </div>
 
-            <div className="grid md:grid-cols-2 gap-12">
-              <div>
-                <h2 className="text-3xl font-bold text-brand-900 mb-8">Contact Information</h2>
-                <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-50 text-brand-600">
-                      <Mail className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-brand-900 mb-1">Email</h3>
-                      {/* `body.alertmend-dark a { color: inherit }` (0,1,2) outranks a plain
-                          utility, and brand-600 only reaches ~3.4:1 on the hero gradient
-                          anyway, so pin violet-300 — the shade already used for violet
-                          accents on dark surfaces — with the `!` modifier. */}
-                      <a href="mailto:hello@alertmend.io" className="!text-violet-300 hover:!text-violet-200 font-medium">
-                        hello@alertmend.io
-                      </a>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-4">
-                    <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-50 text-brand-600">
-                      <MapPin className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-brand-900 mb-1">Address</h3>
-                      <p className="text-gray-600 font-medium">
-                        32 Pekin Street, #05-01<br />
-                        Singapore 048762
-                      </p>
-                    </div>
-                  </div>
+      <PageHero
+        eyebrow="Contact"
+        title="Talk to the team that builds AlertMend."
+        lede="Questions about data quality, infrastructure, security reviews or pricing. Send a message, or book 30 minutes and see the product on a live environment."
+      />
+
+      <Section>
+        <div className={kit.split}>
+          <div>
+            <h2 className={styles.h2}>Other ways to reach us</h2>
+            <ul className={kit.details}>
+              <li>
+                <CalendarDays className={kit.detailIcon} size={20} aria-hidden="true" />
+                <div>
+                  <p className={kit.detailLabel}>Book a demo</p>
+                  <p className={kit.detailValue}>
+                    <a href={calendlyUrl('contact-page')} target="_blank" rel="noopener noreferrer">
+                      Pick a 30-minute slot
+                    </a>
+                  </p>
                 </div>
-              </div>
+              </li>
+              <li>
+                <Mail className={kit.detailIcon} size={20} aria-hidden="true" />
+                <div>
+                  <p className={kit.detailLabel}>Email</p>
+                  <p className={kit.detailValue}>
+                    <a href="mailto:hello@alertmend.io">hello@alertmend.io</a>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <ShieldCheck className={kit.detailIcon} size={20} aria-hidden="true" />
+                <div>
+                  <p className={kit.detailLabel}>Security reviews</p>
+                  <p className={kit.detailValue}>
+                    Start with the <Link to="/trust">trust center</Link>, or ask us for security documentation.
+                  </p>
+                </div>
+              </li>
+              <li>
+                <MapPin className={kit.detailIcon} size={20} aria-hidden="true" />
+                <div>
+                  <p className={kit.detailLabel}>Office</p>
+                  <p className={kit.detailValue}>
+                    32 Pekin Street, #05-01
+                    <br />
+                    Singapore 048762
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
 
-              <div>
-                <header className="mb-4">
-                  <strong className="!text-white">Fill in your details</strong>
-                </header>
-                <form 
-                  onSubmit={handleSubmit}
-                  className="wpcf7-form init space-y-6"
-                  id="contactId"
-                >
-                  <div>
-                    <label htmlFor="full_name" className="block text-sm font-bold text-brand-900 mb-2">
-                      Full Name:
-                    </label>
-                    <span className="wpcf7-form-control-wrap">
-                      <input
-                        type="text"
-                        id="full_name"
-                        name="full_name"
-                        value={formData.full_name}
-                        onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-brand-400 focus:outline-none wpcf7-form-control"
-                        required
-                      />
-                    </span>
-                  </div>
-                  <div>
-                    <label htmlFor="company" className="block text-sm font-bold text-brand-900 mb-2">
-                      Company:
-                    </label>
-                    <span className="wpcf7-form-control-wrap">
-                      <input
-                        type="text"
-                        id="company"
-                        name="company"
-                        value={formData.company}
-                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-brand-400 focus:outline-none wpcf7-form-control"
-                        required
-                      />
-                    </span>
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-bold text-brand-900 mb-2">
-                      Your email:
-                    </label>
-                    <span className="wpcf7-form-control-wrap">
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-brand-400 focus:outline-none wpcf7-form-control"
-                        required
-                      />
-                    </span>
-                  </div>
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-bold text-brand-900 mb-2">
-                      Your message:
-                    </label>
-                    <span className="wpcf7-form-control-wrap">
-                      <textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        rows={6}
-                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-brand-400 focus:outline-none wpcf7-form-control wpcf7-textarea"
-                        required
-                      />
-                    </span>
-                  </div>
-                  
-                  {formStatus === 'success' && (
-                    <div className="p-4 bg-green-50 border-2 border-green-200 rounded-xl text-green-800 font-medium">
-                      Thank you! Your message has been sent successfully. We'll get back to you soon.
-                    </div>
-                  )}
-                  
-                  {formStatus === 'error' && (
-                    <div className="p-4 bg-red-50 border-2 border-red-200 rounded-xl text-red-800 font-medium">
-                      {errorMessage || 'There was an error sending your message. Please try again.'}
-                    </div>
-                  )}
-                  
-                  <button
-                    type="submit"
-                    disabled={formStatus === 'submitting'}
-                    className="wpcf7-form-control wpcf7-submit has-spinner w-full bg-white !text-zinc-950 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-zinc-100 transition-all shadow-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {formStatus === 'submitting' ? 'Sending...' : 'Send'}
-                    {formStatus !== 'submitting' && <Send className="h-5 w-5" />}
-                  </button>
-                </form>
+          <form onSubmit={handleSubmit} className={kit.form} id="contactId" aria-label="Contact form">
+            <div className={kit.formRow}>
+              <div className={kit.field}>
+                <label htmlFor="full_name" className={kit.label}>
+                  Full name
+                </label>
+                <input
+                  type="text"
+                  id="full_name"
+                  name="full_name"
+                  autoComplete="name"
+                  value={formData.full_name}
+                  onChange={update('full_name')}
+                  className={kit.input}
+                  required
+                />
+              </div>
+              <div className={kit.field}>
+                <label htmlFor="company" className={kit.label}>
+                  Company
+                </label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  autoComplete="organization"
+                  value={formData.company}
+                  onChange={update('company')}
+                  className={kit.input}
+                  required
+                />
               </div>
             </div>
-          </div>
-        </section>
-    </div>
+            <div className={kit.field}>
+              <label htmlFor="email" className={kit.label}>
+                Work email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                autoComplete="email"
+                value={formData.email}
+                onChange={update('email')}
+                className={kit.input}
+                required
+              />
+            </div>
+            <div className={kit.field}>
+              <label htmlFor="message" className={kit.label}>
+                How can we help?
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={update('message')}
+                rows={6}
+                className={kit.input}
+                required
+              />
+            </div>
+
+            <div aria-live="polite">
+              {formStatus === 'success' && (
+                <p className={`${kit.notice} ${kit.noticeOk}`}>
+                  Thank you. Your message has been sent and the team will reply by email.
+                </p>
+              )}
+              {formStatus === 'error' && (
+                <p className={`${kit.notice} ${kit.noticeErr}`}>
+                  {errorMessage || 'Your message could not be sent. Please try again.'}
+                </p>
+              )}
+            </div>
+
+            <button type="submit" disabled={formStatus === 'submitting'} className={`${styles.btnPrimary} ${kit.submit}`}>
+              {formStatus === 'submitting' ? 'Sending…' : 'Send message'}
+            </button>
+            <p className={kit.fine}>
+              We use your details only to reply. See our <Link to="/privacy">privacy policy</Link>.
+            </p>
+          </form>
+        </div>
+      </Section>
+    </>
   )
 }
-

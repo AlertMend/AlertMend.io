@@ -1,6 +1,6 @@
 ---
 title: "Resolving Frequent Garbage Collection"
-excerpt: "Explore the latest AI tools and applications that are revolutionizing various industries. From image generation to natural language processing, AI is..."
+excerpt: "In Elasticsearch, frequent garbage collection (GC) can lead to increased response times, latency issues, and overall cluster instability, especially."
 date: "2025-03-9"
 category: "Elasticsearch"
 author: "Himanshu Bansal"

@@ -1,5 +1,5 @@
 ---
-title: "Integrating Coredns With Prometheus For"
+title: "CoreDNS Monitoring and Alerting with Prometheus"
 excerpt: "In 2025, the landscape of system monitoring and alerting solutions is rapidly evolving, with DevOps teams increasingly recognizing the importance of robust t..."
 date: "2026-01-10"
 category: "Kubernetes"
@@ -8,8 +8,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Integrating, Coredns, Prometheus, Advanc
 ---
 
 # Integrating Coredns With Prometheus For Advanced Monitoring And Alerting
-
-*Generated on 2025-12-27 23:09:17*
 
 ---
 

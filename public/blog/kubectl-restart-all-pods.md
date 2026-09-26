@@ -1,10 +1,11 @@
 ---
-title: "kubectl restart all pods Guide"
+title: "kubectl Restart All Pods Guide"
 excerpt: "In the dynamic landscape of Kubernetes, managing pod lifecycles efficiently is crucial for maintaining optimal performance and reliability"
 date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "kubectl, restart, pods, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
+hidden: true
 ---
 
 # kubectl restart all pods

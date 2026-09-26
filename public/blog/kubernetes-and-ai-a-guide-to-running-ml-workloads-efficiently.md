@@ -1,6 +1,6 @@
 ---
-title: "Kubernetes And Ai Guide Running"
-excerpt: "================================================================================ REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS"
+title: "Kubernetes and AI Guide Running"
+excerpt: "2. https://portworx.com/knowledge-hub/kubernetes-ai/ 3. https://pages.run.ai/hubfs/PDFs/Scaling-Up-AI-ML-with-Kubernetes.pdf"
 date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
@@ -8,8 +8,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Kubernetes, Ai, Guide, Running, Ml"
 ---
 
 # Kubernetes And Ai: A Guide To Running Ml Workloads Efficiently
-
-*Generated on 2025-12-25 16:12:41*
 
 ---
 

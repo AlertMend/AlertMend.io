@@ -1,5 +1,5 @@
 ---
-title: "Fix code=exited, status=1/failure (systemd)"
+title: "Fix Code=exited, Status=1/failure (Systemd)"
 excerpt: "A systemd service failed with code=exited, status=1/failure. Read journalctl to find the real error and fix docker, nginx, apache, or mysql start failures."
 date: "2026-01-10"
 dateModified: "2026-07-16"

@@ -5,6 +5,7 @@ date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "node, notready, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
+hidden: true
 ---
 
 # k8s node notready troubleshooting

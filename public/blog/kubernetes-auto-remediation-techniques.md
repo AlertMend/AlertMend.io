@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes Auto Remediation Techniques"
+title: "Kubernetes Auto-Remediation Techniques"
 excerpt: "Kubernetes Auto Remediation Techniques Mastering Kubernetes Auto Remediation Techniques for Efficient DevOps In the ever-evolving landscape of DevOps and..."
 date: "2026-01-10"
 category: "Kubernetes"

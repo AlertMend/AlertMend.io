@@ -3,13 +3,13 @@ import LegacyDocShell from './LegacyDocShell'
 import { ensureUniqueMetaDescription } from '../../utils/descriptionUtils'
 
 export default function SlackAppApprovalPage() {
-  const baseDescription = "Learn how to configure a Slack App for approval workflows in AlertMend AI. Step-by-step guide for setting up Slack integration."
+  const baseDescription = "Learn how to configure a Slack App for approval workflows in AlertMend. Step-by-step guide for setting up Slack integration."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'documentation', 'slack-app-approval')
 
   return (
     <LegacyDocShell title="Slack app for approval">
       <SEO
-        title="AlertMend AI: Configure Slack App for Approval Workflows"
+        title="Slack app for approvals | AlertMend Docs"
         description={uniqueDescription}
         keywords="Slack integration, Slack app approval, AlertMend Slack setup, notification configuration"
         canonical="/documentation/slack-app-approval"
@@ -21,7 +21,7 @@ export default function SlackAppApprovalPage() {
                 How to Configure a Slack App for Approval
               </h1>
               <p className="text-xl text-gray-600">
-                Step-by-step guide to set up Slack App for approval workflows in AlertMend AI
+                Step-by-step guide to set up Slack App for approval workflows in AlertMend
               </p>
             </div>
 
@@ -30,7 +30,7 @@ export default function SlackAppApprovalPage() {
                 <h3 className="text-brand-900 font-bold mb-2">Prerequisites</h3>
                 <ul className="text-gray-700 space-y-1">
                   <li>Admin access to your Slack workspace</li>
-                  <li>AlertMend AI account with appropriate permissions</li>
+                  <li>AlertMend account with appropriate permissions</li>
                   <li>Basic understanding of Slack app configuration</li>
                 </ul>
               </div>
@@ -39,7 +39,7 @@ export default function SlackAppApprovalPage() {
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Navigate to <a href="https://api.slack.com/apps" target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:underline">api.slack.com/apps</a></li>
                 <li>Click "Create New App" and select "From scratch"</li>
-                <li>Enter your app name (e.g., "AlertMend AI") and select your workspace</li>
+                <li>Enter your app name (e.g., "AlertMend") and select your workspace</li>
                 <li>Click "Create App" to proceed</li>
               </ol>
 
@@ -64,9 +64,9 @@ export default function SlackAppApprovalPage() {
                 <li>Copy the "Bot User OAuth Token" (starts with <code className="bg-gray-100 px-2 py-1 rounded">xoxb-</code>)</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 4: Configure in AlertMend AI</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 4: Configure in AlertMend</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
-                <li>Log in to your AlertMend AI dashboard</li>
+                <li>Log in to your AlertMend dashboard</li>
                 <li>Navigate to Settings → Integrations → Slack</li>
                 <li>Paste the Bot User OAuth Token</li>
                 <li>Select the channel where approval requests should be sent</li>
@@ -75,7 +75,7 @@ export default function SlackAppApprovalPage() {
 
               <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 5: Test the Integration</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
-                <li>Create a test approval workflow in AlertMend AI</li>
+                <li>Create a test approval workflow in AlertMend</li>
                 <li>Trigger the workflow and verify that approval requests appear in your Slack channel</li>
                 <li>Test approving and rejecting requests from Slack</li>
               </ol>

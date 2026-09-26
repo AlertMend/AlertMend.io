@@ -1,6 +1,6 @@
 ---
 title: "Resolving Elasticsearch Virtual Memory"
-excerpt: "Elasticsearch requires adequate virtual memory to run smoothly. If the system’s virtual memory limit falls below the recommended level, Elasticsearch may..."
+excerpt: "Elasticsearch requires adequate virtual memory to run smoothly. If the system's virtual memory limit falls below the recommended level, Elasticsearch may."
 date: "2025-02-5"
 category: "Elasticsearch"
 author: "Himanshu Bansal"

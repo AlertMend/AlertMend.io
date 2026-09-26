@@ -55,7 +55,7 @@ export default function KubernetesManagementPage() {
         description:
           'One overview for every cluster: live CrashLoopBackOff and OOMKilled incidents, health rules without YAML redeploys, pod and node drill-down, and AI root cause.',
         keywords:
-          'Kubernetes management, Kubernetes monitoring, cluster overview, CrashLoopBackOff, OOMKilled, health rules, Kubernetes incidents, AI root cause, Kubernetes logs, AlertMend AI',
+          'Kubernetes management, Kubernetes monitoring, cluster overview, CrashLoopBackOff, OOMKilled, health rules, Kubernetes incidents, AI root cause, Kubernetes logs, AlertMend',
         canonical: '/kubernetes-management',
       }}
       badge="Kubernetes management"

@@ -1,5 +1,5 @@
 ---
-title: "Url Downtime Alerts Guide Guide"
+title: "URL Downtime Alerts Guide"
 excerpt: "Url Downtime Alerts Navigating the World of URL Downtime Alerts: A Comprehensive Guide In the fast-paced world of digital operations, keeping your website..."
 date: "2026-01-10"
 category: "URL Monitoring"

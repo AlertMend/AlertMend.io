@@ -52,7 +52,7 @@ export default function KubernetesCostOptimizationPage() {
         description:
           'See Kubernetes and AWS spend by namespace, workload and controller. Right-sizing with YAML preview, idle cleanup, and EC2, RDS and ELB line items.',
         keywords:
-          'Kubernetes cost optimization, FinOps, right-sizing, requested vs used, cloud cost, AWS cost optimization, EC2 RDS savings, idle resources, YAML apply, AlertMend AI',
+          'Kubernetes cost optimization, FinOps, right-sizing, requested vs used, cloud cost, AWS cost optimization, EC2 RDS savings, idle resources, YAML apply, AlertMend',
         canonical: '/kubernetes-cost-optimization',
       }}
       badge="FinOps"

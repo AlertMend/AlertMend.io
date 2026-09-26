@@ -1,6 +1,6 @@
 ---
-title: "Migrating Legacy Vms To Kubernetes"
-excerpt: "================================================================================ REFERENCE CONTENT FROM TOP 9 GOOGLE SEARCH RESULTS"
+title: "Migrating Legacy VMs to Kubernetes"
+excerpt: "2. https://www.vcluster.com/solutions/bare-metal-kubernetes 3. https://kubernetes.io/blog/2024/04/05/diy-create-your-own-cloud-with-kubernetes-part-2/ 4."
 date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
@@ -8,8 +8,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Migrating, Legacy, Vms, Kubernetes, 2025
 ---
 
 # Migrating Legacy Vms To Kubernetes: A 2025 Cloud Native Roadmap
-
-*Generated on 2025-12-24 01:02:13*
 
 ---
 

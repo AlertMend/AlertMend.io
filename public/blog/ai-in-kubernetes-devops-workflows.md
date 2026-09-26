@@ -1,5 +1,5 @@
 ---
-title: "AI In Kubernetes Devops Workflows"
+title: "AI in Kubernetes DevOps Workflows"
 excerpt: "Ai In Kubernetes Devops Workflows Transforming DevOps with AI in Kubernetes Workflows In today's fast-paced tech landscape, integrating AI in Kubernetes..."
 date: "2026-01-10"
 category: "Kubernetes"

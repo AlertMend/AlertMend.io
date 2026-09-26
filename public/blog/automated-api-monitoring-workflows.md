@@ -1,6 +1,6 @@
 ---
 title: "Automated API Monitoring Workflows"
-excerpt: "A comprehensive guide covering essential topics, best practices, and practical solutions for system management and DevOps operations."
+excerpt: "In the fast-paced world of DevOps, ensuring the reliability and performance of your APIs can make or break your system’s functionality."
 date: "2026-01-10"
 category: "API Monitoring"
 author: "AlertMend Team"

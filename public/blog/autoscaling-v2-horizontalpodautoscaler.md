@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes HPA v2: Configuration & Fixes"
+title: "Kubernetes HPA V2: Configuration & Fixes"
 excerpt: "Configure Kubernetes HPA v2 correctly, understand its replica formula, and diagnose unknown metrics, maxReplicas, pending pods, and stuck scale-downs."
 date: "2026-07-04"
 category: "Kubernetes"

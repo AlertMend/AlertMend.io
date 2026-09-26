@@ -1,5 +1,5 @@
 ---
-title: "Kubectl and AI: Kubernetes Management Guide"
+title: "kubectl and AI: Kubernetes Management Guide"
 excerpt: "The landscape of Kubernetes management is evolving rapidly, with artificial intelligence (AI) at the forefront of this transformation."
 date: "2026-01-10"
 category: "Kubernetes"
@@ -8,8 +8,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Kubectl, Ai, Leveraging, Ai, Driven"
 ---
 
 # Kubectl And Ai: Leveraging Ai-Driven Tools For Kubernetes Management In 2025
-
-*Generated on 2025-12-24 00:56:00*
 
 ---
 

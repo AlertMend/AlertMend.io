@@ -1,5 +1,5 @@
 ---
-title: "Big Data on Kubernetes Pdf Free Download"
+title: "Big Data on Kubernetes PDF Free Download"
 excerpt: "In the realm of modern data management, big data on Kubernetes pdf free download resources have become invaluable for data engineers and developers"
 date: "2026-01-10"
 category: "Kubernetes"

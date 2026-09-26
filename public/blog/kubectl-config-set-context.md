@@ -1,5 +1,5 @@
 ---
-title: "Kubectl Config Set Context: Managing"
+title: "kubectl Config Set Context: Managing"
 excerpt: "Learn how to use kubectl config set-context to manage multiple Kubernetes clusters, switch contexts, and streamline cluster access with best practices and..."
 date: "2025-12-15"
 category: "Kubernetes"

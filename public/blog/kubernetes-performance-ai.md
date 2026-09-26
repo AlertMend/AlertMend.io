@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes Performance Ai Guide"
+title: "Kubernetes Performance AI Guide"
 excerpt: "Kubernetes Performance Ai Enhancing Kubernetes Performance with AI: A New Era in DevOps In the dynamic world of IT infrastructure, ensuring optimal..."
 date: "2026-01-10"
 category: "Kubernetes"

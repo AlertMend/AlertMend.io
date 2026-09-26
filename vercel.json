@@ -52,6 +52,191 @@
       "source": "/solutions/on-call-management",
       "destination": "/on-call-management",
       "permanent": true
+    },
+    {
+      "source": "/blog/crashloopbackoff-kubernetes",
+      "destination": "/blog/kubernetes-crashloopbackoff-fix",
+      "permanent": true
+    },
+    {
+      "source": "/blog/kubernetes-crashloopbackoff",
+      "destination": "/blog/kubernetes-crashloopbackoff-fix",
+      "permanent": true
+    },
+    {
+      "source": "/blog/oomkilled",
+      "destination": "/blog/debugging-kubernetes-oomkilled-exit-code-137-causes-and-solutions",
+      "permanent": true
+    },
+    {
+      "source": "/blog/oomkilled-in-kubernetes",
+      "destination": "/blog/debugging-kubernetes-oomkilled-exit-code-137-causes-and-solutions",
+      "permanent": true
+    },
+    {
+      "source": "/blog/errimagepull",
+      "destination": "/blog/kubernetes-imagepullbackoff-fix",
+      "permanent": true
+    },
+    {
+      "source": "/blog/imagepullbackoff-errimagepull-kubernetes",
+      "destination": "/blog/kubernetes-imagepullbackoff-fix",
+      "permanent": true
+    },
+    {
+      "source": "/blog/kubernetes-node-not-ready-troubleshooting",
+      "destination": "/blog/resolving-kubernetes-node-not-ready-error",
+      "permanent": true
+    },
+    {
+      "source": "/blog/kubernetes-node-not-ready",
+      "destination": "/blog/resolving-kubernetes-node-not-ready-error",
+      "permanent": true
+    },
+    {
+      "source": "/blog/kubectl-node-not-ready",
+      "destination": "/blog/resolving-kubernetes-node-not-ready-error",
+      "permanent": true
+    },
+    {
+      "source": "/blog/kubernetes-node-not-ready-error",
+      "destination": "/blog/resolving-kubernetes-node-not-ready-error",
+      "permanent": true
+    },
+    {
+      "source": "/blog/kubernetes-502-bad-gateway",
+      "destination": "/blog/kubernetes-502-bad-gateway-error-fix",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-to-restart-pods-in-kubernetes",
+      "destination": "/blog/how-to-restart-a-pod",
+      "permanent": true
+    },
+    {
+      "source": "/blog/kubectl-restart-all-pods",
+      "destination": "/blog/how-to-restart-a-pod",
+      "permanent": true
+    },
+    {
+      "source": "/blog/troubleshooting-kubernetes-pod-restarts-in-2025",
+      "destination": "/blog/kubernetes-pod-restart-troubleshooting",
+      "permanent": true
+    },
+    {
+      "source": "/blog/kubernetes-pod-restart-troubleshooting-in-2025",
+      "destination": "/blog/kubernetes-pod-restart-troubleshooting",
+      "permanent": true
+    },
+    {
+      "source": "/blog/kubernetes-dns-guide",
+      "destination": "/blog/kubernetes-dns-blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/mitigating-coredns-cve-2025-47950-step-by-step-guide-for-securing-your-dns-infrastructure",
+      "destination": "/blog/mitigating-cve-2025-47950-strategies-for-coredns-defense",
+      "permanent": true
+    },
+    {
+      "source": "/blog/status-is-pending",
+      "destination": "/blog/understanding-kubernetes-pending-pod",
+      "permanent": true
+    },
+    {
+      "source": "/blog/domain-robot-1",
+      "destination": "/blog/domain-robot",
+      "permanent": true
+    },
+    {
+      "source": "/blog/error-remote-origin-already-exists-1",
+      "destination": "/blog/error-remote-origin-already-exists",
+      "permanent": true
+    },
+    {
+      "source": "/blog/exited-code-1-1",
+      "destination": "/blog/exited-code-1",
+      "permanent": true
+    },
+    {
+      "source": "/blog/fatal-cannot-do-a-partial-commit-during-a-merge-1",
+      "destination": "/blog/fatal-cannot-do-a-partial-commit-during-a-merge",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-to-check-ping-in-minecraft-1",
+      "destination": "/blog/how-to-check-ping-in-minecraft",
+      "permanent": true
+    },
+    {
+      "source": "/blog/new-relic-vs-sentry-1",
+      "destination": "/blog/new-relic-vs-sentry",
+      "permanent": true
+    },
+    {
+      "source": "/blog/one-time-seo-1",
+      "destination": "/blog/one-time-seo",
+      "permanent": true
+    },
+    {
+      "source": "/blog/readiness-probe-failed-http-probe-failed-with-statuscode-503-1",
+      "destination": "/blog/readiness-probe-failed-http-probe-failed-with-statuscode-503",
+      "permanent": true
+    },
+    {
+      "source": "/blog/the-site-is-due-maintenance-1",
+      "destination": "/blog/the-site-is-due-maintenance",
+      "permanent": true
+    },
+    {
+      "source": "/blog/top-tools-for-automated-ssl-certificate-discovery-and-monitoring-1",
+      "destination": "/blog/top-tools-for-automated-ssl-certificate-discovery-and-monitoring",
+      "permanent": true
+    },
+    {
+      "source": "/blog/uptime-pro-1",
+      "destination": "/blog/uptime-pro",
+      "permanent": true
+    },
+    {
+      "source": "/blog/uptime-self-hosted-1",
+      "destination": "/blog/uptime-self-hosted",
+      "permanent": true
+    },
+    {
+      "source": "/blog/what-is-a-keyword-monitor-1",
+      "destination": "/blog/what-is-a-keyword-monitor",
+      "permanent": true
+    },
+    {
+      "source": "/blog/what-is-the-best-way-to-prevent-container-drift-1",
+      "destination": "/blog/what-is-the-best-way-to-prevent-container-drift",
+      "permanent": true
+    },
+    {
+      "source": "/blog/monitor-remote-iot-price-2",
+      "destination": "/blog/monitor-remote-iot-price",
+      "permanent": true
+    },
+    {
+      "source": "/blogs/:slug.html",
+      "destination": "/blog/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/blogs/:slug",
+      "destination": "/blog/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/blogs",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/kubernetes-cost-optimization-case-studies-rombee",
+      "destination": "/case-studies/kubernetes-management-case-studies-decklar",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -406,13 +591,18 @@
     {
       "source": "/favicon.ico",
       "destination": "/logos/alertmend-logo.svg"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
     }
   ],
   "headers": [
+    {
+      "source": "/blog/(.*)\\.md",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    },
     {
       "source": "/media/(.*)",
       "headers": [

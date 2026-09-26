@@ -9,8 +9,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Kubernetes, Cost, Optimization, Strategi
 
 # Kubernetes Cost Optimization Strategies
 
-*Generated on 2025-12-27 23:29:24*
-
 ---
 
 ## Navigating Kubernetes Cost Optimization in 2025

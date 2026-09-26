@@ -1,5 +1,5 @@
 ---
-title: "Node-Problem-Detector Guide Guide"
+title: "Node-Problem-Detector Guide"
 excerpt: "In the dynamic world of Kubernetes, maintaining optimal node performance is crucial for ensuring the smooth operation of your clusters. Nodes, which serve as..."
 date: "2026-01-10"
 category: "Kubernetes"

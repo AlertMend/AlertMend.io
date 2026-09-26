@@ -1,5 +1,5 @@
 ---
-title: "Aiops For Predictive Analytics In Devops"
+title: "AIOps for Predictive Analytics in DevOps"
 excerpt: "Aiops For Predictive Analytics In Devops Unleashing the Potential of AIOps for Predictive Analytics in DevOps In the dynamic.."
 date: "2025-12-22"
 category: "AIOps"

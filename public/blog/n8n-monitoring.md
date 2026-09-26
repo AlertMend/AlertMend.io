@@ -1,5 +1,5 @@
 ---
-title: "n8n Monitoring and Auto-Recovery"
+title: "N8n Monitoring and Auto-Recovery"
 excerpt: "Monitor self-hosted n8n: the main process, queue-mode workers, PostgreSQL, Redis, webhooks, and executions, then safely recover the common failures."
 date: "2026-07-06"
 dateModified: "2026-07-06"

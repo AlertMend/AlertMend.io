@@ -9,8 +9,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Monitoring, Cloud, Native, Applications,
 
 # Monitoring Cloud-Native Applications With Kubernetes
 
-*Generated on 2025-12-24 11:16:04*
-
 ---
 
 ## Unlocking the Power of Kubernetes for Cloud-Native Application Monitoring

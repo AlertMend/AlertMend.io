@@ -1,5 +1,5 @@
 ---
-title: "Secure Kubernetes With Certificate Manager"
+title: "Secure Kubernetes with Certificate Manager"
 excerpt: "Secure Kubernetes With Certificate Manager Enhancing Kubernetes Security with Certificate Manager: A Comprehensive Guide In..."
 date: "2025-12-22"
 category: "Kubernetes"

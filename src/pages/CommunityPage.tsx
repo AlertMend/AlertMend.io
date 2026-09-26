@@ -1,89 +1,60 @@
+import { Github, BookOpen, MessageSquare } from 'lucide-react'
 import SEO from '../components/SEO'
-import Breadcrumb from '../components/Breadcrumb'
-import { MessageSquare, Github, Slack } from 'lucide-react'
+import { PageHero, Section, CellGrid, CtaBand } from '../components/enterprise/PageKit'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
 
+const CHANNELS = [
+  {
+    icon: Github,
+    title: 'GitHub',
+    body: 'Follow what we publish and open source.',
+    action: { label: 'Open GitHub', href: 'https://github.com/AlertMend' },
+  },
+  {
+    icon: BookOpen,
+    title: 'Blog and guides',
+    body: 'Practical guides on data quality, Kubernetes, observability and automated fixes.',
+    action: { label: 'Read the blog', href: '/blog' },
+  },
+  {
+    icon: MessageSquare,
+    title: 'Talk to the team',
+    body: 'Questions, feedback or an integration you need. Write to us directly.',
+    action: { label: 'Email the team', href: 'mailto:hello@alertmend.io' },
+  },
+]
+
 export default function CommunityPage() {
-  // Generate unique meta description for community page
-  const baseDescription = "Join the AlertMend AI community! Connect with other users, share experiences, contribute to open-source integrations, and learn from the community on GitHub, Slack, and discussions."
+  const baseDescription =
+    'Follow AlertMend on GitHub, read practical guides on data quality, Kubernetes and observability, and talk directly with the team.'
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'community', 'community')
-  const platforms = [
-    {
-      icon: Github,
-      title: 'GitHub',
-      description: 'Contribute to open-source integrations and report issues',
-      link: '#',
-    },
-    {
-      icon: Slack,
-      title: 'Slack Community',
-      description: 'Join our Slack workspace to connect with other users',
-      link: '#',
-    },
-    {
-      icon: MessageSquare,
-      title: 'Discussions',
-      description: 'Share best practices and get help from the community',
-      link: '#',
-    },
-  ]
 
   return (
-    <div className="min-h-screen bg-white">
+    <>
       <SEO
-        title="AlertMend AI Community: Join Our Growing Ecosystem"
+        title="AlertMend Community: GitHub, Guides and the Team"
         description={uniqueDescription}
-        keywords="AlertMend community, AIOps community, DevOps community, open source, GitHub, Slack community, infrastructure automation community"
+        keywords="AlertMend community, GitHub, data quality guides, Kubernetes guides"
         canonical="/community"
-        breadcrumbData={{
-          items: [{ label: 'Community' }]
-        }}
+        breadcrumbData={{ items: [{ label: 'Community' }] }}
       />
-      <main className="pt-24">
-        <section className="py-20 md:py-32 container-padding hero-dark">
-          <div className="max-w-7xl mx-auto">
-            <div className="mb-8">
-              <Breadcrumb items={[{ label: 'Community' }]} />
-            </div>
-            <div className="text-center mb-20">
-              <div className="inline-block px-5 py-2 bg-gradient-to-r from-brand-50 to-brand-100 text-brand-700 rounded-full text-sm font-bold mb-6 shadow-lg">
-                Community
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6 leading-tight">
-                Join Our Community
-              </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
-                Connect with other AlertMend users, share experiences, and learn from the community.
-              </p>
-            </div>
 
-            <div className="grid md:grid-cols-3 gap-8 mb-16">
-              {platforms.map((platform, index) => {
-                const Icon = platform.icon
-                return (
-                  <div
-                    key={index}
-                    className="bg-white rounded-3xl p-10 border-2 border-gray-200 hover:border-brand-400 hover:shadow-2xl transition-all duration-300 text-center"
-                  >
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-brand-50 text-brand-600 mb-6">
-                      <Icon className="h-8 w-8" />
-                    </div>
-                    <h3 className="text-2xl font-black text-gray-900 mb-4">{platform.title}</h3>
-                    <p className="text-gray-600 mb-6 font-medium">{platform.description}</p>
-                    <a
-                      href={platform.link}
-                      className="text-brand-600 hover:text-brand-700 font-bold text-sm"
-                    >
-                      Join Now →
-                    </a>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
+      <PageHero
+        eyebrow="Community"
+        title="Follow what we ship and tell us what you need."
+        lede="Guides from the team, our public code, and a direct line to the engineers building AlertMend."
+      />
+
+      <Section>
+        <CellGrid items={CHANNELS} />
+      </Section>
+
+      <CtaBand
+        title="Have an integration request?"
+        lede="Tell us which warehouse, BI tool or platform you need next."
+        primary={{ label: 'Send a request', href: '/contact' }}
+        secondary={{ label: 'See integrations', href: '/integrations' }}
+      />
+    </>
   )
 }
-

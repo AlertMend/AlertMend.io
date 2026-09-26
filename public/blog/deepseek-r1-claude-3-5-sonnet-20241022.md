@@ -1,5 +1,5 @@
 ---
-title: "Deepseek R1 Claude-3-5-sonnet-20241022"
+title: "Deepseek R1 Claude-3-5-Sonnet-20241022"
 excerpt: "In the rapidly evolving world of artificial intelligence, selecting the right model for your needs can be a daunting task"
 date: "2026-01-10"
 category: "Kubernetes"

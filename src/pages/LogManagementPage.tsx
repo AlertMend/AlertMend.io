@@ -110,7 +110,7 @@ function SqlLogsExplainer() {
         </div>
 
         <div className="rounded-[10px] border border-zinc-200/80 bg-zinc-50/70 p-4">
-          <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-400">
+          <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
             Columns you filter on
           </div>
           <div className="mt-2.5 flex flex-wrap gap-1.5">

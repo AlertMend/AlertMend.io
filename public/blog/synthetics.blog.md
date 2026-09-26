@@ -1,5 +1,5 @@
 ---
-title: "synthetics.blog Guide Guide Complete Guide"
+title: "Synthetics.blog Guide"
 excerpt: "synthetics.blog  Unleashing the Power of Synthetics.blog for Enhanced DevOps In today's fast-paced digital landscape, the role of synthetics."
 date: "2026-01-10"
 category: "DevOps"

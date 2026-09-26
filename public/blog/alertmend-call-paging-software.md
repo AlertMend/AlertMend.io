@@ -1,5 +1,5 @@
 ---
-title: "Mastering On Call Paging Software"
+title: "Mastering On-Call Paging Software"
 excerpt: "In the fast-paced world of 2026, efficient communication is the backbone of any successful operation, especially in environments requiring immediate response..."
 date: "2026-01-10"
 category: "AIOps"

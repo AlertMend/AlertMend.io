@@ -117,7 +117,7 @@ export default function Solutions() {
             Complete Infrastructure Intelligence
           </h2>
           <p className="text-lg md:text-xl text-brand-700 max-w-3xl mx-auto leading-relaxed mb-6">
-            AlertMend AI empowers DevOps, SRE, and IT teams with AI-driven reliability, cost optimization, and on-call automation across AWS, Google Cloud, and Azure environments.
+            AlertMend empowers DevOps, SRE, and IT teams with AI-driven reliability, cost optimization, and on-call automation across AWS, Google Cloud, and Azure environments.
           </p>
           <div className="flex justify-center mb-10">
             <CloudProviders />

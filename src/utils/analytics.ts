@@ -295,3 +295,40 @@ export function clearBlogSource() {
     // Ignore errors
   }
 }
+
+/* ------------------------------------------------------------------
+ * Homepage two-audience tracking (data teams vs platform/SRE).
+ *
+ * GA4 events:
+ *   home_audience_select  { audience, method: 'toggle' | 'url' | 'session' | 'default' }
+ *   home_cta_click        { audience, cta, destination }
+ * plus a `home_audience` user property, so later conversions (e.g. a
+ * Calendly booking or signup) can be segmented by which version of the
+ * homepage the visitor saw.
+ * ------------------------------------------------------------------ */
+export type HomeAudience = 'data' | 'infra'
+
+export function trackHomeAudience(audience: HomeAudience, method: 'toggle' | 'url' | 'session' | 'default') {
+  if (typeof window === 'undefined') return
+  try {
+    window.gtag?.('set', 'user_properties', { home_audience: audience })
+  } catch {
+    /* ignore */
+  }
+  trackEvent('home_audience_select', {
+    audience,
+    method,
+    event_category: 'homepage',
+    event_label: `${audience}:${method}`,
+  })
+}
+
+export function trackHomeCta(audience: HomeAudience, cta: string, destination?: string) {
+  trackEvent('home_cta_click', {
+    audience,
+    cta,
+    destination,
+    event_category: 'homepage',
+    event_label: `${audience}:${cta}`,
+  })
+}

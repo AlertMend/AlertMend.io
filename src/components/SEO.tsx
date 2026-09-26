@@ -50,7 +50,7 @@ export default function SEO({
 }: SEOProps) {
   const location = useLocation()
   const siteUrl = 'https://www.alertmend.io'
-  const fullTitle = title.includes('AlertMend') ? title : `${title} | AlertMend AI`
+  const fullTitle = title.includes('AlertMend') ? title : `${title} | AlertMend`
   
   // Generate canonical URL - use provided canonical directly, or fallback to pathname
   // If canonical is provided, use it directly (already normalized by the component)
@@ -97,7 +97,7 @@ export default function SEO({
       <meta name="title" content={fullTitle} />
       <meta name="description" content={description} />
       <meta name="keywords" content={mergedKeywords} />
-      <meta name="author" content="AlertMend AI" />
+      <meta name="author" content="AlertMend" />
       <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
       <meta name="language" content="English" />
       <meta name="revisit-after" content="7 days" />
@@ -112,7 +112,7 @@ export default function SEO({
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
-      <meta property="og:site_name" content="AlertMend AI" />
+      <meta property="og:site_name" content="AlertMend" />
       <meta property="og:locale" content="en_US" />
       
       {/* Twitter */}
@@ -122,12 +122,29 @@ export default function SEO({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
       
-      {/* Structured Data */}
-      {structuredData && (
+      {/* Structured Data. Pages without their own get a basic WebPage node
+          tied to the Organization, so every page carries some schema. */}
+      {structuredData ? (
         <script type="application/ld+json">
           {JSON.stringify(structuredData)}
         </script>
-      )}
+      ) : !noindex ? (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebPage',
+            name: fullTitle,
+            description,
+            url: canonicalUrl,
+            publisher: {
+              '@type': 'Organization',
+              name: 'AlertMend',
+              url: siteUrl,
+              logo: `${siteUrl}/logos/alertmend-logo.svg`,
+            },
+          })}
+        </script>
+      ) : null}
       
       {/* Breadcrumb Structured Data */}
       {breadcrumbStructuredData && (

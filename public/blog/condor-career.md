@@ -1,5 +1,5 @@
 ---
-title: "condor career Guide Guide Complete Guide"
+title: "Condor Career Guide"
 excerpt: "Embarking on a career journey in system monitoring, alerting, and DevOps solutions offers numerous growth opportunities"
 date: "2026-01-10"
 category: "Kubernetes"

@@ -71,7 +71,7 @@ function ExplainPanel() {
     <div className={styles.panel}>
       <div className={styles.rcaHead}>
         <div>
-          <div className={styles.brandLine}>AlertMend AI · RCA</div>
+          <div className={styles.brandLine}>AlertMend · RCA</div>
           <div className={styles.mono}>INC-08472 · prod-us-east-1 · checkout</div>
         </div>
         <div className={styles.conf}>

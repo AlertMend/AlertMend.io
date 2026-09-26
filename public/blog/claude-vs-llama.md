@@ -1,5 +1,5 @@
 ---
-title: "claude vs llama Guide Guide Complete Guide"
+title: "Claude vs Llama Guide"
 excerpt: "When it comes to system monitoring and alerting solutions, understanding the capabilities of different AI models is crucial"
 date: "2026-01-10"
 category: "Kubernetes"

@@ -64,12 +64,15 @@ markdownFiles.forEach(file => {
     // Parse hidden field (exclude hidden blogs from list)
     const hidden = metadata.hidden === 'true' || metadata.hidden === true
     if (hidden) return // Skip hidden blogs
+    // noindex: page stays live (robots noindex) but leaves the sitemap and lists
+    if (metadata.noindex === 'true' || metadata.noindex === true) return
     
     blogList.push({
       slug,
       title: metadata.title || slug,
       excerpt: metadata.excerpt || '',
       date: metadata.date || new Date().toISOString().split('T')[0],
+      ...(metadata.updated ? { updated: metadata.updated } : {}),
       category: metadata.category || 'Blog',
       author: metadata.author || 'AlertMend Team',
       tags: tags.length > 0 ? tags : [],

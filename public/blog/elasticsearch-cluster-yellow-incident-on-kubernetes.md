@@ -1,6 +1,6 @@
 ---
-title: "Elasticsearch Cluster Yellow Incident On"
-excerpt: "Elasticsearch requires adequate virtual memory to run smoothly. If the system’s virtual memory limit falls below the recommended level, Elasticsearch may..."
+title: "Elasticsearch Cluster Yellow Incident"
+excerpt: "An Elasticsearch Cluster Yellow incident indicates a partial degradation in the cluster's health, usually triggered by unassigned replica shards."
 date: "2025-06-8"
 category: "Elasticsearch"
 author: "Himanshu Bansal"

@@ -9,8 +9,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Dns, Over, Quic, Understanding, Benefits
 
 # Dns-Over-Quic: Understanding The Benefits And Vulnerabilities In Coredns 2025
 
-*Generated on 2025-12-27 23:08:43*
-
 ---
 
 ## Mastering DNS-over-QUIC: CoreDNS Benefits and Vulnerabilities in 2025

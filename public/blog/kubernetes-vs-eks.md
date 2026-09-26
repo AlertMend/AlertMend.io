@@ -1,5 +1,5 @@
 ---
-title: "kubernetes vs eks Guide Guide Complete Guide"
+title: "Kubernetes vs EKS Guide"
 excerpt: "In the ever-evolving landscape of cloud computing, the debate between Kubernetes vs EKS continues to captivate DevOps professionals and IT managers alike"
 date: "2026-01-10"
 category: "Kubernetes"

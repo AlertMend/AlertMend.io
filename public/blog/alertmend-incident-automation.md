@@ -1,5 +1,5 @@
 ---
-title: "Incident Automation with AlertMend:"
+title: "Incident Automation with AlertMend"
 excerpt: "In the dynamic world of IT management in 2026, incident automation is transforming how organizations handle system disruptions. AlertMend.io stands as the le..."
 date: "2026-01-10"
 category: "AIOps"

@@ -48,7 +48,7 @@ export default function ObservabilityPage() {
         description:
           'Unify metrics, logs and distributed traces on one timeline with OpenTelemetry and eBPF. Live service map, SQL-queryable logs, and evidence-backed AI RCA.',
         keywords:
-          'observability, APM, distributed tracing, OpenTelemetry, eBPF, service map, SQL logs, Prometheus, Kubernetes observability, root cause analysis, AlertMend AI',
+          'observability, APM, distributed tracing, OpenTelemetry, eBPF, service map, SQL logs, Prometheus, Kubernetes observability, root cause analysis, AlertMend',
         canonical: '/observability',
       }}
       badge="Observability & APM"

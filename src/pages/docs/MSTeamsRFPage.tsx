@@ -3,13 +3,13 @@ import LegacyDocShell from './LegacyDocShell'
 import { ensureUniqueMetaDescription } from '../../utils/descriptionUtils'
 
 export default function MSTeamsRFPage() {
-  const baseDescription = "Learn how to configure Microsoft Teams for Remediation Framework (RF) in AlertMend AI. Setup automated remediation workflows."
+  const baseDescription = "Learn how to configure Microsoft Teams for Remediation Framework (RF) in AlertMend. Setup automated remediation workflows."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'documentation', 'ms-teams-rf')
 
   return (
     <LegacyDocShell title="MS Teams in RF">
       <SEO
-        title="Configure MS Teams in AlertMend AI RF: A Step-by-Step Guide"
+        title="Configure MS Teams in AlertMend RF: A Step-by-Step Guide"
         description={uniqueDescription}
         keywords="Microsoft Teams RF, remediation framework, MS Teams automation, AlertMend Teams RF"
         canonical="/documentation/ms-teams-rf"
@@ -29,7 +29,7 @@ export default function MSTeamsRFPage() {
               <div className="bg-brand-50 border-l-4 border-brand-600 p-6 mb-8 rounded-r-lg">
                 <h3 className="text-brand-900 font-bold mb-2">What is Remediation Framework (RF)?</h3>
                 <p className="text-gray-700">
-                  The Remediation Framework (RF) in AlertMend AI automates incident response and remediation actions. 
+                  The Remediation Framework (RF) in AlertMend automates incident response and remediation actions. 
                   MS Teams integration allows you to receive notifications, approve actions, and track remediation progress.
                 </p>
               </div>
@@ -42,7 +42,7 @@ export default function MSTeamsRFPage() {
 
               <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 2: Enable RF Notifications</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
-                <li>Log in to AlertMend AI dashboard</li>
+                <li>Log in to AlertMend dashboard</li>
                 <li>Navigate to Settings → Integrations → Microsoft Teams</li>
                 <li>Find the "Remediation Framework" section</li>
                 <li>Enable "Send RF Notifications" toggle</li>

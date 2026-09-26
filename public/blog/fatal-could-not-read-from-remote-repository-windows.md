@@ -1,5 +1,5 @@
 ---
-title: "Fatal Could Not Read From Remote"
+title: "Fatal Could Not Read from Remote"
 excerpt: "Experiencing a fatal could not read from remote repository windows error can be a frustrating hurdle, particularly when you're in the midst of critical proje..."
 date: "2026-01-10"
 category: "Troubleshooting"

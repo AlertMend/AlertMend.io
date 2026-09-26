@@ -1,5 +1,5 @@
 ---
-title: "Mastering On Call Escalation Policies"
+title: "Mastering On-Call Escalation Policies"
 excerpt: "In the dynamic landscape of IT infrastructure management and DevOps practices, effective incident management is crucial. As we step into 2026, organizations ..."
 date: "2026-01-10"
 category: "AIOps"

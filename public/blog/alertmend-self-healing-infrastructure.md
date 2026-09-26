@@ -1,5 +1,5 @@
 ---
-title: "Self Healing Infrastructure Alertmend"
+title: "Self Healing Infrastructure with AlertMend"
 excerpt: ": The Future of System Reliability with AlertMend.io In today's digital landscape, the concept of a **self-healing infrastructure** has gained significant tr..."
 date: "2026-01-10"
 category: "AIOps"

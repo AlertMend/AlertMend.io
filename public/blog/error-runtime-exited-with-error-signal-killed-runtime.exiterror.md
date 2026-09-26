@@ -1,5 +1,5 @@
 ---
-title: "Error: Runtime Exited With Error: Signal"
+title: "Error: Runtime Exited with Error: Signal"
 excerpt: "In cloud computing, particularly within AWS Lambda environments, you may encounter the runtime exited with error signal killed error."runtime exited with..."
 date: "2026-01-10"
 category: "Troubleshooting"

@@ -1,5 +1,5 @@
 ---
-title: "How To Whitelist IP in Kubernetes"
+title: "How to Whitelist IP in Kubernetes"
 excerpt: "In the realm of Kubernetes, ensuring robust security measures is paramount. IP whitelisting stands out as a powerful tool in this security toolkit, allowing ..."
 date: "2026-01-10"
 category: "Kubernetes"

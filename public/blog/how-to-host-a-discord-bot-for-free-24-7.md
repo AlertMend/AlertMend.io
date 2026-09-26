@@ -1,10 +1,11 @@
 ---
-title: "How To Host A Discord Bot For Free 24 7"
+title: "How to Host a Discord Bot for Free 24/7"
 excerpt: "how to host a discord bot for free 24 7  How to Host a Discord Bot for Free 24/7: Your Ultimate Guide In today's digital landscape, community interaction and..."
 date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, host, discord, free"
+noindex: true
 ---
 
 # how to host a discord bot for free 24 7

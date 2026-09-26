@@ -1,10 +1,11 @@
 ---
-title: "Domain Robot Management And Automation"
+title: "Domain Robot Management and Automation"
 excerpt: "domain robot Navigating the Domain Robot Landscape: A Guide for Modern DevOps The digital world is constantly evolving, and understanding how to..."
 date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, domain, robot"
+hidden: true
 ---
 # Automating Domain Management in Kubernetes with AIOps
 

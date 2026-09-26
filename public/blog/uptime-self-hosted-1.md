@@ -1,10 +1,11 @@
 ---
-title: "uptime self hosted 1 Guide Guide"
+title: "Uptime Self Hosted 1 Guide"
 excerpt: "uptime self hosted  Revolutionizing System Monitoring: The Power of Uptime Self-Hosted Solutions In the ever-evolving landscape of digital infrastructure,..."
 date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, uptime, self, hosted"
+hidden: true
 ---
 
 # uptime self hosted

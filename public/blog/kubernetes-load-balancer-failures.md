@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes Load Balancer Failures"
-excerpt: "A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers."
+excerpt: "In Kubernetes, a Load Balancer is essential for exposing services to external users by routing traffic across multiple pods."
 date: "2025-02-1"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"

@@ -1,5 +1,5 @@
 ---
-title: "Real-time Kubernetes Resource Optimization"
+title: "Real-Time Kubernetes Resource Optimization"
 excerpt: "real-time kubernetes resource optimization solutions Introduction to Real-Time Kubernetes Resource Optimization Solutions In today's fast-evolving tech..."
 date: "2026-01-10"
 category: "Kubernetes"

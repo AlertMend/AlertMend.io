@@ -1,6 +1,6 @@
 ---
 title: "Elasticsearch Cluster Health Showing Red"
-excerpt: "A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers."
+excerpt: "When your Elasticsearch cluster health status turns red, it indicates critical issues that must be addressed immediately."
 date: "2025-02-4"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"

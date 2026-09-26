@@ -1,6 +1,6 @@
 ---
-title: "Integrating Runbooks With System Center"
-excerpt: "================================================================================ REFERENCE CONTENT FROM TOP 8 GOOGLE SEARCH RESULTS"
+title: "Integrating Runbooks with System Center"
+excerpt: "2. https://www.ryandrane.com/2014/08/automating-system-center-orchestrator-2012-runbooks-with-scheduled-tasks/ 3."
 date: "2026-01-10"
 category: "AIOps"
 author: "AlertMend Team"
@@ -8,8 +8,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Integrating, Runbooks, System, Center, O
 ---
 
 # Integrating Runbooks With System Center Orchestrator Schedules
-
-*Generated on 2025-12-25 07:19:55*
 
 ---
 

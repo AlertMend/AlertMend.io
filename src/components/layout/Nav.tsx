@@ -5,10 +5,12 @@ import Icon from '../ui/Icon';
 import type { IconName } from '../ui/Icon';
 import { useScrolled } from '../../hooks/useScrolled';
 import { HOME_PRODUCTS, type HomeProductId } from '../../data/homeProducts';
+import { SHOW_DATA_PRICING } from '../../data/flags';
 import styles from './Nav.module.css';
+import { calendlyUrl } from '../../lib/calendly';
 
 /* ============================================================
-   Navigation — Platform mega-menu + two flat links
+   Navigation — Platform mega-menu + three flat links (Data, Pricing, Customers)
 
    Every product surface lives in the Platform panel, so the bar
    itself stays scannable in one glance: Platform → Pricing →
@@ -19,16 +21,16 @@ import styles from './Nav.module.css';
    same routes, and duplicating them split the same destination
    across two places in the bar.
 
-   The right cluster is intentionally quiet: a small "Sign in"
-   text link, a `● LIVE Playground` pill that signals the
-   running product without competing for the primary CTA, and
-   the single high-emphasis `Book a demo` button. The Playground
-   pill is the only chip in the nav that uses violet, so the eye
-   resolves "real product → live → click here", with the demo
-   button still winning as the primary action.
+   The right cluster has three levels of emphasis: a quiet
+   "Sign in" text link, an outlined "Start free" button, and the
+   single high-emphasis "Book a demo" button.
    ============================================================ */
 
 const primaryLinks: Array<{ to: string; label: string }> = [
+  /* Data buyers are a separate audience; give them a door in the bar itself
+     rather than only inside the Platform panel. */
+  { to: '/data-observability', label: 'Data governance' },
+  { to: '/industries', label: 'Industries' },
   { to: '/pricing', label: 'Pricing' },
   { to: '/case-studies', label: 'Customers' },
 ];
@@ -53,9 +55,10 @@ const PLATFORM_TITLES: Partial<Record<HomeProductId, string>> = {
 };
 
 const PLATFORM_GROUPS: { label: string; ids: HomeProductId[] }[] = [
-  { label: 'Observe', ids: ['k8s', 'obs', 'dataobs'] },
-  { label: 'Respond', ids: ['logs', 'rca', 'fix'] },
-  { label: 'Operate', ids: ['oncall', 'finops', 'mlops'] },
+  { label: 'Observe', ids: ['k8s', 'obs', 'logs'] },
+  { label: 'Respond', ids: ['rca', 'fix', 'oncall'] },
+  { label: 'Operate', ids: ['finops', 'mlops'] },
+  { label: 'Data', ids: ['dataobs'] },
 ];
 
 const byId = Object.fromEntries(HOME_PRODUCTS.map((p) => [p.id, p])) as Record<
@@ -64,8 +67,9 @@ const byId = Object.fromEntries(HOME_PRODUCTS.map((p) => [p.id, p])) as Record<
 >;
 
 const SIGNUP_URL = 'https://app.alertmend.io/signup';
-const PLAYGROUND_URL = 'https://demo.alertmend.io';
-const CALENDLY_URL = 'https://calendly.com/hello-alertmend/30min';
+/** Existing users: the app root (same link the docs' "Open app" uses). */
+const APP_URL = 'https://app.alertmend.io';
+const CALENDLY_URL = calendlyUrl('nav-book-demo');
 
 export default function Nav() {
   const scrolled = useScrolled(8);
@@ -220,7 +224,10 @@ export default function Nav() {
                 <div className={styles.megaGrid}>
                   <div className={styles.megaProducts}>
                     {PLATFORM_GROUPS.map((group) => (
-                      <div key={group.label} className={styles.megaCol}>
+                      <div
+                        key={group.label}
+                        className={`${styles.megaCol} ${group.label === 'Data' ? styles.megaColData : ''}`}
+                      >
                         <span className={styles.megaColLabel}>{group.label}</span>
                         {group.ids.map((id) => {
                           const p = byId[id]
@@ -247,24 +254,53 @@ export default function Nav() {
                             </Link>
                           )
                         })}
+                        {group.label === 'Data' ? (
+                          <div className={styles.megaDataLinks}>
+                            <Link
+                              to="/data-observability#policy"
+                              className={styles.megaDataLink}
+                              onClick={() => setPlatformOpen(false)}
+                            >
+                              Policy to checks
+                            </Link>
+                            {SHOW_DATA_PRICING ? (
+                              <Link
+                                to="/pricing#data"
+                                className={styles.megaDataLink}
+                                onClick={() => setPlatformOpen(false)}
+                              >
+                                Data pricing
+                              </Link>
+                            ) : null}
+                            <a
+                              href={CALENDLY_URL}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={styles.megaDataLink}
+                              onClick={() => setPlatformOpen(false)}
+                            >
+                              Book the data demo
+                            </a>
+                          </div>
+                        ) : null}
                       </div>
                     ))}
                   </div>
                   <Link
-                    to="/observability"
+                    to="/data-observability"
                     className={styles.megaFeatured}
                     onClick={() => setPlatformOpen(false)}
                   >
                     <span className={styles.megaFeaturedTag}>Featured</span>
                     <span className={styles.megaFeaturedTitle}>
-                      One live observability console
+                      Policy-driven data quality
                     </span>
                     <span className={styles.megaFeaturedDesc}>
-                      Metrics, logs, traces and a service map, correlated, with AI
-                      root cause on top.
+                      Turn your data quality policy into live checks on Snowflake and
+                      Oracle, with pipeline cause and Power BI impact.
                     </span>
                     <span className={styles.megaFeaturedCta}>
-                      Explore observability
+                      Explore data quality
                       <Icon name="arrow" size={13} className="arrow" strokeWidth={2.5} />
                     </span>
                   </Link>
@@ -275,13 +311,10 @@ export default function Nav() {
           </nav>
 
           <div className={styles.cta}>
-            {/* Quiet right cluster. Sign in + Playground sit at low
-                emphasis so the primary "Book a demo" wins the eye. The
-                Playground pill carries the only violet accent in the
-                nav, signalling "running product" without competing
-                with the demo CTA. */}
+            {/* Right cluster, three levels of emphasis:
+                Sign in (text) · Start free (outline) · Book a demo (solid). */}
             <a
-              href={SIGNUP_URL}
+              href={APP_URL}
               target="_blank"
               rel="noopener noreferrer"
               className={`${styles.link} ${styles.ctaSignIn}`}
@@ -289,15 +322,12 @@ export default function Nav() {
               Sign in
             </a>
             <a
-              href={PLAYGROUND_URL}
+              href={SIGNUP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.ctaPlayground}
-              aria-label="Open the live playground"
+              className={styles.ctaStart}
             >
-              <span className={styles.ctaPlaygroundDot} aria-hidden="true" />
-              <span className={styles.ctaPlaygroundLive}>LIVE</span>
-              <span>Playground</span>
+              Start free
             </a>
             <a
               href={CALENDLY_URL}
@@ -349,8 +379,19 @@ export default function Nav() {
         </div>
 
         <nav className={styles.drawerLinks} aria-label="Mobile">
-          <span className={styles.drawerGroupLabel}>Platform</span>
-          {HOME_PRODUCTS.map((p) => (
+          <span className={styles.drawerGroupLabel}>Infrastructure</span>
+          {HOME_PRODUCTS.filter((p) => p.group === 'infrastructure').map((p) => (
+            <Link
+              key={p.id}
+              to={p.to}
+              className={styles.link}
+              onClick={() => setDrawerOpen(false)}
+            >
+              {p.name}
+            </Link>
+          ))}
+          <span className={styles.drawerGroupLabel}>Data</span>
+          {HOME_PRODUCTS.filter((p) => p.group === 'data').map((p) => (
             <Link
               key={p.id}
               to={p.to}
@@ -361,23 +402,23 @@ export default function Nav() {
             </Link>
           ))}
           <span className={styles.drawerGroupLabel}>More</span>
-          {primaryLinks.map((l) => renderLink(l, () => setDrawerOpen(false)))}
+          {primaryLinks
+            .filter((l) => l.to !== '/data-observability') /* already in the drawer's Data group */
+            .map((l) => renderLink(l, () => setDrawerOpen(false)))}
         </nav>
 
         <div className={styles.drawerCta}>
           <a
-            href={PLAYGROUND_URL}
+            href={SIGNUP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.ctaPlayground}
+            className={styles.ctaStart}
             onClick={() => setDrawerOpen(false)}
           >
-            <span className={styles.ctaPlaygroundDot} aria-hidden="true" />
-            <span className={styles.ctaPlaygroundLive}>LIVE</span>
-            <span>Playground</span>
+            Start free
           </a>
           <a
-            href={SIGNUP_URL}
+            href={APP_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-ghost"

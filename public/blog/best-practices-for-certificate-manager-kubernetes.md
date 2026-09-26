@@ -1,5 +1,5 @@
 ---
-title: "Best Practices For Certificate Manager"
+title: "Best Practices for Certificate Manager"
 excerpt: "Best Practices For Certificate Manager Kubernetes Navigating Kubernetes Certificate Management: Essential Best Practices In..."
 date: "2025-12-22"
 category: "Kubernetes"

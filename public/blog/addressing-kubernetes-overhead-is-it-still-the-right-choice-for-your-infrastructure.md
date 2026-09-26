@@ -9,8 +9,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Addressing, Kubernetes, Overhead, Is, It
 
 # Addressing Kubernetes Overhead: Is It Still The Right Choice For Your Infrastructure?
 
-*Generated on 2025-12-24 00:58:18*
-
 ---
 
 ## Navigating Kubernetes Overhead: Is It Still the Right Choice for Your Infrastructure?

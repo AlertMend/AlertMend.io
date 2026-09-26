@@ -12,6 +12,7 @@ import { mapOldBlogUrlToSlug } from '../utils/blogSlugMapper'
 import { normalizeBlogMarkdown } from '../utils/markdownNormalize'
 import { getBlogPostPath, isStaticBlog } from '../utils/staticBlogRegistry'
 import { attachScrollReveal } from '../hooks/useScrollReveal'
+import { calendlyUrl } from '../lib/calendly'
 
 export default function BlogPostDetailPage() {
   const { slug } = useParams<{ slug: string }>()
@@ -178,7 +179,7 @@ export default function BlogPostDetailPage() {
       <SEO
         title={seoTitle}
         description={metaDescription}
-        keywords={post.keywords || `${post.category}, AlertMend AI, AIOps, Kubernetes, DevOps`}
+        keywords={post.keywords || `${post.category}, AlertMend, AIOps, Kubernetes, DevOps`}
         canonical={blogPostUrl}
         ogImage="https://www.alertmend.io/og-image.jpg"
         ogType="article"
@@ -193,7 +194,7 @@ export default function BlogPostDetailPage() {
           "author": structuredAuthor,
           "publisher": {
             "@type": "Organization",
-            "name": "AlertMend AI",
+            "name": "AlertMend",
             "logo": {
               "@type": "ImageObject",
               "url": "https://alertmend.io/logos/alertmend-logo.svg"
@@ -337,7 +338,7 @@ export default function BlogPostDetailPage() {
                       <p className="text-zinc-700 text-lg leading-7 mb-6">
                         See how AlertMend unifies observability, runs evidence-backed AI RCA, and remediates only after approval — across Kubernetes, VMs, and cloud.{' '}
                         <button
-                          onClick={() => window.open('https://calendly.com/hello-alertmend/30min', '_blank')}
+                          onClick={() => window.open(calendlyUrl('blog-post'), '_blank')}
                           className="text-brand-600 hover:text-brand-700 font-semibold underline underline-offset-2 inline-flex items-center gap-1"
                         >
                           Book a demo.
@@ -399,6 +400,7 @@ export default function BlogPostDetailPage() {
                          {/* LinkedIn Icon */}
                          <a
                            href="https://www.linkedin.com/in/arvind-rajpurohit-4a332523/"
+                          aria-label="Arvind Rajpurohit on LinkedIn"
                            target="_blank"
                            rel="noopener noreferrer"
                            className="inline-flex items-center text-zinc-500 hover:text-brand-600 transition-colors"

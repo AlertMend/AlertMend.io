@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes PersistentVolumeClaim (PVC)"
-excerpt: "A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers."
+excerpt: "In Kubernetes, a PersistentVolumeClaim (PVC) allows pods to request storage, which can be dynamically or manually provisioned."
 date: "2025-02-12"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"

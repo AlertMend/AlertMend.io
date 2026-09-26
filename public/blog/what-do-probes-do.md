@@ -1,5 +1,5 @@
 ---
-title: "what do probes do Guide Guide Complete Guide"
+title: "What Do Probes Do Guide"
 excerpt: "In the realm of system monitoring, understanding what probes do can significantly enhance the effectiveness of your DevOps strategies"
 date: "2026-01-10"
 category: "Kubernetes"

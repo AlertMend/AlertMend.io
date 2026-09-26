@@ -43,39 +43,20 @@ export function generateUniqueMetaDescription(
   // If still no description, create one from title and category
   if (!description || description.length < minLength) {
     const categoryText = category ? ` on ${category}` : ''
-    description = `Learn how to ${title.toLowerCase()}${categoryText}. Expert tips and best practices from AlertMend AI.`
+    description = `Learn how to ${title.toLowerCase()}${categoryText}. Expert tips and best practices from AlertMend.`
   }
   
-  // Ensure uniqueness by including key terms from title
-  // Add title keywords if description doesn't contain them
-  const titleWords = title.toLowerCase().split(/\s+/).filter(word => word.length > 4)
-  const descriptionLower = description.toLowerCase()
-  const missingKeywords = titleWords.filter(word => !descriptionLower.includes(word))
-  
-  if (missingKeywords.length > 0 && description.length < maxLength - 30) {
-    const keywordsToAdd = missingKeywords.slice(0, 2).join(', ')
-    description = `${description} Discover solutions for ${keywordsToAdd}.`
-  }
-  
-  // Truncate to max length at word boundary
-  if (description.length > maxLength) {
-    let truncated = description.substring(0, maxLength - 3)
-    const lastSpace = truncated.lastIndexOf(' ')
-    if (lastSpace > maxLength * 0.7) {
-      truncated = truncated.substring(0, lastSpace)
-    }
-    // Remove trailing punctuation
-    truncated = truncated.replace(/[-–.,;:!?\s]+$/, '').trim()
-    description = truncated + '...'
-  }
+  // (Removed: appending "Discover solutions for <keywords>." read as keyword
+  // stuffing in search results.)
+
+  // Truncate to max length on a sentence/word boundary, without "..."
+  description = truncateDescription(description, maxLength, minLength)
   
   // Ensure minimum length
   if (description.length < minLength) {
     const padding = `Expert guide on ${category || 'Kubernetes'} troubleshooting.`
     description = description + ' ' + padding
-    if (description.length > maxLength) {
-      description = description.substring(0, maxLength - 3) + '...'
-    }
+    description = truncateDescription(description, maxLength, minLength)
   }
   
   return description.trim()
@@ -94,13 +75,19 @@ export function truncateDescription(
   }
   
   if (description.length > maxLength) {
-    let truncated = description.substring(0, maxLength - 3)
+    // Prefer ending on a full sentence; otherwise cut at a word boundary.
+    // Never append "..." — search results show it verbatim.
+    const window = description.substring(0, maxLength)
+    const lastSentence = Math.max(window.lastIndexOf('. '), window.lastIndexOf('! '), window.lastIndexOf('? '))
+    if (lastSentence > maxLength * 0.5) {
+      return window.substring(0, lastSentence + 1).trim()
+    }
+    let truncated = window
     const lastSpace = truncated.lastIndexOf(' ')
     if (lastSpace > maxLength * 0.7) {
       truncated = truncated.substring(0, lastSpace)
     }
-    truncated = truncated.replace(/[-–.,;:!?\s]+$/, '').trim()
-    return truncated + '...'
+    return truncated.replace(/[-–,;:\s]+$/, '').trim() + '.'
   }
   
   return description
@@ -173,24 +160,11 @@ export function ensureUniqueMetaDescription(
   // Combine description with unique suffix
   let uniqueDescription = description.trim()
   
-  // Add suffix if it fits within max length
+  // Add the suffix only when it fits whole. Never splice a cut-off
+  // description and a suffix together with "..." (it showed up in Google
+  // results as "...ship... Meet the founders...").
   if (uniqueSuffix && (uniqueDescription.length + uniqueSuffix.length) <= maxLength) {
     uniqueDescription = uniqueDescription + uniqueSuffix
-  } else if (uniqueSuffix) {
-    // If suffix doesn't fit, truncate description to make room
-    const availableLength = maxLength - uniqueSuffix.length - 3 // -3 for "..."
-    if (availableLength > 50) {
-      let truncated = uniqueDescription.substring(0, availableLength)
-      const lastSpace = truncated.lastIndexOf(' ')
-      if (lastSpace > availableLength * 0.7) {
-        truncated = truncated.substring(0, lastSpace)
-      }
-      truncated = truncated.replace(/[-–.,;:!?\s]+$/, '').trim()
-      uniqueDescription = truncated + '...' + uniqueSuffix
-    } else {
-      // If not enough room, just truncate description
-      uniqueDescription = truncateDescription(uniqueDescription, maxLength)
-    }
   }
   
   // Final truncation if still too long

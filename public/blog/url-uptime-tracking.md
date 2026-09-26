@@ -1,5 +1,5 @@
 ---
-title: "Url Uptime Tracking Guide Guide"
+title: "URL Uptime Tracking Guide"
 excerpt: "Url Uptime Tracking Achieving Reliable URL Uptime Tracking with Alertmend.io In today's fast-paced digital environment, maintaining continuous online..."
 date: "2026-01-10"
 category: "URL Monitoring"

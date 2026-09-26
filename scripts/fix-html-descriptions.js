@@ -31,12 +31,12 @@ function fixHtmlDescription(filePath, fileName) {
       
       // Ensure it's within bounds
       if (newDesc.length > 160) {
-        newDesc = newDesc.substring(0, 157).trim() + '...'
+        newDesc = newDesc.substring(0, newDesc.lastIndexOf(' ', 158)).replace(/[,;:\s]+$/, '') + '.'
       }
       if (newDesc.length < 50) {
         newDesc = `Learn about ${cleanTitle} and discover expert solutions, best practices, and troubleshooting tips for Kubernetes.`
         if (newDesc.length > 160) {
-          newDesc = newDesc.substring(0, 157).trim() + '...'
+          newDesc = newDesc.substring(0, newDesc.lastIndexOf(' ', 158)).replace(/[,;:\s]+$/, '') + '.'
         }
       }
       

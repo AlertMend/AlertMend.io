@@ -1,5 +1,5 @@
 ---
-title: "Machine Learning For Kubernetes Optimization"
+title: "Machine Learning for Kubernetes Optimization"
 excerpt: "Machine Learning For Kubernetes Optimization Harnessing Machine Learning for Kubernetes Optimization Imagine a world where your Kubernetes clusters..."
 date: "2026-01-10"
 category: "Kubernetes"

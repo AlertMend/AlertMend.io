@@ -1,5 +1,5 @@
 ---
-title: "cron job every 6 hours Guide Guide"
+title: "Cron Job Every 6 Hours Guide"
 excerpt: "cron job every 6 hours  Unlocking the Potential of a Cron Job Every 6 Hours for System Efficiency In today's fast-paced digital environment, efficient..."
 date: "2026-01-10"
 category: "DevOps"

@@ -1,5 +1,5 @@
 ---
-title: "notifier co detector Guide Guide"
+title: "Notifier Co Detector Guide"
 excerpt: "notifier co detector  Enhancing Safety with Alertmend."
 date: "2026-01-10"
 category: "DevOps"

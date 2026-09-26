@@ -1,5 +1,5 @@
 ---
-title: "Edge Computing Systems With Kubernetes"
+title: "Edge Computing Systems with Kubernetes"
 excerpt: "In today's digital landscape, edge computing is revolutionizing how data is processed and services are delivered. By bringing computation closer to data sour..."
 date: "2026-01-10"
 category: "Kubernetes"

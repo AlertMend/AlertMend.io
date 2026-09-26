@@ -53,7 +53,7 @@ export default function LanguageSupport() {
             Available in Your Language
           </h2>
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed mb-12">
-            AlertMend AI supports multiple languages including Vietnamese, Japanese, and more so you can use the app in the language you're most comfortable with.
+            AlertMend supports multiple languages including Vietnamese, Japanese, and more so you can use the app in the language you're most comfortable with.
           </p>
           
           {/* Language Flags */}
@@ -73,7 +73,7 @@ export default function LanguageSupport() {
             Loved by Engineers. Built for Impact.
           </h2>
           <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-            AlertMend AI powers the people behind today's most reliable systems.
+            AlertMend powers the people behind today's most reliable systems.
           </p>
         </div>
       </div>

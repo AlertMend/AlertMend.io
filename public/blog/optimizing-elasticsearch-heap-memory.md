@@ -1,6 +1,6 @@
 ---
 title: "Optimizing Elasticsearch Heap Memory"
-excerpt: "A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers."
+excerpt: "High heap usage in Elasticsearch is a critical issue that can degrade performance, cause system crashes, or result in memory exhaustion."
 date: "2025-02-1"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"

@@ -1,5 +1,5 @@
 ---
-title: "Big Data on Kubernetes Pdf Download"
+title: "Big Data on Kubernetes PDF Download"
 excerpt: "In the evolving landscape of data management, the intersection of big data on Kubernetes has become a focal point for organizations aiming to harness the ful..."
 date: "2026-01-10"
 category: "Kubernetes"

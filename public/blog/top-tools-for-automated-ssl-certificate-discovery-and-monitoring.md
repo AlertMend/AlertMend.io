@@ -1,5 +1,5 @@
 ---
-title: "Top Tools For Automated Ssl Certificate"
+title: "Top Tools for Automated SSL Certificate"
 excerpt: "top tools for automated ssl certificate discovery and monitoring  Navigating the Future of Automated SSL Certificate Management In an era where digital..."
 date: "2026-01-10"
 category: "DevOps"

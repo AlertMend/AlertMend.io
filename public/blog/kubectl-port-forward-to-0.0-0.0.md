@@ -1,5 +1,5 @@
 ---
-title: "Kubectl Port Forward to 0.0 0.0"
+title: "kubectl Port Forward to 0.0.0"
 excerpt: "In the realm of Kubernetes management, understanding how to efficiently access services within your cluster is vital"
 date: "2026-01-10"
 category: "Kubernetes"

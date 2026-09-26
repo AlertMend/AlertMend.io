@@ -1,5 +1,5 @@
 ---
-title: "Devops URL Monitoring Practices"
+title: "DevOps URL Monitoring Practices"
 excerpt: "Devops Url Monitoring Practices Unveiling DevOps URL Monitoring Practices for Enhanced System Reliability In the fast-paced world of DevOps, ensuring..."
 date: "2026-01-10"
 category: "URL Monitoring"

@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes Networking Errors Guide"
-excerpt: "Networking is one of the most critical components in any Kubernetes deployment, facilitating communication between containers, services, and external..."
+excerpt: "Networking is one of the most critical components in any Kubernetes deployment, facilitating communication between containers, services, and external."
 date: "2025-06-27"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"

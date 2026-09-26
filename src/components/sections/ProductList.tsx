@@ -2,10 +2,12 @@ import { useEffect, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { HOME_PRODUCTS } from '../../data/homeProducts'
+import { useAudience, type Audience } from '../../hooks/useAudience'
 import Icon from '../ui/Icon'
 import BrandLogo, { simpleIconsUrl, svgPornUrl } from '../ui/BrandLogo'
 import RcaReportMock, { GPU_RCA } from '../mocks/RcaReportMock'
 import styles from './ProductList.module.css'
+import { trackHomeCta } from '../../utils/analytics'
 
 type Media = { node: ReactNode }
 
@@ -180,7 +182,7 @@ function ObsMock() {
               </linearGradient>
             </defs>
             {[28, 55, 82].map((y) => (
-              <line key={y} x1="0" x2="360" y1={y} y2={y} stroke="rgba(255,255,255,0.06)" />
+              <line key={y} x1="0" x2="360" y1={y} y2={y} stroke="rgba(24,24,27,0.08)" />
             ))}
             <polygon fill="url(#plFill)" points="0,110 0,78 45,76 90,72 135,68 180,22 225,18 270,62 315,70 360,74 360,110" />
             <polyline fill="none" stroke="#8b5cf6" strokeWidth="2.2" points="0,78 45,76 90,72 135,68 180,22 225,18 270,62 315,70 360,74" />
@@ -277,7 +279,7 @@ function RfMock() {
       sub: 'CrashLoopBackOff · prod cluster',
       ico: 'bolt' as const,
       bg: 'rgba(248,113,113,0.18)',
-      fg: '#f87171',
+      fg: '#e11d48',
       brand: { src: simpleIconsUrl('prometheus', 'E6522C'), alt: 'Alertmanager' },
     },
     {
@@ -289,7 +291,7 @@ function RfMock() {
       sub: 'kubectl describe + logs · last 5m',
       ico: 'cmdline' as const,
       bg: 'rgba(99,102,241,0.18)',
-      fg: '#a5b4fc',
+      fg: '#4f46e5',
       brand: { src: svgPornUrl('kubernetes'), alt: 'Kubernetes' },
     },
     {
@@ -301,7 +303,7 @@ function RfMock() {
       sub: 'Branch on container status',
       ico: 'activity' as const,
       bg: 'rgba(251,191,36,0.16)',
-      fg: '#fbbf24',
+      fg: '#b45309',
     },
     {
       kind: 'appr',
@@ -312,7 +314,7 @@ function RfMock() {
       sub: '@oncall · 5 min timeout',
       ico: 'check-thick' as const,
       bg: 'rgba(124,58,237,0.2)',
-      fg: '#c4b5fd',
+      fg: '#7c3aed',
       brand: { src: svgPornUrl('slack'), alt: 'Slack' },
     },
     {
@@ -324,7 +326,7 @@ function RfMock() {
       sub: '#sre-ops · transient blip',
       ico: 'send' as const,
       bg: 'rgba(52,211,153,0.16)',
-      fg: '#34d399',
+      fg: '#059669',
       brand: { src: svgPornUrl('slack'), alt: 'Slack' },
     },
     {
@@ -336,7 +338,7 @@ function RfMock() {
       sub: 'Fan out · all pods · label tier=api',
       ico: 'rotate' as const,
       bg: 'rgba(124,58,237,0.2)',
-      fg: '#c4b5fd',
+      fg: '#7c3aed',
       brand: { src: svgPornUrl('kubernetes'), alt: 'Kubernetes' },
     },
     {
@@ -348,7 +350,7 @@ function RfMock() {
       sub: 'What ran · who approved · audit link',
       ico: 'shieldCheck' as const,
       bg: 'rgba(52,211,153,0.16)',
-      fg: '#34d399',
+      fg: '#059669',
       brand: { src: svgPornUrl('slack'), alt: 'Slack' },
     },
   ]
@@ -426,7 +428,7 @@ function RfMock() {
                     <mpath href={`#${e.id}`} />
                   </animateMotion>
                 </circle>
-                <circle r="2.2" fill="#c4b5fd">
+                <circle r="2.2" fill="#7c3aed">
                   <animateMotion dur={e.dur} begin={e.begin} repeatCount="indefinite" rotate="auto">
                     <mpath href={`#${e.id}`} />
                   </animateMotion>
@@ -490,6 +492,50 @@ function OnCallMock() {
             <em>{st}</em>
           </div>
         ))}
+      </div>
+      <div className={styles.finMain}>
+        <div className={styles.panel}>
+          <div className={styles.panelHead}>
+            <span>Escalation · page #4821</span>
+            <em>RCA attached · 94%</em>
+          </div>
+          {[
+            ['0:00', 'Slack · #oncall-payments', 'sent'],
+            ['+2:00', 'WhatsApp · @alex', 'sent'],
+            ['+5:00', 'Phone · @alex', 'ringing'],
+            ['+10:00', 'Backup · @mira', 'queued'],
+          ].map(([t, step, st]) => (
+            <div key={t} className={styles.tx}>
+              <div className={styles.txMain}>
+                <strong>{step}</strong>
+                <span className={styles.muted}>{t}</span>
+              </div>
+              <span />
+              <b className={st === 'ringing' ? styles.warn : st === 'queued' ? styles.muted : styles.ok}>{st}</b>
+            </div>
+          ))}
+        </div>
+        <div className={styles.panel}>
+          <div className={styles.panelHead}>
+            <span>Rotation · payments</span>
+            <em>follow-the-sun</em>
+          </div>
+          {[
+            ['@alex', 'primary · until 08:00 IST', 'on call'],
+            ['@sam', '08:00 – 16:00 IST', 'next'],
+            ['@mira', 'backup · all day', 'backup'],
+            ['@lee', '16:00 – 00:00 IST', 'later'],
+          ].map(([who, when, st]) => (
+            <div key={who} className={styles.tx}>
+              <div className={styles.txMain}>
+                <strong>{who}</strong>
+                <span className={styles.muted}>{when}</span>
+              </div>
+              <span />
+              <b className={st === 'on call' ? styles.ok : styles.muted}>{st}</b>
+            </div>
+          ))}
+        </div>
       </div>
     </Console>
   )
@@ -569,36 +615,99 @@ function FinOpsMock() {
 }
 
 function DataObsMock() {
-  const anomalies = [
-    { sev: 'crit' as const, title: 'Freshness lag', target: 'analytics.orders · 47m late', rca: true },
-    { sev: 'crit' as const, title: 'Null spike', target: 'orders.amount · 12.4%', rca: true },
-    { sev: 'warn' as const, title: 'Schema drift', target: 'stg_orders · updated_at dropped', rca: false },
+  const types = [
+    { name: 'completeness', pass: 96, fail: 1 },
+    { name: 'uniqueness', pass: 58, fail: 1 },
+    { name: 'validity', pass: 74, fail: 0 },
+    { name: 'freshness', pass: 42, fail: 1 },
+    { name: 'volume', pass: 48, fail: 0 },
+  ]
+  const failing = [
+    { sev: 'crit' as const, title: 'Uniqueness', target: 'customer_accounts.account_id · 98.7%', linked: true },
+    { sev: 'crit' as const, title: 'Freshness', target: 'loans.daily_balance · 3h late', linked: true },
+    { sev: 'warn' as const, title: 'Completeness', target: 'kyc.address · 2.1% missing', linked: false },
   ]
   return (
-    <Console title="Data Observability" meta="warehouse · 424 tables">
+    <Console title="Data Observability" meta="Snowflake · Oracle · 42 datasets">
       <div className={styles.kpis}>
-        <div><span>Tables</span><b>424</b><small>monitored</small></div>
-        <div><span>Anomalies</span><b className={styles.bad}>3</b><small>open</small></div>
-        <div><span>Freshness</span><b className={styles.warn}>47m</b><small>orders lag</small></div>
-        <div><span>Contracts</span><b>86</b><small>enforced</small></div>
+        <div><span>Datasets</span><b>42</b><small>monitored</small></div>
+        <div><span>Failing</span><b className={styles.bad}>3</b><small>2 jobs linked</small></div>
+        <div><span>Checks</span><b>318</b><small>from policy · BCBS 239</small></div>
+        <div><span>Quality</span><b className={styles.ok}>96</b><small>score</small></div>
       </div>
-      <div className={styles.k8sSide}>
-        <div className={styles.panelHead}>
-          <span>Anomalies</span>
-          <em>2 with RCA</em>
-        </div>
-        {anomalies.map((inc) => (
-          <div key={inc.title + inc.target} className={styles.k8sInc}>
-            <b className={inc.sev === 'crit' ? styles.bad : styles.warn}>
-              {inc.sev === 'crit' ? 'CRIT' : 'WARN'}
-            </b>
-            <div>
-              <strong>{inc.title}</strong>
-              <span>{inc.target}</span>
+
+      <div className={styles.dqMain}>
+        <div className={styles.dqCol}>
+          <div className={styles.panel}>
+            <div className={styles.panelHead}>
+              <span>Checks by type</span>
+              <em>pass / fail</em>
             </div>
-            {inc.rca ? <em>View RCA</em> : <em className={styles.muted}>Watching</em>}
+            {types.map((t) => (
+              <div key={t.name} className={styles.dqType}>
+                <span>{t.name}</span>
+                <div className={styles.bar}><i style={{ width: `${Math.round((t.pass / 96) * 100)}%` }} /></div>
+                <em className={t.fail ? styles.bad : undefined}>{t.pass} / {t.fail}</em>
+              </div>
+            ))}
           </div>
-        ))}
+          <div className={styles.panel}>
+            <div className={styles.panelHead}>
+              <span>Cause and impact</span>
+              <em>06:12</em>
+            </div>
+            <div className={styles.dqImpact}>
+              <strong>ODI job nightly_load failed</strong>
+              <code>ORA-01400: cannot insert NULL</code>
+              <div className={styles.dqReports}>
+                <span>Loan book summary</span>
+                <span>Daily liquidity</span>
+                <span>KYC exceptions</span>
+              </div>
+            </div>
+            <div className={styles.dqChips}>
+              <span>Oracle ODI</span>
+              <span>Power BI</span>
+              <span>clause 3.2</span>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.dqCol}>
+          <div className={styles.panel}>
+            <div className={styles.panelHead}>
+              <span>Failing checks</span>
+              <em>last 15m</em>
+            </div>
+            {failing.map((inc) => (
+              <div key={inc.title + inc.target} className={styles.k8sInc}>
+                <b className={inc.sev === 'crit' ? styles.bad : styles.warn}>
+                  {inc.sev === 'crit' ? 'CRIT' : 'WARN'}
+                </b>
+                <div>
+                  <strong>{inc.title}</strong>
+                  <span>{inc.target}</span>
+                </div>
+                {inc.linked ? <em>Job linked</em> : <em className={styles.muted}>Watching</em>}
+              </div>
+            ))}
+          </div>
+          <div className={styles.panel}>
+            <div className={styles.panelHead}>
+              <span>Alert · Microsoft Teams</span>
+              <em>#data-quality</em>
+            </div>
+            <p>
+              <b>Uniqueness failed</b> on BANKING.CUSTOMER_ACCOUNTS. Caused by ODI job nightly_load
+              (ORA-01400). 3 Power BI reports read this table. Policy: BCBS 239, principle 3.
+            </p>
+            <div className={styles.dqChips}>
+              <span>Acknowledge</span>
+              <span>Open check</span>
+              <span>View lineage</span>
+            </div>
+          </div>
+        </div>
       </div>
     </Console>
   )
@@ -678,39 +787,76 @@ const MEDIA: Record<string, Media> = {
   mlops: { node: <MlopsMock /> },
 }
 
+/** Data visitors see Data Observability first; infra visitors see it last. */
+/** Data visitors get a short tour: Data first, then the four surfaces a data
+ *  team touches next. Infra visitors get every infra surface, Data last. */
+const DATA_TOUR: readonly string[] = ['dataobs', 'obs', 'rca', 'fix', 'oncall']
+
+function productsFor(audience: Audience) {
+  if (audience === 'data') {
+    return DATA_TOUR.map((id) => HOME_PRODUCTS.find((p) => p.id === id)).filter(
+      (p): p is (typeof HOME_PRODUCTS)[number] => Boolean(p),
+    )
+  }
+  const data = HOME_PRODUCTS.filter((p) => p.group === 'data')
+  const infra = HOME_PRODUCTS.filter((p) => p.group !== 'data')
+  return [...infra, ...data]
+}
+
+const HEADS: Record<Audience, { h2: string; p: string }> = {
+  data: {
+    h2: 'Start with data. Grow into the platform.',
+    p: 'Data observability shares a console with observability, AI RCA, automated fixes and on-call.',
+  },
+  infra: {
+    h2: 'One console. Every surface.',
+    p: 'Flip through the real product, then go deeper on any page.',
+  },
+}
+
 export default function ProductList() {
-  const [active, setActive] = useState('obs')
+  const { audience } = useAudience()
+  const products = productsFor(audience)
+  const [active, setActive] = useState<string>(products[0].id)
   const [paused, setPaused] = useState(false)
+
+  // Switching audience restarts the tour on that audience's lead product.
+  useEffect(() => {
+    setActive(productsFor(audience)[0].id)
+    setPaused(false)
+  }, [audience])
 
   useEffect(() => {
     if (paused) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const list = productsFor(audience)
     const id = window.setInterval(() => {
       setActive((cur) => {
-        const i = HOME_PRODUCTS.findIndex((p) => p.id === cur)
-        return HOME_PRODUCTS[(i + 1) % HOME_PRODUCTS.length].id
+        const i = list.findIndex((p) => p.id === cur)
+        return list[(i + 1) % list.length].id
       })
     }, 9000)
     return () => window.clearInterval(id)
-  }, [paused])
+  }, [paused, audience])
 
-  const product = HOME_PRODUCTS.find((p) => p.id === active) ?? HOME_PRODUCTS[0]
+  const product = products.find((p) => p.id === active) ?? products[0]
   // Fall back to a real mock so a product without its own preview never crashes.
   const media = MEDIA[product.id] ?? MEDIA.obs
-  const idx = String(HOME_PRODUCTS.findIndex((p) => p.id === product.id) + 1).padStart(2, '0')
+  const idx = String(products.findIndex((p) => p.id === product.id) + 1).padStart(2, '0')
+  const head = HEADS[audience]
 
   return (
     <section id="products" className={styles.section}>
       <div className="container">
         <div className={`sec-head ${styles.head}`}>
           <span className="sec-tag">Products</span>
-          <h2>One console. Every surface that matters.</h2>
-          <p>Flip through the real product — then go deeper on any page.</p>
+          <h2>{head.h2}</h2>
+          <p>{head.p}</p>
         </div>
 
         <div className={styles.rail}>
           <div className={styles.tabs} role="tablist" aria-label="Product surfaces">
-            {HOME_PRODUCTS.map((p) => (
+            {products.map((p) => (
               <button
                 key={p.id}
                 type="button"
@@ -736,7 +882,11 @@ export default function ProductList() {
                   <p>{product.line}</p>
                 </div>
               </div>
-              <Link to={product.to} className={styles.cta}>
+              <Link
+                to={product.to}
+                className={styles.cta}
+                onClick={() => trackHomeCta(audience, `tour_${product.id}`, product.to)}
+              >
                 Explore {product.tab}
                 <ArrowRight size={15} strokeWidth={2.2} />
               </Link>

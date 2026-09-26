@@ -1,5 +1,5 @@
 ---
-title: "It Configuration Governance Tools"
+title: "IT Configuration Governance Tools"
 excerpt: "it configuration governance tools real-time drift detection Harnessing the Power of IT Configuration Governance Tools with Real-Time Drift Detection In..."
 date: "2026-01-10"
 category: "Kubernetes"

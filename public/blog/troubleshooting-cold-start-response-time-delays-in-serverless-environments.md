@@ -9,8 +9,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Troubleshooting, Cold, Start, Response, 
 
 # Troubleshooting Cold Start Response Time Delays In Serverless Environments
 
-*Generated on 2025-12-25 01:03:27*
-
 ---
 
 ## Navigating Cold Start Challenges in Serverless Architectures

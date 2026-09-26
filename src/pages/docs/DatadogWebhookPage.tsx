@@ -3,13 +3,13 @@ import LegacyDocShell from './LegacyDocShell'
 import { ensureUniqueMetaDescription } from '../../utils/descriptionUtils'
 
 export default function DatadogWebhookPage() {
-  const baseDescription = "Learn how to setup custom webhook with Datadog monitors for AlertMend AI integration. Connect Datadog alerts to AlertMend."
+  const baseDescription = "Learn how to setup custom webhook with Datadog monitors for AlertMend integration. Connect Datadog alerts to AlertMend."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'documentation', 'datadog-webhook')
 
   return (
     <LegacyDocShell title="Datadog webhook setup">
       <SEO
-        title="AlertMend AI: Datadog Webhook Setup for Incident Automation"
+        title="Datadog webhook setup | AlertMend Docs"
         description={uniqueDescription}
         keywords="Datadog webhook, Datadog integration, custom webhook, AlertMend Datadog setup"
         canonical="/documentation/datadog-webhook"
@@ -21,7 +21,7 @@ export default function DatadogWebhookPage() {
                 How to Setup Custom Webhook with Datadog Monitors
               </h1>
               <p className="text-xl text-gray-600">
-                Connect Datadog monitors to AlertMend AI using custom webhooks for automated incident management
+                Connect Datadog monitors to AlertMend using custom webhooks for automated incident management
               </p>
             </div>
 
@@ -30,14 +30,14 @@ export default function DatadogWebhookPage() {
                 <h3 className="text-brand-900 font-bold mb-2">Prerequisites</h3>
                 <ul className="text-gray-700 space-y-1">
                   <li>Datadog account with admin or appropriate permissions</li>
-                  <li>AlertMend AI account with webhook endpoint configured</li>
+                  <li>AlertMend account with webhook endpoint configured</li>
                   <li>Datadog monitors already created and configured</li>
                 </ul>
               </div>
 
               <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 1: Get AlertMend Webhook URL</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
-                <li>Log in to AlertMend AI dashboard</li>
+                <li>Log in to AlertMend dashboard</li>
                 <li>Navigate to Settings → Integrations → Webhooks</li>
                 <li>Click "Create New Webhook" or use existing webhook</li>
                 <li>Copy the webhook URL (format: <code className="bg-gray-100 px-2 py-1 rounded">https://api.alertmend.ai/webhooks/datadog/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx</code>)</li>
@@ -48,7 +48,7 @@ export default function DatadogWebhookPage() {
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Log in to your Datadog account</li>
                 <li>Navigate to Monitors → Manage Monitors</li>
-                <li>Select the monitor you want to connect to AlertMend AI</li>
+                <li>Select the monitor you want to connect to AlertMend</li>
                 <li>Click "Edit" to modify the monitor</li>
                 <li>Scroll to the "Say what's happening" section</li>
               </ol>
@@ -57,7 +57,7 @@ export default function DatadogWebhookPage() {
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>In the monitor notification settings, click "Add notification"</li>
                 <li>Select "@webhook" from the notification options</li>
-                <li>Enter a name for the webhook (e.g., "AlertMend AI")</li>
+                <li>Enter a name for the webhook (e.g., "AlertMend")</li>
                 <li>Paste the AlertMend webhook URL</li>
                 <li>Click "Test" to verify the connection</li>
               </ol>
@@ -104,7 +104,7 @@ export default function DatadogWebhookPage() {
               <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 6: Test the Integration</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Trigger a test alert in Datadog (or wait for a real alert)</li>
-                <li>Verify that the alert appears in AlertMend AI dashboard</li>
+                <li>Verify that the alert appears in AlertMend dashboard</li>
                 <li>Check that all relevant information is captured:
                   <ul className="list-disc list-inside ml-6 mt-2 space-y-1">
                     <li>Alert title and message</li>
@@ -114,12 +114,12 @@ export default function DatadogWebhookPage() {
                     <li>Tags and metadata</li>
                   </ul>
                 </li>
-                <li>Verify that AlertMend AI can trigger remediation workflows based on the alert</li>
+                <li>Verify that AlertMend can trigger remediation workflows based on the alert</li>
               </ol>
 
               <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Webhook Payload Format</h2>
               <p className="text-gray-700 mb-4">
-                AlertMend AI expects webhook payloads in the following format:
+                AlertMend expects webhook payloads in the following format:
               </p>
               <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto text-sm">
 {`{
@@ -140,21 +140,21 @@ export default function DatadogWebhookPage() {
                 <h3 className="text-violet-950 font-bold mb-2">💡 Best Practices</h3>
                 <ul className="text-gray-700 space-y-1">
                   <li>Use different webhooks for different environments (dev, staging, prod)</li>
-                  <li>Include relevant tags in the payload for better filtering in AlertMend AI</li>
+                  <li>Include relevant tags in the payload for better filtering in AlertMend</li>
                   <li>Set up multiple monitors for the same metric with different thresholds</li>
-                  <li>Use Datadog's notification routing to send only critical alerts to AlertMend AI</li>
-                  <li>Monitor webhook delivery success rates in both Datadog and AlertMend AI</li>
+                  <li>Use Datadog's notification routing to send only critical alerts to AlertMend</li>
+                  <li>Monitor webhook delivery success rates in both Datadog and AlertMend</li>
                 </ul>
               </div>
 
               <div className="bg-yellow-50 border-l-4 border-yellow-600 p-6 mt-8 rounded-r-lg">
                 <h3 className="text-yellow-950 font-bold mb-2">⚠️ Troubleshooting</h3>
                 <ul className="text-gray-700 space-y-1">
-                  <li>If alerts don't appear in AlertMend AI, check webhook URL is correct</li>
+                  <li>If alerts don't appear in AlertMend, check webhook URL is correct</li>
                   <li>Verify webhook secret/token matches if authentication is required</li>
                   <li>Check Datadog webhook delivery logs for errors</li>
-                  <li>Ensure AlertMend AI webhook endpoint is accessible from Datadog</li>
-                  <li>Validate payload format matches AlertMend AI expectations</li>
+                  <li>Ensure AlertMend webhook endpoint is accessible from Datadog</li>
+                  <li>Validate payload format matches AlertMend expectations</li>
                 </ul>
               </div>
             </div>

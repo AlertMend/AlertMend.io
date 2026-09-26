@@ -1,5 +1,5 @@
 ---
-title: "Real-Time System Monitoring With Aiops"
+title: "Real-Time System Monitoring with AIOps"
 excerpt: "Real-Time System Monitoring With Aiops Embracing Real-Time System Monitoring with AIOps: A Game-Changer for Modern IT..."
 date: "2025-12-22"
 category: "AIOps"

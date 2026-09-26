@@ -5,6 +5,7 @@ date: "2025-12-15"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "Git remote origin, remote already exists, Git configuration, version control, DevOps, Git troubleshooting"
+hidden: true
 ---
 
 # error remote origin already exists

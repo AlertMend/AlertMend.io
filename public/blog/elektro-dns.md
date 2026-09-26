@@ -1,5 +1,5 @@
 ---
-title: "Elektro Dns Configuration And Management"
+title: "Elektro DNS Configuration and Management"
 excerpt: "elektro dns Navigating Elektro DNS: A Comprehensive Guide for DevOps and System Monitoring In today's rapidly evolving technological landscape,..."
 date: "2026-01-10"
 category: "DevOps"

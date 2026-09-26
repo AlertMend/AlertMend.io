@@ -1,5 +1,5 @@
 ---
-title: "Error Command Failed With Exit Code 137."
+title: "Error Command Failed with Exit Code 137"
 excerpt: "Encountering error command failed with exit code 137 can be perplexing when working in containerized environments. Learn how to diagnose and resolve this issue."
 date: "2026-01-10"
 category: "Kubernetes"

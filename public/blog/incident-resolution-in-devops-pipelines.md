@@ -1,5 +1,5 @@
 ---
-title: "Incident Resolution In Devops Pipelines"
+title: "Incident Resolution in DevOps Pipelines"
 excerpt: "Incident Resolution In Devops Pipelines Unlocking Efficiency in DevOps Pipelines: A Guide to Incident Resolution In the rapidly evolving landscape of..."
 date: "2026-01-10"
 category: "Incident Management"

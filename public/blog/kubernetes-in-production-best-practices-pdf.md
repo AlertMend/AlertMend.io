@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes in Production Best Practices Pdf"
+title: "Kubernetes in Production Best Practices PDF"
 excerpt: "Kubernetes has revolutionized how organizations deploy, scale, and manage containerized applications"
 date: "2026-01-10"
 category: "Kubernetes"

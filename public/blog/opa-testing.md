@@ -1,5 +1,5 @@
 ---
-title: "opa testing Guide Guide Complete Guide"
+title: "OPA Policy Testing: A Practical Guide"
 excerpt: "In the fast-evolving landscape of DevOps and system monitoring, OPA testing has emerged as a pivotal tool for ensuring compliance and security within your in..."
 date: "2026-01-10"
 category: "Kubernetes"

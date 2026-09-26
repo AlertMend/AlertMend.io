@@ -9,8 +9,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Kubernetes, Deployment, Automation, 2025
 
 # Kubernetes Deployment Automation In 2025
 
-*Generated on 2025-12-25 15:38:27*
-
 ---
 
 ## Mastering Kubernetes Deployment Automation in 2025

@@ -1,6 +1,6 @@
 ---
 title: "🚨 Debugging Kubernetes Admission"
-excerpt: "Kubernetes Admission Webhooks play a critical role in controlling and managing the lifecycle of resources in your cluster."
+excerpt: "Admission webhooks are HTTP callbacks that intercept requests to the Kubernetes API server. They can:"
 date: "2025-06-14"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"

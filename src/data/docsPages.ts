@@ -1448,8 +1448,8 @@ receivers:
     slug: 'ai-rca',
     title: 'Run AI root cause analysis',
     description:
-      'How to run AlertMend AI RCA: correlate traces, logs, metrics, and Kubernetes events into a cited root cause.',
-    keywords: 'AlertMend AI RCA, how to use RCA, root cause analysis, evidence citations, /rca',
+      'How to run AlertMend RCA: correlate traces, logs, metrics, and Kubernetes events into a cited root cause.',
+    keywords: 'AlertMend RCA, how to use RCA, root cause analysis, evidence citations, /rca',
     lead: 'Open /rca from an alert or incident. Typical cases land near about 15 seconds; every report cites evidence.',
     blocks: [
       {

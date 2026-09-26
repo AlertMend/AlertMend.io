@@ -1,5 +1,5 @@
 ---
-title: "Devops Incident Response Alertmend"
+title: "DevOps Incident Response with AlertMend"
 excerpt: "In the dynamic world of DevOps, where rapid software development and deployment are paramount, **devops incident response** has become an essential disciplin..."
 date: "2026-01-10"
 category: "AIOps"

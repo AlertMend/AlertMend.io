@@ -1,5 +1,5 @@
 ---
-title: "Svg Heartbeat Monitoring And Visualization."
+title: "Svg Heartbeat Monitoring and Visualization"
 excerpt: "Unveiling SVG Heartbeat: The Pulse of Modern System Monitoring In the ever-evolving landscape of DevOps and system monitoring, the term SVG heartbeat has..."
 date: "2026-01-10"
 category: "DevOps"

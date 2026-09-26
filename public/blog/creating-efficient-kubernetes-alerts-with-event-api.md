@@ -9,8 +9,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Creating, Efficient, Kubernetes, Alerts,
 
 # Creating Efficient Kubernetes Alerts With Event Api
 
-*Generated on 2025-12-24 11:16:33*
-
 ---
 
 ## Mastering Efficient Kubernetes Alerts with Event API

@@ -1,5 +1,5 @@
 ---
-title: "Url Health Check Integration Guide"
+title: "URL Health Check Integration Guide"
 excerpt: "Url Health Check Integration Streamlining System Monitoring with URL Health Check Integration In today's fast-paced digital landscape, ensuring that your..."
 date: "2026-01-10"
 category: "URL Monitoring"

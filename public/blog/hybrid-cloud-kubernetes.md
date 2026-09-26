@@ -1,5 +1,5 @@
 ---
-title: "hybrid cloud kubernetes Guide Guide"
+title: "Hybrid Cloud Kubernetes Guide"
 excerpt: "As businesses increasingly adopt hybrid cloud strategies, leveraging hybrid cloud Kubernetes becomes crucial for achieving seamless integration and scalability"
 date: "2026-01-10"
 category: "Kubernetes"

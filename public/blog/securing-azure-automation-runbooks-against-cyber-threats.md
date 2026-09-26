@@ -9,8 +9,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Securing, Azure, Automation, Runbooks, A
 
 # Securing Azure Automation Runbooks Against Cyber Threats
 
-*Generated on 2025-12-25 01:22:11*
-
 ---
 
 ## Navigating Azure Runbooks for Enhanced Cybersecurity

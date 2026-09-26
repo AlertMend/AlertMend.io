@@ -83,7 +83,7 @@ export default function Integrations() {
             Works with Your Stack
           </h2>
           <p className="text-brand-200 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-            AlertMend AI comes with a wide range of integrations and powerful pre-built workflows to automate alert response, remediation, and cost optimization, helping your team get value fast.
+            AlertMend comes with a wide range of integrations and powerful pre-built workflows to automate alert response, remediation, and cost optimization, helping your team get value fast.
           </p>
         </div>
 

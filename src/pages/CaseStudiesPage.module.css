@@ -40,7 +40,7 @@
   margin: 0 0 12px;
   max-width: 24ch;
   font-size: clamp(1.75rem, 3.2vw, 2.4rem);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.15;
   color: #fafafa;

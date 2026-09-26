@@ -1,5 +1,5 @@
 ---
-title: "kubernetes explorer Guide Guide"
+title: "Kubernetes Explorer Guide"
 excerpt: "kubernetes explorer Exploring the Power of Kubernetes Explorer for System Monitoring In today's fast-paced tech landscape, efficiently managing..."
 date: "2026-01-10"
 category: "Kubernetes"

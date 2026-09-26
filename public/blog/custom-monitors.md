@@ -1,5 +1,5 @@
 ---
-title: "custom monitors Guide Guide Complete Guide"
+title: "Custom Monitors Guide"
 excerpt: "custom monitors  Custom Monitors: Tailoring System Monitoring Solutions for Optimal Performance In the dynamic world of system monitoring and DevOps, having..."
 date: "2026-01-10"
 category: "DevOps"

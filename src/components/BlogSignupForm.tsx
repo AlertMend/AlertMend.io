@@ -37,7 +37,7 @@ export default function BlogSignupForm({ blogTitle = '' }: BlogSignupFormProps) 
 
       if (response.ok) {
         setStatus('success')
-        setMessage("Thanks! You're on the list.")
+        setMessage("Thanks. You're on the list.")
         setEmail('')
         setTimeout(() => {
           setStatus('idle')

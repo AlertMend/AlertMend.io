@@ -1,5 +1,5 @@
 ---
-title: "cpu throttling 是 什么 What Is Guide"
+title: "CPU Throttling 是 什么 What is Guide"
 excerpt: "In the realm of system monitoring and performance management, understanding cpu throttling 是 什么 is crucial for optimizing your infrastructure"
 date: "2026-01-10"
 category: "Kubernetes"

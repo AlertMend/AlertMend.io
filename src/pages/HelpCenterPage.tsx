@@ -1,98 +1,92 @@
+import { BookOpen, LifeBuoy, MessageCircle } from 'lucide-react'
 import SEO from '../components/SEO'
-import Breadcrumb from '../components/Breadcrumb'
-import { HelpCircle, Search, Book, MessageCircle } from 'lucide-react'
+import { PageHero, Section, CellGrid, CtaBand, ActionLink } from '../components/enterprise/PageKit'
+import styles from '../components/enterprise/Enterprise.module.css'
+import kit from '../components/enterprise/PageKit.module.css'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
+import { calendlyUrl } from '../lib/calendly'
+
+const CATEGORIES = [
+  {
+    icon: BookOpen,
+    title: 'Getting started',
+    articles: [
+      { label: 'Quick start: install, observe, fix', href: '/documentation' },
+      { label: 'Connect a Kubernetes cluster', href: '/documentation/install-cluster-agent' },
+      { label: 'Add VM and host collectors', href: '/documentation/install-vm-collectors' },
+      { label: 'Platform overview', href: '/documentation/platform-overview' },
+    ],
+  },
+  {
+    icon: LifeBuoy,
+    title: 'Using AlertMend',
+    articles: [
+      { label: 'Handle alerts and incidents', href: '/documentation/alerts-incidents' },
+      { label: 'Run AI root cause analysis', href: '/documentation/ai-rca' },
+      { label: 'Build a remediation flow', href: '/documentation/remediation-flows' },
+      { label: 'Integrations overview', href: '/documentation/integrations' },
+    ],
+  },
+  {
+    icon: MessageCircle,
+    title: 'Talk to us',
+    articles: [
+      { label: 'Email hello@alertmend.io', href: 'mailto:hello@alertmend.io' },
+      { label: 'Book a call with the team', href: calendlyUrl('help-center') },
+      { label: 'Send a message', href: '/contact' },
+      { label: 'Security and compliance questions', href: '/security' },
+    ],
+  },
+]
 
 export default function HelpCenterPage() {
-  // Generate unique meta description for help center page
-  const baseDescription = "Get help with AlertMend AI. Find answers to common questions, troubleshooting guides, installation instructions, and connect with our support team."
+  const baseDescription =
+    'AlertMend help center: setup guides for clusters, VMs and integrations, root cause analysis and remediation flows, and direct access to the team.'
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'help', 'help')
-  const categories = [
-    {
-      icon: Book,
-      title: 'Getting Started',
-      articles: ['Quick Start Guide', 'Installation', 'First Configuration', 'Connecting Your Infrastructure'],
-    },
-    {
-      icon: HelpCircle,
-      title: 'Troubleshooting',
-      articles: ['Common Issues', 'Debugging Tips', 'Performance Optimization', 'Error Messages'],
-    },
-    {
-      icon: MessageCircle,
-      title: 'Support',
-      articles: ['Contact Support', 'Submit a Ticket', 'Live Chat', 'Community Forum'],
-    },
-  ]
 
   return (
-    <div className="min-h-screen bg-white">
+    <>
       <SEO
-        title="AlertMend AI Help Center: Get Support & Documentation"
+        title="AlertMend Help Center: Guides and Support"
         description={uniqueDescription}
-        keywords="AlertMend help, AlertMend support, troubleshooting, documentation, FAQ, customer support, AIOps help"
+        keywords="AlertMend help, AlertMend support, documentation, setup guides"
         canonical="/help"
-        breadcrumbData={{
-          items: [{ label: 'Help Center' }]
-        }}
+        breadcrumbData={{ items: [{ label: 'Help center' }] }}
       />
-      <main className="pt-24">
-        <section className="py-20 md:py-32 container-padding hero-dark">
-          <div className="max-w-7xl mx-auto">
-            <div className="mb-8">
-              <Breadcrumb items={[{ label: 'Help Center' }]} />
-            </div>
-            <div className="text-center mb-20">
-              <div className="inline-block px-5 py-2 bg-gradient-to-r from-brand-50 to-brand-100 text-brand-700 rounded-full text-sm font-bold mb-6 shadow-lg">
-                Help Center
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6 leading-tight">
-                How Can We Help?
-              </h1>
-              <div className="max-w-2xl mx-auto">
-                <div className="relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-                  <input
-                    type="text"
-                    placeholder="Search for help articles..."
-                    className="w-full pl-12 pr-4 py-4 rounded-xl border-2 border-gray-200 focus:border-brand-400 focus:outline-none text-lg"
-                  />
-                </div>
-              </div>
-            </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {categories.map((category, index) => {
-                const Icon = category.icon
-                return (
-                  <div
-                    key={index}
-                    className="bg-white rounded-3xl p-8 border-2 border-gray-200 hover:border-brand-400 hover:shadow-2xl transition-all duration-300"
-                  >
-                    <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 mb-6">
-                      <Icon className="h-7 w-7" />
-                    </div>
-                    <h3 className="text-2xl font-black text-gray-900 mb-6">{category.title}</h3>
-                    <ul className="space-y-3">
-                      {category.articles.map((article, idx) => (
-                        <li key={idx}>
-                          <a
-                            href="#"
-                            className="text-brand-600 hover:text-brand-700 font-medium text-sm flex items-center gap-2"
-                          >
-                            {article}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
+      <PageHero
+        eyebrow="Help center"
+        title="How can we help?"
+        lede="Setup guides live in the documentation. For anything else, the engineers who build AlertMend answer directly."
+        primary={{ label: 'Open documentation', href: '/documentation' }}
+        secondary={{ label: 'Contact support', href: '/contact' }}
+      />
+
+      <Section>
+        <CellGrid
+          items={CATEGORIES.map((c) => ({
+            icon: c.icon,
+            title: c.title,
+            children: (
+              <ul className={styles.checks} style={{ gridTemplateColumns: '1fr', marginTop: 6 }}>
+                {c.articles.map((a) => (
+                  <li key={a.href}>
+                    <ActionLink action={{ label: a.label, href: a.href }} variant="text" />
+                  </li>
+                ))}
+              </ul>
+            ),
+          }))}
+        />
+        <p className={kit.meta}>Can't find what you need? Email hello@alertmend.io and include your workspace name.</p>
+      </Section>
+
+      <CtaBand
+        title="Prefer to see it live?"
+        lede="Book 30 minutes and we will walk through your setup with you."
+        primary={{ label: 'Book a call', href: calendlyUrl('help-center-cta') }}
+        secondary={{ label: 'Tutorials', href: '/tutorials' }}
+      />
+    </>
   )
 }
-

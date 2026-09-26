@@ -1,5 +1,5 @@
 ---
-title: "Api Error Tracking Systems Guide"
+title: "API Error Tracking Systems Guide"
 excerpt: "API Error Tracking Systems in DevOps In today's fast-paced digital landscape, ensuring seamless communication between applications is paramount."
 date: "2026-01-10"
 category: "API Monitoring"

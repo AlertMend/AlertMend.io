@@ -1,5 +1,5 @@
 ---
-title: "Incident Management For Startups"
+title: "Incident Management for Startups"
 excerpt: "Incident management for startups is pivotal in maintaining operational efficiency and resilience amidst rapid growth. As startups navigate the dynamic landsc..."
 date: "2026-01-10"
 category: "AIOps"

@@ -10,8 +10,9 @@ import {
 } from '../data/integrations';
 import { truncateDescription } from '../utils/descriptionUtils';
 import styles from './IntegrationDetailPage.module.css';
+import { calendlyUrl } from '../lib/calendly';
 
-const CALENDLY_URL = 'https://calendly.com/hello-alertmend/30min';
+const CALENDLY_URL = calendlyUrl('integration-page');
 
 export default function IntegrationDetailPage() {
   const { slug = '' } = useParams<{ slug: string }>();
@@ -56,12 +57,27 @@ export default function IntegrationDetailPage() {
   return (
     <>
       <SEO
-        title={`${integration.name} integration | AlertMend AI`}
+        title={`${integration.name} integration | AlertMend`}
         description={truncateDescription(
           `${integration.tagline} ${integration.description.split('. ')[0]}.`
         )}
         canonical={`/integrations/${integration.slug}`}
         keywords={`${integration.name}, AlertMend integration, ${integration.category}, AIOps, observability, automation`}
+        extraStructuredData={
+          integration.faqs && integration.faqs.length > 0
+            ? [
+                {
+                  '@context': 'https://schema.org',
+                  '@type': 'FAQPage',
+                  mainEntity: integration.faqs.map((f) => ({
+                    '@type': 'Question',
+                    name: f.q,
+                    acceptedAnswer: { '@type': 'Answer', text: f.a },
+                  })),
+                },
+              ]
+            : undefined
+        }
       />
 
       <div className={styles.page}>
@@ -100,6 +116,19 @@ export default function IntegrationDetailPage() {
             <section className={styles.about}>
               <h2 className={styles.h2}>About this integration</h2>
               <p>{integration.description}</p>
+              {integration.setupSteps && integration.setupSteps.length > 0 && (
+                <>
+                  <h2 className={`${styles.h2} ${styles.stepsHead}`}>How to connect {integration.name}</h2>
+                  <ol className={styles.steps}>
+                    {integration.setupSteps.map((step, i) => (
+                      <li key={step}>
+                        <span className={styles.stepNum}>{i + 1}</span>
+                        <span>{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </>
+              )}
             </section>
 
             <section className={styles.capabilities}>
@@ -118,6 +147,20 @@ export default function IntegrationDetailPage() {
                 ))}
               </ul>
             </section>
+
+            {integration.faqs && integration.faqs.length > 0 && (
+              <section className={styles.wide}>
+                <h2 className={styles.h2}>{integration.name} integration FAQ</h2>
+                <dl className={styles.faq}>
+                  {integration.faqs.map((f) => (
+                    <div key={f.q}>
+                      <dt>{f.q}</dt>
+                      <dd>{f.a}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </section>
+            )}
 
             <section className={styles.cta}>
               <div>

@@ -1,5 +1,5 @@
 ---
-title: "dashboard pod Guide Guide Complete Guide"
+title: "Dashboard Pod Guide"
 excerpt: "In the world of Kubernetes, dashboard pods play a crucial role in providing a visual interface for managing and monitoring clusters"
 date: "2026-01-10"
 category: "Kubernetes"

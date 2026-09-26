@@ -597,7 +597,7 @@ const POSTS = [
       ['https://www.alertmend.io/pricing', 'AlertMend pricing', 'current plans and enterprise deployment options.'],
       ['https://www.alertmend.io/case-studies/auto-remediation-case-studies-polymer-search', 'AI and SaaS customer outcome', 'Datadog-routed ECS incident response and MTTR result.'],
       ['https://www.alertmend.io/case-studies/kubernetes-cost-optimization-case-studies-wareflex', 'Logistics technology customer outcome', 'GKE right-sizing and cloud-cost result.'],
-      ['https://www.alertmend.io/case-studies/kubernetes-cost-optimization-case-studies-rombee', 'IoT operations customer outcome', 'Kubernetes investigation workflow across more than 3,000 pods.'],
+      ['https://www.alertmend.io/case-studies/kubernetes-management-case-studies-decklar', 'IoT operations customer outcome', 'Kubernetes investigation workflow across more than 3,000 pods.'],
     ],
     audience: ['You like incident.io but need infrastructure action, not only incident coordination', 'You need self-hosted deployment, local AI models, or WhatsApp escalation', 'You want repetitive failures diagnosed and recovered before they page a human'],
     note: 'This guide gives incident.io full credit for its polished collaboration, On-call, AI Investigations, and status-page capabilities. <a href="/">AlertMend</a> publishes the comparison and is the recommended option when the buying outcome is direct infrastructure diagnosis and governed recovery.',
@@ -646,7 +646,7 @@ const POSTS = [
     customerStories: [
       { industry: 'AI & SaaS', stack: 'ECS · SQS · Lambda · Datadog', metric: '90%', metricLabel: 'MTTR reduction', story: 'An AI SaaS team routed Datadog-triggered ECS incidents into AlertMend as an off-hours reliability layer. Its published result moved typical resolution time from about 45 minutes to under five.', url: 'https://www.alertmend.io/case-studies/auto-remediation-case-studies-polymer-search' },
       { industry: 'Logistics Technology', stack: 'Kubernetes · Google Kubernetes Engine', metric: '50%', metricLabel: 'lower GKE spend', story: 'A logistics infrastructure team used workload-level cost analysis and right-sizing to clean unused storage and adjust Kubernetes resources. Its published outcome includes 41% compute and 94% storage savings without performance regression.', url: 'https://www.alertmend.io/case-studies/kubernetes-cost-optimization-case-studies-wareflex' },
-      { industry: 'IoT Operations', stack: 'Kubernetes · 3,000+ pods', metric: '70%', metricLabel: 'less investigation time', story: 'An IoT operations team used AlertMend as a Kubernetes control tower for root-cause investigation across more than 3,000 pods, reclaiming a reported 15–20 engineering hours each week.', url: 'https://www.alertmend.io/case-studies/kubernetes-cost-optimization-case-studies-rombee' },
+      { industry: 'IoT Operations', stack: 'Kubernetes · 3,000+ pods', metric: '70%', metricLabel: 'less investigation time', story: 'An IoT operations team used AlertMend as a Kubernetes control tower for root-cause investigation across more than 3,000 pods, reclaiming a reported 15–20 engineering hours each week.', url: 'https://www.alertmend.io/case-studies/kubernetes-management-case-studies-decklar' },
     ],
     customerStoriesNote: 'Industry labels summarize published AlertMend customer stories. Outcomes are not guarantees; results depend on workload, incident mix, implementation scope, and the policies each team enables.',
     featuredTag: 'Infrastructure diagnosis + governed recovery',

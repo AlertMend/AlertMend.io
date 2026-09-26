@@ -1,5 +1,5 @@
 ---
-title: "one node kubernetes Guide Guide"
+title: "One Node Kubernetes Guide"
 excerpt: "In the realm of container orchestration, Kubernetes stands out as a pivotal tool for managing containerized applications across diverse environments"
 date: "2026-01-10"
 category: "Kubernetes"

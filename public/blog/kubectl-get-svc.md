@@ -1,5 +1,5 @@
 ---
-title: "kubectl get svc: List and Read Services"
+title: "kubectl Get Svc: List and Read Services"
 excerpt: "kubectl get svc lists Kubernetes Services. Learn what svc means, how to read the output, list all namespaces, and fix a pending EXTERNAL-IP."
 date: "2025-12-15"
 dateModified: "2026-07-07"

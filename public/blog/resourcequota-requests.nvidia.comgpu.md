@@ -1,5 +1,5 @@
 ---
-title: "Resourcequota Requests.nvidia.com/gpu"
+title: "ResourceQuota Requests.nvidia.com/gpu"
 excerpt: "In the world of Kubernetes, managing resources efficiently is critical, especially when dealing with specialized hardware like GPUs"
 date: "2026-01-10"
 category: "Kubernetes"

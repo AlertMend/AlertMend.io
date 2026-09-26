@@ -6,8 +6,9 @@ import SEO from '../components/SEO'
 import Breadcrumb from '../components/Breadcrumb'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
 import styles from './CaseStudiesPage.module.css'
+import { calendlyUrl } from '../lib/calendly'
 
-const DEMO_URL = 'https://calendly.com/hello-alertmend/30min'
+const DEMO_URL = calendlyUrl('case-studies')
 
 function CompanyLogo({ company, logo }: { company: string; logo?: string }) {
   const [imageError, setImageError] = useState(false)

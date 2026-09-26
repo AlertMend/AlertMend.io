@@ -1,5 +1,5 @@
 ---
-title: "fortinet fortigate 80 Guide Guide"
+title: "Fortinet Fortigate 80 Guide"
 excerpt: "fortinet fortigate 80  Discovering the Power of Fortinet FortiGate 80 for Network Security In today's digital landscape, safeguarding your network..."
 date: "2026-01-10"
 category: "DevOps"

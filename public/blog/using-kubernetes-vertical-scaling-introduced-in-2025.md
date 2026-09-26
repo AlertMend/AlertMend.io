@@ -9,8 +9,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Using, Kubernetes, Vertical, Scaling, In
 
 # Using Kubernetes Vertical Scaling Introduced In 2025
 
-*Generated on 2025-12-27 23:30:42*
-
 ---
 
 ## Mastering Kubernetes Vertical Scaling in 2025: Revolutionizing Resource Management

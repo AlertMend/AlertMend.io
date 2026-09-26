@@ -1,0 +1,135 @@
+.section {
+  padding: 80px 0;
+  background: #fafafa;
+  border-top: 1px solid rgba(24, 24, 27, 0.06);
+}
+
+.head {
+  margin-bottom: 32px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.card {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 26px 26px 20px;
+  border-radius: var(--radius-lg, 10px);
+  background: #fafafa;
+  border: 1px solid rgba(24, 24, 27, 0.08);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  border-color: rgba(124, 58, 237, 0.28);
+  box-shadow: var(--shadow-card, 0 12px 28px -20px rgba(9, 9, 11, 0.3));
+}
+
+.mark {
+  color: #7c3aed;
+}
+
+.quote {
+  margin: 0;
+  flex: 1;
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  color: #27272a;
+}
+
+.by {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(24, 24, 27, 0.07);
+}
+
+.logoBox {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  min-width: 92px;
+}
+
+.logoBox b {
+  font-size: 14px;
+  font-weight: 750;
+  color: #18181b;
+}
+
+.wordmark {
+  height: 20px;
+  width: auto;
+  max-width: 110px;
+  object-fit: contain;
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+}
+
+.person {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-left: 14px;
+  border-left: 1px solid rgba(24, 24, 27, 0.08);
+}
+
+.person strong {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #18181b;
+}
+
+.person span {
+  font-size: 12.5px;
+  color: #71717a;
+}
+
+.link {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: none;
+  font-size: 12.5px;
+  font-weight: 650;
+  color: #71717a !important;
+  text-decoration: none !important;
+}
+
+.link:hover {
+  color: #7c3aed !important;
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .by {
+    flex-wrap: wrap;
+  }
+  .person {
+    padding-left: 0;
+    border-left: 0;
+    flex-basis: 100%;
+    order: 3;
+  }
+  .link {
+    margin-left: auto;
+  }
+}

@@ -5,6 +5,7 @@ date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "what, best, prevent, container, drift, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
+hidden: true
 ---
 
 # what is the best way to prevent container drift

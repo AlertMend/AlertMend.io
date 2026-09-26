@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes API Rate Limiting Troubleshootin"
-excerpt: "A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers."
+excerpt: "In Kubernetes, the API server is a critical component that manages all the requests and interactions between different components of the cluster."
 date: "2025-02-16"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"

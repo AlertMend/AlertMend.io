@@ -1,6 +1,6 @@
 ---
 title: "Optimizing Elasticsearch for High-Volume"
-excerpt: "When working with Kubernetes, a common issue developers encounter is a pod being stuck in the Pending state. This means the pod has been accepted by the..."
+excerpt: "When indexing large volumes of data in Elasticsearch, inefficiencies can occur, leading to performance degradation, delays, and even failures in the."
 date: "2025-01-18"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"

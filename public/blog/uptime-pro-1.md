@@ -1,10 +1,11 @@
 ---
-title: "Uptime Pro System Monitoring And"
+title: "Uptime Pro System Monitoring"
 excerpt: "uptime pro Elevating Your System's Reliability with Uptime Pro In today's fast-paced digital landscape, ensuring the continuous availability of your..."
 date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, uptime"
+hidden: true
 ---
 
 # uptime pro

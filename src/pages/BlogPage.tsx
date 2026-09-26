@@ -1,10 +1,9 @@
 import SEO from '../components/SEO'
-import Breadcrumb from '../components/Breadcrumb'
+import ent from '../components/enterprise/Enterprise.module.css'
 import { Calendar, ArrowRight } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
 import { useMemo } from 'react'
 import { blogPosts, formatDate } from '../utils/blogUtils'
-import { getBlogPostPath, isStaticBlog } from '../utils/staticBlogRegistry'
+import { getBlogPostPath } from '../utils/staticBlogRegistry'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
 
 /**
@@ -24,6 +23,12 @@ import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
  * any post not listed here falls back to date, newest first.
  */
 const FEATURED_PRIORITY: Record<string, number> = {
+  'bcbs-239-data-quality-controls': 120,
+  'data-quality-policy-to-automated-checks': 118,
+  'monte-carlo-alternatives': 116,
+  'snowflake-data-quality-checks': 114,
+  'power-bi-data-quality-impact-analysis': 112,
+  'data-freshness-monitoring': 110,
   'datadog-alternatives': 100,
   'pagerduty-alternatives': 98,
   'incident-io-alternatives': 96,
@@ -43,7 +48,6 @@ const FEATURED_PRIORITY: Record<string, number> = {
 }
 
 export default function BlogPage() {
-  const navigate = useNavigate()
 
   const sortedPosts = useMemo(() => {
     try {
@@ -84,21 +88,21 @@ export default function BlogPage() {
     }
   }, [])
 
-  const baseDescription = "AlertMend blog: production ops, Kubernetes troubleshooting, AI RCA, and approved remediations."
+  const baseDescription = "Practical guides from the AlertMend team on data quality, data governance, Kubernetes, observability and automated fixes."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'blog-list', 'blog')
 
   if (!sortedPosts || sortedPosts.length === 0) {
     return (
       <div className="min-h-screen bg-white">
         <SEO
-          title="AlertMend Blog: Production ops & Kubernetes"
+          title="AlertMend Blog: Data Quality, Kubernetes and Observability"
           description={uniqueDescription}
           canonical="/blog"
           keywords="AIOps blog, Kubernetes best practices, infrastructure automation, DevOps insights, SRE articles, cloud-native operations"
         />
-        <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden hero-dark">
+        <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-white">
           <div className="max-w-7xl mx-auto text-center">
-            <p className="text-zinc-600">Loading blog posts...</p>
+            <p className="text-zinc-600">Loading posts…</p>
           </div>
         </section>
       </div>
@@ -108,36 +112,20 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-white">
       <SEO
-        title="AlertMend Blog: Production ops & Kubernetes"
+        title="AlertMend Blog: Data Quality, Kubernetes and Observability"
         description={uniqueDescription}
         canonical="/blog"
         keywords="AIOps blog, Kubernetes best practices, infrastructure automation, DevOps insights, SRE articles, cloud-native operations"
       />
       <section className="relative overflow-hidden pt-20 pb-24 md:pt-28 md:pb-32 px-4 sm:px-6 lg:px-8">
-        {/* Single corner violet wash — anchors the brand color without
-            painting the page. Matches the new home ambient pattern. */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 -z-10"
-          style={{
-            background:
-              'radial-gradient(ellipse 60% 40% at 50% -10%, rgba(124, 58, 237,0.10), transparent 60%)',
-          }}
-        />
         <div className="max-w-7xl mx-auto">
-          <div className="mb-8">
-            <Breadcrumb items={[{ label: 'Blog' }]} />
-          </div>
-          <div className="text-center mb-14 md:mb-20">
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-brand-700">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-600 shadow-[0_0_0_3px_rgba(124, 58, 237,0.14)]" />
-              Blog
-            </span>
-            <h1 className="mx-auto mt-6 max-w-4xl text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] text-zinc-950">
-              Latest insights &amp; updates
+          <div className="mb-14 md:mb-16 max-w-3xl">
+            <span className={ent.eyebrow}>Blog</span>
+            <h1 className="text-4xl md:text-[56px] font-semibold tracking-[-0.03em] leading-[1.05] text-[#0b1220]">
+              Guides from the AlertMend team
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-zinc-500 leading-relaxed">
-              Field notes from the AlertMend team on AIOps, Kubernetes, GPU &amp; ML pipelines, incident response, and SRE automation.
+            <p className="mt-5 text-lg md:text-[19px] text-slate-600 leading-relaxed">
+              Practical writing on data quality, data governance, Kubernetes, observability, GPU fleets and automated fixes.
             </p>
           </div>
 
@@ -148,14 +136,7 @@ export default function BlogPage() {
               return (
                 <article
                   key={post.slug}
-                  onClick={() => {
-                    if (isStaticBlog(post.slug)) {
-                      window.location.assign(getBlogPostPath(post.slug))
-                    } else {
-                      navigate(getBlogPostPath(post.slug))
-                    }
-                  }}
-                  className="group relative flex h-full cursor-pointer flex-col rounded-lg border border-zinc-200 bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:shadow-[0_1px_2px_rgba(9,9,11,0.04),0_12px_24px_-16px_rgba(9,9,11,0.16)]"
+                  className="group relative flex h-full flex-col rounded-lg border border-zinc-200 bg-white p-6 transition-all duration-200 hover:border-zinc-400"
                 >
                   <div className="mb-4 flex flex-wrap items-center gap-1.5">
                     <span className="inline-flex items-center rounded-md border border-brand-200 bg-brand-50 px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-brand-700">
@@ -177,14 +158,16 @@ export default function BlogPage() {
                       </>
                     )}
                   </div>
-                  <h2 className="mb-3 text-xl md:text-[22px] font-bold leading-snug tracking-tight text-zinc-950 transition-colors group-hover:text-brand-700">
-                    {displayTitle}
+                  <h2 className="mb-3 text-xl md:text-[22px] font-semibold leading-snug tracking-tight text-zinc-950 transition-colors group-hover:text-brand-700">
+                    <a href={getBlogPostPath(post.slug)} className="!text-inherit after:absolute after:inset-0 after:content-['']">
+                      {displayTitle}
+                    </a>
                   </h2>
                   {displayExcerpt ? (
                     <p className="mb-6 line-clamp-3 flex-grow text-[15px] leading-relaxed text-zinc-600">{displayExcerpt}</p>
                   ) : (
                     <p className="mb-6 line-clamp-3 flex-grow text-[15px] leading-relaxed text-zinc-500 italic">
-                      Read more about {displayTitle}...
+                      Read more about {displayTitle}.
                     </p>
                   )}
                   <div className="mt-auto flex items-center justify-between border-t border-zinc-100 pt-4">

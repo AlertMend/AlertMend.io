@@ -42,6 +42,10 @@ export type Integration = {
   domain: string;
   /** Optional in-app docs path or external setup guide. */
   docsHref?: string;
+  /** Optional "How to connect" steps shown on the detail page. */
+  setupSteps?: string[];
+  /** Optional FAQ; also emitted as FAQPage structured data. */
+  faqs?: { q: string; a: string }[];
 };
 
 const svgporn = (slug: string) => `https://cdn.svgporn.com/logos/${slug}.svg`;
@@ -160,6 +164,16 @@ export const integrations: Integration[] = [
     logoSrc: svgporn('datadog'),
     domain: 'datadoghq.com',
     docsHref: '/documentation/datadog-webhook',
+    setupSteps: [
+      'In AlertMend, copy your webhook URL from the integrations settings.',
+      'In Datadog, add a webhook (Integrations → Webhooks) that points to the AlertMend URL.',
+      'Add the webhook as a notification (@webhook-alertmend) on the monitors you want AlertMend to investigate.',
+      'Trigger a test alert. AlertMend correlates it into an incident and posts the root cause to Slack or Teams.',
+    ],
+    faqs: [
+      { q: 'Do we have to replace Datadog?', a: 'No. Keep Datadog for monitoring. AlertMend ingests its alerts and adds root cause and approved fixes on top.' },
+      { q: 'What happens if AlertMend is down?', a: 'Your existing Datadog alerting path is unaffected; AlertMend sits on top of your stack, not in front of it.' },
+    ],
   },
   {
     slug: 'victoria-metrics',
@@ -194,6 +208,16 @@ export const integrations: Integration[] = [
     logoSrc: svgporn('slack'),
     domain: 'slack.com',
     docsHref: '/documentation/slack-app-approval',
+    setupSteps: [
+      'Create a Slack app for your workspace and add the bot scopes listed in the setup guide.',
+      'Install the app to your workspace and copy the bot token.',
+      'Create or pick a channel for incidents and root-cause reports, invite the AlertMend bot, and copy the channel ID.',
+      'Add the token and channel ID in AlertMend. Approvals for remediation flows can now happen in that channel.',
+    ],
+    faqs: [
+      { q: 'Can fixes run without approval?', a: 'The default is recommend, not execute. Remediation flows wait for an approval in Slack, Teams, email or the product.' },
+      { q: 'Is every approval recorded?', a: 'Yes. Each suggestion, approval and executed step is written to the audit trail with who and when.' },
+    ],
   },
   {
     slug: 'ms-teams',
@@ -360,6 +384,19 @@ export const integrations: Integration[] = [
     iconSlug: 'snowflake',
     logoTint: '29B5E8',
     domain: 'snowflake.com',
+    docsHref: '/data-observability',
+    setupSteps: [
+      'Install the AlertMend agent inside your network. It connects out to AlertMend, so no inbound ports are opened.',
+      'Run the generated grant script to create a read-only Snowflake role for the agent. The agent keeps the credentials; AlertMend stores no warehouse secrets.',
+      'Upload your data quality policy (for example BCBS 239 or an internal standard). AlertMend proposes checks, each citing the clause it enforces.',
+      'Approve the checks you want. Nothing goes live until a person approves it, and every change is versioned.',
+      'Choose where alerts go: Slack or Microsoft Teams, with the failing job and affected reports attached.',
+    ],
+    faqs: [
+      { q: 'Does AlertMend write to Snowflake?', a: 'No. The agent refuses anything but read queries and caps query time.' },
+      { q: 'Do our Snowflake credentials leave our network?', a: 'No. The agent inside your network holds them and sends back only query results.' },
+      { q: 'How many checks can we run?', a: 'Checks and users are unlimited on every data plan. Plans are priced by monitored datasets.' },
+    ],
   },
   {
     slug: 'bigquery',
@@ -466,6 +503,72 @@ export const integrations: Integration[] = [
     iconSlug: 'apacheairflow',
     logoTint: '017CEE',
     domain: 'airflow.apache.org',
+    docsHref: '/data-observability',
+    setupSteps: [
+      'Connect AlertMend to your Airflow metadata so DAG and task runs are visible next to your data checks.',
+      'Map the DAGs that load the tables you monitor.',
+      'When a check fails, AlertMend links it to the Airflow task that loaded the table, with the error, so the alert names the cause.',
+    ],
+    faqs: [
+      { q: 'Do we need to change our DAGs?', a: 'No. AlertMend reads run metadata; it does not modify your DAGs.' },
+      { q: 'Can a failed task page someone?', a: 'Yes. Failures can alert Slack or Teams and escalate through incidents and escalation on the plans that include them.' },
+    ],
+  },
+  {
+    slug: 'oracle',
+    name: 'Oracle',
+    category: 'Data',
+    tagline: 'Policy-driven data quality checks on Oracle, read-only.',
+    description:
+      'Monitor Oracle tables with checks proposed from your data quality policy. A read-only agent runs inside your network, and when a check fails AlertMend links it to the Oracle ODI job that loaded the data.',
+    capabilities: [
+      'Checks proposed from your policy, each citing its clause',
+      'Read-only agent inside your network; no inbound ports',
+      'Failures linked to the Oracle ODI job and its error',
+      'Alerts in Slack or Microsoft Teams with cause and impact',
+    ],
+    logoSrc: svgporn('oracle'),
+    iconSlug: 'oracle',
+    logoTint: 'F80000',
+    domain: 'oracle.com',
+    docsHref: '/data-observability',
+    setupSteps: [
+      'Install the AlertMend agent inside your network. It connects out only.',
+      'Run the generated grant script to create a read-only Oracle role for the agent.',
+      'Upload your data quality policy and approve the checks AlertMend proposes.',
+      'Connect Oracle ODI so failed loads are linked to the checks they break.',
+    ],
+    faqs: [
+      { q: 'Does AlertMend change data in Oracle?', a: 'No. The agent only runs read queries and caps query time.' },
+      { q: 'Where do Oracle credentials live?', a: 'With the agent inside your network. AlertMend stores no warehouse secrets.' },
+    ],
+  },
+  {
+    slug: 'power-bi',
+    name: 'Power BI',
+    category: 'Data',
+    tagline: 'See which reports bad data affects, before anyone opens them.',
+    description:
+      'Connect Power BI so every failed data check shows the reports that read the affected table. Report owners hear about bad numbers before the morning meeting, not from a business user.',
+    capabilities: [
+      'Affected reports listed on every failed check',
+      'Report impact included in Slack and Teams alerts',
+      'Pairs with Snowflake and Oracle checks',
+      'Lineage from table to report',
+    ],
+    logoSrc: svgporn('microsoft-power-bi'),
+    iconSlug: 'powerbi',
+    logoTint: 'F2C811',
+    domain: 'powerbi.microsoft.com',
+    docsHref: '/data-observability',
+    setupSteps: [
+      'Connect AlertMend to your Power BI workspace so it can read which reports use which tables.',
+      'Monitor the source tables in Snowflake or Oracle with checks from your policy.',
+      'When a check fails, the alert lists the Power BI reports that read that table.',
+    ],
+    faqs: [
+      { q: 'Does AlertMend change our reports?', a: 'No. It reads report-to-table lineage to show impact.' },
+    ],
   },
 ];
 

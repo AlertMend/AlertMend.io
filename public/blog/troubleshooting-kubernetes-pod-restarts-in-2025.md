@@ -5,11 +5,10 @@ date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, Troubleshooting, Kubernetes, Pod, Restarts, 2025"
+hidden: true
 ---
 
 # Troubleshooting Kubernetes Pod Restarts In 2025
-
-*Generated on 2025-12-24 11:11:25*
 
 ---
 

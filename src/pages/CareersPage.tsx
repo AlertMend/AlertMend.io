@@ -1,119 +1,89 @@
+import { FileSearch, Users, Globe2 } from 'lucide-react'
 import SEO from '../components/SEO'
-import Breadcrumb from '../components/Breadcrumb'
-import { MapPin, Briefcase, ArrowRight } from 'lucide-react'
+import { PageHero, Section, CellGrid, CtaBand, ActionLink } from '../components/enterprise/PageKit'
+import kit from '../components/enterprise/PageKit.module.css'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
 
+const JOBS = [
+  { title: 'Senior DevOps engineer', location: 'Singapore or remote', type: 'Full-time', department: 'Engineering' },
+  { title: 'AI/ML engineer', location: 'Singapore or remote', type: 'Full-time', department: 'Engineering' },
+  { title: 'Product manager', location: 'Singapore', type: 'Full-time', department: 'Product' },
+  { title: 'Customer success manager', location: 'Remote', type: 'Full-time', department: 'Customer success' },
+]
+
+const WHY = [
+  {
+    icon: FileSearch,
+    title: 'Hard, real problems',
+    body: 'Root cause across data and infrastructure, safe automation, and AI that has to show its evidence.',
+  },
+  {
+    icon: Users,
+    title: 'Close to customers',
+    body: 'Engineers talk to the data and platform teams who use what they build, every week.',
+  },
+  {
+    icon: Globe2,
+    title: 'Small team, wide scope',
+    body: 'Singapore-based with remote colleagues. You will own features end to end.',
+  },
+]
+
 export default function CareersPage() {
-  const jobs = [
-    {
-      title: 'Senior DevOps Engineer',
-      location: 'Singapore / Remote',
-      type: 'Full-time',
-      department: 'Engineering',
-    },
-    {
-      title: 'AI/ML Engineer',
-      location: 'Singapore / Remote',
-      type: 'Full-time',
-      department: 'Engineering',
-    },
-    {
-      title: 'Product Manager',
-      location: 'Singapore',
-      type: 'Full-time',
-      department: 'Product',
-    },
-    {
-      title: 'Customer Success Manager',
-      location: 'Remote',
-      type: 'Full-time',
-      department: 'Customer Success',
-    },
-  ]
-  
-  // Generate unique meta description for careers page
-  const baseDescription = "Join the AlertMend AI team! We're hiring a Senior DevOps Engineer, AI/ML Engineer, and more. Apply now or submit your resume for future opportunities in 2025."
+  const baseDescription =
+    'Careers at AlertMend: open roles in engineering, product and customer success. Apply by email, or send your CV for future roles.'
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'careers', 'careers')
 
   return (
-    <div className="min-h-screen bg-white">
+    <>
       <SEO
-        title="AlertMend AI Careers: Join Our Team Today!"
+        title="Careers at AlertMend: Open Roles"
         description={uniqueDescription}
-        keywords="AlertMend careers, AIOps jobs, DevOps jobs, SRE jobs, infrastructure automation careers, tech jobs Singapore"
+        keywords="AlertMend careers, DevOps jobs, SRE jobs, AI engineer jobs, data engineering jobs Singapore"
         canonical="/careers"
-        breadcrumbData={{
-          items: [{ label: 'Careers' }]
-        }}
+        breadcrumbData={{ items: [{ label: 'Careers' }] }}
       />
-      <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden hero-dark">
-          <div className="max-w-7xl mx-auto">
-            <div className="mb-8">
-              <Breadcrumb items={[{ label: 'Careers' }]} />
-            </div>
-            <div className="text-center mb-12 md:mb-16">
-              <div className="inline-block px-5 py-2 bg-gradient-to-r from-brand-50 to-brand-100 text-brand-700 rounded-full text-sm font-bold mb-8 shadow-md border border-brand-200/50">
-                Careers
+
+      <PageHero
+        eyebrow="Careers"
+        title="Help teams trust their data and their systems."
+        lede="We are building observability that explains failures with evidence and fixes them with approval. We hire people who care about reliability and clear thinking."
+        primary={{ label: 'See open roles', href: '#roles', external: true }}
+      />
+
+      <Section id="roles" eyebrow="Open roles" title={`${JOBS.length} open positions`}>
+        <ul className={kit.rows}>
+          {JOBS.map((job) => (
+            <li key={job.title} className={kit.row}>
+              <div>
+                <h3 className={kit.rowTitle}>{job.title}</h3>
+                <p className={kit.rowMeta}>{job.department}</p>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-900 mb-6 leading-tight">
-                Join Our Team
-              </h1>
-              <p className="text-xl md:text-2xl text-brand-700 max-w-3xl mx-auto leading-relaxed mb-12">
-                Help us build production ops software: observe everything, find root cause, and approve the fix. We're looking for people who care about reliability and clear evidence.
+              <p className={kit.rowMeta}>
+                {job.location} · {job.type}
               </p>
-            </div>
+              <ActionLink
+                variant="text"
+                action={{
+                  label: 'Apply by email',
+                  href: `mailto:careers@alertmend.io?subject=${encodeURIComponent(`Application: ${job.title}`)}`,
+                }}
+              />
+            </li>
+          ))}
+        </ul>
+      </Section>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-12">
-              {jobs.map((job, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-3xl p-8 border-2 border-gray-200 hover:border-brand-400 hover:shadow-2xl transition-all duration-300"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-2xl font-bold text-brand-900 mb-2">{job.title}</h3>
-                      <div className="flex items-center gap-4 text-sm text-gray-600">
-                        <div className="flex items-center gap-1">
-                          <MapPin className="h-4 w-4" />
-                          <span>{job.location}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Briefcase className="h-4 w-4" />
-                          <span>{job.type}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="px-3 py-1 bg-brand-50 text-brand-700 rounded-lg text-xs font-bold">
-                      {job.department}
-                    </div>
-                  </div>
-                  <a
-                    href="#"
-                    className="text-brand-600 hover:text-brand-700 font-bold text-sm flex items-center gap-2"
-                  >
-                    View Details
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
-                </div>
-              ))}
-            </div>
+      <Section alt eyebrow="Why AlertMend" title="What working here is like">
+        <CellGrid items={WHY} />
+      </Section>
 
-            <div className="text-center bg-brand-50 rounded-3xl p-12 border-2 border-brand-200">
-              <h2 className="text-3xl font-bold text-brand-900 mb-4">Don't see a role that fits?</h2>
-              <p className="text-brand-700 mb-6 font-medium">
-                We're always looking for talented people. Send us your resume and we'll keep you in mind for future opportunities.
-              </p>
-              <a
-                href="mailto:careers@alertmend.io"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-brand-800 to-brand-900 !text-white px-8 py-4 rounded-xl font-semibold hover:from-brand-900 hover:to-brand-900 transition-all shadow-lg hover:shadow-xl"
-              >
-                <span className="text-white">Send Resume</span>
-                <ArrowRight className="h-5 w-5 text-white" />
-              </a>
-            </div>
-          </div>
-        </section>
-    </div>
+      <CtaBand
+        title="No role that fits?"
+        lede="Send us your CV and a note on what you would like to work on."
+        primary={{ label: 'Email careers@alertmend.io', href: 'mailto:careers@alertmend.io' }}
+        secondary={{ label: 'About the team', href: '/about' }}
+      />
+    </>
   )
 }
-

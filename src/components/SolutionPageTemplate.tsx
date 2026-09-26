@@ -8,6 +8,7 @@ import { withBrandLogo } from '../data/brandLogos'
 import BrandLogo from './ui/BrandLogo'
 import SEO from './SEO'
 import styles from './SolutionPageTemplate.module.css'
+import { calendlyUrl } from '../lib/calendly'
 
 /**
  * SolutionPageTemplate — the shared skeleton for the product pages.
@@ -75,11 +76,15 @@ export type SolutionPageProps = {
   /** Override the default infra “Works with” band (e.g. warehouse sources for Data). */
   worksWith?: SolutionWorksWith
   spotlight: SolutionSpotlight
+  /** Optional content rendered after the spotlight and before the CTA band. */
+  afterSpotlight?: ReactNode
+  /** Optional id for the steps section, for in-page anchors (e.g. "policy"). */
+  stepsId?: string
   ctaHeading: string
   ctaSub: string
 }
 
-const DEMO_URL = 'https://calendly.com/hello-alertmend/30min'
+const DEMO_URL = calendlyUrl('product-page')
 
 const DEFAULT_WORKS_WITH: SolutionWorksWith = {
   heading: 'Runs on Kubernetes, AWS ECS, EC2 and plain VMs',
@@ -191,7 +196,7 @@ export default function SolutionPageTemplate(p: SolutionPageProps) {
       ) : null}
 
       {/* ============ Steps ============ */}
-      <section className="border-b border-zinc-100 bg-zinc-50/70">
+      <section id={p.stepsId} className="border-b border-zinc-100 bg-zinc-50/70">
         <div className="mx-auto max-w-6xl px-6 py-14 md:py-16">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-[1.65rem] font-bold tracking-tight text-zinc-950 md:text-3xl">
@@ -210,7 +215,7 @@ export default function SolutionPageTemplate(p: SolutionPageProps) {
                     <s.icon className="h-4 w-4" strokeWidth={1.7} />
                   </span>
                   <div>
-                    <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-400">
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
                       Step {i + 1}
                     </div>
                     <div className="text-[15px] font-semibold text-zinc-950">{s.title}</div>
@@ -360,6 +365,13 @@ export default function SolutionPageTemplate(p: SolutionPageProps) {
           </div>
         </div>
       </section>
+
+      {/* ============ After spotlight (optional) ============ */}
+      {p.afterSpotlight ? (
+        <section className="border-b border-zinc-100 bg-white">
+          <div className="mx-auto max-w-6xl px-6 py-14 md:py-16">{p.afterSpotlight}</div>
+        </section>
+      ) : null}
 
       {/* ============ CTA band ============ */}
       <section className="border-t border-zinc-100 bg-zinc-50/70">

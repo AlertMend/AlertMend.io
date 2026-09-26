@@ -9,8 +9,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Kubernetes, 135, Exploring, Place, Pod"
 
 # Kubernetes 1.35: Exploring In-Place Pod Resize And Its Impact On Resource Management
 
-*Generated on 2025-12-24 00:56:31*
-
 ---
 
 ## Revolutionizing Resource Management: Kubernetes 1.35 and In-Place Pod Resize

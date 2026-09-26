@@ -1,5 +1,5 @@
 ---
-title: "kubernetes resourcequota Guide"
+title: "Kubernetes ResourceQuota Guide"
 excerpt: "In the dynamic world of Kubernetes, managing resource allocation efficiently is crucial to maintaining a stable environment"
 date: "2026-01-10"
 category: "Kubernetes"

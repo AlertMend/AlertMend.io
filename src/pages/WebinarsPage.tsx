@@ -1,106 +1,71 @@
+import { Database, Activity, Stethoscope } from 'lucide-react'
 import SEO from '../components/SEO'
-import Breadcrumb from '../components/Breadcrumb'
-import { Video, Calendar, Users, ArrowRight } from 'lucide-react'
+import { PageHero, Section, CellGrid, CtaBand } from '../components/enterprise/PageKit'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
+import { calendlyUrl } from '../lib/calendly'
+
+// No public webinar calendar yet: offer live 1:1 walkthroughs instead of
+// dated events. Add real sessions here (with recording links) when they exist.
+const SESSIONS = [
+  {
+    icon: Database,
+    title: 'Data quality walkthrough',
+    body: 'A sample banking policy turned into live checks, with the failed job and the affected Power BI reports.',
+    slug: 'data-quality',
+  },
+  {
+    icon: Activity,
+    title: 'Infrastructure walkthrough',
+    body: 'From alert to evidence-backed root cause to a fix approved in Slack, on a live environment.',
+    slug: 'infrastructure',
+  },
+  {
+    icon: Stethoscope,
+    title: 'Free infrastructure health check',
+    body: 'A read-only scan of your cluster. You leave with a prioritised list of what is about to break.',
+    slug: 'health-check',
+  },
+]
 
 export default function WebinarsPage() {
-  // Generate unique meta description for webinars page
-  const baseDescription = "Join AlertMend AI webinars to learn from experts. Watch recorded sessions on AIOps, Kubernetes best practices, cost optimization, and infrastructure automation."
+  const baseDescription =
+    'Book a live 30-minute AlertMend walkthrough: data quality from your policy, infrastructure root cause and approved fixes, or a free infrastructure health check.'
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'webinars', 'webinars')
-  const webinars = [
-    {
-      title: 'Introduction to AIOps for Infrastructure',
-      date: 'April 15, 2024',
-      time: '2:00 PM SGT',
-      attendees: '500+',
-      status: 'Upcoming',
-    },
-    {
-      title: 'Kubernetes Best Practices with AlertMend',
-      date: 'March 28, 2024',
-      time: '3:00 PM SGT',
-      attendees: '1.2K',
-      status: 'Recorded',
-    },
-    {
-      title: 'Cost Optimization in Multi-Cloud Environments',
-      date: 'March 15, 2024',
-      time: '2:00 PM SGT',
-      attendees: '800+',
-      status: 'Recorded',
-    },
-  ]
 
   return (
-    <div className="min-h-screen bg-white">
+    <>
       <SEO
-        title="AlertMend AI Webinars: Learn from Experts"
+        title="Live Walkthroughs | AlertMend"
         description={uniqueDescription}
-        keywords="AlertMend webinars, AIOps webinars, Kubernetes webinars, infrastructure automation webinars, recorded webinars, live webinars"
+        keywords="AlertMend walkthrough, data quality demo, Kubernetes health check, infrastructure demo"
         canonical="/webinars"
-        breadcrumbData={{
-          items: [{ label: 'Webinars' }]
-        }}
+        breadcrumbData={{ items: [{ label: 'Live walkthroughs' }] }}
       />
-      <main className="pt-24">
-        <section className="py-20 md:py-32 container-padding hero-dark">
-          <div className="max-w-7xl mx-auto">
-            <div className="mb-8">
-              <Breadcrumb items={[{ label: 'Webinars' }]} />
-            </div>
-            <div className="text-center mb-20">
-              <div className="inline-block px-5 py-2 bg-gradient-to-r from-brand-50 to-brand-100 text-brand-700 rounded-full text-sm font-bold mb-6 shadow-lg">
-                Webinars
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6 leading-tight">
-                Upcoming & Recorded Webinars
-              </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
-                Join our live webinars or watch recorded sessions to learn from experts and peers.
-              </p>
-            </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {webinars.map((webinar, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-3xl p-8 border-2 border-gray-200 hover:border-brand-400 hover:shadow-2xl transition-all duration-300"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className={`px-3 py-1 rounded-lg text-xs font-bold ${
-                      webinar.status === 'Upcoming' 
-                        ? 'bg-brand-100 text-brand-700' 
-                        : 'bg-gray-100 text-gray-700'
-                    }`}>
-                      {webinar.status}
-                    </div>
-                    <div className="flex items-center gap-1 text-gray-500 text-sm">
-                      <Users className="h-4 w-4" />
-                      <span>{webinar.attendees}</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 mb-4">
-                    <Video className="h-6 w-6 text-brand-600" />
-                    <h3 className="text-xl font-black text-gray-900">{webinar.title}</h3>
-                  </div>
-                  <div className="flex items-center gap-2 text-gray-600 text-sm mb-6">
-                    <Calendar className="h-4 w-4" />
-                    <span>{webinar.date} at {webinar.time}</span>
-                  </div>
-                  <a
-                    href="#"
-                    className="text-brand-600 hover:text-brand-700 font-bold text-sm flex items-center gap-2"
-                  >
-                    {webinar.status === 'Upcoming' ? 'Register' : 'Watch Recording'}
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
+      <PageHero
+        eyebrow="Live sessions"
+        title="Live walkthroughs, on your schedule."
+        lede="Pick a session and a time that suits you. Each one is 30 minutes with the team that builds AlertMend."
+      />
+
+      <Section>
+        <CellGrid
+          items={SESSIONS.map((s) => ({
+            icon: s.icon,
+            title: s.title,
+            body: s.body,
+            tag: '30 min · live',
+            action: { label: 'Book a time', href: calendlyUrl(`walkthrough-${s.slug}`) },
+          }))}
+        />
+      </Section>
+
+      <CtaBand
+        title="Not sure which session fits?"
+        lede="Tell us what you are trying to solve and we will tailor the walkthrough."
+        primary={{ label: 'Book a demo', href: calendlyUrl('webinars-page') }}
+        secondary={{ label: 'Contact us', href: '/contact' }}
+      />
+    </>
   )
 }
-

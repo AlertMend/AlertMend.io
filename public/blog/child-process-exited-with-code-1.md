@@ -1,5 +1,5 @@
 ---
-title: "Child Process Exited With Code 1"
+title: "Child Process Exited with Code 1"
 excerpt: "In the realm of system monitoring and DevOps, encountering the error message \"child process exited with code 1\" can be a source of frustration and confusion"
 date: "2026-01-10"
 category: "Kubernetes"

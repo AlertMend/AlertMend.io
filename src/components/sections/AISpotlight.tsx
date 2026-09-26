@@ -2,8 +2,9 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../ui/Icon';
 import styles from './AISpotlight.module.css';
+import { calendlyUrl } from '../../lib/calendly';
 
-const CALENDLY_URL = 'https://calendly.com/hello-alertmend/30min';
+const CALENDLY_URL = calendlyUrl('home-ai-spotlight');
 
 /** Detects reduced-motion so we can suppress autoplay. */
 function prefersReducedMotion(): boolean {

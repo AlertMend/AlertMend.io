@@ -1,5 +1,5 @@
 ---
-title: "eks costs Guide Guide Complete Guide"
+title: "Amazon EKS Costs: A Practical Guide"
 excerpt: "Understanding how to manage costs effectively is crucial for businesses using Amazon Elastic Kubernetes Service (EKS)"
 date: "2026-01-10"
 category: "Kubernetes"

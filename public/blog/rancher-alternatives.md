@@ -1,5 +1,5 @@
 ---
-title: "rancher alternatives Guide Guide"
+title: "Rancher Alternatives Guide"
 excerpt: "In the ever-evolving realm of Kubernetes management, finding the right tool for managing multiple clusters effectively is crucial"
 date: "2026-01-10"
 category: "Kubernetes"

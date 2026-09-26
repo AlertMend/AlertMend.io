@@ -1,10 +1,11 @@
 ---
-title: "discord bot host free 24 7 Guide"
+title: "Discord Bot Host Free 24/7 Guide"
 excerpt: "discord bot host free 24 7  Unlocking Free 24/7 Discord Bot Hosting: A Comprehensive Guide Are you a Discord bot developer searching for a cost-effective..."
 date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, discord, host, free"
+noindex: true
 ---
 
 # discord bot host free 24 7

@@ -1,5 +1,5 @@
 ---
-title: "What To Monitor In Your It Infrastructure"
+title: "What to Monitor in your IT Infrastructure"
 excerpt: "Elevating System Monitoring with Alertmend.io: A Complete Guide In today's fast-paced tech landscape, understanding "co to monitor" is critical for..."
 date: "2026-01-10"
 category: "DevOps"

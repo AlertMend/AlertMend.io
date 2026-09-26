@@ -536,7 +536,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
           const solutionExamples: { [key: string]: { title: string; description: string; examples: any[] } } = {
             'auto-remediation': {
               title: 'Automatic Remediation in Action',
-              description: 'See how AlertMend AI automatically detects, analyzes, and fixes issues across different platforms in seconds',
+              description: 'See how AlertMend automatically detects, analyzes, and fixes issues across different platforms in seconds',
               examples: [
                 {
                   platform: 'Kubernetes',
@@ -584,7 +584,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
             },
             'kubernetes-management': {
               title: 'Kubernetes Management in Action',
-              description: 'See how AlertMend AI provides intelligent Kubernetes cluster management and troubleshooting',
+              description: 'See how AlertMend provides intelligent Kubernetes cluster management and troubleshooting',
               examples: [
                 {
                   platform: 'Kubernetes',
@@ -632,7 +632,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
             },
             'kubernetes-cost-optimization': {
               title: 'Cost Optimization in Action',
-              description: 'See how AlertMend AI automatically optimizes Kubernetes resources and reduces costs',
+              description: 'See how AlertMend automatically optimizes Kubernetes resources and reduces costs',
               examples: [
                 {
                   platform: 'Kubernetes',
@@ -680,7 +680,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
             },
             'on-call-management': {
               title: 'On-Call in Action',
-              description: 'See how AlertMend AI streamlines on-call operations and reduces response times',
+              description: 'See how AlertMend streamlines on-call operations and reduces response times',
               examples: [
                 {
                   platform: 'Alerting',
@@ -728,7 +728,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
             },
             'log-management': {
               title: 'Log Search in Action',
-              description: 'See how AlertMend AI turns hours of manual log hunting into seconds of full-text search across your clusters',
+              description: 'See how AlertMend turns hours of manual log hunting into seconds of full-text search across your clusters',
               examples: [
                 {
                   platform: 'Kubernetes',
@@ -779,7 +779,7 @@ export default function HowItWorks({ solutionId }: HowItWorksProps) {
           // Default examples (for default solution or when no solutionId)
           const defaultExamples = {
             title: 'Automatic Remediation in Action',
-            description: 'See how AlertMend AI automatically detects, analyzes, and fixes issues across different platforms in seconds',
+            description: 'See how AlertMend automatically detects, analyzes, and fixes issues across different platforms in seconds',
             examples: [
               {
                 platform: 'Kubernetes',

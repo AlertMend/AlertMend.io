@@ -9,7 +9,7 @@ export default function AlertMendVMActionsPage() {
   return (
     <LegacyDocShell title="VM predefined actions">
       <SEO
-        title="AlertMend AI: Automate VM Remediation Actions in 2025"
+        title="VM predefined actions | AlertMend Docs"
         description={uniqueDescription}
         keywords="AlertMend VM, VM actions, virtual machine remediation, VM automation, pre-defined actions"
         canonical="/documentation/alertmend-vm-actions"
@@ -107,7 +107,7 @@ export default function AlertMendVMActionsPage() {
               
               <h3 className="text-xl font-bold text-brand-900 mt-6 mb-3">Method 1: Automatic Remediation</h3>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
-                <li>Create a remediation workflow in AlertMend AI</li>
+                <li>Create a remediation workflow in AlertMend</li>
                 <li>Define trigger conditions (e.g., CPU &gt; 90% for 5 minutes)</li>
                 <li>Select the appropriate pre-defined action</li>
                 <li>Configure action parameters (e.g., CPU increase amount)</li>

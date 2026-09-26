@@ -1,5 +1,5 @@
 ---
-title: "big data on kubernetes pdf Guide"
+title: "Big Data on Kubernetes PDF Guide"
 excerpt: "big data on kubernetes pdf Exploring Big Data on Kubernetes: A Comprehensive Guide In today's rapidly evolving digital landscape, the integration of big..."
 date: "2026-01-10"
 category: "Kubernetes"

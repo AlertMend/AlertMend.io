@@ -1,5 +1,5 @@
 ---
-title: "Implementing Local Dns On Omada Networks"
+title: "Implementing Local DNS on Omada Networks"
 excerpt: "In the realm of modern networking, **implementing local DNS on Omada networks using CoreDNS plugins** has emerged as a pivotal solution."
 date: "2026-01-10"
 category: "Kubernetes"
@@ -8,8 +8,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Implementing, Local, Dns, Omada, Network
 ---
 
 # Implementing Local Dns On Omada Networks Using Coredns Plugins
-
-*Generated on 2025-12-27 23:07:38*
 
 ---
 

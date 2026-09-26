@@ -1,5 +1,5 @@
 ---
-title: "machine uptime monitoring Guide"
+title: "Machine Uptime Monitoring Guide"
 excerpt: "A comprehensive guide on Machine Uptime Monitoring..."
 date: "2026-01-10"
 category: "DevOps"

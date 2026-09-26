@@ -16,7 +16,7 @@
     "build:logo-assets": "node scripts/build-logo-assets.mjs",
     "validate:blogs": "node scripts/validate-blogs.js",
     "prerender": "tsx --tsconfig tsconfig.prerender.json --import ./scripts/css-loader-register.mjs scripts/prerender-routes.tsx",
-    "build": "npm run generate:blog-list && npm run sync:vercel-redirects && npm run build:sitemap && npm run build:blog && npm run validate:blogs && tsc && vite build && npm run prerender",
+    "build": "npm run generate:blog-list && npm run sync:vercel-redirects && npm run build:sitemap && npm run build:blog && npm run validate:blogs && tsc && vite build && npm run prerender && node scripts/apply-site-chrome.mjs",
     "capture:aispotlight": "node scripts/capture-aispotlight.mjs",
     "verify:aispotlight": "node scripts/verify-aispotlight-video.mjs",
     "capture:hero": "node scripts/capture-hero.mjs",

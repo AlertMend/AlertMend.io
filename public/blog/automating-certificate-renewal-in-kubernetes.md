@@ -1,5 +1,5 @@
 ---
-title: "Automating Certificate Renewal In"
+title: "Automating Certificate Renewal in Kubernetes"
 excerpt: "Automating Certificate Renewal In Kubernetes Automating Certificate Renewal in Kubernetes: A Critical Component of Modern..."
 date: "2025-12-22"
 category: "Kubernetes"

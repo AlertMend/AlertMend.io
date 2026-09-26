@@ -42,7 +42,7 @@ export default function CaseStudies() {
             Real Results. Real Customers.
           </h2>
           <p className="text-lg md:text-xl text-brand-700 max-w-2xl mx-auto leading-relaxed">
-            See how teams transformed their infrastructure operations with AlertMend AI
+            See how teams transformed their infrastructure operations with AlertMend
           </p>
         </div>
 

@@ -1,5 +1,5 @@
 ---
-title: "Pagerduty Vs Rootly Alertmend Guide"
+title: "PagerDuty vs Rootly with AlertMend"
 excerpt: "In 2026, effective incident management is paramount to maintaining seamless IT operations and ensuring business continuity. With the increasing complexity of..."
 date: "2026-01-10"
 category: "AIOps"

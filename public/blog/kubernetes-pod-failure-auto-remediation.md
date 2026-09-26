@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes Pod Failure Auto Remediation"
+title: "Kubernetes Pod Failure Auto-Remediation"
 excerpt: "Kubernetes Pod Failure Auto Remediation Mastering Kubernetes Pod Failure Auto Remediation for Enhanced DevOps Efficiency In today's fast-paced..."
 date: "2026-01-10"
 category: "Kubernetes"

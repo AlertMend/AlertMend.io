@@ -1,5 +1,5 @@
 ---
-title: "Slack Incident Escalation Alertmend"
+title: "Slack Incident Escalation with AlertMend"
 excerpt: "In today's fast-paced digital landscape, organizations are constantly striving to maintain uninterrupted service delivery. **Slack incident escalation** play..."
 date: "2026-01-10"
 category: "AIOps"

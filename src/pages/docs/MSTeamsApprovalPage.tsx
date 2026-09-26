@@ -3,13 +3,13 @@ import LegacyDocShell from './LegacyDocShell'
 import { ensureUniqueMetaDescription } from '../../utils/descriptionUtils'
 
 export default function MSTeamsApprovalPage() {
-  const baseDescription = "Learn how to configure Microsoft Teams for approval workflows in AlertMend AI. Step-by-step guide for MS Teams integration."
+  const baseDescription = "Learn how to configure Microsoft Teams for approval workflows in AlertMend. Step-by-step guide for MS Teams integration."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'documentation', 'ms-teams-approval')
 
   return (
     <LegacyDocShell title="MS Teams approval">
       <SEO
-        title="AlertMend AI: Configure MS Teams Approvals Easily"
+        title="Microsoft Teams approvals | AlertMend Docs"
         description={uniqueDescription}
         keywords="Microsoft Teams integration, MS Teams approval, AlertMend Teams setup, Teams notification"
         canonical="/documentation/ms-teams-approval"
@@ -21,7 +21,7 @@ export default function MSTeamsApprovalPage() {
                 How to Configure MS Teams for Approval
               </h1>
               <p className="text-xl text-gray-600">
-                Step-by-step guide to set up Microsoft Teams for approval workflows in AlertMend AI
+                Step-by-step guide to set up Microsoft Teams for approval workflows in AlertMend
               </p>
             </div>
 
@@ -30,7 +30,7 @@ export default function MSTeamsApprovalPage() {
                 <h3 className="text-brand-900 font-bold mb-2">Prerequisites</h3>
                 <ul className="text-gray-700 space-y-1">
                   <li>Microsoft Teams admin access or appropriate permissions</li>
-                  <li>AlertMend AI account with integration permissions</li>
+                  <li>AlertMend account with integration permissions</li>
                   <li>Access to Microsoft Azure AD (for app registration)</li>
                 </ul>
               </div>
@@ -40,7 +40,7 @@ export default function MSTeamsApprovalPage() {
                 <li>Go to <a href="https://portal.azure.com" target="_blank" rel="noopener noreferrer" className="text-brand-600 hover:underline">Azure Portal</a></li>
                 <li>Navigate to "Azure Active Directory" → "App registrations"</li>
                 <li>Click "New registration"</li>
-                <li>Enter app name: "AlertMend AI"</li>
+                <li>Enter app name: "AlertMend"</li>
                 <li>Select supported account types (usually "Accounts in this organizational directory only")</li>
                 <li>Set redirect URI: <code className="bg-gray-100 px-2 py-1 rounded">https://alertmend.ai/auth/teams/callback</code></li>
                 <li>Click "Register"</li>
@@ -66,7 +66,7 @@ export default function MSTeamsApprovalPage() {
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
                 <li>Go to "Certificates & secrets" in your app registration</li>
                 <li>Click "New client secret"</li>
-                <li>Add description: "AlertMend AI Integration"</li>
+                <li>Add description: "AlertMend Integration"</li>
                 <li>Set expiration (recommended: 24 months)</li>
                 <li>Click "Add"</li>
                 <li><strong>Important:</strong> Copy the secret value immediately (you won't be able to see it again)</li>
@@ -79,9 +79,9 @@ export default function MSTeamsApprovalPage() {
                 <li>Save these values along with your client secret</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 5: Configure in AlertMend AI</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 5: Configure in AlertMend</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
-                <li>Log in to AlertMend AI dashboard</li>
+                <li>Log in to AlertMend dashboard</li>
                 <li>Navigate to Settings → Integrations → Microsoft Teams</li>
                 <li>Enter the following information:
                   <ul className="list-disc list-inside ml-6 mt-2 space-y-1">
@@ -97,11 +97,11 @@ export default function MSTeamsApprovalPage() {
 
               <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 6: Test Approval Workflow</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
-                <li>Create a test approval workflow in AlertMend AI</li>
+                <li>Create a test approval workflow in AlertMend</li>
                 <li>Trigger the workflow</li>
                 <li>Verify that approval requests appear in your Teams channel</li>
                 <li>Test approving and rejecting requests from Teams</li>
-                <li>Confirm that actions are reflected in AlertMend AI</li>
+                <li>Confirm that actions are reflected in AlertMend</li>
               </ol>
 
               <div className="bg-yellow-50 border-l-4 border-yellow-600 p-6 mt-8 rounded-r-lg">

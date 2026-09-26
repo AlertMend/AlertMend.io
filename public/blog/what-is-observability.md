@@ -1,5 +1,5 @@
 ---
-title: "What Is Observability? A Complete Guide"
+title: "What is Observability? a Complete Guide"
 excerpt: "Observability means understanding a system from its telemetry. Learn the three pillars, logs, metrics, and traces, and how it differs from monitoring."
 date: "2026-08-14"
 dateModified: "2026-08-14"

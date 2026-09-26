@@ -1,5 +1,5 @@
 ---
-title: "Devops With Kubernetes V1.35.0"
+title: "DevOps with Kubernetes V1.35.0"
 excerpt: "Devops With Kubernetes V1.35.0 Navigating DevOps with Kubernetes v1.35."
 date: "2025-12-22"
 category: "Kubernetes"

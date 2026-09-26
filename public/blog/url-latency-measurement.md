@@ -1,6 +1,6 @@
 ---
-title: "Url Latency Measurement Guide Guide"
-excerpt: "A comprehensive guide covering essential topics, best practices, and practical solutions for system management and DevOps operations."
+title: "URL Latency Measurement Guide"
+excerpt: "In the dynamic landscape of system monitoring and DevOps, url latency measurement plays a crucial role in evaluating website performance."
 date: "2026-01-10"
 category: "URL Monitoring"
 author: "AlertMend Team"

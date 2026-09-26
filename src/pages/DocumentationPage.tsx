@@ -23,7 +23,7 @@ import styles from './DocumentationPage.module.css'
 const POPULAR: { label: string; href: string }[] = [
   { label: 'Connect a cluster', href: '/documentation/install-cluster-agent' },
   { label: 'AI RCA', href: '/documentation/ai-rca' },
-  { label: 'RF · Remediation', href: '/documentation/remediation-flows' },
+  { label: 'Remediation flows', href: '/documentation/remediation-flows' },
   { label: 'AT-QL queries', href: '/documentation/atql' },
   { label: 'Slack approvals', href: '/documentation/slack-app-approval' },
   { label: 'UI map', href: '/documentation/platform-overview' },
@@ -204,7 +204,7 @@ export default function DocumentationPage() {
             <div>
               <p className={styles.appCtaTitle}>Already installed?</p>
               <p className={styles.appCtaBody}>
-                Open the UI for service map, RCA, and RF · Remediation.
+                Open the UI for service map, RCA, and remediation flows.
               </p>
             </div>
             <div className={styles.appCtaActions}>

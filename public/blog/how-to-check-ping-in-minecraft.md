@@ -1,10 +1,11 @@
 ---
-title: "How To Check Ping In Minecraft"
+title: "How to Check Ping in Minecraft"
 excerpt: "how to check ping in minecraft  Discovering Server Responsiveness in Minecraft Ever found yourself wondering how to check ping in Minecraft to optimize your..."
 date: "2026-01-10"
 category: "Blog"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, check, ping, minecraft"
+noindex: true
 ---
 
 # how to check ping in minecraft

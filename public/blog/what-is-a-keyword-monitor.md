@@ -1,5 +1,5 @@
 ---
-title: "what is a keyword monitor Guide"
+title: "What is a Keyword Monitor Guide"
 excerpt: "what is a keyword monitor  Navigating the World of Keyword Monitoring for Enhanced System Management Imagine launching an online campaign featuring an exciting."
 date: "2026-01-10"
 category: "DevOps"

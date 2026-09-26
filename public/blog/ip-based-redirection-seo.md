@@ -1,10 +1,11 @@
 ---
-title: "ip based redirection seo Guide"
+title: "IP Based Redirection SEO Guide"
 excerpt: "ip based redirection seo  Navigating IP-Based Redirection for SEO Success As businesses strive to enhance user experience and optimize search engine..."
 date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, based, redirection"
+noindex: true
 ---
 
 # ip based redirection seo

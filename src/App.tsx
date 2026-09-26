@@ -1,7 +1,6 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Routes, Route, useLocation, Navigate, useParams } from 'react-router-dom'
 import { Analytics } from '@vercel/analytics/react'
-import AmbientBackground from './components/layout/AmbientBackground'
 import Nav from './components/layout/Nav'
 import Footer from './components/layout/Footer'
 import { useScrollReveal } from './hooks/useScrollReveal'
@@ -31,7 +30,10 @@ import DatadogWebhookPage from './pages/docs/DatadogWebhookPage'
 import AlertMendVMActionsPage from './pages/docs/AlertMendVMActionsPage'
 import AboutPage from './pages/AboutPage'
 import BlogPage from './pages/BlogPage'
-import BlogPostDetailPage from './pages/BlogPostDetailPage'
+// Blog posts are served as static HTML (scripts/build-blog-html.js); this
+// React route only runs on in-app navigation. Lazy-load it so react-markdown
+// and friends stay out of the bundle every other page downloads.
+const BlogPostDetailPage = lazy(() => import('./pages/BlogPostDetailPage'))
 import CareersPage from './pages/CareersPage'
 import ContactPage from './pages/ContactPage'
 import PartnersPage from './pages/PartnersPage'
@@ -44,6 +46,8 @@ import CommunityPage from './pages/CommunityPage'
 import TutorialsPage from './pages/TutorialsPage'
 import WebinarsPage from './pages/WebinarsPage'
 import NotFoundPage from './pages/NotFoundPage'
+import TrustPage from './pages/TrustPage'
+import IndustriesPage from './pages/IndustriesPage'
 import LEGACY_SOLUTION_REDIRECTS from './data/legacySolutionRedirects.json'
 
 function ScrollToTop() {
@@ -116,7 +120,6 @@ function App() {
 
   return (
     <>
-      {!isDocs && <AmbientBackground />}
       {!isDocs && <Nav />}
       <ScrollToTop />
       <main className={isDocs ? 'docs-main' : undefined}>
@@ -157,13 +160,22 @@ function App() {
           <Route path="/documentation/alertmend-vm-actions" element={<AlertMendVMActionsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/blog" element={<BlogPage />} />
-          <Route path="/blog/:slug" element={<BlogPostDetailPage />} />
+          <Route
+            path="/blog/:slug"
+            element={
+              <Suspense fallback={<div style={{ minHeight: '60vh' }} />}>
+                <BlogPostDetailPage />
+              </Suspense>
+            }
+          />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/partners" element={<PartnersPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/security" element={<SecurityPage />} />
+          <Route path="/trust" element={<TrustPage />} />
+          <Route path="/industries" element={<IndustriesPage />} />
           <Route path="/compliance" element={<CompliancePage />} />
           <Route path="/help" element={<HelpCenterPage />} />
           <Route path="/community" element={<CommunityPage />} />

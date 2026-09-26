@@ -1,6 +1,6 @@
 ---
 title: "API Response Time Monitoring Techniques"
-excerpt: "A comprehensive guide covering essential topics, best practices, and practical solutions for system management and DevOps operations."
+excerpt: "In the world of modern DevOps, ensuring that APIs respond swiftly is pivotal for maintaining seamless user experiences."
 date: "2026-01-10"
 category: "API Monitoring"
 author: "AlertMend Team"

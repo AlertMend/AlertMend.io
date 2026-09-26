@@ -1,6 +1,6 @@
 ---
 title: "Troubleshooting Elasticsearch Cluster"
-excerpt: "Explore the latest AI tools and applications that are revolutionizing various industries. From image generation to natural language processing, AI is..."
+excerpt: "Frequent cluster failures or instability in Elasticsearch can severely impact system performance, leading to downtime, reduced search efficiency, and even."
 date: "2025-03-9"
 category: "Elasticsearch"
 author: "Himanshu Bansal"

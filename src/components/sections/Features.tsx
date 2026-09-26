@@ -41,7 +41,7 @@ const cards: Card[] = [
   {
     to: '/ai-rca',
     ico: <Icon name="message" size={16} strokeWidth={1.6} />,
-    title: 'AlertMend AI chat',
+    title: 'AI chat',
     body: 'Ask cluster questions in plain language. Grounded in your real inventory, events, logs and metrics. Not generic suggestions.',
     tags: ['natural-language', 'grounded'],
   },

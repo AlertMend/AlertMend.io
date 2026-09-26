@@ -1,6 +1,6 @@
 ---
 title: "Resolving Network Connectivity and Latency"
-excerpt: "Explore the latest AI tools and applications that are revolutionizing various industries. From image generation to natural language processing, AI is..."
+excerpt: "Network connectivity or latency problems in Elasticsearch can lead to significant performance degradation, timeouts, and even cluster unavailability."
 date: "2025-03-9"
 category: "Elasticsearch"
 author: "Himanshu Bansal"

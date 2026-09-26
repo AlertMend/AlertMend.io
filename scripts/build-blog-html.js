@@ -7,34 +7,19 @@ import { STATIC_BLOG_SLUGS as STATIC_BLOG_SLUG_LIST } from './static-blog-slugs.
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-// Blog posts data (matching src/utils/blogUtils.ts)
-const blogPosts = [
-  { slug: 'oomkilled-in-kubernetes', title: 'How to Fix OOMKilled Errors in Kubernetes', category: 'Kubernetes' },
-  { slug: 'graceful-shutdown-kubernetes', title: 'Graceful Shutdown in Kubernetes: Ensuring Safe Pod Termination', category: 'Kubernetes' },
-  { slug: 'load-balancing-long-lived-connections-kubernetes', title: 'Load Balancing and Scaling Long-Lived Connections in Kubernetes', category: 'Kubernetes' },
-  { slug: 'rollback-deployments-kubernetes', title: 'How to Roll Back Deployments in Kubernetes', category: 'Kubernetes' },
-  { slug: '5-common-kubernetes-challenges', title: '5 Common Kubernetes Challenges: Scaling, Networking, GitOps & More', category: 'Kubernetes' },
-  { slug: 'troubleshooting-networking-errors-kubernetes', title: 'Troubleshooting Networking Errors in Kubernetes', category: 'Kubernetes' },
-  { slug: 'debugging-kubernetes-admission-webhooks', title: 'Debugging Kubernetes Admission Webhooks: A Complete Guide', category: 'Kubernetes' },
-  { slug: 'kubernetes-dns-guide', title: 'Mastering Kubernetes DNS: A Guide to Seamless Communication in Your Cluster', category: 'Kubernetes' },
-  { slug: 'kubernetes-node-not-ready-error', title: 'How to Troubleshoot and Fix Kubernetes Node Not Ready Error', category: 'Kubernetes' },
-  { slug: 'mastering-kubernetes-statefulsets', title: 'Mastering Kubernetes StatefulSets: Basics, Use Cases, and Debugging Tips', category: 'Kubernetes' },
-  { slug: 'imagepullbackoff-errimagepull-kubernetes', title: 'How to Troubleshoot and Fix ImagePullBackOff and ErrImagePull in Kubernetes', category: 'Kubernetes' },
-  { slug: 'mastering-kubernetes-resource-quotas-requests-limits', title: 'Mastering Kubernetes Resource Quotas, Requests, and Limits for Optimized Cluster Performance', category: 'Kubernetes' },
-  { slug: 'kubernetes-crashloopbackoff', title: 'Understanding and Troubleshooting Kubernetes CrashLoopBackOff', category: 'Kubernetes' },
-  { slug: 'kubernetes-evicted-pods', title: 'Kubernetes Evicted Pods: Causes, Troubleshooting, and Best Practices', category: 'Kubernetes' },
-  { slug: 'kubernetes-502-bad-gateway', title: 'How to Troubleshoot and Fix Kubernetes 502 Bad Gateway Error', category: 'Kubernetes' },
-  { slug: '5-ways-aiops-transforming-infrastructure', title: '5 Ways AIOps is Transforming Infrastructure Management', category: 'AIOps' },
-  { slug: 'kubernetes-auto-remediation-best-practices', title: 'Kubernetes Auto-Remediation: Best Practices', category: 'Kubernetes' },
-  { slug: 'cost-optimization-multi-cloud', title: 'Cost Optimization Strategies for Multi-Cloud Infrastructure', category: 'Cost Optimization' },
-  { slug: 'kubernetes-statefulset-volume-recovery-issues', title: 'Kubernetes StatefulSet Volume Recovery Issues: Troubleshooting and Best Practices', category: 'Kubernetes' },
-  { slug: 'mastering-load-balancing-persistent-connections-kubernetes', title: 'Mastering Load Balancing for Persistent Connections in Kubernetes', category: 'Kubernetes' },
-  { slug: 'troubleshooting-unhealthy-elasticsearch-nodes-kubernetes', title: 'Troubleshooting Unhealthy Elasticsearch Nodes on Kubernetes: Causes and Solutions', category: 'Elasticsearch' },
-  { slug: 'understanding-privileged-containers-kubernetes', title: 'Understanding Privileged Containers in Kubernetes: Best Practices and Security Risks', category: 'Kubernetes' },
-  { slug: 'troubleshooting-elasticsearch-unassigned-shards-kubernetes', title: 'Troubleshooting Elasticsearch Unassigned Shards Incident on Kubernetes: Causes and Solutions', category: 'Elasticsearch' },
-  { slug: 'troubleshooting-kubeapidown', title: 'Troubleshooting KubeAPI Down: Causes and Recovery Steps', category: 'Kubernetes' },
-  { slug: 'elasticsearch-cluster-yellow-incident-kubernetes', title: 'Elasticsearch Cluster Yellow Incident on Kubernetes', category: 'Elasticsearch' },
-]
+// Related-post candidates: the generated, indexable list (hidden and noindex
+// posts are already excluded by generate-blog-list.js, which runs first).
+const blogPosts = (() => {
+  try {
+    const list = JSON.parse(fs.readFileSync(path.join(__dirname, '../src/utils/blogList.json'), 'utf8'))
+    return list
+      .filter((p) => p && p.slug && p.title)
+      .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')))
+      .map((p) => ({ slug: p.slug, title: p.title, category: p.category || 'Blog', date: p.date || '' }))
+  } catch {
+    return []
+  }
+})()
 
 // Configure marked options
 marked.setOptions({
@@ -244,7 +229,11 @@ markdownFiles.forEach(file => {
     })
     
     // Helper function to truncate H2 headings to 50-70 characters for SEO
-    const truncateH2Heading = (heading, minLength = 50, maxLength = 70) => {
+    // Headings are for readers: keep them whole (was cutting to 70 chars + "...").
+    // eslint-disable-next-line no-unused-vars
+    const truncateH2Heading = (heading, minLength = 50, maxLength = 70) => heading
+    // eslint-disable-next-line no-unused-vars
+    const truncateH2HeadingLegacy = (heading, minLength = 50, maxLength = 70) => {
       if (heading.length >= minLength && heading.length <= maxLength) {
         return heading
       }
@@ -286,20 +275,23 @@ markdownFiles.forEach(file => {
       return `<h2${attributes}>${truncated}</h2>`
     })
     
-    // Get related posts (prioritize same category, then other posts, excluding current post)
+    // Data posts get data-team calls to action and data-first related links.
+    const DATA_RX = /data quality|data observability|data governance|data lineage|data freshness|data contract|data pipeline|bcbs|solvency|snowflake|power bi|dbt|monte carlo|warehouse|great expectations/i
+    const isDataText = (t) => DATA_RX.test(t || '')
+    const isDataPost = isDataText(`${metadata.title || ''} ${metadata.category || ''} ${metadata.tags || ''} ${slug}`)
+    const sameAudience = (p) => isDataText(`${p.title} ${p.category} ${p.slug}`) === isDataPost
+
+    // Related posts: same category first, then the same audience, excluding this post.
     const sameCategoryPosts = blogPosts
-      .filter(p => p.category === metadata.category && p.slug !== slug)
-      .slice(0, 3)
-    
+      .filter(p => p.category === metadata.category && p.slug !== slug && sameAudience(p))
+      .slice(0, 4)
     const otherPosts = blogPosts
-      .filter(p => p.category !== metadata.category && p.slug !== slug)
-      .slice(0, 7)
-    
-    // Combine: 3 from same category + 7 from other categories = 10 total
-    const relatedPosts = [...sameCategoryPosts, ...otherPosts].slice(0, 10)
+      .filter(p => p.slug !== slug && sameAudience(p) && !sameCategoryPosts.includes(p))
+      .slice(0, 6)
+    const relatedPosts = [...sameCategoryPosts, ...otherPosts].slice(0, 8)
     
     // Helper function to truncate blog title to 30-60 characters for SEO
-    const truncateBlogTitle = (title, suffix = ' | AlertMend AI', minLength = 30, maxLength = 60) => {
+    const truncateBlogTitle = (title, suffix = ' | AlertMend', minLength = 30, maxLength = 60) => {
       // If title with suffix fits within max length, return as is
       if (title.length + suffix.length <= maxLength) {
         if (title.length + suffix.length >= minLength) {
@@ -325,7 +317,10 @@ markdownFiles.forEach(file => {
       // Remove trailing punctuation and whitespace
       truncatedTitle = truncatedTitle.replace(/[.,;:!?\-—–\s]+$/, '').trim()
       
-      return truncatedTitle + '...' + suffix
+      // Don't publish cut-off titles: Google shortens long titles itself.
+      // Keep the full title and drop the brand suffix when it doesn't fit.
+      void truncatedTitle
+      return title
     }
     
     const shortenedTitle = truncateBlogTitle(metadata.title || slug)
@@ -443,7 +438,7 @@ markdownFiles.forEach(file => {
       
       // If still no description, create one from title and category
       if (!description || description.length < minLength) {
-        const cleanTitle = title.replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+        const cleanTitle = title.replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '').trim()
         const categoryText = category ? ` on ${category}` : ''
         description = `Learn how to ${cleanTitle.toLowerCase()}${categoryText}. Expert tips and best practices.`
         // Ensure it fits
@@ -453,18 +448,15 @@ markdownFiles.forEach(file => {
       }
       
       // Ensure uniqueness by including key terms from title (but only if there's room)
-      const cleanTitle = title.replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+      const cleanTitle = title.replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '').trim()
       const titleWords = cleanTitle.toLowerCase().split(/\s+/).filter(word => word.length > 4)
       const descriptionLower = description.toLowerCase()
       const missingKeywords = titleWords.filter(word => !descriptionLower.includes(word))
       
       if (missingKeywords.length > 0 && description.length < maxLength - 40) {
         const keywordsToAdd = missingKeywords.slice(0, 2).join(', ')
-        const newDescription = `${description} Discover solutions for ${keywordsToAdd}.`
-        // Only add if it fits
-        if (newDescription.length <= maxLength) {
-          description = newDescription
-        }
+        // (Disabled: "Discover solutions for <keywords>." read as keyword stuffing.)
+        void keywordsToAdd
       }
       
       // STRICT truncation to max length (safeMaxLength already defined above)
@@ -528,7 +520,7 @@ markdownFiles.forEach(file => {
       
       // Final check: ensure minimum length - this is CRITICAL and must always pass
       if (description.length < minLength) {
-        const cleanTitle = title.replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+        const cleanTitle = title.replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '').trim()
         const categoryText = category || 'Kubernetes'
         
         // If description is way too short, generate a proper one
@@ -547,7 +539,7 @@ markdownFiles.forEach(file => {
         
         // Absolute guarantee: if still too short, use a fallback
         if (description.length < minLength) {
-          const cleanTitle = title.replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+          const cleanTitle = title.replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '').trim()
           const categoryText = category || 'Kubernetes'
           description = `Expert guide on ${cleanTitle.toLowerCase()} for ${categoryText}. Learn best practices, troubleshooting tips, and solutions.`
         }
@@ -567,7 +559,7 @@ markdownFiles.forEach(file => {
         
         // Final safety: if still too long, at least ensure it's not below minLength
         if (description.length < minLength) {
-          const cleanTitle = title.replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+          const cleanTitle = title.replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '').trim()
           const categoryText = category || 'Kubernetes'
           description = `Expert guide on ${cleanTitle.toLowerCase()} for ${categoryText}. Learn best practices and solutions.`
         }
@@ -586,7 +578,7 @@ markdownFiles.forEach(file => {
       // This is a hard requirement that cannot be violated
       // If description is too short (like "In today" at 8 chars), generate a proper one
       if (!description || description.length < minLength) {
-        const cleanTitle = title.replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+        const cleanTitle = title.replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '').trim()
         const categoryText = category || 'Kubernetes'
         
         // Generate a guaranteed-valid description
@@ -606,7 +598,7 @@ markdownFiles.forEach(file => {
       
       // One more check - if still below minLength (shouldn't happen, but be absolutely safe)
       if (description.length < minLength) {
-        const cleanTitle = title.replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+        const cleanTitle = title.replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '').trim()
         description = `Expert guide on ${cleanTitle.toLowerCase()} for ${category || 'Kubernetes'}. Learn best practices and solutions.`
         if (description.length > safeMaxLength) {
           description = description.substring(0, safeMaxLength - 3).trim() + '...'
@@ -618,7 +610,7 @@ markdownFiles.forEach(file => {
       
       // If description is missing or too short, generate a guaranteed-valid one
       if (!finalDesc || finalDesc.length < minLength) {
-        const cleanTitle = title.replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+        const cleanTitle = title.replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '').trim()
         const categoryText = category || 'Kubernetes'
         // Generate a guaranteed-valid description (always >= 50 chars)
         finalDesc = `Expert guide on ${cleanTitle.toLowerCase()} for ${categoryText}. Learn best practices, troubleshooting tips, and solutions.`
@@ -641,7 +633,7 @@ markdownFiles.forEach(file => {
       // ABSOLUTE FINAL CHECK: must be valid (this should never fail, but be safe)
       // This MUST catch any description that's too short
       if (!finalDesc || finalDesc.length < minLength) {
-        const cleanTitle = title.replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+        const cleanTitle = title.replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '').trim()
         finalDesc = `Expert guide on ${cleanTitle.toLowerCase()} for ${category || 'Kubernetes'}. Learn best practices and solutions.`
         // Ensure it fits
         if (finalDesc.length > safeMaxLength) {
@@ -653,7 +645,7 @@ markdownFiles.forEach(file => {
       const verifiedDesc = (finalDesc || '').trim()
       if (verifiedDesc.length < minLength) {
         // Emergency fallback - this should never happen
-        const cleanTitle = title.replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+        const cleanTitle = title.replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '').trim()
         return `Expert guide on ${cleanTitle.toLowerCase()} for ${category || 'Kubernetes'}. Learn best practices.`
       }
       
@@ -671,7 +663,7 @@ markdownFiles.forEach(file => {
     // This is a final safeguard in case the function somehow returns an invalid description
     const currentDescLength = metaDescription ? metaDescription.trim().length : 0
     if (!metaDescription || currentDescLength < 50) {
-      const cleanTitle = (metadata.title || slug).replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+      const cleanTitle = (metadata.title || slug).replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '').trim()
       const categoryText = metadata.category || 'Kubernetes'
       // Generate a guaranteed-valid description (always >= 50 chars)
       metaDescription = `Expert guide on ${cleanTitle.toLowerCase()} for ${categoryText}. Learn best practices, troubleshooting tips, and solutions.`
@@ -686,7 +678,7 @@ markdownFiles.forEach(file => {
     }
     // Verify final length one more time
     if (metaDescription.trim().length < 50) {
-      const cleanTitle = (metadata.title || slug).replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+      const cleanTitle = (metadata.title || slug).replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '').trim()
       metaDescription = `Expert guide on ${cleanTitle.toLowerCase()} for ${metadata.category || 'Kubernetes'}. Learn best practices.`
     }
     
@@ -710,7 +702,7 @@ markdownFiles.forEach(file => {
     // Check the actual length, not just truthiness
     const descLen = metaDescription ? metaDescription.trim().length : 0
     if (!metaDescription || descLen < 50) {
-      const cleanTitle = (metadata.title || slug).replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+      const cleanTitle = (metadata.title || slug).replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '').trim()
       const categoryText = metadata.category || 'Kubernetes'
       // Generate a guaranteed-valid description (always >= 50 chars)
       metaDescription = `Expert guide on ${cleanTitle.toLowerCase()} for ${categoryText}. Learn best practices, troubleshooting tips, and solutions.`
@@ -722,7 +714,7 @@ markdownFiles.forEach(file => {
     // One more verification right before use
     const finalDescLen = metaDescription ? metaDescription.trim().length : 0
     if (finalDescLen < 50) {
-      const cleanTitle = (metadata.title || slug).replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+      const cleanTitle = (metadata.title || slug).replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '').trim()
       metaDescription = `Expert guide on ${cleanTitle.toLowerCase()} for ${metadata.category || 'Kubernetes'}. Learn best practices and solutions.`
     }
     
@@ -732,7 +724,7 @@ markdownFiles.forEach(file => {
     {
       const currentLen = (metaDescription || '').trim().length
       if (currentLen < 50) {
-        const cleanTitle = (metadata.title || slug).replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+        const cleanTitle = (metadata.title || slug).replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '').trim()
         metaDescription = `Expert guide on ${cleanTitle.toLowerCase()} for ${metadata.category || 'Kubernetes'}. Learn best practices and solutions.`
       }
       // One final trim
@@ -744,13 +736,13 @@ markdownFiles.forEach(file => {
       let cleanDesc = (desc || '').trim()
       // If description is too short, replace it completely
       if (cleanDesc.length < 50) {
-        const cleanTitle = (title || slug).replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+        const cleanTitle = (title || slug).replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '').trim()
         const categoryText = category || 'Kubernetes'
         cleanDesc = `Expert guide on ${cleanTitle.toLowerCase()} for ${categoryText}. Learn best practices and solutions.`
       }
       // If still too short (shouldn't happen), use minimal fallback
       if (cleanDesc.length < 50) {
-        const cleanTitle = (title || slug).replace(/\s*\|\s*AlertMend AI\s*$/i, '').trim()
+        const cleanTitle = (title || slug).replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '').trim()
         cleanDesc = `Expert guide on ${cleanTitle.toLowerCase()} for ${category || 'Kubernetes'}. Learn best practices.`
       }
       // Truncate if too long
@@ -767,15 +759,44 @@ markdownFiles.forEach(file => {
     // This MUST ensure the description is always >= 50 chars
     let tempDesc = (metaDescription || '').trim()
     if (!tempDesc || tempDesc.length < 50) {
-      const cleanTitle = ((metadata.title || slug).replace(/\s*\|\s*AlertMend AI\s*$/i, '')).trim()
+      const cleanTitle = ((metadata.title || slug).replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '')).trim()
       tempDesc = `Expert guide on ${cleanTitle.toLowerCase()} for ${metadata.category || 'Kubernetes'}. Learn best practices and solutions.`
     }
     // Absolute guarantee - if still too short, use minimal fallback
     if (tempDesc.length < 50) {
-      const cleanTitle = ((metadata.title || slug).replace(/\s*\|\s*AlertMend AI\s*$/i, '')).trim()
+      const cleanTitle = ((metadata.title || slug).replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '')).trim()
       tempDesc = `Expert guide on ${cleanTitle.toLowerCase()} for ${metadata.category || 'Kubernetes'}. Learn best practices.`
     }
+    // Never publish a description ending in "..." / "....": end on a full
+    // sentence when one fits, otherwise on a word with a period.
+    const stripEllipsis = (d) => {
+      let out = d.replace(/\s*(\.{2,}|…)\s*$/, '').trim()
+      if (/[.!?]$/.test(out)) return out
+      const lastEnd = Math.max(out.lastIndexOf('. '), out.lastIndexOf('! '), out.lastIndexOf('? '))
+      if (lastEnd >= 50) return out.substring(0, lastEnd + 1)
+      return out.replace(/[,;:\-—–\s]+$/, '') + '.'
+    }
+    tempDesc = stripEllipsis(tempDesc)
     const finalMetaDescription = tempDesc
+
+    // Contextual link from the post to the product page that solves it.
+    const PRODUCT_LINKS = [
+      [/data quality|data observability|snowflake|dbt|airflow|bcbs|power bi|data pipeline/i, '/data-observability', 'Data Observability', 'Turn your data quality policy into live checks, and see the job and reports behind every failure.'],
+      [/gpu|mlops|cuda|nvidia|llm|vllm|model serving|inference|ai agent/i, '/gpu-mlops', 'GPU & MLOps monitoring', 'Watch GPU fleets and ML pipelines, with root cause and approved fixes.'],
+      [/cost|finops|right-siz|spend|billing/i, '/kubernetes-cost-optimization', 'Kubernetes & AWS cost optimization', 'See spend by namespace and apply right-sizing with a YAML preview and rollback.'],
+      [/on-call|on call|pager|escalation|incident management|paging/i, '/on-call-management', 'On-call & incidents', 'Pages that arrive with the root cause and a ready fix attached.'],
+      [/log|elasticsearch|opensearch|loki/i, '/log-management', 'Log management', 'Query Kubernetes and VM logs with plain SQL, in your own VPC.'],
+      [/runbook|remediat|self-heal|automat|toil/i, '/auto-remediation', 'Automated fixes', 'Remediation flows that run the moment you approve them, with an audit trail.'],
+      [/kubernetes|k8s|pod|kubectl|node|helm|container|crashloop|oomkill/i, '/kubernetes-management', 'Kubernetes monitoring & management', 'Every cluster on one overview, with root cause one click away.'],
+      [/monitor|observab|trace|apm|metric|prometheus|grafana|datadog|uptime|latency/i, '/observability', 'Observability & APM', 'Metrics, logs and traces on one timeline, with AI root cause on top.'],
+    ]
+    const ctaHaystack = `${metadata.title || ''} ${metadata.category || ''} ${slug}`
+    const productMatch = PRODUCT_LINKS.find(([rx]) => rx.test(ctaHaystack)) || [null, '/ai-rca', 'AI root cause analysis', 'Evidence-backed root cause in about 15 seconds, posted where your team works.']
+    const productCtaHtml = `<aside class="product-cta" style="margin: 2.5rem 0; padding: 1.25rem 1.5rem; border: 1px solid rgba(124,58,237,0.2); border-radius: 10px; background: #f5f3ff;">
+              <p style="margin: 0 0 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #6d28d9;">Related AlertMend product</p>
+              <p style="margin: 0 0 8px; font-size: 17px; font-weight: 700; color: #18181b;"><a href="${productMatch[1]}" style="color: #18181b;">${productMatch[2]} →</a></p>
+              <p style="margin: 0; font-size: 15px; color: #52525b; line-height: 1.55;">${productMatch[3]}</p>
+            </aside>`
 
     // Build tracking URLs for static blog HTML pages.
     // These pages don't run the React `Navbar`, so we must embed source tracking directly.
@@ -793,8 +814,10 @@ markdownFiles.forEach(file => {
     
 
     const calendlyTrackingUrlObj = new URL('https://calendly.com/hello-alertmend/30min')
-    calendlyTrackingUrlObj.searchParams.set('source', blogSourceParam)
-    calendlyTrackingUrlObj.searchParams.set('blog_slug', normalizedBlogSlug)
+    // Calendly only keeps utm_* params on a booking
+    calendlyTrackingUrlObj.searchParams.set('utm_source', 'alertmend.io')
+    calendlyTrackingUrlObj.searchParams.set('utm_medium', blogSourceParam)
+    calendlyTrackingUrlObj.searchParams.set('utm_campaign', `blog-${normalizedBlogSlug}`)
     const calendlyTrackingUrl = calendlyTrackingUrlObj.toString()
     
     // Function to create HTML head with specific canonical URL
@@ -804,10 +827,10 @@ markdownFiles.forEach(file => {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${shortenedTitle}</title>
-  <meta name="description" content="${((finalMetaDescription && finalMetaDescription.trim().length >= 50) ? finalMetaDescription : `Expert guide on ${((metadata.title || slug).replace(/\s*\|\s*AlertMend AI\s*$/i, '')).trim().toLowerCase()} for ${metadata.category || 'Kubernetes'}. Learn best practices and solutions.`).replace(/"/g, '&quot;')}">
-  <meta name="keywords" content="${(metadata.keywords || `${metadata.category || 'Blog'}, AlertMend AI, AIOps, Kubernetes, DevOps`).replace(/"/g, '&quot;')}">
+  <meta name="description" content="${((finalMetaDescription && finalMetaDescription.trim().length >= 50) ? finalMetaDescription : `Expert guide on ${((metadata.title || slug).replace(/\s*\|\s*AlertMend(?: AI)?\s*$/i, '')).trim().toLowerCase()} for ${metadata.category || 'Kubernetes'}. Learn best practices and solutions.`).replace(/"/g, '&quot;')}">
+  <meta name="keywords" content="${(metadata.keywords || `${metadata.category || 'Blog'}, AlertMend, AIOps, Kubernetes, DevOps`).replace(/"/g, '&quot;')}">
   <meta name="author" content="${metadata.author || 'AlertMend Team'}">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="robots" content="${String(metadata.noindex) === 'true' ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}">
   <link rel="canonical" href="${canonicalUrl}">
   <!-- Favicon - uses SVG logo -->
   <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg" />
@@ -832,8 +855,8 @@ markdownFiles.forEach(file => {
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "${shortenedTitle}",
-    "description": "${finalMetaDescription.replace(/"/g, '\\"')}",
+    "headline": ${JSON.stringify(shortenedTitle)},
+    "description": ${JSON.stringify(finalMetaDescription)},
     "image": "https://www.alertmend.io/og-image.jpg",
     "datePublished": "${metadata.date || ''}",
     "dateModified": "${metadata.date || ''}",
@@ -845,7 +868,7 @@ markdownFiles.forEach(file => {
     },
     "publisher": {
       "@type": "Organization",
-      "name": "AlertMend AI",
+      "name": "AlertMend",
       "logo": {
         "@type": "ImageObject",
         "url": "https://alertmend.io/logos/alertmend-logo.svg"
@@ -936,7 +959,7 @@ markdownFiles.forEach(file => {
       margin-bottom: 32px;
     }
     h1 {
-      color: #4c1d95;
+      color: #0b1220;
       font-size: 2.25rem;
       font-weight: 700;
       line-height: 1.2;
@@ -953,7 +976,7 @@ markdownFiles.forEach(file => {
       }
     }
     h2 {
-      color: #4c1d95;
+      color: #0b1220;
       font-size: 1.875rem;
       font-weight: 700;
       margin-top: 40px;
@@ -966,7 +989,7 @@ markdownFiles.forEach(file => {
       }
     }
     h3 {
-      color: #4c1d95;
+      color: #0b1220;
       font-size: 1.5rem;
       font-weight: 700;
       margin-top: 32px;
@@ -979,7 +1002,7 @@ markdownFiles.forEach(file => {
       }
     }
     h4, h5, h6 {
-      color: #4c1d95;
+      color: #0b1220;
       font-weight: 600;
       margin-top: 24px;
       margin-bottom: 12px;
@@ -1003,7 +1026,8 @@ markdownFiles.forEach(file => {
       border-radius: 50%;
       flex: 0 0 auto;
     }
-    .author-avatar {
+    .author-avatar { color: #5b21b6 !important; }
+    .author-avatar-x {
       background: #ddd6fe;
       display: flex;
       align-items: center;
@@ -1129,7 +1153,7 @@ markdownFiles.forEach(file => {
       padding: 1rem;
       text-align: left;
       font-weight: 600;
-      color: #4c1d95;
+      color: #0b1220;
       border-right: 1px solid #ddd6fe;
       border-bottom: 2px solid #a78bfa;
       background: #fafafa;
@@ -1241,7 +1265,7 @@ markdownFiles.forEach(file => {
     .profile-name {
       font-size: 1.5rem;
       font-weight: 700;
-      color: #4c1d95;
+      color: #0b1220;
       margin-bottom: 8px;
     }
     .profile-bio {
@@ -1300,7 +1324,7 @@ markdownFiles.forEach(file => {
     .sidebar-card h3 {
       font-size: 1.125rem;
       font-weight: 700;
-      color: #4c1d95;
+      color: #0b1220;
       margin-bottom: 16px;
       margin-top: 0;
     }
@@ -1560,51 +1584,77 @@ markdownFiles.forEach(file => {
         display: none;
       }
     }
+    /* ---- Enterprise layer: matches the main site ---- */
+    body { color: #1e293b; }
+    .navbar { position: sticky; box-shadow: none; border-bottom: 1px solid rgba(11,18,32,0.08); }
+    .navbar-content { height: 64px; }
+    .am-lockup { display: block; height: 28px; width: 83px; flex: none; background-color: #6d28d9; -webkit-mask: url(/logos/alertmend-lockup-mask.svg) no-repeat center / contain; mask: url(/logos/alertmend-lockup-mask.svg) no-repeat center / contain; }
+    .am-lockup-light { background-color: #e2e8f0; }
+    .navbar-link { color: #27272a; font-weight: 500; }
+    .navbar-button { border-radius: 8px !important; font-weight: 600; }
+    .navbar-button-primary { background: #0b1220; color: #fff !important; }
+    .navbar-button-primary:hover { background: #1e293b; }
+    .navbar-button-outline { border: 1px solid rgba(11,18,32,0.18); color: #0b1220; background: #fff; }
+    .navbar-button-outline:hover { border-color: #0b1220; }
+    .navbar-mobile-cta { display: inline-flex; }
+    @media (min-width: 1024px) { .navbar-mobile-cta { display: none !important; } }
+    .main-container { padding-top: 48px; }
+    h1 { font-weight: 600 !important; letter-spacing: -0.028em; }
+    @media (min-width: 1024px) { h1 { font-size: 3.25rem !important; line-height: 1.08; } }
+    h2, h3, h4 { font-weight: 600 !important; letter-spacing: -0.015em; }
+    .social-icon { background: #f1f5f9; color: #334155; }
+    .social-icon:hover { background: #e2e8f0; }
+    .promotional-section { background: #f8fafc !important; border: 1px solid rgba(11,18,32,0.08) !important; border-left: 3px solid #6d28d9 !important; border-radius: 8px !important; }
+    .promotional-section .promo-title { font-size: 1.125rem; font-weight: 600; color: #0b1220; margin-bottom: 6px; }
+    .sidebar-card { background: #fff !important; border: 1px solid rgba(11,18,32,0.1) !important; border-radius: 10px !important; box-shadow: none !important; }
+    .sidebar-cta h3 { font-size: 1.125rem; color: #0b1220; margin: 0 0 8px; }
+    .sidebar-eyebrow { margin: 0 0 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #6d28d9; }
+    .sidebar-copy { margin: 0 0 16px; font-size: 14px; line-height: 1.55; color: #475569; }
+    .sidebar-btn { display: block; text-align: center; padding: 10px 16px; border-radius: 8px; background: #0b1220; color: #fff !important; font-size: 14px; font-weight: 600; text-decoration: none; }
+    .sidebar-btn:hover { background: #1e293b; }
+    .sidebar-link { display: block; margin-top: 12px; text-align: center; font-size: 13.5px; font-weight: 600; color: #6d28d9 !important; text-decoration: none; }
+    .related-content-title { font-size: 12px !important; font-weight: 700 !important; letter-spacing: 0.1em !important; text-transform: uppercase; color: #64748b !important; }
+    .related-post-link { color: #334155 !important; text-decoration: none !important; }
+    .related-post-link:hover { color: #6d28d9 !important; }
+    .view-more-link { color: #6d28d9 !important; }
+    .site-footer, .site-footer * { text-align: left; }
+    .site-footer-cols a, .site-footer-base a { font-weight: 400 !important; }
+    .site-footer { margin-top: 64px; background: #0b1220; color: #cbd5e1; }
+    .site-footer-inner { max-width: 1280px; margin: 0 auto; padding: 56px 24px 40px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 40px; }
+    .site-footer-brand p { margin-top: 16px; max-width: 320px; font-size: 14px; line-height: 1.6; color: #94a3b8; }
+    .site-footer-cols { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+    .site-footer-cols a { display: block; margin-bottom: 10px; font-size: 14px; color: #e2e8f0; text-decoration: none; }
+    .site-footer-cols a:hover { color: #fff; text-decoration: underline; }
+    .site-footer-h { margin-bottom: 14px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #94a3b8; }
+    .site-footer-base { max-width: 1280px; margin: 0 auto; padding: 20px 24px 32px; display: flex; justify-content: space-between; gap: 16px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 13px; color: #94a3b8; }
+    .site-footer-base a { color: #cbd5e1; text-decoration: none; }
+    @media (max-width: 800px) {
+      .site-footer-inner { grid-template-columns: 1fr; }
+      .site-footer-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .site-footer-base { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
+  <!-- Navbar (mirrors the site header) -->
+  <nav class="navbar" aria-label="Main">
     <div class="navbar-container">
       <div class="navbar-content">
-        <!-- Logo -->
-        <a href="/" class="navbar-logo">
-          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline'; this.parentElement.querySelector('.navbar-logo-text').style.display='inline';" />
-          <svg class="navbar-logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="display: none;">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-          <span class="navbar-logo-text" style="display: none;">AlertMend AI</span>
-        </a>
-
-        <!-- Desktop Navigation -->
+        <a href="/" class="navbar-logo" aria-label="AlertMend home"><span class="am-lockup" aria-hidden="true"></span></a>
         <div class="navbar-links">
-          <a href="/#how-it-works" class="navbar-link">How It Works</a>
-          <a href="/#solutions" class="navbar-link">Solutions</a>
-          <a href="/#benefits" class="navbar-link">Benefits</a>
-          <a href="/case-studies" class="navbar-link">Case Studies</a>
-          <a href="/blog" class="navbar-link active">Blog</a>
+          <a href="/observability" class="navbar-link">Platform</a>
+          <a href="/data-observability" class="navbar-link">Data governance</a>
+          <a href="/industries" class="navbar-link">Industries</a>
           <a href="/pricing" class="navbar-link">Pricing</a>
+          <a href="/case-studies" class="navbar-link">Customers</a>
+          <a href="/blog" class="navbar-link active" aria-current="page">Blog</a>
         </div>
-
-        <!-- Desktop Actions -->
         <div class="navbar-actions">
-          <a href="${playgroundTrackingUrl}" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-playground">
-            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            Playground
-          </a>
-          <a href="${signupTrackingUrl}" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-secondary">Register</a>
-          <a href="${calendlyTrackingUrl}" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-primary">Book a Demo</a>
+          <a href="https://app.alertmend.io" class="navbar-button navbar-button-secondary">Sign in</a>
+          <a href="${signupTrackingUrl}" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-outline">Start free</a>
+          <a href="${calendlyTrackingUrl}" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-primary">Book a demo</a>
         </div>
-
-        <!-- Mobile Menu Button -->
-        <button class="mobile-menu-button" aria-label="Toggle menu">
-          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
+        <a href="${calendlyTrackingUrl}" target="_blank" rel="noopener noreferrer" class="navbar-button navbar-button-primary navbar-mobile-cta">Book a demo</a>
       </div>
     </div>
   </nav>
@@ -1615,16 +1665,16 @@ markdownFiles.forEach(file => {
       <div class="main-content">
         <!-- Social Share Icons (Left Sidebar) -->
         <div class="social-sidebar">
-          <a href="#" class="social-icon" aria-label="Share on Facebook">
+          <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://www.alertmend.io/blog/${slug}`)}" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Share on Facebook">
             <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           </a>
-          <a href="#" class="social-icon" aria-label="Share on Twitter">
+          <a href="https://twitter.com/intent/tweet?url=${encodeURIComponent(`https://www.alertmend.io/blog/${slug}`)}" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Share on X">
             <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
           </a>
-          <a href="#" class="social-icon" aria-label="Share on LinkedIn">
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://www.alertmend.io/blog/${slug}`)}" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Share on LinkedIn">
             <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           </a>
-          <a href="#" class="social-icon" aria-label="Copy link">
+          <a href="mailto:?subject=${encodeURIComponent(metadata.title || slug)}&body=${encodeURIComponent(`https://www.alertmend.io/blog/${slug}`)}" class="social-icon" aria-label="Share by email">
             <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M8.465 11.293c1.133-1.133 3.109-1.133 4.242 0l.707.707 1.414-1.414-.707-.707c-1.498-1.498-3.94-1.498-5.439 0l-.707.707 1.414 1.414.707-.707zm-2.829 2.829l.707.707c1.498 1.498 3.94 1.498 5.439 0l.707-.707-1.414-1.414-.707.707c-1.133 1.133-3.109 1.133-4.242 0l-.707-.707-1.414 1.414zm11.314-8.485l-6.364 6.364c-.39.39-1.023.39-1.414 0s-.39-1.023 0-1.414l6.364-6.364c.39-.39 1.023-.39 1.414 0s.39 1.023 0 1.414z"/></svg>
           </a>
         </div>
@@ -1654,12 +1704,14 @@ markdownFiles.forEach(file => {
 
             <!-- Promotional Section -->
             <div class="promotional-section">
-              <p>Ready to eliminate manual firefighting and achieve autonomous infrastructure operations?</p>
-              <p>See how AlertMend AI can help you reduce costs by 50%, achieve zero downtime, and automate incident remediation across Kubernetes, VMs, and ECS. <a href="${calendlyTrackingUrl}" target="_blank" rel="noopener noreferrer">Book a demo.</a></p>
+              <p class="promo-title">${isDataPost ? 'Turn your data quality policy into live checks' : 'Find the root cause, then fix it with approval'}</p>
+              <p>${isDataPost ? 'AlertMend reads your policy, proposes checks with the clause they enforce, and shows the job and reports behind every failure. A read-only agent keeps your data in your network.' : 'AlertMend puts metrics, logs and traces on one timeline, explains incidents with evidence, and runs a fix only after your team approves it.'} <a href="${calendlyTrackingUrl}" target="_blank" rel="noopener noreferrer">Book a demo</a></p>
             </div>
 
             <!-- Horizontal Separator -->
             <hr />
+
+            ${productCtaHtml}
 
             <!-- Arvind Rajpurohit Profile Section -->
             <div class="profile-section">
@@ -1669,10 +1721,10 @@ markdownFiles.forEach(file => {
                 <h3 class="profile-name">Arvind Rajpurohit</h3>
                 <p class="profile-title" style="color: #7c3aed; font-weight: 600; margin-bottom: 1rem; font-size: 1rem;">Co-Founder & CEO</p>
                 <div class="profile-bio">
-                  <p>Arvind is a Kubestronaut and Kubernetes expert with 15+ years of experience in infrastructure automation. Previously DevOps Team Lead at Roambee and Customer Success Engineer at Shoreline.io (acquired by NVIDIA), he's helped hundreds of teams achieve 99.97% uptime, reduce costs by 50%, and eliminate 90% of manual operations work.</p>
-                  <p>As CEO of AlertMend AI, Arvind is building the future of autonomous infrastructure management - where AI doesn't just monitor systems, but understands, predicts, and automatically resolves issues while continuously learning and improving.</p>
+                  <p>Arvind is a Kubestronaut and DevOps engineer with over 15 years in infrastructure. Previously DevOps team lead at Roambee and customer success engineer at Shoreline.io (acquired by NVIDIA).</p>
+                  <p>As co-founder and CEO of AlertMend, he leads a team building observability that explains every failure with evidence and fixes it only after approval.</p>
                 </div>
-                <a href="https://www.linkedin.com/in/arvind-rajpurohit-4a332523/" target="_blank" rel="noopener noreferrer" class="linkedin-link">
+                <a href="https://www.linkedin.com/in/arvind-rajpurohit-4a332523/" target="_blank" rel="noopener noreferrer" class="linkedin-link" aria-label="Arvind Rajpurohit on LinkedIn">
                   <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                 </a>
               </div>
@@ -1684,19 +1736,19 @@ markdownFiles.forEach(file => {
       <!-- Right Sidebar (30%) -->
       <aside class="sidebar">
         <div class="sidebar-content">
-          <!-- Email Signup -->
-          <div class="sidebar-card">
-            <h3>Receive blog and product updates</h3>
-            <form class="signup-form">
-              <input type="email" placeholder="Email*" required />
-              <button type="submit">SIGN UP</button>
-            </form>
+          <!-- Product card -->
+          <div class="sidebar-card sidebar-cta">
+            <p class="sidebar-eyebrow">${isDataPost ? 'Data observability' : 'AlertMend platform'}</p>
+            <h3>${isDataPost ? 'Policy to live checks in minutes' : 'Root cause and approved fixes'}</h3>
+            <p class="sidebar-copy">${isDataPost ? 'Checks that cite your policy, with lineage to the failed job and affected reports.' : 'Evidence-backed root cause, and fixes that run only after you approve them in Slack or Teams.'}</p>
+            <a class="sidebar-btn" href="${isDataPost ? 'https://app.alertmend.io/signup?service=data-observability&source=blog-post&blog_slug=' + normalizedBlogSlug : signupTrackingUrl}" target="_blank" rel="noopener noreferrer">Start free</a>
+            <a class="sidebar-link" href="${isDataPost ? '/data-observability' : '/observability'}">${isDataPost ? 'See data observability' : 'See how it works'} →</a>
           </div>
 
           <!-- Related Content -->
           ${relatedPosts.length > 0 ? `
           <div class="sidebar-card">
-            <h3 class="related-content-title">RELATED CONTENT</h3>
+            <h3 class="related-content-title">Related guides</h3>
             <ul class="related-posts-list">
               ${relatedPosts.map(post => `
                 <li>
@@ -1705,7 +1757,7 @@ markdownFiles.forEach(file => {
               `).join('')}
             </ul>
             <a href="/blog" class="view-more-link">
-              View All Posts
+              All guides
               <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
               </svg>
@@ -1715,22 +1767,49 @@ markdownFiles.forEach(file => {
 
           <!-- Additional Internal Links -->
           <div class="sidebar-card">
-            <h3 class="related-content-title">EXPLORE ALERTMEND</h3>
+            <h3 class="related-content-title">Explore AlertMend</h3>
             <ul class="related-posts-list">
-              <li><a href="/" class="related-post-link">Home</a></li>
-              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
-              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
-              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
-              <li><a href="/kubernetes-cost-optimization" class="related-post-link">Cost Optimization</a></li>
-              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
-              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
-              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+              ${(isDataPost ? [
+                ['/data-observability', 'Data observability and governance'],
+                ['/trust', 'Data sovereignty and trust center'],
+                ['/industries', 'Industries'],
+                ['/integrations/snowflake', 'Snowflake integration'],
+                ['/pricing#data', 'Data pricing'],
+                ['/case-studies', 'Customer stories'],
+              ] : [
+                ['/observability', 'Observability and APM'],
+                ['/ai-rca', 'AI root cause analysis'],
+                ['/auto-remediation', 'Automated fixes'],
+                ['/kubernetes-management', 'Kubernetes management'],
+                ['/kubernetes-cost-optimization', 'Cost optimization'],
+                ['/case-studies', 'Customer stories'],
+                ['/pricing', 'Pricing'],
+              ]).map(([href, label]) => `<li><a href="${href}" class="related-post-link">${label}</a></li>`).join('')}
             </ul>
           </div>
         </div>
       </aside>
     </div>
   </div>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <div class="site-footer-brand">
+        <span class="am-lockup am-lockup-light" aria-hidden="true"></span>
+        <p>Data observability and infrastructure observability, with AI root cause and fixes your team approves.</p>
+      </div>
+      <div class="site-footer-cols">
+        <div><p class="site-footer-h">Data</p><a href="/data-observability">Data observability</a><a href="/trust">Trust center</a><a href="/industries">Industries</a></div>
+        <div><p class="site-footer-h">Infrastructure</p><a href="/observability">Observability and APM</a><a href="/ai-rca">AI RCA</a><a href="/auto-remediation">Automated fixes</a><a href="/kubernetes-management">Kubernetes</a></div>
+        <div><p class="site-footer-h">Resources</p><a href="/blog">Blog</a><a href="/documentation">Documentation</a><a href="/case-studies">Case studies</a><a href="/help">Help center</a></div>
+        <div><p class="site-footer-h">Company</p><a href="/about">About</a><a href="/security">Security</a><a href="/pricing">Pricing</a><a href="/contact">Contact</a></div>
+      </div>
+    </div>
+    <div class="site-footer-base">
+      <span>© ${new Date().getFullYear()} AlertMend. All rights reserved.</span>
+      <span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></span>
+    </div>
+  </footer>
 </body>
 </html>`
     
@@ -1780,6 +1859,10 @@ markdownFiles.forEach(file => {
       tags = tagsMatch[1].split(',').map(t => t.trim().replace(/['"]/g, ''))
     }
     
+    // Hidden (duplicates, redirected) and noindex (off-topic) posts stay out
+    // of the listing so the blog index doesn't link to them.
+    if (metadata.hidden === 'true' || metadata.noindex === 'true') return
+
     allBlogPosts.push({
       slug,
       title: metadata.title || slug,
@@ -1842,20 +1925,20 @@ const blogListingHTML = `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AIOps & Kubernetes: AlertMend AI's Insights & Best Practices</title>
-  <meta name="description" content="AlertMend AI blog: Get expert insights on AIOps and Kubernetes. Learn best practices for autonomous infrastructure management.">
+  <title>AlertMend Blog: Data Quality, Kubernetes and Observability</title>
+  <meta name="description" content="Practical guides from the AlertMend team on data quality, data governance, Kubernetes, observability and automated fixes.">
   <meta name="keywords" content="AIOps blog, Kubernetes best practices, infrastructure automation, DevOps insights, SRE articles, cloud-native operations">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.alertmend.io/blog">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.alertmend.io/blog">
-  <meta property="og:title" content="AIOps &amp; Kubernetes: AlertMend AI's Insights &amp; Best Practices">
-  <meta property="og:description" content="AlertMend AI blog: Get expert insights on AIOps and Kubernetes. Learn best practices for autonomous infrastructure management.">
+  <meta property="og:title" content="AlertMend Blog: Data Quality, Kubernetes and Observability">
+  <meta property="og:description" content="Practical guides from the AlertMend team on data quality, data governance, Kubernetes, observability and automated fixes.">
   <meta property="og:image" content="https://www.alertmend.io/og-image.jpg">
-  <meta property="og:site_name" content="AlertMend AI">
+  <meta property="og:site_name" content="AlertMend">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="AIOps &amp; Kubernetes: AlertMend AI's Insights &amp; Best Practices">
-  <meta name="twitter:description" content="AlertMend AI blog: Get expert insights on AIOps and Kubernetes. Learn best practices for autonomous infrastructure management.">
+  <meta name="twitter:title" content="AlertMend Blog: Data Quality, Kubernetes and Observability">
+  <meta name="twitter:description" content="Practical guides from the AlertMend team on data quality, data governance, Kubernetes, observability and automated fixes.">
   <meta name="twitter:image" content="https://www.alertmend.io/og-image.jpg">
   <!-- Favicon - uses SVG logo -->
   <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg" />

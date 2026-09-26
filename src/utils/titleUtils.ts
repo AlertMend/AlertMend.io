@@ -3,14 +3,14 @@
  * Includes the site suffix in the character count
  * 
  * @param title - The blog post title
- * @param suffix - The suffix to append (default: " | AlertMend AI")
+ * @param suffix - The suffix to append (default: " | AlertMend")
  * @param minLength - Minimum title length (default: 30)
  * @param maxLength - Maximum title length including suffix (default: 60)
  * @returns Truncated title with suffix
  */
 export function truncateBlogTitle(
   title: string,
-  suffix: string = ' | AlertMend AI',
+  suffix: string = ' | AlertMend',
   minLength: number = 30,
   maxLength: number = 60
 ): string {
@@ -48,7 +48,7 @@ export function truncateBlogTitle(
  * Gets the optimal title length for SEO
  * Ensures title is between 30-60 characters including suffix
  */
-export function getOptimalTitleLength(title: string, suffix: string = ' | AlertMend AI'): number {
+export function getOptimalTitleLength(title: string, suffix: string = ' | AlertMend'): number {
   const totalLength = title.length + suffix.length
   if (totalLength >= 30 && totalLength <= 60) {
     return totalLength

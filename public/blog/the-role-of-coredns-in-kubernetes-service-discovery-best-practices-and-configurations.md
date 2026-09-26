@@ -1,5 +1,5 @@
 ---
-title: "The Role Of Coredns In Kubernetes"
+title: "The Role of Coredns in Kubernetes"
 excerpt: "In the fast-evolving landscape of Kubernetes, **the role of CoreDNS in Kubernetes service discovery: best practices and configurations** has become pivotal i..."
 date: "2026-01-10"
 category: "Kubernetes"
@@ -8,8 +8,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Role, Coredns, Kubernetes, Service, Disc
 ---
 
 # The Role Of Coredns In Kubernetes Service Discovery: Best Practices And Configurations
-
-*Generated on 2025-12-27 23:11:37*
 
 ---
 

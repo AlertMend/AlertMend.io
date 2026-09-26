@@ -3,13 +3,13 @@ import LegacyDocShell from './LegacyDocShell'
 import { ensureUniqueMetaDescription } from '../../utils/descriptionUtils'
 
 export default function SlackTokenChannelPage() {
-  const baseDescription = "Learn how to get a Slack token and channel ID for AlertMend AI integration. Complete guide for Slack authentication setup."
+  const baseDescription = "Learn how to get a Slack token and channel ID for AlertMend integration. Complete guide for Slack authentication setup."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'documentation', 'slack-token-channel')
 
   return (
     <LegacyDocShell title="Slack token and channel">
       <SEO
-        title="AlertMend AI: Get Slack Token and Channel ID for Integration"
+        title="Slack token and channel ID | AlertMend Docs"
         description={uniqueDescription}
         keywords="Slack token, Slack channel ID, Slack authentication, AlertMend Slack setup"
         canonical="/documentation/slack-token-channel"
@@ -69,9 +69,9 @@ export default function SlackTokenChannelPage() {
                 <li>The channel ID is the part after <code className="bg-gray-100 px-2 py-1 rounded">/archives/</code></li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Using in AlertMend AI</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Using in AlertMend</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
-                <li>Log in to AlertMend AI dashboard</li>
+                <li>Log in to AlertMend dashboard</li>
                 <li>Go to Settings → Integrations → Slack</li>
                 <li>Paste your Bot Token in the "Slack Token" field</li>
                 <li>Enter your Channel ID in the "Channel ID" field</li>

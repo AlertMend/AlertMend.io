@@ -1,5 +1,5 @@
 ---
-title: "Revolutionizing On Call Automation"
+title: "Revolutionizing On-Call Automation"
 excerpt: "In today's fast-paced digital landscape, ensuring seamless system operations and timely incident resolution is crucial. As we step into 2026, on call automat..."
 date: "2026-01-10"
 category: "AIOps"

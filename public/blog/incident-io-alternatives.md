@@ -1,5 +1,5 @@
 ---
-title: "incident.io Alternatives for AI SRE (2026)"
+title: "Incident.io Alternatives for AI SRE (2026)"
 excerpt: "Compare incident.io alternatives for on-call, AI SRE, self-hosting, WhatsApp escalation, and infrastructure remediation, including AlertMend and PagerDuty."
 date: "2026-07-05"
 category: "AIOps"

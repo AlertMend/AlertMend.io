@@ -5,6 +5,7 @@ date: "2026-01-10"
 category: "Kubernetes"
 author: "AlertMend Team"
 keywords: "restart, pods, kubernetes, Kubernetes, AlertMend AI, AIOps, container orchestration, DevOps"
+hidden: true
 ---
 
 # how to restart pods in kubernetes

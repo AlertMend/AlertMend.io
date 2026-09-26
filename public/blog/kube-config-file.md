@@ -1,5 +1,5 @@
 ---
-title: "kube config file Guide Guide Complete Guide"
+title: "Kube Config File Guide"
 excerpt: "In the realm of Kubernetes, the kube config file plays a pivotal role in managing cluster access and configurations"
 date: "2026-01-10"
 category: "Kubernetes"

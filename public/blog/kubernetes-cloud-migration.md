@@ -1,5 +1,5 @@
 ---
-title: "kubernetes cloud migration Guide"
+title: "Kubernetes Cloud Migration Guide"
 excerpt: "Embarking on a Kubernetes cloud migration journey can be daunting, yet it offers unparalleled benefits in terms of scalability and efficiency"
 date: "2026-01-10"
 category: "Kubernetes"

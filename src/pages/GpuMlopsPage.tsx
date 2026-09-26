@@ -75,7 +75,7 @@ export default function GpuMlopsPage() {
   return (
     <SolutionPageTemplate
       seo={{
-        title: 'GPU & MLOps Monitoring for H100 Fleets | AlertMend AI',
+        title: 'GPU & MLOps Monitoring for H100 Fleets | AlertMend',
         description:
           'Monitor NVIDIA H100 and A100 GPU fleets and ML pipelines: CUDA OOM, thermal throttling, NCCL failures, stuck Kubeflow DAGs and vLLM latency drift.',
         keywords:

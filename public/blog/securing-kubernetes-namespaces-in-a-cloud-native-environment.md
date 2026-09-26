@@ -1,5 +1,5 @@
 ---
-title: "Securing Kubernetes Namespaces In A"
+title: "Securing Kubernetes Namespaces in a Cloud-Native Environment"
 excerpt: "Securing Kubernetes namespaces in a cloud-native environment has become a critical component of modern DevOps strategies, especially as we advance into 2025."
 date: "2026-01-10"
 category: "Kubernetes"
@@ -8,8 +8,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Securing, Kubernetes, Namespaces, Cloud,
 ---
 
 # Securing Kubernetes Namespaces In A Cloud-Native Environment
-
-*Generated on 2025-12-24 11:14:25*
 
 ---
 

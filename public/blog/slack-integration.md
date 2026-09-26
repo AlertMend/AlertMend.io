@@ -1,5 +1,5 @@
 ---
-title: "Slack Integration Guide for Alertmend"
+title: "Slack Integration Guide for with AlertMend"
 excerpt: "Integrate Slack with Alertmend to receive real-time incident alerts directly within your preferred Slack channels."
 date: "2024-07-24"
 category: "Blog"

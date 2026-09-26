@@ -15,7 +15,7 @@ const caseStudiesData = [
 
 // Special slug overrides for specific case studies
 const specialSlugOverrides = {
-  'Decklar': 'kubernetes-cost-optimization-case-studies-rombee',
+  'Decklar': 'kubernetes-management-case-studies-decklar',
 }
 
 // Helper function to convert category to URL slug
@@ -209,6 +209,18 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <url>
+    <loc>${siteUrl}/industries</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${siteUrl}/trust</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
   <!-- Integrations (detail pages) -->
 ${[
@@ -216,6 +228,7 @@ ${[
   'victoria-metrics', 'slack', 'ms-teams', 'pagerduty', 'jira', 'sendgrid',
   'google-meet', 'jenkins', 'github-actions', 'gitlab', 'whatsapp',
   'snowflake', 'bigquery', 'redshift', 'databricks', 'postgres', 'dbt', 'airflow',
+  'oracle', 'power-bi',
 ].map((slug) => `  <url>
     <loc>${siteUrl}/integrations/${slug}</loc>
     <lastmod>${currentDate}</lastmod>
@@ -248,7 +261,8 @@ ${caseStudiesData.map(study => {
     <priority>0.8</priority>
   </url>
 ${blogPosts.map(post => {
-  const normalizedDate = normalizeDate(post.date)
+  // `updated` (frontmatter) wins so real content edits refresh lastmod
+  const normalizedDate = normalizeDate(post.updated || post.date)
 
   return `  <!-- Blog Post: ${post.slug} -->
   <url>

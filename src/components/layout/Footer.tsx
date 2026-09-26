@@ -18,12 +18,14 @@ const RESOURCES = [
   { to: '/webinars', label: 'Webinars' },
   { to: '/help', label: 'Help center' },
   { to: '/community', label: 'Community' },
-  { to: '/security', label: 'Security' },
-  { to: '/compliance', label: 'Compliance' },
 ];
 
 const COMPANY = [
   { to: '/about', label: 'About' },
+  { to: '/industries', label: 'Industries' },
+  { to: '/trust', label: 'Trust center' },
+  { to: '/security', label: 'Security' },
+  { to: '/compliance', label: 'Compliance' },
   { to: '/pricing', label: 'Pricing' },
   { to: '/careers', label: 'Careers' },
   { to: '/partners', label: 'Partners' },
@@ -40,8 +42,8 @@ export default function Footer() {
           <div className={styles.brandCol}>
             <Brand tone="light" />
             <p>
-              Production operations across your entire cloud. Observe everything, find
-              root cause, automate the fix.
+              Production health for platform and data teams. Observe infrastructure,
+              turn data quality policy into live checks, and act with approval.
             </p>
             <div className={styles.backedBy}>
               <span className={styles.backedByLabel}>Backed by</span>
@@ -83,9 +85,20 @@ export default function Footer() {
           </div>
 
           <div className={styles.col}>
-            <h5>Platform</h5>
+            <h5>Infrastructure</h5>
             <ul>
-              {HOME_PRODUCTS.map((p) => (
+              {HOME_PRODUCTS.filter((p) => p.group === 'infrastructure').map((p) => (
+                <li key={p.id}>
+                  <Link to={p.to}>{p.name}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className={styles.col}>
+            <h5>Data</h5>
+            <ul>
+              {HOME_PRODUCTS.filter((p) => p.group === 'data').map((p) => (
                 <li key={p.id}>
                   <Link to={p.to}>{p.name}</Link>
                 </li>
@@ -117,7 +130,7 @@ export default function Footer() {
         </div>
 
         <div className={styles.bottom}>
-          <div>© {new Date().getFullYear()} AlertMend AI. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} AlertMend. All rights reserved.</div>
           <div className={styles.legal}>
             <Link to="/privacy">Privacy</Link>
             <Link to="/terms">Terms</Link>

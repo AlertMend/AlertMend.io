@@ -5,6 +5,7 @@ date: "2025-07-01"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"
 keywords: "Kubernetes, OOMKilled errors, memory management, Kubernetes optimization, automated remediation, infrastructure management, Kubernetes troubleshooting, container memory issues"
+hidden: true
 ---
 
 ## Understanding OOMKilled

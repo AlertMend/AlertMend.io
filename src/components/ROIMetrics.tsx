@@ -51,7 +51,7 @@ export default function ROIMetrics() {
             Trusted by Teams Worldwide
           </h2>
           <p className="text-lg md:text-xl text-brand-700 max-w-3xl mx-auto leading-relaxed">
-            Real impact from teams using AlertMend AI across industries
+            Real impact from teams using AlertMend across industries
           </p>
         </div>
 

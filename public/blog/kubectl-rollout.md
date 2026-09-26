@@ -1,5 +1,5 @@
 ---
-title: "Kubectl Rollout: Kubernetes Deployments"
+title: "kubectl Rollout: Kubernetes Deployments"
 excerpt: "Master kubectl rollout commands for managing deployments, monitoring status, performing rollbacks, and implementing rolling updates in Kubernetes."
 date: "2025-08-01"
 category: "Kubernetes"

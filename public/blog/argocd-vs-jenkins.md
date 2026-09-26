@@ -1,5 +1,5 @@
 ---
-title: "argocd vs jenkins Guide Guide Complete Guide"
+title: "Argo CD vs Jenkins Guide"
 excerpt: "In the ever-evolving world of software development, choosing the right tools for your Continuous Integration and Continuous Deployment (CI/CD) pipelines is c..."
 date: "2026-01-10"
 category: "Kubernetes"

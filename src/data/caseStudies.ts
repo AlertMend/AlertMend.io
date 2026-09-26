@@ -13,7 +13,7 @@ const categoryToSlug = (category: string): string => {
 
 // Special slug overrides for specific case studies
 const specialSlugOverrides: { [key: string]: string } = {
-  'Decklar': 'kubernetes-cost-optimization-case-studies-rombee',
+  'Decklar': 'kubernetes-management-case-studies-decklar',
 }
 
 // Helper function to generate case study slug

@@ -1,5 +1,5 @@
 ---
-title: "Deny Access To Computer From Network"
+title: "Deny Access to Computer from Network"
 excerpt: "Learn how to configure the 'Deny access to this computer from the network' security policy in Windows environments to prevent unauthorized network access."
 date: "2026-01-10"
 category: "Troubleshooting"

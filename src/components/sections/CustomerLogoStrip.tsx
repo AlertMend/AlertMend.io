@@ -10,6 +10,7 @@ export default function CustomerLogoStrip() {
   return (
     <section className={styles.section} aria-label="Companies using AlertMend">
       <div className="container">
+        <p className={styles.caption}>Running in production at</p>
         <ul className={styles.list}>
           {customers.map((c) => (
             <li key={c.name} className={styles.item}>

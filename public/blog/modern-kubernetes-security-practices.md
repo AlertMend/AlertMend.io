@@ -9,8 +9,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Modern, Kubernetes, Security, Practices"
 
 # Modern Kubernetes Security Practices
 
-*Generated on 2025-12-25 14:59:13*
-
 ---
 
 ## Navigating Modern Kubernetes Security Practices in 2025

@@ -1,5 +1,5 @@
 ---
-title: "Ssl Error: Unable to Get Local Issuer"
+title: "SSL Error: Unable to Get Local Issuer"
 excerpt: "Encountering the SSL error: unable to get local issuer certificate can disrupt your operations and affect data security"
 date: "2026-01-10"
 category: "Troubleshooting"

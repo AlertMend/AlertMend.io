@@ -3,13 +3,13 @@ import LegacyDocShell from './LegacyDocShell'
 import { ensureUniqueMetaDescription } from '../../utils/descriptionUtils'
 
 export default function SlackRCAChannelPage() {
-  const baseDescription = "Learn how to set up a Slack channel for Root Cause Analysis (RCA) notifications in AlertMend AI. Configure RCA alerts and notifications."
+  const baseDescription = "Learn how to set up a Slack channel for Root Cause Analysis (RCA) notifications in AlertMend. Configure RCA alerts and notifications."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'documentation', 'slack-rca-channel')
 
   return (
     <LegacyDocShell title="Slack RCA channel">
       <SEO
-        title="Set Up AlertMend AI's Slack Channel for RCA Reports in 2025"
+        title="Slack channel for RCA reports | AlertMend Docs"
         description={uniqueDescription}
         keywords="Slack RCA, root cause analysis, Slack notifications, AlertMend RCA setup"
         canonical="/documentation/slack-rca-channel"
@@ -21,7 +21,7 @@ export default function SlackRCAChannelPage() {
                 How to Setup Slack Channel for RCA
               </h1>
               <p className="text-xl text-gray-600">
-                Configure Slack to receive Root Cause Analysis reports and notifications from AlertMend AI
+                Configure Slack to receive Root Cause Analysis reports and notifications from AlertMend
               </p>
             </div>
 
@@ -29,7 +29,7 @@ export default function SlackRCAChannelPage() {
               <div className="bg-brand-50 border-l-4 border-brand-600 p-6 mb-8 rounded-r-lg">
                 <h3 className="text-brand-900 font-bold mb-2">What is RCA?</h3>
                 <p className="text-gray-700">
-                  Root Cause Analysis (RCA) is AlertMend AI's automated analysis that identifies the underlying cause of incidents. 
+                  Root Cause Analysis (RCA) is AlertMend's automated analysis that identifies the underlying cause of incidents. 
                   RCA reports are sent to Slack channels for team visibility and follow-up actions.
                 </p>
               </div>
@@ -58,9 +58,9 @@ export default function SlackRCAChannelPage() {
                 <li>Alternatively, check the URL: <code className="bg-gray-100 px-2 py-1 rounded">https://workspace.slack.com/archives/C0123456789</code></li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 4: Configure in AlertMend AI</h2>
+              <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 4: Configure in AlertMend</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
-                <li>Log in to AlertMend AI dashboard</li>
+                <li>Log in to AlertMend dashboard</li>
                 <li>Navigate to Settings → Notifications → Slack</li>
                 <li>Find the "RCA Channel" section</li>
                 <li>Paste the Channel ID you copied</li>
@@ -78,7 +78,7 @@ export default function SlackRCAChannelPage() {
 
               <h2 className="text-2xl font-bold text-brand-900 mt-8 mb-4">Step 5: Test RCA Notifications</h2>
               <ol className="list-decimal list-inside space-y-3 text-gray-700">
-                <li>Create a test incident in AlertMend AI</li>
+                <li>Create a test incident in AlertMend</li>
                 <li>Wait for the RCA analysis to complete</li>
                 <li>Verify that the RCA report appears in your Slack channel</li>
                 <li>Check that the report includes:

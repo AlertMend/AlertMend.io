@@ -1,10 +1,11 @@
 ---
-title: "new relic vs sentry 1 Guide Guide"
+title: "New Relic vs Sentry 1 Guide"
 excerpt: "new relic vs sentry  Navigating the Monitoring Landscape: New Relic vs."
 date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, relic, sentry"
+hidden: true
 ---
 
 # new relic vs sentry

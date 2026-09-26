@@ -1,5 +1,5 @@
 ---
-title: "Using Azure Logic Apps For Automated"
+title: "Using Azure Logic Apps for Automated"
 excerpt: "In today's fast-paced digital landscape, managing system incidents swiftly and efficiently is more critical than ever. This comprehensive guide explores the ..."
 date: "2026-01-10"
 category: "AIOps"
@@ -8,8 +8,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Using, Azure, Logic, Apps, Automated"
 ---
 
 # Using Azure Logic Apps For Automated Incident Responses
-
-*Generated on 2025-12-25 01:19:53*
 
 ---
 

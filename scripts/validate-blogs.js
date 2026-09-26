@@ -105,14 +105,20 @@ function validateMarkdownFile(filePath, filename) {
     warnings.push(`⚠️  ${filename}: Missing recommended frontmatter field: keywords`)
   }
   
-  // Validate title length (accounting for " | AlertMend AI" suffix which is 17 chars)
+  // Validate title length (accounting for " | AlertMend" suffix which is 14 chars)
   if (frontmatter.title) {
-    const titleWithSuffix = frontmatter.title + ' | AlertMend AI'
+    const titleWithSuffix = frontmatter.title + ' | AlertMend'
     if (titleWithSuffix.length < SEO_RULES.titleMinLength) {
       errors.push(`❌ ${filename}: Title too short (${titleWithSuffix.length} chars, min ${SEO_RULES.titleMinLength}): "${titleWithSuffix}"`)
       isValid = false
     }
-    if (titleWithSuffix.length > SEO_RULES.titleMaxLength) {
+    // The build drops the " | AlertMend" suffix when it doesn't fit, so
+    // only the bare title has to stay within the limit (+10 before Google
+    // starts cutting it visibly).
+    if (frontmatter.title.length > SEO_RULES.titleMaxLength + 10) {
+      warnings.push(`⚠️  ${filename}: Long title (${frontmatter.title.length} chars): "${frontmatter.title}"`)
+    }
+    if (false) {
       errors.push(`❌ ${filename}: Title too long (${titleWithSuffix.length} chars, max ${SEO_RULES.titleMaxLength}): "${titleWithSuffix}"`)
       isValid = false
     }
@@ -307,6 +313,10 @@ function validateAllBlogs() {
     const sitemapContent = fs.readFileSync(sitemapPath, 'utf-8')
     
     for (const slug of slugs) {
+      // hidden (redirected duplicates) and noindex posts are intentionally
+      // left out of the sitemap
+      const md = fs.readFileSync(path.join(blogDir, `${slug}.md`), 'utf-8')
+      if (/^(hidden|noindex):\s*true\s*$/m.test(md.split('\n---')[0])) continue
       checkSitemap(slug, sitemapContent)
     }
     

@@ -1,5 +1,5 @@
 ---
-title: "Mastering Kubernetes Auto Remediation"
+title: "Mastering Kubernetes Auto-Remediation"
 excerpt: "In the fast-paced world of DevOps, where agility and resilience are paramount, Kubernetes has emerged as a pivotal technology."
 date: "2026-01-10"
 category: "Kubernetes"

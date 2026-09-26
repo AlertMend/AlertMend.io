@@ -1,5 +1,5 @@
 ---
-title: "git http.sslBackend schannel Fix"
+title: "Git http.sslBackend Schannel Fix"
 excerpt: "Learn what git config --global http.sslBackend schannel does, when to use it on Windows, and how to fix unsupported ssl backend schannel safely."
 date: "2026-01-10"
 category: "DevOps"

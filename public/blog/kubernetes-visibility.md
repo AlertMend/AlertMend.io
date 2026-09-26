@@ -1,5 +1,5 @@
 ---
-title: "kubernetes visibility Guide Guide"
+title: "Kubernetes Visibility Guide"
 excerpt: "In the dynamic world of containerized applications, Kubernetes visibility is essential for optimizing performance and ensuring security"
 date: "2026-01-10"
 category: "Kubernetes"

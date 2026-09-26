@@ -5,6 +5,7 @@ date: "2025-12-15"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "exited code 1, application errors, process termination, container debugging, environment variables, Kubernetes troubleshooting, system monitoring"
+hidden: true
 ---
 
 # exited - code 1

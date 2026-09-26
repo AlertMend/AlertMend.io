@@ -1,5 +1,5 @@
 ---
-title: "Machine Learning In Cloud Infrastructure"
+title: "Machine Learning in Cloud Infrastructure"
 excerpt: "Machine Learning In Cloud Infrastructure Monitoring Unlocking the Potential of Machine Learning in Cloud Infrastructure..."
 date: "2025-12-22"
 category: "DevOps"

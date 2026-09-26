@@ -1,5 +1,5 @@
 ---
-title: "origin errors Guide Guide Complete Guide"
+title: "Origin Errors Guide"
 excerpt: "In the complex world of system monitoring and DevOps solutions, origin errors represent a significant challenge"
 date: "2026-01-10"
 category: "Troubleshooting"

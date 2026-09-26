@@ -1,5 +1,5 @@
 ---
-title: "heartbeat pricing Guide Guide Complete Guide"
+title: "Heartbeat Pricing Guide"
 excerpt: "heartbeat pricing  Unveiling Alertmend.io Heartbeat Pricing: The Key to Efficient System Monitoring In the fast-evolving world of system monitoring,..."
 date: "2026-01-10"
 category: "DevOps"

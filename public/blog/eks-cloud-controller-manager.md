@@ -1,5 +1,5 @@
 ---
-title: "eks cloud controller manager Guide"
+title: "EKS Cloud Controller Manager Guide"
 excerpt: "In the ever-evolving landscape of cloud infrastructure, the EKS cloud controller manager plays a pivotal role in integrating Kubernetes clusters with Amazon ..."
 date: "2026-01-10"
 category: "Kubernetes"

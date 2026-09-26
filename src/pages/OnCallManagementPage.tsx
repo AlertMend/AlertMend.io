@@ -53,7 +53,7 @@ export default function OnCallManagementPage() {
         description:
           'Timezone-aware schedules and rotations, escalation chains across Slack, Teams, WhatsApp, email and phone, and pages that arrive with the AI root cause attached.',
         keywords:
-          'on-call management, on-call schedules, escalation policy, incident alerts, PagerDuty alternative, WhatsApp alerts, phone call alerts, AI triage, AlertMend AI',
+          'on-call management, on-call schedules, escalation policy, incident alerts, PagerDuty alternative, WhatsApp alerts, phone call alerts, AI triage, AlertMend',
         canonical: '/on-call-management',
       }}
       badge="On-call & incidents"

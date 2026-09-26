@@ -1,5 +1,5 @@
 ---
-title: "Root Robots Programming And Development"
+title: "Root Robots Programming and Development"
 excerpt: "root robots python def monitor_system(): if system_load() > threshold: trigger_alert("High system load detected") monitor_system() This content is..."
 date: "2026-01-10"
 category: "DevOps"

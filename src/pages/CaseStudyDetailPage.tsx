@@ -6,8 +6,9 @@ import SEO from '../components/SEO'
 import Breadcrumb from '../components/Breadcrumb'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
 import styles from './CaseStudyDetailPage.module.css'
+import { calendlyUrl } from '../lib/calendly'
 
-const DEMO_URL = 'https://calendly.com/hello-alertmend/30min'
+const DEMO_URL = calendlyUrl('case-study')
 
 function CompanyLogo({ company, logo }: { company: string; logo?: string }) {
   const [imageError, setImageError] = useState(false)
@@ -120,7 +121,7 @@ export default function CaseStudyDetailPage() {
   return (
     <div className={styles.page}>
       <SEO
-        title={`${study.company} Case Study | AlertMend`}
+        title={`${study.company} Case Study: ${study.results?.[0] ? `${study.results[0].metric} ${study.results[0].label.replace(/\s*\(.*\)$/, '')}` : study.category} | AlertMend`}
         description={uniqueDescription}
         keywords={`${study.company} case study, ${study.category.toLowerCase()}, AlertMend, ${study.industry?.toLowerCase() || ''}`}
         canonical={caseStudyUrl}

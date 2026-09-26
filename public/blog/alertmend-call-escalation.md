@@ -1,5 +1,5 @@
 ---
-title: "Navigating On Call Escalation Alertmend"
+title: "Navigating On-Call Escalation with AlertMend"
 excerpt: "In the fast-paced world of system monitoring and DevOps, **on call escalation** serves as a pivotal mechanism to ensure system reliability and prompt inciden..."
 date: "2026-01-10"
 category: "AIOps"

@@ -1,5 +1,5 @@
 ---
-title: "Bright Server Monitoring And Devops Guide"
+title: "Bright Server Monitoring and DevOps Guide"
 excerpt: "Unveiling the Bright Server: Revolutionizing System Monitoring and DevOps In the fast-evolving landscape of system monitoring and DevOps, the bright server..."
 date: "2026-01-10"
 category: "DevOps"

@@ -1,6 +1,6 @@
 ---
 title: "Troubleshooting Unhealthy Elasticsearch"
-excerpt: "Networking is one of the most critical components in any Kubernetes deployment, facilitating communication between containers, services, and external..."
+excerpt: "In an Elasticsearch cluster, the health of nodes is critical for the stability and performance of the entire system."
 date: "2025-06-27"
 category: "Elasticsearch"
 author: "Arvind Rajpurohit"

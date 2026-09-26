@@ -1,6 +1,6 @@
 ---
-title: "Petrova Ai Recruitment Platform Overview"
-excerpt: "A comprehensive guide covering essential topics, best practices, and practical solutions for system management and DevOps operations."
+title: "Petrova AI Recruitment Platform Overview"
+excerpt: "In the fast-paced world of recruitment, leveraging advanced tools can be a game-changer."
 date: "2026-01-10"
 category: "Troubleshooting"
 author: "AlertMend Team"

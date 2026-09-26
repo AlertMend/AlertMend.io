@@ -1,69 +1,63 @@
 import SEO from '../components/SEO'
-import Breadcrumb from '../components/Breadcrumb'
+import { PageHero, Section } from '../components/enterprise/PageKit'
+import kit from '../components/enterprise/PageKit.module.css'
 import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
 
+// TODO(founders/legal): confirm the "last updated" date and whether these
+// terms are current; enterprise customers are covered by their own agreement.
+const LAST_UPDATED = 'March 2024'
+
 export default function TermsPage() {
-  // Generate unique meta description for terms page
-  const baseDescription = "AlertMend AI Terms: Review the terms of service for AlertMend AI's AIOps platform. Understand your rights and responsibilities."
+  const baseDescription =
+    'AlertMend terms of service: use licence, service availability, limitation of liability and how to contact us about these terms.'
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'terms', 'terms')
-  
+
   return (
-    <div className="min-h-screen bg-white">
+    <>
       <SEO
-        title="AlertMend AI Terms of Service for 2025"
+        title="AlertMend Terms of Service"
         description={uniqueDescription}
-        keywords="AlertMend terms of service, terms and conditions, AIOps terms, service agreement, legal terms"
+        keywords="AlertMend terms of service, terms and conditions"
         canonical="/terms"
+        breadcrumbData={{ items: [{ label: 'Terms of service' }] }}
       />
-      <section className="pt-24 pb-20 md:pb-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden hero-dark">
-          <div className="max-w-4xl mx-auto">
-            <div className="mb-8">
-              <Breadcrumb items={[{ label: 'Terms of Service' }]} />
-            </div>
-            <div className="text-center mb-12 md:mb-16">
-              <div className="inline-block px-5 py-2 bg-gradient-to-r from-brand-50 to-brand-100 text-brand-700 rounded-full text-sm font-bold mb-8 shadow-md border border-brand-200/50">
-                Legal
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-900 mb-6 leading-tight">
-                Terms of Service
-              </h1>
-              <p className="text-xl md:text-2xl text-brand-700 max-w-3xl mx-auto leading-relaxed mb-12">Last updated: March 2024</p>
-            </div>
 
-            <div className="prose prose-lg max-w-none bg-white rounded-3xl p-12 border-2 border-gray-200">
-              <h2 className="text-2xl font-bold text-brand-900 mb-4">Agreement to Terms</h2>
-              <p className="text-brand-700 mb-6 leading-relaxed">
-                By accessing or using AlertMend AI's services, you agree to be bound by these Terms of Service and all applicable laws and regulations.
-              </p>
+      <PageHero eyebrow="Legal" title="Terms of service" meta={`Last updated: ${LAST_UPDATED}`} />
 
-              <h2 className="text-2xl font-bold text-brand-900 mb-4 mt-8">Use License</h2>
-              <p className="text-brand-700 mb-6 leading-relaxed">
-                Permission is granted to use AlertMend AI for your internal business operations. This license does not include:
-              </p>
-              <ul className="list-disc pl-6 text-brand-700 mb-6 space-y-2">
-                <li>Resale or commercial use of the service</li>
-                <li>Modification or reverse engineering of the platform</li>
-                <li>Use of the service for any illegal purpose</li>
-              </ul>
+      <Section>
+        <div className={kit.legal}>
+          <h2>Agreement to terms</h2>
+          <p>
+            By accessing or using AlertMend's services, you agree to be bound by these Terms of Service and all
+            applicable laws and regulations.
+          </p>
 
-              <h2 className="text-2xl font-bold text-brand-900 mb-4 mt-8">Service Availability</h2>
-              <p className="text-brand-700 mb-6 leading-relaxed">
-                We strive to maintain 99.9% uptime but do not guarantee uninterrupted access. We reserve the right to modify or discontinue services with reasonable notice.
-              </p>
+          <h2>Use licence</h2>
+          <p>Permission is granted to use AlertMend for your internal business operations. This licence does not include:</p>
+          <ul>
+            <li>Resale or commercial use of the service</li>
+            <li>Modification or reverse engineering of the platform</li>
+            <li>Use of the service for any illegal purpose</li>
+          </ul>
 
-              <h2 className="text-2xl font-bold text-brand-900 mb-4 mt-8">Limitation of Liability</h2>
-              <p className="text-brand-700 mb-6 leading-relaxed">
-                AlertMend AI shall not be liable for any indirect, incidental, or consequential damages arising from the use of our services.
-              </p>
+          <h2>Service availability</h2>
+          <p>
+            We strive to maintain 99.9% uptime but do not guarantee uninterrupted access. We reserve the right to
+            modify or discontinue services with reasonable notice.
+          </p>
 
-              <h2 className="text-2xl font-bold text-brand-900 mb-4 mt-8">Contact Information</h2>
-              <p className="text-brand-700 mb-6 leading-relaxed">
-                For questions about these Terms, contact us at legal@alertmend.io
-              </p>
-            </div>
-          </div>
-        </section>
-    </div>
+          <h2>Limitation of liability</h2>
+          <p>
+            AlertMend shall not be liable for any indirect, incidental or consequential damages arising from the use of
+            our services.
+          </p>
+
+          <h2>Contact</h2>
+          <p>
+            For questions about these terms, contact <a href="mailto:legal@alertmend.io">legal@alertmend.io</a>.
+          </p>
+        </div>
+      </Section>
+    </>
   )
 }
-

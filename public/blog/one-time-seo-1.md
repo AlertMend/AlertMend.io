@@ -1,10 +1,11 @@
 ---
-title: "One Time Seo Optimization Strategy Guide"
+title: "One Time SEO Optimization Strategy Guide"
 excerpt: "In the dynamic world of DevOps, Kubernetes, and AIOps, staying ahead of the curve is crucial. One-time SEO optimization is a strategic approach that can sign..."
 date: "2026-01-10"
 category: "DevOps"
 author: "AlertMend Team"
 keywords: "AlertMend AI, AIOps, DevOps, time"
+hidden: true
 ---
 # One-Time SEO Optimization Strategy Guide
 

@@ -1,221 +1,683 @@
-import {
-  Database, Activity, FileCheck, Brain, Bell, ShieldCheck,
-  GitBranch, Workflow, Search,
-} from 'lucide-react'
-import SolutionPageTemplate, { Accent } from '../components/SolutionPageTemplate'
+import { useEffect, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
+import {
+  ArrowRight,
+  Plug,
+  FileText,
+  BellRing,
+  ListChecks,
+  TrendingUp,
+  GitBranch,
+  MessageSquare,
+  Gauge,
+  BellOff,
+  ShieldCheck,
+  Lock,
+  History,
+  KeyRound,
+  CheckCircle2,
+  Clock3,
+  Scale,
+  Eye,
+} from 'lucide-react'
+import SEO from '../components/SEO'
+import GovernanceSection from '../components/enterprise/GovernanceSection'
+import SovereigntySection from '../components/enterprise/SovereigntySection'
+import PlatformBoardMock from '../components/mocks/PlatformBoardMock'
+import PlatformBoardStage from '../components/mocks/PlatformBoardStage'
+import BrandLogo from '../components/ui/BrandLogo'
+import { withBrandLogo } from '../data/brandLogos'
+import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
+import styles from './DataObservabilityPage.module.css'
+import { calendlyUrl } from '../lib/calendly'
 
 /**
- * /data-observability — soda.io-style data quality monitoring.
- *
- * Warehouse / lake / pipeline health (freshness, volume, schema, anomalies),
- * not infra Observability & APM. Teach the data problem first, then AlertMend
- * as evidence-backed RCA and approval-gated remediation when bad data lands.
+ * /data-observability — dedicated data observability product page.
  */
 
+const DEMO_URL = calendlyUrl('data-observability-page')
 const SIGNUP_URL = 'https://app.alertmend.io/signup?service=data-observability'
 
-function SpotlightPanel() {
-  const monitors = [
-    { metric: 'freshness', value: '47m late', tone: 'crit' as const },
-    { metric: 'row count', value: '−38% vs baseline', tone: 'warn' as const },
-    { metric: 'null rate · amount', value: '12.4%', tone: 'crit' as const },
-    { metric: 'schema', value: 'column dropped', tone: 'warn' as const },
-  ]
-  const toneCls = {
-    crit: 'border-rose-400/30 bg-rose-500/10 text-rose-300',
-    warn: 'border-amber-400/30 bg-amber-500/10 text-amber-300',
-  }
+const PROOF = [
+  { value: '87', label: 'Check types ready', hint: 'No SQL required' },
+  { value: 'Policy → checks', label: 'From your PDF', hint: 'Clause cited on every check' },
+  { value: 'Read-only', label: 'Agent in your network', hint: 'Credentials never leave' },
+  { value: 'Cause + impact', label: 'In one alert', hint: 'Job + Power BI reports' },
+]
 
+const PILLARS = [
+  {
+    icon: Eye,
+    title: 'Monitor',
+    body: 'Freshness, uniqueness, completeness, validity, volume, anomalies and trends across the datasets that matter.',
+    points: ['87 ready-made checks', 'History-aware anomalies', 'Quality score that cannot hide a fail'],
+  },
+  {
+    icon: FileText,
+    title: 'Govern',
+    body: 'Start from the policy you already have. Every live check names the clause it enforces.',
+    points: ['Upload BCBS 239 or internal DQ PDFs', 'Approve before anything goes live', 'Business glossary links'],
+  },
+  {
+    icon: GitBranch,
+    title: 'Trace',
+    body: 'When a check fails, see the pipeline job that broke and the reports that will show the wrong number.',
+    points: ['Airflow and Oracle ODI', 'Power BI downstream lineage', 'Slack or Teams with context'],
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Trust',
+    body: 'Built for regulated data offices: outbound-only agent, least privilege, versioning and rollback.',
+    points: ['No warehouse secrets in AlertMend', 'Audit trail on every change', 'SOC 2 / ISO in progress'],
+  },
+]
+
+const STEPS = [
+  {
+    n: '01',
+    icon: Plug,
+    title: 'Connect safely',
+    body: 'Install a read-only agent in your network. Point it at your warehouse. Credentials stay on your side.',
+  },
+  {
+    n: '02',
+    icon: FileText,
+    title: 'Upload your policy',
+    body: 'AlertMend proposes checks from the PDF. Each one cites its clause. Nothing monitors until you approve.',
+  },
+  {
+    n: '03',
+    icon: BellRing,
+    title: 'Watch and act',
+    body: 'Failing checks page Slack or Teams with the failed job and affected Power BI reports.',
+  },
+]
+
+const DEEP = [
+  {
+    id: 'policy',
+    eyebrow: 'Policy to checks',
+    title: 'Your written rules become live observability',
+    body: 'Upload BCBS 239, an internal DQ standard, or a data contract PDF. AlertMend proposes the checks, each linked to the clause it enforces. You approve every one. Auditors get a trail instead of a scavenger hunt.',
+    chips: ['BCBS 239', 'Internal DQ policy', 'Clause trace', 'Human approve'],
+    visual: 'policy',
+  },
+  {
+    id: 'pipelines',
+    eyebrow: 'Cause and impact',
+    title: 'Know the job and the report before 9am',
+    body: 'A uniqueness fail on BANKING.CUSTOMER_ACCOUNTS is not just a red badge. It is linked to the ODI or Airflow run that broke, with the error message, and the Power BI reports that read the table.',
+    chips: ['Airflow', 'Oracle ODI', 'Power BI', 'Teams / Slack'],
+    visual: 'impact',
+  },
+  {
+    id: 'copilot',
+    eyebrow: 'Copilot',
+    title: 'Ask in English. Approve every change.',
+    body: 'Add, edit or route checks in plain language. The Copilot only proposes. A person still has to approve. Nothing writes to your warehouse data.',
+    chips: ['Plain English', 'Proposals only', 'Full audit'],
+    visual: 'copilot',
+  },
+]
+
+const FEATURES = [
+  {
+    icon: ListChecks,
+    title: '87 ready-made checks',
+    body: 'Completeness, uniqueness, validity, format, referential integrity, numeric, volume, freshness, anomaly and trend — built in a wizard.',
+  },
+  {
+    icon: TrendingUp,
+    title: 'Anomaly and trend',
+    body: 'Checks learn each dataset’s history. Without enough history, a check waits instead of guessing.',
+  },
+  {
+    icon: Gauge,
+    title: 'Quality score',
+    body: 'One score per dataset and overall. A failing check caps the score so averages cannot hide a problem.',
+  },
+  {
+    icon: MessageSquare,
+    title: 'Data Quality Copilot',
+    body: 'Propose add, edit or route in plain English. Every change stays a proposal until you approve.',
+  },
+  {
+    icon: BellOff,
+    title: 'Alerts without noise',
+    body: 'Cooldowns, maintenance windows and flapping detection, with incidents and escalation when it matters.',
+  },
+  {
+    icon: History,
+    title: 'Version and rollback',
+    body: 'Every check change is versioned with a reason and can be rolled back.',
+  },
+]
+
+const STACK = [
+  'Snowflake',
+  'Oracle',
+  'BigQuery',
+  'Redshift',
+  'Databricks',
+  'Postgres',
+  'dbt',
+  'Airflow',
+  'Oracle ODI',
+  'Power BI',
+  'Slack',
+  'Microsoft Teams',
+] as const
+
+function StackLogo({ label }: { label: string }) {
+  const brand = withBrandLogo({ label })
   return (
-    <div className="rounded-[10px] border border-white/10 bg-white/[0.03] p-5">
-      <div className="flex items-center justify-between">
-        <span className="font-mono text-xs text-white/55">analytics.orders · warehouse</span>
-        <span className="rounded-md border border-rose-400/30 bg-rose-500/10 px-2 py-0.5 text-[10px] font-bold text-rose-300">
-          3 anomalies
-        </span>
+    <BrandLogo
+      src={brand.logoSrc}
+      slug={brand.iconSlug}
+      tint={brand.logoTint}
+      domain={brand.domain}
+      alt=""
+      className={styles.stackLogo}
+    />
+  )
+}
+
+const SECURITY = [
+  {
+    icon: Lock,
+    title: 'Read-only by design',
+    body: 'The agent refuses anything but read queries and caps query time.',
+  },
+  {
+    icon: KeyRound,
+    title: 'Credentials stay home',
+    body: 'The agent holds warehouse credentials. AlertMend stores none.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Outbound only',
+    body: 'The agent connects out. No inbound ports in your network.',
+  },
+  {
+    icon: ListChecks,
+    title: 'Least privilege',
+    body: 'A generated grant script sets up a read-only role.',
+  },
+]
+
+const FAQS: { q: string; a: ReactNode }[] = [
+  {
+    q: 'Is this data observability or data quality?',
+    a: 'Both. You get monitored checks across datasets, plus governance: policy-to-checks, clause citations, approvals and an audit trail.',
+  },
+  {
+    q: 'Does our data leave our network?',
+    a: 'No. The agent runs queries inside your network and sends back only results.',
+  },
+  {
+    q: 'Does AI change our data or checks on its own?',
+    a: 'No. It proposes checks. A person approves each one. Nothing writes to your data.',
+  },
+  {
+    q: 'Which policies can we upload?',
+    a: 'Any text-based PDF — BCBS 239, internal DQ standards or data contracts.',
+  },
+  {
+    q: 'How long does setup take?',
+    a: 'Connecting takes minutes. Most of the time is reviewing proposed checks with data owners.',
+  },
+  {
+    q: 'Can we use it beside our current DQ tool?',
+    a: 'Yes. It runs alongside existing tools.',
+  },
+  {
+    q: 'How is it priced?',
+    a: (
+      <>
+        A plan price with unlimited checks and users.{' '}
+        <Link to="/pricing#data">See data pricing</Link>.
+      </>
+    ),
+  },
+]
+
+function IncidentPanel() {
+  const rows = [
+    { metric: 'uniqueness · account_id', value: '98.7% (expected 100%)', tone: 'crit' as const },
+    { metric: 'completeness · customer_id', value: '100%', tone: 'ok' as const },
+    { metric: 'freshness', value: 'on time', tone: 'ok' as const },
+  ]
+  return (
+    <div className={styles.incidentPanel}>
+      <div className={styles.incidentHead}>
+        <span>BANKING.CUSTOMER_ACCOUNTS · Snowflake</span>
+        <b>1 check failing</b>
       </div>
-      <div className="mt-4 space-y-2">
-        {monitors.map((m) => (
-          <div
-            key={m.metric}
-            className={`flex items-center justify-between rounded-lg border px-3 py-2 ${toneCls[m.tone]}`}
-          >
-            <span className="font-mono text-[11px] text-zinc-200">{m.metric}</span>
-            <span className="font-mono text-[11px] font-semibold">{m.value}</span>
+      <div className={styles.incidentRows}>
+        {rows.map((r) => (
+          <div key={r.metric} className={r.tone === 'crit' ? styles.rowCrit : styles.rowOk}>
+            <span>{r.metric}</span>
+            <strong>{r.value}</strong>
           </div>
         ))}
       </div>
-      <div className="mt-4 rounded-lg border border-violet-400/25 bg-violet-500/10 p-4">
-        <div className="text-xs font-bold text-violet-300">Root cause · confidence 91%</div>
-        <p className="mt-1.5 text-sm leading-relaxed text-zinc-200">
-          Downstream dbt model <b className="text-white">stg_orders</b> stopped landing after
-          deploy <b className="text-white">v4.12.1</b> dropped the <span className="font-mono text-[11.5px]">updated_at</span> column.
+      <div className={styles.incidentCause}>
+        <span>Cause and impact</span>
+        <p>
+          ODI job <b>nightly_load</b> failed with <code>ORA-01400</code>. 3 Power BI reports read
+          this table. Policy: BCBS 239, Principle 3.
         </p>
       </div>
     </div>
   )
 }
 
-export default function DataObservabilityPage() {
+function DeepVisual({ kind }: { kind: string }) {
+  if (kind === 'policy') {
+    return (
+      <div className={styles.mockCard}>
+        <div className={styles.mockLabel}>Policy upload · BCBS 239</div>
+        <div className={styles.mockList}>
+          {[
+            ['Principle 3 · Accuracy', 'Uniqueness on account_id', 'Proposed'],
+            ['Principle 3 · Integrity', 'Completeness on customer_id', 'Approved'],
+            ['Principle 4 · Timeliness', 'Freshness · daily_balance', 'Proposed'],
+          ].map(([clause, check, state]) => (
+            <div key={check} className={styles.mockRow}>
+              <div>
+                <strong>{check}</strong>
+                <span>{clause}</span>
+              </div>
+              <em className={state === 'Approved' ? styles.stateOk : styles.stateWait}>{state}</em>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+  if (kind === 'impact') {
+    return (
+      <div className={styles.mockCard}>
+        <div className={styles.mockLabel}>Failing check · last 15m</div>
+        <div className={styles.mockList}>
+          <div className={styles.mockRow}>
+            <div>
+              <strong>Uniqueness · account_id</strong>
+              <span>customer_accounts · 98.7%</span>
+            </div>
+            <em className={styles.stateHot}>Job linked</em>
+          </div>
+          <div className={styles.mockImpact}>
+            <p>
+              <b>nightly_load</b> · ORA-01400
+            </p>
+            <p>3 Power BI reports affected</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
   return (
-    <SolutionPageTemplate
-      seo={{
-        title: 'Data Observability: Freshness, Volume & Anomalies | AlertMend',
-        description:
-          'Monitor warehouse and lake tables for freshness, volume, schema drift and anomalies without a check per dataset. Data contracts, Slack alerts, and evidence-backed RCA when bad data hits pipelines.',
-        keywords:
-          'data observability, data quality, freshness monitoring, schema drift, anomaly detection, data contracts, warehouse monitoring, lakehouse, dbt, Snowflake, BigQuery, AlertMend',
-        canonical: '/data-observability',
-      }}
-      badge="Data Observability"
-      headline={
-        <>
-          Catch bad data <Accent>before</Accent> it reaches the dashboard
-        </>
-      }
-      sub="Freshness, volume, schema, and null rates across every table, watched automatically. When something breaks a pipeline, AlertMend cites the evidence and proposes a fix you approve in Slack or Teams."
-      signupUrl={SIGNUP_URL}
-      checks={['No check per table', 'Contracts for producers & consumers', 'Host in your VPC']}
-      highlightProduct="dataobs"
-      worksWith={{
-        heading: 'Connects to your warehouse, lake, and pipelines',
-        body: (
-          <>
-            <p className="mt-3 text-[14px] leading-relaxed text-zinc-500">
-              Snowflake, BigQuery, Redshift, Databricks, Postgres, plus dbt and Airflow metadata.
-              Monitors land on the tables those pipelines write. This is data health, not the
-              metrics/logs/traces surface in{' '}
-              <Link
-                to="/observability"
-                className="font-medium text-violet-700 underline-offset-2 hover:underline"
+    <div className={styles.mockCard}>
+      <div className={styles.mockLabel}>Copilot · proposal</div>
+      <div className={styles.mockChat}>
+        <p className={styles.mockUser}>Add a freshness check on loans.daily_balance for BCBS Principle 4</p>
+        <p className={styles.mockBot}>
+          Proposed: freshness · loans.daily_balance · max lag 2h · cites Principle 4. Awaiting
+          approval.
+        </p>
+      </div>
+      <div className={styles.mockActions}>
+        <span>Reject</span>
+        <strong>Approve</strong>
+      </div>
+    </div>
+  )
+}
+
+export default function DataObservabilityPage() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [])
+
+  const baseDescription =
+    'Data observability from your quality policy. Live checks across Snowflake, BigQuery, Redshift, Databricks, Oracle and Postgres — plus dbt, Airflow, Power BI impact, and a read-only agent in your network.'
+  const description = ensureUniqueMetaDescription(
+    baseDescription,
+    'data-observability',
+    'data-observability',
+  )
+
+  return (
+    <div className={styles.page}>
+      <SEO
+        title="Data Observability, Governance & Sovereignty | AlertMend"
+        description={description}
+        keywords="data observability, data quality monitoring, Snowflake, BigQuery, Redshift, Databricks, Postgres, dbt, Airflow, Power BI, AlertMend"
+        canonical="/data-observability"
+      />
+
+      {/* ---- Hero ---- */}
+      <section className={styles.hero}>
+        <div className={styles.heroWash} aria-hidden />
+        <div className={styles.heroInner}>
+          <div className={styles.heroCopy}>
+            <span className={styles.badge}>
+              <i className={styles.badgeDot} />
+              Data quality · Governance · Sovereignty
+            </span>
+            <h1 className={styles.h1}>
+              See bad data before the dashboard does —{' '}
+              <span className={styles.accent}>from the policy you already have</span>
+            </h1>
+            <p className={styles.lede}>
+              AlertMend turns written data quality rules into live checks across your warehouse and
+              lakehouse. When something fails, you get the pipeline job and the Power BI reports in
+              one alert — with credentials that never leave your network.
+            </p>
+            <div className={styles.heroCtas}>
+              <a
+                href={DEMO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.btnPrimary}
               >
-                Observability &amp; APM
+                Book a data demo <ArrowRight className={styles.btnIcon} />
+              </a>
+              <a
+                href={SIGNUP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.btnSecondary}
+              >
+                Start free
+              </a>
+            </div>
+            <ul className={styles.heroChecks}>
+              {[
+                'Checks cite the policy clause',
+                'Read-only agent in your network',
+                'Every change approved and audited',
+              ].map((t) => (
+                <li key={t}>
+                  <CheckCircle2 size={15} strokeWidth={2.2} />
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className={styles.heroVisual}>
+            <PlatformBoardStage split>
+              <PlatformBoardMock activeProduct="dataobs" />
+            </PlatformBoardStage>
+          </div>
+        </div>
+      </section>
+
+      {/* ---- Proof ---- */}
+      <section className={styles.proof}>
+        <div className={styles.wrap}>
+          <div className={styles.proofGrid}>
+            {PROOF.map((p) => (
+              <div key={p.label} className={styles.proofItem}>
+                <strong>{p.value}</strong>
+                <span>{p.label}</span>
+                <em>{p.hint}</em>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---- Pillars ---- */}
+      <section className={styles.section}>
+        <div className={styles.wrap}>
+          <header className={styles.secHead}>
+            <span className="sec-tag">What data observability means here</span>
+            <h2>Monitor. Govern. Trace. Trust.</h2>
+            <p>
+              Not another check farm. Observability that starts from policy, stays in your network,
+              and tells you what broke and who will notice.
+            </p>
+          </header>
+          <div className={styles.pillarGrid}>
+            {PILLARS.map((p) => (
+              <article key={p.title} className={styles.pillar}>
+                <span className={styles.pillarIcon}>
+                  <p.icon size={18} strokeWidth={1.7} />
+                </span>
+                <h3>{p.title}</h3>
+                <p>{p.body}</p>
+                <ul>
+                  {p.points.map((pt) => (
+                    <li key={pt}>{pt}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <GovernanceSection />
+
+      <SovereigntySection />
+
+      {/* ---- How it works ---- */}
+      <section className={styles.sectionAlt} id="policy">
+        <div className={styles.wrap}>
+          <header className={styles.secHead}>
+            <span className="sec-tag">How it works</span>
+            <h2>From policy PDF to live checks</h2>
+            <p>Connect once. Approve the proposals. Get alerts that carry cause and impact.</p>
+          </header>
+          <div className={styles.steps}>
+            {STEPS.map((s) => (
+              <article key={s.n} className={styles.step}>
+                <div className={styles.stepTop}>
+                  <span className={styles.stepNum}>{s.n}</span>
+                  <span className={styles.pillarIcon}>
+                    <s.icon size={16} strokeWidth={1.7} />
+                  </span>
+                </div>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---- Deep dives ---- */}
+      <section className={styles.section}>
+        <div className={styles.wrapNarrow}>
+          {DEEP.map((d, i) => (
+            <article
+              key={d.id}
+              id={d.id === 'pipelines' ? 'pipelines' : undefined}
+              className={`${styles.deep} ${i % 2 === 1 ? styles.deepFlip : ''}`}
+            >
+              <div className={styles.deepCopy}>
+                <span className={styles.deepEyebrow}>{d.eyebrow}</span>
+                <h2>{d.title}</h2>
+                <p>{d.body}</p>
+                <div className={styles.chips}>
+                  {d.chips.map((c) => (
+                    <span key={c}>{c}</span>
+                  ))}
+                </div>
+              </div>
+              <DeepVisual kind={d.visual} />
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* ---- Feature grid ---- */}
+      <section className={styles.sectionAlt}>
+        <div className={styles.wrap}>
+          <header className={styles.secHead}>
+            <span className="sec-tag">Capability set</span>
+            <h2>Everything a regulated data office needs to run checks</h2>
+            <p>Built capabilities only — no vaporware connectors or auto-remediation of your data.</p>
+          </header>
+          <div className={styles.featureGrid}>
+            {FEATURES.map((f) => (
+              <article key={f.title} className={styles.feature}>
+                <span className={styles.pillarIcon}>
+                  <f.icon size={16} strokeWidth={1.7} />
+                </span>
+                <h3>{f.title}</h3>
+                <p>{f.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---- Incident story ---- */}
+      <section className={styles.story}>
+        <div className={styles.wrap}>
+          <div className={styles.storyGrid}>
+            <div>
+              <span className={styles.storyTag}>Bad data at 06:12</span>
+              <h2>The nightly load failed. The report was fixed before the meeting.</h2>
+              <p>
+                The ODI load stopped on an Oracle error. AlertMend failed the linked uniqueness
+                check, named the job and the error, and listed the three Power BI reports that read
+                the table.
+              </p>
+              <ol className={styles.storySteps}>
+                {[
+                  'Uniqueness check fails on BANKING.CUSTOMER_ACCOUNTS',
+                  'Linked to ODI job nightly_load: ORA-01400',
+                  '3 Power BI reports flagged as affected',
+                  'Alert in Teams with the policy clause',
+                ].map((t, i) => (
+                  <li key={t}>
+                    <span>{i + 1}</span>
+                    {t}
+                  </li>
+                ))}
+              </ol>
+              <Link to="/security" className={styles.storyLink}>
+                How your data stays safe <ArrowRight size={16} />
               </Link>
-              .
+            </div>
+            <IncidentPanel />
+          </div>
+        </div>
+      </section>
+
+      {/* ---- Stack ---- */}
+      <section className={styles.section}>
+        <div className={styles.wrap}>
+          <div className={styles.stackLayout}>
+            <div>
+              <span className="sec-tag">Works with</span>
+              <h2 className={styles.stackH2}>Your data stack</h2>
+              <p className={styles.stackBody}>
+                Warehouses and lakes for checks. dbt and Airflow for pipelines. Power BI for
+                report impact. Alerts where your team already works.
+              </p>
+            </div>
+            <div className={styles.stackGrid}>
+              {STACK.map((label) => (
+                <span key={label} className={styles.stackItem}>
+                  <StackLogo label={label} />
+                  {label}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---- Security ---- */}
+      <section className={styles.sectionAlt}>
+        <div className={styles.wrap}>
+          <header className={styles.secHead}>
+            <span className="sec-tag">Built for regulated data</span>
+            <h2>Enterprise controls without moving your warehouse</h2>
+            <p>
+              Banks and operators need proof. AlertMend is designed so secrets stay home and every
+              change is auditable.
             </p>
-            <p className="mt-3 text-[14px] leading-relaxed text-zinc-500">
-              When an anomaly fires, pages go to{' '}
-              <Link
-                to="/integrations/slack"
-                className="font-medium text-violet-700 underline-offset-2 hover:underline"
-              >
-                Slack
-              </Link>{' '}
-              or{' '}
-              <Link
-                to="/integrations/ms-teams"
-                className="font-medium text-violet-700 underline-offset-2 hover:underline"
-              >
-                Microsoft Teams
-              </Link>{' '}
-              with citations, then remediation waits for approval.
-            </p>
-          </>
-        ),
-        items: [
-          { label: 'Snowflake' },
-          { label: 'BigQuery' },
-          { label: 'Redshift' },
-          { label: 'Databricks' },
-          { label: 'Postgres' },
-          { label: 'dbt' },
-          { label: 'Airflow' },
-          { label: 'Slack' },
-          { label: 'Microsoft Teams' },
-        ],
-      }}
-      stepsHeading="From warehouse to a fix you approved"
-      stepsSub="Connect sources once, let monitors learn the baseline, then act on anomalies with the same approval loop as the rest of AlertMend."
-      steps={[
-        {
-          icon: Database,
-          title: 'Connect',
-          sub: 'Warehouse, lake, pipeline',
-          spec: 'Snowflake · BigQuery · Redshift · Databricks · Postgres, plus dbt and Airflow metadata',
-        },
-        {
-          icon: Activity,
-          title: 'Monitor',
-          sub: 'Metrics that learn',
-          spec: 'freshness · volume · schema · null rates · custom metrics, with adaptive thresholds',
-        },
-        {
-          icon: Workflow,
-          title: 'Act',
-          sub: 'Alert, RCA, approve',
-          spec: 'Slack or Teams page with citations · quarantine path · remediation gated by approval',
-        },
-      ]}
-      featuresHeading="Data health without a check farm"
-      featuresSub="Observability & APM watches infra signals. Data Observability watches the tables those pipelines write."
-      features={[
-        {
-          icon: Activity,
-          title: 'Metric monitors at scale',
-          body: 'Turn on freshness, row count, schema and completeness across hundreds of tables in one step. No hand-written check per dataset.',
-          chips: ['freshness', 'volume', 'schema'],
-          big: true,
-        },
-        {
-          icon: Brain,
-          title: 'AI anomaly detection',
-          body: 'Baselines learn seasonality and trend. Flag expected vs anomalous so the model tightens over time instead of paging on every dip.',
-          chips: ['adaptive', 'feedback'],
-        },
-        {
-          icon: FileCheck,
-          title: 'Data contracts',
-          body: 'Producers and consumers share explicit expectations. Versioned proposals, diffs, and enforcement at the source before bad rows spread.',
-          chips: ['contracts', 'Git + UI'],
-        },
-        {
-          icon: Search,
-          title: 'Historical baseline',
-          body: 'Backfill metadata so day one already shows patterns, not a blank chart waiting for weeks of training.',
-          chips: ['backfill', 'trends'],
-        },
-        {
-          icon: Bell,
-          title: 'Slack & Teams alerts',
-          body: 'Opt-in notifications when deviations matter. Every page arrives with the table, metric, and linked evidence.',
-          chips: ['Slack', 'Teams'],
-        },
-        {
-          icon: ShieldCheck,
-          title: 'Failed-record quarantine',
-          body: 'Rows that break a contract or trip an anomaly can land in a quarantine table in your warehouse, not silently in dashboards.',
-          chips: ['quarantine', 'your cloud'],
-        },
-        {
-          icon: GitBranch,
-          title: 'Evidence-backed RCA',
-          body: 'Correlate deploy, dbt run, and metric history into a cited root cause with a confidence score, the same RCA surface as infra incidents.',
-          chips: ['citations', 'confidence'],
-        },
-        {
-          icon: Workflow,
-          title: 'Approval-gated remediation',
-          body: 'Suggest a contract update, pipeline rollback, or quarantine rule. Nothing runs until someone approves in Slack or Teams.',
-          chips: ['approve', 'audit'],
-        },
-      ]}
-      spotlight={{
-        tag: 'Bad data at 06:12',
-        title: 'orders went stale after a dbt deploy',
-        body: 'AlertMend flagged freshness and null-rate anomalies on analytics.orders, tied them to a schema change in stg_orders, and handed the on-call a cited RCA with a contract update ready to approve.',
-        steps: [
-          'Freshness lag and null spike on analytics.orders',
-          'Correlated with dbt deploy v4.12.1 and missing updated_at',
-          'Root cause written with metric and change citations',
-          'Contract update and quarantine rule proposed in Slack',
-        ],
-        linkTo: '/ai-rca',
-        linkLabel: 'See how AI RCA works',
-        panel: <SpotlightPanel />,
-      }}
-      ctaHeading="Point AlertMend at your warehouse"
-      ctaSub="Connect a data source and see freshness, volume and schema monitors live, with the same RCA and approval loop as the rest of your stack."
-    />
+          </header>
+          <div className={styles.securityGrid}>
+            {SECURITY.map((s) => (
+              <article key={s.title} className={styles.securityCard}>
+                <span className={styles.pillarIcon}>
+                  <s.icon size={16} strokeWidth={1.7} />
+                </span>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </article>
+            ))}
+          </div>
+          <div className={styles.securityExtra}>
+            <div className={styles.valueRow}>
+              <span>
+                <Clock3 size={16} strokeWidth={1.7} /> Live in minutes, not quarters
+              </span>
+              <span>
+                <Scale size={16} strokeWidth={1.7} /> Clause-citable checks
+              </span>
+              <span>
+                <ShieldCheck size={16} strokeWidth={1.7} /> SOC 2 Type II &amp; ISO 27001 in progress
+              </span>
+            </div>
+            <Link to="/security" className={styles.storyLink}>
+              Read the security model <ArrowRight size={16} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ---- FAQ ---- */}
+      <section className={styles.section}>
+        <div className={styles.wrapTight}>
+          <header className={styles.secHead}>
+            <span className="sec-tag">FAQ</span>
+            <h2>Questions data teams ask first</h2>
+          </header>
+          <div className={styles.faq}>
+            {FAQS.map((f) => (
+              <details key={f.q} className={styles.faqItem}>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
+          <p className={styles.crossLink}>
+            Also run Kubernetes or VMs?{' '}
+            <Link to="/observability">See AlertMend for infrastructure →</Link>
+          </p>
+        </div>
+      </section>
+
+      {/* ---- CTA ---- */}
+      <section className={styles.ctaBand}>
+        <div className={styles.wrapTight}>
+          <h2>See a banking policy turned into live checks</h2>
+          <p>
+            Thirty minutes on a sample BCBS-style policy — or a pilot on your own warehouse data.
+          </p>
+          <div className={styles.heroCtas}>
+            <a
+              href={DEMO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.btnPrimary}
+            >
+              Book the data demo <ArrowRight className={styles.btnIcon} />
+            </a>
+            <Link to="/contact" className={styles.btnSecondary}>
+              Talk with us
+            </Link>
+          </div>
+        </div>
+      </section>
+    </div>
   )
 }

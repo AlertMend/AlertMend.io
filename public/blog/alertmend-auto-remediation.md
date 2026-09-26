@@ -1,5 +1,5 @@
 ---
-title: "Auto Remediation Alertmend Guide"
+title: "Auto-Remediation with AlertMend"
 excerpt: "In 2026, the complexity of digital environments has reached unparalleled levels, making system management and security more challenging than ever. **Auto rem..."
 date: "2026-01-10"
 category: "AIOps"

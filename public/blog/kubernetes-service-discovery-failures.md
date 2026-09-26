@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes Service Discovery Failures"
-excerpt: "A 502 Bad Gateway error is a common issue that users face when working with Kubernetes, especially when dealing with services and load balancers."
+excerpt: "In Kubernetes, service discovery is crucial for enabling communication between different services within the cluster."
 date: "2025-02-1"
 category: "Kubernetes"
 author: "Arvind Rajpurohit"

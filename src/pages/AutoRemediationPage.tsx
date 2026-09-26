@@ -45,7 +45,7 @@ export default function AutoRemediationPage() {
           'RF remediation, runbooks, remediation flows, Slack approval, Kubernetes automation, incident response, AlertMend',
         canonical: '/auto-remediation',
       }}
-      badge="RF · Remediation"
+      badge="Remediation flows"
       headline={
         <>
           Approved workflows that <Accent>act</Accent>, with an audit trail

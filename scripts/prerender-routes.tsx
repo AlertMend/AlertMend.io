@@ -83,6 +83,9 @@ const allCssFiles = getAllCssFiles(entryKey)
 const cssLinks = allCssFiles.map((cssFile: string) => `<link rel="stylesheet" href="/${cssFile}">`).join('\n')
 const preloadLinks = makeModulePreloadLinks(entryKey)
 
+/** Any path App.tsx doesn't match renders NotFoundPage. */
+const NOT_FOUND_ROUTE = '/__not-found__'
+
 const routesToPrerender = [
   '/',
   '/observability',
@@ -95,6 +98,7 @@ const routesToPrerender = [
   '/on-call-management',
   '/kubernetes-cost-optimization',
   '/pricing',
+  '/blog',
   '/case-studies',
   '/about',
   '/partners',
@@ -107,16 +111,24 @@ const routesToPrerender = [
   '/contact',
   '/careers',
   '/security',
+  '/trust',
+  '/industries',
   '/compliance',
   '/terms',
   '/privacy',
   '/help',
   '/community',
   '/tutorials',
-  '/webinars'
+  '/webinars',
+  // Rendered by the catch-all <Route path="*"> (NotFoundPage, noindex).
+  // Written to dist/404.html so Vercel serves it with a real 404 status.
+  NOT_FOUND_ROUTE,
 ]
 
 const outputPathForRoute = (route: string) => {
+  if (route === NOT_FOUND_ROUTE) {
+    return path.join(distDir, '404.html')
+  }
   if (route === '/') {
     return path.join(distDir, 'index.html')
   }
@@ -160,9 +172,10 @@ routesToPrerender.forEach((route) => {
     gtag('config', 'G-Z8QSJ5NK95');
   </script>
   ${cssLinks}
-  ${helmet?.title?.toString() || '<title>AlertMend AI</title>'}
+  ${helmet?.title?.toString() || '<title>AlertMend</title>'}
   ${helmet?.meta?.toString() || ''}
   ${helmet?.link?.toString() || ''}
+  ${helmet?.script?.toString() || ''}
   ${preloadLinks}
   <!-- SearchAtlas Dynamic Optimization -->
   <script nowprocket nitro-exclude type="text/javascript" id="sa-dynamic-optimization" data-uuid="6df6e583-765f-486e-af01-8883dae4a8f2" src="data:text/javascript;base64,dmFyIHNjcmlwdCA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoInNjcmlwdCIpO3NjcmlwdC5zZXRBdHRyaWJ1dGUoIm5vd3Byb2NrZXQiLCAiIik7c2NyaXB0LnNldEF0dHJpYnV0ZSgibml0cm8tZXhjbHVkZSIsICIiKTtzY3JpcHQuc3JjID0gImh0dHBzOi8vZGFzaGJvYXJkLnNlYXJjaGF0bGFzLmNvbS9zY3JpcHRzL2R5bmFtaWNfb3B0aW1pemF0aW9uLmpzIjtzY3JpcHQuZGF0YXNldC51dWlkID0gIjZkZjZlNTgzLTc2NWYtNDg2ZS1hZjAxLTg4ODNkYWU0YThmMiI7c2NyaXB0LmlkID0gInNhLWR5bmFtaWMtb3B0aW1pemF0aW9uLWxvYWRlciI7ZG9jdW1lbnQuaGVhZC5hcHBlbmRDaGlsZChzY3JpcHQpOw=="></script>

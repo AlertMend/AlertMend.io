@@ -9,8 +9,6 @@ keywords: "AlertMend AI, AIOps, DevOps, Optimizing, Coredns, Plugin, Performance
 
 # Optimizing Coredns Plugin Performance In 2025
 
-*Generated on 2025-12-27 23:13:41*
-
 ---
 
 ## Navigating the Future of DNS: Optimizing CoreDNS Plugin Performance in 2025

@@ -1,5 +1,5 @@
 ---
-title: "How to Get Status of Kubernates Node Using"
+title: "How to Get Status of Kubernates Node Using Golang"
 excerpt: "In the realm of Kubernetes cluster management, understanding the status of your nodes is crucial for maintaining system health and efficiency"
 date: "2026-01-10"
 category: "Kubernetes"

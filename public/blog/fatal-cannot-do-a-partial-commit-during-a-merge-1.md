@@ -1,10 +1,11 @@
 ---
-title: "Fatal Cannot do a Partial Commit During A"
+title: "Fatal Cannot Do a Partial Commit During a Merge"
 excerpt: "When working with Git, encountering the fatal cannot do a partial commit during a merge error can disrupt your workflow. Learn how to resolve it."
 date: "2026-01-10"
 category: "Troubleshooting"
 author: "AlertMend Team"
 keywords: "fatal, cannot, partial, commit, during, Troubleshooting, AlertMend AI, AIOps, error resolution, system monitoring"
+hidden: true
 ---
 
 # fatal cannot do a partial commit during a merge

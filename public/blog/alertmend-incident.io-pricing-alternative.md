@@ -1,5 +1,5 @@
 ---
-title: "Mastering Incident Management Alertmend"
+title: "Mastering Incident Management with AlertMend"
 excerpt: "In 2026, incident management remains a critical component in maintaining seamless operations within IT systems and services."
 date: "2026-01-10"
 category: "AIOps"

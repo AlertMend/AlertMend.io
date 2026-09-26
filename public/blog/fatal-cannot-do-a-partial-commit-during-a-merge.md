@@ -1,5 +1,5 @@
 ---
-title: "Fatal: Cannot do a Partial Commit During A"
+title: "Fatal: Cannot Do a Partial Commit During a Merge"
 excerpt: "In the world of software development, merge conflicts are a familiar challenge, often leading to the puzzling error: \"fatal: cannot do a partial commit durin"
 date: "2026-01-10"
 category: "Troubleshooting"
