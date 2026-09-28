@@ -71,9 +71,9 @@ export const integrations: Integration[] = [
     slug: 'aws',
     name: 'AWS',
     category: 'Cloud',
-    tagline: 'Connect EC2, ECS, RDS, ELB, Lambda — observe and remediate.',
+    tagline: 'Connect EC2, ECS, RDS, ELB and Lambda. Observe and remediate.',
     description:
-      'Register an AlertMend agent in your AWS account to watch CloudWatch metrics, ECS task health, EC2 status checks, and RDS performance signals. AlertMend can restart stuck ECS tasks, cordon unhealthy nodes, and surface FinOps right-sizing across EC2, RDS, ELB, and ECS — all with audited approvals.',
+      'Register an AlertMend agent in your AWS account to watch CloudWatch metrics, ECS task health, EC2 status checks, and RDS performance signals. AlertMend can restart stuck ECS tasks, cordon unhealthy nodes, and surface FinOps right-sizing across EC2, RDS, ELB, and ECS, all with audited approvals.',
     capabilities: [
       'EC2 / ECS / RDS / ELB monitoring with CloudWatch ingestion',
       'Per-resource $/mo savings recommendations',
@@ -87,9 +87,9 @@ export const integrations: Integration[] = [
     slug: 'google-cloud',
     name: 'Google Cloud',
     category: 'Cloud',
-    tagline: 'GKE, GCE, Cloud Run, BigQuery — full-stack visibility.',
+    tagline: 'GKE, GCE, Cloud Run, BigQuery: full-stack visibility.',
     description:
-      'AlertMend integrates with GCP via service-account credentials and GKE workload identity. We watch GKE pods, GCE VM groups, Cloud Run revisions, and budget alerts — and run remediations through cluster RBAC or VM-level SSH.',
+      'AlertMend integrates with GCP via service-account credentials and GKE workload identity. We watch GKE pods, GCE VM groups, Cloud Run revisions, and budget alerts, and run remediations through cluster RBAC or VM-level SSH.',
     capabilities: [
       'GKE workload health + 50% cost reduction patterns from WareFlex',
       'GCE VM auto-recovery for stuck workloads',
@@ -257,7 +257,7 @@ export const integrations: Integration[] = [
     slug: 'jira',
     name: 'Jira',
     category: 'Issue tracking',
-    tagline: 'File RCAs as Jira issues with one click — fields prefilled.',
+    tagline: 'File RCAs as Jira issues with one click, fields prefilled.',
     description:
       'Drop an AlertMend incident into Jira as a structured issue: summary, evidence, runbook log, and root-cause classification all go into the right fields. Works with Jira Cloud and Jira DC.',
     capabilities: [
@@ -275,11 +275,11 @@ export const integrations: Integration[] = [
     category: 'Collaboration',
     tagline: 'Email-channel paging and digest delivery via SendGrid.',
     description:
-      'When you need email as a paging channel — for execs, broader stakeholders, or fallback when chat is down — AlertMend can deliver structured RCA emails through your SendGrid account.',
+      'When you need email as a paging channel (for execs, broader stakeholders, or fallback when chat is down), AlertMend can deliver structured RCA emails through your SendGrid account.',
     capabilities: [
       'Branded HTML RCAs sent on incident open/resolve',
       'Daily/weekly digest emails for stakeholders',
-      'DKIM/SPF respected — sent as your domain',
+      'DKIM/SPF respected, sent as your domain',
       'Per-recipient routing rules',
     ],
     logoSrc: svgporn('sendgrid'),
@@ -324,7 +324,7 @@ export const integrations: Integration[] = [
     category: 'CI/CD',
     tagline: 'Generate PRs from runbooks; correlate Actions to incidents.',
     description:
-      'AlertMend can open a pull request directly from an RCA — for example, the right-sized requests/limits YAML — using a fine-scoped GitHub App. Workflow runs are also ingested as deploy events for evidence.',
+      'AlertMend can open a pull request directly from an RCA (for example, the right-sized requests/limits YAML) using a fine-scoped GitHub App. Workflow runs are also ingested as deploy events for evidence.',
     capabilities: [
       'GitHub App with least-privilege scopes',
       '"Generate PR" action straight from any RCA',

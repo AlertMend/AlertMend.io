@@ -32,7 +32,7 @@ const COMPANY = [
   { to: '/contact', label: 'Contact' },
 ];
 
-const STANDARDS = ['SOC 2 Type II', 'ISO 27001', 'GDPR'];
+const STANDARDS = ['Agent in your network', 'On-prem & air-gapped', 'Bring your own model', 'Full audit trail'];
 
 export default function Footer() {
   return (
@@ -68,10 +68,9 @@ export default function Footer() {
 
             <div className={styles.compliance}>
               <div className={styles.complianceHead}>
-                <span className={styles.complianceLabel}>Security &amp; compliance</span>
-                <Link to="/compliance" className={styles.complianceNote}>
-                  <span className={styles.complianceDot} aria-hidden />
-                  In progress
+                <span className={styles.complianceLabel}>Built for regulated teams</span>
+                <Link to="/trust" className={styles.complianceNote}>
+                  Trust center →
                 </Link>
               </div>
               <div className={styles.complianceList}>

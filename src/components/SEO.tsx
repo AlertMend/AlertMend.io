@@ -38,7 +38,7 @@ interface SEOProps {
 
 export default function SEO({
   title = 'AlertMend: AI Observability & Automation for Kubernetes & AWS',
-  description = 'AlertMend unifies metrics, logs, and traces, runs evidence-backed AI RCA, and remediates only after Slack or Teams approval — with rollback and a full audit trail.',
+  description = 'AlertMend unifies metrics, logs, and traces, runs evidence-backed AI RCA, and remediates only after Slack or Teams approval, with rollback and a full audit trail.',
   keywords = 'AIOps, Kubernetes, incident management, RF remediation, SRE, DevOps, observability, AI RCA, cost optimization, VM monitoring, infrastructure automation, Kubernetes monitoring',
   canonical,
   ogImage = 'https://www.alertmend.io/og-image.jpg',

@@ -29,7 +29,7 @@ import { calendlyUrl } from '../../lib/calendly';
 const primaryLinks: Array<{ to: string; label: string }> = [
   /* Data buyers are a separate audience; give them a door in the bar itself
      rather than only inside the Platform panel. */
-  { to: '/data-observability', label: 'Data governance' },
+  { to: '/data-observability', label: 'Data observability' },
   { to: '/industries', label: 'Industries' },
   { to: '/pricing', label: 'Pricing' },
   { to: '/case-studies', label: 'Customers' },

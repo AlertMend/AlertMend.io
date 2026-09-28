@@ -92,7 +92,7 @@ const DEFAULT_WORKS_WITH: SolutionWorksWith = {
     <>
       <p className="mt-3 text-[14px] leading-relaxed text-zinc-500">
         Containers or virtual machines, self-hosted or managed. AlertMend ingests the alerts you
-        already have — Prometheus Alertmanager, Datadog, Grafana or a plain webhook — so SRE and
+        already have (Prometheus Alertmanager, Datadog, Grafana or a plain webhook), so SRE and
         DevOps teams cut MTTR without swapping out the stack or re-instrumenting anything.
       </p>
       <p className="mt-3 text-[14px] leading-relaxed text-zinc-500">

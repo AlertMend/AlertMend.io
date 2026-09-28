@@ -137,7 +137,7 @@ const PHASES: Phase[] = [
     id: 'see',
     step: '01',
     title: 'See',
-    line: 'Metrics, logs, traces, and cluster health on one timeline — OpenTelemetry and eBPF.',
+    line: 'Metrics, logs, traces, and cluster health on one timeline, with OpenTelemetry and eBPF.',
     to: '/observability',
     cta: 'Explore observability',
     doors: [
@@ -150,7 +150,7 @@ const PHASES: Phase[] = [
     id: 'explain',
     step: '02',
     title: 'Explain',
-    line: 'AI RCA with cited evidence and confidence — not a black-box guess.',
+    line: 'AI RCA with cited evidence and confidence, not a black-box guess.',
     to: '/ai-rca',
     cta: 'See AI RCA',
     doors: [
@@ -162,7 +162,7 @@ const PHASES: Phase[] = [
     id: 'fix',
     step: '03',
     title: 'Fix',
-    line: 'Approved runbooks and PR fixes — auditable, reversible, posted back to Slack.',
+    line: 'Approved runbooks and PR fixes: auditable, reversible, posted back to Slack.',
     to: '/auto-remediation',
     cta: 'See remediation',
     doors: [
@@ -196,7 +196,7 @@ export default function PlatformShowcase() {
       <div className="container">
         <div className={`sec-head reveal ${styles.head}`}>
           <span className="sec-tag">How it works</span>
-          <h2>From signal to fix — one loop.</h2>
+          <h2>From signal to fix, in one loop.</h2>
           <p>
             AlertMend is built around the incident path, not a product catalog.
             See the blast radius, explain the cause, fix with approval.

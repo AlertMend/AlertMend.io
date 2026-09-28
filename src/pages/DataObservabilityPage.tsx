@@ -23,6 +23,7 @@ import {
 import SEO from '../components/SEO'
 import GovernanceSection from '../components/enterprise/GovernanceSection'
 import SovereigntySection from '../components/enterprise/SovereigntySection'
+import { LineageImpact, PolicyContract } from '../components/enterprise/DataDepth'
 import PlatformBoardMock from '../components/mocks/PlatformBoardMock'
 import PlatformBoardStage from '../components/mocks/PlatformBoardStage'
 import BrandLogo from '../components/ui/BrandLogo'
@@ -49,7 +50,7 @@ const PILLARS = [
   {
     icon: Eye,
     title: 'Monitor',
-    body: 'Freshness, uniqueness, completeness, validity, volume, anomalies and trends across the datasets that matter.',
+    body: 'Freshness, volume, schema changes, uniqueness, completeness, validity, anomalies and trends across the datasets and pipelines that matter.',
     points: ['87 ready-made checks', 'History-aware anomalies', 'Quality score that cannot hide a fail'],
   },
   {
@@ -124,7 +125,7 @@ const FEATURES = [
   {
     icon: ListChecks,
     title: '87 ready-made checks',
-    body: 'Completeness, uniqueness, validity, format, referential integrity, numeric, volume, freshness, anomaly and trend — built in a wizard.',
+    body: 'Completeness, uniqueness, validity, format, referential integrity, numeric, volume, freshness, anomaly and trend, built in a wizard.',
   },
   {
     icon: TrendingUp,
@@ -220,7 +221,7 @@ const FAQS: { q: string; a: ReactNode }[] = [
   },
   {
     q: 'Which policies can we upload?',
-    a: 'Any text-based PDF — BCBS 239, internal DQ standards or data contracts.',
+    a: 'Any text-based PDF: BCBS 239, internal DQ standards or data contracts.',
   },
   {
     q: 'How long does setup take?',
@@ -341,7 +342,7 @@ export default function DataObservabilityPage() {
   }, [])
 
   const baseDescription =
-    'Data observability from your quality policy. Live checks across Snowflake, BigQuery, Redshift, Databricks, Oracle and Postgres — plus dbt, Airflow, Power BI impact, and a read-only agent in your network.'
+    'Data observability from your quality policy. Live checks across Snowflake, BigQuery, Redshift, Databricks, Oracle and Postgres, plus dbt, Airflow, Power BI impact, and a read-only agent in your network.'
   const description = ensureUniqueMetaDescription(
     baseDescription,
     'data-observability',
@@ -367,13 +368,13 @@ export default function DataObservabilityPage() {
               Data quality · Governance · Sovereignty
             </span>
             <h1 className={styles.h1}>
-              See bad data before the dashboard does —{' '}
+              See bad data before the dashboard does,{' '}
               <span className={styles.accent}>from the policy you already have</span>
             </h1>
             <p className={styles.lede}>
               AlertMend turns written data quality rules into live checks across your warehouse and
               lakehouse. When something fails, you get the pipeline job and the Power BI reports in
-              one alert — with credentials that never leave your network.
+              one alert, with credentials that never leave your network.
             </p>
             <div className={styles.heroCtas}>
               <a
@@ -459,6 +460,10 @@ export default function DataObservabilityPage() {
         </div>
       </section>
 
+      <LineageImpact />
+
+      <PolicyContract />
+
       <GovernanceSection />
 
       <SovereigntySection />
@@ -519,7 +524,7 @@ export default function DataObservabilityPage() {
           <header className={styles.secHead}>
             <span className="sec-tag">Capability set</span>
             <h2>Everything a regulated data office needs to run checks</h2>
-            <p>Built capabilities only — no vaporware connectors or auto-remediation of your data.</p>
+            <p>Built capabilities only. No vaporware connectors or auto-remediation of your data.</p>
           </header>
           <div className={styles.featureGrid}>
             {FEATURES.map((f) => (
@@ -661,7 +666,7 @@ export default function DataObservabilityPage() {
         <div className={styles.wrapTight}>
           <h2>See a banking policy turned into live checks</h2>
           <p>
-            Thirty minutes on a sample BCBS-style policy — or a pilot on your own warehouse data.
+            Thirty minutes on a sample BCBS-style policy, or a pilot on your own warehouse data.
           </p>
           <div className={styles.heroCtas}>
             <a

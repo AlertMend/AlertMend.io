@@ -16,14 +16,14 @@ const bullets: { html: React.ReactNode }[] = [
   {
     html: (
       <>
-        <b>Evidence-backed RCA</b> — traces, logs, metrics, and changes cited in every report.
+        <b>Evidence-backed RCA:</b> traces, logs, metrics, and changes cited in every report.
       </>
     ),
   },
   {
     html: (
       <>
-        <b>Approved fixes</b> — PR suggestions and runbooks with an audit trail.
+        <b>Approved fixes:</b> PR suggestions and runbooks with an audit trail.
       </>
     ),
   },
@@ -116,7 +116,7 @@ export default function AISpotlight({ standalone = false }: Props) {
           <div ref={textRef} className={`${styles.text} reveal visible`}>
             <span className="sec-tag">AI RCA</span>
             <h2 className={styles.h2}>
-              From alert to root cause — with evidence.
+              From alert to root cause, with evidence.
             </h2>
             <p className={styles.p}>
               AlertMend reads logs, metrics, traces, and Kubernetes events, then explains the

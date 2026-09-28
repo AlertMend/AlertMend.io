@@ -50,7 +50,7 @@ export const HOME_FAQ: Record<Audience, FaqItem[]> = {
     },
     {
       q: 'Are we too small for this?',
-      a: 'No. The free Playground covers an individual end to end, and paid plans start at around ten VMs or a small cluster.',
+      a: 'No. The free plan covers an individual end to end, and paid plans start at around ten VMs or a small cluster.',
     },
   ],
 }

@@ -27,7 +27,7 @@ export const GPU_RCA: RcaReportStory = {
   summary: (
     <>
       Distributed training hung on NCCL all-reduce because GPU 3 on{' '}
-      <b>gpu-h100-04</b> is thermally throttling at 89°C — idle GPUs cost ~$98/hr while hung.
+      <b>gpu-h100-04</b> is thermally throttling at 89°C. Idle GPUs cost ~$98/hr while hung.
     </>
   ),
   evidenceSources: ['Job', 'GPU telemetry', 'NCCL trace', 'Node'],

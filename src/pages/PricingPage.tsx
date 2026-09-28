@@ -23,8 +23,8 @@ type Plan = {
 
 const infraPlans: Plan[] = [
   {
-    name: 'SRE/DevOps Playground',
-    label: 'Free',
+    name: 'Free',
+    label: '',
     description: 'For individuals trying out the product',
     features: [
       'Unlimited remediation flows',
@@ -65,7 +65,7 @@ const infraPlans: Plan[] = [
     href: DEMO_URL,
   },
   {
-    name: 'Enterprise/Custom',
+    name: 'Enterprise',
     label: '',
     description: 'On-prem, bring your own model, custom SLAs',
     features: [
@@ -77,7 +77,7 @@ const infraPlans: Plan[] = [
       'Support: Immediate',
     ],
     popular: false,
-    buttonText: 'Book a demo',
+    buttonText: 'Contact sales',
     href: DEMO_URL,
   },
 ]
@@ -88,7 +88,7 @@ const infraPlans: Plan[] = [
 const dataPlans: Plan[] = [
   {
     name: 'Free',
-    label: 'Free',
+    label: '',
     description: 'Try it on your own data',
     features: [
       'A starter set of datasets',
@@ -111,7 +111,7 @@ const dataPlans: Plan[] = [
       'Power BI impact',
     ],
     popular: true,
-    buttonText: 'Talk to us',
+    buttonText: 'Book a demo',
     href: DATA_DEMO_URL,
   },
   {
@@ -125,7 +125,7 @@ const dataPlans: Plan[] = [
       'Audit export',
     ],
     popular: false,
-    buttonText: 'Talk to us',
+    buttonText: 'Book a demo',
     href: DATA_DEMO_URL,
   },
   {
@@ -140,7 +140,7 @@ const dataPlans: Plan[] = [
       'Security review support',
     ],
     popular: false,
-    buttonText: 'Talk to us',
+    buttonText: 'Contact sales',
     href: DATA_DEMO_URL,
   },
 ]
@@ -154,25 +154,6 @@ const DATA_INCLUDED = [
   'Cause and impact on every failure',
   'Read-only agent, credentials stay in your network',
   'Every check change approved, versioned and reversible',
-]
-
-type Tier = 'Free' | 'Team' | 'Business' | 'Enterprise'
-const TIERS: Tier[] = ['Free', 'Team', 'Business', 'Enterprise']
-
-/** Comparison rows: the first tier that includes each item. */
-const DATA_COMPARE: { label: string; from: Tier | 'all'; note?: Partial<Record<Tier, string>> }[] = [
-  { label: 'Monitored datasets', from: 'all', note: { Free: 'Starter', Team: 'More', Business: 'More', Enterprise: 'Unlimited' } },
-  { label: 'Warehouse connections', from: 'all', note: { Free: 'Starter', Team: 'Starter', Business: 'More', Enterprise: 'Unlimited' } },
-  { label: 'Checks and users', from: 'all', note: { Free: 'Unlimited', Team: 'Unlimited', Business: 'Unlimited', Enterprise: 'Unlimited' } },
-  { label: 'Policy to checks and Copilot', from: 'all' },
-  { label: 'Snowflake and Oracle', from: 'all' },
-  { label: 'Slack and Teams alerts', from: 'all' },
-  { label: 'Pipeline links (Airflow, Oracle ODI)', from: 'Team' },
-  { label: 'Power BI impact', from: 'Team' },
-  { label: 'Incidents and escalation', from: 'Business' },
-  { label: 'Audit export', from: 'Business' },
-  { label: 'On-prem deployment', from: 'Enterprise' },
-  { label: 'Custom SLAs and security review support', from: 'Enterprise' },
 ]
 
 const DATA_FAQ = [
@@ -251,7 +232,7 @@ function PlanGrid({ plans }: { plans: Plan[] }) {
             onClick={() => {
               const url =
                 plan.href ??
-                (plan.buttonText === 'Book a demo' || plan.buttonText === 'Talk to us'
+                (plan.buttonText === 'Book a demo' || plan.buttonText === 'Contact sales'
                   ? DEMO_URL
                   : SIGNUP_URL)
               window.open(url, '_blank', 'noopener,noreferrer')
@@ -394,53 +375,7 @@ export default function PricingPage() {
       {showingData ? (
         <section className="bg-white px-4 py-16 sm:px-6 md:py-24 lg:px-8">
           <div className="mx-auto max-w-7xl">
-            <h2 className="mb-2 text-3xl font-semibold tracking-tight text-[#0b1220]">Compare data plans</h2>
-            <p className="mb-10 text-zinc-600">
-              Priced by monitored datasets. Checks and users are never metered.
-            </p>
-            <div className="overflow-x-auto rounded-lg border border-zinc-200">
-              <table className="w-full min-w-[640px] border-collapse text-left text-sm">
-                <thead>
-                  <tr className="bg-zinc-50">
-                    <th className="px-4 py-3 font-semibold text-zinc-500" scope="col">
-                      &nbsp;
-                    </th>
-                    {TIERS.map((t) => (
-                      <th key={t} scope="col" className="px-4 py-3 text-center font-semibold text-zinc-900">
-                        {t}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {DATA_COMPARE.map((row) => {
-                    const start = row.from === 'all' ? 0 : TIERS.indexOf(row.from)
-                    return (
-                      <tr key={row.label} className="border-t border-zinc-200">
-                        <th scope="row" className="px-4 py-3 font-medium text-zinc-700">
-                          {row.label}
-                        </th>
-                        {TIERS.map((t, i) => (
-                          <td key={t} className="px-4 py-3 text-center">
-                            {row.note?.[t] ? (
-                              <span className="font-semibold text-zinc-800">{row.note[t]}</span>
-                            ) : i >= start ? (
-                              <Check className="mx-auto h-4 w-4 text-brand-600" aria-label="Included" />
-                            ) : (
-                              <span className="text-zinc-300" aria-label="Not included">
-                                —
-                              </span>
-                            )}
-                          </td>
-                        ))}
-                      </tr>
-                    )
-                  })}
-                </tbody>
-              </table>
-            </div>
-
-            <h2 className="mb-6 mt-20 text-3xl font-semibold tracking-tight text-[#0b1220]">Data pricing questions</h2>
+            <h2 className="mb-6 text-3xl font-semibold tracking-tight text-[#0b1220]">Data pricing questions</h2>
             <div className="flex max-w-3xl flex-col gap-3">
               {DATA_FAQ.map((item, i) => (
                 <details key={item.q} className="group rounded-lg border border-zinc-200 bg-white" open={i === 0}>
