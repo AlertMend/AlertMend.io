@@ -7,14 +7,26 @@ import styles from './StackWall.module.css'
 
 /**
  * Homepage "works with" wall. Lists only integrations the product pages
- * already claim; `next` items render muted as "coming".
+ * already claim.
  */
-const STACKS: Record<Audience, { heading: string; sub: string; live: string[]; next: string[] }> = {
+const STACKS: Record<Audience, { heading: string; sub: string; live: string[] }> = {
   data: {
     heading: 'Plugs into your data stack.',
-    sub: 'Checks on Snowflake and Oracle, pipeline runs from Airflow and Oracle ODI, report impact in Power BI, alerts in Slack or Teams.',
-    live: ['Snowflake', 'Oracle', 'Airflow', 'Power BI', 'Microsoft Teams', 'Slack'],
-    next: ['Databricks', 'Postgres'],
+    sub: 'Checks on your warehouse and lakehouse, pipeline runs from dbt, Airflow and Oracle ODI, report impact in Power BI, alerts in Slack or Teams.',
+    live: [
+      'Snowflake',
+      'Oracle',
+      'BigQuery',
+      'Redshift',
+      'Databricks',
+      'Postgres',
+      'dbt',
+      'Airflow',
+      'Oracle ODI',
+      'Power BI',
+      'Microsoft Teams',
+      'Slack',
+    ],
   },
   infra: {
     heading: 'Plugs into your stack.',
@@ -32,11 +44,10 @@ const STACKS: Record<Audience, { heading: string; sub: string; live: string[]; n
       'Jira',
       'GitHub',
     ],
-    next: [],
   },
 }
 
-function Chip({ label, muted }: { label: string; muted?: boolean }) {
+function Chip({ label }: { label: string }) {
   const ref = withBrandLogo({ label })
   // Only link to /integrations/<slug> when that detail page exists.
   const slug = ref.to?.startsWith('/integrations/') ? ref.to.slice('/integrations/'.length) : null
@@ -52,11 +63,10 @@ function Chip({ label, muted }: { label: string; muted?: boolean }) {
         className={styles.logo}
       />
       <span>{label}</span>
-      {muted && <em>next</em>}
     </>
   )
-  const cls = muted ? `${styles.chip} ${styles.chipMuted}` : styles.chip
-  return to && !muted ? (
+  const cls = styles.chip
+  return to ? (
     <Link to={to} className={cls}>
       {inner}
     </Link>
@@ -80,9 +90,6 @@ export default function StackWall() {
         <div className={styles.wall}>
           {stack.live.map((l) => (
             <Chip key={l} label={l} />
-          ))}
-          {stack.next.map((l) => (
-            <Chip key={l} label={l} muted />
           ))}
         </div>
       </div>

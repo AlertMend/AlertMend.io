@@ -42,7 +42,7 @@ const pains: { ico: React.ReactNode; title: string; body: string }[] = [
   {
     ico: <Icon name="gitBranch" size={ICON_SIZE} strokeWidth={ICON_STROKE} />,
     title: 'Traces stop at the pod boundary',
-    body: 'A request slows down and you can only guess where. No distributed trace, no span waterfall — just latency graphs that never point at the culprit.',
+    body: 'A request slows down and you can only guess where. No distributed trace, no span waterfall, just latency graphs that never point at the culprit.',
   },
   {
     ico: <Icon name="layers" size={ICON_SIZE} strokeWidth={ICON_STROKE} />,

@@ -167,7 +167,7 @@ export default function IntegrationDetailPage() {
                 <h2 className={styles.h2}>Ship the integration this week</h2>
                 <p className={styles.ctaSub}>
                   Most {integration.name} customers are live in a day. Bring your
-                  own model for regulated environments — no source data leaves
+                  own model for regulated environments, so no source data leaves
                   your perimeter.
                 </p>
               </div>

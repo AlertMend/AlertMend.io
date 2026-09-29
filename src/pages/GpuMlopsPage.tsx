@@ -88,7 +88,7 @@ export default function GpuMlopsPage() {
           <Accent>GPU clusters</Accent> and ML pipelines, observed end-to-end
         </>
       }
-      sub="From CUDA OOM on an H100 node to a stuck Kubeflow DAG to p99 latency drift on your vLLM inference fleet — AlertMend understands the failure modes that actually break ML in production, then triages and remediates them like the rest of your stack."
+      sub="From CUDA OOM on an H100 node to a stuck Kubeflow DAG to p99 latency drift on your vLLM inference fleet, AlertMend understands the failure modes that actually break ML in production, then triages and remediates them like the rest of your stack."
       signupUrl={SIGNUP_URL}
       checks={['Live nvidia-smi telemetry', 'ML-specific failure modes', 'Approval-gated remediation']}
       highlightProduct="mlops"
@@ -170,7 +170,7 @@ export default function GpuMlopsPage() {
       spotlight={{
         tag: 'One idle GPU is real money',
         title: 'A100 node at 0% for six hours, caught and costed',
-        body: 'AlertMend watches utilisation alongside spend, so an idle or wedged accelerator shows up as both an incident and a recoverable cost line — with the same right-sizing preview and rollback the FinOps surface uses.',
+        body: 'AlertMend watches utilisation alongside spend, so an idle or wedged accelerator shows up as both an incident and a recoverable cost line, with the same right-sizing preview and rollback the FinOps surface uses.',
         steps: [
           'Node flagged: a100-node-06 at 0% utilisation',
           'Correlated with the DAG task that never scheduled',

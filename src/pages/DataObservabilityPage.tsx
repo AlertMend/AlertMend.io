@@ -12,17 +12,14 @@ import {
   Gauge,
   BellOff,
   ShieldCheck,
-  Lock,
   History,
-  KeyRound,
   CheckCircle2,
-  Clock3,
-  Scale,
   Eye,
 } from 'lucide-react'
 import SEO from '../components/SEO'
 import GovernanceSection from '../components/enterprise/GovernanceSection'
 import SovereigntySection from '../components/enterprise/SovereigntySection'
+import { LineageImpact, PolicyContract } from '../components/enterprise/DataDepth'
 import PlatformBoardMock from '../components/mocks/PlatformBoardMock'
 import PlatformBoardStage from '../components/mocks/PlatformBoardStage'
 import BrandLogo from '../components/ui/BrandLogo'
@@ -49,7 +46,7 @@ const PILLARS = [
   {
     icon: Eye,
     title: 'Monitor',
-    body: 'Freshness, uniqueness, completeness, validity, volume, anomalies and trends across the datasets that matter.',
+    body: 'Freshness, volume, schema changes, uniqueness, completeness, validity, anomalies and trends across the datasets and pipelines that matter.',
     points: ['87 ready-made checks', 'History-aware anomalies', 'Quality score that cannot hide a fail'],
   },
   {
@@ -124,7 +121,7 @@ const FEATURES = [
   {
     icon: ListChecks,
     title: '87 ready-made checks',
-    body: 'Completeness, uniqueness, validity, format, referential integrity, numeric, volume, freshness, anomaly and trend — built in a wizard.',
+    body: 'Completeness, uniqueness, validity, format, referential integrity, numeric, volume, freshness, anomaly and trend, built in a wizard.',
   },
   {
     icon: TrendingUp,
@@ -182,29 +179,6 @@ function StackLogo({ label }: { label: string }) {
   )
 }
 
-const SECURITY = [
-  {
-    icon: Lock,
-    title: 'Read-only by design',
-    body: 'The agent refuses anything but read queries and caps query time.',
-  },
-  {
-    icon: KeyRound,
-    title: 'Credentials stay home',
-    body: 'The agent holds warehouse credentials. AlertMend stores none.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Outbound only',
-    body: 'The agent connects out. No inbound ports in your network.',
-  },
-  {
-    icon: ListChecks,
-    title: 'Least privilege',
-    body: 'A generated grant script sets up a read-only role.',
-  },
-]
-
 const FAQS: { q: string; a: ReactNode }[] = [
   {
     q: 'Is this data observability or data quality?',
@@ -220,7 +194,7 @@ const FAQS: { q: string; a: ReactNode }[] = [
   },
   {
     q: 'Which policies can we upload?',
-    a: 'Any text-based PDF — BCBS 239, internal DQ standards or data contracts.',
+    a: 'Any text-based PDF: BCBS 239, internal DQ standards or data contracts.',
   },
   {
     q: 'How long does setup take?',
@@ -341,7 +315,7 @@ export default function DataObservabilityPage() {
   }, [])
 
   const baseDescription =
-    'Data observability from your quality policy. Live checks across Snowflake, BigQuery, Redshift, Databricks, Oracle and Postgres — plus dbt, Airflow, Power BI impact, and a read-only agent in your network.'
+    'Data observability from your quality policy. Live checks across Snowflake, BigQuery, Redshift, Databricks, Oracle and Postgres, plus dbt, Airflow, Power BI impact, and a read-only agent in your network.'
   const description = ensureUniqueMetaDescription(
     baseDescription,
     'data-observability',
@@ -367,13 +341,13 @@ export default function DataObservabilityPage() {
               Data quality · Governance · Sovereignty
             </span>
             <h1 className={styles.h1}>
-              See bad data before the dashboard does —{' '}
+              See bad data before the dashboard does,{' '}
               <span className={styles.accent}>from the policy you already have</span>
             </h1>
             <p className={styles.lede}>
               AlertMend turns written data quality rules into live checks across your warehouse and
               lakehouse. When something fails, you get the pipeline job and the Power BI reports in
-              one alert — with credentials that never leave your network.
+              one alert, with credentials that never leave your network.
             </p>
             <div className={styles.heroCtas}>
               <a
@@ -459,6 +433,10 @@ export default function DataObservabilityPage() {
         </div>
       </section>
 
+      <LineageImpact />
+
+      <PolicyContract />
+
       <GovernanceSection />
 
       <SovereigntySection />
@@ -519,7 +497,7 @@ export default function DataObservabilityPage() {
           <header className={styles.secHead}>
             <span className="sec-tag">Capability set</span>
             <h2>Everything a regulated data office needs to run checks</h2>
-            <p>Built capabilities only — no vaporware connectors or auto-remediation of your data.</p>
+            <p>Built capabilities only. No vaporware connectors or auto-remediation of your data.</p>
           </header>
           <div className={styles.featureGrid}>
             {FEATURES.map((f) => (
@@ -593,76 +571,38 @@ export default function DataObservabilityPage() {
         </div>
       </section>
 
-      {/* ---- Security ---- */}
-      <section className={styles.sectionAlt}>
-        <div className={styles.wrap}>
-          <header className={styles.secHead}>
-            <span className="sec-tag">Built for regulated data</span>
-            <h2>Enterprise controls without moving your warehouse</h2>
-            <p>
-              Banks and operators need proof. AlertMend is designed so secrets stay home and every
-              change is auditable.
-            </p>
-          </header>
-          <div className={styles.securityGrid}>
-            {SECURITY.map((s) => (
-              <article key={s.title} className={styles.securityCard}>
-                <span className={styles.pillarIcon}>
-                  <s.icon size={16} strokeWidth={1.7} />
-                </span>
-                <h3>{s.title}</h3>
-                <p>{s.body}</p>
-              </article>
-            ))}
-          </div>
-          <div className={styles.securityExtra}>
-            <div className={styles.valueRow}>
-              <span>
-                <Clock3 size={16} strokeWidth={1.7} /> Live in minutes, not quarters
-              </span>
-              <span>
-                <Scale size={16} strokeWidth={1.7} /> Clause-citable checks
-              </span>
-              <span>
-                <ShieldCheck size={16} strokeWidth={1.7} /> SOC 2 Type II &amp; ISO 27001 in progress
-              </span>
-            </div>
-            <Link to="/security" className={styles.storyLink}>
-              Read the security model <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* ---- FAQ ---- */}
       <section className={styles.section}>
-        <div className={styles.wrapTight}>
-          <header className={styles.secHead}>
-            <span className="sec-tag">FAQ</span>
-            <h2>Questions data teams ask first</h2>
-          </header>
-          <div className={styles.faq}>
-            {FAQS.map((f) => (
-              <details key={f.q} className={styles.faqItem}>
-                <summary>{f.q}</summary>
-                <p>{f.a}</p>
-              </details>
-            ))}
+        <div className={styles.wrap}>
+          <div className={styles.faqLayout}>
+            <header className={styles.secHead}>
+              <span className="sec-tag">FAQ</span>
+              <h2>Questions data teams ask first</h2>
+              <p className={styles.crossLink} style={{ textAlign: 'left' }}>
+                Also run Kubernetes or VMs? <Link to="/observability">See AlertMend for infrastructure</Link>
+              </p>
+            </header>
+            <div className={styles.faq}>
+              {FAQS.map((f) => (
+                <details key={f.q} className={styles.faqItem}>
+                  <summary>{f.q}</summary>
+                  <p>{f.a}</p>
+                </details>
+              ))}
+            </div>
           </div>
-          <p className={styles.crossLink}>
-            Also run Kubernetes or VMs?{' '}
-            <Link to="/observability">See AlertMend for infrastructure →</Link>
-          </p>
         </div>
       </section>
 
       {/* ---- CTA ---- */}
       <section className={styles.ctaBand}>
-        <div className={styles.wrapTight}>
-          <h2>See a banking policy turned into live checks</h2>
-          <p>
-            Thirty minutes on a sample BCBS-style policy — or a pilot on your own warehouse data.
-          </p>
+        <div className={`${styles.wrap} ${styles.ctaInner}`}>
+          <div>
+            <h2>See a banking policy turned into live checks</h2>
+            <p>
+              Thirty minutes on a sample BCBS-style policy, or a pilot on your own warehouse data.
+            </p>
+          </div>
           <div className={styles.heroCtas}>
             <a
               href={DEMO_URL}
@@ -672,9 +612,9 @@ export default function DataObservabilityPage() {
             >
               Book the data demo <ArrowRight className={styles.btnIcon} />
             </a>
-            <Link to="/contact" className={styles.btnSecondary}>
-              Talk with us
-            </Link>
+            <a href={SIGNUP_URL} target="_blank" rel="noopener noreferrer" className={styles.btnSecondary}>
+              Start free
+            </a>
           </div>
         </div>
       </section>

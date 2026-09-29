@@ -1,5 +1,6 @@
 import Hero from '../components/sections/Hero'
 import SharedEngine from '../components/sections/SharedEngine'
+import Coverage from '../components/sections/Coverage'
 import StackWall from '../components/sections/StackWall'
 import Testimonials from '../components/sections/Testimonials'
 import PilotPlan from '../components/sections/PilotPlan'
@@ -19,7 +20,8 @@ import { HOME_FAQ } from '../data/homeFaq'
  * Homepage — one URL, two buyers (data teams / platform & SRE).
  * The hero toggle (or ?for=data / ?for=infra) sets the audience; hero copy,
  * product order, outcomes and the final CTA follow it. See hooks/useAudience.
- * hero → logos → shared engine (dark) → outcomes → product tour → quotes →
+ * hero → logos → coverage (data + infra) → outcomes →
+ * product tour → quotes → shared engine (dark) →
  * pilot plan → industries → stack wall → sovereignty → FAQ → CTA. Backgrounds alternate white/grey.
  */
 export default function HomePage() {
@@ -69,10 +71,11 @@ export default function HomePage() {
       <AudienceProvider>
         <Hero />
         <CustomerLogoStrip />
-        <SharedEngine />
+        <Coverage />
         <Outcomes />
         <ProductList />
         <Testimonials />
+        <SharedEngine />
         <PilotPlan />
         <StackWall />
         <IndustriesBand />

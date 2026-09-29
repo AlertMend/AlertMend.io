@@ -23,8 +23,8 @@ type Plan = {
 
 const infraPlans: Plan[] = [
   {
-    name: 'SRE/DevOps Playground',
-    label: 'Free',
+    name: 'Free',
+    label: '',
     description: 'For individuals trying out the product',
     features: [
       'Unlimited remediation flows',
@@ -65,7 +65,7 @@ const infraPlans: Plan[] = [
     href: DEMO_URL,
   },
   {
-    name: 'Enterprise/Custom',
+    name: 'Enterprise',
     label: '',
     description: 'On-prem, bring your own model, custom SLAs',
     features: [
@@ -77,7 +77,7 @@ const infraPlans: Plan[] = [
       'Support: Immediate',
     ],
     popular: false,
-    buttonText: 'Book a demo',
+    buttonText: 'Contact sales',
     href: DEMO_URL,
   },
 ]
@@ -88,7 +88,7 @@ const infraPlans: Plan[] = [
 const dataPlans: Plan[] = [
   {
     name: 'Free',
-    label: 'Free',
+    label: '',
     description: 'Try it on your own data',
     features: [
       'A starter set of datasets',
@@ -111,7 +111,7 @@ const dataPlans: Plan[] = [
       'Power BI impact',
     ],
     popular: true,
-    buttonText: 'Talk to us',
+    buttonText: 'Book a demo',
     href: DATA_DEMO_URL,
   },
   {
@@ -123,9 +123,10 @@ const dataPlans: Plan[] = [
       'More datasets and connections',
       'Incidents and escalation',
       'Audit export',
+      'Results written back to your warehouse and Power BI',
     ],
     popular: false,
-    buttonText: 'Talk to us',
+    buttonText: 'Book a demo',
     href: DATA_DEMO_URL,
   },
   {
@@ -140,7 +141,7 @@ const dataPlans: Plan[] = [
       'Security review support',
     ],
     popular: false,
-    buttonText: 'Talk to us',
+    buttonText: 'Contact sales',
     href: DATA_DEMO_URL,
   },
 ]
@@ -154,25 +155,6 @@ const DATA_INCLUDED = [
   'Cause and impact on every failure',
   'Read-only agent, credentials stay in your network',
   'Every check change approved, versioned and reversible',
-]
-
-type Tier = 'Free' | 'Team' | 'Business' | 'Enterprise'
-const TIERS: Tier[] = ['Free', 'Team', 'Business', 'Enterprise']
-
-/** Comparison rows: the first tier that includes each item. */
-const DATA_COMPARE: { label: string; from: Tier | 'all'; note?: Partial<Record<Tier, string>> }[] = [
-  { label: 'Monitored datasets', from: 'all', note: { Free: 'Starter', Team: 'More', Business: 'More', Enterprise: 'Unlimited' } },
-  { label: 'Warehouse connections', from: 'all', note: { Free: 'Starter', Team: 'Starter', Business: 'More', Enterprise: 'Unlimited' } },
-  { label: 'Checks and users', from: 'all', note: { Free: 'Unlimited', Team: 'Unlimited', Business: 'Unlimited', Enterprise: 'Unlimited' } },
-  { label: 'Policy to checks and Copilot', from: 'all' },
-  { label: 'Snowflake and Oracle', from: 'all' },
-  { label: 'Slack and Teams alerts', from: 'all' },
-  { label: 'Pipeline links (Airflow, Oracle ODI)', from: 'Team' },
-  { label: 'Power BI impact', from: 'Team' },
-  { label: 'Incidents and escalation', from: 'Business' },
-  { label: 'Audit export', from: 'Business' },
-  { label: 'On-prem deployment', from: 'Enterprise' },
-  { label: 'Custom SLAs and security review support', from: 'Enterprise' },
 ]
 
 const DATA_FAQ = [
@@ -200,38 +182,26 @@ const DATA_FAQ = [
 
 function PlanGrid({ plans }: { plans: Plan[] }) {
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-16 items-stretch">
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 pt-3 items-stretch">
       {plans.map((plan) => (
         <div
           key={plan.name}
-          className={`flex flex-col h-full bg-white rounded-lg p-8 border transition-colors duration-200 ${
+          className={`relative flex flex-col h-full bg-white rounded-lg p-8 border transition-colors duration-200 ${
             plan.popular ? 'border-[#0b1220] ring-1 ring-[#0b1220]' : 'border-zinc-200 hover:border-zinc-300'
           }`}
         >
+          {plan.popular ? (
+            <span className="absolute -top-3 left-8 inline-block px-3 py-1 bg-[#0b1220] text-white rounded-full text-[11px] font-semibold uppercase tracking-wider">
+              Recommended
+            </span>
+          ) : null}
           <div className="mb-6">
-            <div
-              className={`items-center justify-start ${
-                plan.popular || plan.label
-                  ? 'flex h-7 mb-3'
-                  : 'hidden md:flex md:h-7 md:mb-3'
-              }`}
-            >
-              {plan.popular ? (
-                <span className="inline-block px-3 py-1 bg-[#0b1220] text-white rounded-full text-[11px] font-semibold uppercase tracking-wider">
-                  Recommended
-                </span>
-              ) : plan.label ? (
-                <span className="inline-block px-3 py-1 bg-brand-50 text-brand-700 rounded-full text-xs font-bold border border-brand-200">
-                  {plan.label}
-                </span>
-              ) : null}
-            </div>
-            <h3 className="text-xl font-semibold text-zinc-900 mb-3 leading-tight md:flex md:items-center md:min-h-[50px]">
+            <h3 className="text-xl font-semibold text-zinc-900 mb-2 leading-tight">
               {plan.name}
             </h3>
             <p
               aria-hidden={plan.description ? undefined : true}
-              className={`text-zinc-500 text-sm font-medium leading-tight md:flex md:items-start md:h-[48px] ${
+              className={`text-zinc-500 text-sm font-medium leading-tight md:min-h-[40px] ${
                 plan.description ? '' : 'hidden'
               }`}
             >
@@ -251,7 +221,7 @@ function PlanGrid({ plans }: { plans: Plan[] }) {
             onClick={() => {
               const url =
                 plan.href ??
-                (plan.buttonText === 'Book a demo' || plan.buttonText === 'Talk to us'
+                (plan.buttonText === 'Book a demo' || plan.buttonText === 'Contact sales'
                   ? DEMO_URL
                   : SIGNUP_URL)
               window.open(url, '_blank', 'noopener,noreferrer')
@@ -303,7 +273,7 @@ export default function PricingPage() {
   const showingData = SHOW_DATA_PRICING && tab === 'data'
 
   return (
-    <div className="min-h-screen bg-white">
+    <>
       <SEO
         title="AlertMend Pricing: Infrastructure and Data Quality Plans"
         description={uniqueDescription}
@@ -326,8 +296,8 @@ export default function PricingPage() {
           </p>
         </div>
       </section>
-      <section className="px-4 sm:px-6 lg:px-8 pt-12 pb-20 md:pb-28 bg-[#f8fafc]">
-        <div className="max-w-7xl mx-auto">
+      <section className="pt-12 pb-20 md:pb-24 bg-[#f8fafc]">
+        <div className={ent.wrap}>
           {SHOW_DATA_PRICING ? (
             <div
               className="mb-10 flex w-fit items-center gap-1 rounded-lg border border-zinc-200 bg-white p-1"
@@ -361,7 +331,7 @@ export default function PricingPage() {
           <PlanGrid plans={showingData ? dataPlans : infraPlans} />
 
           {SHOW_DATA_PRICING && tab === 'infrastructure' ? (
-            <p className="text-sm text-zinc-600 -mt-8 mb-8">
+            <p className="text-sm text-zinc-600 -mt-4">
               Looking for data quality pricing?{' '}
               <button
                 type="button"
@@ -374,7 +344,7 @@ export default function PricingPage() {
           ) : null}
 
           {showingData ? (
-            <div className="-mt-6 rounded-lg border border-zinc-200 bg-white p-6 md:p-8">
+            <div className="rounded-lg border border-zinc-200 bg-white p-6 md:p-8">
               <p className="mb-4 text-xs font-bold uppercase tracking-[0.12em] !text-brand-700">
                 Included in every data plan
               </p>
@@ -392,84 +362,52 @@ export default function PricingPage() {
       </section>
 
       {showingData ? (
-        <section className="bg-white px-4 py-16 sm:px-6 md:py-24 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <h2 className="mb-2 text-3xl font-semibold tracking-tight text-[#0b1220]">Compare data plans</h2>
-            <p className="mb-10 text-zinc-600">
-              Priced by monitored datasets. Checks and users are never metered.
-            </p>
-            <div className="overflow-x-auto rounded-lg border border-zinc-200">
-              <table className="w-full min-w-[640px] border-collapse text-left text-sm">
-                <thead>
-                  <tr className="bg-zinc-50">
-                    <th className="px-4 py-3 font-semibold text-zinc-500" scope="col">
-                      &nbsp;
-                    </th>
-                    {TIERS.map((t) => (
-                      <th key={t} scope="col" className="px-4 py-3 text-center font-semibold text-zinc-900">
-                        {t}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {DATA_COMPARE.map((row) => {
-                    const start = row.from === 'all' ? 0 : TIERS.indexOf(row.from)
-                    return (
-                      <tr key={row.label} className="border-t border-zinc-200">
-                        <th scope="row" className="px-4 py-3 font-medium text-zinc-700">
-                          {row.label}
-                        </th>
-                        {TIERS.map((t, i) => (
-                          <td key={t} className="px-4 py-3 text-center">
-                            {row.note?.[t] ? (
-                              <span className="font-semibold text-zinc-800">{row.note[t]}</span>
-                            ) : i >= start ? (
-                              <Check className="mx-auto h-4 w-4 text-brand-600" aria-label="Included" />
-                            ) : (
-                              <span className="text-zinc-300" aria-label="Not included">
-                                —
-                              </span>
-                            )}
-                          </td>
-                        ))}
-                      </tr>
-                    )
-                  })}
-                </tbody>
-              </table>
-            </div>
-
-            <h2 className="mb-6 mt-20 text-3xl font-semibold tracking-tight text-[#0b1220]">Data pricing questions</h2>
-            <div className="flex max-w-3xl flex-col gap-3">
-              {DATA_FAQ.map((item, i) => (
-                <details key={item.q} className="group rounded-lg border border-zinc-200 bg-white" open={i === 0}>
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-semibold text-zinc-900">
-                    {item.q}
-                    <span className="text-xl leading-none text-zinc-400 group-open:rotate-45 transition-transform">+</span>
-                  </summary>
-                  <p className="px-5 pb-5 text-sm leading-relaxed text-zinc-600">{item.a}</p>
-                </details>
-              ))}
-            </div>
-
-            <div className="mt-16 flex flex-col items-start gap-3">
-              <p className="text-lg font-semibold text-zinc-900">Want a number for your estate?</p>
-              <p className="max-w-xl text-zinc-600">
-                Tell us roughly how many tables you want to monitor and we will send you a plan price.
-              </p>
-              <a
-                href={DATA_DEMO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-2 inline-flex items-center rounded-lg bg-[#0b1220] px-6 py-3 text-sm font-semibold !text-white hover:bg-[#1e293b]"
-              >
-                Get a data plan price
-              </a>
+        <section className={ent.section}>
+          <div className={ent.wrap}>
+            <div className={ent.head} style={{ alignItems: 'start' }}>
+              <div>
+                <span className={ent.eyebrow}>Questions</span>
+                <h2 className={ent.h2}>Data pricing questions</h2>
+                <p className={ent.lede} style={{ marginTop: 16 }}>
+                  Priced by monitored datasets. Checks and users are never metered.
+                </p>
+              </div>
+              <div className="flex flex-col gap-3">
+                {DATA_FAQ.map((item, i) => (
+                  <details key={item.q} className="group rounded-lg border border-zinc-200 bg-white" open={i === 0}>
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 font-semibold text-zinc-900">
+                      {item.q}
+                      <span className="text-xl leading-none text-zinc-400 group-open:rotate-45 transition-transform">+</span>
+                    </summary>
+                    <p className="px-5 pb-5 text-sm leading-relaxed text-zinc-600">{item.a}</p>
+                  </details>
+                ))}
+              </div>
             </div>
           </div>
         </section>
       ) : null}
-    </div>
+
+      <section className={ent.cta}>
+        <div className={`${ent.wrap} ${ent.ctaInner}`}>
+          <div>
+            <h2 className={ent.h2}>{showingData ? 'Want a number for your estate?' : 'Not sure which plan fits?'}</h2>
+            <p className={ent.lede}>
+              {showingData
+                ? 'Tell us roughly how many tables you want to monitor and we will send you a plan price.'
+                : 'Tell us about your clusters, VMs and GPU fleet and we will recommend a plan.'}
+            </p>
+          </div>
+          <div className={ent.heroCtas}>
+            <a href={showingData ? DATA_DEMO_URL : DEMO_URL} target="_blank" rel="noopener noreferrer" className={ent.btnPrimary}>
+              {showingData ? 'Get a data plan price' : 'Book a demo'}
+            </a>
+            <a href={showingData ? DATA_SIGNUP_URL : SIGNUP_URL} target="_blank" rel="noopener noreferrer" className={ent.btnSecondary}>
+              Start free
+            </a>
+          </div>
+        </div>
+      </section>
+    </>
   )
 }

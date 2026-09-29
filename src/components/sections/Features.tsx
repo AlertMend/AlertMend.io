@@ -116,7 +116,7 @@ const cards: Card[] = [
     variant: 'full',
     ico: <Icon name="shield" size={16} strokeWidth={1.6} />,
     title: 'RBAC, audit & compliance controls',
-    body: 'Role-based access scopes navigation, data and mutating actions. Every apply and remediation run is captured in the audit trail. SOC 2 Type II is in progress — ask us about the current control set.',
+    body: 'Role-based access scopes navigation, data and mutating actions. Every apply and remediation run is captured in the audit trail. SOC 2 Type II is in progress. Ask us about the current control set.',
     custom: (
       <Link to="/security" className="btn btn-ghost">
         Talk to security
@@ -157,7 +157,7 @@ export default function Features() {
           <span className="sec-tag">Platform</span>
           <h2>One platform. Every operational surface.</h2>
           <p>
-            Observability, AI RCA, approved remediation, on-call, FinOps and logs — designed to
+            Observability, AI RCA, approved remediation, on-call, FinOps and logs, designed to
             feel like one product. Open any tile for the deep walkthrough.
           </p>
         </div>

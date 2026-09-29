@@ -27,7 +27,7 @@ const surfaces: Surface[] = [
     title: 'APM & distributed tracing',
     body: (
       <>
-        Follow a request across every hop — service to service, into the
+        Follow a request across every hop: service to service, into the
         database, out to the queue. p50/p95/p99, error rates and span
         waterfalls, with the slow span highlighted.
       </>
@@ -52,7 +52,7 @@ const surfaces: Surface[] = [
     body: (
       <>
         The real topology, drawn from live traffic. See dependencies,
-        request rates and where errors propagate — click any node to drop
+        request rates and where errors propagate. Click any node to drop
         into its traces, logs and metrics.
       </>
     ),
@@ -63,7 +63,7 @@ const surfaces: Surface[] = [
     title: 'Logs you query in SQL',
     body: (
       <>
-        <code>SELECT * FROM logs</code> with namespace, pod and node fields —
+        <code>SELECT * FROM logs</code> with namespace, pod and node fields,
         time-range presets and stream selection. Fast at production volume.
       </>
     ),
@@ -85,7 +85,7 @@ const surfaces: Surface[] = [
     title: 'AI RCA across every signal',
     body: (
       <>
-        Traces, logs, metrics and K8s events land on one timeline — then the
+        Traces, logs, metrics and K8s events land on one timeline, then the
         agent correlates them into a root-cause narrative in{' '}
         <b>~15 seconds</b>, not a dashboard hunt.
       </>
@@ -207,7 +207,7 @@ export default function Observability() {
             </h2>
             <p>
               Metrics, logs, traces and Kubernetes events collected through
-              OpenTelemetry and eBPF — correlated, not siloed. Stop stitching
+              OpenTelemetry and eBPF, correlated, not siloed. Stop stitching
               four tools together to answer one question.
             </p>
             <div className={styles.pillList}>
@@ -217,7 +217,7 @@ export default function Observability() {
               </div>
               <div className={styles.pillRow}>
                 <Icon name="check" size={15} strokeWidth={3} />
-                eBPF auto-instrumentation — no code changes
+                eBPF auto-instrumentation, no code changes
               </div>
               <div className={styles.pillRow}>
                 <Icon name="check" size={15} strokeWidth={3} />

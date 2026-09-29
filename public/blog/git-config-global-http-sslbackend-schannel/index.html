@@ -175,7 +175,7 @@
     <h2 class="sectionTitle">What <code>http.sslBackend = schannel</code> means</h2>
     <p class="bodyText">Git uses libcurl for HTTPS operations such as clone, fetch, and push. The <code>http.sslBackend</code> setting chooses which TLS backend libcurl should use when that Git build supports runtime backend selection. On Windows, <code>schannel</code> means Secure Channel, the Windows TLS stack that can use the Windows certificate store.</p>
     <div class="answerBox">
-      <strong>TL;DR:</strong> On Git for Windows, schannel can be the clean fix for corporate certificates already trusted by Windows. On unsupported builds, it is not a fix — it becomes the error.
+      <strong>TL;DR:</strong> On Git for Windows, schannel can be the clean fix for corporate certificates already trusted by Windows. On unsupported builds, it is not a fix; it becomes the error.
     </div>
   </section>
 

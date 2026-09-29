@@ -1,5 +1,6 @@
-import { BookOpen, FileCheck2, GitBranch, History, Gauge, UserCheck } from 'lucide-react'
+import { BookOpen, FileCheck2, GitBranch, History, Gauge, UserCheck, Database, FileBarChart2 } from 'lucide-react'
 import styles from './Enterprise.module.css'
+import wb from './GovernanceSection.module.css'
 
 /**
  * Data governance capabilities of AlertMend Data Observability.
@@ -60,6 +61,35 @@ export default function GovernanceSection() {
               <p className={styles.cellBody}>{it.body}</p>
             </div>
           ))}
+        </div>
+
+        <div className={wb.writeBack}>
+          <div className={wb.wbHead}>
+            <h3 className={wb.wbTitle}>Results written back to your own systems</h3>
+            <span className={styles.tag}>Business and Enterprise</span>
+          </div>
+          <div className={wb.wbGrid}>
+            <div className={wb.wbItem}>
+              <Database size={20} strokeWidth={1.6} className={styles.icon} aria-hidden="true" />
+              <div>
+                <h4 className={wb.wbItemTitle}>In your warehouse</h4>
+                <p className={styles.cellBody}>
+                  Check results, quality scores, incidents and lineage are written to tables you own. Build your own
+                  reports, join them to your data and keep the history in your own systems.
+                </p>
+              </div>
+            </div>
+            <div className={wb.wbItem}>
+              <FileBarChart2 size={20} strokeWidth={1.6} className={styles.icon} aria-hidden="true" />
+              <div>
+                <h4 className={wb.wbItemTitle}>In Power BI</h4>
+                <p className={styles.cellBody}>
+                  The quality status of the data behind each report is pushed to Power BI, so business users see a
+                  failing check where they already work.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

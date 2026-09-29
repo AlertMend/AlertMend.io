@@ -336,7 +336,7 @@ export default function BlogPostDetailPage() {
                         Ready to go from signal to root cause to an approved fix?
                       </p>
                       <p className="text-zinc-700 text-lg leading-7 mb-6">
-                        See how AlertMend unifies observability, runs evidence-backed AI RCA, and remediates only after approval — across Kubernetes, VMs, and cloud.{' '}
+                        See how AlertMend unifies observability, runs evidence-backed AI RCA, and remediates only after approval, across Kubernetes, VMs, and cloud.{' '}
                         <button
                           onClick={() => window.open(calendlyUrl('blog-post'), '_blank')}
                           className="text-brand-600 hover:text-brand-700 font-semibold underline underline-offset-2 inline-flex items-center gap-1"

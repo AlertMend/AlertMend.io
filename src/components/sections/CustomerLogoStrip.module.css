@@ -28,6 +28,18 @@
   transition: filter 200ms ease;
 }
 
+.logoMark {
+  height: 26px;
+  margin-right: 6px;
+}
+
+.wordmark {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #3f3f46;
+}
+
 .item:hover .logoImg {
   filter: none;
 }

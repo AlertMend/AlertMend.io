@@ -146,7 +146,7 @@ export function ensureUniqueMetaDescription(
   } else if (pageType === 'security') {
     uniqueSuffix = ` Encryption, RBAC, audit logs, and compliance programs in progress.`
   } else if (pageType === 'compliance') {
-    uniqueSuffix = ` SOC 2 Type II, ISO 27001, and GDPR alignment — certifications in progress.`
+    uniqueSuffix = ` SOC 2 Type II, ISO 27001, and GDPR alignment, with certifications in progress.`
   } else if (pageType === 'privacy') {
     uniqueSuffix = ` Understand how we collect, use, and protect your data and information.`
   } else if (pageType === 'terms') {

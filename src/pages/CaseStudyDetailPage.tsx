@@ -72,7 +72,7 @@ function splitStack(infrastructure?: string): string[] {
 function pctSaved(before: string, after: string): string {
   const b = parseFloat(before.replace(/[^0-9.]/g, ''))
   const a = parseFloat(after.replace(/[^0-9.]/g, ''))
-  if (!b || Number.isNaN(a)) return '—'
+  if (!b || Number.isNaN(a)) return 'n/a'
   return `${(((b - a) / b) * 100).toFixed(1)}%`
 }
 
