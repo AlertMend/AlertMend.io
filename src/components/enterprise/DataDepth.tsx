@@ -6,6 +6,7 @@ import {
   Users,
   Check,
 } from 'lucide-react'
+import { withBrandLogo } from '../../data/brandLogos'
 import styles from './Enterprise.module.css'
 import dd from './DataDepth.module.css'
 
@@ -54,6 +55,178 @@ const STATE_LABEL: Record<NodeState, string> = {
   impact: 'Affected',
 }
 
+/* Desktop lineage view: an SVG graph drawn like the product's lineage screen.
+   Phones get the stacked column list below instead. */
+
+type GNode = { id: string; x: number; y: number; kind: string; brand?: string; name: string; state: NodeState }
+
+const NODE_W = 232
+const NODE_H = 70
+
+const G_NODES: GNode[] = [
+  { id: 'feed', x: 32, y: 150, kind: 'SFTP', name: 'TRADES_FEED', state: 'ok' },
+  { id: 'core', x: 32, y: 262, kind: 'Oracle', brand: 'Oracle', name: 'CORE_BANKING', state: 'ok' },
+  { id: 'dag', x: 316, y: 206, kind: 'Airflow', brand: 'Airflow', name: 'positions_nightly', state: 'cause' },
+  { id: 'odi', x: 316, y: 380, kind: 'Oracle ODI', brand: 'Oracle ODI', name: 'customer_load', state: 'ok' },
+  { id: 'pos', x: 600, y: 206, kind: 'Snowflake', brand: 'Snowflake', name: 'FINANCE.DAILY_POSITIONS', state: 'fail' },
+  { id: 'acc', x: 600, y: 380, kind: 'Snowflake', brand: 'Snowflake', name: 'BANKING.ACCOUNTS', state: 'ok' },
+  { id: 'r1', x: 884, y: 112, kind: 'Power BI', brand: 'Power BI', name: 'Liquidity risk', state: 'impact' },
+  { id: 'r2', x: 884, y: 206, kind: 'Power BI', brand: 'Power BI', name: 'Daily P&L', state: 'impact' },
+  { id: 'r3', x: 884, y: 300, kind: 'Power BI', brand: 'Power BI', name: 'Regulatory returns', state: 'impact' },
+  { id: 'r4', x: 884, y: 394, kind: 'Power BI', brand: 'Power BI', name: 'Customer 360', state: 'ok' },
+]
+
+const G_EDGES: { from: string; to: string; hot?: 'cause' | 'impact' }[] = [
+  { from: 'feed', to: 'dag' },
+  { from: 'core', to: 'dag' },
+  { from: 'core', to: 'odi' },
+  { from: 'dag', to: 'pos', hot: 'cause' },
+  { from: 'odi', to: 'acc' },
+  { from: 'pos', to: 'r1', hot: 'impact' },
+  { from: 'pos', to: 'r2', hot: 'impact' },
+  { from: 'pos', to: 'r3', hot: 'impact' },
+  { from: 'acc', to: 'r3' },
+  { from: 'acc', to: 'r4' },
+]
+
+const G_COLS = [
+  { x: 32, label: 'Source' },
+  { x: 316, label: 'Pipeline' },
+  { x: 600, label: 'Warehouse' },
+  { x: 884, label: 'Reports' },
+]
+
+const STATE_COLOR: Record<NodeState, string> = {
+  ok: '#10b981',
+  cause: '#d97706',
+  fail: '#dc2626',
+  impact: '#7c3aed',
+}
+
+function LineageGraph() {
+  const byId = Object.fromEntries(G_NODES.map((n) => [n.id, n]))
+  const edgePath = (a: GNode, b: GNode) => {
+    const x1 = a.x + NODE_W
+    const y1 = a.y + NODE_H / 2
+    const x2 = b.x - 6
+    const y2 = b.y + NODE_H / 2
+    const dx = (x2 - x1) / 2
+    return `M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}`
+  }
+
+  return (
+    <div className={dd.graphFrame}>
+      <div className={dd.graphBar}>
+        <div className={dd.graphTitle}>
+          <span className={dd.graphDots} aria-hidden="true">
+            <i />
+            <i />
+            <i />
+          </span>
+          <span>Lineage</span>
+          <span className={dd.graphCrumb}>FINANCE.DAILY_POSITIONS</span>
+        </div>
+        <ul className={dd.legend}>
+          <li><i style={{ background: STATE_COLOR.cause }} />Root cause</li>
+          <li><i style={{ background: STATE_COLOR.fail }} />Check failed</li>
+          <li><i style={{ background: STATE_COLOR.impact }} />Affected</li>
+          <li><i style={{ background: STATE_COLOR.ok }} />Healthy</li>
+        </ul>
+      </div>
+
+      <svg
+        className={dd.graph}
+        viewBox="0 0 1148 490"
+        role="img"
+        aria-label="Lineage example: the Airflow DAG positions_nightly is the root cause of a failed check on FINANCE.DAILY_POSITIONS, which affects three Power BI reports."
+      >
+        <defs>
+          <pattern id="lg-dots" width="18" height="18" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="1" fill="#e2e8f0" />
+          </pattern>
+          <marker id="lg-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L8,4 L0,8 z" fill="#cbd5e1" />
+          </marker>
+          <marker id="lg-arrow-cause" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L8,4 L0,8 z" fill={STATE_COLOR.fail} />
+          </marker>
+          <marker id="lg-arrow-impact" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,0 L8,4 L0,8 z" fill={STATE_COLOR.impact} />
+          </marker>
+          <filter id="lg-shadow" x="-10%" y="-20%" width="120%" height="150%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#0b1220" floodOpacity="0.08" />
+          </filter>
+        </defs>
+
+        <rect width="1148" height="490" fill="url(#lg-dots)" />
+
+        {G_COLS.map((c) => (
+          <text key={c.label} x={c.x} y={64} className={dd.gCol}>
+            {c.label.toUpperCase()}
+          </text>
+        ))}
+
+        {G_EDGES.map((e) => {
+          const d = edgePath(byId[e.from], byId[e.to])
+          const color = e.hot === 'cause' ? STATE_COLOR.fail : e.hot === 'impact' ? STATE_COLOR.impact : '#cbd5e1'
+          return (
+            <g key={`${e.from}-${e.to}`}>
+              <path
+                d={d}
+                fill="none"
+                stroke={color}
+                strokeWidth={e.hot ? 2 : 1.5}
+                strokeOpacity={e.hot ? 0.9 : 1}
+                markerEnd={`url(#lg-arrow${e.hot ? `-${e.hot}` : ''})`}
+              />
+              {e.hot && <path d={d} fill="none" stroke={color} strokeWidth={2} className={dd.flow} />}
+            </g>
+          )
+        })}
+
+        {G_NODES.map((n) => {
+          const brand = n.brand ? withBrandLogo({ label: n.brand }) : null
+          const color = STATE_COLOR[n.state]
+          const hot = n.state !== 'ok'
+          return (
+            <g key={n.id} transform={`translate(${n.x},${n.y})`} filter="url(#lg-shadow)">
+              {n.state === 'fail' && (
+                <rect x={-4} y={-4} width={NODE_W + 8} height={NODE_H + 8} rx={13} fill="none" stroke={color} strokeOpacity={0.25} strokeWidth={4} className={dd.pulse} />
+              )}
+              <rect width={NODE_W} height={NODE_H} rx={10} fill="#fff" stroke={hot ? color : '#e2e8f0'} strokeWidth={hot ? 1.5 : 1} />
+              <rect x={0} y={10} width={3} height={NODE_H - 20} rx={1.5} fill={color} />
+              {brand?.logoSrc ? (
+                <image href={brand.logoSrc} x={16} y={14} width={18} height={18} preserveAspectRatio="xMidYMid meet" />
+              ) : (
+                <g transform="translate(16,14)" stroke="#64748b" strokeWidth="1.5" fill="none">
+                  <rect x="1" y="3" width="16" height="12" rx="2" />
+                  <path d="M1 7h16" />
+                </g>
+              )}
+              <text x={42} y={28} className={dd.gKind}>{n.kind}</text>
+              <text x={16} y={54} className={dd.gName}>{n.name}</text>
+              {hot && (
+                <g transform={`translate(${NODE_W - 12},12)`}>
+                  <rect x={-(STATE_LABEL[n.state].length * 6.4 + 16)} y={0} width={STATE_LABEL[n.state].length * 6.4 + 16} height={20} rx={10} fill={color} fillOpacity={0.12} />
+                  <text x={-8} y={14} textAnchor="end" className={dd.gPill} fill={color}>
+                    {STATE_LABEL[n.state]}
+                  </text>
+                </g>
+              )}
+            </g>
+          )
+        })}
+      </svg>
+
+      <div className={dd.graphFoot}>
+        <span><b>Root cause</b> positions_nightly failed after 3 retries</span>
+        <span><b>Check</b> Freshness on FINANCE.DAILY_POSITIONS, clause 4.2</span>
+        <span><b>Impact</b> 3 Power BI reports flagged</span>
+      </div>
+    </div>
+  )
+}
+
 export function LineageImpact() {
   return (
     <section className={styles.sectionAlt} id="lineage">
@@ -70,7 +243,9 @@ export function LineageImpact() {
           </p>
         </div>
 
-        <div className={dd.lineage} role="img" aria-label="Lineage example: the Airflow DAG positions_nightly caused a failed check on FINANCE.DAILY_POSITIONS, which affects three Power BI reports.">
+        <LineageGraph />
+
+        <div className={`${dd.lineage} ${dd.mobileOnly}`} role="img" aria-label="Lineage example: the Airflow DAG positions_nightly caused a failed check on FINANCE.DAILY_POSITIONS, which affects three Power BI reports.">
           {LINEAGE.map((c, ci) => (
             <div key={c.col} className={dd.lcol}>
               <span className={dd.lcolLabel}>{c.col}</span>

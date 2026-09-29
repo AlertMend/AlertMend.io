@@ -256,3 +256,163 @@
     white-space: normal;
   }
 }
+
+/* ---- Lineage graph (desktop) ---- */
+.graphFrame {
+  margin-bottom: 40px;
+  border: 1px solid rgba(11, 18, 32, 0.1);
+  border-radius: 14px;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(11, 18, 32, 0.04), 0 24px 48px -28px rgba(11, 18, 32, 0.25);
+}
+
+.graphBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(11, 18, 32, 0.08);
+  background: #f8fafc;
+}
+
+.graphTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0b1220;
+}
+
+.graphDots {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.graphDots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e2e8f0;
+}
+
+.graphCrumb {
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #991b1b;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+.legend {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12.5px;
+  color: #475569;
+}
+
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.graph {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.gCol {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  fill: #64748b;
+}
+
+.gKind {
+  font-size: 12px;
+  fill: #64748b;
+}
+
+.gName {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13.5px;
+  font-weight: 600;
+  fill: #0b1220;
+}
+
+.gPill {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.flow {
+  stroke-dasharray: 4 14;
+  stroke-linecap: round;
+  animation: lgFlow 1.2s linear infinite;
+}
+
+.pulse {
+  animation: lgPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes lgFlow {
+  to { stroke-dashoffset: -18; }
+}
+
+@keyframes lgPulse {
+  0%, 100% { stroke-opacity: 0.1; }
+  50% { stroke-opacity: 0.35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow, .pulse { animation: none; }
+}
+
+.graphFoot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  padding: 14px 18px;
+  border-top: 1px solid rgba(11, 18, 32, 0.08);
+  background: #f8fafc;
+  font-size: 13.5px;
+  color: #475569;
+}
+
+.graphFoot b {
+  margin-right: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.mobileOnly {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .graphFrame {
+    display: none;
+  }
+  .mobileOnly {
+    display: grid !important;
+  }
+}
