@@ -66,9 +66,10 @@ const NODE_W = 248
 // logos are wordmarks that shrink to unreadable at 28px.
 const GRAPH_LOGOS: Record<string, string> = {
   Snowflake: 'https://cdn.svgporn.com/logos/snowflake-icon.svg',
-  Oracle: 'https://cdn.simpleicons.org/oracle/F80000',
-  'Oracle ODI': 'https://cdn.simpleicons.org/oracle/F80000',
 }
+
+// Oracle has no square icon on the logo CDNs, so draw its red capsule mark inline.
+const INLINE_MARKS = new Set(['Oracle', 'Oracle ODI'])
 const NODE_H = 72
 
 const G_NODES: GNode[] = [
@@ -202,7 +203,8 @@ function LineageGraph() {
         })}
 
         {G_NODES.map((n) => {
-          const brand = n.brand ? { logoSrc: GRAPH_LOGOS[n.brand] ?? withBrandLogo({ label: n.brand }).logoSrc } : null
+          const inlineOracle = n.brand ? INLINE_MARKS.has(n.brand) : false
+          const brand = n.brand && !inlineOracle ? { logoSrc: GRAPH_LOGOS[n.brand] ?? withBrandLogo({ label: n.brand }).logoSrc } : null
           const color = STATE_COLOR[n.state]
           const hot = n.state !== 'ok'
           const label = STATE_LABEL[n.state]
@@ -216,7 +218,9 @@ function LineageGraph() {
                 <rect width={NODE_W} height={NODE_H} rx={12} fill="#fff" stroke={hot ? color : '#e2e8f0'} strokeWidth={hot ? 1.5 : 1} />
               </g>
               <rect x={14} y={14} width={44} height={44} rx={10} fill="#f8fafc" stroke="#e2e8f0" />
-              {brand?.logoSrc ? (
+              {inlineOracle ? (
+                <rect x={22} y={27} width={28} height={18} rx={9} fill="none" stroke="#F80000" strokeWidth={4.5} />
+              ) : brand?.logoSrc ? (
                 <image href={brand.logoSrc} x={22} y={22} width={28} height={28} preserveAspectRatio="xMidYMid meet" />
               ) : (
                 <g transform="translate(24,24)" stroke="#475569" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round">
