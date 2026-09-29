@@ -61,19 +61,27 @@ const STATE_LABEL: Record<NodeState, string> = {
 type GNode = { id: string; x: number; y: number; kind: string; brand?: string; name: string; state: NodeState }
 
 const NODE_W = 248
+
+// Square icon marks for the graph; the site's default Snowflake and Oracle
+// logos are wordmarks that shrink to unreadable at 28px.
+const GRAPH_LOGOS: Record<string, string> = {
+  Snowflake: 'https://cdn.svgporn.com/logos/snowflake-icon.svg',
+  Oracle: 'https://cdn.simpleicons.org/oracle/F80000',
+  'Oracle ODI': 'https://cdn.simpleicons.org/oracle/F80000',
+}
 const NODE_H = 72
 
 const G_NODES: GNode[] = [
-  { id: 'feed', x: 24, y: 146, kind: 'SFTP drop', name: 'Trades feed', state: 'ok' },
-  { id: 'core', x: 24, y: 264, kind: 'Oracle database', brand: 'Oracle', name: 'Core banking', state: 'ok' },
-  { id: 'dag', x: 306, y: 204, kind: 'Airflow DAG', brand: 'Airflow', name: 'Nightly positions', state: 'cause' },
-  { id: 'odi', x: 306, y: 382, kind: 'Oracle ODI job', brand: 'Oracle ODI', name: 'Customer load', state: 'ok' },
-  { id: 'pos', x: 588, y: 204, kind: 'Snowflake table', brand: 'Snowflake', name: 'Daily positions', state: 'fail' },
-  { id: 'acc', x: 588, y: 382, kind: 'Snowflake table', brand: 'Snowflake', name: 'Bank accounts', state: 'ok' },
-  { id: 'r1', x: 872, y: 110, kind: 'Power BI report', brand: 'Power BI', name: 'Liquidity risk', state: 'impact' },
-  { id: 'r2', x: 872, y: 204, kind: 'Power BI report', brand: 'Power BI', name: 'Daily P&L', state: 'impact' },
-  { id: 'r3', x: 872, y: 298, kind: 'Power BI report', brand: 'Power BI', name: 'Regulatory returns', state: 'impact' },
-  { id: 'r4', x: 872, y: 392, kind: 'Power BI report', brand: 'Power BI', name: 'Customer 360', state: 'ok' },
+  { id: 'feed', x: 24, y: 116, kind: 'SFTP drop', name: 'Trades feed', state: 'ok' },
+  { id: 'core', x: 24, y: 234, kind: 'Oracle database', brand: 'Oracle', name: 'Core banking', state: 'ok' },
+  { id: 'dag', x: 306, y: 174, kind: 'Airflow DAG', brand: 'Airflow', name: 'Nightly positions', state: 'cause' },
+  { id: 'odi', x: 306, y: 352, kind: 'Oracle ODI job', brand: 'Oracle ODI', name: 'Customer load', state: 'ok' },
+  { id: 'pos', x: 588, y: 174, kind: 'Snowflake table', brand: 'Snowflake', name: 'Daily positions', state: 'fail' },
+  { id: 'acc', x: 588, y: 352, kind: 'Snowflake table', brand: 'Snowflake', name: 'Bank accounts', state: 'ok' },
+  { id: 'r1', x: 872, y: 80, kind: 'Power BI report', brand: 'Power BI', name: 'Liquidity risk', state: 'impact' },
+  { id: 'r2', x: 872, y: 174, kind: 'Power BI report', brand: 'Power BI', name: 'Daily P&L', state: 'impact' },
+  { id: 'r3', x: 872, y: 268, kind: 'Power BI report', brand: 'Power BI', name: 'Regulatory returns', state: 'impact' },
+  { id: 'r4', x: 872, y: 362, kind: 'Power BI report', brand: 'Power BI', name: 'Customer 360', state: 'ok' },
 ]
 
 const G_EDGES: { from: string; to: string; hot?: 'cause' | 'impact' }[] = [
@@ -105,11 +113,20 @@ const STATE_COLOR: Record<NodeState, string> = {
 
 function LineageGraph() {
   const byId = Object.fromEntries(G_NODES.map((n) => [n.id, n]))
-  const edgePath = (a: GNode, b: GNode) => {
+  // When several edges enter the same node, spread their end points so the
+  // arrowheads don't stack on top of each other.
+  const incoming = (id: string) => G_EDGES.filter((e) => e.to === id).sort((p, q) => byId[p.from].y - byId[q.from].y)
+  const endOffset = (e: { from: string; to: string }) => {
+    const list = incoming(e.to)
+    if (list.length < 2) return 0
+    const i = list.findIndex((x) => x.from === e.from)
+    return (i - (list.length - 1) / 2) * 16
+  }
+  const edgePath = (a: GNode, b: GNode, off = 0) => {
     const x1 = a.x + NODE_W
     const y1 = a.y + NODE_H / 2
-    const x2 = b.x - 6
-    const y2 = b.y + NODE_H / 2
+    const x2 = b.x - 3
+    const y2 = b.y + NODE_H / 2 + off
     const dx = (x2 - x1) / 2
     return `M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}`
   }
@@ -136,7 +153,7 @@ function LineageGraph() {
 
       <svg
         className={dd.graph}
-        viewBox="0 0 1148 490"
+        viewBox="0 0 1148 450"
         role="img"
         aria-label="Lineage example: the Airflow nightly positions load is the root cause of a failed check on the Daily positions table in Snowflake, which affects three Power BI reports."
       >
@@ -144,13 +161,13 @@ function LineageGraph() {
           <pattern id="lg-dots" width="18" height="18" patternUnits="userSpaceOnUse">
             <circle cx="1" cy="1" r="1" fill="#e2e8f0" />
           </pattern>
-          <marker id="lg-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+          <marker id="lg-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
             <path d="M0,0 L8,4 L0,8 z" fill="#cbd5e1" />
           </marker>
-          <marker id="lg-arrow-cause" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+          <marker id="lg-arrow-cause" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
             <path d="M0,0 L8,4 L0,8 z" fill={STATE_COLOR.fail} />
           </marker>
-          <marker id="lg-arrow-impact" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+          <marker id="lg-arrow-impact" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto">
             <path d="M0,0 L8,4 L0,8 z" fill={STATE_COLOR.impact} />
           </marker>
           <filter id="lg-shadow" x="-10%" y="-20%" width="120%" height="150%">
@@ -158,16 +175,16 @@ function LineageGraph() {
           </filter>
         </defs>
 
-        <rect width="1148" height="490" fill="url(#lg-dots)" />
+        <rect width="1148" height="450" fill="url(#lg-dots)" />
 
         {G_COLS.map((c) => (
-          <text key={c.label} x={c.x} y={64} className={dd.gCol}>
+          <text key={c.label} x={c.x} y={48} className={dd.gCol}>
             {c.label.toUpperCase()}
           </text>
         ))}
 
         {G_EDGES.map((e) => {
-          const d = edgePath(byId[e.from], byId[e.to])
+          const d = edgePath(byId[e.from], byId[e.to], endOffset(e))
           const color = e.hot === 'cause' ? STATE_COLOR.fail : e.hot === 'impact' ? STATE_COLOR.impact : '#cbd5e1'
           return (
             <g key={`${e.from}-${e.to}`}>
@@ -185,7 +202,7 @@ function LineageGraph() {
         })}
 
         {G_NODES.map((n) => {
-          const brand = n.brand ? withBrandLogo({ label: n.brand }) : null
+          const brand = n.brand ? { logoSrc: GRAPH_LOGOS[n.brand] ?? withBrandLogo({ label: n.brand }).logoSrc } : null
           const color = STATE_COLOR[n.state]
           const hot = n.state !== 'ok'
           const label = STATE_LABEL[n.state]
@@ -193,7 +210,7 @@ function LineageGraph() {
           return (
             <g key={n.id} transform={`translate(${n.x},${n.y})`}>
               {n.state === 'fail' && (
-                <rect x={-5} y={-5} width={NODE_W + 10} height={NODE_H + 10} rx={15} fill="none" stroke={color} strokeWidth={5} className={dd.pulse} />
+                <rect x={-4} y={-4} width={NODE_W + 8} height={NODE_H + 8} rx={14} fill="none" stroke={color} strokeWidth={3} className={dd.pulse} />
               )}
               <g filter="url(#lg-shadow)">
                 <rect width={NODE_W} height={NODE_H} rx={12} fill="#fff" stroke={hot ? color : '#e2e8f0'} strokeWidth={hot ? 1.5 : 1} />

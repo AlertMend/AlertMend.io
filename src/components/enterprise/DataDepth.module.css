@@ -375,8 +375,8 @@
 }
 
 @keyframes lgPulse {
-  0%, 100% { stroke-opacity: 0.08; }
-  50% { stroke-opacity: 0.28; }
+  0%, 100% { stroke-opacity: 0.06; }
+  50% { stroke-opacity: 0.22; }
 }
 
 @media (prefers-reduced-motion: reduce) {
