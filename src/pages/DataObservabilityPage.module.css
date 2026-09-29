@@ -1308,3 +1308,44 @@
 .storyTag {
   letter-spacing: 0.12em;
 }
+
+/* Same hero geometry as every other product page (SolutionPageTemplate):
+   fixed copy column, product frame takes the rest and bleeds slightly,
+   so the board renders at the same size on every product. */
+.heroInner {
+  max-width: 1280px;
+  padding: 40px 24px 48px;
+}
+
+.h1 {
+  font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+  line-height: 1.14;
+}
+
+.lede {
+  font-size: 15.5px;
+  max-width: 440px;
+}
+
+@media (min-width: 1024px) {
+  .heroInner {
+    grid-template-columns: minmax(380px, 460px) minmax(0, 1fr);
+    align-items: center;
+    gap: 24px 32px;
+    padding: 44px 32px 56px;
+  }
+
+  .heroVisual {
+    margin-right: -4%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .heroInner {
+    padding: 48px 32px 64px;
+  }
+
+  .heroVisual {
+    margin-right: -8%;
+  }
+}

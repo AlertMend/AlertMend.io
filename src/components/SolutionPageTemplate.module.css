@@ -54,7 +54,7 @@
 .headline {
   margin: 18px 0 0;
   font-size: clamp(1.8rem, 2.8vw, 2.4rem);
-  font-weight: 720;
+  font-weight: 600;
   line-height: 1.14;
   letter-spacing: -0.032em;
   color: #09090b;

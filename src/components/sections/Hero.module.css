@@ -1567,3 +1567,25 @@
 .kpiWarn { border-top-color: #d97706; }
 .kpiViolet { border-top-color: #7c3aed; }
 .kpiOk { border-top-color: #059669; }
+
+/* Product frame top bar: the tab strip never runs under the search box or
+   the LIVE badge. The board measures its own width, so the ⌘K search only
+   shows when there is room for every tab. */
+.workspace {
+  container-type: inline-size;
+}
+
+.tabs {
+  overflow: hidden;
+}
+
+@container (max-width: 1000px) {
+  .search {
+    display: none !important;
+  }
+  .tab,
+  .tabActive {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
