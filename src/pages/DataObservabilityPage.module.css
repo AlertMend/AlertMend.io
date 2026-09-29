@@ -1030,3 +1030,281 @@
 .ctaBand .heroCtas {
   justify-content: center;
 }
+
+/* =====================================================================
+   Enterprise polish: bring every section on this page onto the same
+   system as the governance / sovereignty / lineage sections: left-aligned
+   heads, 600-weight headings, hairline grids instead of floating cards,
+   plain violet icons, and one ink navy for every dark surface.
+   ===================================================================== */
+
+.heroWash { display: none; }
+
+.badge {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  color: #6d28d9;
+}
+
+.badgeDot { display: none; }
+
+.h1 {
+  font-size: clamp(2.1rem, 3.6vw, 3.1rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: #0b1220;
+}
+
+.accent { color: #6d28d9; }
+
+.lede {
+  max-width: 520px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #475569;
+}
+
+/* Section heads */
+.section,
+.sectionAlt {
+  padding: 96px 0;
+}
+
+.secHead {
+  text-align: left;
+  max-width: 760px;
+  margin: 0 0 48px;
+}
+
+.secHead :global(.sec-tag) {
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  color: #6d28d9;
+}
+
+.secHead :global(.sec-tag)::before { display: none; }
+
+.secHead h2 {
+  font-size: clamp(30px, 3.4vw, 44px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.024em;
+  color: #0b1220;
+}
+
+.secHead p {
+  font-size: 17px;
+  line-height: 1.65;
+  color: #475569;
+}
+
+/* Hairline grids instead of floating cards */
+.pillarGrid,
+.steps,
+.featureGrid,
+.securityGrid {
+  gap: 0;
+  border-top: 1px solid rgba(11, 18, 32, 0.1);
+  border-left: 1px solid rgba(11, 18, 32, 0.1);
+}
+
+.pillar,
+.step,
+.feature,
+.securityCard {
+  padding: 28px 26px 30px;
+  border: 0;
+  border-right: 1px solid rgba(11, 18, 32, 0.1);
+  border-bottom: 1px solid rgba(11, 18, 32, 0.1);
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.pillarIcon {
+  width: auto;
+  height: auto;
+  justify-content: flex-start;
+  background: none;
+  color: #6d28d9;
+}
+
+.pillar h3,
+.step h3,
+.feature h3,
+.securityCard h3 {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: #0b1220;
+}
+
+.pillar > p,
+.step p,
+.feature p,
+.securityCard p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #475569;
+}
+
+.stepNum {
+  font-size: 13px;
+  font-weight: 650;
+  color: #6d28d9;
+}
+
+/* Deep dives */
+.deepEyebrow {
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  color: #6d28d9;
+}
+
+.deepCopy h2 {
+  font-size: clamp(24px, 2.4vw, 32px);
+  font-weight: 600;
+  line-height: 1.15;
+  color: #0b1220;
+}
+
+.deepCopy p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #475569;
+}
+
+.chips span {
+  border-radius: 999px;
+  background: #fff;
+  color: #334155;
+}
+
+.mockCard {
+  border-radius: 12px;
+  border-color: rgba(255, 255, 255, 0.06);
+  background: #0b1220;
+  box-shadow: 0 24px 48px -28px rgba(11, 18, 32, 0.45);
+}
+
+/* Story + CTA share the site's ink navy */
+.story {
+  padding: 96px 0;
+  background: #0b1220;
+}
+
+.ctaBand {
+  padding: 88px 0;
+  text-align: left;
+  background: #0b1220;
+  border-top: 0;
+}
+
+.ctaInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.ctaBand h2 {
+  margin: 0;
+  max-width: 640px;
+  font-size: clamp(30px, 3.4vw, 44px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.024em;
+  color: #f8fafc;
+}
+
+.ctaBand p {
+  margin: 12px 0 0;
+  max-width: 600px;
+  font-size: 17px;
+  color: #cbd5e1;
+}
+
+.ctaBand .heroCtas {
+  justify-content: flex-start;
+  margin-top: 0;
+}
+
+.ctaBand .btnPrimary {
+  background: #fff;
+  border-color: #fff;
+  color: #0b1220 !important;
+}
+
+.ctaBand .btnSecondary {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #f8fafc !important;
+}
+
+/* FAQ: head on the left, questions on the right */
+.faqLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 32px 64px;
+  align-items: start;
+}
+
+.faqLayout .secHead {
+  margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+  .faqLayout { grid-template-columns: 1fr; }
+}
+
+/* One content width for the whole page, matching the enterprise sections */
+.wrap,
+.wrapNarrow {
+  max-width: 1200px;
+}
+
+.heroInner {
+  max-width: 1200px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.page :global(.sec-tag) {
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  color: #6d28d9;
+}
+
+.page :global(.sec-tag)::before { display: none; }
+
+.stackH2 {
+  font-size: clamp(26px, 2.6vw, 34px);
+  font-weight: 600;
+  color: #0b1220;
+}
+
+.stackBody {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #475569;
+}
+
+.story h2 {
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.024em;
+}
+
+.storyTag {
+  letter-spacing: 0.12em;
+}

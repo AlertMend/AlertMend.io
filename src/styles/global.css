@@ -365,3 +365,8 @@ body.alertmend-dark section.zone-dark {
 main:has(> :last-child:is([class*="_cta"], [class*="final"], [class*="ctaSec"])) + footer {
   margin-top: 0 !important;
 }
+
+/* Same for pages whose last section is a dark `ctaBand` inside a page wrapper. */
+main:has(> :last-child > [class*="ctaBand"]:last-child) + footer {
+  margin-top: 0 !important;
+}
