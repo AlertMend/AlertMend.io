@@ -20,22 +20,22 @@ const LINEAGE: { col: string; nodes: { name: string; kind: string; state: NodeSt
   {
     col: 'Source',
     nodes: [
-      { name: 'CORE_BANKING', kind: 'Oracle', state: 'ok' },
-      { name: 'TRADES_FEED', kind: 'SFTP drop', state: 'ok' },
+      { name: 'Core banking', kind: 'Oracle', state: 'ok' },
+      { name: 'Trades feed', kind: 'SFTP drop', state: 'ok' },
     ],
   },
   {
     col: 'Pipeline',
     nodes: [
-      { name: 'positions_nightly', kind: 'Airflow DAG', state: 'cause' },
-      { name: 'customer_load', kind: 'ODI job', state: 'ok' },
+      { name: 'Nightly positions load', kind: 'Airflow DAG', state: 'cause' },
+      { name: 'Customer load', kind: 'ODI job', state: 'ok' },
     ],
   },
   {
     col: 'Warehouse',
     nodes: [
-      { name: 'FINANCE.DAILY_POSITIONS', kind: 'Snowflake table', state: 'fail' },
-      { name: 'BANKING.ACCOUNTS', kind: 'Snowflake table', state: 'ok' },
+      { name: 'Daily positions', kind: 'Snowflake table', state: 'fail' },
+      { name: 'Bank accounts', kind: 'Snowflake table', state: 'ok' },
     ],
   },
   {
@@ -60,20 +60,20 @@ const STATE_LABEL: Record<NodeState, string> = {
 
 type GNode = { id: string; x: number; y: number; kind: string; brand?: string; name: string; state: NodeState }
 
-const NODE_W = 232
-const NODE_H = 70
+const NODE_W = 248
+const NODE_H = 72
 
 const G_NODES: GNode[] = [
-  { id: 'feed', x: 32, y: 150, kind: 'SFTP', name: 'TRADES_FEED', state: 'ok' },
-  { id: 'core', x: 32, y: 262, kind: 'Oracle', brand: 'Oracle', name: 'CORE_BANKING', state: 'ok' },
-  { id: 'dag', x: 316, y: 206, kind: 'Airflow', brand: 'Airflow', name: 'positions_nightly', state: 'cause' },
-  { id: 'odi', x: 316, y: 380, kind: 'Oracle ODI', brand: 'Oracle ODI', name: 'customer_load', state: 'ok' },
-  { id: 'pos', x: 600, y: 206, kind: 'Snowflake', brand: 'Snowflake', name: 'FINANCE.DAILY_POSITIONS', state: 'fail' },
-  { id: 'acc', x: 600, y: 380, kind: 'Snowflake', brand: 'Snowflake', name: 'BANKING.ACCOUNTS', state: 'ok' },
-  { id: 'r1', x: 884, y: 112, kind: 'Power BI', brand: 'Power BI', name: 'Liquidity risk', state: 'impact' },
-  { id: 'r2', x: 884, y: 206, kind: 'Power BI', brand: 'Power BI', name: 'Daily P&L', state: 'impact' },
-  { id: 'r3', x: 884, y: 300, kind: 'Power BI', brand: 'Power BI', name: 'Regulatory returns', state: 'impact' },
-  { id: 'r4', x: 884, y: 394, kind: 'Power BI', brand: 'Power BI', name: 'Customer 360', state: 'ok' },
+  { id: 'feed', x: 24, y: 146, kind: 'SFTP drop', name: 'Trades feed', state: 'ok' },
+  { id: 'core', x: 24, y: 264, kind: 'Oracle database', brand: 'Oracle', name: 'Core banking', state: 'ok' },
+  { id: 'dag', x: 306, y: 204, kind: 'Airflow DAG', brand: 'Airflow', name: 'Nightly positions', state: 'cause' },
+  { id: 'odi', x: 306, y: 382, kind: 'Oracle ODI job', brand: 'Oracle ODI', name: 'Customer load', state: 'ok' },
+  { id: 'pos', x: 588, y: 204, kind: 'Snowflake table', brand: 'Snowflake', name: 'Daily positions', state: 'fail' },
+  { id: 'acc', x: 588, y: 382, kind: 'Snowflake table', brand: 'Snowflake', name: 'Bank accounts', state: 'ok' },
+  { id: 'r1', x: 872, y: 110, kind: 'Power BI report', brand: 'Power BI', name: 'Liquidity risk', state: 'impact' },
+  { id: 'r2', x: 872, y: 204, kind: 'Power BI report', brand: 'Power BI', name: 'Daily P&L', state: 'impact' },
+  { id: 'r3', x: 872, y: 298, kind: 'Power BI report', brand: 'Power BI', name: 'Regulatory returns', state: 'impact' },
+  { id: 'r4', x: 872, y: 392, kind: 'Power BI report', brand: 'Power BI', name: 'Customer 360', state: 'ok' },
 ]
 
 const G_EDGES: { from: string; to: string; hot?: 'cause' | 'impact' }[] = [
@@ -90,10 +90,10 @@ const G_EDGES: { from: string; to: string; hot?: 'cause' | 'impact' }[] = [
 ]
 
 const G_COLS = [
-  { x: 32, label: 'Source' },
-  { x: 316, label: 'Pipeline' },
-  { x: 600, label: 'Warehouse' },
-  { x: 884, label: 'Reports' },
+  { x: 24, label: 'Source' },
+  { x: 306, label: 'Pipeline' },
+  { x: 588, label: 'Warehouse' },
+  { x: 872, label: 'Reports' },
 ]
 
 const STATE_COLOR: Record<NodeState, string> = {
@@ -124,7 +124,7 @@ function LineageGraph() {
             <i />
           </span>
           <span>Lineage</span>
-          <span className={dd.graphCrumb}>FINANCE.DAILY_POSITIONS</span>
+          <span className={dd.graphCrumb}>Daily positions</span>
         </div>
         <ul className={dd.legend}>
           <li><i style={{ background: STATE_COLOR.cause }} />Root cause</li>
@@ -138,7 +138,7 @@ function LineageGraph() {
         className={dd.graph}
         viewBox="0 0 1148 490"
         role="img"
-        aria-label="Lineage example: the Airflow DAG positions_nightly is the root cause of a failed check on FINANCE.DAILY_POSITIONS, which affects three Power BI reports."
+        aria-label="Lineage example: the Airflow nightly positions load is the root cause of a failed check on the Daily positions table in Snowflake, which affects three Power BI reports."
       >
         <defs>
           <pattern id="lg-dots" width="18" height="18" patternUnits="userSpaceOnUse">
@@ -188,28 +188,31 @@ function LineageGraph() {
           const brand = n.brand ? withBrandLogo({ label: n.brand }) : null
           const color = STATE_COLOR[n.state]
           const hot = n.state !== 'ok'
+          const label = STATE_LABEL[n.state]
+          const pillW = label.length * 6.6 + 20
           return (
-            <g key={n.id} transform={`translate(${n.x},${n.y})`} filter="url(#lg-shadow)">
+            <g key={n.id} transform={`translate(${n.x},${n.y})`}>
               {n.state === 'fail' && (
-                <rect x={-4} y={-4} width={NODE_W + 8} height={NODE_H + 8} rx={13} fill="none" stroke={color} strokeOpacity={0.25} strokeWidth={4} className={dd.pulse} />
+                <rect x={-5} y={-5} width={NODE_W + 10} height={NODE_H + 10} rx={15} fill="none" stroke={color} strokeWidth={5} className={dd.pulse} />
               )}
-              <rect width={NODE_W} height={NODE_H} rx={10} fill="#fff" stroke={hot ? color : '#e2e8f0'} strokeWidth={hot ? 1.5 : 1} />
-              <rect x={0} y={10} width={3} height={NODE_H - 20} rx={1.5} fill={color} />
+              <g filter="url(#lg-shadow)">
+                <rect width={NODE_W} height={NODE_H} rx={12} fill="#fff" stroke={hot ? color : '#e2e8f0'} strokeWidth={hot ? 1.5 : 1} />
+              </g>
+              <rect x={14} y={14} width={44} height={44} rx={10} fill="#f8fafc" stroke="#e2e8f0" />
               {brand?.logoSrc ? (
-                <image href={brand.logoSrc} x={16} y={14} width={18} height={18} preserveAspectRatio="xMidYMid meet" />
+                <image href={brand.logoSrc} x={22} y={22} width={28} height={28} preserveAspectRatio="xMidYMid meet" />
               ) : (
-                <g transform="translate(16,14)" stroke="#64748b" strokeWidth="1.5" fill="none">
-                  <rect x="1" y="3" width="16" height="12" rx="2" />
-                  <path d="M1 7h16" />
+                <g transform="translate(24,24)" stroke="#475569" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M2 6a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z" />
                 </g>
               )}
-              <text x={42} y={28} className={dd.gKind}>{n.kind}</text>
-              <text x={16} y={54} className={dd.gName}>{n.name}</text>
+              <text x={70} y={33} className={dd.gName}>{n.name}</text>
+              <text x={70} y={52} className={dd.gKind}>{n.kind}</text>
               {hot && (
-                <g transform={`translate(${NODE_W - 12},12)`}>
-                  <rect x={-(STATE_LABEL[n.state].length * 6.4 + 16)} y={0} width={STATE_LABEL[n.state].length * 6.4 + 16} height={20} rx={10} fill={color} fillOpacity={0.12} />
-                  <text x={-8} y={14} textAnchor="end" className={dd.gPill} fill={color}>
-                    {STATE_LABEL[n.state]}
+                <g transform={`translate(${NODE_W - pillW - 12},-11)`}>
+                  <rect width={pillW} height={22} rx={11} fill={color} />
+                  <text x={pillW / 2} y={15} textAnchor="middle" className={dd.gPill} fill="#fff">
+                    {label}
                   </text>
                 </g>
               )}
@@ -219,8 +222,8 @@ function LineageGraph() {
       </svg>
 
       <div className={dd.graphFoot}>
-        <span><b>Root cause</b> positions_nightly failed after 3 retries</span>
-        <span><b>Check</b> Freshness on FINANCE.DAILY_POSITIONS, clause 4.2</span>
+        <span><b>Root cause</b> Nightly positions (Airflow DAG) failed after 3 retries</span>
+        <span><b>Check</b> Freshness on Daily positions, policy clause 4.2</span>
         <span><b>Impact</b> 3 Power BI reports flagged</span>
       </div>
     </div>
