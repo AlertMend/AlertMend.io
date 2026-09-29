@@ -296,7 +296,7 @@ export function LineageImpact() {
           <div className={styles.cell}>
             <span className={styles.icon}><FileBarChart2 size={20} strokeWidth={1.75} aria-hidden="true" /></span>
             <h3 className={styles.cellTitle}>Downstream impact</h3>
-            <p className={styles.cellBody}>Every Power BI report that reads the table, flagged as affected until the data is fixed.</p>
+            <p className={styles.cellBody}>Every Power BI report that reads the table, flagged as affected until the data is fixed. On Business and Enterprise, the status also shows in Power BI.</p>
           </div>
           <div className={styles.cell}>
             <span className={styles.icon}><Users size={20} strokeWidth={1.75} aria-hidden="true" /></span>

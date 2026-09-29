@@ -123,6 +123,7 @@ const dataPlans: Plan[] = [
       'More datasets and connections',
       'Incidents and escalation',
       'Audit export',
+      'Results written back to your warehouse and Power BI',
     ],
     popular: false,
     buttonText: 'Book a demo',
