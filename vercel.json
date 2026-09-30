@@ -253,6 +253,10 @@
       "destination": "/blog/ai-agent-observability-in-production/index.html"
     },
     {
+      "source": "/blog/ai-ready-data-checklist",
+      "destination": "/blog/ai-ready-data-checklist/index.html"
+    },
+    {
       "source": "/blog/ai-sre-tooling",
       "destination": "/blog/ai-sre-tooling/index.html"
     },
@@ -273,12 +277,20 @@
       "destination": "/blog/best-ai-agent-observability-tools/index.html"
     },
     {
+      "source": "/blog/bigquery-data-quality-checks",
+      "destination": "/blog/bigquery-data-quality-checks/index.html"
+    },
+    {
       "source": "/blog/centralized-logging-kubernetes-vms",
       "destination": "/blog/centralized-logging-kubernetes-vms/index.html"
     },
     {
       "source": "/blog/code-exited-status-1-failure",
       "destination": "/blog/code-exited-status-1-failure/index.html"
+    },
+    {
+      "source": "/blog/cost-of-bad-data-roi-calculator",
+      "destination": "/blog/cost-of-bad-data-roi-calculator/index.html"
     },
     {
       "source": "/blog/cross-stack-incident-automation",

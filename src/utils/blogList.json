@@ -1,5 +1,35 @@
 [
   {
+    "slug": "ai-ready-data-checklist",
+    "title": "AI-Ready Data: a CDO Checklist",
+    "excerpt": "A concrete, board-usable checklist of what your source data must satisfy before you run AI, agents, or RAG on it, and what skipping it costs.",
+    "date": "2026-09-30",
+    "category": "Data Observability",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "AI-ready data, CDO checklist, AI data readiness, data quality for AI, RAG data quality, AI project failure rate, data observability, AI-ready data checklist, source data quality"
+  },
+  {
+    "slug": "cost-of-bad-data-roi-calculator",
+    "title": "The Cost of Bad Data: ROI Calculator",
+    "excerpt": "Build the CFO case for data quality investment. Verified cost benchmarks plus an interactive data downtime ROI calculator you adjust to your own numbers.",
+    "date": "2026-09-30",
+    "category": "Data Observability",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "cost of bad data, data downtime ROI calculator, data quality business case, data observability ROI, CFO data quality investment, poor data quality cost, Gartner 12.9 million, data incident cost, data downtime cost"
+  },
+  {
+    "slug": "bigquery-data-quality-checks",
+    "title": "BigQuery Data Quality: 12 SQL Monitors",
+    "excerpt": "12 copy-paste SQL checks for BigQuery data quality: freshness, volume, nulls, duplicates, and schema drift, plus how to run them on a schedule.",
+    "date": "2026-09-29",
+    "category": "Data Observability",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "bigquery data quality, bigquery data quality checks, bigquery data monitoring, bigquery freshness check, bigquery null check sql, bigquery duplicate rows sql, bigquery schema drift, data quality sql bigquery, bigquery information_schema, bigquery data observability"
+  },
+  {
     "slug": "bcbs-239-data-quality-controls",
     "title": "BCBS 239 Data Quality Controls: A Guide",
     "excerpt": "What BCBS 239 asks of risk data, which principles drive data quality, and how to turn them into automated checks your auditors can trace.",
