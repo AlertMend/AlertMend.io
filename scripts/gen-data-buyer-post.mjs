@@ -193,7 +193,7 @@ ${buildCredArticleHeader(h1, DATE, category, author)}
     <h2 class="sectionTitle">Where AlertMend fits</h2>
     ${dm(spec.alertmendAngle).split(/\n+/).filter(Boolean).map((p) => `<p class="bodyText">${E(p)}</p>`).join('')}
     <div class="automationCta">
-      <p><strong>Want a second set of eyes on the source tables behind your data and AI?</strong> We will map the five pillars to your stack and show what evidence-backed root cause looks like on a table that keeps breaking.</p>
+      <p><strong>Want to see what this looks like on your own tables?</strong> AlertMend turns your data quality policy into live checks on Snowflake and Oracle, and when a check fails it shows the job that caused it and the reports it affects.</p>
       <a class="ctaButton ctaButtonPrimary" href="${calendly}&intent=data-observability" target="_blank" rel="noopener noreferrer">Book a free consultation &rarr;</a>
     </div>
   </section>
@@ -222,10 +222,10 @@ ${buildCredArticleHeader(h1, DATE, category, author)}
 
   <section class="ctaBox">
     <h2>${I.kind === 'calculator' ? 'Pressure-test your number against a real pipeline.' : 'Enforce the checklist, do not re-run it by hand.'}</h2>
-    <p>AlertMend watches your warehouse across freshness, volume, schema, quality, and lineage, gives evidence-backed root cause when a check fires, and routes a recommend-first fix, in one workspace that also watches the infrastructure beneath your pipelines.</p>
+    <p>AlertMend turns your data quality policy into live checks on Snowflake and Oracle, through a read-only agent inside your network. When a check fails it names the Airflow or Oracle ODI job that caused it and the Power BI reports it affects, and every check cites the policy clause it enforces.</p>
     <div class="ctaButtons">
       <a class="ctaButton ctaButtonPrimary" href="${calendly}" target="_blank" rel="noopener noreferrer">Book a free consultation</a>
-      <a class="ctaButton ctaButtonSecondary" href="/blog/bigquery-data-quality-checks">The SQL monitors &rarr;</a>
+      <a class="ctaButton ctaButtonSecondary" href="/blog/data-quality-check-types">The check catalog &rarr;</a>
     </div>
   </section>
   ${authorCard()}

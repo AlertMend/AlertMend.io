@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Quality Policy to Live Checks | AlertMend AI</title>
+  <meta name="description" content="Turn any written data quality policy into approved, versioned, traceable checks on Snowflake and Oracle with a repeatable method.">
+  <meta name="keywords" content="data quality policy, data quality rules, automated data quality checks, policy to checks, data governance, data observability, audit trail, check versioning, data quality copilot, quality score, referential integrity, freshness checks, Snowflake data quality, Oracle data quality">
+  <meta name="author" content="Dinesh Agrawal">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://www.alertmend.io/blog/data-quality-policy-to-automated-checks">
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.alertmend.io/blog/data-quality-policy-to-automated-checks">
+  <meta property="og:title" content="Data Quality Policy to Live Checks">
+  <meta property="og:description" content="Turn any written data quality policy into approved, versioned, traceable checks on Snowflake and Oracle with a repeatable method.">
+  <meta property="og:image" content="https://www.alertmend.io/assets/data-quality-policy-to-automated-checks/hero.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Data Quality Policy to Live Checks">
+  <meta name="twitter:description" content="Turn any written data quality policy into approved, versioned, traceable checks on Snowflake and Oracle with a repeatable method.">
+  <meta name="twitter:image" content="https://www.alertmend.io/assets/data-quality-policy-to-automated-checks/hero.svg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Data Quality Policy to Live Checks","description":"Turn any written data quality policy into approved, versioned, traceable checks on Snowflake and Oracle with a repeatable method.","image":"https://www.alertmend.io/assets/data-quality-policy-to-automated-checks/hero.svg","datePublished":"2026-09-30","dateModified":"2026-09-30","author":{"@type":"Person","name":"Dinesh Agrawal","jobTitle":"Co-Founder at AlertMend.io","url":"https://www.linkedin.com/in/dineshagrawal85/","sameAs":["https://www.linkedin.com/in/dineshagrawal85/"]},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/data-quality-policy-to-automated-checks"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I turn a written data quality policy into automated checks?","acceptedAnswer":{"@type":"Answer","text":"Rewrite each clause as a testable statement, map it to a check type such as completeness, uniqueness, validity, referential integrity or freshness, set the threshold from the policy, and store the clause reference on the check. Then route every check through approval and versioning. With AlertMend you upload the policy PDF and it proposes the checks with the clause link already attached, for you to approve."}},{"@type":"Question","name":"What check types cover most data quality policy clauses?","acceptedAnswer":{"@type":"Answer","text":"In practice a handful do most of the work: completeness for must be present, uniqueness for must be unique, validity and format for must be valid or must match a pattern, referential integrity for must reference a valid record, freshness for must arrive by a deadline, and numeric range or volume for range and count rules. See /blog/data-quality-check-types for the full catalog and when to use each."}},{"@type":"Question","name":"How do I keep a check traceable to the policy clause it enforces?","acceptedAnswer":{"@type":"Answer","text":"Store the clause id, for example Policy 4.2 or a named principle, as a field on the check itself rather than a comment. That single field lets you list every check enforcing a clause and every clause a check supports, which is the evidence an auditor asks for. AlertMend keeps this link automatically because each proposed check cites the clause it came from."}},{"@type":"Question","name":"Should AI change our data or checks on its own?","acceptedAnswer":{"@type":"Answer","text":"No. AlertMend proposes checks and edits, and a person approves each one. Nothing writes to your data, and no check goes live without approval. The Copilot and the policy upload only draft proposals, so the approval step stays with your data owners."}},{"@type":"Question","name":"How do we handle checks when the policy changes?","acceptedAnswer":{"@type":"Answer","text":"Treat checks like code. Every new or changed check is a proposal with an owner and a reason, previous versions are kept, and a bad edit can be rolled back to the last approved version. Rolling back a check never touches your data. Review coverage on a regular cadence to catch clauses with no check and checks with no clause."}},{"@type":"Question","name":"Which warehouses and policies does AlertMend support today?","acceptedAnswer":{"@type":"Answer","text":"AlertMend monitors Snowflake and Oracle today through a read-only agent in your network. Databricks and Postgres are not supported yet. You can upload any text-based policy PDF, such as an internal data quality standard, a data contract or BCBS 239. For a regulated worked example see /blog/bcbs-239-data-quality-controls."}}]}</script>
+  <link rel="stylesheet" href="/assets/exit-code-126/styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: #1f2937; background: #fff; -webkit-font-smoothing: antialiased; }
+    .navbar { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(229,231,235,.8); z-index: 50; }
+    .navbar-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .navbar-content { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    .navbar-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+    .navbar-logo-icon { height: 32px; width: auto; }
+    .navbar-links { display: none; align-items: center; gap: 4px; }
+    @media (min-width: 1024px) { .navbar-links { display: flex; } }
+    .navbar-link { padding: 6px 12px; font-size: 0.875rem; font-weight: 500; color: #3f3f46; text-decoration: none; border-radius: 6px; }
+    .navbar-link:hover { color: #09090b; background: #f4f4f5; }
+    .navbar-link.active { color: #09090b; background: #fafafa; }
+    .navbar-actions { display: none; align-items: center; gap: 10px; margin-left: 16px; padding-left: 16px; border-left: 1px solid #e5e7eb; }
+    @media (min-width: 1024px) { .navbar-actions { display: flex; } }
+    .navbar-button { padding: 8px 16px; font-size: 0.875rem; font-weight: 600; border-radius: 999px; text-decoration: none; }
+    .navbar-button-primary { background: #09090b; color: #fff; }
+    .navbar-button-secondary { color: #3f3f46; }
+    .main-container { max-width: 1280px; margin: 0 auto; padding: 96px 24px 64px; }
+    .content-wrapper { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media (min-width: 1024px) {
+      .content-wrapper { grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
+    }
+    .main-col { min-width: 0; max-width: 820px; }
+    @media (min-width: 1024px) { .main-col { max-width: none; } }
+    .sidebar { display: none; }
+    @media (min-width: 1024px) { .sidebar { display: block; } }
+    .sidebar-content { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card { background: #fafafa; border-radius: 8px; padding: 24px; border: 1px solid #e4e4e7; }
+    .sidebar-card-title { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
+    .signup-form { display: flex; flex-direction: column; gap: 12px; }
+    .signup-form input { width: 100%; padding: 10px 16px; border-radius: 6px; border: 1px solid #d4d4d8; font-size: 1rem; background: #fff; color: #09090b; }
+    .signup-form input:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2); }
+    .signup-form button { width: 100%; padding: 10px 12px; background: #09090b; color: #fff; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; }
+    .signup-form button:hover { background: #27272a; }
+    .signup-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .signup-status { font-size: 0.875rem; font-weight: 500; margin: 0; }
+    .signup-status.success { color: #047857; }
+    .signup-status.error { color: #dc2626; }
+    .related-content-title { font-size: 11px; font-weight: 700; color: #71717a; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 16px; }
+    .related-posts-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .related-post-link { color: #3f3f46; text-decoration: none; font-size: 0.875rem; line-height: 1.5; display: block; transition: color 0.15s; }
+    .related-post-link:hover { color: #7c3aed; }
+    .view-more-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 16px; color: #7c3aed; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
+    .view-more-link:hover { color: #6d28d9; }
+    .article-header { margin-bottom: 2rem; }
+    .article-header h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; color: #09090b; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .author-info { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: #09090b; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+    .author-name { font-weight: 600; color: #111827; }
+    .author-meta { font-size: 0.875rem; color: #6b7280; }
+    .promo { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; font-size: 1.0625rem; color: #374151; }
+    .promo a { color: #7c3aed; font-weight: 600; }
+.article-header--cred{margin-bottom:1.5rem;}
+.article-header--cred .authorCredLine--top{margin:0 0 .45rem;}
+.article-header--cred .article-meta{font-size:.875rem;color:#6b7280;margin:0;}
+.authorCredLine{font-size:.875rem;line-height:1.55;color:#71717a;}
+.authorCredLine a,.authorCredLine .authorCredName{color:#3f3f46;font-weight:600;text-decoration:none;}
+.authorCredLine a:hover{color:#7c3aed;}
+
+.buyerLead{background:var(--am-surface,#fff);border:1px solid #e4e4e7;border-left:4px solid #7c3aed;border-radius:14px;padding:1.4rem 1.5rem;box-shadow:0 8px 28px rgba(9,9,11,.05);}
+.buyerLead .eyebrow{display:block;color:#7c3aed;font-size:.68rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;margin-bottom:.5rem;}
+.buyerLead h2{font-size:1.3rem;line-height:1.35;color:#18181b;margin:0 0 .6rem;}
+.buyerLead p{margin:0;color:#3f3f46;font-size:.98rem;line-height:1.7;}
+.sourceList li{margin:.35rem 0;line-height:1.6;}
+/* audience block */
+.audienceCard{margin:1.4rem 0;padding:1.1rem 1.4rem;border:1px solid #e9e5f2;border-radius:14px;background:#faf9ff;}
+.audienceCard .audHead{font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#7c3aed;margin-bottom:.6rem;}
+.audienceCard ul{margin:0;padding-left:1.15rem;}
+.audienceCard li{margin:.3rem 0;color:#3f3f46;line-height:1.6;font-size:.95rem;}
+/* stat band */
+.statBand{display:grid;grid-template-columns:1fr;gap:12px;margin:1.6rem 0;}
+@media(min-width:640px){.statBand{grid-template-columns:repeat(3,1fr);}.statBand2{grid-template-columns:repeat(2,1fr);}}
+.statCard{background:#fff;border:1px solid #e4e4e7;border-top:3px solid #7c3aed;border-radius:14px;padding:18px 18px 16px;}
+.statCard .big{font-size:2.3rem;font-weight:800;color:#7c3aed;line-height:1;font-variant-numeric:tabular-nums;}
+.statCard .lbl{font-size:.88rem;color:#3f3f46;margin:.55rem 0 .5rem;line-height:1.45;}
+.statCard .src{font-size:.68rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:.05em;font-weight:800;}
+/* concept graphic */
+.conceptFig{margin:1.7rem 0;}
+.conceptFig svg{display:block;width:100%;height:auto;border:1px solid #e9e5f2;border-radius:14px;}
+.conceptFig figcaption{margin-top:.6rem;font-size:.82rem;color:#71717a;text-align:center;line-height:1.5;}
+/* example */
+.exampleBox{margin:1.7rem 0;border:1px solid #e4e4e7;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 22px rgba(9,9,11,.04);}
+.exampleBox .exHead{background:#f4f2fb;padding:.75rem 1.3rem;font-weight:800;color:#5b21b6;font-size:.95rem;border-bottom:1px solid #ece7f7;}
+.exampleBox .exBody{padding:1.05rem 1.3rem;}
+.exampleBox .exBody p{margin:0 0 .65rem;color:#3f3f46;line-height:1.7;font-size:.95rem;}
+.exampleBox .exLesson{color:#18181b;font-weight:600;font-size:.93rem;border-top:1px dashed #e4e4e7;padding-top:.7rem;margin-top:.3rem;}
+/* pull quote */
+.pullQuote{margin:1.9rem 0;padding:1.2rem 1.6rem;border-left:4px solid #7c3aed;background:#faf8ff;border-radius:0 12px 12px 0;}
+.pullQuote p{font-family:Georgia,'Times New Roman',serif;font-size:1.3rem;line-height:1.5;color:#27272a;margin:0;font-style:italic;}
+.pullQuote .attrib{display:block;margin-top:.65rem;font-size:.82rem;color:#71717a;font-style:normal;font-weight:600;}
+/* code card */
+.codeCard{margin:1.3rem 0;border:1px solid #e4e4e7;border-radius:12px;overflow:hidden;background:#0f172a;}
+.codeCard .codeHead{display:flex;align-items:center;justify-content:space-between;padding:.5rem .9rem;background:#111827;border-bottom:1px solid #1f2937;}
+.codeCard .codeHead span{font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#93c5fd;}
+.codeCard .codeCopy{font-size:.72rem;font-weight:700;color:#cbd5e1;background:#1f2937;border:1px solid #334155;border-radius:6px;padding:.2rem .6rem;cursor:pointer;}
+.codeCard .codeCopy:hover{background:#334155;color:#fff;}
+.codeCard pre{margin:0;padding:1rem 1.1rem;overflow-x:auto;background:#0f172a;}
+.codeCard code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.82rem;line-height:1.6;color:#e2e8f0;white-space:pre;}
+/* comparison table */
+.cmpWrap{margin:1.5rem 0;overflow-x:auto;border:1px solid #e4e4e7;border-radius:12px;}
+.cmpTable{border-collapse:collapse;width:100%;min-width:540px;font-size:.9rem;}
+.cmpTable th,.cmpTable td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid #eee;vertical-align:top;line-height:1.5;}
+.cmpTable thead th{background:#faf8ff;color:#5b21b6;font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:.03em;border-bottom:2px solid #ece7f7;}
+.cmpTable tbody tr:last-child td{border-bottom:none;}
+.cmpTable .cmpRowHead{font-weight:700;color:#18181b;}
+/* step flow */
+.stepFlow{list-style:none;counter-reset:sf;margin:1.4rem 0;padding:0;}
+.stepFlow li{counter-increment:sf;position:relative;padding:.2rem 0 1.1rem 3rem;border-left:2px solid #ece7f7;margin-left:1rem;}
+.stepFlow li:last-child{border-left-color:transparent;}
+.stepFlow li::before{content:counter(sf);position:absolute;left:-1rem;top:-2px;width:2rem;height:2rem;border-radius:50%;background:#7c3aed;color:#fff;font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center;}
+.stepFlow .stepTitle{font-weight:700;color:#18181b;margin-bottom:.2rem;}
+.stepFlow .stepBody{color:#3f3f46;font-size:.93rem;line-height:1.65;}
+/* callout */
+.noteCard{margin:1.3rem 0;padding:1rem 1.2rem;border-radius:12px;border:1px solid #e4e4e7;background:#fbfbfd;}
+.noteCard .noteTitle{font-weight:800;margin-bottom:.35rem;font-size:.92rem;}
+.noteCard p{margin:0;color:#3f3f46;line-height:1.7;font-size:.94rem;}
+.note-info{border-left:4px solid #2563eb;background:#eff6ff;} .note-info .noteTitle{color:#1e40af;}
+.note-warn{border-left:4px solid #d97706;background:#fffbeb;} .note-warn .noteTitle{color:#92400e;}
+.note-good{border-left:4px solid #059669;background:#ecfdf5;} .note-good .noteTitle{color:#065f46;}
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-content">
+        <a href="/" class="navbar-logo">
+          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon">
+        </a>
+        <div class="navbar-links">
+          <a href="/#how-it-works" class="navbar-link">How It Works</a>
+          <a href="/#solutions" class="navbar-link">Solutions</a>
+          <a href="/case-studies" class="navbar-link">Case Studies</a>
+          <a href="/blog" class="navbar-link active">Blog</a>
+          <a href="/pricing" class="navbar-link">Pricing</a>
+        </div>
+        <div class="navbar-actions">
+          <a href="https://app.alertmend.io/signup?source=blog-post&blog_slug=data-quality-policy-to-automated-checks" class="navbar-button navbar-button-secondary">Register</a>
+          <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=data-quality-policy-to-automated-checks" class="navbar-button navbar-button-primary" target="_blank" rel="noopener noreferrer">Book a Demo</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="main-container">
+    <div class="content-wrapper">
+      <div class="main-col">
+        
+
+    <header class="article-header article-header--cred">
+      <h1>Turn a Data Quality Policy Into Live Checks</h1>
+      <p class="authorCredLine authorCredLine--top"><a href="https://www.linkedin.com/in/dineshagrawal85/" target="_blank" rel="noopener noreferrer">Dinesh Agrawal</a> · 12+ years in cloud infrastructure and incident automation</p>
+      <p class="article-meta">2026-09-30 · Data Observability</p>
+    </header>
+<div class="proofStrip" aria-label="Article verification">
+  <strong>✓ Every external stat cited to a named source; every check names an owner and a first action</strong>
+  <span class="dot">•</span>
+  <span>Last reviewed 2026-09-30</span>
+</div>
+
+<article class="ec126 rich">
+  <section class="answerPanel" id="answer">
+    <div class="buyerLead">
+      <span class="eyebrow">The short answer</span>
+      <h2>A policy becomes live checks in a repeatable set of steps</h2>
+      <p>Break the policy into testable clauses, map each clause to a check type, keep the clause reference on every check, and route every new or changed check through an approval and versioning workflow. AlertMend does this from an uploaded policy PDF on Snowflake and Oracle.</p>
+    </div>
+  </section>
+
+  <div class="audienceCard"><div class="audHead">You are in the right place if</div><ul><li>you have a written data quality policy that nobody actively monitors</li><li>you need to show an auditor which clause each check enforces</li><li>you want checks approved and versioned, not scattered in scripts</li></ul></div>
+
+  <div class="statBand"><div class="statCard"><div class="big">$12.9M</div><div class="lbl">Average yearly cost of poor data quality per organization</div><div class="src">Gartner</div></div><div class="statCard"><div class="big">87</div><div class="lbl">Ready-made check types to map a clause to, no SQL needed</div><div class="src">AlertMend</div></div><div class="statCard"><div class="big">14 principles</div><div class="lbl">In BCBS 239, the regulated example this method fits</div><div class="src">Bank for International Settlements</div></div></div>
+
+  <nav class="tocPills" aria-label="On this page">
+    <a href="#method">How do you turn a data q</a>
+    <a href="#steps">Step by step</a>
+    <a href="#traceable">How do you keep each che</a>
+    <a href="#approve">Approving</a>
+    <a href="#alertmend">Where AlertMend fits</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+
+  
+  <section class="sectionBlock" id="method">
+    <h2 class="sectionTitle">How do you turn a data quality policy into checks?</h2>
+    <p class="bodyText">Almost every regulated company has a data quality policy. Far fewer can show which parts of it are monitored today. The gap is not intent. It is the manual work of translating each clause into a rule, keeping the rules in step with the policy, and proving it to an auditor.</p><p class="bodyText">The method below is domain neutral. It works whether the policy governs banking customer records, healthcare claims or supplier master data, and whether you do it by hand or with tooling. For a fully worked regulated example, see the BCBS 239 walkthrough at /blog/bcbs-239-data-quality-controls.</p><ul class="sourceList"><li>Break the policy into testable clauses.</li><li>Map each clause to a check type from a known catalog.</li><li>Keep the clause reference on every check.</li><li>Approve, version and review each check before and after it goes live.</li></ul>
+    <div class="noteCard note-info"><div class="noteTitle">A rewrite is the first real step</div><p>Customer records must be complete is not testable. Every active customer has a non-empty address, date of birth and tax ID is. Rewrite each clause until a query could answer it with a yes or a no.</p></div>
+  </section><figure class="conceptFig"><svg viewBox="0 0 680 150" width="680" height="150" role="img" aria-label="From policy to live checks: upload your policy, AlertMend proposes checks that each cite the clause they enforce, you approve every one, then the checks run live on Snowflake and Oracle." font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"><defs><marker id="pc" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#a1a1aa"/></marker></defs><rect width="680" height="150" rx="14" fill="#faf9ff"/><text x="340" y="26" text-anchor="middle" font-size="12" font-weight="800" fill="#5b21b6" letter-spacing="1">FROM POLICY TO LIVE CHECKS</text><line x1="173" y1="85" x2="183" y2="85" stroke="#a1a1aa" stroke-width="2" marker-end="url(#pc)"/><line x1="333" y1="85" x2="343" y2="85" stroke="#a1a1aa" stroke-width="2" marker-end="url(#pc)"/><line x1="493" y1="85" x2="503" y2="85" stroke="#a1a1aa" stroke-width="2" marker-end="url(#pc)"/><g transform="translate(27,52)"><rect width="146" height="66" rx="12" fill="#fff" stroke="#2563eb" stroke-width="1.5"/><rect width="146" height="4" rx="2" fill="#2563eb"/><text x="73" y="30" text-anchor="middle" font-size="13.5" font-weight="800" fill="#18181b">Your policy</text><text x="73" y="50" text-anchor="middle" font-size="10.5" fill="#71717a">PDF, e.g. BCBS 239</text></g><g transform="translate(187,52)"><rect width="146" height="66" rx="12" fill="#fff" stroke="#7c3aed" stroke-width="1.5"/><rect width="146" height="4" rx="2" fill="#7c3aed"/><text x="73" y="30" text-anchor="middle" font-size="13.5" font-weight="800" fill="#18181b">Checks proposed</text><text x="73" y="50" text-anchor="middle" font-size="10.5" fill="#71717a">each cites its clause</text></g><g transform="translate(347,52)"><rect width="146" height="66" rx="12" fill="#fff" stroke="#d97706" stroke-width="1.5"/><rect width="146" height="4" rx="2" fill="#d97706"/><text x="73" y="30" text-anchor="middle" font-size="13.5" font-weight="800" fill="#18181b">You approve</text><text x="73" y="50" text-anchor="middle" font-size="10.5" fill="#71717a">nothing auto-goes-live</text></g><g transform="translate(507,52)"><rect width="146" height="66" rx="12" fill="#fff" stroke="#059669" stroke-width="1.5"/><rect width="146" height="4" rx="2" fill="#059669"/><text x="73" y="30" text-anchor="middle" font-size="13.5" font-weight="800" fill="#18181b">Live checks</text><text x="73" y="50" text-anchor="middle" font-size="10.5" fill="#71717a">Snowflake & Oracle</text></g></svg><figcaption>Each policy clause becomes one or more checks, and every check keeps a link back to the clause it enforces.</figcaption></figure>
+  <section class="sectionBlock" id="steps">
+    <h2 class="sectionTitle">Step by step: from policy clause to live check</h2>
+    <ol class="stepFlow"><li><div class="stepTitle">Break the policy into testable clauses</div><div class="stepBody">Read the policy clause by clause and rewrite each one as something a query can answer. For each clause note the dataset and columns it covers, the dimension it enforces, the threshold, and the owner who can approve it.</div></li><li><div class="stepTitle">Choose a check type per clause</div><div class="stepBody">Map the wording to a dimension: completeness, uniqueness, validity, format, referential integrity, numeric range, volume, freshness, anomaly or trend. A single clause often maps to more than one check.</div></li><li><div class="stepTitle">Set the threshold from the policy, not a guess</div><div class="stepBody">Start with the policy hard rules, for example zero duplicate account ids, or an allowed rate such as under 0.5 percent missing. Add history-based anomaly and trend checks only once a dataset has enough history.</div></li><li><div class="stepTitle">Keep the clause reference on the check</div><div class="stepBody">Store the clause id on every check, for example Policy 4.2 or BCBS 239 Principle 3. This one field is what lets you answer show me how this rule is enforced in seconds instead of days.</div></li><li><div class="stepTitle">Approve before anything goes live</div><div class="stepBody">Route each new or changed check to the data owner, record the approval, and only then activate it. Checks written by one person and never reviewed become noise.</div></li><li><div class="stepTitle">Alert with cause and impact</div><div class="stepBody">A failed check should name what failed and the observed value, the pipeline run that loaded the data with its error, and the reports and teams that read the table.</div></li></ol>
+    <figure class="cmpWrap"><table class="cmpTable"><thead><tr><th>Policy wording</th><th>Check type</th><th>What good looks like</th></tr></thead><tbody><tr><td class="cmpRowHead">must be present</td><td>Completeness</td><td>null or blank rate on address under 0.5 percent</td></tr><tr><td class="cmpRowHead">must be unique</td><td>Uniqueness</td><td>no duplicate account_id</td></tr><tr><td class="cmpRowHead">must be valid</td><td>Validity</td><td>currency is in the approved list</td></tr><tr><td class="cmpRowHead">must follow a pattern</td><td>Format</td><td>tax_id matches the required format</td></tr><tr><td class="cmpRowHead">must reference a valid customer</td><td>Referential integrity</td><td>every loan account_id exists in customers</td></tr><tr><td class="cmpRowHead">must be available by 07:00</td><td>Freshness</td><td>latest load lands before 07:00</td></tr><tr><td class="cmpRowHead">must stay within range</td><td>Numeric range</td><td>daily_balance is not negative</td></tr></tbody></table><figcaption>A repeatable clause-to-check mapping. Most policies use the same handful of patterns over and over.</figcaption></figure>
+  </section><div class="exampleBox"><div class="exHead">In practice: A KYC completeness clause becomes a live check</div><div class="exBody"><p>Clause 4.2 of the internal policy reads: every active customer record must have a non-empty address, date of birth and tax ID.</p><p>That single clause maps to three completeness checks on BANKING.CUSTOMER_ACCOUNTS, each tagged Policy 4.2.</p><p>The data owner approves all three, they go live, and a later failure alerts Teams with the clause the check enforces.</p><p class="exLesson">One vague sentence often becomes several precise checks. Keeping the clause reference on each one is what turns monitoring into audit evidence.</p></div></div>
+  <section class="sectionBlock" id="traceable">
+    <h2 class="sectionTitle">How do you keep each check traceable to its clause?</h2>
+    <p class="bodyText">Traceability is a single design decision made early: every check carries the clause it enforces as a first-class field, not a note buried in a script comment. Once that link exists, coverage becomes a report you can run. For any clause you can list the checks enforcing it, their history and their current state. For any check you can name the clause that justifies it.</p><p class="bodyText">The link also runs the other way, which is where gaps hide. Two lists matter at every review: clauses with no check yet, and checks with no clause. The first is unmonitored policy. The second is monitoring nobody asked for, which is usually where alert noise starts.</p>
+    <div class="noteCard note-warn"><div class="noteTitle">Averages hide failing checks</div><p>A 97 percent average quality score can hide one critical failing check. Let any failing critical check cap the score for that dataset, so the number never smooths over a real problem.</p></div>
+  </section><figure class="pullQuote"><p>A policy that lives only on paper protects no one. The value shows up the moment a clause becomes a check someone approved.</p><figcaption class="attrib">Dinesh Agrawal</figcaption></figure>
+  <section class="sectionBlock" id="approve">
+    <h2 class="sectionTitle">Approving, versioning and reviewing checks</h2>
+    <p class="bodyText">Policies change, and so must checks. A threshold gets tightened, a clause is retired, a new dataset comes into scope. Without a version history you lose the one thing an auditor asks for: what was this check on the day the failure happened, and who changed it.</p><p class="bodyText">Treat every check like code. Each new or changed check is a proposal with an owner and a reason. Approvals are recorded. Previous versions are kept, and a bad edit to a check can be rolled back to the last approved version. Rolling back a check is not the same as changing your data, which the checks never touch.</p><ul class="sourceList"><li>Rules without owners: every check needs someone who can approve it and act when it fails.</li><li>Silent edits: record who changed a check, when and why, and keep the prior version.</li><li>Stale coverage: review clauses with no check and checks with no clause on a regular cadence.</li></ul>
+  </section>
+
+  <section class="sectionBlock" id="alertmend">
+    <h2 class="sectionTitle">Where AlertMend fits</h2>
+    <p class="bodyText">AlertMend turns this method into an upload. You give it your policy or data contract as a text-based PDF, and it proposes checks, each linked to the clause it enforces. Nothing goes live until a person approves it, so the approval and clause-tracing steps above are built into the workflow rather than tracked in a spreadsheet.</p><p class="bodyText">The Data Quality Copilot lets you add, change or route checks in plain English, and again every change is a proposal you approve. Behind it is an 87-check catalog covering completeness, uniqueness, validity, format, referential integrity, numeric range, volume, freshness and history-based anomaly and trend checks, so most clauses map to a ready-made check with no SQL.</p><p class="bodyText">Checks run on Snowflake and Oracle through a read-only agent inside your network, so warehouse credentials never leave your environment. When a check fails, the alert in Slack or Teams shows the cause and the impact: the failed Airflow or Oracle ODI job with its error, and the Power BI reports that read the affected table, alongside the policy clause the check enforces.</p><p class="bodyText">Every check change is versioned with a reason and can be rolled back to the last approved version, and the audit trail gives you the coverage evidence a data office needs. Databricks and Postgres are not supported yet.</p>
+  </section>
+
+  
+  <section class="sectionBlock" id="sources">
+    <h2 class="sectionTitle">Sources</h2>
+    <ol class="sourceList">
+      <li><a href="https://www.gartner.com/smarterwithgartner/how-to-improve-your-data-quality" target="_blank" rel="noopener noreferrer">Gartner: How to Improve Your Data Quality</a></li><li><a href="https://www.bis.org/publ/bcbs239.htm" target="_blank" rel="noopener noreferrer">Basel Committee on Banking Supervision: Principles for effective risk data aggregation and risk reporting (BCBS 239)</a></li>
+    </ol>
+  </section>
+
+  <section class="sectionBlock" id="faq">
+    <h2 class="sectionTitle">FAQ</h2>
+    <div class="faqList">
+    
+      <div class="faqItem">
+        <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="true">
+          How do I turn a written data quality policy into automated checks?
+          <svg class="faqChevron faqChevronOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faqAnswer">Rewrite each clause as a testable statement, map it to a check type such as completeness, uniqueness, validity, referential integrity or freshness, set the threshold from the policy, and store the clause reference on the check. Then route every check through approval and versioning. With AlertMend you upload the policy PDF and it proposes the checks with the clause link already attached, for you to approve.</div>
+      </div>
+      <div class="faqItem">
+        <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">
+          What check types cover most data quality policy clauses?
+          <svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faqAnswer hidden">In practice a handful do most of the work: completeness for must be present, uniqueness for must be unique, validity and format for must be valid or must match a pattern, referential integrity for must reference a valid record, freshness for must arrive by a deadline, and numeric range or volume for range and count rules. See /blog/data-quality-check-types for the full catalog and when to use each.</div>
+      </div>
+      <div class="faqItem">
+        <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">
+          How do I keep a check traceable to the policy clause it enforces?
+          <svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faqAnswer hidden">Store the clause id, for example Policy 4.2 or a named principle, as a field on the check itself rather than a comment. That single field lets you list every check enforcing a clause and every clause a check supports, which is the evidence an auditor asks for. AlertMend keeps this link automatically because each proposed check cites the clause it came from.</div>
+      </div>
+      <div class="faqItem">
+        <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">
+          Should AI change our data or checks on its own?
+          <svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faqAnswer hidden">No. AlertMend proposes checks and edits, and a person approves each one. Nothing writes to your data, and no check goes live without approval. The Copilot and the policy upload only draft proposals, so the approval step stays with your data owners.</div>
+      </div>
+      <div class="faqItem">
+        <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">
+          How do we handle checks when the policy changes?
+          <svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faqAnswer hidden">Treat checks like code. Every new or changed check is a proposal with an owner and a reason, previous versions are kept, and a bad edit can be rolled back to the last approved version. Rolling back a check never touches your data. Review coverage on a regular cadence to catch clauses with no check and checks with no clause.</div>
+      </div>
+      <div class="faqItem">
+        <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">
+          Which warehouses and policies does AlertMend support today?
+          <svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faqAnswer hidden">AlertMend monitors Snowflake and Oracle today through a read-only agent in your network. Databricks and Postgres are not supported yet. You can upload any text-based policy PDF, such as an internal data quality standard, a data contract or BCBS 239. For a regulated worked example see /blog/bcbs-239-data-quality-controls.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ctaBox">
+    <h2>See your policy turned into checks</h2>
+    <p>AlertMend turns your data quality policy into live checks on Snowflake and Oracle, through a read-only agent inside your network. When a check fails, it names the Airflow or Oracle ODI job that caused it and the Power BI reports it affects, and every check cites the policy clause it enforces.</p>
+    <div class="ctaButtons">
+      <a class="ctaButton ctaButtonPrimary" href="https://app.alertmend.io/signup?service=data-observability&source=blog&blog_slug=data-quality-policy-to-automated-checks" target="_blank" rel="noopener noreferrer">Start free</a>
+      <a class="ctaButton ctaButtonSecondary" href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=data-quality-policy-to-automated-checks" target="_blank" rel="noopener noreferrer">Book the data demo</a>
+    </div>
+  </section>
+  
+  <section class="authorBioCard" aria-label="About the author">
+    <img src="/logos/dinesh.jpeg" alt="Dinesh Agrawal" width="128" height="128" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="authorBioFallback" aria-hidden="true">DA</div>
+    <div class="authorBioContent">
+      <h3>Dinesh Agrawal</h3>
+      <p class="authorBioRole">Cloud infrastructure and AI-driven incident automation</p>
+      <div class="authorBioText">
+        <p>Dinesh Agrawal brings 12+ years of deep experience across cloud infrastructure and AI-driven automation, building systems that observe, diagnose, and recover from production and data incidents without waiting for a human.</p>
+        <p>At AlertMend he works on data and infrastructure observability that correlates telemetry into root cause and runs governed recovery across warehouses, pipelines, VMs, and Kubernetes.</p>
+      </div>
+      <a class="authorBioLink" href="https://www.linkedin.com/in/dineshagrawal85/" target="_blank" rel="noopener noreferrer" aria-label="Dinesh Agrawal on LinkedIn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18V9.94H5.67V18h2.67zM7 8.76a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zM18.34 18v-4.42c0-2.37-1.27-3.47-2.96-3.47-1.36 0-1.97.75-2.31 1.28V9.94h-2.67V18h2.67v-4.5c0-.24.02-.48.09-.65.19-.48.63-.98 1.36-.98.96 0 1.35.73 1.35 1.8V18h2.82z"/></svg>
+        <span>LinkedIn</span>
+      </a>
+    </div>
+  </section>
+</article>
+      </div>
+      
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <div class="sidebar-card">
+            <div class="sidebar-card-title">Receive blog and product updates</div>
+            <form class="signup-form" id="blog-signup-form" data-blog-title="Data Quality Policy to Live Checks" novalidate>
+              <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
+              <button type="submit">Sign up</button>
+              <p class="signup-status" id="blog-signup-status" hidden></p>
+            </form>
+          </div>
+
+          
+          <div class="sidebar-card">
+            <div class="related-content-title">Related content</div>
+            <ul class="related-posts-list">
+              <li><a href="/blog/ai-ready-data-checklist" class="related-post-link">AI-Ready Data: a CDO Checklist</a></li>
+              <li><a href="/blog/cost-of-bad-data-roi-calculator" class="related-post-link">The Cost of Bad Data: ROI Calculator</a></li>
+              <li><a href="/blog/bigquery-data-quality-checks" class="related-post-link">BigQuery Data Quality: 12 SQL Monitors</a></li>
+              <li><a href="/blog/observability-vs-monitoring" class="related-post-link">Observability vs Monitoring: Key Differences</a></li>
+              <li><a href="/blog/what-is-observability" class="related-post-link">What is Observability? a Complete Guide</a></li>
+              <li><a href="/blog/disk-full-auto-remediation" class="related-post-link">Disk Full Auto-Remediation Playbook</a></li>
+              <li><a href="/blog/centralized-logging-kubernetes-vms" class="related-post-link">Centralized Logging for Kubernetes and VMs</a></li>
+              <li><a href="/blog/ops-tasks-to-automate" class="related-post-link">12 Daily Ops Tasks You Can Automate</a></li>
+              <li><a href="/blog/keycloak-monitoring" class="related-post-link">Keycloak Monitoring Guide for Self-Hosted SSO</a></li>
+              <li><a href="/blog/opentelemetry-collector-monitoring" class="related-post-link">OpenTelemetry Collector Monitoring</a></li>
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View all posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          
+
+          <div class="sidebar-card">
+            <div class="related-content-title">Explore AlertMend</div>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <script src="/assets/exit-code-126/script.js"></script>
+  <script>
+  const signupForm = document.getElementById('blog-signup-form');
+  const signupStatus = document.getElementById('blog-signup-status');
+  if (signupForm) {
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = signupForm.querySelector('input[type="email"]');
+      const button = signupForm.querySelector('button[type="submit"]');
+      const email = input && input.value ? input.value.trim() : '';
+      if (!email || !button || button.disabled) return;
+      const blogTitleEl = document.querySelector('.article-header h1, header.article-header--cred h1, h1');
+      const blogTitle = (signupForm.getAttribute('data-blog-title') || (blogTitleEl && blogTitleEl.textContent) || document.title || 'this blog post').trim().replace(/\s*\|\s*AlertMend.*$/i, '');
+      const buttonLabel = button.textContent;
+      button.disabled = true;
+      button.textContent = 'Signing up…';
+      if (signupStatus) {
+        signupStatus.hidden = true;
+        signupStatus.textContent = '';
+        signupStatus.className = 'signup-status';
+      }
+      try {
+        const response = await fetch('https://api.alertmend.io/contact', {
+          method: 'POST',
+          headers: { Accept: 'application/json, text/plain, */*', 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            full_name: 'Blog subscriber',
+            company: '',
+            email,
+            message: 'Newsletter signup from the AlertMend blog post "' + blogTitle + '". Please add this email to the blog and product updates list.',
+            source: 'blog_signup',
+          }),
+        });
+        if (response.ok) {
+          if (input) input.value = '';
+          if (signupStatus) {
+            signupStatus.hidden = false;
+            signupStatus.textContent = "Thanks! You're on the list.";
+            signupStatus.className = 'signup-status success';
+          }
+        } else {
+          const data = await response.json().catch(() => ({}));
+          if (signupStatus) {
+            signupStatus.hidden = false;
+            signupStatus.textContent = data.error || data.message || 'Something went wrong. Please try again.';
+            signupStatus.className = 'signup-status error';
+          }
+        }
+      } catch {
+        if (signupStatus) {
+          signupStatus.hidden = false;
+          signupStatus.textContent = 'Network error. Please check your connection and try again.';
+          signupStatus.className = 'signup-status error';
+        }
+      } finally {
+        button.disabled = false;
+        button.textContent = buttonLabel || 'Sign up';
+      }
+    });
+  }</script>
+  
+<script>
+(function(){
+  document.querySelectorAll('.codeCopy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = document.getElementById(btn.getAttribute('data-copy'));
+      if(!pre) return;
+      var txt = pre.innerText || pre.textContent || '';
+      var done = function(){ var o = btn.textContent; btn.textContent='Copied'; setTimeout(function(){ btn.textContent=o; }, 1400); };
+      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done).catch(done); }
+      else { try{ var ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); done(); }catch(e){} }
+    });
+  });
+})();
+</script>
+</body>
+</html>

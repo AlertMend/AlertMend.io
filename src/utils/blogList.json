@@ -10,6 +10,16 @@
     "keywords": "AI-ready data, CDO checklist, AI data readiness, data quality for AI, RAG data quality, AI project failure rate, data observability, AI-ready data checklist, source data quality"
   },
   {
+    "slug": "bcbs-239-data-quality-controls",
+    "title": "BCBS 239 Data Quality Controls",
+    "excerpt": "Map every BCBS 239 principle to a traceable data quality check an auditor can follow from clause to result on Snowflake and Oracle.",
+    "date": "2026-09-30",
+    "category": "Data Observability",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "BCBS 239, risk data aggregation, data quality controls, data quality policy, banking data governance, data observability, risk data quality checks, audit traceability, Snowflake data quality, Oracle data quality, policy to checks, accuracy completeness timeliness"
+  },
+  {
     "slug": "cost-of-bad-data-roi-calculator",
     "title": "The Cost of Bad Data: ROI Calculator",
     "excerpt": "Build the CFO case for data quality investment. Verified cost benchmarks plus an interactive data downtime ROI calculator you adjust to your own numbers.",
@@ -20,6 +30,76 @@
     "keywords": "cost of bad data, data downtime ROI calculator, data quality business case, data observability ROI, CFO data quality investment, poor data quality cost, Gartner 12.9 million, data incident cost, data downtime cost"
   },
   {
+    "slug": "data-freshness-monitoring",
+    "title": "Data Freshness Monitoring Guide",
+    "excerpt": "Define a freshness SLA per table, catch late loads before reports run, and trace a stale table to the pipeline job that caused it.",
+    "date": "2026-09-30",
+    "category": "Data Observability",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "data freshness monitoring, freshness SLA, late data, stale data, data freshness check, expected arrival time, load timestamp, Snowflake freshness, Oracle freshness, freshness vs volume, pipeline provenance, Airflow late load, Oracle ODI, Power BI impact, data observability"
+  },
+  {
+    "slug": "data-quality-check-types",
+    "title": "Data Quality Checks: 10 Types + SQL",
+    "excerpt": "The 10 data quality check types every data team needs, what each one catches, a generic SQL example for each, and how to prioritise them.",
+    "date": "2026-09-30",
+    "category": "Data Observability",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "data quality checks, data quality check types, data quality dimensions, data validation SQL, completeness check, uniqueness check, freshness check, referential integrity, data observability, data quality rules, anomaly detection, data quality catalog"
+  },
+  {
+    "slug": "data-quality-policy-to-automated-checks",
+    "title": "Data Quality Policy to Live Checks",
+    "excerpt": "Turn any written data quality policy into approved, versioned, traceable checks on Snowflake and Oracle with a repeatable method.",
+    "date": "2026-09-30",
+    "category": "Data Observability",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "data quality policy, data quality rules, automated data quality checks, policy to checks, data governance, data observability, audit trail, check versioning, data quality copilot, quality score, referential integrity, freshness checks, Snowflake data quality, Oracle data quality"
+  },
+  {
+    "slug": "monte-carlo-alternatives",
+    "title": "Monte Carlo Alternatives Compared",
+    "excerpt": "Compare Monte Carlo alternatives on pricing model and approach: Metaplane, Sifflet, Soda, Great Expectations, Elementary and AlertMend.",
+    "date": "2026-09-30",
+    "category": "Data Observability",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "Monte Carlo alternatives, data observability tools, data observability pricing, Metaplane, Sifflet, Soda, Great Expectations, Elementary, per monitor pricing, per dataset pricing, data quality monitoring, policy driven data quality"
+  },
+  {
+    "slug": "oracle-data-quality-monitoring",
+    "title": "Oracle Data Quality Monitoring Guide",
+    "excerpt": "Monitor completeness, uniqueness, validity and freshness in Oracle with runnable SQL, and link a failed check to the ODI job that caused it.",
+    "date": "2026-09-30",
+    "category": "Data Observability",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "Oracle data quality, Oracle data quality monitoring, ODI data quality, Oracle Data Integrator, data observability Oracle, Oracle SQL checks, SYSDATE freshness, FETCH FIRST, completeness check, uniqueness check, referential integrity, cause and impact"
+  },
+  {
+    "slug": "power-bi-data-quality-impact-analysis",
+    "title": "Power BI Bad Data Impact Analysis",
+    "excerpt": "When a warehouse table fails a check, trace which Power BI reports are wrong and warn their owners before anyone opens a bad report.",
+    "date": "2026-09-30",
+    "category": "Data Observability",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "Power BI impact analysis, Power BI lineage, Power BI lineage view, data quality Power BI, table to report lineage, downstream impact analysis, report owner alerts, semantic model dependency, Snowflake data quality, Oracle data quality, data observability, BI report impact"
+  },
+  {
+    "slug": "snowflake-data-quality-checks",
+    "title": "Snowflake Data Quality Checks in SQL",
+    "excerpt": "Run freshness, volume, completeness, uniqueness and validity checks in Snowflake SQL, then move from ad hoc queries to continuous monitoring.",
+    "date": "2026-09-30",
+    "category": "Data Observability",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "Snowflake data quality, Snowflake data quality checks, data freshness Snowflake, Snowflake SQL checks, data observability Snowflake, Snowflake data metric functions, COUNT_IF Snowflake, DATEDIFF Snowflake, freshness check, uniqueness check, completeness check, validity check, continuous data monitoring"
+  },
+  {
     "slug": "bigquery-data-quality-checks",
     "title": "BigQuery Data Quality: 12 SQL Monitors",
     "excerpt": "12 copy-paste SQL checks for BigQuery data quality: freshness, volume, nulls, duplicates, and schema drift, plus how to run them on a schedule.",
@@ -28,86 +108,6 @@
     "author": "Dinesh Agrawal",
     "tags": [],
     "keywords": "bigquery data quality, bigquery data quality checks, bigquery data monitoring, bigquery freshness check, bigquery null check sql, bigquery duplicate rows sql, bigquery schema drift, data quality sql bigquery, bigquery information_schema, bigquery data observability"
-  },
-  {
-    "slug": "bcbs-239-data-quality-controls",
-    "title": "BCBS 239 Data Quality Controls: A Guide",
-    "excerpt": "What BCBS 239 asks of risk data, which principles drive data quality, and how to turn them into automated checks your auditors can trace.",
-    "date": "2026-09-26",
-    "category": "Data Observability",
-    "author": "AlertMend Team",
-    "tags": [],
-    "keywords": "BCBS 239, risk data aggregation, data quality controls, data quality policy, banking data governance, data observability"
-  },
-  {
-    "slug": "data-freshness-monitoring",
-    "title": "Data Freshness Monitoring: Catch Late Data",
-    "excerpt": "How to define freshness expectations per table, detect late loads before reports run, and trace late data back to the pipeline job that caused it.",
-    "date": "2026-09-26",
-    "category": "Data Observability",
-    "author": "AlertMend Team",
-    "tags": [],
-    "keywords": "data freshness monitoring, late data, data SLA, freshness check, Airflow late DAG, data observability"
-  },
-  {
-    "slug": "data-quality-check-types",
-    "title": "Data Quality Checks: 10 Types with SQL Examples",
-    "excerpt": "The ten data quality check types every data team needs, what each catches, and a SQL example for each, from freshness to referential integrity.",
-    "date": "2026-09-26",
-    "category": "Data Observability",
-    "author": "AlertMend Team",
-    "tags": [],
-    "keywords": "data quality checks, data quality dimensions, data validation SQL, data quality rules, data observability"
-  },
-  {
-    "slug": "data-quality-policy-to-automated-checks",
-    "title": "Turn a Data Quality Policy into Automated Checks",
-    "excerpt": "A step-by-step method for turning written data quality policy clauses into approved, automated checks that stay traceable for audit.",
-    "date": "2026-09-26",
-    "category": "Data Observability",
-    "author": "AlertMend Team",
-    "tags": [],
-    "keywords": "data quality policy, data quality rules, automated data quality checks, data contracts, data governance, audit trail"
-  },
-  {
-    "slug": "monte-carlo-alternatives",
-    "title": "Monte Carlo Alternatives for Data Observability",
-    "excerpt": "How Monte Carlo prices data observability, and how Metaplane, Sifflet, Soda, Great Expectations, Elementary and AlertMend compare on pricing and approach.",
-    "date": "2026-09-26",
-    "category": "Data Observability",
-    "author": "AlertMend Team",
-    "tags": [],
-    "keywords": "Monte Carlo alternatives, data observability tools, Metaplane, Sifflet, Soda, Great Expectations, data observability pricing"
-  },
-  {
-    "slug": "oracle-data-quality-monitoring",
-    "title": "Oracle Data Quality Monitoring Guide",
-    "excerpt": "SQL checks for completeness, uniqueness, validity and freshness in Oracle, and how to link failures to Oracle ODI jobs for faster root cause.",
-    "date": "2026-09-26",
-    "category": "Data Observability",
-    "author": "AlertMend Team",
-    "tags": [],
-    "keywords": "Oracle data quality, Oracle data quality monitoring, ODI data quality, Oracle Data Integrator, data observability Oracle"
-  },
-  {
-    "slug": "power-bi-data-quality-impact-analysis",
-    "title": "Power BI Impact Analysis for Bad Data",
-    "excerpt": "When a source table breaks, which Power BI reports are wrong? How to trace table-to-report lineage and warn report owners before anyone opens them.",
-    "date": "2026-09-26",
-    "category": "Data Observability",
-    "author": "AlertMend Team",
-    "tags": [],
-    "keywords": "Power BI impact analysis, Power BI lineage, data quality Power BI, report impact, data observability"
-  },
-  {
-    "slug": "snowflake-data-quality-checks",
-    "title": "Snowflake Data Quality Checks: A Practical Guide",
-    "excerpt": "SQL patterns for freshness, volume, null, uniqueness and validity checks in Snowflake, plus how to run them continuously without writing every rule by hand.",
-    "date": "2026-09-26",
-    "category": "Data Observability",
-    "author": "AlertMend Team",
-    "tags": [],
-    "keywords": "Snowflake data quality, Snowflake data quality checks, data freshness Snowflake, data observability Snowflake, SQL data quality"
   },
   {
     "slug": "observability-vs-monitoring",

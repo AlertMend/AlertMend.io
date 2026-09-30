@@ -292,9 +292,65 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <!-- Blog Post: bcbs-239-data-quality-controls -->
+  <url>
+    <loc>https://www.alertmend.io/blog/bcbs-239-data-quality-controls</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <!-- Blog Post: cost-of-bad-data-roi-calculator -->
   <url>
     <loc>https://www.alertmend.io/blog/cost-of-bad-data-roi-calculator</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: data-freshness-monitoring -->
+  <url>
+    <loc>https://www.alertmend.io/blog/data-freshness-monitoring</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: data-quality-check-types -->
+  <url>
+    <loc>https://www.alertmend.io/blog/data-quality-check-types</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: data-quality-policy-to-automated-checks -->
+  <url>
+    <loc>https://www.alertmend.io/blog/data-quality-policy-to-automated-checks</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: monte-carlo-alternatives -->
+  <url>
+    <loc>https://www.alertmend.io/blog/monte-carlo-alternatives</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: oracle-data-quality-monitoring -->
+  <url>
+    <loc>https://www.alertmend.io/blog/oracle-data-quality-monitoring</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: power-bi-data-quality-impact-analysis -->
+  <url>
+    <loc>https://www.alertmend.io/blog/power-bi-data-quality-impact-analysis</loc>
+    <lastmod>2026-09-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <!-- Blog Post: snowflake-data-quality-checks -->
+  <url>
+    <loc>https://www.alertmend.io/blog/snowflake-data-quality-checks</loc>
     <lastmod>2026-09-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -303,62 +359,6 @@
   <url>
     <loc>https://www.alertmend.io/blog/bigquery-data-quality-checks</loc>
     <lastmod>2026-09-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: bcbs-239-data-quality-controls -->
-  <url>
-    <loc>https://www.alertmend.io/blog/bcbs-239-data-quality-controls</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: data-freshness-monitoring -->
-  <url>
-    <loc>https://www.alertmend.io/blog/data-freshness-monitoring</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: data-quality-check-types -->
-  <url>
-    <loc>https://www.alertmend.io/blog/data-quality-check-types</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: data-quality-policy-to-automated-checks -->
-  <url>
-    <loc>https://www.alertmend.io/blog/data-quality-policy-to-automated-checks</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: monte-carlo-alternatives -->
-  <url>
-    <loc>https://www.alertmend.io/blog/monte-carlo-alternatives</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: oracle-data-quality-monitoring -->
-  <url>
-    <loc>https://www.alertmend.io/blog/oracle-data-quality-monitoring</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: power-bi-data-quality-impact-analysis -->
-  <url>
-    <loc>https://www.alertmend.io/blog/power-bi-data-quality-impact-analysis</loc>
-    <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Blog Post: snowflake-data-quality-checks -->
-  <url>
-    <loc>https://www.alertmend.io/blog/snowflake-data-quality-checks</loc>
-    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

@@ -255,7 +255,7 @@ ${buildCredArticleHeader(h1, publishedDate, category, author)}
     <a href="#pillars">The 5 pillars</a>
     <a href="#monitors">The 12 monitors</a>
     <a href="#schedule">Run on a schedule</a>
-    <a href="#automate">From check to fix</a>
+    <a href="#automate">When to automate</a>
     <a href="#faq">FAQ</a>
   </nav>
 
@@ -295,12 +295,12 @@ ${buildCredArticleHeader(h1, publishedDate, category, author)}
   </section>
 
   <section class="sectionBlock" id="automate">
-    <h2 class="sectionTitle">From check to fix: closing the loop</h2>
-    <p class="bodyText">SQL monitors tell you a table is late or a column dropped. The slow part in production is what comes next: figuring out <em>why</em>, at 2 a.m., across the pipeline and the platform under it. That is the gap AlertMend closes.</p>
-    <p class="bodyText"><strong>AlertMend Data Observability</strong> runs these five pillars as managed monitors against BigQuery (with dbt and Snowflake context too), so you are not maintaining a dozen scheduled queries by hand. When a check fires, it produces an <strong>evidence-backed root cause</strong> (a product target of about 15 seconds at p50) that points at the real trigger, for example a dbt model that stopped landing after a deploy dropped <code>updated_at</code>, which is monitor 12 above. From there it proposes a <strong>governed, recommend-first fix</strong> that a human approves, with full audit, never a silent auto-change.</p>
-    <div class="answerBox"><strong>The honest scope:</strong> AlertMend watches the data and the services and infrastructure beneath your pipeline, and supplies operational evidence (the checks, data SLAs, and downstream lineage). It is proven today on infrastructure incidents (Polymer Search, WareFlex, Decklar, AIVOS) and is expanding to data teams; for regulated estates the root-cause analysis can run self-hosted on your own model inside your network.</p>
+    <h2 class="sectionTitle">When you outgrow hand-run SQL</h2>
+    <p class="bodyText">SQL monitors tell you a table is late or a column dropped. Keeping a dozen of them scheduled, with thresholds that adapt as tables grow, and knowing which report a failure actually hits, is the part that gets heavy in production.</p>
+    <p class="bodyText"><strong>AlertMend Data Observability</strong> turns a written data quality policy into managed checks and runs them for you. When a check fails it gives you cause and impact: it names the Airflow or Oracle ODI job that caused the failure and the Power BI reports that read the table, then alerts Slack or Teams with the policy clause the check enforces. Every check is proposed for your approval, and it never changes your data for you.</p>
+    <div class="answerBox"><strong>The honest scope, for BigQuery specifically:</strong> AlertMend runs managed checks on <strong>Snowflake and Oracle today, not BigQuery</strong>. If your warehouse is BigQuery, the queries above are the way to do this now, through scheduled queries or dbt tests. If you also run Snowflake or Oracle, AlertMend can manage the same kinds of checks there.</p>
     <div class="automationCta">
-      <p><strong>Want the five pillars monitored for you, with root cause and a recommended fix when one fires?</strong> Bring one BigQuery table that keeps breaking and we will map the checks, the alerting, and the first recommend-first runbook.</p>
+      <p><strong>Run Snowflake or Oracle as well as BigQuery?</strong> Bring one table that keeps breaking and we will map the checks, the alerting, and the cause-and-impact links on the supported warehouses.</p>
       <a class="ctaButton ctaButtonPrimary" href="${calendly}&intent=data-observability" target="_blank" rel="noopener noreferrer">Book a free consultation &rarr;</a>
     </div>
   </section>
@@ -332,11 +332,11 @@ ${buildCredArticleHeader(h1, publishedDate, category, author)}
   </section>
 
   <section class="ctaBox">
-    <h2>Stop hand-maintaining a dozen scheduled queries.</h2>
-    <p>AlertMend runs freshness, volume, schema, quality, and lineage as managed monitors on BigQuery, gives evidence-backed root cause when a check fires, and routes a recommend-first fix, in one workspace that also watches the infrastructure beneath your pipelines.</p>
+    <h2>On Snowflake or Oracle? Stop hand-maintaining these checks.</h2>
+    <p>AlertMend turns your data quality policy into live checks on Snowflake and Oracle, through a read-only agent in your network. When a check fails it names the Airflow or Oracle ODI job that caused it and the Power BI reports it affects. BigQuery is not supported yet, so on BigQuery use the queries above.</p>
     <div class="ctaButtons">
       <a class="ctaButton ctaButtonPrimary" href="${calendly}" target="_blank" rel="noopener noreferrer">Book a free consultation</a>
-      <a class="ctaButton ctaButtonSecondary" href="/blog/snowflake-data-quality-checks">Snowflake checks &rarr;</a>
+      <a class="ctaButton ctaButtonSecondary" href="/blog/data-quality-check-types">The check catalog &rarr;</a>
     </div>
   </section>
   ${authorCard()}
@@ -383,8 +383,8 @@ ${buildNavHtml(slug, calendly)}
       <div class="main-col">
         ${content}
         <div class="promo">
-          <p>Ready to turn data quality checks into resolved incidents, not just alerts?</p>
-          <p>See how AlertMend AI monitors your warehouse across all five pillars, finds root cause, and automates safe remediation. <a href="${calendly}" target="_blank" rel="noopener noreferrer">Book a demo. &rarr;</a></p>
+          <p>Ready to turn data quality checks into a program, not a folder of scheduled queries?</p>
+          <p>See how AlertMend turns your data quality policy into managed checks on Snowflake and Oracle, with cause and impact when one fails. <a href="${calendly}" target="_blank" rel="noopener noreferrer">Book a demo. &rarr;</a></p>
         </div>
       </div>
       ${buildSidebarHtml(related, title)}

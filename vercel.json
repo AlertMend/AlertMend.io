@@ -269,6 +269,10 @@
       "destination": "/blog/autoscaling-v2-horizontalpodautoscaler/index.html"
     },
     {
+      "source": "/blog/bcbs-239-data-quality-controls",
+      "destination": "/blog/bcbs-239-data-quality-controls/index.html"
+    },
+    {
       "source": "/blog/best-1-click-logging-and-metrics-tools",
       "destination": "/blog/best-1-click-logging-and-metrics-tools/index.html"
     },
@@ -295,6 +299,18 @@
     {
       "source": "/blog/cross-stack-incident-automation",
       "destination": "/blog/cross-stack-incident-automation/index.html"
+    },
+    {
+      "source": "/blog/data-freshness-monitoring",
+      "destination": "/blog/data-freshness-monitoring/index.html"
+    },
+    {
+      "source": "/blog/data-quality-check-types",
+      "destination": "/blog/data-quality-check-types/index.html"
+    },
+    {
+      "source": "/blog/data-quality-policy-to-automated-checks",
+      "destination": "/blog/data-quality-policy-to-automated-checks/index.html"
     },
     {
       "source": "/blog/datadog-alternatives",
@@ -425,6 +441,10 @@
       "destination": "/blog/monitoring-mcp-servers-in-production/index.html"
     },
     {
+      "source": "/blog/monte-carlo-alternatives",
+      "destination": "/blog/monte-carlo-alternatives/index.html"
+    },
+    {
       "source": "/blog/multi-agent-system-reliability",
       "destination": "/blog/multi-agent-system-reliability/index.html"
     },
@@ -461,8 +481,16 @@
       "destination": "/blog/optimizing-high-jvm-heap-usage-in-elasticsearch/index.html"
     },
     {
+      "source": "/blog/oracle-data-quality-monitoring",
+      "destination": "/blog/oracle-data-quality-monitoring/index.html"
+    },
+    {
       "source": "/blog/pagerduty-alternatives",
       "destination": "/blog/pagerduty-alternatives/index.html"
+    },
+    {
+      "source": "/blog/power-bi-data-quality-impact-analysis",
+      "destination": "/blog/power-bi-data-quality-impact-analysis/index.html"
     },
     {
       "source": "/blog/qemu-exited-with-code-1",
@@ -483,6 +511,10 @@
     {
       "source": "/blog/small-fleet-observability-few-clicks",
       "destination": "/blog/small-fleet-observability-few-clicks/index.html"
+    },
+    {
+      "source": "/blog/snowflake-data-quality-checks",
+      "destination": "/blog/snowflake-data-quality-checks/index.html"
     },
     {
       "source": "/blog/top-kubernetes-cost-management-solutions",
