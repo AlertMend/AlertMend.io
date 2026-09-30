@@ -290,7 +290,7 @@ export function LineageImpact() {
         <div className={`${styles.grid4} ${dd.impactGrid}`}>
           <div className={styles.cell}>
             <span className={styles.icon}><Workflow size={20} strokeWidth={1.75} aria-hidden="true" /></span>
-            <h3 className={styles.cellTitle}>Upstream cause</h3>
+            <h3 className={styles.cellTitle}>Root cause</h3>
             <p className={styles.cellBody}>The DAG, dbt model or ODI job behind the failure, with its error and run history.</p>
           </div>
           <div className={styles.cell}>
@@ -305,7 +305,7 @@ export function LineageImpact() {
           </div>
           <div className={styles.cell}>
             <span className={styles.icon}><Columns size={20} strokeWidth={1.75} aria-hidden="true" /></span>
-            <h3 className={styles.cellTitle}>Schema change impact</h3>
+            <h3 className={styles.cellTitle}>Schema change alerts</h3>
             <p className={styles.cellBody}>A dropped or retyped column is flagged with the reports that read the table.</p>
           </div>
         </div>
@@ -367,7 +367,7 @@ export function PolicyContract() {
         <ul className={`${styles.checks} ${dd.contractPoints}`}>
           <li><Check className={styles.checkIcon} size={16} aria-hidden="true" />Every check cites the clause it enforces</li>
           <li><Check className={styles.checkIcon} size={16} aria-hidden="true" />Owners approve checks before they go live</li>
-          <li><Check className={styles.checkIcon} size={16} aria-hidden="true" />Schema changes flagged before consumers break</li>
+          <li><Check className={styles.checkIcon} size={16} aria-hidden="true" />Breaking schema changes caught before consumers break</li>
           <li><Check className={styles.checkIcon} size={16} aria-hidden="true" />Every check change versioned for audit</li>
         </ul>
       </div>

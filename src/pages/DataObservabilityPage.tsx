@@ -36,34 +36,34 @@ const DEMO_URL = calendlyUrl('data-observability-page')
 const SIGNUP_URL = 'https://app.alertmend.io/signup?service=data-observability'
 
 const PROOF = [
-  { value: '87', label: 'Check types ready', hint: 'No SQL required' },
-  { value: 'Policy → checks', label: 'From your PDF', hint: 'Clause cited on every check' },
+  { value: '87', label: 'Out-of-the-box checks', hint: 'No-code, no SQL' },
+  { value: 'Policy → rules', label: 'Data quality rules from your PDF', hint: 'Clause cited on every check' },
   { value: 'Read-only', label: 'Agent in your network', hint: 'Credentials never leave' },
-  { value: 'Cause + impact', label: 'In one alert', hint: 'Job + Power BI reports' },
+  { value: 'Root cause + impact', label: 'In every alert', hint: 'Lineage to job and Power BI' },
 ]
 
 const PILLARS = [
   {
     icon: Eye,
-    title: 'Monitor',
+    title: 'Data quality monitoring',
     body: 'Freshness, volume, schema changes, uniqueness, completeness, validity, anomalies and trends across the datasets and pipelines that matter.',
     points: ['87 ready-made checks', 'History-aware anomalies', 'Quality score that cannot hide a fail'],
   },
   {
     icon: FileText,
-    title: 'Govern',
+    title: 'Data governance',
     body: 'Start from the policy you already have. Every live check names the clause it enforces.',
     points: ['Upload BCBS 239 or internal DQ PDFs', 'Approve before anything goes live', 'Business glossary links'],
   },
   {
     icon: GitBranch,
-    title: 'Trace',
-    body: 'When a check fails, see the pipeline job that broke and the reports that will show the wrong number.',
+    title: 'Lineage and root cause',
+    body: 'When a check fails, see the root cause (the pipeline job that broke) and the downstream impact (the reports that will show the wrong number).',
     points: ['Airflow and Oracle ODI', 'Power BI downstream lineage', 'Slack or Teams with context'],
   },
   {
     icon: ShieldCheck,
-    title: 'Trust',
+    title: 'Security and sovereignty',
     body: 'Built for regulated data offices: outbound-only agent, least privilege, versioning and rollback.',
     points: ['No warehouse secrets in AlertMend', 'Audit trail on every change', 'SOC 2 / ISO in progress'],
   },
@@ -73,35 +73,35 @@ const STEPS = [
   {
     n: '01',
     icon: Plug,
-    title: 'Connect safely',
+    title: 'Connect your warehouse',
     body: 'Install a read-only agent in your network. Point it at your warehouse. Credentials stay on your side.',
   },
   {
     n: '02',
     icon: FileText,
-    title: 'Upload your policy',
+    title: 'Generate rules from your policy',
     body: 'AlertMend proposes checks from the PDF. Each one cites its clause. Nothing monitors until you approve.',
   },
   {
     n: '03',
     icon: BellRing,
-    title: 'Watch and act',
-    body: 'Failing checks page Slack or Teams with the failed job and affected Power BI reports.',
+    title: 'Detect, triage, resolve',
+    body: 'Data incidents alert Slack or Teams with the root cause (the failed job) and the downstream impact (affected Power BI reports).',
   },
 ]
 
 const DEEP = [
   {
     id: 'policy',
-    eyebrow: 'Policy to checks',
-    title: 'Your written rules become live observability',
+    eyebrow: 'Data quality rules',
+    title: 'Your written policy becomes live data quality rules',
     body: 'Upload BCBS 239, an internal DQ standard, or a data contract PDF. AlertMend proposes the checks, each linked to the clause it enforces. You approve every one. Auditors get a trail instead of a scavenger hunt.',
-    chips: ['BCBS 239', 'Internal DQ policy', 'Clause trace', 'Human approve'],
+    chips: ['BCBS 239', 'Internal DQ policy', 'Rule traceability', 'Human in the loop'],
     visual: 'policy',
   },
   {
     id: 'pipelines',
-    eyebrow: 'Cause and impact',
+    eyebrow: 'Root cause and impact analysis',
     title: 'Know the job and the report before 9am',
     body: 'A uniqueness fail on BANKING.CUSTOMER_ACCOUNTS is not just a red badge. It is linked to the ODI or Airflow run that broke, with the error message, and the Power BI reports that read the table.',
     chips: ['Airflow', 'Oracle ODI', 'Power BI', 'Teams / Slack'],
@@ -109,7 +109,7 @@ const DEEP = [
   },
   {
     id: 'copilot',
-    eyebrow: 'Copilot',
+    eyebrow: 'AI copilot',
     title: 'Ask in English. Approve every change.',
     body: 'Add, edit or route checks in plain language. The Copilot only proposes. A person still has to approve. Nothing writes to your warehouse data.',
     chips: ['Plain English', 'Proposals only', 'Full audit'],
@@ -120,17 +120,17 @@ const DEEP = [
 const FEATURES = [
   {
     icon: ListChecks,
-    title: '87 ready-made checks',
+    title: '87 out-of-the-box checks',
     body: 'Completeness, uniqueness, validity, format, referential integrity, numeric, volume, freshness, anomaly and trend, built in a wizard.',
   },
   {
     icon: TrendingUp,
-    title: 'Anomaly and trend',
+    title: 'Anomaly detection',
     body: 'Checks learn each dataset’s history. Without enough history, a check waits instead of guessing.',
   },
   {
     icon: Gauge,
-    title: 'Quality score',
+    title: 'Data quality score',
     body: 'One score per dataset and overall. A failing check caps the score so averages cannot hide a problem.',
   },
   {
@@ -140,12 +140,12 @@ const FEATURES = [
   },
   {
     icon: BellOff,
-    title: 'Alerts without noise',
+    title: 'Alerting and incident management',
     body: 'Cooldowns, maintenance windows and flapping detection, with incidents and escalation when it matters.',
   },
   {
     icon: History,
-    title: 'Version and rollback',
+    title: 'Versioning and rollback',
     body: 'Every check change is versioned with a reason and can be rolled back.',
   },
 ]
@@ -236,7 +236,7 @@ function IncidentPanel() {
         ))}
       </div>
       <div className={styles.incidentCause}>
-        <span>Cause and impact</span>
+        <span>Root cause and impact</span>
         <p>
           ODI job <b>nightly_load</b> failed with <code>ORA-01400</code>. 3 Power BI reports read
           this table. Policy: BCBS 239, Principle 3.
@@ -279,7 +279,7 @@ function DeepVisual({ kind }: { kind: string }) {
               <strong>Uniqueness · account_id</strong>
               <span>customer_accounts · 98.7%</span>
             </div>
-            <em className={styles.stateHot}>Job linked</em>
+            <em className={styles.stateHot}>Root cause</em>
           </div>
           <div className={styles.mockImpact}>
             <p>
@@ -315,7 +315,7 @@ export default function DataObservabilityPage() {
   }, [])
 
   const baseDescription =
-    'Data observability from your quality policy. Live checks across Snowflake, BigQuery, Redshift, Databricks, Oracle and Postgres, plus dbt, Airflow, Power BI impact, and a read-only agent in your network.'
+    'Data observability platform: data quality monitoring, anomaly detection, schema change alerts, lineage and impact analysis, with rules from your policy.'
   const description = ensureUniqueMetaDescription(
     baseDescription,
     'data-observability',
@@ -325,9 +325,9 @@ export default function DataObservabilityPage() {
   return (
     <div className={styles.page}>
       <SEO
-        title="Data Observability, Governance & Sovereignty | AlertMend"
+        title="Data Observability Platform: Data Quality, Lineage & Governance | AlertMend"
         description={description}
-        keywords="data observability, data quality monitoring, Snowflake, BigQuery, Redshift, Databricks, Postgres, dbt, Airflow, Power BI, AlertMend"
+        keywords="data observability, data observability platform, data quality monitoring, data lineage, impact analysis, anomaly detection, schema change alerts, data contracts, data incidents, root cause analysis, Snowflake, dbt, Airflow, Power BI, Monte Carlo alternative"
         canonical="/data-observability"
       />
 
@@ -338,16 +338,17 @@ export default function DataObservabilityPage() {
           <div className={styles.heroCopy}>
             <span className={styles.badge}>
               <i className={styles.badgeDot} />
-              Data quality · Governance · Sovereignty
+              Data observability · Data quality · Data governance
             </span>
             <h1 className={styles.h1}>
               See bad data before the dashboard does,{' '}
               <span className={styles.accent}>from the policy you already have</span>
             </h1>
             <p className={styles.lede}>
-              AlertMend turns written data quality rules into live checks across your warehouse and
-              lakehouse. When something fails, you get the pipeline job and the Power BI reports in
-              one alert, with credentials that never leave your network.
+              Data observability across your warehouse and lakehouse: freshness, volume, schema,
+              quality and lineage, with data quality rules generated from your policy. Every data
+              incident arrives with its root cause and downstream impact, and credentials never leave
+              your network.
             </p>
             <div className={styles.heroCtas}>
               <a
@@ -407,7 +408,7 @@ export default function DataObservabilityPage() {
       <section className={styles.section}>
         <div className={styles.wrap}>
           <header className={styles.secHead}>
-            <span className="sec-tag">What data observability means here</span>
+            <span className="sec-tag">Data observability platform</span>
             <h2>Monitor. Govern. Trace. Trust.</h2>
             <p>
               Not another check farm. Observability that starts from policy, stays in your network,
@@ -447,7 +448,7 @@ export default function DataObservabilityPage() {
           <header className={styles.secHead}>
             <span className="sec-tag">How it works</span>
             <h2>From policy PDF to live checks</h2>
-            <p>Connect once. Approve the proposals. Get alerts that carry cause and impact.</p>
+            <p>Connect once. Approve the proposed rules. Get alerts with root cause and impact analysis.</p>
           </header>
           <div className={styles.steps}>
             {STEPS.map((s) => (
@@ -495,8 +496,8 @@ export default function DataObservabilityPage() {
       <section className={styles.sectionAlt}>
         <div className={styles.wrap}>
           <header className={styles.secHead}>
-            <span className="sec-tag">Capability set</span>
-            <h2>Everything a regulated data office needs to run checks</h2>
+            <span className="sec-tag">Data quality monitoring</span>
+            <h2>Everything a regulated data team needs to monitor data quality</h2>
             <p>Built capabilities only. No vaporware connectors or auto-remediation of your data.</p>
           </header>
           <div className={styles.featureGrid}>
