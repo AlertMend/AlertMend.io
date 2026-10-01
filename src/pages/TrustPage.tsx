@@ -51,10 +51,10 @@ export default function TrustPage() {
   return (
     <>
       <SEO
-        title="Trust Center: Security, Sovereignty & Compliance | AlertMend"
+        title="Trust Center: Data Security, Sovereignty & Governance | AlertMend"
         description="How AlertMend keeps your data in your boundary: in-network agents, regional hosting, hybrid and air-gapped deployment, bring your own model, approvals and audit."
         canonical="/trust"
-        keywords="AlertMend trust center, data sovereignty, data residency, air-gapped deployment, bring your own model, SOC 2, ISO 27001, GDPR"
+        keywords="AlertMend trust center, data governance, data sovereignty, data security, AI governance, data residency, air-gapped deployment, bring your own model, SOC 2, ISO 27001, GDPR"
         breadcrumbData={{ items: [{ label: 'Trust center' }] }}
       />
 

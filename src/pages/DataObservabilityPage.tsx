@@ -19,7 +19,7 @@ import {
 import SEO from '../components/SEO'
 import GovernanceSection from '../components/enterprise/GovernanceSection'
 import SovereigntySection from '../components/enterprise/SovereigntySection'
-import { LineageImpact, PolicyContract } from '../components/enterprise/DataDepth'
+import { LineageImpact, PolicyContract, AiAndFinOps } from '../components/enterprise/DataDepth'
 import PlatformBoardMock from '../components/mocks/PlatformBoardMock'
 import PlatformBoardStage from '../components/mocks/PlatformBoardStage'
 import BrandLogo from '../components/ui/BrandLogo'
@@ -46,7 +46,7 @@ const PILLARS = [
   {
     icon: Eye,
     title: 'Data quality monitoring',
-    body: 'Freshness, volume, schema changes, uniqueness, completeness, validity, anomalies and trends across the datasets and pipelines that matter.',
+    body: 'Data freshness, volume, schema drift, data drift, uniqueness, completeness and validity, with anomaly detection across the datasets and data pipelines that matter.',
     points: ['87 ready-made checks', 'History-aware anomalies', 'Quality score that cannot hide a fail'],
   },
   {
@@ -126,7 +126,7 @@ const FEATURES = [
   {
     icon: TrendingUp,
     title: 'Anomaly detection',
-    body: 'Checks learn each dataset’s history. Without enough history, a check waits instead of guessing.',
+    body: 'Data drift and outliers are caught because checks learn each dataset’s history. Without enough history, a check waits instead of guessing.',
   },
   {
     icon: Gauge,
@@ -183,6 +183,14 @@ const FAQS: { q: string; a: ReactNode }[] = [
   {
     q: 'Is this data observability or data quality?',
     a: 'Both. You get monitored checks across datasets, plus governance: policy-to-checks, clause citations, approvals and an audit trail.',
+  },
+  {
+    q: 'Does it work with Snowflake and Databricks?',
+    a: 'Yes. Snowflake data observability and Databricks data observability cover data quality, freshness, schema drift and lineage, plus Snowflake and Databricks cost optimization.',
+  },
+  {
+    q: 'Is it suitable for AI and machine learning data?',
+    a: 'Yes. AI data observability monitors the data that feeds your models, so AI runs on AI-ready data, and AI governance keeps approvals and an audit trail for how AI is used.',
   },
   {
     q: 'Does our data leave our network?',
@@ -315,7 +323,7 @@ export default function DataObservabilityPage() {
   }, [])
 
   const baseDescription =
-    'Data observability platform: data quality monitoring, anomaly detection, schema change alerts, lineage and impact analysis, with rules from your policy.'
+    'End-to-end data observability: data quality monitoring, data freshness, schema drift, anomaly detection, data lineage and root cause analysis.'
   const description = ensureUniqueMetaDescription(
     baseDescription,
     'data-observability',
@@ -325,9 +333,9 @@ export default function DataObservabilityPage() {
   return (
     <div className={styles.page}>
       <SEO
-        title="Data Observability Platform: Data Quality, Lineage & Governance | AlertMend"
+        title="Enterprise Data Observability & Data Quality | AlertMend"
         description={description}
-        keywords="data observability, data observability platform, data quality monitoring, data lineage, impact analysis, anomaly detection, schema change alerts, data contracts, data incidents, root cause analysis, Snowflake, dbt, Airflow, Power BI, Monte Carlo alternative"
+        keywords="data observability, enterprise data observability, end-to-end data observability, data reliability, data quality monitoring, data pipeline observability, data pipeline monitoring, data health monitoring, data freshness, data lineage, anomaly detection, schema drift, data drift, root cause analysis, automated root cause detection, data governance, data sovereignty, data security, AI data observability, AI data quality, AI-ready data, AI governance, Snowflake data observability, Databricks data observability, data FinOps, DataOps, data reliability engineering"
         canonical="/data-observability"
       />
 
@@ -338,15 +346,16 @@ export default function DataObservabilityPage() {
           <div className={styles.heroCopy}>
             <span className={styles.badge}>
               <i className={styles.badgeDot} />
-              Data observability · Data quality · Data governance
+              Data observability · Data quality · Data reliability
             </span>
             <h1 className={styles.h1}>
               See bad data before the dashboard does,{' '}
               <span className={styles.accent}>from the policy you already have</span>
             </h1>
             <p className={styles.lede}>
-              Data observability across your warehouse and lakehouse: freshness, volume, schema,
-              quality and lineage, with data quality rules generated from your policy. Every data
+              End-to-end data observability from source to consumption: data freshness, volume, schema
+              drift, data quality and data lineage across Snowflake, Databricks and your pipelines, with
+              data quality rules generated from your policy. Every data
               incident arrives with its root cause and downstream impact, and credentials never leave
               your network.
             </p>
@@ -437,6 +446,8 @@ export default function DataObservabilityPage() {
       <LineageImpact />
 
       <PolicyContract />
+
+      <AiAndFinOps />
 
       <GovernanceSection />
 

@@ -6,6 +6,7 @@ import {
   Users,
   Check,
 } from 'lucide-react'
+import { Sparkles, ShieldCheck, PiggyBank } from 'lucide-react'
 import { withBrandLogo } from '../../data/brandLogos'
 import styles from './Enterprise.module.css'
 import dd from './DataDepth.module.css'
@@ -370,6 +371,56 @@ export function PolicyContract() {
           <li><Check className={styles.checkIcon} size={16} aria-hidden="true" />Breaking schema changes caught before consumers break</li>
           <li><Check className={styles.checkIcon} size={16} aria-hidden="true" />Every check change versioned for audit</li>
         </ul>
+      </div>
+    </section>
+  )
+}
+
+/* ---------------- AI-ready data and data FinOps ---------------- */
+
+const AI_FINOPS = [
+  {
+    icon: Sparkles,
+    title: 'AI data observability',
+    body: 'Monitor the data that feeds your AI and machine learning models: training data, features and retrieval sources. AI data quality checks keep that data AI-ready before it reaches a model.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'AI governance',
+    body: 'AI data governance for regulated teams: policies for how AI is used, approval before any AI-proposed change goes live, and a full audit trail. Bring your own model when data cannot leave.',
+  },
+  {
+    icon: PiggyBank,
+    title: 'Data FinOps',
+    body: 'Snowflake cost optimization and Databricks cost optimization in the same place as data quality: see warehouse, compute and workload spend, and where to cut it.',
+  },
+]
+
+export function AiAndFinOps() {
+  return (
+    <section className={styles.section} id="ai-finops">
+      <div className={styles.wrap}>
+        <div className={styles.head}>
+          <div>
+            <span className={styles.eyebrow}>AI-ready data and data FinOps</span>
+            <h2 className={styles.h2}>Reliable data for AI, at a cost you control.</h2>
+          </div>
+          <p className={styles.lede}>
+            Data reliability now has two more jobs: making sure the data behind AI can be trusted, and keeping
+            Snowflake and Databricks spend in check.
+          </p>
+        </div>
+        <div className={styles.grid3}>
+          {AI_FINOPS.map((it) => (
+            <div key={it.title} className={styles.cell}>
+              <span className={styles.icon}>
+                <it.icon size={22} strokeWidth={1.75} aria-hidden="true" />
+              </span>
+              <h3 className={styles.cellTitle}>{it.title}</h3>
+              <p className={styles.cellBody}>{it.body}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )

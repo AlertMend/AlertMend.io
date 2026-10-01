@@ -57,12 +57,12 @@ export default function IntegrationDetailPage() {
   return (
     <>
       <SEO
-        title={`${integration.name} integration | AlertMend`}
+        title={integration.seoTitle ?? `${integration.name} integration | AlertMend`}
         description={truncateDescription(
           `${integration.tagline} ${integration.description.split('. ')[0]}.`
         )}
         canonical={`/integrations/${integration.slug}`}
-        keywords={`${integration.name}, AlertMend integration, ${integration.category}, AIOps, observability, automation`}
+        keywords={integration.seoKeywords ?? `${integration.name}, AlertMend integration, ${integration.category}, AIOps, observability, automation`}
         extraStructuredData={
           integration.faqs && integration.faqs.length > 0
             ? [

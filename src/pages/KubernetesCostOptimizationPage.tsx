@@ -25,8 +25,8 @@ function SpotlightPanel() {
         </span>
       </div>
       <div className="mt-3 overflow-hidden rounded-lg border border-white/10 bg-black/40 p-3.5 font-mono text-[11px] leading-relaxed">
-        <div className="text-white/40">resources:</div>
-        <div className="text-white/40">&nbsp;&nbsp;requests:</div>
+        <div className="text-white/60">resources:</div>
+        <div className="text-white/60">&nbsp;&nbsp;requests:</div>
         <div className="bg-rose-500/10 text-rose-300">−&nbsp;&nbsp;&nbsp;cpu: 2000m</div>
         <div className="bg-emerald-500/10 text-emerald-300">+&nbsp;&nbsp;&nbsp;cpu: 750m</div>
         <div className="bg-rose-500/10 text-rose-300">−&nbsp;&nbsp;&nbsp;memory: 4Gi</div>
@@ -48,11 +48,11 @@ export default function KubernetesCostOptimizationPage() {
   return (
     <SolutionPageTemplate
       seo={{
-        title: 'Kubernetes & AWS Cost Optimization (FinOps)',
+        title: 'Cloud Cost Optimization & FinOps',
         description:
-          'See Kubernetes and AWS spend by namespace, workload and controller. Right-sizing with YAML preview, idle cleanup, and EC2, RDS and ELB line items.',
+          'Cloud cost optimization for Kubernetes and AWS, plus Snowflake and Databricks cost optimization. Compute and workload optimization with approvals.',
         keywords:
-          'Kubernetes cost optimization, FinOps, right-sizing, requested vs used, cloud cost, AWS cost optimization, EC2 RDS savings, idle resources, YAML apply, AlertMend',
+          'cloud cost optimization, compute optimization, workload optimization, Kubernetes cost optimization, AWS cost optimization, Snowflake cost optimization, Databricks cost optimization, Snowflake FinOps, Databricks FinOps, data FinOps, FinOps, right-sizing, idle resources, AlertMend',
         canonical: '/kubernetes-cost-optimization',
       }}
       badge="FinOps"
@@ -88,7 +88,7 @@ export default function KubernetesCostOptimizationPage() {
         },
       ]}
       featuresHeading="FinOps that engineers actually run"
-      featuresSub="Cost data joined to the same metrics and workloads the rest of the platform watches, so savings never fight reliability."
+      featuresSub="Compute and workload optimization with cost data joined to the same metrics and workloads the rest of the platform watches, so savings never fight reliability."
       features={[
         {
           icon: DollarSign,
@@ -117,9 +117,9 @@ export default function KubernetesCostOptimizationPage() {
         },
         {
           icon: Cloud,
-          title: 'AWS line items',
-          body: 'EC2, RDS and ELB spend in the same view as your Kubernetes costs, scoped by environment.',
-          chips: ['EC2', 'RDS', 'ELB'],
+          title: 'AWS and data platform spend',
+          body: 'EC2, RDS and ELB spend in the same view as your Kubernetes costs, with Snowflake and Databricks cost optimization for data teams.',
+          chips: ['EC2', 'RDS', 'Snowflake', 'Databricks'],
         },
         {
           icon: ShieldCheck,

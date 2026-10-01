@@ -32,6 +32,9 @@ export type Integration = {
   description: string;
   /** Concrete capabilities the AlertMend ↔ <integration> link unlocks. */
   capabilities: string[];
+  /** Optional search title and keywords for the detail page. */
+  seoTitle?: string;
+  seoKeywords?: string;
   /** Direct logo URL (preferred — guarantees brand color). */
   logoSrc?: string;
   /** Simple Icons slug (fallback rendering, always pair with `logoTint` when used). */
@@ -371,12 +374,15 @@ export const integrations: Integration[] = [
     slug: 'snowflake',
     name: 'Snowflake',
     category: 'Data',
-    tagline: 'Warehouse freshness, volume, and schema monitors with RCA.',
+    tagline: 'Snowflake data observability, data quality and cost optimization.',
+    seoTitle: 'Snowflake Data Observability & Data Quality | AlertMend',
+    seoKeywords: 'Snowflake data observability, Snowflake data quality, Snowflake cost optimization, Snowflake FinOps, data freshness, schema drift, anomaly detection, data lineage, AlertMend',
     description:
-      'Connect AlertMend to Snowflake with a read-only role. We watch table freshness, row-count drift, schema changes, and null rates, then page a cited RCA when a pipeline breaks a contract.',
+      'Connect with a read-only role to monitor table freshness, volume, schema drift and null rates. When a pipeline breaks a data contract, AlertMend sends a root cause analysis. Snowflake FinOps shows where warehouse spend goes and how to cut it.',
     capabilities: [
-      'Freshness and volume monitors without a check farm',
-      'Schema-change detection on critical tables',
+      'Data quality monitoring: freshness, volume and anomaly detection',
+      'Schema drift detection on critical tables',
+      'Snowflake cost optimization: warehouse, compute and workload spend',
       'Slack / Teams paging with evidence citations',
       'Approval-gated quarantine or remediations',
     ],
@@ -438,12 +444,15 @@ export const integrations: Integration[] = [
     slug: 'databricks',
     name: 'Databricks',
     category: 'Data',
-    tagline: 'Lakehouse table contracts and pipeline anomaly paging.',
+    tagline: 'Databricks data observability, data quality and cost optimization.',
+    seoTitle: 'Databricks Data Observability & Data Quality | AlertMend',
+    seoKeywords: 'Databricks data observability, Databricks data quality, Databricks cost optimization, Databricks FinOps, Delta tables, Unity Catalog, data pipeline monitoring, schema drift, AlertMend',
     description:
-      'Connect Unity Catalog or workspace metadata so AlertMend can monitor Delta tables for freshness, volume, and schema contracts. Failed jobs and broken producers get the same cited RCA as infra incidents.',
+      'Connect Unity Catalog or workspace metadata to monitor Delta tables for freshness, volume and schema drift. Databricks FinOps shows cluster and job spend. Failed jobs and broken producers get the same cited RCA as infra incidents.',
     capabilities: [
       'Delta / Unity Catalog table monitors',
-      'Job and pipeline anomaly correlation',
+      'Data pipeline monitoring with job and anomaly correlation',
+      'Databricks cost optimization: cluster, job and workload spend',
       'Contract checks for producers and consumers',
       'Slack / Teams approvals for remediations',
     ],

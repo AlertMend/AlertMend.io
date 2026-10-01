@@ -26,9 +26,9 @@ type Signal = { icon: LucideIcon; title: string; body: string }
 const DATA: Signal[] = [
   { icon: Clock3, title: 'Freshness', body: 'Late or missing loads, measured against the SLA in your policy.' },
   { icon: BarChart3, title: 'Volume', body: 'Row counts against each table’s own baseline.' },
-  { icon: Columns, title: 'Schema changes', body: 'Dropped, renamed or retyped columns before consumers break.' },
+  { icon: Columns, title: 'Schema drift', body: 'Dropped, renamed or retyped columns before consumers break.' },
   { icon: ListChecks, title: 'Data quality checks', body: 'Completeness, uniqueness, validity and referential integrity.' },
-  { icon: TrendingUp, title: 'Anomaly detection', body: 'History-aware checks for values, nulls and distributions.' },
+  { icon: TrendingUp, title: 'Anomaly detection', body: 'Data drift in values, nulls and distributions, learned from history.' },
   { icon: Workflow, title: 'Pipeline and job monitoring', body: 'Airflow, dbt and ODI runs linked to the tables they build.' },
   { icon: GitBranch, title: 'Lineage', body: 'From the source and pipeline job to every report that reads the table.' },
   { icon: Briefcase, title: 'Impact analysis', body: 'Which reports and teams would see the wrong numbers, flagged before they do.' },
@@ -40,7 +40,7 @@ const INFRA: Signal[] = [
   { icon: Boxes, title: 'Kubernetes', body: 'Workloads, nodes and health policies across every cluster.' },
   { icon: Server, title: 'VMs and cloud', body: 'EC2, ECS, RDS and on-prem hosts beside your clusters.' },
   { icon: Cpu, title: 'GPU fleets', body: 'Utilisation, MIG slices, training and inference health.' },
-  { icon: DollarSign, title: 'Cost', body: 'Right-sizing for Kubernetes, AWS and idle GPUs.' },
+  { icon: DollarSign, title: 'Cloud cost optimization', body: 'Right-sizing for Kubernetes, AWS and idle GPUs.' },
   { icon: BellRing, title: 'On-call', body: 'Schedules, escalation and alerts that arrive with the cause.' },
 ]
 

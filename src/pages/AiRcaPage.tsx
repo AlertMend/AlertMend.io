@@ -47,7 +47,7 @@ export default function AiRcaPage() {
         description:
           'AlertMend correlates traces, logs, metrics and Kubernetes events into an evidence-backed root cause with confidence scoring, Slack delivery, and GitHub PR Fix.',
         keywords:
-          'AI RCA, root cause analysis, AIOps, Kubernetes incident response, GitHub PR fix, BYOM, AlertMend',
+          'root cause analysis, automated root cause detection, AI RCA, AIOps, Kubernetes incident response, data incident root cause, GitHub PR fix, BYOM, AlertMend',
         canonical: '/ai-rca',
       }}
       badge="AI RCA"

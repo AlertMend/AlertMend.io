@@ -26,15 +26,15 @@ import { HOME_FAQ } from '../data/homeFaq'
  */
 export default function HomePage() {
   const baseDescription =
-    'Policy-driven data quality on Snowflake and Oracle, plus AI observability for Kubernetes, VMs and cloud: evidence-backed root cause and automated fixes.'
+    'Enterprise data observability and data quality for Snowflake and Databricks, plus AI observability for Kubernetes and cloud, with root cause analysis.'
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'home', 'homepage')
 
   return (
     <>
       <SEO
-        title="AlertMend: Data Quality & Infrastructure Observability"
+        title="AlertMend: Data Observability & Infrastructure Observability"
         description={uniqueDescription}
-        keywords="AIOps, observability, APM, distributed tracing, OpenTelemetry, eBPF, AI RCA, auto-remediation, FinOps, on-call, log management, Prometheus, Datadog, Grafana, Alertmanager, data quality monitoring"
+        keywords="data observability, enterprise data observability, data quality monitoring, data reliability, data lineage, anomaly detection, root cause analysis, data governance, Snowflake data observability, Databricks data observability, cloud cost optimization, FinOps, AIOps, observability, APM, AI RCA, Kubernetes, on-call, log management"
         canonical="/"
         structuredData={{
           '@context': 'https://schema.org',

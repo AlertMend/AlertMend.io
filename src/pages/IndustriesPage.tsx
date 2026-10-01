@@ -10,20 +10,20 @@ export default function IndustriesPage() {
   return (
     <>
       <SEO
-        title="Industries: Banking, Insurance, Healthcare & Public Sector | AlertMend"
-        description="Data quality, governance and sovereign deployment for banks, insurers, healthcare and the public sector, plus evidence-backed incident response for their platforms."
+        title="Data Observability for Banking & Insurance | AlertMend"
+        description="Data observability for financial services, banking and insurance, plus healthcare and public sector: data quality, data governance and data sovereignty."
         canonical="/industries"
-        keywords="data governance banking, BCBS 239 data quality, Solvency II data quality, healthcare data integrity, public sector data sovereignty, AlertMend"
+        keywords="data observability for financial services, data observability for banking, data observability for insurance, data governance banking, BCBS 239 data quality, Solvency II data quality, healthcare data integrity, public sector data sovereignty, AlertMend"
         breadcrumbData={{ items: [{ label: 'Industries' }] }}
       />
 
       <section className={styles.pageHero}>
         <div className={styles.wrap}>
-          <span className={styles.eyebrow}>Industries</span>
+          <span className={styles.eyebrow}>Data observability for regulated industries</span>
           <h1 className={styles.h1}>Built for industries that answer to regulators.</h1>
           <p className={styles.lede}>
-            Banks, insurers, healthcare providers and public bodies use AlertMend to prove their data
-            is under control and to keep critical systems running, without moving sensitive data
+            Financial services firms, banks, insurers, healthcare providers and public bodies use
+            AlertMend for data observability and data governance, to prove their data is under control and to keep critical systems running, without moving sensitive data
             out of their environment.
           </p>
           <nav className={styles.jump} aria-label="Industries on this page">
