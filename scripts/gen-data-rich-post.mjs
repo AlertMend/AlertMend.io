@@ -116,7 +116,96 @@ function diagramDataFlow() {
   const impact = `<path d="M ${bx} ${y} L ${bx} ${y - 26} L ${x0 + 3 * (boxW + gap) + boxW / 2} ${y - 26} L ${x0 + 3 * (boxW + gap) + boxW / 2} ${y - 4}" fill="none" stroke="#f87171" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#dfr)"/><text x="${w / 2}" y="${y - 32}" text-anchor="middle" font-size="10.5" fill="#b91c1c" font-weight="700">a bad table here shows up in every report that reads it</text>`
   return `<svg viewBox="0 0 ${w} 170" width="${w}" height="170" role="img" aria-label="Data flows from sources through Airflow or ODI ingest into Snowflake or Oracle, then into Power BI reports. A bad table in the warehouse reaches every report that reads it." font-family="${FONT}"><defs><marker id="df" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#a1a1aa"/></marker><marker id="dfr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#f87171"/></marker></defs><rect width="${w}" height="170" rx="14" fill="#fbfbfd"/>${impact}${arrows}${boxes}</svg>`
 }
-const DIAGRAMS = { policyToChecks: diagramPolicyToChecks, causeImpact: diagramCauseImpact, checkCatalog: diagramCheckCatalog, dataFlow: diagramDataFlow }
+function diagramBcbs239Groups() {
+  const groups = [
+    { title: ['Governance &', 'infrastructure'], range: 'P1-2', hl: false, chips: [['1', 'Governance'], ['2', 'Data architecture & IT']] },
+    { title: ['Risk data', 'aggregation'], range: 'P3-6', hl: true, chips: [['3', 'Accuracy & integrity'], ['4', 'Completeness'], ['5', 'Timeliness'], ['6', 'Adaptability']] },
+    { title: ['Risk', 'reporting'], range: 'P7-11', hl: false, chips: [['7', 'Reporting accuracy'], ['8', 'Comprehensiveness'], ['9', 'Clarity & usefulness'], ['10', 'Frequency'], ['11', 'Distribution']] },
+    { title: ['Supervisory', 'review'], range: 'P12-14', hl: false, chips: [['12', 'Review'], ['13', 'Remedial actions'], ['14', 'Cooperation']] },
+  ]
+  const w = 680, colW = 158, gap = 12, x0 = 6, chipH = 24, chipGap = 6, chipY0 = 92
+  let out = ''
+  groups.forEach((g, i) => {
+    const x = x0 + i * (colW + gap)
+    const accent = g.hl ? '#7c3aed' : '#a1a1aa'
+    if (g.hl) out += `<rect x="${x - 4}" y="32" width="${colW + 8}" height="214" rx="12" fill="#faf5ff" stroke="#e9d5ff"/>`
+    out += `<text x="${x + colW / 2}" y="42" text-anchor="middle" font-size="9" font-weight="800" fill="${g.hl ? '#7c3aed' : '#a1a1aa'}" letter-spacing="0.5">${g.range}</text>`
+    out += `<rect x="${x}" y="48" width="${colW}" height="38" rx="9" fill="${g.hl ? '#7c3aed' : '#f4f4f5'}" stroke="${g.hl ? '#7c3aed' : '#e4e4e7'}"/>`
+    out += `<text x="${x + colW / 2}" y="64" text-anchor="middle" font-size="11" font-weight="800" fill="${g.hl ? '#ffffff' : '#3f3f46'}">${g.title[0]}</text><text x="${x + colW / 2}" y="78" text-anchor="middle" font-size="11" font-weight="800" fill="${g.hl ? '#ffffff' : '#3f3f46'}">${g.title[1]}</text>`
+    g.chips.forEach((c, j) => {
+      const cy = chipY0 + j * (chipH + chipGap)
+      out += `<rect x="${x}" y="${cy}" width="${colW}" height="${chipH}" rx="7" fill="#fff" stroke="#e4e4e7"/><rect x="${x}" y="${cy}" width="4" height="${chipH}" rx="2" fill="${accent}"/><text x="${x + 13}" y="${cy + 16}" font-size="10" font-weight="800" fill="#52525b">${c[0]}</text><text x="${x + 29}" y="${cy + 16}" font-size="9.5" fill="#27272a">${c[1]}</text>`
+    })
+  })
+  const rx = x0 + 1 * (colW + gap) + colW / 2
+  out += `<text x="${rx}" y="258" text-anchor="middle" font-size="9.5" font-weight="700" fill="#7c3aed">where data quality is tested</text>`
+  return `<svg viewBox="0 0 ${w} 268" width="${w}" height="268" role="img" aria-label="The 14 BCBS 239 principles in four groups: governance and infrastructure (1-2), risk data aggregation (3-6, the data quality group), risk reporting (7-11), and supervisory review (12-14)." font-family="${FONT}"><rect width="${w}" height="268" rx="14" fill="#fbfbfd"/><text x="${w / 2}" y="20" text-anchor="middle" font-size="12" font-weight="800" fill="#5b21b6" letter-spacing="1">THE 14 PRINCIPLES, IN FOUR GROUPS</text>${out}</svg>`
+}
+function diagramBcbs239Scorecard() {
+  const w = 680, tx0 = 44, tx1 = 636, tw = tx1 - tx0, gy = 52, gh = 22
+  const val = 3.17, fillW = (val / 4) * tw
+  let ticks = ''
+  for (let v = 0; v <= 4; v++) { const x = tx0 + (v / 4) * tw; ticks += `<line x1="${x}" y1="${gy}" x2="${x}" y2="${gy + gh}" stroke="#d4d4d8" stroke-width="1"/><text x="${x}" y="${gy + gh + 16}" text-anchor="middle" font-size="9.5" fill="#a1a1aa">${v}</text>` }
+  const chips = [
+    { t: '2 of 31', s: 'G-SIBs fully compliant with all 14 principles' },
+    { t: '0 principles', s: 'fully implemented across all 31 banks' },
+  ]
+  let cards = ''
+  chips.forEach((c, i) => { const x = tx0 + i * 300; cards += `<rect x="${x}" y="104" width="288" height="50" rx="10" fill="#fff" stroke="#e4e4e7"/><rect x="${x}" y="104" width="4" height="50" rx="2" fill="#7c3aed"/><text x="${x + 16}" y="126" font-size="16" font-weight="800" fill="#7c3aed">${c.t}</text><text x="${x + 16}" y="143" font-size="9.5" fill="#52525b">${c.s}</text>` })
+  return `<svg viewBox="0 0 ${w} 170" width="${w}" height="170" role="img" aria-label="Adoption after ten years, per the 2023 BIS progress report: the average supervisory compliance rating across 31 G-SIBs was 3.17 out of 4 in 2022, up from 3.14 in 2019; only 2 banks are fully compliant and no principle is fully implemented across all banks." font-family="${FONT}"><rect width="${w}" height="170" rx="14" fill="#faf9ff"/><text x="${tx0}" y="20" font-size="12" font-weight="800" fill="#5b21b6" letter-spacing="0.5">ADOPTION AFTER 10 YEARS (BIS, 2023)</text><text x="${tx0}" y="38" font-size="10.5" fill="#71717a">Average supervisory compliance rating across 31 G-SIBs, where 4 is fully compliant</text><rect x="${tx0}" y="${gy}" width="${tw}" height="${gh}" rx="6" fill="#ece7f7"/><rect x="${tx0}" y="${gy}" width="${fillW}" height="${gh}" rx="6" fill="#7c3aed"/><text x="${tx0 + fillW - 10}" y="${gy + 16}" text-anchor="end" font-size="13" font-weight="800" fill="#ffffff">3.17 / 4</text>${ticks}<text x="${tx1}" y="${gy + gh + 16}" text-anchor="end" font-size="9.5" fill="#a1a1aa">up from 3.14 in 2019</text>${cards}</svg>`
+}
+function diagramBcbs239Scope() {
+  const tiers = [
+    { label: 'About 30 G-SIBs', sub: 'in scope since 2016, assessed every year', w: 300, fill: '#7c3aed', fg: '#ffffff', sfg: '#ede9fe' },
+    { label: 'D-SIBs', sub: 'many national regulators extend the principles to them', w: 460, fill: '#c4b5fd', fg: '#2e1065', sfg: '#4c1d95' },
+    { label: 'Other large and complex banks', sub: 'apply proportionately, as supervisory good practice', w: 600, fill: '#ede9fe', fg: '#4c1d95', sfg: '#6d28d9' },
+  ]
+  const W = 680, h = 52, gap = 8, y0 = 44
+  let out = ''
+  tiers.forEach((t, i) => { const x = (W - t.w) / 2, y = y0 + i * (h + gap); out += `<rect x="${x}" y="${y}" width="${t.w}" height="${h}" rx="10" fill="${t.fill}"/><text x="${x + 18}" y="${y + 23}" font-size="13" font-weight="800" fill="${t.fg}">${t.label}</text><text x="${x + 18}" y="${y + 41}" font-size="10" fill="${t.sfg}">${t.sub}</text>` })
+  return `<svg viewBox="0 0 ${W} 230" width="${W}" height="230" role="img" aria-label="Who must follow BCBS 239: about 30 global systemically important banks are in scope and assessed yearly; many national regulators extend the principles to domestic systemically important banks; other large and complex banks apply them proportionately." font-family="${FONT}"><rect width="${W}" height="230" rx="14" fill="#fbfbfd"/><text x="${W / 2}" y="24" text-anchor="middle" font-size="12" font-weight="800" fill="#5b21b6" letter-spacing="1">WHO MUST FOLLOW BCBS 239</text>${out}<text x="${W / 2}" y="223" text-anchor="middle" font-size="9.5" fill="#a1a1aa">A narrow mandatory core at the top, widening to good practice below</text></svg>`
+}
+function diagramBcbs239WhyBeforeAfter() {
+  const W = 680
+  const left = { title: 'Without the capability', head: '#991b1b', bg: '#fef2f2', bd: '#fecaca', items: ['Risk data stitched together by hand', 'Reconciliation lives in spreadsheets', 'Cannot answer a supervisor fast in a crisis', 'Decisions on numbers nobody verified'] }
+  const right = { title: 'With BCBS 239 in place', head: '#166534', bg: '#ecfdf5', bd: '#bbf7d0', items: ['Aggregation is largely automated', 'Accurate, complete data even under stress', 'Answer a supervisor in hours, not weeks', 'Risk decisions on data you can defend'] }
+  const col = (c, x) => { const w = 300; let o = `<rect x="${x}" y="64" width="${w}" height="150" rx="12" fill="${c.bg}" stroke="${c.bd}"/><text x="${x + 16}" y="86" font-size="12.5" font-weight="800" fill="${c.head}">${c.title}</text>`; c.items.forEach((it, i) => { const y = 110 + i * 26; o += `<circle cx="${x + 20}" cy="${y - 4}" r="2.5" fill="${c.head}"/><text x="${x + 32}" y="${y}" font-size="10.5" fill="#3f3f46">${it}</text>` }); return o }
+  return `<svg viewBox="0 0 ${W} 232" width="${W}" height="232" role="img" aria-label="Why follow BCBS 239: without the capability risk data is manual, reconciled in spreadsheets and slow in a crisis; with BCBS 239 in place aggregation is automated, data is accurate under stress, and a supervisor can be answered in hours." font-family="${FONT}"><rect width="${W}" height="232" rx="14" fill="#faf9ff"/><text x="${W / 2}" y="22" text-anchor="middle" font-size="12" font-weight="800" fill="#5b21b6" letter-spacing="1">WHY FOLLOW IT</text><text x="${W / 2}" y="42" text-anchor="middle" font-size="10" fill="#71717a">BCBS 239 exists because the 2008 crisis showed many banks could not aggregate their own risk fast enough</text>${col(left, 24)}${col(right, 356)}</svg>`
+}
+function diagramBcbs239RiskLadder() {
+  const W = 680, boxW = 150, gap = 14, y = 54, boxH = 74
+  const steps = [
+    { t: 'Supervisory finding', lines: ['materially non-compliant', 'in the annual review (P12)'], fill: '#f5f3ff', bd: '#ddd6fe', fg: '#5b21b6', sfg: '#7c3aed' },
+    { t: 'Remedial action', lines: ['a mandated plan and', 'timeline to close gaps (P13)'], fill: '#ede9fe', bd: '#c4b5fd', fg: '#5b21b6', sfg: '#7c3aed' },
+    { t: 'Escalating measures', lines: ['persistent gaps feed the', 'wider supervisory review (P13)'], fill: '#7c3aed', bd: '#7c3aed', fg: '#ffffff', sfg: '#ede9fe' },
+    { t: 'The real risk', lines: ['wrong risk numbers,', 'decisions made blind'], fill: '#b91c1c', bd: '#b91c1c', fg: '#ffffff', sfg: '#fecaca' },
+  ]
+  const x0 = (W - (4 * boxW + 3 * gap)) / 2
+  let out = ''
+  steps.forEach((s, i) => {
+    const x = x0 + i * (boxW + gap)
+    out += `<rect x="${x}" y="${y}" width="${boxW}" height="${boxH}" rx="11" fill="${s.fill}" stroke="${s.bd}" stroke-width="1.5"/><text x="${x + boxW / 2}" y="${y + 26}" text-anchor="middle" font-size="11.5" font-weight="800" fill="${s.fg}">${s.t}</text><text x="${x + boxW / 2}" y="${y + 46}" text-anchor="middle" font-size="8.5" fill="${s.sfg}">${s.lines[0]}</text><text x="${x + boxW / 2}" y="${y + 59}" text-anchor="middle" font-size="8.5" fill="${s.sfg}">${s.lines[1]}</text>`
+    if (i < 3) { const ax = x + boxW; out += `<line x1="${ax}" y1="${y + boxH / 2}" x2="${ax + gap - 2}" y2="${y + boxH / 2}" stroke="#a1a1aa" stroke-width="2" marker-end="url(#rl)"/>` }
+  })
+  return `<svg viewBox="0 0 ${W} 150" width="${W}" height="150" role="img" aria-label="The risk of getting BCBS 239 wrong escalates: a supervisory finding of material non-compliance, then a required remedial plan, then escalating supervisory measures, and the real risk underneath it all, wrong risk numbers and decisions made blind." font-family="${FONT}"><defs><marker id="rl" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#a1a1aa"/></marker></defs><rect width="${W}" height="150" rx="14" fill="#fbfbfd"/><text x="${W / 2}" y="24" text-anchor="middle" font-size="12" font-weight="800" fill="#5b21b6" letter-spacing="1">THE RISK OF GETTING IT WRONG</text>${out}</svg>`
+}
+function diagramBcbs239Timeline() {
+  const W = 680, y = 66, x0 = 56, x1 = 624
+  const pts = [
+    { x: 56, yr: '2013', c: 'Principles published', a: 'start' },
+    { x: 245, yr: '2016', c: 'G-SIB compliance expected', a: 'middle' },
+    { x: 435, yr: '2019', c: 'avg 3.14 / 4', a: 'middle' },
+    { x: 624, yr: '2022', c: 'avg 3.17 / 4, latest', a: 'end' },
+  ]
+  let out = `<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" stroke="#c4b5fd" stroke-width="3"/>`
+  pts.forEach((p) => {
+    out += `<circle cx="${p.x}" cy="${y}" r="7" fill="#7c3aed" stroke="#fff" stroke-width="2"/>`
+    out += `<text x="${p.x}" y="46" text-anchor="${p.a}" font-size="15" font-weight="800" fill="#18181b">${p.yr}</text>`
+    out += `<text x="${p.x}" y="94" text-anchor="${p.a}" font-size="10" fill="#52525b">${p.c}</text>`
+  })
+  return `<svg viewBox="0 0 ${W} 120" width="${W}" height="120" role="img" aria-label="BCBS 239 timeline: published 2013, G-SIB compliance expected by 2016, average supervisory rating 3.14 of 4 in 2019 and 3.17 of 4 in 2022." font-family="${FONT}"><rect width="${W}" height="120" rx="14" fill="#faf9ff"/><text x="${W / 2}" y="20" text-anchor="middle" font-size="12" font-weight="800" fill="#5b21b6" letter-spacing="1">BCBS 239, A DECADE IN</text>${out}</svg>`
+}
+const DIAGRAMS = { policyToChecks: diagramPolicyToChecks, causeImpact: diagramCauseImpact, checkCatalog: diagramCheckCatalog, dataFlow: diagramDataFlow, bcbs239Groups: diagramBcbs239Groups, bcbs239Scorecard: diagramBcbs239Scorecard, bcbs239Scope: diagramBcbs239Scope, bcbs239Why: diagramBcbs239WhyBeforeAfter, bcbs239Risk: diagramBcbs239RiskLadder, bcbs239Timeline: diagramBcbs239Timeline }
 function diagramHtml() {
   const d = spec.diagram
   if (!d || !DIAGRAMS[d.kind]) return ''
@@ -130,16 +219,16 @@ function statBandHtml() {
   const cls = s.length === 2 ? ' statBand2' : ''
   return `<div class="statBand${cls}">${s.map((x) => `<div class="statCard"><div class="big">${esc(x.big)}</div><div class="lbl">${E(x.lbl)}</div>${x.src ? `<div class="src">${E(x.src)}</div>` : ''}</div>`).join('')}</div>`
 }
-function exampleBoxHtml() {
-  const ex = spec.example
+function exampleBoxFrom(ex) {
   if (!ex) return ''
   return `<div class="exampleBox"><div class="exHead">In practice: ${E(ex.title)}</div><div class="exBody">${(ex.scenario || []).map((p) => `<p>${E(p)}</p>`).join('')}${ex.lesson ? `<p class="exLesson">${E(ex.lesson)}</p>` : ''}</div></div>`
 }
-function pullQuoteHtml() {
-  const q = spec.quote
+function pullQuoteFrom(q) {
   if (!q) return ''
   return `<figure class="pullQuote"><p>${E(q.text)}</p>${q.attrib ? `<figcaption class="attrib">${E(q.attrib)}</figcaption>` : ''}</figure>`
 }
+function exampleBoxHtml() { return exampleBoxFrom(spec.example) }
+function pullQuoteHtml() { return pullQuoteFrom(spec.quote) }
 function audienceBlock() {
   const a = spec.audience
   if (!a || !a.length) return ''
@@ -170,6 +259,16 @@ function renderBlock(b) {
     const tone = ['info', 'warn', 'good'].includes(b.tone) ? b.tone : 'info'
     return `<div class="noteCard note-${tone}">${b.title ? `<div class="noteTitle">${E(b.title)}</div>` : ''}<p>${E(b.body)}</p></div>`
   }
+  if (b.type === 'diagram') {
+    const fn = DIAGRAMS[b.kind]
+    return fn ? `<figure class="conceptFig">${fn()}${b.caption ? `<figcaption>${E(b.caption)}</figcaption>` : ''}</figure>` : ''
+  }
+  if (b.type === 'cards') {
+    const label = b.label ? `<div class="cardGroupLabel${b.hot ? ' cardGroupLabelHot' : ''}">${E(b.label)}</div>` : ''
+    return `${label}<div class="cardGrid">${(b.items || []).map((c) => `<div class="miniCard${c.hot ? ' miniCardHot' : ''}">${c.n ? `<span class="miniCardNum">${esc(c.n)}</span>` : ''}<div class="miniCardBody"><div class="miniCardTitle">${E(c.title)}</div>${c.body ? `<p>${E(c.body)}</p>` : ''}${c.tag ? `<span class="miniCardTag">${E(c.tag)}</span>` : ''}</div></div>`).join('')}</div>`
+  }
+  if (b.type === 'example') return exampleBoxFrom(b)
+  if (b.type === 'quote') return pullQuoteFrom(b)
   return ''
 }
 function renderSection(s) {
@@ -232,6 +331,7 @@ ${buildCredArticleHeader(h1, DATE, category, author)}
   <section class="sectionBlock" id="alertmend">
     <h2 class="sectionTitle">Where AlertMend fits</h2>
     ${alertmentFitParas.map((p) => `<p class="bodyText">${E(p)}</p>`).join('')}
+    ${spec.alertmendDiagram && DIAGRAMS[spec.alertmendDiagram.kind] ? `<figure class="conceptFig">${DIAGRAMS[spec.alertmendDiagram.kind]()}${spec.alertmendDiagram.caption ? `<figcaption>${E(spec.alertmendDiagram.caption)}</figcaption>` : ''}</figure>` : ''}
   </section>
 
   ${(spec.sources && spec.sources.length) ? `
@@ -328,6 +428,18 @@ const extraCss = `
 .note-info{border-left:4px solid #2563eb;background:#eff6ff;} .note-info .noteTitle{color:#1e40af;}
 .note-warn{border-left:4px solid #d97706;background:#fffbeb;} .note-warn .noteTitle{color:#92400e;}
 .note-good{border-left:4px solid #059669;background:#ecfdf5;} .note-good .noteTitle{color:#065f46;}
+/* mini card grid (graphical replacement for prose lists) */
+.cardGrid{display:grid;grid-template-columns:1fr;gap:12px;margin:1.4rem 0;}
+@media(min-width:620px){.cardGrid{grid-template-columns:1fr 1fr;}}
+.miniCard{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid #e4e4e7;border-left:3px solid #7c3aed;border-radius:12px;padding:14px 16px;}
+.miniCardNum{flex-shrink:0;width:28px;height:28px;border-radius:8px;background:#f4f2fb;color:#7c3aed;font-weight:800;font-size:.95rem;display:flex;align-items:center;justify-content:center;}
+.miniCardTitle{font-weight:800;color:#18181b;font-size:.98rem;margin-bottom:.2rem;}
+.miniCardBody p{margin:0 0 .45rem;color:#3f3f46;font-size:.9rem;line-height:1.55;}
+.miniCardTag{display:inline-block;font-size:.72rem;font-weight:700;color:#6d28d9;background:#f4f2fb;border-radius:999px;padding:.15rem .6rem;}
+.cardGroupLabel{font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#71717a;margin:1.4rem 0 .1rem;}
+.cardGroupLabelHot{color:#7c3aed;}
+.miniCardHot{border-left-color:#7c3aed;border-color:#e9d5ff;background:#faf5ff;}
+.miniCardHot .miniCardNum{background:#7c3aed;color:#fff;}
 `
 
 const widgetJs = `
