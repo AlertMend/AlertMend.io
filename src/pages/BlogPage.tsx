@@ -23,6 +23,7 @@ import { ensureUniqueMetaDescription } from '../utils/descriptionUtils'
  * any post not listed here falls back to date, newest first.
  */
 const FEATURED_PRIORITY: Record<string, number> = {
+  'bcbs-239-principles-explained': 122,
   'bcbs-239-data-quality-controls': 120,
   'data-quality-policy-to-automated-checks': 118,
   'monte-carlo-alternatives': 116,
