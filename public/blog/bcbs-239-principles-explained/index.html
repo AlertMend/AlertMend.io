@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The 14 BCBS 239 Principles Explained | AlertMend AI</title>
+  <meta name="description" content="A plain-English guide to all 14 BCBS 239 principles, the data quality each one demands, and how a data team can evidence it for an auditor.">
+  <meta name="keywords" content="bcbs 239 principles, bcbs 239 14 principles, bcbs 239 explained, bcbs 239 requirements, risk data aggregation principles, rdarr principles, bcbs 239 completeness accuracy timeliness, bcbs 239 data quality, bcbs 239 for data teams, basel 239 principles">
+  <meta name="author" content="Dinesh Agrawal">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://www.alertmend.io/blog/bcbs-239-principles-explained">
+  <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.alertmend.io/blog/bcbs-239-principles-explained">
+  <meta property="og:title" content="The 14 BCBS 239 Principles Explained">
+  <meta property="og:description" content="A plain-English guide to all 14 BCBS 239 principles, the data quality each one demands, and how a data team can evidence it for an auditor.">
+  <meta property="og:image" content="https://www.alertmend.io/assets/bcbs-239-principles-explained/hero.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The 14 BCBS 239 Principles Explained">
+  <meta name="twitter:description" content="A plain-English guide to all 14 BCBS 239 principles, the data quality each one demands, and how a data team can evidence it for an auditor.">
+  <meta name="twitter:image" content="https://www.alertmend.io/assets/bcbs-239-principles-explained/hero.svg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"The 14 BCBS 239 Principles Explained","description":"A plain-English guide to all 14 BCBS 239 principles, the data quality each one demands, and how a data team can evidence it for an auditor.","image":"https://www.alertmend.io/assets/bcbs-239-principles-explained/hero.svg","datePublished":"2026-10-07","dateModified":"2026-10-07","author":{"@type":"Person","name":"Dinesh Agrawal","jobTitle":"Co-Founder at AlertMend.io","url":"https://www.linkedin.com/in/dineshagrawal85/","sameAs":["https://www.linkedin.com/in/dineshagrawal85/"]},"publisher":{"@type":"Organization","name":"AlertMend AI","logo":{"@type":"ImageObject","url":"https://www.alertmend.io/logos/alertmend-logo.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.alertmend.io/blog/bcbs-239-principles-explained"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are the 14 principles of BCBS 239?","acceptedAnswer":{"@type":"Answer","text":"They fall in four groups. Overarching governance and infrastructure: 1 governance, 2 data architecture and IT infrastructure. Risk data aggregation: 3 accuracy and integrity, 4 completeness, 5 timeliness, 6 adaptability. Risk reporting: 7 accuracy, 8 comprehensiveness, 9 clarity and usefulness, 10 frequency, 11 distribution. Supervisory review: 12 review, 13 remedial actions and supervisory measures, 14 home and host cooperation."}},{"@type":"Question","name":"Which BCBS 239 principles apply to data quality?","acceptedAnswer":{"@type":"Answer","text":"Principles 3 to 6 apply most directly: accuracy and integrity, completeness, timeliness and adaptability. Principle 7, reporting accuracy, depends on them, and principles 1 and 2 set the governance and architecture around them. In a review these are the principles tested against your actual tables rather than your documents."}},{"@type":"Question","name":"When did BCBS 239 take effect?","acceptedAnswer":{"@type":"Answer","text":"It was published in January 2013. Global systemically important banks (G-SIBs) were expected to comply by January 2016. Many national regulators have since applied the same expectations to domestic systemically important banks (D-SIBs) on their own timelines, and supervisors review compliance on an ongoing basis."}},{"@type":"Question","name":"Who does BCBS 239 apply to?","acceptedAnswer":{"@type":"Answer","text":"It applies first to G-SIBs, the global systemically important banks. In practice many national supervisors have extended the principles to D-SIBs and expect them to be applied proportionately, so a wide set of larger banks now works to BCBS 239 even if they are not on the G-SIB list."}},{"@type":"Question","name":"What is the difference between risk data aggregation and risk reporting in BCBS 239?","acceptedAnswer":{"@type":"Answer","text":"Risk data aggregation, principles 3 to 6, is about getting accurate, complete, timely and adaptable risk data together across the group. Risk reporting, principles 7 to 11, is about turning that data into reports that are accurate, comprehensive, clear, produced at the right frequency and distributed to the right people. A report cannot be accurate if the data underneath it is not."}},{"@type":"Question","name":"How do you evidence BCBS 239 compliance for data?","acceptedAnswer":{"@type":"Answer","text":"Tie each relevant principle to concrete checks and keep the evidence. Completeness and accuracy checks per legal entity for principles 3 and 4, a freshness SLA for principles 5 and 10, documented ownership and lineage for principles 1, 2 and 7, and an audit trail of every check change for principle 12. The point is that a supervisor can follow a report figure back to a check and the clause it enforces."}},{"@type":"Question","name":"What happens if a bank does not comply with BCBS 239?","acceptedAnswer":{"@type":"Answer","text":"For a G-SIB, supervisors assess compliance each year on a 1 to 4 scale. A bank rated materially non-compliant is required to produce a remedial plan with a timeline under Principle 13, and ongoing weakness feeds the wider supervisory assessment. BCBS 239 is principles-based rather than a fixed-penalty rule, so the pressure comes through supervisory review and remediation rather than an automatic fine. The larger cost is operational: risk decisions made on data you cannot trust."}}]}</script>
+  <link rel="stylesheet" href="/assets/exit-code-126/styles.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.7; color: #1f2937; background: #fff; -webkit-font-smoothing: antialiased; }
+    .navbar { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,.98); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(229,231,235,.8); z-index: 50; }
+    .navbar-container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .navbar-content { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    .navbar-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+    .navbar-logo-icon { height: 32px; width: auto; }
+    .navbar-links { display: none; align-items: center; gap: 4px; }
+    @media (min-width: 1024px) { .navbar-links { display: flex; } }
+    .navbar-link { padding: 6px 12px; font-size: 0.875rem; font-weight: 500; color: #3f3f46; text-decoration: none; border-radius: 6px; }
+    .navbar-link:hover { color: #09090b; background: #f4f4f5; }
+    .navbar-link.active { color: #09090b; background: #fafafa; }
+    .navbar-actions { display: none; align-items: center; gap: 10px; margin-left: 16px; padding-left: 16px; border-left: 1px solid #e5e7eb; }
+    @media (min-width: 1024px) { .navbar-actions { display: flex; } }
+    .navbar-button { padding: 8px 16px; font-size: 0.875rem; font-weight: 600; border-radius: 999px; text-decoration: none; }
+    .navbar-button-primary { background: #09090b; color: #fff; }
+    .navbar-button-secondary { color: #3f3f46; }
+    .main-container { max-width: 1280px; margin: 0 auto; padding: 96px 24px 64px; }
+    .content-wrapper { display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media (min-width: 1024px) {
+      .content-wrapper { grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr); gap: 40px; align-items: start; }
+    }
+    .main-col { min-width: 0; max-width: 820px; }
+    @media (min-width: 1024px) { .main-col { max-width: none; } }
+    .sidebar { display: none; }
+    @media (min-width: 1024px) { .sidebar { display: block; } }
+    .sidebar-content { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px; }
+    .sidebar-card { background: #fafafa; border-radius: 8px; padding: 24px; border: 1px solid #e4e4e7; }
+    .sidebar-card-title { font-size: 1.125rem; font-weight: 700; color: #09090b; margin: 0 0 16px; }
+    .signup-form { display: flex; flex-direction: column; gap: 12px; }
+    .signup-form input { width: 100%; padding: 10px 16px; border-radius: 6px; border: 1px solid #d4d4d8; font-size: 1rem; background: #fff; color: #09090b; }
+    .signup-form input:focus { outline: none; border-color: #7c3aed; box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2); }
+    .signup-form button { width: 100%; padding: 10px 12px; background: #09090b; color: #fff; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; }
+    .signup-form button:hover { background: #27272a; }
+    .signup-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .signup-status { font-size: 0.875rem; font-weight: 500; margin: 0; }
+    .signup-status.success { color: #047857; }
+    .signup-status.error { color: #dc2626; }
+    .related-content-title { font-size: 11px; font-weight: 700; color: #71717a; text-transform: uppercase; letter-spacing: 0.12em; margin: 0 0 16px; }
+    .related-posts-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+    .related-post-link { color: #3f3f46; text-decoration: none; font-size: 0.875rem; line-height: 1.5; display: block; transition: color 0.15s; }
+    .related-post-link:hover { color: #7c3aed; }
+    .view-more-link { display: inline-flex; align-items: center; gap: 4px; margin-top: 16px; color: #7c3aed; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
+    .view-more-link:hover { color: #6d28d9; }
+    .article-header { margin-bottom: 2rem; }
+    .article-header h1 { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700; color: #09090b; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .author-info { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: #09090b; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 600; }
+    .author-name { font-weight: 600; color: #111827; }
+    .author-meta { font-size: 0.875rem; color: #6b7280; }
+    .promo { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; font-size: 1.0625rem; color: #374151; }
+    .promo a { color: #7c3aed; font-weight: 600; }
+.article-header--cred{margin-bottom:1.5rem;}
+.article-header--cred .authorCredLine--top{margin:0 0 .45rem;}
+.article-header--cred .article-meta{font-size:.875rem;color:#6b7280;margin:0;}
+.authorCredLine{font-size:.875rem;line-height:1.55;color:#71717a;}
+.authorCredLine a,.authorCredLine .authorCredName{color:#3f3f46;font-weight:600;text-decoration:none;}
+.authorCredLine a:hover{color:#7c3aed;}
+
+.buyerLead{background:var(--am-surface,#fff);border:1px solid #e4e4e7;border-left:4px solid #7c3aed;border-radius:14px;padding:1.4rem 1.5rem;box-shadow:0 8px 28px rgba(9,9,11,.05);}
+.buyerLead .eyebrow{display:block;color:#7c3aed;font-size:.68rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;margin-bottom:.5rem;}
+.buyerLead h2{font-size:1.3rem;line-height:1.35;color:#18181b;margin:0 0 .6rem;}
+.buyerLead p{margin:0;color:#3f3f46;font-size:.98rem;line-height:1.7;}
+.sourceList li{margin:.35rem 0;line-height:1.6;}
+/* audience block */
+.audienceCard{margin:1.4rem 0;padding:1.1rem 1.4rem;border:1px solid #e9e5f2;border-radius:14px;background:#faf9ff;}
+.audienceCard .audHead{font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#7c3aed;margin-bottom:.6rem;}
+.audienceCard ul{margin:0;padding-left:1.15rem;}
+.audienceCard li{margin:.3rem 0;color:#3f3f46;line-height:1.6;font-size:.95rem;}
+/* stat band */
+.statBand{display:grid;grid-template-columns:1fr;gap:12px;margin:1.6rem 0;}
+@media(min-width:640px){.statBand{grid-template-columns:repeat(3,1fr);}.statBand2{grid-template-columns:repeat(2,1fr);}}
+.statCard{background:#fff;border:1px solid #e4e4e7;border-top:3px solid #7c3aed;border-radius:14px;padding:18px 18px 16px;}
+.statCard .big{font-size:2.3rem;font-weight:800;color:#7c3aed;line-height:1;font-variant-numeric:tabular-nums;}
+.statCard .lbl{font-size:.88rem;color:#3f3f46;margin:.55rem 0 .5rem;line-height:1.45;}
+.statCard .src{font-size:.68rem;color:#a1a1aa;text-transform:uppercase;letter-spacing:.05em;font-weight:800;}
+/* concept graphic */
+.conceptFig{margin:1.7rem 0;}
+.conceptFig svg{display:block;width:100%;height:auto;border:1px solid #e9e5f2;border-radius:14px;}
+.conceptFig figcaption{margin-top:.6rem;font-size:.82rem;color:#71717a;text-align:center;line-height:1.5;}
+/* example */
+.exampleBox{margin:1.7rem 0;border:1px solid #e4e4e7;border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 22px rgba(9,9,11,.04);}
+.exampleBox .exHead{background:#f4f2fb;padding:.75rem 1.3rem;font-weight:800;color:#5b21b6;font-size:.95rem;border-bottom:1px solid #ece7f7;}
+.exampleBox .exBody{padding:1.05rem 1.3rem;}
+.exampleBox .exBody p{margin:0 0 .65rem;color:#3f3f46;line-height:1.7;font-size:.95rem;}
+.exampleBox .exLesson{color:#18181b;font-weight:600;font-size:.93rem;border-top:1px dashed #e4e4e7;padding-top:.7rem;margin-top:.3rem;}
+/* pull quote */
+.pullQuote{margin:1.9rem 0;padding:1.2rem 1.6rem;border-left:4px solid #7c3aed;background:#faf8ff;border-radius:0 12px 12px 0;}
+.pullQuote p{font-family:Georgia,'Times New Roman',serif;font-size:1.3rem;line-height:1.5;color:#27272a;margin:0;font-style:italic;}
+.pullQuote .attrib{display:block;margin-top:.65rem;font-size:.82rem;color:#71717a;font-style:normal;font-weight:600;}
+/* code card */
+.codeCard{margin:1.3rem 0;border:1px solid #e4e4e7;border-radius:12px;overflow:hidden;background:#0f172a;}
+.codeCard .codeHead{display:flex;align-items:center;justify-content:space-between;padding:.5rem .9rem;background:#111827;border-bottom:1px solid #1f2937;}
+.codeCard .codeHead span{font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#93c5fd;}
+.codeCard .codeCopy{font-size:.72rem;font-weight:700;color:#cbd5e1;background:#1f2937;border:1px solid #334155;border-radius:6px;padding:.2rem .6rem;cursor:pointer;}
+.codeCard .codeCopy:hover{background:#334155;color:#fff;}
+.codeCard pre{margin:0;padding:1rem 1.1rem;overflow-x:auto;background:#0f172a;}
+.codeCard code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.82rem;line-height:1.6;color:#e2e8f0;white-space:pre;}
+/* comparison table */
+.cmpWrap{margin:1.5rem 0;overflow-x:auto;border:1px solid #e4e4e7;border-radius:12px;}
+.cmpTable{border-collapse:collapse;width:100%;min-width:540px;font-size:.9rem;}
+.cmpTable th,.cmpTable td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid #eee;vertical-align:top;line-height:1.5;}
+.cmpTable thead th{background:#faf8ff;color:#5b21b6;font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:.03em;border-bottom:2px solid #ece7f7;}
+.cmpTable tbody tr:last-child td{border-bottom:none;}
+.cmpTable .cmpRowHead{font-weight:700;color:#18181b;}
+/* step flow */
+.stepFlow{list-style:none;counter-reset:sf;margin:1.4rem 0;padding:0;}
+.stepFlow li{counter-increment:sf;position:relative;padding:.2rem 0 1.1rem 3rem;border-left:2px solid #ece7f7;margin-left:1rem;}
+.stepFlow li:last-child{border-left-color:transparent;}
+.stepFlow li::before{content:counter(sf);position:absolute;left:-1rem;top:-2px;width:2rem;height:2rem;border-radius:50%;background:#7c3aed;color:#fff;font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center;}
+.stepFlow .stepTitle{font-weight:700;color:#18181b;margin-bottom:.2rem;}
+.stepFlow .stepBody{color:#3f3f46;font-size:.93rem;line-height:1.65;}
+/* callout */
+.noteCard{margin:1.3rem 0;padding:1rem 1.2rem;border-radius:12px;border:1px solid #e4e4e7;background:#fbfbfd;}
+.noteCard .noteTitle{font-weight:800;margin-bottom:.35rem;font-size:.92rem;}
+.noteCard p{margin:0;color:#3f3f46;line-height:1.7;font-size:.94rem;}
+.note-info{border-left:4px solid #2563eb;background:#eff6ff;} .note-info .noteTitle{color:#1e40af;}
+.note-warn{border-left:4px solid #d97706;background:#fffbeb;} .note-warn .noteTitle{color:#92400e;}
+.note-good{border-left:4px solid #059669;background:#ecfdf5;} .note-good .noteTitle{color:#065f46;}
+/* mini card grid (graphical replacement for prose lists) */
+.cardGrid{display:grid;grid-template-columns:1fr;gap:12px;margin:1.4rem 0;}
+@media(min-width:620px){.cardGrid{grid-template-columns:1fr 1fr;}}
+.miniCard{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid #e4e4e7;border-left:3px solid #7c3aed;border-radius:12px;padding:14px 16px;}
+.miniCardNum{flex-shrink:0;width:28px;height:28px;border-radius:8px;background:#f4f2fb;color:#7c3aed;font-weight:800;font-size:.95rem;display:flex;align-items:center;justify-content:center;}
+.miniCardTitle{font-weight:800;color:#18181b;font-size:.98rem;margin-bottom:.2rem;}
+.miniCardBody p{margin:0 0 .45rem;color:#3f3f46;font-size:.9rem;line-height:1.55;}
+.miniCardTag{display:inline-block;font-size:.72rem;font-weight:700;color:#6d28d9;background:#f4f2fb;border-radius:999px;padding:.15rem .6rem;}
+.cardGroupLabel{font-size:.74rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#71717a;margin:1.4rem 0 .1rem;}
+.cardGroupLabelHot{color:#7c3aed;}
+.miniCardHot{border-left-color:#7c3aed;border-color:#e9d5ff;background:#faf5ff;}
+.miniCardHot .miniCardNum{background:#7c3aed;color:#fff;}
+</style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      <div class="navbar-content">
+        <a href="/" class="navbar-logo">
+          <img src="/logos/alertmend-logo.svg" alt="AlertMend AI" class="navbar-logo-icon">
+        </a>
+        <div class="navbar-links">
+          <a href="/#how-it-works" class="navbar-link">How It Works</a>
+          <a href="/#solutions" class="navbar-link">Solutions</a>
+          <a href="/case-studies" class="navbar-link">Case Studies</a>
+          <a href="/blog" class="navbar-link active">Blog</a>
+          <a href="/pricing" class="navbar-link">Pricing</a>
+        </div>
+        <div class="navbar-actions">
+          <a href="https://app.alertmend.io/signup?source=blog-post&blog_slug=bcbs-239-principles-explained" class="navbar-button navbar-button-secondary">Register</a>
+          <a href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=bcbs-239-principles-explained" class="navbar-button navbar-button-primary" target="_blank" rel="noopener noreferrer">Book a Demo</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="main-container">
+    <div class="content-wrapper">
+      <div class="main-col">
+        
+
+    <header class="article-header article-header--cred">
+      <h1>The 14 BCBS 239 Principles, Explained for Data Teams</h1>
+      <p class="authorCredLine authorCredLine--top"><a href="https://www.linkedin.com/in/dineshagrawal85/" target="_blank" rel="noopener noreferrer">Dinesh Agrawal</a> · 12+ years in cloud infrastructure and incident automation</p>
+      <p class="article-meta">2026-10-07 · Data Observability</p>
+    </header>
+<div class="proofStrip" aria-label="Article verification">
+  <strong>✓ Every external stat cited to a named source; every check names an owner and a first action</strong>
+  <span class="dot">•</span>
+  <span>Last reviewed 2026-10-07</span>
+</div>
+
+<article class="ec126 rich">
+  <section class="answerPanel" id="answer">
+    <div class="buyerLead">
+      <span class="eyebrow">The short version</span>
+      <h2>A financial crisis wrote these 14 rules. A decade on, only 2 of the 31 biggest banks assessed fully comply.</h2>
+      <p>BCBS 239 exists because in 2008 the world's largest banks could not add up their own exposure to a failing counterparty fast enough to act. The fix was 14 principles for risk data aggregation and risk reporting, in four groups. The four in the middle, principles 3 to 6, are where it bites a data team: those are the ones an auditor tests on your tables, not your intentions.</p>
+    </div>
+  </section>
+
+  <div class="audienceCard"><div class="audHead">You are in the right place if</div><ul><li>You own or support risk data at a bank under BCBS 239 or an equivalent national rule</li><li>You are a data engineer whose tables feed a regulatory or risk report</li><li>You are preparing for a supervisory review and need to show your controls</li></ul></div>
+
+  <div class="statBand"><div class="statCard"><div class="big">14</div><div class="lbl">principles across four groups</div><div class="src">BIS, 2013</div></div><div class="statCard"><div class="big">3.17 / 4</div><div class="lbl">average supervisory compliance in 2022, up from 3.14 in 2019</div><div class="src">BIS, 2023</div></div><div class="statCard"><div class="big">2 of 31</div><div class="lbl">assessed G-SIBs are fully compliant with all 14 principles</div><div class="src">BIS, 2023</div></div></div>
+
+  <nav class="tocPills" aria-label="On this page">
+    <a href="#what">What is BCBS 239?</a>
+    <a href="#principles">The 14 principles</a>
+    <a href="#who">Who actually has to foll</a>
+    <a href="#why">Why follow it</a>
+    <a href="#alertmend">Where AlertMend fits</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+
+  
+  <section class="sectionBlock" id="what">
+    <h2 class="sectionTitle">What is BCBS 239?</h2>
+    <p class="bodyText">BCBS 239 is the Basel Committee's Principles for effective risk data aggregation and risk reporting (RDARR), published in January 2013 after the 2008 crisis exposed how few banks could add up their own risk quickly. It is 14 principles in four groups, and a decade of supervisory reviews shows most banks are still closing gaps.</p>
+    <figure class="conceptFig"><svg viewBox="0 0 680 120" width="680" height="120" role="img" aria-label="BCBS 239 timeline: published 2013, G-SIB compliance expected by 2016, average supervisory rating 3.14 of 4 in 2019 and 3.17 of 4 in 2022." font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"><rect width="680" height="120" rx="14" fill="#faf9ff"/><text x="340" y="20" text-anchor="middle" font-size="12" font-weight="800" fill="#5b21b6" letter-spacing="1">BCBS 239, A DECADE IN</text><line x1="56" y1="66" x2="624" y2="66" stroke="#c4b5fd" stroke-width="3"/><circle cx="56" cy="66" r="7" fill="#7c3aed" stroke="#fff" stroke-width="2"/><text x="56" y="46" text-anchor="start" font-size="15" font-weight="800" fill="#18181b">2013</text><text x="56" y="94" text-anchor="start" font-size="10" fill="#52525b">Principles published</text><circle cx="245" cy="66" r="7" fill="#7c3aed" stroke="#fff" stroke-width="2"/><text x="245" y="46" text-anchor="middle" font-size="15" font-weight="800" fill="#18181b">2016</text><text x="245" y="94" text-anchor="middle" font-size="10" fill="#52525b">G-SIB compliance expected</text><circle cx="435" cy="66" r="7" fill="#7c3aed" stroke="#fff" stroke-width="2"/><text x="435" y="46" text-anchor="middle" font-size="15" font-weight="800" fill="#18181b">2019</text><text x="435" y="94" text-anchor="middle" font-size="10" fill="#52525b">avg 3.14 / 4</text><circle cx="624" cy="66" r="7" fill="#7c3aed" stroke="#fff" stroke-width="2"/><text x="624" y="46" text-anchor="end" font-size="15" font-weight="800" fill="#18181b">2022</text><text x="624" y="94" text-anchor="end" font-size="10" fill="#52525b">avg 3.17 / 4, latest</text></svg><figcaption>Published in 2013, compliance expected by 2016, and still reviewed every year.</figcaption></figure>
+    <div class="noteCard note-info"><div class="noteTitle">Why it still matters</div><p>Supervisors review compliance every year, and a decade in, no principle is fully implemented across all banks. It is a live expectation, not a one-time 2016 project.</p></div>
+  </section><figure class="conceptFig"><svg viewBox="0 0 680 268" width="680" height="268" role="img" aria-label="The 14 BCBS 239 principles in four groups: governance and infrastructure (1-2), risk data aggregation (3-6, the data quality group), risk reporting (7-11), and supervisory review (12-14)." font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"><rect width="680" height="268" rx="14" fill="#fbfbfd"/><text x="340" y="20" text-anchor="middle" font-size="12" font-weight="800" fill="#5b21b6" letter-spacing="1">THE 14 PRINCIPLES, IN FOUR GROUPS</text><text x="85" y="42" text-anchor="middle" font-size="9" font-weight="800" fill="#a1a1aa" letter-spacing="0.5">P1-2</text><rect x="6" y="48" width="158" height="38" rx="9" fill="#f4f4f5" stroke="#e4e4e7"/><text x="85" y="64" text-anchor="middle" font-size="11" font-weight="800" fill="#3f3f46">Governance &</text><text x="85" y="78" text-anchor="middle" font-size="11" font-weight="800" fill="#3f3f46">infrastructure</text><rect x="6" y="92" width="158" height="24" rx="7" fill="#fff" stroke="#e4e4e7"/><rect x="6" y="92" width="4" height="24" rx="2" fill="#a1a1aa"/><text x="19" y="108" font-size="10" font-weight="800" fill="#52525b">1</text><text x="35" y="108" font-size="9.5" fill="#27272a">Governance</text><rect x="6" y="122" width="158" height="24" rx="7" fill="#fff" stroke="#e4e4e7"/><rect x="6" y="122" width="4" height="24" rx="2" fill="#a1a1aa"/><text x="19" y="138" font-size="10" font-weight="800" fill="#52525b">2</text><text x="35" y="138" font-size="9.5" fill="#27272a">Data architecture & IT</text><rect x="172" y="32" width="166" height="214" rx="12" fill="#faf5ff" stroke="#e9d5ff"/><text x="255" y="42" text-anchor="middle" font-size="9" font-weight="800" fill="#7c3aed" letter-spacing="0.5">P3-6</text><rect x="176" y="48" width="158" height="38" rx="9" fill="#7c3aed" stroke="#7c3aed"/><text x="255" y="64" text-anchor="middle" font-size="11" font-weight="800" fill="#ffffff">Risk data</text><text x="255" y="78" text-anchor="middle" font-size="11" font-weight="800" fill="#ffffff">aggregation</text><rect x="176" y="92" width="158" height="24" rx="7" fill="#fff" stroke="#e4e4e7"/><rect x="176" y="92" width="4" height="24" rx="2" fill="#7c3aed"/><text x="189" y="108" font-size="10" font-weight="800" fill="#52525b">3</text><text x="205" y="108" font-size="9.5" fill="#27272a">Accuracy & integrity</text><rect x="176" y="122" width="158" height="24" rx="7" fill="#fff" stroke="#e4e4e7"/><rect x="176" y="122" width="4" height="24" rx="2" fill="#7c3aed"/><text x="189" y="138" font-size="10" font-weight="800" fill="#52525b">4</text><text x="205" y="138" font-size="9.5" fill="#27272a">Completeness</text><rect x="176" y="152" width="158" height="24" rx="7" fill="#fff" stroke="#e4e4e7"/><rect x="176" y="152" width="4" height="24" rx="2" fill="#7c3aed"/><text x="189" y="168" font-size="10" font-weight="800" fill="#52525b">5</text><text x="205" y="168" font-size="9.5" fill="#27272a">Timeliness</text><rect x="176" y="182" width="158" height="24" rx="7" fill="#fff" stroke="#e4e4e7"/><rect x="176" y="182" width="4" height="24" rx="2" fill="#7c3aed"/><text x="189" y="198" font-size="10" font-weight="800" fill="#52525b">6</text><text x="205" y="198" font-size="9.5" fill="#27272a">Adaptability</text><text x="425" y="42" text-anchor="middle" font-size="9" font-weight="800" fill="#a1a1aa" letter-spacing="0.5">P7-11</text><rect x="346" y="48" width="158" height="38" rx="9" fill="#f4f4f5" stroke="#e4e4e7"/><text x="425" y="64" text-anchor="middle" font-size="11" font-weight="800" fill="#3f3f46">Risk</text><text x="425" y="78" text-anchor="middle" font-size="11" font-weight="800" fill="#3f3f46">reporting</text><rect x="346" y="92" width="158" height="24" rx="7" fill="#fff" stroke="#e4e4e7"/><rect x="346" y="92" width="4" height="24" rx="2" fill="#a1a1aa"/><text x="359" y="108" font-size="10" font-weight="800" fill="#52525b">7</text><text x="375" y="108" font-size="9.5" fill="#27272a">Reporting accuracy</text><rect x="346" y="122" width="158" height="24" rx="7" fill="#fff" stroke="#e4e4e7"/><rect x="346" y="122" width="4" height="24" rx="2" fill="#a1a1aa"/><text x="359" y="138" font-size="10" font-weight="800" fill="#52525b">8</text><text x="375" y="138" font-size="9.5" fill="#27272a">Comprehensiveness</text><rect x="346" y="152" width="158" height="24" rx="7" fill="#fff" stroke="#e4e4e7"/><rect x="346" y="152" width="4" height="24" rx="2" fill="#a1a1aa"/><text x="359" y="168" font-size="10" font-weight="800" fill="#52525b">9</text><text x="375" y="168" font-size="9.5" fill="#27272a">Clarity & usefulness</text><rect x="346" y="182" width="158" height="24" rx="7" fill="#fff" stroke="#e4e4e7"/><rect x="346" y="182" width="4" height="24" rx="2" fill="#a1a1aa"/><text x="359" y="198" font-size="10" font-weight="800" fill="#52525b">10</text><text x="375" y="198" font-size="9.5" fill="#27272a">Frequency</text><rect x="346" y="212" width="158" height="24" rx="7" fill="#fff" stroke="#e4e4e7"/><rect x="346" y="212" width="4" height="24" rx="2" fill="#a1a1aa"/><text x="359" y="228" font-size="10" font-weight="800" fill="#52525b">11</text><text x="375" y="228" font-size="9.5" fill="#27272a">Distribution</text><text x="595" y="42" text-anchor="middle" font-size="9" font-weight="800" fill="#a1a1aa" letter-spacing="0.5">P12-14</text><rect x="516" y="48" width="158" height="38" rx="9" fill="#f4f4f5" stroke="#e4e4e7"/><text x="595" y="64" text-anchor="middle" font-size="11" font-weight="800" fill="#3f3f46">Supervisory</text><text x="595" y="78" text-anchor="middle" font-size="11" font-weight="800" fill="#3f3f46">review</text><rect x="516" y="92" width="158" height="24" rx="7" fill="#fff" stroke="#e4e4e7"/><rect x="516" y="92" width="4" height="24" rx="2" fill="#a1a1aa"/><text x="529" y="108" font-size="10" font-weight="800" fill="#52525b">12</text><text x="545" y="108" font-size="9.5" fill="#27272a">Review</text><rect x="516" y="122" width="158" height="24" rx="7" fill="#fff" stroke="#e4e4e7"/><rect x="516" y="122" width="4" height="24" rx="2" fill="#a1a1aa"/><text x="529" y="138" font-size="10" font-weight="800" fill="#52525b">13</text><text x="545" y="138" font-size="9.5" fill="#27272a">Remedial actions</text><rect x="516" y="152" width="158" height="24" rx="7" fill="#fff" stroke="#e4e4e7"/><rect x="516" y="152" width="4" height="24" rx="2" fill="#a1a1aa"/><text x="529" y="168" font-size="10" font-weight="800" fill="#52525b">14</text><text x="545" y="168" font-size="9.5" fill="#27272a">Cooperation</text><text x="255" y="258" text-anchor="middle" font-size="9.5" font-weight="700" fill="#7c3aed">where data quality is tested</text></svg><figcaption>The 14 principles fall in four groups. Principles 3 to 6, risk data aggregation, are where your data quality is tested.</figcaption></figure>
+  <section class="sectionBlock" id="principles">
+    <h2 class="sectionTitle">The 14 principles, group by group</h2>
+    <p class="bodyText">Every principle, what it asks, and the check a data team evidences it with. The four in the middle are the ones that get tested on your tables.</p>
+    <div class="cardGroupLabel">Governance and infrastructure (1 to 2)</div><div class="cardGrid"><div class="miniCard"><span class="miniCardNum">1</span><div class="miniCardBody"><div class="miniCardTitle">Governance</div><p>Risk data under board-level ownership and policy.</p><span class="miniCardTag">policy, named owners, audit trail</span></div></div><div class="miniCard"><span class="miniCardNum">2</span><div class="miniCardBody"><div class="miniCardTitle">Data architecture &amp; IT</div><p>A platform that holds up in normal and stress times.</p><span class="miniCardTag">lineage, stress-tested controls</span></div></div></div>
+    <div class="cardGroupLabel cardGroupLabelHot">Risk data aggregation (3 to 6), where it bites</div><div class="cardGrid"><div class="miniCard miniCardHot"><span class="miniCardNum">3</span><div class="miniCardBody"><div class="miniCardTitle">Accuracy &amp; integrity</div><p>Correct, reconciled data, minimal manual steps.</p><span class="miniCardTag">accuracy, uniqueness, reconciliation</span></div></div><div class="miniCard miniCardHot"><span class="miniCardNum">4</span><div class="miniCardBody"><div class="miniCardTitle">Completeness</div><p>Every material exposure, by entity, line and region.</p><span class="miniCardTag">completeness per dimension</span></div></div><div class="miniCard miniCardHot"><span class="miniCardNum">5</span><div class="miniCardBody"><div class="miniCardTitle">Timeliness</div><p>Fast enough for routine and stress reporting.</p><span class="miniCardTag">a freshness SLA per table</span></div></div><div class="miniCard miniCardHot"><span class="miniCardNum">6</span><div class="miniCardBody"><div class="miniCardTitle">Adaptability</div><p>A new cut for a supervisor without a six-week project.</p><span class="miniCardTag">checks you can change under review</span></div></div></div>
+    <figure class="pullQuote"><p>Principles 3 to 6 are the ones an auditor tests on your data, not your intentions. Can you show the data was accurate, complete, timely and adaptable, with evidence?</p></figure>
+    <div class="noteCard note-warn"><div class="noteTitle">The common failure</div><p>Banks most often fall short on completeness and timeliness: a feed drops a legal entity, or a stress report runs on hours-old data. Both are silent, and both are exactly what a per-dimension completeness check and a freshness SLA catch.</p></div>
+    <div class="exampleBox"><div class="exHead">In practice: when the total reconciled but the detail did not</div><div class="exBody"><p>A bank's group credit-risk report reconciled to the penny at the total, so it looked complete. One legal entity's exposures had quietly stopped loading after a feed change.</p><p>The group number happened to land close enough that nobody noticed, while a real concentration sat hidden inside it.</p><p class="exLesson">A completeness check per legal entity, not just a check on the group total, is the difference between a number that reconciles and one that is actually complete.</p></div></div>
+    <div class="cardGroupLabel">Risk reporting (7 to 11)</div><div class="cardGrid"><div class="miniCard"><span class="miniCardNum">7</span><div class="miniCardBody"><div class="miniCardTitle">Accuracy</div><p>Reports reconcile to the data underneath them.</p><span class="miniCardTag">report-to-source reconciliation</span></div></div><div class="miniCard"><span class="miniCardNum">8</span><div class="miniCardBody"><div class="miniCardTitle">Comprehensiveness</div><p>Reports cover all material risk areas.</p><span class="miniCardTag">risk-to-dataset coverage map</span></div></div><div class="miniCard"><span class="miniCardNum">9</span><div class="miniCardBody"><div class="miniCardTitle">Clarity &amp; usefulness</div><p>Clear and useful to the people who read them.</p><span class="miniCardTag">definitions, business glossary</span></div></div><div class="miniCard"><span class="miniCardNum">10</span><div class="miniCardBody"><div class="miniCardTitle">Frequency</div><p>Produced on cadence, faster under stress.</p><span class="miniCardTag">a timeliness SLA</span></div></div><div class="miniCard"><span class="miniCardNum">11</span><div class="miniCardBody"><div class="miniCardTitle">Distribution</div><p>Reach the right people, stay confidential.</p><span class="miniCardTag">access controls, access log</span></div></div></div>
+    <div class="cardGroupLabel">Supervisory review (12 to 14), your regulator's job</div><div class="cardGrid"><div class="miniCard"><span class="miniCardNum">12</span><div class="miniCardBody"><div class="miniCardTitle">Review</div><p>Supervisors review compliance periodically.</p><span class="miniCardTag">you supply the evidence</span></div></div><div class="miniCard"><span class="miniCardNum">13</span><div class="miniCardBody"><div class="miniCardTitle">Remedial actions</div><p>Supervisors can require fixes and set measures.</p><span class="miniCardTag">a remediation log</span></div></div><div class="miniCard"><span class="miniCardNum">14</span><div class="miniCardBody"><div class="miniCardTitle">Cooperation</div><p>Home and host supervisors coordinate.</p><span class="miniCardTag">outside the data team</span></div></div></div>
+    <figure class="conceptFig"><svg viewBox="0 0 680 170" width="680" height="170" role="img" aria-label="The 87-check catalog spans completeness, uniqueness, validity, format, referential integrity, numeric range, volume, freshness, anomaly (z-score) and trend checks." font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"><rect width="680" height="170" rx="14" fill="#faf9ff"/><text x="340" y="30" text-anchor="middle" font-size="12" font-weight="800" fill="#5b21b6" letter-spacing="1">87 READY-MADE CHECKS, NO SQL NEEDED</text><g transform="translate(11,52)"><rect width="122" height="40" rx="9" fill="#fff" stroke="#e4e4e7"/><circle cx="15" cy="20" r="4" fill="#7c3aed"/><text x="26" y="24" font-size="10.5" font-weight="700" fill="#27272a">Completeness</text></g><g transform="translate(145,52)"><rect width="122" height="40" rx="9" fill="#fff" stroke="#e4e4e7"/><circle cx="15" cy="20" r="4" fill="#7c3aed"/><text x="26" y="24" font-size="10.5" font-weight="700" fill="#27272a">Uniqueness</text></g><g transform="translate(279,52)"><rect width="122" height="40" rx="9" fill="#fff" stroke="#e4e4e7"/><circle cx="15" cy="20" r="4" fill="#7c3aed"/><text x="26" y="24" font-size="10.5" font-weight="700" fill="#27272a">Validity</text></g><g transform="translate(413,52)"><rect width="122" height="40" rx="9" fill="#fff" stroke="#e4e4e7"/><circle cx="15" cy="20" r="4" fill="#7c3aed"/><text x="26" y="24" font-size="10.5" font-weight="700" fill="#27272a">Format</text></g><g transform="translate(547,52)"><rect width="122" height="40" rx="9" fill="#fff" stroke="#e4e4e7"/><circle cx="15" cy="20" r="4" fill="#7c3aed"/><text x="26" y="24" font-size="10.5" font-weight="700" fill="#27272a">Referential integrity</text></g><g transform="translate(11,104)"><rect width="122" height="40" rx="9" fill="#fff" stroke="#e4e4e7"/><circle cx="15" cy="20" r="4" fill="#7c3aed"/><text x="26" y="24" font-size="10.5" font-weight="700" fill="#27272a">Numeric range</text></g><g transform="translate(145,104)"><rect width="122" height="40" rx="9" fill="#fff" stroke="#e4e4e7"/><circle cx="15" cy="20" r="4" fill="#7c3aed"/><text x="26" y="24" font-size="10.5" font-weight="700" fill="#27272a">Volume</text></g><g transform="translate(279,104)"><rect width="122" height="40" rx="9" fill="#fff" stroke="#e4e4e7"/><circle cx="15" cy="20" r="4" fill="#7c3aed"/><text x="26" y="24" font-size="10.5" font-weight="700" fill="#27272a">Freshness</text></g><g transform="translate(413,104)"><rect width="122" height="40" rx="9" fill="#fff" stroke="#e4e4e7"/><circle cx="15" cy="20" r="4" fill="#7c3aed"/><text x="26" y="24" font-size="10.5" font-weight="700" fill="#27272a">Anomaly (z-score)</text></g><g transform="translate(547,104)"><rect width="122" height="40" rx="9" fill="#fff" stroke="#e4e4e7"/><circle cx="15" cy="20" r="4" fill="#7c3aed"/><text x="26" y="24" font-size="10.5" font-weight="700" fill="#27272a">Trend</text></g></svg><figcaption>The evidence tags above are not abstract: most map to concrete, ready-made checks.</figcaption></figure>
+    <figure class="conceptFig"><svg viewBox="0 0 680 170" width="680" height="170" role="img" aria-label="Adoption after ten years, per the 2023 BIS progress report: the average supervisory compliance rating across 31 G-SIBs was 3.17 out of 4 in 2022, up from 3.14 in 2019; only 2 banks are fully compliant and no principle is fully implemented across all banks." font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"><rect width="680" height="170" rx="14" fill="#faf9ff"/><text x="44" y="20" font-size="12" font-weight="800" fill="#5b21b6" letter-spacing="0.5">ADOPTION AFTER 10 YEARS (BIS, 2023)</text><text x="44" y="38" font-size="10.5" fill="#71717a">Average supervisory compliance rating across 31 G-SIBs, where 4 is fully compliant</text><rect x="44" y="52" width="592" height="22" rx="6" fill="#ece7f7"/><rect x="44" y="52" width="469.15999999999997" height="22" rx="6" fill="#7c3aed"/><text x="503.15999999999997" y="68" text-anchor="end" font-size="13" font-weight="800" fill="#ffffff">3.17 / 4</text><line x1="44" y1="52" x2="44" y2="74" stroke="#d4d4d8" stroke-width="1"/><text x="44" y="90" text-anchor="middle" font-size="9.5" fill="#a1a1aa">0</text><line x1="192" y1="52" x2="192" y2="74" stroke="#d4d4d8" stroke-width="1"/><text x="192" y="90" text-anchor="middle" font-size="9.5" fill="#a1a1aa">1</text><line x1="340" y1="52" x2="340" y2="74" stroke="#d4d4d8" stroke-width="1"/><text x="340" y="90" text-anchor="middle" font-size="9.5" fill="#a1a1aa">2</text><line x1="488" y1="52" x2="488" y2="74" stroke="#d4d4d8" stroke-width="1"/><text x="488" y="90" text-anchor="middle" font-size="9.5" fill="#a1a1aa">3</text><line x1="636" y1="52" x2="636" y2="74" stroke="#d4d4d8" stroke-width="1"/><text x="636" y="90" text-anchor="middle" font-size="9.5" fill="#a1a1aa">4</text><text x="636" y="90" text-anchor="end" font-size="9.5" fill="#a1a1aa">up from 3.14 in 2019</text><rect x="44" y="104" width="288" height="50" rx="10" fill="#fff" stroke="#e4e4e7"/><rect x="44" y="104" width="4" height="50" rx="2" fill="#7c3aed"/><text x="60" y="126" font-size="16" font-weight="800" fill="#7c3aed">2 of 31</text><text x="60" y="143" font-size="9.5" fill="#52525b">G-SIBs fully compliant with all 14 principles</text><rect x="344" y="104" width="288" height="50" rx="10" fill="#fff" stroke="#e4e4e7"/><rect x="344" y="104" width="4" height="50" rx="2" fill="#7c3aed"/><text x="360" y="126" font-size="16" font-weight="800" fill="#7c3aed">0 principles</text><text x="360" y="143" font-size="9.5" fill="#52525b">fully implemented across all 31 banks</text></svg><figcaption>Ten years on, banks still fall short. Supervisors point at data architecture (Principle 2) and the data principles as the biggest gaps.</figcaption></figure>
+  </section>
+  <section class="sectionBlock" id="who">
+    <h2 class="sectionTitle">Who actually has to follow BCBS 239?</h2>
+    <p class="bodyText">BCBS 239 was written for global systemically important banks (G-SIBs), in scope since January 2016. Many national regulators extend the same expectations to domestic systemically important banks, and other large banks apply them as good practice. The practical rule: if your bank is systemically important in any market, assume the principles apply.</p>
+    <figure class="conceptFig"><svg viewBox="0 0 680 230" width="680" height="230" role="img" aria-label="Who must follow BCBS 239: about 30 global systemically important banks are in scope and assessed yearly; many national regulators extend the principles to domestic systemically important banks; other large and complex banks apply them proportionately." font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"><rect width="680" height="230" rx="14" fill="#fbfbfd"/><text x="340" y="24" text-anchor="middle" font-size="12" font-weight="800" fill="#5b21b6" letter-spacing="1">WHO MUST FOLLOW BCBS 239</text><rect x="190" y="44" width="300" height="52" rx="10" fill="#7c3aed"/><text x="208" y="67" font-size="13" font-weight="800" fill="#ffffff">About 30 G-SIBs</text><text x="208" y="85" font-size="10" fill="#ede9fe">in scope since 2016, assessed every year</text><rect x="110" y="104" width="460" height="52" rx="10" fill="#c4b5fd"/><text x="128" y="127" font-size="13" font-weight="800" fill="#2e1065">D-SIBs</text><text x="128" y="145" font-size="10" fill="#4c1d95">many national regulators extend the principles to them</text><rect x="40" y="164" width="600" height="52" rx="10" fill="#ede9fe"/><text x="58" y="187" font-size="13" font-weight="800" fill="#4c1d95">Other large and complex banks</text><text x="58" y="205" font-size="10" fill="#6d28d9">apply proportionately, as supervisory good practice</text><text x="340" y="223" text-anchor="middle" font-size="9.5" fill="#a1a1aa">A narrow mandatory core at the top, widening to good practice below</text></svg><figcaption>A narrow mandatory core of G-SIBs at the top, widening to D-SIBs and other large banks who apply the principles as good practice.</figcaption></figure>
+  </section>
+  <section class="sectionBlock" id="why">
+    <h2 class="sectionTitle">Why follow it, beyond the mandate?</h2>
+    <p class="bodyText">For a G-SIB it is not optional, supervisors review it. But the deeper reason created the standard: in 2008 many banks could not add up their exposure to a failing counterparty fast enough to act. When your risk data is accurate, complete and timely you can answer a hard question in hours instead of weeks, price exposures correctly, and defend your decisions.</p>
+    <figure class="conceptFig"><svg viewBox="0 0 680 232" width="680" height="232" role="img" aria-label="Why follow BCBS 239: without the capability risk data is manual, reconciled in spreadsheets and slow in a crisis; with BCBS 239 in place aggregation is automated, data is accurate under stress, and a supervisor can be answered in hours." font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"><rect width="680" height="232" rx="14" fill="#faf9ff"/><text x="340" y="22" text-anchor="middle" font-size="12" font-weight="800" fill="#5b21b6" letter-spacing="1">WHY FOLLOW IT</text><text x="340" y="42" text-anchor="middle" font-size="10" fill="#71717a">BCBS 239 exists because the 2008 crisis showed many banks could not aggregate their own risk fast enough</text><rect x="24" y="64" width="300" height="150" rx="12" fill="#fef2f2" stroke="#fecaca"/><text x="40" y="86" font-size="12.5" font-weight="800" fill="#991b1b">Without the capability</text><circle cx="44" cy="106" r="2.5" fill="#991b1b"/><text x="56" y="110" font-size="10.5" fill="#3f3f46">Risk data stitched together by hand</text><circle cx="44" cy="132" r="2.5" fill="#991b1b"/><text x="56" y="136" font-size="10.5" fill="#3f3f46">Reconciliation lives in spreadsheets</text><circle cx="44" cy="158" r="2.5" fill="#991b1b"/><text x="56" y="162" font-size="10.5" fill="#3f3f46">Cannot answer a supervisor fast in a crisis</text><circle cx="44" cy="184" r="2.5" fill="#991b1b"/><text x="56" y="188" font-size="10.5" fill="#3f3f46">Decisions on numbers nobody verified</text><rect x="356" y="64" width="300" height="150" rx="12" fill="#ecfdf5" stroke="#bbf7d0"/><text x="372" y="86" font-size="12.5" font-weight="800" fill="#166534">With BCBS 239 in place</text><circle cx="376" cy="106" r="2.5" fill="#166534"/><text x="388" y="110" font-size="10.5" fill="#3f3f46">Aggregation is largely automated</text><circle cx="376" cy="132" r="2.5" fill="#166534"/><text x="388" y="136" font-size="10.5" fill="#3f3f46">Accurate, complete data even under stress</text><circle cx="376" cy="158" r="2.5" fill="#166534"/><text x="388" y="162" font-size="10.5" fill="#3f3f46">Answer a supervisor in hours, not weeks</text><circle cx="376" cy="184" r="2.5" fill="#166534"/><text x="388" y="188" font-size="10.5" fill="#3f3f46">Risk decisions on data you can defend</text></svg><figcaption>The same capability that passes a supervisory review is the one that lets you act on your own risk in a crisis.</figcaption></figure>
+  </section>
+  <section class="sectionBlock" id="risk">
+    <h2 class="sectionTitle">What is the risk of getting it wrong?</h2>
+    <p class="bodyText">Two risks stack up. The supervisory one: a materially non-compliant rating (Principle 12) triggers required remedial actions and a timeline (Principle 13), and persistent weakness feeds the wider assessment of the bank. The larger one is what the standard was written to prevent: wrong data means wrong risk numbers, so exposures get mispriced and decisions get made blind.</p>
+    <figure class="conceptFig"><svg viewBox="0 0 680 150" width="680" height="150" role="img" aria-label="The risk of getting BCBS 239 wrong escalates: a supervisory finding of material non-compliance, then a required remedial plan, then escalating supervisory measures, and the real risk underneath it all, wrong risk numbers and decisions made blind." font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"><defs><marker id="rl" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#a1a1aa"/></marker></defs><rect width="680" height="150" rx="14" fill="#fbfbfd"/><text x="340" y="24" text-anchor="middle" font-size="12" font-weight="800" fill="#5b21b6" letter-spacing="1">THE RISK OF GETTING IT WRONG</text><rect x="19" y="54" width="150" height="74" rx="11" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1.5"/><text x="94" y="80" text-anchor="middle" font-size="11.5" font-weight="800" fill="#5b21b6">Supervisory finding</text><text x="94" y="100" text-anchor="middle" font-size="8.5" fill="#7c3aed">materially non-compliant</text><text x="94" y="113" text-anchor="middle" font-size="8.5" fill="#7c3aed">in the annual review (P12)</text><line x1="169" y1="91" x2="181" y2="91" stroke="#a1a1aa" stroke-width="2" marker-end="url(#rl)"/><rect x="183" y="54" width="150" height="74" rx="11" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1.5"/><text x="258" y="80" text-anchor="middle" font-size="11.5" font-weight="800" fill="#5b21b6">Remedial action</text><text x="258" y="100" text-anchor="middle" font-size="8.5" fill="#7c3aed">a mandated plan and</text><text x="258" y="113" text-anchor="middle" font-size="8.5" fill="#7c3aed">timeline to close gaps (P13)</text><line x1="333" y1="91" x2="345" y2="91" stroke="#a1a1aa" stroke-width="2" marker-end="url(#rl)"/><rect x="347" y="54" width="150" height="74" rx="11" fill="#7c3aed" stroke="#7c3aed" stroke-width="1.5"/><text x="422" y="80" text-anchor="middle" font-size="11.5" font-weight="800" fill="#ffffff">Escalating measures</text><text x="422" y="100" text-anchor="middle" font-size="8.5" fill="#ede9fe">persistent gaps feed the</text><text x="422" y="113" text-anchor="middle" font-size="8.5" fill="#ede9fe">wider supervisory review (P13)</text><line x1="497" y1="91" x2="509" y2="91" stroke="#a1a1aa" stroke-width="2" marker-end="url(#rl)"/><rect x="511" y="54" width="150" height="74" rx="11" fill="#b91c1c" stroke="#b91c1c" stroke-width="1.5"/><text x="586" y="80" text-anchor="middle" font-size="11.5" font-weight="800" fill="#ffffff">The real risk</text><text x="586" y="100" text-anchor="middle" font-size="8.5" fill="#fecaca">wrong risk numbers,</text><text x="586" y="113" text-anchor="middle" font-size="8.5" fill="#fecaca">decisions made blind</text></svg><figcaption>The supervisory consequences escalate, but the real risk sits underneath them: acting on risk data you cannot trust.</figcaption></figure>
+  </section>
+
+  <section class="sectionBlock" id="alertmend">
+    <h2 class="sectionTitle">Where AlertMend fits</h2>
+    <p class="bodyText">BCBS 239 is unusually well suited to a policy-to-checks approach, because the standard is already written as clauses. Upload it or your internal RDARR policy as a PDF and AlertMend proposes checks that each cite the principle they enforce, with a person approving every one.</p><p class="bodyText">The checks run on Snowflake and Oracle through a read-only agent in your network, and when one fails you get cause and impact: the Airflow or Oracle ODI job behind it and the Power BI reports it hits, with every change versioned and reversible. Two honest notes: AlertMend covers Snowflake and Oracle today, not BigQuery, Databricks or Postgres, and it supplies operational evidence, not a legal compliance opinion. SOC 2 and ISO 27001 are in progress.</p>
+    <figure class="conceptFig"><svg viewBox="0 0 680 150" width="680" height="150" role="img" aria-label="From policy to live checks: upload your policy, AlertMend proposes checks that each cite the clause they enforce, you approve every one, then the checks run live on Snowflake and Oracle." font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"><defs><marker id="pc" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#a1a1aa"/></marker></defs><rect width="680" height="150" rx="14" fill="#faf9ff"/><text x="340" y="26" text-anchor="middle" font-size="12" font-weight="800" fill="#5b21b6" letter-spacing="1">FROM POLICY TO LIVE CHECKS</text><line x1="173" y1="85" x2="183" y2="85" stroke="#a1a1aa" stroke-width="2" marker-end="url(#pc)"/><line x1="333" y1="85" x2="343" y2="85" stroke="#a1a1aa" stroke-width="2" marker-end="url(#pc)"/><line x1="493" y1="85" x2="503" y2="85" stroke="#a1a1aa" stroke-width="2" marker-end="url(#pc)"/><g transform="translate(27,52)"><rect width="146" height="66" rx="12" fill="#fff" stroke="#2563eb" stroke-width="1.5"/><rect width="146" height="4" rx="2" fill="#2563eb"/><text x="73" y="30" text-anchor="middle" font-size="13.5" font-weight="800" fill="#18181b">Your policy</text><text x="73" y="50" text-anchor="middle" font-size="10.5" fill="#71717a">PDF, e.g. BCBS 239</text></g><g transform="translate(187,52)"><rect width="146" height="66" rx="12" fill="#fff" stroke="#7c3aed" stroke-width="1.5"/><rect width="146" height="4" rx="2" fill="#7c3aed"/><text x="73" y="30" text-anchor="middle" font-size="13.5" font-weight="800" fill="#18181b">Checks proposed</text><text x="73" y="50" text-anchor="middle" font-size="10.5" fill="#71717a">each cites its clause</text></g><g transform="translate(347,52)"><rect width="146" height="66" rx="12" fill="#fff" stroke="#d97706" stroke-width="1.5"/><rect width="146" height="4" rx="2" fill="#d97706"/><text x="73" y="30" text-anchor="middle" font-size="13.5" font-weight="800" fill="#18181b">You approve</text><text x="73" y="50" text-anchor="middle" font-size="10.5" fill="#71717a">nothing auto-goes-live</text></g><g transform="translate(507,52)"><rect width="146" height="66" rx="12" fill="#fff" stroke="#059669" stroke-width="1.5"/><rect width="146" height="4" rx="2" fill="#059669"/><text x="73" y="30" text-anchor="middle" font-size="13.5" font-weight="800" fill="#18181b">Live checks</text><text x="73" y="50" text-anchor="middle" font-size="10.5" fill="#71717a">Snowflake & Oracle</text></g></svg><figcaption>Your policy becomes checks that cite the clause they enforce, approved by a person, running on Snowflake and Oracle.</figcaption></figure>
+  </section>
+
+  
+  <section class="sectionBlock" id="sources">
+    <h2 class="sectionTitle">Sources</h2>
+    <ol class="sourceList">
+      <li><a href="https://www.bis.org/publ/bcbs239.htm" target="_blank" rel="noopener noreferrer">BIS: Principles for effective risk data aggregation and risk reporting (BCBS 239)</a></li><li><a href="https://www.bis.org/publ/bcbs239.pdf" target="_blank" rel="noopener noreferrer">BIS: BCBS 239 full text (PDF)</a></li><li><a href="https://www.bis.org/bcbs/publ/d559.pdf" target="_blank" rel="noopener noreferrer">BIS: Progress in adopting the Principles (2023 report, d559)</a></li><li><a href="https://en.wikipedia.org/wiki/BCBS_239" target="_blank" rel="noopener noreferrer">Wikipedia: BCBS 239</a></li>
+    </ol>
+  </section>
+
+  <section class="sectionBlock" id="faq">
+    <h2 class="sectionTitle">FAQ</h2>
+    <div class="faqList">
+    
+      <div class="faqItem">
+        <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="true">
+          What are the 14 principles of BCBS 239?
+          <svg class="faqChevron faqChevronOpen" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faqAnswer">They fall in four groups. Overarching governance and infrastructure: 1 governance, 2 data architecture and IT infrastructure. Risk data aggregation: 3 accuracy and integrity, 4 completeness, 5 timeliness, 6 adaptability. Risk reporting: 7 accuracy, 8 comprehensiveness, 9 clarity and usefulness, 10 frequency, 11 distribution. Supervisory review: 12 review, 13 remedial actions and supervisory measures, 14 home and host cooperation.</div>
+      </div>
+      <div class="faqItem">
+        <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">
+          Which BCBS 239 principles apply to data quality?
+          <svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faqAnswer hidden">Principles 3 to 6 apply most directly: accuracy and integrity, completeness, timeliness and adaptability. Principle 7, reporting accuracy, depends on them, and principles 1 and 2 set the governance and architecture around them. In a review these are the principles tested against your actual tables rather than your documents.</div>
+      </div>
+      <div class="faqItem">
+        <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">
+          When did BCBS 239 take effect?
+          <svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faqAnswer hidden">It was published in January 2013. Global systemically important banks (G-SIBs) were expected to comply by January 2016. Many national regulators have since applied the same expectations to domestic systemically important banks (D-SIBs) on their own timelines, and supervisors review compliance on an ongoing basis.</div>
+      </div>
+      <div class="faqItem">
+        <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">
+          Who does BCBS 239 apply to?
+          <svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faqAnswer hidden">It applies first to G-SIBs, the global systemically important banks. In practice many national supervisors have extended the principles to D-SIBs and expect them to be applied proportionately, so a wide set of larger banks now works to BCBS 239 even if they are not on the G-SIB list.</div>
+      </div>
+      <div class="faqItem">
+        <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">
+          What is the difference between risk data aggregation and risk reporting in BCBS 239?
+          <svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faqAnswer hidden">Risk data aggregation, principles 3 to 6, is about getting accurate, complete, timely and adaptable risk data together across the group. Risk reporting, principles 7 to 11, is about turning that data into reports that are accurate, comprehensive, clear, produced at the right frequency and distributed to the right people. A report cannot be accurate if the data underneath it is not.</div>
+      </div>
+      <div class="faqItem">
+        <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">
+          How do you evidence BCBS 239 compliance for data?
+          <svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faqAnswer hidden">Tie each relevant principle to concrete checks and keep the evidence. Completeness and accuracy checks per legal entity for principles 3 and 4, a freshness SLA for principles 5 and 10, documented ownership and lineage for principles 1, 2 and 7, and an audit trail of every check change for principle 12. The point is that a supervisor can follow a report figure back to a check and the clause it enforces.</div>
+      </div>
+      <div class="faqItem">
+        <button type="button" class="faqQuestion" data-faq-toggle aria-expanded="false">
+          What happens if a bank does not comply with BCBS 239?
+          <svg class="faqChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="faqAnswer hidden">For a G-SIB, supervisors assess compliance each year on a 1 to 4 scale. A bank rated materially non-compliant is required to produce a remedial plan with a timeline under Principle 13, and ongoing weakness feeds the wider supervisory assessment. BCBS 239 is principles-based rather than a fixed-penalty rule, so the pressure comes through supervisory review and remediation rather than an automatic fine. The larger cost is operational: risk decisions made on data you cannot trust.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ctaBox">
+    <h2>Turn BCBS 239 principles into checks you can evidence.</h2>
+    <p>AlertMend turns your data quality policy into live checks on Snowflake and Oracle, through a read-only agent inside your network. When a check fails, it names the Airflow or Oracle ODI job that caused it and the Power BI reports it affects, and every check cites the policy clause it enforces.</p>
+    <div class="ctaButtons">
+      <a class="ctaButton ctaButtonPrimary" href="https://app.alertmend.io/signup?service=data-observability&source=blog&blog_slug=bcbs-239-principles-explained" target="_blank" rel="noopener noreferrer">Start free</a>
+      <a class="ctaButton ctaButtonSecondary" href="https://calendly.com/hello-alertmend/30min?source=blog-post&blog_slug=bcbs-239-principles-explained" target="_blank" rel="noopener noreferrer">Book the data demo</a>
+    </div>
+  </section>
+  
+  <section class="authorBioCard" aria-label="About the author">
+    <img src="/logos/dinesh.jpeg" alt="Dinesh Agrawal" width="128" height="128" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="authorBioFallback" aria-hidden="true">DA</div>
+    <div class="authorBioContent">
+      <h3>Dinesh Agrawal</h3>
+      <p class="authorBioRole">Cloud infrastructure and AI-driven incident automation</p>
+      <div class="authorBioText">
+        <p>Dinesh Agrawal brings 12+ years of deep experience across cloud infrastructure and AI-driven automation, building systems that observe, diagnose, and recover from production and data incidents without waiting for a human.</p>
+        <p>At AlertMend he works on data and infrastructure observability that correlates telemetry into root cause and runs governed recovery across warehouses, pipelines, VMs, and Kubernetes.</p>
+      </div>
+      <a class="authorBioLink" href="https://www.linkedin.com/in/dineshagrawal85/" target="_blank" rel="noopener noreferrer" aria-label="Dinesh Agrawal on LinkedIn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18V9.94H5.67V18h2.67zM7 8.76a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zM18.34 18v-4.42c0-2.37-1.27-3.47-2.96-3.47-1.36 0-1.97.75-2.31 1.28V9.94h-2.67V18h2.67v-4.5c0-.24.02-.48.09-.65.19-.48.63-.98 1.36-.98.96 0 1.35.73 1.35 1.8V18h2.82z"/></svg>
+        <span>LinkedIn</span>
+      </a>
+    </div>
+  </section>
+</article>
+      </div>
+      
+      <aside class="sidebar">
+        <div class="sidebar-content">
+          <div class="sidebar-card">
+            <div class="sidebar-card-title">Receive blog and product updates</div>
+            <form class="signup-form" id="blog-signup-form" data-blog-title="The 14 BCBS 239 Principles Explained" novalidate>
+              <input type="email" name="email" placeholder="Email*" required aria-label="Email address">
+              <button type="submit">Sign up</button>
+              <p class="signup-status" id="blog-signup-status" hidden></p>
+            </form>
+          </div>
+
+          
+          <div class="sidebar-card">
+            <div class="related-content-title">Related content</div>
+            <ul class="related-posts-list">
+              <li><a href="/blog/ai-ready-data-checklist" class="related-post-link">AI-Ready Data: a CDO Checklist</a></li>
+              <li><a href="/blog/bcbs-239-data-quality-controls" class="related-post-link">BCBS 239 Data Quality Controls</a></li>
+              <li><a href="/blog/cost-of-bad-data-roi-calculator" class="related-post-link">The Cost of Bad Data: ROI Calculator</a></li>
+              <li><a href="/blog/observability-vs-monitoring" class="related-post-link">Observability vs Monitoring: Key Differences</a></li>
+              <li><a href="/blog/what-is-observability" class="related-post-link">What is Observability? a Complete Guide</a></li>
+              <li><a href="/blog/disk-full-auto-remediation" class="related-post-link">Disk Full Auto-Remediation Playbook</a></li>
+              <li><a href="/blog/centralized-logging-kubernetes-vms" class="related-post-link">Centralized Logging for Kubernetes and VMs</a></li>
+              <li><a href="/blog/ops-tasks-to-automate" class="related-post-link">12 Daily Ops Tasks You Can Automate</a></li>
+              <li><a href="/blog/keycloak-monitoring" class="related-post-link">Keycloak Monitoring Guide for Self-Hosted SSO</a></li>
+              <li><a href="/blog/opentelemetry-collector-monitoring" class="related-post-link">OpenTelemetry Collector Monitoring</a></li>
+            </ul>
+            <a href="/blog" class="view-more-link">
+              View all posts
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+          
+
+          <div class="sidebar-card">
+            <div class="related-content-title">Explore AlertMend</div>
+            <ul class="related-posts-list">
+              <li><a href="/" class="related-post-link">Home</a></li>
+              <li><a href="/auto-remediation" class="related-post-link">Automated Incident Remediation</a></li>
+              <li><a href="/kubernetes-management" class="related-post-link">Kubernetes Management</a></li>
+              <li><a href="/on-call-management" class="related-post-link">On-Call Management</a></li>
+              <li><a href="/case-studies" class="related-post-link">Case Studies</a></li>
+              <li><a href="/pricing" class="related-post-link">Pricing</a></li>
+              <li><a href="/blog" class="related-post-link">All Blog Posts</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <script src="/assets/exit-code-126/script.js"></script>
+  <script>
+  const signupForm = document.getElementById('blog-signup-form');
+  const signupStatus = document.getElementById('blog-signup-status');
+  if (signupForm) {
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = signupForm.querySelector('input[type="email"]');
+      const button = signupForm.querySelector('button[type="submit"]');
+      const email = input && input.value ? input.value.trim() : '';
+      if (!email || !button || button.disabled) return;
+      const blogTitleEl = document.querySelector('.article-header h1, header.article-header--cred h1, h1');
+      const blogTitle = (signupForm.getAttribute('data-blog-title') || (blogTitleEl && blogTitleEl.textContent) || document.title || 'this blog post').trim().replace(/\s*\|\s*AlertMend.*$/i, '');
+      const buttonLabel = button.textContent;
+      button.disabled = true;
+      button.textContent = 'Signing up…';
+      if (signupStatus) {
+        signupStatus.hidden = true;
+        signupStatus.textContent = '';
+        signupStatus.className = 'signup-status';
+      }
+      try {
+        const response = await fetch('https://api.alertmend.io/contact', {
+          method: 'POST',
+          headers: { Accept: 'application/json, text/plain, */*', 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            full_name: 'Blog subscriber',
+            company: '',
+            email,
+            message: 'Newsletter signup from the AlertMend blog post "' + blogTitle + '". Please add this email to the blog and product updates list.',
+            source: 'blog_signup',
+          }),
+        });
+        if (response.ok) {
+          if (input) input.value = '';
+          if (signupStatus) {
+            signupStatus.hidden = false;
+            signupStatus.textContent = "Thanks! You're on the list.";
+            signupStatus.className = 'signup-status success';
+          }
+        } else {
+          const data = await response.json().catch(() => ({}));
+          if (signupStatus) {
+            signupStatus.hidden = false;
+            signupStatus.textContent = data.error || data.message || 'Something went wrong. Please try again.';
+            signupStatus.className = 'signup-status error';
+          }
+        }
+      } catch {
+        if (signupStatus) {
+          signupStatus.hidden = false;
+          signupStatus.textContent = 'Network error. Please check your connection and try again.';
+          signupStatus.className = 'signup-status error';
+        }
+      } finally {
+        button.disabled = false;
+        button.textContent = buttonLabel || 'Sign up';
+      }
+    });
+  }</script>
+  
+<script>
+(function(){
+  document.querySelectorAll('.codeCopy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = document.getElementById(btn.getAttribute('data-copy'));
+      if(!pre) return;
+      var txt = pre.innerText || pre.textContent || '';
+      var done = function(){ var o = btn.textContent; btn.textContent='Copied'; setTimeout(function(){ btn.textContent=o; }, 1400); };
+      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done).catch(done); }
+      else { try{ var ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); done(); }catch(e){} }
+    });
+  });
+})();
+</script>
+</body>
+</html>

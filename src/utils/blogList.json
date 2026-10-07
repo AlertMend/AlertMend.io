@@ -1,5 +1,15 @@
 [
   {
+    "slug": "bcbs-239-principles-explained",
+    "title": "The 14 BCBS 239 Principles Explained",
+    "excerpt": "A plain-English guide to all 14 BCBS 239 principles, the data quality each one demands, and how a data team can evidence it for an auditor.",
+    "date": "2026-10-07",
+    "category": "Data Observability",
+    "author": "Dinesh Agrawal",
+    "tags": [],
+    "keywords": "bcbs 239 principles, bcbs 239 14 principles, bcbs 239 explained, bcbs 239 requirements, risk data aggregation principles, rdarr principles, bcbs 239 completeness accuracy timeliness, bcbs 239 data quality, bcbs 239 for data teams, basel 239 principles"
+  },
+  {
     "slug": "ai-ready-data-checklist",
     "title": "AI-Ready Data: a CDO Checklist",
     "excerpt": "A concrete, board-usable checklist of what your source data must satisfy before you run AI, agents, or RAG on it, and what skipping it costs.",

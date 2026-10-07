@@ -273,6 +273,10 @@
       "destination": "/blog/bcbs-239-data-quality-controls/index.html"
     },
     {
+      "source": "/blog/bcbs-239-principles-explained",
+      "destination": "/blog/bcbs-239-principles-explained/index.html"
+    },
+    {
       "source": "/blog/best-1-click-logging-and-metrics-tools",
       "destination": "/blog/best-1-click-logging-and-metrics-tools/index.html"
     },
