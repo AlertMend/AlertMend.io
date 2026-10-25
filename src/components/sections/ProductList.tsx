@@ -806,7 +806,7 @@ function productsFor(audience: Audience) {
 const HEADS: Record<Audience, { h2: string; p: string }> = {
   data: {
     h2: 'Start with data. Grow into the platform.',
-    p: 'Data observability shares a console with observability, AI RCA, automated fixes and on-call.',
+    p: 'Data observability shares a console with observability, AI RCA, automated remediation and on-call.',
   },
   infra: {
     h2: 'One console. Every surface.',

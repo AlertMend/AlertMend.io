@@ -1,19 +1,9 @@
 import { Link } from 'react-router-dom'
 import BrandLogo from '../ui/BrandLogo'
-import { integrations, type IntegrationCategory } from '../../data/integrations'
+import { integrations, integrationCategories } from '../../data/integrations'
 import styles from './Integrations.module.css'
 
-const CATEGORY_ORDER: IntegrationCategory[] = [
-  'Observability',
-  'Data',
-  'Cloud',
-  'Incident & On-call',
-  'Collaboration',
-  'CI/CD',
-  'Issue tracking',
-]
-
-const grouped = CATEGORY_ORDER.map((cat) => ({
+const grouped = integrationCategories.map((cat) => ({
   cat,
   items: integrations.filter((i) => i.category === cat),
 })).filter((g) => g.items.length > 0)

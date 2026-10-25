@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import BrandLogo from '../ui/BrandLogo'
 import { withBrandLogo } from '../../data/brandLogos'
-import { findIntegrationBySlug } from '../../data/integrations'
+import { findIntegrationBySlug, integrations } from '../../data/integrations'
 import { useAudience, type Audience } from '../../hooks/useAudience'
 import styles from './StackWall.module.css'
 
@@ -30,7 +30,7 @@ const STACKS: Record<Audience, { heading: string; sub: string; live: string[] }>
   },
   infra: {
     heading: 'Plugs into your stack.',
-    sub: 'Keep your monitoring. AlertMend ingests the alerts you already have and adds root cause and automated fixes on top.',
+    sub: 'Keep your monitoring. AlertMend ingests the alerts you already have and adds root cause analysis and automated remediation on top.',
     live: [
       'Kubernetes',
       'AWS',
@@ -91,6 +91,11 @@ export default function StackWall() {
           {stack.live.map((l) => (
             <Chip key={l} label={l} />
           ))}
+        </div>
+        <div className={styles.more}>
+          <Link to={`/integrations?for=${audience}`}>
+            See all {integrations.length} integrations and how each one connects →
+          </Link>
         </div>
       </div>
     </section>

@@ -509,7 +509,10 @@ export default function DataObservabilityPage() {
           <header className={styles.secHead}>
             <span className="sec-tag">Data quality monitoring</span>
             <h2>Everything a regulated data team needs to monitor data quality</h2>
-            <p>Built capabilities only. No vaporware connectors or auto-remediation of your data.</p>
+            <p>
+              Automated remediation re-runs the failed pipeline job once your team approves. AlertMend never
+              changes your data.
+            </p>
           </header>
           <div className={styles.featureGrid}>
             {FEATURES.map((f) => (

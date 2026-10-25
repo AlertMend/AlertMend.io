@@ -786,7 +786,7 @@ markdownFiles.forEach(file => {
       [/cost|finops|right-siz|spend|billing/i, '/kubernetes-cost-optimization', 'Kubernetes & AWS cost optimization', 'See spend by namespace and apply right-sizing with a YAML preview and rollback.'],
       [/on-call|on call|pager|escalation|incident management|paging/i, '/on-call-management', 'On-call & incidents', 'Pages that arrive with the root cause and a ready fix attached.'],
       [/log|elasticsearch|opensearch|loki/i, '/log-management', 'Log management', 'Query Kubernetes and VM logs with plain SQL, in your own VPC.'],
-      [/runbook|remediat|self-heal|automat|toil/i, '/auto-remediation', 'Automated fixes', 'Remediation flows that run the moment you approve them, with an audit trail.'],
+      [/runbook|remediat|self-heal|automat|toil/i, '/auto-remediation', 'Automated remediation', 'Remediation flows that run the moment you approve them, with an audit trail.'],
       [/kubernetes|k8s|pod|kubectl|node|helm|container|crashloop|oomkill/i, '/kubernetes-management', 'Kubernetes monitoring & management', 'Every cluster on one overview, with root cause one click away.'],
       [/monitor|observab|trace|apm|metric|prometheus|grafana|datadog|uptime|latency/i, '/observability', 'Observability & APM', 'Metrics, logs and traces on one timeline, with AI root cause on top.'],
     ]
@@ -1779,7 +1779,7 @@ markdownFiles.forEach(file => {
               ] : [
                 ['/observability', 'Observability and APM'],
                 ['/ai-rca', 'AI root cause analysis'],
-                ['/auto-remediation', 'Automated fixes'],
+                ['/auto-remediation', 'Automated remediation'],
                 ['/kubernetes-management', 'Kubernetes management'],
                 ['/kubernetes-cost-optimization', 'Cost optimization'],
                 ['/case-studies', 'Customer stories'],
@@ -1800,7 +1800,7 @@ markdownFiles.forEach(file => {
       </div>
       <div class="site-footer-cols">
         <div><p class="site-footer-h">Data</p><a href="/data-observability">Data observability</a><a href="/trust">Trust center</a><a href="/industries">Industries</a></div>
-        <div><p class="site-footer-h">Infrastructure</p><a href="/observability">Observability and APM</a><a href="/ai-rca">AI RCA</a><a href="/auto-remediation">Automated fixes</a><a href="/kubernetes-management">Kubernetes</a></div>
+        <div><p class="site-footer-h">Infrastructure</p><a href="/observability">Observability and APM</a><a href="/ai-rca">AI RCA</a><a href="/auto-remediation">Automated remediation</a><a href="/kubernetes-management">Kubernetes</a></div>
         <div><p class="site-footer-h">Resources</p><a href="/blog">Blog</a><a href="/documentation">Documentation</a><a href="/case-studies">Case studies</a><a href="/help">Help center</a></div>
         <div><p class="site-footer-h">Company</p><a href="/about">About</a><a href="/security">Security</a><a href="/pricing">Pricing</a><a href="/contact">Contact</a></div>
       </div>
@@ -1926,19 +1926,19 @@ const blogListingHTML = `<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AlertMend Blog: Data Quality, Kubernetes and Observability</title>
-  <meta name="description" content="Practical guides from the AlertMend team on data quality, data governance, Kubernetes, observability and automated fixes.">
+  <meta name="description" content="Practical guides from the AlertMend team on data quality, data governance, Kubernetes, observability and automated remediation.">
   <meta name="keywords" content="AIOps blog, Kubernetes best practices, infrastructure automation, DevOps insights, SRE articles, cloud-native operations">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://www.alertmend.io/blog">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.alertmend.io/blog">
   <meta property="og:title" content="AlertMend Blog: Data Quality, Kubernetes and Observability">
-  <meta property="og:description" content="Practical guides from the AlertMend team on data quality, data governance, Kubernetes, observability and automated fixes.">
+  <meta property="og:description" content="Practical guides from the AlertMend team on data quality, data governance, Kubernetes, observability and automated remediation.">
   <meta property="og:image" content="https://www.alertmend.io/og-image.jpg">
   <meta property="og:site_name" content="AlertMend">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="AlertMend Blog: Data Quality, Kubernetes and Observability">
-  <meta name="twitter:description" content="Practical guides from the AlertMend team on data quality, data governance, Kubernetes, observability and automated fixes.">
+  <meta name="twitter:description" content="Practical guides from the AlertMend team on data quality, data governance, Kubernetes, observability and automated remediation.">
   <meta name="twitter:image" content="https://www.alertmend.io/og-image.jpg">
   <!-- Favicon - uses SVG logo -->
   <link rel="icon" type="image/svg+xml" href="/logos/alertmend-logo.svg" />

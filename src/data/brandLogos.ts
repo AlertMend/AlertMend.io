@@ -181,6 +181,7 @@ export const BRAND_LOGOS: Record<string, BrandLogoRef> = {
     iconSlug: 'oracle',
     logoTint: 'F80000',
     domain: 'oracle.com',
+    to: '/integrations/oracle-odi',
   },
   'Power BI': {
     label: 'Power BI',

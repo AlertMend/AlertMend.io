@@ -75,3 +75,19 @@ a.chip:hover {
     font-size: 13px;
   }
 }
+
+.more {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.more a {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #6d28d9 !important;
+}
+
+.more a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

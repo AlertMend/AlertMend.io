@@ -22,7 +22,7 @@ const PILLARS: Pillar[] = [
     icon: 'check',
     title: 'Nothing changes without approval',
     data: 'AlertMend proposes checks from your policy. A person approves each one.',
-    infra: 'Automated fixes are proposed, then run the moment you approve them in Slack or Teams.',
+    infra: 'Automated remediation is proposed, then runs the moment you approve it in Slack or Teams.',
   },
   {
     icon: 'shield',

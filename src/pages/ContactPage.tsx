@@ -19,7 +19,7 @@ export default function ContactPage() {
   const [errorMessage, setErrorMessage] = useState('')
 
   const baseDescription =
-    'Contact AlertMend about data observability, infrastructure observability, AI root cause analysis and automated fixes. Book a demo or send the team a message.'
+    'Contact AlertMend about data observability, infrastructure observability, AI root cause analysis and automated remediation. Book a demo or send the team a message.'
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'contact', 'contact')
 
   const handleSubmit = async (e: React.FormEvent) => {

@@ -4,10 +4,17 @@ import BrandLogo from '../components/ui/BrandLogo';
 import SEO from '../components/SEO';
 import {
   findIntegrationBySlug,
+  findConnectionMethod,
+  categoriesOf,
+  setupStepsFor,
   integrations,
-  integrationCategories,
+  integrationLayers,
+  layerOf,
+  type Integration,
   type IntegrationCategory,
 } from '../data/integrations';
+import { HOME_PRODUCTS } from '../data/homeProducts';
+import ConnectionSpec from '../components/integrations/ConnectionSpec';
 import { truncateDescription } from '../utils/descriptionUtils';
 import styles from './IntegrationDetailPage.module.css';
 import { calendlyUrl } from '../lib/calendly';
@@ -30,7 +37,7 @@ export default function IntegrationDetailPage() {
         <h1>Integration not found</h1>
         <p>We don't have a page for <code>/{slug}</code> yet.</p>
         <div className={styles.notFoundCta}>
-          <Link to={{ pathname: '/', hash: '#integrations' }} className="btn btn-primary">
+          <Link to="/integrations" className="btn btn-primary">
             See all integrations
           </Link>
           <button
@@ -50,7 +57,9 @@ export default function IntegrationDetailPage() {
   // homepage grid every time.
   const related = integrations
     .filter(
-      (i) => i.category === integration.category && i.slug !== integration.slug,
+      (i) =>
+        i.slug !== integration.slug &&
+        categoriesOf(i).some((c) => categoriesOf(integration).includes(c)),
     )
     .slice(0, 6);
 
@@ -85,7 +94,7 @@ export default function IntegrationDetailPage() {
           <nav className={styles.breadcrumb} aria-label="Breadcrumb">
             <Link to="/">Home</Link>
             <span className={styles.crumbSep}>/</span>
-            <Link to="/#integrations">Integrations</Link>
+            <Link to="/integrations">Integrations</Link>
             <span className={styles.crumbSep}>/</span>
             <span aria-current="page">{integration.name}</span>
           </nav>
@@ -116,19 +125,15 @@ export default function IntegrationDetailPage() {
             <section className={styles.about}>
               <h2 className={styles.h2}>About this integration</h2>
               <p>{integration.description}</p>
-              {integration.setupSteps && integration.setupSteps.length > 0 && (
-                <>
-                  <h2 className={`${styles.h2} ${styles.stepsHead}`}>How to connect {integration.name}</h2>
-                  <ol className={styles.steps}>
-                    {integration.setupSteps.map((step, i) => (
-                      <li key={step}>
-                        <span className={styles.stepNum}>{i + 1}</span>
-                        <span>{step}</span>
-                      </li>
-                    ))}
-                  </ol>
-                </>
-              )}
+              <h2 className={`${styles.h2} ${styles.stepsHead}`}>How to connect {integration.name}</h2>
+              <ol className={styles.steps}>
+                {setupStepsFor(integration).map((step, i) => (
+                  <li key={step}>
+                    <span className={styles.stepNum}>{i + 1}</span>
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ol>
             </section>
 
             <section className={styles.capabilities}>
@@ -147,6 +152,8 @@ export default function IntegrationDetailPage() {
                 ))}
               </ul>
             </section>
+
+            <HowItConnects integration={integration} />
 
             {integration.faqs && integration.faqs.length > 0 && (
               <section className={styles.wide}>
@@ -232,15 +239,17 @@ export default function IntegrationDetailPage() {
   );
 }
 
-/** Footer-style category index — gives the page a clean exit ramp into any
- *  other integration without needing to scroll back to the homepage. */
+/** Footer-style index of the current group's categories (data stack, infra or
+ *  response) — a clean exit ramp without scrolling back to the directory. */
 function CategoryRail({ current }: { current: IntegrationCategory }) {
+  const layer = integrationLayers.find((l) => l.id === layerOf(current))!;
   return (
-    <section className={styles.rail} aria-label="All integration categories">
-      <h3 className={styles.relatedH}>Browse by category</h3>
+    <section className={styles.rail} aria-label={`${layer.label} integrations by category`}>
+      <h3 className={styles.relatedH}>Browse {layer.label.toLowerCase()} by functionality</h3>
       <div className={styles.railGrid}>
-        {integrationCategories.map((cat) => {
-          const items = integrations.filter((i) => i.category === cat);
+        {layer.categories.map((cat) => {
+          const all = integrations.filter((i) => categoriesOf(i).includes(cat));
+          const items = all.slice(0, RAIL_LIMIT);
           return (
             <div key={cat} className={styles.railCol}>
               <div className={styles.railColHead}>
@@ -264,9 +273,51 @@ function CategoryRail({ current }: { current: IntegrationCategory }) {
                   </li>
                 ))}
               </ul>
+              {all.length > RAIL_LIMIT && (
+                <Link
+                  to={`/integrations?category=${encodeURIComponent(cat)}#catalog`}
+                  className={styles.railAll}
+                >
+                  All {all.length} →
+                </Link>
+              )}
             </div>
           );
         })}
+      </div>
+      <Link to="/integrations" className={styles.railHub}>
+        See all {integrations.length} integrations and how each one connects →
+      </Link>
+    </section>
+  );
+}
+
+const RAIL_LIMIT = 6;
+
+const productById = Object.fromEntries(HOME_PRODUCTS.map((p) => [p.id, p]));
+
+/** Data flow, credentials, transport and what AlertMend reads/changes, using the
+ *  same ConnectionSpec as the details panel on /integrations. */
+function HowItConnects({ integration }: { integration: Integration }) {
+  const method = findConnectionMethod(integration.connection);
+  return (
+    <section className={styles.wide} aria-labelledby="how-it-connects">
+      <div className={styles.connectHead}>
+        <h2 id="how-it-connects" className={styles.h2}>
+          How {integration.name} connects
+        </h2>
+        <Link to={`/integrations#method-${method.id}`} className={styles.methodPill}>
+          {method.name}
+        </Link>
+      </div>
+      <ConnectionSpec integration={integration} showSetup={false} />
+      <div className={styles.connectTags}>
+        <span className={styles.connectLabel}>Powers</span>
+        {integration.products.map((id) => (
+          <Link key={id} to={productById[id].to} className={styles.productLink}>
+            {productById[id].name}
+          </Link>
+        ))}
       </div>
     </section>
   );

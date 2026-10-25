@@ -32,7 +32,7 @@ export default function TutorialsPage() {
       <PageHero
         eyebrow="Tutorials"
         title="Step-by-step guides for your first week."
-        lede="Written walkthroughs for the most common first tasks, from connecting a cluster to approving your first automated fix."
+        lede="Written walkthroughs for the most common first tasks, from connecting a cluster to approving your first automated remediation."
       />
 
       <Section title="Guides">

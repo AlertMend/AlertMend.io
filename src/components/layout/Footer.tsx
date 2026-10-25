@@ -12,6 +12,7 @@ import styles from './Footer.module.css';
    which passes no link equity and reads as an orphaned page. */
 const RESOURCES = [
   { to: '/documentation', label: 'Documentation' },
+  { to: '/integrations', label: 'Integrations' },
   { to: '/blog', label: 'Blog' },
   { to: '/case-studies', label: 'Case studies' },
   { to: '/tutorials', label: 'Tutorials' },

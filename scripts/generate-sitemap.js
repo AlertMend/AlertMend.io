@@ -121,6 +121,14 @@ const canonicalFilenameOverrides = {
 const blogListPath = path.join(__dirname, '../src/utils/blogList.json')
 const blogPosts = JSON.parse(fs.readFileSync(blogListPath, 'utf-8'))
 
+// Integration slugs, read from the catalog so new entries can't miss the
+// sitemap (this script is plain JS and can't import the TS module).
+const integrationSlugs = [
+  ...fs
+    .readFileSync(path.join(__dirname, '../src/data/integrations.ts'), 'utf8')
+    .matchAll(/^    slug: '([a-z0-9-]+)',$/gm),
+].map((m) => m[1])
+
 const siteUrl = 'https://www.alertmend.io'
 const currentDate = new Date().toISOString().split('T')[0]
 
@@ -222,14 +230,14 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <priority>0.7</priority>
   </url>
 
-  <!-- Integrations (detail pages) -->
-${[
-  'kubernetes', 'aws', 'google-cloud', 'azure', 'prometheus', 'grafana', 'datadog',
-  'victoria-metrics', 'slack', 'ms-teams', 'pagerduty', 'jira', 'sendgrid',
-  'google-meet', 'jenkins', 'github-actions', 'gitlab', 'whatsapp',
-  'snowflake', 'bigquery', 'redshift', 'databricks', 'postgres', 'dbt', 'airflow',
-  'oracle', 'power-bi',
-].map((slug) => `  <url>
+  <!-- Integrations (hub + detail pages) -->
+  <url>
+    <loc>${siteUrl}/integrations</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+${integrationSlugs.map((slug) => `  <url>
     <loc>${siteUrl}/integrations/${slug}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>

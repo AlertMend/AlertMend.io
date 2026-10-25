@@ -107,6 +107,7 @@ const routesToPrerender = [
   // Detail routes advertised in sitemap.xml — without these they fall back to
   // the SPA shell and crawlers read the homepage's title/canonical instead.
   ...caseStudiesData.map((study) => `/case-studies/${generateCaseStudySlug(study.category, study.company)}`),
+  '/integrations',
   ...integrations.map((integration) => `/integrations/${integration.slug}`),
   '/contact',
   '/careers',

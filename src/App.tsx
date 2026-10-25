@@ -17,6 +17,7 @@ import DataObservabilityPage from './pages/DataObservabilityPage'
 import AiRcaPage from './pages/AiRcaPage'
 import AutoRemediationPage from './pages/AutoRemediationPage'
 import IntegrationDetailPage from './pages/IntegrationDetailPage'
+import IntegrationsPage from './pages/IntegrationsPage'
 import PricingPage from './pages/PricingPage'
 import DocumentationPage from './pages/DocumentationPage'
 import DocArticlePage, { allGeneratedDocPaths } from './components/docs/DocArticle'
@@ -128,6 +129,7 @@ function App() {
           <Route path="/case-studies" element={<CaseStudiesPage />} />
           <Route path="/case-studies/:slug" element={<CaseStudyDetailPage />} />
           <Route path="/solutions/:id" element={<LegacySolutionRedirect />} />
+          <Route path="/integrations" element={<IntegrationsPage />} />
           <Route path="/integrations/:slug" element={<IntegrationDetailPage />} />
           <Route path="/auto-remediation" element={<AutoRemediationPage />} />
           <Route path="/kubernetes-management" element={<KubernetesManagementPage />} />

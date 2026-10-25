@@ -89,7 +89,7 @@ export default function BlogPage() {
     }
   }, [])
 
-  const baseDescription = "Practical guides from the AlertMend team on data quality, data governance, Kubernetes, observability and automated fixes."
+  const baseDescription = "Practical guides from the AlertMend team on data quality, data governance, Kubernetes, observability and automated remediation."
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'blog-list', 'blog')
 
   if (!sortedPosts || sortedPosts.length === 0) {
@@ -126,7 +126,7 @@ export default function BlogPage() {
               Guides from the AlertMend team
             </h1>
             <p className="mt-5 text-lg md:text-[19px] text-slate-600 leading-relaxed">
-              Practical writing on data quality, data governance, Kubernetes, observability, GPU fleets and automated fixes.
+              Practical writing on data quality, data governance, Kubernetes, observability, GPU fleets and automated remediation.
             </p>
           </div>
 

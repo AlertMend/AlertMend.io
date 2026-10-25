@@ -68,7 +68,7 @@ export const HOME_PRODUCTS: readonly HomeProduct[] = [
   {
     id: 'fix',
     tab: 'RF',
-    name: 'Remediation & runbooks',
+    name: 'Automated remediation & runbooks',
     line: 'Approved remediation flows that fix incidents and post the summary back.',
     blurb: 'Approved workflows that act',
     to: '/auto-remediation',

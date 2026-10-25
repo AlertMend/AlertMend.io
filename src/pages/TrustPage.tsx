@@ -19,7 +19,7 @@ const AI = [
   {
     icon: ClipboardCheck,
     title: 'Recommend, not execute, by default',
-    body: 'Automated fixes start in recommend mode. When enabled, they run only after approval and are verified after they run.',
+    body: 'Automated remediation starts in recommend mode. When enabled, it runs only after approval and is verified afterwards.',
   },
 ]
 

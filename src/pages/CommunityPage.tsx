@@ -13,7 +13,7 @@ const CHANNELS = [
   {
     icon: BookOpen,
     title: 'Blog and guides',
-    body: 'Practical guides on data quality, Kubernetes, observability and automated fixes.',
+    body: 'Practical guides on data quality, Kubernetes, observability and automated remediation.',
     action: { label: 'Read the blog', href: '/blog' },
   },
   {

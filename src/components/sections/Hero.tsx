@@ -22,7 +22,7 @@ const HERO_COPY: Record<
     signup: 'https://app.alertmend.io/signup?service=data-observability&source=homepage-hero',
   },
   infra: {
-    sub: 'One timeline for Kubernetes, VMs, cloud and GPU fleets. Root cause in about 15 seconds, automated fixes that run the moment you approve them, and savings on your Kubernetes, AWS and GPU bill.',
+    sub: 'One timeline for Kubernetes, VMs, cloud and GPU fleets. Root cause in about 15 seconds, automated remediation that runs the moment you approve it, and savings on your Kubernetes, AWS and GPU bill.',
     primary: { id: 'hero_health_check', label: 'Get a free health check', href: calendlyUrl('home-infra-hero-health-check') },
     secondary: { id: 'hero_explore', label: 'See how it works', href: '/observability', internal: true },
     proof: ['Read-only scan', 'Results in minutes', 'Prioritized fix and savings list'],

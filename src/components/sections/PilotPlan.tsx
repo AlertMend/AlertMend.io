@@ -24,7 +24,7 @@ const PLANS: Record<Audience, { heading: string; sub: string; steps: Step[]; suc
     steps: [
       { when: 'Day 0–1', title: 'Connect', body: 'Helm install on one cluster and wire your existing alerts. First root cause in minutes.' },
       { when: 'Days 1–7', title: 'Observe and diagnose', body: 'Real incidents arrive with evidence-backed root cause in Slack or Teams.' },
-      { when: 'Week 2', title: 'Respond and automate', body: 'Turn on three automated fixes for your noisiest alerts, and review cost findings.' },
+      { when: 'Week 2', title: 'Respond and automate', body: 'Turn on automated remediation for your three noisiest alerts, and review cost findings.' },
     ],
     success: 'Success is measured together: MTTR down, root-cause confidence up, and cost findings you can act on.',
     cta: 'Plan a pilot',

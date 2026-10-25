@@ -79,7 +79,7 @@ const FOOTER = `
       </div>
       <div class="site-footer-cols">
         <div><p class="site-footer-h">Data</p><a href="/data-observability">Data observability</a><a href="/trust">Trust center</a><a href="/industries">Industries</a></div>
-        <div><p class="site-footer-h">Infrastructure</p><a href="/observability">Observability and APM</a><a href="/ai-rca">AI RCA</a><a href="/auto-remediation">Automated fixes</a><a href="/kubernetes-management">Kubernetes</a></div>
+        <div><p class="site-footer-h">Infrastructure</p><a href="/observability">Observability and APM</a><a href="/ai-rca">AI RCA</a><a href="/auto-remediation">Automated remediation</a><a href="/kubernetes-management">Kubernetes</a></div>
         <div><p class="site-footer-h">Resources</p><a href="/blog">Blog</a><a href="/documentation">Documentation</a><a href="/case-studies">Case studies</a><a href="/help">Help center</a></div>
         <div><p class="site-footer-h">Company</p><a href="/about">About</a><a href="/security">Security</a><a href="/pricing">Pricing</a><a href="/contact">Contact</a></div>
       </div>

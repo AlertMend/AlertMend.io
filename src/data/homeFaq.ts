@@ -34,11 +34,11 @@ export const HOME_FAQ: Record<Audience, FaqItem[]> = {
   infra: [
     {
       q: 'We already have Datadog or Prometheus. Do we replace it?',
-      a: 'No, keep it. AlertMend ingests alerts from Alertmanager, Datadog, Victoria Metrics and webhooks, then adds root cause and automated fixes on top. If AlertMend is down, your existing alerting path is unaffected.',
+      a: 'No, keep it. AlertMend ingests alerts from Alertmanager, Datadog, Victoria Metrics and webhooks, then adds root cause analysis and automated remediation on top. If AlertMend is down, your existing alerting path is unaffected.',
     },
     {
       q: 'Will AI change production on its own?',
-      a: 'Not by default. The default is recommend, not execute. Automated fixes run only after approval in Slack, Teams, email or the product, every step is audited, and a verify step re-checks the service after the run.',
+      a: 'Not by default. The default is recommend, not execute. Automated remediation runs only after approval in Slack, Teams, email or the product, every step is audited, and a verify step re-checks the service after the run.',
     },
     {
       q: 'We can’t send data to OpenAI.',

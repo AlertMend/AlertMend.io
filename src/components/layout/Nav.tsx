@@ -51,7 +51,7 @@ const PLATFORM_ICONS: Record<HomeProductId, IconName> = {
 /** Shorter titles where the full product name is too long for a menu row. */
 const PLATFORM_TITLES: Partial<Record<HomeProductId, string>> = {
   k8s: 'Kubernetes',
-  fix: 'Remediation & runbooks',
+  fix: 'Automated remediation',
 };
 
 const PLATFORM_GROUPS: { label: string; ids: HomeProductId[] }[] = [

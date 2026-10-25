@@ -103,7 +103,7 @@ function PersonCard({ person }: { person: Person }) {
 
 export default function AboutPage() {
   const baseDescription =
-    'AlertMend builds data observability and infrastructure observability with AI root cause analysis and approved, automated fixes. Meet the founders.'
+    'AlertMend builds data observability and infrastructure observability with AI root cause analysis and approved, automated remediation. Meet the founders.'
   const uniqueDescription = ensureUniqueMetaDescription(baseDescription, 'about', 'about')
 
   return (
