@@ -1,4 +1,4 @@
-# AlertMend AI - AIOps Platform  
+# AlertMend AI - AIOps Platform   
 
 Autonomous AIOps platform that automatically detects, analyzes, and resolves incidents across Kubernetes, VMs, and ECS. Stop firefighting. Cut costs by 50%. Achieve zero downtime.
 
